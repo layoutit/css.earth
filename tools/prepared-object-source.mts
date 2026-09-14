@@ -11,8 +11,6 @@ import { requirePreparedControlSource, requirePreparedDefinitionSource, readPrep
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../src/platform/prepared-schema.mts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.mts';
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
-import { sharedTwinName } from '../src/platform/prepared-shared.mts';
-import { inlineSharedFromBanks } from '../src/platform/prepared-shared-banks.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 export function requireDescriptorAdapterSource(text: string, exported: string): string {
@@ -111,11 +109,10 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (named(assignMember.object) !== 'Object' || named(assignMember.property) !== 'assign' || named(assignment.arguments[0]) !== mountId.name) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
   if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
-  // The transport carries the pinned prepared read, and may carry the shared
-  // bank reader and its immutable base URL beside it; nothing else belongs here.
+  // The transport carries only the pinned prepared read.
   const transport = transportObject.properties;
   if (transport.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' ||
-      !['read', 'readShared', 'sharedUrl'].includes(String(propertyKey(property.key))))) fail();
+      String(propertyKey(property.key)) !== 'read')) fail();
   const readProperty = transport.find(property => property.type === 'Property' && propertyKey(property.key) === 'read');
   if (!readProperty || readProperty.type !== 'Property' || !readProperty.method) fail();
   const method = kind(readProperty.value, 'FunctionExpression');
@@ -252,9 +249,7 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
   const scenePath = resolve(preparation, 'scene.json');
   const runtime = requireRecord(JSON.parse(await source(runtimePath)));
   const scene: unknown = JSON.parse(await source(scenePath));
-  closure.add(runtimePath); closure.add(scenePath);
-  // The full files are restored from the checked-in twins; ownership follows the twins too.
-  for (const file of ['runtime.json', 'scene.json', 'sky.json']) closure.add(resolve(preparation, sharedTwinName(file)));
+  closure.add(runtimePath); closure.add(scenePath); closure.add(resolve(preparation, 'sky.json'));
   if (runtime.id !== objectId || runtime.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError('Authored runtime identity is invalid.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText: source, closure });
   return requireObjectRuntimeDefinition(runtime, { objectId });
@@ -281,9 +276,7 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
   const closure = new Set([descriptorPath, payloadPath]);
   const authored = await readAuthoredDefinition({ objectId, descriptor, root, source, closure });
   if (authored) {
-    // The transport references shared banks; the checked runtime is their inlined form.
-    const transported = await inlineSharedFromBanks(root, payload.data, { read: source, visited: closure });
-    if (!isDeepStrictEqual(transported, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+    if (!isDeepStrictEqual(payload.data, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
     return { plan: authored, definition: authored, closure, payloadPath };
   }
   const directory = resolve(root, `src/objects/${objectId}`);

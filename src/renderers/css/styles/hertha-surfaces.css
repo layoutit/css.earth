@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hertha"])[data-lod="billboard"] .hertha-scene, .planet-stage:where([data-object-id="hertha"])[data-lod="marker"] .hertha-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hertha"])[data-lod="marker"] .hertha-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hertha"]).hertha-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

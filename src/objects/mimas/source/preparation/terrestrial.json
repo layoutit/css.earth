@@ -4,7 +4,6 @@
   "namespace": "mimas",
   "displayName": "Mimas",
   "publicBase": "/scenes/mimas/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 8192,
     "height": 4096,
@@ -137,12 +136,6 @@
     "sunSource": "JPL Mimas orbit plus VSOP87 Saturn position and IAU/WGCCRE Mimas rotation"
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      174,
-      171,
-      165
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

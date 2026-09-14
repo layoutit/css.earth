@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bettina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88a940f58960e58b03eb39b1636ef4e8f26cbcbdf459bfadea1d7cb6e173b10b"
+    "sha256": "cc0e1b95814a44ff34a21ae21516d091a17c14d04ffe125206884331cb520ba0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "649314eccff0bad8288fc3b2bb1dccf95c2bdc0c678a89f563befc9b1f6e75d7",
+      "sha256": "993609be8e457656adbbd9037cd846fb2ff01b1dc904d88eb4ff8a2e5f3d8fa2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "bettina",
         "displayName": "Bettina",
         "publicBase": "/scenes/bettina/",
-        "distanceAu": 3.1419813494769286,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1850 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "baa36bada76f6ad47fb9aa229030f3f08cd5deba94714d1918d1eb81a5c9e8be",
+      "sha256": "a3d64b29218661f5a6786b387fcb3eb41f8590b68be86d2b8fb06408142fd19e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1850"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "a57d764a9b9b83bb318bd9e36a6048f50f05326584a343092351d81c25a85489",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "baa36bada76f6ad47fb9aa229030f3f08cd5deba94714d1918d1eb81a5c9e8be",
-      "bytes": 9661,
+      "sha256": "a3d64b29218661f5a6786b387fcb3eb41f8590b68be86d2b8fb06408142fd19e",
+      "bytes": 9382,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/bettina/bettina-elevation-thumbnail.webp",
           "bytes": 5218,
           "sha256": "bc90731b9af660d1b92a6a9a3aafcee8e969e26da1f7881af8dcd66a6ea23df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bettina/bettina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bettina/bettina-elevation-surface@2x.webp",
           "bytes": 246638,
           "sha256": "eb1c736b31a9f377f825ae5d6c3c00a448876fd4cb1e8253a502b3cf19761fb9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/bettina/bettina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bettina/bettina-shape-surface@2x.webp",
           "bytes": 210746,
           "sha256": "98d21a11307ced7097ba5e97b21b95ca9002992c6a98cf0d83b683f46c7f40af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7020,
-          "sha256": "5b41f0740503f52a7104f7f9926ec07d29d38832cb76582f5b67f04c63cd812c",
+          "bytes": 6901,
+          "sha256": "a222ec22ff2866b138214fa2d8d248110b7faced46a5d9d8d4fb88b1661706a7",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "bettina",
+    "materialSha256": "59184313e26218b3be4cf8084d62e16ca7946f5b8e09d4bce5403fc579222d76",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

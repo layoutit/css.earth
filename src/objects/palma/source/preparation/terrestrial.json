@@ -4,7 +4,6 @@
   "namespace": "palma",
   "displayName": "Palma",
   "publicBase": "/scenes/palma/",
-  "distanceAu": 3.163095282258092,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -114,12 +113,6 @@
     "sunSource": "Pinned JPL Horizons elements and DAMIT model 298 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

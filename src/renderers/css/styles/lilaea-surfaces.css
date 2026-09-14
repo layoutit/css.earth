@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lilaea"])[data-lod="billboard"] .lilaea-scene, .planet-stage:where([data-object-id="lilaea"])[data-lod="marker"] .lilaea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lilaea"])[data-lod="marker"] .lilaea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lilaea"]).lilaea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

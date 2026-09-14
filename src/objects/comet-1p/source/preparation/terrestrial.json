@@ -4,7 +4,6 @@
   "namespace": "comet-1p",
   "displayName": "Halley",
   "publicBase": "/scenes/comet-1p/",
-  "distanceAu": 17.859422957021373,
   "raster": {
     "width": 512,
     "height": 256,
@@ -123,12 +122,6 @@
     "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

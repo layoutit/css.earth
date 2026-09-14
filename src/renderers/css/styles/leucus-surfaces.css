@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="leucus"])[data-lod="billboard"] .leucus-scene, .planet-stage:where([data-object-id="leucus"])[data-lod="marker"] .leucus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="leucus"])[data-lod="marker"] .leucus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="leucus"]).leucus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

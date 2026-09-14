@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-29p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9e98c36c20269f8244c060d15293e40e6f0aca8c696d7ab1cd4255251eea8c78"
+    "sha256": "bf2636c4bfea2d471a0878559da561039c26fc0d35039436b7be41eed386e14a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "40b76130429563a23e5571db4720fa22fdeb48c0a6da70f0565f7ac29ea40228",
+      "sha256": "054d337720a42938708457ea234dc51113ef48545102c83854adc5a6f1d699b0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-29p",
         "displayName": "Schwassmann–Wachmann 1",
         "publicBase": "/scenes/comet-29p/",
-        "distanceAu": 6.3177563009608955,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a4628d67392157bc9ee29ae0ac94b1693603f9e4fbe31ccb0ecbf7ed1eca8558",
+      "sha256": "1206b0b0bea2fc8aebe78d463b88f359effe3a4ede2c85127eac661a8dccc17c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://science.nasa.gov/missions/webb/nasas-webb-reveals-unusual-jets-of-volatile-gas-from-icy-centaur-29p/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "10f65d16758e1702d7aba0e80fbf791aa88deb21fb07634cbebbf82cb630eb7b",
       "bytes": 439126,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a4628d67392157bc9ee29ae0ac94b1693603f9e4fbe31ccb0ecbf7ed1eca8558",
-      "bytes": 3164,
+      "sha256": "1206b0b0bea2fc8aebe78d463b88f359effe3a4ede2c85127eac661a8dccc17c",
+      "bytes": 2884,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-29p/comet-29p-model-thumbnail.webp",
           "bytes": 1404,
           "sha256": "cfbb43335bdbed083bb63f0d4f1d914efda60e2568678696c942a5c10a11f2cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-29p/comet-29p-model-surface@2x.webp",
           "bytes": 118870,
           "sha256": "e11365801b5751d3051cac98687fb18ccd34d198af44f64af452f34d61de44ac",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 14898,
-          "sha256": "0cf736d6c3f099650740ef3aecf15389e0c72975595056ab7b7d7538db0bf27f",
+          "bytes": 14779,
+          "sha256": "2a94e6e493ecdff66830d486b761938630c7d41a696f52808280c33b2637dfe9",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-29p",
+    "materialSha256": "a5a423e6ad41acba6c61d76c3e44b2fbc32115785b66a7355c9591dac2055c2b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="petrina"])[data-lod="billboard"] .petrina-scene, .planet-stage:where([data-object-id="petrina"])[data-lod="marker"] .petrina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="petrina"])[data-lod="marker"] .petrina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="petrina"]).petrina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

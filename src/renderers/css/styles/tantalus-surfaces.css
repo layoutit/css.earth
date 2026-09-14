@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="tantalus"])[data-lod="billboard"] .tantalus-scene, .planet-stage:where([data-object-id="tantalus"])[data-lod="marker"] .tantalus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="tantalus"])[data-lod="marker"] .tantalus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="tantalus"]).tantalus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

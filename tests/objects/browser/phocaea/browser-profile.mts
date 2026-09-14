@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/phocaea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'phocaea',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/phocaea/phocaea-directional-sun.webp",
-      "two": "/scenes/phocaea/phocaea-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/phocaea/phocaea-shape-surface@2x.webp"
   ],

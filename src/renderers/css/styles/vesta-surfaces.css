@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="vesta"])[data-lod="billboard"] .vesta-scene, .planet-stage:where([data-object-id="vesta"])[data-lod="marker"] .vesta-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="vesta"])[data-lod="marker"] .vesta-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="vesta"]).vesta-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gallia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ba655dbfdad7fb6cbbb88cdc45d297c8659a4aa3379d57c516b4f825fb7e1e4"
+    "sha256": "360d67b055781fea04647c16f53ef22e853136000d16f2773cf820c0b9256e68"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ab656f083093b4bb73e33e65b1f7ec5009c67dc2dec44e4cd23d67ee33834ecd",
+      "sha256": "c6e2e4a5888d87e6bb86e818784a01b6a50915fc7ddcda4fd9f89ab7066867f1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "gallia",
         "displayName": "Gallia",
         "publicBase": "/scenes/gallia/",
-        "distanceAu": 2.7707071057503048,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4618 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "df01e73fb8c02f773639d3cdbcfb96c79472601519695a67dca008e81278cea3",
+      "sha256": "270aa1a758d1b6a3bab54c3792d466efb1aa4c73349fc7fb0eee0e90a691dbbc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "dfae149a3e1dd7938f6bb711488c8d230804ca7efe942f776479be14f138ab0a",
       "bytes": 46257,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "df01e73fb8c02f773639d3cdbcfb96c79472601519695a67dca008e81278cea3",
-      "bytes": 9397,
+      "sha256": "270aa1a758d1b6a3bab54c3792d466efb1aa4c73349fc7fb0eee0e90a691dbbc",
+      "bytes": 9118,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/gallia/gallia-elevation-thumbnail.webp",
           "bytes": 5432,
           "sha256": "d44c359f62a8735e00e213d22d141538013048570e77770ed23cf12c2a0c2938",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gallia/gallia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gallia/gallia-elevation-surface@2x.webp",
           "bytes": 283780,
           "sha256": "b5e86d0ddd69ad159989db1f2af8bdd231e3e1c3a297b58260429c3c5a5f8890",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/gallia/gallia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gallia/gallia-shape-surface@2x.webp",
           "bytes": 238000,
           "sha256": "4f124055493682b6ebd98501b8f6ca0471228b00924ef995175d3ac4e15046b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6762,
-          "sha256": "3bd92276a34644361f46ec816cb9243f0de1e4db51476c2988db4e13ed8e615c",
+          "bytes": 6643,
+          "sha256": "d2bca5f6ca8f017817774c3a07773252a730b0a5238e4e1e9d400a191b89122b",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "gallia",
+    "materialSha256": "81aacc75a6ec06e65815449a15ebec5b77bd040163c1620becdd23ada595dc0e",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

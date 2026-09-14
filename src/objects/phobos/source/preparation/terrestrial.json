@@ -4,7 +4,6 @@
   "namespace": "phobos",
   "displayName": "Phobos",
   "publicBase": "/scenes/phobos/",
-  "distanceAu": 1.52,
   "raster": {
     "width": 5760,
     "height": 2880,
@@ -213,12 +212,6 @@
     "sunSource": "Vendored JPL Horizons Mars satellite elements and IAU/NAIF rotation at the shared epoch."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      154,
-      149,
-      142
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "melete",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aca4ed1b5fa1a97f8ab6c4f9915ef00fd2d1051532def54a30c3eb89a0e55b45"
+    "sha256": "3b2b5fdc37b8631f6b05d6ee60045727d178d3f4a4a3d37abca85658bb0fc127"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "34779b07e3435a8e831ff746150f6e212e980906a45fd192122d54a174940831",
+      "sha256": "3670fa8328e4b66196d9b1d12f45f8d6116a8d814104797185e16c805183cb67",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "melete",
         "displayName": "Melete",
         "publicBase": "/scenes/melete/",
-        "distanceAu": 2.5988578205374266,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1851 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0d886d0eb366b40bd097587462a9d9e7140b631731016e5cb420af8ed356bd48",
+      "sha256": "f65fc4b5d8a0ba49619a443dfc5754ad6972339aa3f6e876aff3ed3d008eca6e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1851"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0d886d0eb366b40bd097587462a9d9e7140b631731016e5cb420af8ed356bd48",
-      "bytes": 9265,
+      "sha256": "f65fc4b5d8a0ba49619a443dfc5754ad6972339aa3f6e876aff3ed3d008eca6e",
+      "bytes": 8986,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/melete/melete-elevation-thumbnail.webp",
           "bytes": 5302,
           "sha256": "8ca94fe8cd955ea2bc4bd8c0ff78ed6de68fc41a0c5fea0a2407d60cb9e82fee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melete/melete-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melete/melete-elevation-surface@2x.webp",
           "bytes": 280170,
           "sha256": "1e2b7148a48f2fc63a344455802a1da9a10c7801bf80fdd4d0404934ab5f4775",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/melete/melete-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melete/melete-shape-surface@2x.webp",
           "bytes": 202644,
           "sha256": "1b8102be83acd21d89fed20e86c4fce5524becf3118d94f255a031e51f411383",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6638,
-          "sha256": "cbba7ca7278799dfabac3aae327a6fd7427f74dca8b0f3898f94b51889d391dd",
+          "bytes": 6519,
+          "sha256": "37b972dad6f93939af2d5f1f7e0aac4ba5566499ca8eee433d501e5bd8e857bc",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "melete",
+    "materialSha256": "46565bbe6e854552830795591888a25d7faacb496bd825d1f41d7eac723aa580",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

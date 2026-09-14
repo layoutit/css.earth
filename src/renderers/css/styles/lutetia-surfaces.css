@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lutetia"])[data-lod="billboard"] .lutetia-scene, .planet-stage:where([data-object-id="lutetia"])[data-lod="marker"] .lutetia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lutetia"])[data-lod="marker"] .lutetia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lutetia"]).lutetia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

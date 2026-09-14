@@ -21,7 +21,6 @@ export default {
     'platform/prepared-camera-runtime': fileURLToPath(new URL('./rendering/prepared-camera-runtime.ts', import.meta.url)),
     'platform/planet-feature-controls': fileURLToPath(new URL('./rendering/planet-feature-controls.ts', import.meta.url)),
     'platform/surface-fly-to': fileURLToPath(new URL('./navigation/surface-fly-to.ts', import.meta.url)),
-    'platform/directional-sun-runtime': fileURLToPath(new URL('./solar-system/directional-sun-runtime.ts', import.meta.url)),
     'platform/directional-sun-coordinate': fileURLToPath(new URL('./solar-system/directional-sun-coordinate.ts', import.meta.url)),
     index: fileURLToPath(new URL('./index.ts', import.meta.url)),
     universe: fileURLToPath(new URL('./universe/index.ts', import.meta.url)),

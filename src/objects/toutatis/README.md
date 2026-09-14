@@ -59,6 +59,6 @@ The archive specifies kilometers, center of mass as origin, and principal axes. 
 
 Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
-Shared sky and font inputs retain their original licenses and acquisition pins. Runtime installation uses the generated body-specific asset inventory; source restoration and runtime delivery are separate checks.
+The font input retains its original license and acquisition pin. Runtime installation uses the generated body-specific asset inventory; source restoration and runtime delivery are separate checks.
 
 </details>

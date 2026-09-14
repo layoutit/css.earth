@@ -2,33 +2,6 @@
   "schema": "cssasteroid-2002-tc302-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/asteroid-2002-tc302/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3574,
-      "expectedSha256": "8d179332695a941351acef4e5dd9ae8b0dcadb1e58558e2b0c72a02eb7593469",
+      "expectedBytes": 3294,
+      "expectedSha256": "d22b0038c5d0d606ff9be46b9898fc586c7f679daed788a81e15616d5c3ecb8a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,8 +108,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 937,
-      "expectedSha256": "d0687caf1db9a4a35e481016db1c3ebf0404c4a72cff10127ace81ee3e55da7b"
+      "expectedBytes": 734,
+      "expectedSha256": "6a7dd16a5c48cf82d71d4ecd9e33b97e2bdf31f756e35a60c31c11520a54475d"
     },
     {
       "path": "preparation/navigation.json",
@@ -150,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2931,
-      "expectedSha256": "60596eb698195f196f0bed80212ac7db479cc75656c168492afe5ba277fe3d8b"
+      "expectedBytes": 2777,
+      "expectedSha256": "32c99a03cd1921112f14deee7bd0f204b03fb6ba53ef6c197727a7ac612e466a"
     },
     {
       "path": "presentation/minimap.json",
@@ -182,21 +155,6 @@
       "path": "reference/tc302-ortiz-2020.pdf",
       "expectedBytes": 1638671,
       "expectedSha256": "484354879d338114c09e1a2cd7911e2f71ecc2a37578754f48d36066d251c1ee"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 862,
-      "expectedSha256": "a835f3152d5e3561058d6830cc3252df264bad1fa58b07f7c77f7cf61bcb8bde"
     }
   ],
   "generatedIntermediates": [

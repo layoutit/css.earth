@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hypatia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b0b723dad02e29f27996382f76ad6f6d10b25a489a29e9d8ef22dc57db553a05"
+    "sha256": "87162aa334d11aab077f5fe7926bb44b53de5e56375f4e40b760d31a141c87b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "430d7369ea876ad7ac075c2d8a001c309e4624efeba4a8576adb40bafea67d83",
+      "sha256": "07d02ec0595bd491570e96577fcbd1bb479c09947091c5b81610541244a47f2b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hypatia",
         "displayName": "Hypatia",
         "publicBase": "/scenes/hypatia/",
-        "distanceAu": 2.905035805480087,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3844 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "caeda03eb32263f267e1be58dcca40aaa085bb1806d6c0d2d7524255095695f7",
+      "sha256": "5dbf44b361473d6feb887465fc461e080151fd1439851dd56189bad7bab34d52",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3844"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "61b02e21efc8fa19b782a3c1828b46bd1d1bfdf2c35ad352fd995ec9b0aae399",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "caeda03eb32263f267e1be58dcca40aaa085bb1806d6c0d2d7524255095695f7",
-      "bytes": 10071,
+      "sha256": "5dbf44b361473d6feb887465fc461e080151fd1439851dd56189bad7bab34d52",
+      "bytes": 9792,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/hypatia/hypatia-elevation-thumbnail.webp",
           "bytes": 5788,
           "sha256": "572d9b1a1f26632c14a2d9ace2dcff478443f66e87206967f5adb84186352bc1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hypatia/hypatia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hypatia/hypatia-elevation-surface@2x.webp",
           "bytes": 302822,
           "sha256": "3cfa1dd7be45623d3052bdda1e6f7643cb3b056f468decc9cae46300f14730fb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/hypatia/hypatia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hypatia/hypatia-shape-surface@2x.webp",
           "bytes": 231496,
           "sha256": "69e36617e1465d0e90052451aa97d1ef1bba69f65a48c4ed85084b8750b697d2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7422,
-          "sha256": "a1b73ccf46f78fe407268e1652fc3f693f7e4cc7ef29f92d237c50b1cb2c5d31",
+          "bytes": 7303,
+          "sha256": "61b0baa60039fbc8cede866db6c41053339a9719f6ff434d7988a1332d541aed",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hypatia",
+    "materialSha256": "54c6199673c81e89600732eade19dc0584cf92fc9a885e73f26266e40a662f99",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

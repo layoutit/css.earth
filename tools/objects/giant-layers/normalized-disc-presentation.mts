@@ -9,7 +9,7 @@ import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contrac
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
 import{multiplyPreparedMatrix4,preparedRotationMatrix4,readPreparedMatrix4,serializePreparedMatrix4}from'../../../src/platform/prepared-ellipsoid-projection.mts';
-import{preparedSunResources,preparedResourcePool}from'../../../src/platform/prepared-object-assets.mts';
+import{preparedResourcePool}from'../../../src/platform/prepared-object-assets.mts';
 import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presentation-contract.mts';
 import{prepareCssomDeclarationReads}from'../../prepared-cssom.mts';
 import{createPreparedNodeTree}from'../../prepared-node-tree.mts';
@@ -47,7 +47,7 @@ export async function prepareNormalizedDiscPresentation({config:input,geometry,m
  if(!('leaves' in geometry))throw new TypeError('Normalized disc requires latitude-bound geometry.');
  if(config?.schema!=='cssearth-normalized-disc-presentation@1'||!geometry?.leaves?.length||!Array.isArray(config.lenses)||!config.lenses.length)throw new TypeError('Invalid normalized-disc presentation.');
  const cameraPlan={...config.camera,materialDepthPresentation:prepareFrontBiasedDiscPlane(config,materialConfig)},depth=cameraPlan.materialDepthPresentation,lighting=prepareNormalizedDiscAddresses(materialConfig),capacity=materialConfig.bank.maximumRetainedRows,namespace=config.namespace;
- const lensKeys=(id:string)=>[`surface:${id}`,`poles:${id}`],warm=[...preparedSunResources(sun,'warm'),...config.radialResources.map(resource=>({key:`rings:${resource.id}`,url:resource.url,pool:'warm'})),{key:'shadowless',url:`${materialConfig.urlPrefix}${materialConfig.shadowlessOutput}`,pool:'warm'}];
+ const lensKeys=(id:string)=>[`surface:${id}`,`poles:${id}`],warm=[...config.radialResources.map(resource=>({key:`rings:${resource.id}`,url:resource.url,pool:'warm'})),{key:'shadowless',url:`${materialConfig.urlPrefix}${materialConfig.shadowlessOutput}`,pool:'warm'}];
  const entries=[...warm,...config.lenses.flatMap(lens=>(['surface','poles'] as const).map(layer=>({key:`${layer}:${lens.id}`,url:lens[layer],pool:'warm'}))),...lighting.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:'lighting'}))];
  const b=createPreparedNodeTree({cssomReads:await prepareCssomDeclarationReads(geometry.leaves.map(leaf=>leaf.style))}),camera=b.element('div','polycss-camera planet-render-root','perspective:1000000px');
  const cameraState=createPolyCamera({zoom:config.initialScene.zoom,rotX:config.initialScene.totalPitchDegrees-materialConfig.systemRotationXDegrees,rotY:0,target:[0,0,0]}).state;

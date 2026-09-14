@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="tarvos"])[data-lod="billboard"] .tarvos-scene, .planet-stage:where([data-object-id="tarvos"])[data-lod="marker"] .tarvos-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="tarvos"])[data-lod="marker"] .tarvos-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="tarvos"]).tarvos-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

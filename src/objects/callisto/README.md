@@ -84,19 +84,17 @@ The source sphere radius is 2,409,300.0488 m. GeoTIFF projected x increases east
 
 Preparation downsamples to an 8,192 × 4,096 lossless map, bakes the projective latitude bands with proportionally scaled gutters, and prepares 1,024-pixel polar caps. These are selected once at every DPR. The physical sphere radius and map's original cartographic reference radius are kept distinct. No relief, bathymetry or interior model is inferred.
 
-The existing astronomy package supplies JPL parent-relative orbital elements, Jupiter's heliocentric position and IAU rotation at the shared prepared epoch. The same presentation frame registers the moon, Sun, orbit and astrometric sky. The orbital period is about 16.69 days and mean distance from Jupiter about 1,883,000 km. [NASA's facts](https://science.nasa.gov/jupiter/jupiter-moons/callisto/facts/) provide the brief introductory content. A possible subsurface ocean is uncertain.
-
-The Jupiter context photograph is pinned in Callisto's own source closure and prepared into its own 1,024-pixel asset. Installing Callisto does not require Jupiter's scene assets. ESO/S. Brunier imagery and the HYG catalogue supply the same sourced sky as the established moon integration; their licenses are retained.
+The existing astronomy package supplies JPL parent-relative orbital elements, Jupiter's heliocentric position and IAU rotation at the shared prepared epoch. The orbital period is about 16.69 days and mean distance from Jupiter about 1,883,000 km. [NASA's facts](https://science.nasa.gov/jupiter/jupiter-moons/callisto/facts/) provide the brief introductory content. A possible subsurface ocean is uncertain.
 
 ## Checks and source restoration
 
-The original TIFF, font, panorama and parent photograph remain reacquirable, ignored inputs. Runtime assets are independently described by `runtime-assets.json`. Publication and isolated installation are separate from local source verification.
+The original TIFF and font remain reacquirable, ignored inputs. Runtime assets are independently described by `runtime-assets.json`. Publication and isolated installation are separate from local source verification.
 
 ## Preparation ownership
 
 This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`. The source-only registered color converter above produces a standard GeoTIFF; there is no body-specific runtime or alternate body preparation path.
 
-Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. Lighting stays lossless.
 
 ## B6 mapped science
 
@@ -113,6 +111,6 @@ See [NOTICE.md](NOTICE.md) for credits.
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 2410.3 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 16.6904-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Jupiter and the parent marker now comes from the shared navigation atlas.
+The recipe declares a sphere of 2410.3 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 16.6904-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>

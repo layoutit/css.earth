@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="laetitia"])[data-lod="billboard"] .laetitia-scene, .planet-stage:where([data-object-id="laetitia"])[data-lod="marker"] .laetitia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="laetitia"])[data-lod="marker"] .laetitia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="laetitia"]).laetitia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

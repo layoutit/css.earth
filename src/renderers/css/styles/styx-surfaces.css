@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="styx"])[data-lod="billboard"] .styx-scene, .planet-stage:where([data-object-id="styx"])[data-lod="marker"] .styx-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="styx"])[data-lod="marker"] .styx-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="styx"]).styx-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

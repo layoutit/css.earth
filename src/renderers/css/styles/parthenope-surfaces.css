@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="parthenope"])[data-lod="billboard"] .parthenope-scene, .planet-stage:where([data-object-id="parthenope"])[data-lod="marker"] .parthenope-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="parthenope"])[data-lod="marker"] .parthenope-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="parthenope"]).parthenope-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hela",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5cad5683c5dbafffcd53944406f0c26f056de49432e53b2cb6991b773a511a37"
+    "sha256": "9b871bb6714f62123cf17ef31764121558f3a1ca4c719770a3ebb80f9d6530ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "30f2152e3d13d258a93ec98caa53015bc16db5cf93dcaf4220fcc6da78ad1e66",
+      "sha256": "93acb9b33cd7100f6d03016c81bc4b888f2c66995c571776c4d6c7d6947f3fbb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hela",
         "displayName": "Hela",
         "publicBase": "/scenes/hela/",
-        "distanceAu": 2.615426166061675,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 454 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "16f87a18a118d05be00441eb621466349fd3a2015efe0e0249c7033ac70f8c41",
+      "sha256": "81e934b0c329e03f6c6cb172b10c026cd40be060ce02a47cb2882df9dd9ee601",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
       "bytes": 128392,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "16f87a18a118d05be00441eb621466349fd3a2015efe0e0249c7033ac70f8c41",
-      "bytes": 8324,
+      "sha256": "81e934b0c329e03f6c6cb172b10c026cd40be060ce02a47cb2882df9dd9ee601",
+      "bytes": 8044,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -429,19 +410,19 @@
           "url": "/scenes/hela/hela-elevation-thumbnail.webp",
           "bytes": 4614,
           "sha256": "de54c42dd7605979ca7ee3aff1049f45660abc5ee94b309fde636f1f1a24e1db",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hela/hela-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hela/hela-elevation-surface@2x.webp",
           "bytes": 290106,
           "sha256": "5eafab36e9370b715d37e2fd86e37e60494a4ca0243dfbc71597538c39ba544c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -479,13 +460,13 @@
           "url": "/scenes/hela/hela-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hela/hela-shape-surface@2x.webp",
           "bytes": 185374,
           "sha256": "689746603b7869ca546ba813dd682f91bb5af5c129264fb514f58a7e40be8c7f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -516,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5481,
-          "sha256": "2b131bf9d5504833d1d694303969b5c7606faf87c1bb4ce26d9fe7bcdf1160de",
+          "bytes": 5362,
+          "sha256": "eef9d5be55c4f99df20f361d79dc7392ae3c1205bb629ffae0d93d7a0378c230",
           "verification": "bytes-verified"
         }
       ],
@@ -577,5 +558,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hela",
+    "materialSha256": "a0773d0a334491b3fd1f63a933f0aed95621df34fdd96f80185127803a3781ad",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "desdemona",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "96f7a4a3b47dc6ab33a7a73329a2d8c36510bc5d5e213a1e9a9d910da918a9f1"
+    "sha256": "45c1e7187c27c7bf80967718965216fa116a7a7021442ace6f5a1769ccf551af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "162b028bdc777715e4bffd9124606821b6e3c5227c5d24f3aa8dd70940be1b3d",
+      "sha256": "033951f29b261c776ebf4898e5ad5cf8fa74ab5200bda1b1c034bab9caebdfe9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "desdemona",
         "displayName": "Desdemona",
         "publicBase": "/scenes/desdemona/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Uranus-system ephemeris; IAU Desdemona BODY710 pole and meridian from PCK00011, with periodic terms frozen at the prepared epoch."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "044f397b9b2bfcd3d9aa0f66fe089a8d55b5bd2087102c1c62ff0e452b51638c",
+      "sha256": "2625bc0c5c59b64f57001dfb750deafc47cbff87d18533f10a809d1caebbf1f0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,12 +169,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -204,12 +191,6 @@
             "role": "observations",
             "description": "Voyager source inventory",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -265,7 +246,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -300,7 +281,7 @@
       "sha256": "11129d8df0c5a62592e2f3a5ce65950352607cc0d4d7fd34d58c88c7de401b80",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -317,10 +298,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "044f397b9b2bfcd3d9aa0f66fe089a8d55b5bd2087102c1c62ff0e452b51638c",
-      "bytes": 3044,
+      "sha256": "2625bc0c5c59b64f57001dfb750deafc47cbff87d18533f10a809d1caebbf1f0",
+      "bytes": 2765,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -357,13 +338,13 @@
           "url": "/scenes/desdemona/desdemona-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona/desdemona-model-surface@2x.webp",
           "bytes": 53648,
           "sha256": "a1d8205927f2bce28be1680814dc67681ee929b54f5a60f5f399ca96c8b95f49",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7787,
-          "sha256": "3d3086d14446c87d5e83f094adefbfa043010eb7321bd442e7aeb4ecd15c26ce",
+          "bytes": 7668,
+          "sha256": "0a56c5aa0ca9cb42470d354e3dc3f72b7e6179639b67a2b07d4c80a4129f3ffe",
           "verification": "bytes-verified"
         }
       ],
@@ -435,5 +416,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "desdemona",
+    "materialSha256": "fab095d73bb4c30dfb53be0f6ca92cf82baffc775a3673720e1849db9dd25e70",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

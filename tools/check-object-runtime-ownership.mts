@@ -122,6 +122,34 @@ function preparedLightingProjectionRecord(node: Node, file: string) {
     field.value.object?.type === 'Identifier' && field.value.object.name === 'projection' && nameOf(field.value.property) === 'sun';
 }
 
+// The application fetches one pinned JSON plan. Its Node-only import has a
+// concrete URL and JSON attributes, so it contributes data rather than an executor.
+function worldContextPlanImport(ast: Program | null, file: string): number | null {
+  if (!ast || file !== 'site/world-context-plan.mts') return null;
+  const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
+  const source = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && nameOf(node.id) === 'source');
+  const url = astKind(source?.init, 'NewExpression');
+  const base = astKind(url?.arguments[1], 'MemberExpression');
+  const parser = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === '../src/renderers/css/dist/index.js');
+  const imports = nodes.filter(node => node.type === 'ImportExpression');
+  const imported = imports[0];
+  const options = imported?.type === 'ImportExpression' && 'options' in imported ? imported.options as Node | null : null;
+  const json = property(property(options, 'with')?.value, 'type')?.value;
+  const output = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && nameOf(node.id) === 'APPLICATION_WORLD_CONTEXT');
+  const validation = astKind(output?.init, 'CallExpression');
+  const read = astKind(astKind(validation?.arguments[0], 'AwaitExpression')?.argument, 'CallExpression');
+  if (!url || nameOf(url.callee) !== 'URL' || url.arguments.length !== 2 ||
+      url.arguments[0]?.type !== 'Literal' || url.arguments[0].value !== '../src/objects/sun/prepared/world-context.json' ||
+      base?.object.type !== 'MetaProperty' || base.object.meta.name !== 'import' || base.object.property.name !== 'meta' || nameOf(base.property) !== 'url' ||
+      parser?.type !== 'ImportDeclaration' || !parser.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'parsePreparedWorldContext' && specifier.local.name === 'parsePreparedWorldContext') ||
+      imports.length !== 1 || imported?.type !== 'ImportExpression' || memberPath(imported.source)?.join('.') !== 'source.href' ||
+      json?.type !== 'Literal' || json.value !== 'json' || nameOf(validation?.callee) !== 'parsePreparedWorldContext' || validation?.arguments.length !== 1 ||
+      nameOf(read?.callee) !== 'readPreparedWorldContext' || read?.arguments.length !== 0) return null;
+  // No assignment may redirect the statically bound source.
+  if (nodes.some(node => node.type === 'AssignmentExpression' && (nameOf(node.left) === 'source' || memberPath(node.left)?.[0] === 'source'))) return null;
+  return sourceStart(imported);
+}
+
 export function inspectObjectRuntimeModule(source: string, file: string, { shared = false, shellContent = false, serverOnly = false,
   objectIds = OBJECTS.map(o => o.id), registryImportOffsets = new Set(), registryDescriptors = new Set() }: InspectionOptions = {}): Inspection {
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
@@ -145,6 +173,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   const imports: string[] = [], violations: Violation[] = [], aliases = new Map<string, string>();
   const astroRoot = isRecord(ast) && ast.type === "AstroRoot";
   const program = isRecord(ast) && ast.type === "Program" ? ast as unknown as Program : null;
+  const contextImport = worldContextPlanImport(program, file);
   // Follow frontmatter dependencies as server code, including transitive
   // helpers. Client script imports retain a separate, stricter browser visit.
   const frontmatterImports = new Set<Node>();
@@ -183,7 +212,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
     }
   } });
   walkRuntimeAst(ast, node => {
-    if (node.type === "ImportExpression" && !registryImportOffsets.has(sourceStart(node))) note(node, "Dynamic runtime imports hide ownership from the static closure");
+    if (node.type === "ImportExpression" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) note(node, "Dynamic runtime imports hide ownership from the static closure");
     if ((node.type === "CallExpression" || node.type === "NewExpression") &&
         ["eval", "Function"].includes(nameOf(node.callee) || propertyName(node.callee))) note(node, "Runtime code construction hides ownership");
     if (shared) {
@@ -480,51 +509,18 @@ function memberPath(node: Node | null | undefined): string[] | null {
 }
 function property(object: Node | null | undefined, name: string) { return objectProperty(object, name); }
 function requireContextualBindingSource(source: string) {
-  const ast = parseRuntimeSource(source, 'source.mts');
-  const bindings = new Map<string, {name: string; source: string}>(), defaults = new Map<string, string>();
   function fail(): never { throw new TypeError('Contextual binding must use the shared world-context factories and pinned object inventories.'); }
-  function kind<K extends Node['type']>(node: Node | null | undefined, type: K): Extract<Node, {type: K}> {
-    const value = astKind(node, type);
-    if (!value) fail();
-    return value;
-  }
-  for (const node of ast.body) if (node.type === 'ImportDeclaration') for (const specifier of node.specifiers) {
-    if (specifier.type === 'ImportSpecifier') bindings.set(specifier.local.name, {name: nameOf(specifier.imported), source: requireString(node.source.value)});
-    if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(node.source.value));
-  }
+  try { requireDescriptorAdapterSource(source, 'loadPackagedObject'); } catch { fail(); }
+  const ast = parseRuntimeSource(source, 'source.mts');
   const binding = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'bindContextualObject' ? [node.declaration] : [])[0];
-  const context = [...defaults].find(([, path]) => path === '../src/objects/sun/prepared/world-context.json')?.[0];
-  if (!binding || !context || binding.params.length !== 3 || binding.body.body.length !== 2) fail();
-  const definition = kind(binding.params[0], 'Identifier'), contextParam = kind(binding.params[1], 'Identifier');
-  const frameParam = kind(binding.params[2], 'AssignmentPattern'), frameId = kind(frameParam.left, 'Identifier');
-  const frameDefault = kind(frameParam.right, 'MemberExpression');
-  if (frameDefault.computed || nameOf(frameDefault.property) !== 'frame') fail();
-  // Typed adapters validate unknown context before forwarding its physical frame.
-  const parser = astKind(frameDefault.object, 'CallExpression');
-  if (parser) {
-    const imported = bindings.get(nameOf(parser.callee));
-    if (imported?.name !== 'parsePreparedWorldContext' || imported.source !== '../src/renderers/css/dist/index.js' ||
-        parser.arguments.length !== 1 || nameOf(parser.arguments[0]) !== contextParam.name) fail();
-  } else if (nameOf(frameDefault.object) !== contextParam.name) fail();
-  const mountStatement = kind(binding.body.body[0], 'VariableDeclaration');
-  if (mountStatement.kind !== 'const' || mountStatement.declarations.length !== 1) fail();
-  const mount = mountStatement.declarations[0], mountId = kind(mount.id, 'Identifier');
-  const mountInit = kind(mount.init, 'CallExpression');
-  if (nameOf(mountInit.callee) !== 'bindPackagedObject' || mountInit.arguments.length !== 2 || nameOf(mountInit.arguments[0]) !== definition.name) fail();
-  const factory = kind(mountInit.arguments[1], 'CallExpression'), fields = kind(factory.arguments[0], 'ObjectExpression');
-  if (nameOf(factory.callee) !== 'createWorldContextObjectRuntime' || factory.arguments.length !== 1 ||
-      nameOf(property(fields, 'definition')?.value) !== definition.name || nameOf(property(fields, 'context')?.value) !== contextParam.name ||
-      nameOf(property(fields, 'frame')?.value) !== frameId.name) fail();
-  const returned = kind(kind(binding.body.body[1], 'ReturnStatement').argument, 'CallExpression');
-  const assign = kind(returned.callee, 'MemberExpression');
-  if (nameOf(assign.object) !== 'Object' || nameOf(assign.property) !== 'assign' || nameOf(returned.arguments[0]) !== mountId.name) fail();
-  const renderer = bindings.get('createWorldContextObjectRuntime');
-  if (!renderer || bindings.get('createNavigableObjectMount')?.source !== renderer.source ||
-      bindings.get('createPreparedObjectNavigation')?.source !== renderer.source) fail();
-  const navigation = kind(property(returned.arguments[1], 'navigation')?.value, 'CallExpression');
-  const load = kind(navigation.arguments[0], 'ArrowFunctionExpression');
-  if (nameOf(navigation.callee) !== 'createPreparedObjectNavigation' || navigation.arguments.length !== 2 ||
-      nameOf(navigation.arguments[1]) !== frameId.name || !load.async || load.params.length !== 0 || nameOf(load.body) !== definition.name) fail();
+  const frame = astKind(binding?.params[2], 'AssignmentPattern');
+  const returned = astKind(astKind(binding?.body.body[1], 'ReturnStatement')?.argument, 'CallExpression');
+  const navigation = astKind(property(returned?.arguments[1], 'navigation')?.value, 'CallExpression');
+  const load = astKind(navigation?.arguments[0], 'ArrowFunctionExpression');
+  if (!binding || !frame || nameOf(navigation?.callee) !== 'createPreparedObjectNavigation' || navigation?.arguments.length !== 2 ||
+      nameOf(navigation.arguments[1]) !== nameOf(frame.left) || !load?.async || load.params.length !== 0 || nameOf(load.body) !== nameOf(binding.params[0]) ||
+      !ast.body.some(node => node.type === 'ImportDeclaration' && node.source.value === '../src/renderers/css/dist/index.js' && node.specifiers.some(specifier =>
+        specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'createPreparedObjectNavigation' && specifier.local.name === 'createPreparedObjectNavigation'))) fail();
 }
 
 function requireApplicationWorldContextSource(source: string) {
@@ -536,9 +532,9 @@ function requireApplicationWorldContextSource(source: string) {
       if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(statement.source.value));
     }
   }
-  const context = [...defaults].find(([, path]) => path === '../src/objects/sun/prepared/world-context.json')?.[0];
+  const context = [...imports].find(([, binding]) => binding.name === 'APPLICATION_WORLD_CONTEXT' && binding.source === './world-context-plan.mts')?.[0];
   const renderer = '../src/renderers/css/dist/universe.js';
-  const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedCssPointField', 'loadPreparedCssSurfaceShell'];
+  const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedPointAppearance', 'loadPreparedCssSurfaceShell'];
   if (!context || !required.every(name => [...imports].some(([local, binding]) => binding.name === name && binding.source === renderer)) ||
     ![...imports].some(([local, binding]) => binding.name === 'PREPARED_NAVIGATION_MARKERS' && binding.source === './prepared-navigation-markers.mjs')) fail();
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
@@ -547,7 +543,7 @@ function requireApplicationWorldContextSource(source: string) {
   const initializers = nodes.flatMap(node => node.type === 'VariableDeclarator' && node.init?.type === 'Identifier' ? [node.init.name] : []);
   const generated = (name: string) => initializers.some(local => imports.get(local)?.name === name && imports.get(local)?.source === './prepared-context-objects.mts');
   if (!generated('CONTEXT_OBJECT_DESCRIPTORS') || !generated('CONTEXT_OBJECT_ASSET_URLS') ||
-    calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedCssPointField').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
+    calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedPointAppearance').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
     calls('loadPreparedCssSurfaceShell').length !== 1 || calls('prepareObjectResources').length !== 1) fail();
   const resourceCalls = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && nameOf(node.callee) === 'resourceSet');
   if (!resourceCalls.some(node => memberPath(node.arguments[0])?.join('.') === 'applicationContext.volume.objectId') &&
@@ -568,7 +564,7 @@ function requireApplicationWorldContextSource(source: string) {
   if (resourceReturn?.type !== 'ObjectExpression' || descriptor?.value?.type !== 'MemberExpression' || nameOf(descriptor.value.object) !== 'descriptors' ||
     resolveResource?.value?.type !== 'Identifier' || transport?.value?.type !== 'ObjectExpression' ||
     property(transport.value, 'read')?.value?.type !== 'FunctionExpression') fail();
-  const volumeCall = calls('loadPreparedCssVolume')[0], starCall = calls('loadPreparedCssPointField')[0];
+  const volumeCall = calls('loadPreparedCssVolume')[0], starCall = calls('loadPreparedPointAppearance')[0];
   if (volumeCall.arguments.length !== 2 || starCall.arguments.length !== 2 ||
     memberPath(volumeCall.arguments[0])?.join('.') !== `${volumeSet.id.name}.descriptor` ||
     memberPath(volumeCall.arguments[1])?.join('.') !== `${volumeSet.id.name}.transport` ||
@@ -576,7 +572,7 @@ function requireApplicationWorldContextSource(source: string) {
     memberPath(starCall.arguments[1])?.join('.') !== `${starSet.id.name}.transport`) fail();
   const universe = calls('createPreparedUniverse')[0];
   if (universe.arguments.length !== 1 || universe.arguments[0]?.type !== 'ObjectExpression' ||
-    !['context', 'volume', 'stars', 'sprites', 'shells', 'resolveResource', 'resolveStarResource'].every(name => property(universe.arguments[0], name))) fail();
+    !['context', 'volume', 'pointAppearance', 'sprites', 'resolveResource', 'resolvePointResource'].every(name => property(universe.arguments[0], name))) fail();
 }
 
 /** The generated module names each context object; each must reach its descriptor and prepared assets, binary banks included. */
@@ -783,6 +779,15 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     if (file.endsWith(".css")) { await source(path); return; }
     const facts = await inspect(path, true, shellContent, serverOnly);
     if (!sharedEdges.has(path)) sharedEdges.set(path, new Set());
+    if (file === 'site/world-context-plan.mts') {
+      if (worldContextPlanImport(parseRuntimeSource(await source(path), file), file) === null) {
+        sharedViolations.push({ file, line: 1, reason: 'Application world context plan must validate its pinned JSON source.' });
+      } else {
+        const contextPath = resolve(root, 'src/objects/sun/prepared/world-context.json');
+        sharedEdges.get(path)!.add(contextPath);
+        await sharedVisit(contextPath);
+      }
+    }
     sharedFactoryCalls.set(path, facts.factoryCalls);
     sharedViolations.push(...facts.violations);
     for (const site of facts.cameraFactories) if (!cameraFactorySites.some(existing => existing.file === site.file && existing.line === site.line)) cameraFactorySites.push(site);

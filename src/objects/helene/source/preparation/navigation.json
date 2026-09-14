@@ -28,6 +28,8 @@
         "n1687121164_1",
         "n1687121224_1",
         "n1687121524_1",
+        "n1675163339_1",
+        "n1519536732_1",
         "thomas-2018-shape"
       ],
       "size": 512,
@@ -38,8 +40,8 @@
       "lensId": "normal"
     },
     "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
-    "expectedBytes": 121982,
-    "expectedSha256": "aadf516e124bab82d636393864e8557fb198e153b65309ed7239e21d4d77052e"
+    "expectedBytes": 125777,
+    "expectedSha256": "0b11589830d92d44187711517292c40810a83e8a23447c11625cedfdc7a1e578"
   },
   "operations": [
     {

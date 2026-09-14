@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="pyrrhus"])[data-lod="billboard"] .pyrrhus-scene, .planet-stage:where([data-object-id="pyrrhus"])[data-lod="marker"] .pyrrhus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="pyrrhus"])[data-lod="marker"] .pyrrhus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="pyrrhus"]).pyrrhus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

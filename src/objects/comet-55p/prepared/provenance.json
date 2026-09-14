@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-55p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c74436711917171b33ecf5c363a0961c5af0b74807d382b3eed22e00eec13cd"
+    "sha256": "6898e2ef23550fc3347e72e5eaf848e6a4f592642e39d399721e8f80c90cebd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "561189fdb6f7c0141051c729e93779a4d952841b7c2e2883aa4d76302244ba7e",
+      "sha256": "ff53474e057d3f2d970db4a7dabbde74eb4d127d66b2271744164b6006e6d7b5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-55p",
         "displayName": "Tempel–Tuttle",
         "publicBase": "/scenes/comet-55p/",
-        "distanceAu": 12.265992818638155,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cbf983d62634aa0013fe3ad5c04029c9c763e51aeebea78c453cd7217547c062",
+      "sha256": "83781f9860389d5f06746deef30ef586764e4eb31fee03a7522cc61b685e0a7e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "98b1b31a2d4ff93af8f841bdeb25e159b6e66e8d3807161fe3e05c0c49eb52a3",
       "bytes": 437080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cbf983d62634aa0013fe3ad5c04029c9c763e51aeebea78c453cd7217547c062",
-      "bytes": 3075,
+      "sha256": "83781f9860389d5f06746deef30ef586764e4eb31fee03a7522cc61b685e0a7e",
+      "bytes": 2795,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-55p/comet-55p-model-thumbnail.webp",
           "bytes": 1428,
           "sha256": "28312f0c6e47ed28725a36c3ef2e37fee09e9270f63545d559d3dbbaaf8c42c7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-55p/comet-55p-model-surface@2x.webp",
           "bytes": 122050,
           "sha256": "b0725a6002ddaafff659bad73a0f267cf83b092919dae777a749504c89ef81ae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6538,
-          "sha256": "997cbe9c15eccd759f395d27b852fb15ad27ee510d826b7cf6eaa301e9f4799a",
+          "bytes": 6419,
+          "sha256": "850e49aa42ef5140bd5de0a5bf90d9706f5b7b000fba6c7f1954e44e3922c80f",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-55p",
+    "materialSha256": "f8fe081deceaf967bc375fc36ca5f5bb5aeb6081aa3d80be0dedc6ab3daf2dcf",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="metis"])[data-lod="billboard"] .metis-scene, .planet-stage:where([data-object-id="metis"])[data-lod="marker"] .metis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="metis"])[data-lod="marker"] .metis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="metis"]).metis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

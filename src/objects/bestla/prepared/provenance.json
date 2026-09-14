@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bestla",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f6f29b7d43e12d90a2641ccdc79a1fb219aa6d86bdd12c6600ddcee2f56b724b"
+    "sha256": "76abf4dd3d7da344af51ddc1415fe1c8587e01ba824084cd0a7e7c9b10600552"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "612c1044baad5276ed23f33de615d327668b035cbed7dafb0e8d41b1dd4e03a5",
+      "sha256": "8ff0f357268c65fbcaa9c5460fe08d2bf1fa13eb0603c987a95d78f7a7f41cca",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "bestla",
         "displayName": "Bestla",
         "publicBase": "/scenes/bestla/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Partial observed south-ecliptic pole latitude and retrograde sense are preserved. Exact pole longitude and current phase remain unknown; ecliptic south is a representative display convention, not the full measured pole. Author body-page pole cells are blank; the primary paper supplies this partial constraint."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c",
+      "sha256": "01095e0f6041e942b4557cfbbf2d74bd243aba64e31ae68a0589e7c4be366bd3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "8d8045f97ca67fc05545255bdcd90db27a2d0879ce00e464fd9928bffaca48b0",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c",
-      "bytes": 3418,
+      "sha256": "01095e0f6041e942b4557cfbbf2d74bd243aba64e31ae68a0589e7c4be366bd3",
+      "bytes": 3139,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -371,13 +352,13 @@
           "url": "/scenes/bestla/bestla-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bestla/bestla-model-surface@2x.webp",
           "bytes": 56040,
           "sha256": "502d6d13528fb67f4f07289dcfdec51b3e5f1679ce9c15c6b529afaf9f171f00",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -413,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5480,
-          "sha256": "d9de1e1b8425bcf20eebe34cb30150433fb9bf8789d7017ad068b034d8a8eba1",
+          "bytes": 5361,
+          "sha256": "c6740d950ee91ea37174809e674801a7977f9bcaf52c7fd09a1ca5b657076940",
           "verification": "bytes-verified"
         }
       ],
@@ -449,5 +430,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "bestla",
+    "materialSha256": "d178a1ded6368c1d5ae84ae8a343861daef608ea20c7844af34f5a151d27ac9f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

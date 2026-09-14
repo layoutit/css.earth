@@ -4,7 +4,6 @@
   "namespace": "asteroid-2002-ce26",
   "displayName": "2002 CE26 Primary",
   "publicBase": "/scenes/asteroid-2002-ce26/",
-  "distanceAu": 2.232934797602879,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -116,12 +115,6 @@
     "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

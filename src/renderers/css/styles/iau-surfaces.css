@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="iau"])[data-lod="billboard"] .iau-scene, .planet-stage:where([data-object-id="iau"])[data-lod="marker"] .iau-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="iau"])[data-lod="marker"] .iau-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="iau"]).iau-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -2,33 +2,6 @@
   "schema": "csseos-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/eos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "eos-shape",
       "path": "shape/model-1743.txt",
       "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt",
@@ -122,8 +95,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7684,
-      "expectedSha256": "8bec2735b9427a9bb31b6ce90c66022e930e6636d07ca7fb45bdc2781b8d40b9",
+      "expectedBytes": 7405,
+      "expectedSha256": "233900a8584a1fd67a40f8adaf04e12aec2cfd18245230b1baa38d20bfe0809f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -131,8 +104,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1890,
-      "expectedSha256": "bdcb18284430ecdf38b65eb872223b1505a7fbd581640b1ecd9e3e6a1d6b0ec3"
+      "expectedBytes": 1687,
+      "expectedSha256": "4269b5c6a97d5c19dca33702ec449fbf49c8656e03e45be45d0a10649f4bb239"
     },
     {
       "path": "preparation/navigation.json",
@@ -146,8 +119,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3169,
-      "expectedSha256": "890e9f37cc8bea91eeeeb6adf6ebd63687f6cc35e951d1f4b3975fa498937069"
+      "expectedBytes": 3015,
+      "expectedSha256": "78ec18a306d9d2ef28f6749bca0746dea79f896d1f7366f8d28646291b8bdae7"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -212,21 +185,6 @@
       "path": "reference/paper-usui-2011.pdf",
       "expectedBytes": 635799,
       "expectedSha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 144972,
-      "expectedSha256": "d61c3d7035bae7857eaafedbc36fdd515f88fce1b68ee89123ae1fd94b33c51a"
     }
   ]
 }

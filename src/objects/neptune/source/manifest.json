@@ -327,106 +327,6 @@
       }
     },
     {
-      "id": "hyg-v41-neptune-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedSha256": "0b400d767dacc6cce22f4e0ea603ee504c32535a380985090427fd821e4b2af6",
-      "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-      "credit": "David Nash / Astronexus",
-      "license": "CC-BY-SA-4.0, see stars/LICENSE.md",
-      "acquisition": "prepared checked subset of pinned HYG v4.1 during source acquisition",
-      "redistribution": "permitted under CC-BY-SA-4.0 with attribution and share-alike",
-      "consumers": [
-        "stars",
-        "starfield"
-      ],
-      "expectedBytes": 144994,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
-      "id": "eso-neptune-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "expectedBytes": 29082084,
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-neptune-cubic-sky-sun-oracle-asset",
-      "path": "sun/google-maps-sun.png",
-      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
-      "expectedBytes": 10947,
-      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference",
-      "license": "Google proprietary; no redistribution grant verified",
-      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
-      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "google-maps-sun-symbol",
-            "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-neptune-cubic-sky-sun-oracle-measurements",
-      "path": "sun/google-maps-sun-oracle.json",
-      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
-      "expectedBytes": 2895,
-      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
-      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
-      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
-      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene",
-        "lighting"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
-      }
-    },
-    {
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
       "expectedBytes": 3378,
@@ -465,8 +365,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15112,
-      "expectedSha256": "e2a3d86cda4fd43a71f449be62b7d42b7d29cebd4689629e4fd278350348cc22",
+      "expectedBytes": 14949,
+      "expectedSha256": "f736731bb293f719cdabfa65974fc3c720895869c6836de7f6efa11245bf26c7",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -526,8 +426,8 @@
     {
       "id": "neptune-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 12996,
-      "expectedSha256": "67711c6f0e6aa548d94ca2a434a40ab10dea79da9d40965eba74654987e51a6c",
+      "expectedBytes": 14390,
+      "expectedSha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
@@ -544,8 +444,8 @@
     {
       "id": "neptune-authored-materials",
       "path": "preparation/materials.json",
-      "expectedBytes": 4791,
-      "expectedSha256": "7ddf646b781a982b02f66e22a6bad93964c260da8a1e3abf56cd94b820cbfbc8",
+      "expectedBytes": 6589,
+      "expectedSha256": "472ee4ef2aa39ab2e02bb1c71e6fdce97fd3bf34dcf3ef20159c1f8a9501e33c",
       "origin": "Checked source-informed oblate lighting and retained material preparation parameters",
       "credit": "cssEarth and the institutional sources identified by the source manifest",
       "license": "Project-authored specification",
@@ -639,28 +539,10 @@
       }
     },
     {
-      "id": "neptune-authored-celestial",
-      "path": "preparation/celestial.json",
-      "expectedBytes": 330,
-      "expectedSha256": "d382149e96d1fe9decaf6bbe994cb3489021bb12b08ddd7c4cf89e8f246161c2",
-      "origin": "Checked shared photographic sky and clean-room directional Sun presentation inputs",
-      "credit": "cssEarth; ESO/S. Brunier; HYG Stellar Database",
-      "license": "Project-authored specification; original sky-source terms retained",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source",
-      "consumers": [
-        "celestial"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky and Sun display settings; photographic, star and Sun inputs retain separate source records."
-      }
-    },
-    {
       "id": "neptune-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3019,
-      "expectedSha256": "22b65e4b3ae72156ea64c98ba71d3d8ef347537e05d2ef6ba8bcfc1cccdfa0a2",
+      "expectedBytes": 2646,
+      "expectedSha256": "b675fa7f8133bce1cdc5b724db7c8398b9528a397a5803e16c80deff156ebc5a",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
@@ -677,18 +559,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/LICENSE.md",
-      "purpose": "HYG subset attribution and CC-BY-SA-4.0 terms",
-      "expectedBytes": 589,
-      "expectedSha256": "1b29ad9901ae767c65a8f3254b3ba7b1a9da62e95ce00c03f1533f184699c0d1"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
-      "expectedBytes": 1271,
-      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",

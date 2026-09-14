@@ -4,7 +4,6 @@
   "namespace": "ivar",
   "displayName": "Ivar",
   "publicBase": "/scenes/ivar/",
-  "distanceAu": 1.8630871303717667,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -119,12 +118,6 @@
     "sunSource": "DAMIT model 271 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

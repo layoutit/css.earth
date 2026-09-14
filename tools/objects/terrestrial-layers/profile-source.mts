@@ -28,14 +28,13 @@ const observedColor = shape({id:text,consumer:text,monochromeBase:text,
 export function parseSolidPreparationSource(input:unknown) {
   const source=requireRecord(input), base=parseSolidRasterConfig(input);
   const extra=shape({schema:choice('cssearth-terrestrial-preparation@1'),kind:choice('solid-observation-body'),
-    namespace:text,displayName:text,publicBase:text,distanceAu:number,rings:optional(value=>value),
+    namespace:text,displayName:text,publicBase:text,rings:optional(value=>value),
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
       radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({lensId:text})(value)))),
       camera:shape({initialScenePitchDegrees:number,defaultControlYawDegrees:number,framingScale:optional(number)})}),
     lighting:shape({frameSize:number,frameCount:number,columns:number,logicalSize:number,terminatorWidth:number,
       directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number}),
-    presentation:shape({defaultLens:text,markerAtlasUrl:text,pointColor:array(number)}),
-    parentMarker:optional(shape({consumer:text,operations:array(value=>value),tileSize:number,size:number})),
+    presentation:shape({defaultLens:text}),
     celestial:shape({sunSource:text,sunQualification:optional(text),qualification:optional(text)})})(source);
   const raster=requireRecord(source.raster);
   return {...source,...base,...extra,raster:{...base.raster,

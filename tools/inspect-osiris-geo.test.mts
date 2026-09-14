@@ -165,13 +165,13 @@ test('registered filter colors share interpolation and geometry rejection with g
   const policy = { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 };
   const sampled = sampleGeo(frame, matrix, [0, 0, 0], policy);
   assert.equal(sampled.reason, undefined);
-  assert.deepEqual(sampled.reason ? undefined : sampled.color, [0, 3, 8]);
+  assert.deepEqual('color' in sampled ? sampled.color : undefined, [0, 3, 8]);
   // A pixel on another surface or failing quality leaves every band together.
   native.planes.COORDINATE_Z_IMAGE[3] = .1;
   const withoutFourth = sampleGeo(frame, matrix, [0, 0, 0], policy);
-  assert.deepEqual(withoutFourth.reason ? undefined : withoutFourth.color, [0, 2, 8]);
+  assert.deepEqual('color' in withoutFourth ? withoutFourth.color : undefined, [0, 2, 8]);
   native.planes.COORDINATE_Z_IMAGE[3] = 0;
   const qualityDropped = sampleGeo({ ...frame, acceptPixel: i => i !== 3 }, matrix, [0, 0, 0], policy);
-  assert.deepEqual(qualityDropped.reason ? undefined : qualityDropped.color, [0, 2, 8]);
+  assert.deepEqual('color' in qualityDropped ? qualityDropped.color : undefined, [0, 2, 8]);
   assert.equal(sampleGeo({ ...frame, acceptPixel: i => i === 0 }, matrix, [0, 0, 0], policy).reason, 'quality');
 });

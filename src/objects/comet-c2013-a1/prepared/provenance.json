@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2013-a1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "42aa8889f56e6c3ce63f271a1b5374139e420cf020a38587760beecac52977b3"
+    "sha256": "9e6490af61cfbe041b5a13aa0f9499ab03d553ac83bdec7f61781a178a0c6bba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "eb0089d75bc28fe28d0b541b709256314b73d4a1b471d089ec3929cdbf7618e4",
+      "sha256": "8810e75fd0cd8f835d421acef440412668cbccf3e26f7ce21f82fac033af7f8c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c2013-a1",
         "displayName": "Siding Spring 2013",
         "publicBase": "/scenes/comet-c2013-a1/",
-        "distanceAu": 27.900222087262012,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e4a590ae63a97cd2809ac0741e8e2484c86d2ace1a2ffa961ec92c190a8d5d31",
+      "sha256": "a2823fb1288abe41852f637a736bfa255b9713342c9ee199928f35bb11f229b8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://science.nasa.gov/solar-system/comets/c-2013-a1-siding-spring/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "494baae429b711b258eedcda3c13d1fb98b8880d45861db62f811953e1315e6a",
       "bytes": 439176,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e4a590ae63a97cd2809ac0741e8e2484c86d2ace1a2ffa961ec92c190a8d5d31",
-      "bytes": 3111,
+      "sha256": "a2823fb1288abe41852f637a736bfa255b9713342c9ee199928f35bb11f229b8",
+      "bytes": 2831,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-c2013-a1/comet-c2013-a1-model-thumbnail.webp",
           "bytes": 1410,
           "sha256": "69b3466cdc2dfde0ac4620b064471b9988278c3d37be501c5206f3c63bd9e4a9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c2013-a1/comet-c2013-a1-model-surface@2x.webp",
           "bytes": 119364,
           "sha256": "903bdcabe32bb4579c8f25f179cce5733ab2dc1f2c252b464938bc6183ca0c57",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10908,
-          "sha256": "1de6f91e5c67f24e0e219c8c2c209ebda1c1daa287a7bae18ef6444839fd5e8d",
+          "bytes": 10789,
+          "sha256": "d88e369bd4fa3d88114a067e3c4384e1ce0da3f6f2458c99384b8154662e290e",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-c2013-a1",
+    "materialSha256": "e785715c364b1431bfb0cd7a2a13aa625b8594e90853da1aa78a1fc7329f5a2e",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "euphrosyne",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c60b1709953e48610de3aa94090bf90aaf6a32388b595664a4f7ca69d0afac0d"
+    "sha256": "8a1ceca306b17b9862c368fd73eeec403d491020ee8bd03c46a8dbb8f87833ad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "475b9a986777f02170c93a774254b53b85ddd7cb2db0e7869d27879c4544b472",
+      "sha256": "c1e06fc0faa08aab4d61f802c6ed269e3fd98c894a368e2dd0f02cadb42d3c99",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "euphrosyne",
         "displayName": "Euphrosyne",
         "publicBase": "/scenes/euphrosyne/",
-        "distanceAu": 3.162046843719569,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "223d85724b5c6da81a0049bfef0b8b84dc97252c9b1590fd6f1f94ff610b7b51",
+      "sha256": "70dc386c8c453e8d24c5752f051d45cdf395d1fbbee06d5bf69a2a20c202004a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "7c99a8af18219166e1b4046dbbb879d83f289d8288e98b41d226c566f3a6a0d3",
       "bytes": 384379,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "223d85724b5c6da81a0049bfef0b8b84dc97252c9b1590fd6f1f94ff610b7b51",
-      "bytes": 8793,
+      "sha256": "70dc386c8c453e8d24c5752f051d45cdf395d1fbbee06d5bf69a2a20c202004a",
+      "bytes": 8514,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/euphrosyne/euphrosyne-elevation-thumbnail.webp",
           "bytes": 5366,
           "sha256": "03889a0a928e0dc5064ac5b101dc22e0fd10f877f3376c3ef3d7efc974b79ce8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-surface@2x.webp",
           "bytes": 290612,
           "sha256": "998f072bbbe74e71652b68969a4af0d9ad68e7780cdeffc1c01f9c2eda52be1f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/euphrosyne/euphrosyne-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
           "bytes": 226420,
           "sha256": "e7f7e7fbd35220e6b2006d57879203960aeae4094a4b8cd8610f6abb11f1955f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6575,
-          "sha256": "6bd1265279c573349dca45d8107a134ac2c411b1a70efb38df7d2cb0636a8cfe",
+          "bytes": 6456,
+          "sha256": "ad059b3532cabdc37985dc3e08877706c506f372bf2f2ddd08fabf3f3ffe55fc",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "euphrosyne",
+    "materialSha256": "a7996defa8476040d5dd33d204648254500a6607e96666dbccdfaade69efc9ab",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

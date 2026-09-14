@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="polydeuces"])[data-lod="billboard"] .polydeuces-scene, .planet-stage:where([data-object-id="polydeuces"])[data-lod="marker"] .polydeuces-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="polydeuces"])[data-lod="marker"] .polydeuces-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="polydeuces"]).polydeuces-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

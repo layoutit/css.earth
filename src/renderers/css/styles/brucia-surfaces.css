@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="brucia"])[data-lod="billboard"] .brucia-scene, .planet-stage:where([data-object-id="brucia"])[data-lod="marker"] .brucia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="brucia"])[data-lod="marker"] .brucia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="brucia"]).brucia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

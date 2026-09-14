@@ -4,7 +4,6 @@
   "namespace": "siarnaq",
   "displayName": "Siarnaq",
   "publicBase": "/scenes/siarnaq/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "JPL Saturn-system ephemeris. Published approximate spin pole converted from ecliptic J2000 to ICRF; arbitrary initial meridian. This is not a known current surface phase."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

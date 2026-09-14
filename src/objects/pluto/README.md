@@ -8,7 +8,7 @@
 | Monochrome | [USGS LORRI/MVIC mosaic](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_mosaic_300m), July 2017; 24,888 × 12,444, east-positive longitude. |
 | Elevation | [USGS stereo DEM](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m): signed metres above a 1,188.3 km sphere; −32,768 means missing. False-color scale −8 to +8 km. |
 | Methane, nitrogen and water ice | [Drozdov & Emelyanov (2026), Zenodo 18825240](https://zenodo.org/records/18825240), CC BY 4.0. Modeled surface fractions from five New Horizons LEISA scans on 14 July 2015. All three use the same 0–100% scale; they are infrared spectral fits, not photographs. |
-| Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records; shared ESO/HYG sky and Inter title sources. |
+| Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records; Inter title sources. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PLUTO/target) Pluto centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels depend on their size on screen, and a selected feature stays labelled. Available in all six views. |
 
 ## Evidence
@@ -195,9 +195,8 @@ Terrain shading is derived from that same signed DEM using latitude-corrected sp
   period 247.92065 years. NASA supplies the rounded mean solar distance of 39 AU.
   <https://ssd.jpl.nasa.gov/planets/phys_par.html>
   <https://science.nasa.gov/dwarf-planets/pluto/facts/>
-- **Sky and title:** checked ESO/S. Brunier panorama (CC BY 4.0), HYG v4.1
-  registration field (CC BY-SA 4.0), and pinned Inter outlines (SIL OFL 1.1).
-  These use the existing shared preparation recipes, not a Pluto star simulation.
+- **Title:** pinned Inter outlines (SIL OFL 1.1), prepared with the existing shared
+  title recipe.
 
 Neither mosaic nor DEM covers all of Pluto. Source resolution varies across the
 flyby mosaic. A neutral gray cartographic grid marks identified gaps; it is not

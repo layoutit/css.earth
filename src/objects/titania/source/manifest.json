@@ -127,33 +127,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -513,33 +486,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 850,
-      "expectedSha256": "4f0dc5b304ec334d693054f2efc387ec680ed84b201d215fcd118bb4137bbb1d",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
-          }
-        ]
-      }
-    },
-    {
       "id": "titania-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 3820,
@@ -569,8 +515,8 @@
     {
       "id": "titania-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1647,
-      "expectedSha256": "40d9193d596427b78207511575cd618e869c2b2c344bddc34a1fe12ad0f67bc5",
+      "expectedBytes": 309,
+      "expectedSha256": "41381e11b16144c334adf3d173c7ff6f085d22a09ac10e7cca105607c004aa92",
       "origin": "Repository-authored Titania solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -628,8 +574,8 @@
     {
       "id": "titania-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 224,
-      "expectedSha256": "629b24307889fe022dd188b43161a38d10b8fb4da5d76573b7fc9c26fe59b0ce",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Titania celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -684,8 +630,8 @@
     {
       "id": "titania-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3279,
-      "expectedSha256": "51d9b9a6a372bbd685d4fd64d185247561d77d1e2916e563e10409a067771a91",
+      "expectedBytes": 3095,
+      "expectedSha256": "25153077f65a5aebe0eb5d4ccfc034a209fdbc8cd20d4c2298fb242c141842e7",
       "origin": "Repository-authored Titania acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -703,8 +649,8 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12440,
-      "expectedSha256": "7e10ddc4b9921f30dfe7274b352a70deea75045a53aebf5418bd4cd2f32a5ed7",
+      "expectedBytes": 12161,
+      "expectedSha256": "67a37d8f0fee8476e93302e9c6edec44bdc84b3f773984b529ebdd38a3515afd",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -726,16 +672,6 @@
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
       "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kallisto",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8dcf117d3c6d1c1f011f9436fb930a63dff957facd1c4ee9ed36bb0b32ea9ca2"
+    "sha256": "6b2a6d276de5b75e449289fd88e3c76ef1e402645221c35745e1e001a478a22b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d9e770f51f25d09e444725e5d7493e1e81afebbf75f63965ebdec5d0bdfe62a0",
+      "sha256": "c3acd4e9c09d6d8cc2521374a441875719aff3353480eac27b352d1a6f49e95f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kallisto",
         "displayName": "Kallisto",
         "publicBase": "/scenes/kallisto/",
-        "distanceAu": 2.66979749127311,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4787 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8797277e59f9c3d187d88bf076f0b1b0cf95aad0c455eda58f8154823dc484e0",
+      "sha256": "8c9bfbd2e5c0f62036c95bf02e222b86ee747223ed87fed3101cb9a4afd76a45",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4787"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "3108ee1d5da9b4004ac87f550e1a5f5561e02214612a4237757764eed1830f1f",
       "bytes": 45609,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8797277e59f9c3d187d88bf076f0b1b0cf95aad0c455eda58f8154823dc484e0",
-      "bytes": 9494,
+      "sha256": "8c9bfbd2e5c0f62036c95bf02e222b86ee747223ed87fed3101cb9a4afd76a45",
+      "bytes": 9215,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/kallisto/kallisto-elevation-thumbnail.webp",
           "bytes": 6036,
           "sha256": "3c117a8f8a6f72d3f3923bb9c44ae1101f38b0e23618930b65fe84199576ab2f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kallisto/kallisto-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kallisto/kallisto-elevation-surface@2x.webp",
           "bytes": 311034,
           "sha256": "85be32799e86121d49fd570242e7bdbb2420adc7eade465461cedff5e9b8d94f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/kallisto/kallisto-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kallisto/kallisto-shape-surface@2x.webp",
           "bytes": 261556,
           "sha256": "ea7bcab551c73e3f30930c2cafc64d0f2922ef03ecc7d2c9a7ceeb21fcfcb11b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6835,
-          "sha256": "6b69ef10e97f138692ad71ccfbccadfd0a594b4f57d3d36a440bab966b2d3500",
+          "bytes": 6716,
+          "sha256": "8883fc6287635eb746cd7631a4976ddf1de063786d89a7c2f88620bbfa09fe4e",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "kallisto",
+    "materialSha256": "edb2fb1ea61b01fe52e593d3bc5140fd87d8e8ea7538706f0ec8d9f66aafa66d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

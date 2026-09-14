@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "anthe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "00eb62e84952e5a87120cb54bc6a730d3aa1e693e226a7d2687129820890591f"
+    "sha256": "04ec91004aea30ac76d44af54f0b0a514517056404e7fd14022b5648fd094113"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5363531e03ac51d3f1cc60755e0c2333f687529eed03f0da18d8e54cce851eb3",
+      "sha256": "d964567464e9b7bd7784778e952b5cbdd7fa5fb6e37bc7e2328c9b56d35c1934",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "anthe",
         "displayName": "Anthe",
         "publicBase": "/scenes/anthe/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Saturn-system ephemeris. Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "765fa99c1dd68cd3840e4ea8ede3b37f87a026530eb74ffb1b12b86b2a1d37c3",
+      "sha256": "c4ebb105c11332082e797168a1e874f46e384cb5dd3a9a96174f17de97786aea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Cassini source inventory",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "b4ad5bdc90ca3fc53707b951d377fca947d791901dd72e46266914f31ac8be18",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "765fa99c1dd68cd3840e4ea8ede3b37f87a026530eb74ffb1b12b86b2a1d37c3",
-      "bytes": 3071,
+      "sha256": "c4ebb105c11332082e797168a1e874f46e384cb5dd3a9a96174f17de97786aea",
+      "bytes": 2792,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -362,13 +343,13 @@
           "url": "/scenes/anthe/anthe-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anthe/anthe-model-surface@2x.webp",
           "bytes": 57270,
           "sha256": "4df51689d4131d18c3c1c4967b965f3254413dd4b6f4dd493daf43be55d2ad45",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -404,8 +385,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3811,
-          "sha256": "e452279f1675d05f3e1afd9a032da375c739e61daf35b8cb30c0339100029f90",
+          "bytes": 3692,
+          "sha256": "65b49d255235c40d41d3c91cf6d36dd5f30678dbec41de990e22ac5e63b6b5cd",
           "verification": "bytes-verified"
         }
       ],
@@ -440,5 +421,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "anthe",
+    "materialSha256": "7f95de089925dd17f6dab20163843ecf74499a45c340d2bb907b5e1b9037e69c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

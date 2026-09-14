@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kiviuq",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c25a09de2938c8b7e92326c625c7707b8ff75b249e780f964be5658a9aec1935"
+    "sha256": "c8f7fbb0d3a23cb7639c2c55a8a8a4771f812289b7af6d01f47368d608a8ca42"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "48ca263dac19326cd7b9ebfdf0e927deb7575927d1075f33c6bf123d2a69d889",
+      "sha256": "c4824572f628361e8b6ba834e227b60262408533103c39408940026e19e2ba46",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kiviuq",
         "displayName": "Kiviuq",
         "publicBase": "/scenes/kiviuq/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; illustrative display pole and meridian, not a measured spin attitude."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "69194af03ca2dceec1a42d485fec035e7269336a6d87dcc57cddbeca16f72e29",
+      "sha256": "47aaf19591f05e6f71023426757234dc3818deb0734a35551ea3735325cf7507",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -177,12 +170,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -205,12 +192,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -267,7 +248,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -303,7 +284,7 @@
       "sha256": "3d7a18da1fb1fc342002321d7f73f87a3a839f5b78a75405dd477c43d1eef686",
       "bytes": 59958,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -320,10 +301,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "69194af03ca2dceec1a42d485fec035e7269336a6d87dcc57cddbeca16f72e29",
-      "bytes": 3012,
+      "sha256": "47aaf19591f05e6f71023426757234dc3818deb0734a35551ea3735325cf7507",
+      "bytes": 2733,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -360,13 +341,13 @@
           "url": "/scenes/kiviuq/kiviuq-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kiviuq/kiviuq-model-surface@2x.webp",
           "bytes": 51444,
           "sha256": "6eb40102d8e65e6f857e97e92886c089b90b2471dd6df22eb10f52ea225f8c41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -402,8 +383,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3807,
-          "sha256": "25efd59130e4828c5aefb4214a9e6f518cafff97be0f4f9deaa45b7e8fd17f01",
+          "bytes": 3688,
+          "sha256": "1e2fec4a1f15d33627e32a11dcfe620cd2ed8fce73306e267a18981909595228",
           "verification": "bytes-verified"
         }
       ],
@@ -438,5 +419,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "kiviuq",
+    "materialSha256": "c1e901d04dbcdbbbe03728eadc4e1c7d6f5c7d2f66352b457628c2d4e701e44c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

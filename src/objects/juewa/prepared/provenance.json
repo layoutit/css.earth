@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "juewa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2390d3574cc93620756d57197e0f975564ecb8feb9c1138ec998875e5116b353"
+    "sha256": "870025202932fb9a1892d0d02b0073fa65077097c6fe09af76ee7a5fc5799148"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a20624a1c196af4b23125d283ab17f6c2e72d597a5e5b14d5b71a96e02522bb4",
+      "sha256": "98c90c9c7165943ad414d4dfec06fa449e2a407d5a9cd10a9e129fe53d2a9c10",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "juewa",
         "displayName": "Juewa",
         "publicBase": "/scenes/juewa/",
-        "distanceAu": 2.7861445733475856,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b1621e715d448af8cdeb277851e34939cbf2e666e793a81f31f15a27d459c98f",
+      "sha256": "2fd768c49834956625315c670ec1bc81998ecc9e519f1f7aa6c8ccba704479b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5985"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "299db30077ce9e5c022971c38780e16113ad0716ce7de0ce6ffd9288a55acb0c",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "b1621e715d448af8cdeb277851e34939cbf2e666e793a81f31f15a27d459c98f",
+      "sha256": "2fd768c49834956625315c670ec1bc81998ecc9e519f1f7aa6c8ccba704479b4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8211,
+      "bytes": 7932,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/juewa/juewa-elevation-thumbnail.webp",
           "bytes": 6604,
           "sha256": "3fc6aa7ce6eb7ea5275ace2b81fb4523c71772dbfd3fba1e09467a584d89009a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juewa/juewa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juewa/juewa-elevation-surface@2x.webp",
           "bytes": 336066,
           "sha256": "e6a5d1c0ffa2f60ab67dcd702f59ad4230d0dc4f7e0188c2fc4a7bfc7430e465",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/juewa/juewa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juewa/juewa-shape-surface@2x.webp",
           "bytes": 231234,
           "sha256": "9368b77530ebd39c6cb6261071ab7ca2129a7a24878eb39f42a02d41db3cff19",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5549,
-          "sha256": "08225d0e30a7b5c8f32c5c04900bd843cdebc518ec6ae66494eaa6c2aaa56969",
+          "bytes": 5430,
+          "sha256": "5928b7aa2805fab6d440db8402a781246480d85927ab843428920cbdc312c4d4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "juewa",
+    "materialSha256": "260a12f5c1ac0ff737f2f21a43e58f5b4f6be7c0c6094c1e929cd0df3182ce78",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

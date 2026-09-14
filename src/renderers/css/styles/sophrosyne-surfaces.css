@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="sophrosyne"])[data-lod="billboard"] .sophrosyne-scene, .planet-stage:where([data-object-id="sophrosyne"])[data-lod="marker"] .sophrosyne-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="sophrosyne"])[data-lod="marker"] .sophrosyne-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="sophrosyne"]).sophrosyne-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

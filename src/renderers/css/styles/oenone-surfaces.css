@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="oenone"])[data-lod="billboard"] .oenone-scene, .planet-stage:where([data-object-id="oenone"])[data-lod="marker"] .oenone-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="oenone"])[data-lod="marker"] .oenone-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="oenone"]).oenone-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

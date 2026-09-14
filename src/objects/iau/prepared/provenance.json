@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iau",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ea486f03dace4ae452ca2ba00e1850a3b1ca1a7b6054ffe4bfa5c9174fe7259"
+    "sha256": "8545bf341485736d6a7e3f28a283d0f0f49419a6793f9a18f870fcfecd04e36e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "97a5eec91c96d46781560275e568812d97a39643287875e96524cd9783e10a5d",
+      "sha256": "6564b9fbc996867a81824a560f87df0d66bb18651edfcb19785cb74a7fc8e016",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "iau",
         "displayName": "IAU",
         "publicBase": "/scenes/iau/",
-        "distanceAu": 2.535679875280375,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "23c537b77282133e29661b3ec4df5f083a6555875b220bdc84ef18d2fc6f9638",
+      "sha256": "3f9458ac3aa10c3b22f7d3500520cdd3ebecb933bf1c8317d518cb17910e0b3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12740"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "2ca32a686baf5562f447d268d0f7e7debeb9244b60871fb49dd6c70eb085aca7",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "23c537b77282133e29661b3ec4df5f083a6555875b220bdc84ef18d2fc6f9638",
+      "sha256": "3f9458ac3aa10c3b22f7d3500520cdd3ebecb933bf1c8317d518cb17910e0b3b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 6053,
+      "bytes": 5774,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/iau/iau-elevation-thumbnail.webp",
           "bytes": 4600,
           "sha256": "a9ccda53db0e7c93dab1d810dda35890787c921ef5c778782324d18f04308cdd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iau/iau-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iau/iau-elevation-surface@2x.webp",
           "bytes": 275110,
           "sha256": "73df795ca062c331dfe6b25cedc10b4ff4ac7fb7b860df33671e0fdf9af11302",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/iau/iau-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iau/iau-shape-surface@2x.webp",
           "bytes": 188790,
           "sha256": "cd2cca8cc2bb24518e5f5ba093bb94cc3486cd896bad12e33a4fa8c490daee82",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3387,
-          "sha256": "c2f8f357e86697bcc2fdcf591484a6dc2dc8c71b7a2ebcc6b5a75a033065f5e0",
+          "bytes": 3268,
+          "sha256": "cc38163b35dfbd23e768e35ed1e26290167e703f40e9efb5718d0d539ffd3791",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "iau",
+    "materialSha256": "dd570a508a62ba8e78703823b802dd45d463d5c1cde02324375a1c486bb43cac",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

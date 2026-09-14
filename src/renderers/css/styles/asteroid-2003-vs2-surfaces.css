@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-2003-vs2"])[data-lod="billboard"] .asteroid-2003-vs2-scene, .planet-stage:where([data-object-id="asteroid-2003-vs2"])[data-lod="marker"] .asteroid-2003-vs2-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-2003-vs2"])[data-lod="marker"] .asteroid-2003-vs2-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-2003-vs2"]).asteroid-2003-vs2-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

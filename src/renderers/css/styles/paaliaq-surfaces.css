@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="paaliaq"])[data-lod="billboard"] .paaliaq-scene, .planet-stage:where([data-object-id="paaliaq"])[data-lod="marker"] .paaliaq-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="paaliaq"])[data-lod="marker"] .paaliaq-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="paaliaq"]).paaliaq-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

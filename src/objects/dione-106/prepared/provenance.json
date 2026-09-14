@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dione-106",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9163656309c368215282723dde6e44329bfcaef80856c102ab80b0f4e8311d9"
+    "sha256": "265af1ce432d14e869a6f8cd8290887ee67e4fc7bec985925ef8f6ba797ef44a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "37574006caf5a889f5e7d056407ef2f86ab89d1816da850aee6b4986f7f0b6fc",
+      "sha256": "66cb7f24d6f51dd44811d3c86144d7eb106437bf53972cd57859aeabfe65bc65",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dione-106",
         "displayName": "106 Dione",
         "publicBase": "/scenes/dione-106/",
-        "distanceAu": 3.1819345699171295,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5942 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "952aeaf6925087176aa75478f32edbdf5223377ec4f3b7659da981241ccad06e",
+      "sha256": "07b9a882357ca6e8c2cccbf92c172662fe34305408d7811f79612a2368611d3d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5942"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "992f3f5a9ca46623bc42548cff241e5735ede28e48817f20be88f3c054a55ea1",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "952aeaf6925087176aa75478f32edbdf5223377ec4f3b7659da981241ccad06e",
-      "bytes": 10347,
+      "sha256": "07b9a882357ca6e8c2cccbf92c172662fe34305408d7811f79612a2368611d3d",
+      "bytes": 10068,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/dione-106/dione-106-elevation-thumbnail.webp",
           "bytes": 5532,
           "sha256": "64ebe6d6c4b2e04bf2e3726fb269a7a505474c74820ab69a19174db7de5452ad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione-106/dione-106-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione-106/dione-106-elevation-surface@2x.webp",
           "bytes": 276504,
           "sha256": "6625a2e25621c4dcb85eaffcaa3588d7aab5545ab07af6cc90bdc29ecaf3b1dd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/dione-106/dione-106-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione-106/dione-106-shape-surface@2x.webp",
           "bytes": 215760,
           "sha256": "07961e462c6338e337f2690f96069737e0c59aa39ea92cf75bf494b5c7ebcf5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7677,
-          "sha256": "644524667bdb1601c928c80cf5bbfa1cb96179da31138045d8ffee254b0e0731",
+          "bytes": 7558,
+          "sha256": "ba8b87575cadb908c787faf72b8aad4bd223d7ea2d1868e44301c677dd26dc9f",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "dione-106",
+    "materialSha256": "514624bd1cd1021afc1ec374caa7e8111ca5a61621d9d7650330fdf81bde58d0",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

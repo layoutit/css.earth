@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "parysatis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "07909eff225a063bce01d820af188208fa0d64177340ada1fab06a5e4ac6f321"
+    "sha256": "49bc30c36fe2aa52404f168df6b0ced098a86500bd3f56674954d0d4b7006335"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d114397cb1ae51efe044f74365f7c290d76341a6f959582c6c4a244f21e2b935",
+      "sha256": "0d8e2ae3d0f0813844cb7c925eb75095fa681b986097c6224c55c6134d488834",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "parysatis",
         "displayName": "Parysatis",
         "publicBase": "/scenes/parysatis/",
-        "distanceAu": 2.707622170185717,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "763bab1328cd4f785e0955a829a41680976f278fa6a6d19da3aea4a65c09397b",
+      "sha256": "a73ba811ba906066b8ca7e31eb51d09c8e75aee33ddf560237e9678a5ed2c72e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5820"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "5d01fc5141682daead93573aef676e56dfd5cdee4f9608b15a0125d7887bf9bf",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "763bab1328cd4f785e0955a829a41680976f278fa6a6d19da3aea4a65c09397b",
+      "sha256": "a73ba811ba906066b8ca7e31eb51d09c8e75aee33ddf560237e9678a5ed2c72e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10479,
+      "bytes": 10200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/parysatis/parysatis-elevation-thumbnail.webp",
           "bytes": 6486,
           "sha256": "5ae64e2143f53a4f1ab907f95fce253ad41e50ad373422ceab1a2acb168ba32c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/parysatis/parysatis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/parysatis/parysatis-elevation-surface@2x.webp",
           "bytes": 318612,
           "sha256": "99625784a9544dd561444bb7d536629fa142bbdbafcb851c04d45645c2266960",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/parysatis/parysatis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/parysatis/parysatis-shape-surface@2x.webp",
           "bytes": 245212,
           "sha256": "de8b9fd6be23d6506800d3c4623bc9395805483b7f01d6cb2cab282735e145a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7760,
-          "sha256": "12a333ae0c3fe487d7aeeda04d5f68cbcc309382d40b732352d8c2b121ae90a9",
+          "bytes": 7641,
+          "sha256": "d4d2f53b3acfc3a4b5f088195300a91263eb1eadeffc230b2b167a5785b2c80e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "parysatis",
+    "materialSha256": "d55674497621b922b336ad9df22f58dcc7e44a9c6dcaf80c1cc0b8cfd009196b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

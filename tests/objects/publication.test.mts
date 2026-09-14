@@ -7,8 +7,6 @@ import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
 import { writePreparedSet } from '../../tools/write-prepared-set.mts';
-import { sharedBankPath } from '../../src/platform/prepared-shared-banks.mts';
-import { sharedBankText } from '../../src/platform/prepared-shared.mts';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssfixture-runtime-assets@1', assets: Object.entries(values).map(([filename,text]) => ({filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
 test('private material masters stay staged while all consumer JSON is preflighted',async()=>{
  const root=await mkdtemp(join(tmpdir(),'cssearth-publication-json-'));
@@ -130,21 +128,3 @@ test('invalid staged metadata or missing previews fail without changing canonica
   } finally { await rm(fixture.root, { recursive: true, force: true }); }
 });
 
-test('shared dependencies are append-only and a bad existing hash bank blocks publication', async () => {
-  const fixture = await publicationFixture();
-  const text = sharedBankText('planet-points', []);
-  const reference = { kind: 'planet-points' as const, sha256: createHash('sha256').update(text).digest('hex') };
-  const destination = sharedBankPath(fixture.args.projectRoot, reference);
-  try {
-    await put(sharedBankPath(fixture.args.stage, reference), text);
-    await put(destination, 'foreign bytes');
-    const before = await snapshot(fixture.canonical);
-    await assert.rejects(publishPreparedObject(fixture.args), /digest/);
-    assert.deepEqual(await snapshot(fixture.canonical), before);
-    await rm(destination);
-    await rm(join(fixture.args.stage, 'prepared/minimaps/new.webp'));
-    await assert.rejects(publishPreparedObject(fixture.args), /ENOENT/);
-    assert.equal(await readFile(destination, 'utf8'), text, 'another object may already use this verified bank');
-    assert.equal(await readFile(join(fixture.args.objectDirectory, 'object.json'), 'utf8'), '{"id":"fixture","version":"old"}');
-  } finally { await rm(fixture.root, { recursive: true, force: true }); }
-});

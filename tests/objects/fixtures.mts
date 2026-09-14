@@ -28,7 +28,7 @@ export async function readPreparedFixture(id: string, artifact: string): Promise
     : resolve(projectRoot, 'src/objects', id, 'prepared');
   const value:unknown=JSON.parse(await readFile(resolve(root, `${artifact}.json`), 'utf8'));
   if(artifact==='runtime')return checkedRuntime(value);
-  if(artifact==='sky')return validatePreparedCubicSky(value,{requireSun:false});
+  if(artifact==='sky')return validatePreparedCubicSky(value);
   if(artifact==='sun')return validateDirectionalSunPlan(value);
   if(artifact==='title')return parseTitle(value);
   if(artifact==='panel')return parsePanel(value);

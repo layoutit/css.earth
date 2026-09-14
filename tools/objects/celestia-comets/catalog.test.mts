@@ -26,7 +26,7 @@ test('packages use the native Celestia mesh, with only physical scaling',()=>{
   assert.equal(readFileSync(root+'shape/'+c.mesh,'utf8'),readFileSync(new URL(c.mesh,sourceRoot),'utf8'));
   const content=JSON.parse(readFileSync(root+'content/object.json', 'utf8'));assert.equal(content.lenses.controls.length,1);
   assert.equal(JSON.parse(readFileSync(`src/objects/${c.id}/text.json`,'utf8')).datasets.model.detail,'Catalog size');assert.equal(content.panel.facts.length,2);
-  for(const control of requireArray(content.settings.controls).map(value=>fixtureRecord(value)).filter(c=>['shadows','orbit'].includes(String(c.name))))assert.equal(control.checked,false);
+  for(const control of requireArray(content.settings.controls).map(value=>fixtureRecord(value)).filter(c=>String(c.name)==='shadows'))assert.equal(control.checked,false);
   assert.equal(JSON.parse(readFileSync(root+'preparation/rotation.json', 'utf8')).phase,'arbitrary-display-phase');
  }
 });

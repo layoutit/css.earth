@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="toutatis"])[data-lod="billboard"] .toutatis-scene, .planet-stage:where([data-object-id="toutatis"])[data-lod="marker"] .toutatis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="toutatis"])[data-lod="marker"] .toutatis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="toutatis"]).toutatis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

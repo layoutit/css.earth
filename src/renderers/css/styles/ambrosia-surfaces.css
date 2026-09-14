@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ambrosia"])[data-lod="billboard"] .ambrosia-scene, .planet-stage:where([data-object-id="ambrosia"])[data-lod="marker"] .ambrosia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ambrosia"])[data-lod="marker"] .ambrosia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ambrosia"]).ambrosia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

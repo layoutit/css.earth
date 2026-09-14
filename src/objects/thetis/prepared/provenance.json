@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thetis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e7120059ccfe0a2dfde5b346b6a63a676826c0d2506d51302f23d866775d946c"
+    "sha256": "53511197b2fb9f80f7a81a5aca27c94fe346ea63a0fb5d0349cff6d9c87e89be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1045f7c1e0669f04f5c648345ac57f6f580f6cd274cf579a36b22a2656b37b7b",
+      "sha256": "8da03604740abec261245a6f19a21d9578fa12dda01b28647421158b13ab018b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "thetis",
         "displayName": "Thetis",
         "publicBase": "/scenes/thetis/",
-        "distanceAu": 2.472287077212926,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 116 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "789b6b5750d1598efa6321ad8cd94af132a67322e41292e04e0e588fbb7510f7",
+      "sha256": "7794791315279e9e0dd43d46032363e042a279b0fa2667a24dfe82976ba42d25",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/116"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "4ab3bb84cf020ea326fe445362fbb7105effa1754ce56fccccc83f4eb861f8d3",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "789b6b5750d1598efa6321ad8cd94af132a67322e41292e04e0e588fbb7510f7",
-      "bytes": 8540,
+      "sha256": "7794791315279e9e0dd43d46032363e042a279b0fa2667a24dfe82976ba42d25",
+      "bytes": 8261,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/thetis/thetis-elevation-thumbnail.webp",
           "bytes": 5082,
           "sha256": "f555a89d940857e996d0b335f13af9c66bfdc76474655a8d00d9578fce2d6207",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thetis/thetis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thetis/thetis-elevation-surface@2x.webp",
           "bytes": 271016,
           "sha256": "d983b6b389ba136125d3f85b388dcad3504a625ad36f3dc2ee3ccb3290336814",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/thetis/thetis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thetis/thetis-shape-surface@2x.webp",
           "bytes": 225630,
           "sha256": "a9f139876f6d63c6348f1e748989b41827c7ef739d994d82d8cc6aecbc3cca85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5910,
-          "sha256": "8ba7f25d61ff5be2d21cb1b7d23ec29aa40fc0ceb6410a0204c0f9e98e6a9780",
+          "bytes": 5791,
+          "sha256": "2291f12e833767a3e58b747a4c29f9bf65b732c7bcf13ff2a30735c7aeea4883",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "thetis",
+    "materialSha256": "8f70166ae63c131a74ee03b7d1368b81731d3af8203256552dd9a5170bab6ce7",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2002-tc302",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e535be4486c6142703d393f6cf63e4d7fbfd244c4a57d6a1a3054d397800495"
+    "sha256": "168269f740b96ea2408df2b96ff2b5cb492e38608843c04716b255ebb7e6d029"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "60596eb698195f196f0bed80212ac7db479cc75656c168492afe5ba277fe3d8b",
+      "sha256": "32c99a03cd1921112f14deee7bd0f204b03fb6ba53ef6c197727a7ac612e466a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-2002-tc302",
         "displayName": "2002 TC302",
         "publicBase": "/scenes/asteroid-2002-tc302/",
-        "distanceAu": 42.69638663728584,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8d179332695a941351acef4e5dd9ae8b0dcadb1e58558e2b0c72a02eb7593469",
+      "sha256": "d22b0038c5d0d606ff9be46b9898fc586c7f679daed788a81e15616d5c3ecb8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -200,12 +187,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://arxiv.org/abs/2005.08881"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -252,7 +233,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -287,7 +268,7 @@
       "sha256": "f30cacb316b9d74a11d82f49db85312b22df44da832add1864a203d3c1a2bb9e",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -304,10 +285,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8d179332695a941351acef4e5dd9ae8b0dcadb1e58558e2b0c72a02eb7593469",
-      "bytes": 3574,
+      "sha256": "d22b0038c5d0d606ff9be46b9898fc586c7f679daed788a81e15616d5c3ecb8a",
+      "bytes": 3294,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -344,13 +325,13 @@
           "url": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-surface@2x.webp",
           "bytes": 53028,
           "sha256": "bf3ac9ff95c9e28bc01225d9000db4be960b81fdbbca51db908c20eb670c3924",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -386,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7359,
-          "sha256": "ced4c67ad15fc71f1ef065a5c24ca652b993ed664d1b9159fc0e7705e3da2453",
+          "bytes": 7240,
+          "sha256": "a6955871bde60edb35cd3a40cea4eb7eb026edfaf5a500df34d6cfd0ceef7370",
           "verification": "bytes-verified"
         }
       ],
@@ -422,5 +403,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asteroid-2002-tc302",
+    "materialSha256": "69577d6d73e5588d2498ec10d751dd1f68bee6f1bf753e967b7f2dd2fdae5899",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

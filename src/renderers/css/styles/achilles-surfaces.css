@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="achilles"])[data-lod="billboard"] .achilles-scene, .planet-stage:where([data-object-id="achilles"])[data-lod="marker"] .achilles-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="achilles"])[data-lod="marker"] .achilles-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="achilles"]).achilles-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

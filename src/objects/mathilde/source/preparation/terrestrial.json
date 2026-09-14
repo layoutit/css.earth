@@ -4,7 +4,6 @@
   "namespace": "mathilde",
   "displayName": "Mathilde",
   "publicBase": "/scenes/mathilde/",
-  "distanceAu": 2.646575720427923,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -215,12 +214,6 @@
     "sunQualification": "Illustrative directional lighting in Mathilde’s explicitly arbitrary J2000-parallel mapping frame. The source has no solved spin pole or rotational phase, so this is not an accurately timed body-fixed Sun solution. The Monochrome view separately retains NEAR encounter illumination and photographed shadows."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      180,
-      180,
-      180
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

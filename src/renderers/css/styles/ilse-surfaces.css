@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ilse"])[data-lod="billboard"] .ilse-scene, .planet-stage:where([data-object-id="ilse"])[data-lod="marker"] .ilse-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ilse"])[data-lod="marker"] .ilse-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ilse"]).ilse-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

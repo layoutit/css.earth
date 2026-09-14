@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hesperia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "063ae70b3c27da236bf663bef0edf3c212be9486a9fe327d4d1f07d8329c04d4"
+    "sha256": "e616fc23f1763ae2ed178e59a3910af846d24ba20cf921e2ab4261269eb04055"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "95e01b30078900bf7b8d906756d75afc09374300a239a619a49f89967f1ab0cc",
+      "sha256": "7d5bcfbfa88d52429b3b5c34ec6ea0292cf3e0ac22bf443e26f45cee04042daa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hesperia",
         "displayName": "Hesperia",
         "publicBase": "/scenes/hesperia/",
-        "distanceAu": 2.9772137652759962,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 319 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9109fd609530badb3d75c40eee07f0f13ce6ee9e77cd4fc8c11256b1ad7f46a6",
+      "sha256": "e95b1fe43b303adc7db4280cb31b0a53ea95ebc819c3d7c85bd808b3941c5c06",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/319"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "cbe8efe6448bf2e9ba29a52ca5f60b47f50d301f8f77c9610cf3d8ea63cf01c9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9109fd609530badb3d75c40eee07f0f13ce6ee9e77cd4fc8c11256b1ad7f46a6",
-      "bytes": 10688,
+      "sha256": "e95b1fe43b303adc7db4280cb31b0a53ea95ebc819c3d7c85bd808b3941c5c06",
+      "bytes": 10409,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/hesperia/hesperia-elevation-thumbnail.webp",
           "bytes": 5180,
           "sha256": "00b5eb466e24d6be28a5063b3b320662776349042419ee86553e51b77c8d51af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-surface@2x.webp",
           "bytes": 266458,
           "sha256": "dc34ee7339f19b12b8aaa2a5bae17c62f71f52d82c4c5d9675a23300d81a4e68",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/hesperia/hesperia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hesperia/hesperia-shape-surface@2x.webp",
           "bytes": 218050,
           "sha256": "14cb558f27b1bff32cd80832d787b92614156ee599325fc58a2b1756179586d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8033,
-          "sha256": "4e520512fee412092c0db4ebe489c8a99cb4f277849a6dd264af43bfd84ecfe1",
+          "bytes": 7914,
+          "sha256": "6e96796640562c29273cbbfb159ab66ccb4f484f27f817ae7cf4482763573342",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hesperia",
+    "materialSha256": "5e11db018f37863d297f5aec5dc36768ccc0a4df9cce86f8aa14eafb79c6506f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

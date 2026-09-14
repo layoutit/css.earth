@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1992-sk",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f81fae80bad27fa2e19f5db555fae260f4236ee2b99de1429e5dae0392e61ac7"
+    "sha256": "5672b6da6cfc618a4eede68627af0f4f7c85967d381b50b6f1f92e6838d15b0e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "83621c4f51238b972d934a9a4fead33fe8806d5c8ec290260b3399ac91adabbf",
+      "sha256": "5f482a68dd2d841366804d5539a97a4c9c1039c2602c579bb3666b8b220a8daa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1992-sk",
         "displayName": "1992 SK",
         "publicBase": "/scenes/asteroid-1992-sk/",
-        "distanceAu": 1.2485450870597032,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c8226ee11ab3b0d8d297bffc13d8af3d743b1dbb3abfe6c9e4795ee31254d4f",
+      "sha256": "2cf2aae264a2ec147c41393f11eb3aeae6c066c8043c4b3071e2d8523c6c74fa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,12 +242,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -277,12 +264,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -343,7 +324,7 @@
       "sha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c",
       "bytes": 29083,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c8226ee11ab3b0d8d297bffc13d8af3d743b1dbb3abfe6c9e4795ee31254d4f",
-      "bytes": 8695,
+      "sha256": "2cf2aae264a2ec147c41393f11eb3aeae6c066c8043c4b3071e2d8523c6c74fa",
+      "bytes": 8416,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -403,19 +384,19 @@
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-thumbnail.webp",
           "bytes": 5794,
           "sha256": "ffc4b504c3a2344bd090d8cfadca944c319cd4903913462bf3c570bd6b00721f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-surface@2x.webp",
           "bytes": 293980,
           "sha256": "3460ae47533593d05562d2116a79a66ed99fee6d756cd643e42cb86122c521be",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -453,13 +434,13 @@
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "bytes": 208566,
           "sha256": "c8e24c6f70b28db0cbca36ba0e73c6790d6b58dc3d15d79263b5305130c7fdfe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -490,8 +471,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5709,
-          "sha256": "5a1c3eb72a757e91b1fbf350d58ca8927cded9d9eb78321db9dbbef84f470f5c",
+          "bytes": 5590,
+          "sha256": "c5d28d2c1622d10c9cbe51c4783e9215ed336cc69f0de93934eb239f22dfb0e6",
           "verification": "bytes-verified"
         }
       ],
@@ -551,5 +532,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asteroid-1992-sk",
+    "materialSha256": "7bebd6a874e28bdb129c27c3ae99df1084a64194167b251b845dfdd5734163a5",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

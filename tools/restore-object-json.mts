@@ -6,12 +6,11 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../site/objects.mts';
 import { serializeObjectJson } from './prepare-object-json.mts';
 import { writePreparedText } from './write-prepared-text.mts';
-import { sharedTwinName } from '../src/platform/prepared-shared.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 
-/** Restore only pinned JSON transports; never prepare geometry, bindings, banks or assets. */
+/** Restore only pinned JSON transports; never prepare geometry, bindings or assets. */
 export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id), root = projectRoot) {
   if (new Set(ids).size !== ids.length || ids.some(id => !SCENE_OBJECTS.some(object => object.id === id))) {
     throw new TypeError('Choose registered object ids.');
@@ -25,8 +24,7 @@ export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id),
         reference?.format !== PREPARED_CSS_OBJECT_FORMAT) {
       throw new TypeError(`${id}: invalid prepared JSON reference.`);
     }
-    // The transport carries shared-bank references; the twin is the checked-in runtime with those references in place.
-    const runtime: unknown = JSON.parse(await readFile(resolve(directory, 'prepared', sharedTwinName('runtime.json')), 'utf8'));
+    const runtime: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/runtime.json'), 'utf8'));
     const payload = serializeObjectJson(descriptor, runtime);
     if (createHash('sha256').update(payload).digest('hex') !== reference.sha256) {
       throw new Error(`${id}: checked-in runtime does not reproduce its prepared JSON pin.`);

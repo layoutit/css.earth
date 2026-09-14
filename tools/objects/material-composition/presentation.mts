@@ -12,7 +12,7 @@ import type {PreparedNode} from '../../prepared-node-tree.mts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 import { prepareAtlasRows } from './atlas-rows.mts';
 
-import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
+import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from "../../../src/platform/prepared-ellipsoid-projection.mts";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mts";
@@ -56,7 +56,6 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     }
   }
   const entries = [
-    ...preparedSunResources(sun, "warm"),
     { key: "weather", url: `/scenes/${namespace}/${namespace}-weather.webp`, pool: "warm" },
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
     ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: canonicalPreparedAsset(plate.textureUrl, plate.texture2xUrl), pool: "warm" })),

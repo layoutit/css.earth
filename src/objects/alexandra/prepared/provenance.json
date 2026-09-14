@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "alexandra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "011d2f73d5ffe954ef55b7bab53df81ec366a29153677f84d9b1b446c393166e"
+    "sha256": "be6cb064cd7b6f6f890ca9b56c26efd71226d024c6a87d91d9b2e89bba86c313"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "15e116300dd14000592b45e93e42167831fb4be469b478b7cf8e7b6b30d742db",
+      "sha256": "777bcfe0783b91a5a093b1b3b1182133a755e543903873c55e8fee140f7573d3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "alexandra",
         "displayName": "Alexandra",
         "publicBase": "/scenes/alexandra/",
-        "distanceAu": 2.7095146915447392,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1817 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "801a058f7c26ab50c99316baf85a70417247b60b86e5039187f3afe99ebbc02a",
+      "sha256": "4c5a5bcbfd768ebc614c38b9c8d69c63253657f3ef012553946f4d2dfc159c67",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1817"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "aac6326c6087972265e999ec6778be6f932abf27a7643fc745dc055b3b79c643",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "801a058f7c26ab50c99316baf85a70417247b60b86e5039187f3afe99ebbc02a",
-      "bytes": 11000,
+      "sha256": "4c5a5bcbfd768ebc614c38b9c8d69c63253657f3ef012553946f4d2dfc159c67",
+      "bytes": 10721,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/alexandra/alexandra-elevation-thumbnail.webp",
           "bytes": 5280,
           "sha256": "173ebf74af272bbd1098dfa1221f3c064dfae8645b028fb070fd43c78307c06c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alexandra/alexandra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alexandra/alexandra-elevation-surface@2x.webp",
           "bytes": 271268,
           "sha256": "1cb64ee0c1d12f7345dd379b8f88e9e815bf36bc5341d6689fa34a588c888abc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/alexandra/alexandra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alexandra/alexandra-shape-surface@2x.webp",
           "bytes": 201480,
           "sha256": "8f65327ea0f778a24c401ba7982c15ea181a55a7101910bd92413bc5e5cf0029",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8332,
-          "sha256": "5e6e61fe9ad39d4eba8e62f382beab432657f494db18002c8b4bb31e1a5af71b",
+          "bytes": 8213,
+          "sha256": "6ff66eceb9d3127728c00d307919d222dc8e07e660d16272bfbb8ee7c2c51744",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "alexandra",
+    "materialSha256": "61d4cadbb0e0fe6a578cdfbdfb6978c959941676e8cbee1c74e3a13fa4716331",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

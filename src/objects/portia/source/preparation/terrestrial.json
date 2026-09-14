@@ -4,7 +4,6 @@
   "namespace": "portia",
   "displayName": "Portia",
   "publicBase": "/scenes/portia/",
-  "distanceAu": 19.19,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU/WGCCRE Portia pole and prime meridian from PCK712."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

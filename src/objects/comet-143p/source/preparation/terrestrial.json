@@ -4,7 +4,6 @@
   "namespace": "comet-143p",
   "displayName": "Kowal–Mrkos",
   "publicBase": "/scenes/comet-143p/",
-  "distanceAu": 4.744148140394379,
   "raster": {
     "width": 512,
     "height": 256,
@@ -110,12 +109,6 @@
     "qualification": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }
