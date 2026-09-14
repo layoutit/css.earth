@@ -8,6 +8,7 @@ are older standalone audits; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
+| [Native SBMT](sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
 | SpiceyPy (CSPICE N0067) | `tools/spice/`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tools/spice/oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `pds/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
 | pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `pds3/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
@@ -51,6 +52,13 @@ same group and name, and the comparing tests beside the code they check (under
   a recipe or a prepared file.
 
 ## Setup and use
+
+SBMT is an opt-in native backend: `pnpm oracles:setup sbmt`, then
+`pnpm oracles:run sbmt/projection`. It uses the same fixture envelope with a
+pinned executable/software lock and generator digest. `pnpm test:sbmt --unit`
+runs offline in CI; `pnpm test:sbmt --restore` restores only its selected inputs
+and runs all cases. See its [coverage and known differences](sbmt/README.md).
+The commands below operate on the Python backends.
 
 ```bash
 pnpm oracles:setup

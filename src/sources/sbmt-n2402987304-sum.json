@@ -1,0 +1,23 @@
+{
+  "id": "sbmt-n2402987304-sum",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SUM pointing for Hayabusa AMICA ST_2402987304",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM",
+      "label": "Native SBMT file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM",
+      "checkedOn": "2026-09-14",
+      "locator": "Native file; product identifier and camera fields in header."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

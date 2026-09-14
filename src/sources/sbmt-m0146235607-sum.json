@@ -1,0 +1,23 @@
+{
+  "id": "sbmt-m0146235607-sum",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Corrected SUM pointing for NEAR MSI M0146235607",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/sumfiles-updated/M0146235607.SUM",
+      "label": "Native SBMT file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/sumfiles-updated/M0146235607.SUM",
+      "checkedOn": "2026-09-14",
+      "locator": "Native file; product identifier and camera fields in header."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
