@@ -14,6 +14,10 @@ not a physical illumination measurement.
 
 ## Photographic observations
 
+Choose the [investigation route](photographic-investigation.md) before processing:
+producer maps, mapped paper figures and unmapped photographs need different
+registration evidence. The appearance guidance here applies after that choice.
+
 Before increasing a texture budget, trace all resizes between the original
 observation and the delivered atlas. Prefer sampling the pinned original grid
 at the final atlas/pole footprint where the existing registration permits it.
