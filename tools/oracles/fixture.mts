@@ -31,6 +31,10 @@ export async function pinnedOracleVersions() {
 /** Every input matches a body manifest, checked-in FITS fixture or test-only archive record. */
 export async function assertPinnedInputs(inputs: readonly { path: string; sha256: string; bytes: number }[]) {
   for (const input of inputs) {
+    if (/^tests\/fixtures\/sbmt\/[a-z0-9-]+\.(json|tab|sum|info)$/u.test(input.path)) {
+      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      continue;
+    }
     if (input.path.startsWith('.local/fits-reference/')) {
       const pin = (await fitsArchiveInputs()).find(pin => pin.path === input.path);
       if (!pin || pin.sha256 !== input.sha256 || pin.bytes !== input.bytes) throw new Error(`FITS test archive pin changed: ${input.path}`);

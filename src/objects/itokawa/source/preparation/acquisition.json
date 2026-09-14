@@ -332,6 +332,18 @@
       ],
       "path": "observations/st_2493031594_v.fit",
       "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051026/st_2493031594_v.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/N2402987304.SUM",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM",
+      "headers": {
+        "Authorization": "Basic cHVibGljOndpZGUtb3Blbg=="
+      }
     }
   ]
 }
