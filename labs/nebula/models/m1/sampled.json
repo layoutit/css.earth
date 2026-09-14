@@ -1,0 +1,231 @@
+{
+  "schema": "cssearth-sampled-nebula@1",
+  "id": "m1",
+  "centerIcrsDegrees": [
+    83.6334511837,
+    22.0151236394
+  ],
+  "evidence": {
+    "path": "labs/nebula/models/m1/physical-evidence.json",
+    "sha256": "a03ec3e88e8d4aee345d89326da85e5d8cf93f6789ae54b18afe059e7963e1ff"
+  },
+  "source": {
+    "url": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZflux.fits",
+    "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZflux.fits",
+    "sha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
+    "bytes": 6670080,
+    "width": 4,
+    "height": 416573,
+    "columns": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "rawToArcsec": [
+    126.03264377637277,
+    1.853493538431643,
+    0,
+    2.4399412279534687,
+    -1.8686324928319997,
+    125.91516473608657,
+    0,
+    -1.7002420652649037,
+    0,
+    0,
+    -101.47410208119798,
+    0
+  ],
+  "grid": {
+    "longestAxis": 256,
+    "blurSigmaCells": 0.5,
+    "weightExponent": 0.5,
+    "peakOpticalDepth": 1.5
+  },
+  "terms": [
+    {
+      "id": "inner-torus",
+      "kind": "torus",
+      "group": "pwn",
+      "centerArcsec": [
+        1.1238303485966281,
+        -2.2914038159896677,
+        0
+      ],
+      "axis": [
+        -0.7271871263344485,
+        -0.49049391005075504,
+        -0.4802234974431889
+      ],
+      "radiusArcsec": 15.6,
+      "sigmaArcsec": 3,
+      "weight": 0.65,
+      "evidenceIds": [
+        "torus-pair",
+        "presentation-support"
+      ]
+    },
+    {
+      "id": "outer-torus",
+      "kind": "torus",
+      "group": "pwn",
+      "centerArcsec": [
+        1.1238303485966281,
+        -2.2914038159896677,
+        0
+      ],
+      "axis": [
+        -0.7181867359268098,
+        -0.5277536144553187,
+        -0.4535239076037135
+      ],
+      "radiusArcsec": 41.33,
+      "sigmaArcsec": 5.9,
+      "weight": 0.8,
+      "evidenceIds": [
+        "torus-pair",
+        "presentation-support"
+      ]
+    },
+    {
+      "id": "southeast-jet",
+      "kind": "jet",
+      "group": "pwn",
+      "startArcsec": [
+        -4.621663538817851,
+        -6.513432731632217,
+        -3.628191260829708
+      ],
+      "endArcsec": [
+        -70.69484324408435,
+        -55.06676526152153,
+        -45.35239076037135
+      ],
+      "sigmaArcsec": 4,
+      "weight": 0.6,
+      "evidenceIds": [
+        "torus-pair",
+        "presentation-support"
+      ]
+    },
+    {
+      "id": "northwest-counterjet",
+      "kind": "jet",
+      "group": "pwn",
+      "startArcsec": [
+        6.869324236011106,
+        1.9306250996528815,
+        3.628191260829708
+      ],
+      "endArcsec": [
+        47.80596818383926,
+        32.01258112360605,
+        29.47905399424138
+      ],
+      "sigmaArcsec": 3.5,
+      "weight": 0.28,
+      "evidenceIds": [
+        "torus-pair",
+        "presentation-support"
+      ]
+    }
+  ],
+  "pulsar": {
+    "id": "crab-pulsar",
+    "positionArcsec": [
+      1.1238303485966281,
+      -2.2914038159896677,
+      0
+    ],
+    "rgb": [
+      210,
+      230,
+      255
+    ],
+    "diameterArcsec": 1.1,
+    "alpha": 1,
+    "evidenceIds": [
+      "pulsar-position",
+      "presentation-support"
+    ]
+  },
+  "lensComponents": {
+    "hubble-optical": {
+      "ejecta": 1,
+      "pwn": 0.08
+    },
+    "webb-infrared": {
+      "ejecta": 0.85,
+      "pwn": 0.4
+    },
+    "webb-components": {
+      "ejecta": 1,
+      "pwn": 0.3
+    },
+    "spitzer-infrared": {
+      "ejecta": 0.8,
+      "pwn": 0.25
+    },
+    "vla-radio": {
+      "ejecta": 0.22,
+      "pwn": 1
+    },
+    "chandra-xray": {
+      "ejecta": 0,
+      "pwn": 1
+    }
+  },
+  "interpretation": "Conditional 2016 line-emission ejecta and the 2004 published two-torus pulsar-wind model; authored finite jets, smoothing and spectral display weights. There is no combined observing epoch or physically calibrated radiative transfer.",
+  "qualification": {
+    "pointGrid": "grid-to-sky-registration",
+    "deepRegistration": {
+      "path": "labs/nebula/models/m1/sitelle-alignment-check.json",
+      "sha256": "69e44977756ea8f730b8ee76b53816c5909ffd27c33423a20356f74245e14cf2"
+    },
+    "spectralVelocitySource": {
+      "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZvel.fits",
+      "sha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
+      "bytes": 6670080
+    },
+    "rawZVelocityCorrelation": "Paired rows have identical XYZ values; radial velocity = -1116.0011622611532 \u00d7 rawZ km/s.",
+    "internalCoordinateUncertaintyArcsec": 0.4,
+    "unimplemented": "The complete 7.6 arcmin extended PWN lies beyond current selected image/field coverage. The fitted interior diffuse component has authored spatial support, not measured continuum depth; no calibrated radiative transfer."
+  },
+  "resolutionNote": "SITELLE native sampling 0.32 arcsec; measured seeing FWHM 1.17 \u00b1 0.04 arcsec. The 256-cell angular volume has approximately 1.4 arcsec sampling and Gaussian sigma 0.5 cell (about 0.7 arcsec; FWHM 1.65 arcsec), hence remains coarser than the observation. Kernel width and peak optical depth 1.5 are authored display settings, not measured density or extinction.",
+  "emissionFit": {
+    "sourceIds": [
+      "hubble-optical",
+      "webb-infrared",
+      "webb-components",
+      "spitzer-infrared",
+      "vla-radio"
+    ],
+    "evidenceIds": [
+      "extended-diffuse-emission",
+      "diffuse-fit-prior"
+    ],
+    "centerArcsec": [
+      1.1238303485966281,
+      -2.2914038159896677,
+      0
+    ],
+    "axis": [
+      -0.7181867359268098,
+      -0.5277536144553187,
+      -0.4535239076037135
+    ],
+    "radiiArcsec": [
+      185,
+      135,
+      135
+    ],
+    "spacingArcsec": 36,
+    "sigmaArcsec": 20,
+    "imageWidth": 128,
+    "iterations": 150,
+    "regularization": 0.015,
+    "maximumCoefficient": 1.5,
+    "maximumEjectaGain": 8
+  }
+}

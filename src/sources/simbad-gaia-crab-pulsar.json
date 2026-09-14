@@ -1,0 +1,37 @@
+{
+  "id": "simbad-gaia-crab-pulsar",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Crab pulsar · SIMBAD ICRS astrometry for Gaia DR3 3403818172572314624",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "3403818172572314624"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.harvard.edu/simbad/sim-basic?Ident=Crab+Pulsar&submit=SIMBAD+search",
+      "label": "SIMBAD source record"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m1/physical-evidence.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "a03ec3e88e8d4aee345d89326da85e5d8cf93f6789ae54b18afe059e7963e1ff",
+      "locator": "/evidence/8"
+    }
+  ],
+  "publisher": "CDS/SIMBAD; ESA/Gaia/DPAC",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS/SIMBAD; ESA/Gaia/DPAC",
+      "scope": "Catalogued pulsar sky position; in-cloud depth is authored",
+      "evidence": "labs/nebula/models/m1/physical-evidence.json#pulsar-position"
+    }
+  ]
+}

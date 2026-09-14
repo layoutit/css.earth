@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { loadPublishedCompiler, readPublishedCompiler } from './compiler-published';
 import type { CompilerResult } from '../reconstruction/compiler/result';
+import { readCompilerRequest } from '../reconstruction/compiler/model';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const recipePath = 'labs/nebula/models/example/compiler.json';
@@ -41,6 +42,23 @@ test('absent CLI publication is an empty workspace, not an implicit processing r
   let reads = 0;
   assert.equal(await loadPublishedCompiler(pointer, recipePath, async () => { reads++; return new Response(null, { status: 404 }); }), null);
   assert.equal(reads, 1);
+});
+
+test('saved clouds remain inspectable after producer code changes without rewriting its historical hash', async () => {
+  const fixture = completedFixture(), owner = 'labs/nebula/src/reconstruction/compiler/old-producer.ts';
+  const methodPath = fixture.result.method.path, method = JSON.parse(fixture.data.get(methodPath)!);
+  const historicalHash = digest('original producer');
+  method.implementation = [{ name: 'old-producer.ts', sha256: historicalHash }];
+  fixture.data.set(methodPath, JSON.stringify(method));
+  fixture.result.method.sha256 = digest(fixture.data.get(methodPath)!);
+  fixture.data.set(fixture.receipt.result.path, JSON.stringify(fixture.result));
+  fixture.receipt.result.sha256 = digest(fixture.data.get(fixture.receipt.result.path)!);
+  fixture.receipt.inputs.push({ path: owner, sha256: historicalHash });
+  fixture.data.set(owner, 'changed producer');
+  assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal))?.id, fixture.result.id);
+  assert.equal(fixture.receipt.inputs.at(-1)!.sha256, historicalHash);
+  fixture.data.set(methodPath, '{}');
+  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal), /sources changed/);
 });
 
 /** Minimal valid metadata receipt; texture decoding belongs to the volume runtime tests. */
@@ -87,6 +105,17 @@ test('legacy and fully pinned depth receipts both restore without processing', a
     const fixture = completedFixture({ depth });
     assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal))?.id, fixture.result.id);
   }
+});
+
+test('a current publication can replace a saved result only for the same controls, evidence and registration', async () => {
+  const fixture = completedFixture();
+  const expected = readCompilerRequest({ action: 'apply', imageId: 'compiler', recipePath, cataloguePath: recipe.structureCatalogue,
+    controls: fixture.result.controls, evidence: { sensitivity: 1, weights: [] }, imageToFrame: {} });
+  assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal, expected))?.id, fixture.result.id);
+  for (const changed of [{ ...expected, controls: { ...expected.controls, faint: .8 } },
+    { ...expected, evidence: { sensitivity: 2, weights: [] } }, { ...expected, evidence: { sensitivity: 1, weights: [.5] } },
+    { ...expected, imageToFrame: { optical: [1, 0, 0, 1, 30, 40] } }])
+    assert.equal(await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal, readCompilerRequest(changed)), null);
 });
 
 test('publication cannot omit its configured depth recipe or declared evidence ledger', async () => {

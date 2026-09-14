@@ -1,8 +1,20 @@
-import type { SkyFrame, SkyRaster } from './registration.js';
+import type { Affine, SkyFrame, SkyRaster } from './registration.js';
 import type { NativeRemoval } from '../../reconstruction/emission-inference/native-source.js';
 import { validateImageWcs, type ImageWcs } from '../overlay-wcs.js';
-export interface ObservationSource extends SkyRaster { id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string }
-export interface ObservationRecipe { schema: 'cssearth-nebula-observation-recipe@1'; id: string; referenceId: string; frame: SkyFrame; images: ObservationSource[]; nativeRemoval: Omit<NativeRemoval, 'directory'> }
+export interface ObservationSource extends SkyRaster {
+  id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string;
+  registrationMode?: 'field-stars' | 'compact-stars' | 'publisher-wcs';
+  registrationDetection?: { sourceMaximum: number; referenceMaximum: number; maximumStars: number };
+  compactStarChannel?: 'minimum-rgb' | 'maximum-rgb';
+  processingRole?: 'registration-reference';
+  stellarTreatment?: 'preserve';
+  coordinateOrigin?: 'authored-bright-star-seed';
+  matchedStarCatalogue?: { path: string; sha256: string };
+  astrometricCalibration?: { path: string; sha256: string };
+  registrationTransfer?: { referenceId: string; pixelToReference: Affine; evidence: { path: string; sha256: string } };
+}
+export interface ObservationRecipe { schema: 'cssearth-nebula-observation-recipe@1'; id: string; referenceId: string; frame: SkyFrame; images: ObservationSource[]; nativeRemoval: Omit<NativeRemoval, 'directory'>;
+  nativeSeparationCache?: { recipe: { path: string; sha256: string } } }
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Expected observation record.');
   return value as Record<string, unknown>;
@@ -14,28 +26,87 @@ const pair = (value: unknown): [number, number] => { if (!Array.isArray(value) |
 const id = (value: unknown) => { const s = string(value); if (!/^[a-z0-9-]+$/.test(s)) throw new TypeError('Invalid observation id.'); return s; };
 const pin = (value: unknown) => { const s = string(value); if (!/^[0-9a-f]{64}$/.test(s)) throw new TypeError('Expected SHA-256.'); return s; };
 const https = (value: unknown) => { const s = string(value); if (new URL(s).protocol !== 'https:') throw new TypeError('HTTPS source required.'); return s; };
+function transfer(value: unknown): NonNullable<ObservationSource['registrationTransfer']> {
+  const row = record(value), evidence = record(row.evidence), m = row.pixelToReference;
+  if (!Array.isArray(m) || m.length !== 6) throw new TypeError('Expected transfer affine.');
+  const matrix: Affine = [finite(m[0]), finite(m[1]), finite(m[2]), finite(m[3]), finite(m[4]), finite(m[5])];
+  if (Math.abs(matrix[0] * matrix[3] - matrix[1] * matrix[2]) < 1e-12) throw new TypeError('Singular registration transfer.');
+  const path = string(evidence.path);
+  if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Transfer evidence requires a repository-relative path.');
+  return { referenceId: id(row.referenceId), pixelToReference: matrix, evidence: { path, sha256: pin(evidence.sha256) } };
+}
+export const scienceObservationSources = (recipe: ObservationRecipe): ObservationSource[] => recipe.images.filter(image => image.processingRole !== 'registration-reference');
 function sky(value: Record<string, unknown>) {
   const result = { width: dimension(value.width), height: dimension(value.height), fieldArcminutes: pair(value.fieldArcminutes), centerIcrsDegrees: pair(value.centerIcrsDegrees) };
   // Wide official context mosaics reach several degrees. Independent star residuals
   // still determine whether the affine registration is adequate on that footprint.
-  if (result.fieldArcminutes.some(n => n <= 0 || n > 360) || result.centerIcrsDegrees[0] < 0 || result.centerIcrsDegrees[0] >= 360 || Math.abs(result.centerIcrsDegrees[1]) > 90) throw new TypeError('Unsupported small-field sky frame.');
+  if (result.fieldArcminutes.some(n => n <= 0 || n > 600) || result.centerIcrsDegrees[0] < 0 || result.centerIcrsDegrees[0] >= 360 || Math.abs(result.centerIcrsDegrees[1]) > 90) throw new TypeError('Unsupported small-field sky frame.');
   return result;
 }
 export function readObservationRecipe(value: unknown): ObservationRecipe {
   const row = record(value), frame = record(row.frame), removal = record(row.nativeRemoval), model = record(removal.model);
+  let nativeSeparationCache: ObservationRecipe['nativeSeparationCache'];
+  if (row.nativeSeparationCache !== undefined) {
+    const cache = record(row.nativeSeparationCache), recipe = record(cache.recipe), path = string(recipe.path);
+    if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Native separation cache requires a repository-relative recipe.');
+    nativeSeparationCache = { recipe: { path, sha256: pin(recipe.sha256) } };
+  }
   if (row.schema !== 'cssearth-nebula-observation-recipe@1' || frame.northUp !== true || !Array.isArray(row.images) || row.images.length < 2) throw new TypeError('Unsupported observation recipe.');
   const images = row.images.map((value): ObservationSource => {
     const image = record(value);
     const w = record(image.wcs);
-    if (w.projection !== 'TAN' || w.coordinateFrame !== 'ICRS') throw new TypeError('ICRS TAN metadata required.');
+    if ((w.projection !== 'TAN' && w.projection !== 'SIN') || w.coordinateFrame !== 'ICRS') throw new TypeError('ICRS TAN or ordinary SIN metadata required.');
+    if (image.registrationMode !== undefined && image.registrationMode !== 'field-stars' && image.registrationMode !== 'compact-stars' && image.registrationMode !== 'publisher-wcs') throw new TypeError('Unknown registration mode.');
+    if (image.compactStarChannel !== undefined && image.compactStarChannel !== 'minimum-rgb' && image.compactStarChannel !== 'maximum-rgb') throw new TypeError('Unknown compact-star channel.');
+    if (image.processingRole !== undefined && image.processingRole !== 'registration-reference') throw new TypeError('Unknown observation processing role.');
+    if (image.stellarTreatment !== undefined && image.stellarTreatment !== 'preserve') throw new TypeError('Unknown stellar treatment.');
+    if (image.coordinateOrigin !== undefined && image.coordinateOrigin !== 'authored-bright-star-seed') throw new TypeError('Unknown coordinate origin.');
+    let registrationDetection: ObservationSource['registrationDetection'];
+    if (image.registrationDetection !== undefined) {
+      const settings = record(image.registrationDetection);
+      const bounded = (value: unknown, maximum: number) => {
+        const n = finite(value);
+        if (!Number.isInteger(n) || n < 64 || n > maximum) throw new TypeError('Registration detection setting outside its bounded range.');
+        return n;
+      };
+      if (image.registrationMode && image.registrationMode !== 'field-stars' || image.matchedStarCatalogue || image.registrationTransfer) throw new TypeError('Registration detection settings require direct field-star discovery.');
+      registrationDetection = { sourceMaximum: bounded(settings.sourceMaximum, 16384), referenceMaximum: bounded(settings.referenceMaximum, 16384), maximumStars: bounded(settings.maximumStars, 20000) };
+    }
+    let matchedStarCatalogue: ObservationSource['matchedStarCatalogue'];
+    if (image.matchedStarCatalogue !== undefined) {
+      const catalogue = record(image.matchedStarCatalogue), path = string(catalogue.path);
+      if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Star catalogue requires a repository-relative path.');
+      matchedStarCatalogue = { path, sha256: pin(catalogue.sha256) };
+    }
+    let astrometricCalibration: ObservationSource['astrometricCalibration'];
+    if (image.astrometricCalibration !== undefined) {
+      const calibration = record(image.astrometricCalibration), path = string(calibration.path);
+      if (path.startsWith('/') || path.split('/').includes('..') || !matchedStarCatalogue) throw new TypeError('Astrometric calibration requires pinned explicit stars and a relative evidence path.');
+      astrometricCalibration = { path, sha256: pin(calibration.sha256) };
+    }
     const wcs: ImageWcs = { projection: w.projection, coordinateFrame: w.coordinateFrame, referenceDimension: pair(w.referenceDimension),
       referencePixel: pair(w.referencePixel), referenceValueDeg: pair(w.referenceValueDeg), scaleDeg: pair(w.scaleDeg), rotationDeg: finite(w.rotationDeg) };
     validateImageWcs(wcs);
     return { ...sky(image), wcs, id: id(image.id), label: string(image.label), url: https(image.url), page: https(image.page), sha256: pin(image.sha256),
-      credit: string(image.credit), bands: string(image.bands), termsUrl: https(image.termsUrl), northRightDegrees: finite(image.northRightDegrees) };
+      credit: string(image.credit), bands: string(image.bands), termsUrl: https(image.termsUrl), northRightDegrees: finite(image.northRightDegrees),
+      ...(image.registrationMode === undefined ? {} : { registrationMode: image.registrationMode }),
+      ...(registrationDetection === undefined ? {} : { registrationDetection }),
+      ...(image.compactStarChannel === undefined ? {} : { compactStarChannel: image.compactStarChannel }),
+      ...(image.processingRole === undefined ? {} : { processingRole: image.processingRole }),
+      ...(image.stellarTreatment === undefined ? {} : { stellarTreatment: image.stellarTreatment }),
+      ...(image.coordinateOrigin === undefined ? {} : { coordinateOrigin: image.coordinateOrigin }),
+      ...(matchedStarCatalogue === undefined ? {} : { matchedStarCatalogue }),
+      ...(astrometricCalibration === undefined ? {} : { astrometricCalibration }),
+      ...(image.registrationTransfer === undefined ? {} : { registrationTransfer: transfer(image.registrationTransfer) }) };
   });
   const referenceId = id(row.referenceId);
   if (new Set(images.map(image => image.id)).size !== images.length || !images.some(image => image.id === referenceId)) throw new TypeError('Observation ids/reference must be unique and present.');
+  if (images.filter(image => !image.processingRole).length < 2) throw new TypeError('At least two science observations required.');
+  for (const image of images) if (image.registrationTransfer) {
+    const bridge = images.find(candidate => candidate.id === image.registrationTransfer!.referenceId);
+    if (!bridge || bridge === image || bridge.registrationTransfer || image.id === referenceId) throw new TypeError('Transfer requires a distinct directly registered reference.');
+  }
   return { schema: row.schema, id: id(row.id), referenceId, frame: { ...sky(frame), northUp: true }, images,
+    ...(nativeSeparationCache === undefined ? {} : { nativeSeparationCache }),
     nativeRemoval: { scriptSha256: pin(removal.scriptSha256), model: { path: string(model.path), sha256: pin(model.sha256) } } };
 }

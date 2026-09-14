@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-stellar-refresh-evidence@1",
+  "subjectId": "m45",
+  "asOf": "2026-09-13",
+  "result": {
+    "path": ".local/nebula-lab/compiler/29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef/result.json",
+    "sha256": "5c3a60e2a10d401c89689e2276a881cb3751c2cbdbb816e97645ea364404ae8c"
+  },
+  "retainedCloudResult": "a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8",
+  "catalogue": {
+    "path": "labs/nebula/models/m45/stellar-catalogue.json",
+    "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7"
+  },
+  "catalogueRecords": 2105,
+  "selectedStars": 450,
+  "retainedExact": [
+    "neutral/lens banks and all resource pins",
+    "geometry, alpha, sampling, field model",
+    "source images, fit targets and metrics"
+  ],
+  "nativeCorrespondence": {
+    "allSevenPriorStarsMissing": true,
+    "priorNearestPixels": [
+      87,
+      230
+    ],
+    "newCoreCentroidSeparationPixels": [
+      0.39,
+      2.22
+    ],
+    "alcyoneSaturatedCentroidSeparationPixels": 6.22,
+    "interpretation": "Six catalogue positions closely match broad native core centroids; Alcyone lies within its large asymmetric saturated footprint. Not an independent faint-star WCS qualification.",
+    "selectedCoreMatches": [
+      {
+        "id": "HIP 17702",
+        "core": 1,
+        "distanceNativePixels": 6.2175931757201806
+      },
+      {
+        "id": "HIP 17499",
+        "core": 2,
+        "distanceNativePixels": 0.8808402343715035
+      },
+      {
+        "id": "HIP 17573",
+        "core": 3,
+        "distanceNativePixels": 0.3941828614083256
+      },
+      {
+        "id": "HIP 17608",
+        "core": 4,
+        "distanceNativePixels": 1.1525810483534764
+      },
+      {
+        "id": "HIP 17531",
+        "core": 5,
+        "distanceNativePixels": 1.9404816891149494
+      },
+      {
+        "id": "HIP 17489",
+        "core": 6,
+        "distanceNativePixels": 2.22390810617234
+      },
+      {
+        "id": "HIP 17579",
+        "core": 7,
+        "distanceNativePixels": 1.4897330452394268
+      }
+    ]
+  },
+  "limitations": [
+    "Catalogue epoch2000; unknown photograph epoch.",
+    "Optical V/B-V reference stars in every spectral lens, not infrared stellar flux.",
+    "Star depths remain illustrative, not a cluster-membership or distance solution.",
+    "Native NOX leaves bright cores and halos in existing cloud. A star-only correction cannot remove them.",
+    "Wider Niittee optical candidate is aligned but not separated or baked."
+  ],
+  "stellarAppearance": "Prepared main-app soft core/halo profile. Decoded alpha integral compensates tile extent; relative RGB light is preserved. Atlas pin and profile source pin are in the scene receipt.",
+  "validation": "39 affected tests and strict lab TypeScript passed. Exact retained cloud pins and all seven HIP core identities checked in the refreshed output.",
+  "browser": "Existing Pleiades tab loaded the refreshed result. Isolated Chromium checked all four lenses, identical optical reference stars between lenses, decoded sprite use, orbit, toggles and reload. No processing requests or JavaScript errors."
+}

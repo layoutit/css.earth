@@ -66,7 +66,7 @@ export function parseDatasetLens(value: unknown): Lens {
   const lens = object(value, 'lens'), label = text(lens.label, 'lens label');
   const texture = lens.texture === undefined ? undefined : object(lens.texture, 'lens texture');
   const attribution = texture?.attribution === undefined ? undefined : object(texture.attribution, 'texture attribution');
-  return { id: text(lens.id, 'lens id'), label, title: text(lens.title, 'lens title'), summary: text(lens.summary, 'lens summary'),
+  return { id: text(lens.id, 'lens id'), label, title: text(lens.title, 'lens title'), summary: text(lens.summary, 'lens summary'), description: optionalText(lens.description, 'lens description'),
     detail: optionalText(lens.detail, 'lens detail'), thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
     texture: texture && { url: text(texture.url, 'texture URL'), width: number(texture.width, 'texture width'), height: number(texture.height, 'texture height'),
       minimap: texture.minimap, attribution: attribution && { label: text(attribution.label, 'texture attribution'), url: optionalText(attribution.url, 'texture source') } },

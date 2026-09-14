@@ -59,7 +59,8 @@ export interface DatasetReaderText {
   summary: string;
 }
 
-export type Lens = LensControl & DatasetReaderText;
+/** Volume presentations keep a longer description, shown as the summary's hover title; body datasets publish none. */
+export type Lens = LensControl & DatasetReaderText & { description?: string };
 
 export interface LensControl {
   id: string;

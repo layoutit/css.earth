@@ -6,6 +6,6 @@ import SelectedContent from "./SelectedContent.astro";
 const { provenance, lens } = Astro.props;
 const caption = datasetCaption(provenance, lens);
 ---
-<SelectedContent title={caption.title} description={lens.summary}>
+<SelectedContent title={caption.title} description={lens.summary} descriptionDetail={lens.description}>
   <slot />
 </SelectedContent>
