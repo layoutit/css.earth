@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "psyche",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1328f8dc4553be68233a0656a4c112159407be5f4076add8615a3f6e74a218cb"
+    "sha256": "5b3bfee9b6574a53c19310c73b3aa2e0f8f4b8156b2d360fcd841fc087a98fb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a1f0130cd16e6a0c69f00df8d8923656a6fec68f79ef1eae42e630230f0b6b48",
+      "sha256": "7440fb7e872a2bc144929e4e19ba8eb6473e30359500bbfb6a7d58356b94d801",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "psyche",
         "displayName": "Psyche",
         "publicBase": "/scenes/psyche/",
-        "distanceAu": 2.9261360015644122,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fdde515fd30cb4de63984265344a5ac939375b51dff3151d71ab032c086db00f",
+      "sha256": "7b400a64578f1106625e8970c311e1d94a5a5dfc296d0a68faaa7181f69a5a6d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "e49a5d2d92974c283f9ee36bea08568265af80d9f700c20e11cd0b371d23067b",
       "bytes": 388219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fdde515fd30cb4de63984265344a5ac939375b51dff3151d71ab032c086db00f",
-      "bytes": 7305,
+      "sha256": "7b400a64578f1106625e8970c311e1d94a5a5dfc296d0a68faaa7181f69a5a6d",
+      "bytes": 7026,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/psyche/psyche-elevation-thumbnail.webp",
           "bytes": 4964,
           "sha256": "c0adb2532a873e8a227aeccfb1e2643ca2f5829f91c9294455e18644aeefa996",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-elevation-surface@2x.webp",
           "bytes": 306596,
           "sha256": "d8a54e06f75763547a0a44b656b6977596609cd0f8b5c3495289566f7bdeb378",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/psyche/psyche-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-shape-surface@2x.webp",
           "bytes": 215594,
           "sha256": "217e8389db29cd1fea0e367ff70095936916a1b9441bb244ba091c27612ae32c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5139,
-          "sha256": "9918d8f8196d76108023aa97bf4699a71e6ae9d6981c9c6d26eadddf52942f50",
+          "bytes": 5020,
+          "sha256": "fe3818ff96e96511acbb8136506e636f568997a79ac049ca5ebb323a399eac1b",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "psyche",
+    "materialSha256": "c6ed152d779f4d92bb13a987357764cf0b67132fe7d37a479bd4e798af243439",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

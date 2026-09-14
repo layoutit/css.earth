@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="adrastea"])[data-lod="billboard"] .adrastea-scene, .planet-stage:where([data-object-id="adrastea"])[data-lod="marker"] .adrastea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="adrastea"])[data-lod="marker"] .adrastea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="adrastea"]).adrastea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="sn263-gamma"])[data-lod="billboard"] .sn263-gamma-scene, .planet-stage:where([data-object-id="sn263-gamma"])[data-lod="marker"] .sn263-gamma-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="sn263-gamma"])[data-lod="marker"] .sn263-gamma-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="sn263-gamma"]).sn263-gamma-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

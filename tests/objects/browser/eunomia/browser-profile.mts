@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eunomia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eunomia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/eunomia/eunomia-directional-sun.webp",
-      "two": "/scenes/eunomia/eunomia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/eunomia/eunomia-shape-surface@2x.webp"
   ],

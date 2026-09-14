@@ -6,4 +6,4 @@ Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 
 
 Published numerical facts are credited. The analytical model extraction and missing-coverage grid are cssEarth MIT work. Paper originals are reacquired through their pinned URLs; scientific figures are not copied into surface maps.
 
-Shared sky: ESO/S. Brunier panorama, CC BY 4.0; [ESO terms](source/stars/ESO-IMAGE-LICENSE.md). Star catalog: HYG, [supplied license](source/stars/LICENSE.md). Type: Inter, SIL Open Font License 1.1.
+Type: Inter, SIL Open Font License 1.1.

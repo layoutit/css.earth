@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-1998-ml14"])[data-lod="billboard"] .asteroid-1998-ml14-scene, .planet-stage:where([data-object-id="asteroid-1998-ml14"])[data-lod="marker"] .asteroid-1998-ml14-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-1998-ml14"])[data-lod="marker"] .asteroid-1998-ml14-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-1998-ml14"]).asteroid-1998-ml14-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

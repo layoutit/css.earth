@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="educatio"])[data-lod="billboard"] .educatio-scene, .planet-stage:where([data-object-id="educatio"])[data-lod="marker"] .educatio-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="educatio"])[data-lod="marker"] .educatio-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="educatio"]).educatio-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

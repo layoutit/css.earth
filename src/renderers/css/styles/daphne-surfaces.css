@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="daphne"])[data-lod="billboard"] .daphne-scene, .planet-stage:where([data-object-id="daphne"])[data-lod="marker"] .daphne-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="daphne"])[data-lod="marker"] .daphne-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="daphne"]).daphne-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

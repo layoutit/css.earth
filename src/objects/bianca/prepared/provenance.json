@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bianca",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1e27d612ea22e4a815c667e58e16a1b9af3df4069d062b9da5d16f1168916099"
+    "sha256": "e3dc91ae996498c3f633317005cd6f91f7b0a1a169e05b09c30a3030a13b7557"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a4e8f272e0284966fe8c8861efe06522e057377f54c3a3900b0a9eaa91045161",
+      "sha256": "1a580722ac70be1642042f196a57f4de60a0ae38e8d632d216ae3ebb71b44c69",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "bianca",
         "displayName": "Bianca",
         "publicBase": "/scenes/bianca/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Uranus-system ephemeris; IAU Bianca BODY708 pole and meridian from PCK00011, with periodic terms frozen at the prepared epoch."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "59a01391db54a403555eef2411f571576f4b0ab8919f22bd7497752af48b298c",
+      "sha256": "eeed993920352cc14f330f067823fdfa15d97fc533b9a008e230fe580647f9cd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,12 +169,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -204,12 +191,6 @@
             "role": "observations",
             "description": "Voyager source inventory",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -265,7 +246,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -300,7 +281,7 @@
       "sha256": "80e2c5d2f4a9f4ae275bb32c1ce175eac3e71361d568793c51039cda6081ff81",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -317,10 +298,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59a01391db54a403555eef2411f571576f4b0ab8919f22bd7497752af48b298c",
-      "bytes": 3017,
+      "sha256": "eeed993920352cc14f330f067823fdfa15d97fc533b9a008e230fe580647f9cd",
+      "bytes": 2738,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -357,13 +338,13 @@
           "url": "/scenes/bianca/bianca-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bianca/bianca-model-surface@2x.webp",
           "bytes": 55264,
           "sha256": "f5686fa15ec6eead941600584b0806e799c95eaa3bee3c28cf18cdfbcd368262",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5823,
-          "sha256": "e82fa0d22b006b426dfb7f0c5ae725bea51428b8dfb624c61ec8bf16fd01e35f",
+          "bytes": 5704,
+          "sha256": "6a0b28891e67609ada21da3ed3f8013c5e9377d91ca5229522a57a209479061d",
           "verification": "bytes-verified"
         }
       ],
@@ -435,5 +416,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "bianca",
+    "materialSha256": "952f645c384096f90aad959932fead87339043956e6593d8ba4bd92b53ef5a7b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/leukothea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'leukothea',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/leukothea/leukothea-directional-sun.webp",
-      "two": "/scenes/leukothea/leukothea-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/leukothea/leukothea-shape-surface@2x.webp"
   ],

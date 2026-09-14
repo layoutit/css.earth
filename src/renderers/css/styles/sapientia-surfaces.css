@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="sapientia"])[data-lod="billboard"] .sapientia-scene, .planet-stage:where([data-object-id="sapientia"])[data-lod="marker"] .sapientia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="sapientia"])[data-lod="marker"] .sapientia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="sapientia"]).sapientia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

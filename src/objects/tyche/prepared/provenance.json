@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tyche",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "05856eca78db300664669ed5779166c6139e86f454592025b4140d0ffe822cb2"
+    "sha256": "b341a345de9639ab9b265d11edc3713523837fc298c3166f5ed28a1bfa024e88"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "14603a526d1470a73d2b118847897c6f09a1b8f8fd368776bdc961fefc3d204e",
+      "sha256": "37074ce96f24b1115dbbcdfc8a6f66c66b2024c46db7e06fbc77fc422e0ffa11",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "tyche",
         "displayName": "Tyche",
         "publicBase": "/scenes/tyche/",
-        "distanceAu": 2.61507505241983,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 329 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5f67d6d3ec893e7bde3f7ae7549aa7f17a2240593458126b3b264fd6e0c3143",
+      "sha256": "7b6b9ece8417d062ab91aef668d8846575c8094b951c7dacf845b64a4d922e93",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/329"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "0490bad5885c440c58b587c2bf6d2dd5b342afc976fb35ffbbe3dc0eac00f090",
       "bytes": 82222,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f5f67d6d3ec893e7bde3f7ae7549aa7f17a2240593458126b3b264fd6e0c3143",
-      "bytes": 8554,
+      "sha256": "7b6b9ece8417d062ab91aef668d8846575c8094b951c7dacf845b64a4d922e93",
+      "bytes": 8275,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/tyche/tyche-elevation-thumbnail.webp",
           "bytes": 5538,
           "sha256": "f52ef11936506e7abfde04591a2ea06de4330f1f68d0adebfc515a40a64cddd4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tyche/tyche-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tyche/tyche-elevation-surface@2x.webp",
           "bytes": 312070,
           "sha256": "3816334251db8a5be47755e3a433e5bcbd35102cd6b9bb9683c453533f657018",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/tyche/tyche-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tyche/tyche-shape-surface@2x.webp",
           "bytes": 228810,
           "sha256": "9e485503884a0718bb81d93ce3d7d0e90343fc9d0e07a283be18734eadc2b4c1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5932,
-          "sha256": "432d2807f32ad97963ae4c4033f94507242a941575957f1aaa7a9e8c9077d91f",
+          "bytes": 5813,
+          "sha256": "1e4438798d056b4c7fbc928cebc251faeec3e0850d2614c3bc4eff43a0f1b743",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "tyche",
+    "materialSha256": "f0392231f926e142c325af0c14d94d55b4db3500aa5589a58a8d3398254844c3",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

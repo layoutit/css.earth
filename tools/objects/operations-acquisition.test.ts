@@ -35,7 +35,7 @@ test('mapped composition acquisition restores the pinned map and report through 
   await writeFile(join(directory,'recipe.json'),JSON.stringify(recipe));
   const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[],documents:[],generatedIntermediates:
     [['ice.tif',converted.products.ice],['report.json',report]].map(([path,bytes])=>{
-      assert.equal(typeof path,'string');assert.ok(bytes instanceof Uint8Array);
+      assert.ok(typeof path==='string');assert.ok(bytes instanceof Uint8Array);
       return {path,expectedBytes:bytes.length,expectedSha256:sha256(bytes)};
     })};
   const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[

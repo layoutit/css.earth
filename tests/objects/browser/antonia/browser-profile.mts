@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/antonia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'antonia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/antonia/antonia-directional-sun.webp",
-      "two": "/scenes/antonia/antonia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/antonia/antonia-shape-surface@2x.webp"
   ],

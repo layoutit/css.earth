@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ra-shalom/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ra-shalom',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/ra-shalom/ra-shalom-directional-sun.webp",
-      "two": "/scenes/ra-shalom/ra-shalom-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp"
   ],

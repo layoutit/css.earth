@@ -57,4 +57,3 @@ const lens = object({id: string, maximumZoom: number, view: optional(string), su
 const lenses = object({defaultLens: string, controls: array(lens)});
 export const parsePagedLensBindings = (value: unknown) => parse(value, lenses, 'paged lens bindings');
 export type PagedLensBindings = Infer<typeof lenses>;
-export const parsePagedCelestial = (value: unknown) => parse(value, object({includeSun: boolean, directionalSun: object({meanHeliocentricDistanceAu: number})}), 'paged celestial recipe');

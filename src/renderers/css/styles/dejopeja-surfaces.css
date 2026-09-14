@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dejopeja"])[data-lod="billboard"] .dejopeja-scene, .planet-stage:where([data-object-id="dejopeja"])[data-lod="marker"] .dejopeja-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dejopeja"])[data-lod="marker"] .dejopeja-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dejopeja"]).dejopeja-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

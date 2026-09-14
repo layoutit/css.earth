@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "una",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b56298e4de8a161265fc1b02356bed8e4dbf1c74913f3d154e2b0de781108d72"
+    "sha256": "d4a563d6908702ec530ea1ae3e38d7751421346bee8cb8598efd720f690559b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4b836bc17d3afc3ecfaea2b19761ae79d4fb7c02b0b9d4b510764c163dabbfdc",
+      "sha256": "ffb8a18f2f94a3b035c10fba7668e7c6ff2bde4345d2d4988da469c4e883eaa3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "una",
         "displayName": "Una",
         "publicBase": "/scenes/una/",
-        "distanceAu": 2.728272185210906,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 169 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8a543e37656d69dd5f7edfad6dc5998c34b5fdd4ec17009828cfc7087ef04f4d",
+      "sha256": "2ec5959f8f876ad4115fce84798c53e91956fe3fb3a394309034fa8b139c5356",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/169"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "69285eb63614042f0cdf3bf341190155b0785cda3399191b4393a002275c6c21",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8a543e37656d69dd5f7edfad6dc5998c34b5fdd4ec17009828cfc7087ef04f4d",
-      "bytes": 8031,
+      "sha256": "2ec5959f8f876ad4115fce84798c53e91956fe3fb3a394309034fa8b139c5356",
+      "bytes": 7752,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/una/una-elevation-thumbnail.webp",
           "bytes": 6008,
           "sha256": "1f1297bd1ffc49108099815b788c61742fa3e685763f7fc748a495f521155f8f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/una/una-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/una/una-elevation-surface@2x.webp",
           "bytes": 298690,
           "sha256": "c68b04504944cb5275a13ca1de66b3addc61c09e3a3392ca21964fa016a45268",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/una/una-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/una/una-shape-surface@2x.webp",
           "bytes": 223384,
           "sha256": "f9594e0182e2a65b8953df139055445da91004ad49d4b629c1efeb52e44619f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5440,
-          "sha256": "adb79173e13d2ecc55dfc81fa0b73a686622fb65206d7e85e820e2b728ab4550",
+          "bytes": 5321,
+          "sha256": "a0d26c1d3d49fc387fa5b902b9887a4cb1026b1f7fb23d6b07291fb942994fed",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "una",
+    "materialSha256": "ddd8aa3cfebf23d3b991dc4cd2411dd6fcdf90663f7eb9a9d0a6c24491297d0a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

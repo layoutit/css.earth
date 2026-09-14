@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "xanthippe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "265c4a3e25b33e4e47c7a63419e95f3250bb02168224a95fead527a5a0b9e180"
+    "sha256": "65e8f52455d18cd360d70fc49b67ee694ec10d5a5ef06137c8b3df1031431c20"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "061ef31e434048825f94366335335e1a21532d3bf5fd14f21a6228ba4c5fd0bd",
+      "sha256": "2a01cd51439d3d118deef7bee7bac393966f1f26582e28d92e82b4c9eddbaf30",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "xanthippe",
         "displayName": "Xanthippe",
         "publicBase": "/scenes/xanthippe/",
-        "distanceAu": 2.732385125710907,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4643 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e713a381bf99e0eb054f4617883b6429e84a074257fabd144789c4f0e5c135ff",
+      "sha256": "f600255631b0cec275bad98f9b0069caa8be7ac774da70645ffbcb31d8576b50",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4643"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e713a381bf99e0eb054f4617883b6429e84a074257fabd144789c4f0e5c135ff",
-      "bytes": 11179,
+      "sha256": "f600255631b0cec275bad98f9b0069caa8be7ac774da70645ffbcb31d8576b50",
+      "bytes": 10900,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/xanthippe/xanthippe-elevation-thumbnail.webp",
           "bytes": 5262,
           "sha256": "2da4bb12912a651e0cecac1df968c884bb363cef2370aa85612c219d3c935bb0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/xanthippe/xanthippe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/xanthippe/xanthippe-elevation-surface@2x.webp",
           "bytes": 263372,
           "sha256": "a233bc87136e8bf331088d1882b7015420b003acb06cfd9e1375d39a5589f6d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/xanthippe/xanthippe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
           "bytes": 232462,
           "sha256": "85f04fdb239696039493045ed10711f1725a21b92c29dd4798a10cf00e381289",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8507,
-          "sha256": "0be13ec42e1ef0385c0f8fa885213a91798cf15b4f730ee0f217edae2474ec55",
+          "bytes": 8388,
+          "sha256": "b8c98ae24dd7d7ed2d19f4d098411008b439cb89614e505d69d42442d185b167",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "xanthippe",
+    "materialSha256": "cee4e3bf614d38de35de14f8f11a77e4b30c8ba0145914bba648b6e6640e6c84",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

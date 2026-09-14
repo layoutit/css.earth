@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dejanira",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b51d27f9fea91502791e31e1e2b6f755337b07db55a4daad6bb7bcb4a6413b97"
+    "sha256": "b81943100bf03292458ee0c53a12efb90ea4a59d4dcc112095764dd80e9f03ae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9ca2e37f0f86b4fb893984d8cc4cb854205888769f7ddb83af68bc778f306997",
+      "sha256": "fc71e3687c805e6e33b0879c2cf50425323d5273282232f3e5155f945368ed39",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dejanira",
         "displayName": "Dejanira",
         "publicBase": "/scenes/dejanira/",
-        "distanceAu": 2.579713770510923,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 591 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e39dfdd07c027c811f89ed2ffbe37fe23ad466738c3a63a0ec6ec56abc1a7882",
+      "sha256": "8898809783205abc4455080a80e0c0524903b3540cff69d03679fc9b559b7159",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/591"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "9c67749dd7cb5a594927246b2f884cae7d17989b67e9f1c028793518705fdb65",
       "bytes": 45285,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e39dfdd07c027c811f89ed2ffbe37fe23ad466738c3a63a0ec6ec56abc1a7882",
-      "bytes": 10753,
+      "sha256": "8898809783205abc4455080a80e0c0524903b3540cff69d03679fc9b559b7159",
+      "bytes": 10474,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/dejanira/dejanira-elevation-thumbnail.webp",
           "bytes": 4822,
           "sha256": "fb630cb1ae711db4f7c7a03c3901b4b72179ef927847992d4f6b2d92fda30ee7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejanira/dejanira-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejanira/dejanira-elevation-surface@2x.webp",
           "bytes": 292740,
           "sha256": "f7fcb20e7dfdcd55ae8996c8284b1cb3e7d17297dec56849c87fe1e170871bb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/dejanira/dejanira-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejanira/dejanira-shape-surface@2x.webp",
           "bytes": 209218,
           "sha256": "ad20d41c5e03b63178b627bf3499546f377af2a79ba09320867c47db09d2dbb4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8095,
-          "sha256": "439f900fccc64ac1e182fefd1b4a44b41a82ca2df093ccf4b8a21ad2ff4707cd",
+          "bytes": 7976,
+          "sha256": "7a1e28ed7f8039150fc29f663b6949819273fbe8143a7cff7b6eace0ce12052a",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "dejanira",
+    "materialSha256": "e2ab6cad6b7a6e1404336cb0cf253af2f2e1ea8aff6327668db1a365ab7e905d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

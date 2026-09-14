@@ -2,14 +2,14 @@ import { fixtureRecord, required } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import test from 'node:test';
-import {parsePagedProfile, parsePagedLensBindings, parsePagedCelestial} from './profile-source.mts';
+import {parsePagedProfile, parsePagedLensBindings} from './profile-source.mts';
 import {parseInteriorSource, parseAtmosphereResponse} from './source-contract.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, readRefreshDescriptor} from './refresh-source.mts';
 const sourceRoot = new URL('../../../src/objects/earth/source/', import.meta.url);
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, sourceRoot), 'utf8'));
 
 test('Earth preparation boundaries preserve every source and provenance field', async () => {
-  for (const [path, parse] of [['preparation/paged-ellipsoid.json', parsePagedProfile], ['preparation/celestial.json', parsePagedCelestial],
+  for (const [path, parse] of [['preparation/paged-ellipsoid.json', parsePagedProfile],
     ['content/lens-bindings.json', parsePagedLensBindings], ['interior/earth-interior.json', parseInteriorSource],
     ['atmosphere/google-earth-pro-presentation-response.json', parseAtmosphereResponse]] as const) {
     const value = await read(path), before = JSON.stringify(value);

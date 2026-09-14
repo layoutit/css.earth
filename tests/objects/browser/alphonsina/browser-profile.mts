@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/alphonsina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'alphonsina',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/alphonsina/alphonsina-directional-sun.webp",
-      "two": "/scenes/alphonsina/alphonsina-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/alphonsina/alphonsina-shape-surface@2x.webp"
   ],

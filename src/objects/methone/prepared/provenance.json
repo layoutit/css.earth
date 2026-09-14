@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "methone",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c790554fb291f79f68397e7a70eb12a4cf2ed5a03682776e097760721d434a66"
+    "sha256": "397addfe9c4c4aeba188525524b6e15fcde2a5e2e8ae0a3164702357a6425285"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2d50a5f92718b8badb36711ea9ad809da489c3b6c4d7ee7e590278f20cc73dc0",
+      "sha256": "61f51bd0794b499f179c614371a5fd7c9ab8ab0b79a0bcbb3416d2ad56b082fa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "methone",
         "displayName": "Methone",
         "publicBase": "/scenes/methone/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -136,20 +135,14 @@
           "sunSource": "JPL Saturn-system ephemeris. Source camera uses observation-time OPUS geometry independently of the display orientation."
         },
         "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            175,
-            175,
-            175
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "normal"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a",
+      "sha256": "71acbe8a29a37a79f2b33aa781c5fe576d8ee1aba1ae21a9864c33a77da5d21c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -216,12 +209,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -244,12 +231,6 @@
             "role": "observations",
             "description": "Cassini ISS calibrated observation",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -312,7 +293,7 @@
       "sha256": "cd7c3ead82f5629f515008dfad648f931cb52ed48b74b25482397c822f96f677",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -359,7 +340,7 @@
       "sha256": "6154216a44ef22b6f73f37ae2570cbc12e9b5cce3c4057f8fc31ac06eaab4e06",
       "bytes": 3856,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -401,7 +382,7 @@
       "sha256": "fc2c05607e8fc15ec90bc28dd200fc8d5e59fc853acf9a8135d24539ee396747",
       "bytes": 51600,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -418,10 +399,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a",
-      "bytes": 3114,
+      "sha256": "71acbe8a29a37a79f2b33aa781c5fe576d8ee1aba1ae21a9864c33a77da5d21c",
+      "bytes": 2835,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -455,13 +436,13 @@
           "url": "/scenes/methone/methone-normal-thumbnail.webp",
           "bytes": 1650,
           "sha256": "fa9c892e33eaa9b9f8ce833c6e7ae5b1122c0afa5fc1b48f93d46f92ee2bd610",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/methone/methone-normal-surface@2x.webp",
           "bytes": 70644,
           "sha256": "f1578449cb91bd75ffb6fc64d74017553414e441bd4ece61556eec8edc4324e0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -492,8 +473,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5564,
-          "sha256": "a94d946f80ff9ed21d1dd4c5ab88eca41bf593897cbd15768b4b58c76302ed0f",
+          "bytes": 5445,
+          "sha256": "114b05b4824f696ac88fe31946ec436564fd3c0a414635b161209f22eb9ae976",
           "verification": "bytes-verified"
         }
       ],
@@ -531,16 +512,11 @@
   },
   "lastPreparation": {
     "objectId": "methone",
-    "materialSha256": "d9ede083fffc29efecc9ff1871ef56595d5e80d204063c40f135c25785efcb5b",
+    "materialSha256": "15d455d3a1d6aed333f92278ec1283a1ce7e78e2f6353c0407997d211ec50344",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
-    },
-    "record": {
-      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
-      "path": "src/objects/methone/prepared/provenance.json",
-      "sha256": "83b5f86ae8353950300f1361f1068fc356309bd6c9085938872b435310539611"
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
     }
   }
 }

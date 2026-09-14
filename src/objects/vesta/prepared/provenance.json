@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vesta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "97bf7da97e6dd7d819163740706ffb23c5e31b0dcc87e167682e0db2f0a5b420"
+    "sha256": "e2f4ad2b31d9928b33309aab5606de36a6e0a3865b57f38b233cb6a9709317e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cbc43a3c921fe3b065df6d3fed43cd2cecfb8a084cc0f2597e6bdac29508047d",
+      "sha256": "34f5341fa2301c11b9d6423c2c1756b591909858c3a14b0ff072152ef6cf6020",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "vesta",
         "displayName": "Vesta",
         "publicBase": "/scenes/vesta/",
-        "distanceAu": 2.3619,
         "raster": {
           "width": 8192,
           "height": 4096,
@@ -182,20 +181,14 @@
           "sunSource": "JPL Horizons osculating Kepler elements and the DLR Dawn Claudia rotation model"
         },
         "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            180,
-            180,
-            180
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "normal"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c41c721ef13da6241661e1f28bc82719ffbb23fc5d6d8e7324bbabdbfe1f31a0",
+      "sha256": "97b4de406a5fa5f45c6c511b2b0cb0692f1f88bfe7ebf8a4372ca14918d31925",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -337,12 +330,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -371,12 +358,6 @@
             "role": "terrain",
             "description": "Dawn HAMO terrain model",
             "href": "https://dawngis.dlr.de/data/Vesta/dtm_vesta.php"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -500,7 +481,7 @@
       "sha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
       "bytes": 374574072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -555,7 +536,7 @@
       "sha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
       "bytes": 457291404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -612,7 +593,7 @@
       "sha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
       "bytes": 878609842,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -668,7 +649,7 @@
       "sha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
       "bytes": 446346023,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -693,10 +674,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c41c721ef13da6241661e1f28bc82719ffbb23fc5d6d8e7324bbabdbfe1f31a0",
-      "bytes": 9562,
+      "sha256": "97b4de406a5fa5f45c6c511b2b0cb0692f1f88bfe7ebf8a4372ca14918d31925",
+      "bytes": 9283,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -716,7 +697,7 @@
       "sha256": "547f49cb9b21176885a0d353786d61c74e569340ef97d47d2c83a776f5dd2534",
       "bytes": 1000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -742,7 +723,7 @@
       "sha256": "ee0007931abcecc970a2184b582995f9f6026d630661f0840607aa7c5006269f",
       "bytes": 314564,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -769,7 +750,7 @@
       "sha256": "75f4e502b985c08b6a527b7c6459a3ca268a0bb27ce5da8c518435d647501fa5",
       "bytes": 152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -796,7 +777,7 @@
       "sha256": "5f6e1fec30acfda423868511c7219ead5e38998c985d1aa96ecdd28e02f99e03",
       "bytes": 4724,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -842,13 +823,13 @@
           "url": "/scenes/vesta/vesta-normal-thumbnail.webp",
           "bytes": 6002,
           "sha256": "47f63a5a4d91ac1b76bc054bea22d6e3803356b5cf56ac702540ce1041faee5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-normal-surface@2x.webp",
           "bytes": 4293850,
           "sha256": "88e8e4861d21c6efbc87bd9fde61bf9d8a1f2e1fb4764286bcb13fb6712eacc5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -902,13 +883,13 @@
           "url": "/scenes/vesta/vesta-surface-thumbnail.webp",
           "bytes": 3782,
           "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-surface-surface@2x.webp",
           "bytes": 2994634,
           "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -963,13 +944,13 @@
           "url": "/scenes/vesta/vesta-ratios-thumbnail.webp",
           "bytes": 8258,
           "sha256": "aa4ac057660924f899099dc645ce72e9bf68209ddebb99749fc01cfba5371746",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-ratios-surface@2x.webp",
           "bytes": 3378534,
           "sha256": "59252fe1b12ba4917bad014b5f7d3978fd901eb127db19f618a3daed3ec8e07a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1012,19 +993,19 @@
           "url": "/scenes/vesta/vesta-elevation-thumbnail.webp",
           "bytes": 7354,
           "sha256": "d3493ac79ef0c7d57e7f8b63ed47e8aeddcc04584af550f3d8d299d6489e9132",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-elevation-surface@2x.webp",
           "bytes": 1819878,
           "sha256": "8141ca24ec36d809d035f1e34e709a917e1dbfc5b724cafd39d3a5b0e8bf7d85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1055,8 +1036,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5252,
-          "sha256": "c5bf339f2ac0cfea0df18b63ff36969e04364c92e0ba874296668ed4063eef0b",
+          "bytes": 5133,
+          "sha256": "173bd4e86af59764b5937044dc29734ce36a285a008dfed6e174ffeab07dbd8b",
           "verification": "bytes-verified"
         }
       ],
@@ -1093,7 +1074,7 @@
           "url": "/scenes/vesta/vesta-features.json",
           "bytes": 173735,
           "sha256": "55f7e5bf942353cd68d26dc09dfba9eecec5400c33667230e3f843ad60524d1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1205,16 +1186,11 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "ff3b69813fa13e13b119123ed46b4799e00650db5ea51073f471f38f3a2f891a",
+    "materialSha256": "f2d0aa4b8aeda1ef93f0ade156e4e2d7d25f91dc59535759bb1755258c71e884",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
-    },
-    "record": {
-      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
-      "path": "src/objects/vesta/prepared/provenance.json",
-      "sha256": "e402baf94565e5fe2136155d2ebcb053d96cf18f510acbb0e6993f314bd9a2ea"
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
     }
   }
 }

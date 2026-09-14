@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="angelina"])[data-lod="billboard"] .angelina-scene, .planet-stage:where([data-object-id="angelina"])[data-lod="marker"] .angelina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="angelina"])[data-lod="marker"] .angelina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="angelina"]).angelina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

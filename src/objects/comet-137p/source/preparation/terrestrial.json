@@ -4,7 +4,6 @@
   "namespace": "comet-137p",
   "displayName": "Shoemaker–Levy 2",
   "publicBase": "/scenes/comet-137p/",
-  "distanceAu": 4.525635799109316,
   "raster": {
     "width": 512,
     "height": 256,
@@ -110,12 +109,6 @@
     "qualification": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. The grid marks missing surface imagery. Rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

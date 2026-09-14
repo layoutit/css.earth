@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tartaglia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "30d4715d71067e83b01c51a46de795657b09348975355714b9aa9fc241cdcb12"
+    "sha256": "ad82ef581dc7c8427f59f8b5a345dfdcdc81830bbc28812edc3538357535c809"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "888fe450e10628751f301b6b51b488bb3b4fd375e314e1d431c05fe2b3272164",
+      "sha256": "b1ab58e9c4e346aee17e759c6a6a9931f6a4554933ace2073773bfdec07dbeef",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "tartaglia",
         "displayName": "Tartaglia",
         "publicBase": "/scenes/tartaglia/",
-        "distanceAu": 2.708012033150063,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "517d5b14dad38fe97f10eb2655ee034ad3a81177d981bc502732f480bcd5a262",
+      "sha256": "01dac4e58158e65d760acc2002d740ab245983575f4a2bca78a82dbe907b5e80",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15683"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "ee1a402a083d8aa2ce1aad16d6efd9ad71641e82cf788c45c0b0c9b8fb171514",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "517d5b14dad38fe97f10eb2655ee034ad3a81177d981bc502732f480bcd5a262",
+      "sha256": "01dac4e58158e65d760acc2002d740ab245983575f4a2bca78a82dbe907b5e80",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10457,
+      "bytes": 10178,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/tartaglia/tartaglia-elevation-thumbnail.webp",
           "bytes": 4644,
           "sha256": "e916232ed7221057ba0cdce0889899795cf01f209a53cff2ebc7cbedbfd03b6f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-surface@2x.webp",
           "bytes": 264724,
           "sha256": "2f678b53c4481c2c1c997391c8784c745af493da58d84259a6fd6442b7c8981e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/tartaglia/tartaglia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
           "bytes": 203220,
           "sha256": "0ac22696a65c1a4c92861c24e2687c24e1af65e192af88ace646b4dec6bb5a8a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7738,
-          "sha256": "d9d661a6e39f8645359e15e8aab2959260ac4144f69dd48972a310c2e8103cff",
+          "bytes": 7619,
+          "sha256": "672a043f44e25011848f708c1620666287439e485a6a4f5ef60607581efe7253",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "tartaglia",
+    "materialSha256": "0af220e444c11db1e92aa9557eef6d4f3ec3a144d3f25caff5550b4fd429b3c9",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -43,6 +43,6 @@ Source pole: ecliptic J2000 (71°,-69°). Reference sidereal period: 10.1978 h. 
 
 ## Preparation
 
-Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 35 m; source-model accuracy and simplification error remain separate. Shadows and Orbit start off.
+Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 35 m; source-model accuracy and simplification error remain separate. Shadows starts off.
 
 </details>

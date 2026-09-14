@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="desdemona"])[data-lod="billboard"] .desdemona-scene, .planet-stage:where([data-object-id="desdemona"])[data-lod="marker"] .desdemona-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="desdemona"])[data-lod="marker"] .desdemona-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="desdemona"]).desdemona-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

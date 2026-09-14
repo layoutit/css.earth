@@ -275,7 +275,6 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   assert.deepEqual(await readFile(join(root, paper)), bytes);
   assert.equal(result.prepared.closure[paper], createHash('sha256').update(bytes).digest('hex'));
   assert.deepEqual(result.prepared.closure, result.preparedSources.closure);
-  await assert.rejects(readFile(join(root, source, 'stars/eso0932a.tif')), { code: 'ENOENT' });
   const offline = await prepareMachines({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
   assert.deepEqual(offline.outputs, result.outputs, 'warm and cold preparation have identical closures');
 });
@@ -293,8 +292,8 @@ test('numerical extraction uses current package records and preserves reviewed s
       await mkdir(join(target,'..'),{recursive:true});
       await copyFile(path,target);
     }
-    // The extractor does not read these retained common assets or change their pins.
-    for (const path of ['stars/eso0932a.tif','presentation/InterVariable.ttf']) {
+    // The extractor does not read this retained common asset or change its pin.
+    for (const path of ['presentation/InterVariable.ttf']) {
       const target = join(root,source,path);
       await mkdir(join(target,'..'),{recursive:true}); await writeFile(target,'');
     }

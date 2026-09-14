@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2020-f3",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "003da8a1c20312beea2910c41bb7ba2226bea90f8aa7dfd71a803855e5657515"
+    "sha256": "e0c788a2cb232c5052f46470803935a90c3d8e8dbc2f9751149c9b4e83700402"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1ebe07f592c1bf07827fa57f2031794e0ee41d66702d706ce5e8a7b33c805741",
+      "sha256": "a7e71700c35d8c290d4c5ba45ef79ea0a82a08d7bd059fd32c62f005e6a6fe97",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c2020-f3",
         "displayName": "NEOWISE",
         "publicBase": "/scenes/comet-c2020-f3/",
-        "distanceAu": 18.5185079289819,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c72b62e577a8573f416a8963d1624d250ba34deeebcf806d220e4377939e82e3",
+      "sha256": "1bee9599921b27fefc98f54faba71f0bbf6874169c06ffe57cef155780f21e86",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://www.nasa.gov/blogs/watch-the-skies/2020/07/17/see-comet-neowise-a-once-in-a-lifetime-event/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "c1f913fffe30901c6176fa33dbe9398b20014acc83c1da9cf10da23e1a04fc6e",
       "bytes": 438703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c72b62e577a8573f416a8963d1624d250ba34deeebcf806d220e4377939e82e3",
-      "bytes": 3156,
+      "sha256": "1bee9599921b27fefc98f54faba71f0bbf6874169c06ffe57cef155780f21e86",
+      "bytes": 2876,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-c2020-f3/comet-c2020-f3-model-thumbnail.webp",
           "bytes": 1406,
           "sha256": "4a8717a56fd33658a81e44f379b91759a14a6fca1504e278946f87df0b369a60",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c2020-f3/comet-c2020-f3-model-surface@2x.webp",
           "bytes": 120202,
           "sha256": "f0f5f058599c9a548911092307772eefc6131dbbc93dec3f7477b27056264a87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4661,
-          "sha256": "575951afd873cd6ee4bce4dcacd462dd4f4a803f18dad6a4215f5d02b4a5c2a0",
+          "bytes": 4542,
+          "sha256": "2c992dbb28a9f453d0fee37edfbb28ebcc44bc6962399092e71fceb062677fe0",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-c2020-f3",
+    "materialSha256": "b94bcae7bf88d7ac93faf8b9d2e9e0e5b52f36138d9325df46daedd6b824733c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

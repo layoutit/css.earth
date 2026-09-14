@@ -3,8 +3,8 @@ import { afterEach, test, vi } from 'vitest';
 import { getEventListeners } from 'node:events';
 import * as runtimePolicy from '../../../../site/runtime-policy.mts';
 import runtimeDefinition from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
-import { projectHeliocentricView, validatePreparedHeliocentricView } from '../solar-system/heliocentric-view.ts';
-import type { BodyProjection, HeliocentricViewPlan } from '../solar-system/heliocentric-view.ts';
+import { presentWorldCamera, worldCameraFromPresentation } from './world-camera.ts';
+import type { PreparedWorldCameraFrame } from './world-camera.ts';
 import type { CameraDelta } from './types.ts';
 import { hitsProjectedBody } from './world-camera-hit.ts';
 import { bindWorldCameraPicking } from './world-camera-picking.ts';
@@ -13,12 +13,15 @@ import { createUnboundedMatrixDragControls } from './camera-input.ts';
 
 afterEach(() => vi.unstubAllGlobals());
 const bounds = { x: 0, y: 0, width: 1000, height: 800 } satisfies Pick<DOMRect, 'x' | 'y' | 'width' | 'height'>;
-const runtimePlan: HeliocentricViewPlan = runtimeDefinition.heliocentricView.plan;
-validatePreparedHeliocentricView(runtimePlan);
-const project = (bodyCenter: readonly [number, number, number]): BodyProjection => projectHeliocentricView(runtimePlan, {
-  bodyCenter, distance: Math.hypot(...bodyCenter), rotation: [1,0,0,0,1,0,0,0,1],
-  focal: 900, principalOffset: [0,0], viewportWidth: 1000, viewportHeight: 800,
-}).body;
+// The shared world camera presents Mercury's physical radius through a 900 px focal length.
+const radiusUnits = runtimeDefinition.camera.logicalBodyDiameter / 2;
+const frame: PreparedWorldCameraFrame = { referenceFrame: 'sun-icrf', epochJdTt: 2461287.5, originM: [0, 0, 0],
+  presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1000, bodyRadiusM: radiusUnits * 1000 };
+const project = (bodyCenterUnits: readonly [number, number, number]) => {
+  const presented = presentWorldCamera(worldCameraFromPresentation({ rotation: [1,0,0,0,1,0,0,0,1], bodyCenterUnits }, frame),
+    frame, { focalPixels: 900, principalOffsetPixels: [0, 0] });
+  return { visible: presented.silhouette !== null, silhouette: presented.silhouette, translate: presented.translateCssPixels };
+};
 
 type FakeStyle = {
   cursor?: string;

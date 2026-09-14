@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="gryphia"])[data-lod="billboard"] .gryphia-scene, .planet-stage:where([data-object-id="gryphia"])[data-lod="marker"] .gryphia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="gryphia"])[data-lod="marker"] .gryphia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="gryphia"]).gryphia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

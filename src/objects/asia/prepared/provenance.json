@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a7b6d9a5c79fefdd759a98d0fa21266e6a64488b0ff52af2df66ba76814e309"
+    "sha256": "be2aeb38392dc2c92b5939fe1d0ceaf0a932bbedf17cec6c60a910e04b9cd32e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cac561cb2103e28efd5a35f968ac7bf47700e2dced94172e56aad743e0aaae5c",
+      "sha256": "d0e748a83d60caf5ab17d189485d2507a8e168578db0916d72992e63935fc077",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asia",
         "displayName": "Asia",
         "publicBase": "/scenes/asia/",
-        "distanceAu": 2.4209257475173156,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5668 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4c4786b7ada62be3de49b590e01cc6fced68fa99b237bbaaf433ba860280250e",
+      "sha256": "a992340cc19d4a2e118f5e1f8a491891c125512671c6c758f916fcb42858a3c8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "784a802ce9b6fe162194a958f5f66d20f06b591d3b50733fc93aa4e7bc50a453",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4c4786b7ada62be3de49b590e01cc6fced68fa99b237bbaaf433ba860280250e",
-      "bytes": 8536,
+      "sha256": "a992340cc19d4a2e118f5e1f8a491891c125512671c6c758f916fcb42858a3c8",
+      "bytes": 8257,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/asia/asia-elevation-thumbnail.webp",
           "bytes": 5020,
           "sha256": "8e08e6bd077177cab42b00dcbc072a2bc50a416fc23ec297fc3e6cb980288b34",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asia/asia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asia/asia-elevation-surface@2x.webp",
           "bytes": 270070,
           "sha256": "977e3301c417e8169abd20a331ba89a189725af650ca9bf17d016a5635aba740",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/asia/asia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asia/asia-shape-surface@2x.webp",
           "bytes": 218286,
           "sha256": "34352f7a025135ab4909a08335a9568872199c7ff63686449d26d8dbe68967a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5927,
-          "sha256": "2595b32611948f39628986065becefa7dbc8c52dc5fc63a348d5b4c01f4ec718",
+          "bytes": 5808,
+          "sha256": "dcae0a80fcebdacbaff6c0363123364b2aa178aa0c8131e9a6e21718ae222d94",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asia",
+    "materialSha256": "cf7b4a818351a37c731090548d91fba237f3f988426031beb792a24a94b7cd9d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

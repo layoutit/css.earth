@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="nausikaa"])[data-lod="billboard"] .nausikaa-scene, .planet-stage:where([data-object-id="nausikaa"])[data-lod="marker"] .nausikaa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="nausikaa"])[data-lod="marker"] .nausikaa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="nausikaa"]).nausikaa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

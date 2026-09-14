@@ -3,7 +3,7 @@ import { requireRecord, requireArray } from "../../tools/source-values.mts";
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mts";
+import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
 import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "./prepared-presentation-contract.mts";
 import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
 

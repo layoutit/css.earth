@@ -4,4 +4,4 @@ Cassini ISS originals and calibration: NASA/JPL-Caltech/Space Science Institute;
 
 Ellipsoid measurements: Thomas et al. (2013), *The inner small satellites of Saturn: A variety of worlds*, Icarus 226, 999–1019, DOI 10.1016/j.icarus.2013.07.022; NAIF PCK00011. The radius table is cssEarth's analytic representation of published dimensional facts, not an author-released detailed mesh. Photographic source validity, reprojection, approximate illumination normalization, display encoding, mesh simplification and gray coverage grid are changes made by cssEarth under its MIT license. Preserve their limitations and citations.
 
-ESO Milky Way panorama: ESO/S. Brunier, CC BY 4.0; original source license in `source/stars/ESO-IMAGE-LICENSE.md`. Inter Variable: Rasmus Andersson, SIL Open Font License 1.1; retained source and pinned upstream revision. HYG metadata notices are in `source/stars/LICENSE.md`.
+Inter Variable: Rasmus Andersson, SIL Open Font License 1.1; retained source and pinned upstream revision.

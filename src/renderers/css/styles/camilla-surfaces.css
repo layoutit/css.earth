@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="camilla"])[data-lod="billboard"] .camilla-scene, .planet-stage:where([data-object-id="camilla"])[data-lod="marker"] .camilla-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="camilla"])[data-lod="marker"] .camilla-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="camilla"]).camilla-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

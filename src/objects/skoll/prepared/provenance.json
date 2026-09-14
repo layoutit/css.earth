@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "skoll",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e47cee910a34b405bfb9ddd93fcf98ce1d1be942fe6d2b3db43e38ccd0217b7c"
+    "sha256": "2d55b102bb0632280d73c3cc2ada66bbc625cee175a26534508110804400dfbe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "44db4f487405483ebb55063f2bc0be7cfbd37411c6194a41132d74f4b998adac",
+      "sha256": "6f4c1af52535cdc933e8a56390030bc3e360db2f8ee83d35f35294b494acb639",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "skoll",
         "displayName": "Skoll",
         "publicBase": "/scenes/skoll/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6270eb7678c65a0d02be9a599b3858b56ea3908d5526a84c4dac70507e44660b",
+      "sha256": "1d36b2aeedc7c1501c075def84837800a7c108893f4d9b4e64e7bb0009e271e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "7c156195b24799a342d02e27bd58285f0602fc9c6d702343d5fc30e9ddd6ef04",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6270eb7678c65a0d02be9a599b3858b56ea3908d5526a84c4dac70507e44660b",
-      "bytes": 3351,
+      "sha256": "1d36b2aeedc7c1501c075def84837800a7c108893f4d9b4e64e7bb0009e271e1",
+      "bytes": 3072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -371,13 +352,13 @@
           "url": "/scenes/skoll/skoll-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/skoll/skoll-model-surface@2x.webp",
           "bytes": 56604,
           "sha256": "15bb95e02fd461f6ea75bea2984f1c17ca553ccb3b85171e9d38e44c30ee00b7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -413,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3816,
-          "sha256": "0f4b1b42c2770604031a1c1b9c6f99170ad064eb33c81b978c91294a9653fbcf",
+          "bytes": 3697,
+          "sha256": "2116b2e42034e4830a8946597266e25bbed858f0d6a9129c71c75a6cec7ab9ce",
           "verification": "bytes-verified"
         }
       ],
@@ -449,5 +430,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "skoll",
+    "materialSha256": "fb3398de0b04f2db8442975ac883b54ca9b574f9f534a5e63a018d40163fd4db",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

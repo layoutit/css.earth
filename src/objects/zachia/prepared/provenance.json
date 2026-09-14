@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "zachia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc4259ec5caad3e4edd770b46043a53ced757619b9f02128312be522850527ce"
+    "sha256": "0f17ff3feecb46014b44885a94fbd1a4ae47cc857c0c5c00574116f04021b2d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "abea437806829b9e86cc6463c2647c83347b3719258996047430d0478c658f2c",
+      "sha256": "39a6be63dffda6030c916f48b7bb6284e25f3f8bd7e8a137ef3c729753009876",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "zachia",
         "displayName": "Zachia",
         "publicBase": "/scenes/zachia/",
-        "distanceAu": 2.61497834334827,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "90cb7e00c2c2fda158869f9690496ada6fe3bd4ce1c4dada737e361af8912149",
+      "sha256": "521972a451c9bc1c6a6b7f0c36e3b3baf8f8892df7771357ae95750d625fec98",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5901"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "fa76a68f24cbff7a331e2ddb0f72a5080b431c4332d1f91ffc109d28088da6b4",
       "bytes": 44637,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "90cb7e00c2c2fda158869f9690496ada6fe3bd4ce1c4dada737e361af8912149",
+      "sha256": "521972a451c9bc1c6a6b7f0c36e3b3baf8f8892df7771357ae95750d625fec98",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8975,
+      "bytes": 8696,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/zachia/zachia-elevation-thumbnail.webp",
           "bytes": 5412,
           "sha256": "14ad3e638db5388d37149181ef0ddbe7ecb0678533d801e1ef6380d2815db3c8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/zachia/zachia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/zachia/zachia-elevation-surface@2x.webp",
           "bytes": 308290,
           "sha256": "7bf79e96e256e5cc05e880199f8f3464cb1fa2ee18330d401d91d5f0b1486309",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/zachia/zachia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/zachia/zachia-shape-surface@2x.webp",
           "bytes": 242010,
           "sha256": "af5ebec47154a2014d7d4043178d3a837a9917e0be5991c1ad62859062dcbd02",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6295,
-          "sha256": "01b7a03856c863c2fbc1e798d8322c62890ffb6d346d4ebca82b143475866ced",
+          "bytes": 6176,
+          "sha256": "67241cdd56df2fc0a68f42ddb5463a60d6b4e04a9e3f95ad366d21064e40dc8b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "zachia",
+    "materialSha256": "7fb3c418e431aa74cf264ce901a3b1f4f65fa8df2c89cd3da52662d4635315f0",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

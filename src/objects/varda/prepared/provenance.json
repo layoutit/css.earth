@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "varda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "24f7852c6b91b756a62049c6bf39128041f5f317b39aa73b5834e081d81f2522"
+    "sha256": "1260a4f1df8ffffa91dabf4685bc360e405fbc7a417a258b7d7377811af11dac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cb40f9146eda4fc7b6b7c2eeab6958a80a20c919a05a634e71bd68dafb5d1ec4",
+      "sha256": "0f4dfe2894fbc734f54b79f3377cd2bcb8425d1bd07ef07c7ff3d6a2c4ba4f0a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "varda",
         "displayName": "Varda",
         "publicBase": "/scenes/varda/",
-        "distanceAu": 45.619915704968584,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Assumes the spin pole aligns with Ilmarë’s orbit: J2000 RA 272.6° and declination −10.8°. This is a model prior; rotational phase and meridian are illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cbd0f0d92037fdba099ce40c9fbd59b4182dee9e3a51538a585d89b3c3e9485c",
+      "sha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -212,12 +199,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://github.com/benp175/occult3d"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -264,7 +245,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -299,7 +280,7 @@
       "sha256": "60401ead9bac3d726ab87a184f0a1ed8a8a86439d9e8d60c9201da2daf4a3d6d",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -316,10 +297,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cbd0f0d92037fdba099ce40c9fbd59b4182dee9e3a51538a585d89b3c3e9485c",
-      "bytes": 3757,
+      "sha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
+      "bytes": 3477,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -356,13 +337,13 @@
           "url": "/scenes/varda/varda-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/varda/varda-model-surface@2x.webp",
           "bytes": 49844,
           "sha256": "aab83d0fe89bd5c2283d521f50c6486cc985a171ca1eef213b6607a18f7788c5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -398,8 +379,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5618,
-          "sha256": "7b4a89c67f91eeaaa3dc25efa4a8edbca40d4dc9b80d6cabdf1a6f96fefee941",
+          "bytes": 5499,
+          "sha256": "539d9ec019234e7e5f9bb66518f26b3e44dd6f3573c5b026b7a7ec8d87bab78b",
           "verification": "bytes-verified"
         }
       ],
@@ -434,5 +415,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "varda",
+    "materialSha256": "666700048eb666a29b6bc251cbfb2868aaa634528c517596f7de13cb08ec309a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

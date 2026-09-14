@@ -1,5 +1,5 @@
-import type { Vector2, Vector3, Matrix3, Matrix3dLike, VisibleRect } from './types.js';
-import type { PreparedIllumination, SilhouetteEllipse } from './heliocentric-view.js';
+import type { Vector2, Vector3, Matrix3, Matrix3dLike } from './types.js';
+import type { SilhouetteEllipse } from './types.js';
 export interface OffAxisFrame {radial:Vector2;sinTheta:number;cosTheta:number;tanTheta:number;}
 // Distance at which the body's silhouette has the given on-screen radius
 // across the off-axis direction (the tangential semi-axis).
@@ -140,12 +140,6 @@ export function splitVisible(start:Vector3, end:Vector3, hidden:(point:Vector3)=
   return pieces;
 }
 
-export function validVisibleRect(rect:VisibleRect) {
-  return rect !== null && typeof rect === "object" &&
-    [rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite) &&
-    rect.right > rect.left && rect.bottom > rect.top;
-}
-
 // Liang-Barsky against |x| <= clipX, |y| <= clipY; returns the screen-space
 // parameter window or null.
 export function clipSegmentToRectangle(start:Vector2, end:Vector2, clipX:number, clipY:number): Vector2 | null {
@@ -239,32 +233,6 @@ export function positive(value:number | undefined | null): value is number {
 export function vector(value:Vector3 | undefined | null): value is Vector3 {
   return Array.isArray(value) && value.length === 3 &&
     value.every(Number.isFinite);
-}
-
-// Prepared illumination from the observer's vantage: a phase, the light's
-// view depth for the lighting atlas, and the marker's brightness as opacity.
-export function validIllumination(illumination:PreparedIllumination) {
-  return Number.isFinite(illumination?.phaseAngleDegrees) &&
-    illumination.phaseAngleDegrees >= 0 && illumination.phaseAngleDegrees <= 180 &&
-    Number.isFinite(illumination.illuminatedFraction) &&
-    illumination.illuminatedFraction >= 0 && illumination.illuminatedFraction <= 1 &&
-    Number.isFinite(illumination.lightViewZ) && Math.abs(illumination.lightViewZ) <= 1 &&
-    positive(illumination.markerOpacity) && illumination.markerOpacity <= 1;
-}
-
-export function validBehindTurns(turns:readonly number[], vertexCount:number) {
-  return Array.isArray(turns) && turns.length === vertexCount &&
-    turns.every((turn) => Number.isFinite(turn) && turn >= 0 && turn < 1) &&
-    turns[turns.length - 1] < turns[0];
-}
-
-// One weight per chord, each in [0, 1], the last chord (the one returning
-// to the body) at full strength and at least one chord weightless: a trail,
-// never a closed loop.
-export function validTrail(trail:readonly number[], vertexCount:number) {
-  return Array.isArray(trail) && trail.length === vertexCount &&
-    trail.every((weight) => Number.isFinite(weight) && weight >= 0 && weight <= 1) &&
-    trail[trail.length - 1] > 0.9 && trail.some((weight) => weight === 0);
 }
 
 export function unit(value:Vector3 | undefined | null) {

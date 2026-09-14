@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="pallas"])[data-lod="billboard"] .pallas-scene, .planet-stage:where([data-object-id="pallas"])[data-lod="marker"] .pallas-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="pallas"])[data-lod="marker"] .pallas-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="pallas"]).pallas-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

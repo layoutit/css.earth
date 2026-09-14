@@ -1,9 +1,0 @@
-{
-  "schema": "cssearth-shared-celestial@1",
-  "namespace": "uranus",
-  "meanHeliocentricDistanceAu": 19.2,
-  "sourceDistanceConvention": {
-    "source": "cssEarth accepted mean-heliocentric-distance catalogue",
-    "qualification": "Retains the accepted body catalogue distance; this is not an observer-epoch ephemeris."
-  }
-}

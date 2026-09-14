@@ -4,7 +4,7 @@ Varda is a distant binary-system primary whose outline was measured as it eclips
 
 ## Sources
 
-One published allowable triaxial model has semiaxes **389, 353 and 248 km** (full axes **778 × 706 × 496 km**). These best-fit values illustrate one solution. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+One published allowable triaxial model has semiaxes **389, 353 and 248 km** (full axes **778 × 706 × 496 km**). These best-fit values illustrate one solution. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

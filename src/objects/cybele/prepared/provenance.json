@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "cybele",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ecc2d40e99d76011c7e897d4c6c8f4c1f1849ece4797001d686d50099e5eac3"
+    "sha256": "38b3ce302c244f00ed5e4cf726240f97d09c271208eed03daf82ededd1d2783d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d94f25deda36889e0296e82b5abd8bfb881920b49a930a45cf79217888d2b42",
+      "sha256": "39740ff27aac1c17c2a5b6567b9f319763fee52fa31b7d5bac90def03313978d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "cybele",
         "displayName": "Cybele",
         "publicBase": "/scenes/cybele/",
-        "distanceAu": 3.407076943888485,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1843 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82e4c917e4db22bb5ac6509139a244a2a7c74bb6968d0c02e52230b0a70c2ab3",
+      "sha256": "82285b9bfd6199cb06df427ffc73447f0f0d5f143842a235e93bf47d2ebc3895",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1843"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "e9648065de0673532a759e5148dbead9e4bbba55edaf1231e21b2d911e55e35f",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82e4c917e4db22bb5ac6509139a244a2a7c74bb6968d0c02e52230b0a70c2ab3",
-      "bytes": 7361,
+      "sha256": "82285b9bfd6199cb06df427ffc73447f0f0d5f143842a235e93bf47d2ebc3895",
+      "bytes": 7082,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/cybele/cybele-elevation-thumbnail.webp",
           "bytes": 5628,
           "sha256": "83f3970ab33f0d18112a8b30dea42d54401f111cfad2096d2b9856f5f3311c8a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cybele/cybele-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cybele/cybele-elevation-surface@2x.webp",
           "bytes": 288026,
           "sha256": "87f147ebd3d32edde732a017bf90e70d4ca144295f9bc0adba8b882682fe817c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/cybele/cybele-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cybele/cybele-shape-surface@2x.webp",
           "bytes": 204138,
           "sha256": "6b3821cda9351739661796be3cae46a0ff1a93d1d9c7528e956c22daf08998eb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5193,
-          "sha256": "bc1ccab43ceaf1264b6f1faa3d6819f574fd6a600ad4d3781a8c3d80b8a94d56",
+          "bytes": 5074,
+          "sha256": "e7dd2a8a3dd43e3afc3cfa7ed6cb855763b494e30edfded6b0e0314d04f5e3b3",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "cybele",
+    "materialSha256": "cdb1fb8023f12f9b835108332ff64371ca54e00125c304fb0137831b088e1512",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

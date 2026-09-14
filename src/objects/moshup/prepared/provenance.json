@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "moshup",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da89f5190ac567236b8968621d25225b76f21a4dd17ce35c6974d0877fca7f3e"
+    "sha256": "88a141caff903de0b2f6fe55945b625f1038fb4907aab6c17b21d64b4839eafb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ded897fd45d0633c128a9627474e4a4c17bb692b1f08d20cf943256d71f12148",
+      "sha256": "961ead7ca0cfd08e47838f69fc38dc163727ae5af5e0d31d416f3d9e88ffa7e7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "moshup",
         "displayName": "Moshup",
         "publicBase": "/scenes/moshup/",
-        "distanceAu": 0.642389793312345,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "40c7d1615000a0b0cd23bcccd01f426d841ade12ed0f1c49e13c5c618cacc8e0",
+      "sha256": "3aad2e05c67e163de224a6a02175736c9f58554ed3789214cae6aa6a925072ba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -345,7 +326,7 @@
       "sha256": "2bdeafb28dbb20b0aa74d79dbee76021ca7dd09e43fc72ff6cf43445dcc812bf",
       "bytes": 288969,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -370,10 +351,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "40c7d1615000a0b0cd23bcccd01f426d841ade12ed0f1c49e13c5c618cacc8e0",
-      "bytes": 7567,
+      "sha256": "3aad2e05c67e163de224a6a02175736c9f58554ed3789214cae6aa6a925072ba",
+      "bytes": 7288,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -405,19 +386,19 @@
           "url": "/scenes/moshup/moshup-elevation-thumbnail.webp",
           "bytes": 7032,
           "sha256": "4f4349d30da1c7ae976b9324ea5319173fa5de0cf7304192b631d9db7b2ea58d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moshup/moshup-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moshup/moshup-elevation-surface@2x.webp",
           "bytes": 485900,
           "sha256": "fedefd2e58a2c29ee079ff827b11d64748864a9e2203bbcbd87548c93ab9b468",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -455,13 +436,13 @@
           "url": "/scenes/moshup/moshup-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moshup/moshup-shape-surface@2x.webp",
           "bytes": 218166,
           "sha256": "6977379ae49a98610ff415def80217c71c85a75340db5e25bc1243d571170c5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -492,8 +473,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5398,
-          "sha256": "ff0ef07ec6aadf0d25ca3aebb3b1fda3ec38df7b41e3617cea078af60959eb08",
+          "bytes": 5279,
+          "sha256": "4686caac561b2fa060414fb37443ff9e3340e09f2a846e9742c047b0b00b5c3b",
           "verification": "bytes-verified"
         }
       ],
@@ -553,5 +534,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "moshup",
+    "materialSha256": "6629ccff9c14535c51124d8bd1ed5adba33f9d8d3ab29ba60009eebde64b66c1",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

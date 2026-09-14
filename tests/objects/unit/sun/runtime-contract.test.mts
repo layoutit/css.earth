@@ -32,11 +32,11 @@ objectRuntimePackageTests(runtimeDefinition);
 test("binds the exact Sun source and runtime closures", async () => {
   const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/objects/sun/source") });
   // 38 retired-lane inputs + 7 authored records that moved from documents to local inputs (the navigation recipe included); 3 documents remain.
-  assert.deepEqual(await source.verify(), { inputCount: 45, generatedIntermediateCount: 0, documentCount: 3 });
+  assert.deepEqual(await source.verify(), { inputCount: 43, generatedIntermediateCount: 0, documentCount: 1 });
   const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
   assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
-  // 4 lenses x (surface, poles, corona, limb) x 2 densities + 4 thumbnails + 24 starfield faces + 2 system marker strips.
-  assert.equal(runtime.assets.length, 62);
+  // 4 lenses x (surface, poles, corona, limb) x 2 densities + 4 thumbnails.
+  assert.equal(runtime.assets.length, 36);
 });
 
 test("Sun's actual import closure has only shared runtime owners", async () => {
@@ -62,8 +62,8 @@ test("Sun is prepared by the generic raster lane as an emissive sphere with flat
   assert.equal(scene.counts.polarLeafCount, 2);
   assert.equal(scene.material.model, "emissive");
   assert.equal(scene.material.runtimeLighting, false);
-  assert.equal(assets.lighting, undefined);
-  assert.equal(assets.atmosphere, undefined);
+  assert.equal(Object.hasOwn(assets, "lighting"), false);
+  assert.equal(Object.hasOwn(assets, "atmosphere"), false);
   assert.equal(assets.emission.offLimbContext.logicalSize, 768);
   assert.equal(assets.emission.limbMaterial.logicalSize, 496);
   assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
@@ -71,9 +71,8 @@ test("Sun is prepared by the generic raster lane as an emissive sphere with flat
   assert.equal(lenses.defaultLens, "photosphere");
   assert.deepEqual(controls.settings.controls.map(control => control.name), ["speed"]);
   assert.equal(runtimeDefinition.sun, null);
-  assert.equal(runtimeDefinition.sky.sun, undefined);
+  assert.equal(Object.hasOwn(runtimeDefinition.sky, "sun"), false);
   assert.deepEqual(runtimeDefinition.materials, []);
-  assert.equal(runtimeDefinition.heliocentricView, undefined);
   assert.equal(runtimeDefinition.tree.nodes.some(node => node.className?.includes("sun-material-composite")), false);
   for (const layer of ["corona", "limb"]) assert.ok(runtimeDefinition.tree.nodes.some(node => node.className === `sun-${layer}-layer planet-render-root`));
   assert.equal(runtimeDefinition.viewBindings.filter(binding => binding.kind === "silhouette-fit").length, 2);
@@ -123,10 +122,10 @@ test("scientific FITS colors preserve signed polarity and authored log intensity
 
 test("FITS decoding rejects incomplete data and preserves signed floating observations", () => {
   const cards = ["SIMPLE  = T", "BITPIX  = -32", "NAXIS   = 2", "NAXIS1  = 2", "NAXIS2  = 2", "END"].map(card => card.padEnd(80)).join("");
-  const bytes = Buffer.alloc(2880 + 16, 0); bytes.write(cards, "ascii");
+  const bytes = Buffer.alloc(2880 * 2, 0); bytes.write(cards, "ascii");
   [-250, 250, 0, NaN].forEach((value, index) => bytes.writeFloatBE(value, 2880 + index * 4));
   assert.deepEqual([...readFitsPrimary(bytes).values], [-250, 250, 0, NaN]);
-  assert.throws(() => readFitsPrimary(bytes.subarray(0, 2884)), /truncated/);
+  assert.throws(() => readFitsPrimary(bytes.subarray(0, 2884)), /truncated/i);
   const recipe: Parameters<typeof prepareFitsMap>[3] = { bitpix: -32, width: 2, height: 2, latitude: "sine-latitude", reverseLongitude: true, nearestLatitudeLimit: 1, positiveOnly: false, color: { kind: "signed-asinh", softening: 8, maximum: 250, palette: [[28, 95, 190], [95, 32, 11], [255, 224, 110]] } };
   const map = prepareFitsMap(bytes, 2, 2, recipe);
   assert.equal(map.length, 16);

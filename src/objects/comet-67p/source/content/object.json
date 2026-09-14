@@ -494,12 +494,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -534,12 +528,6 @@
       "role": "observations",
       "description": "Rosetta comet mission",
       "href": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     },
     {
       "label": "Rosetta/VIRTIS",

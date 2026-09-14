@@ -23,15 +23,6 @@
       "path": "maps/eros_nearmsi_filter1.tif"
     },
     {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
       "kind": "zip-member",
       "groups": [
         "restore",

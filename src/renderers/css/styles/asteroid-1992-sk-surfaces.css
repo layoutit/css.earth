@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-1992-sk"])[data-lod="billboard"] .asteroid-1992-sk-scene, .planet-stage:where([data-object-id="asteroid-1992-sk"])[data-lod="marker"] .asteroid-1992-sk-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-1992-sk"])[data-lod="marker"] .asteroid-1992-sk-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-1992-sk"]).asteroid-1992-sk-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

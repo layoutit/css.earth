@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "antigone",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8468fa56c72f0eac844c0eee2b44b1da69a20523ae42a33a9ec165b5d971feb5"
+    "sha256": "6a4fca075199c57d58e58679906ba67f6f9297e87b6a11dce15346dc1b28b205"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8a0cbd6e9eaee76495d4580421d110d27c5e547eb9afc32b2ec90300f4d51ad4",
+      "sha256": "fbf766b8c937f407d45ec39969040dc3ac23f92181bfba56edb6c98d052cce2b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "antigone",
         "displayName": "Antigone",
         "publicBase": "/scenes/antigone/",
-        "distanceAu": 2.8676091430240436,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1810 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "674bb56ddf2c6026065d5704410a365d7c6c580ec4d879eb33cdb092f79ec0c0",
+      "sha256": "1076ef9f508150ae877de2b01bc1bba80b5fc12b606a5cb017e8b88a5cabd9d5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "e011dbcecac18acc61b6cb82327ee948983b348ccc3b7c20b2c4ba11078318cf",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "674bb56ddf2c6026065d5704410a365d7c6c580ec4d879eb33cdb092f79ec0c0",
-      "bytes": 9916,
+      "sha256": "1076ef9f508150ae877de2b01bc1bba80b5fc12b606a5cb017e8b88a5cabd9d5",
+      "bytes": 9637,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/antigone/antigone-elevation-thumbnail.webp",
           "bytes": 4942,
           "sha256": "f87b61644c988dea03ebc7cda2321c0982ae05365d2ba532aa53e926f57f39a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/antigone/antigone-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/antigone/antigone-elevation-surface@2x.webp",
           "bytes": 257418,
           "sha256": "cd7dd6e5120f9ccdfe91e896124b353d53b10ff729dba1847dd484fe064ee344",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/antigone/antigone-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/antigone/antigone-shape-surface@2x.webp",
           "bytes": 197786,
           "sha256": "5f3636ba19dc4669c41d0e2c1101f2775eeb31c0bdf38e6f595d229c3d02b427",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7263,
-          "sha256": "386e1aa87b305e7344a4d6b52134541fe88fef309c2f8c441edba12a145ba48c",
+          "bytes": 7144,
+          "sha256": "aae1be1eeceef95a81efabebb690069c09f82593dbe81117a61a86b19bd651e8",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "antigone",
+    "materialSha256": "26faa81a3877ae64b4592354052c68ccf304dd87c0ffbc6985310827486b81cc",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

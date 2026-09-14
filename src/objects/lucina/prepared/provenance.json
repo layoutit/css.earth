@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lucina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cefd8249588b917fd74943935fb610ce5d2cb520f8df13f69aca8fc4abcdb313"
+    "sha256": "368d943a9073874b8f6795e55833ccb2cc5fd2f05ebf12122cc3802a2265a341"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b8e138b3ab84955ee0850723a07e13fce1743ae2371349e0bfd009f656470e3f",
+      "sha256": "ce66876fbda0499e745812a24f958e99e5a9a1ba40a2d9e80cc83144c1d10599",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lucina",
         "displayName": "Lucina",
         "publicBase": "/scenes/lucina/",
-        "distanceAu": 2.7199394547827493,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1837 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2cfe9a4a7fab47c559df0dc8040cfd19003adfff0365c385b011b146ea2252d0",
+      "sha256": "24eb0958082525180eabf325ac56b08326f27d0ee02e12ca405cf8ca22d69b2e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1837"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "667acd4065c0ea2b9930418669bc923020620d6bb64268b432a4f60cd2daa19c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2cfe9a4a7fab47c559df0dc8040cfd19003adfff0365c385b011b146ea2252d0",
-      "bytes": 8904,
+      "sha256": "24eb0958082525180eabf325ac56b08326f27d0ee02e12ca405cf8ca22d69b2e",
+      "bytes": 8625,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/lucina/lucina-elevation-thumbnail.webp",
           "bytes": 5834,
           "sha256": "a3222691b381851c60718a8045f1d89cdb1961df505fa8b7c2977fd2406d632d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucina/lucina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucina/lucina-elevation-surface@2x.webp",
           "bytes": 318976,
           "sha256": "a992b3fb173bc71b7a858b0080e967ad21f289db4c55f86b4dc72bbbf8cc3a1a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/lucina/lucina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucina/lucina-shape-surface@2x.webp",
           "bytes": 209104,
           "sha256": "0f84ae8ae65d199aab4ec59fcbc54200bd4a54289a2b1d20314de541074956a1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6277,
-          "sha256": "7dfab678582341115b54b5688719742f6b0ed65b42f58169f81f14b447c2aa77",
+          "bytes": 6158,
+          "sha256": "2ac46fb6c6a084bccb265143b54f38a3127daeca41b40ed62eb7d03b9bb2d8ba",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lucina",
+    "materialSha256": "49da164ede549ed07d874940bf391b7f0e439f013d5843956a373e6080a0186f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

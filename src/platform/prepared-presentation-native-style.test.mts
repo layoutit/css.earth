@@ -2,7 +2,7 @@ import { parsePreparedObjectRuntime } from "../renderers/css/dist/index.js";
 import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { OBJECTS } from '../../site/objects.mts';
+import { SCENE_OBJECTS as OBJECTS } from '../../site/objects.mts';
 import { retainedPresentationFixture } from './test/object-runtime-package.mts';
 import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
 import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mts';

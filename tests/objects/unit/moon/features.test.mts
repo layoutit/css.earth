@@ -19,7 +19,7 @@ test("the prepared Moon nomenclature catalogue is pinned by the runtime plan and
   assert.equal(catalog.features.length, plan.catalog.count);
   assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
   assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
-  assert.equal(descriptor.excluded.SF, undefined, "lettered satellite craters are labelled now");
+  assert.equal(Object.hasOwn(descriptor.excluded, "SF"), false, "lettered satellite craters are labelled now");
   assert.equal(descriptor.excluded.AL.count, 1);
   assert.equal(plan.catalog.count, 9167, "2,018 parent names, 7,063 lettered satellite craters, four unsized names and 82 spacecraft sites and traverses");
 });

@@ -13,9 +13,6 @@ import { SCENE_OBJECTS } from '../site/objects.mts';
 import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
-import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
-import { sharedTwinName } from '../src/platform/prepared-shared.mts';
-import { syncPreparedShared } from '../src/platform/prepared-shared-banks.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -33,13 +30,13 @@ export function serializeObjectJson(descriptorValue:unknown, definitionValue:unk
 
 export async function writeObjectJson(id:string, definitionValue:unknown, options?:BindingOptions) {
   const { definition: _definition, ...pin } = await finalizeObjectJson(id, definitionValue, { projectRoot: root, objectDirectory: resolve(root, 'src/objects', id),
-    preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json'), sharedRoot: root }, options);
+    preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }, options);
   return pin;
 }
 
 /** Finalize into explicit destinations. Source/style reads still use the real project. */
 export async function finalizeObjectJson(id: string, definitionValue: unknown, target: {
-  projectRoot: string; objectDirectory: string; preparedDirectory: string; descriptorPath: string; sharedRoot: string;
+  projectRoot: string; objectDirectory: string; preparedDirectory: string; descriptorPath: string;
 }, options?: BindingOptions) {
   let definition:RecompiledPresentation<CheckedObjectRuntimeDefinition>=requireObjectRuntimeDefinition(definitionValue);
   if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
@@ -52,7 +49,6 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
-  definition = prepareMarkerBindings(definition);
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
   definition = await preparePresentationBindings(definition, projectRoot, options);
@@ -63,14 +59,13 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   return { id, ...pin, definition };
 }
 
-/** Sync the shared twins and banks, transport the referenced runtime, and pin descriptor and page to it. */
+/** Transport the prepared runtime and pin descriptor and page to it. */
 async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string,
-  target = { preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json'), sharedRoot: root }) {
-  const { preparedDirectory, descriptorPath, sharedRoot } = target;
+  target = { preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }) {
+  const { preparedDirectory, descriptorPath } = target;
   await mkdir(preparedDirectory, { recursive: true });
-  await syncPreparedShared(sharedRoot, preparedDirectory);
   const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
-  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, sharedTwinName('runtime.json')), 'utf8'));
+  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8'));
   const originalProperties = requireRecord(originalDescriptor.properties);
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
   const payload = serializeObjectJson(descriptor, runtime);
@@ -86,7 +81,7 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 
-/** Re-pin an already prepared object to its shared-bank transport without preparing anything. */
+/** Re-pin an already prepared object to its transport without preparing anything. */
 export async function repinObjectJson(id: string, projectRoot = root) {
   const descriptorPath = resolve(projectRoot, 'src/objects', id, 'object.json');
   const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));

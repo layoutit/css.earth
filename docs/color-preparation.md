@@ -128,7 +128,6 @@ buffers; they do not change prepared data or rendering. Europa's capture faces
 its measured color footprint rather than the unchanged initial viewpoint.
 
 A photographic refresh resolves declared monochrome dependencies for decoding
-and minimaps while packing only the selected surface. Caption updates expand the
-checked-in runtime/scene twins and re-pin their transport without recompiling
-texture geometry or seam treatment. This prevents a content update from silently
-changing the retained scene after a merge.
+and minimaps while packing only the selected surface. Caption updates re-pin the
+checked-in runtime's transport without recompiling texture geometry or seam
+treatment.

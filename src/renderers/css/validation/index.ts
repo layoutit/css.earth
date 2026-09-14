@@ -3,7 +3,6 @@ import { choice, fail, parsedJsonNumbersFinite, record, requireJsonData, text } 
 import { requireAssets, requireTree } from './resources-tree.js';
 import { requireCamera, requireControls } from './camera-controls.js';
 import { requireSky, requireSun } from './sky.js';
-import { requireHeliocentric } from './heliocentric.js';
 import { requireMaterials } from './materials.js';
 import { requireAnimations, requireFacing, requireOptionalPresentation, requireVariants, requireViewBindings, requireTextureLevels } from './presentation.js';
 import { requireDepthPartitions } from './depth-partitions.js';
@@ -18,12 +17,11 @@ export function parsePreparedObjectRuntime(value: unknown, { parsedJson = false 
 function requireDefinition(value: unknown, parsedJson: boolean): asserts value is ObjectRuntimeDefinition {
   if (!parsedJson || !parsedJsonNumbersFinite(value)) requireJsonData(value);
   const plan = record(value, 'runtime plan', ['schema', 'id', 'controls', 'camera', 'sky', 'sun', 'assets', 'tree', 'variants', 'materials',
-    'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'pageLayers', 'heliocentricView', 'surfaceHit', 'textureLevels', 'features']);
+    'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'pageLayers', 'surfaceHit', 'textureLevels', 'features']);
   if (plan.schema !== 'cssearth-object-runtime@4') fail('runtime schema is incompatible');
   const id = text(plan.id, 'object id'); if (!/^[a-z][a-z0-9-]*$/.test(id)) fail('object identity is invalid');
   requireControls(plan.controls); requireCamera(plan.camera); requireSky(plan.sky);
   if (plan.sun !== undefined && plan.sun !== null) requireSun(plan.sun);
-  if (plan.heliocentricView !== undefined && plan.heliocentricView !== null) requireHeliocentric(plan.heliocentricView, plan.camera, plan.sun != null, id);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, ['content-first', 'materials-first'], 'resource order');
   requireAssets(plan.assets); requireTree(plan.tree);
   if (!Array.isArray(plan.tree.activationGroups)) fail('activation groups must be prepared before transport');

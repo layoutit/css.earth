@@ -1,0 +1,509 @@
+{
+  "schema": "cssearth-private-celestial-evidence@1",
+  "testedRevision": "eddb2357ad754c586e24767a3f44be39aa24b8d7",
+  "renderedRevision": "91c74ca876",
+  "renderedRevisionNote": "Later commits change tests and oracle source records only; the captured runtime and scene image bytes are unchanged. No local capture patches were applied to the after pages.",
+  "comparisonBase": "da2b6bec7c8ad83c18830905a71e5e45649fc94f",
+  "mergedMain": "7fead38a63df7dfa9f6ad1fa030bb37f81f95084",
+  "capture": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 2,
+    "pixels": {
+      "width": 2880,
+      "height": 1800
+    },
+    "browser": "Playwright 1.60.0 bundled Chromium 148.0.7778.96",
+    "beforeBrowserVersion": "Not recorded by the original capture; the same bundled-chromium launch path was used.",
+    "camera": "Default route view; no camera input.",
+    "epoch": "2026-09-03 00:00 TT",
+    "readiness": "document.dataset.ready=true and playing=false, networkidle, then 4000 ms",
+    "baselineLocalPatches": [
+      "site/components/PreparedFocusLenses.astro",
+      "site/application-world-context.mts"
+    ],
+    "afterLocalPatches": []
+  },
+  "pixelmatch": {
+    "version": "7.2.0",
+    "threshold": 0.1,
+    "includeAA": true,
+    "masks": [],
+    "cropping": "none",
+    "scaling": "none",
+    "comparedPixels": 5184000,
+    "results": {
+      "nix": {
+        "mismatchPixels": 716,
+        "percent": 0.013811728395061727,
+        "inspection": "Changes only in the build version label. The scene is unchanged, including the existing Nix seam and incomplete photographic coverage."
+      },
+      "donaldjohanson": {
+        "mismatchPixels": 139600,
+        "percent": 2.692901234567901,
+        "inspection": "Changes only in the build version label and left panel, where main added the Elevation control. The object and shared sky are unchanged."
+      }
+    }
+  },
+  "network": {
+    "nix": {
+      "beforePrivateSky": [],
+      "beforePrivateSun": [
+        "/scenes/nix/nix-directional-sun@2x.webp"
+      ],
+      "afterPrivateSky": [],
+      "afterPrivateSun": [],
+      "pageStatus": 200,
+      "problems": []
+    },
+    "donaldjohanson": {
+      "beforePrivateSky": [],
+      "beforePrivateSun": [
+        "/scenes/donaldjohanson/donaldjohanson-directional-sun@2x.webp"
+      ],
+      "afterPrivateSky": [],
+      "afterPrivateSun": [],
+      "pageStatus": 200,
+      "problems": []
+    },
+    "triton": {
+      "beforePrivateSky": null,
+      "beforePrivateSun": null,
+      "afterPrivateSky": [],
+      "afterPrivateSun": [],
+      "pageStatus": 200,
+      "problems": [
+        "warning: The resource http://127.0.0.1:4230/scenes/triton/triton-lighting-2x-row-27.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+        "warning: The resource http://127.0.0.1:4230/scenes/triton/triton-lighting-2x-row-29.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+        "warning: The resource http://127.0.0.1:4230/scenes/triton/triton-lighting-2x-row-28.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally."
+      ]
+    }
+  },
+  "triton": {
+    "browser": "Google Chrome 153.0.8010.37, headful",
+    "gpu": "Apple M3 Max, ANGLE Metal, GPU compositing enabled",
+    "atlas": {
+      "filename": "triton-normal@2x.webp",
+      "width": 14560,
+      "height": 10752,
+      "decode": "passed"
+    },
+    "mountedPage": "ready; inspected DPR2 capture",
+    "limits": "The before capture failed decoding, so no Triton fidelity comparison is claimed. Three unused-preload warnings were recorded; no runtime error."
+  },
+  "prepared": {
+    "bodies": 473,
+    "fullRunCompletedBeforeTakeover": true,
+    "mergeReprepared": [
+      "dactyl",
+      "donaldjohanson",
+      "toutatis",
+      "sun",
+      "tethys",
+      "europa",
+      "vesta",
+      "itokawa"
+    ],
+    "reusedMaterialVerified": 465,
+    "oracleMergeMaterialVerified": [
+      "eros",
+      "itokawa"
+    ],
+    "tethysRetainedImagePins": "identical to merged main"
+  },
+  "runtimeAssets": {
+    "main": {
+      "files": 18797,
+      "bytes": 5145491509
+    },
+    "branch": {
+      "files": 5996,
+      "bytes": 2214802767
+    }
+  },
+  "newRuntimePins": {
+    "mercury": [
+      {
+        "filename": "mercury-lens-enhanced.webp",
+        "bytes": 590,
+        "sha256": "e96069879e0ce65af82bccf4a4a36e8f283df2769d57a4eade454907673a75e1"
+      },
+      {
+        "filename": "mercury-lens-normal.webp",
+        "bytes": 280,
+        "sha256": "12cd76ff9ec246fe2039d0138668942404536eb851159c7a40f565b9098c6d4a"
+      },
+      {
+        "filename": "mercury-lens-topography.webp",
+        "bytes": 590,
+        "sha256": "3baf9e8f93dd652fd70182d63be3cd2a9be578d8c8cea78f21eb7773f023fa06"
+      }
+    ],
+    "neptune": [
+      {
+        "filename": "neptune-material-methane-shadowless.webp",
+        "bytes": 49310,
+        "sha256": "e58cf2b54faed0ce21fae4bd7b119f51f180a1bef90401b827231eadf21ddf7e"
+      },
+      {
+        "filename": "neptune-material-methane-shadowless@2x.webp",
+        "bytes": 103744,
+        "sha256": "e85233638211d95abfb09c8c7c4859738e9f0dec093762c1b33eb19ec8730348"
+      },
+      {
+        "filename": "neptune-material-methane.webp",
+        "bytes": 67038,
+        "sha256": "2dd3876370eb4a56b099917fd974228b709e13055fd12083d12dc75924acc715"
+      },
+      {
+        "filename": "neptune-material-methane@2x.webp",
+        "bytes": 190302,
+        "sha256": "adde6785924ede245a7a948c12b4ab80f67047789a5eba23a171b955375f4b0c"
+      },
+      {
+        "filename": "neptune-material-near-infrared-shadowless.webp",
+        "bytes": 46822,
+        "sha256": "2fd8961799f7023b4c3149f9cb90e309e2c5984b220a5a2140f154151b6e0958"
+      },
+      {
+        "filename": "neptune-material-near-infrared-shadowless@2x.webp",
+        "bytes": 98102,
+        "sha256": "010de775ab03810b72c13fe33567853f6669f026a681a4495727f2420b4ae750"
+      },
+      {
+        "filename": "neptune-material-near-infrared.webp",
+        "bytes": 65664,
+        "sha256": "0e43fab98fe29ee417d1559f2baa65a5e1824224927043f64facd4868d0fd627"
+      },
+      {
+        "filename": "neptune-material-near-infrared@2x.webp",
+        "bytes": 182704,
+        "sha256": "eae4280e38357fb02cf77dc61293f830fd1982cadf00525705cf55fbd693dca5"
+      },
+      {
+        "filename": "neptune-material-normal-shadowless.webp",
+        "bytes": 49858,
+        "sha256": "a1138157c05a9296310b69150fb9b6e933852afeba2fc58cfc3f66d27f3baf76"
+      },
+      {
+        "filename": "neptune-material-normal-shadowless@2x.webp",
+        "bytes": 104452,
+        "sha256": "4ab5f612f72f748682b3d9e46ef027e62d88ed6fe10ccd69078297431881f452"
+      },
+      {
+        "filename": "neptune-material-normal.webp",
+        "bytes": 67596,
+        "sha256": "085e3f0ea4952edca52db166f504ab8d33ab1bcfc022a61b4e144de2022679b8"
+      },
+      {
+        "filename": "neptune-material-normal@2x.webp",
+        "bytes": 192124,
+        "sha256": "0adbf33ef6dfbedfaed4e9113d1d7ec8a6ba4e3a952daa3edd8b58ce6730d7bd"
+      },
+      {
+        "filename": "neptune-poles-methane@2x.webp",
+        "bytes": 11594,
+        "sha256": "bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068"
+      },
+      {
+        "filename": "neptune-poles-near-infrared@2x.webp",
+        "bytes": 10202,
+        "sha256": "f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357"
+      },
+      {
+        "filename": "neptune-poles-normal@2x.webp",
+        "bytes": 11348,
+        "sha256": "63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4"
+      }
+    ]
+  },
+  "r2": [
+    {
+      "body": "mercury",
+      "filename": "mercury-lens-enhanced.webp",
+      "bytes": 590,
+      "sha256": "e96069879e0ce65af82bccf4a4a36e8f283df2769d57a4eade454907673a75e1",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e96069879e0ce65af82bccf4a4a36e8f283df2769d57a4eade454907673a75e1/mercury-lens-enhanced.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "590"
+    },
+    {
+      "body": "mercury",
+      "filename": "mercury-lens-normal.webp",
+      "bytes": 280,
+      "sha256": "12cd76ff9ec246fe2039d0138668942404536eb851159c7a40f565b9098c6d4a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/12cd76ff9ec246fe2039d0138668942404536eb851159c7a40f565b9098c6d4a/mercury-lens-normal.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "280"
+    },
+    {
+      "body": "mercury",
+      "filename": "mercury-lens-topography.webp",
+      "bytes": 590,
+      "sha256": "3baf9e8f93dd652fd70182d63be3cd2a9be578d8c8cea78f21eb7773f023fa06",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3baf9e8f93dd652fd70182d63be3cd2a9be578d8c8cea78f21eb7773f023fa06/mercury-lens-topography.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "590"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-methane-shadowless.webp",
+      "bytes": 49310,
+      "sha256": "e58cf2b54faed0ce21fae4bd7b119f51f180a1bef90401b827231eadf21ddf7e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e58cf2b54faed0ce21fae4bd7b119f51f180a1bef90401b827231eadf21ddf7e/neptune-material-methane-shadowless.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "49310"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-methane-shadowless@2x.webp",
+      "bytes": 103744,
+      "sha256": "e85233638211d95abfb09c8c7c4859738e9f0dec093762c1b33eb19ec8730348",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e85233638211d95abfb09c8c7c4859738e9f0dec093762c1b33eb19ec8730348/neptune-material-methane-shadowless@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "103744"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-methane.webp",
+      "bytes": 67038,
+      "sha256": "2dd3876370eb4a56b099917fd974228b709e13055fd12083d12dc75924acc715",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2dd3876370eb4a56b099917fd974228b709e13055fd12083d12dc75924acc715/neptune-material-methane.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "67038"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-methane@2x.webp",
+      "bytes": 190302,
+      "sha256": "adde6785924ede245a7a948c12b4ab80f67047789a5eba23a171b955375f4b0c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/adde6785924ede245a7a948c12b4ab80f67047789a5eba23a171b955375f4b0c/neptune-material-methane@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "190302"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-near-infrared-shadowless.webp",
+      "bytes": 46822,
+      "sha256": "2fd8961799f7023b4c3149f9cb90e309e2c5984b220a5a2140f154151b6e0958",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2fd8961799f7023b4c3149f9cb90e309e2c5984b220a5a2140f154151b6e0958/neptune-material-near-infrared-shadowless.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "46822"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-near-infrared-shadowless@2x.webp",
+      "bytes": 98102,
+      "sha256": "010de775ab03810b72c13fe33567853f6669f026a681a4495727f2420b4ae750",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/010de775ab03810b72c13fe33567853f6669f026a681a4495727f2420b4ae750/neptune-material-near-infrared-shadowless@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "98102"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-near-infrared.webp",
+      "bytes": 65664,
+      "sha256": "0e43fab98fe29ee417d1559f2baa65a5e1824224927043f64facd4868d0fd627",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0e43fab98fe29ee417d1559f2baa65a5e1824224927043f64facd4868d0fd627/neptune-material-near-infrared.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "65664"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-near-infrared@2x.webp",
+      "bytes": 182704,
+      "sha256": "eae4280e38357fb02cf77dc61293f830fd1982cadf00525705cf55fbd693dca5",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/eae4280e38357fb02cf77dc61293f830fd1982cadf00525705cf55fbd693dca5/neptune-material-near-infrared@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "182704"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-normal-shadowless.webp",
+      "bytes": 49858,
+      "sha256": "a1138157c05a9296310b69150fb9b6e933852afeba2fc58cfc3f66d27f3baf76",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a1138157c05a9296310b69150fb9b6e933852afeba2fc58cfc3f66d27f3baf76/neptune-material-normal-shadowless.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "49858"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-normal-shadowless@2x.webp",
+      "bytes": 104452,
+      "sha256": "4ab5f612f72f748682b3d9e46ef027e62d88ed6fe10ccd69078297431881f452",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4ab5f612f72f748682b3d9e46ef027e62d88ed6fe10ccd69078297431881f452/neptune-material-normal-shadowless@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "104452"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-normal.webp",
+      "bytes": 67596,
+      "sha256": "085e3f0ea4952edca52db166f504ab8d33ab1bcfc022a61b4e144de2022679b8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/085e3f0ea4952edca52db166f504ab8d33ab1bcfc022a61b4e144de2022679b8/neptune-material-normal.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "67596"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-material-normal@2x.webp",
+      "bytes": 192124,
+      "sha256": "0adbf33ef6dfbedfaed4e9113d1d7ec8a6ba4e3a952daa3edd8b58ce6730d7bd",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0adbf33ef6dfbedfaed4e9113d1d7ec8a6ba4e3a952daa3edd8b58ce6730d7bd/neptune-material-normal@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "192124"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-poles-methane@2x.webp",
+      "bytes": 11594,
+      "sha256": "bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068/neptune-poles-methane@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "11594"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-poles-near-infrared@2x.webp",
+      "bytes": 10202,
+      "sha256": "f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357/neptune-poles-near-infrared@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "10202"
+    },
+    {
+      "body": "neptune",
+      "filename": "neptune-poles-normal@2x.webp",
+      "bytes": 11348,
+      "sha256": "63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4/neptune-poles-normal@2x.webp",
+      "status": "HTTP/2 200 ",
+      "contentLength": "11348"
+    }
+  ],
+  "mainMaterialComparison": {
+    "mars": {
+      "materials": true,
+      "variants": false,
+      "tree": true,
+      "camera": false,
+      "variantMaterialSelectionsMatch": true
+    },
+    "mercury": {
+      "materials": true,
+      "variants": false,
+      "tree": true,
+      "camera": false,
+      "variantMaterialSelectionsMatch": true
+    },
+    "venus": {
+      "materials": true,
+      "variants": false,
+      "tree": true,
+      "camera": false,
+      "variantMaterialSelectionsMatch": true
+    }
+  },
+  "checks": {
+    "renderer": {
+      "passed": 502,
+      "failed": 0
+    },
+    "focusedPreparation": {
+      "passed": 505,
+      "failed": 0
+    },
+    "focusedRuntime": {
+      "passed": 1636,
+      "failed": 1,
+      "failure": "Mars fixed 256-frame fixture; materials, selected material variants and resolver are unchanged from main."
+    },
+    "runtimeOwnership": {
+      "passed": 51,
+      "failed": 0,
+      "excluded": "Repeated per-object audit loop; the actual complete registry and shared closure were audited together."
+    },
+    "sbmtUnit": {
+      "passed": 7,
+      "failed": 0
+    },
+    "typecheck": "All typecheck stages passed across the initial run and final affected-stage reruns, including all 20 test groups and new oracle tooling.",
+    "builds": [
+      "renderer",
+      "catalog",
+      "preparation"
+    ],
+    "aggregatePlatformInitial": {
+      "passed": 2943,
+      "failed": 1619,
+      "note": "Initial failures include stale registry fixtures subsequently fixed and verified by the focused runtime run; this is not a current full-suite pass."
+    },
+    "aggregatePreparationInitial": {
+      "passed": 1972,
+      "failed": 24,
+      "note": "Affected failures fixed and retested. Older scientific fixtures and source-path expectations remain; no current full-suite pass is claimed."
+    },
+    "notVerified": [
+      "Full production build",
+      "All-object browser interaction conformance",
+      "Clean installation with every scientific archive",
+      "GPU Triton before/after parity",
+      "Performance improvement"
+    ]
+  },
+  "files": {
+    "donaldjohanson-after.png": {
+      "bytes": 1289614,
+      "sha256": "db4122542362e4d69d33723732fc97c908697153d0621220465fbbe41680249d"
+    },
+    "nix-after.png": {
+      "bytes": 1084035,
+      "sha256": "de4deedb1a3107bea28a2d3ef8df628907a42621a6f0c7ff0d664afc46de2ce7"
+    },
+    "donaldjohanson-diff.png": {
+      "bytes": 431267,
+      "sha256": "e039de28ab170f9345a99a6507a3793205c3253ce866d0392a02a6f14babcd97"
+    },
+    "nix-diff.png": {
+      "bytes": 361059,
+      "sha256": "864ff74180016881ef24280cae6708dceb3ceffb622555e3858c4751a76bd2e4"
+    },
+    "nix-before.png": {
+      "bytes": 1084132,
+      "sha256": "b94f77ea8c102ab3da0c19eed00fc43f472a89e3e20a3d4c93703da3bb79a9ac"
+    },
+    "donaldjohanson-before.png": {
+      "bytes": 1289943,
+      "sha256": "b590ddd49eebc05da572967c2041167e0d0c643e51c802d578706e7600e34d2b"
+    },
+    "triton-gpu.png": {
+      "bytes": 1354869,
+      "sha256": "81286774259d1ceb940693b15183fa4ef7cd101490f123b051a20234ee0aa88c"
+    }
+  },
+  "deadSettingsBaseline": {
+    "comparedPixels": 5184000,
+    "OrbitOff": {
+      "mismatchPixels": 0,
+      "sha256": "b94f77ea8c102ab3da0c19eed00fc43f472a89e3e20a3d4c93703da3bb79a9ac"
+    },
+    "CatalogueStarsOff": {
+      "mismatchPixels": 0,
+      "sha256": "b94f77ea8c102ab3da0c19eed00fc43f472a89e3e20a3d4c93703da3bb79a9ac"
+    },
+    "baselineSha256": "b94f77ea8c102ab3da0c19eed00fc43f472a89e3e20a3d4c93703da3bb79a9ac",
+    "note": "Both captures are byte-identical to the retained nix-before.png."
+  },
+  "trackedBytes": {
+    "base": "7fead38a63df7dfa9f6ad1fa030bb37f81f95084",
+    "baselineBytes": 1876211519,
+    "addedFiles": 1434,
+    "addedBytes": 607258090,
+    "deletedFiles": 3078,
+    "deletedBytes": 830131345,
+    "netByteDelta": -230512997,
+    "note": "Measured with the evidence payload included; measurement.json size is rounded by its own metadata."
+  }
+}

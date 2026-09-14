@@ -106,74 +106,6 @@
       "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_topography&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
     },
     {
-      "kind": "catalog-field",
-      "groups": [
-        "refresh",
-        "refresh-starfield"
-      ],
-      "path": "stars/hyg-v41-field.json",
-      "url": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
-      "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
-      "catalogRows": 119626,
-      "selectedCount": 60000,
-      "template": {
-        "schema": "cssvenus-prepared-star-cubemap-source@1",
-        "source": {
-          "id": "hyg-v4.1",
-          "title": "HYG Stellar Database v4.1",
-          "credit": "David Nash / Astronexus",
-          "license": "CC-BY-SA-4.0",
-          "repositoryUrl": "https://github.com/astronexus/HYG-Database",
-          "sourceUrl": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
-          "commit": "c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-          "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
-          "catalogRows": 119626,
-          "retrieved": "2026-08-28"
-        },
-        "projection": {
-          "model": "prepared-equatorial-cubemap",
-          "coordinateSystem": "ICRS equatorial catalog coordinates",
-          "centerRaDegrees": 40,
-          "centerDecDegrees": 7,
-          "faceOrder": [
-            "front",
-            "right",
-            "back",
-            "left",
-            "top",
-            "bottom"
-          ],
-          "qualification": "catalog-derived static full sky; orientation is illustrative because the Venus scene has no absolute observer epoch or inertial camera orientation"
-        },
-        "presentation": {
-          "faceSize": 1024,
-          "candidateStars": 119625,
-          "selectedStars": 60000,
-          "selection": "brightest apparent magnitude across the complete catalog sphere",
-          "brightestMagnitude": -1.44,
-          "faintestMagnitude": 8.46,
-          "pointOpacity": 0.78,
-          "densityGlow": "prepared broad galactic-plane context derived from selected ICRS positions"
-        },
-        "starColumns": [
-          "catalogId",
-          "rightAscensionDegrees",
-          "declinationDegrees",
-          "apparentMagnitude",
-          "colorIndexBv"
-        ]
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh",
-        "refresh-starfield-photo"
-      ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
       "kind": "verify-request",
       "groups": [
         "refresh"
@@ -204,14 +136,6 @@
       "expectedPath": "atmosphere/psg-venus-r240-rif.txt",
       "selector": "numeric-lines",
       "rowCount": 253
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore"
-      ],
-      "path": "sun/google-maps-sun.png",
-      "url": "https://mw1.google.com/mw-weather/static/sun.png"
     },
     {
       "kind": "download",

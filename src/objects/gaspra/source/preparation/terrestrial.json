@@ -4,7 +4,6 @@
   "namespace": "gaspra",
   "displayName": "Gaspra",
   "publicBase": "/scenes/gaspra/",
-  "distanceAu": 2.209587858452779,
   "raster": {
     "width": 2048,
     "height": 1024,
@@ -222,12 +221,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      180,
-      180,
-      180
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

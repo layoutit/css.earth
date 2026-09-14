@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tantalus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "786a9938abe6c90a05196c863ff147dd54c0f040af8c1ce5c259e92f7f89a578"
+    "sha256": "d19819eb30ff491f3d4289cf72e6dea8388dc1140b356d3a4c23eeda8af6e5ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8a1839a3dbc971008f7e59926135551b2f25edc6cd813f7dfc1c306bc3a8f487",
+      "sha256": "b3427601b71b418bf39e2bb53e029ab58d1bc831a3ad8890d8d2128f0ea26f85",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "tantalus",
         "displayName": "Tantalus",
         "publicBase": "/scenes/tantalus/",
-        "distanceAu": 1.2900615327857758,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 6205 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e30f2a6d1220ec4303a64e200d9af78c54665a9daac5fce3c1f6d199d484adbb",
+      "sha256": "11a7bf08a5ac24ec5ef044b1ab28804709408d7758bc122b95e36b4bfee31a10",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -266,12 +259,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -294,12 +281,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6205"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -368,7 +349,7 @@
       "sha256": "deeba7099d07c93d2da587bec6974398634beb3ab21b95ab0a51f56aa4463d59",
       "bytes": 80926,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -393,10 +374,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e30f2a6d1220ec4303a64e200d9af78c54665a9daac5fce3c1f6d199d484adbb",
-      "bytes": 10297,
+      "sha256": "11a7bf08a5ac24ec5ef044b1ab28804709408d7758bc122b95e36b4bfee31a10",
+      "bytes": 10017,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/tantalus/tantalus-elevation-thumbnail.webp",
           "bytes": 7408,
           "sha256": "dbf540dbac4efa2a7080cd05d94b805b939fcf32ce758848387796080a6e417b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tantalus/tantalus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tantalus/tantalus-elevation-surface@2x.webp",
           "bytes": 400654,
           "sha256": "2a43cd13d855da14b2be6cafe94a09aede6dace73bd7e1c29609c81bd0008256",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,13 +459,13 @@
           "url": "/scenes/tantalus/tantalus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tantalus/tantalus-shape-surface@2x.webp",
           "bytes": 208932,
           "sha256": "b92a8910a0d475ca802a9be83ceecc21fb508c2bdc9bf7a7f4c878f3aa355c2b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -515,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7458,
-          "sha256": "78b70213f260de88decd20d9ec192740fb108d6975a0598a2e8952f38d911cff",
+          "bytes": 7339,
+          "sha256": "ee72587dec8bca239836cbc5574e9e46a84ad81210e14ba8134cfaf7bc4b094a",
           "verification": "bytes-verified"
         }
       ],
@@ -576,5 +557,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "tantalus",
+    "materialSha256": "61106a1097e7dda731bcb471945cabf9340d2a93148bc12bb3fc25ad8c7e5051",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

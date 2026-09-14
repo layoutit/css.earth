@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vindobona",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "259c5cd82fd19660ff7260f6f695d0cb41a554275da94d20b1bd5d0c4f1985f6"
+    "sha256": "121d2044e16157a1f19bc5dc0d770a361c60a479a7b39ff62a20d16aea6f622b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aa0610e5657017a891ab5275cda43a6736bcd6d2f475ba3e4ed9dda38497c149",
+      "sha256": "15788f7a4599a35094232556f31a0d31ddf7b1c3effd04bc9373a34ca420a946",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "vindobona",
         "displayName": "Vindobona",
         "publicBase": "/scenes/vindobona/",
-        "distanceAu": 2.918785954300875,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4148 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "97b4731242d9cff00733f3df70a0197f0b3f200e95e6b059c06ce463c33be4a6",
+      "sha256": "f7271bd385c2a31419571ad1357be581da827664f326aa59b83c9b32be8c984f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4148"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "b350d98f2dc934419375ae342ce7c825dc290eebe41efc3e943ca51ed62dc85b",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "97b4731242d9cff00733f3df70a0197f0b3f200e95e6b059c06ce463c33be4a6",
-      "bytes": 11095,
+      "sha256": "f7271bd385c2a31419571ad1357be581da827664f326aa59b83c9b32be8c984f",
+      "bytes": 10816,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/vindobona/vindobona-elevation-thumbnail.webp",
           "bytes": 5446,
           "sha256": "31899f62eb425ddebc42f30fd87cf914544862a1e3e7a59a7517c1473b936569",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vindobona/vindobona-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vindobona/vindobona-elevation-surface@2x.webp",
           "bytes": 288632,
           "sha256": "84646763f60b2d479f9dfe937c8194b89460af25a2e808f9ddd474cac68b3aa4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/vindobona/vindobona-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vindobona/vindobona-shape-surface@2x.webp",
           "bytes": 242908,
           "sha256": "e9f737375c784f1362a72c419040c507b3d02ec1030f438656ce2007cc6529db",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8423,
-          "sha256": "223ca58ae655c53e794551763ac62938c52f7f45e8c0048052b51c5942148fe7",
+          "bytes": 8304,
+          "sha256": "e4a6699240725bee2276b328b6cc2295b77fdec43f78b6457acad67379f97947",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "vindobona",
+    "materialSha256": "a8a6e64e9a74429525a5b0ec50640c3f8f2253a6440ed8dd6c75549a1f2aac82",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

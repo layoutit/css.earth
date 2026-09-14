@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hyperion"])[data-lod="billboard"] .hyperion-scene, .planet-stage:where([data-object-id="hyperion"])[data-lod="marker"] .hyperion-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hyperion"])[data-lod="marker"] .hyperion-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hyperion"]).hyperion-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-137p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "11d565613e806fb7001d4238a5d66cfc163002e08c3066ad791ff376a4189337"
+    "sha256": "bb6a25d0a03e72e366d74575a93e3b391c9cde4a34a3c79b5b7a5b025d1b619a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "172a1dc2cefae5e782b66487260be3fe3e763824bbaa0a33ed7c7cc6961b809a",
+      "sha256": "defa08427a342b75a9d3f8054f524b28cee7edf9947b8a5e1a8a8ed315a5f5bd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-137p",
         "displayName": "Shoemaker–Levy 2",
         "publicBase": "/scenes/comet-137p/",
-        "distanceAu": 4.525635799109316,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. The grid marks missing surface imagery. Rotation phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "314f109a931ada95d660f942c583c59f4d76c9cc3c945be5c769bdaff1711b27",
+      "sha256": "7957290bb9a1f036c7d30dd0d60031c10f03d2e1d5cf1580667ed2d93dd6400b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -227,12 +214,6 @@
             "role": "observations",
             "description": "Infrared nucleus size measurements",
             "href": "https://doi.org/10.1016/j.icarus.2013.07.021"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e335339de48d829c44b82ea56f827499c9d83904fc3977d47933f5cae56dd9d3",
       "bytes": 1330,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "314f109a931ada95d660f942c583c59f4d76c9cc3c945be5c769bdaff1711b27",
-      "bytes": 2783,
+      "sha256": "7957290bb9a1f036c7d30dd0d60031c10f03d2e1d5cf1580667ed2d93dd6400b",
+      "bytes": 2504,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -330,13 +311,13 @@
           "url": "/scenes/comet-137p/comet-137p-model-thumbnail.webp",
           "bytes": 1556,
           "sha256": "351ef96eda5a7e7bdf5a5711bcfe0f25bd15b018c9ed5877f20366ff910a1592",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-137p/comet-137p-model-surface@2x.webp",
           "bytes": 113572,
           "sha256": "c9fbf78ab82d1bde96415d3f736e6ef002c7d8c106b5af9bac6f4f67c3dc13f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -367,8 +348,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8992,
-          "sha256": "520e8015f9520d81f7f6138cd8863d8d9bdb3ec1df2570fda65f705b0a0de08c",
+          "bytes": 8873,
+          "sha256": "ac89effddf98ed9a4aadc5e92b64a6081d1190963db59f2ce3c03887f70e51b9",
           "verification": "bytes-verified"
         }
       ],
@@ -378,5 +359,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-137p",
+    "materialSha256": "43ecbda88d18b808f8e9e88f473e5adb1af84d24d8ff0072a6fb28f4686bc863",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "johanna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d1962162f97f131de889ad682374a349292d6f3103275268fee1b41e6cc0873"
+    "sha256": "838a82958a553fd2e3484f24828a833ddc0baf95cad3bbe8128bc2b292d8f033"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5121ac28b3c76393cc34e2bd4d48798fa4a7da877693235d928eb6a042ac62a3",
+      "sha256": "ca943c4f103634d719768b0f2a23709470f42404a692576e95384f2948efc93a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "johanna",
         "displayName": "Johanna",
         "publicBase": "/scenes/johanna/",
-        "distanceAu": 2.7565883306989893,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 444 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ecb02d81f5cefa09459d9ff1ad800c0ea0aa8593ecb310dada775c0295364dec",
+      "sha256": "b7674e9b28d881af60895871d8de53686ede5e07c4405756583bc67c1f6ba26a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/444"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "641a0c871a4f30afcfb42761be86fd53ef4a6c72566c5ad87e3a6e3dbf5a1923",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ecb02d81f5cefa09459d9ff1ad800c0ea0aa8593ecb310dada775c0295364dec",
-      "bytes": 10345,
+      "sha256": "b7674e9b28d881af60895871d8de53686ede5e07c4405756583bc67c1f6ba26a",
+      "bytes": 10066,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/johanna/johanna-elevation-thumbnail.webp",
           "bytes": 4810,
           "sha256": "69cf9c3441fc33a58af2ee4d7899b4713ddc06e7e1d884aa81618c672868fa5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/johanna/johanna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/johanna/johanna-elevation-surface@2x.webp",
           "bytes": 273734,
           "sha256": "d111aedfd77f210481aa5e501f62e513ff8b4688c220dc3ff7b73333b9a2bc6d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/johanna/johanna-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/johanna/johanna-shape-surface@2x.webp",
           "bytes": 196194,
           "sha256": "c1783b02998cefd4a37465be7027c725ea5a5dfbdc0edfbcc7d32637f79c6c1f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7699,
-          "sha256": "5a8b6ab9bb3a2574c190cb8b4a49604cc8ef715f89d10cac31ec2cbaee7ceb5a",
+          "bytes": 7580,
+          "sha256": "09704c2348283a177bd8786fd1035e76c4f6fed14617151e7d594131a769b385",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "johanna",
+    "materialSha256": "830f37cb1c38cef1c0348ba7c768391e6b900da879d6e81646479f22fdc87498",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

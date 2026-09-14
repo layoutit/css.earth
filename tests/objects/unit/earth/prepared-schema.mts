@@ -41,8 +41,8 @@ export const parseEarthScene=shape({schema:text,
     outerBodyBands:bands,outerAssets:shape({surface:shape({one:text,two:text,oneUrls:array(text),twoUrls:array(text)}),poles:pair,
       litSurface:shape({urls:array(text)}),litPoles:pair}),shells:array(shape({id:text,label:text,radiusScale:number,cutaway:boolean,className:text,leaves:array(leaf)})),
     sectionLeaves:array(leaf),leafCount:number,runtimeGeometry:boolean,runtimeRasterization:boolean}),
-  assets:shape({starfield:text}),counts:shape({surfaceLeafCount:number,cloudLeafCount:number,lightingLeafCount:number,atmosphereLeafCount:number,
-    directionalSunLeafCount:number,interiorLeafCount:number,cityPageLeafCount:number,noisePageLeafCount:number,retainedLeafCount:number,
+  counts:shape({surfaceLeafCount:number,cloudLeafCount:number,lightingLeafCount:number,atmosphereLeafCount:number,
+    interiorLeafCount:number,cityPageLeafCount:number,noisePageLeafCount:number,retainedLeafCount:number,
     maximumRetainedLeafCount:number,runtimeGeometryPreparation:boolean,runtimeRasterization:boolean})});
 
 export const parseEarthLenses=shape({schema:text,defaultLens:text,runtimeFilters:boolean,runtimeRasterization:boolean,

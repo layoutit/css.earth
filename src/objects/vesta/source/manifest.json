@@ -2,33 +2,6 @@
   "schema": "cssvesta-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "dlr-hamo-natural-color",
       "path": "maps/vesta-true-color.png",
       "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png",
@@ -323,27 +296,9 @@
   ],
   "documents": [
     {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89771,
-      "expectedSha256": "e5be273b5ab3fd256c49100db22e2e690f7f87ec3666cf4e9690fc59e7fbe703",
-      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
-      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
-      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
-    },
-    {
       "path": "content/object.json",
-      "expectedBytes": 9562,
-      "expectedSha256": "c41c721ef13da6241661e1f28bc82719ffbb23fc5d6d8e7324bbabdbfe1f31a0",
+      "expectedBytes": 9283,
+      "expectedSha256": "97b4de406a5fa5f45c6c511b2b0cb0692f1f88bfe7ebf8a4372ca14918d31925",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -351,8 +306,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1511,
-      "expectedSha256": "ddc8f0fbf74533054b0865850f70135f48bc52137b5fb886569a4be555e62868"
+      "expectedBytes": 1327,
+      "expectedSha256": "5f258e2a5837e9f317936d4546ff196e5491bc5a81ac3777f3e1523f0a0e2336"
     },
     {
       "path": "preparation/navigation.json",
@@ -366,8 +321,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4302,
-      "expectedSha256": "cbc43a3c921fe3b065df6d3fed43cd2cecfb8a084cc0f2597e6bdac29508047d"
+      "expectedBytes": 4159,
+      "expectedSha256": "34f5341fa2301c11b9d6423c2c1756b591909858c3a14b0ff072152ef6cf6020"
     },
     {
       "path": "presentation/title-mark.json",

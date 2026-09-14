@@ -8,9 +8,7 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/titania/titania-normal.webp", two: "/scenes/titania/titania-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/titania/titania-poles-normal.webp", two: "/scenes/titania/titania-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/titania/titania-starfield-front.webp", two: "/scenes/titania/titania-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/titania/titania-directional-sun.webp", two: "/scenes/titania/titania-directional-sun@2x.webp" }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "elevation",

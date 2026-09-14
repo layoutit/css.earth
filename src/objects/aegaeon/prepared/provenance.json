@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aegaeon",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa605c362d7551e0d98c49288b7254d34d1a990827a3b1a6f22351b73d109ecd"
+    "sha256": "7dc1bd99b9297aac9a31b6b01d91cbf3f9bf19eb07e5745239cf3b30fcf1acdf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "90b9540162faaad66478e69c3cd9c3d999264e2699d991df0321bb1aacc2c215",
+      "sha256": "e3de40fafe1a70b7a73e6015d8a1ff4991e05c3536b6ec6f403aa413d722a517",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "aegaeon",
         "displayName": "Aegaeon",
         "publicBase": "/scenes/aegaeon/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris. Frozen historical Aegaeon pole from the mission BPC at 2015-12-19T12:32:14.886 UTC, arbitrary display meridian; not a current spin prediction."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3486664c672b7e7d0230e7fca54097a510c28147bab1655c4120c8546bc5a03a",
+      "sha256": "c3506a2ea179a13e509d2c1236468f177d8ccdf9314632136dc799f22ebd9fb3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,12 +175,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -210,12 +197,6 @@
             "role": "observations",
             "description": "Cassini source inventory",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -271,7 +252,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -306,7 +287,7 @@
       "sha256": "1c66a2d6a48ba2277f553f58c24be65d2e9ec00c18e60b6ecf7c57aa06198fa6",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -323,10 +304,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3486664c672b7e7d0230e7fca54097a510c28147bab1655c4120c8546bc5a03a",
-      "bytes": 3105,
+      "sha256": "c3506a2ea179a13e509d2c1236468f177d8ccdf9314632136dc799f22ebd9fb3",
+      "bytes": 2826,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -363,13 +344,13 @@
           "url": "/scenes/aegaeon/aegaeon-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aegaeon/aegaeon-model-surface@2x.webp",
           "bytes": 47964,
           "sha256": "7fb842d74ddc19a298d13029f58bd334bf4a3c12bdfaad178352540082426295",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -405,8 +386,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6532,
-          "sha256": "a3a862bac2cd786c3f1e822f6f6f2c92084c3864a60539c8280e737d0b1e989b",
+          "bytes": 6413,
+          "sha256": "cc3b4b8c62d900af7dc04fc35350eadc8093b91e24fb4ab640ad60f761ad17c9",
           "verification": "bytes-verified"
         }
       ],
@@ -441,5 +422,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "aegaeon",
+    "materialSha256": "b02deeefec6e5c8c549125ba92f80f423a1757899e98fba937af9d3a2ea0bd34",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

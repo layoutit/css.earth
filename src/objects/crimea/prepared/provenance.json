@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "crimea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "290d4380318c2d3d3bdd7fc0b2c44f77f7e36c8b27c70a5d78bf8be71b65fa64"
+    "sha256": "02e42206509c3c36e35e09521dc9509e1df4d54db2270a9e0c6c55e63aefb5e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8b47179c27ab3ee8e169956dd96b5aa962c4b1cc8b2560ce66da19cea1a4e74d",
+      "sha256": "e52f301a663565de3cfdbeee168b3a09f2dd0109186eab43162d846c38c44279",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "crimea",
         "displayName": "Crimea",
         "publicBase": "/scenes/crimea/",
-        "distanceAu": 2.7724619385411438,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5684f0bf9b5c12c84f180baa1133455fa7212599ea8828be4d75c69130499780",
+      "sha256": "b106e9caa4aaf102bec9de164dfa46e77012d05affa68a33d468b73175a5fa5a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/403"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "8facba4b82f8c0b8a07506e24100ae6c721bb21661d113b7df51b6f9fd6d0117",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "5684f0bf9b5c12c84f180baa1133455fa7212599ea8828be4d75c69130499780",
+      "sha256": "b106e9caa4aaf102bec9de164dfa46e77012d05affa68a33d468b73175a5fa5a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8944,
+      "bytes": 8665,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/crimea/crimea-elevation-thumbnail.webp",
           "bytes": 4838,
           "sha256": "5866cba328e98a92636fb0f64733bc812fb9d564243d85da203a6e0e4258de4a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/crimea/crimea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/crimea/crimea-elevation-surface@2x.webp",
           "bytes": 285008,
           "sha256": "08b001a8a7aec202b067eaec9cdaf7dfde6f94f775565927e9c5f4459d68e4d9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/crimea/crimea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/crimea/crimea-shape-surface@2x.webp",
           "bytes": 191116,
           "sha256": "26c269753c94d2fb4370d07c49f1064a909106ea532d719c6ff5277cc6927e8c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6279,
-          "sha256": "e863eda58de390c6f67b43f28879cae9ed2d43d83541e2656982c64c0ad76a3b",
+          "bytes": 6160,
+          "sha256": "099577a5950f41bc3da14a39f23ddffa8e540497ee8762cba723b94f31c58e5d",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "crimea",
+    "materialSha256": "60bae7b3f53a031327b6842900d5e707b0e3ac0e5953175988fb993acb083228",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

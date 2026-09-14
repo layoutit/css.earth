@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "brunhild",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "84693ea0ab489a7a80f8e86dfb5e3c273e69313052fc7394d88be64342542e9e"
+    "sha256": "b69ba9e4eb500e16f0e942e62bd6b5ce1d7c12c108a0e210c49653167ae4f7a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "27ae02ccdc12fecf2f45dc7856df947bb4427fc84d81eaba724004c4ae8c7e97",
+      "sha256": "a1deb91cf1ec06c3bacc414b175f3bb9313d8f20c150042221766ad83ce2025b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "brunhild",
         "displayName": "Brunhild",
         "publicBase": "/scenes/brunhild/",
-        "distanceAu": 2.6955168441339983,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4507 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aa2b24707cf0f90692e7a5ad8d1aa605ccab39850f6f98044c28200cdc09d0de",
+      "sha256": "235cb90ab285414cd12b928076a715872563bc0195e24406eef3cc6731b2798a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4507"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "573126734566ace9227a24b38761a639cd45a87a447f44c115857f4e4aa904a7",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aa2b24707cf0f90692e7a5ad8d1aa605ccab39850f6f98044c28200cdc09d0de",
-      "bytes": 9253,
+      "sha256": "235cb90ab285414cd12b928076a715872563bc0195e24406eef3cc6731b2798a",
+      "bytes": 8974,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/brunhild/brunhild-elevation-thumbnail.webp",
           "bytes": 6518,
           "sha256": "020f2db76fba84d2137c865eac3d937df8e6eb17befd606bd61c954d7087e35f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/brunhild/brunhild-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/brunhild/brunhild-elevation-surface@2x.webp",
           "bytes": 338132,
           "sha256": "e71d5eed755fda8246e9a91d7287cbbe970e6741a28c81497ee3a278cebbec3b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/brunhild/brunhild-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/brunhild/brunhild-shape-surface@2x.webp",
           "bytes": 255586,
           "sha256": "48bc38ce088df9c9260256c2d60cbdfd3c34ec17821c13bc7b25cd6b4e685a68",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6597,
-          "sha256": "2e5b34d6de0ca9ad637405dec487525c1e350dba7975161ec0eb5821c3dca302",
+          "bytes": 6478,
+          "sha256": "31d906e97ed08fce8a58c19c566b08532645cd8941b055615b6ebdce6ff458db",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "brunhild",
+    "materialSha256": "17d657929ce803ed25a573cfc6220fec2cbfd72378b92c35f37dc541257f0a6c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

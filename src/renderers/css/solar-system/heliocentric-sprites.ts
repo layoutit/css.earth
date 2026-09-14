@@ -1,73 +1,8 @@
-import type { OrbitSegment } from './heliocentric-view.js';
-import { formatLineNumber, orbitSegmentTransform } from './orbit-segment-presentation.js';
 export interface Sprite {url?:string;index:number;count:number;size:number;}
 export interface SpriteImage {url:string;index:number;count:number;}
 /** `detail` is a larger prepared image of the same marker, drawn from `fromDiameterPixels`. */
 export interface SpriteWithUrl extends Sprite {url:string; minimumDiameterPixels?: number;
   detail?: SpriteImage & {fromDiameterPixels:number};}
-export interface PhaseAtlas {url:string;columns:number;rowCount:number;frameCount:number;minimumLightViewZ:number;maximumLightViewZ:number;baseLightAzimuthDegrees:number;}
-export interface SystemMarkers {url:string;sun:Sprite;bodies:Readonly<Record<string,Sprite>>;phase:PhaseAtlas;}
-// This writer owns the line styles. Keep the last publication in JS so a
-// redundant-write check never asks CSSOM to serialize thousands of matrices.
-const pieceStyles = new WeakMap<HTMLElement, { transform: string; opacity: string; weight: number }>();
-// Writes screen-space segments onto a piece pool: each piece is a unit-width
-// bar laid out at the overlay's centre, so the projection's centre-relative
-// offsets are the translation as they are and the segment is the bar's x
-// axis. Pieces beyond the segment count are hidden.
-export function writePieces(pool:readonly HTMLElement[], segments:readonly OrbitSegment[], previousCount:number,
-  setVisible?: (index: number, visible: boolean) => void, transforms?: readonly string[], changedIndices?: ArrayLike<number>) {
-  if (transforms && transforms.length !== segments.length) throw new TypeError('Orbit transforms must match their projected segments.');
-  const count = Math.min(segments.length, pool.length);
-  for (let slot = 0; slot < (changedIndices?.length ?? count); slot += 1) {
-    const index = changedIndices ? changedIndices[slot] : slot;
-    if (index >= count) throw new TypeError('Orbit delta exceeds the prepared line pool.');
-    const weight = segments[index][4];
-    const piece = pool[index];
-    let written = pieceStyles.get(piece);
-    if (!written) { written = { transform: '', opacity: '', weight: NaN }; pieceStyles.set(piece, written); }
-    const transform = transforms?.[index] ?? orbitSegmentTransform(segments[index]);
-    if (written.transform !== transform) { piece.style.transform = transform; written.transform = transform; }
-    // The chord's trail weight: the line fades backwards from the body.
-    if (written.weight !== weight) {
-      const opacity = formatLineNumber(weight);
-      if (written.opacity !== opacity) { piece.style.opacity = opacity; written.opacity = opacity; }
-      written.weight = weight;
-    }
-    if (setVisible) setVisible(index, true);
-    else if (piece.style.visibility !== "") piece.style.visibility = "";
-  }
-  for (let index = count; index < previousCount; index += 1) {
-    if (setVisible) setVisible(index, false);
-    else pool[index].style.visibility = "hidden";
-  }
-  return { count, overflowed: segments.length > pool.length };
-}
-
-// The lighting atlas: a grid of frames indexed by the light's view depth,
-// lit from `baseLightAzimuthDegrees` at zero roll.
-export function validPhaseAtlas(atlas:PhaseAtlas | null | undefined): atlas is PhaseAtlas {
-  return typeof atlas?.url === "string" && Number.isSafeInteger(atlas.columns) && atlas.columns > 0 &&
-    Number.isSafeInteger(atlas.rowCount) && atlas.rowCount > 0 &&
-    Number.isSafeInteger(atlas.frameCount) && atlas.frameCount > 1 &&
-    atlas.frameCount <= atlas.columns * atlas.rowCount &&
-    Number.isFinite(atlas.minimumLightViewZ) && Number.isFinite(atlas.maximumLightViewZ) &&
-    atlas.maximumLightViewZ > atlas.minimumLightViewZ &&
-    Number.isFinite(atlas.baseLightAzimuthDegrees);
-}
-
-// The same frame choice as the object's own overlay: the light's view depth
-// mapped across the atlas's range.
-export function phaseFrameFor(atlas:PhaseAtlas, lightViewZ:number) {
-  return Math.round(Math.max(0, Math.min(1,
-    (lightViewZ - atlas.minimumLightViewZ) / (atlas.maximumLightViewZ - atlas.minimumLightViewZ))) *
-    (atlas.frameCount - 1));
-}
-
-export function validSprite(sprite:Sprite|null|undefined): sprite is Sprite {
-  return sprite != null && Number.isSafeInteger(sprite.index) && sprite.index >= 0 &&
-    Number.isSafeInteger(sprite.count) && sprite.count > sprite.index &&
-    sprite.size > 0;
-}
 
 // The tile at `index` of the atlas strip, the whole tile scaled to `size`
 // pixels, centred on the element's layout position.
@@ -83,12 +18,4 @@ export function applySpriteImage(element:HTMLElement, sprite:SpriteImage) {
   element.style.backgroundPosition = `${(sprite.index /
     Math.max(1, sprite.count - 1) * 100).toFixed(4)}% center`;
   element.style.backgroundSize = `${sprite.count * 100}% 100%`;
-}
-
-export function formatNumber(value:number) {
-  return Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
-}
-
-export function clamp(value:number, minimum:number, maximum:number) {
-  return Math.max(minimum, Math.min(maximum, value));
 }

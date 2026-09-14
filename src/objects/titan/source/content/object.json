@@ -356,12 +356,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -384,12 +378,6 @@
       "role": "surface",
       "description": "Mission-end SAR and HiSAR mosaic",
       "href": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     },
     {
       "label": "Cassini RADAR",

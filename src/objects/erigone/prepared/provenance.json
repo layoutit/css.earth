@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "erigone",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c911098a69bd90e8dc2aa2aedd4877a397f0302f5b05622598c131045d8d4dc"
+    "sha256": "5cc41d9a27c8f0c8147d92b31970807b517e94a0a3fb0d26053fd9068e225d79"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1a2a94d67d8fef3f8502017b7f8782113e2b2abf82369bd17633b5206a1f72ac",
+      "sha256": "9abea6e7d164e98f6a013047327cf91644d56ac1df29c69029e369ea7d55e5b8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "erigone",
         "displayName": "Erigone",
         "publicBase": "/scenes/erigone/",
-        "distanceAu": 2.367053015804557,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1399 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7e3263126fc709f0d7baa425a5e05caa1878dfb63ff331cfa1339d3ab4db97c3",
+      "sha256": "a8983264c9120cb78a67b2365e5ad872c315a302bea6401ea4c6841ffd0ed210",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1399"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "6aad46d87b3e7994de886e34871bc6c1d2979208ffaeeb345945cae43f2f778a",
       "bytes": 81331,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7e3263126fc709f0d7baa425a5e05caa1878dfb63ff331cfa1339d3ab4db97c3",
-      "bytes": 9620,
+      "sha256": "a8983264c9120cb78a67b2365e5ad872c315a302bea6401ea4c6841ffd0ed210",
+      "bytes": 9341,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/erigone/erigone-elevation-thumbnail.webp",
           "bytes": 4748,
           "sha256": "4e90d9dbc86e24e5ccc24b6852e94108f00f0ea77473ab4be48ab995fec0aa8b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/erigone/erigone-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/erigone/erigone-elevation-surface@2x.webp",
           "bytes": 268486,
           "sha256": "76d434691992dc643ddadccfa9c85b627f4b90b3eced1a2c5a8150b60b374b2a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/erigone/erigone-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/erigone/erigone-shape-surface@2x.webp",
           "bytes": 200792,
           "sha256": "e0616e606dbf437bf37e50c0149439775347bf8f4e8501b510566aa90af4a065",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6974,
-          "sha256": "4539801c8ddca3cc650bcfabcbaefbcda37e34b08ae8ee10bf0422e16f277c09",
+          "bytes": 6855,
+          "sha256": "abe3a2c7042c2b94e6fd18cb32343fe33a43dcf2df081f9dc397245d9cd98af0",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "erigone",
+    "materialSha256": "eddfa26a36a33b6016d80cf1ebb589565b76d642a92721309a33f90701f36b34",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

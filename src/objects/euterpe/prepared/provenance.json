@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "euterpe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "977d0f4bb2de5ee9cb4bcce48964399f6211ec2ed8ce6ba8b614eb3c821170d2"
+    "sha256": "e406eeecab91aaa1d624cc3ce054f7ddd8896ce44101a4bfcd05d9ad1aa38024"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5091f010944011674da897a4d1177b08c89fd920c00e01253a9a03d1dcef82dc",
+      "sha256": "a5fe108e62efdfd6c07d7e37ded9a62023f967d967384d194dd80ea94b41b9a8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "euterpe",
         "displayName": "Euterpe",
         "publicBase": "/scenes/euterpe/",
-        "distanceAu": 2.347052758675226,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 441 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "68ead611bc35505a7d6ad6e596be1645bb04c1067b4b47c5939edac1a1e532df",
+      "sha256": "63f81e7ed2d8def0cc2e59ad84e69017b7194c46caa5b3af4487dca08d3b64b5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/441"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "0805b6f32ecb1e5e05c9c5a2f79c4cfa521a2370860b4930a728613d2e9bbc9a",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "68ead611bc35505a7d6ad6e596be1645bb04c1067b4b47c5939edac1a1e532df",
-      "bytes": 9444,
+      "sha256": "63f81e7ed2d8def0cc2e59ad84e69017b7194c46caa5b3af4487dca08d3b64b5",
+      "bytes": 9165,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/euterpe/euterpe-elevation-thumbnail.webp",
           "bytes": 5354,
           "sha256": "28e956749c18cb9b4c06f679dcba4f28b6984e679bdd6f59f9c0218db533562b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euterpe/euterpe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euterpe/euterpe-elevation-surface@2x.webp",
           "bytes": 275824,
           "sha256": "8b99c11733f66e0d266f7bb2fe85d28561fd3a0b94e82591e86d50650aa653d8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/euterpe/euterpe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euterpe/euterpe-shape-surface@2x.webp",
           "bytes": 211512,
           "sha256": "e370a514a4a450a06d0d44027a2504c8f20ff7502c5d978f7b5a373ac7431aad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6796,
-          "sha256": "0c249f6cd9c03a7a3a68ef91e6c4c764177705ad02ddc42dcafd8e8848e9f811",
+          "bytes": 6677,
+          "sha256": "da59110c166f252d3d3367748d8619a235fa15fd5f816f4c1332e5923c24e0e7",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "euterpe",
+    "materialSha256": "2868a893e83894fad30b0ff8e948e82a3a5a56270f2ae60e820029268a9303c4",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

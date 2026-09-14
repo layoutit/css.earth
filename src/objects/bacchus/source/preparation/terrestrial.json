@@ -4,7 +4,6 @@
   "namespace": "bacchus",
   "displayName": "Bacchus",
   "publicBase": "/scenes/bacchus/",
-  "distanceAu": 1.0774720987446262,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -116,12 +115,6 @@
     "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

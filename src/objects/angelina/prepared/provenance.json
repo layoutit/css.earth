@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "angelina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4dd005b0a852de67c9b295767046834ce0b92fff31fccdf4781128f480fa2da0"
+    "sha256": "30d29ccbff349399eefee136058627ae6ba8fe1f2d6756727422b899d4eb5a93"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6e207800fc9dfc245e58a351d6fdd951b2cbce352b76ac61f266979873a815fb",
+      "sha256": "3165ddee42ccc0c8c8460252782881f1c16c98b925317b67f2891414b1cf27b4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "angelina",
         "displayName": "Angelina",
         "publicBase": "/scenes/angelina/",
-        "distanceAu": 2.6802741704742274,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 289 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d30ccc2a324837fd75bcb01848512dbd4487a70430f6a4bb75b926f797cc9daa",
+      "sha256": "48882e51acd35b1c5f41de07bc6860002bda705a5149cc068c5d11f95bf6c267",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/289"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "407c69944a62497de88e485c514c9eb71ec90fb57d63e3dbd32fbad8953f7b47",
       "bytes": 81250,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d30ccc2a324837fd75bcb01848512dbd4487a70430f6a4bb75b926f797cc9daa",
-      "bytes": 8142,
+      "sha256": "48882e51acd35b1c5f41de07bc6860002bda705a5149cc068c5d11f95bf6c267",
+      "bytes": 7863,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/angelina/angelina-elevation-thumbnail.webp",
           "bytes": 5700,
           "sha256": "cb664453eae801d9e1931433d92655de64636a9bcae6f6c632b1caa22f285919",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/angelina/angelina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/angelina/angelina-elevation-surface@2x.webp",
           "bytes": 341138,
           "sha256": "522efb6dd3408c2b42e16958f87570fa45daa878579c1121e95e36d3a8537ac2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/angelina/angelina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/angelina/angelina-shape-surface@2x.webp",
           "bytes": 216842,
           "sha256": "07b93e7395d1d16eb80b18b6bb6b41a3049a451704a2729ca96c5fcc2a0542df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5954,
-          "sha256": "a827d52eb9db069a7eaffa2e225613d047aa88b8cefd301dd810729882c0d4ef",
+          "bytes": 5835,
+          "sha256": "7ebc07b20b2525a26580aa5a9b467192301e7c360f47887e2f50dba9d9efe51a",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "angelina",
+    "materialSha256": "cecdc5df8d64aafb511d76da4e4877e2e7edd010d1f23559a0a5e5c69d58bb55",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

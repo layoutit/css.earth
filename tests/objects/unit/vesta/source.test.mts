@@ -7,8 +7,6 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/pds-scalar-grid.mts';
 import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
-import { preparePlanetarySystem } from '../../../../src/platform/prepare-planetary-system.mts';
-import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar-presentation-frame.mts';
 const root = resolve(import.meta.dirname, '../../../..'), base = resolve(root, 'src/objects/vesta');
 const read = async (path: string) => JSON.parse(await readFile(resolve(base, path), 'utf8'));
 
@@ -100,7 +98,4 @@ test('Vesta uses one shared scene and its measured mesh for drawing and hits', a
     assert.equal(bytes.length, asset.bytes);
     assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256);
   }
-  const system = await preparePlanetarySystem({ bodyId: 'vesta', presentationFrame: prepareEclipticPresentationFrame('vesta'), kilometersPerUnit: 261.385 / 230 });
-  assert.ok(system.bodies.every(body => body.id !== 'vesta'));
-  assert.ok(system.bodies.every(body => body.position.every(Number.isFinite)));
 });
