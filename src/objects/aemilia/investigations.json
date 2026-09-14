@@ -4,16 +4,23 @@
   "entries": [
     {
       "id": "selected-model",
-      "subject": "Selected source model",
+      "subject": "ISAM SAGE 102: selected nonconvex shape",
       "status": "included",
-      "finding": "Checked 2026-09-09. Selected **ISAM/SAGE model 102**, original OBJ, pinned in the input manifest. The archive does not declare a source release date; 2026-09-09 is the retrieval date. ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A 610, A7; Bartczak and collaborators. Model fields and mesh measurements.",
+      "finding": "The actual recipe selects shape/isam-sage-102.obj, not DAMIT 1869 named in the older comparison metadata. The retained original OBJ header identifies target 159, SAGE, 3842 vertices, 7680 facets, pole (138.85848°, 65.93886°) and period 24.478724 h. These match the rounded SAGE pole-1 solution in Marciniak 2018 Table 3; the recipe applies its separately documented 135 km volume scale.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aemilia/README.md"
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aemilia/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aemilia/source/preparation/terrestrial.json",
+        "https://arxiv.org/html/1711.01893"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -37,15 +44,21 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible.",
+      "finding": "SAGE pole 2 remains a viable alternative, with a different published occultation scale. The actual source header matches pole 1, so neither the alternate pole scale nor the older convex model scale belongs on this mesh without a new fit.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aemilia/README.md"
+        "https://arxiv.org/html/1711.01893",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aemilia/source/manifest.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -66,16 +79,23 @@
     },
     {
       "id": "recorded-survey-2",
-      "subject": "Marciniak et al",
+      "subject": "Marciniak 2018: SAGE pole-1 calibration",
       "status": "included",
-      "finding": "- [Marciniak et al. (2018), published paper](https://hebe.astro.amu.edu.pl/docs/5_models.pdf): included. Table 3 binds the SAGE pole families; Table 4 is 135±7 km volume-equivalent occultation calibration for pole 1; Table 7 TPM 137±8 km is consistent. Section 5.1 notes the SAGE pole 1 fit is marginally preferred, but other poles/shapes remain viable. Concavities are photometric inverse-model features, not observed image pixels.",
+      "finding": "Tables 3 and 4 were checked against the OBJ header and recipe. The occultation-calibrated SAGE pole-1 diameter is 135 ±7 km; pole 2 is 138 ±7 km, while the convex solutions are 130 km. The four-chord 2009 occultation does not uniquely select a pole. Section 5.1 gives a marginal thermophysical preference for SAGE pole 1 with 137 ±8 km. The selected calibration remains supported without treating this inverse model as photographed terrain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aemilia/README.md"
+        "https://arxiv.org/html/1711.01893",
+        "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aemilia/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

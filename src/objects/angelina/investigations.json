@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "Shape and spin",
+      "subject": "DAMIT 289: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT 289](https://damit.cuni.cz/projects/damit/asteroid_models/view/289)",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-289.txt. Model 289, version 2011-02-11, pole (138°, 14°), period 8.75033 h match the retained metadata. The archive diameter field is 52 ±10 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/angelina/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/289"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/289",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/angelina/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/angelina/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -31,6 +39,23 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 288: pole (317°, 17°), 8.75032 h, version 2011-02-11, archive diameter 51 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/288"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

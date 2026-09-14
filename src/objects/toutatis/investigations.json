@@ -47,6 +47,8 @@
       "revisitWhen": "Qualify the existing closest-source-point path on Toutatis: preserve distinct neck surfaces, establish a source/display distance bound and check seams and withheld coverage without changing the geometry budget.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L19",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/tests/objects/unit/toutatis/source.test.mts",
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/obj-shape.mts#L272",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts"
       ],
@@ -59,6 +61,11 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

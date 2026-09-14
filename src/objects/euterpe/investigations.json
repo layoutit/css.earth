@@ -4,18 +4,26 @@
   "entries": [
     {
       "id": "survey-selected-model",
-      "subject": "Selected model",
+      "subject": "DAMIT 441: selected shape and spin",
       "status": "included",
-      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/441) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/1716/shape.txt) — included unchanged. Convex light-curve inversion; fine relief is unresolved.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-441.txt. Model 441, version 2011-10-27, pole (258°, -42°), period 10.40828 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/euterpe/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/441",
-        "https://damit.cuni.cz/projects/damit/stored_files/open/1716/shape.txt"
+        "https://damit.cuni.cz/projects/damit/stored_files/open/1716/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/euterpe/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/euterpe/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -55,33 +63,47 @@
       "id": "survey-akari-acua",
       "subject": "AKARI AcuA",
       "status": "included",
-      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 109.79 ± 1.54 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 109.79 ± 1.54 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 27 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/euterpe/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/euterpe/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "survey-hanu-et-al-2017",
-      "subject": "Hanuš et al. 2017",
-      "status": "included",
-      "finding": "[Hanuš et al. 2017](https://arxiv.org/abs/1702.01996), [Viikinkoski et al. 2017](https://arxiv.org/abs/1708.05191), and [Vernazza et al. 2021](https://damit.cuni.cz/projects/damit/references/view/660) — resolved-model releases surveyed; when present in this target’s archive they are preferred over an older convex model. Their disk images constrain geometry but are not registered global reflectance mosaics.",
+      "subject": "Resolved-model surveys: body-specific candidate not established",
+      "status": "unresolved",
+      "finding": "The imported survey cites Hanuš 2017, Viikinkoski 2017 and Vernazza 2021 without identifying a selected product for this body. The current DAMIT reference join does not bind selected model 441 to those surveys. This does not prove that no resolved model exists elsewhere; a body-specific candidate and its release must be identified before the entry can count as included.",
+      "revisitWhen": "A target row, supplementary model or release URL from one of these surveys establishes a concrete candidate and permits comparison with the selected shape.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/euterpe/README.md",
         "https://arxiv.org/abs/1702.01996",
         "https://arxiv.org/abs/1708.05191",
-        "https://damit.cuni.cz/projects/damit/references/view/660"
+        "https://damit.cuni.cz/projects/damit/references/view/660",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models_references"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

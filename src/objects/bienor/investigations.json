@@ -6,14 +6,21 @@
       "id": "selected-1",
       "subject": "Rizos et al. (2024), A&A 689, A82",
       "status": "included",
-      "finding": "Smooth ellipsoid fitted to stellar-occultation chords and rotational light curves: semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km.",
+      "finding": "Rizos et al. fit a smooth triaxial reference ellipsoid to stellar-occultation chords and rotational light curves: semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (full axes 254 × 110 × 90 km). It is a global model, not resolved terrain or mapped albedo; the prepared approximation uses those semiaxes unchanged, with their doubled full axes recorded separately.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
+        "https://doi.org/10.1051/0004-6361/202450833",
+        "https://arxiv.org/abs/2405.17235",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/source/measurements.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -21,14 +28,21 @@
       "id": "selected-fern-ndez-valenzuela-et-al-2017-assessed-by-the",
       "subject": "Fernández-Valenzuela et al. (2017), assessed by the 2024 study",
       "status": "included",
-      "finding": "Prograde ecliptic pole, supported over 22 years; the refined photometric period is 9.1736 ± 0.0002 h.",
+      "finding": "The 2024 study retains the prograde ecliptic pole at longitude 35° ± 8°, latitude +50° ± 3°, and refines the photometric period to 9.1736 ± 0.0002 h. The display's longitude origin and absolute phase remain arbitrary; the reported pole and period do not establish surface registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
+        "https://doi.org/10.1051/0004-6361/202450833",
+        "https://arxiv.org/abs/2405.17235",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/source/preparation/rotation.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -36,15 +50,21 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "The grid marks an unmapped surface. The smooth ellipsoid resolves no terrain or mapped albedo and leaves light-curve asymmetry unexplained; shape, albedo and companion alternatives remain unresolved. - Display longitude and absolute phase are arbitrary. Orbit context is fixed at 2026-09-03 TT. - Settings is hidden; optional Shadows were checked through the checkbox event. These reports do not establish a full-suite pass or physical-device performance.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "finding": "This review found occultation and disk-integrated light-curve constraints, not a reusable surface raster registered to the selected ellipsoid. The grid represents unmapped terrain; light curves and spectra cannot supply mapped color or local relief.",
+      "revisitWhen": "A released reusable observation or mapped product supplies pixel geometry and registration to a source model that can be compared with the selected ellipsoid.",
       "evidence": [
+        "https://arxiv.org/abs/2405.17235",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -52,15 +72,21 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "The grid marks an unmapped surface. The smooth ellipsoid resolves no terrain or mapped albedo and leaves light-curve asymmetry unexplained; shape, albedo and companion alternatives remain unresolved. - Display longitude and absolute phase are arbitrary. Orbit context is fixed at 2026-09-03 TT. - Settings is hidden; optional Shadows were checked through the checkbox event. These reports do not establish a full-suite pass or physical-device performance.",
-      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "finding": "The 2024 paper reports that the selected ellipsoid does not reproduce all rotational-light-curve asymmetry and considers irregular/contact-binary shape, albedo variation and satellite alternatives. Those are tested explanations, not uniquely measured replacement geometry; the occultations do not establish a ring or satellite geometry.",
+      "revisitWhen": "A released numerical replacement shape or independent pole, scale, ring, or companion constraints distinguish an alternative and permit comparison with the selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
+        "https://arxiv.org/abs/2405.17235",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/source/measurements.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -68,30 +94,43 @@
       "id": "recorded-survey-1",
       "subject": "Reference ellipsoid and light-curve asymmetry",
       "status": "unresolved",
-      "finding": "The reference ellipsoid does not reproduce all observed light-curve asymmetry. The paper’s irregular-shape, contact-binary, albedo and satellite scenarios are alternatives rather than uniquely measured geometry. No ring or satellite is displayed because the selected occultations do not establish their geometry. Integrated light curves and spectra are not surface maps.",
-      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "finding": "The selected ellipsoid is retained as the paper's reference model, while its unresolved asymmetry prevents treating it as a unique physical shape. No scientific qualification follows from the authored neutral surface or grid.",
+      "revisitWhen": "A model-specific release or new observations resolve the paper's stated ambiguity and can be tested against the current approximation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
+        "https://doi.org/10.1051/0004-6361/202450833",
+        "https://github.com/layoutit/css.earth/pull/192"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "recorded-survey-2",
-      "subject": "Complementary source survey",
-      "status": "included",
-      "finding": "[The source survey](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions) records the selections and alternatives. Published papers are cited, not relicensed or bundled. Credits and reuse terms for the authored approximation, ESO panorama, Inter font and HYG metadata are in NOTICE.md and the manifest.",
+      "subject": "Historical Centaur source-survey record",
+      "status": "excluded",
+      "finding": "The historical source-survey document records prior route dispositions and attribution practice. It is provenance context, not a primary scientific input and does not qualify the selected model, a surface view, or a use licence for a new data product.",
+      "revisitWhen": "A cited primary release from that survey is separately inspected with its native metadata and terms.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
+        "https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions",
+        "https://github.com/layoutit/css.earth/pull/192"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

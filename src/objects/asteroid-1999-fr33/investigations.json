@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "Shape and spin",
+      "subject": "DAMIT 15145: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT 15145](https://damit.cuni.cz/projects/damit/asteroid_models/view/15145)",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-15145.txt. Model 15145, version 2022-12-01, pole (145°, -85°), period 3.38833 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1999-fr33/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/15145"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/15145",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1999-fr33/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1999-fr33/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,14 +30,21 @@
       "id": "selected-physical-scale",
       "subject": "Physical scale",
       "status": "included",
-      "finding": "Calibration and uncertainty",
+      "finding": "The retained calibration uses 5.754 ±0.174 km. The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.,Quoted ±0.174 km is the catalog fit error; approximately 10% additional systematic diameter uncertainty applies.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1999-fr33/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1999-fr33/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1999-fr33/source/reference/calibration.json",
+        "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D80000"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -52,16 +67,24 @@
     {
       "id": "recorded-reference-1",
       "subject": "Other DAMIT matches",
-      "status": "included",
-      "finding": "[Other DAMIT matches](https://damit.cuni.cz/?q=80000) — Inspected for calibrated replacements; retain the selected solution and disclose available alternatives.",
+      "status": "unresolved",
+      "finding": "[Other DAMIT matches](https://damit.cuni.cz/?q=80000) — Inspected for calibrated replacements; retain the selected solution and disclose available alternatives. The live DAMIT export lists these other models for this target: 15146: pole (302°, -55°), 3.38834 h, version 2022-12-01. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A model-specific comparison establishes whether an archived alternative improves the selected shape or resolves its pole/scale ambiguity.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1999-fr33/README.md",
-        "https://damit.cuni.cz/?q=80000"
+        "https://damit.cuni.cz/?q=80000",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/15146"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

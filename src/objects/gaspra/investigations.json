@@ -83,9 +83,33 @@
     {
       "id": "recorded-survey-6",
       "subject": "NIMS spectral image cube and point spectra",
+      "status": "deferred",
+      "finding": "The current PDS page and native gaspra_nims_hires_radiance XML label were inspected. Product urn:nasa:pds:galileo.ast-gaspra.nims.spectral-cube:data:gaspra_nims_hires_radiance_fit::1.0 describes a 17-band, 100 ×66 radiance cube plus per-pixel wavelength and radiance-error arrays, big-endian float32, with missing radiance −1. The 2025 label is a PDS3 migration of a 2012 product from the 1991 encounter. The label names calibration input G1GNGLOBAL01A_MSY04.IOF, while the landing text names e1wanta2.qub: this discrepancy and the point-perspective transfer to the Thomas model need resolution before a scientific lens. Pixels were not decoded in this review. The separate approach spectra remain non-global measurements.",
+      "revisitWhen": "Resolve the calibration-input discrepancy and native point-perspective/shape registration, then qualify spectral units, per-pixel wavelengths, missing data and source-model coverage as an infrared view.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md",
+        "https://sbn.psi.edu/pds/resource/gaspracube.html",
+        "https://sbn.psi.edu/pds/resource/gaspraspec.html",
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.nims.spectral-cube/data/gaspra_nims_hires_radiance.xml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "rejected-107315039",
+      "subject": "SSI image 107315039",
       "status": "excluded",
-      "finding": "[NIMS spectral image cube](https://sbn.psi.edu/pds/resource/gaspracube.html) and [point spectra](https://sbn.psi.edu/pds/resource/gaspraspec.html) — **Excluded from these surface views.** They are valuable infrared measurements, but point-perspective spectral/point observations are not a global optical surface or elevation map. No composition or thermal lens is inferred from them.",
-      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "finding": "The candidate failed to establish four separate registration checks at the retained tolerance. Finer source sampling did not qualify its projection.",
+      "revisitWhen": "Corrected source camera information or new independent controls resolve the failed checks without loosening tolerances.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
       ],
@@ -95,22 +119,6 @@
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
       ]
-    },
-    {
-      "id": "rejected-107315039",
-      "subject": "SSI image 107315039",
-      "status": "excluded",
-      "finding": "The candidate failed to establish four separate registration checks at the retained tolerance. Finer source sampling did not qualify its projection.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
-      ],
-      "revisitWhen": "Corrected source camera information or new independent controls resolve the failed checks without loosening tolerances."
     }
   ]
 }

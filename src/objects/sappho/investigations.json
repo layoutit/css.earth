@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "Shape and spin",
+      "subject": "DAMIT 1832: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT 1832](https://damit.cuni.cz/projects/damit/asteroid_models/view/1832)",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1832.txt. Model 1832, version 2017-06-09, pole (196°, -21°), period 14.03086 h match the retained metadata. The archive diameter field is 61 ±8 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sappho/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/sappho/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/sappho/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -31,6 +39,23 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 145: pole (194°, -26°), 14.03087 h, version 2011-03-28, archive diameter 67 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/145"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

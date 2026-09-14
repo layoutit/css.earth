@@ -4,18 +4,26 @@
   "entries": [
     {
       "id": "survey-selected-model",
-      "subject": "Selected model",
+      "subject": "DAMIT 4643: selected shape and spin",
       "status": "included",
-      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/4643) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/53182/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-4643.txt. Model 4643, version 2019-10-23, pole (197°, 9°), period 22.1157 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/xanthippe/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4643",
-        "https://damit.cuni.cz/projects/damit/stored_files/open/53182/shape.txt"
+        "https://damit.cuni.cz/projects/damit/stored_files/open/53182/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/xanthippe/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/xanthippe/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -55,15 +63,22 @@
       "id": "survey-akari-acua",
       "subject": "AKARI AcuA",
       "status": "included",
-      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 115.49 ± 1.74 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 115.49 ± 1.74 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 156 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/xanthippe/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/xanthippe/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -120,16 +135,22 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "Alternative archive solutions: model 4644, pole ['22', '15'], [Model 4644](https://damit.cuni.cz/projects/damit/asteroid_models/view/4644)",
+      "finding": "Alternative archive solutions: model 4644, pole ['22', '15'], [Model 4644](https://damit.cuni.cz/projects/damit/asteroid_models/view/4644) The live DAMIT export lists these other models for this target: 4644: pole (22°, 15°), 22.1157 h, version 2019-10-23. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/xanthippe/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4644"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4644",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

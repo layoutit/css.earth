@@ -101,6 +101,7 @@
       "subject": "OSIRIS 18:37:16 and later follow-up frames",
       "status": "excluded",
       "finding": "The 18:37:16 image required gain 1.56, above the retained 1.35 limit. The examined 18:37:56, 18:38:36 and 18:39:43 views had progressively poorer source/model footprint agreement. They remain excluded; the former Minnaert treatment is superseded.",
+      "revisitWhen": "Corrected source calibration or independently verified camera/model registration changes the failed result without raising acceptance limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
       ],
@@ -109,8 +110,25 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
+      ]
+    },
+    {
+      "id": "mosaic-coverage-mask",
+      "subject": "Stooke mosaic coverage and coordinate limits",
+      "status": "unresolved",
+      "finding": "The retained registration note binds the east-positive map with 0° at its center and documents the half-turn conversion. Its edge-connected dark-pixel test marks 3,567,208 of 6,480,000 map pixels as exterior. This is a display heuristic, not a scientific validity mask or 55% physical-surface coverage. The original map lacks a verified source mask, and its registration to each vertex of the later shape is not bounded by that test.",
+      "revisitWhen": "A source validity mask or independent per-pixel coverage/registration reference can replace or qualify the documented heuristic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/steins/source/reference/registration.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/steins/README.md"
       ],
-      "revisitWhen": "Corrected source calibration or independently verified camera/model registration changes the failed result without raising acceptance limits."
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
     }
   ]
 }

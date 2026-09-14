@@ -31,10 +31,6 @@ Bienor is an elongated Centaur. The full approximation dimensions are 254 × 110
 
 The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. Ecliptic J2000 coordinates are converted to ICRF using the preparation recipe. The 2024 study uses its refined period to compute rotational phase; cssEarth’s arbitrary display phase is a separate choice. [measurements.json](source/measurements.json) records the radius-table formula, pole conversion and numerical extraction checked on 2026-09-09.
 
-### Source survey
-
-See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
-
 ### Orbit
 
 This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `54598;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. [Independent vector comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/orbit-errors.json) sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.

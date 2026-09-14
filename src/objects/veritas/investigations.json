@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "Shape and spin",
+      "subject": "DAMIT 833: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT 833](https://damit.cuni.cz/projects/damit/asteroid_models/view/833)",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-833.txt. Model 833, version 2016-01-04, pole (56°, 34°), period 7.92811 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/veritas/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/833"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/833",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/veritas/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/veritas/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,14 +30,21 @@
       "id": "selected-physical-scale",
       "subject": "Physical scale",
       "status": "included",
-      "finding": "Calibration and uncertainty",
+      "finding": "The retained calibration uses 118.803 ±1.83 km. effective body diameter",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/veritas/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/veritas/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/veritas/source/reference/calibration.json",
+        "https://doi.org/10.1088/2041-8205/759/1/L8"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -46,6 +61,23 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 834: pole (231°, 43°), 7.92812 h, version 2016-01-04. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/834"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

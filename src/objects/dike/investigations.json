@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "survey-damit-model-record",
-      "subject": "DAMIT model record",
+      "subject": "DAMIT 1144: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT model record](https://damit.cuni.cz/projects/damit/asteroid_models/view/1144) — selected original mesh and spin metadata.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1144.txt. Model 1144, version 2016-01-04, pole (233°, 50°), period 18.11914 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/dike/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/dike/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/dike/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

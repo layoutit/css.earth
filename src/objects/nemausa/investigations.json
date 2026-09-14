@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape",
-      "subject": "Shape",
+      "subject": "LAM/SPHERE MPCD: selected reconstruction",
       "status": "included",
-      "finding": "[Released reconstruction](https://observations.lam.fr/astero/3Dshape/51_Nemausa_mpcd.obj)",
+      "finding": "The current LAM 3Dshape directory lists 51_Nemausa_mpcd.obj, matching the actual preparation input. The retained measurements describe 2258 vertices and 4512 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nemausa/README.md",
-        "https://observations.lam.fr/astero/3Dshape/51_Nemausa_mpcd.obj"
+        "https://observations.lam.fr/astero/3Dshape/51_Nemausa_mpcd.obj",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/nemausa/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/nemausa/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,31 +30,64 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "[Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781)",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 150 km, ecliptic J2000 pole (170°, -66°), period 7.78484 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 74.49842105891972 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nemausa/README.md",
-        "https://doi.org/10.1051/0004-6361/202141781"
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/nemausa/source/reference/model-properties.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "subject": "Released SPHERE observations and surface registration",
       "status": "unresolved",
-      "finding": "Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "finding": "The live source folder https://observations.lam.fr/astero/Data/51Nemausa/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
+      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nemausa/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nemausa/README.md",
+        "https://observations.lam.fr/astero/Data/51Nemausa/",
+        "https://observations.lam.fr/astero/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "lam-adam-alternative",
+      "subject": "Released ADAM companion model",
+      "status": "excluded",
+      "finding": "The live directory also lists 51_Nemausa_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "evidence": [
+        "https://observations.lam.fr/astero/3Dshape/51_Nemausa_adam.obj",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/nemausa/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/nemausa/source/reference/model-properties.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

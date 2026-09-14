@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "Shape and spin",
+      "subject": "DAMIT 5480: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT 5480](https://damit.cuni.cz/projects/damit/asteroid_models/view/5480)",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-5480.txt. Model 5480, version 2019-10-23, pole (136°, -56°), period 8.0117 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/selinur/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5480"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5480",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/selinur/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/selinur/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,14 +30,21 @@
       "id": "selected-physical-scale",
       "subject": "Physical scale",
       "status": "included",
-      "finding": "Calibration and uncertainty",
+      "finding": "The retained calibration uses 40.828 ±0.247 km. effective body diameter",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/selinur/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/selinur/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/selinur/source/reference/calibration.json",
+        "https://doi.org/10.1088/0004-637X/791/2/121"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

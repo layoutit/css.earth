@@ -38,10 +38,6 @@ The selected contact gives C1R radius 385.9 km and radial width 7.04 km, and C2R
 
 Preparation uses the existing annular geometry helper and coplanar raster compiler: 256 source quads become 16 retained image tiles, preserving the central aperture and gap. Ring triangles are absent from the body surface-picking structure; no separate ring picking is provided. [The batch ring account](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#chariklos-rings) explains this processing and its source choices.
 
-### Source survey
-
-See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
-
 ### Orbit
 
 This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `10199;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. [Independent vector comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/orbit-errors.json) sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
