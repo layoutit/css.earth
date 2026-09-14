@@ -93,7 +93,7 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
       const ox = (c.observedPixel[0] - left + .5) * scale, oy = (c.observedPixel[1] - top + .5) * scale;
       const px = (c.projectedPixel[0] - left + .5) * scale, py = (c.projectedPixel[1] - top + .5) * scale;
       const [l, t, r, b] = c.regionPixels;
-      return `<rect x="${(l - left) * scale}" y="${(t - top) * scale}" width="${(r - l) * scale}" height="${(b - t) * scale}" fill="none" stroke="#ffd56b"/><path d="M${ox} ${oy}L${px} ${py}" stroke="#ffd56b"/><circle cx="${ox}" cy="${oy}" r="4" fill="#ffd56b"/><path d="M${px-6} ${py}h12M${px} ${py-6}v12" stroke="#55e5ff" stroke-width="2"/><text x="${ox + 7}" y="${oy - 9}" fill="#ffd56b" font-size="14">${xml(c.id)}</text>`;
+      return `<rect x="${(l - left) * scale}" y="${(t - top) * scale}" width="${(r - l) * scale}" height="${(b - t) * scale}" fill="none" stroke="#ffd56b"/><path d="M${ox} ${oy}L${px} ${py}" stroke="#ffd56b"/><circle cx="${ox}" cy="${oy}" r="4" fill="#ffd56b"/><path d="M${px-6} ${py}h12M${px} ${py-6}v12" stroke="#55e5ff" stroke-width="2"/><text x="${ox + 7}" y="${oy - 9}" fill="#ffd56b" stroke="#141a20" stroke-width="3" paint-order="stroke" font-size="18">${xml(c.id)}</text>`;
     }).join('');
     const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${panelWidth}" height="${panelHeight}"><g font-family="monospace">${overlay}</g></svg>`);
     panels.push(await sharp(nativePng).composite([{ input: svg }]).png().toBuffer());
