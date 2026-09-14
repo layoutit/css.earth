@@ -10,6 +10,10 @@
 
 ## Evidence
 
+![Elevation on the source shape, Shadows off](evidence/source-surface/elevation.webp)
+
+The 14 September 2026 qualification at `22530863b602e90684fe778b16136de3d890fe2d` passed both body source/package checks, three focused source-surface regressions, the independent full-source verifier and strict TypeScript. [Headless browser conformance](evidence/source-surface/conformance.json) passed mobile and dataset interactions at DPR 1 and 2. [Additional views](evidence/source-surface/browser.json) cover both sides, a close-up, an extreme angle and Shadows on/off. [Close-up](evidence/source-surface/close.webp): fine triangle boundaries remain visible at close zoom; small gray patches mark withheld transfers. These are focused checks, not a full-suite pass.
+
 The 56 m transfer limit withholds 13,810 of 5,778,049 triangle-interior texels (0.239%); those texels retain the ordinary grid. These are atlas sample counts, not measured surface-area coverage. The [preparation comparison](evidence/source-surface/preparation.json) verifies unchanged geometry, camera, retained leaves and every pre-existing image hash. Elevation adds 587,310 image bytes. The [fresh-install record](evidence/source-surface/delivery.json) verifies published asset hashes in an empty destination.
 
 Elevation uses the existing closest-source-point sampler on the full 547,996-facet mesh. Its 56 m transfer limit matches the authored simplification allowance; it is not a source measurement uncertainty or an exhaustive geometric bound. Display points farther from the source stay a grid. At source facet 487421, the correct height is **942.724 m** above the reference sphere; selecting the first ray intersection would understate it by **400.124 m**. The [independent full-source check](evidence/source-surface/independent.json) verifies the two overlapping patches and an offset point against every original triangle, using separate projection code. The [regression fixtures](../../../tools/objects/terrestrial-layers/fixtures/source-surface-cases.json) retain those coordinates. The existing L’LORRI mosaic remains the default, and Shadows starts off.
