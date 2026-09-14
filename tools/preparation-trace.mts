@@ -19,6 +19,9 @@ const traceDirectory = resolve(directory), importFlag = `--import=${import.meta.
 const original = { statSync: fs.statSync, readFileSync: fs.readFileSync, writeFileSync: fs.writeFileSync, mkdirSync: fs.mkdirSync };
 const files = new Map<string, { accesses: Set<PreparationAccess>; first: TracedState }>();
 const commands: TracedCommand[] = [], catalogImporters = new Set<string>(), unsupported = new Set<string>();
+// Node's module loader reads sources through the public fs functions; inside the module hooks those reads are the
+// module load itself, which the load hook records.
+let loaderDepth = 0;
 
 function pathOf(value: unknown): string | null {
   if (typeof value === 'string') return resolve(value);
@@ -38,6 +41,7 @@ function firstState(path: string): TracedState {
   return state;
 }
 function note(value: unknown, access: PreparationAccess) {
+  if (loaderDepth > 0 && access !== 'load') return;
   const path = pathOf(value);
   if (!path || path.includes(`${sep}node_modules${sep}`) || path === traceDirectory || path.startsWith(traceDirectory + sep)) return;
   let file = files.get(path);
@@ -130,7 +134,9 @@ try {
 
 registerHooks({
   resolve(specifier, context, nextResolve) {
-    const result = nextResolve(specifier, context);
+    loaderDepth++;
+    let result;
+    try { result = nextResolve(specifier, context); } finally { loaderDepth--; }
     if (context.parentURL?.startsWith('file:') && result.url.startsWith('file:') && fileURLToPath(result.url).endsWith(`${sep}${CATALOG_MODULE.split('/').join(sep)}`)) {
       catalogImporters.add(fileURLToPath(context.parentURL));
     }
@@ -138,7 +144,8 @@ registerHooks({
   },
   load(url, context, nextLoad) {
     if (url.startsWith('file:')) note(new URL(url), 'load');
-    return nextLoad(url, context);
+    loaderDepth++;
+    try { return nextLoad(url, context); } finally { loaderDepth--; }
   },
 });
 
