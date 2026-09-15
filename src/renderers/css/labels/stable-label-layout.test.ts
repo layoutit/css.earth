@@ -30,6 +30,24 @@ test('committed alternate placement remains stable when its default side becomes
   expect(admitStableLabels([label], createLabelBudget(500, 400))[0]?.placement).toBe(1);
 });
 
+test('one slot admits a caption and its circle atomically and reserves both footprints', () => {
+  const first = { ...candidate('first', 30), anchor: rect(0), tier: 2 };
+  const second = { ...candidate('second', 100), anchor: rect(40) };
+  const budget = createLabelBudget(500, 400);
+  expect(admitStableLabels([second, first], budget).map(item => item.candidate.id)).toEqual(['first']);
+  expect(budget.count).toBe(1);
+  expect(budget.accepts(rect(0))).toBe(false);
+  expect(budget.accepts(rect(30))).toBe(false);
+});
+
+test('a blocked circle cannot leave a caption reservation or consume a slot', () => {
+  const blocked = { ...candidate('blocked', 0), tier: 2, anchor: rect(150) };
+  const other = candidate('other', 0);
+  const budget = createLabelBudget(500, 400, [], [rect(150)]);
+  expect(admitStableLabels([blocked, other], budget).map(item => item.candidate.id)).toEqual(['other']);
+  expect(budget.count).toBe(1);
+});
+
 
 test('a featured tier displaces an ordinary survivor but stays stable among its peers', () => {
   const ordinary = { ...candidate('ordinary', 0, true), tier: 0 };

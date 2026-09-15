@@ -22,8 +22,10 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
    and previews. The write path also finishes CSS bindings, navigation and page
    metadata in staging before publishing the outputs together.
 4. The Sources compiler follows this lineage and each input's `sourceBinding`.
-   It derives usage links to published works. `site/object-sources.mts` retains
-   local and unresolved source disclosures in the common panel.
+   It derives usage links to published works. The footer links the selected
+   subject's README, where sources, unresolved inputs and limitations are
+   documented. Dataset cards use contribution edges to identify their missions
+   and observing equipment.
 
 Each source has its exact path, byte count and SHA-256. Each product records its
 recipe, a JSON Pointer to the operation, any additional contributing recipes,
