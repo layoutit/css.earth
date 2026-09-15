@@ -207,7 +207,7 @@ try {
         `${config.name}: clearing the search restores the selected card`);
       const breadcrumbs = page.locator('.planet-information-panel .planet-breadcrumbs').first();
       assert.deepEqual((await breadcrumbs.locator('li').allTextContents()).map(text => text.replace(/[»\s]+/gu, ' ').trim()),
-        ['Milky Way', 'Solar System'], `${config.name}: the card names its ancestors`);
+        ['Local Group', 'Milky Way', 'Solar System'], `${config.name}: the card names its three closest ancestors`);
       assert.equal((await page.locator('.planet-information-panel .planet-title').first().textContent())?.trim(), 'Jupiter');
       await search.fill('Neptune');
       await search.press('ArrowDown');

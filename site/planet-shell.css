@@ -559,7 +559,7 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 
 .planet-breadcrumbs ol {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
   gap: 6px;
