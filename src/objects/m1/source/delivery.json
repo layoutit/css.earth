@@ -73,5 +73,10 @@
   "fieldStars": {
     "path": "src/objects/m1/source/stellar-field.json",
     "sha256": "4b4502d725e6a4df12d46a6aa0339556140a82d8f0dde2df8b32db840ca2d177"
-  }
+  },
+  "compactInputs": {
+    "path": "src/objects/m1/source/compact/model.json.gz",
+    "sha256": "19a8d6d41d35694861e2ce5db6414f2d8f2a59ad9ea6d0129c3dc1d628b60be5"
+  },
+  "compactMethod": "sampled"
 }
