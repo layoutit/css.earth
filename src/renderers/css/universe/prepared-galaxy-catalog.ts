@@ -8,6 +8,7 @@ import { createOpacityFader } from '../stars/opacity-fader.js';
 import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 import type { ProjectedGalaxy } from './galaxy-catalog-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
+import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 
 interface Entry {
@@ -77,11 +78,12 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     marker.dataset.galaxyMarker = object.id;
     mountCatalogMarker(marker, object);
     label.dataset.galaxyLabel = object.id;
+    label.className = 'prepared-context-label';
     if (navigable) label.dataset.objectNavigate = object.id;
     label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
-    label.style.cssText = 'position:absolute;left:50%;top:50%;font:400 14px/18px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#c2ccd8;white-space:nowrap;opacity:0;pointer-events:none;cursor:pointer';
+    label.style.cssText = 'position:absolute;left:50%;top:50%;opacity:0;pointer-events:none;cursor:pointer';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
       event.preventDefault(); event.stopPropagation(); onSelect(object);
@@ -163,7 +165,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       for (const entry of entries) {
         const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
         const projected = admittedById.get(entry.object.id);
-        const labelOpacity = projected ? objectAlpha * .85 : 0;
+        const labelOpacity = projected ? objectAlpha * DEFAULT_CONTEXT_LABEL_OPACITY : 0;
         fader.set(entry.label, labelOpacity, 200);
         // Only a shown or still-fading label follows its galaxy. Moving every on-screen
         // candidate restyled each hidden label on every camera frame.

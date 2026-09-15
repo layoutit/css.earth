@@ -38,7 +38,7 @@ test('nearby nebula labels wake and follow the camera while both extragalactic f
   runtime.publish(camera(-1e17), viewport, 0, [], 0);
   expect(label.style.pointerEvents).toBe('none');
   runtime.publish(camera(1e17), viewport, 0, [], 0); document.defaultView.advance(250);
-  expect(label.style.pointerEvents).toBe('auto'); expect(Number(label.style.opacity)).toBe(.85);
+  expect(label.style.pointerEvents).toBe('auto'); expect(Number(label.style.opacity)).toBe(.65);
   const transform = label.style.transform;
   runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0);
   expect(label.style.transform).not.toBe(transform);
@@ -93,7 +93,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.publish(pose, viewport, 1, [], 1); document.defaultView.advance(350);
   expect(picking.pick(0, 15)).toBe(label);
   expect(screenPicking(host as unknown as HTMLElement).pick(0, 15)).toBeNull();
-  expect(Number(label.style.opacity)).toBeCloseTo(.425); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
+  expect(Number(label.style.opacity)).toBeCloseTo(.325); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
   const firstTransform = aperture.style.transform;
   const shifted = { ...pose, pose: { ...pose.pose, positionM: [pose.pose.positionM[0] + object.aperture.comovingRadiusM, ...pose.pose.positionM.slice(1)] as [number,number,number] } };
   const blockers = runtime.publish(shifted, viewport, 1, [], 1);
@@ -102,9 +102,9 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   expect(label.style.pointerEvents).toBe('none');
   expect(picking.pick(-150, 15)).not.toBe(label);
   label.dispatchEvent(new Event('click')); expect(onSelect).not.toHaveBeenCalled();
-  document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.425);
+  document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.325);
   runtime.publish(shifted, viewport, 1, [], 1); document.defaultView.advance(600);
-  expect(Number(label.style.opacity)).toBe(.85); label.dispatchEvent(new Event('click'));
+  expect(Number(label.style.opacity)).toBe(.65); label.dispatchEvent(new Event('click'));
   expect(onSelect).toHaveBeenCalledWith(object); expect(runtime.resolve(object.id)).toMatchObject({kind: 'galaxy-cluster'});
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);
