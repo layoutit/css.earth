@@ -9,8 +9,7 @@ import { SCENE_OBJECTS } from "../objects.mts";
 import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
-import { sceneSources, sceneSourceGroups } from "../scene-sources.mts";
-import SourceRow from './SourceRow.astro';
+import SourcesPanel from './SourcesPanel.astro';
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
@@ -35,8 +34,6 @@ declare const __CSSEARTH_VERSION__: string;
 
 const {
   objectId,
-  title,
-  resources = [],
   lenses,
   settings,
   destinations,
@@ -65,10 +62,6 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
-const sources = sceneSources(resources);
-// One footer entry per provider name, so a shared name is printed once.
-const sourceGroups = sceneSourceGroups(sources);
-const hasResources = sources.length > 0;
 const searchPlaceholder = 'Search celestial objects...';
 const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
@@ -296,12 +289,6 @@ const searchCategories = ([
             <p class="planet-introduction" data-focus-basis></p>
             <p class="planet-introduction" data-focus-reference></p>
           </PlanetAccordion>
-          <h2 class="planet-lens-details-title">Sources</h2>
-          <ul class="planet-resources-links">
-            {Array.from({ length: 3 }, () => <SourceRow data-focus-source-row hidden>
-              <a class="planet-resource-label" data-focus-source target="_blank" rel="noreferrer" hidden></a>
-            </SourceRow>)}
-          </ul>
         </div>
       </PlanetCard>
       <PlanetCard class="planet-galactic-overview planet-overview-card" data-galactic-overview hidden>
@@ -311,7 +298,7 @@ const searchCategories = ([
         </PlanetCardHeader>
         <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information"
           tabs={[{ id: 'systems', label: 'Systems', count: 1 + unavailableSystems.length },
-            { id: 'factsheet', label: 'Factsheet' }, { id: 'sources', label: 'Sources' }]} />
+            { id: 'factsheet', label: 'Factsheet' }]} />
         <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-systems-content`}
           role="region" aria-label="Planetary systems">
           <ul class="planet-object-list">
@@ -336,13 +323,6 @@ const searchCategories = ([
         <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-factsheet-content`}
           role="region" aria-label="Factsheet">
           <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} embedded />
-        </div>
-        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-sources-content`}
-          role="region" aria-label="Sources">
-          <ul class="planet-resources-links">
-            {sources.filter(source => ['galaxy','sky'].includes(source.role)).map(source => <SourceRow
-              links={[{id: source.role, href: source.href, title: source.label}]} credit={source.description} />)}
-          </ul>
         </div>
       </PlanetCard>
       <ExtragalacticOverviews />
@@ -393,43 +373,13 @@ const searchCategories = ([
       </section>
     </template>}
   </div>
+  <SourcesPanel {...Astro.props} />
 </aside>
 </div>
 
-<footer class="planet-footer" aria-label="Sources and view information">
-<nav
-  class="planet-attribution-footer"
-  hidden={!hasResources}
-  aria-label={`${title.label} and shared universe sources`}
->
-  {sourceGroups.map((group, index) => (
-    <>
-      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">,</span>}
-      <span class="planet-attribution-group">
-        {group.provider && <span class="planet-attribution-provider">{group.provider}</span>}
-        {group.members.map((resource, member) => (
-          <>
-            {member > 0 && <span class="planet-attribution-group-separator" aria-hidden="true">,</span>}
-            <a
-              class="planet-attribution-link"
-              href={resource.href}
-              title={`${resource.role}: ${resource.description}`}
-              aria-label={`${resource.role}: ${resource.label}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span class="planet-attribution-source">{resource.part}</span>
-            </a>
-          </>
-        ))}
-      </span>
-    </>
-  ))}
-</nav>
+<footer class="planet-footer" aria-label="View information">
     <div class="planet-view-readout" aria-label="View information">
       <span class="planet-view-context">
-        {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-record" title="Record stage input; press again to stop and copy the recording">Record</button>}
-        {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-script" title="Replay the recorded motion for tracing">Do motion</button>}
         {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
         <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
           <span>Epoch: <span data-view-date></span></span>

@@ -461,6 +461,32 @@
   list-style: none;
 }
 .planet-object-results-scroll .planet-observation-control { text-decoration: none; }
+.planet-information-panel [data-information-panel="moons"] .planet-object-list {
+  width: 100%;
+}
+.planet-object-results-scroll .planet-object-link[aria-disabled="true"] {
+  color: var(--shell-text-muted);
+  cursor: default;
+}
+.planet-moon-placeholder {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.catalogue-moon-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.catalogue-moon-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
 .planet-sidebar .planet-object-link .planet-lens-icon { opacity: 1; }
 .planet-object-results-scroll:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
 .planet-sidebar .planet-object-results-scroll .planet-object-link:focus-visible .planet-object-name {
@@ -624,7 +650,7 @@
   top: calc(var(--subject-y) / var(--subject-h) * -100%);
 }
 .planet-machine-image { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-machine-emblem { position: absolute; left: 8px; bottom: 8px; display: block; width: 64px; height: 64px; }
+.planet-machine-emblem { position: absolute; left: 0; top: 64px; display: block; width: 64px; height: 64px; }
 .planet-machine-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .planet-machine a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
 /* Labels, format notes and bibliographies are needed to read a dataset but are

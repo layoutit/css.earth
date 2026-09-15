@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-major-moons@1",
+  "classification": "OpenSpace major-moon groups at the same pinned revision as Saturn's source archive. Other systems retain their existing moon orbits.",
+  "sourceRoot": "https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/",
+  "systems": [
+    { "id": "jupiter", "source": "jupiter/major_moons.asset", "moons": ["io", "europa", "ganymede", "callisto"] },
+    { "id": "saturn", "source": "saturn/major_moons.asset", "moons": ["mimas", "enceladus", "tethys", "dione", "rhea", "titan", "hyperion", "iapetus"] },
+    { "id": "uranus", "source": "uranus/major_moons.asset", "moons": ["miranda", "ariel", "umbriel", "titania", "oberon"] },
+    { "id": "neptune", "source": "neptune/major_moons.asset", "moons": ["triton", "nereid"] }
+  ]
+}

@@ -5,7 +5,7 @@ body[data-object-shell] {
   --explorer-panel-left: 12px;
   --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
-  --explorer-wordmark-size: 38px;
+  --explorer-wordmark-size: 36px;
   --explorer-content-inset: 20px;
   --explorer-categories-sidebar-gap: 12px;
   --explorer-panel-padding: 0px;
@@ -69,6 +69,13 @@ body[data-object-shell] {
   padding-block-start: 16px;
 }
 
+/* Sources is its own card, outside the scrolling information content. */
+.planet-sidebar > .planet-sources-panel {
+  padding: 0;
+  margin-top: 4px;
+  border-radius: var(--explorer-card-radius);
+}
+
 /* A focused object's hierarchy belongs above its title, not below its datasets. */
 .planet-object-browser:has(> [data-prepared-focus-card]:not([hidden])) > [data-large-scale-overview] .planet-breadcrumbs {
   display: none;
@@ -100,7 +107,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .explorer-shell-header {
   --explorer-header-control-gap: 4px;
-  --explorer-wordmark-size: 38px;
+  --explorer-wordmark-size: 36px;
   position: fixed;
   z-index: 220;
   inset: var(--explorer-header-top) auto auto var(--explorer-panel-left);
@@ -508,13 +515,19 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   gap: var(--explorer-panel-gap);
 }
 .planet-dataset-context-card .planet-card-tabpanel { padding-top: 0; }
+/* The high-gain dish faces inward from the right-hand illustration. */
+.planet-machine:is([data-mission="cassini"], [data-machine="cassini"]) .planet-machine-image-crop {
+  width: 65%;
+  margin: 32px auto;
+  transform: rotate(60deg);
+}
 
 @media (min-width: 821px) and (orientation: landscape) {
   /* Settings and the spacecraft card take turns in this slot. */
   .planet-dataset-context-rail,
   .planet-dataset-context-dock > .planet-settings-panel {
     inset: auto;
-    --dataset-context-top: var(--explorer-controls-top);
+    --dataset-context-top: calc(var(--explorer-header-top) + var(--explorer-header-bar-height) + var(--explorer-header-panel-gap));
     position: fixed;
     margin: 0;
     width: var(--explorer-panel-width);
@@ -528,7 +541,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-object-shell] {
-    --explorer-header-height: var(--explorer-header-bar-height);
+    --explorer-header-height: calc(var(--explorer-header-bar-height) + var(--explorer-header-row-gap) + var(--explorer-search-height));
   }
 
   .planet-ui-layer {
@@ -554,21 +567,19 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     min-height: 0;
     overflow: hidden;
     border: 0;
-    border-radius: var(--explorer-card-radius);
-    background: var(--explorer-panel-background);
+    background: transparent;
     pointer-events: auto;
     isolation: isolate;
   }
 
-  /* Full-width row over the scene; inline padding keeps its controls on the panel edges. */
+  /* Search sits over the sidebar; the other controls share the top row. */
   .explorer-shell-header {
     position: relative;
     inset: auto;
     margin: var(--explorer-header-top) calc(-1 * var(--explorer-panel-left)) var(--explorer-header-panel-gap);
     display: grid;
-    /* The wordmark column takes the free space (margin-right: auto), so the other siblings pack right. */
-    grid-template-columns: minmax(max-content, 1fr) max-content minmax(0, max-content) max-content;
-    grid-template-rows: var(--explorer-header-height);
+    grid-template-columns: var(--explorer-panel-width) minmax(0, 1fr) minmax(0, max-content) max-content;
+    grid-template-rows: var(--explorer-header-bar-height) var(--explorer-search-height);
     /* One gap between every header control, matching the gap inside the pill groups. */
     column-gap: 8px;
     box-sizing: border-box;
@@ -577,10 +588,10 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     max-width: none;
   }
 
-  .explorer-brand-row { grid-column: 1; justify-self: start; pointer-events: auto; }
-  .planet-search-toolbar { grid-column: 2; pointer-events: auto; }
-  .planet-search-categories { grid-column: 3; }
-  .planet-header-actions { grid-column: 4; }
+  .explorer-brand-row { grid-row: 1; grid-column: 1; justify-self: start; pointer-events: auto; }
+  .planet-search-toolbar { grid-row: 2; grid-column: 1; pointer-events: auto; }
+  .planet-search-categories { grid-row: 1; grid-column: 3; }
+  .planet-header-actions { grid-row: 1; grid-column: 4; }
 
   .planet-sidebar {
     --explorer-card-padding-left: calc(var(--explorer-content-inset) - var(--explorer-panel-padding));
@@ -593,30 +604,27 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     min-height: 0;
     max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-footer-height) - var(--explorer-panel-bottom-gap));
     padding-top: 0;
+    overflow: visible;
     pointer-events: auto;
     /* Fixed dataset cards share this DOM; keep their containing block at the viewport. */
     contain: none;
-    background: var(--explorer-panel-background);
+    background: transparent;
+  }
+
+  .planet-drawer-content {
+    display: block;
+    flex: 0 1 auto;
+    min-height: 0;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    border-radius: var(--explorer-card-radius);
   }
 
   .planet-viewport {
     inset: 0;
   }
 
-}
-
-@media (min-width: 821px) and (max-width: 900px) and (orientation: landscape) {
-  body[data-object-shell] {
-    --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-header-row-gap));
-  }
-  .explorer-shell-header {
-    grid-template-columns: max-content minmax(0, 1fr) minmax(0, max-content);
-    grid-template-rows: repeat(2, var(--explorer-search-height));
-  }
-  .explorer-brand-row { grid-row: 1; grid-column: 1; }
-  .planet-header-actions { grid-row: 1; grid-column: 3; justify-self: end; }
-  .planet-search-toolbar { grid-row: 2; grid-column: 1 / 3; }
-  .planet-search-categories { grid-row: 2; grid-column: 3; }
 }
 
 @media (min-width: 821px) and (orientation: landscape) {
@@ -774,7 +782,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     background: transparent;
     pointer-events: none;
   }
-  body[data-object-shell] .planet-attribution-footer { display: none; }
 
   /* A phone on its side has little height: the filters join the search row and
      the sheet peeks less, so the scene keeps a usable band. */

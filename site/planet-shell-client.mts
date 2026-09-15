@@ -1,7 +1,6 @@
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
-import { createMotionRecorder, runMotionScript } from './motion-script.mts';
 const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { readInitialFocus } from './focus-catalog.mts';
@@ -20,6 +19,7 @@ interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
 import { createDatasetContextController } from './dataset-context-controller.mts';
+import { createSourcePanelController } from './source-panel-controller.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
@@ -273,6 +273,7 @@ export function mountPlanetShell({
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationTabs = retain(createInformationTabsController(drawer, owner));
     retain(createDatasetContextController(drawer, documentTarget, windowTarget, owner));
+    retain(createSourcePanelController(drawer, documentTarget, windowTarget, owner));
     retain(createChartSwitcherController(drawer, windowTarget, owner));
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
@@ -450,27 +451,6 @@ function createSettingsController(
     onAsteroidLabelsChange(asteroidLabelsEnabled);
   }, { signal: events.signal });
   renderAsteroidLabels();
-  const motionScript = documentTarget.querySelector(".planet-motion-script");
-  if (motionScript instanceof windowTarget.HTMLButtonElement) {
-    motionScript.addEventListener("click", () => {
-      motionScript.disabled = true;
-      runMotionScript(documentTarget, windowTarget).catch(error => windowTarget.alert(String(error))).finally(() => { motionScript.disabled = false; });
-    }, { signal: events.signal });
-  }
-  const motionRecord = documentTarget.querySelector(".planet-motion-record");
-  if (motionRecord instanceof windowTarget.HTMLButtonElement) {
-    let recorder: ReturnType<typeof createMotionRecorder> | null = null;
-    motionRecord.addEventListener("click", () => {
-      if (!recorder) { recorder = createMotionRecorder(documentTarget, windowTarget); motionRecord.textContent = "Stop"; motionRecord.setAttribute("aria-pressed", "true"); return; }
-      const recording = recorder.stop(); recorder = null;
-      motionRecord.textContent = "Record"; motionRecord.setAttribute("aria-pressed", "false");
-      const text = JSON.stringify(recording);
-      (windowTarget as unknown as { __cssEarthMotion?: string }).__cssEarthMotion = text;
-      console.log("MOTION_RECORDING", text);
-      windowTarget.navigator.clipboard?.writeText(text).then(() => windowTarget.alert(`Recorded ${recording.length} events; copied to clipboard.`),
-        () => windowTarget.alert(`Recorded ${recording.length} events; see console (MOTION_RECORDING).`));
-    }, { signal: events.signal });
-  }
   orbitRendererSelect.value = orbitRenderer;
   orbitRendererSelect.addEventListener("change", () => {
     const next = orbitRendererSelect.value;
@@ -654,6 +634,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   };
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const filter = (resetScroll = true) => {
+    const sourceScope = preparedFocus ? 'focus' : overview ? overviewScope : 'object';
+    if (browser.dataset.sourceScope !== sourceScope) browser.dataset.sourceScope = sourceScope;
+    const sourceFocus = preparedFocus?.id ?? '';
+    if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')

@@ -94,3 +94,46 @@ test('zoom jitter does not repeatedly reverse annotation visibility at its exit 
   for (const diameter of [7.99, 8.01, 7.99]) expect(sample(diameter).indicatorShown).toBe(false);
   expect(sample(7.7).indicatorShown).toBe(true);
 });
+
+test('orbit settings do not change admitted names or label placement', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const labels = () => calculate(input).projectedBodies.filter(body => body.labelShown)
+    .map(body => ({ index: body.index, position: body.labelPosition }));
+  const before = structuredClone(labels());
+  expect(before.length).toBeGreaterThan(0);
+  input.bodies.forEach(body => { body.orbitHidden = true; });
+  expect(labels()).toEqual(before);
+});
+
+test('planet views label their own moon family, with a bounded total', () => {
+  const points = [plan.focus, ...plan.bodies];
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const saturn = points.find(body => body.id === 'saturn')!;
+  input.selectedId = 'saturn'; input.overview = false;
+  input.world.pose.positionM = [saturn.positionM[0], saturn.positionM[1], saturn.positionM[2] + 4e10];
+  const names = calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!);
+  expect(names.length).toBeLessThanOrEqual(24);
+  expect(names.some(body => body.id === 'saturn')).toBe(true);
+  expect(names.filter(body => 'orbit' in body && body.orbit && body.orbit.centerBodyId !== plan.focus.id)
+    .every(body => 'orbit' in body && body.orbit?.centerBodyId === 'saturn')).toBe(true);
+});
+
+test.each(['saturn', 'jupiter', 'uranus'])('%s retains projected orbit paths past the close-detail fade threshold', id => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === id);
+  const selected = plan.bodies[index - 1]!;
+  input.selectedId = id; input.overview = false;
+  for (const discHeightShare of [.1, .2, .3, .6]) {
+    const distance = Math.hypot(selected.radiusM,
+      2 * input.viewport.focalPixels * selected.radiusM / (1236 * discHeightShare));
+    input.world.pose.positionM = [selected.positionM[0], selected.positionM[1], selected.positionM[2] + distance];
+    const frame = calculate(input);
+    const orbit = frame.projectedBodies.find(body => body.index === index)!;
+    expect(orbit.segments.length, `${discHeightShare} viewport height`).toBeGreaterThan(0);
+    expect(orbit.orbitVisibility).toBeGreaterThan(.29);
+    expect(orbit.segments.every(segment => segment.every(Number.isFinite))).toBe(true);
+    if (discHeightShare >= .3) expect(orbit.orbitVisibility).toBeCloseTo(.3, 2);
+  }
+  input.bodies[index]!.orbitHidden = true;
+  expect(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility).toBe(0);
+});
