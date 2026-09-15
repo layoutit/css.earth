@@ -21,7 +21,8 @@ const results=[], errors:{scenario:string;error:string}[]=[];
 const sample = () => ({active:window.__cssearthTest.scene().activeObjectId, ready:window.__cssearthTest.scene().ready, error:window.__cssearthTest.scene().error,
   scenes:document.querySelectorAll('.planet-stage > .polycss-camera').length,
   groups:[...document.querySelectorAll(window.__activationSelector)].map(n=>window.__cssearthTest.htmlElement(n).style.display),
-  overlaysSuppressed:[...document.querySelectorAll("[data-context-label], [data-context-indicator], .context-orbit")].every(node=>window.__cssearthTest.htmlElement(node).style.opacity==="0"),
+  flightCaption:(()=>{const node=document.querySelector<HTMLElement>('[data-context-flight-label]');return node ? {
+    id:node.dataset.contextFlightLabel,visible:getComputedStyle(node).visibility!=='hidden'&&Number(getComputedStyle(node).opacity)>0 } : null;})(),
   marker:document.querySelector<HTMLElement>(`[data-context-body="${window.__activationTarget}"]`)?.style.transform});
 const select = (page: Page,id:string) => page.evaluate(id=>window.__cssearthTest.htmlElement(document.querySelector(`.planet-object-link[data-object-id="${id}"]`)).click(),id);
 try {
@@ -39,7 +40,8 @@ try {
     if(scenario!=='reduced-motion') {
       await page.waitForFunction(()=>{const ns=[...document.querySelectorAll(window.__activationSelector)];const n=ns.filter(x=>window.__cssearthTest.htmlElement(x).style.display!=='none').length;return n>2&&n<ns.length;});
       before=await page.evaluate(sample);
-      assert.equal(before.overlaysSuppressed,true,"Navigation overlays fade away during flight");
+      assert.equal(before.flightCaption?.id,targetId,'Flight caption follows the destination');
+      assert.equal(before.flightCaption.visible,true,'Destination stays named while its detail activates');
       if(scenario==='escape') { await page.locator('.planet-input-surface').focus(); await page.keyboard.press('Escape'); }
       else if(scenario==='supersede') await select(page,replacementId);
     }
@@ -51,7 +53,7 @@ try {
     if (!after.ready || after.error) results.push({scenario,before,after});
     assert.equal(after.error,null,`${scenario}: input must not dispose a bank in use`);
     assert.equal(after.scenes,1); assert.equal(after.ready,true);
-    assert.equal(after.overlaysSuppressed,false,"Navigation overlays restore after arrival or interruption");
+    assert.equal(after.flightCaption?.visible,false,'Flight caption retires on arrival or interruption');
     const samples=await page.evaluate(()=>{cancelAnimationFrame(window.__activationFrame);return window.__activationSamples;});
     if(scenario==='supersede') assert.equal(after.active,replacementId);
     if(scenario==='reduced-motion') { assert.equal(after.active,targetId);assert.ok(samples.every(s=>s.count===required(samples.at(-1)).count),'Direct arrivals must never show a partial surface'); }
