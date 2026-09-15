@@ -1,5 +1,7 @@
 # Harmonia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="selected-model"></a>
@@ -34,7 +36,7 @@ Prime-meridian display phase is explicitly arbitrary; the available IAUspin file
 
 The selected 2017 nonconvex ADAM model 1855 combines adaptive-optics constraints with light curves. The earlier [convex model 313](https://damit.cuni.cz/projects/damit/asteroid_models/view/313) is superseded for this presentation. The two releases have different calibrated diameters; their vertices are not mixed or rescaled.
 
-The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared no-imagery grid or a clearly labeled visualization of the selected model radius.
+The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared neutral-gray material or a clearly labeled visualization of the selected model radius.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

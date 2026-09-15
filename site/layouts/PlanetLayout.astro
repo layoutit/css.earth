@@ -1,6 +1,8 @@
 ---
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
+import TitleTypography from "../components/TitleTypography.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
+import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { requireSceneObject } from "../objects.mts";
 import { objectSeo } from "../seo.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
@@ -31,6 +33,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
 <html lang="en" data-scene-presented={scene ? 'true' : undefined}>
   <head>
     <meta charset="UTF-8" />
+    {!navigation && <script is:inline set:html={initialShellContextBootstrap}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={seo.canonical} />
@@ -55,6 +58,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <slot name="planet-head" />
     <title>{seo.title}</title>
     <ObjectSwatchStyles />
+    <TitleTypography />
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->
@@ -89,6 +93,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
       bindNativeViewForms(document, window);
       import("../scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
+        delete document.documentElement.dataset.shellContext;
         console.error('The interactive scene could not load.', error);
       });
     </script>}

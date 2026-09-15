@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ab2042e32f679c3c3109ac81966e57916d9d19f65dac8391f89a30ac8f6f294a"
+          "sha256": "108970d3425734829ebb22af0438319c76819c6ac2472736dbc24c552d6920ea"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "5507a62bb2c33e4c927d3ea442aeb7e40a120eb2cb9a48ca0113e1a90a31373d"
+          "sha256": "1888acf3672c765256124cc65aa5114b880110ecd4167b93ed4655ca9bf05e15"
         },
         {
           "id": "acquisition",
@@ -110,10 +110,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8261240543765e48764d670d240f702b9d013f0e852196fe64ffcc34ad94dc1e"
+        "sha256": "f09366be5a0df585b01f2e4b68001d27c57a83032019a2aba28ba7888b734bd8"
       }
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Siding Spring",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0ee6557590bfba7f69490272a0efb83dff35f2fb82178fba8be1a5b9f47fc39b"
+    "sha256": "a8711999809b6988f1b795a1ef3b01820735e8bb1e6edaf930cfa5665b46c70f"
   }
 }

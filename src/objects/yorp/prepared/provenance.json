@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "yorp",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "245ff285525ca5c5cda21215f0b9d187f3255a0d8b79835a8b5b11e74aa507c5"
+    "sha256": "d0d9e6e18f7f396c01189448591f96a9eea08c37302d367612bed2c69436c6fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d801beb237086a32e88b6c3cf0c2ed585d37ebdd2265e5b6b73313a59629f26c",
+      "sha256": "79d9468942cff0bb039c043636bd2b9b551032598e73b5b938a195af2d688204",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,7 +203,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
+              "notes": "The shared neutral gray marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -330,7 +330,7 @@
       "sha256": "f9047ccbf39831b20d4571f17158f6960313d1b51c9d4ea429162ddb614a51e7",
       "bytes": 16131,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -355,10 +355,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d801beb237086a32e88b6c3cf0c2ed585d37ebdd2265e5b6b73313a59629f26c",
-      "bytes": 6317,
+      "sha256": "79d9468942cff0bb039c043636bd2b9b551032598e73b5b938a195af2d688204",
+      "bytes": 6423,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +390,19 @@
           "url": "/scenes/yorp/yorp-elevation-thumbnail.webp",
           "bytes": 6790,
           "sha256": "6eee5d1b476bebd6f1c5ca831c13a976c7e9e813bbce0201c8d673b0412a3de9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-surface@2x.webp",
           "bytes": 227432,
           "sha256": "c00a5cb83f222a51a4f5a0a94a9fc5f9ab1683ff0bef9b9bfe620b911c849ccf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -438,15 +438,15 @@
       "outputs": [
         {
           "url": "/scenes/yorp/yorp-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/yorp/yorp-shape-surface@2x.webp",
-          "bytes": 190290,
-          "sha256": "5fafecb03476ea46ed38da686fb494dda076324963bb676ce695159041629e2d",
-          "verification": "bytes-verified"
+          "bytes": 58204,
+          "sha256": "3deff6e52eea403097b5087111f737b88b4029cd3c29541e2a0378e5bad75339",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -503,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

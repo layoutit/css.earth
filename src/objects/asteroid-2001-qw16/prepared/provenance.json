@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2001-qw16",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6e2f149b0aa1713e3793746ad62cfe5dcb6fd142736d863854ea927de19bb93f"
+    "sha256": "51e7ec9d05777ac733c4445017a27e995e302558b971c35fdc38df5c36270cae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ee1a43de14e7b0c3f5cac03f6103b6b9ccfaef39b419ebd79501cd2a07f0e65d",
+      "sha256": "84a9d503bd50bbf8b50c0cc617bf7332c224aae21f2bc0c301b0f45c09c6fd62",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 10.403 ± 0.259 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "notes": "Thermal diameter 10.403 ± 0.259 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "e41e4dae7371422f0d9aa7c771b916832311f7b74ca5cc3995dc9f1317433f33",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "ee1a43de14e7b0c3f5cac03f6103b6b9ccfaef39b419ebd79501cd2a07f0e65d",
+      "sha256": "84a9d503bd50bbf8b50c0cc617bf7332c224aae21f2bc0c301b0f45c09c6fd62",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9459,
+      "bytes": 9557,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-thumbnail.webp",
           "bytes": 5054,
           "sha256": "f4002dc51a7b10d82b891a6ae1c2938a3e21dae6b03027a96f1dc2267d780ede",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-surface@2x.webp",
           "bytes": 301596,
           "sha256": "01546108e94f89bf0b88c2aca11ef21b10dfe19b1b2556e58d4c700a295d816b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
-          "bytes": 219752,
-          "sha256": "e937884c7b12fb7f4369f6b11ce6ee4beec6a3201cac47258b3608e3f689bdf4",
-          "verification": "bytes-verified"
+          "bytes": 68076,
+          "sha256": "aeae0c11b08353aa44c5e2cd117ace5a9dc02d90fdb7702c65581e6868b15a61",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

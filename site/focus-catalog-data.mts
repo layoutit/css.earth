@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import galaxies from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import clusters from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
+import { focusSourceDocumentation } from './source-documentation.mts';
 
 const parts = Object.values(import.meta.glob('../src/objects/*/source/nebula.json', { eager: true, import: 'default' })).map(parsePreparedNebulaCatalog);
 const nebulae = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxies.frame,
@@ -15,6 +16,9 @@ export const FOCUS_CATALOG_DATA = [
   { id: 'nebulae', data: nebulae },
 ].map(({ id, data }) => {
   const text = JSON.stringify(data);
-  return { id, text, pin: { id, url: `/catalogues/${id}.json`, bytes: Buffer.byteLength(text),
+  return { id, data, text, pin: { id, url: `/catalogues/${id}.json`, bytes: Buffer.byteLength(text),
     sha256: createHash('sha256').update(text).digest('hex') } };
 });
+
+export const FOCUS_SOURCE_DOCUMENTS = new Map(FOCUS_CATALOG_DATA.flatMap(catalog => catalog.data.objects
+  .map(object => [object.id, focusSourceDocumentation(object, catalog.id)] as const)));

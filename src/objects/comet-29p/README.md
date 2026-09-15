@@ -1,5 +1,7 @@
 # 29P/Schwassmann–Wachmann 1
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Schwassmann–Wachmann 1 releases gas and dust far from the Sun. Webb detected several jets with different mixtures of carbon monoxide and carbon dioxide.
 
 One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.

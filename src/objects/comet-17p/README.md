@@ -1,5 +1,7 @@
 # 17P/Holmes
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Holmes became about a million times brighter during its 2007 outburst. The expanding dust cloud was enormous compared with the small nucleus that released it.
 
 One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.

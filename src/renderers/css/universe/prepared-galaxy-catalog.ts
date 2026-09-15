@@ -8,7 +8,9 @@ import { createOpacityFader } from '../stars/opacity-fader.js';
 import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 import type { ProjectedGalaxy } from './galaxy-catalog-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
+import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
+import { createLabelBudget, labelEligible, type LabelBudget } from '../labels/universe-label-policy.js';
 
 interface Entry {
   readonly object: PreparedCatalogObject;
@@ -19,6 +21,7 @@ interface Entry {
   readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
   readonly cornersM: readonly (readonly number[])[] | null;
+  placement: number; shown: boolean;
   width: number;
   height: number;
   /** This frame's projected label anchor; written to the label only while it shows or fades. */
@@ -58,7 +61,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   const fader = createOpacityFader(document.defaultView!);
   // The source bank also preserves Local Volume nonmembers for future scopes.
   // Membership is a prepared scientific fact, never a runtime distance cut.
-  const entries: Entry[] = objects.map(object => {
+  const entries: Entry[] = objects.filter(object => labelEligible({ named: Boolean(object.name), notable: isPreparedCluster(object) || Boolean(object.detailedObjectId) })).map(object => {
     const marker = document.createElement('span'), label = document.createElement('span');
     const navigable = isPreparedCluster(object) || Boolean(object.detailedObjectId && (!renderedObjectIds || renderedObjectIds.has(object.detailedObjectId)));
     const dot = !isPreparedCluster(object) && !isPreparedNebula(object) ? document.createElement('span') : null;
@@ -77,11 +80,12 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     marker.dataset.galaxyMarker = object.id;
     mountCatalogMarker(marker, object);
     label.dataset.galaxyLabel = object.id;
+    label.className = 'prepared-context-label';
     if (navigable) label.dataset.objectNavigate = object.id;
     label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
-    label.style.cssText = 'position:absolute;left:50%;top:50%;font:400 14px/18px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#c2ccd8;white-space:nowrap;opacity:0;pointer-events:none;cursor:pointer';
+    label.style.cssText = 'position:absolute;left:50%;top:50%;opacity:0;pointer-events:none;cursor:pointer';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
       event.preventDefault(); event.stopPropagation(); onSelect(object);
@@ -94,7 +98,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     root.append(marker, label);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
     return { object, marker, dot, navigable, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
-      width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
+      placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
@@ -108,7 +112,8 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   return Object.freeze({ root, catalog,
     select(id: string | null) { selectedId = entries.find(entry => entry.object.id === id || (!isPreparedCluster(entry.object) && entry.object.detailedObjectId === id))?.object.id ?? id; },
     resolve(id: string) { return [...catalog.objects, ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].find(object => object.id === id || (!isPreparedCluster(object) && object.detailedObjectId === id)) ?? null; },
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number, blockerRects: readonly LabelScreenRect[] = [], clusterOpacity = opacity, dotOpacity = opacity) {
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number, blockerRects: readonly LabelScreenRect[] = [], clusterOpacity = opacity, dotOpacity = opacity,
+      budget?: LabelBudget, nebulaOpacity = opacity) {
       if (destroyed) return exclusions;
       if (world.referenceFrame !== catalog.frame.referenceFrame || world.epochJdTt !== catalog.frame.epochJdTt) {
         throw new TypeError('Galaxy catalogue and observer must share a reference frame and epoch.');
@@ -119,6 +124,8 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       const apertures = new Set<string>();
       const alpha = Math.max(0, Math.min(1, opacity));
       const clusterAlpha = Math.max(0, Math.min(1, clusterOpacity));
+      const objectOpacity = (object: PreparedCatalogObject) =>
+        isPreparedCluster(object) ? clusterAlpha : isPreparedNebula(object) ? nebulaOpacity : alpha;
       // Only the extragalactic populations sleep with their fades. Nearby
       // nebulae keep following the camera and remain available as fly-to targets.
       if (alpha === 0 && dotOpacity === 0 && clusterAlpha === 0 && !nebulaCatalog?.objects.length) {
@@ -149,21 +156,34 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         if (entry.cornersM && !bounds) continue;
         const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
         const y = (bounds?.bottom ?? point.y) + 8 + entry.height;
-        entry.labelX = x; entry.labelY = y;
         const labelRect = { left: x - entry.width / 2, right: x + entry.width / 2,
           top: y - entry.height, bottom: y };
-        const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
-        if (labelRect.left >= -width / 2 && labelRect.right <= width / 2 && labelRect.top >= -height / 2 && labelRect.bottom <= height / 2 && objectAlpha > 0) {
-          candidates.push({ object: entry.object, ...point, labelRect });
+        const objectAlpha = objectOpacity(entry.object);
+        {
+          const above = (bounds?.top ?? point.y) - 8;
+          const alternateLabelRects = entry.navigable ? [
+            { left: labelRect.left, right: labelRect.right, top: above - entry.height, bottom: above },
+            { left: (bounds?.right ?? point.x) + 12, right: (bounds?.right ?? point.x) + 12 + entry.width,
+              top: point.y - entry.height / 2, bottom: point.y + entry.height / 2 },
+            { left: (bounds?.left ?? point.x) - 12 - entry.width, right: (bounds?.left ?? point.x) - 12,
+              top: point.y - entry.height / 2, bottom: point.y + entry.height / 2 },
+          ] : [];
+          const previousRect = [labelRect, ...alternateLabelRects][entry.placement] ?? labelRect;
+          // A rejected label keeps following the same side throughout its fade.
+          entry.labelX = (previousRect.left + previousRect.right) / 2; entry.labelY = previousRect.bottom;
+          if (objectAlpha > 0) candidates.push({ object: entry.object, navigable: entry.navigable, shown: entry.shown, placement: entry.placement,
+            ...point, labelRect, alternateLabelRects });
         }
       }
-      const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId);
+      const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId, budget ?? createLabelBudget(width, height));
       const admittedById = new Map(admitted.map(entry => [entry.object.id, entry]));
       const pickTargets: ScreenPickTarget[] = [];
       for (const entry of entries) {
-        const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
+        const objectAlpha = objectOpacity(entry.object);
         const projected = admittedById.get(entry.object.id);
-        const labelOpacity = projected ? objectAlpha * .85 : 0;
+        entry.shown = Boolean(projected);
+        if (projected) { entry.placement = projected.placement ?? 0; entry.labelX = (projected.labelRect.left + projected.labelRect.right) / 2; entry.labelY = projected.labelRect.bottom; }
+        const labelOpacity = projected ? objectAlpha * DEFAULT_CONTEXT_LABEL_OPACITY : 0;
         fader.set(entry.label, labelOpacity, 200);
         // Only a shown or still-fading label follows its galaxy. Moving every on-screen
         // candidate restyled each hidden label on every camera frame.

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lutetia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03a9d7ee72131eb2a1a086793b9a208cb4f4e80bfa562c6d5e8000f2c402f0ae"
+    "sha256": "0d7ff34fa7f834529fd1adeb24be6480ee092c09f20a52e804815d8de6e45095"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -205,7 +205,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0cd01f3dd98223333919054398a8f7a4a0ae1ec91795bd93e3f8e32d111abb96",
+      "sha256": "db4a75972d63dc51ed2150a60e99b37e9cb0bf7d815e8601db217889b13aa624",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -307,7 +307,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
+              "notes": "The shared neutral gray marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -493,7 +493,7 @@
       "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "bytes": 2954640,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -527,7 +527,7 @@
       "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -555,7 +555,7 @@
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -581,7 +581,7 @@
       "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -612,7 +612,7 @@
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -638,7 +638,7 @@
       "sha256": "b1c6c6ecf86cd733290f2eebd972d6b227d235e5f5552bb3a1e42f3d9f496481",
       "bytes": 37776384,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -666,7 +666,7 @@
       "sha256": "b6e70f70299f772905d3063b891fd8110c00799d54476ed66d068dd39dbefa3a",
       "bytes": 5140,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -694,7 +694,7 @@
       "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
       "bytes": 663,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -711,10 +711,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0cd01f3dd98223333919054398a8f7a4a0ae1ec91795bd93e3f8e32d111abb96",
-      "bytes": 9278,
+      "sha256": "db4a75972d63dc51ed2150a60e99b37e9cb0bf7d815e8601db217889b13aa624",
+      "bytes": 9384,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -734,7 +734,7 @@
       "sha256": "4c8dd8e79922736361cfec1d91ef62c077141e96d6a5930abfc0589971e7f58b",
       "bytes": 1010,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -760,7 +760,7 @@
       "sha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
       "bytes": 134132,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -787,7 +787,7 @@
       "sha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
       "bytes": 154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -814,7 +814,7 @@
       "sha256": "92372088c940f9dddf30480811a68ac518a0704a943de78c4bd622c8e8e87cc9",
       "bytes": 1335,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -846,19 +846,19 @@
           "url": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "28eadc457171bd3c6386469daa3fe910a13dd8318598c50868392df0d4114a30",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
           "bytes": 375170,
           "sha256": "7d7960dce265687aaba2acf3897e4cb20f9f87e9bf21c289490817286ce78534",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -894,15 +894,15 @@
       "outputs": [
         {
           "url": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
-          "bytes": 220590,
-          "sha256": "1080889eaa3f187ed7029f70483458f9b9cec4b3bbe392c20ea09b56ddc4b4fe",
-          "verification": "bytes-verified"
+          "bytes": 68452,
+          "sha256": "5d8d67008a11fbc3f80cfb7e3360883ca5ff51e7ffaae2622202089b4e8540a6",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -947,13 +947,13 @@
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
           "bytes": 2374,
           "sha256": "9ef32d7daafc5a94714755115788bbe5ba95bb18e84aaa378638f88343e1779f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "bytes": 839936,
           "sha256": "9fdd8643ef0935915b8018f6eb9436da663259b5fa9c0d861841c45802fcb73f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1022,7 +1022,7 @@
           "url": "/scenes/lutetia/lutetia-features.json",
           "bytes": 77450,
           "sha256": "8dd8ba48ba244f14817761051a4354dc19b36dd348afacd912bfbedf0a451eaa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1046,8 +1046,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

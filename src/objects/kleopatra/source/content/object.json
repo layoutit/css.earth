@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase.",
+        "notes": "The shared neutral gray marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       }
     ]

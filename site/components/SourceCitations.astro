@@ -1,9 +1,0 @@
----
-import type { SourceCitation } from '../../src/platform/source-catalog.mts';
-import { SOURCES, sourceHref } from '../sources-catalog.mts';
-interface Props { citations: readonly SourceCitation[]; }
----
-<ul>{Astro.props.citations.map(citation => <li>
-  <a href={sourceHref(citation.catalogueId)} target="_blank" rel="noreferrer">{SOURCES[citation.catalogueId].title}</a>
-  {citation.locator && <> · {citation.locator}</>} · Checked {citation.checkedOn}
-</li>)}</ul>

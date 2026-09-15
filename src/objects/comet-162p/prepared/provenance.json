@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-162p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0038d46ddfd8aac5f911ff497aef4da875435c98a26b03ee576b8f88369acb42"
+    "sha256": "9940065cc9cc5f97b22238e88931f83bd6c7aaf39db8584008cbce1a5e489402"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ab2042e32f679c3c3109ac81966e57916d9d19f65dac8391f89a30ac8f6f294a",
+      "sha256": "108970d3425734829ebb22af0438319c76819c6ac2472736dbc24c552d6920ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -185,7 +185,7 @@
                   "value": "32.86 hours"
                 }
               ],
-              "notes": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative.",
+              "notes": "A smooth approximation of the published proportions. Its thickness is uncertain. Neutral gray marks missing surface imagery; it does not show terrain. Rotation phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             }
           ]
@@ -259,7 +259,7 @@
       "sha256": "67de482ce30f232038f9c589720c818014aa31422e1c8d73ce3f53559c3b1b9a",
       "bytes": 1334,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -276,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ab2042e32f679c3c3109ac81966e57916d9d19f65dac8391f89a30ac8f6f294a",
-      "bytes": 2493,
+      "sha256": "108970d3425734829ebb22af0438319c76819c6ac2472736dbc24c552d6920ea",
+      "bytes": 2595,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -309,15 +309,15 @@
       "outputs": [
         {
           "url": "/scenes/comet-162p/comet-162p-model-thumbnail.webp",
-          "bytes": 1048,
-          "sha256": "c6eab94c3282fb7047bae639b931d8ee44e897e206a0d0b0c0bf09e1917882a1",
-          "verification": "bytes-verified"
+          "bytes": 704,
+          "sha256": "ab2b0d4976c7f1826cf08b3cf5f8a0a15942c8fd13cfd0403d1858066eab3489",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-162p/comet-162p-model-surface@2x.webp",
-          "bytes": 85410,
-          "sha256": "b14af4531cc67048fdc99219f5f4ac17e6029a7bb2f11e127a1f4188db21550b",
-          "verification": "bytes-verified"
+          "bytes": 44002,
+          "sha256": "e1b2be65e9faa30633d3c3dc2dae6de097cd5b1bd1d1052dab45f975762f27f4",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

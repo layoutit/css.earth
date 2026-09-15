@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1999-fr33",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab7fda3e641174aadeb8753e5562c38459eeece1f28ed402e780c5e6c9c6f7a6"
+    "sha256": "499386d71142c49afd4c98dfcd5dd009b057c2ad4cd3317128d569c894e3a20b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ca44a09cac4c52e9b612244eee1614f52f7852ea82347a96a0e932f0c8fe2c16",
+      "sha256": "c1e6c2ba3d7d4a839631283f7a3ad2cdb1b02183ca74c2a52d4857fba079790a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 5.754 ± 0.174 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "notes": "Thermal diameter 5.754 ± 0.174 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "4b80f749069df27aeffc6c40e144a9b7a75ee36025e0845e5fe2a313eb0bc8c5",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "ca44a09cac4c52e9b612244eee1614f52f7852ea82347a96a0e932f0c8fe2c16",
+      "sha256": "c1e6c2ba3d7d4a839631283f7a3ad2cdb1b02183ca74c2a52d4857fba079790a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10755,
+      "bytes": 10853,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-thumbnail.webp",
           "bytes": 5444,
           "sha256": "3483429d0c51b4b23456252d7d10332945378737987e318a5efff48e715451ad",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-surface@2x.webp",
           "bytes": 327852,
           "sha256": "db80841e70756b666a36308b5e88e2e82258f140b80ddae825868ff2f98ca74b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
-          "bytes": 211910,
-          "sha256": "20bf82313afa6203e05dd263fddebe4292793f09c1db2364ba1143669172d431",
-          "verification": "bytes-verified"
+          "bytes": 70864,
+          "sha256": "f09f5e79d0d2488425d08b7a545574eba963b655c4bdc55ea6567cd3509c970c",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

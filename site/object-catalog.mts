@@ -1,3 +1,4 @@
+import type { ObjectDiscovery } from './object-discovery.mts';
 import { record } from './browser-types.mts';
 import { defineObject } from './object-schema.mts';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.mts';
@@ -21,16 +22,18 @@ function order(value: unknown): number | undefined {
 }
 
 /** Decode package metadata at both the build and application boundaries. */
-export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['loadScene'], distance: NavigationDistance): CatalogEntry {
+export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['loadScene'], distance: NavigationDistance, discovery?: ObjectDiscovery): CatalogEntry {
   if (!record(input) || input.schema !== 'cssearth-object@1' || typeof input.id !== 'string' || !record(input.properties)) {
     throw new TypeError('Invalid catalogue descriptor.');
   }
   const catalog = input.properties.catalog;
   if (!record(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
-  const keys = ['name', 'systemName', 'classification', 'color', 'distanceAu', 'description', 'order', 'context'];
+  const keys = ['name', 'systemName', 'classification', 'color', 'distanceAu', 'description', 'order', 'context', 'featured', 'illustrationLenses'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
       typeof color !== 'string' || typeof distanceAu !== 'number' || typeof description !== 'string') throw new TypeError(`Invalid catalogue metadata: ${input.id}.`);
+  if (catalog.featured !== undefined && typeof catalog.featured !== 'boolean' || catalog.illustrationLenses !== undefined &&
+      (!Array.isArray(catalog.illustrationLenses) || !catalog.illustrationLenses.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)))) throw new TypeError(`Invalid discovery metadata: ${input.id}.`);
   let context: CatalogContext | undefined;
   if (catalog.context !== undefined) {
     const value = catalog.context;
@@ -46,5 +49,5 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   // validated as authored metadata but never published as a measured distance.
   return { ...defineObject({ id: input.id, name, systemName, color, distance, description,
     classification: classification(catalog.classification), route: `/${input.id}/`,
-    worldFrame: input.properties.worldFrame, loadScene }), order: order(catalog.order), ...(context ? { context } : {}) };
+    worldFrame: input.properties.worldFrame, discovery, loadScene }), order: order(catalog.order), ...(context ? { context } : {}) };
 }

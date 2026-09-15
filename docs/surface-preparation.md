@@ -407,3 +407,25 @@ product version, band, projection and lunar reference sphere, then integrates
 source pixel footprints before applying display gain/gamma. Source special values
 are masked before sampling; observed black is retained. It reads one row strip
 at a time and supplies the same interpretation to the globe and sidebar map.
+
+## Internal fill for globe seams
+
+Spherical and ellipsoidal objects share one retained interior disc. Irregular
+body meshes are excluded. The common presentation compiler measures the actual
+surface leaf planes in the body's frame and fits an inner ellipsoid behind
+them. It reserves two raster pixels around the 512px disc for antialiasing.
+Every point on the camera-facing disc stays inside those prepared bounds as the
+camera moves; it does not enlarge the exterior silhouette.
+
+The disc uses the alpha-weighted mean of the active prepared surface images,
+including all pages of a paged dataset. Dataset selection changes that prepared
+color. Cutaway views hide the disc. The runtime only transports its prepared
+shape with the shared physical camera; it does not read image pixels or build
+surface geometry.
+
+The common compiler prepares this during normal object finalization. To refresh
+only this metadata from existing local assets, run
+`node tools/prepare-interior-fills.mts --all` (or supply object ids). The command
+preserves surface assets, motion, lighting and depth partitions, and re-pins the
+scene and page metadata. Source graphs are retained only after checking that
+their inputs changed solely in those scene references.

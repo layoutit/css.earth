@@ -166,8 +166,13 @@ Examples of the reasoning, not dimensions to copy to other bodies:
   sourced size scale; it does not establish three measured axes or a unique pole.
 
 Keep the approximate status and material assumptions visible beside the body,
-using existing body-owned content. Use the normal missing-data grid where texels
-are unqualified; a grid does not validate the underlying geometry. Do not invent
+using existing body-owned content. Shape-only views use the shared neutral gray
+(`#808080` sRGB), a display convention rather than measured color or albedo.
+The default shape view includes gentle baked normal-based shading; Shadows on
+adds the stronger prepared directional and source-cast lighting. See the shared
+[shape-only material policy](../../../../docs/shape-only-material.md).
+Keep the missing-data grid for unqualified texels within photographic or scientific
+datasets. Neither material validates the underlying geometry. Do not invent
 surface detail or claim an observational lens. Respect the user's geometry budget
 and distinguish simplification from scientific certainty.
 

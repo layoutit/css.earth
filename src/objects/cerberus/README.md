@@ -1,5 +1,7 @@
 # (1865) Cerberus
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 Checked 2026-09-09. Original [DAMIT model 456](https://damit.cuni.cz/projects/damit/asteroid_models/view/456), version 2016-04-22.

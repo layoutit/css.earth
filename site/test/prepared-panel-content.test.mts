@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
 
 type PanelContentInput = { schema: string; title: { baseline: unknown }; facts: { value: unknown }[] };
 type PanelControlsInput = { lenses: { controls: Record<string, unknown>[] } };
 const read = async (id: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/${file}.json`, import.meta.url), 'utf8'));
 
-test('every registered object supplies typed shared panel content and controls', async () => {
-  for (const { id } of OBJECTS) {
+test('every registered scene supplies typed shared panel content and controls', async () => {
+  for (const { id } of SCENE_OBJECTS) {
     const content = parsePreparedPanelContent(await read(id, 'content'));
     const controls = parsePanelControls(await read(id, 'controls'));
     assert.equal(content.objectId, id);

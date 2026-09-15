@@ -172,6 +172,7 @@ src/objects/*/source/**/*.bpc
 /site/prepared-sources.json
 /site/prepared-machines.json
 /site/prepared-object-catalog.mts
+/site/prepared-object-discovery.json
 /site/prepared-context-objects.mts
 /site/prepared-feature-index.json
 /public/features/
@@ -180,6 +181,7 @@ src/objects/*/source/**/*.bpc
 /src/platform/solar-geometry.mts
 /src/objects/sun/prepared/world-context.json
 /site/minimap/prepared.json
+/site/moon-labels.prepared.json
 
 # AKARI AcuA v1: restored and verified from each body source manifest.
 /src/objects/*/source/reference/AcuA_V1.txt.gz
@@ -274,3 +276,9 @@ src/spice/**/*.bc
 !/src/objects/nearby-universe/prepared/
 /src/objects/nearby-universe/prepared/*
 !/src/objects/nearby-universe/prepared/manifest.json
+
+# Nebula lens/axis atlases are reproduced by the delivery bake.
+/src/objects/lmc/prepared/*/atlases/*.webp
+
+# Compact registered material inputs; runtime slice/atlas outputs remain ignored.
+!src/objects/lmc/source/bake-inputs/*.png

@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "36a12de779f9ee900cd5f9963da8307528bf64ccbdf93eb63bfba3ff00bd97ac"
+          "sha256": "7780b90b379757d232c2ee4ea75eecf40fd05e9fc97af6fed44975a9f062fde7"
         },
         {
           "id": "title",
@@ -39,7 +39,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "87437d6e6012a10cd25ef0b9d1ae2456c8735a038fa0252c9537b1b5424b7f2c"
+          "sha256": "3b63e20ee1ae00da8484a3131834b9b899a9fbc01832d155d2eb1a0a158e4ce2"
         },
         {
           "id": "acquisition",
@@ -93,7 +93,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2bba300e333da2bd700e89e0ba858dd1f2a212cdf39e7950ecb6e6e801294197"
+        "sha256": "fcffacb79118683a9d1d35949569ab912323a36a7255fe4d204b6156d68ed00c"
       }
     },
     "worldFrame": {
@@ -124,6 +124,7 @@
       "bodyRadiusM": 695.2053289772899
     },
     "catalog": {
+      "illustrationLenses": ["shape"],
       "name": "Dactyl",
       "systemName": "Solar System",
       "classification": "satellite",
@@ -136,6 +137,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e968fcebfec91b47918a237ef2a59eb493fca64bbcf4efa3026f11035e0edd6e"
+    "sha256": "156aba9745999d946aa9fe8d759cc4172e16c3796145c5c8369b1d95cd11eb5d"
   }
 }

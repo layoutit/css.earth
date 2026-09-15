@@ -78,7 +78,7 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
   expect(labels.root.className).toBe('prepared-environment-labels');
   expect(nodes['deep-cloud']!.textContent).toBe('Authored Galaxy');
   expect(nodes['outer-shell']!.textContent).toBe('Outer Shell');
-  expect(nodes['deep-cloud']!.style.cssText).toContain('font:400 14px/18px ui-sans-serif');
+  expect(nodes['deep-cloud']!.className).toBe('prepared-context-label');
 
   // Captions measure themselves when first shown, never at mount: measuring
   // there flushed the whole starting page's layout for far-out labels.
@@ -92,31 +92,31 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
   expect(nodes['deep-cloud']!.style.opacity).toBe('0');
   expect(nodes['outer-shell']!.style.transform).toBe('translate(200px,-45.5px) translate(-50%,-100%)');
   clock.frame(100);
-  expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.5, 12);
-  expect(Number(nodes['outer-shell']!.style.opacity)).toBeCloseTo(.2, 12);
+  expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.325, 12);
+  expect(Number(nodes['outer-shell']!.style.opacity)).toBeCloseTo(.13, 12);
   clock.frame(100);
-  expect(nodes['deep-cloud']!.style.opacity).toBe('1');
-  expect(nodes['outer-shell']!.style.opacity).toBe('0.4');
+  expect(nodes['deep-cloud']!.style.opacity).toBe('0.65');
+  expect(nodes['outer-shell']!.style.opacity).toBe('0.26');
   expect(labels.labelExclusionRects()).toBe(first);
 
   labels.publish({ world: world([0, 0, 150]), viewport, shellStats: [stats(.4), stats(.6)] });
   expect(nodes['deep-cloud']!.style.transform).toBe('translate(0px,72px) translate(-50%,-100%)');
-  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.75, 12);
-  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.5, 12);
+  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.4875, 12);
+  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.325, 12);
   labels.publish({ world: world([0, 0, 50]), viewport, shellStats: [stats(.4), stats(.6)] });
   // Inside the volume the caption fades to nothing, so it keeps the last anchor
   // it committed instead of tracking one it will not show.
   expect(nodes['deep-cloud']!.style.transform).toBe('translate(0px,72px) translate(-50%,-100%)');
-  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.25, 12);
+  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.1625, 12);
   expect(nodes['deep-cloud']!.style.visibility).toBe('');
   labels.publish({ world: world([0, 0, 150]), viewport, shellStats: [stats(.4), stats(.6)] });
-  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.375, 12);
+  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.24375, 12);
   vi.advanceTimersByTime(200); expect(nodes['deep-cloud']!.style.visibility).toBe('');
 
   labels.publish({ world: world([0, 0, 300]), viewport, shellStats: [stats(.4), stats(.6)] });
   clock.frame(200);
   labels.publish({ world: world([0, 0, 300]), viewport, shellStats: [stats(0), stats(.6)] });
-  clock.frame(100); vi.advanceTimersByTime(100); expect(Number(nodes['outer-shell']!.style.opacity)).toBeCloseTo(.2, 12);
+  clock.frame(100); vi.advanceTimersByTime(100); expect(Number(nodes['outer-shell']!.style.opacity)).toBeCloseTo(.13, 12);
   expect(nodes['outer-shell']!.style.visibility).toBe('');
   labels.publish({ world: world([0, 0, 300]), viewport, shellStats: [stats(0), stats(.6)] });
   clock.frame(100); vi.advanceTimersByTime(100); expect(nodes['outer-shell']!.style.visibility).toBe('hidden');
@@ -126,9 +126,9 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
   labels.publish({ world: world([0, 0, 150]), viewport, shellStats: [stats(.4), stats(.6)],
     blockerRects: [{ left: -400, top: -300, right: 400, bottom: 300 }] });
   expect(nodes['deep-cloud']!.style.transform).toBe('translate(0px,72px) translate(-50%,-100%)');
-  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.5, 12);
+  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.325, 12);
   labels.publish({ world: world([0, 0, 300]), viewport, shellStats: [stats(.4), stats(.6)] });
-  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.75, 12);
+  clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.4875, 12);
   vi.advanceTimersByTime(200); expect(nodes['deep-cloud']!.style.visibility).toBe('');
   expect([...host.children, ...labels.root.children]).toEqual(retained);
 

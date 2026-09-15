@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dinkinesh",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "365fb95228941184cf5cc266f410f72afd39d45ad05578f5ae2e7b3c9f65836e"
+    "sha256": "742932046e2d13dcd739e17cf3d483e507f23f51f61804df00dafe469db97245"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -120,7 +120,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "72f3c36ce8b0ec32e356b7f3905e99724b201793c15902d749829b00ca1a873d",
+      "sha256": "b50f6f599fa5d2d441025aa191a9682cc76705862f75a582a32a439c0fc7168f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,7 @@
                 "path": "../manifest.json",
                 "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
               },
-              "notes": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain.",
+              "notes": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. Neutral gray marks missing qualified photography; it does not mark measured terrain. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -187,7 +187,8 @@
                 "path": "../manifest.json",
                 "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod"
               },
-              "noData": true
+              "noData": true,
+              "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
             }
           ]
         },
@@ -341,7 +342,7 @@
       "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
       "bytes": 237239,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +379,7 @@
       "sha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
       "bytes": 1476,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -413,7 +414,7 @@
       "sha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "bytes": 8490675,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -430,10 +431,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "72f3c36ce8b0ec32e356b7f3905e99724b201793c15902d749829b00ca1a873d",
-      "bytes": 4739,
+      "sha256": "b50f6f599fa5d2d441025aa191a9682cc76705862f75a582a32a439c0fc7168f",
+      "bytes": 4959,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -455,7 +456,7 @@
       "sha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
       "bytes": 1319,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -481,7 +482,7 @@
       "sha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
       "bytes": 14569,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -510,7 +511,7 @@
       "sha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
       "bytes": 156,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -537,7 +538,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -568,15 +569,15 @@
       "outputs": [
         {
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-thumbnail.webp",
-          "bytes": 444,
-          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
-          "bytes": 96138,
-          "sha256": "0666a03d38bb752031a5f167eb9a7ec8c5bbba80c84089622c523702a45bf2de",
-          "verification": "bytes-verified"
+          "bytes": 46276,
+          "sha256": "6e82dc482d752931f9cca7e2d8dc2de46a4d09f83f7b6ceb95bbcbe4469c45ff",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -613,15 +614,15 @@
       "outputs": [
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
-          "bytes": 444,
-          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
-          "bytes": 98238,
-          "sha256": "d5968fdbef52eea2f5ab8fccb6a81cb2cd56818a1009216770d8ca1fcf62265c",
-          "verification": "bytes-verified"
+          "bytes": 40424,
+          "sha256": "a80cfdf3fe449ef06fe6d5aa7328d997845c058e51ded2cc1b68a23ec7e657aa",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -690,7 +691,7 @@
           "url": "/scenes/dinkinesh/dinkinesh-features.json",
           "bytes": 3841,
           "sha256": "5d760d17fb3cddb25203c267c8f3204cb0ae4afab999d2a618ccd08e84a3febe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -714,8 +715,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/tempest-shape.webp",
-          "bytes": 2958,
-          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "bytes": 290,
+          "sha256": "c77e7f0c517b8d938751eb557cdaa3f86d50a9a017506ecca452642081a8f254",
           "verification": "bytes-verified"
         }
       ]
@@ -739,8 +740,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2958,
-          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "bytes": 290,
+          "sha256": "c77e7f0c517b8d938751eb557cdaa3f86d50a9a017506ecca452642081a8f254",
           "verification": "bytes-verified"
         }
       ]

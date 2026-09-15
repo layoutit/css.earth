@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hela",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b871bb6714f62123cf17ef31764121558f3a1ca4c719770a3ebb80f9d6530ba"
+    "sha256": "73b71f1bb86c9c102d72b53c4be45bad43cc9eb16db3dbf17536049cbe5c71f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "81e934b0c329e03f6c6cb172b10c026cd40be060ce02a47cb2882df9dd9ee601",
+      "sha256": "ceb5899019f2b70ef5ca5d94c9c525d87120bbcd109e436739c899b5fc97c996",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+              "notes": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Neutral gray marks unavailable imagery; pole ambiguity is retained in source notes. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -350,7 +350,7 @@
       "sha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
       "bytes": 128392,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -375,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "81e934b0c329e03f6c6cb172b10c026cd40be060ce02a47cb2882df9dd9ee601",
-      "bytes": 8044,
+      "sha256": "ceb5899019f2b70ef5ca5d94c9c525d87120bbcd109e436739c899b5fc97c996",
+      "bytes": 8150,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/hela/hela-elevation-thumbnail.webp",
           "bytes": 4614,
           "sha256": "de54c42dd7605979ca7ee3aff1049f45660abc5ee94b309fde636f1f1a24e1db",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hela/hela-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hela/hela-elevation-surface@2x.webp",
           "bytes": 290106,
           "sha256": "5eafab36e9370b715d37e2fd86e37e60494a4ca0243dfbc71597538c39ba544c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -458,15 +458,15 @@
       "outputs": [
         {
           "url": "/scenes/hela/hela-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hela/hela-shape-surface@2x.webp",
-          "bytes": 185374,
-          "sha256": "689746603b7869ca546ba813dd682f91bb5af5c129264fb514f58a7e40be8c7f",
-          "verification": "bytes-verified"
+          "bytes": 60722,
+          "sha256": "d4f42f3759acc5006497233b01a0f2f220c9565d8db935af4e9ca78768a37f18",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -523,8 +523,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a44679933fb9c8a0dc8da26d74cec77480ea969175443ce194720e548d865764"
+          "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "d2b25884a9efda66cb0bfca42d07be9035e228a958369d1d1b1b06048a4c1d24"
+          "sha256": "5732ea6b441cfdf0f3beb8a4aa75d124344c4ccf664db2994ca8e3c154cb47fa"
         },
         {
           "id": "acquisition",
@@ -110,10 +110,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c075ee32bc44c08eef952d24f7f3f8014d4cc8a1b1f19e4726e24fb5ca9644c1"
+        "sha256": "7de1b0ff680a48b60ba537de189a4cd437ae645219f4dc4d9c63075cb5ec9874"
       }
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Encke",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f1ffb4d46ed3603e9d512c67a11a7d884dd41c9a41871aabcbdafece6d20b768"
+    "sha256": "6959b0168cd3a6fda9e598f1721eb2801a50953b9000f64a27265d62f2246cf9"
   }
 }

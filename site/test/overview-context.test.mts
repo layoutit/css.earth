@@ -4,6 +4,7 @@ import preparedContext from '../../src/objects/sun/prepared/world-context.json' 
 import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
 import { presentWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
+import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
 
 // The same validated plan the application mounts; the raw JSON import is untyped.
 const context = parsePreparedWorldContext(preparedContext);
@@ -20,6 +21,22 @@ const camera = (distance: number, plan: Pick<typeof context, 'focus'> = context)
 const frameAt = (originM: PreparedWorldCameraFrame['originM'], bodyRadiusM: number): PreparedWorldCameraFrame => ({
   originM, bodyRadiusM, referenceFrame: 'world', epochJdTt: 1,
   presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1,
+});
+
+test('body cards retain overview through small boundary reversals for bodies with and without moons', () => {
+  const frame = frameAt([0, 0, 0], 1000);
+  const optics: ReturnType<ObjectWorldNavigation['optics']> = { framingRadiusPixels: 400, visibleRect: null,
+    focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1200, heightPixels: 800, detailHandoffDiameterPixels: 14 };
+  for (const id of ['fixture', 'saturn']) {
+    const radius = SYSTEM_FRAMING_RADII.get(id);
+    const threshold = radius ? systemOverviewDistance(1000, radius, optics) : 1000 * Math.sqrt(1 + (2000 / 14) ** 2);
+    let previous: 'detail' | 'overview' = 'detail';
+    for (const factor of [1.01, .99, 1.005, .98]) {
+      previous = bodyCardViewAtCamera(camera(threshold * factor, { focus: { ...context.focus, positionM: [0, 0, 0] } }), frame, optics, id, previous);
+      assert.equal(previous, 'overview');
+    }
+    assert.equal(bodyCardViewAtCamera(camera(threshold * .85, { focus: { ...context.focus, positionM: [0, 0, 0] } }), frame, optics, id, previous), 'detail');
+  }
 });
 
 test('body cards switch at the shared camera detail threshold, independent of camera aim', () => {

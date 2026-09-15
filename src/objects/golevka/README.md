@@ -1,5 +1,7 @@
 # Golevka
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Golevka is a near-Earth asteroid whose radar reconstruction has angular faces, sharp edges and large concavities.
 
 ## Sources

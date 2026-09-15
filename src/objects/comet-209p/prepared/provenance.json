@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-209p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1bd7b74aee2a67cc3ab6be5c530cd452bc02481eb6cb43d942eb580a204c4571"
+    "sha256": "18c2cfacc1b03121d73db95c9b56dc402c5f9a89241dd0f3a52a7848cd8cee5b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "827a14ff75e3339291a9b79b0722bdb4ac888a498807b6d07c510f63938926b0",
+      "sha256": "ff9d8ce50c6c3f832822aabd3984059b856d223069c11abc7bcd5b9371fc68fc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -185,7 +185,7 @@
                   "value": "≈10.9 hours"
                 }
               ],
-              "notes": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative.",
+              "notes": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. Neutral gray marks absent surface photographs; the orientation is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             }
           ]
@@ -259,7 +259,7 @@
       "sha256": "dc650cb624fe902e34a7c35d9cba7a754fd6766754a63bcb9a6192c9cbe81da6",
       "bytes": 944,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -276,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "827a14ff75e3339291a9b79b0722bdb4ac888a498807b6d07c510f63938926b0",
-      "bytes": 2610,
+      "sha256": "ff9d8ce50c6c3f832822aabd3984059b856d223069c11abc7bcd5b9371fc68fc",
+      "bytes": 2712,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -309,15 +309,15 @@
       "outputs": [
         {
           "url": "/scenes/comet-209p/comet-209p-model-thumbnail.webp",
-          "bytes": 1480,
-          "sha256": "0d11a324311fb5cd30589f0ef600688897bac19321333de46734ef5ec4bb460e",
-          "verification": "bytes-verified"
+          "bytes": 866,
+          "sha256": "bc73b571dcbd1423401e9d59a57807a12f8cf8998e6249405e9c7411fc37c679",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-209p/comet-209p-model-surface@2x.webp",
-          "bytes": 116052,
-          "sha256": "36587e00f26f1b505b25769c96cc5c78eed9eaca4db4c570a630eedb726a632b",
-          "verification": "bytes-verified"
+          "bytes": 42760,
+          "sha256": "8ca319387508f56f0d65a4aba4eb87d2d22a28e611163cf911e1e5889613bdd3",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

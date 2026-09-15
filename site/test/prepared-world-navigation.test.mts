@@ -14,6 +14,7 @@ import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/defer
 import type { ObjectPreparationView } from '../../src/renderers/css/runtime/prepared-object-navigation.ts';
 import type { SceneFactory } from '../browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
+import type { PreparedArrivalView } from '../arrival-view.mts';
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
@@ -23,11 +24,12 @@ type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWo
 type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
 const lifecycle = { ready: Promise.resolve(), sharedView: unusedSharedView, pause() {}, resume() {}, destroy() {} } satisfies Omit<ObjectSceneLifecycle, 'navigation'>;
 const identity = [1,0,0,0,1,0,0,0,1] as const;
-function fixtureFactory() {
+function fixtureFactory(arrival?: PreparedArrivalView) {
   const frames: Mutable<PreparedWorldCameraFrame>[] = [0, 1].map(index => ({ referenceFrame: 'world', epochJdTt: 1,
     originM: [index * 1e8, 0, 0], presentationToReference: identity, metersPerUnit: 1, bodyRadiusM: 1000,
     orbitUpReference: [0,1,0] }));
-  const objects = frames.map((worldFrame, index) => ({ id: String(index), worldFrame }));
+  const objects = frames.map((worldFrame, index) => ({ id: String(index), worldFrame,
+    ...(arrival && index === 1 ? { discovery: { featured: true, imagery: true, illustration: false, arrival } } : {}) }));
   const callbacks = new Map<number, FrameRequestCallback>(), documentTarget = new EventTarget();
   let next = 0, time = 0;
   let current: WorldCameraPose = { referenceFrame: 'world', epochJdTt: 1,
@@ -79,6 +81,52 @@ async function drainFrames<T>(fixture: ReturnType<typeof fixtureFactory>, { task
   }
 }
 const range = (pose: WorldCameraPose["pose"], origin: readonly number[]) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
+
+const photographicArrival: PreparedArrivalView = { defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,-1,0,0,0,-1] };
+
+test('scene selection and cross-object flight use the prepared photographic face', async () => {
+  const f = fixtureFactory(photographicArrival), frame = f.factory.navigation.frame, optics = f.navigation.optics();
+  const target = required(f.service.systemTarget({ objectId: '1', fromId: '0', mount: { ...lifecycle, navigation: f.navigation } }));
+  assert.deepEqual(presentWorldCamera(target, frame, optics).rotation, photographicArrival.rotation);
+  const handoff = await drainFrames(f, { task: f.start() });
+  const mount = f.mounted();
+  handoff.mountOptions.onNavigationReady?.(mount.navigation);
+  await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+  const arrived = presentWorldCamera(mount.navigation.capture(), frame, optics);
+  arrived.rotation.forEach((value, index) => assert.ok(Math.abs(value - photographicArrival.rotation[index]) < 1e-12));
+  assert.ok(required(arrived.centerPixels).every(value => Math.abs(value) < 1e-6));
+});
+
+test('saved views and explicit non-photographic datasets keep their requested direction', async () => {
+  for (const dataset of ['shape', 'photo']) {
+    const f = fixtureFactory(photographicArrival), frame = f.factory.navigation.frame, optics = f.navigation.optics();
+    const target = createWorldSelectionTarget(f.navigation.capture(), frame, optics);
+    const projection = presentWorldCamera(target, frame, optics);
+    const saved = formatSharedView({ preparedEpochJdTt: frame.epochJdTt,
+      playback: { times: [0], speed: 1, motionRequested: false },
+      camera: { distanceKilometers: projection.distanceM / 1000,
+        pose: { schema: 'cssearth-camera-pose@2', scene: projection.sceneMatrix } } });
+    const url = `https://example.test/1/?dataset=${dataset}${dataset === 'photo' ? `&${saved}` : ''}`;
+    const handoff = await drainFrames(f, { task: f.start({ url }) });
+    const mount = f.mounted();
+    handoff.mountOptions.onNavigationReady?.(mount.navigation);
+    await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+    closePose(mount.navigation.capture().pose, target.pose);
+  }
+});
+
+test('a prepared photographic angle never rotates a system overview or an explicit target', async () => {
+  const f = fixtureFactory(photographicArrival), from = f.navigation.capture();
+  const system = required(f.service.systemTarget({ objectId: '1', fromId: '0', mount: { ...lifecycle, navigation: f.navigation }, force: true }));
+  assert.deepEqual(system.pose.orientationXyzw, from.pose.orientationXyzw);
+  const target = required(f.service.centerTarget({ objectId: '1', fromId: '0', mount: { ...lifecycle, navigation: f.navigation }, force: true }));
+  assert.deepEqual(target.pose.orientationXyzw, from.pose.orientationXyzw);
+  const handoff = await drainFrames(f, { task: f.start({ targetWorldCamera: target }) });
+  const mount = f.mounted();
+  handoff.mountOptions.onNavigationReady?.(mount.navigation);
+  await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+  closePose(mount.navigation.capture().pose, target.pose);
+});
 
 test('a falsy camera publication failure rejects and releases native flight listeners', async () => {
   for (const failure of [null, undefined, false, 0, '']) {

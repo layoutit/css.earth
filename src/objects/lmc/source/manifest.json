@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
       "origin": "https://www.eso.org/public/images/eso1914a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1914a/",
-      "title": "Large Magellanic Cloud · ESO eso1914a",
+      "title": "Large Magellanic Cloud \u00b7 ESO eso1914a",
       "credit": "ESO/VMC Survey",
       "displayCredit": "ESO/VMC Survey",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -41,9 +41,9 @@
       "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
       "origin": "https://noirlab.edu/public/images/iotw2547a/",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/",
-      "title": "Large Magellanic Cloud · NOIRLab iotw2547a",
-      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
-      "displayCredit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "title": "Large Magellanic Cloud \u00b7 NOIRLab iotw2547a",
+      "credit": "NOIRLab/NSF/AURA/P. Hor\u00e1lek (Institute of Physics in Opava)",
+      "displayCredit": "NOIRLab/NSF/AURA/P. Hor\u00e1lek (Institute of Physics in Opava)",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
       "expectedSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
       "expectedBytes": 8507407,
@@ -64,9 +64,9 @@
         "attributions": [
           {
             "kind": "unresolved",
-            "label": "Petr Horálek",
+            "label": "Petr Hor\u00e1lek",
             "evidence": "https://noirlab.edu/public/images/iotw2547a/",
-            "reason": "The photograph credits Petr Horálek but does not identify the individual camera."
+            "reason": "The photograph credits Petr Hor\u00e1lek but does not identify the individual camera."
           }
         ]
       }
@@ -76,7 +76,7 @@
       "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
       "origin": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
       "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
-      "title": "Large Magellanic Cloud · AllWISE color mosaic",
+      "title": "Large Magellanic Cloud \u00b7 AllWISE color mosaic",
       "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "displayCredit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -158,7 +158,7 @@
           {
             "kind": "machine",
             "machineId": "swope-1m",
-            "evidence": "https://arxiv.org/abs/0905.1328 — section 2.3.2: table 3 UBVI columns are MCPS; https://arxiv.org/abs/astro-ph/0407006 section 2: Swope 1 m and Great Circle Camera. Preparation consumes B and V, not OGLE or infrared photometry."
+            "evidence": "https://arxiv.org/abs/0905.1328 \u2014 section 2.3.2: table 3 UBVI columns are MCPS; https://arxiv.org/abs/astro-ph/0407006 section 2: Swope 1 m and Great Circle Camera. Preparation consumes B and V, not OGLE or infrared photometry."
           },
           {
             "kind": "machine",
@@ -168,7 +168,7 @@
           {
             "kind": "unresolved",
             "label": "Bonanos literature astrometry and spectral classifications",
-            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1–2.3; labs/nebula/models/lmc/stars/source/refs.dat",
+            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1\u20132.3; labs/nebula/models/lmc/stars/source/refs.dat",
             "reason": "Positions and classifications combine literature records; an individual observing telescope has not been established for every retained catalogue row. The Swope and Curtis Schmidt attributions apply to the consumed MCPS B/V photometry."
           }
         ]
@@ -201,8 +201,8 @@
     {
       "id": "document-1",
       "path": "src/objects/lmc/source/lens-manifest.json",
-      "expectedSha256": "a6748babbb14411e3a5784792c5a24836b754fd6447829b2dd67de78e5cd943e",
-      "expectedBytes": 72546,
+      "expectedSha256": "dfc6b44b4da261e7c856a7d4a6ca0341d42d6c596bba09319f28ebb7acc957f5",
+      "expectedBytes": 4109,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -351,8 +351,8 @@
     {
       "id": "document-16",
       "path": "src/objects/lmc/source/presentation.json",
-      "expectedSha256": "1570c6c345ddbb422be1971ccc91ad7673f0e8511ee963ed9871bbabce56d6c9",
-      "expectedBytes": 5980,
+      "expectedSha256": "59e3cc91324213850dbbb60280b01ec7d08ac8cc0a5642a92f394bede97afe5e",
+      "expectedBytes": 6033,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -401,11 +401,102 @@
           {
             "kind": "machine",
             "machineId": "blanco-4m",
-            "evidence": "https://noirlab.edu/public/images/noirlab2030a/ — publisher-curated mirror https://www.astropix.org/image/noirlab/noirlab2030a identifies Blanco-4m/DECam in g, r, i and z; this historical image is retained as a source document."
+            "evidence": "https://noirlab.edu/public/images/noirlab2030a/ \u2014 publisher-curated mirror https://www.astropix.org/image/noirlab/noirlab2030a identifies Blanco-4m/DECam in g, r, i and z; this historical image is retained as a source document."
           }
         ]
       }
+    },
+    {
+      "id": "atlas-inputs",
+      "path": "src/objects/lmc/source/atlas-inputs.json",
+      "expectedSha256": "2f64334242d7d1b1254d38cbb2d5d785999628aed574c4d64a1e4f84f3366132",
+      "expectedBytes": 144006,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned accepted slice resource identities and leaf mapping for deterministic Q80/A80 atlas delivery; no geometry or scientific model changes."
+      }
     }
   ],
-  "generatedIntermediates": []
+  "generatedIntermediates": [
+    {
+      "id": "compact-bake-inputs-vista-infrared-png",
+      "path": "src/objects/lmc/source/bake-inputs/vista-infrared.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 1029854,
+      "expectedSha256": "1543315d7a098cf6b9f7efbe6fbc1ae0e4eda3a78a76d3f1f46d53af27f1c098"
+    },
+    {
+      "id": "compact-bake-inputs-wise-wide-infrared-png",
+      "path": "src/objects/lmc/source/bake-inputs/wise-wide-infrared.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 395441,
+      "expectedSha256": "336adcd5f4d9230d377a98f426b34c83f9cdc2c234a8062376346fcea078269c"
+    },
+    {
+      "id": "compact-bake-inputs-README-md",
+      "path": "src/objects/lmc/source/bake-inputs/README.md",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 1914,
+      "expectedSha256": "f4185998159a915877213674435d75f2dc1c140436717fa9703537625843b2af"
+    },
+    {
+      "id": "compact-bake-inputs-inputs-json",
+      "path": "src/objects/lmc/source/bake-inputs/inputs.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 3159,
+      "expectedSha256": "cfb652b3d316d3164dcf67974af787a2fc95b11a94465185e8a0dd2511d53cc2"
+    },
+    {
+      "id": "compact-bake-inputs-horalek-widefield-png",
+      "path": "src/objects/lmc/source/bake-inputs/horalek-widefield.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 1177007,
+      "expectedSha256": "fc8e9fa739c506156e067e4f1331bbdf3ce9e25baaa932b35af6c230c771136e"
+    },
+    {
+      "id": "compact-bake-inputs-density-volume-json",
+      "path": "src/objects/lmc/source/bake-inputs/density/volume.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 1370,
+      "expectedSha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+    },
+    {
+      "id": "compact-bake-inputs-density-provenance-json",
+      "path": "src/objects/lmc/source/bake-inputs/density/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 5801,
+      "expectedSha256": "259147f9067bf5e9e9389d95d8fc94e34c5e9f2e249bb59679b0fdcac5469bb9"
+    },
+    {
+      "id": "compact-bake-inputs-density-density-ktx2",
+      "path": "src/objects/lmc/source/bake-inputs/density/density.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 315857,
+      "expectedSha256": "874682f828f1143ada8d4013f1a80634019f83d6ff6e7d906e51b0a764929f60"
+    }
+  ]
 }

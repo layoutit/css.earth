@@ -1,5 +1,7 @@
 # (302) Clarissa
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **296**, version **2011-02-17**. DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2011), Hanuš (2011); model 296, version 2011-02-17.
 
-Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ Table3 gives volume-equivalent43±4 km for this pole; local surface relief is un
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 297, pole ['190', '-72'], [Model 297](https://damit.cuni.cz/projects/damit/asteroid_models/view/297)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 297, pole ['190', '-72'], [Model 297](https://damit.cuni.cz/projects/damit/asteroid_models/view/297)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

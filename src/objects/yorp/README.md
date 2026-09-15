@@ -1,5 +1,7 @@
 # YORP
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 YORP is a small near-Earth asteroid with a radar-derived flattened northern hemisphere and a prominent concavity.
 
 ## Sources
