@@ -34,7 +34,7 @@ const banks = Object.entries(descriptors).filter(([, descriptor]) => (descriptor
   </div>)}
 </div> : <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
-  <DatasetLenses objectId={`focus-${bank.id}`} route={`/${objectId}/`} lenses={presentation} {provenance} controlName="focusLens" />
+  <DatasetLenses objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={`/${objectId}/`} lenses={presentation} {provenance} controlName="focusLens" />
     {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
       <input type="checkbox" data-focus-stars name="focusStars" form={`focus-${bank.id}-datasets`} checked />
       <span class="planet-setting-text">Catalogue stars</span>

@@ -10,6 +10,7 @@ import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
 import { sceneSources, sceneSourceGroups } from "../scene-sources.mts";
+import SourceRow from './SourceRow.astro';
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
@@ -296,9 +297,11 @@ const searchCategories = ([
             <p class="planet-introduction" data-focus-reference></p>
           </PlanetAccordion>
           <h2 class="planet-lens-details-title">Sources</h2>
-          <div class="planet-resources-links">
-            {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
-          </div>
+          <ul class="planet-resources-links">
+            {Array.from({ length: 3 }, () => <SourceRow data-focus-source-row hidden>
+              <a class="planet-resource-label" data-focus-source target="_blank" rel="noreferrer" hidden></a>
+            </SourceRow>)}
+          </ul>
         </div>
       </PlanetCard>
       <PlanetCard class="planet-galactic-overview planet-overview-card" data-galactic-overview hidden>
@@ -337,10 +340,8 @@ const searchCategories = ([
         <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-sources-content`}
           role="region" aria-label="Sources">
           <ul class="planet-resources-links">
-            {sources.filter(source => ['galaxy','sky'].includes(source.role)).map(source => <li class="planet-resource-row">
-              <a class="planet-resource-label" href={source.href} target="_blank" rel="noreferrer">{source.label}</a>
-              <span class="planet-resource-description">{source.description}</span>
-            </li>)}
+            {sources.filter(source => ['galaxy','sky'].includes(source.role)).map(source => <SourceRow
+              links={[{id: source.role, href: source.href, title: source.label}]} credit={source.description} />)}
           </ul>
         </div>
       </PlanetCard>

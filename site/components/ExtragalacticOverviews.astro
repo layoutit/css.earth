@@ -4,6 +4,7 @@ import PlanetCard from './PlanetCard.astro';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
+import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/catalog';
 import galaxies from '../../src/objects/local-group/prepared/catalogue.json';
@@ -46,7 +47,7 @@ const groups = [
           Math.hypot(...object.positionM.map((value, axis) => value - origin.positionM[axis])) / 3.085677581491367e16])))}>
 
         <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={object.href} data-prepared-focus-id={object.focusId}>
-          <span class="planet-lens-icon"><span class="planet-navigation-marker catalog-navigation-marker" aria-hidden="true" /></span>
+          <span class="planet-lens-icon"><ContextNavigationMarker objectId={object.id} /></span>
           <span class="planet-object-name planet-lens-label">{object.name}</span>
           <span class="planet-object-distance planet-lens-detail" title="Published catalogue distance from the Solar System">
             <span class="planet-object-distance-value">≈{distance(object.distancePc ?? 0).value}</span>{" "}

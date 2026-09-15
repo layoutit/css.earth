@@ -11,6 +11,7 @@ import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
+import SourceRow from './SourceRow.astro';
 const { objectId, lenses, provenance } = Astro.props;
 const contexts = (lenses?.controls ?? []).map(lens => ({ lens,
   ...datasetContext(objectId, lens.id, provenance, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
@@ -99,14 +100,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
         <div class="planet-card-tabpanel">
           <h2 class="planet-lens-details-title">Sources</h2>
           <ul class="planet-resources-links">
-            {context.sources.map(group => <li class="planet-resource-row">
-              {group.links.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
-              {group.credit && <span class="planet-resource-description">{group.credit}</span>}
-              {group.supporting.length > 0 && <details class="planet-resource-supporting">
-                <summary>{group.supporting.length} supporting {group.supporting.length === 1 ? 'file' : 'files'}</summary>
-                {group.supporting.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
-              </details>}
-            </li>)}
+            {context.sources.map(group => <SourceRow {...group} />)}
           </ul>
         </div>
       </PlanetCard>}
