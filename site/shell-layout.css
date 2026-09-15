@@ -153,7 +153,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 /* The version shares the wordmark's baseline. */
 .explorer-brand-version {
   color: var(--shell-text-muted);
-  font: 400 13px/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
   text-decoration: none;
 }
 .explorer-brand-version:is(:hover, :focus-visible) { color: var(--shell-text); }
@@ -177,7 +177,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   border: 0;
   border-radius: var(--explorer-control-radius);
   background: var(--explorer-header-control-background);
-  font: 400 15px/20px var(--shell-ui-font);
+  font: var(--shell-font-content);
   letter-spacing: 0.1px;
 }
 
@@ -315,7 +315,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   background: transparent;
   box-shadow: none;
   color: var(--explorer-control-text);
-  font: 400 15px/20px var(--shell-ui-font);
+  font: var(--shell-font-content);
   white-space: nowrap;
   cursor: pointer;
   touch-action: manipulation;
@@ -678,6 +678,8 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     /* Room for the Settings avatar and the clear button beside it. */
     padding-inline-end: calc(var(--explorer-search-height) + 32px);
     box-shadow: var(--explorer-float-shadow);
+    /* The field inherits this font; keep the mobile size on its owner. */
+    font-size: 16px;
   }
   /* Clear stays left of the avatar instead of under it. */
   .explorer-shell-header .planet-sidebar-search-clear { right: 52px; }
