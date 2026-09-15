@@ -1,0 +1,40 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { mkdtemp, cp, readFile, writeFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { createHash } from "node:crypto";
+import { replayCompactSymmetry } from "./compact-symmetry";
+const path = "src/objects/m2-9/source/compact/model.json";
+const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
+test("retained symmetry fields replay accepted slices without source photographs", async () => {
+  const root = await mkdtemp(join(tmpdir(), "nebula-symmetry-"));
+  try {
+    await cp(
+      "src/objects/m2-9/source/compact",
+      join(root, "src/objects/m2-9/source/compact"),
+      { recursive: true },
+    );
+    const bytes = await readFile(join(root, path));
+    const result = await replayCompactSymmetry(
+      root,
+      { path, sha256: sha(bytes) },
+      "prepared",
+    );
+    assert.equal(result.volume.resources.length, 144);
+    const corrupt = await readFile(
+      join(root, "src/objects/m2-9/source/compact/emission-0.f32.gz"),
+    );
+    corrupt[0] = corrupt[0]! ^ 1;
+    await writeFile(
+      join(root, "src/objects/m2-9/source/compact/emission-0.f32.gz"),
+      corrupt,
+    );
+    await assert.rejects(
+      replayCompactSymmetry(root, { path, sha256: sha(bytes) }, "broken"),
+      /pin differs/,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

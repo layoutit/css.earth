@@ -29,7 +29,7 @@ async function put(root: string, path: string, bytes: Uint8Array | string) {
 }
 async function fixture(root: string) {
   // The delivery identity reads these source files from its checkout; keep the fixture isolated.
-  for (const directory of ['labs/nebula/src/delivery','src/renderers/css/preparation','src/renderers/css/volume']) {
+  for (const directory of ['labs/nebula/src/delivery','src/renderers/css/preparation','src/renderers/css/volume','src/preparation/volume']) {
     for (const name of await readdir(directory)) {
       if (!name.endsWith('.ts')) continue;
       const path = `${directory}/${name}`;
@@ -46,7 +46,7 @@ async function fixture(root: string) {
   }
   await put(root,'input/request.json',request);
   await put(directory,'source/delivery.json',JSON.stringify({...recipe,
-    request:{path:'input/request.json',sha256:hash(request)},inputPins:[],symmetryDirectory:'input'}));
+    request:{path:'input/request.json',sha256:hash(request)},inputPins:[],compactInputs:undefined,compactMethod:undefined,symmetryDirectory:'input'}));
   await copyFile('src/objects/m2-9/source/nebula.json',join(directory,'source/nebula.json'));
   const pixels = await sharp({create:{width:2,height:2,channels:4,background:{r:220,g:80,b:30,alpha:0.6}}}).png().toBuffer();
   const matrices: Record<VolumeAxis,string> = {
@@ -88,7 +88,9 @@ test('delivery restores missing impostors, rejects drift and rebuilds when their
       assert.equal(hash(bytes),resource.sha256);
       assert.equal(bytes.length,resource.bytes);
     }
-    assert.deepEqual(await readFile(join(directory,'prepared/hst-optical/slice.png')),pixels);
+    assert.equal(lens.volume.resources.filter(resource=>resource.path.includes('/atlases/')).length,3);
+    assert.ok(lens.volume.stacks.every(stack=>stack.leaves.every(leaf=>leaf.texturePath === `hst-optical/atlases/${stack.axis}.webp`)));
+    await assert.rejects(readFile(join(directory,'prepared/hst-optical/slice.png')),/ENOENT/);
     assert.equal((await prepareNebulaObject(root,directory,true)).status,'verified');
 
     const proxy = proxies[0]!, path = join(directory,'prepared',proxy.path), original = await readFile(path);

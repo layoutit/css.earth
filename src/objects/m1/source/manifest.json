@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/hubble-optical.tif",
       "origin": "https://esahubble.org/images/heic0515a/",
       "sourceUrl": "https://esahubble.org/images/heic0515a/",
-      "title": "Crab Nebula · Hubble · optical lines",
+      "title": "Crab Nebula \u00b7 Hubble \u00b7 optical lines",
       "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "displayCredit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/webb-infrared.tif",
       "origin": "https://esawebb.org/images/weic2326a/",
       "sourceUrl": "https://esawebb.org/images/weic2326a/",
-      "title": "Crab Nebula · Webb · near/mid-infrared",
+      "title": "Crab Nebula \u00b7 Webb \u00b7 near/mid-infrared",
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -65,7 +65,7 @@
           {
             "kind": "machine",
             "machineId": "webb",
-            "evidence": "https://esawebb.org/images/weic2326a/ — NIRCam and MIRI; Colours & filters"
+            "evidence": "https://esawebb.org/images/weic2326a/ \u2014 NIRCam and MIRI; Colours & filters"
           }
         ]
       }
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/webb-components.tif",
       "origin": "https://esawebb.org/images/weic2417a/",
       "sourceUrl": "https://esawebb.org/images/weic2417a/",
-      "title": "Crab Nebula · Webb · dust, sulfur, synchrotron",
+      "title": "Crab Nebula \u00b7 Webb \u00b7 dust, sulfur, synchrotron",
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -99,7 +99,7 @@
           {
             "kind": "machine",
             "machineId": "webb",
-            "evidence": "https://esawebb.org/images/weic2417a/ — Webb infrared components"
+            "evidence": "https://esawebb.org/images/weic2417a/ \u2014 Webb infrared components"
           }
         ]
       }
@@ -109,7 +109,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/spitzer-infrared.tif",
       "origin": "https://esahubble.org/images/potw1720c/",
       "sourceUrl": "https://esahubble.org/images/potw1720c/",
-      "title": "Crab Nebula · Spitzer · mid-infrared",
+      "title": "Crab Nebula \u00b7 Spitzer \u00b7 mid-infrared",
       "credit": "JPL/Caltech",
       "displayCredit": "JPL/Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -143,7 +143,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/vla-radio.tif",
       "origin": "https://esahubble.org/images/potw1720b/",
       "sourceUrl": "https://esahubble.org/images/potw1720b/",
-      "title": "Crab Nebula · VLA · radio synchrotron",
+      "title": "Crab Nebula \u00b7 VLA \u00b7 radio synchrotron",
       "credit": "NRAO/AUI/NSF",
       "displayCredit": "NRAO/AUI/NSF",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -167,7 +167,7 @@
           {
             "kind": "machine",
             "machineId": "vla",
-            "evidence": "https://esahubble.org/images/potw1720b/ — VLA radio observation"
+            "evidence": "https://esahubble.org/images/potw1720b/ \u2014 VLA radio observation"
           }
         ]
       }
@@ -177,7 +177,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/chandra-xray.tif",
       "origin": "https://esahubble.org/images/potw1720f/",
       "sourceUrl": "https://esahubble.org/images/potw1720f/",
-      "title": "Crab Nebula · Chandra · X-ray pulsar wind",
+      "title": "Crab Nebula \u00b7 Chandra \u00b7 X-ray pulsar wind",
       "credit": "CXC",
       "displayCredit": "CXC",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -201,7 +201,7 @@
           {
             "kind": "machine",
             "machineId": "chandra",
-            "evidence": "https://esahubble.org/images/potw1720f/ — Chandra X-ray observation"
+            "evidence": "https://esahubble.org/images/potw1720f/ \u2014 Chandra X-ray observation"
           }
         ]
       }
@@ -211,7 +211,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/hubble-2017-bridge.tif",
       "origin": "https://esahubble.org/images/potw1720d/",
       "sourceUrl": "https://esahubble.org/images/potw1720d/",
-      "title": "Crab Nebula · Hubble · 2017 common-grid astrometric bridge",
+      "title": "Crab Nebula \u00b7 Hubble \u00b7 2017 common-grid astrometric bridge",
       "credit": "NASA, ESA, and J. Hester (Arizona State University)",
       "displayCredit": "NASA, ESA, and J. Hester (Arizona State University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -286,7 +286,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZflux.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZflux.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE · 3dmap_XYZflux.fits",
+      "title": "Crab SITELLE \u00b7 3dmap_XYZflux.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
@@ -308,7 +308,7 @@
           {
             "kind": "machine",
             "machineId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ \u2014 SITELLE at CFHT generated Martin, Milisavljevic and Drissen\u2019s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
       }
@@ -318,7 +318,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZvel.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZvel.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE · 3dmap_XYZvel.fits",
+      "title": "Crab SITELLE \u00b7 3dmap_XYZvel.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
@@ -340,7 +340,7 @@
           {
             "kind": "machine",
             "machineId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ \u2014 SITELLE at CFHT generated Martin, Milisavljevic and Drissen\u2019s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
       }
@@ -350,7 +350,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/m1.deep_frame.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE · m1.deep_frame.fits",
+      "title": "Crab SITELLE \u00b7 m1.deep_frame.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
@@ -372,7 +372,7 @@
           {
             "kind": "machine",
             "machineId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ \u2014 SITELLE at CFHT generated Martin, Milisavljevic and Drissen\u2019s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
       }
@@ -385,8 +385,8 @@
       "title": "Crab Nebula adopted world placement",
       "credit": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I",
       "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
-      "expectedSha256": "27230a8423f75c4b5a3ac01ee1c92635e521d84581aa8713ad1e5818cc8b56bb",
-      "expectedBytes": 3382,
+      "expectedSha256": "8d8f8d93db4803da5353b9644aab29896f8080f79e0001d101b93399e709eade",
+      "expectedBytes": 3578,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -437,7 +437,7 @@
           {
             "kind": "machine",
             "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite \u2014 Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
           }
         ]
       }
@@ -447,8 +447,8 @@
     {
       "id": "document-1",
       "path": "src/objects/m1/source/delivery.json",
-      "expectedSha256": "27230a8423f75c4b5a3ac01ee1c92635e521d84581aa8713ad1e5818cc8b56bb",
-      "expectedBytes": 3382,
+      "expectedSha256": "8d8f8d93db4803da5353b9644aab29896f8080f79e0001d101b93399e709eade",
+      "expectedBytes": 3578,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -467,8 +467,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m1/source/presentation.json",
-      "expectedSha256": "88145df02c5879ecb0d756938b9c08bb0173dfa2878bee800c78e036da74cd0b",
-      "expectedBytes": 13557,
+      "expectedSha256": "dec7b83716265c031eed9dcb61a263da4e1637a3f76470a53186821c23e22501",
+      "expectedBytes": 13689,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -485,5 +485,96 @@
       }
     }
   ],
-  "generatedIntermediates": []
+  "generatedIntermediates": [
+    {
+      "id": "compact-compact-hubble-optical-colors-f64-gz",
+      "path": "src/objects/m1/source/compact/hubble-optical-colors.f64.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 6708918,
+      "expectedSha256": "795e66a0ecbef23aa41618c123c35abb282568cc320e2ed9534d4fe848ff75d4"
+    },
+    {
+      "id": "compact-compact-spitzer-infrared-colors-f64-gz",
+      "path": "src/objects/m1/source/compact/spitzer-infrared-colors.f64.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 6089813,
+      "expectedSha256": "f5031645b67fdba0cb04b4fc7f5a2b015de2e9f6c8f39b48425cfc705a1f4ff0"
+    },
+    {
+      "id": "compact-compact-webb-components-colors-f64-gz",
+      "path": "src/objects/m1/source/compact/webb-components-colors.f64.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 6549023,
+      "expectedSha256": "1b107403541e8aaefd3e1bc4b1fb8f1d304c086de0f3fc23899d598f12d22ac7"
+    },
+    {
+      "id": "compact-compact-chandra-xray-colors-f64-gz",
+      "path": "src/objects/m1/source/compact/chandra-xray-colors.f64.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 12988,
+      "expectedSha256": "cf396f149d3602087ff96ba234606e9540609ba2c78d152c3270f24098f617e5"
+    },
+    {
+      "id": "compact-compact-webb-infrared-colors-f64-gz",
+      "path": "src/objects/m1/source/compact/webb-infrared-colors.f64.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 6478718,
+      "expectedSha256": "7a4ddf595a01e61befffb93fff00106954d94b644ed57059a1f6d48d50cc528f"
+    },
+    {
+      "id": "compact-compact-particles-fits-gz",
+      "path": "src/objects/m1/source/compact/particles.fits.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 4198099,
+      "expectedSha256": "fed402a44998ca3c094584f347cc7c2a8d36f90804c9f0716f0bb1a86b4137fa"
+    },
+    {
+      "id": "compact-compact-vla-radio-colors-f64-gz",
+      "path": "src/objects/m1/source/compact/vla-radio-colors.f64.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 6267043,
+      "expectedSha256": "3f22d2870055e084430c2c876d600b958bffd699f8300efe1dc340044e045c3c"
+    },
+    {
+      "id": "compact-compact-model-json-gz",
+      "path": "src/objects/m1/source/compact/model.json.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice model/material input or replay record; published inputs are separately bound in this manifest and retained provenance."
+      },
+      "expectedBytes": 96438,
+      "expectedSha256": "19a8d6d41d35694861e2ce5db6414f2d8f2a59ad9ea6d0129c3dc1d628b60be5"
+    },
+    {
+      "id": "compact-compact-README-md",
+      "path": "src/objects/m1/source/compact/README.md",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice model/material input or replay record; published inputs are separately bound in this manifest and retained provenance."
+      },
+      "expectedBytes": 1410,
+      "expectedSha256": "8af91b58f8f623a60947be4d2232ac64ee9d8841ab3e0552d8d6e68bede1c35f"
+    }
+  ]
 }

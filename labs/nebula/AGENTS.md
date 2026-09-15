@@ -84,3 +84,7 @@ models/
 Use targeted lab typechecking/tests and the affected browser flow. Verify actual output hashes, source identity, full extent, geometry/handedness, all three slice axes, and source-switch/refresh behavior. Keep numerical convergence thresholds fixed; increase sampling at its owning layer when needed. Inspect front and oblique views before claiming visual quality.
 
 Do not infer completion from process launch or exit code alone. Do not run unrelated production suites during lab iteration. No review council or external-agent review is required for routine lab changes.
+
+## Compact application bake inputs
+
+Accepted deliveries may commit compact pre-slice emission/density fields, component colors, registered material planes, stars and sampling settings with source pins. These are explicit application bake inputs, not runtime slices or atlases. Keep every runtime image generated and ignored. Default app preparation replays these inputs without native observation downloads, NOX or fitting; `--research` retains the full scientific pipeline. Export from the actual delivered result, not the historical acceptance ID. Require cold replay and expected texture hashes before replacing a bundle; never quietly refit to package it.

@@ -34,3 +34,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/README.md) preserves crop, manual point masks, independent FISTA/proximal implementation, original timings and failed-view limitations. The [planetary-nebula method](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/planetary-nebulae.md) describes the paper and its constraints. Common preparation is in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
+
+## Compact delivery inputs
+
+The source-owned compact input pin in [delivery.json](source/delivery.json) retains the accepted pre-slice model, material and integration data. Ordinary preparation regenerates the runtime WebP Q80/A80 XYZ atlases and distant impostors without native observation downloads, star extraction or model fitting. Runtime images remain generated and ignored. The [shared bake guide](../../../docs/nebulae/README.md#compact-inputs-and-research-replay) distinguishes this replay from optional full research processing. Source observations and the model limitations above still apply.

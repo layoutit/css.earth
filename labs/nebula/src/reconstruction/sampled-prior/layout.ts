@@ -82,8 +82,9 @@ export function padComponentSlice(reference: RegisteredSlice, component: Registe
 }
 
 export async function registerComponentBanks(root: string, outputDirectory: string, neutral: CompilerBakeResult,
-  lenses: CompilerLensVolume[], signal: AbortSignal): Promise<CompilerBakeResult> {
-  const readVolume = async (pin: CompilerPin) => validatePreparedCssVolume(JSON.parse((await readGeometryPin(root, pin)).toString()));
+  lenses: CompilerLensVolume[], signal: AbortSignal,
+  readPinned: (pin: CompilerPin) => Promise<Buffer> = pin => readGeometryPin(root, pin)): Promise<CompilerBakeResult> {
+  const readVolume = async (pin: CompilerPin) => validatePreparedCssVolume(JSON.parse((await readPinned(pin)).toString()));
   const catalogue = async (pin: CompilerPin) => readSlices(JSON.parse(await readFile(resolve(root, dirname(pin.path), 'volume-slices.json'), 'utf8')));
   const banks = await Promise.all([{ id: 'neutral', volume: neutral.neutral }, ...lenses].map(async item => ({
     ...item, original: await readVolume(item.volume), slices: new Map((await catalogue(item.volume)).map(q => [q.id, q])),
@@ -100,7 +101,7 @@ export async function registerComponentBanks(root: string, outputDirectory: stri
     await Promise.all(banks.map(async bank => {
       const source = bank.slices.get(id); let pixels: Buffer | undefined;
       if (source) {
-        const bytes = await readGeometryPin(root, { path: `${dirname(bank.volume.path)}/${source.texturePath}`, sha256: source.sha256 });
+        const bytes = await readPinned({ path: `${dirname(bank.volume.path)}/${source.texturePath}`, sha256: source.sha256 });
         const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
         if (bytes.length !== source.bytes || decoded.info.width !== source.widthPx || decoded.info.height !== source.heightPx || decoded.info.channels !== 4)
           throw new TypeError('Component raster differs from its registered crop.');
