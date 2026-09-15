@@ -1,11 +1,11 @@
 ---
 import type { Props as ShellProps } from '../planet-shell-types';
-interface Props { provenance?: ShellProps['provenance']; lens: NonNullable<ShellProps['lenses']>['controls'][number]; }
-import { datasetCaption } from "../dataset-caption.mts";
+interface Props { lens: NonNullable<ShellProps['lenses']>['controls'][number]; }
+import { validateDatasetText } from "../dataset-content.mts";
 import SelectedContent from "./SelectedContent.astro";
-const { provenance, lens } = Astro.props;
-const caption = datasetCaption(provenance, lens);
+const { lens } = Astro.props;
+const { title } = validateDatasetText(lens);
 ---
-<SelectedContent title={caption.title} description={lens.summary} descriptionDetail={lens.description}>
+<SelectedContent {title} description={lens.summary} descriptionDetail={lens.description}>
   <slot />
 </SelectedContent>

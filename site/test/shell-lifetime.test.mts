@@ -51,6 +51,7 @@ class Element extends EventTarget {
   getAttribute(key: string) { return this.attributes.get(key) ?? null; }
   hasAttribute(key: string) { return this.attributes.has(key); }
   removeAttribute(key: string) { this.attributes.delete(key); }
+  append(...items: Element[]) { this.children = items; }
   override addEventListener(...[type, listener, options]: Parameters<EventTarget['addEventListener']>) {
     super.addEventListener(type, listener, options);
     this.listeners.add(listener);
@@ -136,12 +137,13 @@ function fixture(options: Partial<ShellOptions> = {}) {
 
 test('retained catalogue groups follow filters and release their visibility observer', () => {
   const f = fixture(), browser = f.selectors.element('.planet-object-browser');
-  const items = ['earth', 'mars'].map(objectName => {
+  const items = Array.from({ length: 17 }, (_, index) => index === 16 ? 'mars' : `earth-${index}`).map(objectName => {
     const item = new Element(); item.dataset = { objectName, objectSystemName: 'solar system', objectClassification: 'planet' };
     return item;
   });
-  const groups = items.map(item => {
-    const group = new Element(); group.selectors.set('.planet-object-item', [item]); return group;
+  const groups = [items.slice(0, 16), items.slice(16)].map(rows => {
+    const group = new Element(); group.selectors.set('.planet-object-item', rows);
+    group.selectors.set('.planet-object-chunk-list', new Element()); return group;
   });
   browser.selectors.set('.planet-object-item', items);
   browser.selectors.set('.planet-object-chunk', groups);
@@ -400,12 +402,15 @@ test('destination card stays fixed across flight poses and camera handoff, then 
   shell.destroy();
 });
 
-test('camera scale changes retained overview content without moving the camera and search selects the matching category tab', () => {
+test('camera scale keeps the overview, while search shows only results and dismissal restores its tabs', () => {
   const f = fixture(), browser = f.selectors.element('.planet-object-browser');
   const galaxy = new Element(), system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
   browser.selectors.set('[data-galactic-overview]', galaxy);
   browser.selectors.set('[data-solar-system-results]', system);
+  const categoryTabs = new Element();
+  browser.selectors.set('[data-solar-system-results] > .planet-selected-panel', introduction);
+  browser.selectors.set('[data-solar-system-results] > .planet-object-tabs', categoryTabs);
   const items = ['planet', 'satellite'].map(type => {
     const item = new Element();
     item.dataset = { objectName: type === 'planet' ? 'earth' : 'moon', objectSystemName: 'solar system',
@@ -426,11 +431,16 @@ test('camera scale changes retained overview content without moving the camera a
   for (const callback of listeners) callback(world);
   assert.equal(search.value, ''); assert.equal(system.hidden, false); assert.equal(galaxy.hidden, true);
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
-  assert.equal(introduction.hidden, false, 'Search keeps the Solar System introduction visible');
+  assert.equal(introduction.hidden, true, 'Search hides the card heading and introduction');
+  assert.equal(categoryTabs.hidden, true);
   assert.equal(items[0].hidden, true); assert.equal(items[1].hidden, false);
   assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
   search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
-  assert.equal(tabs[2].getAttribute('aria-selected'), 'true', 'The current category survives clearing the filter');
+  assert.equal(tabs[0].getAttribute('aria-selected'), 'true', 'Text search includes every matching category');
+  assert.equal(browser.requireSelector('#object-category-results').getAttribute('aria-labelledby'), null);
+  search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
+  assert.equal(introduction.hidden, false);
+  assert.equal(categoryTabs.hidden, false);
   tabs[2].dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Home' }));
   assert.equal(f.documentTarget.activeElement, tabs[0]);
   assert.equal(items[0].hidden, false); assert.equal(items[1].hidden, false);
@@ -645,11 +655,13 @@ test('flight completion and overview handoff preserve a newer active search', ()
 });
 
 
-test('category pills reuse search, retain the query through navigation, and dismiss with Escape', () => {
-  const f = fixture();
+test('category pills toggle shared results without camera navigation or opening the search sheet', async () => {
+  const highlights: (string | null)[] = [];
+  const f = fixture({ onCategoryChange: value => highlights.push(value) });
   const categories = [
     { label: 'Planets', type: 'planet', name: 'earth', singular: 'planet' },
     { label: 'Moons', type: 'satellite', name: 'moon', singular: 'moon' },
+    { label: 'Comets', type: 'comet', name: 'halley', singular: 'comet' },
     { label: 'Asteroids', type: 'asteroid', name: 'eros', singular: 'asteroid' },
   ];
   const buttons = categories.map(category => {
@@ -673,6 +685,7 @@ test('category pills reuse search, retain the query through navigation, and dism
   const system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
   browser.selectors.set('[data-solar-system-results]', system);
+  browser.selectors.set('[data-solar-system-results] > .planet-selected-panel', introduction);
   const search = f.selectors.element('.planet-sidebar-search');
   const shell = f.mount();
   shell.setObject({ id: 'earth', name: 'Earth', apply() {}, dispose() {} });
@@ -685,35 +698,64 @@ test('category pills reuse search, retain the query through navigation, and dism
       return dispatch(event);
     };
   }
-  buttons.forEach((button, index) => {
+  for (const [index, button] of buttons.entries()) {
     button.dispatchEvent(new Event('click'));
+    await Promise.resolve();
+    assert.equal(highlights.at(-1), categories[index].type);
     assert.equal(search.value, categories[index].label);
-    assert.equal(introduction.hidden, false, 'Category results keep the introduction visible');
+    assert.equal(introduction.hidden, true, 'Category searches also use the plain results card');
     assert.equal(browser.hidden, false);
     assert.equal(f.selectors.element('.planet-information-panel').hidden, true);
     assert.deepEqual(items.map(item => item.hidden), items.map((item, i) =>
       i !== index && !(index === 0 && item === dwarf)));
     assert.deepEqual(buttons.map(item => item.ariaPressed), buttons.map((_, i) => String(i === index)));
-  });
-  assert.deepEqual(navigations, categories.map(category => category.type), 'each pill asks the router to frame its classification');
+  }
+  assert.deepEqual(navigations, [], 'pills never request camera navigation');
+  buttons[3].dispatchEvent(new Event('click'));
+  await Promise.resolve();
+  assert.equal(search.value, '');
+  assert.equal(browser.hidden, true);
+  assert.equal(highlights.at(-1), null);
+  assert.ok(buttons.every(button => button.ariaPressed === 'false'));
+  assert.equal(f.selectors.element('.planet-sheet-handle').checked, false);
   for (const query of ['planet', 'planets']) {
     search.value = query; search.dispatchEvent(new Event('input'));
-    assert.deepEqual(items.map(item => item.hidden), [false, true, true, false]);
+    assert.deepEqual(items.map(item => item.hidden), [false, true, true, true, false]);
     assert.equal(buttons[0].ariaPressed, 'true');
   }
   search.value = 'dwarf planets'; search.dispatchEvent(new Event('input'));
-  assert.deepEqual(items.map(item => item.hidden), [true, true, true, false], 'Specific dwarf planet search stays specific');
-  buttons[2].dispatchEvent(new Event('click'));
+  assert.deepEqual(items.map(item => item.hidden), [true, true, true, true, false], 'Specific dwarf planet search stays specific');
+  buttons[3].dispatchEvent(new Event('click'));
   shell.setObject({ id: 'mars', name: 'Mars', apply() {}, dispose() {} });
   assert.equal(search.value, 'Asteroids');
-  assert.equal(buttons[2].ariaPressed, 'true');
-  buttons[2].dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
+  assert.equal(buttons[3].ariaPressed, 'true');
+  buttons[3].dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
   assert.equal(search.value, 'Asteroids', 'Card changes never replace the query');
   assert.equal(f.documentTarget.activeElement, search);
   assert.equal(browser.hidden, true);
   assert.ok(buttons.every(button => button.ariaPressed === 'false'));
   shell.destroy();
   assert.ok(buttons.every(button => button.listeners.size === 0));
+});
+
+test('changing Illustration models refreshes an open category without erasing its query', () => {
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser');
+  const earth = new Element(), haumea = new Element();
+  earth.dataset = { objectName: 'earth', objectClassification: 'planet', objectClassificationName: 'planet' };
+  haumea.dataset = { objectName: 'haumea', objectClassification: 'dwarf-planet', objectClassificationName: 'dwarf planet', objectIllustration: 'true' };
+  browser.selectors.set('.planet-object-item', [earth, haumea]);
+  const shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
+  search.value = 'Planets'; search.dispatchEvent(new Event('input'));
+  assert.deepEqual([earth.hidden, haumea.hidden], [false, true]);
+  const setting = f.selectors.element('.planet-illustration-models-setting');
+  setting.checked = true; setting.dispatchEvent(new Event('change'));
+  assert.deepEqual([earth.hidden, haumea.hidden], [false, false]);
+  setting.checked = false; setting.dispatchEvent(new Event('change'));
+  assert.deepEqual([earth.hidden, haumea.hidden], [false, true]);
+  assert.equal(search.value, 'Planets');
+  search.value = 'haumea'; search.dispatchEvent(new Event('input'));
+  assert.equal(haumea.hidden, false, 'explicit names remain searchable');
+  shell.destroy();
 });
 
 test('the overview preview changes immediately and survives a same-scene commit', () => {

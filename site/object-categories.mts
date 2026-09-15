@@ -14,6 +14,10 @@ export function objectCategory(classification: string | undefined): string | und
     : OWN_TABS.has(classification) ? classification : 'asteroid';
 }
 export const matchesObjectCategory = (classification: string | undefined, category: string | undefined) => category === 'all' || objectCategory(classification) === category;
+
+/** Type searches and scene emphasis share membership; the Other tab is broader. */
+export const matchesObjectClassification = (classification: string, requested: string | null | undefined) =>
+  classification === requested || requested === 'planet' && classification === 'dwarf-planet';
 export function objectCategoryCount(classifications: readonly (string | undefined)[], category: string | undefined) {
   return String(category === 'all' ? classifications.length
     : classifications.filter(classification => objectCategory(classification) === category).length);

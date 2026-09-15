@@ -10,8 +10,10 @@ export function labelEligible(facts: { named?: boolean; notable?: boolean }): bo
   return facts.named === true || facts.notable === true;
 }
 
-/** Importance comes from prepared classification, never from spelling or navigation availability. */
-export function labelImportance(kind: string, major = false): number {
+/** Sun and Earth are orientation references; other tiers come from prepared classification. */
+export function labelImportance(kind: string, major = false, id?: string): number {
+  if (id === 'sun') return 5;
+  if (id === 'earth') return 4;
   if (['star', 'planet', 'environment', 'galaxy-cluster'].includes(kind)) return 3;
   if (major || kind === 'dwarf-planet') return 2;
   if (kind === 'asteroid') return 0;
@@ -44,14 +46,17 @@ export function createLabelBudget(width: number, height: number, labels: readonl
   return {
     get count() { return count; },
     get remaining() { return Math.max(0, limit - count); },
-    accepts(rect: LabelScreenRect) {
+    accepts(rect: LabelScreenRect, anchor?: LabelScreenRect) {
       return count < limit && rect.left >= -width / 2 && rect.right <= width / 2 &&
         rect.top >= -height / 2 && rect.bottom <= height / 2 &&
-        !occupied.some(other => labelRectsOverlap(rect, other, UNIVERSE_LABEL_POLICY.spacingPixels));
+        [rect, ...(anchor ? [anchor] : [])].every(part =>
+        !occupied.some(other => labelRectsOverlap(part, other, UNIVERSE_LABEL_POLICY.spacingPixels)));
     },
-    admit(rect: LabelScreenRect) {
-      if (!this.accepts(rect)) return false;
-      occupied.push(rect); count++; return true;
+    admit(rect: LabelScreenRect, anchor?: LabelScreenRect) {
+      if (!this.accepts(rect, anchor)) return false;
+      occupied.push(rect);
+      if (anchor) occupied.push(anchor);
+      count++; return true;
     },
   };
 }

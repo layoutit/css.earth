@@ -6,6 +6,7 @@ import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../se
 import { objectSearchLabels, searchObjects } from '../object-search.mts';
 import { matchesObjectCategory } from '../object-categories.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
+import { createFeatureBrowser } from '../feature-browser.mts';
 
 const origin = 'https://preview.example.test';
 const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@1',
@@ -20,13 +21,13 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
   <form class="planet-sidebar-search-card" data-search-object="saturn"><input class="planet-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="planet-sheet-handle" type="checkbox">
   <nav class="planet-object-browser" hidden>
-    <div data-galactic-overview hidden>Milky Way</div><div data-solar-system-results><section class="planet-selected-panel"></section></div>
-    ${['all', 'planet', 'satellite', 'nebula'].map(category => `<button data-object-tab="${category}"><span class="planet-object-tab-count"></span></button>`).join('')}
-    <div id="object-category-results"><ul><li class="planet-object-chunk"><ul class="planet-object-chunk-list">
+    <div data-galactic-overview hidden>Milky Way</div><div data-solar-system-results><section class="planet-selected-panel">Solar System introduction</section>
+    <div class="planet-object-tabs">${['all', 'planet', 'satellite', 'nebula'].map(category => `<button data-object-tab="${category}"><span class="planet-object-tab-count"></span></button>`).join('')}</div>
+    <div id="object-category-results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="planet-object-chunk"><ul class="planet-object-chunk-list">
     ${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}
-    </ul></li></ul></div><p class="planet-object-empty" hidden>No matching objects</p>
-    <section class="planet-feature-results" data-feature-index='${JSON.stringify(pin)}' hidden><p class="planet-destination-hint"></p>
-      <ul><li hidden><a class="planet-destination-result"><span class="planet-destination-result-name"></span><span class="planet-destination-result-context"></span></a></li></ul></section>
+    </ul></li></ul><p class="planet-object-empty" hidden>No matching results</p>
+    <details class="planet-feature-results" data-feature-index='${JSON.stringify(pin)}' hidden><summary>Named features <span class="planet-panel-heading-count"></span></summary><p class="planet-destination-hint"></p>
+      <ul><li hidden><a class="planet-destination-result"><span class="planet-destination-result-name"></span><span class="planet-destination-result-context"></span></a></li></ul></details></div></div>
   </nav><section class="planet-information-panel">Saturn</section><!--search-shell:end-->
   <main class="planet-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 const fetchIndex: typeof fetch = async input => {
@@ -74,12 +75,51 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(failure.querySelector('.planet-destination-result')?.hasAttribute('href'), false);
 });
 
-test('the Milky Way query uses the existing overview card without loading a feature index', async () => {
-  const neverFetch: typeof fetch = async () => { throw new Error('Unexpected index request'); };
-  const document = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=Milky+Way', origin), neverFetch)).document;
-  assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, false);
-  assert.equal(document.querySelector<HTMLElement>('[data-solar-system-results]')?.hidden, true);
-  assert.equal(document.querySelector('.planet-object-browser')?.getAttribute('aria-label'), 'Milky Way');
+test('search is a flat list across categories, including queries that name an overview', async () => {
+  for (const query of ['t', 'Milky Way']) {
+    const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
+    assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('[data-solar-system-results] > .planet-selected-panel')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('.planet-object-tabs')?.hidden, true);
+    assert.equal(document.querySelector('.planet-object-browser')?.getAttribute('aria-label'), 'Search results');
+    assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
+    if (query === 't') assert.deepEqual(visibleNames(document), ['Saturn', 'Titan']);
+    assert.equal(document.querySelector<HTMLElement>('[data-search-overview]')?.hidden, query !== 'Milky Way');
+    if (query === 'Milky Way') assert.equal(document.querySelector<HTMLElement>('.planet-object-empty')?.hidden, true);
+  }
+});
+
+test('named features share the results panel, start collapsed, and disappear when there are no matches', async () => {
+  const document = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), fetchIndex)).document;
+  const features = document.querySelector<HTMLElement>('#object-category-results > .planet-feature-results');
+  assert.ok(features);
+  assert.equal(features.hidden, false);
+  assert.equal(features.hasAttribute('open'), false);
+  assert.equal(features.querySelector('.planet-panel-heading-count')?.textContent, '(1)');
+  const empty = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=unknown', origin), fetchIndex)).document;
+  assert.equal(empty.querySelector<HTMLElement>('.planet-feature-results')?.hidden, true);
+  assert.equal(empty.querySelector<HTMLElement>('.planet-object-empty')?.hidden, false);
+});
+
+test('live feature results retain their rows and disclosure until the query changes', async context => {
+  context.mock.method(globalThis, 'fetch', async () => new Response(index));
+  const { document } = parseHTML(html);
+  const root = document.querySelector<HTMLElement>('.planet-feature-results')!;
+  const row = root.querySelector('.planet-destination-result');
+  const counts: number[] = [];
+  const browser = createFeatureBrowser({ documentTarget: document, objectId: 'saturn', onSelected() {}, onResults: count => counts.push(count) })!;
+  await browser.search('tycho');
+  assert.equal(root.hidden, false);
+  assert.equal(root.hasAttribute('open'), false);
+  root.setAttribute('open', '');
+  await browser.search('tycho');
+  assert.equal(root.hasAttribute('open'), true);
+  await browser.search('unknown');
+  assert.equal(root.hidden, true);
+  assert.equal(root.hasAttribute('open'), false);
+  assert.equal(root.querySelector('.planet-destination-result'), row);
+  assert.deepEqual(counts, [1, 1, 0]);
+  browser.destroy();
 });
 
 test('queries stay text, are bounded, and cannot become executable attributes or scene markup', async () => {
