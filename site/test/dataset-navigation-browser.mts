@@ -55,15 +55,14 @@ async function noOverflow(target: Page) {
 try {
   const rail = page.locator('.planet-information-panel > .planet-dataset-context-rail');
   const active = () => rail.locator('[data-dataset-context]:not([hidden])');
-  const sources = page.locator('[data-source-panel]');
-  const activeSources = () => sources.locator('[data-source-bank]:not([hidden])');
+  const sources = page.locator('[data-source-link]');
   await visit('/mars/#dataset=elevation', 'mars', 'elevation');
   assert.equal(await page.getByRole('tab', { name: 'Missions', exact: true }).count(), 0);
   assert.equal(await page.getByRole('tab', { name: 'Sources', exact: true }).count(), 0);
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
-  assert.equal(await sources.locator('details').getAttribute('open'), null, 'Sources start collapsed');
-  await sources.locator('summary').first().click();
-  assert.equal(await activeSources().locator('[data-source="source-mars-usgs-mola-pseudocolor"]').isVisible(), true);
+  assert.equal(await sources.isVisible(), true);
+  assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mars\/README\.md$/u);
+  const marsSource = await sources.getAttribute('href');
   assert.equal(await page.locator('template[data-object-card]').count(), 0, 'Routes ship no resident card bank');
   const stage = await page.locator('.planet-stage .polycss-camera').elementHandle();
   const before = await state();
@@ -71,6 +70,7 @@ try {
   await thermal.focus();
   await page.keyboard.press('Enter');
   await ready('mars', 'thermal');
+  assert.equal(await sources.getAttribute('href'), marsSource, 'the source document covers every dataset');
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').count(), 0);
   const selected = await state();
@@ -128,18 +128,15 @@ try {
 
   await visit('/mercury/#dataset=enhanced', 'mercury', 'enhanced');
   assert.equal(await active().locator('[data-mission="messenger"]').count(), 1);
-  await sources.locator('summary').first().click();
-  const datasetSources = sources.locator('[data-source-bank="body:enhanced"] [data-source^="source-"]');
-  assert.equal(await datasetSources.count(), 3);
-  const source = datasetSources.first();
-  await source.focus();
-  assert.equal(await source.evaluate(node => getComputedStyle(node).textDecorationLine), 'underline');
+  assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
+  await sources.focus();
+  assert.equal(await sources.evaluate(node => getComputedStyle(node).textDecorationLine), 'underline');
   await page.locator('button[name="dataset"][value="interior"]').click();
   await ready('mercury', 'interior');
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.equal(await sources.isVisible(), true);
-  assert.equal(await sources.locator('[data-source-bank="body:interior"]').isVisible(), true);
-  cases.push({ name: 'multi-input sources remain distinct and unlinked missions stay hidden' });
+  assert.match(await sources.getAttribute('href') ?? '', /\/src\/objects\/mercury\/README\.md$/u);
+  cases.push({ name: 'the body source document covers all datasets and unlinked missions stay hidden' });
 
   await visit('/mars/#dataset=elevation', 'mars', 'elevation');
   await page.setViewportSize({ width: 390, height: 844 });

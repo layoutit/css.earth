@@ -365,8 +365,7 @@ export function createSceneRouter({
       && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'solar-system';
     const overviewTarget = options.overviewScope
       ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount })
-      : options.classification
-        ? navigation.classificationTarget?.({ classification: options.classification, objectId: id, fromId: objectId, mount: active?.mount }) : null;
+      : null;
     const centerTarget = overviewTarget?.world ?? (options.recenter
       ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
       : options.sceneSelection && !opensOverviewFocus && id !== centeredObjectId && hasPresented
@@ -407,8 +406,8 @@ export function createSceneRouter({
     request.lifetime.onDispose(() => {
       if (!pending || pending === request) worldContextMount?.previewSelection?.();
     });
-    // A category flight keeps its filtered results instead of the overview card.
-    if ((options.recenter || options.centerSelection) && options.overview && !options.classification) {
+    // Preview the destination card while the camera approaches its overview.
+    if ((options.recenter || options.centerSelection) && options.overview) {
       const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'solar-system');
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
     } else if (!options.overview) {

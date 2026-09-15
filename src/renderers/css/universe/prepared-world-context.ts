@@ -502,6 +502,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let depthOrder = bodies;
   let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
+  let highlighting = false;
   let selectionPreview: string | null | undefined;
   let navigationInFlight = false;
   let rotationActive = false;
@@ -717,8 +718,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         entry.highlighted = next; changed = true;
         if (next) entry.marker.dataset.contextHighlight = 'true'; else delete entry.marker.dataset.contextHighlight;
       }
-      if (bodies.some(entry => entry.highlighted)) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
-      if (changed) { presentationRevision++; refresh(); }
+      highlighting = bodies.some(entry => entry.highlighted);
+      if (highlighting) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
+      if (changed) { presentationRevision++; policyRevision++; refresh(); }
     },
     opacityStats: fader.stats,
     publicationStats: () => ({ skippedPublications, bodyPublications, depthPublications, paintedBodies: paintedBodies.size }),
@@ -828,9 +830,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
         if (mask === 0) continue;
-        const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength);
-        // Overview flights retain system annotations; body flights fade unrelated ones.
-        const annotationsVisible = !navigationInFlight || selectionPolicy.opacity(body.id, emphasizedId) === 1;
+        const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) *
+          (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1);
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
@@ -903,7 +904,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           target.rank = rank; target.shape.x = x; target.shape.y = y; target.shape.radius = radius;
           entry.markerPick = target;
         }
-        const indicatorVisible = entry.indicatorShown && annotationsVisible;
+        const indicatorVisible = entry.indicatorShown;
         const indicatorState = String(indicatorVisible);
         if (marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
         if (indicatorVisible && markerOpacity > .1) {
@@ -954,7 +955,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
 
         }
         if (mask & (ContextChange.label | ContextChange.marker)) {
-          const labelVisible = entry.labelShown && annotationsVisible;
+          const labelVisible = entry.labelShown;
           const labelState = String(labelVisible);
           if (marker.dataset.contextLabelVisible !== labelState) marker.dataset.contextLabelVisible = labelState;
           entry.labelRect = null; entry.labelPick = null;

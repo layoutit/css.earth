@@ -1,7 +1,8 @@
 # Sources catalogue
 
-The Sources card links the selected dataset to its published works and data
-products. The catalogue also retains citations for factsheets, missions and
+The footer links the current selection's source-and-methods README at the
+running build's Git commit. Its `Sources: …` text lists credits from the prepared
+source index; Astro prepares the text once per document owner. The catalogue retains citations for factsheets, missions and
 shared environments. A shared source has one identity across bodies;
 each body keeps its own input bytes, processing, credits and limits.
 
@@ -125,18 +126,25 @@ claim index. A missing edge does not establish that a source is unused throughou
 the repository. File checks establish identity; scientific review establishes
 whether the source supports the displayed quantity.
 
-The current body's HTML includes prepared mission and source cards for each
-dataset. The Sources card follows product dependencies for the selected lens,
-keeps distinct published products as separate links, and groups their shared
-credit. Factsheet and shared-environment citations do not create dataset links.
-The inert navigation previews omit these cards; the existing page transport
-fills their template. The complete catalogue and graph remain build inputs.
+The current body's HTML includes prepared mission cards for each dataset.
+Source documents remain in the repository: detailed bodies and nebulae use
+their own README, while catalogue-only galaxies and clusters use the catalogue
+owner's README. Overview links select the Sun, Milky Way, Local Group or Nearby
+Universe document. A body's README covers its datasets, so changing a dataset
+does not rebuild the footer. Search text does not change the selected source.
+
+Astro prepares link text and commit-pinned destinations, checking that each
+document exists. The shell copies the selected link from its retained navigation
+rows. It has no separate source-card bank, citation deduplication or source
+mutation observer. Desktop shows the link at bottom left; compact screens show
+"Sources" beside the view readout, with the full name available to assistive
+technology. Source manifests, catalogue identities and provenance checks remain
+the authority for preparation. Mission artwork retains its existing credit links.
 
 ## Interface examples
 
-These images show the earlier Sources tab. The current interface shows the
-selected dataset's sources in a separate card on the right, or below the body
-card on narrow screens.
+These images document the earlier Sources tab. They are historical examples;
+the current interface uses the footer link described above.
 
 ![Mercury Sources disclosure on desktop](images/catalogue-sources-desktop.png)
 

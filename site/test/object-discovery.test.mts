@@ -1,13 +1,34 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFile } from 'node:fs/promises';
 import { SCENE_OBJECTS, requireSceneObject } from '../objects.mts';
 import { deriveObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
 import { discoveryVisibility, parseObjectDiscovery } from '../object-discovery.mts';
+import { parseArrivalView } from '../arrival-view.mts';
+import { record } from '../browser-types.mts';
+import { searchObjects } from '../object-search.mts';
+import { objectClassificationLabel } from '../planet-search-objects.mts';
 
 const controls = (...ids: string[]) => ({ lenses: { controls: ids.map(id => ({ id })) } });
 const policy = { illustrationLenses: ['model'] };
 const model = { id: 'model', metadata: { modeled: true } };
 const defaults = { illustrations: false, asteroids: false, asteroidLabels: false };
+
+test('all four type searches and scene highlights contain the same eligible registered objects', () => {
+  const labels = SCENE_OBJECTS.map(object => ({ id: object.id, name: object.name.toLowerCase(), names: [],
+    classification: object.classification, classificationName: objectClassificationLabel(object.classification).toLowerCase(),
+    systemName: object.systemName.toLowerCase(), illustration: object.discovery.illustration }));
+  for (const illustrations of [false, true]) for (const [query, classification] of [
+    ['Planets', 'planet'], ['Moons', 'satellite'], ['Comets', 'comet'], ['Asteroids', 'asteroid'],
+  ]) {
+    const result = searchObjects(labels, query, 'all', { illustrations });
+    const scene = discoveryVisibility(SCENE_OBJECTS, { ...defaults, illustrations, highlighted: classification });
+    assert.deepEqual(result.matches.map(object => object.id).sort(), scene.highlightedBodies.toSorted(), query);
+    assert.ok(scene.highlightedBodies.every(id => !scene.hiddenBodies.includes(id) && !scene.hiddenLabels.includes(id)));
+    if (classification === 'planet') for (const id of ['earth', 'ceres', 'pluto']) assert.ok(scene.highlightedBodies.includes(id));
+  }
+  assert.ok(searchObjects(labels, 'Hale–Bopp').matches.some(object => object.id === 'comet-c1995-o1'), 'a name search still finds illustrations');
+});
 
 test('only a prepared observation promotes an illustration, without a second flag change', () => {
   const recipes = [{ raster: { observations: [model], surfaceObservations: [{ id: 'camera' }] } }];
@@ -61,4 +82,21 @@ test('category browsing and asteroid settings cannot bypass Illustration models'
   const explicit = discoveryVisibility(SCENE_OBJECTS, { ...defaults, highlighted: 'comet' });
   assert.equal(explicit.hiddenLabels.includes('comet-67p'), false);
   assert.equal(explicit.hiddenBodies.includes('comet-c1995-o1'), true);
+});
+
+test('photographic arrivals use the prepared package camera, excluding modeled and unexposed datasets', async () => {
+  const runtime: unknown = JSON.parse(await readFile(new URL('../../src/objects/arrokoth/prepared/runtime.json', import.meta.url), 'utf8'));
+  assert.ok(record(runtime) && record(runtime.camera));
+  const preparedControls = { lenses: { defaultLens: 'photo', controls: [{ id: 'photo' }, { id: 'model' }] } };
+  const recipes = [{ raster: { observations: [model], surfaceObservations: [{ id: 'photo' }, { id: 'unprepared' }] } }];
+  const camera = { ...runtime.camera, initialScenePitchDegrees: 0, defaultControlYawDegrees: 90 };
+  const discovery = deriveObjectDiscovery(policy, preparedControls, recipes, camera);
+  assert.deepEqual(discovery.arrival?.lensIds, ['photo']);
+  const rotation = discovery.arrival!.rotation;
+  [0,0,1,0,1,0,-1,0,0].forEach((value, index) => assert.ok(Math.abs(rotation[index] - value) < 1e-12));
+  assert.equal(deriveObjectDiscovery(policy, preparedControls, [{ raster: { observations: [model] } }], camera).arrival, undefined);
+  assert.equal(deriveObjectDiscovery({}, preparedControls, [{ raster: { mosaics: [{ id: 'photo' }] } }], camera).arrival, undefined);
+  assert.throws(() => deriveObjectDiscovery(policy, preparedControls, recipes, { ...camera, defaultControlYawDegrees: NaN }));
+  assert.throws(() => parseArrivalView({ defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,1,0,0,0,-1] }));
+  assert.ok(requireSceneObject('arrokoth').discovery.arrival?.lensIds.includes('lorri'));
 });

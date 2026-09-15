@@ -5,7 +5,6 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { machineAgencies } from '../dataset-machines.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
 import { compileContributions, contributionViews, parseContributionGraph } from '../../src/platform/exploration-contributions.mts';
@@ -101,16 +100,6 @@ test('schematic and synthetic views do not inherit observations from their outer
     assert.deepEqual(ids(await graphFor(object), 'elevation', 'machine'), ['vlt-ut3'],
       `${object} credits the telescope that produced its shape`);
   }
-});
-
-test('agency choices count individual missions and preserve joint credits', () => {
-  const values = [missions.hubble, missions.juno, missions.hubble];
-  assert.deepEqual(machineAgencies(values).map(group => [group.name, group.missions.map(mission => mission.id)]), [
-    ['NASA', ['hubble', 'juno']], ['ESA', ['hubble']],
-  ]);
-  assert.deepEqual(machineAgencies([missions.cassini]).map(group => group.name), ['NASA', 'ESA', 'ASI']);
-  assert.equal(machineAgencies([missions['viking-1'], missions['viking-2']])[0].missions.length, 2);
-  assert.deepEqual(machineAgencies([]), []);
 });
 
 test('every migrated capture stays bound to its source; the full prepared graph is deterministic', async () => {

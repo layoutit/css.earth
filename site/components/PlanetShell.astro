@@ -9,7 +9,7 @@ import { SCENE_OBJECTS } from "../objects.mts";
 import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
-import SourcesPanel from './SourcesPanel.astro';
+import SourcesLink from './SourcesLink.astro';
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
@@ -337,30 +337,32 @@ const searchCategories = ([
           introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
           <PlanetBreadcrumbs scope="solar-system" />
         </PlanetCardHeader>
-        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId} />
-      </PlanetCard>
-      <section class="planet-feature-results" aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
-        <p class="planet-feature-hint planet-destination-hint" role="status"></p>
-        <ul class="planet-destination-list">
-          {Array.from({ length: 8 }, () => <li hidden>
-            <a class="planet-destination-result">
-              <span class="planet-destination-result-name"></span>
-              <span class="planet-destination-result-context"></span>
-            </a>
-          </li>)}
-        </ul>
-      </section>
-      {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
-        <p class="planet-destination-hint" role="status"></p>
-        <ul class="planet-destination-list">
-          {Array.from({ length: 8 }, () => <li hidden>
-            <button class="planet-destination-result" type="button">
-              <span class="planet-destination-result-name"></span>
-              <span class="planet-destination-result-context"></span>
-            </button>
-          </li>)}
-        </ul>
-      </section>}</>}
+        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
+          <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
+            aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+            <p class="planet-feature-hint planet-destination-hint" role="status"></p>
+            <ul class="planet-destination-list">
+              {Array.from({ length: 8 }, () => <li hidden>
+                <a class="planet-destination-result">
+                  <span class="planet-destination-result-name"></span>
+                  <span class="planet-destination-result-context"></span>
+                </a>
+              </li>)}
+            </ul>
+          </PlanetAccordion>
+          {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+            <p class="planet-destination-hint" role="status"></p>
+            <ul class="planet-destination-list">
+              {Array.from({ length: 8 }, () => <li hidden>
+                <button class="planet-destination-result" type="button">
+                  <span class="planet-destination-result-name"></span>
+                  <span class="planet-destination-result-context"></span>
+                </button>
+              </li>)}
+            </ul>
+          </section>}
+        </PlanetObjectResults>
+      </PlanetCard></>}
     </nav>
     {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
       <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
@@ -379,12 +381,12 @@ const searchCategories = ([
       </section>
     </template>}
   </div>
-  <SourcesPanel {...Astro.props} />
 </aside>
 </div>
 
 <footer class="planet-footer" aria-label="View information">
     <div class="planet-view-readout" aria-label="View information">
+      <SourcesLink objectId={objectId} name={Astro.props.title.label} />
       <span class="planet-view-context">
         {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
         <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>

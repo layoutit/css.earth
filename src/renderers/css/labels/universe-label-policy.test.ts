@@ -22,3 +22,8 @@ test('different layers consume one density and collision budget', () => {
   expect(budget.admit({ left: 0, right: 40, top: 0, bottom: 14 })).toBe(false);
   expect(budget.count).toBe(12);
 });
+
+test('Earth is the second orientation reference after the Sun, ahead of other planets', () => {
+  expect(labelImportance('star', true, 'sun')).toBeGreaterThan(labelImportance('planet', true, 'earth'));
+  expect(labelImportance('planet', true, 'earth')).toBeGreaterThan(labelImportance('planet', true, 'jupiter'));
+});

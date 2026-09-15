@@ -10,6 +10,8 @@ export interface StableLabelCandidate {
   tier?: number;
   shown: boolean;
   previousPlacement: number;
+  /** Reserve a body's circle with its caption, as one admitted annotation. */
+  anchor?: LabelScreenRect;
   placements: readonly { slot: number; rect: LabelScreenRect }[];
 }
 
@@ -26,8 +28,8 @@ export function admitStableLabels<T extends StableLabelCandidate>(candidates: re
     const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
     const options = previousOnly ? previous ? [previous] : [] :
       [...(previous ? [previous] : []), ...candidate.placements.filter(item => item !== previous)];
-    const choice = options.find(item => clear(candidate, item.rect) && budget.accepts(item.rect));
-    if (!choice || !budget.admit(choice.rect)) return;
+    const choice = options.find(item => clear(candidate, item.rect) && budget.accepts(item.rect, candidate.anchor));
+    if (!choice || !budget.admit(choice.rect, candidate.anchor)) return;
     admitted.add(candidate);
     accepted.push({ candidate, placement: choice.slot, rect: choice.rect });
   };
