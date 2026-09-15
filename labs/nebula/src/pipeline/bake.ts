@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
+import { mkdtemp } from 'node:fs/promises';
+import { restoreCompactLmc } from './compact-lmc.js';
 import { createStarRemover } from '../star-removal/star-removal-preparation.js';
 import { createReconstructor } from '../reconstruction/reconstruction-preparation.js';
 import { promoteVolumeLenses, type VolumeLensPromotion } from '../reconstruction/volume-lens-promotion.js';
@@ -20,6 +22,17 @@ export async function bakeNebula(root: string, args: string[]) {
       console.log(`DELIVERY_CACHED ${recipe.delivery.directory}: every app asset verified`);
       return;
     }
+  }
+  if (!options.research && recipe.delivery?.compactInputs && options.stage === 'all' && !options.image) {
+    const cache = resolve(root, '.local/nebula-lab/bakes');
+    await mkdir(cache, { recursive: true });
+    const temporary = await mkdtemp(resolve(cache, 'compact-lmc-'));
+    try {
+      const results = await restoreCompactLmc(root, recipe.delivery.compactInputs, temporary);
+      await restoreDelivery(root, recipe.delivery, results.map(result => ({ ...result, directory: relative(root, result.directory) })));
+      console.log(`BAKE_COMPLETE ${recipe.id}: compact inputs; every delivery hash verified`);
+      return;
+    } finally { await rm(temporary, { recursive: true, force: true }); }
   }
   const selected = recipe.images.filter(image => !options.image || image.imageId === options.image);
   assert.ok(selected.length, `Unknown image: ${options.image}`);

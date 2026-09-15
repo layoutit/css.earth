@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import type { EmissionVector3 } from '../compiler/field-types';
 import { prepareSampledField } from './field';
 import { gridDiffuse, type DiffuseAtom } from './emission-fit';
-import { prepareSampledMaterial } from './material';
+import { prepareSampledMaterial, sampledPointColors } from './material';
 import { readSampledRecipe } from './model';
 
 const points = new Float32Array([-1.2, 0, -5, 1, 1.2, 0, 5, 1, -15, -15, -15, 1e-10, 15, 15, 15, 1e-10]);
@@ -91,4 +91,12 @@ test('invalid material fit lengths and invalid observed color fail before transp
   assert.throws(() => prepareSampledMaterial(points, configured, prepared, redBlue, weights, { ...base, diffuse: new Float32Array(1) }), /grid shape/);
   for (const invalid of [NaN, Infinity, -1, 256]) assert.throws(() => prepareSampledMaterial(points, configured, prepared,
     { id: 'invalid', sampleRgb(_x, _y, out) { out[0] = invalid; out[1] = out[2] = 0; return true; } }, weights), /Invalid emitter material pixel/);
+});
+
+test('compact emitter colors regenerate the identical material without source images', () => {
+  const configured=recipe(), prepared=prepareSampledField(points,configured);
+  const original=prepareSampledMaterial(points,configured,prepared,redBlue,{ejecta:1,pwn:0});
+  const replay=prepareSampledMaterial(points,configured,prepared,{id:'optical',sampleRgb(){throw new Error('Source images unavailable');}},
+    {ejecta:1,pwn:0},undefined,undefined,{pointColors:sampledPointColors(points,configured,redBlue),windColors:[],atomColors:[]});
+  assert.deepEqual(replay.gridMaterial,original.gridMaterial);
 });

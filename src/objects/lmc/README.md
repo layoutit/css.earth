@@ -1,6 +1,6 @@
 # Large Magellanic Cloud (LMC)
 
-Three lenses color the same simulated stellar-density cloud; **ESO VISTA is the default**. Each has 144 directional slices and the same 943 catalogue stars. This is not measured gas or dust depth.
+Three lenses color the same simulated stellar-density cloud; **ESO VISTA is the default**. Each has 144 directional slices packed into three WebP Q80/A80 axis atlases and the same 943 catalogue stars. All three lenses total 482,062 bytes of cloud textures. This is not measured gas or dust depth.
 
 ## Sources
 
@@ -13,11 +13,13 @@ Three lenses color the same simulated stellar-density cloud; **ESO VISTA is the 
 | [Bonanos et al. (2009)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | Observed sky positions and Johnson V photometry; 943 selected stars have deterministic, density-conditioned depths. Individual stellar distances are unmeasured. |
 | [SMASH, noirlab2030a](https://noirlab.edu/public/images/noirlab2030a/) | Shared sky-registration and catalogue-selection reference; its former color lens is superseded. |
 
-Native photographs supply color after registered star removal. They preserve the density slices’ geometry and alpha; uncovered regions retain neutral material. None covers the entire simulation. Measured image registration does not establish a correspondence between observed stars and simulated particles.
+Native photographs supply color after registered star removal. Reconstruction preserves the density slices’ geometry and alpha; the delivery atlas keeps geometry but quantizes RGB and alpha at quality 80; uncovered regions retain neutral material. None covers the entire simulation. Measured image registration does not establish a correspondence between observed stars and simulated particles.
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
 ## Evidence
+
+- Atlas delivery replays from the accepted reconstruction slices using the pinned [slice inputs](source/atlas-inputs.json). Local replay reproduced all nine atlas hashes and complete volume metadata exactly; geometry, frame and stars are unchanged. This is an encoding check, not a new scientific reconstruction or cold-source bake.
 
 - [Saved lens settings](source/lenses.json) and [handoff evidence](source/lens-settings-evidence.json) preserve the 2026-09-09 browser selection; per-lens results and provenance are linked there. [Delivery byte pins](source/lens-manifest.json) define the reproducibility target, not a newly completed cold replay.
 - The [fixed alignment report](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/alignment-report.json) records 5340 VISTA and 198 Horálek held-out stars. WISE’s unchanged WCS was checked against 34,811 AllWISE matches; this checks W1 positions, not diffuse colors or seams.

@@ -6,16 +6,16 @@ import { diffuseAtomEmission, diffuseAtomProjection, type DiffuseAtom } from './
 import type { SampledRecipe, ComponentWeights, SampleTerm } from './model';
 
 type Image = Pick<CompilerImage, 'id' | 'sampleRgb'>;
-type Color = { rgb: EmissionVector3; covered: boolean };
+export type SampledColor = { rgb: EmissionVector3; covered: boolean };
 export interface SampledMaterialFit { atoms: DiffuseAtom[]; coefficients: number[]; ejectaGain: number; diffuse: Float32Array; colors?: EmissionVector3[] }
-function chromaticity(image: Image, x: number, y: number): Color {
+function chromaticity(image: Image, x: number, y: number): SampledColor {
   const rgb: EmissionVector3 = [0, 0, 0], observed = image.sampleRgb(x, y, rgb);
   if (observed && rgb.some(n => !Number.isFinite(n) || n < 0 || n > 255)) throw new TypeError('Invalid emitter material pixel.');
   const peak = observed ? Math.max(...rgb) : 0;
   return { rgb: peak > 0 ? rgb.map(n => n / peak) as EmissionVector3 : [1, 1, 1], covered: peak > 0 };
 }
 /** An image assigns one color to a whole bounded component, not different repeated pixels to its depth samples. */
-function projectedColor(image: Image, min: [number, number], max: [number, number], projection: (x: number, y: number) => number): Color {
+function projectedColor(image: Image, min: [number, number], max: [number, number], projection: (x: number, y: number) => number): SampledColor {
   const rgb: EmissionVector3 = [0, 0, 0]; let total = 0, covered = 0;
   for (let y = 0; y < 17; y++) for (let x = 0; x < 17; x++) {
     const px = min[0] + (x + .5) / 17 * (max[0] - min[0]), py = min[1] + (y + .5) / 17 * (max[1] - min[1]);
@@ -25,7 +25,7 @@ function projectedColor(image: Image, min: [number, number], max: [number, numbe
   }
   return { rgb: total > 0 ? rgb.map(n => n / total) as EmissionVector3 : [1, 1, 1], covered: covered > 0 };
 }
-function termColor(term: SampleTerm, image: Image): Color {
+function termColor(term: SampleTerm, image: Image): SampledColor {
   const center = term.kind === 'jet' ? term.startArcsec.map((n, i) => (n + term.endArcsec[i]!) / 2) as EmissionVector3 : term.centerArcsec;
   const extent = term.kind === 'ellipsoid' ? term.sigmaArcsec.map(s => 4 * s) : term.kind === 'torus' ?
     [0, 1, 2].map(() => term.radiusArcsec + 4 * term.sigmaArcsec) :
@@ -36,7 +36,7 @@ function termColor(term: SampleTerm, image: Image): Color {
     return total;
   });
 }
-export function diffuseMaterialColors(image: Image, atoms: DiffuseAtom[]): Color[] {
+export function diffuseMaterialColors(image: Image, atoms: DiffuseAtom[]): SampledColor[] {
   return atoms.map(atom => projectedColor(image,
     [atom.centerArcsec[0] - 4 * atom.sigmaArcsec, atom.centerArcsec[1] - 4 * atom.sigmaArcsec],
     [atom.centerArcsec[0] + 4 * atom.sigmaArcsec, atom.centerArcsec[1] + 4 * atom.sigmaArcsec],
@@ -44,12 +44,13 @@ export function diffuseMaterialColors(image: Image, atoms: DiffuseAtom[]): Color
 }
 
 export function prepareSampledMaterial(values: Float32Array, recipe: SampledRecipe, prepared: PreparedSampledField,
-  image: Image, weights: ComponentWeights, fit?: SampledMaterialFit, signal?: AbortSignal) {
+  image: Image, weights: ComponentWeights, fit?: SampledMaterialFit, signal?: AbortSignal, retained?: { pointColors: Float64Array; windColors: SampledColor[]; atomColors: SampledColor[] }) {
   if (values.length !== recipe.source.width * recipe.source.height) throw new TypeError('Material source count differs from qualified samples.');
   if (fit && (fit.atoms.length !== fit.coefficients.length || fit.coefficients.some(n => !Number.isFinite(n) || n < 0) ||
     !Number.isFinite(fit.ejectaGain) || fit.ejectaGain <= 0)) throw new TypeError('Invalid material component fit.');
   if (fit?.colors && (fit.colors.length !== fit.atoms.length || fit.colors.some(rgb => rgb.length !== 3 || rgb.some(n => !Number.isFinite(n) || n < 0 || n > 1))))
     throw new TypeError('Invalid fitted component RGB.');
+  if (retained && (retained.pointColors.length !== recipe.source.height * 4 || retained.windColors.length !== recipe.terms.length || retained.atomColors.length !== (fit?.atoms.length ?? 0))) throw new TypeError('Retained emitter colors differ from spatial components.');
   const { size, pitch, bounds } = prepared, [nx, ny, nz] = size, count = nx * ny * nz;
   if (fit && fit.diffuse.length !== count) throw new TypeError('Material fit grid shape differs.');
   // Three emission-weighted channels plus observed-coverage emission; no new density field.
@@ -58,7 +59,7 @@ export function prepareSampledMaterial(values: Float32Array, recipe: SampledReci
   const kernelSum = kernel.reduce((a, b) => a + b, 0) ** 3, ejectaGain = weights.ejecta * (fit?.ejectaGain ?? 1);
   const [cx, cy, cz, cw] = recipe.source.columns, stride = recipe.source.width;
   let observedPoints = 0, uncoveredPoints = 0;
-  const add = (index: number, emission: number, color: Color) => {
+  const add = (index: number, emission: number, color: SampledColor) => {
     const at = index * 4;
     for (let c = 0; c < 3; c++) grid[at + c] += emission * color.rgb[c]!;
     if (color.covered) grid[at + 3] += emission;
@@ -67,7 +68,7 @@ export function prepareSampledMaterial(values: Float32Array, recipe: SampledReci
     if ((row & 4095) === 0) signal?.throwIfAborted();
     const flux = values[row * stride + cw]!; if (!(flux > 0)) continue;
     const point = mapSample(recipe.rawToArcsec, values[row * stride + cx]!, values[row * stride + cy]!, values[row * stride + cz]!);
-    const color = chromaticity(image, point[0], point[1]); if (color.covered) observedPoints++; else uncoveredPoints++;
+    const color: SampledColor = retained ? { rgb: [retained.pointColors[row * 4]!, retained.pointColors[row * 4 + 1]!, retained.pointColors[row * 4 + 2]!], covered: retained.pointColors[row * 4 + 3] === 1 } : chromaticity(image, point[0], point[1]); if (color.covered) observedPoints++; else uncoveredPoints++;
     const ix = Math.round((point[0] - bounds.min[0]) / pitch), iy = Math.round((point[1] - bounds.min[1]) / pitch), iz = Math.round((point[2] - bounds.min[2]) / pitch);
     const weight = Math.pow(flux, recipe.grid.weightExponent) / kernelSum * prepared.evidence.normalization * ejectaGain;
     for (let kz = 0; kz < kernel.length; kz++) for (let ky = 0; ky < kernel.length; ky++) for (let kx = 0; kx < kernel.length; kx++) {
@@ -76,7 +77,7 @@ export function prepareSampledMaterial(values: Float32Array, recipe: SampledReci
       add((z * ny + y) * nx + x, weight * kernel[kx]! * kernel[ky]! * kernel[kz]!, color);
     }
   }
-  const windColors = recipe.terms.map(term => termColor(term, image));
+  const windColors = retained?.windColors ?? recipe.terms.map(term => termColor(term, image));
   if (weights.pwn > 0) for (let z = 0; z < nz; z++) {
     signal?.throwIfAborted();
     for (let y = 0; y < ny; y++) for (let x = 0; x < nx; x++) {
@@ -84,7 +85,7 @@ export function prepareSampledMaterial(values: Float32Array, recipe: SampledReci
       recipe.terms.forEach((term, i) => add(index, weights.pwn * analyticEmission(term, bounds.min[0] + x * pitch, bounds.min[1] + y * pitch, bounds.min[2] + z * pitch), windColors[i]!));
     }
   }
-  const atomColors = diffuseMaterialColors(image, fit?.atoms ?? []).map((color, i) =>
+  const atomColors = retained?.atomColors ?? diffuseMaterialColors(image, fit?.atoms ?? []).map((color, i) =>
     ({ ...color, rgb: fit?.colors ? [...fit.colors[i]!] as EmissionVector3 : color.rgb }));
   fit?.atoms.forEach((atom, i) => {
     signal?.throwIfAborted(); const coefficient = fit.coefficients[i]!; if (!(coefficient > 0)) return;
@@ -123,4 +124,17 @@ export function prepareSampledMaterial(values: Float32Array, recipe: SampledReci
     windColors: recipe.terms.map((term, i) => ({ id: term.id, ...windColors[i]! })),
     diffuseColors: atomColors,
     interpretation: 'Each qualified point receives one registered color before its finite XYZ kernel is splatted. Each finite wind/diffuse component receives a footprint-weighted color. Mixtures follow those components in three dimensions; the source image is never sampled at a baked voxel. Color associations remain inferred where components overlap in projection; missing coverage stays neutral. Density, geometry and stars are unchanged.' } };
+}
+
+/** Compact per-emitter colors are independent of source image resolution and slicing. */
+export function sampledPointColors(values: Float32Array, recipe: SampledRecipe, image: Image): Float64Array {
+  const colors = new Float64Array(recipe.source.height * 4);
+  const [cx, cy, cz, cw] = recipe.source.columns, stride = recipe.source.width;
+  for (let row = 0; row < recipe.source.height; row++) {
+    if (!(values[row * stride + cw]! > 0)) continue;
+    const point = mapSample(recipe.rawToArcsec, values[row * stride + cx]!, values[row * stride + cy]!, values[row * stride + cz]!);
+    const color = chromaticity(image, point[0], point[1]);
+    colors.set([...color.rgb, Number(color.covered)], row * 4);
+  }
+  return colors;
 }

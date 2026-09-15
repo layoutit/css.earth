@@ -1,8 +1,10 @@
-# Rebuild the accepted nebulae
+# Rebuild nebula assets and research results
+
+For the ordinary app bake, use the [compact-input installation](../../../docs/nebulae/README.md#reproduce-from-a-clean-checkout). It needs Node/pnpm and no original observations, simulation archives, NOX or Python. The sections below describe the optional full research replay; its native-artifact verifier intentionally expects research caches.
 
 Requires **Node 22, pnpm 10.33.0 and Python 3.9–3.12** with `venv`/`pip`, plus internet access and free disk space for the native images, Python environment and results. The pinned TensorFlow release needs a wheel for your OS/CPU. The [clean-install verification](clean-install-verification.md) records the platform actually tested; it is not a claim that every platform produces identical bytes.
 
-## Prepare the processing environment
+## Full research processing environment
 
 From the repository root in a clean checkout, this complete setup prepares the prerequisites for `prepare-observations` and `compile-nebula`. For a new environment, `python3` on `PATH` must be Python 3.9–3.12 with `venv` and `pip` available.
 
@@ -26,7 +28,7 @@ git clone --depth 1 --single-branch https://github.com/layoutit/css.earth.git "$
 cd "$nebula_dir"
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-pnpm lab:nebula:bake
+pnpm lab:nebula:bake --research
 pnpm lab:nebula:verify
 ```
 

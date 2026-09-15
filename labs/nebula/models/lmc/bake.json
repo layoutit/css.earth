@@ -131,7 +131,15 @@
     "directory": "src/objects/lmc",
     "manifest": {
       "path": "src/objects/lmc/source/lens-manifest.json",
-      "sha256": "a6748babbb14411e3a5784792c5a24836b754fd6447829b2dd67de78e5cd943e"
+      "sha256": "dfc6b44b4da261e7c856a7d4a6ca0341d42d6c596bba09319f28ebb7acc957f5"
+    },
+    "atlasInputs": {
+      "path": "src/objects/lmc/source/atlas-inputs.json",
+      "sha256": "2f64334242d7d1b1254d38cbb2d5d785999628aed574c4d64a1e4f84f3366132"
+    },
+    "compactInputs": {
+      "path": "src/objects/lmc/source/bake-inputs/inputs.json",
+      "sha256": "cfb652b3d316d3164dcf67974af787a2fc95b11a94465185e8a0dd2511d53cc2"
     }
   },
   "starCalibration": {

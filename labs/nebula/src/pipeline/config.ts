@@ -23,6 +23,7 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
   assert.equal(new Set(recipe.images.map(image => image.imageId)).size, recipe.images.length);
   for (const pin of [recipe.catalogue, recipe.separationPlan, recipe.stars, recipe.starAlignment, recipe.promotion,
     recipe.removal.script, recipe.removal.baselineScript]) await pinned(root, pin);
+  if (recipe.delivery?.compactInputs) await pinned(root, recipe.delivery.compactInputs);
   if (recipe.starCalibration) await pinned(root, recipe.starCalibration);
   assert.equal(recipe.removal.method, 'nox-positive-union-with-saved-baseline');
   // These are the pinned worker's actual settings; changing the algorithm requires a new script pin too.
@@ -38,10 +39,11 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
 }
 export const stages = ['density', 'assets', 'removal', 'reconstruction', 'all'] as const;
 type BakeStage = typeof stages[number];
-export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage; image?: string; python?: string; ifMissing: boolean} {
+export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage; image?: string; python?: string; ifMissing: boolean; research: boolean} {
   let recipe = 'labs/nebula/models/lmc/bake.json', stage: BakeStage = 'all', image: string | undefined, python: string | undefined;
-  let ifMissing = false;
+  let ifMissing = false, research = false;
   for (const arg of args) {
+    if (arg === '--research') { research = true; continue; }
     if (arg === '--if-missing') { ifMissing = true; continue; }
     const [key, ...rest] = arg.split('='), value = rest.join('=');
     if (!value) throw new Error(`Expected --option=value: ${arg}`);
@@ -52,5 +54,5 @@ export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage
     else throw new Error(`Unknown bake option: ${arg}`);
   }
   if (ifMissing && (stage !== 'all' || image)) throw new Error('--if-missing checks the complete application delivery; use it without --stage or --image.');
-  return { recipe, stage, image, python, ifMissing };
+  return { recipe, stage, image, python, ifMissing, research };
 }
