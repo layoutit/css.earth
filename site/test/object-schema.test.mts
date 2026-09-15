@@ -43,6 +43,7 @@ test("defines one generic renderable-object contract", () => {
     "loadScene",
     "description",
     "worldFrame",
+    "discovery",
   ]);
   assert.equal(objectRecord.loadScene, loadScene);
   assert.equal(Object.isFrozen(objectRecord), true);

@@ -29,3 +29,14 @@ test('committed alternate placement remains stable when its default side becomes
   const label = { ...candidate('label', 0, true), previousPlacement: 1 };
   expect(admitStableLabels([label], createLabelBudget(500, 400))[0]?.placement).toBe(1);
 });
+
+
+test('a featured tier displaces an ordinary survivor but stays stable among its peers', () => {
+  const ordinary = { ...candidate('ordinary', 0, true), tier: 0 };
+  const featured = { ...candidate('featured', 0), tier: 2 };
+  expect(admitStableLabels([ordinary, featured], createLabelBudget(500, 400, [], [], 1))[0]?.candidate.id).toBe('featured');
+  const peer = { ...candidate('peer', 0), tier: 2, priority: 9999 };
+  expect(admitStableLabels([{ ...featured, shown: true }, peer], createLabelBudget(500, 400, [], [], 1))[0]?.candidate.id).toBe('featured');
+  const selected = { ...ordinary, pinned: 1 };
+  expect(admitStableLabels([selected, featured], createLabelBudget(500, 400, [], [], 1))[0]?.candidate.id).toBe('ordinary');
+});

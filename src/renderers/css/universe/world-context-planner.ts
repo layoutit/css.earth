@@ -309,9 +309,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const rect = { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius };
         const targeted = hovered || entry.highlighted || entry.body.id === emphasizedId;
         if (view.labelBlockers?.some(blocker => labelRectsOverlap(rect, blocker))) continue;
-        // New circles must not evict an established label. Existing circles can
-        // still cause a real collision as their physical anchors move.
-        if (!entry.indicatorShown && !targeted && survivors.some(({ item: other, rect: label }) => other !== item && Math.hypot(other.x - x, other.y - y) > BODY_INDICATOR_DIAMETER + 6 && labelRectsOverlap(rect, label))) continue;
+        // A new circle preserves labels of equal or greater discovery importance.
+        // Existing circles can still collide as their physical anchors move.
+        if (!entry.indicatorShown && !targeted && survivors.some(({ item: other, rect: label }) => (annotationPriorities[other.entry.body.id] ?? 0) >= (annotationPriorities[entry.body.id] ?? 0) && other !== item && Math.hypot(other.x - x, other.y - y) > BODY_INDICATOR_DIAMETER + 6 && labelRectsOverlap(rect, label))) continue;
         indicators.add({ owner: 0, id: entry.body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
           anchor: [x, y], widthPx: BODY_INDICATOR_DIAMETER + padding * 2,
           bottomOffsetPx: -radius - padding, topOffsetPx: radius + padding });
@@ -361,7 +361,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           return { slot, rect: { left: x - padding, top: y - padding, right: x + size.width + padding, bottom: y + size.height + padding } };
         });
         candidates.push({ id: body.id, projected, padding, navigable: true, pinned: hovered ? 3 : highlighted ? 2 : body.id === emphasizedId ? 1 : 0,
-          priority, shown: entry.labelShown, previousPlacement: entry.labelShown ? entry.labelPlacement : sides[0], placements });
+          priority, tier: annotationPriorities[body.id] ?? 0, shown: entry.labelShown, previousPlacement: entry.labelShown ? entry.labelPlacement : sides[0], placements });
       }
       const accepted = admitStableLabels(candidates, labelBudget, (candidate, rect) => {
         if (rect.left < -width / 2 + 4 || rect.right > width / 2 - 4 || rect.top < -height / 2 + 4 || rect.bottom > height / 2 - 4) return false;
