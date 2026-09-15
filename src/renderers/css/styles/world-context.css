@@ -22,7 +22,8 @@
    The neutral default sits on the shared root, below every per-body swatch
    rule, so swatch colours win regardless of stylesheet order. */
 .prepared-world-context,
-.prepared-context-label {
+.prepared-context-label,
+.prepared-context-marker {
   color: #dfdfdf;
 }
 .prepared-world-context [data-context-body-visible="false"] {
@@ -39,12 +40,15 @@
   pointer-events: none;
   visibility: hidden;
 }
+.prepared-world-context [data-context-body]::before,
+.prepared-context-marker {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
 .prepared-world-context [data-context-body]::before {
   content: '';
   width: 16px;
   height: 16px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px currentColor;
   transform: scale(1) translate(-50%, -50%);
   opacity: attr(data-context-line-alpha type(<number>), .65);
 }
