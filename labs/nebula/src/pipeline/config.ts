@@ -54,5 +54,6 @@ export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage
     else throw new Error(`Unknown bake option: ${arg}`);
   }
   if (ifMissing && (stage !== 'all' || image)) throw new Error('--if-missing checks the complete application delivery; use it without --stage or --image.');
+  if (image && !research) throw new Error('--image requires --research; use the default bake for compact LMC replay.');
   return { recipe, stage, image, python, ifMissing, research };
 }
