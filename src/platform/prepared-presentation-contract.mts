@@ -420,13 +420,19 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels"]);
-    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property"]), "view binding");
+    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "sceneFromBody", "radii", "inset"]);
+    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc"]), "view binding");
     // The stage itself may carry a published level-of-detail attribute or
     // property; every other binding names a retained node.
     node(binding.target, ["view-attribute", "view-property"].includes(binding.kind));
     if ([tree.camera, tree.scene].includes(binding.target) && binding.kind !== "view-attribute") fail("view binding cannot duplicate the camera publisher");
-    if (binding.kind === "silhouette-fit") {
+    if (binding.kind === "interior-disc") {
+      const matrix = array(binding.sceneFromBody, "interior disc frame"), radii = array(binding.radii, "interior disc radii");
+      matrix.forEach(value => finite(value, "interior disc frame")); radii.forEach(value => finite(value, "interior disc radius"));
+      if (matrix.length !== 16 || [3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1 || radii.length !== 3 || radii.some(value => value <= 0) ||
+          !(binding.inset > 0 && binding.inset < 1) || !Number.isFinite(binding.inset) || tree.nodes[binding.target].parent !== tree.scene ||
+          plan.camera.projection?.model !== "css-perspective-shared-with-sky") fail("interior disc requires an affine frame inside the perspective scene");
+    } else if (binding.kind === "silhouette-fit") {
       // The overlay fitted to the projected silhouette a perspective camera
       // publishes (see perspective-dolly.mjs), never below a prepared radius.
       if (!(binding.minimumRadius >= 0) || !(binding.unitScale > 0)) fail("silhouette fit requires a prepared floor and unit scale");

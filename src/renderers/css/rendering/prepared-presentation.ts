@@ -1,3 +1,4 @@
+import { createPreparedInteriorDisc, type PreparedInteriorDisc } from './prepared-interior-disc.js';
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
 import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
@@ -35,6 +36,7 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "view-attribute"; property: string; source: "scene-pitch" | "control-yaw" | "zoom" | "level-of-detail-stage" | "scene-matrix"; precision: number | null } |
   { kind: "view-property"; property: string; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
   { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
+  ({ kind: "interior-disc" } & PreparedInteriorDisc) |
   ({ kind: "silhouette-step-property"; property: string } & PreparedSilhouetteSteps) |
   { kind: "zoom-property"; property: string } | { kind: "shell-scale"; variable: string; defaultZoom: number } |
   { kind: "counter-rotation"; systemTransform: string | null }
@@ -240,6 +242,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   const target = (index: number) => index === -1 ? stage : nodes[index];
   // Hysteresis needs the step each silhouette binding last published.
   const silhouetteSteps = new Map<PreparedViewBinding, number>();
+  const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
+    ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
   return {
     publish({ selection, view, resources, plan }: PreparedFramePublication) {
       publishDepth(view.projection);
@@ -259,6 +263,11 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
         } else if (binding.kind === "view-property") {
           const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
           if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+        } else if (binding.kind === "interior-disc") {
+          const transform = view.projection ? interiorDiscs.get(binding.target)!(view.projection) : null;
+          const visibility = transform ? "visible" : "hidden";
+          if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
+          if (transform && element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
         } else if (binding.kind === "silhouette-fit") {
           // The overlay fitted to the projected silhouette: an ellipse,
           // slightly elongated and shifted outward when off-axis, exactly the
