@@ -73,7 +73,7 @@ export interface SurfaceFeaturesConfig {
   /** Optional landing, impact and sample sites and traverses (inside `directory`): the document and its pinned path files. */
   readonly sites?: { readonly document: string; readonly inputs: readonly string[] };
   /** Mission-defined regions or source-backed model anatomy, independent of IAU naming. */
-  readonly landmarks?: { readonly document: string; readonly inputs: readonly string[] };
+  readonly landmarks?: { readonly document: string; readonly inputs: readonly string[]; readonly priority?: number };
 }
 export interface SurfaceFeaturesSourceManifest {
   readonly schema: typeof SURFACE_FEATURES_SOURCE_SCHEMA;
@@ -98,6 +98,8 @@ export interface PreparedSurfaceFeature {
   readonly machineId?: string;
   /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
   readonly minimumZoomShare: number;
+  /** Found by search and labelled when selected, never by default. */
+  readonly searchOnly?: true;
 }
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: typeof PREPARED_SURFACE_FEATURES_SCHEMA; readonly objectId: string;
@@ -188,7 +190,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
-    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseSitesRecipe(input.landmarks) }),
+    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseLandmarksRecipe(input.landmarks) }),
   });
 }
 
@@ -210,6 +212,13 @@ function parseSitesRecipe(value: unknown): { document: string; inputs: string[] 
   const input = record(value, 'features recipe sites');
   if (!Array.isArray(input.inputs)) throw new TypeError('features recipe sites.inputs must be an array.');
   return { document: relativePath(input.document, 'sites.document'), inputs: input.inputs.map((item, index) => relativePath(item, `sites.inputs[${index}]`)) };
+}
+/** Landmarks share the sites document shape; a recipe may rank them among its other names (default 10). */
+function parseLandmarksRecipe(value: unknown): { document: string; inputs: string[]; priority?: number } {
+  const recipe = parseSitesRecipe(value), priority = record(value, 'features recipe landmarks').priority;
+  if (priority === undefined) return recipe;
+  if (typeof priority !== 'number' || !Number.isFinite(priority) || priority < 0) throw new TypeError('landmarks.priority must be a non-negative number.');
+  return { ...recipe, priority };
 }
 
 export function parseSurfaceFeaturesSourceManifest(value: unknown): SurfaceFeaturesSourceManifest {
@@ -503,9 +512,10 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const naturalEarth = config.naturalEarth ? loadNaturalEarthRows(context.sourceDirectory, config.directory, config.naturalEarth) : null;
   const zoomShareById = new Map<string, number>();
   const priorityById = new Map<string, number>(), pathsById = new Map<string, readonly (readonly (readonly [number, number])[])[]>();
+  const searchOnlyIds = new Set<string>();
   const approvalLabel = naturalEarth ? 'Natural Earth' : 'Adopted by IAU';
   const table = naturalEarth ? { fields: [], rows: naturalEarth.map(row => {
-    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, row.zoomShare); if (row.paths) pathsById.set(row.id, row.paths);
+    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, row.zoomShare); if (row.paths) pathsById.set(row.id, row.paths); if (row.searchOnly) searchOnlyIds.add(row.id);
     return { name: row.name, clean_name: row.cleanName, approvaldt: `${manifest.snapshotDate.replaceAll('-', '/')} 00:00:00`, origin: row.origin, diameter: '0',
       center_lon: String(row.centerLon), center_lat: String(row.centerLat), type: row.type, code: row.code, approval: approvalLabel,
       min_lon: row.extent ? String(row.extent.minLon) : '', max_lon: row.extent ? String(row.extent.maxLon) : '', min_lat: row.extent ? String(row.extent.minLat) : '', max_lat: row.extent ? String(row.extent.maxLat) : '',
@@ -544,7 +554,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const features: PreparedSurfaceFeature[] = [];
   const landmarks = config.landmarks ? await prepareLandmarks(JSON.parse(await readFile(resolve(directory, config.landmarks.document), 'utf8')), context, axes, config.mapLeftEdgeLongitudeDeg) : null;
   if (landmarks) for (const feature of landmarks.features) {
-    features.push(feature); zoomShareById.set(feature.id, feature.minimumZoomShare); priorityById.set(feature.id, 10);
+    features.push(feature); zoomShareById.set(feature.id, feature.minimumZoomShare); priorityById.set(feature.id, config.landmarks!.priority ?? 10);
   }
   const ids = new Map<string, PreparedSurfaceFeature>();
   const landmarkIds = new Set(features.map(feature => feature.id));
@@ -632,6 +642,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       ...(siteNoteById.has(id) ? { note: siteNoteById.get(id)! } : noteById.has(id) ? { note: { text: noteById.get(id)!.extract, title: noteById.get(id)!.title, url: noteById.get(id)!.url, credit: 'Wikipedia, CC BY-SA 4.0' } } : {}),
       ...(machineById.has(id) ? { machineId: machineById.get(id)! } : {}),
       minimumZoomShare: 0,
+      ...(searchOnlyIds.has(id) ? { searchOnly: true as const } : {}),
     };
     ids.set(id, feature);
     features.push(feature);

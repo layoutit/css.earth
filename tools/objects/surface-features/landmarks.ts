@@ -63,7 +63,7 @@ export function parseLandmarks(value: unknown) {
  * A representative point is neither an official region centre nor an invented circular boundary. */
 export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePreparationContext, axes: SurfaceFeatureAxes, leftEdge: number) {
   const doc = parseLandmarks(value), hit = context.hitMesh;
-  if (!hit && (!context.referenceSphere || doc.vtk || doc.entries.some(e => !('longitudeDeg' in e.position)))) throw new TypeError('Landmarks require the prepared picking mesh or an explicit sphere with geographic coordinates.');
+  if (!hit && (!(context.referenceSphere || context.surface) || doc.vtk || doc.entries.some(e => !('longitudeDeg' in e.position)))) throw new TypeError('Landmarks require the prepared picking mesh, or an explicit sphere or rendered ellipsoid with geographic coordinates.');
   const unitsPerMeter = context.meshRadiusUnits / (context.radiusKm * 1000);
   if (leftEdge !== 0 && (doc.vtk || doc.entries.some(e => 'pointMeters' in e.position))) throw new TypeError('Cartesian landmarks require an explicit zero-longitude surface frame.');
   const native = (v: readonly number[]): Vec => [dot(v, axes.prime) / unitsPerMeter, dot(v, axes.east) / unitsPerMeter, dot(v, axes.north) / unitsPerMeter];
@@ -120,7 +120,7 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
   }
   const evidence: { id: string; sourceFace?: number; displayFace?: number; distanceMeters?: number; regionId?: number }[] = [];
   const features: PreparedSurfaceFeature[] = doc.entries.map(e => {
-    let anchor: Vec, longitudeDeg: number, latitudeDeg: number, surfaceNormal: Vec | undefined;
+    let anchor: Vec, longitudeDeg: number, latitudeDeg: number, surfaceNormal: Vec | undefined, geodetic = false;
     if ('regionId' in e.position) {
       const selected = regions.get(e.position.regionId);
       if (!selected) throw new TypeError(`No interior display triangle maps to ${e.name}; do not substitute a sphere point.`);
@@ -138,14 +138,23 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
       evidence.push({ id: e.id, displayFace: closest.faceId, distanceMeters: Number(closest.distanceMeters.toFixed(3)) });
     } else {
       const direction = surfaceDirection(e.position.longitudeDeg, e.position.latitudeDeg, axes, leftEdge);
-      const radius = hit ? projectRadial(hit.triangles, direction) : context.referenceSphere ? context.meshRadiusUnits : null;
-      if (radius === null) throw new TypeError(`No display surface at ${e.name}.`);
-      anchor = [direction[0] * radius, direction[1] * radius, direction[2] * radius];
+      if (!hit && context.surface) {
+        // A rendered ellipsoid casts geodetic coordinates through the same sampler as its other names.
+        const [x, y, z] = context.surface.onSurface(direction);
+        anchor = [x, y, z]; geodetic = true;
+        // Facing uses the map direction, as for the Natural Earth names cast through the same sampler.
+        surfaceNormal = [direction[0], direction[1], direction[2]];
+      } else {
+        const radius = hit ? projectRadial(hit.triangles, direction) : context.referenceSphere ? context.meshRadiusUnits : null;
+        if (radius === null) throw new TypeError(`No display surface at ${e.name}.`);
+        anchor = [direction[0] * radius, direction[1] * radius, direction[2] * radius];
+      }
       evidence.push({ id: e.id });
     }
     const body = native(anchor);
-    longitudeDeg = ((Math.atan2(body[1], body[0]) * 180 / Math.PI + leftEdge) % 360 + 360) % 360;
-    latitudeDeg = Math.asin(body[2] / length(body)) * 180 / Math.PI;
+    // A geodetic sampler keeps the published coordinates: the anchor's geocentric direction would shift the latitude.
+    longitudeDeg = geodetic && 'longitudeDeg' in e.position ? e.position.longitudeDeg : ((Math.atan2(body[1], body[0]) * 180 / Math.PI + leftEdge) % 360 + 360) % 360;
+    latitudeDeg = geodetic && 'latitudeDeg' in e.position ? e.position.latitudeDeg : Math.asin(body[2] / length(body)) * 180 / Math.PI;
     return { id: e.id, name: e.name, kind: e.kind, type: e.type, code: 'RE', diameterKm: 0, longitudeDeg, latitudeDeg,
       anchorUnits: rounded(anchor, 3), normal: rounded(surfaceNormal ?? unit(anchor)), radiusUnits: 0,
       outline: { kind: 'circle', center: rounded(anchor, 3), east: [0, 0, 0], north: [0, 0, 0] },
