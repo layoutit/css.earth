@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-optical-composite-recipe@1",
+  "id": "optical-composite",
+  "label": "Optical composite · NOIRLab + Niittee",
+  "compilerRecipe": "labs/nebula/models/m45/compiler.json",
+  "baseResult": {
+    "path": ".local/nebula-lab/compiler/29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef/result.json",
+    "sha256": "5c3a60e2a10d401c89689e2276a881cb3751c2cbdbb816e97645ea364404ae8c"
+  },
+  "neutralSlices": {
+    "path": ".local/nebula-lab/compiler/a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8/scene/neutral/volume-slices.json",
+    "sha256": "1a7db1ce7d4d8f87f5c137c6a24a908130a5250745f6df5390b9c8d877d01fb9"
+  },
+  "observationRecipe": "labs/nebula/models/m45/optical-composite-observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/m45-optical-composite/observations.json",
+  "detailSourceId": "noirlab-optical",
+  "wideSourceId": "niittee-widefield",
+  "featherArcsec": 360,
+  "lowFrequencyArcsec": 45,
+  "interpretation": "Optical display composite: Taavi Niittee supplies wide-field RGB and broad illumination; registered NOIRLab supplies bounded central luminance detail after removal of broad image illumination. The display fusion is not common-filter calibrated photometry. Existing inferred cloud and catalogue stars stay unchanged."
+}
