@@ -5,7 +5,7 @@ import type { SourceUsage } from '../src/platform/source-usage.mts';
 import { sourceCitationUrl, type SourceResolver } from '../src/platform/source-catalog.mts';
 import { objectSources } from './object-sources.mts';
 
-interface SourceGroup {
+export interface SourceGroup {
   credit: string;
   /** The dataset's own inputs, ahead of the labels and format notes they need. */
   links: { id: string; title: string; href: string }[];
