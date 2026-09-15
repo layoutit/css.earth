@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "crimea",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "02e42206509c3c36e35e09521dc9509e1df4d54db2270a9e0c6c55e63aefb5e0"
+    "sha256": "18dde745314b91354265cbeb55441fff07c8bb9bd7e541badfc875412cc39886"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b106e9caa4aaf102bec9de164dfa46e77012d05affa68a33d468b73175a5fa5a",
+      "sha256": "f559d71facca093ad8ddbff830ab4dcc20c9e9ac62d6cd1ae6214deaece7e1cb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 29.179 ± 0.155 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "notes": "Thermal diameter 29.179 ± 0.155 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "8facba4b82f8c0b8a07506e24100ae6c721bb21661d113b7df51b6f9fd6d0117",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "b106e9caa4aaf102bec9de164dfa46e77012d05affa68a33d468b73175a5fa5a",
+      "sha256": "f559d71facca093ad8ddbff830ab4dcc20c9e9ac62d6cd1ae6214deaece7e1cb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8665,
+      "bytes": 8763,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/crimea/crimea-elevation-thumbnail.webp",
           "bytes": 4838,
           "sha256": "5866cba328e98a92636fb0f64733bc812fb9d564243d85da203a6e0e4258de4a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/crimea/crimea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/crimea/crimea-elevation-surface@2x.webp",
           "bytes": 285008,
           "sha256": "08b001a8a7aec202b067eaec9cdaf7dfde6f94f775565927e9c5f4459d68e4d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/crimea/crimea-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/crimea/crimea-shape-surface@2x.webp",
-          "bytes": 191116,
-          "sha256": "26c269753c94d2fb4370d07c49f1064a909106ea532d719c6ff5277cc6927e8c",
-          "verification": "bytes-verified"
+          "bytes": 63632,
+          "sha256": "1187da4dedbee0ec113d3635a10800cf884044cd325fc1361cceb0a6f6ed1d42",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

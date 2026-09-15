@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2002-ce26",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d8ad97b7c63869ff6ee0d9d46f552d88c4bb5404ec3eda67bd31a656e5bcf17"
+    "sha256": "6056e5b7803ed5cfd3c67d03dbb46f8db39f44e204d80df1463d640e22dc4338"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a14755bc3a2f65bfca02c52096956524f1cff7b49dda6e65bdfc57d6df81cb21",
+      "sha256": "4846c154043630bf05587f678e3aadebbb4e8414aaded3176d1bd17699e5c9ec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,7 +203,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
+              "notes": "The shared neutral gray marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -329,7 +329,7 @@
       "sha256": "4b625ea6906aba4d5828836c44d733ca4ad8c2a501739dc74f305ef84bb42c12",
       "bytes": 67313,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a14755bc3a2f65bfca02c52096956524f1cff7b49dda6e65bdfc57d6df81cb21",
-      "bytes": 12829,
+      "sha256": "4846c154043630bf05587f678e3aadebbb4e8414aaded3176d1bd17699e5c9ec",
+      "bytes": 12935,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -389,19 +389,19 @@
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-thumbnail.webp",
           "bytes": 6264,
           "sha256": "565ad07b9b2b9ab31f8350d7f717368f3f8f091c0e6c3b09998f1105aec251ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-surface@2x.webp",
           "bytes": 351038,
           "sha256": "ace0a02ce77c7b4275dfae29be347d454f90ea54bbe8c4d8d6e4e32e22efba5e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -437,15 +437,15 @@
       "outputs": [
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
-          "bytes": 221742,
-          "sha256": "d92cbba755a433725a78e63633e56f612e0731d95acc627686e38c016295b12b",
-          "verification": "bytes-verified"
+          "bytes": 59966,
+          "sha256": "559b03c460bf001f147cda4032a77171d89ff804f42cf74e5a675b55492a4df9",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -502,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

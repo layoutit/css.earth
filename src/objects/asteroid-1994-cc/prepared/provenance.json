@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1994-cc",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ccff7ad62c67af04cc13c6d502030d3dda9812f95fac3a6782dc339a98cb5910"
+    "sha256": "81b00ab827ae8df223f204d50acfd55386b74b6556e730681fac1bad30aeefa0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "551959c8ea1eeb7a077426eb896c71160a3628e947e8bf8959ea3b967f83f5d3",
+      "sha256": "5fd9820eee5362720ca817008b12002a05e9efb72e7968f955f33c33669160c8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,7 +199,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Published radar shape model",
+              "notes": "Published radar shape model Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -326,7 +326,7 @@
       "sha256": "8df685e9f555ba71a07ba4364af3ea59e485fcb5afa43fb54e5a12f645fca78b",
       "bytes": 120595,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -351,10 +351,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "551959c8ea1eeb7a077426eb896c71160a3628e947e8bf8959ea3b967f83f5d3",
-      "bytes": 10102,
+      "sha256": "5fd9820eee5362720ca817008b12002a05e9efb72e7968f955f33c33669160c8",
+      "bytes": 10200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
           "bytes": 7542,
           "sha256": "6f2021266b63661777f52557d74476ecdb9b854d2fd94b7899be440bef49d1ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-surface@2x.webp",
           "bytes": 450112,
           "sha256": "548e772fe603a1d90c1f68b81cdb235acd21db190cfeea17b42aefd8ed78af7c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -434,15 +434,15 @@
       "outputs": [
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
-          "bytes": 224574,
-          "sha256": "b465e70d9720970217357168d14bf36c02e1864bbc911d47ec8c3633d8401c9e",
-          "verification": "bytes-verified"
+          "bytes": 61604,
+          "sha256": "df57b97e63f755f519afec29d66c16201456b6933d06d1cf04fa95633ca8ac59",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -499,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-2p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d3b43872b53f2893fcb0223c5054f9b3811e684b942e80538762eef3b360f380"
+    "sha256": "847e953e0dbdbc2b522bc82d1dc02a86da69fc2502c86898b538889dc1259a77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a44679933fb9c8a0dc8da26d74cec77480ea969175443ce194720e548d865764",
+      "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -185,7 +185,7 @@
                   "value": "≈11.1 hours"
                 }
               ],
-              "notes": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative.",
+              "notes": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. Neutral gray marks absent surface photographs; the orientation is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             }
           ]
@@ -259,7 +259,7 @@
       "sha256": "b9b625659f98d6eafd05de9007a9f76db36bd5422fc6f3cd2f64ae472d60ca55",
       "bytes": 1077,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -276,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a44679933fb9c8a0dc8da26d74cec77480ea969175443ce194720e548d865764",
-      "bytes": 2410,
+      "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
+      "bytes": 2512,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -309,15 +309,15 @@
       "outputs": [
         {
           "url": "/scenes/comet-2p/comet-2p-model-thumbnail.webp",
-          "bytes": 1102,
-          "sha256": "4095a8b3a8221be2a84a513c69d4ec068eee3d3ce03dc903db0a63962461b3d5",
-          "verification": "bytes-verified"
+          "bytes": 690,
+          "sha256": "86b911593355aeed356b720a983eeb54e2bcdc3649572b2c67b883a3a73740de",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-2p/comet-2p-model-surface@2x.webp",
-          "bytes": 110952,
-          "sha256": "6ff963d7393a952ea3b43ab8c7a10be2ca029bff58219fcc8fb2b7df856a03a6",
-          "verification": "bytes-verified"
+          "bytes": 45122,
+          "sha256": "fc860f900204a17ed62660d7f3994f99224966a3cc16e5117276946fbd0ec184",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

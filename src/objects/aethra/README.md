@@ -1,5 +1,7 @@
 # (132) Aethra
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 Checked 2026-09-09. Selected DAMIT model [161](https://damit.cuni.cz/projects/damit/asteroid_models/view/161), version **2011-04-19**.

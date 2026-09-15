@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
+        "notes": "The shared neutral gray marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

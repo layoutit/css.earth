@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "transvaalia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf2da7d004141b265ce216500721dc4128329c0ca8712f304b1e75cdaa77e9b3"
+    "sha256": "2a98a40f306916193c019cf5f5492efddb5963fa201dc1f279fdf77dbbe92e26"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a279c116a5e75163edeee8220e0e8005efb0867915ae2fd30f1b4a3796c14d29",
+      "sha256": "d6e9e45b8f2764b19dfbb4788c99f2fd8a73e5e0ee10b53d924fb08fce7fa2fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 25.458 ± 0.591 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "notes": "Thermal diameter 25.458 ± 0.591 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a279c116a5e75163edeee8220e0e8005efb0867915ae2fd30f1b4a3796c14d29",
+      "sha256": "d6e9e45b8f2764b19dfbb4788c99f2fd8a73e5e0ee10b53d924fb08fce7fa2fb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11325,
+      "bytes": 11423,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/transvaalia/transvaalia-elevation-thumbnail.webp",
           "bytes": 6038,
           "sha256": "30701e4f558d18884cd01c0f99c1d3aecd5ddf6b9dc01154c2c52981c0027887",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-surface@2x.webp",
           "bytes": 301674,
           "sha256": "7a8ad7c8986a130cbd527089f0c708c09f3be5219a0f5278730ec7f0814d31f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/transvaalia/transvaalia-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-shape-surface@2x.webp",
-          "bytes": 248764,
-          "sha256": "f8593f648a3dbceaca0fa7574913486ab390db403a6f92bfb8bd92550409b48b",
-          "verification": "bytes-verified"
+          "bytes": 64806,
+          "sha256": "df8a2a429335b484c1e1ccca9caaf68591e7f6821db075c291c0694944b075de",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

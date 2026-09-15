@@ -67,7 +67,8 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab"
         },
-        "noData": true
+        "noData": true,
+        "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
       }
     ]
   },

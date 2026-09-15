@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-137p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb6a25d0a03e72e366d74575a93e3b391c9cde4a34a3c79b5b7a5b025d1b619a"
+    "sha256": "367aa96ec13c82138159283caa3246274de1d0e035e4987f448ab4425a3d9a34"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7957290bb9a1f036c7d30dd0d60031c10f03d2e1d5cf1580667ed2d93dd6400b",
+      "sha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -185,7 +185,7 @@
                   "value": "7.79 hours"
                 }
               ],
-              "notes": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. The grid marks missing surface imagery. Rotation phase is illustrative.",
+              "notes": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. Neutral gray marks missing surface imagery. Rotation phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             }
           ]
@@ -259,7 +259,7 @@
       "sha256": "e335339de48d829c44b82ea56f827499c9d83904fc3977d47933f5cae56dd9d3",
       "bytes": 1330,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -276,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7957290bb9a1f036c7d30dd0d60031c10f03d2e1d5cf1580667ed2d93dd6400b",
-      "bytes": 2504,
+      "sha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
+      "bytes": 2606,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -309,15 +309,15 @@
       "outputs": [
         {
           "url": "/scenes/comet-137p/comet-137p-model-thumbnail.webp",
-          "bytes": 1556,
-          "sha256": "351ef96eda5a7e7bdf5a5711bcfe0f25bd15b018c9ed5877f20366ff910a1592",
-          "verification": "bytes-verified"
+          "bytes": 904,
+          "sha256": "9abc813ca537d37592c12f6a7fc07128d4cfcacc0b0517662ddd7c50311bcdb0",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-137p/comet-137p-model-surface@2x.webp",
-          "bytes": 113572,
-          "sha256": "c9fbf78ab82d1bde96415d3f736e6ef002c7d8c106b5af9bac6f4f67c3dc13f7",
-          "verification": "bytes-verified"
+          "bytes": 40796,
+          "sha256": "5e23f6cfff604d61f855b186067215362344e96d19303c1e5db41448f3c1b216",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

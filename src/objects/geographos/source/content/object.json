@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+        "notes": "The shared neutral gray marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

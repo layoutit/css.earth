@@ -1,5 +1,7 @@
 # (125) Liberatrix
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **157**, version **2007-02-27**. DAMIT, Astronomical Institute of Charles University; J. Ďurech (2007); model 157, version 2007-02-27.
 
-Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 2.1 km (reported model-ensemble range). An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 2.1 km (reported model-ensemble range). An alternative pole remains possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ Empirical VS-TPM interval formed from the smallest range of14 best-fit varied-sh
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 158, pole ['280', '74'], [Model 158](https://damit.cuni.cz/projects/damit/asteroid_models/view/158)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 158, pole ['280', '74'], [Model 158](https://damit.cuni.cz/projects/damit/asteroid_models/view/158)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
