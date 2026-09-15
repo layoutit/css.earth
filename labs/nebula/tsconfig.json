@@ -1,13 +1,23 @@
 {
-  "extends": "../../src/renderers/css/tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "allowJs": true,
-    "checkJs": false,
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "resolveJsonModule": true,
-    "types": ["node"],
-    "typeRoots": ["../../node_modules/.pnpm/node_modules/@types"]
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../node_modules/.pnpm/node_modules/@types"
+    ]
   },
-  "include": ["vite.config.ts", "src/**/*.ts", "src/**/*.tsx", "../../node_modules/vite/client.d.ts"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": [
+    "vite.config.ts",
+    "run.mts",
+    "../../node_modules/vite/client.d.ts"
+  ]
 }

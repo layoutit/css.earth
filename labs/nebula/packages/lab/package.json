@@ -1,0 +1,51 @@
+{
+  "name": "@cssearth/nebula-lab",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server/jobs": "./src/server/jobs/service.ts",
+    "./server/job-routes": "./src/server/routes/jobs.ts",
+    "./cli": "./src/cli/run.ts",
+    "./server/worker": "./src/server/workers/run.ts",
+    "./server/implementation": "./src/server/services/implementation.ts",
+    "./adapters/viewer/inspection-camera-renderer": "./src/adapters/viewer/inspection-camera-renderer.ts",
+    "./adapters/viewer/shape-cloud-renderer": "./src/adapters/viewer/shape-cloud-renderer.ts",
+    "./adapters/viewer/shape-cloud-viewer": "./src/adapters/viewer/shape-cloud-viewer.ts",
+    "./adapters/viewer/compiler-renderer": "./src/adapters/viewer/compiler-renderer.ts",
+    "./adapters/viewer/inspection-renderer": "./src/adapters/viewer/inspection-renderer.ts",
+    "./adapters/viewer/reconstruction-overlay": "./src/adapters/viewer/reconstruction-overlay.ts",
+    "./adapters/viewer/shape-cloud-renderer-validation": "./src/adapters/viewer/shape-cloud-renderer-validation.ts",
+    "./adapters/viewer/shape-cloud-camera": "./src/adapters/viewer/shape-cloud-camera.ts",
+    "./adapters/viewer/compiler-viewer": "./src/adapters/viewer/compiler-viewer.ts",
+    "./adapters/viewer/volume-renderer": "./src/adapters/viewer/volume-renderer.ts",
+    "./viewer/legacy": "./src/features/legacy-viewer/controller.ts",
+    "./adapters/viewer/joint-fit-viewer": "./src/adapters/viewer/joint-fit-viewer.ts",
+    "./adapters/viewer/catalogue-stars": "./src/adapters/viewer/catalogue-stars.ts",
+    "./viewer/lab-routing": "./src/features/legacy-viewer/lab-routing.ts",
+    "./viewer/tone-runtime": "./src/adapters/viewer/tone-runtime.ts",
+    "./viewer/overlay-variants": "./src/features/legacy-viewer/overlay-variants.ts",
+    "./viewer/available-overlay-variants": "./src/features/legacy-viewer/available-overlay-variants.ts",
+    "./viewer/overlay-tone": "./src/features/legacy-viewer/overlay-tone.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@cssearth/volume-core": "workspace:*",
+    "@cssearth/volume-bake": "workspace:*",
+    "@cssearth/nebula-reconstruction": "workspace:*",
+    "@cssearth/volume-viewer": "workspace:*",
+    "esbuild": "0.27.7",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "@layoutit/polycss": "0.2.11",
+    "@cssearth/engine": "workspace:*",
+    "@cssearth/objects": "workspace:*",
+    "vite": "7.3.1"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0",
+    "sharp": "0.35.3"
+  }
+}
