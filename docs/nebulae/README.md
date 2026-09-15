@@ -18,19 +18,18 @@ These are **relative display emission** models, not measured 3D gas density. The
 
 ## Reproduce from a clean checkout
 
-Requires Node 22.18+, pnpm 10.33.0, Python 3.9–3.12 with pip/venv, a supported TensorFlow wheel, internet access and disk space for native images. Run from the repository root. This uses the existing lab processing environment without opening its UI or restarting a running lab.
+Requires Node 22.18+ and pnpm 10.33.0. Dependency installation needs internet; the accepted nebula bake uses checked-in compact inputs and needs no native image downloads, Python, NOX or simulation archive. Run from a clean repository checkout.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
 pnpm prepare:nebulae
 pnpm dev
 ```
 
-`pnpm prepare:nebulae` handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/machine/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 replays its symmetry recipe if its local volume is absent. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
+`pnpm prepare:nebulae` handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/machine/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 integrates its retained RGB emission grid; the compiler objects replay fitted fields and saved materials. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
 
-Source recipes, provenance, requests and small object descriptors are committed. Textures, prepared descriptors and receipts under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
+Source recipes, provenance, requests, compact pre-slice bake inputs and small object descriptors are committed. Textures, prepared descriptors and receipts under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
 
 For work elsewhere in the application, `pnpm dev` no longer runs this full nebula
 preparation. Startup checks each volume's bank, textures, previews and presentation
@@ -137,3 +136,58 @@ retains its original scope and limitations. Cold native-processing replay,
 quantitative axis-handoff requalification and unrelated planet suites are not
 claimed by a provenance-only update. Existing material defects remain in the
 object records and investigation ledgers.
+
+## Volume texture delivery
+
+The seven lens-bank objects (Crab, Orion, Helix, M2–9, Pleiades, Lagoon and LMC)
+pack each lens’s original X/Y/Z slices into three WebP atlases. Delivery uses
+color quality 80, alpha quality 80, effort 4, and two-pixel clamped gutters.
+Packing preserves the leaf transforms, dimensions, order, frame, stars and
+saved brightness. Only texture resources and prepared background coordinates
+change. No density fitting or star removal occurs in this packaging step.
+
+The existing renderer uses these prepared coordinates unchanged. Distant
+billboards remain separate and the volume atlases load through the existing
+projected-size handoff. Three requests replace hundreds of individual slice
+requests per lens; atlas compression does not reduce decoded RGBA memory or
+the number of rendered planes. Q80/A80 is lossy, including alpha: it preserves
+geometry, not every pixel or faint-opacity level.
+
+`pnpm prepare:nebulae` restores the atlases as part of normal app preparation.
+The compiler/symmetry handoff hashes the atlas implementation into its receipt.
+LMC replays pinned accepted slices and compares the regenerated atlases with
+its delivery manifest. Generated atlas images stay ignored.
+
+## Compact inputs and research replay
+
+The ordinary bake begins after scientific fitting and material assignment:
+
+- Orion, Helix, Pleiades and Lagoon retain analytic emission components, per-component colors, stars and integration settings.
+- Crab retains its sampled/model material inputs; it keeps tracer-specific component support.
+- M2–9 retains three compressed RGB emission grids before optical integration.
+- LMC retains the small density grid and three registered starless RGB material planes, with the accepted placement and appearance settings. These planes are material inputs, not XYZ slices.
+
+The original acquisition records and full research recipes remain available.
+`prepare-nebula-objects --research` and `bake-nebula --research` explicitly rerun
+the research route, which can need native downloads and Python. The default
+route never silently falls back to that expensive process when compact inputs
+are missing or invalid: it reports the broken pin. New scientific fits must
+be inspected and explicitly exported before replacing the compact inputs.
+
+Runtime atlases, impostors and slices are generated and ignored. The compact
+fields retain provenance and expected texture hashes; they do not make the
+inferred depth or material scientifically measured.
+
+To export a newly inspected compiler or symmetry result, start from an installed
+checkout with that object's research result already delivered:
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node labs/nebula/src/run.ts export-compact-nebula --object=m42
+```
+
+This writes compact inputs and prints their pin; it does not update the accepted
+delivery pin or publish. Inspect the input diff, verify replay, then update the
+source-owned recipe and manifest. LMC's historical registered-material snapshot
+is separately pinned; changing its method remains research work.

@@ -57,5 +57,10 @@
   "fieldStars": {
     "path": "src/objects/m45/source/stellar-field.json",
     "sha256": "b23d82f9fb1132b7c01aa2d95795fd92a4136268f78ebf61b40963c48e1c7fbe"
-  }
+  },
+  "compactInputs": {
+    "path": "src/objects/m45/source/bake-inputs.json.gz",
+    "sha256": "3857ef8b5e9aa0f77ac7ee7a9a5f4b84df45b1c72dfb65ca6ada3970ca7f1450"
+  },
+  "compactMethod": "compiler"
 }

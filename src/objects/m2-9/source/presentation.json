@@ -5,8 +5,8 @@
   "defaultLens": "hst-optical",
   "bank": {
     "path": "src/objects/m2-9/prepared/lenses.json",
-    "sha256": "aded0209986b0333f9ed3ebc8e48459f5ee0d372d6e6db96a6b799a0bbfdaf39",
-    "bytes": 222816
+    "sha256": "a1c233e309280ebf4509971e0f58a43808f255f4d7f9fa19125380e566b8816a",
+    "bytes": 187021
   },
   "recipes": [
     {
@@ -18,8 +18,8 @@
     {
       "id": "delivery",
       "path": "src/objects/m2-9/source/delivery.json",
-      "sha256": "e737db3770654a8d820445967a6c886a30374f4a9aeb334389f894a01c08d12e",
-      "bytes": 1382
+      "sha256": "6bbc8f16e48fdccaea6ef70057952e60ad47000255eb4e0b0e89c53e9ee07be8",
+      "bytes": 1578
     }
   ],
   "sharedInputs": [
@@ -29,26 +29,26 @@
   "lenses": [
     {
       "id": "hst-optical",
-      "label": "Hubble · optical",
+      "label": "Hubble \u00b7 optical",
       "title": "The Twin Jet Nebula in visible light",
-      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300\u00b1200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Hubble optical colors on an assumed symmetric cloud; depth and inclination are not measured.",
-      "detail": "788 × 438 px",
+      "detail": "788 \u00d7 438 px",
       "facts": [
         {
           "id": "source-pixels",
           "label": "Accepted crop",
-          "value": "788 × 438 pixels"
+          "value": "788 \u00d7 438 pixels"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "58.0350 × 32.2766 arcsec"
+          "value": "58.0350 \u00d7 32.2766 arcsec"
         },
         {
           "id": "distance",
           "label": "Adopted distance",
-          "value": "650 pc; published alternative 1300 ± 200 pc"
+          "value": "650 pc; published alternative 1300 \u00b1 200 pc"
         }
       ],
       "input": "hst-optical",
