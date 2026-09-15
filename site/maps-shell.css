@@ -123,7 +123,7 @@
   content: "";
 }
 
-.planet-sidebar [data-solar-system-results] .planet-object-list::before { content: none; }
+.planet-sidebar .planet-overview-card .planet-object-list::before { content: none; }
 
 .planet-sidebar .maps-object-results .planet-object-link:not(.planet-observation-control) {
   position: relative;
@@ -379,17 +379,17 @@
 }
 
 /* A retained catalogue with one scrolling list beneath its category tabs. */
-.planet-sidebar .planet-card:is([data-solar-system-results], [data-card-view="overview"]) {
+.planet-sidebar .planet-card:is(.planet-overview-card, [data-card-view="overview"]) {
   display: flex;
   flex-direction: column;
   container-type: inline-size;
   padding-bottom: 12px;
   max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-status-height) - var(--explorer-panel-bottom-gap));
 }
-[data-solar-system-results] > .planet-selected-panel,
+.planet-overview-card > .planet-selected-panel,
 [data-card-view="overview"] > .planet-selected-panel,
 :is(.planet-object-tabs, .planet-card-tabs) { flex: 0 0 auto; }
-.planet-card[data-solar-system-results] > .planet-selected-panel { padding-bottom: 8px; }
+.planet-overview-card > .planet-selected-panel { padding-bottom: 8px; }
 :is(.planet-object-tabs, .planet-card-tabs) {
   display: flex;
   flex-wrap: nowrap;
