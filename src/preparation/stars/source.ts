@@ -1,7 +1,7 @@
 import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
 import type { PreparedStar, Rgb, StarsRecipe } from './types.js';
-import { verifiedBytes } from '../volume/source.js';
+import { verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { catalogueColor, nearestColor } from './color.js';
 function column(catalogue: Catalog, name: string): Float32Array {
   const value = catalogue.numeric(name);
