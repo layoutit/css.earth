@@ -6,12 +6,11 @@ import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
   lenses: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
-  provenance?: ShellProps['provenance'];
   controlName?: 'dataset' | 'focusLens';
   route?: string;
   thumbnailObjectId?: string;
 }
-const { objectId, lenses, provenance, controlName = 'dataset', route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
+const { objectId, lenses, controlName = 'dataset', route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const focus = controlName === 'focusLens';
 ---
 <section id={`${objectId}-lenses`} class="planet-lenses">
@@ -54,7 +53,7 @@ const focus = controlName === 'focusLens';
         data-focus-lens-details={focus ? lens.id : undefined}
         hidden={lens.id !== lenses.defaultLens}
       >
-        <DatasetDescription {provenance} {lens}>
+        <DatasetDescription {lens}>
           {lens.texture && <div
             class="planet-surface-minimap"
             data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}

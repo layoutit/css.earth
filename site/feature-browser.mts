@@ -1,5 +1,6 @@
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { requiredElement } from './browser-types.mts';
+import { presentFeatureResults } from './search-results-presentation.mts';
 
 import { parseFeaturePin, parseFeatureIndex, matchFeatures, featureResult } from './feature-search.mts';
 import type { IndexedFeature, FeatureIndex } from './feature-search.mts';
@@ -13,7 +14,6 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   if (!candidate) return null;
   const root = candidate;
   const pin = parseFeaturePin(root.dataset.featureIndex);
-  const hint = requiredElement(root, '.planet-feature-hint');
   const buttons = [...root.querySelectorAll<HTMLAnchorElement>('.planet-destination-result')];
   const events = new AbortController();
   const currentObjectId = () => documentTarget.body.dataset.objectShell || objectId;
@@ -35,11 +35,11 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   }
   async function search(value: string) {
     if (destroyed) return;
-    if (query !== value) clearRows();
+    if (query !== value) { clearRows(); root.removeAttribute('open'); }
     query = value;
     const request = ++revision;
-    root.hidden = !value.trim() || !pin;
-    if (root.hidden) { clearRows(); onResults(0); return; }
+    if (!value.trim() || !pin) { root.hidden = true; clearRows(); onResults(0); return; }
+    root.hidden = matches.length === 0;
     try {
       pending ??= load().catch(error => { pending = null; throw error; });
       index ??= await pending;
@@ -55,11 +55,11 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
         button.ariaLabel = result.label;
         button.href = result.href;
       }
-      hint.textContent = matches.length ? 'Named features' : 'No matching named features.';
-      onResults(matches.length || 1);
+      presentFeatureResults(root, matches.length);
+      onResults(matches.length);
     } catch {
       if (destroyed || request !== revision) return;
-      hint.textContent = 'Feature names could not load. Change your search to retry.';
+      presentFeatureResults(root, 0, 'Feature names could not load. Change your search to retry.');
       onResults(1);
     }
   }

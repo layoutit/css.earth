@@ -10,6 +10,13 @@ Captions use the shared camera, ordinary caption typography and the
 family, using space left after clickable scene labels. They are retained text,
 not additional body scenes.
 
+A selected moon with no moons of its own shows its parent system instead of an
+empty **Moons (0)** tab. For example, Titan's **Saturn system** tab links to Saturn
+and its other available, non-illustration moons. The same list remains available
+when zooming out. It omits Titan itself and unavailable destinations; Saturn's
+own **Moons** tab still contains the complete confirmed catalogue. Bodies with
+neither moons nor a parent system omit the empty tab.
+
 ## Sources
 
 - [JPL discovery circumstances](https://ssd.jpl.nasa.gov/sats/discovery.html)
@@ -69,7 +76,7 @@ identity and ephemeris coverage before accepting refreshed inputs. Do not reuse
 cached replies for a different epoch or reference frame.
 
 Focused checks: `node --test site/test/body-moons.test.mts
-site/test/moon-labels.test.mts site/test/source-panel.test.mts`. They verify full
+site/test/moon-labels.test.mts site/test/source-link.test.mts`. They verify full
 catalogue membership, available destinations, every prepared vector against its
 pinned reply, rejection of the wrong Horizons target, major/minor orbit policy,
 planet occlusion, caption collision and overview hiding.

@@ -20,15 +20,22 @@ interface FlightPace {speed: number;}
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
-import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, CLASSIFICATION_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
-  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, classificationViews = CLASSIFICATION_VIEWS }: {objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS; classificationViews?: typeof CLASSIFICATION_VIEWS}) {
+  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS}) {
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
+  const arrivals = new Map(objects.map(object => [object.id, object.discovery?.arrival]));
+  function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
+    const framed = createWorldSelectionTarget(from, frame, optics), arrival = arrivals.get(id);
+    if (!arrival || !arrival.lensIds.includes(lens ?? arrival.defaultLens)) return framed;
+    const distanceUnits = presentWorldCamera(framed, frame, optics).distanceUnits;
+    return worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits }, frame, optics);
+  }
   let lastCamera: WorldCamera | null = null, lastOptics: Optics | null = null;
   const supports = (from: string, to: string) => {
     const a = frames.get(from), b = frames.get(to);
@@ -70,13 +77,6 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
         (owner?.frame ?? frames.get(fromId))!.originM);
     },
-    /** Fit every body of one classification around the root system, keeping the camera angle. */
-    classificationTarget({ classification, objectId, mount }: TargetRequest & {classification: string}) {
-      const view = classificationViews.get(classification), owner = mount?.navigation, frame = frames.get(objectId);
-      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
-      if (!view || !from || !optics || !frame) return null;
-      return { world: systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget)), focusPositionM: frame.originM };
-    },
     systemTarget({ objectId, fromId, mount, force = false }: TargetRequest) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
@@ -87,9 +87,9 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const systemRadius = systemRadii.get(objectId);
       if (view) return systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget),
         systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics));
-      return createWorldSelectionTarget(from, { ...frame,
+      return systemRadius || force ? createWorldSelectionTarget(from, { ...frame,
         bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
-      }, optics);
+      }, optics) : selectionTarget(from, frame, optics, objectId);
     },
     /** The world camera a URL's saved view names on the mounted object, or null without one.
      * An invalid view, or one from another prepared date, restores and reports as before, without a flight. */
@@ -105,7 +105,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const owner = mount?.navigation, frame = frames.get(objectId);
       if (!owner || !frame) throw new TypeError('Object focus requires its mounted prepared camera.');
       const from = owner.capture(), optics = owner.optics();
-      const target = targetWorldCamera ?? createWorldSelectionTarget(from, frame, optics);
+      const target = targetWorldCamera ?? selectionTarget(from, frame, optics, objectId);
       const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: targetFocusPositionM ?? frame.originM,
         durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       owner.setPreparedFocus?.(null);
@@ -154,7 +154,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       if ((query?.getAll('v').length ?? 0) > 1) throw new TypeError('A destination URL may contain only one saved view.');
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
       const target = targetWorldCamera ?? (saved ? savedWorldCamera(saved, targetFrame, optics)
-        : createWorldSelectionTarget(from, targetFrame, optics));
+        : selectionTarget(from, targetFrame, optics, toId, query?.get('dataset')));
       // One numeric flight survives the change of detailed object owner.
       const flight = createSelectionFlight({ from: from.pose, to: target.pose,
         focusPositionM: targetFocusPositionM ?? targetFrame.originM, durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });

@@ -1,25 +1,4 @@
-import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-
-export interface ContextLabelCandidate {
-  readonly id: string;
-  readonly priority: number;
-  readonly distanceM: number;
-  readonly rect: LabelScreenRect;
-}
-
-/** Stable annotation priority; marker visibility and physical photometry are independent. */
-export function selectContextLabels(candidates: readonly ContextLabelCandidate[], width: number, height: number): readonly ContextLabelCandidate[] {
-  const accepted: ContextLabelCandidate[] = [];
-  const ordered = [...candidates].sort((a, b) => a.priority - b.priority || a.distanceM - b.distanceM || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-  for (const candidate of ordered) {
-    const rect = candidate.rect;
-    if (rect.left < -width / 2 || rect.right > width / 2 || rect.top < -height / 2 || rect.bottom > height / 2) continue;
-    if (accepted.some(other => labelRectsOverlap(rect, other.rect))) continue;
-    accepted.push(candidate);
-  }
-  return accepted;
-}
 
 /** A framed overview may reserve its orbit footprint; close/clipped orbits must not cover the sky. */
 export function compactOrbitFootprint(bounds: LabelScreenRect, width: number, height: number): LabelScreenRect | null {

@@ -20,12 +20,13 @@ interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
 import { createDatasetContextController } from './dataset-context-controller.mts';
-import { createSourcePanelController } from './source-panel-controller.mts';
+import { renderSourceLink, sourceDocuments } from './source-link.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
 import { createFeatureBrowser } from "./feature-browser.mts";
 import { objectSearchLabels, searchObjects } from './object-search.mts';
+import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
@@ -105,7 +106,7 @@ export function mountPlanetShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, onCategoryChange));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { onCategoryChange, illustrationModelsEnabled }));
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
@@ -279,7 +280,6 @@ export function mountPlanetShell({
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationTabs = retain(createInformationTabsController(drawer, owner));
     retain(createDatasetContextController(drawer, documentTarget, windowTarget, owner));
-    retain(createSourcePanelController(drawer, documentTarget, windowTarget, owner));
     retain(createChartSwitcherController(drawer, windowTarget, owner));
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
@@ -287,7 +287,11 @@ export function mountPlanetShell({
       { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
         onOrbitRendererChange(renderer) { orbitRenderer = renderer; onOrbitRendererChange(renderer); },
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
-        onIllustrationModelsChange(enabled) { illustrationModelsEnabled = enabled; onIllustrationModelsChange(enabled); },
+        onIllustrationModelsChange(enabled) {
+          illustrationModelsEnabled = enabled;
+          objectBrowser.setIllustrationModelsEnabled(enabled);
+          onIllustrationModelsChange(enabled);
+        },
         onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
@@ -509,7 +513,7 @@ function createSettingsController(
 }
 
 function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  onCategoryChange: (classification: string | null) => void = () => {}) {
+  { onCategoryChange = () => {}, illustrationModelsEnabled = false }: Pick<ShellOptions, 'onCategoryChange' | 'illustrationModelsEnabled'> = {}) {
   const setPanelHidden = (panel: HTMLElement, hidden: boolean) => {
     if (panel.hidden !== hidden) panel.hidden = hidden;
     const inert = hidden || panel.ariaBusy === 'true';
@@ -539,6 +543,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     throw new Error("Planet shell object browser has no objects.");
   }
   const searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+  const sourceLinks = sourceDocuments(documentTarget);
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
@@ -567,6 +572,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
+  let showingSearchResults = false;
   let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
@@ -602,10 +608,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
       || !matchesObjectCategory(item.dataset.objectClassification, classification);
     refreshChunks();
-    visibleObjects = items.filter(item => !item.hidden).length;
+    visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
     empty.hidden = visibleObjects > 0;
-    const systemHeading = system?.querySelector<HTMLElement>(':scope > .planet-selected-panel');
-    if (systemHeading) systemHeading.hidden = classification === 'nebula';
+    presentSearchResults(browser, showingSearchResults, classification);
   };
 
   const events = new AbortController();
@@ -617,16 +622,19 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const overviewName = () => ({ 'solar-system': 'Solar System', 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
+  let visibleOverviews = 0;
+  let visibleDestinations = 0, visibleFeatures = 0;
+  const updateEmpty = () => { empty.hidden = visibleObjects + visibleDestinations + visibleFeatures > 0; };
   const destinations = createDestinationBrowser({
     documentTarget,
-    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onResults(count) { visibleDestinations = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
     onReset() { render(false); },
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
     documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
-    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
   });
   lifetime.onDispose(() => features?.destroy());
@@ -653,12 +661,13 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   };
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const publishSourceContext = () => {
-    const sourceScope = preparedFocus ? 'focus' : overview ? overviewScope : 'object';
-    if (browser.dataset.sourceScope !== sourceScope) browser.dataset.sourceScope = sourceScope;
     const sourceFocus = preparedFocus?.id ?? '';
     if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
+    renderSourceLink(documentTarget, preparedFocus ? `focus:${preparedFocus.id}`
+      : overview ? `overview:${overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
   };
   const filter = (resetScroll = true) => {
+    const searching = browsing && (search.value.trim().length > 0 || browseAll);
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
@@ -666,21 +675,24 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     setPanelHidden(information, query.length > 0);
     // A camera handoff republishes the same card context. Its results, counts
     // and chips are already current; only a closed browser needs reopening.
-    if (query === filteredQuery) {
+    if (query === filteredQuery && searching === showingSearchResults) {
       setPanelHidden(browser, query.length === 0);
       markCategory(filteredClassification);
       return;
     }
     filteredQuery = query;
+    showingSearchResults = searching;
+    visibleOverviews = presentOverviewResults(browser, searching ? query : '');
+    presentSearchResults(browser, searching, activeCategory);
     filteredClassification = null;
     if (resetScroll) resetResultsScroll();
     markCategory();
     destinations?.setOpen(query.length > 0);
-    const focused = preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
-    const galactic = !focused && query === 'milky way';
+    const focused = !searching && preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
+    const galactic = !searching && !focused && query === 'milky way';
     const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
     const galaxySelected = focused && preparedFocus && neighborCard && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === preparedFocus!.id);
-    const largeScale = galaxySelected ? neighborCard : !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
+    const largeScale = galaxySelected ? neighborCard : !searching && !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
     if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) selectGalaxyNeighbor(neighborCard, galaxySelected ? preparedFocus!.id : 'milky-way');
     for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
     if (focusCard) setPanelHidden(focusCard, !focused);
@@ -692,14 +704,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       void destinations?.search(''); void features?.search('');
       return;
     }
-    browser.ariaLabel = galactic ? 'Milky Way' : 'Celestial objects';
+    browser.ariaLabel = searching ? 'Search results' : galactic ? 'Milky Way' : 'Celestial objects';
     if (galactic || largeScale) {
       if (largeScale) browser.ariaLabel = largeScale.dataset.largeScaleName!;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
       void destinations?.search(''); void features?.search('');
       return;
     }
-    const result = searchObjects(searchLabels, query, activeCategory);
+    const result = searchObjects(searchLabels, query, activeCategory, { illustrations: illustrationModelsEnabled });
     const { classification, systemName, showAll } = result;
     markCategory(classification);
     filteredClassification = classification;
@@ -719,7 +731,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     for (const tab of tabs) {
       requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
     }
-    const nextCategory = initialCategory ?? result.category;
+    const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
     empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
@@ -771,12 +783,16 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   for (const button of categoryButtons) {
     button.addEventListener('click', event => {
       event.preventDefault();
+      if (button.ariaPressed === 'true') {
+        search.value = '';
+        render(false);
+        return;
+      }
       search.value = button.dataset.searchQuery ?? "";
-      search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
+      browsing = true;
+      browseAll = false;
+      render(true);
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
-      // Frame every body of this classification; the router owns the camera flight.
-      button.dispatchEvent(new windowTarget.CustomEvent('categorynavigate', { bubbles: true,
-        detail: { classification: button.dataset.searchClassification } }));
     }, { signal: events.signal });
     button.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
@@ -810,7 +826,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
       // Enter opens the first result. The category tabs come first in the browser but are not results.
-      const first = [...browser.querySelectorAll<HTMLElement>("a, button")]
+      const first = [...browser.querySelectorAll<HTMLElement>("summary, a, button")]
         .find(control => (event.key !== "Enter" || control.getAttribute("role") !== "tab") && visibleControl(control));
       if (first) {
         event.preventDefault();
@@ -864,6 +880,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }
   };
   return Object.freeze({
+    setIllustrationModelsEnabled(enabled: boolean) {
+      if (illustrationModelsEnabled === enabled) return;
+      illustrationModelsEnabled = enabled;
+      filteredQuery = null;
+      if (open) filter(false);
+    },
     previewOverview(scope: OverviewScope = 'solar-system') {
       const previous = { selectedObjectName, overview, overviewScope, preparedFocus, browsing };
       preparedFocus = null;
