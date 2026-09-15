@@ -4,6 +4,7 @@
 // preparers, and the shape-model lane keeps `prepareGlbSurface`. Every branch returns finished
 // RGB(A) pixels at the requested density plus the `nearest` flag the packer needs.
 import { resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
 import type { ObservationInterpretation, InterpretedSurface } from '../../../src/preparation/raster/index.js';
 import type { RasterRecipe } from '../../../src/preparation/raster/index.js';
 import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-synoptic.mts';
@@ -31,8 +32,9 @@ import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapL
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; }
 interface Options { readonly objectId: string; readonly displayName: string; readonly sourceDirectory: string; readonly recipe: InterpreterRecipe;
-  /** A photographic refresh checks its source files and each decoder's dependent groups; a full prepare verifies the whole package. */
-  readonly sourceVerification?: 'complete' | 'photographs'; }
+  /** Partial restores verify selected source pins and decoder groups; photographs additionally forbid scientific/model changes.
+   * Full preparation (and solar synoptic preparation) verifies the entire package. */
+  readonly sourceVerification?: 'complete' | 'photographs' | 'selected-surfaces'; }
 
 const plainRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 const emissionSchema = object({ offLimbSize: number, limbSize: number, bodyDiameter: number, offLimbOutput: string, limbOutput: string, metadata: plainRecord });
@@ -95,10 +97,22 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     if (sourceVerification === 'complete') await source.verify();
     else for (const surface of recipe.surfaces) {
       const kind = surface.science?.kind ?? 'static-observation';
-      if ((!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind))) ||
-          surface.science?.scientific || surface.science?.elevation || surface.science?.synoptic)
+      if (sourceVerification === 'photographs' && (!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind)) ||
+          surface.science?.scientific || surface.science?.elevation || surface.science?.synoptic))
         throw new TypeError('A photographic refresh cannot reprepare scientific, modeled or emissive views.');
+      // Solar maps use multiple time samples and emission plates; keep their full-package check.
+      if (sourceVerification === 'selected-surfaces' && surface.science?.synoptic)
+        throw new TypeError('Synoptic surfaces require complete source verification.');
       await source.validatePath(surface.source);
+      // The static scientific decoder resolves detached labels beside its primary raster.
+      // Other scientific/mosaic decoders validate their declared consumer groups below.
+      const scientific = surface.science?.scientific;
+      if (sourceVerification === 'selected-surfaces' && plainRecord(scientific) && typeof scientific.labelPath === 'string') {
+        const labelPath = surface.source.slice(0, surface.source.lastIndexOf('/') + 1) + scientific.labelPath;
+        const entry = [...source.manifest.inputs, ...source.manifest.documents].find(entry => entry.path === labelPath);
+        if (!entry) throw new Error(`Scientific label has no source pin: ${labelPath}`);
+        source.assertBytes(entry, await readFile(resolve(sourceDirectory, labelPath)));
+      }
     }
     return source;
   });

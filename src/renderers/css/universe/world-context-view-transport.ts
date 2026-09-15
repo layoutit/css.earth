@@ -3,7 +3,7 @@ import type { WorldBodyPresentation } from './world-context-planner.js';
 /** Per-body presentation crosses the worker boundary as one transferred column
  * block instead of hundreds of structured-cloned objects every frame. Optional
  * flags keep their absence (NaN), so the worker rebuilds the exact objects. */
-const FIELDS = 14;
+const FIELDS = 15;
 const flag = (value: boolean | undefined) => value === undefined ? Number.NaN : value ? 1 : 0;
 const optional = (value: number) => Number.isNaN(value) ? undefined : value === 1;
 
@@ -16,6 +16,7 @@ export function packWorldBodies(bodies: readonly WorldBodyPresentation[]): Float
     values[offset + 6] = body.labelSize.width; values[offset + 7] = body.labelSize.height; values[offset + 8] = flag(body.labelShown);
     values[offset + 9] = body.labelPlacement; values[offset + 10] = flag(body.indicatorShown); values[offset + 11] = body.indicatorRadius;
     values[offset + 12] = body.orbitAppearance.width; values[offset + 13] = body.orbitAppearance.opacity;
+    values[offset + 14] = flag(body.highlighted);
   }
   return values;
 }
@@ -35,6 +36,8 @@ export function unpackWorldBodies(values: Float64Array): WorldBodyPresentation[]
     if (bodyHidden !== undefined) body.bodyHidden = bodyHidden;
     if (labelSuppressed !== undefined) body.labelSuppressed = labelSuppressed;
     if (indicatorHidden !== undefined) body.indicatorHidden = indicatorHidden;
+    const highlighted = optional(values[offset + 14]!);
+    if (highlighted !== undefined) body.highlighted = highlighted;
     bodies.push(body);
   }
   return bodies;

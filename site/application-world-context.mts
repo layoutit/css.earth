@@ -33,7 +33,7 @@ const hiddenOrbitIds = [
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id))]));
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.id)]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -153,10 +153,11 @@ export function createApplicationWorldContext() {
         let illustrationModelsEnabled = false, asteroidBodiesEnabled = false, asteroidLabelsEnabled = false;
         let highlightedClassification: string | null = null;
         const updateDiscoveryVisibility = () => {
-          const { hiddenBodies, hiddenLabels } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
+          const { hiddenBodies, hiddenLabels, highlightedBodies } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
             asteroids: asteroidBodiesEnabled, asteroidLabels: asteroidLabelsEnabled, highlighted: highlightedClassification });
           layer.setHiddenBodies(hiddenBodies);
           layer.setHiddenLabels(hiddenLabels);
+          layer.setHighlighted(highlightedBodies);
           minimap.setHiddenBodies(hiddenBodies);
           if (publication) minimap.publish(publication.world, publication.viewport);
         };
@@ -281,8 +282,6 @@ export function createApplicationWorldContext() {
             if (destroyed) return;
             highlightedClassification = classification;
             updateDiscoveryVisibility();
-            layer.setHighlighted(classification === null ? []
-              : SCENE_OBJECTS.filter(object => object.classification === classification).map(object => object.id));
           },
           setHeliosphereEnabled(enabled: boolean) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
