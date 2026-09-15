@@ -21,6 +21,7 @@ interface Entry {
   readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
   readonly cornersM: readonly (readonly number[])[] | null;
+  placement: number; shown: boolean;
   width: number;
   height: number;
   /** This frame's projected label anchor; written to the label only while it shows or fades. */
@@ -97,7 +98,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     root.append(marker, label);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
     return { object, marker, dot, navigable, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
-      width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
+      placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
@@ -155,11 +156,10 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         if (entry.cornersM && !bounds) continue;
         const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
         const y = (bounds?.bottom ?? point.y) + 8 + entry.height;
-        entry.labelX = x; entry.labelY = y;
         const labelRect = { left: x - entry.width / 2, right: x + entry.width / 2,
           top: y - entry.height, bottom: y };
         const objectAlpha = objectOpacity(entry.object);
-        if (objectAlpha > 0) {
+        {
           const above = (bounds?.top ?? point.y) - 8;
           const alternateLabelRects = entry.navigable ? [
             { left: labelRect.left, right: labelRect.right, top: above - entry.height, bottom: above },
@@ -168,7 +168,11 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
             { left: (bounds?.left ?? point.x) - 12 - entry.width, right: (bounds?.left ?? point.x) - 12,
               top: point.y - entry.height / 2, bottom: point.y + entry.height / 2 },
           ] : [];
-          candidates.push({ object: entry.object, navigable: entry.navigable, ...point, labelRect, alternateLabelRects });
+          const previousRect = [labelRect, ...alternateLabelRects][entry.placement] ?? labelRect;
+          // A rejected label keeps following the same side throughout its fade.
+          entry.labelX = (previousRect.left + previousRect.right) / 2; entry.labelY = previousRect.bottom;
+          if (objectAlpha > 0) candidates.push({ object: entry.object, navigable: entry.navigable, shown: entry.shown, placement: entry.placement,
+            ...point, labelRect, alternateLabelRects });
         }
       }
       const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId, budget ?? createLabelBudget(width, height));
@@ -177,7 +181,8 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       for (const entry of entries) {
         const objectAlpha = objectOpacity(entry.object);
         const projected = admittedById.get(entry.object.id);
-        if (projected) { entry.labelX = (projected.labelRect.left + projected.labelRect.right) / 2; entry.labelY = projected.labelRect.bottom; }
+        entry.shown = Boolean(projected);
+        if (projected) { entry.placement = projected.placement ?? 0; entry.labelX = (projected.labelRect.left + projected.labelRect.right) / 2; entry.labelY = projected.labelRect.bottom; }
         const labelOpacity = projected ? objectAlpha * DEFAULT_CONTEXT_LABEL_OPACITY : 0;
         fader.set(entry.label, labelOpacity, 200);
         // Only a shown or still-fading label follows its galaxy. Moving every on-screen

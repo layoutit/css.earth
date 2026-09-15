@@ -606,6 +606,7 @@ export function createSceneRouter({
     // and re-adding an unchanged body class restyled the whole document (2,745 elements).
     setData(root, "scenePresented", String(hasPresented || initialScene?.available === true));
     setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
+    if (sceneState === 'ready' || sceneState === 'error') delete root.dataset.shellContext;
     const bodyState = `${sceneState}:${scenePaused}`;
     if (bodyState !== publishedBodyState) {
       body.classList.remove("loading", "ready", "paused", "error");

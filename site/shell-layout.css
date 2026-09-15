@@ -1,4 +1,19 @@
 /* Application geometry. Tune the dock here, not in planet or component styles. */
+html[data-shell-context="pending"] :is(.planet-sidebar, .planet-dataset-context-rail, .planet-footer) {
+  visibility: hidden;
+}
+html[data-shell-context="pending"] .planet-sidebar-frame::before {
+  content: "Loading view…";
+  display: block;
+  position: absolute;
+  inset: 0 0 auto;
+  box-sizing: border-box;
+  padding: 20px;
+  min-height: 140px;
+  border-radius: 16px;
+  background: #141414;
+  color: #aaa;
+}
 body[data-object-shell] {
   --explorer-rail-left: 16px;
   --explorer-rail-item-gap: 0px;
