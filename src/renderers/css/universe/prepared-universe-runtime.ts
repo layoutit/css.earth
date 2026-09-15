@@ -278,7 +278,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             opacityClock.batch(() => {
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             prefetchGalaxy(distanceM);
-            additionalPoints.publish({world, viewport});
+            additionalPoints.publish({world, viewport}, distanceM);
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
             volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
