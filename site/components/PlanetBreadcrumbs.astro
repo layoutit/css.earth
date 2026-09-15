@@ -8,11 +8,16 @@ import { solarSystemFocus } from '../overview-selection.mts';
 const { objectId, scope, includeObject = false } = Astro.props;
 const object = SCENE_OBJECTS.find(object => object.id === objectId);
 const systemRoute = solarSystemFocus(SCENE_OBJECTS)!.route;
-const crumbs: { label: string; href?: string }[] = [
-  { label: 'Local Group', href: `${systemRoute}?overview=local-group` },
-  { label: 'Milky Way', href: `${systemRoute}?overview=milky-way` },
+const hierarchy: { scope: OverviewScope; label: string }[] = [
+  { scope: 'nearby-universe', label: 'Nearby Universe' },
+  { scope: 'local-group', label: 'Local Group' },
+  { scope: 'milky-way', label: 'Milky Way' },
+  { scope: 'solar-system', label: object?.systemName ?? 'Solar System' },
 ];
-if (scope !== 'milky-way') crumbs.push({ label: object?.systemName ?? 'Solar System', href: `${systemRoute}?overview=solar-system` });
+const scopeIndex = hierarchy.findIndex(entry => entry.scope === (scope ?? 'solar-system'));
+const crumbs = hierarchy.slice(0, scopeIndex + 1).map(entry => ({
+  label: entry.label, href: `${systemRoute}?overview=${entry.scope}`,
+}));
 if (object && !scope) {
   // Use the same prepared orbit parents as the moon result rows.
   const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;
