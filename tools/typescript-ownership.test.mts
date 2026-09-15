@@ -112,13 +112,16 @@ test('source-local test and audit JavaScript remain authored and receive no owne
 
 test('nebula evidence fusion is an authored algorithm owner without exempting its harness imports', t => {
   const repo = fixture(t);
-  const owner = 'labs/nebula/src/reconstruction/evidence-fusion/model.ts';
+  const owner = 'labs/nebula/packages/reconstruction/src/evidence/model.ts';
   repo.write(owner, 'export const combine = () => 1;');
-  repo.write('labs/nebula/src/reconstruction/compiler.ts', 'import "./evidence-fusion/model.ts";');
+  repo.write('labs/nebula/src/reconstruction/compiler.ts', `import "/${owner}";`);
   assert.deepEqual(repo.audit().violations, [], 'The exact multiband processing owner is usable by authored source.');
 
   const harnesses = [
     ['tools/capture-image.mts', 'evidence'],
+    ['labs/nebula/packages/reconstruction/src/evidence/capture-image.ts', 'evidence'],
+    ['labs/nebula/packages/reconstruction/src/evidence/model.test.ts', 'test'],
+    ['labs/nebula/packages/reconstruction/src/evidence-copy/model.ts', 'evidence'],
     ['tools/evidence/compare.mts', 'evidence'],
     ['tools/audits/images/compare.mts', 'evidence'],
     ['labs/nebula/src/reconstruction/evidence-fusion/capture-image.ts', 'evidence'],
