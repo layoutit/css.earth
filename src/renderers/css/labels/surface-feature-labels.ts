@@ -220,7 +220,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const candidates: SurfaceLabelCandidate[] = [];
     for (let index = 0; index < entries.length; index++) {
       const entry = entries[index]!, feature = entry.feature;
-      if (!feature || ((!zoomGate || feature.minimumZoomShare > currentShare + 1e-6) && index !== pinnedIndex)) continue;
+      // A search-only name labels the map only while it is the selected feature.
+      if (!feature || ((!zoomGate || feature.searchOnly || feature.minimumZoomShare > currentShare + 1e-6) && index !== pinnedIndex)) continue;
       const projected = projectSurfaceFeature(feature, matrix, projection.focalPixels, projection.principalOffsetPixels);
       if (!projected) continue;
       entry.x = projected.x; entry.y = projected.y;
