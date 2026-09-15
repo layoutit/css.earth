@@ -185,7 +185,7 @@
           "id": "cassini-spc-2025-rhea-q128-shape",
           "path": "../manifest.json"
         },
-        "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "notes": "Neutral gray over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

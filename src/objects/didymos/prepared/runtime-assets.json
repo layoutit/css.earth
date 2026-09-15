@@ -1,0 +1,85 @@
+{
+  "schema": "cssdidymos-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "didymos-albedo-legend.webp",
+      "bytes": 64,
+      "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f"
+    },
+    {
+      "filename": "didymos-albedo-shadow@2x.webp",
+      "bytes": 174174,
+      "sha256": "b1cb454217b2c286b3966e306c6aef9ff571cc453652a5836e43e3e390acea4d"
+    },
+    {
+      "filename": "didymos-albedo-surface@2x.webp",
+      "bytes": 220476,
+      "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6"
+    },
+    {
+      "filename": "didymos-albedo-thumbnail.webp",
+      "bytes": 2558,
+      "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041"
+    },
+    {
+      "filename": "didymos-draco-shadow@2x.webp",
+      "bytes": 172210,
+      "sha256": "45c3d36ba34cd1ba50ffe532cdf4d5b2bd9ac3f57e7dc30a4933c8addbd28845"
+    },
+    {
+      "filename": "didymos-draco-surface@2x.webp",
+      "bytes": 294862,
+      "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44"
+    },
+    {
+      "filename": "didymos-draco-thumbnail.webp",
+      "bytes": 1990,
+      "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1"
+    },
+    {
+      "filename": "didymos-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "didymos-elevation-shadow@2x.webp",
+      "bytes": 154830,
+      "sha256": "d6c141416cc54ba0cd8dbc8b52bcd1a565b8cb663e64d11ffb0a03bce1b44cec"
+    },
+    {
+      "filename": "didymos-elevation-surface@2x.webp",
+      "bytes": 266414,
+      "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6"
+    },
+    {
+      "filename": "didymos-elevation-thumbnail.webp",
+      "bytes": 5004,
+      "sha256": "cd4746448a1140e2b673d293d13883d930167f1cf1450c4329aca95fadabf2e1"
+    },
+    {
+      "filename": "didymos-features.json",
+      "bytes": 2800,
+      "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73"
+    },
+    {
+      "filename": "didymos-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "didymos-shape-shadow@2x.webp",
+      "bytes": 70682,
+      "sha256": "43553b766423ab7fe1664229a8df81b89907c50ee269adf99da5128fec3fb54b"
+    },
+    {
+      "filename": "didymos-shape-surface@2x.webp",
+      "bytes": 57982,
+      "sha256": "7ca6f6770b6039981566eddeab676bdd685b37206397a408906b2dd5f376ac0c"
+    },
+    {
+      "filename": "didymos-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

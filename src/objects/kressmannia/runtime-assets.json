@@ -1,0 +1,45 @@
+{
+  "schema": "csskressmannia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "kressmannia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "kressmannia-elevation-shadow@2x.webp",
+      "bytes": 197510,
+      "sha256": "f1109bcce711b29fc0848db3f7ccf8e56e48cafcce4ee1b6d87a097bd4e53b8c"
+    },
+    {
+      "filename": "kressmannia-elevation-surface@2x.webp",
+      "bytes": 290772,
+      "sha256": "e74fbdd491434c2c6b658618320e39db121e05297808d02e51e0dfbfce1369d3"
+    },
+    {
+      "filename": "kressmannia-elevation-thumbnail.webp",
+      "bytes": 5440,
+      "sha256": "2d435fe9e9f3b33c9d1a7b3eedeb0a712fa0ee865a26a8eaaeae7d94ddb713fa"
+    },
+    {
+      "filename": "kressmannia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "kressmannia-shape-shadow@2x.webp",
+      "bytes": 72560,
+      "sha256": "145b21a8dea0f45cc0fa1e60704d5caee1c6d6a6cb6c104e419f9f9b1063198b"
+    },
+    {
+      "filename": "kressmannia-shape-surface@2x.webp",
+      "bytes": 66816,
+      "sha256": "de0be0264f0e0cee7fe264d744ac2ea24b5c373f4ce4c98b096a3255a5e372c3"
+    },
+    {
+      "filename": "kressmannia-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

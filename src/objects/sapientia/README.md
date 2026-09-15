@@ -1,5 +1,7 @@
 # (275) Sapientia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **16284**, version **2023-10-03**. DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2023); model 16284, version 2023-10-03.
 
-Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -29,7 +31,7 @@ It is not substituted by an invented shape.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 16283, pole ['85', '-10'], [Model 16283](https://damit.cuni.cz/projects/damit/asteroid_models/view/16283)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 16283, pole ['85', '-10'], [Model 16283](https://damit.cuni.cz/projects/damit/asteroid_models/view/16283)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

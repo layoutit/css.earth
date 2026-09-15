@@ -75,8 +75,8 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 80589,
-      "expectedSha256": "3c898264b038ec4964df56edaa21d44abbed21a14be7aa30d60061f9615a0912",
+      "expectedBytes": 36457,
+      "expectedSha256": "20d8c9dc5578c9b015faf0549177ac4cf61bb6bc1adbb0bbee333df3de26d50a",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -95,8 +95,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11236,
-      "expectedSha256": "7d610eb4785778b8aa0fd36498e55f3a975e2583532a60d704c512046735bd70",
+      "expectedBytes": 11354,
+      "expectedSha256": "0d1066c11112da04ffc2692ddc7f50940c516c34f99dfcc5593c3c7a0c53a79b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -110,7 +110,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1259,
-      "expectedSha256": "03f2b9464cf84438ef809dd505987c9fe798657edf878e8dbcde8e97b2f9d04c"
+      "expectedSha256": "9f14283b39ce8cbca16302f2eeb00b0be30961c6eaff9bef32dc8c9c3f010212"
     },
     {
       "path": "preparation/rotation.json",

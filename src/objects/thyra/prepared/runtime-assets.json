@@ -1,0 +1,45 @@
+{
+  "schema": "cssthyra-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "thyra-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "thyra-elevation-shadow@2x.webp",
+      "bytes": 178680,
+      "sha256": "dad10a56513f0d9f9b39fd914c2740e4f51c75787262f2327827d421ddf68b7c"
+    },
+    {
+      "filename": "thyra-elevation-surface@2x.webp",
+      "bytes": 259376,
+      "sha256": "7d130bcf7796c588869aa26430bb1aa505de11ed076b59d416525abcb209b8e5"
+    },
+    {
+      "filename": "thyra-elevation-thumbnail.webp",
+      "bytes": 5310,
+      "sha256": "ec55cabe72eff16017447ae253c036490ca046a24c62a491041ea41c9f3e815a"
+    },
+    {
+      "filename": "thyra-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "thyra-shape-shadow@2x.webp",
+      "bytes": 71728,
+      "sha256": "b224d1f0d1bd410cb869f8e822c36fc09e345ee1732549502aa01310db276d98"
+    },
+    {
+      "filename": "thyra-shape-surface@2x.webp",
+      "bytes": 63162,
+      "sha256": "a716b8d77d336642355303c48e6115536c8fbe1a791e68733154eb2f747db2fb"
+    },
+    {
+      "filename": "thyra-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

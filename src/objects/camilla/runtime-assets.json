@@ -1,0 +1,45 @@
+{
+  "schema": "csscamilla-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "camilla-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "camilla-elevation-shadow@2x.webp",
+      "bytes": 146048,
+      "sha256": "bf9c5f01543e39aaff397538f36c849d19e423135c3cffe39e67aaae05c7333b"
+    },
+    {
+      "filename": "camilla-elevation-surface@2x.webp",
+      "bytes": 265780,
+      "sha256": "14b59466ae873418d53aad54664b1bd09be6d0ede4fd15ad56f7e9627fb7f8f8"
+    },
+    {
+      "filename": "camilla-elevation-thumbnail.webp",
+      "bytes": 4780,
+      "sha256": "3b4ac0d8c34d4fdd3b2349d8ea4796e56149328f814f8c6604d533a2e0b4e084"
+    },
+    {
+      "filename": "camilla-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "camilla-shape-shadow@2x.webp",
+      "bytes": 64464,
+      "sha256": "f5384c7584108cb911f683dc248a40d62a343c8b5d59b673ee47e6970f17a7c9"
+    },
+    {
+      "filename": "camilla-shape-surface@2x.webp",
+      "bytes": 52650,
+      "sha256": "8a00abb68fd22d80fc0694d70f0990b57a94e24cee89643620784cba08b0a7f8"
+    },
+    {
+      "filename": "camilla-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

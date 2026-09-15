@@ -1,5 +1,7 @@
 # Bacchus
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj) is attributed to Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes.

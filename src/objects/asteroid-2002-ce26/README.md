@@ -1,5 +1,7 @@
 # 2002 CE26 Primary
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 (276049) 2002 CE26 is a near-Earth binary system.
 
 ## Sources

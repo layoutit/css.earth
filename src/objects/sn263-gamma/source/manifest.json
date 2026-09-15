@@ -97,15 +97,15 @@
         "diffuse": 0.55,
         "lensId": "shape"
       },
-      "expectedBytes": 73946,
-      "expectedSha256": "289dca66cd81f6e613eb24406d7ef9aaf95b065a0e302fdc6127e329d1150f2b"
+      "expectedBytes": 34114,
+      "expectedSha256": "18f0ae8cf9861cf8ce0e130d3752acc079b56a4cad70de9a8c9a43671868090c"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3225,
-      "expectedSha256": "4fe2b73e0b897dd621d3dc1e18dc06b446261345af4534cd9524341ca9c60527",
+      "expectedBytes": 3343,
+      "expectedSha256": "38cf4cf81744913399fb6ae20c35c1e5d6afd461378b888d7c3d4f45c0baa507",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -139,7 +139,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1334,
-      "expectedSha256": "f12117e818beeeea9c6ea55cde39fd75f9c1ba1081d30660d1c63be627256a4d"
+      "expectedSha256": "a352851faa89ace9d4e9f1364cd09106b432c18ad8cf904ab75e32e7fdfd8b86"
     },
     {
       "path": "preparation/rotation.json",

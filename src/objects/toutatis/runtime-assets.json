@@ -1,0 +1,45 @@
+{
+  "schema": "csstoutatis-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "toutatis-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "toutatis-elevation-shadow@2x.webp",
+      "bytes": 360634,
+      "sha256": "2b46563bdcde3253318b48ab52f0f4cb79a63312d6f852b81c221874221bbf3c"
+    },
+    {
+      "filename": "toutatis-elevation-surface@2x.webp",
+      "bytes": 380870,
+      "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014"
+    },
+    {
+      "filename": "toutatis-elevation-thumbnail.webp",
+      "bytes": 5802,
+      "sha256": "8172417040d331136b7f5c7905a8a592deb3556da5df383e7465917826da04b8"
+    },
+    {
+      "filename": "toutatis-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "toutatis-shape-shadow@2x.webp",
+      "bytes": 75342,
+      "sha256": "08a6380d8876d8238cee72d134225e2ff421037bbb4d4bff2b8dcbd737fba4cb"
+    },
+    {
+      "filename": "toutatis-shape-surface@2x.webp",
+      "bytes": 73254,
+      "sha256": "33450a04b5a8baf229e8c381346fe1277f2787de22e9391558912da867a36d72"
+    },
+    {
+      "filename": "toutatis-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

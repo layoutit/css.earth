@@ -1,5 +1,7 @@
 # (28) Bellona
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -27,7 +29,7 @@ The original ADAM study used only one AO observation for this body, limiting the
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 287, pole ['102', '-8'], [Model 287](https://damit.cuni.cz/projects/damit/asteroid_models/view/287)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 287, pole ['102', '-8'], [Model 287](https://damit.cuni.cz/projects/damit/asteroid_models/view/287)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

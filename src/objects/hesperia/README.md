@@ -1,5 +1,7 @@
 # (69) Hesperia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -25,7 +27,7 @@ The original mesh is uniformly scaled to the selected archive record’s declare
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 320, pole ['71', '-2'], [Model 320](https://damit.cuni.cz/projects/damit/asteroid_models/view/320)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 320, pole ['71', '-2'], [Model 320](https://damit.cuni.cz/projects/damit/asteroid_models/view/320)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

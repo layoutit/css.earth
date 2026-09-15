@@ -1,5 +1,7 @@
 # C/2006 P1 McNaught
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 McNaught became exceptionally bright during its January 2007 passage around the Sun. JPL lists it among history’s great comets.
 
 One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.

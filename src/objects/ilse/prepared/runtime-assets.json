@@ -1,0 +1,45 @@
+{
+  "schema": "cssilse-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "ilse-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "ilse-elevation-shadow@2x.webp",
+      "bytes": 210156,
+      "sha256": "f65ac9b47594b3c1c9eb438a6a46bceab60d1084ffd9a4a6e7ad10f2bc229994"
+    },
+    {
+      "filename": "ilse-elevation-surface@2x.webp",
+      "bytes": 296574,
+      "sha256": "06d69a32934f7ca399f9daf473f6b8947b0f0bceb073c82f15b6c60ab5fc7367"
+    },
+    {
+      "filename": "ilse-elevation-thumbnail.webp",
+      "bytes": 5448,
+      "sha256": "64be20f56c43022eac5805d4ed63ecccb445afd92614e7208f801b57bda953e3"
+    },
+    {
+      "filename": "ilse-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "ilse-shape-shadow@2x.webp",
+      "bytes": 71544,
+      "sha256": "c70574f70777802b555f6ebd4fda103e0998fc9d1dd7016277663cfa1e2d2989"
+    },
+    {
+      "filename": "ilse-shape-surface@2x.webp",
+      "bytes": 67760,
+      "sha256": "729be8c0bd5d1be8f2a6cab0adf30b9a76e4908e3650ec903c88667073f9b776"
+    },
+    {
+      "filename": "ilse-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -75,7 +75,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Convex light-curve reconstruction with approximate thermal size: 50.799 km effective diameter (fit ±1.181 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 50.799 km effective diameter (fit ±1.181 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; neutral gray marks unavailable imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

@@ -1,0 +1,45 @@
+{
+  "schema": "cssdresda-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "dresda-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "dresda-elevation-shadow@2x.webp",
+      "bytes": 211246,
+      "sha256": "a86118e861d30608cbe7af9198ff3a242e3c20d0d2ba510783b356923316c4f5"
+    },
+    {
+      "filename": "dresda-elevation-surface@2x.webp",
+      "bytes": 291416,
+      "sha256": "40ab7fdb3d7469e14358c80fe384ae3e209bc84ddfc5083a2e292fe0b18669a3"
+    },
+    {
+      "filename": "dresda-elevation-thumbnail.webp",
+      "bytes": 5812,
+      "sha256": "a92ab7f06f96a209e0a9ec04e53926b7cc74d77a79b202146138c2dcce046cb9"
+    },
+    {
+      "filename": "dresda-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "dresda-shape-shadow@2x.webp",
+      "bytes": 72222,
+      "sha256": "cf86787ed0f3c35bc815fd6d23cffcac1a3ebf7d296ca8407381d192a26d9513"
+    },
+    {
+      "filename": "dresda-shape-surface@2x.webp",
+      "bytes": 66786,
+      "sha256": "dfc8cb49d0960e6b10e5bc4e3bdd3c7587b47f94bc422c4605b218af9211db24"
+    },
+    {
+      "filename": "dresda-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssbamberga-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "bamberga-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "bamberga-elevation-shadow@2x.webp",
+      "bytes": 156572,
+      "sha256": "2c0af5e347dfbc676384f51c78262d4b822c60cb21b868854e1bf65424f27290"
+    },
+    {
+      "filename": "bamberga-elevation-surface@2x.webp",
+      "bytes": 270080,
+      "sha256": "1b3d34f14f6675e4921800b292256018c209c23b5ac50c697f7d45d31c879282"
+    },
+    {
+      "filename": "bamberga-elevation-thumbnail.webp",
+      "bytes": 5002,
+      "sha256": "d003ccc1d55447c4c57e15391b60babce9b4f08647f2060476677c90bf8d1f5c"
+    },
+    {
+      "filename": "bamberga-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "bamberga-shape-shadow@2x.webp",
+      "bytes": 68696,
+      "sha256": "fdd8f49c9cca677c316e7321f2d79a63eca445d866923a657f4effed3b36e599"
+    },
+    {
+      "filename": "bamberga-shape-surface@2x.webp",
+      "bytes": 58516,
+      "sha256": "21a933a6941ef8396a395338733e5252e31a8a1ed1400e551596904a3a3837a0"
+    },
+    {
+      "filename": "bamberga-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

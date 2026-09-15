@@ -1,5 +1,7 @@
 # 167P/CINEOS
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 CINEOS follows a distant orbit that stays beyond Saturn at its closest approach to the Sun. Its nucleus is represented here by a size illustration from Celestia’s catalog.
 
 One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.

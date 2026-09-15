@@ -1,0 +1,45 @@
+{
+  "schema": "csseumelos-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "eumelos-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "eumelos-elevation-shadow@2x.webp",
+      "bytes": 183868,
+      "sha256": "732adf65cd9b49785516e3a65f28a91b03e716e6fbc74fef3242e451c7356329"
+    },
+    {
+      "filename": "eumelos-elevation-surface@2x.webp",
+      "bytes": 300618,
+      "sha256": "b604313e835cbcecfe3bb73358c29876061f200ac424fda91c22130667d76d58"
+    },
+    {
+      "filename": "eumelos-elevation-thumbnail.webp",
+      "bytes": 5514,
+      "sha256": "32feee1b79eef7b1a315a967e714036e132246c581a3829c3c4c448133f8a673"
+    },
+    {
+      "filename": "eumelos-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "eumelos-shape-shadow@2x.webp",
+      "bytes": 69988,
+      "sha256": "4a5c70d71057dbf7f25a10eac10338151db4efda75b22689bdb64fb72c7de18d"
+    },
+    {
+      "filename": "eumelos-shape-surface@2x.webp",
+      "bytes": 62392,
+      "sha256": "83ec5f71ccbd241f4fec56e3bc98ad8dc5da147be4671dd9eab5d49ae3f33cda"
+    },
+    {
+      "filename": "eumelos-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

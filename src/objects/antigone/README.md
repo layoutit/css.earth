@@ -1,5 +1,7 @@
 # (129) Antigone
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **1810**, version **2017-06-14**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1810, version 2017-06-14.
 
-Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 126 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.
+Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 126 ± 3 km equivalent-volume size; its size error is not local shape accuracy. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -25,7 +27,7 @@ Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 159, pole ['207', '58'], [Model 159](https://damit.cuni.cz/projects/damit/asteroid_models/view/159)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 159, pole ['207', '58'], [Model 159](https://damit.cuni.cz/projects/damit/asteroid_models/view/159)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
