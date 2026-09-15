@@ -30,3 +30,8 @@ test('unsupported GitHub execution policies cannot silently produce a local pass
   assert.throws(()=>readCiSteps(`jobs:\n  universe:\n    steps:\n${step}\n`));
  }
 });
+test('a selected job uses its own steps and inherited environment',()=>{
+ const workflow='env:\n  SHARED: shared\njobs:\n  universe:\n    steps:\n      - name: main\n        run: echo main\n  nebula:\n    env:\n      SUBJECT: cloud\n    steps:\n      - name: lab\n        run: echo lab\n';
+ assert.deepEqual(readCiSteps(workflow,'nebula'),[{name:'lab',run:'echo lab',env:{SHARED:'shared',SUBJECT:'cloud'}}]);
+ assert.throws(()=>readCiSteps(workflow,'absent'),/Unknown CI job/);
+});
