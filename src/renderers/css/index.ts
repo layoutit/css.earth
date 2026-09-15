@@ -55,3 +55,5 @@ export { createPreparedUniverse } from './universe/prepared-universe-runtime.js'
 
 export { requireAssets } from './validation/resources-tree.js';
 export { requireControls } from './validation/camera-controls.js';
+
+export { PREPARED_INTERIOR_DISC_SIZE } from './rendering/prepared-interior-disc.js';
