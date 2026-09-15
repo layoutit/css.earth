@@ -7,9 +7,10 @@ does not automatically need a caption on screen.
 
 ## Eligibility and context
 
-- Existing explorable objects are the curated, source-backed set, including
-  significant objects known by designations such as 2008 EV5 and M31. Do not
-  reject a name just because it contains numbers.
+- Default Solar System discovery prioritizes the Sun, major planets and objects
+  with prepared imagery or a package-owned `catalog.featured` recommendation.
+  The [discovery policy](object-discovery.md) distinguishes approximate stand-ins
+  from body-specific meshes. Designations such as 2008 EV5 and M31 remain valid names.
 - Additional moon captions require an assigned name in the pinned JPL source.
   Provisional designations remain in the complete sidebar lists.
 - A planet or moon view labels its own moon family. Unrelated small bodies wait
@@ -35,9 +36,10 @@ Off-screen, occluded and unreadable objects do not consume slots.
 
 Selected and hovered targets take priority within the relevant group. Clickable
 catalogue destinations outrank disabled captions before classification or
-distance is considered. Existing valid caption placements are reserved before
-newcomers; when filling free space, major planets and source-classified major
-moons win against smaller peers. Available scene-body labels are admitted before the
+distance is considered. Static discovery tiers put orientation anchors first, featured destinations
+next, and other objects afterward. Clear placements survive within each tier;
+a higher tier can displace a lower one. Source-classified major moons retain
+their existing importance. Available scene-body labels are admitted before the
 additional disabled moon captions; those captions cannot displace a clickable
 label. The full sidebar list remains available regardless of scene crowding.
 
@@ -48,8 +50,8 @@ Disabled moon captions have no circle or navigation target.
 ## Stable references
 
 [`stable-label-layout.ts`](../src/renderers/css/labels/stable-label-layout.ts)
-reserves clear existing placements before relocating blocked labels or admitting
-new ones. Explicit selection and hover can take priority. Camera drag, inertia
+reserves clear existing placements within each static tier before relocating
+blocked labels or admitting peers. Explicit selection and hover can take priority. Camera drag, inertia
 and rest use this same rule; ending motion never triggers a separate layout.
 Indicators retain classification priority when their physical circles collide.
 

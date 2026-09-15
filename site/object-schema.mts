@@ -1,3 +1,4 @@
+import { parseObjectDiscovery, type ObjectDiscovery } from './object-discovery.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
 import type { PositionM } from '@cssearth/engine';
@@ -11,9 +12,9 @@ export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-plan
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   color: string; distance: NavigationDistance; route: string; description: string;
-  loadScene(): Promise<SceneFactory>; worldFrame?: unknown;
+  loadScene(): Promise<SceneFactory>; worldFrame?: unknown; discovery?: ObjectDiscovery;
 }
-export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame'> & { kind: 'scene'; worldFrame: PreparedWorldCameraFrame | null }>;
+export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: PreparedWorldCameraFrame | null }>;
 
 const OBJECT_INPUT_KEYS = new Set([
   "id",
@@ -26,6 +27,7 @@ const OBJECT_INPUT_KEYS = new Set([
   "loadScene",
   "description",
   "worldFrame",
+  "discovery",
 ]);
 
 // Classification vocabulary, not a registry of object identities. Extend this
@@ -64,6 +66,7 @@ export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
     loadScene,
     description,
     worldFrame: parseWorldFrame(worldFrame),
+    discovery: parseObjectDiscovery(input.discovery ?? { featured: false, imagery: false, illustration: false }),
   });
 }
 

@@ -54,6 +54,7 @@ export function createSceneRouter({
   let motionEnabled = false;
   let heliosphereEnabled = false;
   let highContrastSky = documentTarget.querySelector<HTMLInputElement>('.planet-sky-contrast-setting')?.checked ?? false;
+  let illustrationModelsEnabled = false;
   let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
@@ -136,7 +137,7 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
@@ -147,6 +148,10 @@ export function createSceneRouter({
           onHeliosphereChange(next) { if (shellOwner === owner && active) {
             heliosphereEnabled = next === true;
             worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
+          } },
+          onIllustrationModelsChange(next) { if (shellOwner === owner && active) {
+            illustrationModelsEnabled = next === true;
+            worldContextMount?.setIllustrationModelsEnabled?.(illustrationModelsEnabled);
           } },
           onAsteroidBodiesChange(next) { if (shellOwner === owner && active) {
             asteroidBodiesEnabled = next === true;
@@ -665,6 +670,7 @@ export function createSceneRouter({
         worldContextMount = value;
         value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
+        value.setIllustrationModelsEnabled?.(illustrationModelsEnabled);
         value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);

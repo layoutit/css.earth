@@ -6,6 +6,8 @@ export interface StableLabelCandidate {
   navigable: boolean;
   pinned: number;
   priority: number;
+  /** Static discovery tier; camera movement must not change it. */
+  tier?: number;
   shown: boolean;
   previousPlacement: number;
   placements: readonly { slot: number; rect: LabelScreenRect }[];
@@ -16,7 +18,7 @@ export interface StableLabelCandidate {
 export function admitStableLabels<T extends StableLabelCandidate>(candidates: readonly T[], budget: LabelBudget,
   clear: (candidate: T, rect: LabelScreenRect) => boolean = () => true) {
   const ordered = [...candidates].sort((a, b) => b.pinned - a.pinned || Number(b.navigable) - Number(a.navigable) ||
-    Number(b.shown) - Number(a.shown) || b.priority - a.priority || a.id.localeCompare(b.id));
+    (b.tier ?? 0) - (a.tier ?? 0) || Number(b.shown) - Number(a.shown) || b.priority - a.priority || a.id.localeCompare(b.id));
   const accepted: { candidate: T; placement: number; rect: LabelScreenRect }[] = [];
   const admitted = new Set<T>();
   const place = (candidate: T, previousOnly: boolean) => {
@@ -34,8 +36,11 @@ export function admitStableLabels<T extends StableLabelCandidate>(candidates: re
   for (const candidate of ordered.filter(item => item.pinned > 0)) place(candidate, false);
   for (const navigable of [true, false]) {
     const group = ordered.filter(item => item.pinned === 0 && item.navigable === navigable);
-    for (const candidate of group) if (candidate.shown) place(candidate, true);
-    for (const candidate of group) place(candidate, false);
+    for (const tier of [...new Set(group.map(item => item.tier ?? 0))].sort((a, b) => b - a)) {
+      const peers = group.filter(item => (item.tier ?? 0) === tier);
+      for (const candidate of peers) if (candidate.shown) place(candidate, true);
+      for (const candidate of peers) place(candidate, false);
+    }
   }
   return accepted;
 }

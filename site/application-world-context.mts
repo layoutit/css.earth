@@ -14,6 +14,7 @@ import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { SCENE_OBJECTS } from './objects.mts';
+import { discoveryVisibility } from './object-discovery.mts';
 import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
@@ -32,7 +33,7 @@ const hiddenOrbitIds = [
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, labelImportance(object.classification, object.classification === 'satellite' && !minorMoonIds.includes(object.id))]));
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id))]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -149,6 +150,16 @@ export function createApplicationWorldContext() {
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
         let selectedObjectId = applicationContext.focus.id, asteroidOrbitsEnabled = false;
+        let illustrationModelsEnabled = false, asteroidBodiesEnabled = false, asteroidLabelsEnabled = false;
+        let highlightedClassification: string | null = null;
+        const updateDiscoveryVisibility = () => {
+          const { hiddenBodies, hiddenLabels } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
+            asteroids: asteroidBodiesEnabled, asteroidLabels: asteroidLabelsEnabled, highlighted: highlightedClassification });
+          layer.setHiddenBodies(hiddenBodies);
+          layer.setHiddenLabels(hiddenLabels);
+          minimap.setHiddenBodies(hiddenBodies);
+          if (publication) minimap.publish(publication.world, publication.viewport);
+        };
         const updateOrbitVisibility = () => layer.setHiddenOrbits(asteroidOrbitsEnabled ? hiddenOrbitIds
           : [...hiddenOrbitIds, ...asteroidIds.filter(id => id !== selectedObjectId)]);
         let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
@@ -199,9 +210,10 @@ export function createApplicationWorldContext() {
           if (!active && publication) minimap.publish(publication.world, publication.viewport);
         };
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
-        // Asteroid rings are hidden by default. Each marker keeps a pick circle
-        // the ring's size, so asteroids stay clickable; hover still shows the ring.
-        layer.setHiddenIndicators(asteroidIds);
+        // Featured asteroids keep circles. Other asteroid markers retain their
+        // pick target when enabled, with the circle revealed on hover.
+        layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !object.discovery.featured).map(object => object.id));
+        updateDiscoveryVisibility();
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
@@ -242,14 +254,15 @@ export function createApplicationWorldContext() {
             minimap.selectObject(frame);
             moonLabels.selectObject(id);
           },
+          setIllustrationModelsEnabled(enabled: boolean) {
+            if (destroyed) return;
+            illustrationModelsEnabled = enabled === true;
+            updateDiscoveryVisibility();
+          },
           setAsteroidBodiesEnabled(enabled: boolean) {
             if (destroyed) return;
-            const hidden = enabled === true ? [] : asteroidIds;
-            layer.setHiddenBodies(hidden);
-            // The minimap shows the same asteroids, so the overview must agree
-            // with the main world. It only redraws on a fresh publication.
-            minimap.setHiddenBodies(hidden);
-            if (publication) minimap.publish(publication.world, publication.viewport);
+            asteroidBodiesEnabled = enabled === true;
+            updateDiscoveryVisibility();
           },
           setAsteroidOrbitsEnabled(enabled: boolean) {
             if (destroyed) return;
@@ -260,10 +273,15 @@ export function createApplicationWorldContext() {
             if (!destroyed) layer.setOrbitRenderer(renderer);
           },
           setAsteroidLabelsEnabled(enabled: boolean) {
-            if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
+            if (destroyed) return;
+            asteroidLabelsEnabled = enabled === true;
+            updateDiscoveryVisibility();
           },
           setHighlightedClassification(classification: string | null) {
-            if (!destroyed) layer.setHighlighted(classification === null ? []
+            if (destroyed) return;
+            highlightedClassification = classification;
+            updateDiscoveryVisibility();
+            layer.setHighlighted(classification === null ? []
               : SCENE_OBJECTS.filter(object => object.classification === classification).map(object => object.id));
           },
           setHeliosphereEnabled(enabled: boolean) {
