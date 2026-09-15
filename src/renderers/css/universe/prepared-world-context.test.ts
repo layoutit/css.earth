@@ -625,7 +625,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])), orbitRenderer });
   layer.selectObject(parent.id); layer.setOverview(true);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
-    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+    pose: { positionM: [100, 0, 40], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 100, principalOffsetPixels: [0, 0] });
   const opacity = (id: string) => {
     const body = layer.inspect().find(body => body.id === id)!;
     const line = orbitRenderer === 'bars'
@@ -653,6 +653,20 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
   document.defaultView.advance(200); document.defaultView.advance(200);
   layer.previewSelection(null); document.defaultView.advance(200);
   for (const body of context.bodies) expect(opacity(body.id)).toEqual(baseline.get(body.id));
+  // Pulling back restores context without clearing the selected body. Both
+  // paint owners must update their multipliers again when zooming back in.
+  layer.previewSelection(parent.id);
+  const publishDistance = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [100, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 100, principalOffsetPixels: [0, 0] });
+  publishDistance(200);
+  const farSelected = opacity(unrelated.id);
+  layer.previewSelection(null);
+  expect(opacity(unrelated.id)).toEqual(farSelected);
+  layer.previewSelection(parent.id);
+  publishDistance(40);
+  expect(opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker).toBeCloseTo(.25, 1);
+  expect(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line).toBeCloseTo(.25, 1);
   layer.destroy();
 });
 
@@ -1733,8 +1747,8 @@ test('the Sun locator stays visible across galactic observer rotations while res
       orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
     } }, viewport);
     document.defaultView.advance(200);
-    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(.25);
-    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(.25);
+    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(1);
+    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(1);
   }
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
     positionM: [3e12 + 1e8, 0, 0], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2],
@@ -2090,7 +2104,7 @@ test('delta publication matches full frames through navigation, hover, fades and
   full.destroy(); incremental.destroy();
 });
 
-test('rotation makes annotations immediate without arming visibility transitions on release', () => {
+test('rotation and settlement use the same annotation rules without a deferred rearrangement', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const marker = find(root, 'contextBody', 'mercury');
   const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -2099,15 +2113,14 @@ test('rotation makes annotations immediate without arming visibility transitions
   layer.publish(camera, viewport);
   layer.setRotationActive(true);
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
-  // A rotation holds the committed annotation set, so a suppression arriving
-  // mid-drag cannot make the caption blink; the release applies it in one go.
+  // An explicit policy change applies during motion, not in a burst on release.
   layer.setSuppressedLabels(['mercury']);
-  expect(marker.dataset.contextLabelVisible).toBe('true');
+  expect(marker.dataset.contextLabelVisible).toBe('false');
   for (const angle of [.05, .1, 0]) {
     camera.pose.orientationXyzw = [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)];
     layer.publish(camera, viewport);
     expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
-    expect(marker.dataset.contextLabelVisible).toBe('true');
+    expect(marker.dataset.contextLabelVisible).toBe('false');
     expect(layer.opacityStats().active).toBe(0);
   }
   layer.setRotationActive(false);
@@ -2126,6 +2139,7 @@ test('hidden billboards settle without pseudo fades or depth writes and catch up
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   layer.publish(camera, viewport);
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  layer.setOverview(true);
   layer.setHiddenBodies(['sun', 'mercury', 'venus']);
   root.ownerDocument.defaultView.advance(1000);
   expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
@@ -2138,6 +2152,7 @@ test('hidden billboards settle without pseudo fades or depth writes and catch up
   expect(all(root).map(node => [node.styleWrites, node.attributeWrites])).toEqual(counts);
   expect(layer.publicationStats()).toEqual(publications);
   layer.selectObject('mercury');
+  layer.setOverview(false);
   layer.setHiddenBodies([]);
   expect(marker.style.visibility).toBe('');
   expect(mover(marker).style.zIndex).toBe('0');

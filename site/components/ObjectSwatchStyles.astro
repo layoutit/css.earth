@@ -17,7 +17,7 @@ const styles = SCENE_OBJECTS.map(({ id }) => {
   const group = `.prepared-world-context [data-context-group="${id}"]`;
   const orbit = `.prepared-world-context [data-context-orbit="${id}"]`;
   const [locator, hover] = contextLocatorImages(hex);
-  return `${group}, ${orbit} { color: ${hex}; }\n${group}[data-context-selected="true"]::before { background-image: ${locator}; }\n${group}[data-context-selected="true"][data-context-indicator-hovered="true"]::before { background-image: ${hover}; }`;
+  return `${group}, ${orbit} { color: ${hex}; }\n${group}[data-context-selected="true"]::before { border-radius: 0; box-shadow: none; background-image: ${locator}; }\n${group}[data-context-selected="true"][data-context-indicator-hovered="true"]::before { background-image: ${hover}; }`;
 }).join('\n');
 const defaults = '.prepared-world-context { color: #dfdfdf; }';
 const majorBodyLabelStyles = SCENE_OBJECTS
