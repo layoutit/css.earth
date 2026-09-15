@@ -1,3 +1,4 @@
+import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import { mountPreparedCssVolume } from '../volume/prepared-volume-runtime.js';
@@ -138,6 +139,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let labelBudget = createLabelBudget(0, 0);
+      let labelBlockers: readonly LabelScreenRect[] = [];
       let overview = false;
       let selectionPreview: string | null | undefined;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
@@ -262,6 +264,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setRotationActive(active: boolean) { spatial!.setRotationActive(active); },
           setHiddenIndicators(ids: readonly string[]) { spatial!.setHiddenIndicators(ids); },
           setHighlighted(ids: readonly string[]) { spatial!.setHighlighted(ids); },
+          setLabelBlockers(rects: readonly LabelScreenRect[]) { labelBlockers = rects; spatial!.setLabelBlockers(rects); },
           labelBudget() { return labelBudget; },
           inspect() {
             return Object.freeze({ opacity: spatial!.opacityStats(), publication: spatial!.publicationStats(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(), galaxies: galaxyCatalog?.inspect(),
@@ -326,7 +329,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
             }
             spatial!.publish(world, viewport, frame);
-            const foregroundRects = spatial!.backgroundExclusionRects();
+            const foregroundRects = [...spatial!.backgroundExclusionRects(), ...labelBlockers];
             labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
               bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
             const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);

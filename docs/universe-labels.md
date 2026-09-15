@@ -15,6 +15,9 @@ does not automatically need a caption on screen.
 - A planet or moon view labels its own moon family. Unrelated small bodies wait
   for a Solar System view, a resolved disc, hover, selection or an explicit
   classification highlight.
+- Hiding a category keeps the selected body's marker and caption available as
+  its detailed surface becomes too small to see. The asteroid orbit setting
+  also preserves the selected asteroid's path; other asteroids stay hidden.
 - Body-parent separation must occupy readable pixels: 12–48 CSS pixels is the
   shared appearance range. Labels no longer depend on the orbit visibility
   setting or on whether an orbit stroke crosses their text.
@@ -26,20 +29,35 @@ does not automatically need a caption on screen.
 
 The foreground planner admits the active system first. Environment landmarks,
 deep-space catalogues and additional moon captions share the remaining screen
-space and slots. The settled-frame limit is 24 captions on desktop and 12 below
+space and slots. The admission limit is 24 captions on desktop and 12 below
 700 CSS pixels, across these layers rather than a separate allowance per layer.
 Off-screen, occluded and unreadable objects do not consume slots.
 
 Selected and hovered targets take priority within the relevant group. Clickable
 catalogue destinations outrank disabled captions before classification or
-distance is considered. Major planets and source-classified major moons win
-against smaller peers. Available scene-body labels are admitted before the
+distance is considered. Existing valid caption placements are reserved before
+newcomers; when filling free space, major planets and source-classified major
+moons win against smaller peers. Available scene-body labels are admitted before the
 additional disabled moon captions; those captions cannot displace a clickable
 label. The full sidebar list remains available regardless of scene crowding.
 
 Clickable deep-space labels try below, above, right and left when crowded.
 Prepared cloud bounds keep those alternatives outside a nebula's image.
 Disabled moon captions have no circle or navigation target.
+
+## Stable references
+
+[`stable-label-layout.ts`](../src/renderers/css/labels/stable-label-layout.ts)
+reserves clear existing placements before relocating blocked labels or admitting
+new ones. Explicit selection and hover can take priority. Camera drag, inertia
+and rest use this same rule; ending motion never triggers a separate layout.
+Indicators retain classification priority when their physical circles collide.
+
+Galaxy and nebula captions keep their chosen side while fading out. Additional
+moon captions retain admission history, use a small entry margin and fade over
+200 ms. Font loading invalidates measured bounds. The shell publishes panel
+occlusion rectangles on layout changes, shared by body, catalogue, environment,
+moon and surface-feature labels; camera frames do not measure the panels.
 
 ## Orbit and selection emphasis
 
@@ -51,7 +69,9 @@ distance fading and explicit hidden-orbit settings still apply.
 
 Selecting a planet or moon keeps its planet and satellite family at normal
 brightness. Unrelated bodies, circles, captions and orbit lines use 25% of their
-normal strength. Hover restores emphasis. The Solar System overview and Sun
+normal strength nearby. That dimming eases away between half and twice the
+primary body's solar-orbit radius as the camera pulls back; moons use their
+planet's scale. Hover restores emphasis. The Solar System overview and Sun
 selection retain normal emphasis across the system. These paint multipliers do
 not decide label admission or navigation availability.
 
@@ -63,7 +83,6 @@ selection, occlusion, retained DOM and source frames. Moon tests check catalogue
 counts, assigned names and each prepared position against the pinned Horizons
 reply. Browser evidence belongs in ignored `output/playwright/`.
 
-The changes preserve the renderer's existing label hold during drag and flight.
-The limit describes settled labels; existing fades can briefly retain outgoing
+The limit describes admitted labels; existing fades can briefly retain outgoing
 captions during a transition. This is an admission policy, not a new scientific
 definition of notability or a claim that every catalogue object is explorable.

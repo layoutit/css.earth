@@ -24,6 +24,31 @@ class Element extends EventTarget {
 class Document { count = 0; defaultView = new Window(); createElement() { this.count++; return new Element(this); } }
 const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../objects/${path}`, import.meta.url), 'utf8'));
 
+test('alternate catalogue labels keep their side when space opens and throughout rejection fade', () => {
+  const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
+  const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement,
+    before: before as unknown as HTMLElement, payload, nebulae, onSelect() {} });
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
+  const world = { ...nebulae.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 1e17] as const,
+    orientationXyzw: [0, 0, 0, 1] as const } };
+  const label = runtime.inspect().labels[object.id]!;
+  runtime.publish(world, viewport, 0, [{ left: -150, right: 150, top: 5, bottom: 50 }], 0, 0, undefined, 1);
+  document.defaultView.advance(250);
+  const alternate = label.style.transform;
+  expect(Number(label.style.opacity)).toBeGreaterThan(0);
+  runtime.publish(world, viewport, 0, [], 0, 0, undefined, 1);
+  expect(label.style.transform).toBe(alternate);
+  runtime.publish(world, viewport, 0, [{ left: -400, right: 400, top: -300, bottom: 300 }], 0, 0, undefined, 1);
+  document.defaultView.advance(300);
+  expect(Number(label.style.opacity)).toBeGreaterThan(0);
+  expect(label.style.transform).toBe(alternate);
+  document.defaultView.advance(500);
+  expect(Number(label.style.opacity)).toBe(0);
+  runtime.destroy();
+});
+
 test('nearby nebula labels wake and follow the camera while both extragalactic fades are zero', () => {
   const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
   const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];

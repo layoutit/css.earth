@@ -63,8 +63,7 @@
   box-shadow: inset 0 0 0 .8px currentColor;
 }
 .prepared-world-context [data-context-selected="true"]::before {
-  border-radius: 0;
-  box-shadow: none;
+  /* Keep the standard circle unless the shell supplies a swatch locator. */
   background: none center / 16px 16px no-repeat;
 }
 .prepared-world-context [data-context-selected="true"][data-context-indicator-hovered="true"]::before {

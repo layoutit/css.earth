@@ -1,3 +1,4 @@
+import { createLabelOcclusionController } from './label-occlusion-controller.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
@@ -81,8 +82,10 @@ export function mountPlanetShell({
   let information: HTMLElement | null = null;
   function updateBodyCard(world = camera?.navigation?.capture()) {
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.planet-information-panel');
+    const previous = information?.dataset.cardView;
     const view = cardNavigation?.view ?? bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
-      camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId);
+      camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId,
+      previous === 'detail' || previous === 'overview' ? previous : undefined);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
   }
   function updateOverview(force = false, world = camera?.navigation?.capture()) {
@@ -104,6 +107,7 @@ export function mountPlanetShell({
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
+    own(createLabelOcclusionController(documentTarget));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
     }));
@@ -633,11 +637,13 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     });
   };
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
-  const filter = (resetScroll = true) => {
+  const publishSourceContext = () => {
     const sourceScope = preparedFocus ? 'focus' : overview ? overviewScope : 'object';
     if (browser.dataset.sourceScope !== sourceScope) browser.dataset.sourceScope = sourceScope;
     const sourceFocus = preparedFocus?.id ?? '';
     if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
+  };
+  const filter = (resetScroll = true) => {
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
@@ -704,6 +710,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
+    publishSourceContext();
     if (!next) browsing = false;
     if ((preparedFocus || overview) && !next) next = true;
     // Only an actual open/close transition may reset a scrolled result list.
@@ -1004,6 +1011,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   let gesture: SheetGesture | null = null;
   let dragged = false;
   let snapFrame = 0;
+  let readingPosition: { key: string; top: number } | null = null;
+  let handleReadingPosition: number | null = null;
+  const readingKey = () => `${body.dataset.objectShell}:${documentTarget.documentElement.dataset.selection}:${
+    documentTarget.querySelector<HTMLElement>('.planet-object-browser')?.dataset.sourceFocus ?? ''}`;
   lifetime.onDispose(() => {
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = 0;
@@ -1033,6 +1044,9 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
     const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
     sheet.style.setProperty("--sheet-snap-duration", `${duration}ms`);
+    if (state === 'full' && next !== 'full') readingPosition = { key: readingKey(), top: handleReadingPosition ?? sheet.scrollTop };
+    handleReadingPosition = null;
+    const restoreScroll = next === 'full' && state !== 'full' && readingPosition?.key === readingKey() ? readingPosition.top : null;
     if (next !== "full") sheet.scrollTop = 0;
     state = next;
     body.dataset.sheet = next;
@@ -1041,7 +1055,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
-      if (!lifetime.disposed) sheet.style.removeProperty("transform");
+      if (!lifetime.disposed) {
+        sheet.style.removeProperty("transform");
+        if (restoreScroll !== null) sheet.scrollTop = restoreScroll;
+      }
     });
   };
   // Scrolled content keeps its own drags until it returns to the top.
@@ -1059,6 +1076,9 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     dragged = false;
     if (!mobile.matches || !event.isPrimary || event.button > 0 || ownsGesture(event.target)) return;
     const fromHandle = event.target instanceof windowTarget.Node && handle.contains(event.target);
+    // Native focus can scroll the checkbox into view before its change event.
+    // Save the reading position before that default action, including a drag.
+    if (fromHandle && state === 'full') handleReadingPosition = sheet.scrollTop;
     if (state === "full" && !fromHandle && scrolled(event.target)) return;
     const start = currentOffset();
     gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, start, offset: start,
