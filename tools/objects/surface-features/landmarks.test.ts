@@ -82,3 +82,15 @@ test('an image-plane landmark uses its observed facet normal even below the arbi
   assert.equal(JSON.stringify(triangles), before, 'surface direction does not modify the mesh');
   assert.throws(() => parseLandmarks({ ...document({ longitudeDeg: 0, latitudeDeg: 0 }), entries: [{ ...entry, position: { longitudeDeg: 0, latitudeDeg: 0 }, normal: 'surface' }] }), /Cartesian landmark/u);
 });
+
+test('geographic landmarks on a rendered ellipsoid cast through its surface sampler; Cartesian ones still need a mesh', async () => {
+  const { hitMesh, ...ctx } = context('.');
+  const casts: number[][] = [];
+  const surface = { onSurface: (direction: readonly [number, number, number]) => { casts.push([...direction]); return [direction[0] * 1000, direction[1] * 1000, direction[2] * 990] as [number, number, number]; },
+    plan: () => ({ equatorial: 1000, polar: 990, north: [0, 0, 1] as [number, number, number], minimumShare: 1, maximumShare: 1 }) };
+  const result = await prepareLandmarks(document({ longitudeDeg: 0, latitudeDeg: 45 }), { ...ctx, surface }, axes, 0);
+  assert.equal(casts.length, 1, 'the anchor comes from the sampler');
+  assert.ok(Math.abs(result.features[0]!.anchorUnits[2] - casts[0]![2]! * 990) < 1e-3, 'the polar radius of the ellipsoid is kept');
+  assert.deepEqual([result.features[0]!.longitudeDeg, result.features[0]!.latitudeDeg], [0, 45], 'the published geodetic coordinates are kept, not the geocentric direction of the anchor');
+  await assert.rejects(prepareLandmarks(document({ pointMeters: [1, 2, 3], maximumDistanceMeters: 1 }), { ...ctx, surface }, axes, 0), /picking mesh/u);
+});

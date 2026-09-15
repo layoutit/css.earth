@@ -99,10 +99,11 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     if (!Array.isArray(feature.searchNames) || !feature.searchNames.length || !feature.searchNames.every(value => typeof value === 'string' && value.length > 0)) throw new TypeError('Surface feature search names are invalid.');
     const searchNames = Object.freeze([...feature.searchNames as string[]]), searchContext = text(feature.searchContext, 'feature search context');
     if (!name.trim() || !/^https?:\/\//u.test(link)) throw new TypeError('Surface feature caption is invalid.');
+    if (feature.searchOnly !== undefined && feature.searchOnly !== true) throw new TypeError('Surface feature searchOnly must be true when present.');
     return Object.freeze({ id, name, kind: kind as SurfaceFeatureKind, type: text(feature.type, 'feature type'), code: text(feature.code, 'feature code'),
       diameterKm, longitudeDeg: finite(feature.longitudeDeg, 'feature longitude'), latitudeDeg: finite(feature.latitudeDeg, 'feature latitude'),
       anchorUnits, normal, radiusUnits, outline, searchNames, searchContext, origin: text(feature.origin, 'feature origin'), approved: text(feature.approved, 'feature approval'),
-      quad: text(feature.quad, 'feature quad'), link, credit: text(feature.credit, 'feature credit'), note: parseNote(feature.note), machineId: feature.machineId === undefined ? null : text(feature.machineId, 'feature machine'), minimumZoomShare: zoomShare(feature.minimumZoomShare) });
+      quad: text(feature.quad, 'feature quad'), link, credit: text(feature.credit, 'feature credit'), note: parseNote(feature.note), machineId: feature.machineId === undefined ? null : text(feature.machineId, 'feature machine'), minimumZoomShare: zoomShare(feature.minimumZoomShare), searchOnly: feature.searchOnly === true });
   });
   return Object.freeze({ schema: 'cssearth-prepared-surface-features@1', objectId, source: text(catalog.source, 'catalogue source'),
     snapshotDate: text(catalog.snapshotDate, 'catalogue snapshot'), sourcePage: text(catalog.sourcePage, 'catalogue page'),

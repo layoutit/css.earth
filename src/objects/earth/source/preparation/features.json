@@ -38,6 +38,7 @@
     ],
     "region": [
       "CO",
+      "CN",
       "BA",
       "VA",
       "RE",
@@ -56,8 +57,59 @@
   "outline": {
     "pieces": 256
   },
+  "landmarks": {
+    "document": "landmarks.json",
+    "inputs": [
+      "landmarks.json"
+    ],
+    "priority": 5000000000
+  },
   "naturalEarth": {
+    "discovery": {
+      "farthestZoomLevel": 1.1,
+      "closestZoomLevel": 4.4,
+      "mapMaximumZoomLevel": 4.4
+    },
+    "highlights": {
+      "tier": 5,
+      "ids": [
+        "1159104337",
+        "1159104307",
+        "1159104309",
+        "1159104297",
+        "1159104311",
+        "1159121589",
+        "1159116655",
+        "1159115321"
+      ]
+    },
     "layers": [
+      {
+        "id": "countries",
+        "archive": "ne_10m_admin_0_countries.zip",
+        "attributes": "ne_10m_admin_0_countries.dbf",
+        "shapes": "ne_10m_admin_0_countries.shp",
+        "classField": "featurecla",
+        "classes": {
+          "Admin-0 country": {
+            "code": "CN",
+            "type": "Country",
+            "map": true,
+            "tier": 7
+          }
+        },
+        "nameField": "ADMIN",
+        "idField": "NE_ID",
+        "wikidataField": "WIKIDATAID",
+        "rankField": "LABELRANK",
+        "maximum": null,
+        "rankOrder": "ascending",
+        "zoomField": "MIN_LABEL",
+        "pointFields": {
+          "longitude": "LABEL_X",
+          "latitude": "LABEL_Y"
+        }
+      },
       {
         "id": "populated-places",
         "archive": "ne_10m_populated_places.zip",
@@ -67,39 +119,60 @@
         "classes": {
           "Admin-0 capital": {
             "code": "CT",
-            "type": "Capital"
+            "type": "Capital",
+            "map": true,
+            "tier": 6,
+            "minimumZoomShare": 0.5
           },
           "Admin-0 capital alt": {
             "code": "CT",
-            "type": "Capital"
+            "type": "Capital",
+            "map": true,
+            "tier": 6,
+            "minimumZoomShare": 0.5
           },
           "Admin-0 region capital": {
             "code": "CT",
-            "type": "Capital"
+            "type": "Capital",
+            "map": true,
+            "tier": 6,
+            "minimumZoomShare": 0.5
           },
           "Admin-1 capital": {
             "code": "CT",
-            "type": "City"
+            "type": "City",
+            "map": true,
+            "tier": 4,
+            "minimumZoomShare": 0.5
           },
           "Admin-1 region capital": {
             "code": "CT",
-            "type": "City"
+            "type": "City",
+            "map": true,
+            "tier": 4,
+            "minimumZoomShare": 0.5
           },
           "Populated place": {
             "code": "CT",
-            "type": "City"
+            "type": "City",
+            "map": true,
+            "tier": 4,
+            "minimumZoomShare": 0.5
           },
           "Scientific station": {
             "code": "CT",
-            "type": "Research station"
+            "type": "Research station",
+            "map": false
           },
           "Historic place": {
             "code": "CT",
-            "type": "Historic place"
+            "type": "Historic place",
+            "map": false
           },
           "Meteorological Station": {
             "code": "CT",
-            "type": "Station"
+            "type": "Station",
+            "map": false
           }
         },
         "nameField": "NAME_EN",
@@ -119,35 +192,43 @@
         "classes": {
           "cape": {
             "code": "CP",
-            "type": "Cape"
+            "type": "Cape",
+            "map": false
           },
           "pole": {
             "code": "PO",
-            "type": "Pole"
+            "type": "Pole",
+            "map": false
           },
           "plain": {
             "code": "PL",
-            "type": "Plain"
+            "type": "Plain",
+            "map": false
           },
           "peninsula": {
             "code": "PE",
-            "type": "Peninsula"
+            "type": "Peninsula",
+            "map": false
           },
           "island": {
             "code": "IS",
-            "type": "Island"
+            "type": "Island",
+            "map": false
           },
           "waterfall": {
             "code": "WF",
-            "type": "Waterfall"
+            "type": "Waterfall",
+            "map": false
           },
           "mountain": {
             "code": "MO",
-            "type": "Mountain"
+            "type": "Mountain",
+            "map": false
           },
           "desert": {
             "code": "DE",
-            "type": "Desert"
+            "type": "Desert",
+            "map": false
           }
         },
         "nameField": "name_en",
@@ -167,87 +248,109 @@
         "classes": {
           "Continent": {
             "code": "CO",
-            "type": "Continent"
+            "type": "Continent",
+            "map": true,
+            "tier": 8
           },
           "Range/mtn": {
             "code": "MO",
-            "type": "Mountain range"
+            "type": "Mountain range",
+            "map": false
           },
           "Desert": {
             "code": "DE",
-            "type": "Desert"
+            "type": "Desert",
+            "map": false
           },
           "Island": {
             "code": "IS",
-            "type": "Island"
+            "type": "Island",
+            "map": false
           },
           "Island group": {
             "code": "IS",
-            "type": "Island group"
+            "type": "Island group",
+            "map": false
           },
           "Peninsula": {
             "code": "PE",
-            "type": "Peninsula"
+            "type": "Peninsula",
+            "map": false
           },
           "Plain": {
             "code": "PL",
-            "type": "Plain"
+            "type": "Plain",
+            "map": false
           },
           "Plateau": {
             "code": "PL",
-            "type": "Plateau"
+            "type": "Plateau",
+            "map": false
           },
           "Basin": {
             "code": "BA",
-            "type": "Basin"
+            "type": "Basin",
+            "map": false
           },
           "Valley": {
             "code": "VA",
-            "type": "Valley"
+            "type": "Valley",
+            "map": false
           },
           "Lowland": {
             "code": "PL",
-            "type": "Lowland"
+            "type": "Lowland",
+            "map": false
           },
           "Tundra": {
             "code": "RE",
-            "type": "Tundra"
+            "type": "Tundra",
+            "map": false
           },
           "Wetlands": {
             "code": "RE",
-            "type": "Wetlands"
+            "type": "Wetlands",
+            "map": false
           },
           "Delta": {
             "code": "RE",
-            "type": "Delta"
+            "type": "Delta",
+            "map": false
           },
           "Isthmus": {
             "code": "RE",
-            "type": "Isthmus"
+            "type": "Isthmus",
+            "map": false
           },
           "Gorge": {
             "code": "VA",
-            "type": "Gorge"
+            "type": "Gorge",
+            "map": false
           },
           "Foothills": {
             "code": "MO",
-            "type": "Foothills"
+            "type": "Foothills",
+            "map": false
           },
           "Coast": {
             "code": "RE",
-            "type": "Coast"
+            "type": "Coast",
+            "map": false
           },
           "Depression": {
             "code": "BA",
-            "type": "Depression"
+            "type": "Depression",
+            "map": false
           },
           "Geoarea": {
             "code": "RE",
-            "type": "Region"
+            "type": "Region",
+            "map": false
           },
           "Pen/cape": {
             "code": "PE",
-            "type": "Peninsula"
+            "type": "Peninsula",
+            "map": false
           }
         },
         "nameField": "NAME_EN",
@@ -256,7 +359,7 @@
         "rankField": "SCALERANK",
         "maximum": null,
         "rankOrder": "ascending",
-        "zoomField": null
+        "zoomField": "MIN_LABEL"
       },
       {
         "id": "marine",
@@ -267,51 +370,64 @@
         "classes": {
           "ocean": {
             "code": "OC",
-            "type": "Ocean"
+            "type": "Ocean",
+            "map": true,
+            "tier": 9
           },
           "sea": {
             "code": "SE",
-            "type": "Sea"
+            "type": "Sea",
+            "map": false
           },
           "bay": {
             "code": "SE",
-            "type": "Bay"
+            "type": "Bay",
+            "map": false
           },
           "gulf": {
             "code": "SE",
-            "type": "Gulf"
+            "type": "Gulf",
+            "map": false
           },
           "strait": {
             "code": "ST",
-            "type": "Strait"
+            "type": "Strait",
+            "map": false
           },
           "channel": {
             "code": "ST",
-            "type": "Channel"
+            "type": "Channel",
+            "map": false
           },
           "sound": {
             "code": "SE",
-            "type": "Sound"
+            "type": "Sound",
+            "map": false
           },
           "lagoon": {
             "code": "SE",
-            "type": "Lagoon"
+            "type": "Lagoon",
+            "map": false
           },
           "fjord": {
             "code": "SE",
-            "type": "Fjord"
+            "type": "Fjord",
+            "map": false
           },
           "inlet": {
             "code": "SE",
-            "type": "Inlet"
+            "type": "Inlet",
+            "map": false
           },
           "reef": {
             "code": "IS",
-            "type": "Reef"
+            "type": "Reef",
+            "map": false
           },
           "generic": {
             "code": "SE",
-            "type": "Water body"
+            "type": "Water body",
+            "map": false
           }
         },
         "nameField": "name_en",
@@ -320,7 +436,7 @@
         "rankField": "scalerank",
         "maximum": null,
         "rankOrder": "ascending",
-        "zoomField": null
+        "zoomField": "min_label"
       },
       {
         "id": "rivers",
@@ -331,11 +447,13 @@
         "classes": {
           "River": {
             "code": "RI",
-            "type": "River"
+            "type": "River",
+            "map": false
           },
           "Lake Centerline": {
             "code": "RI",
-            "type": "Lake centreline"
+            "type": "Lake centreline",
+            "map": false
           }
         },
         "nameField": "name_en",
