@@ -70,6 +70,20 @@ test('overview uses its prepared billboard even when the retained surface is lar
   expect(marker(false).markerOpacity).toBe(0);
 });
 
+test('a departed focus outside the view cannot blank the surrounding orbit field', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  input.overview = false; input.navigationInFlight = true; input.selectionPreview = 'arrokoth';
+  for (const z of [0, -149597870700, 149597870]) {
+    input.world.pose.positionM = [20 * 149597870700, 0, z];
+    const packet = calculate(input);
+    expect(packet.projectedBodies.some(body => body.orbitVisibility > 0 && body.segments.length > 0),
+      `orbit field remains visible while the departed Sun crosses the eye plane at ${z}`).toBe(true);
+  }
+  // Preserve the close-up fade when the selected disc really fills the view.
+  input.world.pose.positionM = [0, 0, plan.focus.radiusM * 5];
+  expect(calculate(input).projectedBodies.every(body => body.orbitVisibility === 0)).toBe(true);
+});
+
 test('zoom jitter does not repeatedly reverse annotation visibility at its exit threshold', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.anchorOnly = true; input.overview = false;
@@ -93,4 +107,28 @@ test('zoom jitter does not repeatedly reverse annotation visibility at its exit 
   expect(sample(8.01).indicatorShown).toBe(false);
   for (const diameter of [7.99, 8.01, 7.99]) expect(sample(diameter).indicatorShown).toBe(false);
   expect(sample(7.7).indicatorShown).toBe(true);
+});
+
+test('a flight destination keeps its caption and its side across the preview fade', () => {
+  for (const overview of [false, true]) {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const target = plan.bodies.find(body => body.id === 'mercury')!;
+  const index = 1 + plan.bodies.indexOf(target);
+  // The shell can still own the source overview while destination detail activates.
+  input.selectedId = overview ? plan.focus.id : target.id;
+  input.selectionPreview = target.id; input.overview = overview; input.navigationInFlight = true;
+  for (const diameter of [4, 8, 13, 14, 17, 21, 50, 150, 300]) {
+    input.world.pose.positionM = [target.positionM[0], target.positionM[1],
+      target.positionM[2] + Math.hypot(target.radiusM, 2 * input.viewport.focalPixels * target.radiusM / diameter)];
+    const body = calculate(input).projectedBodies.find(body => body.index === index)!;
+    expect(body.labelShown, `${diameter}px destination must remain named`).toBe(true);
+    expect(body.labelPlacement).toBe(0);
+    expect(body.indicatorShown, `${diameter}px circle follows the preview handoff`).toBe(diameter < 20);
+    if (diameter >= 20) expect(body.markerOpacity).toBe(0);
+    Object.assign(input.bodies[index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
+      indicatorShown: body.indicatorShown });
+  }
+  input.navigationInFlight = false; input.overview = false; input.selectedId = target.id;
+  expect(calculate(input).projectedBodies.find(body => body.index === index)!.labelShown).toBe(false);
+  }
 });
