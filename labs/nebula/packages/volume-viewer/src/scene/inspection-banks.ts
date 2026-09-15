@@ -3,7 +3,7 @@ export type InspectionAxis = 'auto' | 'x' | 'y' | 'z';
 export type InspectionComponent = 'all' | 'diffuse' | 'detail';
 export interface InspectionBank {
   axis: Exclude<InspectionAxis, 'auto'>; root: HTMLElement;
-  leaves: { id: string; nodes: HTMLElement[]; detail: boolean }[];
+  leaves: { id: string; nodes: HTMLElement[]; detail: boolean; setTexture?(url: string): void }[];
 }
 export function dominantInspectionBank(banks: readonly InspectionBank[]): InspectionBank {
   return banks.reduce((best, bank) => Number(bank.root.style.opacity) > Number(best.root.style.opacity) ? bank : best, banks[0]!);
@@ -48,7 +48,7 @@ export interface InspectionMountBackend<Bank, Publication> {
 export function mountInspectionScene<Bank, Publication>(options: {
   backend: InspectionMountBackend<Bank, Publication>; host: HTMLElement; before: Element; payload: Bank;
   resolveResource(path: string): string; composite: boolean; overlays: boolean;
-  bind?(leaf: InspectionLeafResources, nodes: HTMLElement[]): void;
+  bind?(leaf: InspectionLeafResources, nodes: HTMLElement[], setTexture?: (url: string) => void): void;
   partForLeaf?(id: string): string;
 }) {
   const { backend, host, before, payload } = options;
@@ -62,7 +62,7 @@ export function mountInspectionScene<Bank, Publication>(options: {
   const mounted = backend.mount(surface ?? host, marker ?? before, payload, options.resolveResource, options.overlays);
   const resources = new Map(backend.leaves(payload).map(leaf => [leaf.id, leaf]));
   for (const bank of mounted.banks) for (const leaf of bank.leaves) {
-    if (options.bind) options.bind(resources.get(leaf.id)!, leaf.nodes);
+    if (options.bind) options.bind(resources.get(leaf.id)!, leaf.nodes, leaf.setTexture);
     if (options.partForLeaf) for (const node of leaf.nodes) node.dataset.cloudPart = options.partForLeaf(leaf.id);
   }
   return { banks: mounted.banks, overlayMeshes: mounted.overlayMeshes, root: surface,

@@ -416,8 +416,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       if (cloud) { host.dataset.cloudDensityFilter = JSON.stringify({ cutoff: 0, softness: .25, showRemoved: false }); host.dataset.cloudDensityReady = 'true'; }
       const instance = mountInspectionScene({ backend: inspectionRenderer(isImage), host, before: end, payload: loaded,
         resolveResource: resourceUrl, composite: Boolean(cloud), overlays: currentMode === 'density',
-        ...(currentMode === 'density' || cloud ? { bind(leaf: InspectionLeafResources, nodes: HTMLElement[]) {
-          toneResources.bind(`${directory}/prepared/${leaf.texturePath}`, leaf.widthPx, leaf.heightPx, nodes);
+        ...(currentMode === 'density' || cloud ? { bind(leaf: InspectionLeafResources, nodes: HTMLElement[], setTexture?: (url: string) => void) {
+          toneResources.bind(`${directory}/prepared/${leaf.texturePath}`, leaf.widthPx, leaf.heightPx, nodes, setTexture);
         } } : {}), ...(cloud ? { partForLeaf: (id: string) => cloud!.partForLeaf(id) } : {}),
       });
       mounted = instance; cloudSurface = instance.root ? instance : null;

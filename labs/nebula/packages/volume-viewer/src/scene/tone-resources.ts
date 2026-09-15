@@ -1,20 +1,26 @@
 /** Transport prepared inspection pixels onto retained leaves, after the entire bank decodes. */
 export interface ToneResource { sourcePath: string; url: string; width: number; height: number; }
 export function createToneResourceController(options: { isAllowedUrl(url: string): boolean }) {
-  const bindings = new Map<string, { width: number; height: number; nodes: HTMLElement[] }>();
+  const bindings = new Map<string, { width: number; height: number; nodes: HTMLElement[]; writers: { nodes: HTMLElement[]; write: (url: string) => void }[] }>();
   const urls = new Map<string, string>();
   let generation = 0;
   return {
     clear() { generation++; bindings.clear(); urls.clear(); },
     unbind(nodes: HTMLElement[]) {
       const removed = new Set(nodes);
-      for (const binding of bindings.values()) binding.nodes = binding.nodes.filter(node => !removed.has(node));
+      for (const binding of bindings.values()) {
+        binding.nodes = binding.nodes.filter(node => !removed.has(node));
+        binding.writers = binding.writers.filter(writer => !writer.nodes.some(node => removed.has(node)));
+      }
     },
-    bind(path: string, width: number, height: number, nodes: HTMLElement[] = []) {
+    bind(path: string, width: number, height: number, nodes: HTMLElement[] = [], setTexture?: (url: string) => void) {
       const prior = bindings.get(path);
-      bindings.set(path, { width, height, nodes: [...(prior?.nodes ?? []), ...nodes] });
+      bindings.set(path, { width, height, nodes: [...(prior?.nodes ?? []), ...(setTexture ? [] : nodes)], writers: [...(prior?.writers ?? []), ...(setTexture ? [{ nodes, write: setTexture }] : [])] });
       const preparedUrl = urls.get(path);
-      if (preparedUrl) for (const node of nodes) node.style.backgroundImage = `url(${JSON.stringify(preparedUrl)})`;
+      if (preparedUrl) {
+        if (setTexture) setTexture(preparedUrl);
+        else for (const node of nodes) node.style.backgroundImage = `url(${JSON.stringify(preparedUrl)})`;
+      }
     },
     url(path: string, fallback: string) { return urls.get(path) ?? fallback; },
     async apply(resources: ToneResource[], expectedPaths: string[], isCurrent: () => boolean) {
@@ -38,6 +44,7 @@ export function createToneResourceController(options: { isAllowedUrl(url: string
       if (version !== generation || !isCurrent()) return;
       for (const item of resources) {
         urls.set(item.sourcePath, item.url);
+        for (const writer of bindings.get(item.sourcePath)!.writers) writer.write(item.url);
         for (const node of bindings.get(item.sourcePath)!.nodes) node.style.backgroundImage = `url(${JSON.stringify(item.url)})`;
       }
     },

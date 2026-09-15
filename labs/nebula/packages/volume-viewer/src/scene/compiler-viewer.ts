@@ -75,7 +75,7 @@ export async function createCompilerViewer<Bank, Publication>({ backend, host, r
       const request = ++materialRequest;
       if (disposed) return;
       if (mode === 'neutral') {
-        for (const leaf of leaves) for (const node of leaf.nodes) node.style.backgroundImage = `url("${leaf.neutral}")`;
+        mounted.setTextures(leaves.map(leaf => leaf.neutral));
         root.dataset.material = 'neutral'; root.dataset.lens = ''; stars.setLens(null); publish(); return;
       }
       const lens = result.lenses.find(item => item.id === lensId);
@@ -87,11 +87,11 @@ export async function createCompilerViewer<Bank, Publication>({ backend, host, r
         try { backend.assertLensGeometry(neutral.payload, loaded.payload, result, lens); }
         catch (error) { release(loaded); throw error; }
         const previous = activeLens; activeLens = { id: lens.id, bank: loaded };
-        applyBank(backend, leaves, loaded);
+        applyBank(backend, leaves, loaded, mounted.setTextures);
         root.dataset.material = 'textured'; root.dataset.lens = lens.id; delete root.dataset.materialLoading;
         if (previous) release(previous.bank);
       } else {
-        applyBank(backend, leaves, activeLens.bank); root.dataset.material = 'textured'; root.dataset.lens = lens.id;
+        applyBank(backend, leaves, activeLens.bank, mounted.setTextures); root.dataset.material = 'textured'; root.dataset.lens = lens.id;
       }
       stars.setLens(lens.id); publish();
     },
@@ -112,10 +112,10 @@ export async function createCompilerViewer<Bank, Publication>({ backend, host, r
     } };
 }
 
-function applyBank<Bank, Publication>(backend: CompilerViewerBackend<Bank, Publication>, leaves: MaterialLeaf[], bank: LoadedBank<Bank>) {
+function applyBank<Bank, Publication>(backend: CompilerViewerBackend<Bank, Publication>, leaves: MaterialLeaf[], bank: LoadedBank<Bank>, setTextures: (urls: readonly string[]) => void) {
   const textures = backend.texturePaths(bank.payload).map(path => requiredTexture(bank, path));
   if (textures.length !== leaves.length) throw new Error('Compiler material texture count differs from neutral geometry.');
-  leaves.forEach((leaf, index) => { for (const node of leaf.nodes) node.style.backgroundImage = `url("${textures[index]}")`; });
+  setTextures(textures);
 }
 
 export type { CompilerViewerBackend } from './backend.ts';

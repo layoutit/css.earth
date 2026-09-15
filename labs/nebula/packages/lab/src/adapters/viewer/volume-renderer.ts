@@ -20,7 +20,7 @@ export const volumeRenderer: VolumeViewerBackend<PreparedCssVolume, VolumeCamera
       if (nodes.length !== stack.leaves.length * 3) throw new Error('Compiler leaves do not match the prepared material layout.');
       return stack.leaves.map((leaf, leafIndex) => ({ nodes: nodes.slice(leafIndex * 3, leafIndex * 3 + 3), texturePath: leaf.texturePath }));
     });
-    return { materials,
+    return { materials, setTextures: urls => mounted.setTextures(urls),
       publish(camera) {
         mounted.publish({ world: camera.publication.world, viewport: { focalPixels: camera.publication.viewport.focalPixels,
           principalOffsetPixels: camera.publication.viewport.principalOffsetPixels } });

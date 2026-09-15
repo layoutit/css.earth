@@ -34,10 +34,11 @@ test('stale tone decode cannot overwrite a newer selection or a new mount', asyn
   try {
     for (const invalidateMount of [false, true]) {
       const controller = createToneResourceController(), node = { style: { backgroundImage: 'original' } } as HTMLElement;
-      controller.bind('a', 10, 10, [node]); let current = true;
+      let writes = 0;
+      controller.bind('a', 10, 10, [node], () => { writes++; }); let current = true;
       const work = controller.apply([{ sourcePath: 'a', url: '/@fs/toned', width: 10, height: 10 }], ['a'], () => current);
       if (invalidateMount) controller.clear(); else current = false;
-      release(); await work; assert.equal(node.style.backgroundImage, 'original');
+      release(); await work; assert.equal(node.style.backgroundImage, 'original'); assert.equal(writes, 0);
     }
   } finally { globalThis.Image = originalImage; }
 });

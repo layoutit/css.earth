@@ -15,9 +15,11 @@ export function inspectionRenderer(isImage: boolean): InspectionMountBackend<Pre
       const options = { host, before, payload, resolveResource };
       const instance = isImage ? mountPreparedCssImageLayers({ ...options, payload: imageBank(payload) }) : mountPreparedCssVolume(options);
       const roots = 'root' in instance ? [...instance.root.querySelectorAll<HTMLElement>('[data-image-layer-axis]')] : instance.roots;
+      let materialIndex = 0;
       const banks = payload.stacks.map((stack, index) => {
         const nodes = [...roots[index]!.querySelectorAll<HTMLElement>('.css-volume-mesh s')], copies = isImage ? 1 : 3;
         return { axis: stack.axis, root: roots[index]!, leaves: stack.leaves.map((leaf, leafIndex) => ({
+          setTexture: 'setTexture' in instance ? ((index: number) => (url: string) => instance.setTexture(index, url))(materialIndex++) : undefined,
           id: leaf.id, nodes: nodes.slice(leafIndex * copies, (leafIndex + 1) * copies), detail: leaf.id.endsWith('detail'),
         })) };
       });

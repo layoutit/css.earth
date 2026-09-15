@@ -9,6 +9,7 @@ export interface SceneCamera<Publication> { publication: Publication; transform:
 export interface MaterialSurface { nodes: HTMLElement[]; texturePath: string }
 export interface RetainedVolumeMount<Publication> {
   materials: MaterialSurface[];
+  setTextures(urls: readonly string[]): void;
   publish(camera: SceneCamera<Publication>): void;
   destroy(): void;
 }

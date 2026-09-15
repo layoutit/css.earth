@@ -1,13 +1,13 @@
 import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
-import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
+import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
 import { validatePreparedCssVolume } from './validation.js';
 
 const AXES = ['x', 'y', 'z'] as const;
 
 /** Mounts fixed projective slice geometry. It owns DOM transforms only; all geometry and pixels are prepared. */
-export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): PreparedVolumeRuntime {
+export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): PreparedMaterialVolumeRuntime {
   const payload = validatePreparedCssVolume(options.payload);
   if (options.host?.nodeType !== 1 || options.before?.nodeType !== 1 || options.before.ownerDocument !== options.host.ownerDocument || typeof options.resolveResource !== 'function') {
     throw new TypeError('Prepared CSS volume mount needs a host, insertion point and resource resolver.');
@@ -28,6 +28,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const scenes: HTMLElement[] = [];
   const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean | null }[] = [];
   const pendingTextures = AXES.map(() => new Map<{ nodes: HTMLElement[]; shown: boolean | null }, string>());
+  const materialLeaves: { axis: number; leaf: typeof boundedLeaves[number] }[] = [];
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[] }[] = [];
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
@@ -52,6 +53,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const textureUrl = options.resolveResource(leaf.texturePath);
       const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: null as boolean | null };
       boundedLeaves.push(bounded);
+      materialLeaves.push({ axis: AXES.indexOf(axis), leaf: bounded });
       pendingTextures[AXES.indexOf(axis)]!.set(bounded, textureUrl);
       // Coincident copies reuse the same prepared pixels and transform. They
       // increase optical length without intersecting another axis's planes.
@@ -155,7 +157,19 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       }
     }
   };
-  return Object.freeze({ publish, roots: Object.freeze(roots), destroy() {
+  const setTexture = (index: number, url: string) => {
+    if (!Number.isInteger(index) || !materialLeaves[index] || typeof url !== 'string' || !url)
+      throw new TypeError('Prepared material texture index or URL is invalid.');
+    if (destroyed) return;
+    const { axis, leaf } = materialLeaves[index]!;
+    if (pendingTextures[axis]!.has(leaf)) pendingTextures[axis]!.set(leaf, url);
+    else for (const node of leaf.nodes) node.style.backgroundImage = `url("${escapeUrl(url)}")`;
+  };
+  return Object.freeze({ publish, setTexture, setTextures(urls: readonly string[]) {
+    if (urls.length !== materialLeaves.length || urls.some(url => typeof url !== 'string' || !url))
+      throw new TypeError('Prepared material texture count or URL is invalid.');
+    urls.forEach((url, index) => setTexture(index, url));
+  }, roots: Object.freeze(roots), destroy() {
     if (destroyed) return;
     destroyed = true;
     for (const root of roots) root.remove();

@@ -95,7 +95,7 @@ export async function createShapeCloudViewer<Bank, Publication>({ backend, host,
       if (next !== 'neutral' && next !== 'textured') throw new TypeError('Unknown shape cloud material.');
       if (disposed || material === next) return;
       material = next;
-      for (const leaf of leaves) for (const node of leaf.nodes) node.style.backgroundImage = `url("${leaf[next]}")`;
+      mounted.setTextures(leaves.map(leaf => leaf[next]));
       root.dataset.material = next;
     },
     setPose(yawDegrees, pitchDegrees) {
