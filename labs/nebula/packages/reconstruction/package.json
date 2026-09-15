@@ -43,7 +43,19 @@
     "./observations/archives": "./src/observations/archives.ts",
     "./methods/symmetry/solver": "./src/methods/symmetry/solver.ts",
     "./methods/symmetry/shape-prior": "./src/methods/symmetry/shape-prior.ts",
-    "./evidence/structure-map": "./src/evidence/structure-map.ts"
+    "./evidence/structure-map": "./src/evidence/structure-map.ts",
+    "./star-removal/native": "./src/star-removal/native.ts",
+    "./methods/sampled/material-fit": "./src/methods/sampled/material-fit.ts",
+    "./star-removal/extraction": "./src/star-removal/extraction.ts",
+    "./star-removal/native-extraction": "./src/star-removal/native-extraction.ts",
+    "./methods/density-prior/filled-components": "./src/methods/density-prior/filled-components.ts",
+    "./methods/density-prior/filled-contracts": "./src/methods/density-prior/filled-contracts.ts",
+    "./methods/density-prior/filled-volume": "./src/methods/density-prior/filled-volume.ts",
+    "./methods/density-prior/filled-parts": "./src/methods/density-prior/filled-parts.ts",
+    "./methods/density-prior/filled-products": "./src/methods/density-prior/filled-products.ts",
+    "./methods/density-prior/coherent-volume": "./src/methods/density-prior/coherent-volume.ts",
+    "./methods/density-prior/coherent-validation": "./src/methods/density-prior/coherent-validation.ts",
+    "./registration/compact": "./src/registration/compact.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

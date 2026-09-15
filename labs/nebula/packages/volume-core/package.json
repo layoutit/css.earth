@@ -36,7 +36,10 @@
     "./contracts/joint-volume": "./src/contracts/joint-volume.ts",
     "./contracts/shape-scene": "./src/contracts/shape-scene.ts",
     "./fields/cloud-density": "./src/fields/cloud-density.ts",
-    "./fields/observation-prior": "./src/fields/observation-prior.ts"
+    "./fields/observation-prior": "./src/fields/observation-prior.ts",
+    "./contracts/authored-shapes": "./src/contracts/authored-shapes.ts",
+    "./fields/authored-shapes": "./src/fields/authored-shapes.ts",
+    "./coordinates/overlay-alignment": "./src/coordinates/overlay-alignment.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"
