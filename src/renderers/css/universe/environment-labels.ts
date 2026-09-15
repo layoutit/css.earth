@@ -1,4 +1,5 @@
 import { screenPicking } from '../navigation/screen-picking.js';
+import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
@@ -115,9 +116,10 @@ function createEntry(document: Document, kind: Entry['kind'], id: string, name: 
   const element = document.createElement(href ? 'a' : 'span');
   if (href) { element.setAttribute('href', href); element.dataset.environmentNavigate = 'true'; }
   element.dataset.environmentLabel = id;
+  element.className = 'prepared-context-label';
   element.dataset.environmentKind = kind;
   element.textContent = name;
-  element.style.cssText = 'position:absolute;left:50%;top:50%;font:400 14px/18px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#c2ccd8;white-space:nowrap;visibility:hidden;opacity:0;pointer-events:none';
+  element.style.cssText = 'position:absolute;left:50%;top:50%;visibility:hidden;opacity:0;pointer-events:none';
   if (href) element.style.cursor = 'pointer';
   element.style.visibility = 'hidden'; element.style.opacity = '0';
   return { kind, id, element, frame, pickRect: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null };
@@ -135,7 +137,7 @@ function admit(entry: Entry, opacity: number, publication: EnvironmentLabelPubli
   if (rect.left < -width / 2 || rect.right > width / 2 || rect.top < -height / 2 || rect.bottom > height / 2 ||
       !(opacity > 0)) { fadeTo(entry, 0, fader); return; }
   if (blockers.some(blocker => labelRectsOverlap(rect, blocker))) { fadeTo(entry, 0, fader); return; }
-  fadeTo(entry, Math.min(1, opacity), fader);
+  fadeTo(entry, Math.min(1, opacity) * DEFAULT_CONTEXT_LABEL_OPACITY, fader);
   entry.pickRect = rect;
   accepted.push(Object.freeze(rect));
 }
