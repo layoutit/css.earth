@@ -143,8 +143,10 @@ try {
     await page.evaluate(distanceKilometers => window.__cssearthTest.object('sun').camera.setState({ distanceKilometers }), context.camera.maximumDistanceM / 1000);
     await page.waitForFunction(() => window.__cssearthTest.input('.planet-sidebar-search').value === 'Milky Way');
     const galaxy = page.locator('[data-galactic-overview]');
-    assert.deepEqual(await galaxy.locator('.planet-title-tag').allTextContents(), ['Local Group', 'Galaxy']);
-    assert.equal(await galaxy.locator('.planet-factsheet-section').evaluate(node => window.__cssearthTest.detailsElement(node).open), false);
+    assert.deepEqual(await galaxy.locator('.planet-breadcrumbs li').allTextContents().then(labels =>
+      labels.map(label => label.replace('»', '').trim())), ['Nearby Universe', 'Local Group', 'Milky Way']);
+    assert.equal(await galaxy.getByRole('region', { name: 'Planetary systems', exact: true }).isVisible(), true);
+    assert.equal(await galaxy.locator('.planet-factsheet-section').isVisible(), false);
     assert.equal(await page.locator('[data-solar-system-results] .planet-factsheet-section').count(), 0);
     assert.equal(await page.locator('[data-object-type-group="asteroid"]').count(), 0);
     const disabled = galaxy.locator('.planet-object-link[aria-disabled="true"]');
@@ -156,10 +158,12 @@ try {
     }));
     assert.ok(markers[0].size < markers[2].size && markers[2].size < markers[3].size);
     assert.equal(new Set(markers.map(marker => marker.color)).size, 4);
-    const accordion = galaxy.locator('.planet-accordion');
-    await accordion.locator('summary').click();
-    assert.equal(await accordion.evaluate(node => window.__cssearthTest.detailsElement(node).open), false);
-    await accordion.locator('summary').click();
+    await galaxy.getByRole('radio', { name: 'Factsheet', exact: true }).check();
+    assert.equal(await galaxy.locator('.planet-factsheet-section').isVisible(), true);
+    assert.equal(await galaxy.getByRole('region', { name: 'Planetary systems', exact: true }).isVisible(), false);
+    await galaxy.getByRole('radio', { name: 'Sources', exact: true }).check();
+    assert.equal(await galaxy.getByRole('region', { name: 'Sources', exact: true }).isVisible(), true);
+    await galaxy.getByRole('radio', { name: /^Systems/ }).check();
     await page.screenshot({ path: `${output}/milky-way-dpr-${dpr}.png` });
     results.push({ dpr, handoffError, initialOffset, centered, overviewUrl, passed: true });
     console.log(`OVERVIEW PASS DPR ${dpr}: preserved camera, zoom-only centering, continuous Sun wheel-out, saved overview, Sun-only wheel-in, hysteresis, selection and Back`);
