@@ -41,5 +41,10 @@
   "fieldStars": {
     "path": "src/objects/helix/source/stellar-field.json",
     "sha256": "5dca1a7a9abf3aab176e5c6677134ee647cc2c5e0278b3234cc76d43c5fc8dd2"
-  }
+  },
+  "compactInputs": {
+    "path": "src/objects/helix/source/bake-inputs.json.gz",
+    "sha256": "bdb226760a292ea0295cef580804f2d6db466c202ac604621d66c75c0e25fac3"
+  },
+  "compactMethod": "compiler"
 }

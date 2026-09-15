@@ -6,10 +6,11 @@ import test from 'node:test';
 import { deliveryReady } from './delivery.js';
 import { hash, writeAtomic } from './io.js';
 
-test('app preparation rebuilds absent textures and rejects changed textures or reference metadata', async () => {
+for (const texture of ['prepared/test/slices/x/00.webp', 'prepared/test/atlases/x.webp']) {
+test(`app preparation rebuilds missing ${texture} and rejects changed textures or reference metadata`, async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-delivery-'));
   try {
-    const texture = 'prepared/test/slices/x/00.webp', metadata = 'object.json';
+    const metadata = 'object.json';
     const manifest = JSON.stringify({ schema: 'cssearth-volume-lens-manifest@1', outputs: {
       [texture]: { sha256: hash('pixels'), bytes: 6 }, [metadata]: { sha256: hash('{}'), bytes: 2 },
     } });
@@ -26,3 +27,4 @@ test('app preparation rebuilds absent textures and rejects changed textures or r
     await assert.rejects(deliveryReady(root, delivery), /Input hash differs/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+}

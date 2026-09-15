@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "golevka",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2ae47d562adfe6637d48d886aaf228aa42c17c368c952008d4f870a87b7d3476"
+    "sha256": "7293b18036ea597ec35c10dcafff5cae90f99d74bb154e5c0db1ff13c9741956"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8284fdc5e7361c150c285a64d66913238887c0990253d0e656eeadbd6dfcfb60",
+      "sha256": "b1278e83b4b9d50811f7019ef31a8fe9e9f103d698e6a69fc72f90373c0d6cb3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,7 +203,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
+              "notes": "The shared neutral gray marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -324,7 +324,7 @@
       "sha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
       "bytes": 123654,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -349,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8284fdc5e7361c150c285a64d66913238887c0990253d0e656eeadbd6dfcfb60",
-      "bytes": 8067,
+      "sha256": "b1278e83b4b9d50811f7019ef31a8fe9e9f103d698e6a69fc72f90373c0d6cb3",
+      "bytes": 8173,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -384,19 +384,19 @@
           "url": "/scenes/golevka/golevka-elevation-thumbnail.webp",
           "bytes": 7048,
           "sha256": "265c96dbfba1fb178487c2358684b7b74e682941697b0d126ad6f5938d25fc56",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-surface@2x.webp",
           "bytes": 441626,
           "sha256": "9567bd03765a15f29328386a53f85c202da5701414d64c6c98c9a49333bc0a01",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -432,15 +432,15 @@
       "outputs": [
         {
           "url": "/scenes/golevka/golevka-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/golevka/golevka-shape-surface@2x.webp",
-          "bytes": 232630,
-          "sha256": "5ca924645c7bc657105e19f429b96a8e5ff8ec94755b14158bf663636b1e7ff5",
-          "verification": "bytes-verified"
+          "bytes": 76230,
+          "sha256": "5f3a2f559cedbce49d66914c562b0858811f49cbb0712fc45c0f9edb7a1fb093",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

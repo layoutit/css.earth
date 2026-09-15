@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "virginia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a6cb8efeb8a60d644210d15f88a4c4e54ecf15c077e1eca5c7155c9bc2f0dbdd"
+    "sha256": "128b8916458a90e3ab1440905ebec8cb48b9f79d4d814c3ec37d6be7d7607bef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1475b49d6438e4ccb1001206b6cd07e32be412f4f461a923a3c6f20b4685fd37",
+      "sha256": "d77e2098383fdcfe38a5d1b71ca8a9b0dc0d6598a7b884ad0afb0956e9f0a5e4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 84.37 ± 0.82 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "notes": "Thermal diameter 84.37 ± 0.82 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "8b1dc50c7f205bb4935eaab846f570620cca1443dfe383c2b6706ecc7bcf1a42",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "1475b49d6438e4ccb1001206b6cd07e32be412f4f461a923a3c6f20b4685fd37",
+      "sha256": "d77e2098383fdcfe38a5d1b71ca8a9b0dc0d6598a7b884ad0afb0956e9f0a5e4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8633,
+      "bytes": 8731,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/virginia/virginia-elevation-thumbnail.webp",
           "bytes": 5932,
           "sha256": "039c06e3437535e63bd0aefe020e0a17a640d8780d60f4cc8ba06e671c4f9f4b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/virginia/virginia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/virginia/virginia-elevation-surface@2x.webp",
           "bytes": 312242,
           "sha256": "7043fb3428761fc32c8c93408ec18e980db54bff84c6ea88100a9e31396e7039",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/virginia/virginia-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/virginia/virginia-shape-surface@2x.webp",
-          "bytes": 222090,
-          "sha256": "cec6537dd73e3a0650ef3919875a4ae4ba3348b693260f76485fd36e3d498ae8",
-          "verification": "bytes-verified"
+          "bytes": 62246,
+          "sha256": "adf25d1ea47bbdf668ff952453b4b992e64e0d8564854e4cbd0937f7db50027f",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

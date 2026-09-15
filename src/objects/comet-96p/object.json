@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f06c4e3110e0b40a319ea847d57406a45e2d6f5c157ff0266ccba320231ae069"
+          "sha256": "df3ed0040b98bbababc07a50810aab747ea6428f0f9f0d8eaa23b3475cb95de3"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "32fdd580ce039445d666ae45abf99479b82aafed70f2ca52cb1de31475923b54"
+          "sha256": "8104430766c9a3b3cc561edb8045ad54216382632bc98595542c7e05462dc55b"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "41f68164aa33852e9483561614fce51776139fcb7d626a4208425c92f6e22ae5"
+        "sha256": "234e85b015458201b72ce8c1fc92bf096fe2f1d736602e0cad0b018a3bcdf51a"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 2359.8465506092007
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Machholz 1",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5e50a4601e31d02f287be8c82bd8b3541a730d67990dd4abd7e585041554e7bb"
+    "sha256": "76e0e4249130a916f6d92ab9aadb530c21314066bf4b00f4bc6fad0de463a15f"
   }
 }

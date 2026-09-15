@@ -1,5 +1,7 @@
 # (272) Antonia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **637**, version **2013-02-11**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 637, version 2013-02-11.
 
-Convex light-curve reconstruction with approximate thermal size: 23.89 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with approximate thermal size: 23.89 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ The archive lists one solution, without establishing local shape accuracy. The r
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. The survey found no alternative archive solution for this target.
+The release supplies no registered surface imagery; neutral gray marks that gap. The survey found no alternative archive solution for this target.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

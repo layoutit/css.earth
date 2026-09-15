@@ -1,4 +1,7 @@
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
+import { replayCompactCompiler } from './compact-compiler.js';
+import { replayCompactSymmetry } from './compact-symmetry.js';
+import { replayCompactSampled } from './compact-sampled.js';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
@@ -11,6 +14,7 @@ import { prepareNebulaCatalogueField } from './catalogue-field.js';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { validatePreparedCssVolume } from '../../../../src/renderers/css/volume/validation.js';
 import { validatePreparedVolumeLenses } from '../../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import { prepareVolumeAtlases } from '../../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../../src/renderers/css/preparation/volume-impostors.js';
 import type { PreparedVolumeLens } from '../../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.js';
@@ -22,6 +26,7 @@ const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v
 // Prepared pixels and their contract must invalidate a previously installed handoff together.
 const implementationFiles = [
   'labs/nebula/src/delivery/nebula-objects.ts',
+  'src/preparation/volume/atlas.ts',
   'labs/nebula/src/delivery/nebula-frame.ts',
   'labs/nebula/src/reconstruction/compiler/stars.ts',
   'src/renderers/css/preparation/volume-order.ts',
@@ -51,11 +56,14 @@ export function readNebulaDelivery(v: unknown) {
       !['compiler','axial-symmetry'].includes(text(r.method)) || !Array.isArray(center) || center.length !== 2 || !Array.isArray(r.inputPins)) throw new TypeError('Invalid nebula delivery recipe.');
   if (!(finite(r.framingRadiusUnits)>0) || !/^https:\/\//.test(text(r.sourceUrl))) throw new TypeError('Invalid nebula framing/source URL.');
   if (r.compositeRecipe !== undefined && r.method !== 'compiler') throw new TypeError('Optical composite requires compiler delivery.');
+  if (r.compactInputs !== undefined && !['compiler','sampled','symmetry'].includes(text(r.compactMethod))) throw new TypeError('Invalid compact bake method.');
+  if (r.compactInputs !== undefined && ((r.compactMethod === 'symmetry') !== (r.method === 'axial-symmetry'))) throw new TypeError('Compact method and delivery method differ.');
   const sky: NebulaSkyFrame = { centerIcrsDegrees: [finite(center[0]),finite(center[1])], distancePc: finite(frame.distancePc),
     imageRotationDegrees: finite(frame.imageRotationDegrees), arcsecPerUnit: finite(frame.arcsecPerUnit) };
   return { id: text(r.id), method: text(r.method), request: pin(r.request), inputPins: r.inputPins.map(pin), sky,
     sourceUrl: text(r.sourceUrl), description: text(r.description), defaultLens: text(r.defaultLens),
     framingRadiusUnits: finite(r.framingRadiusUnits), acceptedLabResult: text(r.acceptedLabResult),
+    ...(r.compactInputs === undefined ? {} : { compactInputs: pin(r.compactInputs), compactMethod: text(r.compactMethod) }),
     ...(r.compositeRecipe === undefined ? {} : { compositeRecipe: pin(r.compositeRecipe) }),
     ...(r.fieldStars === undefined ? {} : { fieldStars: pin(r.fieldStars) }),
     ...(r.symmetryDirectory === undefined ? {} : { symmetryDirectory: text(r.symmetryDirectory) }) };
@@ -79,7 +87,7 @@ async function installed(directory: string, recipeSha256: string, implementation
     return true;
   } catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }
 }
-export async function prepareNebulaObject(root: string, directory: string, ifMissing = false) {
+export async function prepareNebulaObject(root: string, directory: string, ifMissing = false, research = false) {
   const recipeBytes = await readFile(local(directory,'source/delivery.json')), recipe = readNebulaDelivery(JSON.parse(recipeBytes.toString()));
   const catalogue = parsePreparedNebulaCatalog(await read(directory,'source/nebula.json'));
   if (catalogue.objects.length !== 1 || catalogue.objects[0]!.id !== recipe.id ||
@@ -87,8 +95,12 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       catalogue.objects[0]!.skyPosition.raDeg !== recipe.sky.centerIcrsDegrees[0] ||
       catalogue.objects[0]!.skyPosition.decDeg !== recipe.sky.centerIcrsDegrees[1]) throw new TypeError('Nebula catalogue and delivery identity/sky frame differ.');
   for (const input of [recipe.request,...recipe.inputPins,...(recipe.compositeRecipe ? [recipe.compositeRecipe] : []),
-    ...(recipe.fieldStars ? [recipe.fieldStars] : [])]) await pinned(root,input);
-  const owners = [...implementationFiles, ...(recipe.method === 'compiler' ? [
+    ...(recipe.fieldStars ? [recipe.fieldStars] : []), ...(recipe.compactInputs ? [recipe.compactInputs] : [])]) await pinned(root,input);
+  const owners = [...implementationFiles, ...(recipe.compactInputs ? [
+    'labs/nebula/src/delivery/compact-compiler.ts',
+    'labs/nebula/src/delivery/compact-sampled.ts',
+    'labs/nebula/src/delivery/compact-symmetry.ts',
+  ] : []), ...(recipe.method === 'compiler' ? [
     'labs/nebula/src/reconstruction/sampled-prior/compile.ts',
   ] : []), ...(recipe.fieldStars ? ['labs/nebula/src/delivery/catalogue-field.ts',
     'src/renderers/css/navigation/world-camera-math.ts',
@@ -114,11 +126,14 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         await put(local(staging,`${id}/${resource.path}`),bytes);
       }
       const brightness: PreparedVolumeLens['brightness'] = {overall:1,x:1,y:1,z:1};
-      const prepared = await prepareVolumeImpostors({
+      const projected = await prepareVolumeImpostors({
         volume:embedNebulaVolume(volume,frame,`${recipe.id}-${id}`,id),brightness,prefix:`${id}/impostors`,
         readResource:path=>readFile(local(staging,path)),
         writeResource:(path,bytes)=>put(local(staging,path),bytes),
       });
+      const prepared = await prepareVolumeAtlases({volume:projected,prefix:`${id}/atlases`,
+        readResource:path=>readFile(local(staging,path)),writeResource:(path,bytes)=>put(local(staging,path),bytes)});
+      for (const resource of volume.resources) await rm(local(staging,`${id}/${resource.path}`));
       if (recipe.fieldStars) {
         const field = await prepareNebulaCatalogueField(root,recipe.fieldStars,frame,stars.points,anchorPoints);
         if (field.receipt.id !== recipe.id) throw new TypeError('Catalogue field and nebula delivery identities differ.');
@@ -128,15 +143,28 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         volume:prepared,stars,brightness });
     };
     if (recipe.method === 'compiler') {
-      const request = readCompilerRequest(JSON.parse((await pinned(root,recipe.request)).toString()));
-      let lastMessage = '', lastProgress = 0;
-      let result = readCompilerResult(await compileNebula(root,request,new AbortController().signal,(message,fraction) => {
+      const progress = (message: string, fraction?: number) => {
         if (message !== lastMessage || Date.now()-lastProgress > 5000) {
           console.log(`${recipe.id} ${Math.round((fraction??0)*100)}% ${message}`); lastMessage=message; lastProgress=Date.now();
         }
-      }));
-      if (recipe.compositeRecipe) result = await prepareOpticalCompositeForResult(root, recipe.compositeRecipe.path, result,
-        { progress: message => console.log(`${recipe.id} ${message}`) });
+      };
+      let lastMessage = '', lastProgress = 0;
+      const prepareResult = async () => {
+        if (recipe.compactInputs && !research) {
+          const output = resolve(staging, 'compact');
+          // Replay selects a saved model method, never an object identity.
+          return recipe.compactMethod === 'sampled'
+            ? replayCompactSampled(root, recipe.compactInputs, relative(root, output))
+            : replayCompactCompiler(root, recipe.compactInputs, relative(root, output), event => progress(event.message, event.completed / event.total));
+        }
+        const request = readCompilerRequest(JSON.parse((await pinned(root, recipe.request)).toString()));
+        let result = readCompilerResult(await compileNebula(root, request, new AbortController().signal, progress));
+        if (recipe.compositeRecipe) result = await prepareOpticalCompositeForResult(root, recipe.compositeRecipe.path, result,
+          { progress: message => console.log(`${recipe.id} ${message}`) });
+        return result;
+      };
+      const result = await prepareResult();
+      if ('objectId' in result && result.objectId !== recipe.id) throw new TypeError('Compact input belongs to another object.');
       sourceResult = result.id;
       const frame = embedNebulaFrame(result.scene.frame,recipe.sky,result.scene.coordinates.localOriginArcsec);
       const anchorPoints = result.scene.stars.map(star => ({id:star.id,positionUnits:reflectNebulaPoint(star.positionUnits),
@@ -152,6 +180,10 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         });
         await add(lens.id,lens.label,source.page,lens.volume.path,lens.volume.sha256,frame,{frame,points},anchorPoints);
       }
+    } else if (recipe.compactInputs && !research) {
+      const result = await replayCompactSymmetry(root, recipe.compactInputs, relative(root, resolve(staging, 'compact')));
+      const frame = embedNebulaFrame(result.frame, recipe.sky);
+      await add(recipe.defaultLens, 'Hubble · optical', recipe.sourceUrl, result.pin.path, result.pin.sha256, frame, { frame, points: [] });
     } else {
       if (!recipe.symmetryDirectory) throw new TypeError('Missing symmetry output owner.');
       const target = local(root,recipe.symmetryDirectory);
@@ -170,6 +202,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       // The accepted symmetry baseline has no measured point catalogue; do not fabricate one.
       await add(recipe.defaultLens,'Hubble · optical',recipe.sourceUrl,`${recipe.symmetryDirectory}/${preparedPin.path}`,preparedPin.sha256,frame,{frame,points:[]});
     }
+    await rm(resolve(staging, 'compact'), { recursive: true, force: true });
     const data = validatePreparedVolumeLenses({schema:'cssearth-volume-lenses@1',id:recipe.id,defaultLens:recipe.defaultLens,
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:lenses[0]!.stars.points.length>0,lenses});
     const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-lens-bank',format:'cssearth-volume-lenses@1',data});

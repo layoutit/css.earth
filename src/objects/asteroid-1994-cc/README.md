@@ -1,5 +1,7 @@
 # 1994 CC Alpha
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 1994 CC Alpha is the primary of a triple near-Earth asteroid system.
 
 ## Sources

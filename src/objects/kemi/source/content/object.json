@@ -75,7 +75,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+        "notes": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Neutral gray marks unavailable imagery; pole ambiguity is retained in source notes. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

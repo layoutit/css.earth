@@ -4,6 +4,8 @@ import { OBJECT_CATEGORIES, matchesObjectCategory, objectCategoryCount } from '.
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeatureIndex, parseFeaturePin, matchFeatures, featureResult } from './feature-search.mts';
 import { renderDatasetResponse } from './dataset-response.mts';
+import { renderSourceLink } from './source-link.mts';
+import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
@@ -99,19 +101,19 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   if (focusCard) focusCard.hidden = searching;
   if (searching) requiredElement(document, '.planet-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
-  const galactic = searching && value.toLocaleLowerCase('en') === 'milky way';
-  browser.setAttribute('aria-label', galactic ? 'Milky Way' : 'Celestial objects');
+  browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
   const galaxy = browser.querySelector<HTMLElement>('[data-galactic-overview]');
   const system = browser.querySelector<HTMLElement>('[data-solar-system-results]');
-  if (galaxy) galaxy.hidden = !galactic;
-  if (system) system.hidden = galactic || !searching && !!focusCard;
-  if (searching && !galactic) {
+  if (galaxy) galaxy.hidden = true;
+  for (const card of browser.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) card.hidden = true;
+  if (system) system.hidden = !searching && !!focusCard;
+  if (searching) {
     const items = [...browser.querySelectorAll<HTMLElement>('.planet-object-item')];
     const labels = items.map(item => ({ ...objectSearchLabels(item), item }));
     const requestedCategory = url.searchParams.get('category');
     const category = OBJECT_CATEGORIES.some(([id]) => id === requestedCategory) ? requestedCategory! : undefined;
     const result = searchObjects(labels, value || 'all objects', category);
-    const selected = category ?? result.category;
+    const selected = !value && category ? category : result.classification ? result.category : 'all';
     const matches = new Set(result.matches.map(match => match.item));
     const classifications = result.matches.map(match => match.classification);
     for (const item of items) {
@@ -131,9 +133,8 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
       tab.setAttribute('aria-selected', String(tab.dataset.objectTab === selected));
       requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
     }
-    requiredElement(browser, '#object-category-results').setAttribute('aria-labelledby', `object-tab-${selected}`);
-    const heading = browser.querySelector<HTMLElement>('[data-solar-system-results] > .planet-selected-panel');
-    if (heading) heading.hidden = selected === 'nebula';
+    presentSearchResults(browser, true, selected);
+    const overviewCount = presentOverviewResults(browser, value);
     for (const pill of document.querySelectorAll<HTMLElement>('.planet-search-category')) {
       pill.setAttribute('aria-pressed', String(pill.dataset.searchClassification === result.classification));
     }
@@ -145,16 +146,20 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
         if (pin) {
           const index = parseFeatureIndex(await loadIndex(parseSearchPin(pin), url.origin, fetcher), pin);
           const results = matchFeatures(index, result.detailQuery, objectId).map(feature => featureResult(feature, index, objectId));
-          publishResults(featureRoot, results, results.length ? 'Named features' : 'No matching named features.');
-          detailCount = results.length || 1;
+          publishResults(featureRoot, results, '');
+          presentFeatureResults(featureRoot, results.length);
+          detailCount = results.length;
         }
       } catch {
         publishResults(featureRoot, [], 'Feature names could not load. Submit your search to retry.');
+        presentFeatureResults(featureRoot, 0, 'Feature names could not load. Submit your search to retry.');
         detailCount = 1;
       }
     }
-    requiredElement<HTMLElement>(browser, '.planet-object-empty').hidden = items.some(item => !item.hidden) || detailCount > 0;
+    requiredElement<HTMLElement>(browser, '.planet-object-empty').hidden = items.some(item => !item.hidden) || detailCount + overviewCount > 0;
   }
+  browser.dataset.sourceFocus = focusCard?.dataset.preparedFocusId ?? '';
+  renderSourceLink(document, focusCard ? `focus:${focusCard.dataset.preparedFocusId}` : `overview:${url.searchParams.get('overview') ?? ''}`);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "geographos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d378d261a0821ede621f3b9f6a7ecfb2884f04ff1e3b24c2ce2b6f33ab8c252b"
+    "sha256": "126d89cbb8be63fbe7580ef79e7837a51c97b061df5b2406dd52a846c17e7bfc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "45adfa5f3109abd26cdbd08bcaafca24e21c0a4c933fb12ea10fb1d8b81c2822",
+      "sha256": "cddc2ee21df2ee59d90a13b966d064bb46966220ace108088a85e07f8cb01812",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,7 +203,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+              "notes": "The shared neutral gray marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -324,7 +324,7 @@
       "sha256": "fea2d6afa17abbcf0f5db3f85223bf6bd9f295a177c98f62389feb7fdbcb28d5",
       "bytes": 148206,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -349,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "45adfa5f3109abd26cdbd08bcaafca24e21c0a4c933fb12ea10fb1d8b81c2822",
-      "bytes": 11598,
+      "sha256": "cddc2ee21df2ee59d90a13b966d064bb46966220ace108088a85e07f8cb01812",
+      "bytes": 11704,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -384,19 +384,19 @@
           "url": "/scenes/geographos/geographos-elevation-thumbnail.webp",
           "bytes": 5538,
           "sha256": "fa8528b828074b1bfa80cba6409a9144df58890eb897b9f4856471cce76e73f6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/geographos/geographos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/geographos/geographos-elevation-surface@2x.webp",
           "bytes": 347490,
           "sha256": "87c324b72c0d83e32ae94262d399a94265307c7c3e48f92f152862247535d547",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -432,15 +432,15 @@
       "outputs": [
         {
           "url": "/scenes/geographos/geographos-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/geographos/geographos-shape-surface@2x.webp",
-          "bytes": 206066,
-          "sha256": "a6cf5206de1259e7596cd56e3ef600ffc07f708fddf14d8383a24c965b7b98fe",
-          "verification": "bytes-verified"
+          "bytes": 67132,
+          "sha256": "01e45a635579ddbae028972379788c3867a9687513fec17a7ccafc2542f3ad6d",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

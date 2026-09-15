@@ -1,5 +1,7 @@
 # Enceladus
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 - The following two products are Schenk and McKinnon (2024), published in the USGS/PDS archive on 2024-08-12.
@@ -113,7 +115,7 @@ NAIF states that images were reprocessed after errors in the original model. The
 
 A pinned SpiceyPy 6.0.3/CSPICE N0067 acquisition operator extracts native kilometre coordinates. Exact duplicates are welded, with every original vertex-to-output mapping preserved. No epsilon weld, rotation, scale, smoothing or synthetic terrain is introduced. Raw DSK counts are 396,294 vertices and 786,432 plates. The actual converter produced 393,218 vertices: 3,076 exact duplicates were welded, with exact reconstruction of all original coordinates through the retained mapping. Target 602, frame 10040 (IAU_ENCELADUS), surface 20122, data type 2, class 1. The retained PCK/FK document the recommended body frame. Geometry is static; kernel 1950–2050 coverage is not an observation date or temporal terrain model.
 
-Preparation requests 1,600 faces and a 1,000 m simplifier error ceiling. This is a requested approximation budget, not achieved accuracy. Original DSK radius extent is 247.68912735585084–257.59813481361255 km. The Shape view’s neutral grid distinguishes the geometry from observed imagery. The global family’s nominal 500 m resolution is not uniform detail in the selected Q256 model or the prepared mesh.
+Preparation requests 1,600 faces and a 1,000 m simplifier error ceiling. This is a requested approximation budget, not achieved accuracy. Original DSK radius extent is 247.68912735585084–257.59813481361255 km. The Shape view’s neutral gray distinguishes the geometry from observed imagery. The global family’s nominal 500 m resolution is not uniform detail in the selected Q256 model or the prepared mesh.
 
 The existing Schenk elevation grid is retained: kilometres above a reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km, not radius or full diameters. It must not be added to a sphere or to the JPL DSK.
 

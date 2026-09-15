@@ -13,6 +13,19 @@ They combine observations across one rotation, not one simultaneous view.
 | Corona | SDO AIA 171 Å CR2311 FITS | Logarithmic intensity in false color. |
 | Outside the disk | AIA browse images, 27 May 2026 | Separate stationary images behind the matching globe view; not rotating global maps. |
 
+### Solar System overview
+
+The Solar System overview is hosted by the Sun scene. Its credits also include
+the planets, moons, asteroids and comets in the [shared world](source/presentation/solar-system.json),
+not just the solar maps above. Each body keeps its imagery, shape, measurements
+and full acknowledgments in its [own object package](../).
+
+The [shared orbital preparation](../../../tools/prepare-solar-geometry.mts)
+combines analytical models with retained Horizons states. These prepared
+positions and orbit paths use the displayed scene epoch; they are not live
+ephemerides. The footer's provider list combines the existing prepared source
+credits of the bodies in this overview.
+
 ## Evidence
 
 Lane change (this PR): the static-surface lane was retired; the Sun now prepares

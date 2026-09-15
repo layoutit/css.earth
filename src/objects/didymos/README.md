@@ -1,5 +1,7 @@
 # Didymos
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 | View or property | Source and interpretation |
@@ -103,7 +105,7 @@ The current DART s547 Horizons primary-body record (`920065803`), updated 2026-0
 
 Daly, T., Barnouin, O., Ernst, C., Nair, H., Espiritu, R., and Waller, D. (2023), *DART Shapemodel Archive Bundle*, NASA PDS, DOI [10.26007/96fn-p578](https://doi.org/10.26007/96fn-p578). The Didymos v003 collection has DOI [10.26007/bm57-x327](https://doi.org/10.26007/bm57-x327). [Browse the released collection](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/).
 
-- **Shape** uses the shared no-imagery grid over the released terrain. It is a scientific shape model without observed surface imagery, not a photograph or measured surface albedo. Shadows default off; prepared directional lighting remains available through the control.
+- **Shape** uses the shared neutral-gray material over the released terrain. It is a scientific shape model without observed surface imagery, not a photograph or measured surface albedo. Shadows default off; prepared directional lighting remains available through the control.
 - **Relative albedo** displays the original v003 SPC facet field as linear grayscale from 0.75 to 1.4. This is modeled relative surface brightness, not absolute geometric albedo or a photograph. Only facets with positive finite sigma are eligible: 25,686 of 49,152 source faces, representing 58.2072% of the source mesh area. Sigma-zero values are withheld even if their nominal albedo is 1; the ordinary grid marks those gaps. Shadows stays off by default.
 - **Elevation** is source radius minus a 365 m reference sphere, in meters (−120 to +90 m display scale), with prepared cartographic relief. It includes whole-body flattening and the equatorial ridge; it is not height above a gravitational equipotential.
 

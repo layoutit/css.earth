@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+        "notes": "The shared neutral gray marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "parysatis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49bc30c36fe2aa52404f168df6b0ced098a86500bd3f56674954d0d4b7006335"
+    "sha256": "d3097d439a6d737a4b6c0cbe82a5c51876fcf0c18f6d036259cef7ceb4a84fe7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a73ba811ba906066b8ca7e31eb51d09c8e75aee33ddf560237e9678a5ed2c72e",
+      "sha256": "5ee11ed639ab235d8e340289aaf58735201405a99dd26f1bd41535e420975850",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 44.749 ± 0.37 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "notes": "Thermal diameter 44.749 ± 0.37 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "5d01fc5141682daead93573aef676e56dfd5cdee4f9608b15a0125d7887bf9bf",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a73ba811ba906066b8ca7e31eb51d09c8e75aee33ddf560237e9678a5ed2c72e",
+      "sha256": "5ee11ed639ab235d8e340289aaf58735201405a99dd26f1bd41535e420975850",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10200,
+      "bytes": 10298,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/parysatis/parysatis-elevation-thumbnail.webp",
           "bytes": 6486,
           "sha256": "5ae64e2143f53a4f1ab907f95fce253ad41e50ad373422ceab1a2acb168ba32c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/parysatis/parysatis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/parysatis/parysatis-elevation-surface@2x.webp",
           "bytes": 318612,
           "sha256": "99625784a9544dd561444bb7d536629fa142bbdbafcb851c04d45645c2266960",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/parysatis/parysatis-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/parysatis/parysatis-shape-surface@2x.webp",
-          "bytes": 245212,
-          "sha256": "de8b9fd6be23d6506800d3c4623bc9395805483b7f01d6cb2cab282735e145a6",
-          "verification": "bytes-verified"
+          "bytes": 62898,
+          "sha256": "9898d6bba528e033e1db20281b82918384f75687ade56923e4458d94f9e806bd",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

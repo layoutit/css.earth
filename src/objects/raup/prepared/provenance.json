@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "raup",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8285447f8fc5bb649f2d033b0efe2e32120e50f2dc141d714fa47211bd7e105d"
+    "sha256": "0e1fb9bf2c73f3a9eb267f83e367fc9454c46bbb4a4e90c7e97a8006fdd35e7c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "134d657d23d0937484dba6c8c23f3744043ff9b75952641c866d4b814dd7e841",
+      "sha256": "df64a736754b5132e5bb855cc8d05784e9645d255391f4f0488b46f942c38e4c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 4.839 ± 0.167 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. Slow spin and short-wave thermal data leave scale sensitive to viewing aspect; rotational phase is illustrative.",
+              "notes": "Thermal diameter 4.839 ± 0.167 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. Slow spin and short-wave thermal data leave scale sensitive to viewing aspect; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "ffae22baf0155a59ff90c8363569c60c3261fce268cd2871126416261159367b",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "134d657d23d0937484dba6c8c23f3744043ff9b75952641c866d4b814dd7e841",
+      "sha256": "df64a736754b5132e5bb855cc8d05784e9645d255391f4f0488b46f942c38e4c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7583,
+      "bytes": 7681,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/raup/raup-elevation-thumbnail.webp",
           "bytes": 5086,
           "sha256": "f18dedd07f2f346786deaaa6e66aafcdaf84f5e40a5392f96a48c86801d090c5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/raup/raup-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/raup/raup-elevation-surface@2x.webp",
           "bytes": 319528,
           "sha256": "76325529b70bb9d62ee619eb50553c7e1897e864d2c2406e0044c8dd9af584af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/raup/raup-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/raup/raup-shape-surface@2x.webp",
-          "bytes": 177216,
-          "sha256": "4d565f01521523de25d09ea6da09409f6221e3dc6f217d14899dfd1fd9e88063",
-          "verification": "bytes-verified"
+          "bytes": 76568,
+          "sha256": "920a4f7f31d17158919b475299409d063dff0e5dd69f87c11e09b137e26c0b16",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

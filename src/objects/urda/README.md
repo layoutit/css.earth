@@ -1,5 +1,7 @@
 # (167) Urda
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **172**, version **2011-03-28**. DAMIT, Astronomical Institute of Charles University; Slivan et al. (2003), B. D. Warner (2008), Ďurech et al. (2011); model 172, version 2011-03-28.
 
-Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 44 ±15 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 44 ±15 km. An alternative pole remains possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -21,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
+The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral gray must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
 
 Select archive model 172 (249,-68), explicitly marked preferred. Ďurech et al. (2011), discussion and Fig.34, says it fits better but the rival cannot be rejected and size is not very accurate; one negative chord was visual.
 
@@ -29,7 +31,7 @@ Retain the direct occultation volume-equivalent 44 ±15 km estimate. The later H
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 171, pole ['107', '-69'], [Model 171](https://damit.cuni.cz/projects/damit/asteroid_models/view/171)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 171, pole ['107', '-69'], [Model 171](https://damit.cuni.cz/projects/damit/asteroid_models/view/171)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

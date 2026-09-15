@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis-9",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f1649483f8385df23ad6e40f0b62590b7e83e4591e6bb3c74379db93c866cff0"
+    "sha256": "b882c9c968bfa5f766fe4904cf997f33e43928a7af63ba5ccc1114c5726305ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b2247efcf8c8dda8ee18f2171483bd22c56e6da93a3d0140f30ff345d96d2e16",
+      "sha256": "6ae3d67b0b8e77f51b2687cca2e5ab320698ea8af1bf9608a3e142c0afd42db6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,7 +199,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "VLT/SPHERE shape model",
+              "notes": "VLT/SPHERE shape model Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -320,7 +320,7 @@
       "sha256": "e53e042ecbcf006f31aa24746026265c2a99f43b034fd0156a7e6f0cad34e875",
       "bytes": 355579,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -348,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b2247efcf8c8dda8ee18f2171483bd22c56e6da93a3d0140f30ff345d96d2e16",
-      "bytes": 7348,
+      "sha256": "6ae3d67b0b8e77f51b2687cca2e5ab320698ea8af1bf9608a3e142c0afd42db6",
+      "bytes": 7446,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +383,19 @@
           "url": "/scenes/metis-9/metis-9-elevation-thumbnail.webp",
           "bytes": 5514,
           "sha256": "1ff8995ddebaadff81ef88bc2886dc766877d4d459e96dcbfb76c3441c140a72",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-surface@2x.webp",
           "bytes": 344396,
           "sha256": "772efcb054ff9aee4ff72bb1fef8f893f611ab056b614b1555c3d23d0460cd9c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -431,15 +431,15 @@
       "outputs": [
         {
           "url": "/scenes/metis-9/metis-9-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
-          "bytes": 217836,
-          "sha256": "9606a5032611eba4feeda5d02789e031053821961143cb9c8a05b8bc6daf4950",
-          "verification": "bytes-verified"
+          "bytes": 64368,
+          "sha256": "94badb4790afcb7ec3f04d29856261eecaa5ccc608b4ee6b5af8f031ec6e7dfc",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

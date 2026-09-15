@@ -1,3 +1,4 @@
+import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
 import galaxyFieldDescriptor from '../src/objects/nearby-universe/object.json' with { type: 'json' };
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
@@ -13,19 +14,26 @@ import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { SCENE_OBJECTS } from './objects.mts';
-import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
+import { discoveryVisibility } from './object-discovery.mts';
+import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
+import { minorMoonOrbitIds, suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
+import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const hiddenOrbitIds = SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
+const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
+const hiddenOrbitIds = [
+  ...SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id),
+  ...minorMoonIds,
+];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, (CONTEXT_ANNOTATION_PRIORITY as Readonly<Partial<Record<typeof object.classification, number>>>)[object.classification] ?? 0]));
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.id)]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -114,6 +122,7 @@ export function createApplicationWorldContext() {
       const prepared = await loadApplicationUniverse();
       if (signal?.aborted) throw signal.reason;
       const resources = prepareObjectResources(prepared.assets, { signal });
+      let releaseOcclusion = () => {};
       let pendingLayer: ReturnType<typeof prepared.mount> | null = null;
       let pendingPlanner: ReturnType<typeof prepared.createFramePlanner> | null = null;
       try {
@@ -125,15 +134,35 @@ export function createApplicationWorldContext() {
         const presentationHost = stage.closest<HTMLElement>('.planet-world-stage') ?? stage;
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
+        const occlusion = labelOcclusionFor(stage.ownerDocument);
+        const updateOcclusion = () => layer.setLabelBlockers(occlusion.read());
+        updateOcclusion();
+        releaseOcclusion = occlusion.subscribe(updateOcclusion);
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: [...prepared.catalogs.galaxies.sources, ...prepared.catalogs.clusters.sources, ...prepared.catalogs.nebulae.sources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
+        const restoreMoonOrbitPaint = suppressMinorMoonOrbitPaint(presentationHost, minorMoonIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
+        const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
+        let selectedObjectId = applicationContext.focus.id, asteroidOrbitsEnabled = false;
+        let illustrationModelsEnabled = false, asteroidBodiesEnabled = false, asteroidLabelsEnabled = false;
+        let highlightedClassification: string | null = null;
+        const updateDiscoveryVisibility = () => {
+          const { hiddenBodies, hiddenLabels, highlightedBodies } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
+            asteroids: asteroidBodiesEnabled, asteroidLabels: asteroidLabelsEnabled, highlighted: highlightedClassification });
+          layer.setHiddenBodies(hiddenBodies);
+          layer.setHiddenLabels(hiddenLabels);
+          layer.setHighlighted(highlightedBodies);
+          minimap.setHiddenBodies(hiddenBodies);
+          if (publication) minimap.publish(publication.world, publication.viewport);
+        };
+        const updateOrbitVisibility = () => layer.setHiddenOrbits(asteroidOrbitsEnabled ? hiddenOrbitIds
+          : [...hiddenOrbitIds, ...asteroidIds.filter(id => id !== selectedObjectId)]);
         let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
         let stagedFrame: {world: WorldCameraPose; viewport: WorldCameraViewport; frame: Awaited<ReturnType<typeof framePlanner.plan>>; snapshot: ReturnType<typeof layer.captureFrame>; consumed: boolean} | null = null;
         const publish = (world: WorldCameraPose, viewport: WorldCameraViewport) => {
@@ -152,6 +181,7 @@ export function createApplicationWorldContext() {
           }
           if (staged) staged.consumed = true;
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled }, frame);
+          moonLabels.publish(world, viewport, layer.labelBudget());
           // The decorative minimap follows a drag at half rate and holds still
           // through a fly-to; release and arrival publish it once.
           if (!flying && (!rotating || (minimapFrame++ & 1) === 0)) minimap.publish(world, viewport);
@@ -173,8 +203,7 @@ export function createApplicationWorldContext() {
         }, layer.opacityClock);
         refreshWorld = () => frameQueue.refresh();
         const inputSurface = stage.ownerDocument.querySelector<HTMLElement>('.planet-input-surface');
-        // Rotation holds every label and indicator still: they follow their bodies
-        // and are re-resolved once on release, never hidden and restored.
+        // Rotation suppresses hover/picking churn; label placement is continuous.
         const rotationChanged = (event: Event) => {
           const active = event instanceof CustomEvent && (event.detail as { active?: unknown } | null)?.active === true;
           layer.setRotationActive(active);
@@ -182,9 +211,10 @@ export function createApplicationWorldContext() {
           if (!active && publication) minimap.publish(publication.world, publication.viewport);
         };
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
-        // Asteroid rings are hidden by default. Each marker keeps a pick circle
-        // the ring's size, so asteroids stay clickable; hover still shows the ring.
-        layer.setHiddenIndicators(asteroidIds);
+        // Featured asteroids keep circles. Other asteroid markers retain their
+        // pick target when enabled, with the circle revealed on hover.
+        layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !object.discovery.featured).map(object => object.id));
+        updateDiscoveryVisibility();
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
@@ -220,29 +250,38 @@ export function createApplicationWorldContext() {
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             layer.selectObject(id, frame);
+            selectedObjectId = id;
+            updateOrbitVisibility();
             minimap.selectObject(frame);
+            moonLabels.selectObject(id);
+          },
+          setIllustrationModelsEnabled(enabled: boolean) {
+            if (destroyed) return;
+            illustrationModelsEnabled = enabled === true;
+            updateDiscoveryVisibility();
           },
           setAsteroidBodiesEnabled(enabled: boolean) {
             if (destroyed) return;
-            const hidden = enabled === true ? [] : asteroidIds;
-            layer.setHiddenBodies(hidden);
-            // The minimap shows the same asteroids, so the overview must agree
-            // with the main world. It only redraws on a fresh publication.
-            minimap.setHiddenBodies(hidden);
-            if (publication) minimap.publish(publication.world, publication.viewport);
+            asteroidBodiesEnabled = enabled === true;
+            updateDiscoveryVisibility();
           },
           setAsteroidOrbitsEnabled(enabled: boolean) {
-            if (!destroyed) layer.setHiddenOrbits(enabled === true ? hiddenOrbitIds : [...hiddenOrbitIds, ...asteroidIds]);
+            if (destroyed) return;
+            asteroidOrbitsEnabled = enabled === true;
+            updateOrbitVisibility();
           },
           setOrbitRenderer(renderer: OrbitRenderer) {
             if (!destroyed) layer.setOrbitRenderer(renderer);
           },
           setAsteroidLabelsEnabled(enabled: boolean) {
-            if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
+            if (destroyed) return;
+            asteroidLabelsEnabled = enabled === true;
+            updateDiscoveryVisibility();
           },
           setHighlightedClassification(classification: string | null) {
-            if (!destroyed) layer.setHighlighted(classification === null ? []
-              : SCENE_OBJECTS.filter(object => object.classification === classification).map(object => object.id));
+            if (destroyed) return;
+            highlightedClassification = classification;
+            updateDiscoveryVisibility();
           },
           setHeliosphereEnabled(enabled: boolean) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
@@ -258,15 +297,15 @@ export function createApplicationWorldContext() {
             if (publication && !refreshWorld()) publish(publication.world, publication.viewport);
           },
           destroy() {
-            destroyed = true; publication = null;
+            destroyed = true; publication = null; releaseOcclusion();
             inputSurface?.removeEventListener('objectrotationchange', rotationChanged);
             frameQueue.destroy(); framePlanner.destroy(); stagedFrame = null;
             if (diagnostics && Reflect.get(target, '__cssEarthUniverse') === diagnostics) Reflect.deleteProperty(target, '__cssEarthUniverse');
-            contextNavigation?.destroy(); minimap.destroy();
+            contextNavigation?.destroy(); minimap.destroy(); moonLabels.destroy(); restoreMoonOrbitPaint();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
-      } catch (error) { pendingPlanner?.destroy(); pendingLayer?.destroy(); resources.destroy(); throw error; }
+      } catch (error) { releaseOcclusion(); pendingPlanner?.destroy(); pendingLayer?.destroy(); resources.destroy(); throw error; }
     },
   };
 }

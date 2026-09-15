@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ajax",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f65a3f24165f94ad3f08df1357c311776f509f6634cc694aae429d6420a4676e"
+    "sha256": "ff1287923ee06d3817e360d7584671da271ef1be98bd5b2fa100dbd2ee14f35d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7640280361fd1c6186d252a1d31ccaae62bc0eb81fa530453d4e516a9a9123f4",
+      "sha256": "45fe200901d682ab4d1ae993aef75308198a56a5dff47aff8d8a2bf6609b1a95",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Convex light-curve reconstruction with approximate thermal size: 83.99 km effective diameter (fit ±1.279 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+              "notes": "Convex light-curve reconstruction with approximate thermal size: 83.99 km effective diameter (fit ±1.279 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; neutral gray marks unavailable imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -350,7 +350,7 @@
       "sha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -375,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7640280361fd1c6186d252a1d31ccaae62bc0eb81fa530453d4e516a9a9123f4",
-      "bytes": 8252,
+      "sha256": "45fe200901d682ab4d1ae993aef75308198a56a5dff47aff8d8a2bf6609b1a95",
+      "bytes": 8358,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/ajax/ajax-elevation-thumbnail.webp",
           "bytes": 5642,
           "sha256": "517fe3609d9ecd82acdf6b44e934cabdee199ebda9261665cb0853202a7862f2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ajax/ajax-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ajax/ajax-elevation-surface@2x.webp",
           "bytes": 294930,
           "sha256": "cf6d5b17e9168afe30cf4ceb241ee5dbfe0c7a319b3288f35d5455b2d6873c30",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -458,15 +458,15 @@
       "outputs": [
         {
           "url": "/scenes/ajax/ajax-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ajax/ajax-shape-surface@2x.webp",
-          "bytes": 233156,
-          "sha256": "277398cf348fd910e18e9093550ed26f14fd8106447de364e27474ee9a2118bf",
-          "verification": "bytes-verified"
+          "bytes": 67726,
+          "sha256": "c67c17966310e9e7fd111712348c764cccc6ecdd63d116aaa68ca2b1dd0531ab",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -523,8 +523,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

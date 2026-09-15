@@ -1,3 +1,6 @@
+import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill } from './prepared-interior-fill.mts';
+import { isRecord } from './source-values.mts';
+import type { PreparedInteriorDisc } from '../src/renderers/css/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '../src/renderers/css/rendering/prepared-presentation.ts';
 import type { PreparedFacingPlane } from '../src/renderers/css/rendering/prepared-facing.ts';
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.mts';
@@ -8,27 +11,34 @@ interface DepthResult {id: string; source: PresentationSource; compiled: Present
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { objectPageStyles } from '../site/object-page-contract.mts';
-import { chromium } from 'playwright';
+import { chromium, type Browser } from 'playwright';
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
 import { verifyDepthStyles } from './prepared-depth-styles.mts';
 
 /** Resolve authored motion and immutable leaf facing offline. Runtime receives
  * explicit animation handles and planes, never a live style discovery pass. */
-export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult }: {onDepthResult?: (result: DepthResult) => void} = {}) {
-  const definition = restoreDepthSource(input);
+export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult, interiorOnly = false, browser: suppliedBrowser }: {onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser} = {}) {
+  const definition = restoreDepthSource(withoutPreparedInteriorFill(input));
   const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, 'object.json'), 'utf8'));
+  const recipe = isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) ? descriptor.properties.recipe : null;
+  const shape = recipe && isRecord(recipe.shape) ? recipe.shape : null;
+  const ellipsoid = shape?.kind === 'sphere' || shape?.kind === 'ellipsoid';
+  const closed = ellipsoid && !definition.surfaceHit;
+  const ratios = shape?.kind === 'ellipsoid' && typeof shape.radiusKm === 'number'
+    ? [1, typeof shape.secondaryRadiusKm === 'number' ? shape.secondaryRadiusKm / shape.radiusKm : 1,
+      typeof shape.polarRadiusKm === 'number' ? shape.polarRadiusKm / shape.radiusKm : 1] : [1, 1, 1];
   const styles = await Promise.all(objectPageStyles(descriptor).map(path => readFile(resolve(root, path), 'utf8')));
-  const browser = await chromium.launch({ headless: true });
+  const browser = suppliedBrowser ?? await chromium.launch({ headless: true });
+  const page = await browser.newPage();
   try {
-    const page = await browser.newPage();
     // Prepared textures have no role in resolving authored motion. No asset
     // fetch is allowed during this CSS-only compilation step.
     await page.route('**/*', route => route.abort());
     await page.setContent('<main class="planet-stage example-stage"></main>');
     await page.addStyleTag({ content: styles.join('\n') });
     const browserDefinition: PresentationSource = { ...definition, id: input.id };
-    const prepared = await page.evaluate(definition => {
+    const prepared = await page.evaluate(({ definition, closed, ratios, inset, interiorOnly }) => {
       const stage = document.querySelector('main');
       if (!stage) throw new TypeError('Preparation stage is missing.');
       stage.dataset.objectId = definition.id;
@@ -168,6 +178,51 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         }
         return { target: source.target, leaves, frontSigns, bodyFromScene: Array.from(matrix.inverse().toFloat64Array()) };
       }
+      function interiorGeometry(): PreparedInteriorDisc | null {
+        if (!closed || ratios.some(value => !(value > 0) || !Number.isFinite(value))) return null;
+        const bodies = definition.tree.nodes.flatMap((node, id) =>
+          node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway') ? [id] : []);
+        if (!bodies.length) return null;
+        function frame(target: number): DOMMatrix | null {
+          let result = new DOMMatrix();
+          for (let cursor = target; cursor !== definition.tree.scene; cursor = definition.tree.nodes[cursor].parent) {
+            if (cursor < 0) return null;
+            const style = getComputedStyle(nodes[cursor]);
+            if (![style.left, style.top].every(value => value === 'auto' || parseFloat(value) === 0) ||
+                style.translate !== 'none' || style.rotate !== 'none' || style.scale !== 'none' || style.perspective !== 'none') return null;
+            const origin = style.transformOrigin.split(' ').map(parseFloat);
+            result = new DOMMatrix().translate(origin[0], origin[1], origin[2] ?? 0)
+              .multiply(new DOMMatrix(style.transform === 'none' ? undefined : style.transform))
+              .translate(-origin[0], -origin[1], -(origin[2] ?? 0)).multiply(result);
+          }
+          return result;
+        }
+        const sceneFromBody = frame(bodies[0]);
+        if (!sceneFromBody || !sceneFromBody.toFloat64Array().every(Number.isFinite)) return null;
+        const unitFromScene = new DOMMatrix().scale(1/ratios[0], 1/ratios[1], 1/ratios[2]).multiply(sceneFromBody.inverse());
+        let support = Infinity, count = 0;
+        for (const body of bodies) for (const leaf of nodes[body].querySelectorAll('*')) {
+          if (leaf.children.length) continue;
+          const target = index.get(leaf);
+          if (target === undefined) return null;
+          const sceneFromLeaf = frame(target);
+          if (!sceneFromLeaf) return null;
+          // z=0 in the leaf's frame. Inverse row 3 transports that plane to
+          // the normalized body frame, including projective leaf transforms.
+          const inverse = unitFromScene.multiply(sceneFromLeaf).inverse();
+          const distance = Math.abs(inverse.m43) / Math.hypot(inverse.m13, inverse.m23, inverse.m33);
+          if (!(distance > 0) || !Number.isFinite(distance)) return null;
+          support = Math.min(support, distance); count++;
+        }
+        if (count < 4) return null;
+        return { sceneFromBody: Array.from(sceneFromBody.toFloat64Array()),
+          radii: [ratios[0]*support, ratios[1]*support, ratios[2]*support], inset };
+      }
+      // Spherical/ellipsoidal bodies declare their axis ratios. Their axial
+      // spin preserves these bounds; irregular surface meshes are excluded.
+      for (const animation of stage.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 0; }
+      const interior = interiorGeometry();
+      if (interiorOnly) return { interior, surface: null, depthReason: null, motion: [], facing: [] };
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
@@ -227,15 +282,17 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       }
       // Recheck after every variant has declared its motion targets.
       const finalSurface = variableSurface ? null : depthSurface();
-      return { surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
-    }, browserDefinition);
-    const { surface, depthReason, ...bindings } = prepared;
+      return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
+    }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
+    const { interior, surface, depthReason, ...bindings } = prepared;
+    if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, resolve(root, "public"));
     const source = { ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
     let compiled = prepareDepthPartitions(source, surface);
     let reason = depthReason;
     if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }
     if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
     onDepthResult?.({ id: source.id, source, compiled, surface, reason });
-    return { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
-  } finally { await browser.close(); }
+    const activated = { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
+    return withPreparedInteriorFill(activated, interior, resolve(root, "public"));
+  } finally { await page.close(); if (!suppliedBrowser) await browser.close(); }
 }

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d54cefe11978308c9313463d9639f56a78a716e7a0c0ec07514c82cc968627f1"
+          "sha256": "ccf92e979fe267027d623d8c8836ad906c88ec6ab57c1cf7be3b8d494bb78302"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "1f1f6341ad9ddcf555ce8e5a89f649d39fa4f49d05c76ab2fc73b7acaf45b6cc"
+          "sha256": "a639f3b77750a36bbaa75550b99347d99cb598308cf17019a3a9639e7aa74903"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "608d1e442840f71598869bb393a62f3e4cb70f8abff590ba99db5f8a916936c3"
+        "sha256": "18568da7a0a7d07d3d575cea85261324b243c29785e7245ef36718a2320c67d7"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 8701.934155371428
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Swift–Tuttle",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d31935b151af3171316c52e20852b428b0a3004cd5ed00c28dd629488c146b36"
+    "sha256": "2089b10d234106723cd487d98373e6ee2507238b4bc76514fbafa6d95dafad19"
   }
 }

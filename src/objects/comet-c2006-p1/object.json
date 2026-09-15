@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6d9bf4179d9daafdb4aeaadfa4bde36565d8d6eb042b736a13439f775864dd9b"
+          "sha256": "6e3c538a3cb5d0e53445ded67474299780d119620514a0870d72934fd5937b22"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "631462528d74f18ca3b4b01db9e4d647efb996f654710af89b29bbea36c1834b"
+          "sha256": "ca39f223a84dbd07e97d1a45f7e6d5e14e66655ccd5bdb0c2365f068936aaf7b"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2634f48a4282263afc9bc13b1d3ea89324e736a587c414e1e987d9a98fcd70ec"
+        "sha256": "059854443d620abfe5c15d6b2089b4add1ad3237fd5a9e5ab4fd94ffe0da72a2"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 1165.1742343632927
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "McNaught",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ea785c8dfd4d9f3097af95430be5ca3a62e8c5a9f73bf8b4a5ca5283298e17e9"
+    "sha256": "fdd41732e023f2ba5fb3e0966cebe3861ff3ec2797f72f2ccca4b25d08617194"
   }
 }

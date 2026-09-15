@@ -3,17 +3,15 @@ import type { Props as ShellProps } from '../planet-shell-types';
 interface Props {
   objectId: string;
   lenses?: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
-  provenance?: ShellProps['provenance'];
 }
-import { datasetContext } from '../dataset-context.mts';
-import { EXPLORATION, referenceUrl } from '../exploration-catalog.mts';
-import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
+import { datasetContributors } from '../dataset-context.mts';
+import { EXPLORATION } from '../exploration-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
-const { objectId, lenses, provenance } = Astro.props;
+const { objectId, lenses } = Astro.props;
 const contexts = (lenses?.controls ?? []).map(lens => ({ lens,
-  ...datasetContext(objectId, lens.id, provenance, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
+  ...datasetContributors(objectId, lens.id, EXPLORATION.graph, EXPLORATION.catalog),
 }));
 const span = (from?: { value: string }, to?: { value: string }) =>
   from ? `${from.value}${to ? `–${to.value}` : ''}` : null;
@@ -23,7 +21,7 @@ const contributors = (context: (typeof contexts)[number]) => [
   ...context.missions.map(mission => ({
     id: mission.id, title: mission.shortName?.value ?? mission.name.value,
     lead: mission.shortName && mission.name.value, description: mission.description.value,
-    href: referenceUrl(mission.description), dates: span(mission.started, mission.ended),
+    dates: span(mission.started, mission.ended),
     image: mission.imageId ? EXPLORATION.images[mission.imageId] : undefined,
     emblem: mission.emblemId ? EXPLORATION.emblems[mission.emblemId] : undefined,
     attribute: { 'data-mission': mission.id },
@@ -33,13 +31,12 @@ const contributors = (context: (typeof contexts)[number]) => [
   })),
   ...context.notes.map(note => ({
     id: note.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
-    title: note.label, lead: undefined, description: note.reason, href: undefined,
+    title: note.label, lead: undefined, description: note.reason,
     dates: null, image: undefined, emblem: undefined,
     attribute: { 'data-unresolved': note.label }, band: undefined,
   })),
   ...context.machines.map(machine => ({
     id: machine.id, title: machine.name.value, lead: undefined, description: machine.description.value,
-    href: referenceUrl(machine.description),
     dates: span(machine.commissioned, machine.retired) ?? machine.launch?.value ?? null,
     image: machine.imageId ? EXPLORATION.images[machine.imageId] : undefined,
     emblem: undefined, attribute: { 'data-machine': machine.id }, band: machine.band?.value,
@@ -75,7 +72,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           aria-label={tabbed ? entry.band : undefined}
           tabindex={tabbed ? 0 : undefined}>
           <article class="planet-machine" {...entry.attribute}>
-            <SelectedContent title={entry.title} lead={entry.lead} description={entry.description} href={entry.href}>
+            <SelectedContent title={entry.title} lead={entry.lead} description={entry.description}>
               <div slot="header" class:list={{ 'planet-machine-preview': Boolean(entry.image || entry.emblem),
                 'planet-machine-preview-overlay': entry.image?.kind === 'published-photograph' }}>
                 <div class:list={['planet-machine-heading', entry.image?.kind === 'published-photograph' && 'planet-machine-heading-backdrop']}>
@@ -95,21 +92,6 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           </article>
         </div>)}
       </PlanetCard>)}
-      {context.sources.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region" aria-label="Sources">
-        <div class="planet-card-tabpanel">
-          <h2 class="planet-lens-details-title">Sources</h2>
-          <ul class="planet-resources-links">
-            {context.sources.map(group => <li class="planet-resource-row">
-              {group.links.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
-              {group.credit && <span class="planet-resource-description">{group.credit}</span>}
-              {group.supporting.length > 0 && <details class="planet-resource-supporting">
-                <summary>{group.supporting.length} supporting {group.supporting.length === 1 ? 'file' : 'files'}</summary>
-                {group.supporting.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
-              </details>}
-            </li>)}
-          </ul>
-        </div>
-      </PlanetCard>}
     </div>;
   })}
 </aside>

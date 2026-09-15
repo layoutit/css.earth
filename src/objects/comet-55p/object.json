@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "83781f9860389d5f06746deef30ef586764e4eb31fee03a7522cc61b685e0a7e"
+          "sha256": "837cbc42aefb9552024fa25e5e256dc649a94214f107ac16eecfe3688caf9479"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "b80b5cc3dd5e871addde5af70439a4d32f590ed336bb0f51c02db5ab62988458"
+          "sha256": "f99a4d071220fe0a1bff4b170dff0dc4c16831194d364d1a40561d7b1764fa41"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3c34b5246d4e2cc8e900b82440eb163f9eee9845dbfa7136a0567b0bcbbe98b6"
+        "sha256": "7e5e67ad47e7fe3605aa9b4eaca7ddefbb1db5040ed62910b7e484b9fa543232"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 1327.4136847176753
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Tempel–Tuttle",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f438cf6788f02cd531beb02f6fbe24e2b298e827fdd6d5934cd16157201d5099"
+    "sha256": "eae92cad4c1e202c869e1d700cf451411ef3a2753358a5b6beca725dbf3ba952"
   }
 }

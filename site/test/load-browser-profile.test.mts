@@ -30,7 +30,7 @@ function profile(withLenses = false) {
   };
 }
 
-const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "skyContrast", kind: "toggle" }, { name: "heliosphere", kind: "toggle" }, { name: "asteroidBodies", kind: "toggle" }, { name: "asteroidOrbits", kind: "toggle" }, { name: "asteroidLabels", kind: "toggle" }]);
+const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "skyContrast", kind: "toggle" }, { name: "heliosphere", kind: "toggle" }, { name: "illustrationModels", kind: "toggle" }, { name: "asteroidBodies", kind: "toggle" }, { name: "asteroidOrbits", kind: "toggle" }, { name: "asteroidLabels", kind: "toggle" }]);
 type FixtureControls = { readonly lenses: null | { readonly defaultLens: string; readonly controls: readonly { readonly id: string }[] }; readonly settings: null | { readonly controls: readonly { readonly name: string; readonly kind: string }[] } };
 function snapshot(controls: FixtureControls = emptyControls) {
   const objectSettings = controls.settings?.controls ?? [];
@@ -45,7 +45,7 @@ function snapshot(controls: FixtureControls = emptyControls) {
     settings: [sharedSettings[0],
       ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
       ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
-      sharedSettings[1], sharedSettings[2], sharedSettings[3], sharedSettings[4], sharedSettings[5],
+      ...sharedSettings.slice(1),
       ...remaining.map(({ name, kind }) => ({ name, kind }))],
   };
 }

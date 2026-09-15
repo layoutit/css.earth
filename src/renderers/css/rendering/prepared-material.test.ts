@@ -40,6 +40,10 @@ test("material demand follows ready addresses, fixed shadows and the geometry-to
   const hidden = resolvePreparedMaterialDemand(track, { ...selected, enabled: false }, view(-1));
   expect(hidden.required).toEqual([]);
   expect(hidden.prewarm).toEqual([]);
+  const shadowless = resolvePreparedMaterialDemand(track, { ...fixed, enabled: false, publishWhenHidden: "static" }, view(-1));
+  expect(shadowless.required).toEqual(["shadowless"]);
+  expect(shadowless.prewarm).toEqual([]);
+  expect(resolvePreparedMaterialDemand(track, { ...selected, enabled: false, publishWhenHidden: "static" }, view(-1)).required).toEqual([]);
   expect(preparedMaterialAddress(track, preparedMaterialState(track, selected, view(-1)), { has: () => false })).toBeNull();
 });
 

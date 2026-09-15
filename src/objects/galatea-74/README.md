@@ -1,5 +1,7 @@
 # (74) Galatea
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **6181**, version **2022-02-14**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 6181, version 2022-02-14.
 
-Convex light-curve reconstruction with approximate thermal size: 113.09 km effective diameter (catalog ±2.15 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.
+Convex light-curve reconstruction with approximate thermal size: 113.09 km effective diameter (catalog ±2.15 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; neutral gray marks unavailable imagery.
 
 ## Evidence
 
@@ -25,7 +27,7 @@ AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred s
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 6182, pole ['109', '1'], [Model 6182](https://damit.cuni.cz/projects/damit/asteroid_models/view/6182)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 6182, pole ['109', '1'], [Model 6182](https://damit.cuni.cz/projects/damit/asteroid_models/view/6182)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

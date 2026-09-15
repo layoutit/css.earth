@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1bee9599921b27fefc98f54faba71f0bbf6874169c06ffe57cef155780f21e86"
+          "sha256": "01ce199a780623bcf8538281ec6d9a7d268e6591f6b76566130e2e845220e306"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "676cbfc6c005a00e9561a3fa7740855777a428d1738d6a121f8f2f4e3a20c09a"
+          "sha256": "465a109a82d50867a1ca193a58146157151f2d7f6465623ac1c10c2900b5ec58"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "83c9acce05dc30496fb917c760a0a1198a9d6d6dfc2a2a03e5d5de1e1d6bc4e2"
+        "sha256": "eb2a6a9c91a49dac2102aa897f6b434e3d16cdfae853d4495856b27e2bd16831"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 1843.6301176634377
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "NEOWISE",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "636a2332231034241ee7bb50bd37a1ff7b30fa19af647068649a19b9533e43b6"
+    "sha256": "510f50330cc04fc984089df9eaa0798d1aba15d131035f772a92e99bca288e82"
   }
 }

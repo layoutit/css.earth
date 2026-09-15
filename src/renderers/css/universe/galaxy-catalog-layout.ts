@@ -5,14 +5,20 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
+import { admitStableLabels } from '../labels/stable-label-layout.js';
 import { offAxisFrame, silhouetteEllipse } from '../solar-system/heliocentric-geometry.js';
+import { createLabelBudget, labelImportance, type LabelBudget } from '../labels/universe-label-policy.js';
 
 export interface ProjectedGalaxy {
+  readonly navigable?: boolean;
+  readonly shown?: boolean;
+  readonly placement?: number;
   readonly object: PreparedCatalogObject;
   readonly x: number;
   readonly y: number;
   readonly distanceM: number;
   readonly labelRect: LabelScreenRect;
+  readonly alternateLabelRects?: readonly LabelScreenRect[];
 }
 
 /** Only the observer projection is runtime work; every astronomical position is prepared. */
@@ -62,22 +68,20 @@ export function projectCatalogBounds(cornersM: readonly (readonly number[])[], w
 }
 
 function priority(object: PreparedCatalogObject): number {
-  if (isPreparedCluster(object) || isPreparedNebula(object) || object.detailedObjectId) return 0;
-  if (object.status === 'candidate') return 3;
-  return object.hostId ? 2 : 1;
+  if (object.status === 'candidate') return 0;
+  return labelImportance(isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? 'nebula' : 'galaxy', !isPreparedCluster(object) && Boolean(object.detailedObjectId));
 }
 
 /** Foreground exclusions win; selection, major objects, then stable distance/id ties. */
-export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blockers: readonly LabelScreenRect[], selectedId: string | null, limit = 12) {
-  const sorted = [...candidates].sort((a, b) => Number(b.object.id === selectedId) - Number(a.object.id === selectedId) ||
-    priority(a.object) - priority(b.object) || a.distanceM - b.distanceM ||
-    a.object.id.localeCompare(b.object.id));
-  const accepted: ProjectedGalaxy[] = [];
-  for (const candidate of sorted) {
-    if (accepted.length >= limit) break;
-    if (blockers.some(rect => labelRectsOverlap(rect, candidate.labelRect)) ||
-        accepted.some(other => labelRectsOverlap(other.labelRect, candidate.labelRect))) continue;
-    accepted.push(candidate);
-  }
-  return accepted;
+export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blockers: readonly LabelScreenRect[], selectedId: string | null,
+  budget: LabelBudget = createLabelBudget(Infinity, Infinity, [], blockers)) {
+  const ranked = [...candidates].sort((a, b) => priority(b.object) - priority(a.object) || a.distanceM - b.distanceM || a.object.id.localeCompare(b.object.id));
+  const stable = ranked.map((candidate, index) => ({
+    id: candidate.object.id, candidate, navigable: candidate.navigable ?? (isPreparedCluster(candidate.object) || Boolean(candidate.object.detailedObjectId)),
+    pinned: Number(candidate.object.id === selectedId), priority: ranked.length - index,
+    shown: candidate.shown ?? false, previousPlacement: candidate.placement ?? 0,
+    placements: [candidate.labelRect, ...candidate.alternateLabelRects ?? []].map((rect, slot) => ({ slot, rect })),
+  }));
+  return admitStableLabels(stable, budget, (_, rect) => !blockers.some(blocker => labelRectsOverlap(blocker, rect)))
+    .map(({ candidate: { candidate }, placement, rect }) => ({ ...candidate, placement, labelRect: rect }));
 }

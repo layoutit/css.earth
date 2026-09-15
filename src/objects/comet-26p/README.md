@@ -1,5 +1,7 @@
 # 26P/Grigg–Skjellerup
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley.
 
 One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.

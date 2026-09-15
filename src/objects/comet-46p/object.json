@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "245375544601b579bf74f0028396e649395f170003997c4f22f09fd2dc12e4e4"
+          "sha256": "a8a25d6c0e1cecffe71e461245b7bc1cbef262e9c78727533a539d922ec3f141"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "ff613367183606b77d317442fb58c8f1198229157d794f429833522871a7465c"
+          "sha256": "40739daecf00efe35b491c3095081daa511128a1560ddca9a881982c91689c7b"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4add5cefe8a4a976f1cdf486478f48d7bd107a6a10b6cd4d7ab5e217148c2893"
+        "sha256": "1fe2177eb587173420be91909bbb10bbbc4921e03b1451fdf93547737f247dd3"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 442.47122823922507
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Wirtanen",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6d23a8940755dde2563f1ea3a8d07f7882a3a99d57bd5cdd530b2596b8dc706a"
+    "sha256": "3be30a2d9ac75c7315b2f7a900675ab4d28dc2094344757e10a51cb6838cb12c"
   }
 }

@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
+        "notes": "The shared neutral gray marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

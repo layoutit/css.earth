@@ -61,8 +61,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 43504,
-      "expectedSha256": "ae51f55322a8f5c7a75cba4b1a3862a72ce722338541f4084c9517d4f61a7033",
+      "expectedBytes": 11372,
+      "expectedSha256": "b9c0be2c03512e6fb0307e5047d879794a2eda844e9d0674d58ec1df5a52b605",
       "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
       "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2504,
-      "expectedSha256": "7957290bb9a1f036c7d30dd0d60031c10f03d2e1d5cf1580667ed2d93dd6400b",
+      "expectedBytes": 2606,
+      "expectedSha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -108,7 +108,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1627,
-      "expectedSha256": "f8bac550f0d40038173d9c36b8207c0a84c7bdae396bff92bbda7124745890bb"
+      "expectedSha256": "c3c463f937ff5205b12b7f225dd2eb32d59cb1ecd7af6e15e0d70f35c24716a1"
     },
     {
       "path": "preparation/rotation.json",

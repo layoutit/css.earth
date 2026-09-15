@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "enceladus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "38f33f14eece0841d86a90191524d7b13a4dadfbf9bc2f443f22977011fb828c"
+    "sha256": "6e3dc40c6018f9b4077d5c323fb248bbfdfb4aef19fea25ae7641f6aeebdf289"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -261,7 +261,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "622531066296df07832e5111a241cc1387a5a8689840646d46c00ea95c5e477a",
+      "sha256": "09efe9bfd0b4a872133fcaba84d4c8e75a2ceff2b475078481413bd83d36d2ba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -393,7 +393,7 @@
                 "id": "jpl-spc-enceladus-v2-q256",
                 "path": "../manifest.json"
               },
-              "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+              "notes": "Neutral gray over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -649,7 +649,7 @@
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -688,7 +688,7 @@
       "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "bytes": 10207923,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "dsk-mesh",
         "groups": [
@@ -766,7 +766,7 @@
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -824,7 +824,7 @@
       "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "bytes": 101934,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -875,7 +875,7 @@
       "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "bytes": 109752,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -892,10 +892,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "622531066296df07832e5111a241cc1387a5a8689840646d46c00ea95c5e477a",
-      "bytes": 14559,
+      "sha256": "09efe9bfd0b4a872133fcaba84d4c8e75a2ceff2b475078481413bd83d36d2ba",
+      "bytes": 14657,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -915,7 +915,7 @@
       "sha256": "0949b3d8937a3b19b9d6b80215059f7a6451a33e684ccaabcf57a617b87d1cd0",
       "bytes": 1020,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -941,7 +941,7 @@
       "sha256": "116964fc1780821aa5af3b9807616a272de3cb5ac1e469a46fff2fa603d4abfb",
       "bytes": 265163,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -968,7 +968,7 @@
       "sha256": "02505cf90f3299d9da02f513681d1dc5ca2d1458d3ac48edbc8fea6ae861de65",
       "bytes": 156,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -995,7 +995,7 @@
       "sha256": "12e908511c7d63a7fd2e1e45421350b68e224e55a4125955b398bfafdcd0f858",
       "bytes": 19545,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1046,13 +1046,13 @@
           "url": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
           "bytes": 1850,
           "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "bytes": 9033580,
           "sha256": "03b9058083f3096d4c5a0acdb2659bf2d3154ce26ce5a450e3e4de4e4d399a92",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1097,19 +1097,19 @@
           "url": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
           "bytes": 8066,
           "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
           "bytes": 10574576,
           "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1149,19 +1149,19 @@
           "url": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
           "bytes": 1520,
           "sha256": "12fff2fb2f5df848aedc72db8598c2192a5b75521ac4c6e9b286805d743b10cc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
           "bytes": 67618,
           "sha256": "530427bb129a342b15aaa01415a6d3106c64a389bcd125101d2a74d1c3bd3717",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1201,19 +1201,19 @@
           "url": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
           "bytes": 2166,
           "sha256": "7ce993b429aa895f5d6f306b27ca52b08e5b53d4e8c7ceb99ba1eebf76301ae2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp",
           "bytes": 196,
           "sha256": "cb891375c261f05e633ed9af6366e538fe4a3551f53ea2e5edcdd8c0c7897c7f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
           "bytes": 68880,
           "sha256": "db9135d4a85f658a52b89c269b1eb624d262b12248bbc3b526aa60c826f188d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1249,15 +1249,15 @@
       "outputs": [
         {
           "url": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
-          "bytes": 460676,
-          "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f",
-          "verification": "bytes-verified"
+          "bytes": 116628,
+          "sha256": "8975f412edadf5a90d9830344fd04404491c1fc9be089412278bf82a60d901f3",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1326,7 +1326,7 @@
           "url": "/scenes/enceladus/enceladus-features.json",
           "bytes": 317837,
           "sha256": "e414a63ce1d78fcb751a9ab327609f50296e8ed25bdbb06a9648a877c31224ed",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1375,8 +1375,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 3072,
-          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

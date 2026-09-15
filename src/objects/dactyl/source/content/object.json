@@ -41,7 +41,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.1006/icar.1996.0045"
         },
-        "noData": true
+        "noData": true,
+        "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
       }
     ]
   },

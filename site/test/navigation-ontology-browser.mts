@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, readFile } from 'node:fs/promises';
-import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
+import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { createTestPage } from './browser-observations.mts';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
@@ -10,7 +9,6 @@ const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const host = SCENE_OBJECTS.find(object => object.classification === 'star' && object.distance.meters === 0);
 assert.ok(host);
 const focuses = OBJECTS.filter((object): object is PreparedFocusObject => object.kind === 'prepared-focus');
-const galaxyCatalog = parsePreparedGalaxyCatalog(JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8')));
 const representatives = [...new Set([
   ...['galaxy', 'galaxy-cluster', 'nebula'].map(kind => focuses.find(object => object.classification === kind)),
   ...['m_031', 'lmc', 'smc'].map(id => focuses.find(object => object.id === id)),
@@ -43,13 +41,11 @@ try {
       const card = page.locator(`[data-prepared-focus-card][data-prepared-focus-id="${object.id}"]`);
       await card.waitFor({ state: 'visible' });
       await card.locator('[data-information-tab="factsheet"]').click();
-      assert.ok(await card.locator('a[data-focus-source]:visible').count() > 0, 'focus must expose resolved source links');
-      const galaxy = galaxyCatalog.objects.find(galaxy => galaxy.id === object.id);
-      if (galaxy) {
-        const citation = resolveSpatialCitation(galaxy.distance.sourceRef, galaxyCatalog.sources);
-        assert.ok(citation);
-        assert.ok((await card.locator('a[data-focus-source]:visible').evaluateAll(links => links.map(link => link.getAttribute('href')))).includes(citation.url), 'the distance paper must be linked, beyond the catalogue itself');
-      }
+      const source = page.locator('[data-source-link]');
+      assert.equal(await source.isVisible(), true);
+      assert.equal(await source.getAttribute('aria-label'), `Sources and methods for ${object.name}`);
+      assert.match(await source.getAttribute('href') ?? '', /\/blob\/[a-f0-9]{40}\/src\/objects\/[^/]+\/README\.md$/u);
+      assert.equal(await page.locator('[data-source-bank]').count(), 0, 'sources need no hidden citation bank');
     }
     assert.equal(documents.length, 1, 'focus selection must not reload the scene document');
     await search.fill('galaxies');

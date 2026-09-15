@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "827a14ff75e3339291a9b79b0722bdb4ac888a498807b6d07c510f63938926b0"
+          "sha256": "ff9d8ce50c6c3f832822aabd3984059b856d223069c11abc7bcd5b9371fc68fc"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "6cc2619d949d6a608dca670527e5c925fca489c51b6ac6ca900161572039875a"
+          "sha256": "422c5eeb4c293b9e641adf20012ede7df6d16b2bb071cf02376f50e3b8b6b290"
         },
         {
           "id": "acquisition",
@@ -110,10 +110,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3b8a8ba6414569e15984a92756a642c0032e4a9c8d858d5b8862f44d7d8a9859"
+        "sha256": "705a2c4b6e8f906401641d799eb17b5ad9ebaf8afcd78184bdc8c20955a962eb"
       }
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "LINEAR",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a21fb0c414ab151df0950e0d29dcf4b5d2432e9ee2e2dd82b0fd11f420151fa1"
+    "sha256": "05baf16ff1c7c3b427973d4dff390241cd39fb70d9ecc6a12dfa5f96a708c723"
   }
 }

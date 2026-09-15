@@ -94,3 +94,7 @@ Choose the configured method first. The numbered procedure below is the **fixed-
 - Preserve exact historical receipt bytes/hashes during organization; resolve relocated paths at loading boundaries.
 - Keep all derived images out of Git, including original-image inspection previews, historical reference panels, extraction previews and every object’s runtime textures; retain inputs, settings and expected hashes. An accepted recipe may restore already-approved app textures through its pinned delivery manifest. New production promotion still requires explicit scope, reproducible input/recipe/transform/depth/bake records and fixed-camera acceptance. Keep runtime PolyCSS plain TypeScript; React owns the lab UI only.
 - For a future high-detail named structure, test a registered local crop and connected volumetric model first. Multi-band color, wavelets, NeRF or Gaussian splats alone do not recover missing physical depth.
+
+### Accepted compact delivery inputs
+
+For ordinary app preparation, replay the source-owned compact pre-slice fields/materials/stars/settings. Explicitly accepted registered material planes may be retained as compact bake inputs; they are not runtime textures. Keep atlases, impostors and XYZ slices ignored. The `--research` route still acquires native observations and reruns fitting. Export only the actual inspected delivery result, preserve source lineage, and verify a cache-free replay against every expected texture digest before promotion. Never silently refit or substitute a new material model during this packaging step.

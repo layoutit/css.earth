@@ -40,8 +40,8 @@ export async function prepareSampledSceneStars(root: string, outputDirectory: st
   return readCompilerBakeResult({ ...scene, ...await prepareCompilerStarSprites(root, outputDirectory, scene.stars) });
 }
 
-async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
-  if (!(/^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || pin.path === 'tools/fits.mts') || /[\\?#\s]/.test(pin.path) ||
+export async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
+  if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || pin.path === 'tools/fits.mts') || /[\\?#\s]/.test(pin.path) ||
       pin.path.split('/').some(p => !p || p === '..') || !/^[a-f0-9]{64}$/.test(pin.sha256)) throw new TypeError('Invalid sampled source pin.');
   const path = await realpath(resolve(root, pin.path)), offset = relative(await realpath(root), path);
   if (offset === '..' || offset.startsWith('../') || isAbsolute(offset)) throw new TypeError('Sampled source leaves the repository.');

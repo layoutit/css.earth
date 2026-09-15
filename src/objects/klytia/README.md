@@ -1,5 +1,7 @@
 # (73) Klytia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **142**, version **2011-04-20**. DAMIT, Astronomical Institute of Charles University; A. Marciniak (2008), Hanuš (2011); model 142, version 2011-04-20.
 
-Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.
+Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. Neutral gray marks unavailable imagery and rotational phase is illustrative.
 
 ## Evidence
 
@@ -23,7 +25,7 @@ The report includes 2 browser cases tied to recorded body assets. It does not id
 
 Only a uniform scale from the published thermophysical fit is transferred to the archived nominal mesh. The varied-model ensemble does not establish identical mesh bytes or local surface accuracy. The alternative pole remains possible. No thermal or reflectance map is inferred.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 143, pole ['266', '68'], [Model 143](https://damit.cuni.cz/projects/damit/asteroid_models/view/143)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 143, pole ['266', '68'], [Model 143](https://damit.cuni.cz/projects/damit/asteroid_models/view/143)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
