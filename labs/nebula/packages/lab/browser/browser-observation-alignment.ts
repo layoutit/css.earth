@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 /** Real prepared observations: registration display, layer identity, persistence and shared shell. */
 import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
@@ -79,14 +80,14 @@ try {
   assert.equal(await mesh.evaluate(node => node.isConnected), true, 'Observation inspection must retain the existing 3D scene.');
   assert.deepEqual(writes, [], 'Observation inspection never starts processing.');
   observationInspection = false;
-  await page.locator('#subject').selectOption('lmc-clouds');
+  await chooseLabObject(page, 'lmc-clouds');
   await page.locator('#viewer[data-ready="true"][data-mode="density"][data-subject="lmc-clouds"]').waitFor();
   assert.equal(await page.locator('.observation-alignment').count(), 0);
-  await page.locator('#subject').selectOption('helix-model-prior');
+  await chooseLabObject(page, 'helix-model-prior');
   await page.locator('.observation-frame img').first().waitFor();
-  await page.locator('#subject').selectOption('m2-9-inferred');
+  await chooseLabObject(page, 'm2-9-inferred');
   await page.locator('#viewer[data-ready="true"][data-mode="photo"][data-subject="m2-9-inferred"]').waitFor();
-  assert.equal(await page.locator('#subject').inputValue(), 'm2-9-inferred');
+  assert.equal(await page.locator('#subject').getAttribute('data-object-id'), 'm2-9-inferred');
   assert.equal(await page.getByRole('tab', { name: 'Reconstruction', exact: true }).getAttribute('aria-selected'), 'true');
   assert.deepEqual(errors, []);
   await writeFile(`${directory}/result.json`, JSON.stringify({ passed: true, browser: browser.version(), viewport: { width: 1600, height: 1000 },

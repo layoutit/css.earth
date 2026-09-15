@@ -1,3 +1,7 @@
+import { LabNavigation } from '../../ui/lab-navigation';
+import { labObjectId } from '../../features/legacy-viewer/lab-routing';
+import { subjects } from '../../features/legacy-viewer/subject-catalogue';
+import { supportsLabAlignment } from '../../state/lab-workflows';
 import { useEffect, useMemo, useState } from 'react';
 import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierInventory, type ArchiveImage, type ArchiveProvider,
   type ArchiveQuery, type MessierCatalogue, type MessierInventory, type MessierObject } from '../../features/catalogue/types';
@@ -48,7 +52,7 @@ function angle(degrees: number | null) {
 function readImageMode(): 'surveys' | 'archives' | 'papers' {
   const value = new URL(location.href).searchParams.get('view'); return value === 'papers' || value === 'archives' ? value : 'surveys';
 }
-function readObjectId() { return new URL(location.href).searchParams.get('object') ?? 'm42'; }
+function readObjectId() { return labObjectId(new URL(location.href)) ?? 'm42'; }
 function textError(value: unknown) { return value instanceof Error ? value.message : 'Catalogue unavailable.'; }
 function queryStatus(query?: ArchiveQuery) {
   if (!query || query.status === 'pending') return 'Pending';
@@ -183,8 +187,8 @@ export function CatalogueView() {
   const candidateCount = target?.queries.reduce((sum, query) => sum + (query.imageCount ?? query.images.length), 0) ?? 0;
   const storage = useMemo(() => inventory ? inventoryStorage(inventory) : null, [inventory]);
   function chooseObject(id: string) {
-    if (!catalogue?.objects.some(object => object.id === id)) return;
-    setSelectedId(id); const url = new URL(location.href); url.searchParams.set('object', id); history.replaceState(history.state, '', url);
+    if (!catalogue?.objects.some(object => object.id === id) && !subjects.some(object => object.id === id)) return;
+    setSelectedId(id); const url = new URL(location.href); url.searchParams.set('subject', id); url.searchParams.delete('object'); history.replaceState(history.state, '', url);
   }
   const filtered = useMemo(() => {
     const query = productSearch.trim().toLowerCase();
@@ -195,9 +199,11 @@ export function CatalogueView() {
   }, [selectedQueries, band, imageRole, candidateObject, resolution, productSearch]);
   const selectionKey = `${selectedId}:${band}:${imageRole}:${resolution}:${productSearch}:${imageOrder}:${provider}`;
   return <>
-    <header className="lab-header catalogue-header"><h1>Nebula Lab</h1><span className="catalogue-heading">Messier catalogue</span>
-      <nav aria-label="Lab navigation"><a href="/alignment" target="_blank" rel="noreferrer">Open lab ↗</a><a href="/catalogue" aria-current="page">Catalogue</a></nav>
-    </header>
+    <LabNavigation page="catalogue" objectId={selectedId}
+      objects={[...new Map([...subjects.filter(object => !object.sourceSubjectId).map(object => [object.id, { id: object.id, name: object.menuLabel ?? object.name }] as const),
+        ...(catalogue?.objects ?? []).map(object => [object.id, { id: object.id, name: `${object.id.toUpperCase()} · ${object.name}` }] as const)]).values()]}
+      onObjectChange={chooseObject} alignmentAvailable={supportsLabAlignment(subjects.find(object => object.id === selectedId))}
+      reconstructionAvailable={subjects.some(object => object.id === selectedId && !object.alignmentOnly)} />
     <main className="catalogue-layout">
       <aside className="catalogue-objects" aria-label="Messier objects">
         <label className="catalogue-field">Find object<input type="search" value={objectSearch} onChange={event => setObjectSearch(event.target.value)} placeholder="M42, Orion, NGC…" /></label>
@@ -218,7 +224,7 @@ export function CatalogueView() {
           <button type="button" onClick={() => setReload(value => value + 1)} disabled={loading}>Reload snapshot</button>
           {inventory && <span className="catalogue-updated" title={`Snapshot ${inventory.generatedAt}${error ? '; previous snapshot remains visible' : ''}`}>{error ? 'Showing previous snapshot · ' : ''}{new Date(inventory.generatedAt).toLocaleString()}</span>}
         </div>
-        {!selected && !loading && catalogue && <p className="catalogue-empty" role="status">Choose a Messier object from the catalogue.</p>}
+        {!selected && !loading && catalogue && <p className="catalogue-empty" role="status">This object is outside the Messier catalogue. Its prepared sources remain available in Alignment.</p>}
         {selected && <>
           <div className="catalogue-image-modes" role="group" aria-label="Image collection">
             <button type="button" aria-pressed={imageMode === 'surveys'} onClick={() => chooseImageMode('surveys')}>Survey images</button>

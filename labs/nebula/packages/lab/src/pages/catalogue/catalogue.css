@@ -1,6 +1,3 @@
-.catalogue-header { gap: 18px; }
-.catalogue-header .catalogue-heading { color: var(--text-secondary); font-size: 12px; }
-.catalogue-header nav { display: flex; gap: 12px; margin-left: auto; font-size: 12px; }
 .catalogue-layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); flex: 1; min-height: 0; }
 .catalogue-objects { display: flex; flex-direction: column; min-height: 0; gap: 12px; padding: 18px 16px; background: #151515; border-right: 1px solid var(--divider); }
 .catalogue-field { display: grid; gap: 6px; font-size: 11px; color: var(--text-secondary); }

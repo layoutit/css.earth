@@ -62,12 +62,12 @@ try {
   await page.getByRole('searchbox', { name: 'Find object' }).fill('M 42');
   assert.equal(await objects.getByRole('option').count(), 1);
   await page.getByRole('searchbox', { name: 'Find object' }).fill('');
-  visited.add('m31'); await objects.locator('[data-object-id="m31"]').click(); assert.equal(new URL(page.url()).searchParams.get('object'), 'm31');
+  visited.add('m31'); await objects.locator('[data-object-id="m31"]').click(); assert.equal(new URL(page.url()).searchParams.get('subject'), 'm31');
   await page.reload(); await ready(); await page.getByRole('button', {name:'Archive records',exact:true}).click(); await recordsReady(); assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm31');
   await page.getByRole('combobox', { name: 'Order by' }).selectOption('number');
   visited.add('m32'); await objects.getByRole('option', { selected: true }).focus(); await objects.getByRole('option', { selected: true }).press('ArrowDown');
   assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm32');
-  assert.equal(new URL(page.url()).searchParams.get('object'), 'm32');
+  assert.equal(new URL(page.url()).searchParams.get('subject'), 'm32');
   const populated = inventory?.targets.find(target => target.objectId === 'm42' && target.queries.some(query => query.imageCount ?? query.images.length)) ??
     inventory?.targets.find(target => target.queries.some(query => query.imageCount ?? query.images.length));
   if (inventory && !allowMissing) assert.ok(populated, 'The actual archive cache has no candidates to inspect.');

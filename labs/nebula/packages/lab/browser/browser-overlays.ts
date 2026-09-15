@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -273,12 +274,12 @@ try {
   assert.equal(await page.locator('#overlay-choice').inputValue(), pending.id); assert.deepEqual(await placementProbe(pending.id), savedPending);
   assert.equal(await page.locator('#overlay-opacity').inputValue(), '44');
 
-  await page.selectOption('#subject', 'smc-particles'); await panelReady('smc-particles', smc);
+  await chooseLabObject(page, 'smc-particles'); await panelReady('smc-particles', smc);
   assert.equal(await page.locator('#overlay-choice option').count(), smc.overlays.length, 'SMC selector count differs from manifest');
   const smcFirst = smc.overlays[0]!; assert.equal(await page.locator('#overlay-choice').inputValue(), smcFirst.id);
   assert.deepEqual(await values(smcFirst.id), smcFirst.initialPlacement ?? identity, 'LMC placement leaked to SMC');
   await page.locator(`#overlay-${smcFirst.id}`).check(); await selected(smcFirst.id); await edit(smcFirst.id, 'x', -3);
-  await page.selectOption('#subject', 'lmc-particles'); await panelReady('lmc-particles', lmc); await selected(pending.id);
+  await chooseLabObject(page, 'lmc-particles'); await panelReady('lmc-particles', lmc); await selected(pending.id);
   assert.deepEqual(await placementProbe(pending.id), savedPending, 'subject round trip lost selected placement');
   await choose(first.id); assert.deepEqual(await placementProbe(first.id), savedFirst, 'per-image state was not retained');
   await choose(pending.id);

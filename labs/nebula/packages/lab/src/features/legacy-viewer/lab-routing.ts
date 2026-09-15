@@ -14,3 +14,18 @@ export function labViewUrl(url: URL, view: LabView): URL {
   next.searchParams.delete('tab');
   return next;
 }
+
+export type LabPage = LabView | 'catalogue';
+
+/** One selected-object parameter; continue accepting old catalogue bookmarks. */
+export function labObjectId(url: URL): string | null {
+  return url.searchParams.get('subject') ?? url.searchParams.get('object');
+}
+
+export function labPageUrl(url: URL, page: LabPage, objectId: string): URL {
+  const next = labViewUrl(url, page === 'catalogue' ? 'alignment' : page);
+  next.pathname = `/${page}`;
+  next.searchParams.set('subject', objectId);
+  next.searchParams.delete('object');
+  return next;
+}

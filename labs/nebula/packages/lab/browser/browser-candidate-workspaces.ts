@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 /** Empty observation-only subjects must remain navigable without starting processing. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -22,7 +23,7 @@ try {
   for (const id of candidates) {
     await page.goto(`${base}/alignment?subject=${id}`);
     await page.getByRole('button', { name: 'Open nebula compiler', exact: true }).waitFor();
-    assert.equal(await page.locator('#subject').inputValue(), id);
+    assert.equal(await page.locator('#subject').getAttribute('data-object-id'), id);
     assert.equal(await page.getByRole('tab', { name: 'Alignment', exact: true }).isEnabled(), true);
     await page.getByRole('button', { name: 'Open nebula compiler', exact: true }).click();
     await page.waitForFunction(() => document.querySelector('.compiler-controls')?.getAttribute('data-busy') === 'false');
@@ -36,7 +37,7 @@ try {
   await page.getByRole('group', { name: 'Inspection mode', exact: true }).waitFor();
   assert.deepEqual(await page.getByRole('group', { name: 'Inspection mode', exact: true }).getByRole('button').allTextContents(),
     ['Nebula', 'Structure map', 'Combined', 'Velocity', 'Joint fit', 'Volume']);
-  await page.locator('#subject').selectOption('m42');
+  await chooseLabObject(page, 'm42');
   await page.waitForFunction(() => document.querySelector('.compiler-controls')?.getAttribute('data-busy') === 'false');
   assert.equal(await page.getByRole('button', { name: 'Compile nebula', exact: true }).isEnabled(), true);
   assert.deepEqual(posts, [], 'Browsing started processing.');
