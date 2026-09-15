@@ -2,9 +2,12 @@
 import type { PreparedFocusObject } from '../prepared-focus-object.mts';
 import { distanceDescription } from '../navigation-distance.mts';
 import { objectClassificationLabel } from '../planet-search-objects.mts';
-import MaterialSymbol from './MaterialSymbol.astro';
+import ContextNavigationMarker from './ContextNavigationMarker.astro';
+import { FOCUS_SOURCE_DOCUMENTS } from '../focus-catalog-data.mts';
 interface Props { object: PreparedFocusObject; hidden?: boolean; }
 const { object, hidden = false } = Astro.props;
+const source = FOCUS_SOURCE_DOCUMENTS.get(object.id);
+if (!source) throw new Error(`Missing focus source document: ${object.id}`);
 ---
 <li class="planet-object-item" role="listitem" hidden={hidden}
   data-object-name={object.name.toLocaleLowerCase('en')}
@@ -13,8 +16,9 @@ const { object, hidden = false } = Astro.props;
   data-object-system-name={object.systemName.toLocaleLowerCase('en')}
   data-object-classification={object.classification} data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase('en')}>
   <a class="planet-object-link planet-observation-control planet-thumbnail-leading"
-    href={object.route} data-prepared-focus-id={object.focusId}>
-    <span class="planet-lens-icon"><MaterialSymbol name="grain" /></span>
+    href={object.route} data-prepared-focus-id={object.focusId}
+    data-source-subject={`focus:${object.focusId}`} data-source-document={source.href} data-source-label={source.label}>
+    <span class="planet-lens-icon"><ContextNavigationMarker objectId={object.id} /></span>
     <span class="planet-object-name planet-lens-label">{object.name}</span>
     <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={`${object.distance.value} pc. ${distanceDescription(object.distance)}`}>{new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value)} pc{object.distance.quantity === 'comoving' ? ' (comoving)' : ''}</span>
   </a>

@@ -1,0 +1,45 @@
+{
+  "schema": "cssferonia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "feronia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "feronia-elevation-shadow@2x.webp",
+      "bytes": 163736,
+      "sha256": "fbe26cb0e25469c79076a936a3cf845616d16bbe921982e8a2f28bae091a193e"
+    },
+    {
+      "filename": "feronia-elevation-surface@2x.webp",
+      "bytes": 273386,
+      "sha256": "4eb153a4bef0ccada24e181361deff4a0767e05b9841757ee5154de130dd36a7"
+    },
+    {
+      "filename": "feronia-elevation-thumbnail.webp",
+      "bytes": 5498,
+      "sha256": "83fd877781ab4430f6af49ba84459d9a5d165b4766728e215af544b68c2669da"
+    },
+    {
+      "filename": "feronia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "feronia-shape-shadow@2x.webp",
+      "bytes": 62374,
+      "sha256": "7396c37d1c07934f70bfca7eec89ca5bb24de0b060ace093b6625d255b0a3d0b"
+    },
+    {
+      "filename": "feronia-shape-surface@2x.webp",
+      "bytes": 58924,
+      "sha256": "78881f0a0e7055b18c2ce37f7d8028165eb88a76cf79f8f4464d36055ac84495"
+    },
+    {
+      "filename": "feronia-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

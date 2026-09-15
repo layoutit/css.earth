@@ -43,7 +43,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
+        "notes": "The shared neutral gray marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

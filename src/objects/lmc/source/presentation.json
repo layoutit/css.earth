@@ -5,8 +5,8 @@
   "defaultLens": "vista-infrared",
   "bank": {
     "path": "src/objects/lmc/prepared/lenses.json",
-    "sha256": "90d4b0b89b18056dbc6f1b07823c71556c1d3e3b51addd75703c590714b89f43",
-    "bytes": 1498886
+    "sha256": "75e04281f3f08265f94bbd68a75f3183b351c8d94aae4c624a8d52272f8e4ac0",
+    "bytes": 1391053
   },
   "recipes": [
     {
@@ -18,8 +18,8 @@
     {
       "id": "recipe-2",
       "path": "labs/nebula/models/lmc/bake.json",
-      "sha256": "6946cf57f16e33531ceb50ef34aac765ff4031260221671808f9ea0ae1e08b35",
-      "bytes": 4086
+      "sha256": "82e44aebd5dc80e3f44c5258c51040f778a6cfa1f0c105b4b23ef8dcba6154b8",
+      "bytes": 4432
     },
     {
       "id": "recipe-3",
@@ -56,19 +56,19 @@
       "id": "vista-infrared",
       "label": "ESO VISTA",
       "title": "LMC in near infrared",
-      "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
+      "description": "Near-infrared colors from ESO\u2019s VISTA survey, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
       "summary": "Near-infrared false color on simulated stellar density; gas and dust depth are not measured.",
-      "detail": "8954 × 10000 px",
+      "detail": "8954 \u00d7 10000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared · Y / J / Ks"
+          "value": "Near-infrared \u00b7 Y / J / Ks"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "8954 × 10000"
+          "value": "8954 \u00d7 10000"
         },
         {
           "id": "depth",
@@ -86,11 +86,11 @@
     },
     {
       "id": "horalek-widefield",
-      "label": "Horálek optical",
-      "title": "Petr Horálek’s visible-light LMC",
-      "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
+      "label": "Hor\u00e1lek optical",
+      "title": "Petr Hor\u00e1lek\u2019s visible-light LMC",
+      "description": "Visible-light colors from Petr Hor\u00e1lek\u2019s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
       "summary": "Optical photograph colors on simulated stellar density; gas and dust depth are not measured.",
-      "detail": "6582 × 4388 px",
+      "detail": "6582 \u00d7 4388 px",
       "facts": [
         {
           "id": "bands",
@@ -100,7 +100,7 @@
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6582 × 4388"
+          "value": "6582 \u00d7 4388"
         },
         {
           "id": "depth",
@@ -122,17 +122,17 @@
       "title": "LMC in WISE infrared",
       "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
       "summary": "WISE infrared false color on simulated stellar density; gas and dust depth are not measured.",
-      "detail": "6000 × 6000 px",
+      "detail": "6000 \u00d7 6000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared display color · W4 / W2 / W1"
+          "value": "Infrared display color \u00b7 W4 / W2 / W1"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6000 × 6000"
+          "value": "6000 \u00d7 6000"
         },
         {
           "id": "depth",

@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "noData": true
+        "noData": true,
+        "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
       },
       {
         "id": "elevation",

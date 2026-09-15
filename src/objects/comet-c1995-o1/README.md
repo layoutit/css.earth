@@ -1,5 +1,7 @@
 # C/1995 O1 Hale–Bopp
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century.
 
 One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.

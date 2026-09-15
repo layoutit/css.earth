@@ -1,0 +1,45 @@
+{
+  "schema": "cssvirtanen-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "virtanen-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "virtanen-elevation-shadow@2x.webp",
+      "bytes": 192420,
+      "sha256": "481d81d7ba69d33151ae96a3b6a887f77b6346f338937441e55f5b607a46235b"
+    },
+    {
+      "filename": "virtanen-elevation-surface@2x.webp",
+      "bytes": 281794,
+      "sha256": "bab552d8584fcfd5bdf833f91ca8d6ac573025fa7eacc25532a8678a3fcd9b3f"
+    },
+    {
+      "filename": "virtanen-elevation-thumbnail.webp",
+      "bytes": 5216,
+      "sha256": "c336d1574d7d65e1c33d68f3747c50ecd2419eacab197beb646b63e0b861721e"
+    },
+    {
+      "filename": "virtanen-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "virtanen-shape-shadow@2x.webp",
+      "bytes": 69546,
+      "sha256": "b5664459afc6b4014d511409d3f31f0f2ba6feb594f4a24a6fec0ebef856b25e"
+    },
+    {
+      "filename": "virtanen-shape-surface@2x.webp",
+      "bytes": 62494,
+      "sha256": "71444c7262dd0f4a73e5246bf187ffe35adf53f2f152896941c3f7641d4805b9"
+    },
+    {
+      "filename": "virtanen-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

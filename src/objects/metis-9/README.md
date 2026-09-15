@@ -1,5 +1,7 @@
 # 9 Metis
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="selected-data"></a>
@@ -25,7 +27,7 @@ Full source face-centroid checks and 8192 sphere directions found no repeated ra
 
 ## Known problems
 
-Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 86.5 km reference sphere, with a -30 to 30 km legend. This includes global shape, not height above a gravitational equipotential.
+Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 86.5 km reference sphere, with a -30 to 30 km legend. This includes global shape, not height above a gravitational equipotential.
 
 Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
 

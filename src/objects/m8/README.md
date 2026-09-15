@@ -34,3 +34,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/README.md), [physical evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/physical-evidence.json) and [source dossier](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/source-dossier.json) preserve the Arias/Tiwari local interpretations, historical result identities and Hubble attempts with 0 and 9 matches against a 45-match gate. The papers’ 1250 pc local footprint conversion stays distinct from the adopted application distance. Use the [shared nebula guide](../../../docs/nebulae/README.md) for preparation.
 
 </details>
+
+## Compact delivery inputs
+
+The source-owned compact input pin in [delivery.json](source/delivery.json) retains the accepted pre-slice model, material and integration data. Ordinary preparation regenerates the runtime WebP Q80/A80 XYZ atlases and distant impostors without native observation downloads, star extraction or model fitting. Runtime images remain generated and ignored. The [shared bake guide](../../../docs/nebulae/README.md#compact-inputs-and-research-replay) distinguishes this replay from optional full research processing. Source observations and the model limitations above still apply.

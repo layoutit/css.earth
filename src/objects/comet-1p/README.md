@@ -1,5 +1,7 @@
 # 1P/Halley
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 The photographic dataset combines the accepted Giotto close-up with two Vega 2 views. About **28% of the same nucleus model** has accepted photographic coverage; uncertain and missing areas remain grid. The two menu choices are **Historical model** and **Giotto + Vega**, with Shadows off.
 
 ## Sources
@@ -86,7 +88,7 @@ The existing per-object camera `framingScale` is 0.7 so the elongated nucleus fi
 
 ## Material, orientation and placement
 
-The **Historical model** view uses the shared no-imagery grid over the source shape. The **Giotto + Vega** view uses photographic pixels only inside the accepted footprints and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. The existing uniform-flood option preserves image RGB values instead of applying an extra baked light direction. Navigation context is rendered from the same simplified geometry and material.
+The **Historical model** view uses the shared neutral-gray material over the source shape. The **Giotto + Vega** view uses photographic pixels only inside the accepted footprints and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. The existing uniform-flood option preserves image RGB values instead of applying an extra baked light direction. Navigation context is rendered from the same simplified geometry and material.
 
 These are presentation choices, not Halley's physical spin solution. No rotation-period fact or spin/tumble animation is supplied.
 

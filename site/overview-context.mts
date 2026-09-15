@@ -8,19 +8,20 @@ import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 const distance = (position: readonly number[], origin: readonly number[]) => Math.hypot(...position.map((value, axis) => value - origin[axis]));
 
 /** Match the camera's detail handoff at the body's centered apparent size. */
-export function bodyCardViewAtCamera(world: WorldCameraPose | null | undefined, frame: PreparedWorldCameraFrame | null | undefined, optics: ReturnType<ObjectWorldNavigation['optics']> | null | undefined, objectId: string) {
+export function bodyCardViewAtCamera(world: WorldCameraPose | null | undefined, frame: PreparedWorldCameraFrame | null | undefined, optics: ReturnType<ObjectWorldNavigation['optics']> | null | undefined, objectId: string, previous?: 'detail' | 'overview') {
   if (!world || !frame || !optics) return 'detail';
   const range = distance(world.pose.positionM, frame.originM);
   if (range <= frame.bodyRadiusM) return 'detail';
   const systemRadius = SYSTEM_FRAMING_RADII.get(objectId);
   if (systemRadius && optics.framingRadiusPixels) {
     // Switch halfway in zoom between the system framing and the body close-up.
-    return range >= systemOverviewDistance(frame.bodyRadiusM, systemRadius, optics) ? 'overview' : 'detail';
+    const threshold = systemOverviewDistance(frame.bodyRadiusM, systemRadius, optics);
+    return range >= threshold * (previous === 'overview' ? .9 : 1) ? 'overview' : 'detail';
   }
   // Centered size keeps panning or looking away from changing the card's zoom mode.
   const diameter = 2 * optics.focalPixels * frame.bodyRadiusM
     / Math.sqrt(range * range - frame.bodyRadiusM * frame.bodyRadiusM);
-  return diameter <= optics.detailHandoffDiameterPixels ? 'overview' : 'detail';
+  return diameter <= optics.detailHandoffDiameterPixels * (previous === 'overview' ? 1 / .9 : 1) ? 'overview' : 'detail';
 }
 
 /** Follow the prepared galaxy's fade, with a separate return threshold to avoid flicker. */

@@ -89,11 +89,14 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               footer.hidden = !incomingFooter;
               if (incomingFooter) {
                 footer.replaceChildren(...[...incomingFooter.childNodes].map(node => documentTarget.importNode(node, true)));
-                footer.setAttribute('aria-label', incomingFooter.getAttribute('aria-label') ?? '');
+                for (const name of ['href', 'aria-label', 'title', 'data-source-document', 'data-source-label']) {
+                  const value = incomingFooter.getAttribute(name);
+                  if (value === null) footer.removeAttribute(name); else footer.setAttribute(name, value);
+                }
               }
             } else if (incomingFooter) {
-              const uiLayer = documentTarget.querySelector('.planet-footer') ?? documentTarget.body;
-              uiLayer.append(documentTarget.importNode(incomingFooter, true));
+              const readout = documentTarget.querySelector('.planet-view-readout') ?? documentTarget.body;
+              readout.prepend(documentTarget.importNode(incomingFooter, true));
             }
             documentTarget.title = source.title;
             for (const incoming of source.head.querySelectorAll(

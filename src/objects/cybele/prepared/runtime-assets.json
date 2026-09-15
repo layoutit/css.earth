@@ -1,0 +1,45 @@
+{
+  "schema": "csscybele-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "cybele-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "cybele-elevation-shadow@2x.webp",
+      "bytes": 175342,
+      "sha256": "aa14d307095ae7295957cedf22c977a26f76bb53b5e7800336af9bec09be18b8"
+    },
+    {
+      "filename": "cybele-elevation-surface@2x.webp",
+      "bytes": 288026,
+      "sha256": "87f147ebd3d32edde732a017bf90e70d4ca144295f9bc0adba8b882682fe817c"
+    },
+    {
+      "filename": "cybele-elevation-thumbnail.webp",
+      "bytes": 5628,
+      "sha256": "83f3970ab33f0d18112a8b30dea42d54401f111cfad2096d2b9856f5f3311c8a"
+    },
+    {
+      "filename": "cybele-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "cybele-shape-shadow@2x.webp",
+      "bytes": 68304,
+      "sha256": "e2a1a86650ac101ba08a18e8feabc6fb8bd16d083e9d4b96f2cc493ad64c72fe"
+    },
+    {
+      "filename": "cybele-shape-surface@2x.webp",
+      "bytes": 55386,
+      "sha256": "1af90f7458723e863dcbe666ca2fe94332f7aa865533437cacbda94984230127"
+    },
+    {
+      "filename": "cybele-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

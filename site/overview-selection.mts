@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
+import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { ObjectEntry } from './object-schema.mts';
 interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraViewport; }
@@ -10,18 +10,13 @@ import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 export const solarSystemFocus = (objects: readonly ObjectEntry[]) => objects.find(object => object.classification === 'star' && object.distance.meters === 0);
 
-export function overviewExitDistance(frame: PreparedWorldCameraFrame, sunFrame: PreparedWorldCameraFrame) {
-  return Math.max(frame.bodyRadiusM * policy.minimumDistanceRadii,
-    distance(frame.originM, sunFrame.originM) * policy.orbitDistanceFactor);
-}
-
 export function selectionAtCamera({ world, viewport, objects, objectId, overview }: SelectionPublication & { objects: readonly ObjectEntry[]; objectId: string; overview: boolean }): OverviewSelection | null {
   const focus = solarSystemFocus(objects);
   const sun = focus?.worldFrame;
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
   if (!sun || !selected) return null;
   if (!overview) {
-    return distance(world.pose.positionM, selected.originM) > overviewExitDistance(selected, sun)
+    return distance(world.pose.positionM, sun.originM) >= policy.exitSunDistanceM
       ? { overview: true, objectId: focus.id } : null;
   }
   const view = presentWorldCamera(world, sun, viewport);

@@ -14,8 +14,8 @@
     "consumers": [
       "navigation"
     ],
-    "expectedBytes": 84913,
-    "expectedSha256": "f1bcf80ff89ea6207356640991aa0f39351f8c600a422e0da93b7a8aedcb2f56",
+    "expectedBytes": 40671,
+    "expectedSha256": "86ee292b9515161f1f3630b29c082b701c06bb149bbdc184c43abca835a3d108",
     "recipe": {
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
       "inputs": [

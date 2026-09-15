@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "62eaaaa02a8b873d8a52c2125c99e2ccb24717b9c6f85955e9eea1154114bf85"
+          "sha256": "4468d0c8e7dca4c8cbe41db4462019f49b4fc96b9ec72ecb9a8b2f7c7c3ceb8e"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "bd4961b7a3aa0bff69dba438785de1034cd76401a5ccd389c1b0baf35efd9deb"
+          "sha256": "32187c18aec7527a90c4205fd44bd0e70ff73aeb0df0c7fee5cca9fe4af7f482"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "421c58f1d49c33ee09ceff8ff2ae7c188efad82a345232490c7a7ac28d7f7ffc"
+        "sha256": "de45d03a81ac25113f815306fae2e08933f91ab7884ba6432131107aa8504040"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 4350.967077685714
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Tsuchinshan–ATLAS",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a18365c62767c0044e5758e00f75eb1ff44bae4ec2bab69ff3f0e70c2f911152"
+    "sha256": "c2428318b38fcedd7bcb9a91849c59ceb06a4935bf5b19c0452fe12fa05e530a"
   }
 }

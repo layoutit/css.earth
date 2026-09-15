@@ -452,10 +452,8 @@ try {
       "the source footer has no trailing separator");
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     if (config.mobile) {
-      assert.equal(await page.locator(".planet-resources-panel").isVisible(), false,
-        `${config.label}: resources stay out of the mobile shell`);
-      assert.equal(await attributionFooter.isVisible(), false,
-        `${config.label}: source attribution stays out of the mobile shell`);
+      assert.equal(await attributionFooter.isVisible(), true,
+        `${config.label}: the mobile footer retains the Sources link`);
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await about.click();
       assert.equal(await page.evaluate(() => window.scrollY), 0);

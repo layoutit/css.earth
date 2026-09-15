@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d8ac4e3e02549c6c0f0c03ff38e5820d1e6c4fa7a380bf7b48e4d4b0a091f85f"
+          "sha256": "482ef194add2a2ed673fea3b09ddc5346de382f7dc47d98c887178f20e15631d"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "fcefacefcbbfa4288f25cf386345fef341de0e3c413a629eb60dcf5108483a1f"
+          "sha256": "791c829c2f22a2ceb85a02520ad275ffa659e7f90c20b071de3d0cfbe84621b8"
         },
         {
           "id": "acquisition",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "54428e6e7d23d425e33974581934a751441a723859a296e8bac222c70d2e99b4"
+        "sha256": "c5ac568687a237dc41acc5adfc7984a4a18cd77bb760010c8516ad6f2f57b86e"
       }
     },
     "worldFrame": {
@@ -114,6 +114,7 @@
       "bodyRadiusM": 1876.8154597813798
     },
     "catalog": {
+      "illustrationLenses": ["model"],
       "name": "Ikeya–Zhang",
       "classification": "comet",
       "color": "#b8b6b2",
@@ -129,6 +130,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d4cf1d2bbfd5fee5b3807e3cf3ecb71d32ac7d0848fe64e45ad6f69a404e7974"
+    "sha256": "8c2a2a43e5623675ea8c75830fb99bef02953ce09867dc398885a7d4ea2f4ece"
   }
 }

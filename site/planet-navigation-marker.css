@@ -23,3 +23,16 @@
   border: 1px solid currentColor;
   border-radius: 50%;
 }
+
+.catalog-navigation-marker { display: grid; place-items: center; }
+.catalog-navigation-marker::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.context-navigation-thumbnail { display: grid; place-items: center; }
+.context-navigation-thumbnail img { width: 16px; height: 16px; }

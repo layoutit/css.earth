@@ -1,0 +1,45 @@
+{
+  "schema": "cssflora-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "flora-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "flora-elevation-shadow@2x.webp",
+      "bytes": 189818,
+      "sha256": "95428f823d0e7d9cf3125ebd5807698cb96deae3cbd12a2d670ee09629dc0c23"
+    },
+    {
+      "filename": "flora-elevation-surface@2x.webp",
+      "bytes": 337492,
+      "sha256": "dac64ed2fec75a7f763e09ff1d960a450320b206a3b3aa1df04e51f3601ba251"
+    },
+    {
+      "filename": "flora-elevation-thumbnail.webp",
+      "bytes": 6162,
+      "sha256": "6177ec8ccefb65120562f6c98944ef78a55be5548468145f0eec3abc29a81dd4"
+    },
+    {
+      "filename": "flora-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "flora-shape-shadow@2x.webp",
+      "bytes": 69470,
+      "sha256": "033c70e2b5edc0afe09f2ff13b7a608c8dba34b9519eb52ac1420a95076235ba"
+    },
+    {
+      "filename": "flora-shape-surface@2x.webp",
+      "bytes": 61586,
+      "sha256": "9130ad89732f2dde4dd9d655d37f6ed6961afeeae19dfc81d1903b9117797281"
+    },
+    {
+      "filename": "flora-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

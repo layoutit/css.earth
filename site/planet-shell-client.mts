@@ -1,7 +1,7 @@
+import { createLabelOcclusionController } from './label-occlusion-controller.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
-import { createMotionRecorder, runMotionScript } from './motion-script.mts';
 const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { readInitialFocus } from './focus-catalog.mts';
@@ -15,16 +15,18 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
 import { createDatasetContextController } from './dataset-context-controller.mts';
+import { renderSourceLink, sourceDocuments } from './source-link.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
 import { createFeatureBrowser } from "./feature-browser.mts";
 import { objectSearchLabels, searchObjects } from './object-search.mts';
+import { presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
@@ -48,6 +50,8 @@ export function mountPlanetShell({
   onSkyContrastChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
+  illustrationModelsEnabled = false,
+  onIllustrationModelsChange = () => {},
   asteroidBodiesEnabled = false,
   onAsteroidBodiesChange = () => {},
   asteroidOrbitsEnabled = false,
@@ -81,8 +85,10 @@ export function mountPlanetShell({
   let information: HTMLElement | null = null;
   function updateBodyCard(world = camera?.navigation?.capture()) {
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.planet-information-panel');
+    const previous = information?.dataset.cardView;
     const view = cardNavigation?.view ?? bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
-      camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId);
+      camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId,
+      previous === 'detail' || previous === 'overview' ? previous : undefined);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
   }
   function updateOverview(force = false, world = camera?.navigation?.capture()) {
@@ -100,10 +106,11 @@ export function mountPlanetShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, onCategoryChange));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { onCategoryChange, illustrationModelsEnabled }));
     // Hover, focus or press on another body fetches its card before the click.
     own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
+    own(createLabelOcclusionController(documentTarget));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
     }));
@@ -277,9 +284,14 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
         onOrbitRendererChange(renderer) { orbitRenderer = renderer; onOrbitRendererChange(renderer); },
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
+        onIllustrationModelsChange(enabled) {
+          illustrationModelsEnabled = enabled;
+          objectBrowser.setIllustrationModelsEnabled(enabled);
+          onIllustrationModelsChange(enabled);
+        },
         onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
@@ -365,7 +377,7 @@ function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
   { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange = () => {}, heliosphereEnabled, onHeliosphereChange,
-    asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
+    illustrationModelsEnabled, onIllustrationModelsChange, asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -373,6 +385,7 @@ function createSettingsController(
   }
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
+  const illustrationModels = documentTarget.querySelector(".planet-illustration-models-setting");
   const asteroidBodies = documentTarget.querySelector(".planet-asteroid-bodies-setting");
   const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
   const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
@@ -385,6 +398,7 @@ function createSettingsController(
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
+      !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
       !(asteroidBodies instanceof windowTarget.HTMLInputElement) ||
       !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
       !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
@@ -396,7 +410,7 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  for (const input of [motion, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = false;
+  for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -420,6 +434,16 @@ function createSettingsController(
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
+  const renderIllustrationModels = () => {
+    illustrationModels.checked = illustrationModelsEnabled === true;
+    documentTarget.body.dataset.illustrationModels = illustrationModels.checked ? 'on' : 'off';
+  };
+  illustrationModels.addEventListener("change", () => {
+    illustrationModelsEnabled = illustrationModels.checked;
+    renderIllustrationModels();
+    onIllustrationModelsChange(illustrationModelsEnabled);
+  }, { signal: events.signal });
+  renderIllustrationModels();
   const renderAsteroidBodies = () => {
     asteroidBodies.checked = asteroidBodiesEnabled === true;
     documentTarget.body.dataset.asteroidBodies = asteroidBodies.checked ? 'on' : 'off';
@@ -450,27 +474,6 @@ function createSettingsController(
     onAsteroidLabelsChange(asteroidLabelsEnabled);
   }, { signal: events.signal });
   renderAsteroidLabels();
-  const motionScript = documentTarget.querySelector(".planet-motion-script");
-  if (motionScript instanceof windowTarget.HTMLButtonElement) {
-    motionScript.addEventListener("click", () => {
-      motionScript.disabled = true;
-      runMotionScript(documentTarget, windowTarget).catch(error => windowTarget.alert(String(error))).finally(() => { motionScript.disabled = false; });
-    }, { signal: events.signal });
-  }
-  const motionRecord = documentTarget.querySelector(".planet-motion-record");
-  if (motionRecord instanceof windowTarget.HTMLButtonElement) {
-    let recorder: ReturnType<typeof createMotionRecorder> | null = null;
-    motionRecord.addEventListener("click", () => {
-      if (!recorder) { recorder = createMotionRecorder(documentTarget, windowTarget); motionRecord.textContent = "Stop"; motionRecord.setAttribute("aria-pressed", "true"); return; }
-      const recording = recorder.stop(); recorder = null;
-      motionRecord.textContent = "Record"; motionRecord.setAttribute("aria-pressed", "false");
-      const text = JSON.stringify(recording);
-      (windowTarget as unknown as { __cssEarthMotion?: string }).__cssEarthMotion = text;
-      console.log("MOTION_RECORDING", text);
-      windowTarget.navigator.clipboard?.writeText(text).then(() => windowTarget.alert(`Recorded ${recording.length} events; copied to clipboard.`),
-        () => windowTarget.alert(`Recorded ${recording.length} events; see console (MOTION_RECORDING).`));
-    }, { signal: events.signal });
-  }
   orbitRendererSelect.value = orbitRenderer;
   orbitRendererSelect.addEventListener("change", () => {
     const next = orbitRendererSelect.value;
@@ -503,14 +506,14 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = true;
+      for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = true;
       delete documentTarget.body.dataset.skyContrast;
     },
   });
 }
 
 function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
-  onCategoryChange: (classification: string | null) => void = () => {}) {
+  { onCategoryChange = () => {}, illustrationModelsEnabled = false }: Pick<ShellOptions, 'onCategoryChange' | 'illustrationModelsEnabled'> = {}) {
   const setPanelHidden = (panel: HTMLElement, hidden: boolean) => {
     if (panel.hidden !== hidden) panel.hidden = hidden;
     const inert = hidden || panel.ariaBusy === 'true';
@@ -540,6 +543,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     throw new Error("Planet shell object browser has no objects.");
   }
   const searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+  const sourceLinks = sourceDocuments(documentTarget);
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
@@ -568,6 +572,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
+  let showingSearchResults = false;
   let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
@@ -603,10 +608,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
       || !matchesObjectCategory(item.dataset.objectClassification, classification);
     refreshChunks();
-    visibleObjects = items.filter(item => !item.hidden).length;
+    visibleObjects = items.filter(item => !item.hidden).length + visibleOverviews;
     empty.hidden = visibleObjects > 0;
-    const systemHeading = system?.querySelector<HTMLElement>(':scope > .planet-selected-panel');
-    if (systemHeading) systemHeading.hidden = classification === 'nebula';
+    presentSearchResults(browser, showingSearchResults, classification);
   };
 
   const events = new AbortController();
@@ -618,16 +622,19 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const overviewName = () => ({ 'solar-system': 'Solar System', 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
+  let visibleOverviews = 0;
+  let visibleDestinations = 0, visibleFeatures = 0;
+  const updateEmpty = () => { empty.hidden = visibleObjects + visibleDestinations + visibleFeatures > 0; };
   const destinations = createDestinationBrowser({
     documentTarget,
-    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onResults(count) { visibleDestinations = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
     onReset() { render(false); },
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
     documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
-    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
   });
   lifetime.onDispose(() => features?.destroy());
@@ -653,7 +660,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     });
   };
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
+  const publishSourceContext = () => {
+    const sourceFocus = preparedFocus?.id ?? '';
+    if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
+    renderSourceLink(documentTarget, preparedFocus ? `focus:${preparedFocus.id}`
+      : overview ? `overview:${overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
+  };
   const filter = (resetScroll = true) => {
+    const searching = browsing && (search.value.trim().length > 0 || browseAll);
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
@@ -661,21 +675,24 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     setPanelHidden(information, query.length > 0);
     // A camera handoff republishes the same card context. Its results, counts
     // and chips are already current; only a closed browser needs reopening.
-    if (query === filteredQuery) {
+    if (query === filteredQuery && searching === showingSearchResults) {
       setPanelHidden(browser, query.length === 0);
       markCategory(filteredClassification);
       return;
     }
     filteredQuery = query;
+    showingSearchResults = searching;
+    visibleOverviews = presentOverviewResults(browser, searching ? query : '');
+    presentSearchResults(browser, searching, activeCategory);
     filteredClassification = null;
     if (resetScroll) resetResultsScroll();
     markCategory();
     destinations?.setOpen(query.length > 0);
-    const focused = preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
-    const galactic = !focused && query === 'milky way';
+    const focused = !searching && preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
+    const galactic = !searching && !focused && query === 'milky way';
     const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
     const galaxySelected = focused && preparedFocus && neighborCard && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === preparedFocus!.id);
-    const largeScale = galaxySelected ? neighborCard : !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
+    const largeScale = galaxySelected ? neighborCard : !searching && !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
     if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) selectGalaxyNeighbor(neighborCard, galaxySelected ? preparedFocus!.id : 'milky-way');
     for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
     if (focusCard) setPanelHidden(focusCard, !focused);
@@ -687,14 +704,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       void destinations?.search(''); void features?.search('');
       return;
     }
-    browser.ariaLabel = galactic ? 'Milky Way' : 'Celestial objects';
+    browser.ariaLabel = searching ? 'Search results' : galactic ? 'Milky Way' : 'Celestial objects';
     if (galactic || largeScale) {
       if (largeScale) browser.ariaLabel = largeScale.dataset.largeScaleName!;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
       void destinations?.search(''); void features?.search('');
       return;
     }
-    const result = searchObjects(searchLabels, query, activeCategory);
+    const result = searchObjects(searchLabels, query, activeCategory, { illustrations: illustrationModelsEnabled });
     const { classification, systemName, showAll } = result;
     markCategory(classification);
     filteredClassification = classification;
@@ -714,12 +731,13 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     for (const tab of tabs) {
       requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
     }
-    const nextCategory = initialCategory ?? result.category;
+    const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
     empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
+    publishSourceContext();
     if (!next) browsing = false;
     if ((preparedFocus || overview) && !next) next = true;
     // Only an actual open/close transition may reset a scrolled result list.
@@ -765,12 +783,16 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   for (const button of categoryButtons) {
     button.addEventListener('click', event => {
       event.preventDefault();
+      if (button.ariaPressed === 'true') {
+        search.value = '';
+        render(false);
+        return;
+      }
       search.value = button.dataset.searchQuery ?? "";
-      search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
+      browsing = true;
+      browseAll = false;
+      render(true);
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
-      // Frame every body of this classification; the router owns the camera flight.
-      button.dispatchEvent(new windowTarget.CustomEvent('categorynavigate', { bubbles: true,
-        detail: { classification: button.dataset.searchClassification } }));
     }, { signal: events.signal });
     button.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
@@ -804,7 +826,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
       // Enter opens the first result. The category tabs come first in the browser but are not results.
-      const first = [...browser.querySelectorAll<HTMLElement>("a, button")]
+      const first = [...browser.querySelectorAll<HTMLElement>("summary, a, button")]
         .find(control => (event.key !== "Enter" || control.getAttribute("role") !== "tab") && visibleControl(control));
       if (first) {
         event.preventDefault();
@@ -858,6 +880,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }
   };
   return Object.freeze({
+    setIllustrationModelsEnabled(enabled: boolean) {
+      if (illustrationModelsEnabled === enabled) return;
+      illustrationModelsEnabled = enabled;
+      filteredQuery = null;
+      if (open) filter(false);
+    },
     previewOverview(scope: OverviewScope = 'solar-system') {
       const previous = { selectedObjectName, overview, overviewScope, preparedFocus, browsing };
       preparedFocus = null;
@@ -1020,6 +1048,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   let gesture: SheetGesture | null = null;
   let dragged = false;
   let snapFrame = 0;
+  let readingPosition: { key: string; top: number } | null = null;
+  let handleReadingPosition: number | null = null;
+  const readingKey = () => `${body.dataset.objectShell}:${documentTarget.documentElement.dataset.selection}:${
+    documentTarget.querySelector<HTMLElement>('.planet-object-browser')?.dataset.sourceFocus ?? ''}`;
   lifetime.onDispose(() => {
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = 0;
@@ -1049,6 +1081,9 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
     const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
     sheet.style.setProperty("--sheet-snap-duration", `${duration}ms`);
+    if (state === 'full' && next !== 'full') readingPosition = { key: readingKey(), top: handleReadingPosition ?? sheet.scrollTop };
+    handleReadingPosition = null;
+    const restoreScroll = next === 'full' && state !== 'full' && readingPosition?.key === readingKey() ? readingPosition.top : null;
     if (next !== "full") sheet.scrollTop = 0;
     state = next;
     body.dataset.sheet = next;
@@ -1057,7 +1092,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
-      if (!lifetime.disposed) sheet.style.removeProperty("transform");
+      if (!lifetime.disposed) {
+        sheet.style.removeProperty("transform");
+        if (restoreScroll !== null) sheet.scrollTop = restoreScroll;
+      }
     });
   };
   // Scrolled content keeps its own drags until it returns to the top.
@@ -1075,6 +1113,9 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     dragged = false;
     if (!mobile.matches || !event.isPrimary || event.button > 0 || ownsGesture(event.target)) return;
     const fromHandle = event.target instanceof windowTarget.Node && handle.contains(event.target);
+    // Native focus can scroll the checkbox into view before its change event.
+    // Save the reading position before that default action, including a drag.
+    if (fromHandle && state === 'full') handleReadingPosition = sheet.scrollTop;
     if (state === "full" && !fromHandle && scrolled(event.target)) return;
     const start = currentOffset();
     gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, start, offset: start,

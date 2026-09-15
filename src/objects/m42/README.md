@@ -34,3 +34,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 The [physical ledger](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/physical-evidence.json) separates observed positions, published models and authored parameters; [depth-model.json](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/depth-model.json) is the runnable hypothesis. The [fixed lab README](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/README.md) preserves the earlier 355-support and saved-100%-detail comparisons, including their normalized-image error limits. General preparation is documented in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
+
+## Compact delivery inputs
+
+The source-owned compact input pin in [delivery.json](source/delivery.json) retains the accepted pre-slice model, material and integration data. Ordinary preparation regenerates the runtime WebP Q80/A80 XYZ atlases and distant impostors without native observation downloads, star extraction or model fitting. Runtime images remain generated and ignored. The [shared bake guide](../../../docs/nebulae/README.md#compact-inputs-and-research-replay) distinguishes this replay from optional full research processing. Source observations and the model limitations above still apply.

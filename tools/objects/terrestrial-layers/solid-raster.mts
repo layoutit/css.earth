@@ -39,6 +39,7 @@ import {loadControlledObservationGeometry,matchObservedColorLevels} from './phot
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { radialModelForLens } from './radial-models.mts';
+import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
 
 export function createRasterEmitter(publicDirectory:string, publicBase:string) {
   return async (filename:string, pipeline:Sharp, encoding:WebpOptions = { lossless: true, effort: 4 }) => {
@@ -184,10 +185,11 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const terrain = requireRecord(requireRecord(modelConfig.geometry).radialTerrain);
     const entry = entries.find(input => input.path === terrain.path);
     if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
-    const rgb = Buffer.alloc(width * height * 3);
-    const missingImagery = new Uint8Array(width * height).fill(1);
-    surfaces.push(await packSurface(view.id, rgb, missingImagery, { label: view.label,
-      appearance: 'Shared no-imagery grid over source geometry; not observed surface color or albedo.',
+    const rgb = shapeMaterialRaster(width, height);
+    surfaces.push(await packSurface(view.id, rgb, null, { label: view.label,
+      appearance: SHAPE_MATERIAL.appearance,
+      material: { kind: 'unobserved-neutral', color: SHAPE_MATERIAL.color },
+      ...(config.raster.reportMissingPixels ? { missingPixels: width * height } : {}),
       source: { id: entry.id, sha256: entry.expectedSha256 } }));
   }
   for (const recipe of config.raster.surfaceObservations ?? []) {
