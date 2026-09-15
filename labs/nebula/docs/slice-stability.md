@@ -33,8 +33,8 @@ From the repository root, with pinned inputs and completed results available:
 pnpm install --frozen-lockfile
 pnpm lab:nebula
 # In a second terminal at the repository root after the lab is ready:
-node --experimental-strip-types labs/nebula/src/run.ts browser-reconstruction-tabs
-node --experimental-strip-types labs/nebula/src/run.ts browser-reconstruction-reference
+node --experimental-strip-types labs/nebula/run.mts browser-reconstruction-tabs
+node --experimental-strip-types labs/nebula/run.mts browser-reconstruction-reference
 ```
 
 Reuse a running lab. Both commands inspect the `.local/nebula-lab/alignment-material-acceptance.json` ledger by default, accept an explicit ledger/base URL/output directory, and write local screenshots/reports. They never start image removal or reconstruction.

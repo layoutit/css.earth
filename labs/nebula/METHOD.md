@@ -1,6 +1,6 @@
 # Nebula image processing method
 
-This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches. The accepted LMC workflow is executable with `pnpm lab:nebula:bake`; [baking.md](docs/baking.md) defines the clean-start command, stage inputs and reproducibility boundary.
+This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches. The native LMC research workflow is executable with `pnpm lab:nebula:bake --research`; [baking.md](docs/baking.md) defines the clean-start command, stage inputs and reproducibility boundary.
 
 **Material qualification is now stricter:** a real density field painted with one XY photograph at every depth still extrudes the photograph's structures. New accepted clouds require color attached to finite 3D emitters, depth-aware mixing, a regression that rejects the old projected painter, and front/oblique/side inspection. Preserving a front photograph while smearing it sideways fails; averaging away its details also fails. The historical density/symmetry/shape recipes documented below remain reproducible inspection baselines, not proof of this new gate. Requalify their material method before new promotion; do not silently change previously pinned app assets.
 
@@ -13,6 +13,8 @@ Use [Nebula Compiler Process Guidelines](docs/nebula-compiler-guidelines.md) bef
 **Current inference stage:** **Nebula → Compile nebula** runs the authorized pipeline from pinned observations to one prepared cloud. Independent per-image normalization forms a combined relative-luminosity target with explicit coverage. A bounded positive multiscale fit supplies projected emission; an optional velocity-conditioned scaffold and an explicitly uncertain halo supply its depth. Near/far allocation and thickness remain assumptions. Every image lens repaints the same geometry and alpha, and compact lights use observed sky positions with conditional field depths. None of these products is calibrated gas density or confirmed stellar membership. The [compiler guide](docs/emission-compiler.md) records setup, controls, replay and limits; visual acceptance remains open.
 
 **Current density stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
+
+Scientific algorithms live in the private reconstruction package, shared fields/contracts in volume-core, and offline replay in volume-bake. The lab owns recipes, application state and durable jobs; volume-viewer consumes prepared assets through an injected host renderer. Ordinary app installation uses `tools/nebula/prepare.mts` without scientific refitting. See [ownership and verification](docs/internal-packages.md).
 
 ## Density method: order of operations
 

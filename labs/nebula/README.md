@@ -32,30 +32,21 @@ Keep the shared density, star catalogue and calibration inputs: they reproduce t
 
 ```text
 labs/nebula/
-├── AGENTS.md             # Usage, ownership and development boundaries
-├── METHOD.md             # Repeatable scientific/processing method
+├── packages/
+│   ├── lab/              # React shell, pages, state, server, CLI and host adapters
+│   ├── volume-core/      # Validated contracts, coordinates and numerical fields
+│   ├── volume-bake/      # Deterministic compact replay and offline image encoding
+│   ├── reconstruction/   # Acquisition, registration, separation and scientific fitting
+│   └── volume-viewer/    # Retained scene and camera through an injected renderer
+├── run.mts               # Research commands and test discovery
+├── models/               # Object recipes, evidence and compact research inputs
+├── sources/              # Acquisition metadata and credits
 ├── docs/                 # Current workflow and archived research
-├── src/
-│   ├── components/       # React UI
-│   ├── catalogue/        # Archive discovery, receipts and metadata browser
-│   ├── alignment/        # Registration and saved image placement
-│   ├── star-removal/     # Automatic NOX pipeline
-│   ├── pipeline/         # Reproducible command and stage orchestration
-│   ├── reconstruction/   # Volume model, worker and saved variants
-│   ├── density/          # Full prior and cutoff preparation
-│   ├── stars/            # Catalogue and particle tooling
-│   ├── delivery/         # Pinned lab results and sky frames for app volumes
-│   ├── viewer/           # Retained TypeScript PolyCSS scene
-│   ├── utils/            # Jobs, stores and shared utilities
-│   ├── cli/              # Offline preparation commands
-│   └── browser/          # Browser checks
-├── models/
-│   ├── lmc/              # LMC recipes, evidence and prepared models
-│   ├── smc/              # SMC recipes, evidence and prepared models
-│   └── messier/          # Discovery catalogue and its source evidence
-└── sources/              # Acquisition metadata and credits
+└── nebula_lab_refactor.md # Verified progress and remaining migration work
 ```
 
-Rebuild the selected sources with **`pnpm lab:nebula:bake`**, then check them with **`pnpm lab:nebula:verify`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
+Reprocess the saved LMC research recipe with **`pnpm lab:nebula:bake --research`**, then check its native artifacts with **`pnpm lab:nebula:verify`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
+
+The five packages are private workspace owners, with explicit public exports. See [package boundaries and validation](docs/internal-packages.md) for the dependency graph, CI scope and isolated replay gates. Ordinary application preparation enters through `tools/nebula/prepare.mts` (`pnpm prepare:nebulae`); it does not invoke the research CLI or fit observations.
 
 Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the workflow](docs/workflows.md), [processing method](METHOD.md), or [documentation index](docs/README.md). Source/registration evidence and prior failed experiments remain accessible without adding more UI tabs.

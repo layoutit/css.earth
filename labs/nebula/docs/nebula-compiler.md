@@ -163,10 +163,10 @@ pnpm build:packages
 python3 -m venv .local/open-star-removal/venv
 .local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
-node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json
-node --experimental-strip-types labs/nebula/src/run.ts prepare-observation-structures labs/nebula/models/helix/observation-structures.json
-node --experimental-strip-types labs/nebula/src/run.ts prepare-observation-geometry labs/nebula/models/helix/observation-geometry.json
-node --experimental-strip-types labs/nebula/src/run.ts test observation-structure-source structure-inspection detect-shapes geometry-model
+node --experimental-strip-types labs/nebula/run.mts prepare-observations labs/nebula/models/helix/observations.json
+node --experimental-strip-types labs/nebula/run.mts prepare-observation-structures labs/nebula/models/helix/observation-structures.json
+node --experimental-strip-types labs/nebula/run.mts prepare-observation-geometry labs/nebula/models/helix/observation-geometry.json
+node --experimental-strip-types labs/nebula/run.mts test observation-structure-source structure-inspection detect-shapes geometry-model
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 
@@ -213,9 +213,9 @@ pnpm build:packages
 python3 -m venv .local/open-star-removal/venv
 .local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
-node --experimental-strip-types labs/nebula/src/run.ts prepare-emission labs/nebula/models/helix/model-prior.json
-node --experimental-strip-types labs/nebula/src/run.ts prepare-nebula-structures labs/nebula/models/helix/structure-map.json
-node --experimental-strip-types labs/nebula/src/run.ts test structure-map structure-wavelets
+node --experimental-strip-types labs/nebula/run.mts prepare-emission labs/nebula/models/helix/model-prior.json
+node --experimental-strip-types labs/nebula/run.mts prepare-nebula-structures labs/nebula/models/helix/structure-map.json
+node --experimental-strip-types labs/nebula/run.mts test structure-map structure-wavelets
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 

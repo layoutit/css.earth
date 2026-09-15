@@ -6,7 +6,7 @@ Local development tooling, separate from the production website. Current objects
 
 ## Usage
 
-From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pnpm build:packages`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; `pnpm lab:nebula:verify` validates the completed native, reconstruction and delivery artifacts without processing; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
+From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pnpm build:packages`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` replays the three accepted LMC lenses from compact inputs; `--research` explicitly selects their native processing recipe; `pnpm lab:nebula:verify` validates the completed native, reconstruction and delivery artifacts without processing; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
 
 - `/alignment`: inspect the complete density field, choose an image, adjust placement/tone, compare Original / Without stars / Residual, and run optional Quick preview or full Remove stars.
 - `/catalogue`: browse all 110 Messier objects, survey images, bounded archive metadata and the SIMBAD-linked [paper catalogue](docs/paper-catalogue.md); [workflow and limits](docs/archive-catalogue.md). Keep this independent of reconstruction subjects, processing and saved camera state. Retain close-up footprints/provenance for future named detail regions; catalogue metadata is neither processing acceptance nor measured 3D structure.
@@ -19,31 +19,29 @@ From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pn
 ## Organization
 
 ```text
-src/
-  components/       React panels and reusable controls
-  catalogue/        archive discovery, query receipts and metadata browser
-  alignment/        source registration, placement and saved fits
-  star-removal/     NOX processing, residuals and saved removal state
-  pipeline/         source acquisition, stage replay and completion receipts
-  reconstruction/   structure/depth model, bake worker and saved variants
-  density/          unchanged prior and integrated-signal inspection
-  stars/            particle/catalogue preparation and stellar overlays
-  delivery/         pinned lab-to-app volume handoff and sky-frame conversion
-  viewer/           retained plain-TypeScript PolyCSS scene
-  utils/            shared stores, local jobs and path resolution
-  cli/              offline preparation commands
-  browser/          real browser checks
-models/
-  lmc/              LMC inputs, recipes and prepared models
-  smc/              SMC inputs, recipes and prepared models
-  messier/          discovery identities, sky extents and source evidence
+packages/
+  lab/src/{shell,pages,features,state,ui}/       React and application state
+  lab/src/server/{routes,jobs,workers,workflows}/ durable processing and orchestration
+  lab/src/adapters/                             explicit cssEarth integration
+  lab/src/cli/                                 research commands and test discovery
+  lab/browser/                                 real browser checks and helpers
+  volume-core/src/                             contracts, frames and pure numerics
+  volume-bake/src/                             deterministic compact replay and encoding
+  reconstruction/src/                         configured scientific methods
+  volume-viewer/src/                          retained scene and camera APIs
+models/                                      object recipes and source evidence
+sources/                                     acquisition metadata and credits
+run.mts                                      research CLI entrypoint
 ```
+
+- Internal dependency graph: lab imports reconstruction, volume-bake, volume-viewer and volume-core; reconstruction, baking and viewing import volume-core, never one another. Use explicit package exports. Repository renderer/source imports belong only in lab host adapters. Every authored source file stays at or below 600 physical lines. See [internal packages](docs/internal-packages.md); remaining verification is tracked in the local `nebula_lab_refactor.md` plan.
+- Ordinary cssEarth preparation enters through `tools/nebula/prepare.mts` and the baker; research commands enter through `labs/nebula/run.mts`. Never make compact app replay depend on the lab CLI, native acquisition, NOX or fitting.
 
 - React owns UI markup, control state and interaction. The PolyCSS renderer remains a plain TypeScript library mounted through a stable element/ref. UI rerenders must not recreate the cloud scene.
 - Keep one reusable lab shell, selected by object configuration: `density` paints an independent model; `symmetry` fits an explicitly symmetric emission prior; `inference` compares unconstrained image evidence and authored shape hypotheses. These are methods, not separate apps named after LMC, M2–9 or Helix. Shared observation alignment and star separation precede any image-driven method. Alignment must be usable before a volume exists.
 - Observation alignment uses a common north-up sky frame and the exact same native-pixel transform for Original / Without stars / Residual. Publisher astrometry is an initial registration, not a passed star-match check. Keep full native footprints, independent matched-star residuals, and manual inspection adjustments distinct. Processing needs authorization for its sources; an authorized full Compile includes its source stages and requires no repeated acceptance clicks. Preserve their validation and receipts.
 - Reuse css.earth's existing visual language and input policy. Keep the lab a compact tool: visible controls, brief status, longer interpretation in tooltips/popovers or docs.
-- Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside the module; browser checks live in `browser/`.
+- Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside their owning modules; application browser checks live in `packages/lab/browser/`.
 - Source originals and large native/intermediate outputs stay in the ignored local cache. Keep credits, source hashes, registration evidence and reproducible recipes with the model. No copies of large assets just to rearrange folders.
 - For LMC, keep only the selected VISTA, Horálek and WISE image candidates. Do not recommit retired cloud render banks or auto-discover old cache images. Preserve shared density/stars, coordinate-only calibration and research notes; new candidates require explicit scope.
 - Keep `models/lmc/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. All derived images (including original-image previews, reference panels, separation previews and density/app slices) are ignored; compact grids, star inputs, recipes and registration metadata remain tracked. The full bake restores the configured app textures against immutable delivery hashes; `prepare:nebulae` verifies or rebuilds them before app startup/build.
@@ -81,7 +79,7 @@ models/
 
 ## Validation
 
-Use targeted lab typechecking/tests and the affected browser flow. Verify actual output hashes, source identity, full extent, geometry/handedness, all three slice axes, and source-switch/refresh behavior. Keep numerical convergence thresholds fixed; increase sampling at its owning layer when needed. Inspect front and oblique views before claiming visual quality.
+Use `pnpm typecheck:nebula`, `pnpm check:nebula-boundaries`, targeted tests through `node labs/nebula/run.mts test <names>`, and the affected browser flow. The routine CI selection requires no native assets; the complete lab suite and saved-output browser gates have separate prerequisites in [internal packages](docs/internal-packages.md). Verify actual output hashes, source identity, full extent, geometry/handedness, all three slice axes, and source-switch/refresh behavior. Keep numerical convergence thresholds fixed; increase sampling at its owning layer when needed. Inspect front and oblique views before claiming visual quality.
 
 Do not infer completion from process launch or exit code alone. Do not run unrelated production suites during lab iteration. No review council or external-agent review is required for routine lab changes.
 

@@ -2,6 +2,8 @@
 
 ## Current app
 
+- [Internal packages and validation](internal-packages.md): ownership, application/research entrypoints, routine CI and separate artifact/cold gates.
+
 - [Next steps](../NEXTSTEPS.md): current compiler assessment and preserved handoff history.
 - [Research and papers](../RESEARCH.md): implemented method, novelty assessment and objects without a simulation.
 - [Workflow](workflows.md): the main Nebula compiler, source diagnostics and the separate density Preview workflow.

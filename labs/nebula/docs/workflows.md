@@ -14,6 +14,8 @@ Open [Alignment](http://127.0.0.1:4331/alignment). Startup restores neutral dens
 
 Do not restart an already running server to switch views. Legacy `?subject=…&tab=alignment|reconstruction` links normalize to the corresponding path. Object selection remains in the URL; camera and per-image adjustments are retained locally.
 
+The research command entrypoint is `labs/nebula/run.mts`; its registry and server live in `packages/lab`. React owns one application tree and its control portals; the retained viewer owns scene nodes. Application installation separately uses `tools/nebula/prepare.mts` with accepted compact inputs. See [package ownership and validation](internal-packages.md).
+
 ## 1. Align an image
 
 1. Choose **LMC** or **SMC** in the header, then **Alignment**.

@@ -27,7 +27,7 @@ pnpm prepare:nebulae
 pnpm dev
 ```
 
-`pnpm prepare:nebulae` handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/machine/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 integrates its retained RGB emission grid; the compiler objects replay fitted fields and saved materials. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
+`pnpm prepare:nebulae` enters through `tools/nebula/prepare.mts` and the private volume-bake package, without invoking the lab CLI. It handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/machine/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 integrates its retained RGB emission grid; the compiler objects replay fitted fields and saved materials. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
 
 Source recipes, provenance, requests, compact pre-slice bake inputs and small object descriptors are committed. Textures, prepared descriptors and receipts under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
 
@@ -42,13 +42,14 @@ Production builds require all configured packages, including when invoking
 To restore one of the six Galactic nebulae through its existing delivery recipe:
 
 ```sh
-node --experimental-strip-types labs/nebula/src/run.ts prepare-nebula-objects --object=helix --if-missing
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node tools/nebula/prepare.mts --object=helix --if-missing
 pnpm prepare:sources
 ```
 
 The processing prerequisites above still apply. Restart the development server
-after restoration; available banks are selected once at startup. LMC keeps the
-existing `bake-nebula --if-missing` preparation used by `pnpm prepare:nebulae`.
+after restoration; available banks are selected once at startup. LMC is selected through the same application entrypoint; the lab research CLI is not part of this replay.
 
 ## Spectral datasets and source cards
 
