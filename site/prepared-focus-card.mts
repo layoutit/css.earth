@@ -17,6 +17,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
+  const sourceRows = [...root.querySelectorAll<HTMLElement>('[data-focus-source-row]')];
   const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
   const events = new AbortController();
   const unavailable = root.querySelector<HTMLElement>('[data-focus-unavailable]');
@@ -99,6 +100,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     for (const [index, link] of links.entries()) {
       const source = sources[index];
       link.hidden = !source;
+      if (sourceRows[index]) sourceRows[index].hidden = !source;
       if (source) { link.href = source.url; link.textContent = source.citation; }
       else { link.removeAttribute('href'); link.textContent = ''; }
     }

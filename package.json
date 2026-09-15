@@ -24,6 +24,7 @@
     "prepare:factsheets": "node tools/prepare-factsheets.mts",
     "prepare:text": "node tools/prepare-text.mts",
     "prepare:navigation": "node tools/prepare-navigation.mts",
+    "prepare:sidebar-thumbnails": "node tools/prepare-sidebar-thumbnails.mts",
     "prepare:planet-title-sources": "node tools/prepare-planet-title-sources.mts",
     "prepare:overview-titles": "node tools/prepare-overview-titles.mts",
     "prepare:titles": "node tools/prepare-shell-titles.mts",
