@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso0936a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
-      "title": "Lagoon Nebula · ESO · optical",
+      "title": "Lagoon Nebula \u00b7 ESO \u00b7 optical",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1101d/",
       "sourceUrl": "https://www.eso.org/public/images/eso1101d/",
-      "title": "Lagoon Nebula · ESO VISTA · infrared",
+      "title": "Lagoon Nebula \u00b7 ESO VISTA \u00b7 infrared",
       "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
       "origin": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
       "sourceUrl": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
-      "title": "Lagoon Nebula · Spitzer · mid-infrared",
+      "title": "Lagoon Nebula \u00b7 Spitzer \u00b7 mid-infrared",
       "credit": "NASA/JPL-Caltech",
       "displayCredit": "NASA/JPL-Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -144,8 +144,8 @@
       "title": "Lagoon Nebula adopted world placement",
       "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
       "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
-      "expectedSha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
-      "expectedBytes": 2002,
+      "expectedSha256": "47ea5df636096b29645d8b561dccae2a11823126c32a09521c77902e1195ce35",
+      "expectedBytes": 2197,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -196,7 +196,7 @@
           {
             "kind": "machine",
             "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite \u2014 Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
           }
         ]
       }
@@ -206,8 +206,8 @@
     {
       "id": "document-1",
       "path": "src/objects/m8/source/delivery.json",
-      "expectedSha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
-      "expectedBytes": 2002,
+      "expectedSha256": "47ea5df636096b29645d8b561dccae2a11823126c32a09521c77902e1195ce35",
+      "expectedBytes": 2197,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -226,8 +226,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m8/source/presentation.json",
-      "expectedSha256": "3be0c4752171b5db8d907e593fe29b3f2ec597b5ba7269e73ff0b0149183ba28",
-      "expectedBytes": 6784,
+      "expectedSha256": "cc6fc1f1d25151d1d37b725735a70b9d9b71bdfdefe3b3d77626c6462fb5fd50",
+      "expectedBytes": 6852,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -244,5 +244,16 @@
       }
     }
   ],
-  "generatedIntermediates": []
+  "generatedIntermediates": [
+    {
+      "id": "compact-bake-inputs-json-gz",
+      "path": "src/objects/m8/source/bake-inputs.json.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      },
+      "expectedBytes": 260362,
+      "expectedSha256": "ee8953cb7c95824bb8dadeb86d4029a964409fc4d36ea7339d4f866ea9e2d266"
+    }
+  ]
 }

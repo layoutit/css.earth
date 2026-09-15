@@ -8,6 +8,8 @@ import { parseBakeArgs, readRecipe } from './config.js';
 
 test('bake arguments reject misspelled stages rather than unexpectedly running all processing', () => {
   assert.equal(parseBakeArgs([]).stage, 'all');
+  assert.equal(parseBakeArgs([]).research, false);
+  assert.equal(parseBakeArgs(['--research']).research, true);
   assert.equal(parseBakeArgs(['--stage=assets']).stage, 'assets');
   assert.equal(parseBakeArgs(['--image=wise-wide-infrared']).image, 'wise-wide-infrared');
   assert.throws(() => parseBakeArgs(['--stage=asset']));
