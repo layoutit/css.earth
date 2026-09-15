@@ -188,6 +188,34 @@ test('a short center selection slows into its target instead of stopping at full
   assert.ok(Math.max(...steps.slice(-5)) <= 5, `the last five publications moved the body edge by up to ${Math.max(...steps.slice(-5)).toFixed(1)} px`);
 });
 
+test('small bodies and planets grow through a readable close-up at both 60 and 120 Hz', async () => {
+  for (const radiusM of [1000, 9948, 300000, 6051840, 24764000]) {
+    const durations: number[] = [];
+    for (const hz of [60, 120]) {
+      const f = fixtureFactory(), frame = f.navigation.frame, optics = f.navigation.optics();
+      frame.bodyRadiusM = radiusM;
+      f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1,
+        pose: { positionM: [0, 0, 2e13], orientationXyzw: [0, 0, 0, 1] } });
+      f.paints.length = 0;
+      const target = createWorldSelectionTarget(f.navigation.capture(), frame, optics);
+      await drainFrames(f, { stepMs: 1000 / hz, task: f.service.focus({ objectId: '0',
+        mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal }) });
+      assert.deepEqual(required(f.paints.at(-1)).pose, target.pose);
+      const diameters = f.paints.map(world => 2 * required(presentWorldCamera(world, frame, optics).silhouette).tangentialSemiAxis);
+      const first = diameters.findIndex(diameter => diameter >= 14), last = diameters.findIndex(diameter => diameter >= 300);
+      assert.ok(first >= 0 && last > first);
+      const seconds = (last - first) / hz;
+      assert.ok(seconds >= .65 && seconds <= 1.3, `${radiusM} m at ${hz} Hz rushed or stalled the close-up: ${seconds.toFixed(3)} s`);
+      for (let i = first + 1; i <= last; i++) {
+        assert.ok(required(diameters[i]) >= required(diameters[i - 1]), 'Approach must not reverse');
+        assert.ok(required(diameters[i]) / required(diameters[i - 1]) < 1.1, 'No sudden growth between painted frames');
+      }
+      durations.push(seconds);
+    }
+    assert.ok(Math.abs(required(durations[0]) - required(durations[1])) < .05, 'Refresh rate must not set the close-up speed');
+  }
+});
+
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
   const f = fixtureFactory(), viewReady = deferred();
   let readView: (() => ObjectPreparationView) | undefined, finalView: ObjectPreparationView | undefined;

@@ -1865,7 +1865,37 @@ test('flights keep admitted annotations and orbit projection live with shared se
   layer.destroy();
 });
 
-test('overview flights retain system annotations and orbit cutouts without enabling picking', () => {
+test('one retained flight caption survives the sprite fade through arrival', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const nodes = all(root);
+  layer.selectObject('mercury'); layer.previewSelection('mercury'); layer.setNavigationInFlight(true);
+  let caption: FakeElement | undefined;
+  const world = (diameter: number) => ({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [100, 0, Math.hypot(1, 800 / diameter)], orientationXyzw: [0, 0, 0, 1] } } as const);
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
+  for (const diameter of [13, 17, 20, 100, 300]) {
+    layer.publish(world(diameter), viewport);
+    const current = find(root, 'contextFlightLabel', 'mercury');
+    caption ??= current;
+    expect(current).toBe(caption);
+    expect(current.style.visibility).toBe('');
+    expect(current.textContent).toBe('Mercury');
+    expect(Number(current.style.opacity)).toBeGreaterThan(0);
+    const marker = find(root, 'contextLabel', 'mercury');
+    expect(annotationVisibility(marker, 'label')).toBe('hidden');
+    const circle = find(root, 'contextFlightCircle', 'mercury');
+    expect(circle.style.visibility).toBe(diameter < 20 ? '' : 'hidden');
+    if (diameter < 20) expect(Number(circle.style.opacity)).toBeGreaterThan(0);
+    expect(annotationVisibility(marker, 'indicator')).toBe('hidden');
+    if (diameter >= 20) expect(marker.style.opacity).toBe('0');
+  }
+  layer.setNavigationInFlight(false); layer.publish(world(300), viewport);
+  expect(caption!.style.visibility).toBe('hidden');
+  expectRetained(root, nodes);
+  layer.destroy();
+});
+
+test.each([null, 'venus'])('flights to %s retain system annotations and orbit cutouts without enabling picking', destination => {
   const root = mount(1), layer = mounted.get(root)!;
   const nodes = all(root);
   layer.previewSelection(null);
@@ -1874,6 +1904,7 @@ test('overview flights retain system annotations and orbit cutouts without enabl
     indicator: entry.billboard.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })),
     navigate: entry.billboard.dataset.objectNavigate }));
   expect(picking.pick(30, -20)).not.toBeNull();
+  layer.previewSelection(destination);
   layer.setNavigationInFlight(true);
   for (const previous of before) {
     const entry = layer.inspect().find(entry => entry.id === previous.id)!;
@@ -1927,7 +1958,7 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   const normalOpacity = Number(sprite.style.opacity);
   expect(normalOpacity).toBeGreaterThan(0);
 
-  // Selection changes immediately; the authored 120 ms emphasis fade settles on the shared clock.
+  // Selection changes immediately without dimming surrounding landmarks.
   layer.previewSelection('sun');
   root.ownerDocument.defaultView.advance(120);
   expect(sun.dataset.contextSelected).toBe('true');
@@ -1938,7 +1969,7 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   expect(sun.dataset.contextSelected).toBe('true');
   expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
 
-  // Returning to the overview restores the neutral weight through the same fade.
+  // Returning to the overview keeps that same weight.
   layer.previewSelection(null);
   root.ownerDocument.defaultView.advance(120);
   neutral();
