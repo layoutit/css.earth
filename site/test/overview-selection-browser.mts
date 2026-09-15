@@ -10,7 +10,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { SCENE_OBJECTS } from '../objects.mts';
 import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { overviewExitDistance } from '../overview-selection.mts';
+import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
 import { parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
@@ -18,7 +18,7 @@ const output = 'output/playwright/overview-selection';
 await mkdir(output, { recursive: true });
 const sun = required(required(SCENE_OBJECTS.find(object => object.id === 'sun')).worldFrame);
 const ceres = required(required(SCENE_OBJECTS.find(object => object.id === 'ceres')).worldFrame);
-const exitKm = overviewExitDistance(ceres, sun) / 1000;
+const exitKm = OVERVIEW_SELECTION_POLICY.exitSunDistanceM / 1000;
 function worldFromState(state:CameraState, frame:PreparedWorldCameraFrame) {
   return savedWorldCamera({ camera: { distanceKilometers: required(state.distanceKilometers),
     ...(state.bodyCenterKilometers ? { bodyCenterKilometers: state.bodyCenterKilometers } : {}),
@@ -47,11 +47,12 @@ try {
       };
       sample();
     });
-    await page.evaluate(distanceKilometers => window.__cssearthTest.object('ceres').camera.setState({ distanceKilometers }), exitKm * .98);
+    // Ceres is about 2.7 AU from the Sun; these margins bracket the Sun-based threshold in any direction.
+    await page.evaluate(distanceKilometers => window.__cssearthTest.object('ceres').camera.setState({ distanceKilometers }), exitKm * .95);
     await page.waitForTimeout(300);
     assert.equal(await page.evaluate(() => window.__cssearthTest.scene().selectedObjectId), 'ceres');
     const beforeHandoff = worldFromState(await page.evaluate(distanceKilometers =>
-      window.__cssearthTest.object('ceres').camera.setState({ distanceKilometers }), exitKm * 1.02), ceres);
+      window.__cssearthTest.object('ceres').camera.setState({ distanceKilometers }), exitKm * 1.05), ceres);
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().overview && window.__cssearthTest.scene().activeObjectId === 'sun', null, { timeout: 20000 });
     await page.locator('.planet-object-browser').waitFor({ state: 'visible' });
     assert.equal(await page.locator('.planet-sidebar-search').inputValue(), 'Solar System');
@@ -114,7 +115,7 @@ try {
     await page.evaluate(() => window.__cssearthTest.object('sun').camera.setState({ distanceKilometers: 40000000 }));
     await page.waitForTimeout(300);
     assert.equal(await page.evaluate(() => window.__cssearthTest.scene().selectedObjectId), 'sun', 'Zoom reversal does not flicker back to overview');
-    await page.evaluate(distanceKilometers => window.__cssearthTest.object('sun').camera.setState({ distanceKilometers }), sun.bodyRadiusM * 128 * .98 / 1000);
+    await page.evaluate(distanceKilometers => window.__cssearthTest.object('sun').camera.setState({ distanceKilometers }), exitKm * .98);
     await page.waitForTimeout(300);
     let flippedDuringScroll = false;
     for (let step = 0; step < 24; step++) {

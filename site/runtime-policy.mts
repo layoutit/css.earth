@@ -102,11 +102,9 @@ export const SYSTEM_FRAMING_ANGLES = Object.freeze({
   azimuthStepDegrees: 15,
 });
 
-// Leave a body only once the observer has reached the scale of its orbit.
-// A much larger Sun disc is required to show its card again on approach.
+// Select the Solar System at one fixed distance from the Sun, for every body.
 export const OVERVIEW_SELECTION_POLICY = Object.freeze({
-  orbitDistanceFactor: 1.5,
-  minimumDistanceRadii: 128,
+  exitSunDistanceM: 100 * 149_597_870_700,
   enterSunDiameterPixels: 48,
   centerRadiusPixels: 160,
   settleMilliseconds: 180,
