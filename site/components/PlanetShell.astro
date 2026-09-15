@@ -265,7 +265,7 @@ const searchCategories = ([
           {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
             <PlanetBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
           <div class="planet-title-row">
-            <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></p>
+            <p class="planet-title planet-title-text" data-focus-name></p>
             <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
           </div>
           <p class="planet-introduction" data-focus-aliases hidden></p>
@@ -366,7 +366,7 @@ const searchCategories = ([
     {!navigation && <template data-object-card-preview>
       <section class="planet-selected-panel" data-card-preview>
         <div class="planet-title-row">
-          <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-card-preview-name></p>
+          <p class="planet-title planet-title-text" data-card-preview-name></p>
           <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-card-preview-classification></span></div>
         </div>
         <p class="planet-introduction" data-card-preview-description></p>

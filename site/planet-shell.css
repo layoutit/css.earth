@@ -70,7 +70,7 @@
 .planet-lens-details-copy {
   margin: 0;
   color: var(--shell-text-secondary);
-  font: 400 0.875rem/20px var(--shell-ui-font);
+  font: var(--shell-font-small);
   overflow-wrap: anywhere;
 }
 
@@ -223,7 +223,7 @@
   min-height: 24px;
   min-width: 0;
   color: var(--shell-text-secondary);
-  font: 400 0.8125rem/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
 }
 
 .planet-lens-legend-categories li::before {
@@ -259,7 +259,7 @@
   gap: 6px;
   margin: 0;
   color: var(--shell-text-secondary);
-  font: 400 0.8125rem/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
 }
 
 .planet-lens-legend-panel > * + .planet-lens-legend-no-data {
@@ -554,7 +554,7 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
   position: relative;
   margin: 0 0 4px;
   color: var(--shell-text-muted);
-  font: 400 13px/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
 }
 
 .planet-breadcrumbs ol {
@@ -601,16 +601,14 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 .planet-lens-details-lead { color: var(--shell-text); font-weight: 500; }
 /* Mission and spacecraft names title their cards at the shell's panel heading size,
    outranking the shared tab-panel text scale. */
-.planet-card-tabpanel .planet-machine .planet-lens-details-title { font: 500 22px/28px var(--shell-ui-font); }
+.planet-card-tabpanel .planet-machine .planet-lens-details-title { font: var(--shell-font-panel-heading); }
 
 .planet-introduction {
   width: 100%;
   margin: 7px 0 0;
   padding: 0 8px 0 0;
   color: inherit;
-  font-family: var(--shell-ui-font);
-  font-size: 1rem;
-  line-height: 1.4;
+  font: var(--shell-font-introduction);
   user-select: text;
 }
 
@@ -897,7 +895,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   border: 0;
   color: var(--shell-text);
   background: transparent;
-  font: 400 0.8125rem/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
   text-align: right;
   outline: 0;
 }
@@ -949,7 +947,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   margin: 8px 0 0;
   padding: 0;
   list-style: none;
-  font: 400 15px/20px var(--shell-ui-font);
+  font: var(--shell-font-content);
 }
 
 .planet-resource-row {
@@ -971,7 +969,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 .planet-resource-description {
   color: var(--shell-text-muted);
-  font: 400 13px/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
   overflow-wrap: anywhere;
 }
 
@@ -1021,7 +1019,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 }
 .planet-sources-panel .planet-accordion > .planet-panel-summary .planet-panel-heading {
   color: var(--shell-text);
-  font: 500 15px/20px var(--shell-ui-font);
+  font: var(--shell-font-section-heading);
   text-transform: none;
   opacity: 1;
 }
@@ -1298,7 +1296,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   padding: 0;
   overflow: hidden;
   color: inherit;
-  font: 400 0.9375rem/20px var(--shell-ui-font);
+  font: var(--shell-font-content);
   opacity: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1327,8 +1325,8 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 }
 
 .planet-lens-detail,
-.planet-factsheet-section .planet-fact-value {
-  font: 400 13px/20px var(--shell-ui-font);
+.planet-facts .planet-fact-value {
+  font: var(--shell-font-value);
 }
 
 .planet-observation-control.planet-thumbnail-leading {
@@ -1439,7 +1437,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-panel-heading {
     overflow: hidden;
-    font: 400 0.875rem/18px var(--shell-ui-font);
+    font: var(--shell-font-label);
     letter-spacing: 0;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -1810,7 +1808,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-panel-heading {
     overflow: hidden;
-    font: 400 0.875rem/18px var(--shell-ui-font);
+    font: var(--shell-font-label);
     letter-spacing: 0;
     text-overflow: ellipsis;
     text-transform: uppercase;
