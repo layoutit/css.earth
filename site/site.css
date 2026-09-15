@@ -19,6 +19,16 @@
   --shell-disabled-opacity: .5;
   --shell-ui-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
+  /* Shared text roles retain the desktop's established sizes and rhythm. */
+  --shell-font-content: 400 15px/20px var(--shell-ui-font);
+  --shell-font-introduction: 400 16px/1.4 var(--shell-ui-font);
+  --shell-font-metadata: 400 13px/18px var(--shell-ui-font);
+  --shell-font-caption: 400 13px/16px var(--shell-ui-font);
+  --shell-font-value: 400 13px/20px var(--shell-ui-font);
+  --shell-font-small: 400 14px/20px var(--shell-ui-font);
+  --shell-font-section-heading: 500 15px/20px var(--shell-ui-font);
+  --shell-font-panel-heading: 500 22px/28px var(--shell-ui-font);
+  --shell-font-label: 400 14px/18px var(--shell-ui-font);
   color-scheme: dark;
   accent-color: var(--shell-focus);
   background: var(--shell-background);
@@ -129,7 +139,7 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
 [data-context-label] {
   background: transparent;
   color: var(--shell-text);
-  font: 400 14px/18px var(--shell-ui-font);
+  font: var(--shell-font-label);
   text-decoration: none;
 }
 
