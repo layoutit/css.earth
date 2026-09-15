@@ -56,11 +56,17 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {
-    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'variable', 'defaultZoom', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels']);
-    const kind = choice(binding.kind, ['zoom-property', 'shell-scale', 'counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property'], 'view binding');
+    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'variable', 'defaultZoom', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'sceneFromBody', 'radii', 'inset']);
+    const kind = choice(binding.kind, ['zoom-property', 'shell-scale', 'counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc'], 'view binding');
     const target = nodeReference(binding.target, tree, kind === 'view-attribute' || kind === 'view-property');
     if ([tree.camera, tree.scene].includes(target) && kind !== 'view-attribute') fail('view binding cannot duplicate camera publisher');
-    if (kind === 'silhouette-fit') {
+    if (kind === 'interior-disc') {
+      const matrix = array(binding.sceneFromBody, 'interior disc frame').map(value => finite(value, 'interior disc frame'));
+      const radii = array(binding.radii, 'interior disc radii').map(value => positive(value, 'interior disc radius'));
+      if (matrix.length !== 16 || [3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1 || radii.length !== 3 ||
+          !(finite(binding.inset, 'interior disc inset') > 0 && Number(binding.inset) < 1) ||
+          tree.nodes[target].parent !== tree.scene || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('interior disc requires an affine frame inside the perspective scene');
+    } else if (kind === 'silhouette-fit') {
       if (finite(binding.minimumRadius, 'silhouette floor') < 0 || !(positive(binding.unitScale, 'silhouette scale') > 0) || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('silhouette fit requires perspective camera and scale');
     } else if (kind === 'silhouette-step-property') {
       if (!text(binding.property, 'silhouette step property').startsWith('--')) fail('silhouette step property must be custom');
