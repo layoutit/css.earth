@@ -1,9 +1,15 @@
+import { subjects } from '../../features/legacy-viewer/controller';
+import { WorkspaceSections } from './workspace-sections';
+import '../../features/workspace/workspace-controls.css';
 import type { LabControlsProps } from '../../state/use-lab-controller';
 
 export function ReconstructionControlsPanel({ shell, controller }: LabControlsProps) {
-  return <aside id="cloud-adjustment-panel" className="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden={!shell.presentation?.cloudAdjustments}>
+  const emission = subjects.find(item => item.id === shell.objectId)?.emissionExperiment;
+  return <aside id="cloud-adjustment-panel" className="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden={shell.view !== 'reconstruction' || !shell.presentation?.cloudAdjustments && Boolean(emission)}>
+            <WorkspaceSections active="compiler" capabilities={{ compiler: true }} onChange={() => {}} />
+            {!shell.presentation?.cloudAdjustments && <fieldset disabled title="This object has a prepared density model but no image reconstruction workflow."><legend>Image and processing</legend><p className="interaction-hint">No image reconstruction is configured.</p></fieldset>}
             <fieldset id="reconstruction-image-controls" hidden={!shell.presentation?.reconstructionImages}>
-              <legend>Reconstruction</legend>
+              <legend>Image and processing</legend>
               <div id="reconstruction-processing"></div>
             </fieldset>
             {shell.view === 'reconstruction' && <fieldset className="inspection-section" id="reconstruction-original-controls"

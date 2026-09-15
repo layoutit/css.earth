@@ -18,11 +18,12 @@ export function CameraPanel({ shell, controller }: LabControlsProps) {
               <p className="interaction-hint">Drag to orbit. Scroll to zoom.</p>
             </fieldset>
             <section id="density-adjustment-panel" className="inspection-section" hidden={!shell.presentation?.densityAdjustments}>
-              <fieldset id="density-tone-fieldset" disabled={shell.presentation?.toneDisabled ?? true}><legend>Density adjustments</legend><div id="density-tone-controls"></div></fieldset>
+              <fieldset id="density-tone-fieldset" disabled={shell.presentation?.toneDisabled ?? true}><legend>Model</legend><div id="density-tone-controls"></div></fieldset>
             </section>
             <section id="cloud-density-panel" className="inspection-section" aria-label="Reconstruction density filter" hidden={!shell.presentation?.cloudDensity}>
-              <div id="cloud-density-controls"></div>
+              <fieldset><legend>Model</legend><div id="cloud-density-controls"></div></fieldset>
             </section>
+            {!shell.presentation?.densityAdjustments && !shell.presentation?.cloudDensity && <fieldset className="workspace-model" disabled title="This prepared scene does not expose editable model controls."><legend>Model</legend><p className="interaction-hint">No editable model controls</p></fieldset>}
             <p id="status" role="status" aria-live="polite" hidden={shell.presentation?.status.hidden ?? false}
               data-error={shell.presentation?.status.error ? 'true' : undefined}>{shell.presentation?.status.message ?? 'Loading…'}</p>
             <a id="source-link" className="model-source" hidden={!shell.presentation?.sourceUrl} href={shell.presentation?.sourceUrl} title={shell.presentation?.sourceCredit} target="_blank" rel="noreferrer">Model source ↗</a>

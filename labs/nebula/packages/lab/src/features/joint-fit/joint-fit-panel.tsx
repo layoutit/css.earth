@@ -75,22 +75,9 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
   const status = state.error || storageError || (state.busy ? state.progress || 'Fitting registered evidence…' : result ? 'Joint fit up to date' : 'Preparing joint fit…');
   return <fieldset className="joint-fit-controls" data-result-id={result?.id ?? ''} data-busy={state.busy}
     data-candidate={candidate?.fit.parameters.family ?? ''}>
-    <legend>Joint fit</legend>
+    <legend>Image and processing</legend>
     <div className="joint-fit-status" role={state.error || storageError ? 'alert' : 'status'} title={status}>{status}</div>
     {state.error && <button type="button" onClick={state.retry}>Retry</button>}
-    <ControlSlider id="joint-ridge" label="Ridge threshold" value={controls.ridgeThreshold} min={.05} max={.9} step={.01}
-      display={controls.ridgeThreshold.toFixed(2)} onChange={ridgeThreshold => updateControls({ ...controls, ridgeThreshold })} />
-    <ControlSlider id="joint-length" label="Minimum length" value={controls.minLengthArcseconds} min={10} max={240} step={5}
-      display={`${controls.minLengthArcseconds.toFixed(0)}″`} onChange={minLengthArcseconds => updateControls({ ...controls, minLengthArcseconds })} />
-    <ControlSlider id="joint-image-weight" label="Image weight" value={controls.imageWeight} min={.1} max={4} step={.05}
-      display={`${controls.imageWeight.toFixed(2)}×`} onChange={imageWeight => updateControls({ ...controls, imageWeight })} />
-    <ControlSlider id="joint-velocity-weight" label="Velocity weight" value={controls.velocityWeight} min={.1} max={4} step={.05}
-      display={`${controls.velocityWeight.toFixed(2)}×`} onChange={velocityWeight => updateControls({ ...controls, velocityWeight })} />
-    <div className="joint-fit-candidates" role="group" aria-label="Prepared model candidate">
-      {([['ellipsoid', 'Shell'], ['bipolar', 'Lobes']] as const).map(([id, label]) => <button type="button" key={id}
-        aria-pressed={candidate?.fit.parameters.family === id} disabled={!result?.candidates.some(item => item.fit.parameters.family === id)}
-        onClick={() => setFamily(id)}>{label}</button>)}
-    </div>
     <label className="field-label" htmlFor="joint-fit-source">Source image</label>
     <select id="joint-fit-source" value={source?.id ?? ''} disabled={!result} onChange={event => setSourceId(event.target.value)}>
       {result?.sources.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
@@ -99,8 +86,6 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
       <label className="observation-check"><input type="checkbox" checked={showRidges} onChange={event => setShowRidges(event.target.checked)} /> Ridges</label>
       <label className="observation-check"><input type="checkbox" checked={showPointings} onChange={event => setShowPointings(event.target.checked)} /> Pointings</label>
     </div>
-    <div className="joint-fit-camera-actions"><button type="button" onClick={() => setView(earthJointFitView)}>Earth view</button>
-      <button type="button" aria-pressed={!view.locked} onClick={() => setView({ ...view, locked: !view.locked })}>Orbit</button></div>
     {candidate && <div className="joint-fit-metrics" aria-label="Fit metrics">
       <span>Image <output>{candidate.fit.metrics.imageResidualArcsec.toFixed(1)}″</output></span>
       <span title={`RMS uses ${Math.max(0, candidate.fit.metrics.trainingCount - candidate.fit.metrics.missingTraining)} matched training velocities; ${candidate.fit.metrics.missingTraining} missing intersections remain penalized in the objective.`}>Train <output>{metric(candidate.fit.metrics.trainingRmsKmS)} · {candidate.fit.metrics.missingTraining} missing</output></span>
@@ -120,6 +105,26 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
       <p>Angular depth and simple expansion belong to the candidate model. They are not measured gas density or a physical-distance reconstruction.</p></details>
     <details><summary>Sources</summary><p>{result ? `${result.accounting.ridgePoints} ridge samples from ${result.sources.length} registered images; ${result.accounting.pointings} molecular pointings at ${result.accounting.beamFwhmArcsec.toFixed(0)}″ beam FWHM.` : 'Registered source accounting is prepared with the result.'}</p>
       <p>Combine sensitivity {evidence.sensitivity.toFixed(2)}×; source weights {evidence.weights.map(weight => weight.toFixed(2)).join(', ')}. Held-out velocities do not select the candidate.</p></details>
+    {host && createPortal(<aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
+      <fieldset><legend>Camera</legend>
+    <div className="joint-fit-camera-actions"><button type="button" onClick={() => setView(earthJointFitView)}>Earth view</button>
+      <button type="button" aria-pressed={!view.locked} onClick={() => setView({ ...view, locked: !view.locked })}>Orbit</button></div>
+      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+    <ControlSlider id="joint-ridge" label="Ridge threshold" value={controls.ridgeThreshold} min={.05} max={.9} step={.01}
+      display={controls.ridgeThreshold.toFixed(2)} onChange={ridgeThreshold => updateControls({ ...controls, ridgeThreshold })} />
+    <ControlSlider id="joint-length" label="Minimum length" value={controls.minLengthArcseconds} min={10} max={240} step={5}
+      display={`${controls.minLengthArcseconds.toFixed(0)}″`} onChange={minLengthArcseconds => updateControls({ ...controls, minLengthArcseconds })} />
+    <ControlSlider id="joint-image-weight" label="Image weight" value={controls.imageWeight} min={.1} max={4} step={.05}
+      display={`${controls.imageWeight.toFixed(2)}×`} onChange={imageWeight => updateControls({ ...controls, imageWeight })} />
+    <ControlSlider id="joint-velocity-weight" label="Velocity weight" value={controls.velocityWeight} min={.1} max={4} step={.05}
+      display={`${controls.velocityWeight.toFixed(2)}×`} onChange={velocityWeight => updateControls({ ...controls, velocityWeight })} />
+    <div className="joint-fit-candidates" role="group" aria-label="Prepared model candidate">
+      {([['ellipsoid', 'Shell'], ['bipolar', 'Lobes']] as const).map(([id, label]) => <button type="button" key={id}
+        aria-pressed={candidate?.fit.parameters.family === id} disabled={!result?.candidates.some(item => item.fit.parameters.family === id)}
+        onClick={() => setFamily(id)}>{label}</button>)}
+    </div>
+      </fieldset>
+    </aside>, host)}
     {host && createPortal(<JointWorkspace resultId={result?.id ?? ''} source={imageUrl} candidate={candidate}
       ridgePaths={result?.ridgePaths ?? []} diagramSize={result?.diagramSize ?? 512} showRidges={showRidges}
       showPointings={showPointings} spanArcsec={result?.spanArcsec} view={view} setView={setView} />, host)}

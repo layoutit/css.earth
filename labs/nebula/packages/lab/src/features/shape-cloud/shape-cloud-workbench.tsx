@@ -16,6 +16,7 @@ interface Props {
   image: StructureImage; geometry: GeometryMap; cataloguePath: string; host: Element | null;
   matrix: Matrix; frame: { width: number; height: number }; onDetected(): void;
   visible?: boolean;
+  modelTools?: ReactNode;
   initialQuality?: 'draft' | 'detailed';
   preset?: ShapeCloudPreset;
 }
@@ -37,7 +38,7 @@ function Slider({ id, label, value, min, max, step = .01, display, title, onChan
       onPointerCancel={onSettle} onKeyUp={onSettle} onBlur={onSettle} />
   </div>;
 }
-function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, visible = true, initialQuality, preset, mode, stageMode, setMode, view, setView }: Props & {
+function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, modelTools, visible = true, initialQuality, preset, mode, stageMode, setMode, view, setView }: Props & {
   mode: ShapeCloudMode; stageMode: Exclude<ShapeCloudMode, 'structure'>; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
 }) {
   const state = useShapeCloudState(image, geometry, cataloguePath, initialQuality, preset), { settings, result } = state;
@@ -113,15 +114,21 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
       <p className="interaction-hint shape-cloud-diagnostic-legend" title={result?.comparison ? `One global model brightness fit: ${result.comparison.brightnessScale.toPrecision(3)}. This matches overall brightness; spatial differences remain. It does not change the cloud. Missing ${(100 * result.comparison.metrics.missingFraction).toFixed(1)}%; excess ${(100 * result.comparison.metrics.excessFraction).toFixed(1)}%; normalized RMSE ${result.comparison.metrics.normalizedRmse.toFixed(3)}.` : 'Prepared full-frame diagnostics are loading.'}>
         {channel === 'difference' ? 'White: missing · black: excess · gray: match' : 'Shared gain · one global brightness fit'}
       </p>
-      <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setComparisonView(earthComparisonView)}>Earth view</button></div>
     </div> : <>
-    <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setView(earthCloudView)}>Earth view</button>
-      <button type="button" aria-pressed={!view.locked} onClick={() => setView(view.locked ? { ...view, locked: false } : { ...view, locked: true, yaw: 0, pitch: 0 })}>
-        {view.locked ? 'Unlock rotation' : 'Lock to Earth'}</button></div>
     <label className="observation-check"><input type="checkbox" checked={outlines} onChange={event => setOutlines(event.target.checked)} /> Shape outlines</label>
     {mode === 'overlay' && <Slider id="shape-cloud-overlay-opacity" label="Cloud" value={opacity} min={0} max={1}
       display={`${Math.round(opacity * 100)}%`} onChange={setOpacity} />}
     </>}
+    <div className="shape-cloud-foot"><button type="button" className="text-button" onClick={onDetected}>Detected lines</button>
+      <span className="interaction-hint" title="Nearby duplicate contours are merged. Shell depth, thickness and falloff are model assumptions, not physical measurements.">{settings.components.length} inferred components</span></div>
+    {host && createPortal(<aside className="floating-panel workspace-model-panel" hidden={!visible} aria-label="Camera and model">
+      <fieldset><legend>Camera</legend>
+        {mode === 'structure' ? <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setComparisonView(earthComparisonView)}>Earth view</button></div> :
+          <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setView(earthCloudView)}>Earth view</button>
+            <button type="button" aria-pressed={!view.locked} onClick={() => setView(view.locked ? { ...view, locked: false } : { ...view, locked: true, yaw: 0, pitch: 0 })}>
+              {view.locked ? 'Unlock rotation' : 'Lock to Earth'}</button></div>}
+      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+      {modelTools}
     <div className="shape-cloud-editing">
       <div className="shape-cloud-scope" role="group" aria-label="Edit scope">{(['all', 'group', 'selected'] as const).map(value =>
         <button type="button" key={value} aria-pressed={scope === value} onClick={() => setScope(value)}>{value === 'all' ? 'All' : value === 'group' ? 'Group' : 'Selected'}</button>)}</div>
@@ -159,8 +166,8 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
       {formulaError && <p className="interaction-hint shape-cloud-error" role="alert">{formulaError}</p>}
       <button type="button" className="text-button" onClick={() => { state.reset(); setBeforeSolo(null); }}>{preset ? 'Reset to saved fit' : 'Reset to detected'}</button>
     </div>
-    <div className="shape-cloud-foot"><button type="button" className="text-button" onClick={onDetected}>Detected lines</button>
-      <span className="interaction-hint" title="Nearby duplicate contours are merged. Shell depth, thickness and falloff are model assumptions, not physical measurements.">{settings.components.length} inferred components</span></div>
+      </fieldset>
+    </aside>, host)}
     {host && createPortal(<section className="shape-cloud-workspace" hidden={!visible} aria-label="Shape cloud comparison">
       <div className="shape-cloud-three-d" hidden={mode === 'structure'}>
       <ShapeCloudStage mode={stageMode} result={result} source={source} width={image.width} height={image.height} matrix={workingMatrix} frame={frame}

@@ -1,0 +1,57 @@
+/* Shared dock geometry. Prepared scene nodes stay inside their existing hosts. */
+.workspace-content {
+  --workspace-left-width: clamp(200px, 22vw, 280px);
+  --workspace-right-width: clamp(240px, 26vw, 340px);
+}
+.workspace-content :is(.floating-panel, .image-overlay-panel) {
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  max-height: none;
+  padding: 18px;
+  border-radius: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  z-index: 6;
+}
+.workspace-content :is(#inspection-panel, .observation-camera, .workspace-model-panel) {
+  left: 0;
+  right: auto;
+  width: var(--workspace-left-width);
+  border-right: 1px solid var(--divider);
+}
+.workspace-content :is(.cloud-adjustment-panel, .image-overlay-panel) {
+  left: auto;
+  right: 0;
+  width: var(--workspace-right-width);
+  border-left: 1px solid var(--divider);
+}
+.workspace-content :is(.floating-panel, .image-overlay-panel) > fieldset:first-child { margin-top: 0; }
+.workspace-content .workspace-model { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--divider); }
+.workspace-model > legend { padding-top: 0; }
+.workspace-model .shape-cloud-editing { border: 0; padding: 0; margin: 12px 0 0; }
+.workspace-model-panel :is(select, input[type="range"]) { width: 100%; min-width: 0; }
+.workspace-model-panel :is(.compiler-slider, .joint-fit-slider) { grid-template-columns: 80px minmax(25px, 1fr) 45px; }
+.workspace-content > #render-panel,
+.workspace-content :is(.compiler-workspace, .joint-fit-workspace, .kinematics-workspace),
+.workspace-content :is(.observation-sky, .fusion-viewport) {
+  inset: 0 var(--workspace-right-width) 0 var(--workspace-left-width);
+}
+.workspace-content .shape-cloud-stage { inset: 0 var(--workspace-right-width) 30px var(--workspace-left-width); }
+.workspace-content :is(.shape-cloud-camera-hint, .shape-cloud-terms) { left: var(--workspace-left-width); right: var(--workspace-right-width); }
+.workspace-content .emission-structure-map { inset: 0 var(--workspace-right-width) 0 var(--workspace-left-width); padding: 16px; }
+.workspace-content:has(.workspace-model-panel) > #inspection-panel { visibility: hidden; }
+.workspace-content .workspace-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0 0 20px; }
+.workspace-sections button { min-width: 0; white-space: normal; padding: 8px 6px; }
+.workspace-sections button:disabled { opacity: .45; }
+.workspace-sections button[aria-pressed="true"] { background: #34383d; border-color: #788792; }
+.workspace-content :is(.compiler-progress > div, .joint-fit-status) { white-space: normal; height: auto; overflow-wrap: anywhere; }
+@media (max-width: 800px) {
+  .workspace-content { --workspace-left-width: 27%; --workspace-right-width: 31%; }
+  .workspace-content :is(.floating-panel, .image-overlay-panel) { padding: 12px 9px; }
+  .workspace-content .workspace-sections { grid-template-columns: 1fr; }
+  .workspace-model-panel :is(.compiler-slider, .joint-fit-slider, .structure-slider, .kinematics-slider) { grid-template-columns: minmax(0, 1fr) 45px; }
+  .workspace-model-panel :is(.compiler-slider, .joint-fit-slider, .structure-slider, .kinematics-slider) > input { grid-column: 1 / -1; grid-row: 2; }
+  .workspace-model-panel :is(.compiler-slider, .joint-fit-slider, .structure-slider, .kinematics-slider) > output { grid-column: 2; grid-row: 1; }
+}

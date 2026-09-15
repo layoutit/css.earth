@@ -124,15 +124,18 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
       </div>}
     </div>
     <aside className="floating-panel observation-camera" aria-label="Alignment camera">
-      <fieldset disabled={!data}><legend>Sky alignment</legend>
+      <fieldset disabled={!data}><legend>Camera</legend>
         <div className="camera-actions"><button type="button" onClick={() => fitImages()} title="Fit every full image edge in the common north-up sky frame.">Earth view · fit all</button>
           <button type="button" onClick={() => fitImages(true)} title="Fit this image at its true sky orientation; switching images retains this camera.">Fit image</button></div>
         <p className="interaction-hint">Drag to pan · scroll to zoom</p>
         <p className="interaction-hint" title="Images share one celestial coordinate frame. This is not a 3D depth model.">{data?.frame.fieldArcminutes.join(' × ')}′ sky frame</p>
       </fieldset>
+      <fieldset className="workspace-model" disabled title="Alignment compares registered images before any volume model is selected."><legend>Model</legend>
+        <p className="interaction-hint">Registered sky frame · no volume in Alignment</p>
+      </fieldset>
     </aside>
     <aside className="image-overlay-panel observation-images" aria-label="Observation images">
-      <fieldset disabled={!data}><legend>Images</legend>
+      <fieldset disabled={!data}><legend>Image</legend>
         <label className="field-label" htmlFor="observation-image">Image</label>
         <select id="observation-image" value={selected} title="Switch aligned images without moving the camera or changing their sky scale." onChange={event => {
           const id = event.target.value;

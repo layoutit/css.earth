@@ -1,3 +1,4 @@
+import { workspaceObjects } from '../../state/workspace-objects';
 import { LabNavigation } from '../../ui/lab-navigation';
 import { labObjectId } from '../../features/legacy-viewer/lab-routing';
 import { subjects } from '../../features/legacy-viewer/subject-catalogue';
@@ -200,7 +201,7 @@ export function CatalogueView() {
   const selectionKey = `${selectedId}:${band}:${imageRole}:${resolution}:${productSearch}:${imageOrder}:${provider}`;
   return <>
     <LabNavigation page="catalogue" objectId={selectedId}
-      objects={[...new Map([...subjects.filter(object => !object.sourceSubjectId).map(object => [object.id, { id: object.id, name: object.menuLabel ?? object.name }] as const),
+      objects={[...new Map([...workspaceObjects(subjects).map(object => [object.id, { id: object.id, name: object.menuLabel ?? object.name }] as const),
         ...(catalogue?.objects ?? []).map(object => [object.id, { id: object.id, name: `${object.id.toUpperCase()} · ${object.name}` }] as const)]).values()]}
       onObjectChange={chooseObject} alignmentAvailable={supportsLabAlignment(subjects.find(object => object.id === selectedId))}
       reconstructionAvailable={subjects.some(object => object.id === selectedId && !object.alignmentOnly)} />

@@ -137,7 +137,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   return <fieldset className="compiler-controls" data-result-id={result?.id ?? ''} data-job-id={state.job?.id ?? ''}
     data-job-status={state.job?.status ?? ''} data-busy={state.busy}
     data-compiler-operator={fixedGeometry === null ? 'loading' : fixedGeometry ? 'sampled-prior' : 'emission-fit'}>
-    <legend>Nebula compiler</legend>
+    <legend>Image and processing</legend>
     <div className="compiler-actions">
       <button type="button" className="compiler-primary" disabled={state.busy} onClick={state.error ? state.retry : state.compile}>
         {state.error ? 'Retry compile' : 'Compile nebula'}</button>
@@ -149,16 +149,6 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
         value={state.job?.progress ? state.job.progress.current : undefined} />
     </div>
     {result && <CompilerPipeline result={result} busy={state.busy} fixedGeometry={fixedGeometry === true} />}
-    {fixedGeometry === false && <>
-    <CompilerSlider id="compiler-detail" label="Detail" value={controls.detail} min={0} max={1} step={.05} display={`${Math.round(controls.detail * 100)}%`}
-      title="Retain more prepared small-scale image structure in the inferred cloud." onChange={detail => updateControls({ ...controls, detail })} />
-    <CompilerSlider id="compiler-faint" label="Faint emission" value={controls.faint} min={0} max={1} step={.05} display={`${Math.round(controls.faint * 100)}%`}
-      title="Change the contribution of faint, less constrained emission." onChange={faint => updateControls({ ...controls, faint })} />
-    <CompilerSlider id="compiler-depth" label="Depth" value={controls.depth} min={.5} max={2} step={.05} display={`${controls.depth.toFixed(2)}×`}
-      title="Scale the inferred line-of-sight extent. This remains a model assumption." onChange={depth => updateControls({ ...controls, depth })} />
-    <p className="compiler-auto-note" title={sourceStatus || 'After the first completed compile, changes update automatically. Processing survives refresh.'}>{result ? 'Controls update automatically' : 'Prepared sources restored on compile'}</p>
-    </>}
-    {fixedGeometry && <p className="compiler-auto-note" title="Depth and component weights are fixed by the qualified model. Detail, faint-emission and depth refits are unavailable.">Fixed reconstructed geometry</p>}
     <label className="field-label" htmlFor="compiler-lens">Lens</label>
     <select id="compiler-lens" value={source?.id ?? ''} disabled={!result} onChange={event => updatePresentation({ ...presentation, lensId: event.target.value })}>
       {!result && <option value="">Available after compilation</option>}
@@ -172,10 +162,25 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       <label className="observation-check" title="Prepared stellar overlay. Catalogue sources use optical brightness and colors across all image lenses; depths may be inferred."><input type="checkbox" checked={presentation.stars} onChange={event => updatePresentation({ ...presentation, stars: event.target.checked })} />Stars</label>
       <label className="observation-check"><input type="checkbox" checked={presentation.original} onChange={event => updatePresentation({ ...presentation, original: event.target.checked })} />Original</label>
     </div>
+    {host && createPortal(<aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
+      <fieldset><legend>Camera</legend>
     <div className="compiler-camera-actions">
       <button type="button" aria-pressed={presentation.view.locked} onClick={() => updatePresentation({ ...presentation, view: { ...earthCloudView } })}>Earth view</button>
       <button type="button" aria-pressed={!presentation.view.locked} onClick={() => updatePresentation({ ...presentation, view: { ...presentation.view, locked: !presentation.view.locked } })}>Orbit</button>
     </div>
+      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+    {fixedGeometry === false && <>
+    <CompilerSlider id="compiler-detail" label="Detail" value={controls.detail} min={0} max={1} step={.05} display={`${Math.round(controls.detail * 100)}%`}
+      title="Retain more prepared small-scale image structure in the inferred cloud." onChange={detail => updateControls({ ...controls, detail })} />
+    <CompilerSlider id="compiler-faint" label="Faint emission" value={controls.faint} min={0} max={1} step={.05} display={`${Math.round(controls.faint * 100)}%`}
+      title="Change the contribution of faint, less constrained emission." onChange={faint => updateControls({ ...controls, faint })} />
+    <CompilerSlider id="compiler-depth" label="Depth" value={controls.depth} min={.5} max={2} step={.05} display={`${controls.depth.toFixed(2)}×`}
+      title="Scale the inferred line-of-sight extent. This remains a model assumption." onChange={depth => updateControls({ ...controls, depth })} />
+    <p className="compiler-auto-note" title={sourceStatus || 'After the first completed compile, changes update automatically. Processing survives refresh.'}>{result ? 'Controls update automatically' : 'Prepared sources restored on compile'}</p>
+    </>}
+    {fixedGeometry && <p className="compiler-auto-note" title="Depth and component weights are fixed by the qualified model. Detail, faint-emission and depth refits are unavailable.">Fixed reconstructed geometry</p>}
+      </fieldset>
+    </aside>, host)}
     {host && createPortal(<section className="compiler-workspace" aria-label="Compiled nebula" data-result-id={result?.id ?? ''}>
       <CompilerStage result={result} lensId={source?.id ?? null} mode={presentation.mode} stars={presentation.stars}
         showOriginal={presentation.original} view={presentation.view} onView={onView} inspectionFrame={inspectionFrame} />

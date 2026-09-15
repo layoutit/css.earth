@@ -1,3 +1,4 @@
+import { workspaceObjects } from '../state/workspace-objects';
 import { readAppliedImage, writeAppliedImage, rememberAppliedLayer, verifyRestoredImage, type RestoredAppliedImage } from '../features/star-removal/applied-image-state.ts';
 import { createNebulaLabViewer, subjects, registerReconstructionSubject } from '../features/legacy-viewer/controller';
 import { createReconstructionControls } from '../features/reconstruction/reconstruction-controls';
@@ -16,7 +17,7 @@ import { supportsLabAlignment } from '../state/lab-workflows.ts';
 import type { ControlPortals } from '../ui/control-portals';
 import { labPresentation, type AlignmentState, type LabPresentation, type LabShellState } from '../state/lab-shell';
 
-export const labObjects = subjects.filter(item => !item.sourceSubjectId).map(item => ({ id: item.id, name: item.menuLabel ?? item.name }));
+export const labObjects = workspaceObjects(subjects).map(item => ({ id: item.id, name: item.menuLabel ?? item.name }));
 export type { AlignmentState, LabShellState } from '../state/lab-shell';
 
 export async function mountNebulaLab(options: { controls: ControlPortals; onShellState(state: LabShellState): void }) {
@@ -119,7 +120,7 @@ function invalidateToneContexts() { layerActivation++; pendingLayerActivation = 
 const visibleObjects = labObjects;
 function objectId(id: string | null) {
   const item = subjects.find(value => value.id === id);
-  const source = item?.sourceSubjectId ?? id ?? '';
+  const source = visibleObjects.some(value => value.id === id) ? id! : item?.sourceSubjectId ?? id ?? '';
   return visibleObjects.find(value => value.id === source ||
     (value.id === 'lmc-clouds' && source.startsWith('lmc')) ||
     (value.id === 'smc-particles' && source.startsWith('smc')))?.id ?? visibleObjects[0]!.id;

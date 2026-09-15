@@ -50,3 +50,9 @@ Reprocess the saved LMC research recipe with **`pnpm lab:nebula:bake --research`
 The five packages are private workspace owners, with explicit public exports. See [package boundaries and validation](docs/internal-packages.md) for the dependency graph, CI scope and isolated replay gates. Ordinary application preparation enters through `tools/nebula/prepare.mts` (`pnpm prepare:nebulae`); it does not invoke the research CLI or fit observations.
 
 Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the workflow](docs/workflows.md), [processing method](METHOD.md), or [documentation index](docs/README.md). Source/registration evidence and prior failed experiments remain accessible without adding more UI tabs.
+
+## Workspace navigation
+
+Catalogue, Alignment and Reconstruction share one header and a centered, searchable object picker. Routes retain `?subject=<id>`; older catalogue `?object=<id>` links remain readable. Selecting a catalogue object without a configured workspace keeps Alignment/Reconstruction visible but unavailable.
+
+Camera and model controls use the left dock; image, appearance and processing controls use the right dock. Reconstruction inspection sections keep the same order for every method. Missing data disables a section with an explanation instead of removing it. Navigating pages does not cancel durable processing jobs.

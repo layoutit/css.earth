@@ -1,11 +1,13 @@
+import '../../features/workspace/workspace-controls.css';
 import type { LabControlsProps } from '../../state/use-lab-controller';
 import type { AlignmentState } from '../../state/lab-shell';
 
 export function AlignmentControls({ shell, controller, updateAlignment }: LabControlsProps & { updateAlignment(value: Partial<AlignmentState>): void }) {
   const alignment = shell.alignment;
-  return <aside id="image-overlay-panel" className="image-overlay-panel" aria-label="Image placement" hidden={!shell.presentation?.imageAdjustments} data-selected-overlay={alignment?.imageId}>
-            <fieldset id="overlay-controls" disabled={shell.presentation?.toneDisabled ?? true}>
-              <legend>Image adjustments</legend>
+  return <aside id="image-overlay-panel" className="image-overlay-panel" aria-label="Image placement" hidden={shell.view !== 'alignment'} data-selected-overlay={alignment?.imageId}>
+            <fieldset id="overlay-controls" disabled={!shell.presentation?.imageAdjustments || (shell.presentation?.toneDisabled ?? true)}>
+              <legend>Image</legend>
+              {!shell.presentation?.imageAdjustments && <p className="interaction-hint">No image overlays are configured for this object.</p>}
               <label className="field-label" htmlFor="overlay-choice">Image</label>
               <select id="overlay-choice" value={alignment?.imageId ?? ""} onChange={event => controller.current?.chooseImage(event.target.value)}>{alignment?.images.map(image => <option key={image.id} value={image.id}>{image.label}</option>)}</select>
               <div id="overlay-layer-control" hidden={!alignment || alignment.layers.length < 2}>

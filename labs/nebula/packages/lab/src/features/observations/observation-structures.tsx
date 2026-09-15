@@ -197,13 +197,41 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
       <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
     </div>}
-    {shapes && image && !preset && <GeometryDetectionControls detector={detector} image={image} />}
+    {cloudMounted && effectiveImage && geometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
+      modelTools={!preset && <GeometryDetectionControls detector={detector} image={image} />}
+      image={effectiveImage} geometry={geometry} preset={preset} initialQuality={preset ? 'detailed' : detector.quality} cataloguePath={cataloguePath} host={host}
+      matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
+    {map && <p className="interaction-hint" title={`Maximum additive reconstruction error ${map.metrics.reconstructionMaxError}. Unassigned signal and imperfect star-removal residuals remain. Decisions indicate human review, never depth or physical membership.`}>
+      {map.metrics.reconstructionMaxError < 1e-5 ? 'All input accounted for' : 'Inspect accounting error'} · {(map.metrics.unassignedFraction * 100).toFixed(1)}% unassigned</p>}
+    {image && <p className="interaction-hint"><a href={image.page} target="_blank" rel="noreferrer" title={image.credit}>Source & credit ↗</a></p>}
+    {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] || (shapes && geometryErrors[selected]) ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected] || (shapes && geometryErrors[selected]))}>{status || storageError}</p>}
+    {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection" data-cloud-active={cloudActive}>
+      <div ref={viewport} className="observation-sky" aria-label="Structure inspection sky" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
+        onPointerUp={event => { const start = drag.current; drag.current = null;
+          if (start?.id === event.pointerId && start.regionId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setRegionId(start.regionId);
+          if (start?.id === event.pointerId && start.shapeId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setShapeId(start.shapeId);
+        }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={fitAll}
+        onKeyDown={event => { if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitAll(); } }}>
+        <div className="observation-structure-frame" style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
+          {data?.images.map(item => { const prepared = maps[item.id], matrix = matrices[item.id]; return prepared && matrix ? <StructurePlane key={item.id} image={item} map={prepared} matrix={matrix}
+            active={item.id === selected} layer={layer} visibleIds={item.id === selected ? visibleIds : emptyIds} selectedId={item.id === selected ? selectedRegion?.id ?? '' : ''}
+            highlights={highlights && !shapes} onSelect={setRegionId} onError={imageError}
+            geometry={item.id === selected ? geometry : geometries[item.id]} shapes={shapes} shapeIds={item.id === selected ? shapeIds : emptyIds}
+            selectedShapeId={item.id === selected ? selectedShape?.id ?? '' : ''} onSelectShape={setShapeId} /> : null; })}
+        </div>
+        <div className="observation-compass">N ↑ · E ←</div>
+        {status && <p className="observation-loading">{status}</p>}
+      </div>
+      <aside className="floating-panel observation-camera" aria-label="Structure camera"><fieldset><legend>Camera</legend>
+        <button type="button" onClick={fitAll} disabled={!data}>Fit all images</button>
+        <p className="interaction-hint">Drag to pan. Scroll to zoom.</p>
+        <p className="interaction-hint" title="Same full native footprints and common sky frame as Alignment. Image selection never changes the camera.">Full field · north up · 2D</p>
+        <p className="interaction-hint" title="Fine adjustments saved in Alignment are applied only for inspection; measured registration is unchanged.">{manuallyAdjusted ? 'Manual inspection adjustment' : 'Registered positioning'}</p>
+      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+    {shapes && !cloudActive && image && !preset && <GeometryDetectionControls detector={detector} image={image} />}
     <div hidden={!shapes || cloudActive}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
       showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
     {shapes && !cloudEditor && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
-    {cloudMounted && effectiveImage && geometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
-      image={effectiveImage} geometry={geometry} preset={preset} initialQuality={preset ? 'detailed' : detector.quality} cataloguePath={cataloguePath} host={host}
-      matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
     <div hidden={shapes}>
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>
       <input type="checkbox" checked={filters.morphology[kind]} onChange={event => setFilters(current => ({ ...current, morphology: { ...current.morphology, [kind]: event.target.checked } }))} />{title(kind)}
@@ -242,32 +270,6 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       </> : <p className="interaction-hint">No regions match these filters.</p>}
     </section>
     </div>
-    {map && <p className="interaction-hint" title={`Maximum additive reconstruction error ${map.metrics.reconstructionMaxError}. Unassigned signal and imperfect star-removal residuals remain. Decisions indicate human review, never depth or physical membership.`}>
-      {map.metrics.reconstructionMaxError < 1e-5 ? 'All input accounted for' : 'Inspect accounting error'} · {(map.metrics.unassignedFraction * 100).toFixed(1)}% unassigned</p>}
-    {image && <p className="interaction-hint"><a href={image.page} target="_blank" rel="noreferrer" title={image.credit}>Source & credit ↗</a></p>}
-    {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] || (shapes && geometryErrors[selected]) ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected] || (shapes && geometryErrors[selected]))}>{status || storageError}</p>}
-    {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection" data-cloud-active={cloudActive}>
-      <div ref={viewport} className="observation-sky" aria-label="Structure inspection sky" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
-        onPointerUp={event => { const start = drag.current; drag.current = null;
-          if (start?.id === event.pointerId && start.regionId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setRegionId(start.regionId);
-          if (start?.id === event.pointerId && start.shapeId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setShapeId(start.shapeId);
-        }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={fitAll}
-        onKeyDown={event => { if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitAll(); } }}>
-        <div className="observation-structure-frame" style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
-          {data?.images.map(item => { const prepared = maps[item.id], matrix = matrices[item.id]; return prepared && matrix ? <StructurePlane key={item.id} image={item} map={prepared} matrix={matrix}
-            active={item.id === selected} layer={layer} visibleIds={item.id === selected ? visibleIds : emptyIds} selectedId={item.id === selected ? selectedRegion?.id ?? '' : ''}
-            highlights={highlights && !shapes} onSelect={setRegionId} onError={imageError}
-            geometry={item.id === selected ? geometry : geometries[item.id]} shapes={shapes} shapeIds={item.id === selected ? shapeIds : emptyIds}
-            selectedShapeId={item.id === selected ? selectedShape?.id ?? '' : ''} onSelectShape={setShapeId} /> : null; })}
-        </div>
-        <div className="observation-compass">N ↑ · E ←</div>
-        {status && <p className="observation-loading">{status}</p>}
-      </div>
-      <aside className="floating-panel observation-camera" aria-label="Structure camera"><fieldset><legend>Sky view</legend>
-        <button type="button" onClick={fitAll} disabled={!data}>Fit all images</button>
-        <p className="interaction-hint">Drag to pan. Scroll to zoom.</p>
-        <p className="interaction-hint" title="Same full native footprints and common sky frame as Alignment. Image selection never changes the camera.">Full field · north up · 2D</p>
-        <p className="interaction-hint" title="Fine adjustments saved in Alignment are applied only for inspection; measured registration is unchanged.">{manuallyAdjusted ? 'Manual inspection adjustment' : 'Registered positioning'}</p>
       </fieldset></aside>
     </section>, host)}
   </fieldset>;
