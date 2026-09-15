@@ -17,6 +17,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
+  const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
   const events = new AbortController();
   const unavailable = root.querySelector<HTMLElement>('[data-focus-unavailable]');
   const unavailableIds = new Set(unavailable?.dataset.unavailableObjects?.split(' ') ?? []);
@@ -77,6 +78,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
     fields.aliases.hidden = record.aliases.length === 0;
     const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
+    const parentScope = cluster ? 'nearby-universe' : nebula ? 'milky-way' : 'local-group';
+    for (const trail of breadcrumbs) trail.hidden = trail.dataset.focusBreadcrumbScope !== parentScope;
     write('status', cluster || nebula ? record.classification.name : `${words(record.status)} galaxy`);
     const distanceScale = record.distance.valuePc >= 1e6 ? 1e6 : record.distance.valuePc >= 1e3 ? 1e3 : 1;
     write('distance', `${number.format(record.distance.valuePc / distanceScale)} ${distanceScale === 1e6 ? 'Mpc' : distanceScale === 1e3 ? 'kpc' : 'pc'}`);

@@ -763,6 +763,7 @@ test('a first selection frames the object system and changes its card, then the 
 });
 
 test('zooming out after first-click system framing restores the overview at the same camera pose', async () => {
+  const au = 149597870700;
   const rotation = identityRotation;
   const frame = (originM: readonly [number, number, number], bodyRadiusM: number) => ({ originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1,
     presentationToReference: rotation, metersPerUnit: 1 });
@@ -787,13 +788,13 @@ test('zooming out after first-click system framing restores the overview at the 
     };
     assert.equal(await drain(h.router.navigate('venus', { sceneSelection: true })), true);
     const selected = required(h.mounts.at(-1));
-    required(selected.publishCamera)(camera(1400));
-    assert.equal(timers.size, 0, 'The selected system remains below the existing orbital cutoff');
-    required(selected.publishCamera)(camera(1600));
+    required(selected.publishCamera)(camera(99 * au));
+    assert.equal(timers.size, 0, 'The selected system remains below 100 AU from the Sun');
+    required(selected.publishCamera)(camera(101 * au));
     assert.equal(timers.size, 1, 'First-click selection must not disable the zoom-out cutoff');
-    required(selected.publishCamera)(camera(1400));
+    required(selected.publishCamera)(camera(99 * au));
     assert.equal(timers.size, 0, 'A transient crossing is cancelled');
-    const zoomedOut = camera(1700);
+    const zoomedOut = camera(102 * au);
     required(selected.publishCamera)(zoomedOut);
     for (const [id, callback] of timers) { timers.delete(id); callback(); }
     await drain(h.router.settled);

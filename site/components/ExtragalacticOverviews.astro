@@ -1,6 +1,4 @@
 ---
-import { catalogMarkerSvg } from '../../src/renderers/css/universe/catalog-marker.js';
-import type { CatalogMarkerKind } from '../../src/renderers/css/universe/catalog-marker.js';
 import '../planet-navigation-marker.css';
 import PlanetCard from './PlanetCard.astro';
 import PlanetCardHeader from './PlanetCardHeader.astro';
@@ -13,11 +11,11 @@ import milkyWay from '../../src/objects/milky-way/object.json';
 import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json';
 const localGalaxies = parsePreparedGalaxyCatalog(galaxies).objects;
 const principal = [
-  { id: 'milky-way', name: 'Milky Way', href: '/sun/?overview=milky-way', distancePc: null, positionM: milkyWay.properties.volume.originM, radiusM: 6e20 },
+  { id: 'milky-way', focusId: undefined, name: 'Milky Way', href: '/sun/?overview=milky-way', distancePc: null, positionM: milkyWay.properties.volume.originM },
   ...[['lmc', 'LMC'], ['smc', 'SMC'], ['m31', 'M31 (Andromeda)'], ['m33', 'M33 (Triangulum)']].map(([id, name]) => {
     const object = localGalaxies.find(object => object.detailedObjectId === id);
     if (!object) throw new Error('Missing principal Local Group galaxy: ' + id);
-    return { id: object.id, positionM: object.positionM, radiusM: object.presentation?.focusRadiusM ?? 1e20, name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) };
+    return { id: object.id, focusId: object.id, positionM: object.positionM, name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) };
   }),
 ];
 const distance = (pc: number) => {
@@ -26,12 +24,12 @@ const distance = (pc: number) => {
   return { value: new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor), unit: divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly' };
 };
 const groups = [
-  { id: 'local-group' as const, name: 'Local Group', section: 'Galaxies', marker: 'galaxy' as CatalogMarkerKind,
+  { id: 'local-group' as const, name: 'Local Group', section: 'Galaxies',
     introduction: 'Our galaxy group, including the Milky Way, Andromeda and their neighboring galaxies.',
     objects: principal },
-  { id: 'nearby-universe' as const, name: 'Nearby Universe', section: 'Galaxy clusters', marker: 'galaxy-cluster' as CatalogMarkerKind,
+  { id: 'nearby-universe' as const, name: 'Nearby Universe', section: 'Galaxy clusters',
     introduction: 'Selected nearby galaxy clusters. This view is not a complete map of the observable universe.',
-    objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, positionM: object.positionM, radiusM: object.aperture.comovingRadiusM, name: object.name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) })) },
+    objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) })) },
 ];
 ---
 {groups.map(group => <PlanetCard class="planet-overview-card" data-large-scale-overview={group.id} data-large-scale-name={group.name} hidden>
@@ -47,8 +45,8 @@ const groups = [
         data-neighbor-distances={JSON.stringify(Object.fromEntries(group.objects.map(origin => [origin.id,
           Math.hypot(...object.positionM.map((value, axis) => value - origin.positionM[axis])) / 3.085677581491367e16])))}>
 
-        <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={object.href}>
-          <span class="planet-lens-icon"><span class="planet-navigation-marker catalog-navigation-marker" aria-hidden="true" style={"--catalog-symbol-size:" + Math.max(6, Math.min(14, 12 * Math.sqrt(object.radiusM / 6e20))) + "px"} title="Relative prepared display extent; symbol sizes are compressed for readability" set:html={catalogMarkerSvg(group.marker)} /></span>
+        <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={object.href} data-prepared-focus-id={object.focusId}>
+          <span class="planet-lens-icon"><span class="planet-navigation-marker catalog-navigation-marker" aria-hidden="true" /></span>
           <span class="planet-object-name planet-lens-label">{object.name}</span>
           <span class="planet-object-distance planet-lens-detail" title="Published catalogue distance from the Solar System">
             <span class="planet-object-distance-value">≈{distance(object.distancePc ?? 0).value}</span>{" "}
@@ -59,8 +57,3 @@ const groups = [
     </ul>
   </div>
 </PlanetCard>)}
-
-<style>
-  .catalog-navigation-marker { display: grid; place-items: center; }
-  .catalog-navigation-marker :global(svg) { width: var(--catalog-symbol-size); height: var(--catalog-symbol-size); }
-</style>
