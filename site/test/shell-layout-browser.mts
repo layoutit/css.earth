@@ -127,7 +127,7 @@ try {
           assert.ok(result.categories.top > result.search.bottom, "filters sit under the search field");
           assert.ok(result.status.bottom <= result.sidebar.top + .1, "the readout rides above the sheet");
           assert.equal(result.minimapShown, false, "phones leave the scene uncovered");
-          assert.equal(result.sourcesShown, false, "phones carry credits in the card, not a strip");
+          assert.equal(result.sourcesShown, true, "phones carry the shared Sources card in the sheet");
           assert.equal(result.githubShown, false, "the version link carries GitHub on phones");
           assert.ok(result.settings.right <= result.search.right,
             "Settings sits inside the search pill's end");

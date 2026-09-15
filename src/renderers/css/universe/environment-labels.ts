@@ -16,6 +16,7 @@ const LABEL_GAP_PX = 8;
 const LABEL_FADE_MS = 200;
 
 export interface EnvironmentLabelPublication {
+  readonly labelBudget?: import('../labels/universe-label-policy.js').LabelBudget;
   readonly world: WorldCameraPose;
   readonly viewport: WorldCameraViewport;
   readonly shellStats: readonly PreparedSurfaceShellStats[];
@@ -137,6 +138,7 @@ function admit(entry: Entry, opacity: number, publication: EnvironmentLabelPubli
   if (rect.left < -width / 2 || rect.right > width / 2 || rect.top < -height / 2 || rect.bottom > height / 2 ||
       !(opacity > 0)) { fadeTo(entry, 0, fader); return; }
   if (blockers.some(blocker => labelRectsOverlap(rect, blocker))) { fadeTo(entry, 0, fader); return; }
+  if (publication.labelBudget && !publication.labelBudget.admit(rect)) { fadeTo(entry, 0, fader); return; }
   fadeTo(entry, Math.min(1, opacity) * DEFAULT_CONTEXT_LABEL_OPACITY, fader);
   entry.pickRect = rect;
   accepted.push(Object.freeze(rect));

@@ -3,11 +3,13 @@ import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldContext } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
-import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
-import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
+import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
+import { contextOrbitOpacity } from './context-presentation-policy.js';
+import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter } from '../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../solar-system/types.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
+import { createLabelBudget, labelExtentOpacity } from '../labels/universe-label-policy.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
@@ -35,22 +37,8 @@ const EXTENT_FADE_STEPS = 64;
 const quantizeAlpha = (alpha: number) => Math.round(alpha * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
 function orbitPresentationForExtent(extent: number) {
   const opacity = Math.round(logarithmicFade(extent, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS) * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
-  // Every orbit and its unresolved body annotation share one zoom fade.
+  // Orbit paint has its own fade; label admission does not depend on this value.
   return { width: CONTEXT_LINE_WIDTH, opacity };
-}
-
-function orbitOverlapsLabel(orbits: readonly { segments: readonly OrbitSegment[]; orbitVisibility: number; lineWidth: number }[], x: number, y: number, width: number, height: number): boolean {
-  const cx = x + width / 2, cy = y + height / 2;
-  return orbits.some(({ segments, orbitVisibility, lineWidth }) => {
-    // Reserve the visible stroke plus one pixel. Faded geometry cannot hide text.
-    const clearance = lineWidth / 2 + 1, rx = width / 2 + clearance, ry = height / 2 + clearance;
-    return segments.some(([x0, y0, x1, y1, weight]) => {
-      if (orbitVisibility * weight <= 0.1) return false;
-      if (Math.max(x0, x1) < cx - rx || Math.min(x0, x1) > cx + rx ||
-          Math.max(y0, y1) < cy - ry || Math.min(y0, y1) > cy + ry) return false;
-      return clipSegmentToRectangle([x0 - cx, y0 - cy], [x1 - cx, y1 - cy], rx, ry) !== null;
-    });
-  });
 }
 
 // Clip already-projected chords at the UI marker, preserving the prepared orbit.
@@ -181,7 +169,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       const focusDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
-      const orbitOpacity = orbitLineOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
+      const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
       const near = opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -280,9 +268,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           (isAnchor ? 1 : opacity * (isSelected ? 1 : proxyOpacity));
         const orbitVisibility = skipped ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
+        const neighbourhoodExtent = entry.parent ? Math.hypot(...body.positionM.map((value, axis) => value - entry.parent!.positionM[axis]!)) * focal /
+          Math.max(1, -frame.eye(entry.parent)[2]) : Infinity;
         const indicatorOpacity = entry.indicatorHidden && !hovered ? 0 : isAnchor && overview ? 1 :
-          // A highlighted circle follows the system fade, not its orbit's.
-          bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden || highlighted || !entry.orbit ? opacity : orbitVisibility);
+          bodyLod.markerOpacity * (isAnchor ? 1 : opacity * (hovered || highlighted || isSelected || body.id === emphasizedId ? 1 : labelExtentOpacity(neighbourhoodExtent)));
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
         const priority = (isAnchor ? 4e6 : 0) + (hovered ? 16e6 : 0) + (highlighted ? 8e6 : 0) + (body.id === emphasizedId ? 6e6 : (overview ? isAnchor : isSelected) ? 1e6 : 0) + (annotationPriorities[body.id] ?? 0) * 1e4 + (primary ? 1000 : 0) + Math.min(99, diameter);
         if (!holdAnnotations && annotationVisible && indicatorOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) {
@@ -314,6 +303,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         projected.segments = clipped;
       }
       const placedLabels: { left: number; right: number; top: number; bottom: number }[] = [];
+      const labelBudget = createLabelBudget(width, height);
       const labelPriority = (body: (typeof projectedBodies)[number]) => body.priority + (body.entry.labelShown ? 100 : 0);
       for (const projected of [...projectedBodies].sort((a, b) => labelPriority(b) - labelPriority(a))) {
         const { entry, x, y, diameter, markerOpacity, indicatorOpacity, annotationVisible, hovered, priority, orbitVisibility } = projected;
@@ -323,7 +313,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // A highlighted set shows its labels despite default hiding, and keeps a label whose
         // circle lost a collision; label collisions still decide placement.
         const highlighted = entry.highlighted === true;
-        const labelOpacity = hovered || highlighted ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.proxyOpacity : 1) : markerOpacity;
+        const labelOpacity = hovered || highlighted ? 1 : markerOpacity;
+        const localExtent = entry.parent ? Math.hypot(...body.positionM.map((value, axis) => value - entry.parent!.positionM[axis]!)) * focal /
+          Math.max(1, -frame.eye(entry.parent)[2]) : Infinity;
+        const targeted = hovered || highlighted || body.id === emphasizedId;
+        // A planet view labels its own moon family. Small unrelated bodies wait
+        // for a system view, a resolved disc, or explicit selection/highlight.
+        const inContext = !satellite || activeSystems.has(entry.parent!.id);
+        const foregroundSystem = selectedId !== plan.focus.id && !overview;
+        const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
         const labelThreshold = entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN;
         const gap = Math.max(5, diameter / 2, entry.indicatorShown ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         // Right, left, above and below; a highlighted set may also use the four diagonals,
@@ -337,9 +335,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           if (entry.labelShown && size.width > 0) projected.labelPosition = positions[entry.labelPlacement] ?? positions[0];
           continue;
         }
-        if (entry.labelSuppressed || !annotationVisible || size.width === 0 || (!hovered && !highlighted &&
+        if (entry.labelSuppressed || !annotationVisible || size.width === 0 ||
+            (!targeted && !resolvedDisc && (!inContext || unrelatedMinor || labelExtentOpacity(localExtent) <= .5)) || (!hovered && !highlighted &&
             ((entry.labelHidden && body.id !== emphasizedId) || labelOpacity <= labelThreshold ||
-            (!resolvedDisc && body.id !== emphasizedId && entry.orbit && !entry.orbitHidden && orbitVisibility <= labelThreshold) ||
             (indicatorOpacity > 0 && !entry.indicatorShown)))) continue;
         const sides = highlighted ? [0, 1, 2, 3, 4, 5, 6, 7] : [0, 1, 2, 3];
         const padding = entry.labelShown ? 0 : 2;
@@ -362,14 +360,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
               const rect = labelRect(lx, ly);
               return rect.left < other.right + 4 && rect.right + 4 > other.left &&
                 rect.top < other.bottom + 4 && rect.bottom + 4 > other.top;
-            }) &&
+            }) && labelBudget.accepts(labelRect(lx, ly)) &&
             !projectedBodies.some(other => {
-              if (other.entry === entry || other.entry.orbitHidden || !other.entry.indicatorShown || other.indicatorOpacity <= 0.1) return false;
+              if (other.entry === entry || !other.entry.indicatorShown || other.indicatorOpacity <= .1) return false;
               const nearestX = Math.max(lx, Math.min(lx + size.width, other.x));
               const nearestY = Math.max(ly, Math.min(ly + size.height, other.y));
               return Math.hypot(nearestX - other.x, nearestY - other.y) < BODY_INDICATOR_DIAMETER / 2 + 4 + padding;
-            }) && (hovered || body.id === emphasizedId || entry.closedOrbit || satellite || body.id === plan.focus.id ||
-              !orbitOverlapsLabel(projectedBodies, lx, ly, size.width, size.height));
+            });
         }) ?? (hovered ? placements.find(withinViewport) ?? placements[0] : undefined);
         if (placement === undefined) continue;
         entry.labelPlacement = placement;
@@ -378,6 +375,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           labelX = Math.max(-width / 2 + 4, Math.min(labelX, width / 2 - size.width - 4));
           labelY = Math.max(-height / 2 + 4, Math.min(labelY, height / 2 - size.height - 4));
         }
+        if (!labelBudget.admit(labelRect(labelX, labelY))) continue;
         placedLabels.push(labelRect(labelX, labelY));
         labels.add({ owner: 0, id: body.id, priority: priority + (entry.labelShown ? 100 : 0),
           anchor: [labelX + size.width / 2, labelY + size.height + padding],

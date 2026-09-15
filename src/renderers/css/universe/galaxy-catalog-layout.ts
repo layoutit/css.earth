@@ -6,13 +6,16 @@ import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js'
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { offAxisFrame, silhouetteEllipse } from '../solar-system/heliocentric-geometry.js';
+import { createLabelBudget, labelImportance, labelInteractionPriority, type LabelBudget } from '../labels/universe-label-policy.js';
 
 export interface ProjectedGalaxy {
+  readonly navigable?: boolean;
   readonly object: PreparedCatalogObject;
   readonly x: number;
   readonly y: number;
   readonly distanceM: number;
   readonly labelRect: LabelScreenRect;
+  readonly alternateLabelRects?: readonly LabelScreenRect[];
 }
 
 /** Only the observer projection is runtime work; every astronomical position is prepared. */
@@ -62,22 +65,26 @@ export function projectCatalogBounds(cornersM: readonly (readonly number[])[], w
 }
 
 function priority(object: PreparedCatalogObject): number {
-  if (isPreparedCluster(object) || isPreparedNebula(object) || object.detailedObjectId) return 0;
-  if (object.status === 'candidate') return 3;
-  return object.hostId ? 2 : 1;
+  if (object.status === 'candidate') return 0;
+  return labelImportance(isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? 'nebula' : 'galaxy', !isPreparedCluster(object) && Boolean(object.detailedObjectId));
 }
 
 /** Foreground exclusions win; selection, major objects, then stable distance/id ties. */
-export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blockers: readonly LabelScreenRect[], selectedId: string | null, limit = 12) {
+export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blockers: readonly LabelScreenRect[], selectedId: string | null,
+  budget: LabelBudget = createLabelBudget(Infinity, Infinity, [], blockers)) {
+  const interaction = (candidate: ProjectedGalaxy) => labelInteractionPriority(candidate.navigable ??
+    (isPreparedCluster(candidate.object) || Boolean(candidate.object.detailedObjectId)));
   const sorted = [...candidates].sort((a, b) => Number(b.object.id === selectedId) - Number(a.object.id === selectedId) ||
-    priority(a.object) - priority(b.object) || a.distanceM - b.distanceM ||
+    interaction(b) - interaction(a) ||
+    priority(b.object) - priority(a.object) || a.distanceM - b.distanceM ||
     a.object.id.localeCompare(b.object.id));
   const accepted: ProjectedGalaxy[] = [];
   for (const candidate of sorted) {
-    if (accepted.length >= limit) break;
-    if (blockers.some(rect => labelRectsOverlap(rect, candidate.labelRect)) ||
-        accepted.some(other => labelRectsOverlap(other.labelRect, candidate.labelRect))) continue;
-    accepted.push(candidate);
+    if (!budget.remaining) break;
+    const rect = [candidate.labelRect, ...candidate.alternateLabelRects ?? []].find(rect =>
+      !blockers.some(blocker => labelRectsOverlap(blocker, rect)) && budget.accepts(rect));
+    if (!rect || !budget.admit(rect)) continue;
+    accepted.push(rect === candidate.labelRect ? candidate : { ...candidate, labelRect: rect });
   }
   return accepted;
 }

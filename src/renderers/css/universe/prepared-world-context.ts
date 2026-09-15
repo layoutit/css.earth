@@ -1,4 +1,5 @@
 import { ContextChange, createWorldContextFrameReceiver } from './world-context-frame.js';
+import { createContextSelectionOpacity } from './context-presentation-policy.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
@@ -407,6 +408,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let previousHeader: { emphasizedId: string | null; width: number; height: number } | null = null;
   let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
+  const selectionOpacity = createContextSelectionOpacity(plan);
   let orbitRenderer: OrbitRenderer = initialOrbitRenderer, publishCount = 0;
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     const sprite = sprites[body.id];
@@ -820,9 +822,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
         if (mask === 0) continue;
-        const dimmed = emphasizedId !== null && body.id !== emphasizedId;
+        const emphasis = selectionOpacity(body.id, emphasizedId, entry.hovered);
         // Overview flights retain system annotations; body flights fade unrelated ones.
-        const annotationsVisible = !navigationInFlight || emphasizedId === null || body.id === emphasizedId || entry.parent?.id === emphasizedId;
+        const annotationsVisible = !navigationInFlight || selectionOpacity(body.id, emphasizedId) === 1;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
@@ -872,7 +874,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.indicatorHovered = entry.hovered;
             marker.dataset.contextIndicatorHovered = String(entry.hovered);
           }
-          if (policyChanged || !wasShown || hoverChanged) fader.multiply(marker, dimmed && !entry.hovered ? .75 : 1, animatedAnnotations.has(entry) ? 120 : 0);
+          if (policyChanged || !wasShown || hoverChanged) fader.multiply(marker, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
           fader.set(marker, markerOpacity);
           const transform = `translate(${width / 2 + x}px,${height / 2 + y}px) scale(${markerDiameter / BILLBOARD_SIZE}) translate(-50%,-50%)`;
           // CSSOM serializes commas/spacing differently from the published
@@ -914,7 +916,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (entry.orbit && orbitShown) {
           if (entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
           if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
-          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * (dimmed ? .75 : 1), animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
+          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
           const orbitTransform = `translate(${width / 2}px,${height / 2}px)`;

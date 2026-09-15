@@ -180,6 +180,7 @@ src/objects/*/source/**/*.bpc
 /src/platform/solar-geometry.mts
 /src/objects/sun/prepared/world-context.json
 /site/minimap/prepared.json
+/site/moon-labels.prepared.json
 
 # AKARI AcuA v1: restored and verified from each body source manifest.
 /src/objects/*/source/reference/AcuA_V1.txt.gz

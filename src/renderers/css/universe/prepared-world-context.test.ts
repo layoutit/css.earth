@@ -10,7 +10,7 @@ import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from './world-context-frame.js';
 import { createWorldContextPlanner, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
 import { SCENE_OBJECTS } from '../../../../site/objects.mts';
-import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mts';
+import { labelImportance } from '../labels/universe-label-policy.js';
 import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 
 class FakeElement extends EventTarget {
@@ -25,6 +25,12 @@ class FakeElement extends EventTarget {
     set: (target, key, value) => { this.attributeWrites++; Reflect.set(target, key, value); return true; },
   });
   parentNode: FakeElement | null = null;
+  get parentElement(): FakeElement | null { return this.parentNode; }
+  get isConnected(): boolean { return this.parentNode !== null; }
+  closest(selector: string): FakeElement | null {
+    if (selector.startsWith('.') && this.className.split(' ').includes(selector.slice(1))) return this;
+    return this.parentNode?.closest(selector) ?? null;
+  }
   className = ''; textContent = ''; hidden = false; clientWidth = 0; clientHeight = 0;
   readonly ownerDocument: FakeDocument;
   readonly tagName: string;
@@ -95,7 +101,6 @@ test('approximate orbit cues stay on retained groups through selection and publi
   expect(all(root).length).toBe(count);
   layer.destroy();
 });
-const contextPriorityByClassification: Readonly<Partial<Record<(typeof SCENE_OBJECTS)[number]['classification'], number>>> = CONTEXT_ANNOTATION_PRIORITY;
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
 const presentation = {
   projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },
@@ -581,7 +586,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   }
 });
 
-test('prepared planetary systems retain moon orbits with a small selected planet', async () => {
+test('prepared planetary systems keep close orbit visibility subject to viewport clipping', async () => {
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
@@ -598,10 +603,56 @@ test('prepared planetary systems retain moon orbits with a small selected planet
     // The planet spans about 20px, or 3.3% of this viewport: the moon system is readable.
     publish(40);
     expect(orbit().some(paintedOrbitLeaf), `${planet} moon system at overview distance`).toBe(true);
-    // A close-up still retires orbit lines when the selected planet fills the screen.
+    // At close range Titan and Europa leave the viewport; Titania's path crosses
+    // it and must stay visible even though Uranus spans over 30% of its height.
     publish(2);
-    expect(orbit().every(piece => !paintedOrbitLeaf(piece)), `${planet} close-up`).toBe(true);
+    expect(orbit().some(paintedOrbitLeaf), `${planet} close-up`).toBe(planet === 'uranus');
   }
+  layer.destroy();
+});
+
+test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full emphasis and dims unrelated bodies and paths', orbitRenderer => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1), parent = base.bodies[0]!;
+  const unrelated = { ...base.bodies[1]!, positionM: [0, -100, 0] as const, orbit: orbit([0, -100, 0], 1) };
+  const moons = ['moon-a', 'moon-b'].map((id, index) => ({ ...parent, id, name: id, radiusM: .1,
+    positionM: [150, (index ? -1 : 1) * 50, 0], orbit: { ...orbit([150, (index ? -1 : 1) * 50, 0], 1),
+      centerBodyId: index ? 'satellite-center' : parent.id, centerPositionM: parent.positionM } }));
+  const context = parsePreparedWorldContext({ ...base, bodies: [parent, unrelated, ...moons],
+    orbitCenters: { 'satellite-center': { centerBodyId: parent.id, positionM: parent.positionM } } });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])), orbitRenderer });
+  layer.selectObject(parent.id); layer.setOverview(true);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const opacity = (id: string) => {
+    const body = layer.inspect().find(body => body.id === id)!;
+    const line = orbitRenderer === 'bars'
+      ? Number(find(layer.root as unknown as FakeElement, 'contextOrbit', id).style.opacity)
+      : Math.max(...body.orbit.filter(piece => piece.getAttribute('points')).map(piece => Number(piece.style.strokeOpacity)));
+    return { marker: Number(body.billboard.style.opacity), line };
+  };
+  const baseline = new Map(context.bodies.map(body => [body.id, opacity(body.id)]));
+  for (const id of [parent.id, 'moon-a', 'moon-b']) {
+    layer.previewSelection(id); document.defaultView.advance(200);
+    for (const body of context.bodies) {
+      const expected = body.id === unrelated.id ? .25 : 1;
+      const actual = opacity(body.id), normal = baseline.get(body.id)!;
+      expect(normal.marker).toBeGreaterThan(0); expect(normal.line).toBeGreaterThan(0);
+      expect(actual.marker / normal.marker, `${id} -> ${body.id} marker`).toBeCloseTo(expected, 1);
+      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(expected, 1);
+    }
+  }
+  const marker = layer.inspect().find(body => body.id === unrelated.id)!.billboard;
+  marker.dataset.objectHovered = 'true'; host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(200); document.defaultView.advance(200);
+  expect(opacity(unrelated.id).marker).toBeCloseTo(baseline.get(unrelated.id)!.marker);
+  expect(opacity(unrelated.id).line).toBeGreaterThan(baseline.get(unrelated.id)!.line);
+  marker.dataset.objectHovered = 'false'; host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(200); document.defaultView.advance(200);
+  layer.previewSelection(null); document.defaultView.advance(200);
+  for (const body of context.bodies) expect(opacity(body.id)).toEqual(baseline.get(body.id));
   layer.destroy();
 });
 
@@ -656,7 +707,7 @@ test('initial Jupiter system framing makes the four large moons and their labels
     required(frame), viewport, required(SYSTEM_VIEWS.get('jupiter')), systemFramingRect(viewport));
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
-    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextPriorityByClassification[object.classification] ?? 0])),
+    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, labelImportance(object.classification)])),
   });
   layer.selectObject('jupiter');
   layer.publish(target, viewport); document.defaultView.advance(200);
@@ -846,8 +897,8 @@ test('body circles fade with apparent size, remain clickable, and reuse their no
   expect(Number(indicator.style.opacity)).toBeGreaterThan(0);
   expect(Number(indicator.style.opacity)).toBeLessThan(1);
   publish(200);
-  expect(Number(indicator.style.opacity)).toBeGreaterThan(0.98 * .75);
-  expect(Number(indicator.style.opacity)).toBeLessThanOrEqual(.75);
+  expect(Number(indicator.style.opacity)).toBeGreaterThan(0.98);
+  expect(Number(indicator.style.opacity)).toBeLessThanOrEqual(1);
   expect(indicator.dataset.objectNavigate).toBe('mercury');
   const selections: string[] = [];
   root.parentNode!.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
@@ -973,7 +1024,7 @@ test.each([
   })) });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries(['sun', ...objects.map(object => object.id)].map(id => [id, sprite])),
-    annotationPriorities: Object.fromEntries(objects.map(object => [object.id, contextPriorityByClassification[object.classification] ?? 0])),
+    annotationPriorities: Object.fromEntries(objects.map(object => [object.id, labelImportance(object.classification)])),
   });
   layer.setOverview(true);
   const root = layer.root as unknown as FakeElement, nodes = all(root);
@@ -1384,7 +1435,9 @@ test.each([true, false])('shared billboard alpha retains ring visibility and ind
     // Culled indicators retain their last paint values; visible fades still match exactly.
     expect(Number(body.billboard.style.opacity)).toBeGreaterThanOrEqual(Number(orbitRoot.style.opacity));
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(extent > 12);
-    expect(body.indicatorShown).toBe(extent > 12);
+    // Body-parent separation is five times this fixture's tiny orbit extent.
+    // Indicator readability follows that separation, independently of orbit paint.
+    expect(body.indicatorShown).toBe(true);
     expect(body.billboard.style.pointerEvents).toBe('none');
   }
   expectRetained(layer.root as unknown as FakeElement, nodes);
@@ -1503,7 +1556,7 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.measurements, 'camera publication must never remeasure label layout').toBe(1);
 });
 
-test('readable satellite orbits show labels even with an unresolved parent, then fade at system distance', () => {
+test('the selected moon family shows readable labels, then fades at system distance', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = { ...base.bodies[0]!, radiusM: 5 }, satellite = base.bodies[1]!;
@@ -1518,6 +1571,7 @@ test('readable satellite orbits show labels even with an unresolved parent, then
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   const camera = (z: number): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [100, 0, z], orientationXyzw: [0, 0, 0, 1] } });
+  layer.selectObject(parent.id);
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
   expect(marker.style.visibility).toBe(''); expect(annotationVisibility(label, 'label')).toBe('');
@@ -1540,7 +1594,7 @@ test('readable satellite orbits show labels even with an unresolved parent, then
   layer.destroy(); expect(layer.labelExclusionRects()).toEqual([]);
 });
 
-test('resolved body labels remain visible when close-up framing hides orbit lines', () => {
+test('resolved body labels remain visible alongside faint close-up orbit lines', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), position = [35, 0, -60] as const;
@@ -1553,7 +1607,8 @@ test('resolved body labels remain visible when close-up framing hides orbit line
   { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const body = layer.inspect().find(body => body.id === 'mercury')!;
   expect(body.billboard.style.visibility).toBe('');
-  expect(body.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
+  expect(body.orbit.some(paintedOrbitLeaf)).toBe(true);
+  expect(Number(find(layer.root as unknown as FakeElement, 'contextOrbit', 'mercury').style.opacity)).toBeGreaterThan(0);
   expect(body.billboard.style.visibility).toBe('');
   expect(body.billboard.dataset.objectNavigate).toBe('mercury');
   const [labelX, labelY] = captionPosition(body.billboard);
@@ -1678,8 +1733,8 @@ test('the Sun locator stays visible across galactic observer rotations while res
       orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
     } }, viewport);
     document.defaultView.advance(200);
-    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(.75);
-    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(.75);
+    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(.25);
+    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(.25);
   }
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
     positionM: [3e12 + 1e8, 0, 0], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2],
@@ -1876,11 +1931,11 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   root.ownerDocument.defaultView.advance(120);
   expect(sun.dataset.contextSelected).toBe('true');
   expect(mercury.dataset.contextSelected).toBe('false');
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity * .75);
+  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
   layer.setOverview(false);
   layer.previewSelection();
   expect(sun.dataset.contextSelected).toBe('true');
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity * .75);
+  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
 
   // Returning to the overview restores the neutral weight through the same fade.
   layer.previewSelection(null);
