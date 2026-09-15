@@ -172,6 +172,7 @@ src/objects/*/source/**/*.bpc
 /site/prepared-sources.json
 /site/prepared-machines.json
 /site/prepared-object-catalog.mts
+/site/prepared-object-discovery.json
 /site/prepared-context-objects.mts
 /site/prepared-feature-index.json
 /public/features/
@@ -275,5 +276,3 @@ src/spice/**/*.bc
 !/src/objects/nearby-universe/prepared/
 /src/objects/nearby-universe/prepared/*
 !/src/objects/nearby-universe/prepared/manifest.json
-
-/site/prepared-object-discovery.json
