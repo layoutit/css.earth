@@ -177,7 +177,8 @@ try {
       const delayed = await delayNextBitmap(page);
       try {
         await page.locator('#compiler-lens').selectOption(lenses.find(lens => lens !== savedPresentation.lens)!); await delayed.held();
-        await page.locator('#subject').selectOption(nextSubject);
+        await page.locator('#subject').fill(nextSubject);
+        await page.locator(`#object-results [data-object-id="${nextSubject}"]`).click();
         await page.waitForFunction(previous => {
           const stage = document.querySelector('.compiler-stage');
           return stage?.getAttribute('data-compiler-ready') === 'true' && stage.getAttribute('data-compiler-result') !== previous;
@@ -186,7 +187,7 @@ try {
         const nextScene = await retainCompilerScene(page), nextResult = await page.locator('.compiler-controls').getAttribute('data-result-id');
         const nextPresentation = await compilerPresentation(page);
         await delayed.release(); await delayed.settled();
-        assert.equal(await page.locator('#subject').inputValue(), nextSubject);
+        assert.equal(await page.locator('#subject').getAttribute('data-object-id'), nextSubject);
         assert.equal(await page.locator('.compiler-controls').getAttribute('data-result-id'), nextResult);
         assert.deepEqual(await compilerPresentation(page), nextPresentation, 'Old-source bitmap completion overwrote the new source presentation.');
         await assertCompilerSceneRetained(page, nextScene, `${id} to ${nextSubject}/late decode`); await nextScene.dispose();

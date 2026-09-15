@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -101,9 +102,9 @@ try {
   await page.click('#density-tab'); await ready('density', 'lmc-particles'); const density = await state();
   assert.equal(density.pose, retained.pose); assert.equal(density.distance, retained.distance); assert.deepEqual(density.transforms, retained.transforms);
   report.transitions.push({ from: 'density', through: 'photo', to: 'density', pose: retained.pose, distance: retained.distance });
-  await page.selectOption('#subject', 'm31'); await ready('density', 'm31'); assert.match(await page.locator('#status').innerText(), /No independent density field/);
+  await chooseLabObject(page, 'm31'); await ready('density', 'm31'); assert.match(await page.locator('#status').innerText(), /No independent density field/);
   assert.equal((await state()).roots, 0, 'unavailable density retained a scene'); assert.equal(await page.locator('#source-image').isVisible(), false, 'unavailable density displayed a photograph');
-  await page.selectOption('#subject', 'smc-particles'); await ready('density', 'smc-particles');
+  await chooseLabObject(page, 'smc-particles'); await ready('density', 'smc-particles');
   await page.waitForFunction(count => document.querySelectorAll('#overlay-choice option').length === count, smcOverlays.overlays.length);
   assert.equal(Number((await state()).distance), smcOverlays.referenceDistanceUnits, 'unseen SMC did not open at its Earth observer distance');
   assert.equal(await page.locator('#overlay-choice').inputValue(), smcOverlays.overlays[0]!.id, 'SMC default selection differs from its manifest');

@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 /** Focused, read-only check of the planetary-nebula experiment in the real lab. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -17,7 +18,7 @@ try {
   const volumeButton = page.getByRole('button', { name: 'Volume', exact: true });
   if (await volumeButton.count()) await volumeButton.click();
   await page.locator('#camera-pose:not([disabled])').waitFor();
-  assert.equal(await page.locator('#subject').inputValue(), subjectId);
+  assert.equal(await page.locator('#subject').getAttribute('data-object-id'), subjectId);
   assert.ok(await page.locator('.css-volume-mesh s').count() > 100, 'Must use prepared PolyCSS geometry.');
   assert.equal(await page.locator('#viewer canvas, #viewer svg').count(), 0);
   for (const pose of ['front', 'y-plus-60', 'edge-y', 'edge-x', 'front']) {
@@ -36,7 +37,7 @@ try {
   const peer = process.argv[3];
   if (peer) {
     await page.locator('#camera-pose').selectOption('y-plus-60');
-    await page.locator('#subject').selectOption(peer);
+    await chooseLabObject(page, peer);
     await page.locator(`#viewer[data-ready="true"][data-subject="${peer}"]`).waitFor();
     assert.equal(await page.locator('#camera-pose').inputValue(), 'y-plus-60', 'Comparison switch must retain the view.');
   }

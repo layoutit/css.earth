@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -124,7 +125,7 @@ try {
     await page.mouse.wheel(0, -500); await page.waitForFunction(value => document.querySelector<HTMLElement>('#viewer')?.dataset.distance !== value, before); await page.waitForTimeout(350);
     const retained = { pose: await page.locator('#camera-pose').inputValue(), distance: await page.locator('#viewer').getAttribute('data-distance') };
     for (const id of group.slice(1)) {
-      await page.selectOption('#subject', id); await waitReady();
+      await chooseLabObject(page, id); await waitReady();
       assert.equal(await page.locator('#camera-pose').inputValue(), retained.pose, `${id}: paired pose changed`);
       assert.equal(await page.locator('#viewer').getAttribute('data-distance'), retained.distance, `${id}: paired distance changed`);
       report.paired.push({ from: group[0], to: id, ...retained });

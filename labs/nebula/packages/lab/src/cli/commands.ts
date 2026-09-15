@@ -16,6 +16,7 @@ export const labCommands: Record<string, string> = {
   "inventory-messier": "labs/nebula/packages/lab/src/cli/commands/catalogue/inventory-messier.ts",
   "acquire-messier": "labs/nebula/packages/lab/src/cli/commands/catalogue/acquire-messier.ts",
   "prepare-nebula-objects": "labs/nebula/packages/lab/src/cli/commands/prepare-nebula-objects.ts",
+  "browser-workspace-navigation": "labs/nebula/packages/lab/browser/browser-workspace-navigation.ts",
   "browser-catalogue": "labs/nebula/packages/lab/browser/browser-catalogue.ts",
   "browser-candidate-published": "labs/nebula/packages/lab/browser/browser-candidate-published.ts",
   "browser-candidate-workspaces": "labs/nebula/packages/lab/browser/browser-candidate-workspaces.ts",

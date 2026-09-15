@@ -56,3 +56,5 @@ Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the 
 Catalogue, Alignment and Reconstruction share one header and a centered, searchable object picker. Routes retain `?subject=<id>`; older catalogue `?object=<id>` links remain readable. Selecting a catalogue object without a configured workspace keeps Alignment/Reconstruction visible but unavailable.
 
 Camera and model controls use the left dock; image, appearance and processing controls use the right dock. Reconstruction inspection sections keep the same order for every method. Missing data disables a section with an explanation instead of removing it. Navigating pages does not cancel durable processing jobs.
+
+The saved-output navigation check is `node labs/nebula/run.mts browser-workspace-navigation http://127.0.0.1:4331`. It uses isolated browser storage, checks capability/dock consistency, blocks processing operations and verifies durable job receipts remain unchanged.

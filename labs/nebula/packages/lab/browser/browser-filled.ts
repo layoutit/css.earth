@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { basename } from 'node:path';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -232,7 +233,7 @@ try {
   await page.mouse.wheel(0, -350); await page.waitForFunction(distance => Number(document.querySelector<HTMLElement>('#viewer')?.dataset.distance) !== distance, beforeZoom.distance);
   await page.waitForTimeout(350);
   const retained = await runtimeState();
-  await page.selectOption('#subject', subjects[0]!.id); await waitReady(subjects[0]!.id, 'photo');
+  await chooseLabObject(page, subjects[0]!.id); await waitReady(subjects[0]!.id, 'photo');
   const switched = await runtimeState();
   assert.equal(switched.pose, retained.pose, 'variant switch changed camera pose');
   assert.equal(switched.distance, retained.distance, 'variant switch changed camera distance');

@@ -1,3 +1,4 @@
+import { chooseLabObject } from './browser-object-picker.ts';
 /** Focused real-browser checks of retained prepared cloud parts and display attenuation. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -173,8 +174,8 @@ try {
   await page.click('#render-tab'); await ready();
   assert.equal((await state()).selection, saved.selection, 'Tab change lost part selection');
   assert.equal((await state()).brightness, saved.brightness, 'Tab change lost brightness');
-  await page.selectOption('#subject', 'lmc-clouds-broad'); await ready('lmc-clouds-broad');
-  await page.selectOption('#subject', 'lmc-clouds'); await ready();
+  await chooseLabObject(page, 'lmc-clouds-broad'); await ready('lmc-clouds-broad');
+  await chooseLabObject(page, 'lmc-clouds'); await ready();
   assert.equal((await state()).selection, saved.selection, 'Subject roundtrip lost part selection');
   assert.equal((await state()).brightness, saved.brightness, 'Subject roundtrip lost brightness');
   await page.reload({ waitUntil: 'domcontentloaded' }); await ready();
