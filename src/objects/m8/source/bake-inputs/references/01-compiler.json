@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "m8",
+  "label": "Lagoon · M8",
+  "observationRecipe": "labs/nebula/models/m8/processing-observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/m8-processed/observations.json",
+  "structureRecipe": "labs/nebula/models/m8/processing-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/m8-processed/structures/catalogue.json",
+  "defaultSourceId": "eso-optical",
+  "emissionWindow": { "sourceId": "eso-optical", "featherArcsec": 450 },
+  "maximumStars": 650,
+  "starCatalogue": {
+    "sourceIds": ["eso-optical", "eso-vista"],
+    "mergeRadiusArcsec": 3
+  },
+  "interpretation": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses and image-detected compact lights retain one geometry; no gas velocity is converted to depth.",
+  "depthRecipe": "labs/nebula/models/m8/depth-model.json",
+  "defaultControls": {
+    "detail": 0.9,
+    "faint": 0.15,
+    "depth": 1
+  },
+  "sourceWeights": {
+    "eso-optical": 1,
+    "eso-vista": 0.15,
+    "spitzer-mid-infrared": 0.8
+  },
+  "targetControls": {
+    "sources": {
+      "eso-optical": { "backgroundSpread": 1.5, "edgeTaperArcsec": 450 },
+      "eso-vista": { "backgroundSpread": 1.5, "edgeTaperArcsec": 240 },
+      "spitzer-mid-infrared": { "backgroundSpread": 1.5, "edgeTaperArcsec": 240 }
+    }
+  }
+}
