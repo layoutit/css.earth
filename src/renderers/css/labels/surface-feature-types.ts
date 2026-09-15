@@ -43,6 +43,8 @@ export interface PreparedSurfaceFeature {
   readonly machineId: string | null;
   /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
   readonly minimumZoomShare: number;
+  /** Found by search and labelled when selected, never by default. */
+  readonly searchOnly: boolean;
 }
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: 'cssearth-prepared-surface-features@1'; readonly objectId: string;

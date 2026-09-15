@@ -1,0 +1,871 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Wikidata items, English label and description, and coordinate location (P625), retrieved 2026-09-15 from query.wikidata.org",
+  "frame": "WGS84 geodetic latitude and east-positive longitude (Wikidata globe coordinates on Earth)",
+  "entries": [
+    {
+      "id": "81000001",
+      "name": "Mount Everest",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 86.925,
+        "latitudeDeg": 27.988056
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Earth's highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Mount Everest (Q513)",
+        "url": "https://www.wikidata.org/wiki/Q513",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000002",
+      "name": "Great Wall of China",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 116.564444,
+        "latitudeDeg": 40.431389
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Series of fortifications built along the historical border of China.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Great Wall of China (Q12501)",
+        "url": "https://www.wikidata.org/wiki/Q12501",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000003",
+      "name": "Eiffel Tower",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 2.294479,
+        "latitudeDeg": 48.858296
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Tower located on the Champ de Mars in Paris, France.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Eiffel Tower (Q243)",
+        "url": "https://www.wikidata.org/wiki/Q243",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000004",
+      "name": "Mount Kilimanjaro",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 37.359167,
+        "latitudeDeg": -3.066667
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Mountain massif in Kilimanjaro National Park in Tanzania.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Mount Kilimanjaro (Q7296)",
+        "url": "https://www.wikidata.org/wiki/Q7296",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000005",
+      "name": "Taj Mahal",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 78.041944,
+        "latitudeDeg": 27.175
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Marble mausoleum in Agra, India.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Taj Mahal (Q9141)",
+        "url": "https://www.wikidata.org/wiki/Q9141",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000006",
+      "name": "Suez Canal",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 32.344167,
+        "latitudeDeg": 30.705
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Artificial sea-level waterway in Egypt.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Suez Canal (Q899)",
+        "url": "https://www.wikidata.org/wiki/Q899",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000007",
+      "name": "Easter Island",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 250.65,
+        "latitudeDeg": -27.12
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Polynesian island and special territory of Chile.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Easter Island (Q14452)",
+        "url": "https://www.wikidata.org/wiki/Q14452",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000008",
+      "name": "Dead Sea",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 35.4845,
+        "latitudeDeg": 31.5207
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Lake with no outflow (sea) in Western Asia.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Dead Sea (Q23883)",
+        "url": "https://www.wikidata.org/wiki/Q23883",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000009",
+      "name": "Panama Canal",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 280.25,
+        "latitudeDeg": 9.12
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Large canal in Panama.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Panama Canal (Q7350)",
+        "url": "https://www.wikidata.org/wiki/Q7350",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000010",
+      "name": "Great Barrier Reef",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 145.8,
+        "latitudeDeg": -16.4
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Over 2300 km long coral reef off Australia's northeast coast, UNESCO World Heritage Site.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Great Barrier Reef (Q7343)",
+        "url": "https://www.wikidata.org/wiki/Q7343",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000011",
+      "name": "Statue of Liberty",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 285.955575,
+        "latitudeDeg": 40.689209
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Monument in New York.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Statue of Liberty (Q9202)",
+        "url": "https://www.wikidata.org/wiki/Q9202",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000012",
+      "name": "Hagia Sophia",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 28.98,
+        "latitudeDeg": 41.008333
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Mosque, museum, and former church in Istanbul, Turkey.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Hagia Sophia (Q12506)",
+        "url": "https://www.wikidata.org/wiki/Q12506",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000013",
+      "name": "Machu Picchu",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 287.454444,
+        "latitudeDeg": -13.163333
+      },
+      "minimumZoomShare": 0.6,
+      "description": "15th-century Inca citadel in the Peruvian Andes and UNESCO World Heritage Site.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Machu Picchu (Q676203)",
+        "url": "https://www.wikidata.org/wiki/Q676203",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000014",
+      "name": "Colosseum",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 12.492222,
+        "latitudeDeg": 41.890278
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Ancient Roman amphitheatre, a landmark of Rome, Italy.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Colosseum (Q10285)",
+        "url": "https://www.wikidata.org/wiki/Q10285",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000015",
+      "name": "Mount Fuji",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 138.7275,
+        "latitudeDeg": 35.360556
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Volcano in Yamanashi and Shizuoka Prefectures, Japan.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Mount Fuji (Q39231)",
+        "url": "https://www.wikidata.org/wiki/Q39231",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000016",
+      "name": "Burj Khalifa",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 55.274167,
+        "latitudeDeg": 25.197222
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Skyscraper in Dubai, United Arab Emirates.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Burj Khalifa (Q12495)",
+        "url": "https://www.wikidata.org/wiki/Q12495",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000017",
+      "name": "Angkor Wat",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 103.866667,
+        "latitudeDeg": 13.4125
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Hindu-Buddhist temple complex in Cambodia.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Angkor Wat (Q43473)",
+        "url": "https://www.wikidata.org/wiki/Q43473",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000018",
+      "name": "Niagara Falls",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 280.929,
+        "latitudeDeg": 43.08
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Three waterfalls that straddle the international border between Canada and the United States.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Niagara Falls (Q34221)",
+        "url": "https://www.wikidata.org/wiki/Q34221",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000019",
+      "name": "Stonehenge",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 358.173889,
+        "latitudeDeg": 51.178889
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Neolithic henge monument in Amesbury, Wiltshire, England, UK.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Stonehenge (Q39671)",
+        "url": "https://www.wikidata.org/wiki/Q39671",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000020",
+      "name": "Galapagos Islands",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 269.45,
+        "latitudeDeg": -0.666667
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Archipelago in the Pacific Ocean, part of Ecuador since 1832.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Galapagos Islands (Q38095)",
+        "url": "https://www.wikidata.org/wiki/Q38095",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000021",
+      "name": "Great Pyramid of Giza",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 31.13422,
+        "latitudeDeg": 29.97915
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Oldest and largest of the three pyramids in the Giza Necropolis; one of the seven ancient wonders of the world.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Great Pyramid of Giza (Q37200)",
+        "url": "https://www.wikidata.org/wiki/Q37200",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000022",
+      "name": "Empire State Building",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 286.014444,
+        "latitudeDeg": 40.748333
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Skyscraper located in Midtown Manhattan, New York City, USA.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Empire State Building (Q9188)",
+        "url": "https://www.wikidata.org/wiki/Q9188",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000023",
+      "name": "Pompeii",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 14.489722,
+        "latitudeDeg": 40.750556
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Ancient Roman city near modern Naples, Italy.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Pompeii (Q43332)",
+        "url": "https://www.wikidata.org/wiki/Q43332",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000024",
+      "name": "Leaning Tower of Pisa",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 10.396624,
+        "latitudeDeg": 43.72301
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Cathedral bell tower in Pisa, Italy.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Leaning Tower of Pisa (Q39054)",
+        "url": "https://www.wikidata.org/wiki/Q39054",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000025",
+      "name": "Petra",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 35.440278,
+        "latitudeDeg": 30.328889
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Ancient rock-cut historical city in Jordan.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Petra (Q5788)",
+        "url": "https://www.wikidata.org/wiki/Q5788",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000026",
+      "name": "Grand Canyon",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 247.904722,
+        "latitudeDeg": 36.0975
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Steep-sided canyon carved by the Colorado River in Arizona, United States.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Grand Canyon (Q118841)",
+        "url": "https://www.wikidata.org/wiki/Q118841",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000027",
+      "name": "Yellowstone National Park",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 249.5,
+        "latitudeDeg": 44.6
+      },
+      "minimumZoomShare": 0.6,
+      "description": "First national park in the world, located in Wyoming, Montana, and Idaho in the United States.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Yellowstone National Park (Q351)",
+        "url": "https://www.wikidata.org/wiki/Q351",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000028",
+      "name": "Aconcagua",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 289.988333,
+        "latitudeDeg": -32.653056
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Highest mountain in both the Southern and the Western Hemispheres (6967 m).",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Aconcagua (Q39739)",
+        "url": "https://www.wikidata.org/wiki/Q39739",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000029",
+      "name": "Victoria Falls",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 25.858056,
+        "latitudeDeg": -17.924778
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Waterfall on the Zambezi River in Zambia and Zimbabwe.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Victoria Falls (Q43278)",
+        "url": "https://www.wikidata.org/wiki/Q43278",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000030",
+      "name": "Chichen Itza",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 271.431389,
+        "latitudeDeg": 20.683056
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Pre-Columbian Maya city in Mexico.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Chichen Itza (Q5859)",
+        "url": "https://www.wikidata.org/wiki/Q5859",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000031",
+      "name": "Golden Gate Bridge",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 237.521389,
+        "latitudeDeg": 37.819722
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Suspension bridge on the San Francisco Bay.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Golden Gate Bridge (Q44440)",
+        "url": "https://www.wikidata.org/wiki/Q44440",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000032",
+      "name": "Forbidden City",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 116.390833,
+        "latitudeDeg": 39.915833
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Chinese imperial palace in Beijing.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Forbidden City (Q80290)",
+        "url": "https://www.wikidata.org/wiki/Q80290",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000033",
+      "name": "Sydney Opera House",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 151.214897,
+        "latitudeDeg": -33.857058
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Multi-venue performing arts centre in Sydney, New South Wales, Australia.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Sydney Opera House (Q45178)",
+        "url": "https://www.wikidata.org/wiki/Q45178",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000034",
+      "name": "Acropolis of Athens",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 23.726111,
+        "latitudeDeg": 37.971667
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Ancient citadel above the city of Athens.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Acropolis of Athens (Q131013)",
+        "url": "https://www.wikidata.org/wiki/Q131013",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000035",
+      "name": "Mount Rushmore",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 256.540833,
+        "latitudeDeg": 43.878889
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Mountain in South Dakota featuring a sculpture of four US presidents.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Mount Rushmore (Q83497)",
+        "url": "https://www.wikidata.org/wiki/Q83497",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000036",
+      "name": "Christ the Redeemer",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 316.789536,
+        "latitudeDeg": -22.951916
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Colossal statue of Jesus in Rio de Janeiro, Brazil.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Christ the Redeemer (Q79961)",
+        "url": "https://www.wikidata.org/wiki/Q79961",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000037",
+      "name": "Uluru",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 131.036111,
+        "latitudeDeg": -25.345
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Large sandstone isolated mount in Australia.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Uluru (Q33910)",
+        "url": "https://www.wikidata.org/wiki/Q33910",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000038",
+      "name": "Matterhorn",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 7.658611,
+        "latitudeDeg": 45.976389
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Mountain in the Pennine Alps on the border between Switzerland and Italy.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Matterhorn (Q1374)",
+        "url": "https://www.wikidata.org/wiki/Q1374",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000039",
+      "name": "Neuschwanstein Castle",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 10.749442,
+        "latitudeDeg": 47.557489
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Castle in Bavaria, Germany, Europe.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Neuschwanstein Castle (Q4152)",
+        "url": "https://www.wikidata.org/wiki/Q4152",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000040",
+      "name": "Terracotta Army",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 109.273056,
+        "latitudeDeg": 34.385
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Collection of ancient Chinese military statues.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Terracotta Army (Q47672)",
+        "url": "https://www.wikidata.org/wiki/Q47672",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000041",
+      "name": "Big Ben",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 359.87543,
+        "latitudeDeg": 51.50067
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Tower of the Palace of Westminster, London containing the bell Big Ben.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Big Ben (Q41225)",
+        "url": "https://www.wikidata.org/wiki/Q41225",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000042",
+      "name": "Petronas Towers",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 101.711667,
+        "latitudeDeg": 3.157778
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Twin skyscrapers in Kuala Lumpur, Malaysia.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Petronas Towers (Q83063)",
+        "url": "https://www.wikidata.org/wiki/Q83063",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000043",
+      "name": "Tower of London",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 359.923802,
+        "latitudeDeg": 51.5082
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Castle in central London, United Kingdom.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Tower of London (Q62378)",
+        "url": "https://www.wikidata.org/wiki/Q62378",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000044",
+      "name": "Yosemite National Park",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 240.4625,
+        "latitudeDeg": 37.7425
+      },
+      "minimumZoomShare": 0.6,
+      "description": "National park in California, United States.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Yosemite National Park (Q180402)",
+        "url": "https://www.wikidata.org/wiki/Q180402",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000045",
+      "name": "Potala Palace",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 91.116944,
+        "latitudeDeg": 29.657778
+      },
+      "minimumZoomShare": 0.6,
+      "description": "7th-century Tibetan fortress and palace in Lhasa, rebuilt in the 17th century as the winter seat of the Dalai Lamas.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Potala Palace (Q71229)",
+        "url": "https://www.wikidata.org/wiki/Q71229",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000046",
+      "name": "Ha Long Bay",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 107.2,
+        "latitudeDeg": 20.9
+      },
+      "minimumZoomShare": 0.6,
+      "description": "UNESCO World Heritage Site in Vietnam.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Ha Long Bay (Q190128)",
+        "url": "https://www.wikidata.org/wiki/Q190128",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000047",
+      "name": "Table Mountain",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 18.41352,
+        "latitudeDeg": -33.96216
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Mountain in Cape Town, South Africa.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Table Mountain (Q213360)",
+        "url": "https://www.wikidata.org/wiki/Q213360",
+        "credit": "Wikidata, CC0"
+      }
+    },
+    {
+      "id": "81000048",
+      "name": "Salar de Uyuni",
+      "kind": "point",
+      "type": "Landmark",
+      "position": {
+        "longitudeDeg": 292.3,
+        "latitudeDeg": -20.33333
+      },
+      "minimumZoomShare": 0.6,
+      "description": "Salt flat in Bolivia.",
+      "qualification": "Wikidata coordinate location (P625): one point, not the extent of the site.",
+      "reference": {
+        "title": "Salar de Uyuni (Q76122)",
+        "url": "https://www.wikidata.org/wiki/Q76122",
+        "credit": "Wikidata, CC0"
+      }
+    }
+  ]
+}
