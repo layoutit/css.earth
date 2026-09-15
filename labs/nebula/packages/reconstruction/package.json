@@ -1,0 +1,45 @@
+{
+  "name": "@cssearth/nebula-reconstruction",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./registration/particle-alignment": "./src/registration/particle-alignment.ts",
+    "./registration/stellar": "./src/registration/stellar.ts",
+    "./registration/overlap": "./src/registration/overlap.ts",
+    "./evidence/wavelets": "./src/evidence/wavelets.ts",
+    "./evidence/geometry/ellipse": "./src/evidence/geometry/ellipse.ts",
+    "./evidence/geometry/ridges": "./src/evidence/geometry/ridges.ts",
+    "./evidence/geometry/contours": "./src/evidence/geometry/contours.ts",
+    "./evidence/geometry/settings": "./src/evidence/geometry/settings.ts",
+    "./evidence/geometry/detect-shapes": "./src/evidence/geometry/detect-shapes.ts",
+    "./methods/joint/geometry": "./src/methods/joint/geometry.ts",
+    "./methods/joint/model": "./src/methods/joint/model.ts",
+    "./methods/joint/fitter": "./src/methods/joint/fitter.ts",
+    "./methods/sampled/material-solver": "./src/methods/sampled/material-solver.ts",
+    "./methods/sampled/emission-detail": "./src/methods/sampled/emission-detail.ts",
+    "./methods/sampled/emission-fit": "./src/methods/sampled/emission-fit.ts",
+    "./methods/inference/depth-model": "./src/methods/inference/depth-model.ts",
+    "./methods/inference/fit": "./src/methods/inference/fit.ts",
+    "./evidence/model": "./src/evidence/model.ts",
+    "./methods/inference/target": "./src/methods/inference/target.ts",
+    "./evidence/combine": "./src/evidence/combine.ts",
+    "./evidence/fields": "./src/evidence/fields.ts",
+    "./evidence/ridge-graph": "./src/evidence/ridge-graph.ts",
+    "./evidence/ridge-model": "./src/evidence/ridge-model.ts",
+    "./evidence/ridge-skeleton": "./src/evidence/ridge-skeleton.ts",
+    "./methods/kinematics/types": "./src/methods/kinematics/types.ts",
+    "./methods/kinematics/validation": "./src/methods/kinematics/validation.ts",
+    "./methods/kinematics/forward-model": "./src/methods/kinematics/forward-model.ts",
+    "./methods/kinematics/source-figure": "./src/methods/kinematics/source-figure.ts",
+    "./methods/kinematics/molecular-types": "./src/methods/kinematics/molecular-types.ts",
+    "./methods/kinematics/molecular-data": "./src/methods/kinematics/molecular-data.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@cssearth/volume-core": "workspace:*",
+    "sharp": "0.35.3"
+  }
+}
