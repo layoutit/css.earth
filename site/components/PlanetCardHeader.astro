@@ -1,10 +1,14 @@
 ---
+import { SCENE_OBJECTS } from '../objects.mts';
+import { discoveryDescription, isDiscoveryAnchor } from '../object-discovery.mts';
 import type { HTMLAttributes } from 'astro/types';
 import type { PlanetTitle } from '../planet-shell-types';
 /** `heading` is the page heading by default; overview cards pass false so a
  * document keeps exactly one h1, the object's own title. */
-interface Props extends Omit<HTMLAttributes<'section'>, 'title'> { title: PlanetTitle; introduction?: string; heading?: boolean }
-const { title, introduction = '', heading = true, ...attributes } = Astro.props;
+interface Props extends Omit<HTMLAttributes<'section'>, 'title'> { title: PlanetTitle; introduction?: string; heading?: boolean; objectId?: string }
+const { title, introduction = '', heading = true, objectId, ...attributes } = Astro.props;
+const object = SCENE_OBJECTS.find(candidate => candidate.id === objectId);
+const contentDescription = object && !isDiscoveryAnchor(object) ? discoveryDescription(object.discovery) : null;
 const TitleTag = heading ? 'h1' : 'p';
 const titleScale = title.renderHeight / Number(title.renderViewBox.split(' ')[3]);
 const titleDescent = title.renderHeight - (title.baseline + title.renderPathOffsetY) * titleScale;
@@ -18,6 +22,7 @@ const titleDescent = title.renderHeight - (title.baseline + title.renderPathOffs
         <path d={title.path} transform={title.renderPathOffsetY === 0 ? undefined : `translate(0 ${title.renderPathOffsetY})`} />
       </svg>
     </TitleTag>
+    {contentDescription && <span class="planet-classification-tag planet-title-tag" data-discovery-note>{contentDescription}</span>}
   </div>
   <slot name="image" />
   {introduction && <p class="planet-introduction">{introduction}</p>}

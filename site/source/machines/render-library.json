@@ -4,46 +4,101 @@
   "format": "webp",
   "quality": 90,
   "composition": {
-    "background": "#0d0d0d",
-    "requestedOffsetXCssPixels": 32,
-    "preserveApprovedScale": true,
-    "rightMarginCssPixels": 8,
-    "fitPolicy": "Clamp translation to transparent right margin; never shrink or crop spacecraft.",
+    "background": "transparent for model renders",
     "displaySize": [
       296,
       148
     ],
-    "preserveAspectRatio": true
+    "preserveAspectRatio": true,
+    "fitPolicy": "Center retained source geometry; alpha bounds with 6px padding supply sidebar crop."
   },
   "normalBuildPolicy": "Reuse the committed images. Rendering and acquisition are explicit maintenance operations only.",
   "renderer": {
-    "name": "Apple SceneKit",
+    "name": "Neutral inward-facing machine thumbnails v3",
+    "renderer": "Three.js 0.180.0",
     "preparationOnly": true,
     "masterSize": [
       1200,
       600
     ],
-    "antialiasing": "4x MSAA",
-    "environmentIntensity": 1.2,
-    "exposureOffset": 0,
+    "outputSize": [
+      592,
+      296
+    ],
+    "materials": "Original source materials and textures; no artistic overrides.",
+    "toneMapping": "ACESFilmic",
+    "exposure": 1,
+    "environment": {
+      "name": "RoomEnvironment",
+      "blur": 0.04,
+      "intensity": 0.2
+    },
     "lights": [
       {
-        "direction": [
-          -1,
-          2,
-          3
+        "role": "key",
+        "intensity": 3.2,
+        "position": [
+          -3,
+          4,
+          6
         ],
-        "intensity": 850
+        "shadows": true
       },
       {
-        "direction": [
+        "role": "fill",
+        "intensity": 0.25,
+        "position": [
           2,
-          0.5,
-          -2
+          -1,
+          4
         ],
-        "intensity": 500
+        "shadows": false
+      },
+      {
+        "role": "rim",
+        "intensity": 0.65,
+        "position": [
+          4,
+          2,
+          -4
+        ],
+        "shadows": false
       }
-    ]
+    ],
+    "lightColor": "#ffffff",
+    "shadowMapSize": 2048,
+    "framing": "Centered orthographic; fit retained geometry within 88% width / 86% height.",
+    "camera": {
+      "position": [
+        0,
+        0,
+        10
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "rollDegrees": 0
+    },
+    "orientation": {
+      "poses": "tools/machine-renders/poses.mts",
+      "inwardDirection": [
+        -0.8,
+        -0.45,
+        0.45
+      ],
+      "policy": "Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude."
+    },
+    "browser": "153.0.8010.37",
+    "sharp": "0.35.3",
+    "implementation": {
+      "tools/prepare-machine-renders.mts": "03b81a86c1825b7139de72e60316a0f943cccd3d104e6c26517f0219ec4e5604",
+      "tools/machine-renders/render.mts": "36a4e5921698c939e27c6a1070238e7878a55a561e38620baefa45807fe46ffb",
+      "tools/machine-renders/poses.mts": "f5dc1d2f52d0dfcf690b614129cf3ce83c62079ba462610e658942aa3b6d4b41",
+      "tools/machine-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
+      "tools/machine-renders/refresh.mts": "5d05ffb602abb1802928d11bb1dc68a3ed13b6360fa7818dea447124912946b1"
+    }
   },
   "entries": [
     {
@@ -128,10 +183,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 6280,
-      "sha256": "2da3c46f3a63ec5b26109939d2e346cc761223a559f4b125d11e20c47379280e",
+      "bytes": 19476,
+      "sha256": "0449286afbcbaf0b2852e98afd7516f14ab8023a8270e1554e642ac82a0c7c72",
       "source": {
         "kind": "model-render",
         "id": "cassini",
@@ -167,10 +222,63 @@
         ]
       },
       "subject": {
-        "left": 246,
-        "top": 16,
-        "width": 228,
-        "height": 264
+        "left": 175,
+        "top": 12,
+        "width": 242,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 25686,
+        "omissions": [
+          {
+            "mesh": "aluminum",
+            "components": [
+              235,
+              288,
+              265
+            ],
+            "triangles": 50
+          }
+        ],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "f8bc110e23821021e99b88634843449cc8e98d86d0d8561c612c1cf0404e64e7",
+          "facingFeature": "Radar / high-gain dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.848399234791,
+            -0.466483160423,
+            -0.017914603695,
+            0.249582183702
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/radio-detection-and-ranging/radar-technical-write-up/",
+            "identification": "Use the visible opening of the large dish as the illustration front."
+          },
+          "renderedDirection": [
+            -0.782585580871723,
+            -0.4402043892395184,
+            0.4402043892397375
+          ]
+        }
       }
     },
     {
@@ -183,10 +291,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 13
+        "offsetXCssPixels": 0
       },
-      "bytes": 5206,
-      "sha256": "a34eec837d839c64f9be7f16b18837226a6d9611ff6f871f30c15a6232f962df",
+      "bytes": 10966,
+      "sha256": "01bc4ed373bafe7940a341e27d633d33e338d1a3f541515901789f71f1659214",
       "source": {
         "kind": "model-render",
         "id": "dawn",
@@ -222,10 +330,53 @@
         ]
       },
       "subject": {
-        "left": 64,
-        "top": 83,
-        "width": 516,
-        "height": 130
+        "left": 84,
+        "top": 12,
+        "width": 424,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 32096,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "411249aed791994b6a2014894ad6bd7ca0445dbcf6d5342af9edc5df988f04b7",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            0,
+            1
+          ],
+          "modelQuaternion": [
+            0.273127361384,
+            -0.453099602563,
+            -0.025525568038,
+            0.848204362166
+          ],
+          "evidence": {
+            "url": "https://www.jpl.nasa.gov/images/pia12026-illustration-of-dawn-spacecraft-inside-view/",
+            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
+          },
+          "renderedDirection": [
+            -0.7825855808711409,
+            -0.4402043892390659,
+            0.4402043892412251
+          ]
+        }
       }
     },
     {
@@ -238,10 +389,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 8566,
-      "sha256": "c571b5c59b281f026c5fa320b2419a9c210eefd020e0a4f4921a12cf3ebee417",
+      "bytes": 16366,
+      "sha256": "9ccb0f91c1026ef97d2738f6dde8fc446b6ab9439d8f79b0a45872abd9807d9b",
       "source": {
         "kind": "model-render",
         "id": "galileo-v2",
@@ -333,10 +484,53 @@
         ]
       },
       "subject": {
-        "left": 146,
-        "top": 16,
-        "width": 428,
-        "height": 264
+        "left": 160,
+        "top": 12,
+        "width": 272,
+        "height": 271
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 16721,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "43943ada671c17c31d07ddb220a95c302e0ca5c3ded6abda7935df2bae634877",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.840690524284,
+            -0.492123574677,
+            -0.11550600417,
+            0.194196273463
+          ],
+          "evidence": {
+            "url": "https://www.jpl.nasa.gov/news/press_kits/galileo-end.pdf#page=17",
+            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
+          },
+          "renderedDirection": [
+            -0.7825855808706017,
+            -0.4402043892404462,
+            0.4402043892408032
+          ]
+        }
       }
     },
     {
@@ -385,10 +579,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 12874,
-      "sha256": "285782d727866443e7e5c80931295f4b8c63f34b532e755a798cda4ae4f254ee",
+      "bytes": 20590,
+      "sha256": "b02103ff8a052a34c6eb1be4e2af76ae26d52bbfbae5ec60d5d790b007c8cd16",
       "source": {
         "kind": "model-render",
         "id": "grail",
@@ -474,10 +668,53 @@
         ]
       },
       "subject": {
-        "left": 225,
-        "top": 16,
-        "width": 271,
-        "height": 264
+        "left": 105,
+        "top": 12,
+        "width": 382,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 6952,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "5fd82bb248b085ac3b448077d77cbcd532516ad627268c2fde32c5db5392de53",
+          "facingFeature": "MoonKAM nadir deck",
+          "sourceAxis": [
+            0,
+            0,
+            1
+          ],
+          "modelQuaternion": [
+            0.296476939609,
+            -0.438177166977,
+            -0.069902416308,
+            0.84570434953
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/grail/",
+            "identification": "Moon-facing camera deck; the gravity-ranging link points to the other spacecraft."
+          },
+          "renderedDirection": [
+            -0.7825855808710944,
+            -0.44020438924008337,
+            0.44020438924029026
+          ]
+        }
       }
     },
     {
@@ -610,10 +847,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 12980,
-      "sha256": "ac76d87a942faa21bfd9648bb32e9bc9ff495f9346a78393f209b2d29fd8ff26",
+      "bytes": 19388,
+      "sha256": "7f50da8f38afe25e8ef033626891510146242a8b5cffffd9128855e79a240865",
       "source": {
         "kind": "model-render",
         "id": "hubble-v2",
@@ -650,10 +887,53 @@
         ]
       },
       "subject": {
-        "left": 179,
-        "top": 16,
-        "width": 362,
-        "height": 264
+        "left": 163,
+        "top": 12,
+        "width": 266,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 7672,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "e5ba4de15c7d359ac8fa1ab7e286aff42dec09c0fadae3db99252587f39fa384",
+          "facingFeature": "Telescope aperture",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.789657241177,
+            -0.524059195449,
+            -0.310714718152,
+            0.072524237637
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/hubble/observatory/design/optics/",
+            "identification": "Open end of the main optical tube."
+          },
+          "renderedDirection": [
+            -0.7825855808713478,
+            -0.4402043892397108,
+            0.4402043892402128
+          ]
+        }
       }
     },
     {
@@ -702,10 +982,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 6470,
-      "sha256": "1f53c9672aef2917e0caf69539df685d25b9d826bfe3120edbb647b5c8ec7c4d",
+      "bytes": 10742,
+      "sha256": "c9617addac15fa9a71bd333360fb15999d152906fda7db702b8a0a24f6c66247",
       "source": {
         "kind": "model-render",
         "id": "juno",
@@ -741,10 +1021,53 @@
         ]
       },
       "subject": {
-        "left": 235,
-        "top": 16,
-        "width": 250,
-        "height": 264
+        "left": 197,
+        "top": 12,
+        "width": 198,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 17124,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "13f6bd48ff830a1890b21ef6e0182bb1043926feebb77af9733e7374b050367a",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            -0.169117737989,
+            0.346067505501,
+            0.831565622977,
+            0.400168823144
+          ],
+          "evidence": {
+            "url": "https://descanso.jpl.nasa.gov/DPSummary/Descanso16_Juno_RevA.pdf",
+            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
+          },
+          "renderedDirection": [
+            -0.7825855808713236,
+            -0.4402043892394234,
+            0.44020438924054295
+          ]
+        }
       }
     },
     {
@@ -757,10 +1080,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 14292,
-      "sha256": "f178d28c7c19786e25152e51ccdcdc2a2533f558dd61b068e36529b17847360b",
+      "bytes": 21230,
+      "sha256": "44c40e815911e002dc83446f0298319fd4c92836bcc9a84e38fc13d55efb1657",
       "source": {
         "kind": "model-render",
         "id": "lro",
@@ -796,10 +1119,53 @@
         ]
       },
       "subject": {
-        "left": 154,
-        "top": 16,
-        "width": 412,
-        "height": 264
+        "left": 123,
+        "top": 12,
+        "width": 346,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 8142,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "c868a65e36ed293476be3d05e7e60968778c5cf4b2a7aba8859fcc20242a0612",
+          "facingFeature": "Lunar observing instruments",
+          "sourceAxis": [
+            0,
+            0,
+            1
+          ],
+          "modelQuaternion": [
+            -0.422661200534,
+            -0.318206403052,
+            0.841100586337,
+            0.112481101893
+          ],
+          "evidence": {
+            "url": "https://svs.gsfc.nasa.gov/10408/",
+            "identification": "Optical openings on the instrument cluster beside the bus."
+          },
+          "renderedDirection": [
+            -0.7825855808716463,
+            -0.4402043892395729,
+            0.44020438923981997
+          ]
+        }
       }
     },
     {
@@ -812,10 +1178,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 21.5
+        "offsetXCssPixels": 0
       },
-      "bytes": 13368,
-      "sha256": "2fd71b46da3689e4a2e624f2a89fceb8a6d77d373af6edc380859e7ca3007f71",
+      "bytes": 23216,
+      "sha256": "4857506a2bff5bf1678d6f72852e7cf5e3e1a76cdf9778078ec19b590e576f53",
       "source": {
         "kind": "model-render",
         "id": "magellan",
@@ -851,10 +1217,53 @@
         ]
       },
       "subject": {
-        "left": 98,
-        "top": 16,
-        "width": 482,
-        "height": 264
+        "left": 114,
+        "top": 12,
+        "width": 364,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 7364,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "8a7f61e467309865fb2bb3fc3b2d3efbc0898d9e15eb6afb2fd743b7cd9f5084",
+          "facingFeature": "Radar antenna",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.824337466787,
+            -0.386367893191,
+            0.201419799103,
+            0.361410648005
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/magellan/",
+            "identification": "Radar uses the large high-gain dish."
+          },
+          "renderedDirection": [
+            -0.7825855808717874,
+            -0.44020438923916283,
+            0.4402043892399788
+          ]
+        }
       }
     },
     {
@@ -867,10 +1276,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 20.5
+        "offsetXCssPixels": 0
       },
-      "bytes": 13460,
-      "sha256": "15599eaf440d759a366c591453a1962324bdaefb765f1f840755a4a8588d2eca",
+      "bytes": 13182,
+      "sha256": "a1e35c6c3ff8574efdcd98495ca9d57a783e37f3231858f8d68605f1f2170386",
       "source": {
         "kind": "model-render",
         "id": "mars-global-surveyor",
@@ -906,10 +1315,53 @@
         ]
       },
       "subject": {
-        "left": 94,
-        "top": 15,
-        "width": 486,
-        "height": 266
+        "left": 215,
+        "top": 12,
+        "width": 162,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 6194,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "8812c97f2c147e409e883d5196377d596df84de87c08c1453e9e3cfaf082052f",
+          "facingFeature": "MOC/MOLA science deck",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.732040302959,
+            -0.266590704802,
+            0.429207629784,
+            0.456976149808
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/mars-global-surveyor/science-instruments/",
+            "identification": "Instrument apertures opposite the antenna-boom end."
+          },
+          "renderedDirection": [
+            -0.7825855808710019,
+            -0.4402043892413993,
+            0.44020438923913846
+          ]
+        }
       }
     },
     {
@@ -922,10 +1374,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 9340,
-      "sha256": "2daebf31f243548d35fe6f9448b7af476b56ad2ab170fe16c6ace3bd43ad4946",
+      "bytes": 13962,
+      "sha256": "bbd5accdf1b03fb1a80e524467793bc315c74dee17faaa293eac1baf0eb1c034",
       "source": {
         "kind": "model-render",
         "id": "messenger",
@@ -961,10 +1413,53 @@
         ]
       },
       "subject": {
-        "left": 158,
-        "top": 16,
-        "width": 404,
-        "height": 264
+        "left": 193,
+        "top": 12,
+        "width": 206,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 11572,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "c0268bfed0910e68a54c45925aea8edfc6e479d8131a849de7949252e01b9875",
+          "facingFeature": "MDIS/MLA instrument deck",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            -0.5280947528,
+            0.489987266672,
+            0.664242520985,
+            0.199525145982
+          ],
+          "evidence": {
+            "url": "https://www.nasa.gov/wp-content/uploads/2015/04/525164main_mercurymoi_pk.pdf",
+            "identification": "Apertures opposite the large engine nozzle, distinct from the heat shield."
+          },
+          "renderedDirection": [
+            -0.7825855808714223,
+            -0.4402043892392861,
+            0.4402043892405047
+          ]
+        }
       }
     },
     {
@@ -977,10 +1472,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 24.5
+        "offsetXCssPixels": 0
       },
-      "bytes": 13956,
-      "sha256": "162a39ca85c234906234e1725565d8b14b3ae621c141b84d5a2c3c0ee922b826",
+      "bytes": 18898,
+      "sha256": "f665c641a979c9d0c0846164a132f7ca520f873e7fa06694fabc28775c1a45e0",
       "source": {
         "kind": "model-render",
         "id": "mro",
@@ -1016,10 +1511,53 @@
         ]
       },
       "subject": {
-        "left": 110,
-        "top": 16,
-        "width": 470,
-        "height": 264
+        "left": 159,
+        "top": 12,
+        "width": 274,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 124062,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "b195c566d227dec8e42ca2fafcc2a8cc26a127e04ed577e4b9515199d2002d9e",
+          "facingFeature": "HiRISE science deck",
+          "sourceAxis": [
+            0,
+            -1,
+            0
+          ],
+          "modelQuaternion": [
+            0.097148676431,
+            0.544768125266,
+            -0.520057631468,
+            0.650638059381
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/science-instruments/",
+            "identification": "Main telescope lens plane faces negative Y in the source model."
+          },
+          "renderedDirection": [
+            -0.7825855808714431,
+            -0.4402043892388755,
+            0.44020438924087824
+          ]
+        }
       }
     },
     {
@@ -1032,10 +1570,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 9612,
-      "sha256": "74795b0c803c88a28f9f2c92a92d3f33900db6050d7d828849e8523a5d8a76bb",
+      "bytes": 13012,
+      "sha256": "cc4a20de076421d6aaac64f97eee092fb52195b33d2232c4920d1bd0bc827dc2",
       "source": {
         "kind": "model-render",
         "id": "near-shoemaker",
@@ -1071,10 +1609,53 @@
         ]
       },
       "subject": {
-        "left": 191,
-        "top": 16,
-        "width": 339,
-        "height": 264
+        "left": 189,
+        "top": 12,
+        "width": 214,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 9312,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "f3de2f87c97685b207be97e80d7cdca37d1567dd68204e1feb2d85f90e3adb0c",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            -0.297339126118,
+            -0.081361278746,
+            -0.794790311151,
+            -0.522760124436
+          ],
+          "evidence": {
+            "url": "https://pds.nasa.gov/data/near-a-mag-3-rdr-earth-v1.0/nmerth_2001/document/mission.pdf",
+            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
+          },
+          "renderedDirection": [
+            -0.7825855808716898,
+            -0.4402043892404631,
+            0.4402043892388522
+          ]
+        }
       }
     },
     {
@@ -1087,10 +1668,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 10832,
-      "sha256": "de359b67985a4b524f18d072cbe8e3c0da77d25772fd86bfb992615f3f73bb37",
+      "bytes": 18714,
+      "sha256": "d0326df9e12098d5c777204cb3364e0da65dfa17e1974f0d8bc1bcc9c1b64cc7",
       "source": {
         "kind": "model-render",
         "id": "new-horizons",
@@ -1126,10 +1707,53 @@
         ]
       },
       "subject": {
-        "left": 245,
-        "top": 15,
-        "width": 230,
-        "height": 265
+        "left": 165,
+        "top": 12,
+        "width": 261,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 8280,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "cf152d8cea17c4a83711041cb0d29ca1d980bfafa084ada2656569ea92cdd73f",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.520353161895,
+            -0.07786474314,
+            0.670324385298,
+            0.523292353428
+          ],
+          "evidence": {
+            "url": "https://pluto.jhuapl.edu/Mission/Spacecraft.php",
+            "identification": "The large communication dish supplies the visual facing direction."
+          },
+          "renderedDirection": [
+            -0.7825855808719122,
+            -0.44020438923869704,
+            0.4402043892402227
+          ]
+        }
       }
     },
     {
@@ -1142,10 +1766,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 7136,
-      "sha256": "a070e425e815a82de54c019567f6652c4e9a56a02480c512ca5c662bda501b6b",
+      "bytes": 16162,
+      "sha256": "65cf7be2b9a5a4753720dc5ca1abf1fd74a274caab48788d2b556630492fe8ce",
       "source": {
         "kind": "model-render",
         "id": "odyssey",
@@ -1181,10 +1805,53 @@
         ]
       },
       "subject": {
-        "left": 191,
-        "top": 16,
-        "width": 338,
-        "height": 264
+        "left": 173,
+        "top": 12,
+        "width": 246,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 8642,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "ac0faa8dbfb54aabcbe3d06886c3d98dd29d120fd49b1c9fa6abbfbed22b049a",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            -1,
+            0,
+            0
+          ],
+          "modelQuaternion": [
+            -0.408857549103,
+            0.109175259119,
+            0.311107653974,
+            0.850957281523
+          ],
+          "evidence": {
+            "url": "https://www.jpl.nasa.gov/news/press_kits/odysseylaunch.pdf",
+            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
+          },
+          "renderedDirection": [
+            -0.7825855808701124,
+            -0.44020438924122623,
+            0.4402043892408929
+          ]
+        }
       }
     },
     {
@@ -1197,10 +1864,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 24.5
+        "offsetXCssPixels": 0
       },
-      "bytes": 15194,
-      "sha256": "0b3a3f683b7cdbe0416b09e4e96b9d35e95f0a4eac6c02d858a19212d9878653",
+      "bytes": 18992,
+      "sha256": "77075614481090c0c36040e075f20ae2a90f8c36687c4475da43ba0694c6f603",
       "source": {
         "kind": "model-render",
         "id": "osiris-rex",
@@ -1236,10 +1903,53 @@
         ]
       },
       "subject": {
-        "left": 110,
-        "top": 16,
-        "width": 470,
-        "height": 264
+        "left": 93,
+        "top": 12,
+        "width": 406,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 184407,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "ef8e0429ee4dd8e918908923d5efdc6d3576b9216cc8e16533b50dd28c196bca",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            1,
+            0,
+            0
+          ],
+          "modelQuaternion": [
+            0.29013329881,
+            -0.270327351726,
+            0.904552880347,
+            -0.156620172665
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/osiris-rex/science-instruments/",
+            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
+          },
+          "renderedDirection": [
+            -0.7825855808715622,
+            -0.4402043892394128,
+            0.4402043892401294
+          ]
+        }
       }
     },
     {
@@ -1252,10 +1962,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 13
+        "offsetXCssPixels": 0
       },
-      "bytes": 4970,
-      "sha256": "28f2aefc0c1c4c9e3a8c1707ee2cc73b3740db59ea030e3ce12f4dc5487db4f9",
+      "bytes": 20810,
+      "sha256": "a10543238ec56cf8a6f735f062b7a42e92bbbf08675c1f6b92a22c5bba5e3b3f",
       "source": {
         "kind": "model-render",
         "id": "rosetta-v2",
@@ -1347,10 +2057,53 @@
         ]
       },
       "subject": {
-        "left": 64,
-        "top": 84,
-        "width": 516,
-        "height": 128
+        "left": 27,
+        "top": 41,
+        "width": 538,
+        "height": 214
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 17665,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "56b3325b9ff45da5a03ba0c13b548b59de979c83ec3738085183d7dd1029fb76",
+          "facingFeature": "OSIRIS science face",
+          "sourceAxis": [
+            0,
+            0,
+            -1
+          ],
+          "modelQuaternion": [
+            0.837465012355,
+            0.136947244227,
+            0.496924482735,
+            -0.181559532491
+          ],
+          "evidence": {
+            "url": "https://www.esa.int/ESA_Multimedia/Images/2013/12/Rosetta_s_instruments_black_background",
+            "identification": "Optical openings on the face opposite the launch adapter."
+          },
+          "renderedDirection": [
+            -0.7825855808708492,
+            -0.4402043892405039,
+            0.4402043892403058
+          ]
+        }
       }
     },
     {
@@ -1363,10 +2116,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 8080,
-      "sha256": "914f2123ec867790a64a4405e54889cf227cecf973fe3e8a9fbf6658bdcd2610",
+      "bytes": 13310,
+      "sha256": "2b6d2ceb0444f8f452c532091eec166350e26e8232197c45cc40eda8ac588eb1",
       "source": {
         "kind": "model-render",
         "id": "sdo",
@@ -1402,10 +2155,53 @@
         ]
       },
       "subject": {
-        "left": 230,
-        "top": 16,
-        "width": 260,
-        "height": 264
+        "left": 170,
+        "top": 12,
+        "width": 252,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 272770,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "8ce4607bd65f098eee22f02717a182d6721610c940a961511dfbca832a3eda95",
+          "facingFeature": "AIA telescope apertures",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            0.799110407901,
+            -0.521496684794,
+            -0.285525393976,
+            0.089101139884
+          ],
+          "evidence": {
+            "url": "https://sdo.gsfc.nasa.gov/mission/spacecraft.php",
+            "identification": "Four telescope apertures at the end of the long spacecraft body."
+          },
+          "renderedDirection": [
+            -0.7825855808706342,
+            -0.4402043892413164,
+            0.4402043892398752
+          ]
+        }
       }
     },
     {
@@ -1454,10 +2250,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 8508,
-      "sha256": "2089948529c1f9f5acf8b5a813ad9ffce78af0aeca053ab5796224f3eda21c9e",
+      "bytes": 12000,
+      "sha256": "2312f28e7592cb91d101c31b4626243a04eda3630051c1000a57feef6727e42d",
       "source": {
         "kind": "model-render",
         "id": "suomi-npp",
@@ -1493,10 +2289,53 @@
         ]
       },
       "subject": {
-        "left": 180,
-        "top": 15,
-        "width": 361,
-        "height": 265
+        "left": 190,
+        "top": 12,
+        "width": 212,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 4024,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "885278277ed8fa864368803b7da2046292754bff01033055d56fe86e8b951ee4",
+          "facingFeature": "Earth-facing instrument deck",
+          "sourceAxis": [
+            -1,
+            0,
+            0
+          ],
+          "modelQuaternion": [
+            -0.481990138908,
+            -0.319491531217,
+            -0.081439370362,
+            -0.81177478184
+          ],
+          "evidence": {
+            "url": "https://svs.gsfc.nasa.gov/vis/a010000/a010700/a010742/NPPInstruments.html",
+            "identification": "Sensor openings on the instrument deck, distinct from the opposite electronics face."
+          },
+          "renderedDirection": [
+            -0.7825855808712686,
+            -0.4402043892399956,
+            0.44020438924006833
+          ]
+        }
       }
     },
     {
@@ -1509,10 +2348,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 15.5
+        "offsetXCssPixels": 0
       },
-      "bytes": 13062,
-      "sha256": "b0d61c866c51aa65444e9339fdcd41c554ac762f5c1c815f4c06bb3737c3a08a",
+      "bytes": 18794,
+      "sha256": "8d4e2ce508a339bb131fd24b023c411469a664e45bbf4e4c1e52eb2fa7d9393a",
       "source": {
         "kind": "model-render",
         "id": "terra",
@@ -1548,10 +2387,53 @@
         ]
       },
       "subject": {
-        "left": 74,
-        "top": 15,
-        "width": 506,
-        "height": 265
+        "left": 141,
+        "top": 12,
+        "width": 310,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 117120,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "8794857595f7a7d416184fe926ecb50e11bf267dbe471d1cf2728a85e8d017fa",
+          "facingFeature": "Earth-facing instrument deck",
+          "sourceAxis": [
+            0,
+            -1,
+            0
+          ],
+          "modelQuaternion": [
+            -0.518319837353,
+            -0.807981474587,
+            0.106029956078,
+            0.25936100583
+          ],
+          "evidence": {
+            "url": "https://terra.nasa.gov/about/terra-instruments",
+            "identification": "Instrument apertures on the nadir side, opposite the flat zenith panels."
+          },
+          "renderedDirection": [
+            -0.7825855808711322,
+            -0.4402043892407969,
+            0.4402043892395097
+          ]
+        }
       }
     },
     {
@@ -1678,10 +2560,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 25
+        "offsetXCssPixels": 0
       },
-      "bytes": 9994,
-      "sha256": "aec2d8218eb24347f6529e5274e2fe292a940c2dda80c21254e9756ddf87226f",
+      "bytes": 13080,
+      "sha256": "cb7f12f12024f716bc1db93135b4b4c54c3b70c6ab52d7beb49185f5a2fca9a6",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -1726,10 +2608,53 @@
         ]
       },
       "subject": {
-        "left": 111,
-        "top": 16,
-        "width": 469,
-        "height": 264
+        "left": 167,
+        "top": 12,
+        "width": 258,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 20378,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "4f8c8299c7259a5870f009c401967cd667e2741640cbead4ccb15c774545b5f3",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            -0.169253524047,
+            -0.162193165141,
+            -0.831537996256,
+            -0.503578377774
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/voyager/spacecraft/",
+            "identification": "The large communication dish supplies the visual facing direction."
+          },
+          "renderedDirection": [
+            -0.7825855808714898,
+            -0.44020438923972055,
+            0.44020438923995003
+          ]
+        }
       }
     },
     {
@@ -1742,10 +2667,10 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 25
+        "offsetXCssPixels": 0
       },
-      "bytes": 9994,
-      "sha256": "aec2d8218eb24347f6529e5274e2fe292a940c2dda80c21254e9756ddf87226f",
+      "bytes": 13080,
+      "sha256": "cb7f12f12024f716bc1db93135b4b4c54c3b70c6ab52d7beb49185f5a2fca9a6",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -1790,10 +2715,53 @@
         ]
       },
       "subject": {
-        "left": 111,
-        "top": 16,
-        "width": 469,
-        "height": 264
+        "left": 167,
+        "top": 12,
+        "width": 258,
+        "height": 272
+      },
+      "processing": {
+        "recipe": "tools/machine-renders/render.mts#recipe",
+        "sourceMaterials": "unchanged",
+        "triangles": 20378,
+        "omissions": [],
+        "camera": {
+          "direction": [
+            0,
+            0,
+            10
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "rollDegrees": 0
+        },
+        "pose": {
+          "sourceSha256": "4f8c8299c7259a5870f009c401967cd667e2741640cbead4ccb15c774545b5f3",
+          "facingFeature": "High-gain antenna dish",
+          "sourceAxis": [
+            0,
+            1,
+            0
+          ],
+          "modelQuaternion": [
+            -0.169253524047,
+            -0.162193165141,
+            -0.831537996256,
+            -0.503578377774
+          ],
+          "evidence": {
+            "url": "https://science.nasa.gov/mission/voyager/spacecraft/",
+            "identification": "Same source model and dish-facing pose as Voyager 1."
+          },
+          "renderedDirection": [
+            -0.7825855808714898,
+            -0.44020438923972055,
+            0.44020438923995003
+          ]
+        }
       }
     }
   ]

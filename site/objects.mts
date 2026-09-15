@@ -1,6 +1,8 @@
 import { defineObjects } from './object-schema.mts';
 import { catalogEntry } from './object-catalog.mts';
 import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';
+import discoveries from './prepared-object-discovery.json' with { type: 'json' };
+import { parseObjectDiscovery } from './object-discovery.mts';
 import distances from './prepared-object-distances.json' with { type: 'json' };
 import focuses from './prepared-focus-objects.json' with { type: 'json' };
 import { parseNavigationDistance } from './navigation-distance.mts';
@@ -13,9 +15,14 @@ export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map
   const { order, context, ...object } = catalogEntry(descriptor, async () => {
     const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
     return loadPackagedObject(descriptor);
-  }, preparedDistance(descriptor));
+  }, preparedDistance(descriptor), preparedDiscovery(descriptor));
   return object;
 }), ...focuses.map(definePreparedFocus)]);
+
+function preparedDiscovery(descriptor: unknown) {
+  if (!record(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
+  return parseObjectDiscovery(Object.getOwnPropertyDescriptor(discoveries, descriptor.id)?.value);
+}
 
 function preparedDistance(descriptor: unknown) {
   if (!record(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');

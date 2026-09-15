@@ -75,7 +75,7 @@ export async function assertRenderedObjectControls(page: BrowserPage, profile: O
     ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
     ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
     { name: "skyContrast", kind: "toggle" },
-    { name: "heliosphere", kind: "toggle" }, { name: "asteroidBodies", kind: "toggle" }, { name: "asteroidOrbits", kind: "toggle" }, { name: "asteroidLabels", kind: "toggle" },
+    { name: "heliosphere", kind: "toggle" }, { name: "illustrationModels", kind: "toggle" }, { name: "asteroidBodies", kind: "toggle" }, { name: "asteroidOrbits", kind: "toggle" }, { name: "asteroidLabels", kind: "toggle" },
     ...remainingSettings.map(({ name, kind }) => ({ name, kind })),
   ];
   const actual = await page.evaluate(() => ({

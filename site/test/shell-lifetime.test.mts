@@ -58,6 +58,7 @@ class Element extends EventTarget {
   }
 }
 class FixtureDocument extends Element {
+  defaultView: FixtureWindow | null = null;
   body = new Element(); documentElement = new Element(); activeElement: Element | null = null;
 }
 interface VisibilityObserver { observed: globalThis.Element[]; disconnected: boolean; options?: IntersectionObserverInit; observe(node: globalThis.Element): void; disconnect(): void; }
@@ -75,7 +76,9 @@ class FixtureWindow extends Element {
   // The fixture is a wide layout, so phone-only sheet gestures stay idle.
   matchMedia = (_query: string) => Object.assign(new EventTarget(), { matches: false });
   IntersectionObserver?: new (callback: IntersectionObserverCallback, options?: IntersectionObserverInit) => VisibilityObserver;
-  MutationObserver?: new (callback: MutationCallback) => { observe(target: Node): void; disconnect(): void };
+  ResizeObserver = class { constructor(_callback: ResizeObserverCallback) {} observe() {} unobserve() {} disconnect() {} };
+  MutationObserver: new (callback: MutationCallback) => { observe(target: Node): void; disconnect(): void } =
+    class { constructor(_callback: MutationCallback) {} observe() {} disconnect() {} };
 }
 function fixture(options: Partial<ShellOptions> = {}) {
   const selectors = new SelectorMap();
@@ -85,7 +88,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting", ".planet-orbit-renderer-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting", ".planet-orbit-renderer-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -114,6 +117,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     documentTarget.activeElement = selectors.element('.planet-sidebar-search');
   };
   const windowTarget = new FixtureWindow();
+  documentTarget.defaultView = windowTarget;
   windowTarget.Event = Event;
   for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLSelectElement", "HTMLDetailsElement", "HTMLLIElement"] as const)
     windowTarget[name] = Element;
@@ -169,6 +173,27 @@ test('retained catalogue groups follow filters and release their visibility obse
 });
 
 // Asteroid dots default off: the busiest layer must not cost a first view.
+test('Illustration models starts off and retains its independent preference across body navigation', () => {
+  const changes: boolean[] = [], f = fixture({ onIllustrationModelsChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.element('.planet-illustration-models-setting');
+  assert.equal(toggle.checked, false);
+  assert.equal(f.documentTarget.body.dataset.illustrationModels, 'off');
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {}, dispose() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.documentTarget.body.dataset.illustrationModels, enabled ? 'on' : 'off');
+      assert.equal(f.selectors.element('.planet-heliosphere-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
+});
+
 test('Asteroids starts off and retains its independent preference across body navigation', () => {
   const changes: boolean[] = [], f = fixture({ onAsteroidBodiesChange: value => changes.push(value) }), shell = f.mount();
   const toggle = f.selectors.element('.planet-asteroid-bodies-setting');
@@ -435,7 +460,7 @@ test('the planet lens controller ignores an earlier retained galaxy bank and bin
     disconnect() {}
   };
   const shell = f.mount();
-  assert.deepEqual(observed, [button]);
+  assert.deepEqual(observed.filter(node => node !== f.documentTarget.body && node !== f.documentTarget.documentElement), [button]);
   assert.equal(detail.hidden, false);
   assert.equal(focusedBank.hidden, true);
   shell.destroy();

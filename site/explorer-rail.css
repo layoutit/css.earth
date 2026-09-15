@@ -101,7 +101,7 @@
     16px var(--explorer-card-padding-inline-start);
   border-bottom: 1px solid var(--explorer-divider);
   color: var(--shell-text-secondary);
-  font: 400 16px/1.4 var(--shell-ui-font);
+  font: var(--shell-font-introduction);
   text-wrap: balance;
 }
 
@@ -136,7 +136,7 @@
     var(--explorer-card-padding-inline-start);
   border-bottom: 1px solid var(--explorer-divider);
   color: var(--shell-text-muted);
-  font: 400 13px/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
   text-transform: uppercase;
 }
 
@@ -148,7 +148,7 @@
   min-width: 0;
   overflow: hidden;
   color: var(--shell-text-secondary);
-  font: 400 13px/18px var(--shell-ui-font);
+  font: var(--shell-font-metadata);
   text-align: right;
   text-overflow: ellipsis;
   text-transform: none;
@@ -197,7 +197,7 @@
 
 .explorer-settings-panel .planet-setting-text {
   color: var(--shell-text);
-  font: 400 14px/20px var(--shell-ui-font);
+  font: var(--shell-font-small);
   letter-spacing: 0;
   opacity: 1;
 }

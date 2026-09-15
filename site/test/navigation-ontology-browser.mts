@@ -43,12 +43,15 @@ try {
       const card = page.locator(`[data-prepared-focus-card][data-prepared-focus-id="${object.id}"]`);
       await card.waitFor({ state: 'visible' });
       await card.locator('[data-information-tab="factsheet"]').click();
-      assert.ok(await card.locator('a[data-focus-source]:visible').count() > 0, 'focus must expose resolved source links');
+      const sources = page.locator('[data-source-panel]');
+      if (await sources.locator('details').first().getAttribute('open') === null) await sources.locator('summary').first().click();
+      const sourceLinks = sources.locator('[data-source-bank]:not([hidden]) a:not([hidden])');
+      assert.ok(await sourceLinks.count() > 0, 'focus must expose resolved source links in the shared panel');
       const galaxy = galaxyCatalog.objects.find(galaxy => galaxy.id === object.id);
       if (galaxy) {
         const citation = resolveSpatialCitation(galaxy.distance.sourceRef, galaxyCatalog.sources);
         assert.ok(citation);
-        assert.ok((await card.locator('a[data-focus-source]:visible').evaluateAll(links => links.map(link => link.getAttribute('href')))).includes(citation.url), 'the distance paper must be linked, beyond the catalogue itself');
+        assert.ok((await sourceLinks.evaluateAll(links => links.map(link => link.getAttribute('href')))).includes(citation.url), 'the distance paper must be linked, beyond the catalogue itself');
       }
     }
     assert.equal(documents.length, 1, 'focus selection must not reload the scene document');
