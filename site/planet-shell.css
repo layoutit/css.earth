@@ -1068,8 +1068,9 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 .planet-view-readout {
   display: flex;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   min-width: 0;
+  max-width: 100%;
   margin-left: auto;
   align-items: center;
   justify-content: safe flex-end;
@@ -1082,13 +1083,24 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   font: 12px/1.4 var(--shell-ui-font);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.planet-view-context {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
   overflow-x: auto;
   scrollbar-width: none;
 }
 
+.planet-view-altitude { flex: 0 0 auto; }
+
 .planet-view-date,
 .planet-view-coordinates {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   gap: 8px;
 }
@@ -1198,7 +1210,18 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 }
 
 @media (max-width: 600px) {
-  .planet-view-coordinates { display: none; }
+  .planet-view-context { display: none; }
+  .planet-view-altitude {
+    display: flex;
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 4px;
+  }
+  [data-view-distance-label] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  [data-view-altitude] { flex: 0 0 auto; }
 }
 
 .planet-observation-controls {

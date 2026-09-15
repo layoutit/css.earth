@@ -69,6 +69,11 @@ body[data-object-shell] {
   padding-block-start: 16px;
 }
 
+/* A focused object's hierarchy belongs above its title, not below its datasets. */
+.planet-object-browser:has(> [data-prepared-focus-card]:not([hidden])) > [data-large-scale-overview] .planet-breadcrumbs {
+  display: none;
+}
+
 .planet-card > .planet-selected-panel:has(+ :is(.planet-card-tabs, .planet-object-tabs))::after {
   content: "";
   display: block;
