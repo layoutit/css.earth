@@ -1,5 +1,7 @@
 # 666 Desdemona
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="selected-model"></a>
@@ -34,7 +36,7 @@ Prime-meridian display phase is explicitly arbitrary; the available IAUspin file
 
 This view uses [model 6218](https://damit.cuni.cz/projects/damit/asteroid_models/view/6218) at its published scale and paired pole. [Model 6219](https://damit.cuni.cz/projects/damit/asteroid_models/view/6219) is an alternative pole/shape solution, excluded from this presentation without claiming the selected pole is unique.
 
-The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared no-imagery grid or a clearly labeled visualization of the selected model radius.
+The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared neutral-gray material or a clearly labeled visualization of the selected model radius.
 
 The selected model is associated with Marciniak et al., Properties of slowly rotating asteroids from the Convex Inversion Thermophysical Model (A&A 654, A87, 2021). Its thermophysical calibration does not turn the convex solution into resolved surface terrain.
 

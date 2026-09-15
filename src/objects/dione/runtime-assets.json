@@ -1,0 +1,135 @@
+{
+  "schema": "cssdione-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "dione-elevation-legend.webp",
+      "bytes": 240,
+      "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
+    },
+    {
+      "filename": "dione-elevation-shadow@2x.webp",
+      "bytes": 1141136,
+      "sha256": "1fbc99589fa402e3de18635087195b687294b0ebbc74372bf62c14826186aa57"
+    },
+    {
+      "filename": "dione-elevation-surface@2x.webp",
+      "bytes": 3711216,
+      "sha256": "2e3b5af78c3547a7c5d48e653cb2fac2fb0269758be7251c1319e9fada5a61e8"
+    },
+    {
+      "filename": "dione-elevation-thumbnail.webp",
+      "bytes": 6576,
+      "sha256": "a78215a343e7974777db0d8bf527f09c685d5617477eafa5f75fdca1c8ebbbfd"
+    },
+    {
+      "filename": "dione-enhanced-shadow@2x.webp",
+      "bytes": 4672346,
+      "sha256": "b325199329b7029c45f4a50d98ccec288baf4fc78f87f9d20bc2fe7fcd898d27"
+    },
+    {
+      "filename": "dione-enhanced-surface@2x.webp",
+      "bytes": 11353038,
+      "sha256": "8ef948d87ecbbb2a1008336fe0fef175cca4bf72f2c7f53b8d293db51283a4db"
+    },
+    {
+      "filename": "dione-enhanced-thumbnail.webp",
+      "bytes": 5686,
+      "sha256": "6c7afd5c45392cf68f8911a67d52a8b249c5a5da062a13ba795c4bd94fc0d5d0"
+    },
+    {
+      "filename": "dione-features.json",
+      "bytes": 213580,
+      "sha256": "ef592df5869dd87b5539dbe22ef0a060baf0dc541721dc504afdc95fa303ec98"
+    },
+    {
+      "filename": "dione-ice-absorption-legend.webp",
+      "bytes": 162,
+      "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477"
+    },
+    {
+      "filename": "dione-ice-absorption-shadow@2x.webp",
+      "bytes": 189270,
+      "sha256": "8ccc63aa0d7ae63d1effbd8cdbc5d8b508bdf9393f9e748b2ed9621a2141c11d"
+    },
+    {
+      "filename": "dione-ice-absorption-surface@2x.webp",
+      "bytes": 198478,
+      "sha256": "94f684e773ac46c667e29b528acba20fd27dde98adbb9f6f0868b61d4124f0b0"
+    },
+    {
+      "filename": "dione-ice-absorption-thumbnail.webp",
+      "bytes": 3876,
+      "sha256": "4a4ddd8621409cdc530a663df53cd069ec83007dd35c81ee3f0297c88d02ddc0"
+    },
+    {
+      "filename": "dione-infrared-shadow@2x.webp",
+      "bytes": 230304,
+      "sha256": "21924651b80378ababdaae9bcbf27c6eca6cf27d5048868b62fc080f3e9b314a"
+    },
+    {
+      "filename": "dione-infrared-surface@2x.webp",
+      "bytes": 293986,
+      "sha256": "e4791d7fb224e216eaccf4d5e495712c6e1f49bbef24ae2c85a5ef3be8d047ee"
+    },
+    {
+      "filename": "dione-infrared-thumbnail.webp",
+      "bytes": 5282,
+      "sha256": "3ffff60af0ed43572dea9d7204dd9a03283ec1fdb02a2762a43f382d0a99197f"
+    },
+    {
+      "filename": "dione-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "dione-normal-shadow@2x.webp",
+      "bytes": 5746044,
+      "sha256": "09250a3799c316bf6fceb452e010b603f9987f0c5f5700386195e508d5ad467b"
+    },
+    {
+      "filename": "dione-normal-surface@2x.webp",
+      "bytes": 12038078,
+      "sha256": "f6729f8681603d812304e23cf1ee63c072e9dc4eb243824da18b4a7da48f3f76"
+    },
+    {
+      "filename": "dione-normal-thumbnail.webp",
+      "bytes": 3404,
+      "sha256": "3fa0418a8627fd84fad2af811005c1cee1d2e707ceef5b6d9e81748a76c76175"
+    },
+    {
+      "filename": "dione-relative-albedo-legend.webp",
+      "bytes": 276,
+      "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7"
+    },
+    {
+      "filename": "dione-relative-albedo-shadow@2x.webp",
+      "bytes": 14187150,
+      "sha256": "d7934729096f7dcb95022dbeca3dedc7f33780f705700cbe9c837c20181508d4"
+    },
+    {
+      "filename": "dione-relative-albedo-surface@2x.webp",
+      "bytes": 24244394,
+      "sha256": "3e114305b06e862b66b5b9c480defa263dd040d74ac3cacffba6b71abd973b32"
+    },
+    {
+      "filename": "dione-relative-albedo-thumbnail.webp",
+      "bytes": 3820,
+      "sha256": "3ca9e442cf8651e4a6fec3b07a8ed444d28474af6feae454c13bf020e654c360"
+    },
+    {
+      "filename": "dione-shape-shadow@2x.webp",
+      "bytes": 142600,
+      "sha256": "70f26228486be033af38405f489832ca1a3d61a1bc6670f8c7fee91b075a7608"
+    },
+    {
+      "filename": "dione-shape-surface@2x.webp",
+      "bytes": 110020,
+      "sha256": "016faa1b30ab4561fc0f20ff568b5faf37934fe355d9bbdfdbc2a2a9669eea18"
+    },
+    {
+      "filename": "dione-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

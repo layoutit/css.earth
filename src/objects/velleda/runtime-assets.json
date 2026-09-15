@@ -1,0 +1,45 @@
+{
+  "schema": "cssvelleda-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "velleda-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "velleda-elevation-shadow@2x.webp",
+      "bytes": 191790,
+      "sha256": "f7f4b6007362b5291006faff6dc7a24d0d184e4ac3ae03eb1acc5e97580d9db1"
+    },
+    {
+      "filename": "velleda-elevation-surface@2x.webp",
+      "bytes": 295224,
+      "sha256": "6e9d4fdb8e523a9637c378b31b0dd4508610b90aff98df0cf0cb8b5f69a85019"
+    },
+    {
+      "filename": "velleda-elevation-thumbnail.webp",
+      "bytes": 5560,
+      "sha256": "4479395533118ffeb8dccb69506cebab5ab9105fb3beab39229d11d70abdaca7"
+    },
+    {
+      "filename": "velleda-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "velleda-shape-shadow@2x.webp",
+      "bytes": 71380,
+      "sha256": "431db5d92daa2bddaecc9ab6ceda1d7f670ef115cf7794aba8251419fa5c5943"
+    },
+    {
+      "filename": "velleda-shape-surface@2x.webp",
+      "bytes": 62170,
+      "sha256": "f656798637c9b280164c0582319315090d4755dd30ecb310602be7b57871ed9e"
+    },
+    {
+      "filename": "velleda-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

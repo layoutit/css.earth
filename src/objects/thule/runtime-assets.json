@@ -1,0 +1,45 @@
+{
+  "schema": "cssthule-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "thule-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "thule-elevation-shadow@2x.webp",
+      "bytes": 205588,
+      "sha256": "2aae17e7aa65cf79badd77e8d3bab530b254146264c5c40fbe77bab87772b294"
+    },
+    {
+      "filename": "thule-elevation-surface@2x.webp",
+      "bytes": 344876,
+      "sha256": "96f0a1a587a12c13dbefd792ac5c4621444f391463d5337a6a6489a56fa7687b"
+    },
+    {
+      "filename": "thule-elevation-thumbnail.webp",
+      "bytes": 6070,
+      "sha256": "26c47fd9f2452d9de20198e644879584716093483e5aa74271e115f19fc98720"
+    },
+    {
+      "filename": "thule-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "thule-shape-shadow@2x.webp",
+      "bytes": 71194,
+      "sha256": "90e7332b9b21f2f43288901f651f21f2d01af8ceb51a2081a3892db8eaa5dc54"
+    },
+    {
+      "filename": "thule-shape-surface@2x.webp",
+      "bytes": 57602,
+      "sha256": "816e7551263756bcce9c8642036976f493617f7391e1ef461223d9105e9d5e83"
+    },
+    {
+      "filename": "thule-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

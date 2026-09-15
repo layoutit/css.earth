@@ -1,0 +1,45 @@
+{
+  "schema": "cssphaethon-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "phaethon-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "phaethon-elevation-shadow@2x.webp",
+      "bytes": 193036,
+      "sha256": "fee6ea29413f728d1b176fd31bd57a8f35543ffd10aa73e68f96b7ca7dab3380"
+    },
+    {
+      "filename": "phaethon-elevation-surface@2x.webp",
+      "bytes": 339952,
+      "sha256": "caf2915fb199a34eb703be5b07da18c9b3aa453c278ea414574ce9e38fe4dd94"
+    },
+    {
+      "filename": "phaethon-elevation-thumbnail.webp",
+      "bytes": 5726,
+      "sha256": "35fc592cf7808f7b8f8c43fe8733c2dbd5bdb67b1541664e691fa3d4585352a0"
+    },
+    {
+      "filename": "phaethon-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "phaethon-shape-shadow@2x.webp",
+      "bytes": 72370,
+      "sha256": "b09ad392d489784256d3623a25b51149a6dd5c4fd39c296f314ba49cefdd18e4"
+    },
+    {
+      "filename": "phaethon-shape-surface@2x.webp",
+      "bytes": 62148,
+      "sha256": "7d87e1e2ab72fc60212801b966273f18899873aa5f618189dd468e90e0e83a05"
+    },
+    {
+      "filename": "phaethon-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

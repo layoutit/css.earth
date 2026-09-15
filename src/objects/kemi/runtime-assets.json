@@ -1,0 +1,45 @@
+{
+  "schema": "csskemi-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "kemi-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "kemi-elevation-shadow@2x.webp",
+      "bytes": 191582,
+      "sha256": "d1ca968ffdd97a48fd00186574bcbdc7462a057b4e06a663f7a29b98d7511032"
+    },
+    {
+      "filename": "kemi-elevation-surface@2x.webp",
+      "bytes": 280498,
+      "sha256": "774330db09cb35f1e14041683d712824c36984c3df2af08a122cc59e5db41447"
+    },
+    {
+      "filename": "kemi-elevation-thumbnail.webp",
+      "bytes": 5310,
+      "sha256": "15135138157747b4d6482ccc6d35e8266fb4afb42b101e2c3df157de45db41ae"
+    },
+    {
+      "filename": "kemi-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "kemi-shape-shadow@2x.webp",
+      "bytes": 73066,
+      "sha256": "a3a4e62654ea5dfd7044aabbdf104839b3b9fde99ec8081514f5ca6de9dcdcbc"
+    },
+    {
+      "filename": "kemi-shape-surface@2x.webp",
+      "bytes": 65494,
+      "sha256": "b790c80f4a9ae37b36bfd38d9542c20360dbfa3a03a2bd1f1adf2784bdaaf0a7"
+    },
+    {
+      "filename": "kemi-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

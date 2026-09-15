@@ -1,0 +1,45 @@
+{
+  "schema": "cssdike-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "dike-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "dike-elevation-shadow@2x.webp",
+      "bytes": 216520,
+      "sha256": "7b0572584584339c8e35976bf613a4c4ef9d38a99b23a595e8d9008beba9cdbe"
+    },
+    {
+      "filename": "dike-elevation-surface@2x.webp",
+      "bytes": 309532,
+      "sha256": "89928f5135b5bc89d25ab39b43e02dac1e9e0455f0fd3bc99fc1fa0d9ef979b8"
+    },
+    {
+      "filename": "dike-elevation-thumbnail.webp",
+      "bytes": 6248,
+      "sha256": "04ac169bb9e19a5877b23c517f6189b259693d4d18ff5f0347be1fa522b54eb5"
+    },
+    {
+      "filename": "dike-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "dike-shape-shadow@2x.webp",
+      "bytes": 68950,
+      "sha256": "11e41912d42f4e17d84f7523a33e21db86ac1829928a73fb5883463f3ae44137"
+    },
+    {
+      "filename": "dike-shape-surface@2x.webp",
+      "bytes": 62508,
+      "sha256": "5d0afafe550e872ea1c6fc3a1f90989b5c29152bc20f8c8a2edbdc06aed1e61c"
+    },
+    {
+      "filename": "dike-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

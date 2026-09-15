@@ -1,0 +1,45 @@
+{
+  "schema": "cssmassalia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "massalia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "massalia-elevation-shadow@2x.webp",
+      "bytes": 191392,
+      "sha256": "de63067b9c78210f0a287d451132687a4e88e8db07d79b711078e75272f68229"
+    },
+    {
+      "filename": "massalia-elevation-surface@2x.webp",
+      "bytes": 281756,
+      "sha256": "5f6235c1429610ef6c15cb22eddee8b3fed8b0210af86ef34e914ba28a24015f"
+    },
+    {
+      "filename": "massalia-elevation-thumbnail.webp",
+      "bytes": 5392,
+      "sha256": "8b843e9ebde6827c4c1099a530b663c53b78602695de3e755ad34521b140f9c4"
+    },
+    {
+      "filename": "massalia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "massalia-shape-shadow@2x.webp",
+      "bytes": 70030,
+      "sha256": "95bc6063fced939a8117f594eaf17489019eb8f2934ee3c41a00636cba9f62c6"
+    },
+    {
+      "filename": "massalia-shape-surface@2x.webp",
+      "bytes": 60356,
+      "sha256": "e4615ac17de636eb928a0f3ae93a62f6f3572a9a96a609f9782d51021ac10aa5"
+    },
+    {
+      "filename": "massalia-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "csshebe-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "hebe-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "hebe-elevation-shadow@2x.webp",
+      "bytes": 187866,
+      "sha256": "9ab3b99fc1fc47d8398564cf686317bed3c8ca33346760a74b47cda0ad23dba0"
+    },
+    {
+      "filename": "hebe-elevation-surface@2x.webp",
+      "bytes": 361096,
+      "sha256": "558e8d23a3f821ad0d85562caeaa6e395459552f2be3d505b762344bfa451950"
+    },
+    {
+      "filename": "hebe-elevation-thumbnail.webp",
+      "bytes": 5956,
+      "sha256": "13fd131b0b9e39feda149f818b591a373253c682b09d283a593e6cd671fd61b9"
+    },
+    {
+      "filename": "hebe-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "hebe-shape-shadow@2x.webp",
+      "bytes": 66074,
+      "sha256": "1ae18babdfbd368b1a8f489a74b7326d656d0f0c2fe0241162298e703b8c784d"
+    },
+    {
+      "filename": "hebe-shape-surface@2x.webp",
+      "bytes": 62626,
+      "sha256": "76df4fa28f1f764ce4162e9f52dc6cdeba9d599494de88adae0ac1d17bff642f"
+    },
+    {
+      "filename": "hebe-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

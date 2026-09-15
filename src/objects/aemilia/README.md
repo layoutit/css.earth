@@ -1,5 +1,7 @@
 # (159) Aemilia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 Checked 2026-09-09. Selected **ISAM/SAGE model 102**, [original OBJ](http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102), pinned in the [input manifest](source/manifest.json). The archive does not declare a source release date; 2026-09-09 is the retrieval date. ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A 610, A7; Bartczak and collaborators.
@@ -16,9 +18,9 @@ The source-preserving reducer uses `regularize: false`. The optional triangle-qu
 
 ## Known problems
 
-Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative.
+Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. Neutral gray marks unavailable imagery; rotation phase is illustrative.
 
-No registered global reflectance mosaic is supplied by these releases. The neutral grid marks missing imagery. Fine relief and albedo are unresolved.
+No registered global reflectance mosaic is supplied by these releases. The neutral gray marks missing imagery. Fine relief and albedo are unresolved.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

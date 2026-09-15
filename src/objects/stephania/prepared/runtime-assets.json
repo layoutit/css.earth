@@ -1,0 +1,45 @@
+{
+  "schema": "cssstephania-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "stephania-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "stephania-elevation-shadow@2x.webp",
+      "bytes": 186476,
+      "sha256": "7781cee98a400164f0c96d5d0332263bb574fb72bc37cf53d35a5870d9af89dc"
+    },
+    {
+      "filename": "stephania-elevation-surface@2x.webp",
+      "bytes": 294580,
+      "sha256": "2fdb3697ab1849c9dc0b0c28ec1453132c07ef6dd9e6f44e25cd60888a09f8a7"
+    },
+    {
+      "filename": "stephania-elevation-thumbnail.webp",
+      "bytes": 5314,
+      "sha256": "1ec6fb4444960077b313513c7c3c64566089b3c013da0461a6c3c427ce884377"
+    },
+    {
+      "filename": "stephania-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "stephania-shape-shadow@2x.webp",
+      "bytes": 69674,
+      "sha256": "41113a4fa6ddcba075c2095b978cb6e67d4a2c3219b6b4533d6a45537f721ae1"
+    },
+    {
+      "filename": "stephania-shape-surface@2x.webp",
+      "bytes": 64358,
+      "sha256": "7ee16c3607e42fc054d6c1f6e56d913bf08d1ed5b7ad0491aa88d4a10feb8ea3"
+    },
+    {
+      "filename": "stephania-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Dione
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 | View | Source and interpretation |
@@ -82,7 +84,7 @@ Pinned URLs, source bytes and hashes are in `source/manifest.json`. The shared a
 
 The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 5,614 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 4851.62 m, 95th percentile 2463.15 m and RMS 1298.41 m. These samples do not establish a full Hausdorff bound.
 
-The Shape lens uses the shared neutral grid over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 6.32 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
+The Shape lens uses the shared neutral gray over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 6.32 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
 
 - [USGS Cassini–Voyager global mosaic](https://astrogeology.usgs.gov/search/map/dione_cassini_voyager_global_mosaic_154m): 2010 edition, 23040 × 11520, about 154 m per source pixel on a 563 km cartographic sphere. Its equirectangular GeoTIFF has center longitude 0° and eastward raster x. Preparation rolls the 180° E left edge by half a width; it does not mirror the image. Exactly zero is documented no-data and receives the shared gray grid. Other values remain observed terrain, including shadows. Source resolution varies; Voyager images fill some Cassini gaps.
 - [NASA/JPL enhanced-color map PIA18434](https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/): 2014, 14134 × 7067, about 250 m per source pixel. Ultraviolet and infrared extend the colors beyond human vision. Paul Schenk calibrated, registered and photometrically corrected the contributing images. The north-up map starts at 0° E and is not rolled. There is no separate validity mask: all published pixels are preserved. Hemisphere differences reflect surface alteration and E-ring dust as well as residual photographed shading; they are not removed as shadows.

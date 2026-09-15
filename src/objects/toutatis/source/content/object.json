@@ -74,7 +74,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable surface imagery over the Hudson–Ostro–Scheeres shape reconstructed from 1992 and 1996 radar observations. This is a simplified model, not a photographic texture or measured albedo. Later radar and Chang’e-2 images reveal differences from this model. The long axis is displayed in a fixed arbitrary orientation; the light does not reproduce a specific observation.",
+        "notes": "The shared neutral gray marks unavailable surface imagery over the Hudson–Ostro–Scheeres shape reconstructed from 1992 and 1996 radar observations. This is a simplified model, not a photographic texture or measured albedo. Later radar and Chang’e-2 images reveal differences from this model. The long axis is displayed in a fixed arbitrary orientation; the light does not reproduce a specific observation. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

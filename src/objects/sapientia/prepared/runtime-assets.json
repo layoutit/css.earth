@@ -1,0 +1,45 @@
+{
+  "schema": "csssapientia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "sapientia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "sapientia-elevation-shadow@2x.webp",
+      "bytes": 220158,
+      "sha256": "9011b118b7e71f5bae3324cfa381ba37caaca36d2090fb9b75aa906f4d1fcb1d"
+    },
+    {
+      "filename": "sapientia-elevation-surface@2x.webp",
+      "bytes": 317748,
+      "sha256": "ca854e16d11169e9c4932d85e79517a6454e2899b08d47d0ee0dbaf9a4a8d287"
+    },
+    {
+      "filename": "sapientia-elevation-thumbnail.webp",
+      "bytes": 6240,
+      "sha256": "a506ef4bd736544f6c05eac13509289fc846224e8c793d9bd10736646435b61d"
+    },
+    {
+      "filename": "sapientia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "sapientia-shape-shadow@2x.webp",
+      "bytes": 69390,
+      "sha256": "7e5d832028942527fb9b2844c12befc30e85ef1b4c5a58b4ecce98fd7562e7cd"
+    },
+    {
+      "filename": "sapientia-shape-surface@2x.webp",
+      "bytes": 61474,
+      "sha256": "26a58755662d6bc5e56510c0aeb5cd19a018683fb5ce6545af1832f7fc45a0af"
+    },
+    {
+      "filename": "sapientia-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "bb802d74209207d5ed1ea02dfdaa1123467591ba00e454278da2ca5260f04064"
+          "sha256": "82f281d84571499450a3d3234452bc799e61d752988f4c8f6476bf19c7db77e7"
         },
         {
           "id": "title",
@@ -71,7 +71,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "c83436c9158d68e93c2618d1cdb2e2e061cb2f7299cb6b324a5303aae325334c"
+          "sha256": "d0303d9430700a634eb1f0897a927a3522d2df869f3c20445f2eb6655c8ef985"
         },
         {
           "id": "acquisition",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "436b41479edfef5254346d8820d4d259a319fbfe76ff5138f5927b55afea12cb"
+        "sha256": "df7be96b3ccf8ac87bd4c9550d4037b941b1eb59ff1f731aede3e672414f10b8"
       }
     },
     "catalog": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "036b820984f7571409783706bec4002cc9ffe85ab6bd09ba4253125738a11bf8"
+    "sha256": "a231148084b75eb0f91b9cd7abe000a439045ae5d1de99e58163dd9dad806cce"
   }
 }

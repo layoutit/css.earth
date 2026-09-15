@@ -1,0 +1,45 @@
+{
+  "schema": "cssartemis-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "artemis-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "artemis-elevation-shadow@2x.webp",
+      "bytes": 186332,
+      "sha256": "e017333b428a2050d8a238ee7adc06963e2d76ba4283aa7b6876c17b0c4c1981"
+    },
+    {
+      "filename": "artemis-elevation-surface@2x.webp",
+      "bytes": 279928,
+      "sha256": "8f8e06a6a31672e1b60028f9e9f4fde8d4191c4c26e34a7bb983043cecaea99f"
+    },
+    {
+      "filename": "artemis-elevation-thumbnail.webp",
+      "bytes": 5074,
+      "sha256": "e3d6524e636bf5c3430d0969cffe8bfcac188424e553d712f40a50fdcc6e86bb"
+    },
+    {
+      "filename": "artemis-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "artemis-shape-shadow@2x.webp",
+      "bytes": 72134,
+      "sha256": "5087ba6e6d361bb90d6b4d6cc7a6e6816cfb4a13daad98bbfeda50390f97669a"
+    },
+    {
+      "filename": "artemis-shape-surface@2x.webp",
+      "bytes": 62406,
+      "sha256": "47a10669e13706593e4392212505c38ebb609d308c49685fec68807ca2a336d1"
+    },
+    {
+      "filename": "artemis-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

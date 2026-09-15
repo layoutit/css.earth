@@ -1,0 +1,45 @@
+{
+  "schema": "csshuberta-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "huberta-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "huberta-elevation-shadow@2x.webp",
+      "bytes": 200248,
+      "sha256": "646b7c35fbeaf1ea27cd0aee5232f63859e33ff16785ca167045abeebfc48c9d"
+    },
+    {
+      "filename": "huberta-elevation-surface@2x.webp",
+      "bytes": 290594,
+      "sha256": "9c7b55bf013a093fb79f37771a288aef33559eb6c3e7d6ebb42f0833f924a78a"
+    },
+    {
+      "filename": "huberta-elevation-thumbnail.webp",
+      "bytes": 5606,
+      "sha256": "8b507a54391dc642872852f9a75830290b84b1d501d9420fb98cd0d4d0488652"
+    },
+    {
+      "filename": "huberta-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "huberta-shape-shadow@2x.webp",
+      "bytes": 74890,
+      "sha256": "7d77cfabfb7fb0beec75c94ad03eab39c2ea81589861c39951593fbe710a1e76"
+    },
+    {
+      "filename": "huberta-shape-surface@2x.webp",
+      "bytes": 63632,
+      "sha256": "93e9c649dba626e2af5fb955b49f15bd41b4e55439d8561f3ec4d26de322603b"
+    },
+    {
+      "filename": "huberta-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -61,8 +61,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 28740,
-      "expectedSha256": "48b805157b454da53eb8051749adae87eeeb7c89a2ac9cc9d2984da3782c6ade",
+      "expectedBytes": 7843,
+      "expectedSha256": "4351041f3b26d1e247554028d6246404171e45bee4af375e6918a6cb4dd50606",
       "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
       "credit": "Harmon & Nolan (2005); cssEarth approximation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2410,
-      "expectedSha256": "a44679933fb9c8a0dc8da26d74cec77480ea969175443ce194720e548d865764",
+      "expectedBytes": 2512,
+      "expectedSha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -107,8 +107,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1557,
-      "expectedSha256": "d2b25884a9efda66cb0bfca42d07be9035e228a958369d1d1b1b06048a4c1d24"
+      "expectedBytes": 1556,
+      "expectedSha256": "5732ea6b441cfdf0f3beb8a4aa75d124344c4ccf664db2994ca8e3c154cb47fa"
     },
     {
       "path": "preparation/rotation.json",

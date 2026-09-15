@@ -1,5 +1,7 @@
 # (184) Dejopeja
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **175**, version **2007-09-21**. DAMIT, Astronomical Institute of Charles University; A. Marciniak (2007), Hanuš et al. (2013); model 175, version 2007-09-21.
 
-Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -21,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
+The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral gray must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
 
 Select pole1 model175 (200,52). Hanuš et al. (2013), Tables2–3, reports this pole and its mirror (18,54), one Keck AO image, and volume-equivalent diameters93 ±9 and95 ±9 km; neither is marked rejected. The selected93-km archive calibration matches the paper.
 
@@ -29,7 +31,7 @@ Convex geometry is still inferred from light curves; the AO silhouette calibrate
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 176, pole ['18', '54'], [Model 176](https://damit.cuni.cz/projects/damit/asteroid_models/view/176)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 176, pole ['18', '54'], [Model 176](https://damit.cuni.cz/projects/damit/asteroid_models/view/176)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

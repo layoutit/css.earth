@@ -1,0 +1,45 @@
+{
+  "schema": "cssgyptis-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "gyptis-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "gyptis-elevation-shadow@2x.webp",
+      "bytes": 205702,
+      "sha256": "85e3644272244c3272a2193e62450bba64a53ec22b7e1008c0ca4e60c13fc7b0"
+    },
+    {
+      "filename": "gyptis-elevation-surface@2x.webp",
+      "bytes": 288110,
+      "sha256": "d0d934bba384b68b8f7eae68cd8c004795c2d0a247106666d3d41bb6452b4cc6"
+    },
+    {
+      "filename": "gyptis-elevation-thumbnail.webp",
+      "bytes": 5400,
+      "sha256": "c582cf17be52a741fa3896c3a405cd03d28287a1bc2dd964c31cf5205834a70c"
+    },
+    {
+      "filename": "gyptis-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "gyptis-shape-shadow@2x.webp",
+      "bytes": 77162,
+      "sha256": "1ad621749ad35b101c59674943f9bb51d236f4a1f6952f1704cb703fe0d5e098"
+    },
+    {
+      "filename": "gyptis-shape-surface@2x.webp",
+      "bytes": 72500,
+      "sha256": "6f9a6540732f8577309b5afa351c74c3922b0f7311477e38c467818a02bccd02"
+    },
+    {
+      "filename": "gyptis-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

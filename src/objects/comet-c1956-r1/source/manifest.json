@@ -61,8 +61,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 32976,
-      "expectedSha256": "2827b39c765c4a43a0faba8d08dfdb1927b92516209aaf7891b4cec0fe87ec37",
+      "expectedBytes": 10032,
+      "expectedSha256": "3c3db62aa24b5a9021fd7b50e30acbe04edb26947f41e8dc14141ad886172206",
       "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
       "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
       "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2779,
-      "expectedSha256": "dea526eb916030280020dc177904fed1380edfb7f78cc294ff7db1c92a6cc320",
+      "expectedBytes": 2881,
+      "expectedSha256": "092590967d1376d747062a410c4bf7d58e75b627396cf8c8b7195f91aca28ad1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -108,7 +108,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1651,
-      "expectedSha256": "d969df849f2eeabadef8316b0dae38afec41c1f58367db772e1e007944f4f779"
+      "expectedSha256": "ba5b4d82524c86b49b239554d1e08949b84c0c7830f36bb8e9df2b4b1e27cfc5"
     },
     {
       "path": "preparation/rotation.json",

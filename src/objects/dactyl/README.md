@@ -1,5 +1,7 @@
 # Dactyl
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Dactyl, discovered beside Ida in Galileo images, was the first moon found orbiting an asteroid.
 
 ## Representation
