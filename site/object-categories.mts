@@ -1,11 +1,11 @@
 export const OBJECT_CATEGORIES: readonly (readonly [string, string])[] = [
   ['all', 'All'], ['planet', 'Planets'],
-  ['satellite', 'Moons'], ['comet', 'Comets'], ['nebula', 'Nebulae'], ['galaxy', 'Galaxies'], ['galaxy-cluster', 'Galaxy clusters'], ['asteroid', 'Other'],
+  ['satellite', 'Moons'], ['nebula', 'Nebulae'], ['galaxy', 'Galaxies'], ['galaxy-cluster', 'Galaxy clusters'], ['asteroid', 'Other'],
 ];
-const OWN_TABS = new Set(['planet', 'satellite', 'comet', 'nebula', 'galaxy', 'galaxy-cluster']);
+const OWN_TABS = new Set(['planet', 'satellite', 'nebula', 'galaxy', 'galaxy-cluster']);
 
 /** The tab a classification is listed under: dwarf planets with Planets; every class
- * without its own tab (asteroids, trans-Neptunian and interstellar objects) in Other. */
+ * without its own tab (comets, asteroids, trans-Neptunian and interstellar objects) in Other. */
 export function objectCategory(classification: string): string;
 export function objectCategory(classification: string | undefined): string | undefined;
 export function objectCategory(classification: string | undefined): string | undefined {
