@@ -3,7 +3,9 @@ import { expect, test } from 'vitest';
 import { parsePreparedWorldContext } from './prepared-world-context.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
+import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
+import { labelImportance } from '../labels/universe-label-policy.js';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
   new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
@@ -127,6 +129,78 @@ test('orbit settings do not change admitted names or label placement', () => {
   expect(before.length).toBeGreaterThan(0);
   input.bodies.forEach(body => { body.orbitHidden = true; });
   expect(labels()).toEqual(before);
+});
+
+test('highlighted moons remain identifiable when their orbits are too small to draw', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const bodies = [plan.focus, ...plan.bodies];
+  const moons = new Set(['moon', 'phobos', 'deimos', 'io', 'europa', 'ganymede', 'callisto', 'titan', 'rhea', 'triton', 'charon']);
+  input.bodies.forEach((body, index) => {
+    body.highlighted = moons.has(bodies[index].id);
+    body.orbitHidden = true;
+  });
+  for (const distance of [50, 100, 205]) {
+    input.world.pose.positionM = [0, 0, distance * 149597870700];
+    const frame = calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) });
+    const admitted = frame.projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown);
+    expect(admitted.length).toBeGreaterThan(0);
+    for (const body of admitted) {
+      expect(body.indicatorShown).toBe(true);
+      expect(body.markerOpacity).toBeGreaterThan(.5);
+      expect(body.segments).toHaveLength(0);
+    }
+  }
+  input.bodies.forEach(body => { body.highlighted = false; });
+  expect(calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) })
+    .projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown)).toHaveLength(0);
+});
+
+test('system zoom and rotation never publish an unidentified context orbit or circle', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  let paths = 0, crowded = 0;
+  for (const distance of [20, 75, 205, 75, 20]) for (const angle of [0, .3, .7, .3, 0]) {
+    input.world.pose.positionM = [0, 0, distance * 149597870700];
+    input.world.pose.orientationXyzw = [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)];
+    const frame = calculate(input);
+    for (const body of frame.projectedBodies) {
+      if (body.indicatorShown) expect(body.labelShown).toBe(true);
+      if (body.segments.length) { paths++; expect(body.labelShown).toBe(true); }
+      if (!body.labelShown) {
+        expect(body.segments).toHaveLength(0);
+        expect(body.orbitVisibility).toBe(0);
+        if (body.visible) crowded++;
+      }
+      Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
+        indicatorShown: body.indicatorShown });
+    }
+  }
+  expect(paths).toBeGreaterThan(0);
+  expect(crowded).toBeGreaterThan(0);
+});
+
+test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-space distance', () => {
+  const input = view(), points = [plan.focus, ...plan.bodies];
+  input.bodies.forEach((body, index) => { body.bodyHidden = !['sun', 'earth'].includes(points[index].id); });
+  const calculate = createWorldContextPlanner(plan, {
+    sun: labelImportance('star', true, 'sun'), earth: labelImportance('planet', true, 'earth'),
+  });
+  input.world.pose.positionM = [0, 0, 5 * 149597870700];
+  expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toContain('earth');
+  input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
+  expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toEqual(['sun']);
+});
+
+test('the selected close-up path survives a blocked caption while other paths retire', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === 'saturn');
+  const saturn = plan.bodies[index - 1]!;
+  input.selectedId = 'saturn'; input.overview = false;
+  input.world.pose.positionM = [saturn.positionM[0], saturn.positionM[1], saturn.positionM[2] + saturn.radiusM * 8];
+  input.labelBlockers = [{ left: -1000, right: 1000, top: -1000, bottom: 1000 }];
+  const frame = calculate(input);
+  expect(frame.projectedBodies.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
+  expect(frame.projectedBodies[index].segments.length).toBeGreaterThan(0);
+  expect(frame.projectedBodies.filter(body => body.index !== index).every(body => body.segments.length === 0)).toBe(true);
 });
 
 test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidden, then retires on deselection', id => {
