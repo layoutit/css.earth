@@ -1483,6 +1483,51 @@
         "kind": "local",
         "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
       }
+    },
+    {
+      "id": "natural-earth-admin-0-countries",
+      "path": "features/ne_10m_admin_0_countries.zip",
+      "expectedBytes": 4930492,
+      "expectedSha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
+      "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
+      "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Downloaded 2026-09-15 from https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip (1:10m vectors, version 5.1.x as published).",
+      "redistribution": "Public domain; credit Natural Earth",
+      "consumers": [
+        "features"
+      ],
+      "title": "Natural Earth 1:10m admin 0 countries",
+      "displayCredit": "Natural Earth",
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "earth-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Transcribed from Wikidata: English label, description and coordinate location (P625) of each listed item, query.wikidata.org retrieved 2026-09-15.",
+      "credit": "Wikidata contributors; cssEarth transcription",
+      "license": "CC0 (Wikidata structured data)",
+      "licenseEvidence": [
+        "https://www.wikidata.org/wiki/Wikidata:Copyright"
+      ],
+      "redistribution": "CC0; keep the Wikidata item link on each landmark.",
+      "acquisition": "Checked-in transcription of one SPARQL query result; each entry links its Wikidata item.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored transcription of Wikidata coordinates for the default landmark list."
+      },
+      "expectedBytes": 28537,
+      "expectedSha256": "646efc2ea52249c099c264ad961f4fe8339b468afbd3467368b46b27c56b2794"
     }
   ],
   "generatedIntermediates": [
@@ -1667,8 +1712,8 @@
     {
       "id": "earth-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 8433,
-      "expectedSha256": "61e461be5dc366b3f856069c9ffecfb80c85c0de6f66dc529a7d2e09b04c4f8e",
+      "expectedBytes": 11441,
+      "expectedSha256": "974a205becd3450725bc510b670ebe621d5c7cd939be1330a88bd40af5c9f3d1",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1685,8 +1730,8 @@
     {
       "id": "earth-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 2292,
-      "expectedSha256": "0bf33af0e8562409821c519e0b401f1c1412e651edc5f2ca89a4debd2584c3c2",
+      "expectedBytes": 3083,
+      "expectedSha256": "5af7f2ad08a7306a46aa29df8c7d125a2563f2ecce7b0998fa66d6f33204f384",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",

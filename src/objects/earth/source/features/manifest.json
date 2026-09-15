@@ -1,12 +1,18 @@
 {
   "schema": "cssearth-surface-features-source@1",
-  "source": "Natural Earth 1:10m cultural and physical vectors (populated places, geographic regions, marine areas, rivers and lake centerlines)",
+  "source": "Natural Earth 1:10m cultural and physical vectors (countries, populated places, geographic regions, marine areas, rivers and lake centerlines) and Wikidata landmark coordinates",
   "snapshotDate": "2026-09-12",
   "sourcePage": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
   "license": "Public domain (Natural Earth)",
   "licenseEvidence": "https://www.naturalearthdata.com/about/terms-of-use/ (read 2026-09-12): all versions of Natural Earth raster and vector map data are in the public domain; no permission is needed to use them.",
-  "qualification": "Natural Earth places, regions, seas and rivers with English names, a scale rank and Wikidata ids. Places are unsized points ranked by population; regions and seas carry their bounding box as the extent; rivers carry their centreline. Names, ranks and geometry are Natural Earth's editorial choices, not an official gazetteer.",
+  "qualification": "Natural Earth countries, places, regions, seas and rivers with English names, ranks, label zoom levels and Wikidata ids, plus a short list of world-famous landmarks transcribed from Wikidata. Countries anchor at Natural Earth's label point with no boundary; places are unsized points; regions and seas carry their bounding box as the extent; rivers carry their centreline; landmarks are single Wikidata coordinates. Names, ranks and geometry are Natural Earth's and Wikidata's editorial choices, not an official gazetteer.",
   "inputs": [
+    {
+      "path": "ne_10m_admin_0_countries.zip",
+      "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
+      "bytes": 4930492,
+      "sha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6"
+    },
     {
       "path": "ne_10m_populated_places.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip",
@@ -36,6 +42,12 @@
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip",
       "bytes": 2079507,
       "sha256": "ded71b01870855ccfe19b51f2ec14c9bb48fae23c0e9f3c11974d426433b5c38"
+    },
+    {
+      "path": "landmarks.json",
+      "origin": "Wikidata items and coordinate location (P625), query.wikidata.org SPARQL retrieved 2026-09-15; cssEarth transcription.",
+      "bytes": 28537,
+      "sha256": "646efc2ea52249c099c264ad961f4fe8339b468afbd3467368b46b27c56b2794"
     }
   ]
 }
