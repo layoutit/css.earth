@@ -5,6 +5,7 @@ import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { LabelScreenRect } from './screen-label-layout.js';
+import { labelOcclusionFor } from './label-occlusion.js';
 import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
 import type { SurfaceLabelCandidate } from './surface-feature-layout.js';
 import { loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
@@ -139,6 +140,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     windowTarget.addEventListener('keydown', onKey);
   }
   lifetime.onDispose(destroy);
+  const occlusion = labelOcclusionFor(host.ownerDocument);
+  lifetime.onDispose(occlusion.subscribe(() => refresh()));
   void loadPreparedSurfaceFeatureCatalog(plan, objectId, controller.signal, transport).then(loadedValue => {
     if (destroyed) return;
     catalog = loadedValue;
@@ -225,7 +228,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     }
     // The label budget grows with the zoom: a whole body carries a third of the prepared maximum, the closest view all of it.
     const budget = { ...plan.policy, maximumVisible: Math.max(4, Math.round(plan.policy.maximumVisible * (0.3 + 0.7 * currentShare))) };
-    const admitted = admitSurfaceFeatureLabels(candidates, budget, { width, height }, visible, [], pinnedIndex);
+    const admitted = admitSurfaceFeatureLabels(candidates, budget, { width, height }, visible, occlusion.read(), pinnedIndex);
     const next = new Set<number>(), nextRects = new Map<string, LabelScreenRect>(), targets: ScreenPickTarget[] = [];
     for (const { index, rect, opacity } of admitted.accepted) {
       const entry = entries[index]!;

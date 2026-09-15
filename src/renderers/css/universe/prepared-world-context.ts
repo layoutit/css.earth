@@ -1,4 +1,5 @@
 import { ContextChange, createWorldContextFrameReceiver } from './world-context-frame.js';
+import { createContextSelectionPolicy } from './context-presentation-policy.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
@@ -16,6 +17,7 @@ import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { applySprite, applySpriteImage } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
+import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { OrbitSegment } from '../solar-system/types.js';
@@ -404,9 +406,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const picking = screenPicking(host);
   let presentationRevision = 0, policyRevision = 0, publishedPolicyRevision = -1;
   const contextFrames = createWorldContextFrameReceiver();
-  let previousHeader: { emphasizedId: string | null; width: number; height: number } | null = null;
+  let previousHeader: { emphasizedId: string | null; selectionStrength: number; width: number; height: number } | null = null;
   let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
+  const selectionPolicy = createContextSelectionPolicy(plan);
   let orbitRenderer: OrbitRenderer = initialOrbitRenderer, publishCount = 0;
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     const sprite = sprites[body.id];
@@ -450,7 +453,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = 'position:absolute;inset:0;width:0;height:0;pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbit ? orbit.verticesM.length * 2 : 0, id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.verticesM.length ?? 0), id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -502,6 +505,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let selectionPreview: string | null | undefined;
   let navigationInFlight = false;
   let rotationActive = false;
+  let labelBlockers: readonly LabelScreenRect[] = [];
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
   // The prepared bank stays mounted. Only owners currently contributing paint
@@ -583,7 +587,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       return { world, viewport: { ...viewport,
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
-        selectedId, overview, selectionPreview, navigationInFlight, holdAnnotations: rotationActive, anchorOnly: publishingBodies === anchorOnly,
+        selectedId, overview, selectionPreview, navigationInFlight, labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
           indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
@@ -593,6 +597,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
       const view = readView(world, viewport), revision = presentationRevision;
       return { view, current: () => !destroyed && revision === presentationRevision };
+    },
+    setLabelBlockers(rects: readonly LabelScreenRect[]) {
+      labelBlockers = rects; presentationRevision++; policyRevision++; refresh();
     },
     labelExclusionRects: () => labelExclusions,
     backgroundExclusionRects: () => backgroundExclusions,
@@ -642,7 +649,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       for (const entry of bodies) {
         entry.piecePool.destroy();
         entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement === 'approximate',
-          capacity: entry.orbit ? entry.orbit.verticesM.length * 2 : 0, id: entry.body.id });
+          capacity: orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0), id: entry.body.id });
         entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
       }
       // The next publication carries every chord again: retained deltas name leaves that no longer exist.
@@ -682,9 +689,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (destroyed || rotationActive === active) return;
       rotationActive = active;
       if (active) { hoverIntent = false; settleHover(); }
-      // Annotations hold still while rotating: starting needs no policy republish.
-      // Release publishes once in full, so held keyboard targets catch up; its
-      // writes are guarded, so unchanged markers are not restyled.
+      // Placement uses the same committed state during motion and at rest.
+      // Release only refreshes interaction targets that were suspended during drag.
       presentationRevision++;
       if (!active) policyRevision++;
       refresh();
@@ -775,13 +781,15 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       depthSelection = selectedId;
       const selectedRank = pickRanks.get(selectedEntry)!;
       const { emphasizedId, width, height } = frame;
+      const selectionStrength = selectionPolicy.strengthAt(emphasizedId, world.pose.positionM);
       cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
-      const policyChanged = !delta || resized || publishedPolicyRevision !== policyRevision || previousHeader?.emphasizedId !== emphasizedId;
+      const policyChanged = !delta || resized || publishedPolicyRevision !== policyRevision || previousHeader?.emphasizedId !== emphasizedId ||
+        previousHeader?.selectionStrength !== selectionStrength;
       publishedPolicyRevision = policyRevision;
-      previousHeader = { emphasizedId, width, height };
+      previousHeader = { emphasizedId, selectionStrength, width, height };
       if (!cameraChanged && !policyChanged && !depthChanged && !interactiveHover && delta?.changes.size === 0) {
         skippedPublications++;
         return;
@@ -820,9 +828,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
         if (mask === 0) continue;
-        const dimmed = emphasizedId !== null && body.id !== emphasizedId;
+        const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength);
         // Overview flights retain system annotations; body flights fade unrelated ones.
-        const annotationsVisible = !navigationInFlight || emphasizedId === null || body.id === emphasizedId || entry.parent?.id === emphasizedId;
+        const annotationsVisible = !navigationInFlight || selectionPolicy.opacity(body.id, emphasizedId) === 1;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
@@ -872,7 +880,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.indicatorHovered = entry.hovered;
             marker.dataset.contextIndicatorHovered = String(entry.hovered);
           }
-          if (policyChanged || !wasShown || hoverChanged) fader.multiply(marker, dimmed && !entry.hovered ? .75 : 1, animatedAnnotations.has(entry) ? 120 : 0);
+          if (policyChanged || !wasShown || hoverChanged) fader.multiply(marker, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
           fader.set(marker, markerOpacity);
           const transform = `translate(${width / 2 + x}px,${height / 2 + y}px) scale(${markerDiameter / BILLBOARD_SIZE}) translate(-50%,-50%)`;
           // CSSOM serializes commas/spacing differently from the published
@@ -914,7 +922,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (entry.orbit && orbitShown) {
           if (entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
           if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
-          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * (dimmed ? .75 : 1), animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
+          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
           const orbitTransform = `translate(${width / 2}px,${height / 2}px)`;

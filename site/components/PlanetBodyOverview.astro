@@ -20,7 +20,7 @@ const tabs = [
 ];
 ---
 
-<PlanetCardHeader {title} data-body-overview data-has-portrait={overview.image ? true : undefined}>
+<PlanetCardHeader {objectId} {title} data-body-overview data-has-portrait={overview.image ? true : undefined}>
   <PlanetBreadcrumbs {objectId} />
   <Fragment slot="image">
     {overview.image && <div class="planet-overview-portrait">

@@ -25,7 +25,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <p>{destinations.description}</p>
       </section>}
       {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
-      <PlanetCardHeader heading={false} {title} {introduction}>
+      <PlanetCardHeader {objectId} heading={false} {title} {introduction}>
           <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
       <InformationTabs idPrefix={objectId} />
@@ -129,7 +129,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <PlanetFactsheet id={objectId} {facts} {moreFacts} embedded />
       </div>
       <DatasetContextPanels {...Astro.props} />
-      <div class="planet-card-tabpanel" id={`${objectId}-moons-content`} data-information-panel="moons"
+      <div class="planet-card-tabpanel planet-object-results-scroll" id={`${objectId}-moons-content`} data-information-panel="moons"
         role="region" aria-label="Moons">
         <PlanetMoonList {moons} />
       </div>

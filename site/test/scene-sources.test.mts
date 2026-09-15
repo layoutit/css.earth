@@ -157,12 +157,12 @@ test('footer groups print a shared provider name once and keep every source link
     'a lone provider keeps its whole label');
 });
 
-test('app credits and prepared body provenance have separate consumers on direct and cached routes', async () => {
+test('the shared source panel consumes prepared body provenance on direct and cached routes', async () => {
   const read = (name: string) => readFile(new URL(`../components/${name}.astro`, import.meta.url), 'utf8');
   const [shell, information, object, context] = await Promise.all([
     read('PlanetShell'), read('PlanetInformationPanel'), read('PreparedObjectPanel'), read('DatasetContextPanels'),
   ]);
-  assert.match(shell, /const sources = sceneSources\(resources\)/u);
+  assert.match(shell, /<SourcesPanel \{\.\.\.Astro\.props\} \/>/u);
   assert.doesNotMatch(information, /sceneSources/u);
   assert.match(information, /<DatasetContextPanels \{\.\.\.Astro\.props\}/u);
   assert.doesNotMatch(context, /sceneSources/u);

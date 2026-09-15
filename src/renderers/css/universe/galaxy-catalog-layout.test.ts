@@ -18,16 +18,29 @@ test('projects prepared metre coordinates in the shared observer including trans
 });
 test('foreground exclusions beat all catalogue labels; major objects beat minor neighbours and selection wins', () => {
   const near = candidate('near', 100), far = candidate('far', 200, true);
-  expect(admitGalaxyLabels([far, near], [], null)).toEqual([far]);
+  expect(admitGalaxyLabels([far, near], [], null)).toEqual([{ ...far, placement: 0 }]);
   expect(admitGalaxyLabels([far, near], [rect], null)).toEqual([]);
-  expect(admitGalaxyLabels([far, near], [], 'near')).toEqual([near]);
-  expect(admitGalaxyLabels([candidate('far', 200), near], [], null)).toEqual([near]);
+  expect(admitGalaxyLabels([far, near], [], 'near')).toEqual([{ ...near, placement: 0 }]);
+  expect(admitGalaxyLabels([candidate('far', 200), near], [], null)).toEqual([{ ...near, placement: 0 }]);
 });
-test('the default shared budget is twelve, including a distant selected label, with stable ties', () => {
+
+test('a clickable target beats a nearer disabled label even when its prepared class has lower priority', () => {
+  const disabled = { ...candidate('disabled', 1, true), navigable: false };
+  const clickable = { ...candidate('clickable', 100), navigable: true };
+  expect(admitGalaxyLabels([disabled, clickable], [], null)).toEqual([{ ...clickable, placement: 0 }]);
+});
+
+test('a clickable label tries another side before yielding its space to disabled names', () => {
+  const alternate = { left: -50, right: -20, top: 0, bottom: 12 };
+  const target = { ...candidate('target', 100), navigable: true, alternateLabelRects: [alternate] };
+  const disabled = { ...candidate('disabled', 1), navigable: false, labelRect: alternate };
+  expect(admitGalaxyLabels([disabled, target], [rect], null)).toEqual([{ ...target, labelRect: alternate, placement: 1 }]);
+});
+test('catalogues use the shared desktop budget, including a distant selected label, with stable ties', () => {
   const rows = Array.from({ length: 40 }, (_, i) => ({ ...candidate(String(i).padStart(2, '0'), 100 + i),
     labelRect: { left: i * 40, right: i * 40 + 30, top: 0, bottom: 12 } }));
   const accepted = admitGalaxyLabels(rows, [], '39');
-  expect(accepted).toHaveLength(12); expect(accepted[0]!.object.id).toBe('39');
+  expect(accepted).toHaveLength(24); expect(accepted[0]!.object.id).toBe('39');
   expect(admitGalaxyLabels([...rows].reverse(), [], '39')).toEqual(accepted);
 });
 test('an R500 aperture is projected with sphere perspective, including off-axis displacement and the near-plane limit', () => {

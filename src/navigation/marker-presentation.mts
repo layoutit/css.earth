@@ -1,3 +1,5 @@
+import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../renderers/css/labels/label-presentation.ts';
+
 export interface MarkerPresentation {
   size: number; ringAngle?: number; ringExtra?: number; ringHeight?: number; ringOpacity?: number;
   ringColorShare?: number; ringOutlineOpacity?: number; ringOutlineOffset?: number;
@@ -70,6 +72,6 @@ export function contextAnnotationOpacity(classification: string): { line: number
   return {
     line: classification === 'asteroid' ? .35
       : ['satellite', 'dwarf-planet', 'trans-neptunian', 'comet', 'interstellar'].includes(classification) ? .5 : .65,
-    label: ['dwarf-planet', 'comet', 'trans-neptunian', 'interstellar'].includes(classification) ? .5 : .65,
+    label: ['dwarf-planet', 'comet', 'trans-neptunian', 'interstellar'].includes(classification) ? .5 : DEFAULT_CONTEXT_LABEL_OPACITY,
   };
 }

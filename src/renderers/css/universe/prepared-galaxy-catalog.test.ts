@@ -24,6 +24,31 @@ class Element extends EventTarget {
 class Document { count = 0; defaultView = new Window(); createElement() { this.count++; return new Element(this); } }
 const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../objects/${path}`, import.meta.url), 'utf8'));
 
+test('alternate catalogue labels keep their side when space opens and throughout rejection fade', () => {
+  const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
+  const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement,
+    before: before as unknown as HTMLElement, payload, nebulae, onSelect() {} });
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
+  const world = { ...nebulae.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 1e17] as const,
+    orientationXyzw: [0, 0, 0, 1] as const } };
+  const label = runtime.inspect().labels[object.id]!;
+  runtime.publish(world, viewport, 0, [{ left: -150, right: 150, top: 5, bottom: 50 }], 0, 0, undefined, 1);
+  document.defaultView.advance(250);
+  const alternate = label.style.transform;
+  expect(Number(label.style.opacity)).toBeGreaterThan(0);
+  runtime.publish(world, viewport, 0, [], 0, 0, undefined, 1);
+  expect(label.style.transform).toBe(alternate);
+  runtime.publish(world, viewport, 0, [{ left: -400, right: 400, top: -300, bottom: 300 }], 0, 0, undefined, 1);
+  document.defaultView.advance(300);
+  expect(Number(label.style.opacity)).toBeGreaterThan(0);
+  expect(label.style.transform).toBe(alternate);
+  document.defaultView.advance(500);
+  expect(Number(label.style.opacity)).toBe(0);
+  runtime.destroy();
+});
+
 test('nearby nebula labels wake and follow the camera while both extragalactic fades are zero', () => {
   const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
   const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];
@@ -38,9 +63,12 @@ test('nearby nebula labels wake and follow the camera while both extragalactic f
   runtime.publish(camera(-1e17), viewport, 0, [], 0);
   expect(label.style.pointerEvents).toBe('none');
   runtime.publish(camera(1e17), viewport, 0, [], 0); document.defaultView.advance(250);
-  expect(label.style.pointerEvents).toBe('auto'); expect(Number(label.style.opacity)).toBe(.85);
+  expect(label.style.pointerEvents).toBe('none');
+  // Stellar context admits nebulae; planetary context does not.
+  runtime.publish(camera(1e17), viewport, 0, [], 0, 0, undefined, 1); document.defaultView.advance(500);
+  expect(label.style.pointerEvents).toBe('auto'); expect(Number(label.style.opacity)).toBe(.65);
   const transform = label.style.transform;
-  runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0);
+  runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0, 0, undefined, 1);
   expect(label.style.transform).not.toBe(transform);
   label.dispatchEvent(new Event('click')); expect(onSelect).toHaveBeenCalledWith(object);
   expect(document.count).toBe(nodes); runtime.destroy();
@@ -59,7 +87,7 @@ test('nebula label and its single-click target sit below the prepared cloud', ()
   const pose = { ...nebulae.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 1e17] as const,
     orientationXyzw: [0, 0, 0, 1] as const } };
   runtime.select(object.id);
-  const rectangles = runtime.publish(pose, viewport, 0), bottom = 600 * 1e16 / 9.8e16;
+  const rectangles = runtime.publish(pose, viewport, 0, [], 0, 0, undefined, 1), bottom = 600 * 1e16 / 9.8e16;
   expect(rectangles).toHaveLength(1);
   expect(rectangles[0]!.top).toBeCloseTo(bottom + 8);
   const picking = screenPicking(host as unknown as HTMLElement), label = runtime.inspect().labels[object.id]!;
@@ -93,18 +121,18 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.publish(pose, viewport, 1, [], 1); document.defaultView.advance(350);
   expect(picking.pick(0, 15)).toBe(label);
   expect(screenPicking(host as unknown as HTMLElement).pick(0, 15)).toBeNull();
-  expect(Number(label.style.opacity)).toBeCloseTo(.425); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
+  expect(Number(label.style.opacity)).toBeCloseTo(.325); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
   const firstTransform = aperture.style.transform;
   const shifted = { ...pose, pose: { ...pose.pose, positionM: [pose.pose.positionM[0] + object.aperture.comovingRadiusM, ...pose.pose.positionM.slice(1)] as [number,number,number] } };
   const blockers = runtime.publish(shifted, viewport, 1, [], 1);
   expect(aperture.style.transform).not.toBe(firstTransform); expect(blockers.length).toBeGreaterThan(0);
-  runtime.publish(shifted, viewport, 1, blockers, 1);
+  runtime.publish(shifted, viewport, 1, [{ left: -400, right: 400, top: -300, bottom: 300 }], 1);
   expect(label.style.pointerEvents).toBe('none');
   expect(picking.pick(-150, 15)).not.toBe(label);
   label.dispatchEvent(new Event('click')); expect(onSelect).not.toHaveBeenCalled();
-  document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.425);
+  document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.325);
   runtime.publish(shifted, viewport, 1, [], 1); document.defaultView.advance(600);
-  expect(Number(label.style.opacity)).toBe(.85); label.dispatchEvent(new Event('click'));
+  expect(Number(label.style.opacity)).toBe(.65); label.dispatchEvent(new Event('click'));
   expect(onSelect).toHaveBeenCalledWith(object); expect(runtime.resolve(object.id)).toMatchObject({kind: 'galaxy-cluster'});
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);

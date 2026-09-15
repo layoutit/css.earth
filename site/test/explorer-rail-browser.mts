@@ -454,8 +454,8 @@ try {
     if (config.mobile) {
       assert.equal(await page.locator(".planet-resources-panel").isVisible(), false,
         `${config.label}: resources stay out of the mobile shell`);
-      assert.equal(await attributionFooter.isVisible(), false,
-        `${config.label}: source attribution stays out of the mobile shell`);
+      assert.equal(await attributionFooter.isVisible(), true,
+        `${config.label}: the mobile sheet retains the shared Sources card`);
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await about.click();
       assert.equal(await page.evaluate(() => window.scrollY), 0);
