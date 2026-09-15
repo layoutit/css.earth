@@ -80,6 +80,12 @@ export interface PreparedVolumeRuntime {
   readonly roots: readonly HTMLElement[];
 }
 
+/** Material changes apply to full-resolution slices; impostor banks remain separate. */
+export interface PreparedMaterialVolumeRuntime extends PreparedVolumeRuntime {
+  setTextures(urls: readonly string[]): void;
+  setTexture(index: number, url: string): void;
+}
+
 export interface PreparedVolumeCameraTransform {
   readonly rotation: readonly number[];
   readonly translationCssPixels: readonly [number, number, number];
