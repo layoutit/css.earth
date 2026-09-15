@@ -25,7 +25,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <p>{destinations.description}</p>
       </section>}
       {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
-      <PlanetCardHeader heading={false} {title} {introduction}>
+      <PlanetCardHeader {objectId} heading={false} {title} {introduction}>
           <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
       <InformationTabs idPrefix={objectId} />

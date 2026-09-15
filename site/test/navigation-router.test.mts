@@ -389,15 +389,19 @@ test('the destination card stays held until arrival, including the new camera mo
 });
 
 test('asteroid label and orbit settings default off and reach the retained context independently', async () => {
-  const labels: (boolean)[] = [], orbits: (boolean)[] = [], bodies: (boolean)[] = [];
+  const labels: boolean[] = [], orbits: boolean[] = [], bodies: boolean[] = [], illustrations: boolean[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
+      setIllustrationModelsEnabled: value => illustrations.push(value),
       setAsteroidLabelsEnabled: value => labels.push(value),
       setAsteroidOrbitsEnabled: value => orbits.push(value),
       setAsteroidBodiesEnabled: value => bodies.push(value) };
   } } });
   await h.router.settled;
   const settings = h.shells[0].options;
+  assert.equal(settings.illustrationModelsEnabled, false);
+  assert.deepEqual(illustrations, [false]);
+  required(settings.onIllustrationModelsChange)(true);
   assert.equal(settings.asteroidLabelsEnabled, false);
   assert.equal(settings.asteroidBodiesEnabled, false);
   // The mount itself carries the defaults: a context that never received them
@@ -407,6 +411,7 @@ test('asteroid label and orbit settings default off and reach the retained conte
   required(settings.onAsteroidBodiesChange)(true);
   await h.router.navigate('venus');
   assert.equal(h.shells.length, 1);
+  assert.deepEqual(illustrations, [false, true]);
   // Each setting carries its own preference across the body change, so turning
   // one on cannot switch on the asteroid work the others still leave off.
   assert.deepEqual(labels, [false, true]); assert.deepEqual(orbits, [false]);
@@ -418,6 +423,8 @@ test('asteroid label and orbit settings default off and reach the retained conte
   h.router.destroy();
   required(settings.onAsteroidLabelsChange)(true);
   required(settings.onAsteroidBodiesChange)(false);
+  required(settings.onIllustrationModelsChange)(false);
+  assert.deepEqual(illustrations, [false, true]);
   assert.deepEqual(labels, [false, true, false]); assert.deepEqual(bodies, [false, true]);
 });
 

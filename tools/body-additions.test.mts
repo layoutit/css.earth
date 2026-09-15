@@ -17,6 +17,7 @@ const write = async (path: string, value: unknown) => {
 async function addBody(root: string, id: string, classification: string, parent = 'sun') {
   await write(resolve(root, `src/objects/${id}/object.json`), {
     schema: 'cssearth-object@1', id, type: 'test', properties: {
+      recipe: { sources: [] },
       worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: id === 'sun' ? [0,0,0] : [1,0,0], presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 1 },
       catalog: { name: id, classification, systemName: 'Solar System', color: '#aaaaaa',
         distanceAu: 3, description: 'Synthetic catalogue test input.', context: {} },
@@ -27,6 +28,7 @@ async function addBody(root: string, id: string, classification: string, parent 
       gravitationalParameterKm3PerS2: 0, parent: id === 'sun' ? null : parent },
   });
   await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), { id });
+  await write(resolve(root, `src/objects/${id}/prepared/controls.json`), { lenses: { controls: [] } });
 }
 
 test('independent asteroid, moon and comet branches merge without changing existing packages', async t => {
@@ -38,7 +40,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   git('config', 'user.email', 'test@example.invalid');
   git('config', 'commit.gpgsign', 'false');
   git('config', 'core.hooksPath', '/dev/null');
-  await write(resolve(root, '.gitignore'), '/site/prepared-object-catalog.mts\n/site/prepared-object-distances.json\n/site/prepared-focus-objects.json\n/site/prepared-context-objects.mts\n/packages/astronomy/src/data/generated/\n');
+  await write(resolve(root, '.gitignore'), '/site/prepared-object-discovery.json\n/site/prepared-object-catalog.mts\n/site/prepared-object-distances.json\n/site/prepared-focus-objects.json\n/site/prepared-context-objects.mts\n/packages/astronomy/src/data/generated/\n');
   await mkdir(resolve(root, 'packages/astronomy/data/fixtures'), { recursive: true });
   await addBody(root, 'sun', 'star');
   await addBody(root, 'existing-body', 'asteroid');

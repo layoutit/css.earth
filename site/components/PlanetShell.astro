@@ -191,6 +191,12 @@ const searchCategories = ([
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
+      <input class="planet-illustration-models-setting" type="checkbox" name="illustrationModels" aria-describedby={`${objectId}-illustration-models-description`} disabled />
+      <span class="planet-setting-text">Illustration models</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <p id={`${objectId}-illustration-models-description`} class="planet-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
+    <label class="planet-setting-control">
       <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" disabled />
       <span class="planet-setting-text">Asteroids</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>

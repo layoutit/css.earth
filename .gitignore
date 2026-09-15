@@ -275,3 +275,5 @@ src/spice/**/*.bc
 !/src/objects/nearby-universe/prepared/
 /src/objects/nearby-universe/prepared/*
 !/src/objects/nearby-universe/prepared/manifest.json
+
+/site/prepared-object-discovery.json
