@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { parseShellRecipe } from './config.js';
 import { parseGriddedShellMesh, parseIndexedShellMesh, loadShellMesh, type ShellMesh } from './mesh.js';
 import { prepareSurfaceShellObject } from './prepare.js';
-import { sha256, verifiedBytes } from '../volume/source.js';
+import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { PreparedCssSurfaceShell } from '../../renderers/css/shell/types.js';
 import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';
 import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '../../renderers/css/shell/material-address.js';

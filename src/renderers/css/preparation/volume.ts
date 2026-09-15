@@ -3,8 +3,8 @@ import { balanceVolumeSlices } from './volume-order.js';
 import { compileLeafBounds } from './leaf-bounds.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { Axis, Vector3, VolumeRecipe } from '../../../preparation/volume/config.js';
-import type { VolumeSlices } from '../../../preparation/volume/slices.js';
+import type { Axis, Vector3, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import type { PreparedCssVolume } from '../volume/types.js';
 export type { PreparedCssVolume } from '../volume/types.js';
 

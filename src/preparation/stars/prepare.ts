@@ -7,7 +7,7 @@ import { palette } from './color.js';
 import { loadStarSource } from './source.js';
 import { prepareStarHierarchy } from './hierarchy.js';
 import { preparePointAtlas, preparePointPhotometry } from '../../renderers/css/preparation/stars/material.js';
-import { containedPath, verifiedBytes, sha256 } from '../volume/source.js';
+import { containedPath, verifiedBytes, sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { PreparedCssPointFieldManifest } from './types.js';
 import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse-sky.js';
 import { encodePointFieldBank } from '../../renderers/css/preparation/stars/point-field-bank.js';
