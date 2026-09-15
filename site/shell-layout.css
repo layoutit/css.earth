@@ -515,13 +515,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   gap: var(--explorer-panel-gap);
 }
 .planet-dataset-context-card .planet-card-tabpanel { padding-top: 0; }
-/* The high-gain dish faces inward from the right-hand illustration. */
-.planet-machine:is([data-mission="cassini"], [data-machine="cassini"]) .planet-machine-image-crop {
-  width: 65%;
-  margin: 32px auto;
-  transform: rotate(60deg);
-}
-
 @media (min-width: 821px) and (orientation: landscape) {
   /* Settings and the spacecraft card take turns in this slot. */
   .planet-dataset-context-rail,
