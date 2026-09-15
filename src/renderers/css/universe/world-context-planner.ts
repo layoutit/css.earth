@@ -136,7 +136,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
   // Only the selected path fades with depth; one shared scratch pool serves it.
   const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0))));
   return (view: WorldContextView) => {
-    const { world, viewport, selectedId, overview, selectionPreview } = view;
+    const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
         view.bodies.length !== prepared.length || !(viewport.widthPixels! > 0 && viewport.heightPixels! > 0)) {
       throw new TypeError('World context planning requires a matching frame, body state and measured viewport.');
@@ -168,7 +168,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       const focusDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
-      const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
+      // A departed focus can cross the eye plane while its detail still owns
+      // selection. Its unprojectable diameter is not a screen-filling disc:
+      // only a visible focus may fade the surrounding orbit field.
+      const [selectedX, selectedY] = project(selectedEye);
+      const focusInView = selectedEye[2] < -selected.radiusM &&
+        Math.abs(selectedX) < width / 2 + focusDiameter / 2 &&
+        Math.abs(selectedY) < height / 2 + focusDiameter / 2;
+      const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusInView ? focusDiameter / height : 0);
       const near = opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -268,11 +275,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // An explicit category names bodies even when their orbits are subpixel.
         // The shared system fade and annotation collision budget still apply.
         const proxyOpacity = highlighted ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
-        const markerOpacity = (isSelected ? lod.proxyOpacity : 1) *
-          (isAnchor ? 1 : opacity * (isSelected ? 1 : proxyOpacity));
+        const flightDestination = navigationInFlight && body.id === emphasizedId;
+        const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
+          (isAnchor ? 1 : opacity * (isSelected || flightDestination ? 1 : proxyOpacity));
         const orbitVisibility = skipped ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
-        const circle = (isAnchor && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
+        // A flight destination keeps its circle until the preview hands off to detail.
+        const circle = (flightDestination ? opacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
+          isAnchor && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
           (!entry.indicatorHidden || hovered || isSelected);
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
         const priority = (isAnchor ? 1000 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
@@ -300,14 +310,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const inContext = !satellite || activeSystems.has(entry.parent!.id);
         const foregroundSystem = selectedId !== plan.focus.id && !overview;
         const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
-        const alpha = targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
+        const flightDestination = navigationInFlight && body.id === emphasizedId;
+        // The destination stays named through the whole flight, across its preview fade.
+        const alpha = flightDestination ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
         if (entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
             (!targeted && (entry.labelHidden || !resolvedDisc && (!inContext || unrelatedMinor)))) continue;
         const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
-        const sides = body.id === plan.focus.id ? [3] : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : [0, 1, 2, 3];
+        const sides = body.id === plan.focus.id ? [3] : !flightDestination && (resolvedDisc || body.id === emphasizedId) ? [3, 2, 0, 1] : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
           if (hovered) {
@@ -353,14 +365,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       const { entry } = projected, slot = prepared[entry.index]!;
       const billboardShown = (projected.visible || (projected.annotationVisible &&
         (entry.indicatorShown || entry.labelShown))) && projected.markerOpacity > 0;
+      const flightCueShown = navigationInFlight && entry.body.id === emphasizedId && (entry.labelShown || entry.indicatorShown);
       const output = slot.output ??= { x: 0, y: 0, diameter: 0, markerOpacity: 0, visible: false, annotationVisible: false, hovered: false, lineWidth: 0,
         orbitVisibility: 0, segments: [], labelPosition: undefined, orbitBounds: null, index: entry.index, labelShown: false, labelPlacement: 0,
         indicatorShown: false, indicatorCutout: false, orbitAppearance: entry.orbitAppearance };
-      output.x = billboardShown ? projected.x : 0; output.y = billboardShown ? projected.y : 0;
+      output.x = billboardShown || flightCueShown ? projected.x : 0; output.y = billboardShown || flightCueShown ? projected.y : 0;
       // Alphas travel in 1/64 steps: every rotation frame moves a marker's silhouette a
       // little, and a step this small cannot change a composited pixel, so unchanged
       // steps neither cross the worker boundary nor restyle the marker's cue and caption.
-      output.diameter = billboardShown ? projected.diameter : 0; output.markerOpacity = billboardShown ? quantizeAlpha(projected.markerOpacity) : 0;
+      output.diameter = billboardShown || flightCueShown ? projected.diameter : 0; output.markerOpacity = billboardShown ? quantizeAlpha(projected.markerOpacity) : 0;
       output.visible = projected.visible; output.annotationVisible = projected.annotationVisible; output.hovered = projected.hovered;
       output.lineWidth = projected.lineWidth; output.orbitVisibility = quantizeAlpha(projected.orbitVisibility); output.segments = projected.segments;
       output.labelPosition = projected.labelPosition;

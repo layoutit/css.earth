@@ -19,7 +19,7 @@ interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;
 interface FlightPace {speed: number;}
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
-import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
+import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
@@ -451,7 +451,17 @@ function easeArrivalInto(flight: Flight, fromElapsedS: number, toElapsedS: numbe
   const at = (elapsedS: number) => sampleSelectionFlightInto(flight, elapsedS, out).progress;
   if (toElapsedS <= fromElapsedS) return toElapsedS;
   const from = at(fromElapsedS);
-  const limit = from + (1 - Math.exp(-FLIGHT_ARRIVAL_EASE_RATE * Math.max(0, clockStepS))) * (1 - from);
+  let rate = FLIGHT_ARRIVAL_EASE_RATE;
+  if (flight.curve.startRangeM > flight.curve.endRangeM) {
+    const [x, y, z] = out.positionM, [fx, fy, fz] = flight.focusPositionM;
+    const rangeM = Math.hypot(x - fx, y - fy, z - fz);
+    const scale = flight.curve.endRangeM / rangeM;
+    const { startScale, fullScale, settleScale, easeRate } = FLIGHT_VISIBLE_APPROACH;
+    const blend = Math.max(0, Math.min(1, (scale - startScale) / (fullScale - startScale)));
+    const settle = Math.max(0, Math.min(1, (scale - settleScale) / (1 - settleScale)));
+    rate += (easeRate - rate) * blend * blend * (3 - 2 * blend) * (1 - settle * settle * (3 - 2 * settle));
+  }
+  const limit = from + (1 - Math.exp(-rate * Math.max(0, clockStepS))) * (1 - from);
   if (at(toElapsedS) <= limit) return toElapsedS;
   let low = fromElapsedS, high = toElapsedS;
   for (let iteration = 0; iteration < 32; iteration++) {

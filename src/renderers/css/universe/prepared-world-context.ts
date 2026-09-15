@@ -484,6 +484,20 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
+  // One caption follows the destination through the entire flight. Its preview sprite has a
+  // separate lifetime and fades at 14–20px, long before the close-up has arrived.
+  const flightCaption = host.ownerDocument.createElement('span');
+  flightCaption.className = 'context-flight-caption';
+  flightCaption.dataset.contextFlightLabel = '';
+  flightCaption.style.visibility = 'hidden';
+  flightCaption.setAttribute('aria-hidden', 'true');
+  root.appendChild(flightCaption);
+  const flightCircle = host.ownerDocument.createElement('span');
+  flightCircle.className = 'context-flight-circle';
+  flightCircle.dataset.contextFlightCircle = '';
+  flightCircle.style.visibility = 'hidden';
+  flightCircle.setAttribute('aria-hidden', 'true');
+  root.appendChild(flightCircle);
   const planWorld = createWorldContextPlanner(plan, annotationPriorities);
   const windowTarget = host.ownerDocument.defaultView!;
   const ownClock = opacityClock ?? createOpacityClock(windowTarget);
@@ -796,6 +810,35 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         skippedPublications++;
         return;
       }
+      const flightBody = navigationInFlight && emphasizedId !== null
+        ? frame.projectedBodies.find(body => bodies[body.index].body.id === emphasizedId)
+        : undefined;
+      const captionBody = flightBody?.labelShown && flightBody.labelPosition ? flightBody : undefined;
+      const circleVisible = flightBody?.indicatorShown && flightBody.annotationVisible;
+      const circleVisibility = circleVisible ? '' : 'hidden';
+      if (flightCircle.style.visibility !== circleVisibility) flightCircle.style.visibility = circleVisibility;
+      if (circleVisible && flightBody) {
+        const entry = bodies[flightBody.index];
+        if (flightCircle.dataset.contextFlightCircle !== entry.body.id) flightCircle.dataset.contextFlightCircle = entry.body.id;
+        const { billboardFadeStartDiscPixels: start, billboardFullDiscPixels: full } = plan.camera.presentation.levelOfDetail;
+        const opacity = String(entry.baseAlpha.line * Math.max(0, Math.min(1, (start - flightBody.diameter) / (start - full))));
+        if (flightCircle.style.opacity !== opacity) flightCircle.style.opacity = opacity;
+        const transform = `translate(${Math.round((width / 2 + flightBody.x) * 1000) / 1000}px, ${Math.round((height / 2 + flightBody.y) * 1000) / 1000}px) translate(-50%, -50%)`;
+        if (flightCircle.style.transform !== transform) flightCircle.style.transform = transform;
+      }
+      const captionVisibility = captionBody ? '' : 'hidden';
+      if (flightCaption.style.visibility !== captionVisibility) flightCaption.style.visibility = captionVisibility;
+      if (captionBody?.labelPosition) {
+        const entry = bodies[captionBody.index];
+        if (flightCaption.dataset.contextFlightLabel !== entry.body.id) {
+          flightCaption.dataset.contextFlightLabel = entry.body.id;
+          flightCaption.textContent = entry.marker.dataset.contextName!;
+          flightCaption.style.opacity = String(entry.baseAlpha.label);
+        }
+        const [x, y] = captionBody.labelPosition;
+        const transform = `translate(${Math.round((width / 2 + x) * 1000) / 1000}px, ${Math.round((height / 2 + y) * 1000) / 1000}px)`;
+        if (flightCaption.style.transform !== transform) flightCaption.style.transform = transform;
+      }
       const candidates = delta && !policyChanged
         ? Array.from(delta.changes.keys(), index => frame.projectedBodies[index]) : frame.projectedBodies;
       const projectedBodies = candidates.map(projected => {
@@ -905,7 +948,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           entry.markerPick = target;
         }
         const indicatorVisible = entry.indicatorShown;
-        const indicatorState = String(indicatorVisible);
+        const indicatorState = String(indicatorVisible && !(navigationInFlight && body.id === emphasizedId));
         if (marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
         if (indicatorVisible && markerOpacity > .1) {
           const target = entry.indicatorPickTarget ??= { element: marker, rank: rank + 2, shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } };
@@ -956,7 +999,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
         if (mask & (ContextChange.label | ContextChange.marker)) {
           const labelVisible = entry.labelShown;
-          const labelState = String(labelVisible);
+          const labelState = String(labelVisible && !(navigationInFlight && body.id === emphasizedId));
           if (marker.dataset.contextLabelVisible !== labelState) marker.dataset.contextLabelVisible = labelState;
           entry.labelRect = null; entry.labelPick = null;
           if (labelVisible && labelPosition) {
@@ -1000,6 +1043,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           orbitBounds.left = Math.min(orbitBounds.left, bounds.left); orbitBounds.right = Math.max(orbitBounds.right, bounds.right);
           orbitBounds.top = Math.min(orbitBounds.top, bounds.top); orbitBounds.bottom = Math.max(orbitBounds.bottom, bounds.bottom);
         }
+      }
+      if (captionBody?.labelPosition) {
+        const [left, top] = captionBody.labelPosition, size = bodies[captionBody.index].labelSize;
+        acceptedRects.push({ left, top, right: left + size.width, bottom: top + size.height });
       }
       labelExclusions = acceptedRects;
       const footprint = compactOrbitFootprint(orbitBounds, width, height);
