@@ -15,6 +15,6 @@ Use the explicit `@cssearth/volume-core/<folder>/<module>` exports. The package 
 
 Field positions and stellar contracts retain west/north/away coordinates and their declared units. Photographic material never creates emission support. Finite-component material and historical registered-ray material remain distinct operations; a projection match does not establish physical depth.
 
-`pnpm --filter @cssearth/volume-core typecheck` checks the package with ECMAScript libraries only. During migration, existing tests and imports can use temporary lab-path re-exports; those contain no numerical implementation.
+`pnpm --filter @cssearth/volume-core typecheck` checks the package with ECMAScript libraries only. Numerical tests live beside their package owners and use the public APIs. Node test libraries are excluded from the platform-neutral package typecheck and covered by the strict lab test batches.
 
 Sampled replay evaluates accepted spatial samples and finite atoms without rerunning image fitting. The sampled recipe validator accepts a source-path policy from its host; the research adapter retains its restricted model/cache paths. Cancellation uses a structural `throwIfAborted()` contract so the numerical owners require neither Node nor DOM globals.

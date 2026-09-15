@@ -1,5 +1,5 @@
 /** Offline transfer of one shared sky-to-density alignment to image-centred controls. */
-import { updateOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { updateOverlayPlacement, type OverlayPlacement } from './overlay-placement.ts';
 
 export function transferOverlayAlignment(placement: OverlayPlacement, referencePivot: readonly number[],
   imagePivot: readonly number[], pixelsPerKpc: number): OverlayPlacement {

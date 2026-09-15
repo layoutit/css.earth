@@ -17,7 +17,8 @@
     "./compact-inputs/sampled": "./src/compact-inputs/sampled.ts",
     "./compiler/component-layout": "./src/compiler/component-layout.ts",
     "./compiler/retained-material": "./src/compiler/retained-material.ts",
-    "./slices/painted-field": "./src/slices/painted-field.ts"
+    "./slices/painted-field": "./src/slices/painted-field.ts",
+    "./compact-inputs/density-window": "./src/compact-inputs/density-window.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

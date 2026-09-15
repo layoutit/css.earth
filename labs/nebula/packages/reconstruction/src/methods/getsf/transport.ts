@@ -1,0 +1,1 @@
+export interface GetSfFitsTransport {encodeFits(values:Float32Array,width:number,height:number,metadata:Record<string,string|number|boolean>):Buffer;decodeFits(bytes:Buffer):{width:number;height:number;values:Float32Array};float32LittleEndian(values:Float32Array):Buffer}

@@ -19,7 +19,8 @@ export { compilerFrame, compilerSliceCounts } from '@cssearth/volume-core/coordi
 export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '@cssearth/volume-core/contracts/compiler-bake';
 export { readCompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
 export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
-export interface CompilerStarInput { id: string; positionArcsec: EmissionVector3; rgb: [number, number, number]; widthPx?: number; diameterUnits?: number; alpha: number; materials?: Record<string, CompilerStarMaterial> }
+import type {CompilerStarInput} from '@cssearth/volume-core/contracts/compiler-star-input';
+export type {CompilerStarInput} from '@cssearth/volume-core/contracts/compiler-star-input';
 export interface CompilerLensInput {
   id: string; label: string;
   /** Component-bound 3D chromaticity in 0..255; false means no observed material. No projected-image fallback. */
