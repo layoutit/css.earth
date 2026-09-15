@@ -1,0 +1,37 @@
+---
+import type { Props } from '../planet-shell-types';
+import { sourcePanelBanks } from '../source-panel-data.mts';
+import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
+import { isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import PlanetCard from './PlanetCard.astro';
+import PlanetAccordion from './PlanetAccordion.astro';
+import SourceRow from './SourceRow.astro';
+const { objectId, title, lenses } = Astro.props;
+const banks = sourcePanelBanks(Astro.props);
+const catalogs = FOCUS_CATALOG_DATA.map(({ id, text }) => ({ id, data: id === 'galaxies' ? parsePreparedGalaxyCatalog(JSON.parse(text))
+  : id === 'clusters' ? parsePreparedClusterCatalog(JSON.parse(text)) : parsePreparedNebulaCatalog(JSON.parse(text)) }));
+const records = catalogs.flatMap(catalog => catalog.data.objects.map(record => {
+  const refs = [record.distance.sourceRef, isPreparedCluster(record) || isPreparedNebula(record) ? record.classification.sourceRef : record.membership.sourceRef];
+  return { id: record.id, name: record.name, objectId: isPreparedCluster(record) ? '' : record.detailedObjectId,
+    citations: catalog.data.sources.filter(source => refs.some(ref => ref === source.id || ref?.startsWith(`${source.id}:`))).map(source => `citation:${catalog.id}:${source.id}`) };
+}));
+const initial = new Set([`body:${lenses?.defaultLens}`, 'object', 'scope:sky']);
+const initialCount = new Set(banks.filter(bank => initial.has(bank.id)).flatMap(bank => bank.groups.flatMap(group => [...group.links, ...group.supporting].map(link => link.href.replace(/\/$/u, ''))))).size;
+---
+<PlanetCard class="planet-attribution-footer planet-sources-panel" data-source-panel aria-label="Sources">
+  <PlanetAccordion title="Sources" count={initialCount} data-sources-disclosure>
+    <div class="planet-sources-content" data-source-owner={objectId} data-source-name={title.label}>
+      <p class="planet-resource-description" data-source-view>{title.label}</p>
+      {banks.map(bank => <section data-source-bank={bank.id} data-source-object={bank.objectId} data-source-lens={bank.lensId}
+        data-source-label={bank.label} hidden={!initial.has(bank.id)}>
+        <h3 class="planet-lens-details-title">{bank.label}</h3>
+        <ul class="planet-resources-links">{bank.groups.map(group => <SourceRow {...group} />)}</ul>
+      </section>)}
+      {catalogs.flatMap(catalog => catalog.data.sources.map(source => <section data-source-bank={`citation:${catalog.id}:${source.id}`} hidden>
+        <ul class="planet-resources-links"><SourceRow links={[{id: source.id, href: source.url, title: source.citation}]} /></ul>
+      </section>))}
+      {records.map(record => <span hidden data-source-record={record.id} data-source-record-name={record.name}
+        data-source-record-object={record.objectId} data-source-citations={record.citations.join(' ')} />)}
+    </div>
+  </PlanetAccordion>
+</PlanetCard>

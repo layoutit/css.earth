@@ -9,7 +9,7 @@ import { SCENE_OBJECTS } from "../objects.mts";
 import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
-import { sceneSources, sceneSourceGroups } from "../scene-sources.mts";
+import SourcesPanel from './SourcesPanel.astro';
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
@@ -34,8 +34,6 @@ declare const __CSSEARTH_VERSION__: string;
 
 const {
   objectId,
-  title,
-  resources = [],
   lenses,
   settings,
   destinations,
@@ -64,10 +62,6 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
-const sources = sceneSources(resources);
-// One footer entry per provider name, so a shared name is printed once.
-const sourceGroups = sceneSourceGroups(sources);
-const hasResources = sources.length > 0;
 const searchPlaceholder = 'Search celestial objects...';
 const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
@@ -197,6 +191,12 @@ const searchCategories = ([
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
+      <input class="planet-illustration-models-setting" type="checkbox" name="illustrationModels" aria-describedby={`${objectId}-illustration-models-description`} disabled />
+      <span class="planet-setting-text">Illustration models</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <p id={`${objectId}-illustration-models-description`} class="planet-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
+    <label class="planet-setting-control">
       <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" disabled />
       <span class="planet-setting-text">Asteroids</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
@@ -268,8 +268,10 @@ const searchCategories = ([
     >
       {!navigation && <><PlanetCard class="planet-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
+          {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
+            <PlanetBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
           <div class="planet-title-row">
-            <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></p>
+            <p class="planet-title planet-title-text" data-focus-name></p>
             <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
           </div>
           <p class="planet-introduction" data-focus-aliases hidden></p>
@@ -293,49 +295,44 @@ const searchCategories = ([
             <p class="planet-introduction" data-focus-basis></p>
             <p class="planet-introduction" data-focus-reference></p>
           </PlanetAccordion>
-          <h2 class="planet-lens-details-title">Sources</h2>
-          <div class="planet-resources-links">
-            {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
-          </div>
         </div>
       </PlanetCard>
-      <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
+      <PlanetCard class="planet-galactic-overview planet-overview-card" data-galactic-overview hidden>
         <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['milky-way']}
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
           <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
-        <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} />
-        <PlanetAccordion title="Sources" open>
-          <ul class="planet-resources-links">
-            {sources.filter(source => ['galaxy','sky'].includes(source.role)).map(source => <li class="planet-resource-row">
-              <a class="planet-resource-label" href={source.href} target="_blank" rel="noreferrer">{source.label}</a>
-              <span class="planet-resource-description">{source.description}</span>
-            </li>)}
-          </ul>
-        </PlanetAccordion>
-        <PlanetAccordion title="Planetary systems" count={1 + unavailableSystems.length} open>
+        <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information"
+          tabs={[{ id: 'systems', label: 'Systems', count: 1 + unavailableSystems.length },
+            { id: 'factsheet', label: 'Factsheet' }]} />
+        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-systems-content`}
+          role="region" aria-label="Planetary systems">
           <ul class="planet-object-list">
             <li>
-              <a class="planet-object-link" href={`${systemStar.route}?overview=solar-system`} data-browse-solar-system aria-label="Browse Solar System">
-                <PlanetNavigationMarker planetId={systemStar.id} color={systemStar.color} />
-                <span class="planet-object-name">Solar System</span>
+              <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${systemStar.route}?overview=solar-system`} data-browse-solar-system aria-label="Browse Solar System">
+                <span class="planet-lens-icon"><PlanetNavigationMarker planetId={systemStar.id} color={systemStar.color} /></span>
+                <span class="planet-object-name planet-lens-label">Solar System</span>
               </a>
             </li>
             {unavailableSystems.map(system => <li>
-              <span class="planet-object-link" role="link" aria-disabled="true" title="Not available yet">
-                <PlanetNavigationMarker planetId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} />
-                <span class="planet-object-name">{system.name}</span>
-                <span class="planet-object-distance">
+              <span class="planet-object-link planet-observation-control planet-thumbnail-leading" role="link" aria-disabled="true" title="Not available yet">
+                <span class="planet-lens-icon"><PlanetNavigationMarker planetId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} /></span>
+                <span class="planet-object-name planet-lens-label">{system.name}</span>
+                <span class="planet-object-distance planet-lens-detail">
                   <span class="planet-object-distance-value">≈{system.distanceLy}</span>{" "}
                   <span class="planet-object-distance-unit">ly</span>
                 </span>
               </span>
             </li>)}
           </ul>
-        </PlanetAccordion>
+        </div>
+        <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-factsheet-content`}
+          role="region" aria-label="Factsheet">
+          <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} embedded />
+        </div>
       </PlanetCard>
       <ExtragalacticOverviews />
-      <PlanetCard data-solar-system-results>
+      <PlanetCard class="planet-overview-card" data-solar-system-results>
         <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['solar-system']}
           introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
           <PlanetBreadcrumbs scope="solar-system" />
@@ -375,59 +372,31 @@ const searchCategories = ([
     {!navigation && <template data-object-card-preview>
       <section class="planet-selected-panel" data-card-preview>
         <div class="planet-title-row">
-          <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-card-preview-name></p>
+          <p class="planet-title planet-title-text" data-card-preview-name></p>
           <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-card-preview-classification></span></div>
         </div>
         <p class="planet-introduction" data-card-preview-description></p>
       </section>
     </template>}
   </div>
+  <SourcesPanel {...Astro.props} />
 </aside>
 </div>
 
-<footer class="planet-footer" aria-label="Sources and view information">
-<nav
-  class="planet-attribution-footer"
-  hidden={!hasResources}
-  aria-label={`${title.label} and shared universe sources`}
->
-  {sourceGroups.map((group, index) => (
-    <>
-      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">,</span>}
-      <span class="planet-attribution-group">
-        {group.provider && <span class="planet-attribution-provider">{group.provider}</span>}
-        {group.members.map((resource, member) => (
-          <>
-            {member > 0 && <span class="planet-attribution-group-separator" aria-hidden="true">,</span>}
-            <a
-              class="planet-attribution-link"
-              href={resource.href}
-              title={`${resource.role}: ${resource.description}`}
-              aria-label={`${resource.role}: ${resource.label}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span class="planet-attribution-source">{resource.part}</span>
-            </a>
-          </>
-        ))}
-      </span>
-    </>
-  ))}
-</nav>
+<footer class="planet-footer" aria-label="View information">
     <div class="planet-view-readout" aria-label="View information">
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-record" title="Record stage input; press again to stop and copy the recording">Record</button>}
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-script" title="Replay the recorded motion for tracing">Do motion</button>}
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
-      <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
-        <span>Epoch: <span data-view-date></span></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-      </span>
-      <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
-        <span data-view-latitude></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-        <span data-view-longitude></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
+      <span class="planet-view-context">
+        {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
+        <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
+          <span>Epoch: <span data-view-date></span></span>
+          <span class="planet-view-separator" aria-hidden="true">·</span>
+        </span>
+        <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
+          <span data-view-latitude></span>
+          <span class="planet-view-separator" aria-hidden="true">·</span>
+          <span data-view-longitude></span>
+          <span class="planet-view-separator" aria-hidden="true">·</span>
+        </span>
       </span>
       <span class="planet-view-altitude" title="Camera altitude above the selected object's reference surface">
         <span data-view-distance-label>Altitude:</span> <span data-view-altitude>—</span>

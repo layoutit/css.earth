@@ -389,15 +389,19 @@ test('the destination card stays held until arrival, including the new camera mo
 });
 
 test('asteroid label and orbit settings default off and reach the retained context independently', async () => {
-  const labels: (boolean)[] = [], orbits: (boolean)[] = [], bodies: (boolean)[] = [];
+  const labels: boolean[] = [], orbits: boolean[] = [], bodies: boolean[] = [], illustrations: boolean[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
+      setIllustrationModelsEnabled: value => illustrations.push(value),
       setAsteroidLabelsEnabled: value => labels.push(value),
       setAsteroidOrbitsEnabled: value => orbits.push(value),
       setAsteroidBodiesEnabled: value => bodies.push(value) };
   } } });
   await h.router.settled;
   const settings = h.shells[0].options;
+  assert.equal(settings.illustrationModelsEnabled, false);
+  assert.deepEqual(illustrations, [false]);
+  required(settings.onIllustrationModelsChange)(true);
   assert.equal(settings.asteroidLabelsEnabled, false);
   assert.equal(settings.asteroidBodiesEnabled, false);
   // The mount itself carries the defaults: a context that never received them
@@ -407,6 +411,7 @@ test('asteroid label and orbit settings default off and reach the retained conte
   required(settings.onAsteroidBodiesChange)(true);
   await h.router.navigate('venus');
   assert.equal(h.shells.length, 1);
+  assert.deepEqual(illustrations, [false, true]);
   // Each setting carries its own preference across the body change, so turning
   // one on cannot switch on the asteroid work the others still leave off.
   assert.deepEqual(labels, [false, true]); assert.deepEqual(orbits, [false]);
@@ -418,6 +423,8 @@ test('asteroid label and orbit settings default off and reach the retained conte
   h.router.destroy();
   required(settings.onAsteroidLabelsChange)(true);
   required(settings.onAsteroidBodiesChange)(false);
+  required(settings.onIllustrationModelsChange)(false);
+  assert.deepEqual(illustrations, [false, true]);
   assert.deepEqual(labels, [false, true, false]); assert.deepEqual(bodies, [false, true]);
 });
 
@@ -763,6 +770,7 @@ test('a first selection frames the object system and changes its card, then the 
 });
 
 test('zooming out after first-click system framing restores the overview at the same camera pose', async () => {
+  const au = 149597870700;
   const rotation = identityRotation;
   const frame = (originM: readonly [number, number, number], bodyRadiusM: number) => ({ originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1,
     presentationToReference: rotation, metersPerUnit: 1 });
@@ -787,13 +795,13 @@ test('zooming out after first-click system framing restores the overview at the 
     };
     assert.equal(await drain(h.router.navigate('venus', { sceneSelection: true })), true);
     const selected = required(h.mounts.at(-1));
-    required(selected.publishCamera)(camera(1400));
-    assert.equal(timers.size, 0, 'The selected system remains below the existing orbital cutoff');
-    required(selected.publishCamera)(camera(1600));
+    required(selected.publishCamera)(camera(99 * au));
+    assert.equal(timers.size, 0, 'The selected system remains below 100 AU from the Sun');
+    required(selected.publishCamera)(camera(101 * au));
     assert.equal(timers.size, 1, 'First-click selection must not disable the zoom-out cutoff');
-    required(selected.publishCamera)(camera(1400));
+    required(selected.publishCamera)(camera(99 * au));
     assert.equal(timers.size, 0, 'A transient crossing is cancelled');
-    const zoomedOut = camera(1700);
+    const zoomedOut = camera(102 * au);
     required(selected.publishCamera)(zoomedOut);
     for (const [id, callback] of timers) { timers.delete(id); callback(); }
     await drain(h.router.settled);

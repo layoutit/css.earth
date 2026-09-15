@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "10f43b7cfb1e179fa3cb5ec8ddf3e7fa45d26e886f3b00a567e540bce358fa6c"
+    "sha256": "e9be4a4fbb0c15d26aef32997918a53aa4544095b3a7d95efaaac5a9a01ee5b7"
   },
   "id": "ceres",
   "properties": {
@@ -152,10 +152,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f28c2ec70fd8793a778071963da4c4ff59190c2d6ac888751681877f84ca56fb"
+        "sha256": "d6778d11e34fc3f49ca01121131c8eef71e314c40d1dff550f72dfde381cfb80"
       }
     },
     "catalog": {
+      "featured": true,
       "name": "Ceres",
       "classification": "dwarf-planet",
       "color": "#8e8b86",

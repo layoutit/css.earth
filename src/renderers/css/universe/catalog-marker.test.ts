@@ -15,14 +15,15 @@ test('shipped classifications select the correct marker without object ID except
   expect(catalogMarkerKind(galaxies.objects[0]!)).toBe('galaxy');
 });
 
-test('galaxy groups have outlined hexagons and clusters have filled hexagons', () => {
+test('outer scene markers share the ordinary circle while retaining classification metadata', () => {
   const clusters = parsePreparedClusterCatalog(JSON.parse(readFileSync(
     new URL('../../../objects/galaxy-clusters/prepared/catalogue.json', import.meta.url), 'utf8')));
   expect(clusters.objects.every(object => catalogMarkerKind(object) === 'galaxy-cluster')).toBe(true);
-  const marker = { dataset: {}, style: {}, innerHTML: '', setAttribute() {} };
-  mountCatalogMarkerKind(marker as unknown as HTMLElement, 'galaxy-group');
-  expect(marker.innerHTML).toContain('M12 3 20 7.5v9L12 21l-8-4.5v-9Z');
-  expect(marker.innerHTML).not.toContain('fill="currentColor"');
-  mountCatalogMarkerKind(marker as unknown as HTMLElement, 'galaxy-cluster');
-  expect(marker.innerHTML).toContain('fill="currentColor"');
+  for (const kind of ['galaxy', 'nebula', 'planetary-nebula', 'open-cluster', 'galaxy-group', 'galaxy-cluster'] as const) {
+    const marker = { className: '', dataset: { catalogMarkerKind: '' }, style: {}, innerHTML: '<svg></svg>', setAttribute() {} };
+    mountCatalogMarkerKind(marker as unknown as HTMLElement, kind);
+    expect(marker.dataset.catalogMarkerKind).toBe(kind);
+    expect(marker.className).toBe('prepared-context-marker');
+    expect(marker.innerHTML).toBe('');
+  }
 });
