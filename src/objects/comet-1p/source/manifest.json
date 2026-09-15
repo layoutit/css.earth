@@ -576,8 +576,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 58410,
-      "expectedSha256": "a3c162d7b85a6f29372f59b5208608569e14eab7a33934bd5eba090ac3249914",
+      "expectedBytes": 33490,
+      "expectedSha256": "2b6c2b2328d0ad3baf6638595e09b236497a8512dcb3554ca6f215c579028311",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
       "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
       "license": "PDS public scientific archive; credit Stooke and Abergel",
@@ -607,8 +607,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3690,
-      "expectedSha256": "4f763104006f4a2fcd271324bb218db639c51ca08a1727431b8e361d14c6e0a0",
+      "expectedBytes": 3788,
+      "expectedSha256": "99eb2fdbe056e0dc7b3e9e8ede37886c493edf4440acd2df2de86a3cb10a7214",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -622,7 +622,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1655,
-      "expectedSha256": "5a3880d937ea8462f398ab14892c3b1527e768e65fcfa70d1dd4e796c6582d33"
+      "expectedSha256": "5f8f4324b78367e5c92176dec378bdc90d4a6eeb4c7b26da0bbda7be59141874"
     },
     {
       "path": "preparation/rotation.json",

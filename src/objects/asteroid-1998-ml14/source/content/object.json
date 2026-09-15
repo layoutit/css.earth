@@ -68,7 +68,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
+        "notes": "The shared neutral gray marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

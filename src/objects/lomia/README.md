@@ -1,5 +1,7 @@
 # (117) Lomia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **838**, version **2016-01-04**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 838, version 2016-01-04.
 
-Convex light-curve reconstruction with approximate thermal size: 144.92 km effective diameter (catalog ±1.86 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with approximate thermal size: 144.92 km effective diameter (catalog ±1.86 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ The other archive pole (323,-57) differs from the paper table (312,-40); it is r
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 839, pole ['323', '-57'], [Model 839](https://damit.cuni.cz/projects/damit/asteroid_models/view/839)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 839, pole ['323', '-57'], [Model 839](https://damit.cuni.cz/projects/damit/asteroid_models/view/839)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

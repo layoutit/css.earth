@@ -1,5 +1,7 @@
 # Dimorphos
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 - Source: [NASA PDS DART shape model v004](https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004), Daly/Ernst and the DART shape-model team.
@@ -63,7 +65,7 @@ Named features run of 2026-09-12 (this version): the catalogue labels 11 IAU nam
 
 - **Relative albedo:** This is the encounter-facing SPC model's relative brightness field, not a photograph, absolute/geometric albedo, or a measurement of the post-impact surface. `SIGMA > 0` requires multiple contributing images in the archive; zero-sigma nominal values remain unavailable.
 
-- **Albedo support:** The accepted triangles cover 31.2138% of the original mesh's summed area; this is an exact fraction of those model triangles, not a precision claim about the real surface. Unqualified facets and transfer gaps use the common neutral grid.
+- **Albedo support:** The accepted triangles cover 31.2138% of the original mesh's summed area; this is an exact fraction of those model triangles, not a precision claim about the real surface. Unqualified facets and transfer gaps use the common neutral gray.
 
 - **Orientation and orbit:** The displayed mesh uses the observed pre-impact pole (ICRF RA 69.70029°, declination −72.69527°) and an explicitly arbitrary display phase. The pre-impact 11.92177 h period is source metadata, not a post-impact attitude prediction. The shared solar context uses the post-impact DART s547 Dimorphos trajectory relative to the Didymos primary, fitted to the existing precessing Kepler model over JD 2461256.5–2461316.5. This is a compact display fit, not a long-term binary dynamics solution.
 

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "moskva",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "483a7665225c41516cdfc32cf3d038f4f395a5331afe926739a46561bf192729"
+    "sha256": "5e722210ef412e8ae90a329c8172324ddad2d1d833a23c3ea7cc31a2ea2bf317"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "47ace8e40bca3c6d7fea09fd6a111ada31c6c5854c7012d876957fd9fb498c52",
+      "sha256": "253ea005476ffe03951247ead9bb06f72d159a6de129696f8a8d034be99d15a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 31.962 ± 0.789 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "notes": "Thermal diameter 31.962 ± 0.789 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "76ada158146d485d5ca583742e60825d7cdf15f7d4febff30655d63234863503",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "47ace8e40bca3c6d7fea09fd6a111ada31c6c5854c7012d876957fd9fb498c52",
+      "sha256": "253ea005476ffe03951247ead9bb06f72d159a6de129696f8a8d034be99d15a7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8414,
+      "bytes": 8512,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/moskva/moskva-elevation-thumbnail.webp",
           "bytes": 5132,
           "sha256": "dd21a3302d903e7ae7b40a6531b562812594b682da8d21ff2a9d63b4d680ab4a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moskva/moskva-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moskva/moskva-elevation-surface@2x.webp",
           "bytes": 281352,
           "sha256": "8b0703f02e7eccd862223e06f9966fd3409c07b9f19b943b7a1e088b6de7312a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/moskva/moskva-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moskva/moskva-shape-surface@2x.webp",
-          "bytes": 202348,
-          "sha256": "cdc0a3757ffe955ee49c57275b4965bdcf2347d8edb4c8189666bbffaba76c5c",
-          "verification": "bytes-verified"
+          "bytes": 66438,
+          "sha256": "26a87f7d800c2a0d69add7f08c25e7641f59441456431ede37a99f91070114c2",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

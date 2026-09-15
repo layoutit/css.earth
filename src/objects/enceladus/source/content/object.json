@@ -129,7 +129,7 @@
           "id": "jpl-spc-enceladus-v2-q256",
           "path": "../manifest.json"
         },
-        "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+        "notes": "Neutral gray over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

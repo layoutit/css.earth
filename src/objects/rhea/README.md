@@ -1,5 +1,7 @@
 # Rhea
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 `/rhea/` — Cassini and Voyager data on a simplified spacecraft-derived shape.
 
 ## Sources
@@ -139,7 +141,7 @@ its values; it is neither geometric albedo nor calibrated reflectance.
 Rhea used calibrated ISS frames. Source sigma is internal maplet agreement, not absolute height
 uncertainty.
 
-The Shape lens uses the shared neutral grid over the source mesh to distinguish geometry from
+The Shape lens uses the shared neutral gray over the source mesh to distinguish geometry from
 imagery. The Photographic views retain pre-existing image seams, shadows and local control
 differences. Source reference radii and projections do not become spherical geometry
 constraints.

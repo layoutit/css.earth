@@ -75,7 +75,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery.",
+        "notes": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Neutral gray marks unavailable imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2008-ev5",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ed5d4e3bdb1e1850a2254752bdc2b236b9084c8e4ba6339d929372ae3b4c251"
+    "sha256": "f2ed9a2cc0f8408402dd56f6f82a260cb38716deb11bce870a64259e657dde5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "87eac4b2711819f8ff96cd520ee63c9bf65da89eb8b81e864b63d1b30e91c9cb",
+      "sha256": "33f20e7a2cab8d043b1ce7d3117e88dbb2a831e4a913ab5099f56f090636a789",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,7 +203,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable surface imagery on this radar model. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+              "notes": "The shared neutral gray marks unavailable surface imagery on this radar model. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -335,7 +335,7 @@
       "sha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
       "bytes": 120483,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -360,10 +360,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "87eac4b2711819f8ff96cd520ee63c9bf65da89eb8b81e864b63d1b30e91c9cb",
-      "bytes": 8744,
+      "sha256": "33f20e7a2cab8d043b1ce7d3117e88dbb2a831e4a913ab5099f56f090636a789",
+      "bytes": 8850,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -395,19 +395,19 @@
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-thumbnail.webp",
           "bytes": 7908,
           "sha256": "c844a149db64d42481a91418c3d8ffdc0f3b845f90ad0cb3b6b48a0b3ea3e52c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-surface@2x.webp",
           "bytes": 510070,
           "sha256": "17fa683a8dcaef876e485cb54cd38f67ce6d2cd39032d828f7130dc7200cb045",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -443,15 +443,15 @@
       "outputs": [
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-surface@2x.webp",
-          "bytes": 234248,
-          "sha256": "279cd11e42a84e32bdc4df02f6a84c89c16dc2ceab24395612c05a675a60d834",
-          "verification": "bytes-verified"
+          "bytes": 62962,
+          "sha256": "1e736a6e4a06910cb6d9556db79eaeb4111ba5c98753fbb55d4faafc0d43bec1",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -508,8 +508,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

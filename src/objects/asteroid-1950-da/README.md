@@ -1,5 +1,7 @@
 # 1950 DA
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 1950 DA is a near-Earth asteroid with a rounded, oblate radar shape and an equatorial ridge.
 
 ## Sources

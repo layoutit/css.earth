@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "klytia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b87a1cf2e80bbf03763d0dc9d2920ffe71166ae6aacfe1603b087e1d8ec387ba"
+    "sha256": "1d47ae6b8b269e95f3dfbfd3a752fe3a9c2787cb7a09a014bd2ad675ab7bbd94"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a952af9237592bd7352b2f15d80db2001153d613f534260b76dfe03658700747",
+      "sha256": "82666209a7532fe477ecf8caf922d24fd96a0298cbceecc97af9e941693fcc89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -220,7 +220,8 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "noData": true
+              "noData": true,
+              "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
             },
             {
               "id": "elevation",
@@ -348,7 +349,7 @@
       "sha256": "32e8a509863ce93032e7d97e906d1b7413d1c5db35b9229bee8953d0a8af54f7",
       "bytes": 81574,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -373,10 +374,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a952af9237592bd7352b2f15d80db2001153d613f534260b76dfe03658700747",
-      "bytes": 8156,
+      "sha256": "82666209a7532fe477ecf8caf922d24fd96a0298cbceecc97af9e941693fcc89",
+      "bytes": 8274,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -408,19 +409,19 @@
           "url": "/scenes/klytia/klytia-elevation-thumbnail.webp",
           "bytes": 5078,
           "sha256": "896587789bd7edd365d02e722e6eb0464b86b04bcea49bca266f637c49551655",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klytia/klytia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klytia/klytia-elevation-surface@2x.webp",
           "bytes": 270842,
           "sha256": "79302591a5ee7f729df83f4b57d95b3665eaf55bc95d46330acc915bd4c5528b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -456,15 +457,15 @@
       "outputs": [
         {
           "url": "/scenes/klytia/klytia-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klytia/klytia-shape-surface@2x.webp",
-          "bytes": 223734,
-          "sha256": "bbed2fdc91eb568101876af235920e16b3d64fa5c39549b32dd0d10ee72deddd",
-          "verification": "bytes-verified"
+          "bytes": 67240,
+          "sha256": "cdd15e9bd708d460e6a1ee5840fa5946a356a72e64fe8b90ef30d395ed2aaf1d",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -521,8 +522,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

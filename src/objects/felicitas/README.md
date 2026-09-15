@@ -1,5 +1,7 @@
 # (109) Felicitas
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **3097**, version **2019-06-24**. DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2019); model 3097, version 2019-06-24.
 
-Convex light-curve reconstruction with the thermally preferred pole. The selected archive mesh has an 85 km equivalent-volume size; the paper reports a thermal-size 3-sigma interval of 80–92 km. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with the thermally preferred pole. The selected archive mesh has an 85 km equivalent-volume size; the paper reports a thermal-size 3-sigma interval of 80–92 km. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ WISE W3/W4 residual offsets remain and roughness is unconstrained.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 3096, pole ['252', '-49'], [Model 3096](https://damit.cuni.cz/projects/damit/asteroid_models/view/3096)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 3096, pole ['252', '-49'], [Model 3096](https://damit.cuni.cz/projects/damit/asteroid_models/view/3096)
 
 Marciniak2019 section4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.
 
