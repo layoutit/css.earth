@@ -637,7 +637,14 @@
 .planet-machine-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
 /* A render is transparent apart from its machine, so the card shows the region
    the machine actually occupies instead of the empty frame around it. */
-.planet-machine-image-crop { position: relative; overflow: hidden; aspect-ratio: var(--subject-w) / var(--subject-h); }
+.planet-machine-image-crop {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--subject-w) / var(--subject-h);
+  /* Preserve the thumbnail slot when the observing pose has a tall silhouette. */
+  width: min(100%, calc(148px * var(--subject-w) / var(--subject-h)));
+  margin-inline: auto;
+}
 .planet-machine-image-crop > .planet-machine-image {
   position: absolute; object-fit: fill;
   width: calc(var(--frame-w) / var(--subject-w) * 100%);
