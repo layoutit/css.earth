@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2006-p1",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64f82428cd8c93cb213b326d81d25a997b72826b8efd6f0a405dca6c9bb87e74"
+    "sha256": "813c5a142aaf449739807a818c1a06c74c8971bc6875e35e76feaca3663ec5ae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6d9bf4179d9daafdb4aeaadfa4bde36565d8d6eb042b736a13439f775864dd9b",
+      "sha256": "6e3c538a3cb5d0e53445ded67474299780d119620514a0870d72934fd5937b22",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -185,7 +185,7 @@
                   "value": "0.173 AU"
                 }
               ],
-              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and neutral gray marks missing surface imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             }
           ]
@@ -265,7 +265,7 @@
       "sha256": "0e26203a07faff85bb4cf0cdf53ed5261f91492f054dd7132a6de3f094be8310",
       "bytes": 436012,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -282,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6d9bf4179d9daafdb4aeaadfa4bde36565d8d6eb042b736a13439f775864dd9b",
-      "bytes": 2773,
+      "sha256": "6e3c538a3cb5d0e53445ded67474299780d119620514a0870d72934fd5937b22",
+      "bytes": 2875,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -315,15 +315,15 @@
       "outputs": [
         {
           "url": "/scenes/comet-c2006-p1/comet-c2006-p1-model-thumbnail.webp",
-          "bytes": 1398,
-          "sha256": "da4d8c2350c4e553bd86d72916ea55bece602b60c5c22a632ede1bc23744d980",
-          "verification": "bytes-verified"
+          "bytes": 824,
+          "sha256": "3b86e06c62053f54f97c2f1cbbe88376f265a6ab5abb1ae564768551f86d0652",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-c2006-p1/comet-c2006-p1-model-surface@2x.webp",
-          "bytes": 121602,
-          "sha256": "c9463c496eaa3e05914b0a9dbb6c97c691b9feef1c9c161f5d9626443fb64111",
-          "verification": "bytes-verified"
+          "bytes": 44014,
+          "sha256": "de2638f5ac757e95c92bf386307058d825fce029a045d112c09105a1eab935ce",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

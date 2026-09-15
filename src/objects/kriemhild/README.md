@@ -1,5 +1,7 @@
 # (242) Kriemhild
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **621**, version **2013-02-11**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 621, version 2013-02-11.
 
-Convex light-curve reconstruction with approximate thermal size: 45.14 km effective diameter (catalog ±0.51 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with approximate thermal size: 45.14 km effective diameter (catalog ±0.51 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ An alternative pole remains possible; no unique orientation is claimed. The rele
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 622, pole ['100', '-40'], [Model 622](https://damit.cuni.cz/projects/damit/asteroid_models/view/622)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 622, pole ['100', '-40'], [Model 622](https://damit.cuni.cz/projects/damit/asteroid_models/view/622)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

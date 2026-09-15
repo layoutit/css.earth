@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "silvretta",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82d3cd4c8d46868c527923cca5c8c16eedf209ab66577328277275146086b65f"
+    "sha256": "3bb2722fd1d46354a1119e6f3896fe228b2851ac1e78fc6faa5842f7d0d205b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2c1af89512f29e246e808112da52cd31e1c737b7f767e443794c91bd1010f271",
+      "sha256": "f2b94d128fd4f5b9da1f52d3e66d6d7d38cc131f5c57f11837e03fb7074ec183",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 26.393 ± 0.439 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km. The convex model shows broad shape; rotational phase is illustrative.",
+              "notes": "Thermal diameter 26.393 ± 0.439 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "f2abcec4e89d1fbe1b297e546e91239b04bb94ce621998061ddeee09acee3724",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "2c1af89512f29e246e808112da52cd31e1c737b7f767e443794c91bd1010f271",
+      "sha256": "f2b94d128fd4f5b9da1f52d3e66d6d7d38cc131f5c57f11837e03fb7074ec183",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9093,
+      "bytes": 9191,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/silvretta/silvretta-elevation-thumbnail.webp",
           "bytes": 5866,
           "sha256": "ee0030ec1dc19051e0f29a42e1026a78b5997efb1f9b7672fadda0bd1268904b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/silvretta/silvretta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/silvretta/silvretta-elevation-surface@2x.webp",
           "bytes": 308786,
           "sha256": "626a62c42d16c5742d26ef1defc0824d7d01736dc7b32e897f7f5c573977f448",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/silvretta/silvretta-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/silvretta/silvretta-shape-surface@2x.webp",
-          "bytes": 230004,
-          "sha256": "364eafafb77a92508c23c3f70602be8433fbfe0423ee5aafe89a730163a8ef9d",
-          "verification": "bytes-verified"
+          "bytes": 65958,
+          "sha256": "3fc1e9517214d2b74cad3e32d7f44f669c2c63f549f842448ca006e3d41a7d33",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

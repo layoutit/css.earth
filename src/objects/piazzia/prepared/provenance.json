@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "piazzia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c68d0ccc0644eb2bbb499a7da94b67dbc6024180ccc53dc5f0c77d87e44f7db0"
+    "sha256": "f9a2f95a069d697e03b405185745b92d31cc7daf9d159ba69f9108709fa6f61d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb802d74209207d5ed1ea02dfdaa1123467591ba00e454278da2ca5260f04064",
+      "sha256": "82f281d84571499450a3d3234452bc799e61d752988f4c8f6476bf19c7db77e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 47.78 ± 2 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "notes": "Thermal diameter 47.78 ± 2 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "fb52ac0fccad4ef29a233531a572785aedd8686267f4998d3a7b090c5a93850e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "bb802d74209207d5ed1ea02dfdaa1123467591ba00e454278da2ca5260f04064",
+      "sha256": "82f281d84571499450a3d3234452bc799e61d752988f4c8f6476bf19c7db77e7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8068,
+      "bytes": 8166,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/piazzia/piazzia-elevation-thumbnail.webp",
           "bytes": 5808,
           "sha256": "b5f7cbec84232fe031860648b389c526f494478c21ea955b1cf44f9f45076de8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/piazzia/piazzia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/piazzia/piazzia-elevation-surface@2x.webp",
           "bytes": 326918,
           "sha256": "570aab918199d42702e6028c79f11a5a5abcce6f7e2d93ccb1d8b79f4fc2f8a8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/piazzia/piazzia-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
-          "bytes": 216868,
-          "sha256": "0f1efa8bc28179e7785557825a1fc463a96caf5af5e1e7a22eaa34170d1a3400",
-          "verification": "bytes-verified"
+          "bytes": 70948,
+          "sha256": "ac633c2e7f023d8dcde1c3b95ece908b1234b00e444bd5621fe34d2f3feae2f2",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "augusta",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea90ca81c7063970691c98a0883ba876dab792670b622d2a52cf0b97a5168531"
+    "sha256": "d0bc90dd8738086c2eaa491d4bcb0cf51c21b890483fbbb3a3767380c24dfc04"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d306763e5a3d2b7a1812a10d0ee6147dc3181dd30a3a47c4b01816db670adeb9",
+      "sha256": "aa663e38fdc8db058603b0436ceabedef49fda1239ae1b030a05493bd4bf689f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -220,7 +220,8 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "noData": true
+              "noData": true,
+              "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
             },
             {
               "id": "elevation",
@@ -348,7 +349,7 @@
       "sha256": "e0158056d0fcd78655afea95b3e0bff52c8430f45bd2c6c6b5efc1fdff30d188",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -373,10 +374,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d306763e5a3d2b7a1812a10d0ee6147dc3181dd30a3a47c4b01816db670adeb9",
-      "bytes": 9986,
+      "sha256": "aa663e38fdc8db058603b0436ceabedef49fda1239ae1b030a05493bd4bf689f",
+      "bytes": 10104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -408,19 +409,19 @@
           "url": "/scenes/augusta/augusta-elevation-thumbnail.webp",
           "bytes": 5376,
           "sha256": "c85d48b3f7edcf5706e5288c0a344fa50209de64b4155c464ad96ddf59463143",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/augusta/augusta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/augusta/augusta-elevation-surface@2x.webp",
           "bytes": 282346,
           "sha256": "7c64444c6977a000a958786b9d0ddb855c3841b1ff1b9269279e8314c4611a16",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -456,15 +457,15 @@
       "outputs": [
         {
           "url": "/scenes/augusta/augusta-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/augusta/augusta-shape-surface@2x.webp",
-          "bytes": 230450,
-          "sha256": "024dafb58e1a669b74d2076412c000ce40273136b6e7c6e6c7da6cbd03f71fa9",
-          "verification": "bytes-verified"
+          "bytes": 62628,
+          "sha256": "adb9eea4d61d23f3fda1168265d5a105913e979f4e17d7d40c6e9e1fad08dd0e",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -521,8 +522,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

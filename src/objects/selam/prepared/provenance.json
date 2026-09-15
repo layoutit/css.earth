@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "selam",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9e6ae436f96762019613e7d7990a712bc1e78f74620b46d6830f22e4981019a5"
+    "sha256": "f89b7f0a650321315950b8666243007b5a8f163b01ff06c86ddf428d3d15a8cd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,7 +93,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0fa9a8618e1ac15a9bb0965f7f52c5b6e7a925bd048c0a62f715b779d366b7c",
+      "sha256": "e84dd4f6ef65247b459f5fb1e4e9b49ebfb7b48f53a702321e1e2960df77c284",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -136,7 +136,8 @@
                 "id": "shape-model",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1038/s41586-024-07378-0"
-              }
+              },
+              "notes": "Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo."
             }
           ]
         },
@@ -212,7 +213,7 @@
       "sha256": "7b5a16b99d453beddac8a2c98113f020732b1a9fbfd7299855a4a7ac4f920409",
       "bytes": 316,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -229,10 +230,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0fa9a8618e1ac15a9bb0965f7f52c5b6e7a925bd048c0a62f715b779d366b7c",
-      "bytes": 2206,
+      "sha256": "e84dd4f6ef65247b459f5fb1e4e9b49ebfb7b48f53a702321e1e2960df77c284",
+      "bytes": 2324,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -262,15 +263,15 @@
       "outputs": [
         {
           "url": "/scenes/selam/selam-shape-thumbnail.webp",
-          "bytes": 444,
-          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/selam/selam-shape-surface@2x.webp",
-          "bytes": 85782,
-          "sha256": "7dc35b640776a076939f24a34a5233082c0bd4db9009482b9506fd9cc981bf11",
-          "verification": "bytes-verified"
+          "bytes": 37532,
+          "sha256": "2c50fee2496aee540de4c05c9e31546c05e57864c2c658c19deeda8acb9b7351",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -327,8 +328,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2958,
-          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "bytes": 290,
+          "sha256": "c77e7f0c517b8d938751eb557cdaa3f86d50a9a017506ecca452642081a8f254",
           "verification": "bytes-verified"
         }
       ]

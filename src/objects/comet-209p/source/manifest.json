@@ -61,8 +61,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 41210,
-      "expectedSha256": "4fb0677d13e2517e62e455f9978ba298a4e2f7f4c764c81323888d98d9805e29",
+      "expectedBytes": 10681,
+      "expectedSha256": "fc15bc63ca0e642af733402782d7c328a6e585b0d51cf076346ae49f80233fb2",
       "origin": "https://doi.org/10.3847/0004-6256/152/4/89",
       "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016); cssEarth approximation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2610,
-      "expectedSha256": "827a14ff75e3339291a9b79b0722bdb4ac888a498807b6d07c510f63938926b0",
+      "expectedBytes": 2712,
+      "expectedSha256": "ff9d8ce50c6c3f832822aabd3984059b856d223069c11abc7bcd5b9371fc68fc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -108,7 +108,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1605,
-      "expectedSha256": "6cc2619d949d6a608dca670527e5c925fca489c51b6ac6ca900161572039875a"
+      "expectedSha256": "422c5eeb4c293b9e641adf20012ede7df6d16b2bb071cf02376f50e3b8b6b290"
     },
     {
       "path": "preparation/rotation.json",

@@ -58,6 +58,7 @@ import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { orientObservedSurface, validateObservedReduction } from './open-surface.mts';
 import {prepareNativePhotographicAtlas} from './native-photograph.mts';
+import { neutralShapeAtlas, shapeFillIllumination } from './shape-material.mts';
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
@@ -366,6 +367,18 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   let reusedLightingSamples = 0;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
+    const neutralShape = surface.material && requireRecord(surface.material).kind === 'unobserved-neutral';
+    if (neutralShape && !lighting && !surface.textureScale &&
+        !config.geometry.radialTerrain.thumbnail && !radial.faces.some(face => face.estimated) && !radial.grid?.imageGrid) {
+      const { flood, shadow } = neutralShapeAtlas(radial, sunDirection);
+      const raw = { width: canonicalWidth, height: canonicalHeight, channels: 4 as const };
+      const encoding = { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
+      surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw }), encoding);
+      surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw }), encoding);
+      surface.polesUrl = surface.surface.url;
+      surface.layout = { kind: 'triangle-atlas', width: canonicalWidth, height: canonicalHeight, tileSize: canonicalTileSize, faceCount: radial.faces.length };
+      continue;
+    }
     const photograph=config.raster.observations?.find(observation=>observation.id===surface.id);
     if(photograph?.nativePhotographicSampling) {
       if(!sourceDirectory || lightingRecipe || artifactId || surface.textureScale || radial.observationSurfaces?.has(surface.id) || radial.scientificSurfaces?.has(surface.id)) {
@@ -526,11 +539,12 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         const nearestX = Math.floor(lon * info.width) % info.width;
         const nearestY = Math.max(0, Math.min(info.height - 1, Math.floor((.5 - lat / Math.PI) * info.height)));
+        const fillIllumination = neutralShape ? shapeFillIllumination(dot(normal, sunDirection)) : (light ? light.flood : 1);
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
           const color = nearest ? map[(nearestY * info.width + nearestX) * 4 + channel] : top * (1 - ty) + bottom * ty;
-          flood[offset + channel] = Math.round(color * (light ? light.flood : 1));
+          flood[offset + channel] = Math.round(color * fillIllumination);
           shadow[offset + channel] = Math.round((light ? color : Math.round(color)) * illumination);
         }
         flood[offset + 3] = shadow[offset + 3] = 255;

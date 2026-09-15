@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "didymos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4136be93153bb8562f03899e0dc503526dfd61e07f37988cc860d9ee944e1d8"
+    "sha256": "7e7eab392d8a2b5b0b57f55fa0e9308d9ee1cab623b960d697d75484893680b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "eb300ba2695dfa1c857e3ff0bc8f9d0334f9023cfba9be7d2bd7b2c85f5b145b",
+      "sha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -332,7 +332,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
+              "notes": "The shared neutral gray marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -585,7 +585,7 @@
       "sha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "bytes": 3616200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -626,7 +626,7 @@
       "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "bytes": 1189440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -660,7 +660,7 @@
       "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "bytes": 6724,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -700,7 +700,7 @@
       "sha256": "e3a24cd1589987b2454f95dbb7c557e1fe2eb2b0e9c04a378d6768091b69750e",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +738,7 @@
       "sha256": "4d4847a207f5e14975431949b8d500ade608c0bb0612bac54f1f3deed91cc5aa",
       "bytes": 40054,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -778,7 +778,7 @@
       "sha256": "3290224e1f16b41abe2999763a8416c781d41657c81b02b749571f953dfdd04f",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -816,7 +816,7 @@
       "sha256": "ab5b4d3eea17bd6ac8e0f03024cfbd5145b23545a2434c0577a207a07ff9e9bc",
       "bytes": 40053,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -841,10 +841,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "eb300ba2695dfa1c857e3ff0bc8f9d0334f9023cfba9be7d2bd7b2c85f5b145b",
-      "bytes": 11298,
+      "sha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
+      "bytes": 11404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -866,7 +866,7 @@
       "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
       "bytes": 1310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -892,7 +892,7 @@
       "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
       "bytes": 6693,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -921,7 +921,7 @@
       "sha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
       "bytes": 154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -948,7 +948,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -980,19 +980,19 @@
           "url": "/scenes/didymos/didymos-elevation-thumbnail.webp",
           "bytes": 5004,
           "sha256": "cd4746448a1140e2b673d293d13883d930167f1cf1450c4329aca95fadabf2e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
           "bytes": 266414,
           "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1032,19 +1032,19 @@
           "url": "/scenes/didymos/didymos-albedo-thumbnail.webp",
           "bytes": 2558,
           "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
           "bytes": 220476,
           "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1080,15 +1080,15 @@
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
-          "bytes": 219240,
-          "sha256": "fd36cf7c204e365b94bd58ecf2df23ace7403765e0fff7da3deab3ce69a51c0d",
-          "verification": "bytes-verified"
+          "bytes": 57982,
+          "sha256": "7ca6f6770b6039981566eddeab676bdd685b37206397a408906b2dd5f376ac0c",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1130,13 +1130,13 @@
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
           "bytes": 1990,
           "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
           "bytes": 294862,
           "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1205,7 +1205,7 @@
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
           "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1229,8 +1229,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

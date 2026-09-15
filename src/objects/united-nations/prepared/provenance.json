@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "united-nations",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5b140e10e3f92edfddf6043706d4c01a442dc07674c5c51b54f31f0f6c37f895"
+    "sha256": "49a4132045505ab9c8d859d626fb0c2bf15e84efb44f2d8033b62c936022dc7a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8a21f53f56f9dd931ae176cf8d47f57a66c2b0dc84187e3d900e4b18d408eef7",
+      "sha256": "3c5f1550326e58b3f696c27267f026d1ec080b574c8076ef7f589e50c3dbd99b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Thermal diameter 11 ± 0.295 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "notes": "Thermal diameter 11 ± 0.295 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "9f8df63e5658a5f6657a6f9abaa9ca55ed8adbc4712304e6d313c23e28f9167a",
       "bytes": 45528,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "8a21f53f56f9dd931ae176cf8d47f57a66c2b0dc84187e3d900e4b18d408eef7",
+      "sha256": "3c5f1550326e58b3f696c27267f026d1ec080b574c8076ef7f589e50c3dbd99b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11700,
+      "bytes": 11798,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/united-nations/united-nations-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "17b7f67678d52760e977846bbc1d15b8cffb50fdf4a4b192849482dd74e994be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-surface@2x.webp",
           "bytes": 295412,
           "sha256": "7191457b3d8bed8757562495f7add54d5b722a1470f601b748ca3d749897bb0f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/united-nations/united-nations-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/united-nations/united-nations-shape-surface@2x.webp",
-          "bytes": 198478,
-          "sha256": "ac65dd16aa4f2a329f51b9668afe71a4050aff066aae9c02b313ffa9111bb470",
-          "verification": "bytes-verified"
+          "bytes": 67768,
+          "sha256": "5c0b5f4415233397dc9ab36054c2e323dc633664c228b72017f240214c2f0135",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

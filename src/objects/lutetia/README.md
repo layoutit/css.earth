@@ -1,5 +1,7 @@
 # Lutetia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 | View or property | Source and interpretation |
@@ -96,7 +98,7 @@ The 15:43:54 candidate failed image/model registration; the 15:45:28 candidate f
 
 **Views and source interpretation**
 
-**Shape** uses the shared no-imagery grid over the released geometry. It is not a photographic texture, measured albedo, natural color or a claim about small-scale surface brightness. Prepared directional lighting exposes the model's relief. Shadows defaults off; switching it on applies the prepared directional lighting.
+**Shape** uses the shared neutral-gray material over the released geometry. It is not a photographic texture, measured albedo, natural color or a claim about small-scale surface brightness. Prepared directional lighting exposes the model's relief. Shadows defaults off; switching it on applies the prepared directional lighting.
 
 **Bounded source survey (2026-09-07)**
 

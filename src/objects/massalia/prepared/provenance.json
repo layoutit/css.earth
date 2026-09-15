@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "massalia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c121796f50a973e2be5981ae835362e014827d803463e194feb8822848c2b0c8"
+    "sha256": "677f13d0ff678a1240a894164188ed5201fd9ab9f8a19240401d5bb1e253bd4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c302345c255658a70ab90128d477f5431becbf2502ebff428212db8be19304f2",
+      "sha256": "c7d5f907771134c07685ed48657daf6b9bff63be830012e7380e7b83afca8606",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative.",
+              "notes": "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045",
       "bytes": 293943,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "c302345c255658a70ab90128d477f5431becbf2502ebff428212db8be19304f2",
+      "sha256": "c7d5f907771134c07685ed48657daf6b9bff63be830012e7380e7b83afca8606",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10763,
+      "bytes": 10861,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/massalia/massalia-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "8b843e9ebde6827c4c1099a530b663c53b78602695de3e755ad34521b140f9c4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/massalia/massalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/massalia/massalia-elevation-surface@2x.webp",
           "bytes": 281756,
           "sha256": "5f6235c1429610ef6c15cb22eddee8b3fed8b0210af86ef34e914ba28a24015f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/massalia/massalia-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/massalia/massalia-shape-surface@2x.webp",
-          "bytes": 219678,
-          "sha256": "18a1a2aedbadf5db3cc8e5b81363a8f0ba88aaf0845bbb16ca406ccac8befd33",
-          "verification": "bytes-verified"
+          "bytes": 60356,
+          "sha256": "e4615ac17de636eb928a0f3ae93a62f6f3572a9a96a609f9782d51021ac10aa5",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

@@ -1,5 +1,7 @@
 # Sylvia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Sylvia is a main-belt asteroid observed in the ESO/VLT/SPHERE survey.
 
 ## Sources
@@ -52,7 +54,7 @@ Source pins live in source/manifest.json; source/preparation/acquisition.json re
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/87Sylvia/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this package: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
 - [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
 
-Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 137 km reference sphere, with a -50 to 70 km legend. This includes global shape, not height above a gravitational equipotential. Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
+Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 137 km reference sphere, with a -50 to 70 km legend. This includes global shape, not height above a gravitational equipotential. Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
 
 The prepared scene now uses the retained [Sylvia heliocentric vector](../romulus/source/orbit/sylvia-heliocentric.txt) at JD 2461286.5 TT, shared with Romulus. Its position, velocity and solar GM define the same conic in every prepared observer and the solar-system overview. The [validated epoch record](../romulus/source/validation/epoch-state.json) retains source identity and time-scale provenance. The original ±30-day conic fixtures above remain evidence for the generic propagated astronomy API, not an accuracy guarantee for Romulus's published orbit or the updated fixed-date snapshot.
 
