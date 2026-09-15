@@ -14,26 +14,26 @@
   "lenses": [
     {
       "id": "eso-optical",
-      "label": "ESO · optical",
+      "label": "ESO \u00b7 optical",
       "title": "Lagoon nebula in visible light",
       "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Optical display colors on one inferred cloud front; physical depth and foreground extinction are not recovered.",
-      "detail": "4000 × 2679 px",
+      "detail": "4000 \u00d7 2679 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical · H-alpha / R / V / B"
+          "value": "Optical \u00b7 H-alpha / R / V / B"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 × 2679"
+          "value": "4000 \u00d7 2679"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "93.49 × 62.61 arcmin"
+          "value": "93.49 \u00d7 62.61 arcmin"
         }
       ],
       "input": "eso-optical",
@@ -46,26 +46,26 @@
     },
     {
       "id": "eso-vista",
-      "label": "ESO VISTA · infrared",
+      "label": "ESO VISTA \u00b7 infrared",
       "title": "Lagoon stars and nebulosity in near infrared",
       "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. The publisher caption identifies J/H/Ks; its conflicting H-alpha metadata is not used. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Near-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
-      "detail": "4000 × 2202 px",
+      "detail": "4000 \u00d7 2202 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared · J / H / Ks"
+          "value": "Near-infrared \u00b7 J / H / Ks"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 × 2202"
+          "value": "4000 \u00d7 2202"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "71.81 × 39.54 arcmin"
+          "value": "71.81 \u00d7 39.54 arcmin"
         }
       ],
       "input": "eso-vista",
@@ -78,26 +78,26 @@
     },
     {
       "id": "spitzer-mid-infrared",
-      "label": "Spitzer · mid-infrared",
+      "label": "Spitzer \u00b7 mid-infrared",
       "title": "Lagoon warm dust in mid-infrared",
       "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Mid-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
-      "detail": "1757 × 1417 px",
+      "detail": "1757 \u00d7 1417 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Mid-infrared · IRAC 3.6 / 4.5 / 5.8 / 8.0 µm + MIPS 24 µm"
+          "value": "Mid-infrared \u00b7 IRAC 3.6 / 4.5 / 5.8 / 8.0 \u00b5m + MIPS 24 \u00b5m"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "1757 × 1417"
+          "value": "1757 \u00d7 1417"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "35.73 × 28.81 arcmin"
+          "value": "35.73 \u00d7 28.81 arcmin"
         }
       ],
       "input": "spitzer-mid-infrared",
@@ -111,15 +111,15 @@
   ],
   "bank": {
     "path": "src/objects/m8/prepared/lenses.json",
-    "sha256": "3bdbd0a131791ba83048ded4a997bd89c8d529a03bba449a880d453729432588",
-    "bytes": 3326216
+    "sha256": "17b44610c62ad4b238bf44571e9f2d6dace2d5ddd0ee07b6d98ad3d9b257dba7",
+    "bytes": 2787756
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/m8/source/delivery.json",
-      "sha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
-      "bytes": 2002
+      "sha256": "47ea5df636096b29645d8b561dccae2a11823126c32a09521c77902e1195ce35",
+      "bytes": 2197
     },
     {
       "id": "recipe-2",
