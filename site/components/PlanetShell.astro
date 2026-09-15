@@ -268,6 +268,8 @@ const searchCategories = ([
     >
       {!navigation && <><PlanetCard class="planet-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
+          {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
+            <PlanetBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
           <div class="planet-title-row">
             <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></p>
             <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
@@ -424,18 +426,20 @@ const searchCategories = ([
   ))}
 </nav>
     <div class="planet-view-readout" aria-label="View information">
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-record" title="Record stage input; press again to stop and copy the recording">Record</button>}
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-script" title="Replay the recorded motion for tracing">Do motion</button>}
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
-      <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
-        <span>Epoch: <span data-view-date></span></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-      </span>
-      <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
-        <span data-view-latitude></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-        <span data-view-longitude></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
+      <span class="planet-view-context">
+        {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-record" title="Record stage input; press again to stop and copy the recording">Record</button>}
+        {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-script" title="Replay the recorded motion for tracing">Do motion</button>}
+        {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
+        <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
+          <span>Epoch: <span data-view-date></span></span>
+          <span class="planet-view-separator" aria-hidden="true">·</span>
+        </span>
+        <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
+          <span data-view-latitude></span>
+          <span class="planet-view-separator" aria-hidden="true">·</span>
+          <span data-view-longitude></span>
+          <span class="planet-view-separator" aria-hidden="true">·</span>
+        </span>
       </span>
       <span class="planet-view-altitude" title="Camera altitude above the selected object's reference surface">
         <span data-view-distance-label>Altitude:</span> <span data-view-altitude>—</span>
