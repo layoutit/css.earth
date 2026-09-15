@@ -4,6 +4,7 @@ import test from 'node:test';
 import { loadPublishedCompiler, readPublishedCompiler } from './compiler-published';
 import type { CompilerResult } from './result.ts';
 import { readCompilerRequest } from './model.ts';
+import { implementationPins } from '../../server/services/implementation.ts';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const recipePath = 'labs/nebula/models/example/compiler.json';
@@ -147,4 +148,39 @@ test('current depth pins cannot relabel a historical bake with missing or differ
   const changed = completedFixture({ depth: true });
   changed.data.set(`.local/nebula-lab/compiler/${changed.result.id}/evidence.json`, '{"changed":true}');
   await assert.rejects(loadPublishedCompiler(pointer, recipePath, changed.fetchLocal), /sources changed/);
+});
+
+
+test('relocated producer closures restore without fetching current code or changing historical hashes', async () => {
+  const owners = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
+  assert.ok(owners.some(owner => owner.path.startsWith('src/preparation/')));
+  assert.ok(owners.some(owner => owner.path.endsWith('/package.json')));
+  const fixture = completedFixture(), historicalOwners = owners.map(owner => ({ ...owner, sha256: digest(`historical ${owner.path}`) }));
+  const method = JSON.parse(fixture.data.get(fixture.result.method.path)!);
+  method.implementation = historicalOwners;
+  const saveMethod = () => {
+    fixture.data.set(fixture.result.method.path, JSON.stringify(method));
+    fixture.result.method.sha256 = digest(fixture.data.get(fixture.result.method.path)!);
+    fixture.data.set(fixture.receipt.result.path, JSON.stringify(fixture.result));
+    fixture.receipt.result.sha256 = digest(fixture.data.get(fixture.receipt.result.path)!);
+  };
+  saveMethod(); fixture.receipt.inputs.push(...historicalOwners);
+  const before = JSON.stringify(fixture.receipt), requested: string[] = [];
+  const fetchLocal = async (path: string) => {
+    requested.push(path);
+    assert.equal(owners.some(owner => owner.path === path), false, `Historical producer must not be fetched: ${path}`);
+    return fixture.fetchLocal(path);
+  };
+  assert.equal((await loadPublishedCompiler(pointer, recipePath, fetchLocal))?.id, fixture.result.id);
+  assert.equal(JSON.stringify(fixture.receipt), before);
+  assert.ok(requested.includes(recipe.observationCatalogue), 'scientific input remains hash checked');
+  fixture.data.set(recipe.observationCatalogue, '{"changed":true}');
+  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fetchLocal), /sources changed/);
+  fixture.data.set(recipe.observationCatalogue, files.get(recipe.observationCatalogue)!);
+  fixture.receipt.inputs = fixture.receipt.inputs.filter(owner => owner.path !== historicalOwners[0]!.path);
+  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fetchLocal), /implementation/);
+  fixture.receipt.inputs.push({ ...historicalOwners[0]!, sha256: digest('mismatched producer') });
+  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fetchLocal), /implementation/);
+  method.implementation = [{ path: recipePath, sha256: fixture.receipt.inputs[0]!.sha256 }]; saveMethod();
+  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fetchLocal), /implementation/);
 });

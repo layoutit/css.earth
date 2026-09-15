@@ -5,10 +5,16 @@ import { readSampledRecipe, verifySampledEvidence } from '../sampled-prior/model
 
 interface Pin { path: string; sha256: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
+/** Producer identities are historical metadata; scientific recipes/outputs never match this policy. */
+function producerPath(path: string): boolean {
+  return /^labs\/nebula\/(?:src\/.+\.[cm]?tsx?|packages\/(?:lab|volume-core|volume-bake|reconstruction)\/(?:src\/.+\.[cm]?tsx?|package\.json))$/.test(path) ||
+    /^src\/(?:preparation|renderers)\/.+\.[cm]?ts$/.test(path) ||
+    /^tools\/(?:fits\.mts|nebula\/application\/.+\.[cm]?ts)$/.test(path);
+}
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {
-  if (!record(value) || typeof value.path !== 'string' || !/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) ||
-      value.path.split('/').some(part => part === '..' || part === '') || /[\\?#\s]/.test(value.path) ||
+  if (!record(value) || typeof value.path !== 'string' || !(/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) || producerPath(value.path)) ||
+      value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path) ||
       typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.sha256)) throw new TypeError('Invalid prepared compiler pin.');
   return { path: value.path, sha256: value.sha256 };
 }
@@ -36,7 +42,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   if (!response.ok) throw new Error('Prepared nebula receipt is unavailable.');
   const publication = readPublishedCompiler(await response.json(), recipePath);
   // Preparing code can evolve while a saved cloud remains inspectable. Never replace its recorded producer hashes.
-  const inputs = await Promise.all(publication.inputs.filter(source => !source.path.startsWith('labs/nebula/src/'))
+  const inputs = await Promise.all(publication.inputs.filter(source => !producerPath(source.path))
     .map(async source => [source.path, await checkedBytes(source, fetchLocal)] as const));
   const recipeBytes = inputs.find(([path]) => path === recipePath)![1];
   const recipe = readCompilerRecipe(JSON.parse(new TextDecoder().decode(recipeBytes)));
@@ -99,9 +105,12 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     }
   }
   for (const implementation of method.implementation) {
-    if (!record(implementation) || typeof implementation.name !== 'string' || !/^[a-z0-9-]+\.ts$/.test(implementation.name) ||
-        !publication.inputs.some(input => input.path === `labs/nebula/src/reconstruction/compiler/${implementation.name}` && input.sha256 === implementation.sha256))
-      throw new Error('Prepared nebula implementation changed. Compile again.');
+    if (!record(implementation)) throw new Error('Invalid prepared nebula implementation.');
+    const path = typeof implementation.path === 'string' ? implementation.path :
+      typeof implementation.name === 'string' && /^[a-z0-9-]+\.ts$/.test(implementation.name)
+        ? `labs/nebula/src/reconstruction/compiler/${implementation.name}` : '';
+    if (!producerPath(path) || !publication.inputs.some(input => input.path === path && input.sha256 === implementation.sha256))
+      throw new Error('Prepared nebula implementation differs from its published receipt.');
   }
   return result;
 }
