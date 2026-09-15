@@ -1,10 +1,46 @@
 import { expect, test } from 'vitest';
-import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute } from './prepared-ring-projection.js';
+import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute, orbitProjectionCapacity } from './prepared-ring-projection.js';
 import { rayHitsSphereBefore } from './heliocentric-geometry.js';
 import type { Vector3 } from './types.js';
 
 const project = ([x, y, z]: Vector3) => [130 + 800 * x / -z, -40 + 800 * y / -z];
 const limits = { toEye: (point: Vector3) => point, project, near: .1, clipX: 1000, clipY: 600 };
+
+test('distance fade preserves nearby chords and clips a long distant continuation into bounded opacity bands', () => {
+  const vertices: Vector3[] = [[-10, 0, -100], [10, 0, -100], [2000, 200, -4000]];
+  const trail = [1, 1], pool = createRetainedRingProjection(orbitProjectionCapacity(vertices.length));
+  const options = { ...limits, hidden: () => false, mayOcclude: () => false };
+  const original = createPreparedRingProjector(options)(vertices, trail, undefined, true, undefined, false);
+  const projector = createPreparedRingProjector({ ...options, depthFade: { start: 400, end: 1600 } });
+  const faded = projector(vertices, trail, undefined, true, pool, false);
+  expect(faded[0]).toEqual(original[0]);
+  expect(faded.length).toBeGreaterThan(5);
+  expect(faded.length).toBeLessThan(20);
+  expect(faded.some(s => s[4] > 0 && s[4] < .2)).toBe(true);
+  expect(faded.every(s => s[4] > 0 && s[4] <= 1 && s.every(Number.isFinite))).toBe(true);
+  // The far endpoint no longer appears; intermediate points stay on the
+  // original projected line, rather than inventing a different orbit curve.
+  const end = project(vertices[2]);
+  expect(faded.every(s => Math.hypot(s[2] - end[0], s[3] - end[1]) > 1)).toBe(true);
+  for (const s of faded.slice(1)) {
+    const line = original[1], dx = line[2] - line[0], dy = line[3] - line[1];
+    expect(Math.abs((s[0] - line[0]) * dy - (s[1] - line[1]) * dx)).toBeLessThan(1e-7);
+  }
+  expect(projector(vertices, trail, undefined, true, pool, false)).toBe(faded);
+  const distant = createPreparedRingProjector({ ...options, depthFade: { start: 5000, end: 20000 } })(vertices, trail, undefined, true, undefined, false);
+  expect(distant).toEqual(original);
+});
+
+test('fade clipping handles reversed chords, near-plane crossings and hidden trails', () => {
+  const vertices: Vector3[] = [[50, 0, -4000], [10, 0, -100], [0, 0, 100]];
+  const projector = createPreparedRingProjector({ ...limits, hidden: () => false, depthFade: { start: 400, end: 1600 } });
+  const faded = projector(vertices, [1, 1], undefined, false, undefined, false);
+  expect(faded.length).toBeGreaterThan(10);
+  expect(faded.every(s => s.every(Number.isFinite))).toBe(true);
+  expect(faded[0][4]).toBeLessThan(faded.at(-1)![4]);
+  expect(projector(vertices, [0, 0], undefined, false, undefined, false)).toEqual([]);
+  expect(() => createPreparedRingProjector({ ...limits, hidden: () => false, depthFade: { start: 400, end: 300 } })).toThrow(/fade/);
+});
 
 test('a retained projection preserves clipped snapshots while reusing bounded slots through retirement and re-entry', () => {
   const vertices: Vector3[] = Array.from({ length: 128 }, (_, i) => [

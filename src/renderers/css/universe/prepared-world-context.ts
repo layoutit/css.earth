@@ -17,6 +17,7 @@ import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { applySprite, applySpriteImage } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
+import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { OrbitSegment } from '../solar-system/types.js';
@@ -452,7 +453,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = 'position:absolute;inset:0;width:0;height:0;pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbit ? orbit.verticesM.length * 2 : 0, id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.verticesM.length ?? 0), id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -644,7 +645,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       for (const entry of bodies) {
         entry.piecePool.destroy();
         entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement === 'approximate',
-          capacity: entry.orbit ? entry.orbit.verticesM.length * 2 : 0, id: entry.body.id });
+          capacity: orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0), id: entry.body.id });
         entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
       }
       // The next publication carries every chord again: retained deltas name leaves that no longer exist.
