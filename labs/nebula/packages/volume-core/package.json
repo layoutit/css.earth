@@ -34,7 +34,9 @@
     "./sampling/registered-raster": "./src/sampling/registered-raster.ts",
     "./coordinates/compiler-frame": "./src/coordinates/compiler-frame.ts",
     "./contracts/joint-volume": "./src/contracts/joint-volume.ts",
-    "./contracts/shape-scene": "./src/contracts/shape-scene.ts"
+    "./contracts/shape-scene": "./src/contracts/shape-scene.ts",
+    "./fields/cloud-density": "./src/fields/cloud-density.ts",
+    "./fields/observation-prior": "./src/fields/observation-prior.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

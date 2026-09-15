@@ -33,7 +33,17 @@
     "./methods/kinematics/forward-model": "./src/methods/kinematics/forward-model.ts",
     "./methods/kinematics/source-figure": "./src/methods/kinematics/source-figure.ts",
     "./methods/kinematics/molecular-types": "./src/methods/kinematics/molecular-types.ts",
-    "./methods/kinematics/molecular-data": "./src/methods/kinematics/molecular-data.ts"
+    "./methods/kinematics/molecular-data": "./src/methods/kinematics/molecular-data.ts",
+    "./observations/model": "./src/observations/model.ts",
+    "./observations/footprint": "./src/observations/footprint.ts",
+    "./observations/image-ranking": "./src/observations/image-ranking.ts",
+    "./observations/image-links": "./src/observations/image-links.ts",
+    "./observations/suitability": "./src/observations/suitability.ts",
+    "./observations/tap": "./src/observations/tap.ts",
+    "./observations/archives": "./src/observations/archives.ts",
+    "./methods/symmetry/solver": "./src/methods/symmetry/solver.ts",
+    "./methods/symmetry/shape-prior": "./src/methods/symmetry/shape-prior.ts",
+    "./evidence/structure-map": "./src/evidence/structure-map.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"
