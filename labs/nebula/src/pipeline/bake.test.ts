@@ -11,13 +11,21 @@ test('bake arguments reject misspelled stages rather than unexpectedly running a
   assert.equal(parseBakeArgs([]).research, false);
   assert.equal(parseBakeArgs(['--research']).research, true);
   assert.equal(parseBakeArgs(['--stage=assets']).stage, 'assets');
-  assert.equal(parseBakeArgs(['--image=wise-wide-infrared']).image, 'wise-wide-infrared');
   assert.throws(() => parseBakeArgs(['--stage=asset']));
   assert.throws(() => parseBakeArgs(['--image']));
   assert.throws(() => parseBakeArgs(['--force']));
   assert.equal(parseBakeArgs(['--if-missing']).ifMissing, true);
   assert.throws(() => parseBakeArgs(['--if-missing', '--stage=assets']));
   assert.throws(() => parseBakeArgs(['--if-missing', '--image=vista-infrared']));
+});
+
+test('image-filtered bakes require explicit research opt-in', () => {
+  const filter = '--image=wise-wide-infrared';
+  for (const args of [[filter], [filter, '--stage=all'], [filter, '--stage=removal'], [filter, '--stage=reconstruction']]) {
+    assert.throws(() => parseBakeArgs(args), /--image requires --research/);
+    assert.equal(parseBakeArgs(['--research', ...args]).image, 'wise-wide-infrared');
+    assert.equal(parseBakeArgs([...args, '--research']).research, true);
+  }
 });
 
 test('acquisition rejects altered local sources without downloading or overwriting them', async () => {

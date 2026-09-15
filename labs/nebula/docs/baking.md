@@ -60,8 +60,11 @@ The scalar grids and existing catalogue measurements are the pipeline's scientif
 
 Options with values use `--name=value`. Stages include their preceding dependencies and reuse verified completed results.
 
+Image-filtered bakes require `--research`, for example `pnpm lab:nebula:bake --research --image=wise-wide-infrared`. Without it, the command rejects the filter before reading recipes or starting processing. Run `pnpm lab:nebula:bake` without options to replay all three LMC lenses from compact inputs.
+
 | Option | Purpose |
 |---|---|
+| `--research` | Use the original processing route; required with `--image` |
 | `--stage=density` | Offline neutral fields only |
 | `--stage=assets` | Neutral fields and inspection/reference images; used by lab startup/tests, without Python or star removal |
 | `--stage=removal` | Stop after native baseline/NOX products and separation previews |
