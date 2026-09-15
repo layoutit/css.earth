@@ -75,7 +75,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery.",
+        "notes": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Neutral gray marks unavailable imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

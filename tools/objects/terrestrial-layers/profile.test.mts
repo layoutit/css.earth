@@ -23,7 +23,7 @@ test('observation recipes reject ambiguous masks and fallback ordering',async()=
  assert.throws(()=>parseTerrestrialProfile(forward),/ordering/);
 });
 
-test('a shape display requires a source mesh and consumer for the shared no-imagery grid', async () => {
+test('a shape display requires a source mesh and consumer for the shared neutral material', async () => {
  const profile=await read('ida');
  profile.raster.observations=[];profile.raster.scientific=[];profile.raster.surfaceObservations=[];
  profile.raster.shapeViews=[{id:'shape',label:'Shape',consumer:'geometry'}];

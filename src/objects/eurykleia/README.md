@@ -1,5 +1,7 @@
 # (195) Eurykleia
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **3102**, version **2019-06-24**. DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2019); model 3102, version 2019-06-24.
 
-Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ This published uncertainty supersedes the archive ±6 km simplification.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 3103, pole ['352', '83'], [Model 3103](https://damit.cuni.cz/projects/damit/asteroid_models/view/3103)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 3103, pole ['352', '83'], [Model 3103](https://damit.cuni.cz/projects/damit/asteroid_models/view/3103)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

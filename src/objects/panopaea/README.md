@@ -1,5 +1,7 @@
 # Panopaea
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="selected-model"></a>
@@ -34,7 +36,7 @@ Prime-meridian display phase is explicitly arbitrary; the available IAUspin file
 
 This view uses [model 6171](https://damit.cuni.cz/projects/damit/asteroid_models/view/6171) at its published scale and paired pole. [Model 6172](https://damit.cuni.cz/projects/damit/asteroid_models/view/6172) is an alternative pole/shape solution, excluded from this presentation without claiming the selected pole is unique.
 
-The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared no-imagery grid or a clearly labeled visualization of the selected model radius.
+The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared neutral-gray material or a clearly labeled visualization of the selected model radius.
 
 The 2023 calibrated release is associated with Marciniak et al., Scaling slowly rotating asteroids with stellar occultations (A&A 679, A60). It scales a lightcurve-inversion shape with occultation evidence; the paired alternative pole solution is retained in the source survey, not blended into this model.
 

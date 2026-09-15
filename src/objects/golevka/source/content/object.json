@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
+        "notes": "The shared neutral gray marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

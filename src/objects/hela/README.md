@@ -1,5 +1,7 @@
 # (699) Hela
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 Checked 2026-09-09. Selected DAMIT model [454](https://damit.cuni.cz/projects/damit/asteroid_models/view/454), version **2012-07-30**.

@@ -75,7 +75,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative.",
+        "notes": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 ± 0.2 km. Neutral gray marks unavailable mapped imagery; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

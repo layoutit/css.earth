@@ -1,5 +1,7 @@
 # 2001 SN263 Beta
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 A selectable larger, outer moon through the shared CSS object renderer. Published radar shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.
 
 ## Sources

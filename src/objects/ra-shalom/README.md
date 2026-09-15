@@ -1,5 +1,7 @@
 # Ra-Shalom
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 Ra-Shalom is an irregular near-Earth asteroid reconstructed from Arecibo radar observations in 2000 and 2003.
 
 ## Sources

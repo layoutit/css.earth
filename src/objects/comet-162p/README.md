@@ -1,5 +1,7 @@
 # 162P/Siding Spring
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 [Donaldson’s thesis](https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad) supplies the physical axis ratios and nominal pole (Section 3.3.2, printed page 79 physical extents; Table 3.1). [SEPPCoN](https://doi.org/10.1016/j.icarus.2013.07.021) supplies the thermal radius. Exact numeric constraints, alternative model dispositions, uncertainties and source hashes are in source/shape/model.json and source/reference/source-record.json.

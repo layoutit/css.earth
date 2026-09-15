@@ -1,5 +1,7 @@
 # (233) Asterope
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **1823**, version **2017-06-16**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1823, version 2017-06-16.
 
-Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). The grid marks unavailable imagery; rotational phase is illustrative.
+Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ Use the pinned archive solution, not an assertion that the paper’s ensemble is
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 1093, pole ['322', '59'], [Model 1093](https://damit.cuni.cz/projects/damit/asteroid_models/view/1093)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 1093, pole ['322', '59'], [Model 1093](https://damit.cuni.cz/projects/damit/asteroid_models/view/1093)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

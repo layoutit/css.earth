@@ -60,7 +60,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
+        "notes": "The shared neutral gray marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {

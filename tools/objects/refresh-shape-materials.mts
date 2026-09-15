@@ -1,0 +1,262 @@
+/** Repaint existing shape lenses using retained geometry and the shared material preparer. */
+import { createHash } from 'node:crypto';
+import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
+import { resolve, basename, dirname } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import sharp from 'sharp';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../source-values.mts';
+import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
+import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
+import { createRasterEmitter } from './terrestrial-layers/solid-raster.mts';
+import { loadRadialTerrain, prepareRadialMaterials } from './terrestrial-layers/radial-terrain.mts';
+import { SHAPE_MATERIAL, shapeMaterialRaster } from './terrestrial-layers/shape-material.mts';
+import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
+import { refreshObservationControls } from './refresh-surface-observations.mts';
+import { prepareSurfaceMinimaps } from '../prepare-surface-minimaps.mts';
+import { prepareObjectProvenance } from './provenance.mts';
+import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.mts';
+import { renderRadialSnapshot } from './terrestrial-layers/radial-snapshot.mts';
+import { parseRadialSnapshot } from './terrestrial-layers/radial-source.mts';
+import { prepareBodyMarkers } from '../prepare-navigation.mts';
+import { validateMarkerDescriptor, renderMarker } from '../../src/navigation/marker-recipe.mts';
+import { SCENE_OBJECTS } from '../../site/objects.mts';
+
+const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
+const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
+const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value) + '\n');
+const pretty = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
+
+async function replaceAsset(source: string, destination: string) {
+  const temporary = `${destination}.shape-material-tmp`;
+  await copyFile(source, temporary);
+  await rename(temporary, destination);
+}
+
+function describeNeutralMaterial(text: string): string {
+  return text.replace(/shared no-imagery grid/g, 'shared neutral-gray material')
+    .replace(/shared missing-imagery grid/g, 'shared neutral-gray material')
+    .replace(/no-imagery grid/g, 'neutral-gray material')
+    .replace(/Neutral grid/g, 'Neutral gray').replace(/neutral grid/g, 'neutral gray')
+    .replace(/shared grid/g, 'shared neutral gray')
+    .replace(/The grid marks/g, 'Neutral gray marks').replace(/the grid marks/g, 'neutral gray marks')
+    .replace(/Grid marks/g, 'Neutral gray marks').replace(/grid marks/g, 'neutral gray marks');
+}
+
+export async function refreshShapeMaterialDescriptions(id: string) {
+  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const recipe = await json(resolve(sourceDirectory, 'preparation/terrestrial.json'));
+  const lensIds = records(requireRecord(recipe.raster).shapeViews ?? []).map(view => requireString(view.id));
+  if (!lensIds.length) return;
+  const contentPath = resolve(sourceDirectory, 'content/object.json'), content = await json(contentPath);
+  let edited = false;
+  for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id))) {
+    const before = requireString(lens.notes ?? '');
+    let notes = describeNeutralMaterial(before);
+    const qualification = 'Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.';
+    if (!notes.includes(qualification)) notes = `${notes}${notes ? ' ' : ''}${qualification}`;
+    if (notes !== before) { lens.notes = notes; edited = true; }
+  }
+  if (edited) {
+    await pretty(contentPath, content);
+    const bytes = await readFile(contentPath), manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
+    for (const entry of records(manifest.documents)) if (entry.path === 'content/object.json') {
+      entry.expectedBytes = bytes.length; entry.expectedSha256 = hash(bytes);
+    }
+    await pretty(manifestPath, manifest);
+    const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = await json(descriptorPath);
+    for (const reference of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))
+      if (reference.path === 'source/content/object.json') reference.sha256 = hash(bytes);
+    await pretty(descriptorPath, descriptor);
+  }
+  const readmePath = resolve(objectDirectory, 'README.md'), readme = await readFile(readmePath, 'utf8');
+  // A body can also have photographed/scientific gaps. Only change sentences
+  // explicitly describing the whole shape's absent imagery or neutral material.
+  const updated = readme.split('\n').map(line => /no-imagery|neutral grid|Neutral grid|grid marks (unavailable|missing surface|that gap)/.test(line)
+    ? describeNeutralMaterial(line) : line).join('\n');
+  const note = 'Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.';
+  const final = updated.includes(note) ? updated : updated.replace(/^(#[^\n]+\n)/, `$1\n${note}\n`);
+  if (final !== readme) await writeFile(readmePath, final);
+}
+
+/** Select an existing model without changing a triangle, camera, or atlas address. */
+export function retainedShapeAtlas(scene: Record<string, unknown>, lensId: string) {
+  const ranges = scene.surfaceLensRanges === undefined ? [] : records(scene.surfaceLensRanges);
+  const range = ranges.find(range => range.lensId === lensId);
+  if (ranges.length && !range) throw new Error(`Shape lens has no retained geometry: ${lensId}.`);
+  const triangles = requireArray(scene.surfaceTriangles), leaves = requireArray(scene.bodyLeaves);
+  const start = range ? requireFiniteNumber(range.start) : 0, count = range ? requireFiniteNumber(range.count) : triangles.length;
+  if (![start, count].every(Number.isSafeInteger) || start < 0 || count < 1 || start + count > triangles.length || leaves.length !== triangles.length)
+    throw new Error('Invalid retained shape range.');
+  const atlas = retainedPhotographicAtlas({ surfaceTriangles: triangles.slice(start, start + count), bodyLeaves: leaves.slice(start, start + count) });
+  return { ...atlas, faces: atlas.plans.map(plan => plan.face) };
+}
+
+export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
+  if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid object id.');
+  const started = performance.now(), objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared');
+  const publicDirectory = resolve('public/scenes', id), stage = resolve('output/shape-material-refresh', id);
+  const recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json'), recipeBytes = await readFile(recipePath);
+  const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = config.raster.shapeViews ?? [];
+  if (!views.length) throw new Error(`${id} has no shape-only lens.`);
+  const descriptor = await json(resolve(objectDirectory, 'object.json'));
+  for (const reference of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))
+    if (hash(await readFile(resolve(objectDirectory, requireString(reference.path)))) !== reference.sha256) throw new Error(`Unpinned source: ${reference.path}.`);
+  const originals = new Map<string, Buffer>();
+  for (const name of ['scene.json', 'surfaces.json', 'material.json', 'runtime-assets.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  const scene = requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8')));
+  const document = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8'))), oldSurfaces = records(document.surfaces);
+  const sourceDirectory = resolve(objectDirectory, 'source');
+  const source = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: sourceDirectory });
+  await mkdir(stage, { recursive: true });
+  sharp.concurrency(1); sharp.cache(false);
+  const emit = createRasterEmitter(stage, config.publicBase), surfaces: RadialMaterialSurface[] = [];
+  for (const view of views) {
+    const old = oldSurfaces.find(surface => surface.id === view.id);
+    if (!old) throw new Error('Refresh cannot add a lens.');
+    const alternate = config.geometry.radialTerrainAlternatives?.find(terrain => terrain.lensId === view.id);
+    const terrain = requireRecord(alternate ?? config.geometry.radialTerrain), radial = retainedShapeAtlas(scene, view.id);
+    const sourceEntry = source.manifest.inputs.find(entry => entry.path === terrain.path && entry.consumers.includes(view.consumer));
+    if (!sourceEntry || requireRecord(old.source).sha256 !== sourceEntry.expectedSha256) throw new Error('Retained shape source binding changed.');
+    const { width, height } = config.raster, stem = `${id}-${view.id}`;
+    const flat = sharp(shapeMaterialRaster(width, height), { raw: { width, height, channels: 3 } }).ensureAlpha();
+    const surface: RadialMaterialSurface = { ...old, id: view.id,
+      appearance: SHAPE_MATERIAL.appearance, material: { kind: 'unobserved-neutral', color: SHAPE_MATERIAL.color },
+      map: await emit(`${stem}-map.webp`, flat.clone()),
+      thumbnail: await emit(`${stem}-thumbnail.webp`, flat.clone().resize(96, 48)),
+      billboardColor: SHAPE_MATERIAL.color,
+    };
+    // Source-cast shadows need the original mesh. Read it from the explicitly selected
+    // source checkout; do not copy, edit, or simplify the retained scene.
+    let grid;
+    if (terrain.sourceLighting) {
+      const localSource = await access(resolve(sourceDirectory, requireString(terrain.path))).then(() => true, () => false);
+      const lightingDirectory = !localSource && sourceRoot ? resolve(sourceRoot, 'src/objects', id, 'source') : sourceDirectory;
+      const lightingSource = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: lightingDirectory });
+      const reference = lightingSource.manifest.inputs.find(entry => entry.path === terrain.path);
+      if (reference?.expectedSha256 !== sourceEntry.expectedSha256) throw new Error('Source lighting mesh differs between checkouts.');
+      grid = (await loadRadialTerrain({ config: { ...config, geometry: { ...config.geometry, radialTerrain: terrain } }, sourceDirectory: lightingDirectory, source: lightingSource }))?.grid;
+    }
+    await prepareRadialMaterials({ radial: { ...radial, grid }, surfaces: [surface],
+      config: { ...config, geometry: { ...config.geometry, radialTerrain: terrain } }, source,
+      publicDirectory: stage, outputDirectory: stage, sunDirection: requireBodyFixedSunDirection(id), snapshotEntries: [] });
+    surfaces.push(surface);
+  }
+  // No partial changes while an asset is being baked, and no writes into a shared inode.
+  for (const [name, bytes] of originals) if (hash(await readFile(resolve(outputDirectory, name))) !== hash(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
+  if (hash(await readFile(recipePath)) !== hash(recipeBytes)) throw new Error('Recipe changed during refresh.');
+  const inventory = requireRecord(JSON.parse(originals.get('runtime-assets.json')!.toString('utf8'))), assets = records(inventory.assets);
+  const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
+  for (const surface of surfaces) for (const key of ['map', 'surface', 'shadowSurface', 'thumbnail']) {
+    const asset = requireRecord(surface[key]), filename = basename(requireString(asset.url));
+    const bytes = await readFile(resolve(stage, filename));
+    if (hash(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`Invalid staged asset: ${filename}.`);
+    await replaceAsset(resolve(stage, filename), resolve(publicDirectory, filename));
+    if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: hash(bytes) });
+  }
+  const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
+  for (const name of ['surfaces.json', 'material.json']) {
+    const document = requireRecord(JSON.parse(originals.get(name)!.toString('utf8')));
+    document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
+    await save(resolve(outputDirectory, name), document);
+  }
+  const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
+  for (const path of [resolve(objectDirectory, 'runtime-assets.json'), resolve(outputDirectory, 'runtime-assets.json')])
+    await writeFile(path, JSON.stringify(nextInventory, null, 2) + '\n');
+  const lensIds = views.map(view => view.id);
+  // Context images and tiny navigation icons use the same material and retained mesh.
+  const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
+  const navigationPath = resolve(sourceDirectory, 'preparation/navigation.json'), navigation = await json(navigationPath);
+  let changedContext = false;
+  for (const entry of records(manifest.generatedIntermediates ?? [])) {
+    const recipe = entry.recipe === undefined ? null : requireRecord(entry.recipe);
+    if (!recipe || !lensIds.includes(requireString(recipe.lensId ?? '')) || !String(entry.generator).includes('radial-snapshot.')) continue;
+    const surface = surfaces.find(surface => surface.id === recipe.lensId)!;
+    const png = await renderRadialSnapshot({ ...parseRadialSnapshot(recipe), faces: retainedShapeAtlas(scene, surface.id).faces,
+      map: resolve(stage, basename(surface.map.url)) });
+    const contextPath = resolve(sourceDirectory, requireString(entry.path));
+    await mkdir(dirname(contextPath), { recursive: true });
+    const stagedContext = resolve(stage, `context-${surface.id}.png`);
+    await writeFile(stagedContext, png); await replaceAsset(stagedContext, contextPath);
+    entry.expectedBytes = png.length; entry.expectedSha256 = hash(png);
+    if (requireRecord(navigation.source).path === entry.path) {
+      navigation.source = { ...requireRecord(navigation.source), expectedBytes: png.length, expectedSha256: hash(png) };
+      changedContext = true;
+    }
+  }
+  if (changedContext) {
+    await pretty(navigationPath, navigation);
+    const bytes = await readFile(navigationPath);
+    for (const entry of records(manifest.documents)) if (entry.path === 'preparation/navigation.json') {
+      entry.expectedBytes = bytes.length; entry.expectedSha256 = hash(bytes);
+    }
+    for (const reference of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))
+      if (reference.path === 'source/preparation/navigation.json') reference.sha256 = hash(bytes);
+    await pretty(resolve(objectDirectory, 'object.json'), descriptor);
+    const markerStage = resolve(stage, 'navigation'); await mkdir(markerStage, { recursive: true });
+    const descriptors = [validateMarkerDescriptor(navigation)];
+    await prepareBodyMarkers({ projectRoot: resolve('.'), outputRoot: markerStage, descriptors });
+
+    // Radial snapshots already own their crop and size. Use the same marker
+    // renderer and context encoding without evaluating the whole orbital catalogue.
+    const marker = descriptors[0];
+    if (marker.context) {
+      if (marker.operations.some(operation => !['resize', 'png'].includes(operation.type))) throw new Error('Shape refresh requires an uncropped radial context recipe.');
+      const sourcePath = resolve(sourceDirectory, marker.source.path), size = await sharp(sourcePath).metadata();
+      const tileSize = Math.min(marker.context.pixels, size.width ?? 0, size.height ?? 0);
+      const png = await renderMarker(marker, { sourcePath, tileSize });
+      await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(markerStage, `${id}-context.webp`));
+    }
+
+    for (const filename of await readdir(markerStage)) await replaceAsset(resolve(markerStage, filename), resolve('public/navigation', filename));
+  }
+  await pretty(manifestPath, manifest);
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
+  await refreshObservationControls(id, lensIds, new Map(lensIds.map(lensId => [lensId, SHAPE_MATERIAL.color])));
+  await refreshShapeMaterialDescriptions(id);
+  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
+  const report = { id, lensIds, seconds: (performance.now() - started) / 1000,
+    retainedSceneSha256: hash(originals.get('scene.json')!), recipeSha256: hash(recipeBytes), material: SHAPE_MATERIAL,
+    changedAssets: [...changed.values()], retainedAssets: assets.length - changed.size,
+    geometryBasis: 'Existing prepared scene; original source mesh additionally verified for source-cast lighting.' };
+  await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
+  console.log(JSON.stringify({ id, seconds: report.seconds, changedAssets: changed.size }));
+  return report;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2), sourceOption = args.find(arg => arg.startsWith('--source-root='));
+  const sourceRoot = sourceOption?.slice('--source-root='.length), requested = args.filter(arg => !arg.startsWith('--'));
+  const allIds = args.includes('--all') ? SCENE_OBJECTS.map(object => object.id) : requested;
+  const shard = args.find(arg => arg.startsWith('--shard='))?.slice('--shard='.length).split('/').map(Number);
+  if (shard && (shard.length !== 2 || !shard.every(Number.isSafeInteger) || shard[0] < 0 || shard[1] < 1 || shard[0] >= shard[1] || shard[1] > 4))
+    throw new Error('Shard must be an index/count with at most four independent object batches.');
+  const ids = shard ? allIds.filter((_id, index) => index % shard[1] === shard[0]) : allIds;
+  if (!ids.length) throw new Error('Choose existing object ids or --all.');
+  for (const id of ids) {
+    if (args.includes('--all')) {
+      let recipe;
+      try { recipe = await json(resolve('src/objects', id, 'source/preparation/terrestrial.json')); }
+      catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') continue; throw error; }
+      if (!requireArray(requireRecord(recipe.raster).shapeViews ?? []).length) continue;
+    }
+    if (args.includes('--descriptions-only')) {
+      await refreshShapeMaterialDescriptions(id);
+      await prepareObjectProvenance({ objectDirectory: resolve('src/objects', id), publicDirectory: resolve('public/scenes', id), basis: 'recovered' });
+      continue;
+    }
+    if (args.includes('--resume')) {
+      let receipt;
+      try { receipt = await json(resolve('output/shape-material-refresh', id, 'refresh.json')); }
+      catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
+      if (receipt && receipt.recipeSha256 === hash(await readFile(resolve('src/objects', id, 'source/preparation/terrestrial.json'))) &&
+          receipt.retainedSceneSha256 === hash(await readFile(resolve('src/objects', id, 'prepared/scene.json')))) {
+        for (const asset of records(receipt.changedAssets)) if (hash(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
+          throw new Error(`Refreshed asset changed before resume: ${id}/${asset.filename}.`);
+        continue;
+      }
+    }
+    await refreshShapeMaterials(id, sourceRoot);
+  }
+}

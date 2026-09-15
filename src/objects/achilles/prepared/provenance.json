@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "achilles",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bdee6c87d319d64935873af4241cb773166344f378fa4422f2b00f2ecdd3e08b"
+    "sha256": "d28d487192edb5dd343e0ce04812259584ff4a7cb68d079df0d0855bf3859687"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3af9633368bcc8fab5979f4c1f95fd3dc5602b3408da1d6aa7f395d80d3cf5a8",
+      "sha256": "fd7c7315874058623079e6cd8542c3b51e5b37e9d312eb96c34f13df85a33615",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative.",
+              "notes": "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -333,7 +333,7 @@
       "sha256": "38db827d7d93b048832ba643e1644e072e5fb5a681e122f3085e9735600220ca",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -347,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "3af9633368bcc8fab5979f4c1f95fd3dc5602b3408da1d6aa7f395d80d3cf5a8",
+      "sha256": "fd7c7315874058623079e6cd8542c3b51e5b37e9d312eb96c34f13df85a33615",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7930,
+      "bytes": 8028,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/achilles/achilles-elevation-thumbnail.webp",
           "bytes": 5822,
           "sha256": "070b72c7de7e5cd657f3047a3cf4681656573b6b95ad246f2650ec0b58356ce2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/achilles/achilles-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/achilles/achilles-elevation-surface@2x.webp",
           "bytes": 312368,
           "sha256": "15d8926ee5c3324a0b108dc9c1295f2d39fa547aa8189440cba998a7288cba7a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -441,15 +441,15 @@
       "outputs": [
         {
           "url": "/scenes/achilles/achilles-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/achilles/achilles-shape-surface@2x.webp",
-          "bytes": 203600,
-          "sha256": "452c354f1310126b1e58a71b92363bcc48e6e8344f59c41689ec6a89cfd96758",
-          "verification": "bytes-verified"
+          "bytes": 68484,
+          "sha256": "6c0fd2d0e2b55d78c77069fef1240627631a7575294d4af9271eb699d29a5b47",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -506,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

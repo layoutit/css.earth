@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ivar",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da66d1d9055618eaf056ac1b4e6fad00037d6409dff09bdc2784a4af8acd79aa"
+    "sha256": "f2412492f38083b75dcbe16cefeaea1c2bca2af791f868a3275574bc16e6d6c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e41b0b23e3c572d5e8be890cc73640e9288d173d710cca8efc35bc47f19e0fbc",
+      "sha256": "60d28b8fd182c6820602efb971b5545bb72abfa7fb65fe241c418851743e2cbe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,7 +221,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery.",
+              "notes": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Neutral gray marks unavailable imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
               "noData": true
             },
             {
@@ -350,7 +350,7 @@
       "sha256": "6838a5ad71d37ea2d341cb2b4aa37a66d698bf84202b49cbb7084c4dc4095c24",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -375,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e41b0b23e3c572d5e8be890cc73640e9288d173d710cca8efc35bc47f19e0fbc",
-      "bytes": 7608,
+      "sha256": "60d28b8fd182c6820602efb971b5545bb72abfa7fb65fe241c418851743e2cbe",
+      "bytes": 7714,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/ivar/ivar-elevation-thumbnail.webp",
           "bytes": 4518,
           "sha256": "01784c6d0a8102e1d0502f88bbbb88e12d72a34dfaa30bd2700639851f3d061d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ivar/ivar-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ivar/ivar-elevation-surface@2x.webp",
           "bytes": 264666,
           "sha256": "126644c33c4ae41f120c44a44409d4efef2e5c0e1341016bb9be7b107e69efe8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -458,15 +458,15 @@
       "outputs": [
         {
           "url": "/scenes/ivar/ivar-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ivar/ivar-shape-surface@2x.webp",
-          "bytes": 195828,
-          "sha256": "501cde56e1cb4ca06ce9f5414e7f25b646863bd635f3586cfb20fd8132a26e63",
-          "verification": "bytes-verified"
+          "bytes": 65064,
+          "sha256": "1c5a376efca0bc58bc501261f97fbc2b70503ad1b3f24d57139372f6b9e23a6e",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -523,8 +523,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]

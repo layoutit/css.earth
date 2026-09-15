@@ -1,5 +1,7 @@
 # (118) Peitho
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **4397**, version **2020-04-26**. DAMIT, Astronomical Institute of Charles University; DAMIT archive (no linked publication in this model record); model 4397, version 2020-04-26.
 
-Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -27,7 +29,7 @@ The prior opposite pole4474 remains listed as a comparison, not an equally suppo
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 4474, pole ['346', '34'], [Model 4474](https://damit.cuni.cz/projects/damit/asteroid_models/view/4474;) model 4475, pole ['176', '59'], [Model 4475](https://damit.cuni.cz/projects/damit/asteroid_models/view/4475)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 4474, pole ['346', '34'], [Model 4474](https://damit.cuni.cz/projects/damit/asteroid_models/view/4474;) model 4475, pole ['176', '59'], [Model 4475](https://damit.cuni.cz/projects/damit/asteroid_models/view/4475)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

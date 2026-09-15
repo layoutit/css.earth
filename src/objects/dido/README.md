@@ -1,5 +1,7 @@
 # (209) Dido
 
+Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+
 ## Sources
 
 <a id="shape-scale-and-orientation"></a>
@@ -11,7 +13,7 @@
 
 Checked 2026-09-09. Selected DAMIT model **3659**, version **2019-05-07**. DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3659, version 2019-05-07.
 
-Convex light-curve reconstruction with approximate thermal size: 133.43 km effective diameter (catalog ±2.06 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction with approximate thermal size: 133.43 km effective diameter (catalog ±2.06 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -25,7 +27,7 @@ Gaia DR2 plus Lowell inversion; publication table gives 430 Lowell and 14 Gaia p
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
-The release supplies no registered surface imagery; the grid marks that gap. Alternative archive solutions: model 3660, pole ['43', '-34'], [Model 3660](https://damit.cuni.cz/projects/damit/asteroid_models/view/3660)
+The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 3660, pole ['43', '-34'], [Model 3660](https://damit.cuni.cz/projects/damit/asteroid_models/view/3660)
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
