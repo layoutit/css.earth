@@ -13,19 +13,25 @@ import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { SCENE_OBJECTS } from './objects.mts';
-import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
+import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
+import { minorMoonOrbitIds, suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
+import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const hiddenOrbitIds = SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
+const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
+const hiddenOrbitIds = [
+  ...SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id),
+  ...minorMoonIds,
+];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, (CONTEXT_ANNOTATION_PRIORITY as Readonly<Partial<Record<typeof object.classification, number>>>)[object.classification] ?? 0]));
+  [object.id, labelImportance(object.classification, object.classification === 'satellite' && !minorMoonIds.includes(object.id))]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -129,10 +135,12 @@ export function createApplicationWorldContext() {
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: [...prepared.catalogs.galaxies.sources, ...prepared.catalogs.clusters.sources, ...prepared.catalogs.nebulae.sources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
+        const restoreMoonOrbitPaint = suppressMinorMoonOrbitPaint(presentationHost, minorMoonIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
+        const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
         let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
         let stagedFrame: {world: WorldCameraPose; viewport: WorldCameraViewport; frame: Awaited<ReturnType<typeof framePlanner.plan>>; snapshot: ReturnType<typeof layer.captureFrame>; consumed: boolean} | null = null;
@@ -152,6 +160,7 @@ export function createApplicationWorldContext() {
           }
           if (staged) staged.consumed = true;
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled }, frame);
+          moonLabels.publish(world, viewport, layer.labelBudget());
           // The decorative minimap follows a drag at half rate and holds still
           // through a fly-to; release and arrival publish it once.
           if (!flying && (!rotating || (minimapFrame++ & 1) === 0)) minimap.publish(world, viewport);
@@ -221,6 +230,7 @@ export function createApplicationWorldContext() {
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             layer.selectObject(id, frame);
             minimap.selectObject(frame);
+            moonLabels.selectObject(id);
           },
           setAsteroidBodiesEnabled(enabled: boolean) {
             if (destroyed) return;
@@ -262,7 +272,7 @@ export function createApplicationWorldContext() {
             inputSurface?.removeEventListener('objectrotationchange', rotationChanged);
             frameQueue.destroy(); framePlanner.destroy(); stagedFrame = null;
             if (diagnostics && Reflect.get(target, '__cssEarthUniverse') === diagnostics) Reflect.deleteProperty(target, '__cssEarthUniverse');
-            contextNavigation?.destroy(); minimap.destroy();
+            contextNavigation?.destroy(); minimap.destroy(); moonLabels.destroy(); restoreMoonOrbitPaint();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };

@@ -38,9 +38,12 @@ test('nearby nebula labels wake and follow the camera while both extragalactic f
   runtime.publish(camera(-1e17), viewport, 0, [], 0);
   expect(label.style.pointerEvents).toBe('none');
   runtime.publish(camera(1e17), viewport, 0, [], 0); document.defaultView.advance(250);
+  expect(label.style.pointerEvents).toBe('none');
+  // Stellar context admits nebulae; planetary context does not.
+  runtime.publish(camera(1e17), viewport, 0, [], 0, 0, undefined, 1); document.defaultView.advance(500);
   expect(label.style.pointerEvents).toBe('auto'); expect(Number(label.style.opacity)).toBe(.65);
   const transform = label.style.transform;
-  runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0);
+  runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0, 0, undefined, 1);
   expect(label.style.transform).not.toBe(transform);
   label.dispatchEvent(new Event('click')); expect(onSelect).toHaveBeenCalledWith(object);
   expect(document.count).toBe(nodes); runtime.destroy();
@@ -59,7 +62,7 @@ test('nebula label and its single-click target sit below the prepared cloud', ()
   const pose = { ...nebulae.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 1e17] as const,
     orientationXyzw: [0, 0, 0, 1] as const } };
   runtime.select(object.id);
-  const rectangles = runtime.publish(pose, viewport, 0), bottom = 600 * 1e16 / 9.8e16;
+  const rectangles = runtime.publish(pose, viewport, 0, [], 0, 0, undefined, 1), bottom = 600 * 1e16 / 9.8e16;
   expect(rectangles).toHaveLength(1);
   expect(rectangles[0]!.top).toBeCloseTo(bottom + 8);
   const picking = screenPicking(host as unknown as HTMLElement), label = runtime.inspect().labels[object.id]!;
@@ -98,7 +101,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   const shifted = { ...pose, pose: { ...pose.pose, positionM: [pose.pose.positionM[0] + object.aperture.comovingRadiusM, ...pose.pose.positionM.slice(1)] as [number,number,number] } };
   const blockers = runtime.publish(shifted, viewport, 1, [], 1);
   expect(aperture.style.transform).not.toBe(firstTransform); expect(blockers.length).toBeGreaterThan(0);
-  runtime.publish(shifted, viewport, 1, blockers, 1);
+  runtime.publish(shifted, viewport, 1, [{ left: -400, right: 400, top: -300, bottom: 300 }], 1);
   expect(label.style.pointerEvents).toBe('none');
   expect(picking.pick(-150, 15)).not.toBe(label);
   label.dispatchEvent(new Event('click')); expect(onSelect).not.toHaveBeenCalled();

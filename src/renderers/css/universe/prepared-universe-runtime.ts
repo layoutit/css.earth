@@ -24,6 +24,7 @@ import type { WorldPlannerSource } from './world-context-planner-client.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
+import { createLabelBudget } from '../labels/universe-label-policy.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -136,6 +137,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
+      let labelBudget = createLabelBudget(0, 0);
       let overview = false;
       let selectionPreview: string | null | undefined;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
@@ -203,6 +205,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
         spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, opacityClock });
+        const bodyAnnotations = spatial.inspect();
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock });
         if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, galaxySample: catalog.galaxySample, clusters: catalog.clusters?.payload, nebulae: catalog.nebulae,
@@ -259,6 +262,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setRotationActive(active: boolean) { spatial!.setRotationActive(active); },
           setHiddenIndicators(ids: readonly string[]) { spatial!.setHiddenIndicators(ids); },
           setHighlighted(ids: readonly string[]) { spatial!.setHighlighted(ids); },
+          labelBudget() { return labelBudget; },
           inspect() {
             return Object.freeze({ opacity: spatial!.opacityStats(), publication: spatial!.publicationStats(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(), galaxies: galaxyCatalog?.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });
@@ -323,13 +327,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             spatial!.publish(world, viewport, frame);
             const foregroundRects = spatial!.backgroundExclusionRects();
+            labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
+              bodyAnnotations.flatMap(body => body.labelRect ? [body.labelRect] : []), foregroundRects);
             const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);
             const environmentRects = environmentLabels!.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
-              shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });
+              shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });
             if (catalog) galaxyCatalog!.publish(world, viewport,
               localAnnotations * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
               catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0,
-              (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM));
+              (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM),
+              labelBudget, (1 - fade) * logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM));
             const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
             focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });

@@ -1002,68 +1002,46 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   contain: layout size;
 }
 
-.planet-attribution-footer {
-  display: flex;
-  flex: 1 1 auto;
-  align-items: center;
-  gap: 8px;
-  height: var(--explorer-status-height);
+.planet-sources-panel {
+  flex: 0 0 auto;
+  width: 100%;
   min-width: 0;
-  box-sizing: border-box;
-  padding: 0 8px 0 4px;
-  color: var(--shell-text-secondary);
-  background: var(--shell-background);
-  font: 12px/1.4 var(--shell-ui-font);
+  padding: 0;
   pointer-events: auto;
-  white-space: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
-.planet-attribution-footer[hidden] { display: none; }
-
-.planet-attribution-link {
-  display: inline-flex;
-  gap: 3px;
-  color: inherit;
-  text-decoration: none;
+.planet-sources-panel > .planet-accordion {
+  margin: 0;
+  padding: 0;
 }
-
-.planet-attribution-source {
+.planet-sources-panel .planet-panel-summary {
+  box-sizing: border-box;
+  height: 48px;
+  min-height: 48px;
+  padding: 0 var(--explorer-content-inset);
+}
+.planet-sources-panel .planet-accordion > .planet-panel-summary .planet-panel-heading {
   color: var(--shell-text);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 1px;
+  font: 500 15px/20px var(--shell-ui-font);
+  text-transform: none;
+  opacity: 1;
 }
-
-.planet-attribution-separator {
+.planet-sources-panel .planet-panel-heading-count {
   color: var(--shell-text-muted);
-  /* The comma hugs the provider before it; the footer gap opens the next one. */
-  margin-left: -8px;
 }
-
-/* Sources that share a provider name print it once, then their own parts. The
-   comma inside a group reads tighter than the dot between providers. */
-.planet-attribution-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  white-space: nowrap;
+.planet-sources-content {
+  box-sizing: border-box;
+  max-height: min(340px, 40dvh);
+  padding: 0 var(--explorer-content-inset) 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  user-select: text;
 }
-.planet-attribution-provider { color: var(--shell-text-secondary); }
-/* The comma hugs the name before it; the group gap then separates the next one. */
-.planet-attribution-group-separator {
-  color: var(--shell-text-muted);
-  margin-left: -4px;
+.planet-sources-content > [data-source-bank] {
+  margin-top: 16px;
 }
-
-.planet-attribution-link:hover {
-  color: var(--shell-text);
-}
-
-.planet-attribution-link:focus-visible {
-  color: var(--shell-text);
-  outline: 1px solid var(--shell-focus);
-  outline-offset: -1px;
+.planet-sources-content > [data-source-view] {
+  margin: 0;
 }
 
 .planet-view-readout {
@@ -1105,8 +1083,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   gap: 8px;
 }
 
-.planet-motion-record,
-.planet-motion-script,
 .planet-diagnostic-record {
   flex: 0 0 auto;
   padding: 0;
@@ -1116,11 +1092,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   font: inherit;
   cursor: pointer;
 }
-.planet-motion-record:hover,
-.planet-motion-script:hover,
 .planet-diagnostic-record:hover { color: var(--shell-text); }
-.planet-motion-record[aria-pressed="true"] { color: #e98679; }
-.planet-motion-script[disabled] { opacity: .5; cursor: default; }
 .planet-diagnostic-record[aria-pressed="true"] { color: #e98679; }
 
 .planet-view-scale {
@@ -1201,7 +1173,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     align-items: stretch;
     gap: 0;
   }
-  .planet-attribution-footer { flex: 0 0 var(--explorer-status-height); }
   .planet-view-readout {
     flex: 0 0 var(--explorer-status-height);
     width: 100%;

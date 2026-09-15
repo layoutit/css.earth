@@ -4,6 +4,7 @@ import { OBJECT_CATEGORIES, matchesObjectCategory, objectCategoryCount } from '.
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeatureIndex, parseFeaturePin, matchFeatures, featureResult } from './feature-search.mts';
 import { renderDatasetResponse } from './dataset-response.mts';
+import { renderSourcePanel } from './source-panel-controller.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
@@ -155,6 +156,9 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
     requiredElement<HTMLElement>(browser, '.planet-object-empty').hidden = items.some(item => !item.hidden) || detailCount > 0;
   }
+  browser.dataset.sourceScope = focusCard ? 'focus' : url.searchParams.get('overview') ?? 'object';
+  browser.dataset.sourceFocus = focusCard?.dataset.preparedFocusId ?? '';
+  renderSourcePanel(document);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
