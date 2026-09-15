@@ -2,6 +2,12 @@ import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from './helio
 import type { Vector3 } from './types.js';
 import type { OrbitSegment } from './types.js';
 
+const DISTANCE_FADE_STEPS = 16;
+export interface OrbitDepthFade { readonly start: number; readonly end: number }
+/** A depth plane cuts a prepared conic at most twice. Reserve the fade's
+ * additional clipped pieces, including the existing visibility split budget. */
+export const orbitProjectionCapacity = (vertices: number) => vertices ? vertices * 2 + DISTANCE_FADE_STEPS * 4 : 0;
+
 /** A mounted line pool owns one live projection, with the same bounded capacity
  * as its drawing leaves. Consumers finish reading it before the next publish.
  * Prepared vertices remain immutable; only these screen coordinates change. */
@@ -51,7 +57,7 @@ export function orbitBoundsMayContribute(center: Vector3, radius: number, focal:
 }
 
 /** Project prepared chords into a bounded retained line pool; never derive an orbit. */
-export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude, near, clipX, clipY }: {
+export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude, near, clipX, clipY, depthFade }: {
   toEye(point: Vector3): Vector3;
   project(eye: Vector3): readonly number[];
   hidden(eye: Vector3): boolean;
@@ -60,7 +66,14 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   near: number;
   clipX: number;
   clipY: number;
+  /** Display attenuation along the selected path, in eye-space metres. */
+  depthFade?: OrbitDepthFade;
 }) {
+  if (depthFade && !(depthFade.start > 0 && depthFade.end > depthFade.start && Number.isFinite(depthFade.end))) {
+    throw new TypeError('Orbit depth fade requires a finite increasing range.');
+  }
+  const fadePlanes = depthFade ? Array.from({ length: DISTANCE_FADE_STEPS + 1 }, (_, i) =>
+    depthFade.start * (depthFade.end / depthFade.start) ** (i / DISTANCE_FADE_STEPS)) : [];
   // Painting and presentation measurement share the exact clipping path. A
   // measurement may stop once its consumer's existing fade is fully saturated.
   const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
@@ -85,10 +98,11 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       let start = eyeAt(index), end = eyeAt(next);
       let startDepth = -start[2], endDepth = -end[2];
       if (startDepth <= near && endDepth <= near) continue;
+      if (depthFade && startDepth >= depthFade.end && endDepth >= depthFade.end) continue;
       // Interior chords outside every occluder's conservative shadow already
       // are their final screen segment. Do not run clipping, perspective lerps,
       // visibility splitting and endpoint projection again for the common case.
-      if (startDepth > near && endDepth > near && mayOcclude) {
+      if (startDepth > near && endDepth > near && mayOcclude && (!depthFade || Math.max(startDepth, endDepth) <= depthFade.start)) {
         const a = screenAt(index), b = screenAt(next);
         if (inside(a) && inside(b) && !mayOcclude(a, b)) {
           // Preserve the detailed path's endpoint arithmetic exactly, even
@@ -116,6 +130,25 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       const pieces = mayOcclude && !mayOcclude(startScreen, endScreen)
         ? [[visibleStart, visibleEnd]] : splitVisible(visibleStart, visibleEnd, hidden);
       for (const [pieceStart, pieceEnd] of pieces) {
+        if (depthFade && Math.max(-pieceStart[2], -pieceEnd[2]) > depthFade.start) {
+          // Clip the existing straight chord at the fade planes. This changes
+          // its visibility only; it does not generate or fit an orbital curve.
+          const d0 = -pieceStart[2], d1 = -pieceEnd[2], cuts = [0, 1];
+          if (d0 !== d1) for (const plane of fadePlanes) {
+            const t = (plane - d0) / (d1 - d0);
+            if (t > 0 && t < 1) cuts.push(t);
+          }
+          cuts.sort((a, b) => a - b);
+          for (let i = 1; i < cuts.length; i++) {
+            const from = cuts[i - 1], to = cuts[i], depth = d0 + (d1 - d0) * (from + to) / 2;
+            if (depth >= depthFade.end) continue;
+            const opacity = depth <= depthFade.start ? 1 : 1 - Math.log(depth / depthFade.start) / Math.log(depthFade.end / depthFade.start);
+            const [x0, y0] = project(lerp(pieceStart, pieceEnd, from)), [x1, y1] = project(lerp(pieceStart, pieceEnd, to));
+            if (![x0, y0, x1, y1].every(Number.isFinite) || Math.hypot(x1 - x0, y1 - y0) < .05) continue;
+            if (!segment(x0, y0, x1, y1, weight * opacity)) return;
+          }
+          continue;
+        }
         const [x0, y0] = project(pieceStart), [x1, y1] = project(pieceEnd);
         if (![x0, y0, x1, y1].every(Number.isFinite) || Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
         if (!segment(x0, y0, x1, y1, weight)) return;

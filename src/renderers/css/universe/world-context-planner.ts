@@ -4,9 +4,9 @@ import type { PreparedWorldContext } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
-import { contextOrbitOpacity } from './context-presentation-policy.js';
+import { contextOrbitOpacity, selectedOrbitDepthFade } from './context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter } from '../solar-system/prepared-ring-projection.js';
+import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../solar-system/types.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 import { createLabelBudget, labelExtentOpacity } from '../labels/universe-label-policy.js';
@@ -135,6 +135,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
   });
   const labels = createLabelDeclutter({ capacity: points.length, spacingPixels: 4 });
   const indicators = createLabelDeclutter({ capacity: points.length, spacingPixels: 2 });
+  // Only the selected path fades with depth; one shared scratch pool serves it.
+  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0))));
   return (view: WorldContextView) => {
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight, holdAnnotations = false } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
@@ -240,6 +242,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
             (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
           const projector = createPreparedRingProjector({ toEye, project, hidden: occlusion.hidden,
             mayOcclude: occlusion.mayOcclude,
+            ...(isSelected ? { depthFade: selectedOrbitDepthFade(Math.hypot(...eye)) } : {}),
             near, clipX: width / 2, clipY: height / 2 });
           if (skipped || inactiveMoon) {
             // Hidden paths have no geometry consumer. Their proxies still need
@@ -257,7 +260,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           if (!skipped) {
             measuredExtent = null;
             const level = entry.levels[detailLevel(entry)]!;
-            segments = projector(level.vertices, level.trail, level.activeChords, fullOrbit, entry.orbitProjection, entry.orbit.closed !== false);
+            segments = projector(level.vertices, level.trail, level.activeChords, fullOrbit,
+              isSelected ? selectedOrbitProjection : entry.orbitProjection, entry.orbit.closed !== false);
           }
         }
         if (entry.orbit) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
