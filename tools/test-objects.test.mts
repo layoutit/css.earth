@@ -23,6 +23,8 @@ test('a file passes on exit 0, skips only when every failure names an absent loc
   // The named path exists, so the failure is not a missing input.
   assert.equal(classify(1, enoent, true, unitFile, '/repo', present).status, 'failed');
   assert.equal(classify(1, enoent, false, unitFile, '/repo', absent).status, 'failed');
+  const sharp = tap('decodes a texel', "    Input file is missing: /repo/public/scenes/earth/earth-tomography-section@2x.webp");
+  assert.equal(classify(1, sharp, true, unitFile, '/repo', absent).detail, 'missing local input /repo/public/scenes/earth/earth-tomography-section@2x.webp');
   assert.equal(classify(1, enoent + assertion.replace('ok 1', 'ok 2'), true, unitFile, '/repo', absent).status, 'failed');
   assert.deepEqual(classify(1, assertion, true, unitFile, '/repo', absent), { status: 'failed', detail: 'AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:' });
   assert.deepEqual(classify(2, 'Error: crashed before any test\n', true, unitFile, '/repo', absent), { status: 'failed', detail: 'exit 2' });
