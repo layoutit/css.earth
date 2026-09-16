@@ -944,14 +944,14 @@
       "outputs": [
         {
           "url": "/scenes/steins/steins-osiris-thumbnail.webp",
-          "bytes": 1672,
-          "sha256": "118b33b0b5ae52e2a5beaf35bfb7f08a74af35cbf1209132d304529b848bc208",
+          "bytes": 1662,
+          "sha256": "2845713b3b2bbfd64607b16a33a5f00a6f94d9a52f26d62f10b6a1d0090d49f1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-osiris-surface@2x.webp",
-          "bytes": 298938,
-          "sha256": "f288d6973feef9a9ec85fbca44a405f36ed203ba5e86505121d443dd84f56232",
+          "bytes": 284776,
+          "sha256": "ea0a346a4333fc7aa2e2d4dd9e5a59fbbf4d2bdd36bfa379eeb09c9f88149db6",
           "verification": "bytes-verified"
         }
       ],
@@ -1070,8 +1070,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 9876,
-          "sha256": "830dee0eac8f4e1585d1e771b58fc49f409df1384995639e81df3f35d926e655",
+          "bytes": 8932,
+          "sha256": "3b84c2285428e0313b46c071609c00eb3b34f88a6d73ec78d4da4e8b34f32a85",
           "verification": "bytes-verified"
         }
       ]
@@ -1108,7 +1108,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "3301fc47fad7f2e90f1b762d21f0851fbb8837daba9faec3525c0fb2dfd80736",
+    "materialSha256": "7c70503a18264dbe2fe52c749e45606a9c6f44196f7d6cd03255d85cdc1fd40a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

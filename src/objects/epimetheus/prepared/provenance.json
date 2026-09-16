@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "93d79f7b8aef9b060df5075505da6a5bdf2083c88b1eb0f3d5f4db72f9cf23c1"
+    "sha256": "bf9b2bce3eed8b152a90b768c6593f20cffe8661c16254988a35e0e9b4c574f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2134,14 +2134,14 @@
       "outputs": [
         {
           "url": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
-          "bytes": 2074,
-          "sha256": "5de28b5ea259601ebecaae20e7b06cbb32f4fad83c89cddf416743241858639f",
+          "bytes": 2078,
+          "sha256": "2de969c28bcdce2348e82cf965df5b98b3b5d525363221579aeea38bec2236da",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
-          "bytes": 939518,
-          "sha256": "1312facdef62c275daf018654f49a104092ff8ec07028a6b3a2ef3b918e583f5",
+          "bytes": 743552,
+          "sha256": "40f9cff45c9601cc15fac523d74547eeaf0d9f3dc86b4a836856d92c46a5b37a",
           "verification": "bytes-verified"
         }
       ],
@@ -2196,8 +2196,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
-          "bytes": 412128,
-          "sha256": "ab0f4670d652cbc519ce0d23b8fb9d6e2b2eb05439bac114be90355bf26da7ce",
+          "bytes": 462866,
+          "sha256": "fbfaa1e2b61c917cf8655edac2e0117b7aff4958a96a3f10dcbc6e447d584338",
           "verification": "bytes-verified"
         }
       ],
@@ -2255,8 +2255,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 37484,
-          "sha256": "1820d06f23262f8e574d940ad2f7706ea7f5f4f01afe8ee5990bec9fb5a1d998",
+          "bytes": 30470,
+          "sha256": "f6e022ad0465c90b65c809986bc4300e47a68921d7bedbf396f9d02e76ce0911",
           "verification": "bytes-verified"
         }
       ]
@@ -2318,7 +2318,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "7c39e5e9e0e06e513b7a0b958967a59767183e9b0b1fccf83ef83373505d83e5",
+    "materialSha256": "68b9e7707d6c5904f1c27bc9fe44b8655eb7760dde74c6c1b36404ca408beed7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -55,10 +55,14 @@ import { loadPdsRadialTable, loadPdsRadialTableMesh } from './pds-radial-table.m
 import { createRasterEmitter } from './solid-raster.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';
+import { linearToSrgb, srgbToLinear } from '../color-transfer.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { orientObservedSurface, validateObservedReduction } from './open-surface.mts';
 import {prepareNativePhotographicAtlas} from './native-photograph.mts';
 import { neutralShapeAtlas, shapeFillIllumination } from './shape-material.mts';
+
+/** Scales a photograph's encoded sRGB byte by an illumination factor in linear light. */
+const litByte = (byte: number, illumination: number) => Math.round(255 * linearToSrgb(srgbToLinear(byte / 255) * illumination));
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
@@ -487,7 +491,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
           }
           for (let channel = 0; channel < 3; channel++) {
             flood[offset + channel] = color[channel];
-            shadow[offset + channel] = Math.round(color[channel] * illumination);
+            shadow[offset + channel] = observation ? litByte(color[channel], illumination) : Math.round(color[channel] * illumination);
           }
           flood[offset + 3] = shadow[offset + 3] = 255;
           continue;
@@ -514,7 +518,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
             // The observation's authored photometric treatment is already prepared. Uniform flood
             // preserves its measured detail on every side of the source mesh.
             flood[offset + channel] = sample.color[channel];
-            shadow[offset + channel] = Math.round(sample.color[channel] * illumination);
+            // A photograph is light: its shading multiplies decoded linear light, never the encoded byte.
+            shadow[offset + channel] = litByte(sample.color[channel], illumination);
           }
           flood[offset + 3] = shadow[offset + 3] = 255;
           continue;
@@ -563,9 +568,13 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       }
     }
     // Scientific colours retain exact palette values; the numeric source index is preparation-only.
-    const encoding = scalarSources || nearest || scientific?.format === 'image-plane-dem' ? { lossless: true, effort: 4 } : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
+    // Photographs keep full chroma detail through sharp's smart subsampling.
+    const encoding = scalarSources || nearest || scientific?.format === 'image-plane-dem' ? { lossless: true, effort: 4 }
+      : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4, ...(observation ? { smartSubsample: true } : {}) };
     surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw: { width, height, channels: 4 } }), encoding);
-    surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
+    // A photograph that keeps its acquisition lighting has no second, epoch-lit atlas: Shadows shows it as photographed.
+    if (observation?.retainsIllumination) delete surface.shadowSurface;
+    else surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
     if (config.geometry.radialTerrain.thumbnail && !observation && !sourceSurface) {

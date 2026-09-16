@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0a9b0455b28cad6e6cb7d5218bc270ca268d2ef0c44618df9cd5e1bdeff3651b"
+    "sha256": "2f947dabb906545e5b0159dff2ec035caf25c836699a8ccaac7d42fee3568e09"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1129,14 +1129,14 @@
       "outputs": [
         {
           "url": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
-          "bytes": 1352,
-          "sha256": "8ec47433c6d57a2afd5a68cf9bb43b5556c177a4b2588808b6f778709143ca0c",
+          "bytes": 1374,
+          "sha256": "c1da8149bd7c0695b2b0d1fc46cf68f1557cfff4e2402771990e6a962df86a73",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
-          "bytes": 143368,
-          "sha256": "d9a53a0a03de46abfd09505fa851836ad53c775fc0d97d28ba88072b07b47456",
+          "bytes": 139474,
+          "sha256": "0f611eea774fb82f4be126c1469808b499053cdba96dbfeb46a3335a65cc396a",
           "verification": "bytes-verified"
         }
       ],
@@ -1230,8 +1230,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 13858,
-          "sha256": "fbea88a2776af0f82458728d5264213af89f8783740e99fd2268f93e3f3449f8",
+          "bytes": 14428,
+          "sha256": "5a9a923205461520f15a17a5fc4a3452bfeb175bea3b964ce6abf7f1b20c8d78",
           "verification": "bytes-verified"
         }
       ]
@@ -1268,7 +1268,7 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "094a6139b1d49c2138a0effe20e37e94a07d2704550989169c70587a88ae670a",
+    "materialSha256": "7933e9b22653ed9f43138ab8319baf39bd99f24253beade3d52d848ee26eb039",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

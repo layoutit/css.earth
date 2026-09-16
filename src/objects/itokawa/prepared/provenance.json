@@ -1826,14 +1826,14 @@
       "outputs": [
         {
           "url": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
-          "bytes": 1320,
-          "sha256": "8d23fbfbacd396c8cc75b31abb90e187e0fbc8ac33cc1e84b85e7207afedd491",
+          "bytes": 1296,
+          "sha256": "0ace49d9018eccd343b550f1209df97fd4833eca873eab474c600a520959845d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
-          "bytes": 2215602,
-          "sha256": "191b37d1edf01c64a8e7954b3a634d4649c85ba5981b86a4d293f7beb0fa6c97",
+          "bytes": 1756578,
+          "sha256": "d3603a4b8799fb4deb961d12d5f6370cd57d0db5499d642513e9fd1207c22dc7",
           "verification": "bytes-verified"
         }
       ],
@@ -1927,8 +1927,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/amica.webp",
-          "bytes": 55802,
-          "sha256": "0e0a605ea8135908a84244abf5918f07cb72edc691cfc237a0bbaa0d21dc62c5",
+          "bytes": 50708,
+          "sha256": "c13ec11a4cd794cc73ace7e86a4bb7a636544a0d9dbc38e260da7305ce401330",
           "verification": "bytes-verified"
         }
       ]
@@ -1965,7 +1965,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "fa06e31512a12935d6f5b9026fdfc1f8bf072e1236e7d3f232a208b304f21d56",
+    "materialSha256": "e4c58f39d02edf4d1b31189abeb83bb3e94f1e9e8e6d62936d065bf881419bd7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,6 +1,7 @@
 import type {GeoFrame,DiskPhotometry,PhasePhotometry} from './contracts.mts';
 import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
 import { phaseGain as phaseFunctionGain } from '../../photometry/phase.mts';
+import { pds3Keyword } from '../pds-labels.mts';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
 // product. No image coordinates, ray tracing or source geometry enter runtime.
 export const GEO_SHAPE_MODEL = 'cg-dlr_spg-shap7-v1.0_4Mfacets.ver';
@@ -8,18 +9,12 @@ export const PLANE_NAMES = ['IMAGE', 'DISTANCE_IMAGE', 'EMISSION_ANGLE_IMAGE',
   'INCIDENCE_ANGLE_IMAGE', 'PHASE_ANGLE_IMAGE', 'FACET_INDEX_IMAGE',
   'COORDINATE_X_IMAGE', 'COORDINATE_Y_IMAGE', 'COORDINATE_Z_IMAGE'];
 
-export const field = (text: string, name: string) => {
-  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const hits = [...text.matchAll(new RegExp(`^\\s*${escaped}[ \\t]*=[ \\t]*(?:\\r?\\n[ \\t]*)?("[^"\\r\\n]*"|[^\\r\\n]+)`, 'gm'))];
-  if (hits.length !== 1) throw new Error(`Expected one PDS field: ${name}`);
-  return hits[0][1].trim().replace(/^"(.*)"$/, '$1');
+/** One PDS3 keyword, optionally inside a root OBJECT; a missing or repeated keyword fails. */
+export const field = (text: string, name: string, scope?: readonly string[]) => {
+  const value = pds3Keyword(text, name, scope);
+  if (value === undefined) throw new Error(`Expected one PDS field: ${name}`);
+  return value;
 };
-
-export function imageBlock(label: string, name: string) {
-  const matches = [...label.matchAll(new RegExp(`^OBJECT\\s*=\\s*${name}\\s*\\r?\\n([\\s\\S]*?)^END_OBJECT\\s*=\\s*${name}\\s*$`, 'gm'))];
-  if (matches.length !== 1) throw new Error(`Missing or duplicate IMAGE object: ${name}`);
-  return matches[0][1];
-}
 
 export function decodeOsirisGeo(bytes: Buffer) {
   const prefix = bytes.subarray(0, Math.min(bytes.length, 65536)).toString('ascii');
@@ -40,15 +35,13 @@ export function decodeOsirisGeo(bytes: Buffer) {
   const planes: Record<string,Float32Array|Int32Array> = {}, ranges: [number,number][] = [];
   let planeWidth: number | undefined, planeHeight: number | undefined;
   for (const name of PLANE_NAMES) {
-    const matches = [...label.matchAll(new RegExp(`^OBJECT\\s*=\\s*${name}\\s*\\r?\\n([\\s\\S]*?)^END_OBJECT\\s*=\\s*${name}\\s*$`, 'gm'))];
-    if (matches.length !== 1) throw new Error(`Missing or duplicate IMAGE object: ${name}`);
-    const block = matches[0][1], w = Number(field(block, 'LINE_SAMPLES')), h = Number(field(block, 'LINES'));
+    const block = (key: string) => field(label, key, [name]), w = Number(block('LINE_SAMPLES')), h = Number(block('LINES'));
     if (!Number.isSafeInteger(w) || !Number.isSafeInteger(h) || w < 2 || h < 2 || w > 4096 || h > 4096 ||
-        (planeWidth !== undefined && (w !== planeWidth || h !== planeHeight)) || Number(field(block, 'SAMPLE_BITS')) !== 32 ||
-        field(block, 'SAMPLE_TYPE') !== (name === 'FACET_INDEX_IMAGE' ? 'LSB_INTEGER' : 'PC_REAL') ||
-        Number(field(block, 'BANDS')) !== 1 || Number(field(block, 'FIRST_LINE')) !== 1 || Number(field(block, 'FIRST_LINE_SAMPLE')) !== 1 ||
-        field(block, 'LINE_DISPLAY_DIRECTION') !== 'DOWN' || field(block, 'SAMPLE_DISPLAY_DIRECTION') !== 'LEFT' ||
-        field(block, 'UNIT') !== (name === 'IMAGE' ? 'W/M**2/SR/NM' : name === 'FACET_INDEX_IMAGE' ? 'INTEGER' : name.includes('ANGLE') ? 'RAD' : 'KM')) {
+        (planeWidth !== undefined && (w !== planeWidth || h !== planeHeight)) || Number(block('SAMPLE_BITS')) !== 32 ||
+        block('SAMPLE_TYPE') !== (name === 'FACET_INDEX_IMAGE' ? 'LSB_INTEGER' : 'PC_REAL') ||
+        Number(block('BANDS')) !== 1 || Number(block('FIRST_LINE')) !== 1 || Number(block('FIRST_LINE_SAMPLE')) !== 1 ||
+        block('LINE_DISPLAY_DIRECTION') !== 'DOWN' || block('SAMPLE_DISPLAY_DIRECTION') !== 'LEFT' ||
+        block('UNIT') !== (name === 'IMAGE' ? 'W/M**2/SR/NM' : name === 'FACET_INDEX_IMAGE' ? 'INTEGER' : name.includes('ANGLE') ? 'RAD' : 'KM')) {
       throw new Error(`Unsupported plane layout: ${name}`);
     }
     planeWidth = w; planeHeight = h;
@@ -63,7 +56,8 @@ export function decodeOsirisGeo(bytes: Buffer) {
   }
   if (planeWidth === undefined || planeHeight === undefined) throw new Error('Missing OSIRIS image dimensions.');
   const width = planeWidth, height = planeHeight;
-  const xyz = (i: number) => ['X', 'Y', 'Z'].map(axis => planes[`COORDINATE_${axis}_IMAGE`][i]);
+  const X = planes.COORDINATE_X_IMAGE, Y = planes.COORDINATE_Y_IMAGE, Z = planes.COORDINATE_Z_IMAGE;
+  const xyz = (i: number) => [X[i], Y[i], Z[i]];
   // This is a geometry-backed footprint, not a detector-quality mask. Keep
   // finite zero/negative radiance. L5 has no accompanying L3/L4 quality plane.
   const valid = (i: number) => Number.isInteger(i) && i >= 0 && i < width * height &&
@@ -94,13 +88,13 @@ export function decodeOsirisQuality(bytes: Buffer, geo: Pick<GeoFrame,"width"|"h
   if (field(label, 'DATA_QUALITY_ID') !== '0000000000000000') throw new Error('Unqualified image-wide OSIRIS quality flags.');
   const ranges: [number,number][] = [], data: Record<string,Buffer> = {};
   for (const name of ['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE']) {
-    const block = imageBlock(label, name), quality = name === 'QUALITY_MAP_IMAGE', stride = quality ? 1 : 4;
+    const block = (key: string) => field(label, key, [name]), quality = name === 'QUALITY_MAP_IMAGE', stride = quality ? 1 : 4;
     const start = (Number(field(label, `^${name}`)) - 1) * recordBytes, end = start + geo.width * geo.height * stride;
-    if (Number(field(block, 'LINE_SAMPLES')) !== geo.width || Number(field(block, 'LINES')) !== geo.height ||
-        Number(field(block, 'BANDS')) !== 1 || Number(field(block, 'FIRST_LINE')) !== 1 || Number(field(block, 'FIRST_LINE_SAMPLE')) !== 1 ||
-        field(block, 'LINE_DISPLAY_DIRECTION') !== 'DOWN' || field(block, 'SAMPLE_DISPLAY_DIRECTION') !== 'LEFT' ||
-        Number(field(block, 'SAMPLE_BITS')) !== stride * 8 || field(block, 'SAMPLE_TYPE') !== (quality ? 'LSB_UNSIGNED_INTEGER' : 'PC_REAL') ||
-        (!quality && field(block, 'UNIT') !== 'W/M**2/SR/NM') || !Number.isSafeInteger(start) || start < label.length || end > bytes.length ||
+    if (Number(block('LINE_SAMPLES')) !== geo.width || Number(block('LINES')) !== geo.height ||
+        Number(block('BANDS')) !== 1 || Number(block('FIRST_LINE')) !== 1 || Number(block('FIRST_LINE_SAMPLE')) !== 1 ||
+        block('LINE_DISPLAY_DIRECTION') !== 'DOWN' || block('SAMPLE_DISPLAY_DIRECTION') !== 'LEFT' ||
+        Number(block('SAMPLE_BITS')) !== stride * 8 || block('SAMPLE_TYPE') !== (quality ? 'LSB_UNSIGNED_INTEGER' : 'PC_REAL') ||
+        (!quality && block('UNIT') !== 'W/M**2/SR/NM') || !Number.isSafeInteger(start) || start < label.length || end > bytes.length ||
         ranges.some(([a, b]) => start < b && end > a)) throw new Error(`Invalid quality companion plane: ${name}`);
     ranges.push([start, end]); data[name] = bytes.subarray(start, end);
   }

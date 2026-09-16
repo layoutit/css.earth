@@ -828,14 +828,14 @@
       "outputs": [
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
-          "bytes": 1376,
-          "sha256": "f0645a69bb7abc23377bfa641a5a0efa5a0746601ca08f4d161ff73bd1dd484b",
+          "bytes": 1372,
+          "sha256": "c51d55efa3313a6db01edcfd77de1febadba4c410a9ff4163c0ad967433ccf3e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 678120,
-          "sha256": "1bc7651e929605dfa7d596f48a393d2f7dd5ae43ace4442c640018ea2d1d963f",
+          "bytes": 558832,
+          "sha256": "cbc238d821084a06141816e7fd767cda56f293be51534bcdc0792f352ef3c02f",
           "verification": "bytes-verified"
         }
       ],
@@ -954,8 +954,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/llorri.webp",
-          "bytes": 21142,
-          "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012",
+          "bytes": 17578,
+          "sha256": "c9baa68a698bfc5863d87568a69b734cdab194152a1eaf0ee298ed0743fd674a",
           "verification": "bytes-verified"
         }
       ]
@@ -992,7 +992,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "06bc126ed127cd3ec88c6ee1076275218c742495dffa415f3a36e51523dde06e",
+    "materialSha256": "c310168c3695577c49e6b772ba458356b3f4efc237051bf563c994af7c1b0e43",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

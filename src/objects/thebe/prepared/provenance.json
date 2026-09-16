@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe23e88d736aeddefab8dc69df76e99ec66501fb18d3297c77067357232b49aa"
+    "sha256": "651361acbd24f49bc872b6c76f88d8648040a4b88bca924a7ee867d481305f53"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1114,14 +1114,14 @@
       "outputs": [
         {
           "url": "/scenes/thebe/thebe-normal-thumbnail.webp",
-          "bytes": 1716,
-          "sha256": "74ca4e237dc043ee761f4e78349275388ccb6c86b0e751860fa0c1e1f64c0e9a",
+          "bytes": 1608,
+          "sha256": "e34bbd675d7209ff07c8122cab8803a20efb27e8bf1cadf37303183e5da72d9f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thebe/thebe-normal-surface@2x.webp",
-          "bytes": 117868,
-          "sha256": "46d8bacd54fd8baeebbbdf095a64fa7b7445f346a50282b10109192164375282",
+          "bytes": 110596,
+          "sha256": "9e5f8de3e122ede0ec1035008e9284484569d4a1865d837e1f57e08b589502ea",
           "verification": "bytes-verified"
         }
       ],
@@ -1215,8 +1215,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 9626,
-          "sha256": "3e444aee4d12da2795d07544c7a9c2f608c57eb136f980b54dffcfcc1429808c",
+          "bytes": 9714,
+          "sha256": "6b46e0f9194e1cc387460e7b7d3ba1055706ce9bb1a075d23c0c7141ce16a9af",
           "verification": "bytes-verified"
         }
       ]
@@ -1253,7 +1253,7 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "e8e11884b721b44648f0aed57d8e8e09fdafd7442c999532b545f249f96b9a57",
+    "materialSha256": "ab89a00f91b1e631f5db8bdbc93bd85962bc252b581dca385b944e15aa6587b2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

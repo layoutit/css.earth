@@ -17,12 +17,13 @@ interface SolidMaterialConfig {
   lighting: LambertAttenuationParameters & {logicalSize: number};
 }
 import type {Sharp,WebpOptions} from 'sharp';
-import {requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
+import {hasErrorCode,requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
 import {parseDimensions} from './source-records.mts';
 export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
 export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { copyFile, link, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { createHash, randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
@@ -341,11 +342,29 @@ export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, conf
   }
 }
 
+/**
+ * The attenuation atlas is one image for every body that shares its parameters, and its lossless encoding takes about 30 s.
+ * The encoded bytes are kept under the digest of the pixels, the encoder options and the libvips build, created once and never
+ * replaced, so a body reuses them byte for byte and a changed generator or encoder simply finds no entry.
+ */
+async function encodeLightingAtlas(pixels: Uint8Array, width: number, height: number, destination: string) {
+  const options = { lossless: true, quality: 100, effort: 6 };
+  const key = createHash('sha256').update(pixels).update(JSON.stringify([width, height, options, sharp.versions])).digest('hex');
+  const cached = resolve(process.cwd(), '.local/lighting-atlas', `${key}.webp`);
+  try { await copyFile(cached, destination); return; } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
+  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp(options).toFile(destination);
+  await mkdir(dirname(cached), { recursive: true });
+  const temporary = `${cached}.${randomUUID()}.tmp`;
+  await copyFile(destination, temporary);
+  // A hard link creates the entry only if no other body wrote it first; either way the bytes are the same.
+  try { await link(temporary, cached); } catch (error) { if (!hasErrorCode(error, 'EEXIST')) throw error; } finally { await rm(temporary, { force: true }); }
+}
+
 export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDirectory, config }: {surfaces: SolidSurface[]; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig}) {
   await prepareSolidSurfacePoles({ surfaces, publicDirectory, config });
   const { pixels, width, height, rows } = lambertAttenuationAtlas(config.lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
-  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));
+  await encodeLightingAtlas(pixels, width, height, resolve(publicDirectory, filename));
   const { columns, frameCount, logicalSize } = config.lighting;
   const frames = Array.from({ length: frameCount }, (_, frame) => ({ resource: 'lighting', frame, row: 0,
     backgroundPosition: `${-(frame % columns) * logicalSize}px ${-Math.floor(frame / columns) * logicalSize}px`,

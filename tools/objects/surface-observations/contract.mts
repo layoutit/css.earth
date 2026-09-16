@@ -114,6 +114,8 @@ export interface SurfacePolicy {
   /** An authored palette replaces the linear grey of a monochrome lens; the display levels are unchanged. */
   display: ({ range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay }) & { palette?: readonly string[] };
   photometry: Record<string, unknown>;
+  /** Whether the displayed brightness keeps the acquisition illumination; such a lens is never lit again. */
+  retainsIllumination: boolean;
   limits: Record<string, unknown>;
   limitations?: string;
   /** Evidence the format measured once for the whole lens, such as filter camera registration. */

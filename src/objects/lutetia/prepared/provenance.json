@@ -953,14 +953,14 @@
       "outputs": [
         {
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
-          "bytes": 2374,
-          "sha256": "9ef32d7daafc5a94714755115788bbe5ba95bb18e84aaa378638f88343e1779f",
+          "bytes": 2384,
+          "sha256": "8f0b7841461c97a1c62a915265d55d8430185e7a1434fb0bc95f5e46d023208c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
-          "bytes": 839936,
-          "sha256": "9fdd8643ef0935915b8018f6eb9436da663259b5fa9c0d861841c45802fcb73f",
+          "bytes": 787590,
+          "sha256": "2f4e398e1c2e8ac5d570f6e73cb125bb11bbd5982c695fe815626820b2eaff0d",
           "verification": "bytes-verified"
         }
       ],
@@ -1079,8 +1079,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 29842,
-          "sha256": "46b2cfd611ca94145dff80d8f7a9bf069715b58e170452b85c8b1ca4e5f03c47",
+          "bytes": 28248,
+          "sha256": "9998901149a90aefa058ec3553c3b64b9406fdd3d532f83b2da4c81d748098f2",
           "verification": "bytes-verified"
         }
       ]
@@ -1117,7 +1117,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "218dadfed760522780c35da556ea699da9b8f30e1d2a5408125db6868f69be8d",
+    "materialSha256": "553a1c82db11f42a1daca4edf6259bdf66310630b2c86030713f7876ccc16715",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

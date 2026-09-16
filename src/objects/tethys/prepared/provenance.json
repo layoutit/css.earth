@@ -2189,14 +2189,14 @@
       "outputs": [
         {
           "url": "/scenes/tethys/tethys-iss-thumbnail.webp",
-          "bytes": 2380,
-          "sha256": "70948d0747c46712b6173f2b8876b30e4296da4cdb9a083a0e1206bc4ece7489",
+          "bytes": 2324,
+          "sha256": "751494ac33d44b086ec3974c23b55f7ca17143e1d3c32a519603793cf4ab5d5c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
-          "bytes": 1224584,
-          "sha256": "8dca5b9a340a322c97176a04ec43c48bde781a14c74e92bdf2003f5b7c21c740",
+          "bytes": 1086580,
+          "sha256": "7889ac48405ad427737f5d829cf560256e4d2f592112f20166eb62905c9cdf89",
           "verification": "bytes-verified"
         }
       ],
@@ -2390,8 +2390,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/iss.webp",
-          "bytes": 20994,
-          "sha256": "0a197b3130c0cdcd7cc6e9ed9ab8c9efa561a456fbb62fce163a24eb82c0b6b2",
+          "bytes": 18898,
+          "sha256": "fad54660b16018ad02ffc7b8e14c5001962f05605ccd0a073df8e0670e034a9c",
           "verification": "bytes-verified"
         }
       ]
@@ -2478,7 +2478,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "ed879a185414cc31e4c0dda683e039b0da4908b1ac7da91bcd5f446157b07afa",
+    "materialSha256": "b475813da8c17eeca5c3f9b10c76a5b97cb952ce61355dc199fa86eb5b6cc23f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

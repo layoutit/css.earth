@@ -1128,14 +1128,14 @@
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
-          "bytes": 1990,
-          "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1",
+          "bytes": 1986,
+          "sha256": "222e9dffe41e12a04d4bdb6f5af273a2e7f775e09f2e03be1eb31efb4d78434a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
-          "bytes": 294862,
-          "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44",
+          "bytes": 298822,
+          "sha256": "939082591625fa4a9fae9c45559da26f188d0b3fa7774edf7f82e8016d590885",
           "verification": "bytes-verified"
         }
       ],
@@ -1254,8 +1254,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 6342,
-          "sha256": "cff43fee6181bd3f429eced7c3fb96af13d0466b064e29e82b1fa8b4d478ff36",
+          "bytes": 6344,
+          "sha256": "a6e4109ae6a919a8c73941ffea2ec8694de73e979adfd625614de5c0518c19a3",
           "verification": "bytes-verified"
         }
       ]
@@ -1317,7 +1317,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "ffa3e7c28313920198c1afa9eb20c4ab72a8c2baba14cd773eda8eda872f3a06",
+    "materialSha256": "5b4a9544f33228821322cc3cfcc7db5cbbb502703ccf6f79926042dd37407b62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
