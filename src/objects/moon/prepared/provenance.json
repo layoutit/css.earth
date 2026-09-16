@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dbdd252b3caeece38fc8a1d6a469cbbf4370d4a8a6da81454222ba51f23a8ea0"
+    "sha256": "be3222e28f9fec3eb9e7daa64c749baa88339049d3b575fd80f83da50668d0d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "9cd67764f11339404a5ef9bed8683efb738eda3ccb63f4b8a74817168e461b5a",
+      "sha256": "b5a08af420176145843fd336e8aa68fabe38723ee66a8a3b00c864089d75eb3f",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/moon/",
@@ -615,7 +615,6 @@
             "schema": "cssmoon-prepared-lighting@1",
             "storageModel": "prepared-full-resolution-density-row-shards",
             "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
-            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
             "ambientIntensity": 0.05,
             "shadowlessFloodLimbFloor": 0.35,
             "orenNayarRoughness": 0,
@@ -627,7 +626,8 @@
             "maximumLightViewZ": 1,
             "baseLightAzimuthDegrees": 0,
             "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-            "runtimeRasterization": false
+            "runtimeRasterization": false,
+            "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; formulation adapted from the OpenSpace globe shader (MIT) and documented in the body README"
           }
         }
       }
@@ -635,7 +635,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4c7daaacb0f6ac8088f8e23ff48a162bd7a9095c74da9f89552d6dd0a697a629",
+      "sha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -1719,7 +1719,7 @@
           {
             "label": "OpenSpace",
             "role": "scene",
-            "description": "Globe configuration",
+            "description": "Lighting model parameters (adapted, MIT)",
             "href": "https://github.com/OpenSpace/OpenSpace"
           },
           {
@@ -2183,8 +2183,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "4c7daaacb0f6ac8088f8e23ff48a162bd7a9095c74da9f89552d6dd0a697a629",
-      "bytes": 34253,
+      "sha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
+      "bytes": 34459,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3333,8 +3333,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5521,
-          "sha256": "b73c9f2827b7846b34193145a3a27ac12c1b63e402ce9889d993ebb7dc257292",
+          "bytes": 5542,
+          "sha256": "df4c211edc6657f5c54149cb2d30152d800e9b5dc7436b515c1bf90bf5453397",
           "verification": "bytes-verified"
         }
       ],
@@ -3586,7 +3586,7 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "5f68ea3ca72a1fa45158d23e648d6ff6e917d2117110fa22eb21fa96eaffa777",
+    "materialSha256": "8c7b1b17ac3822a5e3d679d8a30d3fcc8c850a6baa4f8f4cb27e7c8f4ca13af4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",

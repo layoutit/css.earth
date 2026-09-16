@@ -3,6 +3,7 @@ import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional
 import type {PreparedAtmosphereProfile} from '../../prepared-atmosphere.mts';
 import {readJsonSource, requireRecord, requireFiniteNumber} from '../../source-values.mts';
 import {parseAtmosphereResponse} from './source-contract.mts';
+import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
 export interface AtmosphereConfiguration {
   material: {tileSize: number; presentationSize: number; framesPerShard: number; discRadius: number;
     illumination: {frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number}};
@@ -40,130 +41,45 @@ async function readAtmosphereModel() {
       presentationResponse.observedResponse?.exposureRole !==
         "camera-response-not-body-irradiance" ||
       presentationResponse.cleanRoomTransfer?.bodySunIntensitySource !==
-        "openspace-body-atmosphere-model" ||
+        "body-atmosphere-model" ||
       presentationResponse.transferPolicy?.googlePixelsRedistributed !== false ||
       presentationResponse.transferPolicy?.googleShaderBytesRedistributed !== false) {
     throw new Error("Google Earth Pro atmosphere response is incompatible.");
   }
 
-  const [outerRadiusKm, innerRadiusKm] = captureNumbers(
-    text,
-    /AtmosphereHeight\s*=\s*([\d.]+)\s*-\s*([\d.]+)/u,
-    "atmosphere height",
-  );
-  const planetRadiusKm = captureNumber(
-    text,
-    /PlanetRadius\s*=\s*([\d.]+)/u,
-    "planet radius",
-  );
-  if (innerRadiusKm !== planetRadiusKm || outerRadiusKm <= planetRadiusKm) {
-    throw new Error("OpenSpace body atmosphere radii are inconsistent.");
-  }
-
-  const rayleighBlock = captureText(
-    text,
-    /Rayleigh\s*=\s*\{([\s\S]*?)\n\s*\},\n\s*--\[\[/u,
-    "Rayleigh block",
-  );
-  const mieBlock = captureText(
-    text,
-    /-- Default\s+Mie\s*=\s*\{([\s\S]*?)\n\s*\},\n\s*Debug/u,
-    "Mie block",
-  );
-  const wavelengthsNanometers = captureList(
-    rayleighBlock,
-    /Wavelengths\s*=\s*\{([^}]+)\}/u,
-    "Rayleigh wavelengths",
-  );
-  const rayleighScatteringPerKm = captureList(
-    rayleighBlock,
-    /Scattering\s*=\s*\{([^}]+)\}/u,
-    "Rayleigh scattering",
-  );
-  const mieScatteringPerKm = captureList(
-    mieBlock,
-    /Scattering\s*=\s*\{([^}]+)\}/u,
-    "Mie scattering",
-  );
-  if (wavelengthsNanometers.length !== 3 ||
-      rayleighScatteringPerKm.length !== 3 ||
-      mieScatteringPerKm.length !== 3) {
-    throw new Error("OpenSpace body atmosphere RGB coefficients are incomplete.");
-  }
-
+  const model = parseAtmosphereModelRecord(JSON.parse(text));
+  const planetRadiusKm = model.planetRadiusKm, outerRadiusKm = planetRadiusKm + model.atmosphereHeightKm, innerRadiusKm = planetRadiusKm;
   return deepFreeze({
-    schema: "cssearth-openspace-atmosphere-source@1",
-    authority: "OpenSpace RenderableAtmosphere",
+    schema: "cssearth-atmosphere-model-source@1",
+    authority: "repository-authored cssearth-atmosphere-model@1 record",
     sourceId: source.id,
     sourceSha256: source.expectedSha256,
     planetRadiusKm,
     atmosphereHeightKm: outerRadiusKm - innerRadiusKm,
     outerRadiusRatio: outerRadiusKm / planetRadiusKm,
-    sunIntensity: captureNumber(
-      text,
-      /SunIntensity\s*=\s*([\d.]+)/u,
-      "Sun intensity",
-    ),
+    sunIntensity: model.sunIntensity,
     rayleigh: {
-      wavelengthsNanometers,
-      scatteringPerKm: rgbCoefficients(rayleighScatteringPerKm),
-      scaleHeightKm: captureNumber(
-        rayleighBlock,
-        /H_R\s*=\s*([\d.]+)/u,
-        "Rayleigh scale height",
-      ),
+      wavelengthsNanometers: [...model.rayleigh.wavelengthsNm],
+      scatteringPerKm: rgbCoefficients(model.rayleigh.scatteringPerKm),
+      scaleHeightKm: model.rayleigh.scaleHeightKm,
     },
     mie: {
-      scatteringPerKm: rgbCoefficients(mieScatteringPerKm),
-      scaleHeightKm: captureNumber(
-        mieBlock,
-        /H_M\s*=\s*([\d.]+)/u,
-        "Mie scale height",
-      ),
-      anisotropy: captureNumber(
-        mieBlock,
-        /^\s*G\s*=\s*([\d.]+)/mu,
-        "Mie anisotropy",
-      ),
+      scatteringPerKm: rgbCoefficients(model.mie.scatteringPerKm),
+      scaleHeightKm: model.mie.scaleHeightKm,
+      anisotropy: model.mie.phaseG,
     },
     presentationResponse,
   });
 }
 
 function rgbCoefficients(values: readonly number[]): [number, number, number] {
-  if (values.length !== 3 || values.some(value => !Number.isFinite(value))) throw new Error('OpenSpace atmosphere RGB coefficients are invalid.');
+  if (values.length !== 3 || values.some(value => !Number.isFinite(value))) throw new Error('Atmosphere model RGB coefficients are invalid.');
   return [values[0], values[1], values[2]];
 }
 
-function captureText(text: string, expression: RegExp, label: string) {
-  const value = text.match(expression)?.[1];
-  if (!value) throw new Error(`OpenSpace body ${label} is missing.`);
-  return value;
-}
 
-function captureNumber(text: string, expression: RegExp, label: string) {
-  const value = Number(captureText(text, expression, label));
-  if (!Number.isFinite(value)) {
-    throw new Error(`OpenSpace body ${label} is not finite.`);
-  }
-  return value;
-}
 
-function captureNumbers(text: string, expression: RegExp, label: string) {
-  const match = text.match(expression);
-  if (!match) throw new Error(`OpenSpace body ${label} is missing.`);
-  const values = match.slice(1).map(Number);
-  if (values.some((value) => !Number.isFinite(value))) {
-    throw new Error(`OpenSpace body ${label} is not finite.`);
-  }
-  return values;
-}
 
-function captureList(text: string, expression: RegExp, label: string) {
-  return captureText(text, expression, label)
-    .split(",")
-    .map((value) => Number(value.trim()));
-}
 
 function deepFreeze<T extends object>(value: T): Readonly<T> {
   for (const nested of Object.values(value as Record<string, unknown>)) {
