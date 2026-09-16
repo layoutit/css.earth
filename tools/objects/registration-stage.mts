@@ -6,7 +6,10 @@
  *
  *   node tools/objects/registration-stage.mts <object-id>          measure and print
  *   node tools/objects/registration-stage.mts <object-id> --write  measure, rewrite the report in both prepared intermediates and the README block
+ *   node tools/objects/registration-stage.mts --all --write         the same for every body with a camera lens
  */
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
@@ -17,10 +20,22 @@ import { loadSurfaceObservation } from './surface-observations/index.mts';
 import { registrationBlockFor, withRegistrationBlock } from './report-registration.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
-const [objectId, flag] = process.argv.slice(2);
-if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/registration-stage.mts <object-id> [--write]'); process.exit(2); }
+const [selector, flag] = process.argv.slice(2);
+if (!selector || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/registration-stage.mts <object-id>|--all [--write]'); process.exit(2); }
 
-const objectDirectory = resolve(ROOT, 'src/objects', objectId), sourceDirectory = resolve(objectDirectory, 'source');
+if (selector === '--all') {
+  // Every body with a camera lens, one after another; a rule change in the stage is re-measured across the set this way.
+  const bodies = readdirSync(resolve(ROOT, 'src/objects')).filter(id => existsSync(resolve(ROOT, 'src/objects', id, 'source/preparation/terrestrial.json')) && existsSync(resolve(ROOT, 'src/objects', id, 'prepared/surfaces.json')))
+    .filter(id => { const recipe = JSON.parse(readFileSync(resolve(ROOT, 'src/objects', id, 'source/preparation/terrestrial.json'), 'utf8')) as { raster?: { surfaceObservations?: unknown[] } }; return (recipe.raster?.surfaceObservations?.length ?? 0) > 0; });
+  const failures: string[] = [];
+  for (const id of bodies) {
+    try { process.stdout.write(execFileSync(process.execPath, [process.argv[1], id, ...(flag ? [flag] : [])], { encoding: 'utf8' })); }
+    catch (error) { failures.push(id); console.error(`${id}: ${String((error as { stderr?: string }).stderr ?? error).split('\n').find(line => /Error/.test(line)) ?? 'failed'}`); }
+  }
+  console.log(`${bodies.length - failures.length} of ${bodies.length} bodies measured${failures.length ? `; failed: ${failures.join(', ')}` : ''}.`);
+  process.exit(failures.length ? 1 : 0);
+}
+const objectId = selector, objectDirectory = resolve(ROOT, 'src/objects', objectId), sourceDirectory = resolve(objectDirectory, 'source');
 const config = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8')));
 const lenses = requireArray(requireRecord(config.raster).surfaceObservations ?? []).map(value => requireRecord(value));
 if (!lenses.length) { console.log(`${objectId}: no surface observation lens.`); process.exit(0); }

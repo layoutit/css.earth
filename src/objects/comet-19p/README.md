@@ -24,6 +24,10 @@ The [terrain-place browser record](evidence/terrain-places/browser.json) covers 
 
 - **Reader oracle, 2026-09-12:** `tools/oracles/isis2/borrelly-micas.py` reads the four pinned MICAS cubes with pvl and numpy. `tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts` requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
 
+### Registration
+
+<!-- registration-report:begin --><!-- registration-report:end -->
+
 ## Known problems
 
 - The 16 m USGS grid oversamples roughly 150 m stereo terrain. Height is displacement above an arbitrary image plane.

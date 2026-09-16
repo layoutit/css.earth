@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { rotate } from '../../spice/frames.mts';
 import { controlledShapeCamera, type CameraImage } from './shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from './observer-camera.mts';
-import { framesReference, limbCentre, observationCaster, observerCaster, radiusFieldMesh, reduced, registrationSweep, turnedOrientation, type SurfaceReference } from './observer-registration.mts';
+import { framesReference, limbCentre, observationCaster, observerCaster, prepareFrame, radiusFieldMesh, registrationSweep, turnedOrientation, type SurfaceReference } from './observer-registration.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;
 
@@ -92,7 +92,7 @@ test('the body\'s other frames stand in for a map and expose a turned frame', ()
     const s = { ...sighting(center), epochJd: J2000 + 3.1 + days };
     return { image: render(base, center, markings, s.epochJd), sighting: s, camera: observerCaster(s, base) };
   });
-  const reference = framesReference(frames.slice(1), sphere);
+  const reference = framesReference(frames.slice(1).map(frame => prepareFrame(frame.image, frame.camera, sphere)));
   const held = registrationSweep(frames[0].image, frames[0].camera, sphere, reference, { exactHalfWidth: 4 });
   assert.ok(Math.abs(held.exact.offsetDegrees) <= 1, `a consistent frame peaks at zero (${held.exact.offsetDegrees})`);
   assert.ok(held.mirrorMargin > 1.5, `the frames agree on handedness (${held.mirrorMargin})`);

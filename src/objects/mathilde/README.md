@@ -62,6 +62,18 @@ The retained notes report a successful 35-asset bake, eight downloads restored, 
 
 [Source test definitions](../../../tests/objects/unit/mathilde/source.test.mts).
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `near-msi` | 2 | 0 | — | — | — | its other 2 frames | 0 of 2 | — | 0 of 2 |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset.
+<!-- registration-report:end -->
+
 ## Known problems
 
 NEAR close-ups have substantial gaps, including areas photographed too obliquely
