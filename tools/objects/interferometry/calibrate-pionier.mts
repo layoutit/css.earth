@@ -74,6 +74,7 @@ const exists = (path: string) => access(path).then(() => true, () => false);
 export async function rawFrame(dpId: string, directory: string) {
   const target = resolve(directory, `${dpId}.fits`);
   if (await exists(target)) return target;
+  await mkdir(directory, { recursive: true });
   const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`);
   if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
   if (!response.ok || !response.body) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
