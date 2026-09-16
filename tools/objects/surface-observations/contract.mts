@@ -8,6 +8,7 @@
  * shared: the bilinear footprint, the closest source point, visibility, selection, level matching,
  * the display range, area coverage, the preview and the report.
  */
+import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import type { RadialSurface, SourceAccess, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { BandColorDisplay } from '../color-transfer.mts';
@@ -91,8 +92,13 @@ export interface ObservationFrame {
   visible(point: readonly number[]): boolean;
   /** Measured footprint: nadir-equivalent ground size of one pixel, from the camera's pixel angle and each pixel's range. */
   footprint: FrameFootprint;
+  /** The photograph, its camera and the mesh it was cast on, kept for the registration stage; absent for a frame without a camera. */
+  detector?: FrameDetector;
   report: Record<string, unknown>;
 }
+
+/** What the registration stage measures a frame with: the pixels as decoded, the camera as the route stated it, the mesh the rays were cast on. */
+export interface FrameDetector { image: ObservationImage; camera: ObservationCamera; mesh: Pick<SourceMesh, 'intersect' | 'positions' | 'indices'> }
 
 export interface FrameFootprint { pixelAngleMicroradians: number; nadirMedianMeters: number; nadirMinimumMeters: number; sampledPixels: number }
 
