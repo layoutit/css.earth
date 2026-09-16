@@ -73,7 +73,7 @@
     },
     {
       "expectedBytes": 1684,
-      "expectedSha256": "036b191936e090b8cbb4d0189059f97608eb25174a99c6164f5b280cd24ad683",
+      "expectedSha256": "11702548e7647f666e069c99cb129105474b0bb0a970c1b75a716f313f63bfa6",
       "id": "antares-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -172,8 +172,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 3851,
-      "expectedSha256": "b82e382f68abd1b4823968a20c3f57a6683dd8bf0d7e5cbf570204c587bfcebc",
+      "expectedBytes": 2948,
+      "expectedSha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

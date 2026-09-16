@@ -147,7 +147,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2018); model 1743, version 2017-03-31."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/eos.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   },

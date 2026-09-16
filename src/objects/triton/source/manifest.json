@@ -423,8 +423,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7901,
-      "expectedSha256": "8ec68e5cf600e4b233ac3e016fa208c349d25fc987c6f7409cabf542df9277a8",
+      "expectedBytes": 6961,
+      "expectedSha256": "bb876106c486f2c2cd5146e4ecdb342a07f99e69bfd630be081c19d43b81551d",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -455,8 +455,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2342,
-      "expectedSha256": "8c0773e1f0fbb9d75e901e9c9bcd8c4a98f58b300284f5eea08f7cbdfca75f75"
+      "expectedBytes": 1091,
+      "expectedSha256": "47db49d2191c87ebb67f06389aa0e9162d2ac04e1fb4b933b53267f75d6478c6"
     },
     {
       "id": "triton-surface-feature-notes",

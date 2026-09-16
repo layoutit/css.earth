@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Fides model 311, version 2011-04-21; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/fides.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

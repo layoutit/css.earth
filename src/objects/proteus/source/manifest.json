@@ -506,15 +506,15 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 165480,
-      "expectedSha256": "1ed2c94ec699bc6aaaf4c85d2349c6cd265dbeb8954fb0576cf28c7241396c57"
+      "expectedBytes": 163673,
+      "expectedSha256": "8575a1a13d346acaa316f0d5322af6311f5cb59ea136f867c078604a746d9acc"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5567,
-      "expectedSha256": "afbf39f9404d6784dbf3cb68e3064232e43489479cef93f6be0820597a7f592a",
+      "expectedBytes": 5622,
+      "expectedSha256": "2b68e878403ab96fc1eba5e6b0723800a8417a99d697507ea29998964af356c9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -604,8 +604,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2359,
-      "expectedSha256": "169aabd3de5448159f6c666144f0d3cb9e5009dd8687cc8b5db50b3174b3f120"
+      "expectedBytes": 1089,
+      "expectedSha256": "dc1991bce819ba1b50ac5aa0b86f0f4c211f90872197cff914f915e01c4505fc"
     },
     {
       "path": "geometry/c1137328-opus.json",

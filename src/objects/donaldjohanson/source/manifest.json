@@ -408,8 +408,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 16566,
-      "expectedSha256": "50b0c4b46bc54d64f4e6f2534c90a6e1db10ec511f5e2efb743960786d658df6",
+      "expectedBytes": 15214,
+      "expectedSha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -550,21 +550,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
-      }
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 3117,
-      "expectedSha256": "352689e9b203a7e87a4d851d0828f0746abbe78bfd529f881a9f55becdcbc673",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Donaldjohanson: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
       }
     }
   ]

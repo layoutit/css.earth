@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13955,
-      "expectedSha256": "d8b8851031de177b2a95fd6b63a47d0d567cdddc9036edebabe8d34e179ebbab",
+      "expectedBytes": 14237,
+      "expectedSha256": "00397c61e69ff869c90eca04b6d5aeb98e0e806075126de6ec2752579056d01b",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1118,8 +1118,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2647,
-      "expectedSha256": "5a5b1dcfa47839aa23b400b18c77a709cb8bad4f3fc617bdd8affdc9a29437cc"
+      "expectedBytes": 1413,
+      "expectedSha256": "1a514750d68e2db4d3a778a3d4ce8ea56e1d7faceedde77643282b5b46d03d1c"
     },
     {
       "id": "usgs-sim3168-io-geology-metadata-txt",

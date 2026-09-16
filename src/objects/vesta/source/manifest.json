@@ -1487,8 +1487,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10221,
-      "expectedSha256": "f7ef640d6e118a5c2f724a0282694b803fa53050ecf72182ed06f7ba840c4cd3",
+      "expectedBytes": 10021,
+      "expectedSha256": "4765ca31462d5f54c0ca436b3c528b498f5fdabac7812b057fc0cb8e63c74643",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1585,21 +1585,6 @@
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
       "acquisition": "Extracted unmodified from the released PDS zip archive beside the pinned mosaic."
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5237,
-      "expectedSha256": "0fcaf02d242a63bcb312a90756b1209751555e7a89a3a1f9055c554c65a6988e",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Vesta: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

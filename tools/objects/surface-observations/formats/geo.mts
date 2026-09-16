@@ -277,7 +277,7 @@ export const geoFormat: SurfaceObservationFormat = {
       // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
       display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
           colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
-        : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
+        : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };
     return { frames, policy, exceeded };
   },
 };

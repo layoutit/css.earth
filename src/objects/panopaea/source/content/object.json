@@ -164,7 +164,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Panopaea model 6171, version 2023-10-03; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/panopaea.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

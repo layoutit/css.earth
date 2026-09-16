@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10635,
-      "expectedSha256": "a154742cc80d47a6ef093cab3f09081229c378a12323881a37e65132294a1dae",
+      "expectedBytes": 10337,
+      "expectedSha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,21 +164,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1813,
       "expectedSha256": "be1ecd587943a4f608e4658c0d50359081c5d980c17d6b9afa76eaf105425d2c"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5169,
-      "expectedSha256": "8e26b254eef2cd9412adb792f5f4d52cf8c9cd12d262a81b587d596802cd2cee",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Alphonsina: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

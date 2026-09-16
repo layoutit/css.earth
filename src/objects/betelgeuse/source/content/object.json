@@ -68,7 +68,7 @@
           "kind": "scale",
           "title": "Relative intensity at 4 µm",
           "labels": [
-            "0.37",
+            "0.35",
             "0.68",
             "1.00"
           ],
@@ -106,7 +106,7 @@
               ]
             ],
             "labels": [
-              "0.37",
+              "0.35",
               "0.68",
               "1.00"
             ]
@@ -157,7 +157,7 @@
       "credit": "J. Drevon, F. Millour, P. Cruzalèbes et al.; ESO/VLTI/MATISSE; JMMC OiDB"
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/betelgeuse.json",
       "credit": "Joyce et al. (2020) radius and distance; SIMBAD astrometry; Kervella et al. (2018) rotation"
     }
   }

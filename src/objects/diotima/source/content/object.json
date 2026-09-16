@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Diotima model 1836, version 2017-07-11; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/diotima.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

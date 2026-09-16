@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7558,
-      "expectedSha256": "c3e9c92dd7211fe68fbd6c6d501fcd58ec438e3506eaeba820ba610491b47310",
+      "expectedBytes": 7811,
+      "expectedSha256": "e8617a9b54b67c69e6621cd9652465c1076784b001b3fdffff4d42f740944668",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,21 +200,6 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "a33943f95c68b091dd59e61bfe4d70a067605dd8947ac5cfc9444a1271b9599f"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5402,
-      "expectedSha256": "644d76af40c9910b288b114dcfdb12ab479436dc14bbf4db97b320d4b0b8214a",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Themis: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

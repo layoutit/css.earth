@@ -532,8 +532,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11155,
-      "expectedSha256": "0a9c3406333f8029ce77548c33ef8cb52fdb795352a9ba083e987123a0432918",
+      "expectedBytes": 10278,
+      "expectedSha256": "200826b43945ab958f7e12b24faac5e643b42fa7ee9f3b5b31665aa325641ff5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -706,21 +706,6 @@
       "origin": "https://doi.org/10.1006/icar.1994.1005",
       "credit": "Published Hapke parameters: Helfenstein et al. (1994), doi:10.1006/icar.1994.1005. Selection and transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5307,
-      "expectedSha256": "dada15586ebfaaf5c2f08f434ab157506ce1d2c90bbdbd34338f970f7f6738a8",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Gaspra: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

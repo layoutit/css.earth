@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
+import { pds3Keyword } from '../pds-labels.mts';
 import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 
 // PDS3 byte images carry their projection and validity in the attached label.
@@ -11,9 +12,9 @@ export function decodePdsByteImage(bytes: Buffer, value: unknown = {}) {
   const policy = parseBytePolicy(value);
   const label = bytes.subarray(0, 65536).toString('ascii');
   const field = (key: string) => {
-    const value = label.match(new RegExp(`^\\s*${key.replaceAll('^', '\\^')}\\s*=\\s*([^\\r\\n]+)`, 'm'))?.[1];
+    const value = pds3Keyword(label, key);
     if (value === undefined) throw new Error(`Missing PDS field: ${key}`);
-    return value.trim().replaceAll('"', '');
+    return value;
   };
   const number = (key: string) => {
     const value = Number.parseFloat(field(key));

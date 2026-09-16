@@ -350,8 +350,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10482,
-      "expectedSha256": "5f0b8cc3fce51228512fa85126560ec42172664c229368c624da5d7a3b531a54",
+      "expectedBytes": 10034,
+      "expectedSha256": "ed5061be70199ccec6e6097f36a1884c2d7e657ce201f110690326f92057cff6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -387,8 +387,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2329,
-      "expectedSha256": "436a8c9f95ef4c8920529efed5fd48c0bfff10bedf3b9dfdc37e0f9958f69621"
+      "expectedBytes": 1083,
+      "expectedSha256": "87ee97453d388b3fe81c9c9a46abdab8f5c167d6d38cf022b53fe0d8c3ac7c13"
     },
     {
       "id": "mimas-surface-feature-notes",

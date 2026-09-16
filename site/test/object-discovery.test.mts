@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { SCENE_OBJECTS, requireSceneObject } from '../objects.mts';
-import { deriveObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
+import { deriveObjectDiscovery, prepareObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
 import { discoveryVisibility, parseObjectDiscovery } from '../object-discovery.mts';
 import { parseArrivalView } from '../arrival-view.mts';
 import { record } from '../browser-types.mts';
@@ -123,4 +125,14 @@ test('photographic arrivals use the prepared package camera, excluding modeled a
   assert.throws(() => deriveObjectDiscovery(policy, preparedControls, recipes, { ...camera, defaultControlYawDegrees: NaN }));
   assert.throws(() => parseArrivalView({ defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,1,0,0,0,-1] }));
   assert.ok(requireSceneObject('arrokoth').discovery.arrival?.lensIds.includes('lorri'));
+});
+
+test('a package that was never prepared is discoverable as shape only instead of failing the catalogue', async () => {
+  const folder = await mkdtemp(join(tmpdir(), 'discovery-unprepared-'));
+  try {
+    await mkdir(join(folder, 'source/preparation'), { recursive: true });
+    await writeFile(join(folder, 'source/preparation/raster.json'), JSON.stringify({ surfaces: [{ id: 'photo', science: { kind: 'surface-observation' } }] }));
+    const descriptor = { properties: { catalog: {}, recipe: { sources: [{ id: 'raster', path: 'source/preparation/raster.json' }] } } };
+    assert.deepEqual(await prepareObjectDiscovery(descriptor, folder), { imagery: false, illustration: false, featured: false });
+  } finally { await rm(folder, { recursive: true, force: true }); }
 });

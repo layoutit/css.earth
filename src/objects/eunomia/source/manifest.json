@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8241,
-      "expectedSha256": "dff7b36cd72ec06fffd9c695e8a584fcd6bf0aae2edf4d10070e6286f8db7448",
+      "expectedBytes": 8495,
+      "expectedSha256": "f1ff322d358c962c0ff1a9945d7c58f2e44e8a3e97e2875fb5e9005e42eaf8f6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,21 +200,6 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "f9161de434e77327dcb647e7582fe67839d9dcfbfa4816c6cdf7759fa573d76e"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 6474,
-      "expectedSha256": "12d0fcc686011cd46aa180e834f32e93108f270ec23e5aacdaf2fd9c31f9c18b",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Eunomia: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

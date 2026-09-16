@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Phaethon model 4394, version 2019-12-03; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/phaethon.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

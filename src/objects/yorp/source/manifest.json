@@ -192,8 +192,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7844,
-      "expectedSha256": "5b6f0ca9fad0a0c01a0e87c3de6eeab007624d7ddb8ff85733ab16c8074bdfe7",
+      "expectedBytes": 7642,
+      "expectedSha256": "52c56aa5deeb762e846438f35e4978df2591fd97b0e9ef04fbd9dfb838ec6c9c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -248,21 +248,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 2311,
       "expectedSha256": "99aa1b171f21c736e8683e90f4d685626d697d913345d5fd39e27f5d97f1491b"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 4316,
-      "expectedSha256": "1e47c0452aa786e40bf1725f0b4a003efaccf2946a070ec96b7c093e2d3b0bac",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for YORP: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }
