@@ -200,10 +200,12 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   }
   const hasId = (node: Node | null | undefined) => values(node).some(value => typeof value === "string" && ids.has(value));
   walkRuntimeAst(ast, node => { if (node.type === "ImportDeclaration" ||
-      node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration") {
+      node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration" ||
+      // A dynamic import with a literal specifier is followed like a static one; only a computed specifier hides its owner.
+      node.type === "ImportExpression" && node.source.type === "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) {
     if (isRecord(node) && (node.importKind === 'type' || node.exportKind === 'type')) return;
     const imported = requireString(node.source?.value);
-    const onServer = astroRoot ? frontmatterImports.has(node) : serverOnly;
+    const onServer = node.type !== "ImportExpression" && (astroRoot ? frontmatterImports.has(node) : serverOnly);
     (onServer ? serverImports : clientImports).add(imported);
     if (!registryDescriptors.has(imported) && !(onServer && isBuiltin(imported))) imports.push(imported);
     for (const specifier of node.type === "ImportDeclaration" ? node.specifiers : []) {
@@ -213,7 +215,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
     }
   } });
   walkRuntimeAst(ast, node => {
-    if (node.type === "ImportExpression" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) note(node, "Dynamic runtime imports hide ownership from the static closure");
+    if (node.type === "ImportExpression" && node.source.type !== "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) note(node, "Computed dynamic imports hide ownership from the static closure");
     if ((node.type === "CallExpression" || node.type === "NewExpression") &&
         ["eval", "Function"].includes(nameOf(node.callee) || propertyName(node.callee))) note(node, "Runtime code construction hides ownership");
     if (shared) {
@@ -801,6 +803,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         await sharedVisit(importedPath);
         continue;
       }
+      // A Vite asset reference (?url, ?raw, ?inline) delivers bytes, not runtime source, so it closes nothing.
+      if (/\?(?:url|raw|inline)$/.test(imported)) continue;
       try {
         const target = await resolveRuntimeSource(imported, path, { root, source, objectIds: objectPackageIds });
         if (!target) throw new Error(`Unclosed shared runtime import ${imported}`);
