@@ -370,6 +370,7 @@
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "percentiles": [
             1,
             99.5

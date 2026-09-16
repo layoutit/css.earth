@@ -6,7 +6,7 @@ import {array,choice,number,shape,text,parseMeshProfile} from './source-records.
 import {loadPdsPlanetocentricShape} from './obj-shape.mts';
 import {decodeHriiSpectra,decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spectra.mts';
 import {hriiCamera,hriiControlResidual} from './hrii-camera.mts';
-import {parseHriiContext,parseHriiDenseFit,loadHriiContext,fitHriiPointing} from './hrii-registration.mts';
+import {parseHriiContext,parseHriiDenseFit,loadHriiContext,fitHriiPointing} from './hrii-pointing.mts';
 
 const pin=shape({path:text,sha256:text});
 const recipeParser=shape({schema:text,target:text,targetAliases:array(text),mesh:shape({path:text,sha256:text,grid:parseMeshProfile}),solar:pin,
