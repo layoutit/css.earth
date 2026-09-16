@@ -88,6 +88,7 @@
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "percentiles": [
             0.9,
             99.8
@@ -127,6 +128,7 @@
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "displayRange": [
             0,
             0.17

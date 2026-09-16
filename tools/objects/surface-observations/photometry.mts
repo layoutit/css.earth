@@ -30,6 +30,6 @@ export function diskPhotometry(block: DiskPhotometry): ObservationPhotometry {
 }
 
 /** The photograph's own shading, with no angle limits beyond the transfer's. */
-export function observedPhotometry(report: Record<string, unknown>): ObservationPhotometry {
+export function retainedPhotometry(report: Record<string, unknown>): ObservationPhotometry {
   return { gain: () => 1, retainsIllumination: true, report: { ...report, limitations: 'Original acquisition shading retained; bounded relative display levels only, not albedo.' } };
 }

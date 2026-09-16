@@ -14,7 +14,7 @@ import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds } from '../../spice/lsk.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
 import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera } from './observer-camera.mts';
-import { limbCentre } from './observer-registration.mts';
+import { limbCentre } from './registration-sweeps.mts';
 
 const DEGREE = Math.PI / 180;
 export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@1';
