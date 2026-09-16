@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-transiting-planet@1",
+  "id": "wasp-43b",
+  "host": "wasp-43",
+  "radiusKm": 73481.18,
+  "radiusSource": "Planet-to-star radius ratio 0.15883 +0.00056/-0.00053 (Challener et al. 2024, ApJL 969, L32, Table 1, fitted to the JWST NIRSpec white-light transit) times the assumed stellar radius 0.665 solar radii of the same table: 73,481 km, 1.03 Jupiter radii at 71,492 km.",
+  "orbitalPeriodDays": 0.8134741,
+  "orbitalPeriodSource": "Challener et al. (2024), Table 1, assumed orbital period.",
+  "semiMajorAxisKm": 2256158.92635,
+  "semiMajorAxisSource": "Semi-major axis 4.8767 +0.0068/-0.0069 stellar radii (Challener et al. 2024, Table 1) times 462,640.5 km: 2,256,159 km, 0.0151 AU.",
+  "temperature": {
+    "hottestKelvin": 1975.68,
+    "hottestLongitudeDegrees": 5.625,
+    "hottestLatitudeDegrees": -13.125,
+    "daysideMeanKelvin": 1561.2,
+    "nightsideMeanKelvin": 1003.2,
+    "source": "Computed here from the deposited white-light temperature map (whitelight.tmap in maps.npy, Zenodo 10.5281/zenodo.12627524): the hottest grid cell and the area-weighted means of the hemispheres centred on longitudes 0 and 180. The paper reports the hotspot 6.9 +/- 0.5 degrees east and 13.4 +3.2/-1.7 degrees south, a peak near 2000 K and a nightside average near 1000 K."
+  }
+}

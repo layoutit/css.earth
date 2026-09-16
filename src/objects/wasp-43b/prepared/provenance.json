@@ -1,0 +1,515 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "wasp-43b",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "88b772f5701c101a406707300b7fe44112ab383c57794e393bd3d768b0a5ec22"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "9e87e3d6a0c31d47f9c2d750d9e8d7e1c9d7027ee31eac1c1cf6ddb7b69f558a"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "0ca0f1ab9aad643254a5d71c34937a10362e9d5187447fb663df866ffafc73f5",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/wasp-43b/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "wasp-43b-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "csswasp-43b-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "temperature",
+            "output": "wasp-43b-surface-{id}{suffix}.webp",
+            "thumbnail": "wasp-43b-lens-{id}.webp",
+            "source": "science/challener-2024/wasp-43b.tar",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "temperature",
+              "label": "Temperature",
+              "format": "npy-dictionary-map",
+              "path": "science/challener-2024/wasp-43b.tar",
+              "member": "wasp-43b/maps.npy",
+              "consumer": "challener-2024-eclipse-map",
+              "sampling": "bilinear",
+              "displaySampling": "bilinear",
+              "outputLongitudeOrigin": -90,
+              "units": "K",
+              "values": [
+                "whitelight",
+                "tmap"
+              ],
+              "latitudes": [
+                "whitelight",
+                "lat"
+              ],
+              "longitudes": [
+                "whitelight",
+                "lon"
+              ],
+              "minimum": 700,
+              "maximum": 2000,
+              "colors": [
+                "#0d0887",
+                "#7e03a8",
+                "#cc4778",
+                "#f89540",
+                "#f0f921"
+              ],
+              "labels": [
+                "700",
+                "1350",
+                "2000"
+              ],
+              "description": "Brightness temperature of the whole planet, fitted to how its light changed over a full JWST orbit. Only large patterns are real.",
+              "title": "JWST NIRSpec · eclipse map",
+              "sourceUrl": "https://zenodo.org/records/12627524"
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "wasp-43b-context-{id}{suffix}.webp",
+          "limbOutput": "wasp-43b-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "csswasp-43b-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "3e55bca14ccfb0d591ade9bbd076d06b3e6f402e7f5d5601710d9a16c8959aa1",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "wasp-43b",
+        "displayName": "WASP-43b",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "1.03 Jupiter radii",
+              "source": {
+                "catalogueId": "arxiv-2406-10207",
+                "url": "https://arxiv.org/abs/2406.10207",
+                "label": "Challener et al. (2024), Table 1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "19.5 hours",
+              "source": {
+                "catalogueId": "arxiv-2406-10207",
+                "url": "https://arxiv.org/abs/2406.10207",
+                "label": "Challener et al. (2024), Table 1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "locator": "orbitalPeriodDays; orbitalPeriodSource"
+              }
+            },
+            {
+              "id": "distance-from-star",
+              "label": "Distance from its star",
+              "value": "0.015 AU",
+              "source": {
+                "catalogueId": "arxiv-2406-10207",
+                "url": "https://arxiv.org/abs/2406.10207",
+                "label": "Challener et al. (2024), Table 1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "locator": "semiMajorAxisKm; semiMajorAxisSource"
+              }
+            },
+            {
+              "id": "hottest",
+              "label": "Hottest point",
+              "value": "About 2,000 K, just east of noon",
+              "source": {
+                "catalogueId": "zenodo-12627524",
+                "url": "https://zenodo.org/records/12627524",
+                "label": "Challener et al. (2024) deposited map",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "locator": "temperature"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "temperature",
+          "controls": [
+            {
+              "id": "temperature",
+              "label": "Temperature",
+              "qualification": "Eclipse map · 3rd-degree harmonics · JWST NIRSpec 2023 phase curve",
+              "thumbnail": "wasp-43b-lens-temperature.webp",
+              "surface": "wasp-43b-surface-temperature.webp",
+              "poles": "wasp-43b-poles-temperature.webp",
+              "source": {
+                "id": "wasp-43b-challener-2024-deposit",
+                "path": "../manifest.json",
+                "url": "https://zenodo.org/records/12627524"
+              },
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Brightness temperature",
+                "labels": [
+                  "700",
+                  "1350",
+                  "2000"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      13,
+                      8,
+                      135
+                    ],
+                    [
+                      126,
+                      3,
+                      168
+                    ],
+                    [
+                      204,
+                      71,
+                      120
+                    ],
+                    [
+                      248,
+                      149,
+                      64
+                    ],
+                    [
+                      240,
+                      249,
+                      33
+                    ]
+                  ],
+                  "labels": [
+                    "700",
+                    "1350",
+                    "2000"
+                  ]
+                },
+                "meta": "K",
+                "sourceUrl": "https://zenodo.org/records/12627524"
+              },
+              "notes": "Brightness temperature fitted to JWST light curves; large-scale patterns only. North and south cannot be told apart by this method."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Challener et al. (2024), ApJL 969, L32",
+            "href": "https://arxiv.org/abs/2406.10207"
+          },
+          {
+            "label": "Data",
+            "role": "dataset",
+            "description": "Maps and light curves, Zenodo",
+            "href": "https://zenodo.org/records/12627524"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/abs/2406.10207",
+            "credit": "Challener et al. (2024), ApJL 969, L32"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/wasp-43b.json",
+            "credit": "Transit-fitted radius and orbit around WASP-43; assumed synchronous rotation"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "wasp-43b-challener-2024-deposit",
+      "path": "science/challener-2024/wasp-43b.tar",
+      "origin": "https://zenodo.org/api/records/12627524/files/wasp-43b.tar/content",
+      "productId": "wasp-43b.tar",
+      "version": "10.5281/zenodo.12627524",
+      "title": "Latitudinal Asymmetry in the Dayside Atmosphere of WASP-43b: data inputs and analysis products",
+      "sourceUrl": "https://zenodo.org/records/12627524",
+      "credit": "R. C. Challener, Z. Rustamkulov et al. (2024); JWST NIRSpec program 1224 (PI S. Birkmann)",
+      "displayCredit": "Challener et al. · JWST NIRSpec",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/12627524",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the lens, the white-light light curve for the geometry test). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-12627524",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/12627524#/files/wasp-43b.tar"
+          },
+          {
+            "catalogueId": "arxiv-2406-10207",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2406.10207#section-4"
+          }
+        ]
+      },
+      "sha256": "a2dc0004e40fad053933156237d8aeb5defaeee68ef6981f667f503b96731138",
+      "bytes": 1003520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/challener-2024/wasp-43b.tar",
+        "url": "https://zenodo.org/api/records/12627524/files/wasp-43b.tar/content"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "3e55bca14ccfb0d591ade9bbd076d06b3e6f402e7f5d5601710d9a16c8959aa1",
+      "bytes": 4495,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "temperature",
+      "label": "Temperature",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Eclipse map · 3rd-degree harmonics · JWST NIRSpec 2023 phase curve"
+      ],
+      "lensIds": [
+        "temperature"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "wasp-43b-challener-2024-deposit"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-surface-temperature.webp",
+          "bytes": 13698,
+          "sha256": "5ffec1e0ae5046ba7a5db16ba62db48c6ef6fb648c066b429109c080567b2ae0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-surface-temperature@2x.webp",
+          "bytes": 37498,
+          "sha256": "69f77a5da1689f356122a57df40b4c296c7114a067333ea68b40210dce04ad85",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-lens-temperature.webp",
+          "bytes": 262,
+          "sha256": "da5b14edd3f8adfcef149d7ac4e05da569454f8a7ac81aa9fd97ad94948b064a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-poles-temperature.webp",
+          "bytes": 20126,
+          "sha256": "0f2d94b686ae85133c5e02b4ed170dabcc8e6838d83a0fcbf3ff3e3bdfaf34c2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-poles-temperature@2x.webp",
+          "bytes": 42268,
+          "sha256": "ee825b01b550f322844b48e4e8e45a85ad6896db5a99fc271d889ecb3b0924bc",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-context-temperature.webp",
+          "bytes": 54,
+          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-limb-temperature.webp",
+          "bytes": 52,
+          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-context-temperature@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/wasp-43b/wasp-43b-limb-temperature@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "wasp-43b-challener-2024-deposit",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6454,
+          "sha256": "91961bc0292d348ee6be2c46e2bde9338d50aea27ac68a472b8fb70f40e04a17",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:temperature",
+      "label": "Temperature preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "temperature"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/temperature.webp",
+          "bytes": 4608,
+          "sha256": "f3aabd00a397456d460d34993e791adee3d5558718e3b2714b06de35b3024061",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "wasp-43b",
+    "materialSha256": "3e979b09f7651db33c46dcf0a28ed6447c0c2464d6fb824cca146fc6aac018fb",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "9e87e3d6a0c31d47f9c2d750d9e8d7e1c9d7027ee31eac1c1cf6ddb7b69f558a"
+    }
+  }
+}

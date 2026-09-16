@@ -303,7 +303,9 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         let raster = science.get(surface.id);
         if (!raster) { raster = loadScienceSurface(sourceDirectory, parsed); science.set(surface.id, raster); }
         const { rgb, missing } = paintScienceSurface(await raster, parsed, width, height);
-        return rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest');
+        const painted = rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest');
+        // A self-luminous body (a thermal emission map) owes the emissive presentation its plates; nothing lies beyond its limb.
+        return recipe.emission ? { ...painted, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : painted;
       }
       case 'terrestrial-mosaic': {
         const plan = shape({ format: text, consumer: text })(surface.science);
