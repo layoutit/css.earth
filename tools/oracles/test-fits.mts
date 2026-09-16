@@ -15,7 +15,7 @@ const run = (args: string[]) => {
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
-const unit = ['tools/fits.test.mts', 'tools/fits.oracle.test.mts', 'tools/oracle-fixtures.test.mts',
+const unit = ['tools/fits.test.mts', 'tools/fits.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tools/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tools/objects/terrestrial-layers/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);
