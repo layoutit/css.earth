@@ -26,7 +26,8 @@
   },
   "include": [
     "**/*.mts",
-    "../site/env.d.ts"
+    "../site/env.d.ts",
+    "nebula/application/**/*.ts"
   ],
   "exclude": [
     "**/*.test.mts",

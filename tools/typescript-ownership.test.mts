@@ -112,13 +112,16 @@ test('source-local test and audit JavaScript remain authored and receive no owne
 
 test('nebula evidence fusion is an authored algorithm owner without exempting its harness imports', t => {
   const repo = fixture(t);
-  const owner = 'labs/nebula/src/reconstruction/evidence-fusion/model.ts';
+  const owner = 'labs/nebula/packages/reconstruction/src/evidence/model.ts';
   repo.write(owner, 'export const combine = () => 1;');
-  repo.write('labs/nebula/src/reconstruction/compiler.ts', 'import "./evidence-fusion/model.ts";');
+  repo.write('labs/nebula/src/reconstruction/compiler.ts', `import "/${owner}";`);
   assert.deepEqual(repo.audit().violations, [], 'The exact multiband processing owner is usable by authored source.');
 
   const harnesses = [
     ['tools/capture-image.mts', 'evidence'],
+    ['labs/nebula/packages/reconstruction/src/evidence/capture-image.ts', 'evidence'],
+    ['labs/nebula/packages/reconstruction/src/evidence/model.test.ts', 'test'],
+    ['labs/nebula/packages/reconstruction/src/evidence-copy/model.ts', 'evidence'],
     ['tools/evidence/compare.mts', 'evidence'],
     ['tools/audits/images/compare.mts', 'evidence'],
     ['labs/nebula/src/reconstruction/evidence-fusion/capture-image.ts', 'evidence'],
@@ -132,6 +135,34 @@ test('nebula evidence fusion is an authored algorithm owner without exempting it
     `${owner}: source imports ${role} module ${path}; move shared behavior into an authored owner.`).sort());
   repo.write('labs/nebula/src/reconstruction/evidence-fusion/new-owner.js', 'export const value = 1;');
   assert.ok(repo.audit().violations.includes('New authored JavaScript: labs/nebula/src/reconstruction/evidence-fusion/new-owner.js. Use TypeScript or justify an exact exception.'));
+});
+
+test('moved lab evidence-fusion features, workflows and route are authored owners with narrow boundaries', t => {
+  const repo = fixture(t);
+  const owners = [
+    'labs/nebula/packages/lab/src/features/evidence-fusion/jobs-model.ts',
+    'labs/nebula/packages/lab/src/server/workflows/evidence-fusion/provider.ts',
+    'labs/nebula/packages/lab/src/server/routes/evidence-fusion.ts',
+  ];
+  for (const owner of owners) repo.write(owner, 'export const value = 1;');
+  repo.write('labs/nebula/vite.config.ts', owners.map(owner => `import "/${owner}";`).join('\n'));
+  assert.deepEqual(repo.audit().violations, []);
+  const harnesses = [
+    ['labs/nebula/packages/lab/src/features/evidence-fusion/capture-image.ts', 'evidence'],
+    ['labs/nebula/packages/lab/src/server/workflows/evidence-fusion/evidence/report.ts', 'evidence'],
+    ['labs/nebula/packages/lab/src/features/evidence-fusion/jobs-model.test.ts', 'test'],
+    ['labs/nebula/packages/lab/src/server/routes/evidence-fusion.test.ts', 'test'],
+    ['labs/nebula/packages/lab/src/features/evidence-fusion-copy/model.ts', 'evidence'],
+    ['labs/nebula/packages/lab/src/server/workflows/evidence-fusion-copy/model.ts', 'evidence'],
+    ['labs/nebula/packages/lab/src/server/routes/evidence-fusion-report.ts', 'evidence'],
+  ];
+  for (const [path] of harnesses) repo.write(path!, 'export const value = 1;');
+  for (const owner of owners) repo.write(owner, harnesses.map(([path]) => `import "/${path}";`).join('\n'));
+  assert.deepEqual(repo.audit().violations, owners.flatMap(owner => harnesses.map(([path, role]) =>
+    `${owner}: source imports ${role} module ${path}; move shared behavior into an authored owner.`)).sort());
+  const authoredJs = 'labs/nebula/packages/lab/src/server/workflows/evidence-fusion/new-owner.js';
+  repo.write(authoredJs, 'export const value = 1;');
+  assert.ok(repo.audit().violations.includes(`New authored JavaScript: ${authoredJs}. Use TypeScript or justify an exact exception.`));
 });
 
 test('a compatibility facade rejects added behavior and a different source owner', t => {

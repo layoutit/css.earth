@@ -1,5 +1,4 @@
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
-import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
@@ -160,7 +159,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       const listeners = new Set<(state: PreparedVolumeLensState) => void>();
       const lensContent = Object.freeze(data.lenses.map(({ id, label, title, description, sourceUrl }) =>
         Object.freeze({ id, label, title, description, sourceUrl })));
-      const banks: { lens: PreparedVolumeLens; surface: HTMLElement; runtime: ReturnType<typeof mountPreparedCssVolume> }[] = [];
+      const banks: { lens: PreparedVolumeLens; surface: HTMLElement; runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
       const state = (): PreparedVolumeLensState => Object.freeze({ id: selected, defaultLens: data.defaultLens, selectedLens: selected,
         objectId: data.id, starsVisible, lenses: lensContent });

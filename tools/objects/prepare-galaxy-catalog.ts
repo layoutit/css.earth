@@ -6,7 +6,7 @@ import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/cata
 import { parseGalaxyRecipe, record, text } from '../../src/preparation/galaxy-catalog/config.js';
 import { prepareGalaxyCatalog } from '../../src/preparation/galaxy-catalog/prepare.js';
 import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from '../../src/preparation/galaxy-catalog/source.js';
-import { verifiedBytes, sha256 } from '../../src/preparation/volume/source.js';
+import { verifiedBytes, sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { GalaxySource } from '../../src/preparation/galaxy-catalog/types.js';
 import { readBibliography } from '../../src/preparation/galaxy-catalog/bibliography.js';
 

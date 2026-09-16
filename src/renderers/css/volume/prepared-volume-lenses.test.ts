@@ -9,7 +9,7 @@ import { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '.
 import type { PreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
-import { cloudCompositeOpacity } from '../../../../labs/nebula/src/viewer/cloud-inspection.js';
+import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
 
 class FakeElement {
   readonly nodeType = 1;

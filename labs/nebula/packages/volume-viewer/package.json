@@ -1,0 +1,29 @@
+{
+  "name": "@cssearth/volume-viewer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./camera/framing": "./src/camera/framing.ts",
+    "./camera/inspection": "./src/camera/inspection.ts",
+    "./camera/point-projection": "./src/camera/point-projection.ts",
+    "./scene/tone-resources": "./src/scene/tone-resources.ts",
+    "./scene/compiler-viewer": "./src/scene/compiler-viewer.ts",
+    "./camera/shape-cloud": "./src/camera/shape-cloud.ts",
+    "./scene/backend": "./src/scene/backend.ts",
+    "./scene/shape-cloud-viewer": "./src/scene/shape-cloud-viewer.ts",
+    "./scene/joint-fit-viewer": "./src/scene/joint-fit-viewer.ts",
+    "./camera/inspection-camera": "./src/camera/inspection-camera.ts",
+    "./scene/cloud-types": "./src/scene/cloud-types.ts",
+    "./scene/cloud-inspection": "./src/scene/cloud-inspection.ts",
+    "./scene/inspection-banks": "./src/scene/inspection-banks.ts",
+    "./scene/catalogue-stars": "./src/scene/catalogue-stars.ts",
+    "./scene/image-plane": "./src/scene/image-plane.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@cssearth/volume-core": "workspace:*"
+  }
+}
