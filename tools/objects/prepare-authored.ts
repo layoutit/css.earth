@@ -80,7 +80,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
-        descriptorPath: resolve(stage, 'object.json') });
+        descriptorPath: resolve(stage, 'object.json') }, { stagedAssets: stagedPublic });
       const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
       await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
       const { publishPreparedObject } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');

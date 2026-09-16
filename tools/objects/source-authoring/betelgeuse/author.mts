@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-/** Betelgeuse authored inputs: the uniform-disc reference sphere from the retained measurements, and the monochromatic continuum
- * OIFITS merged from the pinned VLT/MATISSE files. Both are deterministic functions of checked-in or pinned inputs.
+/** Betelgeuse authored inputs: the uniform-disc reference sphere from the retained measurements, the monochromatic continuum
+ * OIFITS merged from the pinned VLT/MATISSE files, the beam-convolved reconstruction and the navigation marker rendered from it.
+ * All are deterministic functions of checked-in or pinned inputs.
  *
  *   node tools/objects/source-authoring/betelgeuse/author.mts [--check]
  *
@@ -10,7 +11,9 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '../../interferometry/matisse-continuum.mts';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
-import { requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
+import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
+import sharp from 'sharp';
+import { interpolatePalette } from '../../color-transfer.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
 
@@ -31,6 +34,9 @@ export const RAW_IMAGE_PATH = 'observations/betelgeuse-matisse-2020-02-continuum
 export const BEAM_IMAGE_PATH = 'observations/betelgeuse-matisse-2020-02-continuum-4mas.fits';
 export const BEAM_FWHM_MAS = 4;
 export const SPHERE_PATH = 'shape/uniform-disc.tab';
+/** The navigation marker: the beam-convolved reconstruction as observed (north up, east left) through the lens's palette. */
+export const CONTEXT_PATH = 'presentation/context.png';
+export const CONTEXT_SIZE = 512;
 
 /** A latitude/longitude/radius table of one radius: the reference sphere, in the released-table format the mesh loader reads. */
 export function uniformDiscTable(radiusKm: number, stepDegrees: number): string {
@@ -39,6 +45,25 @@ export function uniformDiscTable(radiusKm: number, stepDegrees: number): string 
     for (let longitude = 0; longitude <= 360; longitude += stepDegrees) lines.push(`${longitude} ${latitude} ${radiusKm.toFixed(6)}`);
   }
   return `${lines.join('\n')}\n`;
+}
+
+/** The sky-plane image through the lens's own palette and percentile stretch, transparent off the disc. */
+export async function contextMarker(image: ReturnType<typeof readReconstruction>, palette: readonly string[], percentiles: readonly [number, number], backgroundMaximum: number) {
+  const { width, height } = image, values = image.values;
+  const disc = values.filter(value => value > backgroundMaximum).sort((a, b) => a - b);
+  if (!disc.length) throw new Error('The reconstruction has no pixel above the background maximum.');
+  const at = (p: number) => disc[Math.min(disc.length - 1, Math.floor(disc.length * p / 100))]!;
+  const [low, high] = [at(percentiles[0]), at(percentiles[1])];
+  if (!(high > low)) throw new Error('The reconstruction has no display range.');
+  const rgba = Buffer.alloc(width * height * 4);
+  for (let row = 0; row < height; row++) for (let column = 0; column < width; column++) {
+    // FITS rows run south to north and CDELT1 is negative (east left): flip rows so north is up in the PNG.
+    const value = values[(height - 1 - row) * width + column]!;
+    if (!(value > backgroundMaximum)) continue;
+    const [r, g, b] = interpolatePalette(palette, (value - low) / (high - low));
+    rgba.set([r, g, b, 255], (row * width + column) * 4);
+  }
+  return sharp(rgba, { raw: { width, height, channels: 4 } }).resize(CONTEXT_SIZE, CONTEXT_SIZE, { kernel: 'lanczos3', fit: 'fill' }).png({ compressionLevel: 9 }).toBuffer();
 }
 
 export async function authorBetelgeuse({ check = false } = {}) {
@@ -55,7 +80,12 @@ export async function authorBetelgeuse({ check = false } = {}) {
   const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
   if (!(pixelMas > 0)) throw new Error('The reconstruction states no pixel scale.');
   const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
-  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [MERGED_PATH, oifits], [BEAM_IMAGE_PATH, beam]];
+  const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
+  const lens = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').lens, 'lens');
+  const display = requireRecord(lens.display, 'display'), frame = requireRecord(requireArray(lens.frames)[0], 'frame');
+  const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
+  const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
+  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [MERGED_PATH, oifits], [BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
   for (const [path, bytes] of outputs) {
     const target = resolve(root, path);
     if (check) {
@@ -67,5 +97,5 @@ export async function authorBetelgeuse({ check = false } = {}) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const result = await authorBetelgeuse({ check: process.argv.includes('--check') });
-  console.log(`Betelgeuse: ${result.files} MATISSE files, ${result.rawVis2} raw V2 and ${result.rawT3} raw T3 channels -> ${result.vis2} V2 and ${result.t3} T3 rows; sphere table and beam-convolved image written.`);
+  console.log(`Betelgeuse: ${result.files} MATISSE files, ${result.rawVis2} raw V2 and ${result.rawT3} raw T3 channels -> ${result.vis2} V2 and ${result.t3} T3 rows; sphere table, beam-convolved image and navigation marker written.`);
 }

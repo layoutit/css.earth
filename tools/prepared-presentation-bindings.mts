@@ -9,7 +9,7 @@ type MotionTrack = Omit<NonNullable<PreparedPresentationDefinition['motion']>[nu
 interface DepthResult {id: string; source: PresentationSource; compiled: PresentationSource; surface: DepthSurface | null; reason: string | null | undefined;}
 
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { objectPageStyles } from '../site/object-page-contract.mts';
 import { chromium, type Browser } from 'playwright';
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
@@ -18,7 +18,10 @@ import { verifyDepthStyles } from './prepared-depth-styles.mts';
 
 /** Resolve authored motion and immutable leaf facing offline. Runtime receives
  * explicit animation handles and planes, never a live style discovery pass. */
-export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult, interiorOnly = false, browser: suppliedBrowser }: {onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser} = {}) {
+export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult, interiorOnly = false, browser: suppliedBrowser, stagedAssets }: {onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser;
+  /** A staged preparation's flat asset directory: surfaces not yet published under public/scenes resolve there by file name. */
+  stagedAssets?: string} = {}) {
+  const surfaceRoot = stagedAssets ? (url: string) => resolve(stagedAssets, basename(url)) : resolve(root, 'public');
   const definition = restoreDepthSource(withoutPreparedInteriorFill(input));
   const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, 'object.json'), 'utf8'));
   const recipe = isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) ? descriptor.properties.recipe : null;
@@ -285,7 +288,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
     }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
     const { interior, surface, depthReason, ...bindings } = prepared;
-    if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, resolve(root, "public"));
+    if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, surfaceRoot);
     const source = { ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
     let compiled = prepareDepthPartitions(source, surface);
     let reason = depthReason;
@@ -293,6 +296,6 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
     onDepthResult?.({ id: source.id, source, compiled, surface, reason });
     const activated = { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
-    return withPreparedInteriorFill(activated, interior, resolve(root, "public"));
+    return withPreparedInteriorFill(activated, interior, surfaceRoot);
   } finally { await page.close(); if (!suppliedBrowser) await browser.close(); }
 }

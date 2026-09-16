@@ -19,8 +19,9 @@ const DEGREE = Math.PI / 180, PARSEC_AU = 648000 / Math.PI, MAS_RAD = DEGREE / 3
 const direction = (ra: number, dec: number) => [Math.cos(dec * DEGREE) * Math.cos(ra * DEGREE), Math.cos(dec * DEGREE) * Math.sin(ra * DEGREE), Math.sin(dec * DEGREE)];
 
 test('the lens recipe states the camera the pinned astrometry and pole imply', async () => {
-  const recipe = requireRecord(await readJson(resolve(BODY, 'source/preparation/terrestrial.json')));
-  const lens = requireRecord(requireArray(requireRecord(recipe.raster).surfaceObservations).find(entry => requireRecord(entry).id === 'matisse'));
+  const recipe = requireRecord(await readJson(resolve(BODY, 'source/preparation/raster.json')));
+  const surface = requireRecord(requireArray(recipe.surfaces).find(entry => requireRecord(entry).id === 'matisse'));
+  const lens = requireRecord(requireRecord(surface.science).lens);
   const frames = requireArray(lens.frames);
   assert.equal(frames.length, 1, 'the lens states one reconstructed frame');
   const frame = requireRecord(frames[0]);

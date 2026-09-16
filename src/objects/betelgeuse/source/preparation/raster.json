@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/betelgeuse/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "betelgeuse-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssbetelgeuse-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "matisse",
+      "source": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+      "falseColor": true,
+      "output": "betelgeuse-surface-{id}{suffix}.webp",
+      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 531514800,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 1020000000
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "MATISSE reconstruction",
+            "falseColor": true,
+            "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
+          },
+          "frames": [
+            {
+              "id": "matisse-2020-02-continuum",
+              "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 1e-05,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 5183938336905497,
+              "northAzimuthDegrees": 312,
+              "pixelAngleMicroradians": 0.003781546712654381,
+              "center": [
+                63.994,
+                63.001
+              ],
+              "reconstruction": {
+                "startTime": "2020-02-08T00:12:31",
+                "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+                "visibilitiesPath": "observations/betelgeuse-matisse-2020-02-continuum.oifits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "sphere-photograph"
+        }
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 768,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "betelgeuse-context-{id}{suffix}.webp",
+    "limbOutput": "betelgeuse-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssbetelgeuse-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 768,
+        "source": "none: an interferometric reconstruction images the photosphere only; the off-limb plate is transparent",
+        "composition": "transparent",
+        "rotation": "stationary; nothing is drawn",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the reconstruction's limb darkening is in the surface itself",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

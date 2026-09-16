@@ -1120,6 +1120,98 @@
           }
         ]
       }
+    },
+    {
+      "id": "betelgeuse-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 5762,
+      "expectedSha256": "c6bbb40ebbdde32670fdc7eea9c58952065edfc702d7d3e849a35183d326fe6a",
+      "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "betelgeuse-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1834,
+      "expectedSha256": "c014648178cbc136c5965b832f67925fa278c9b74756d342fb407614a6c270d5",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "betelgeuse-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "betelgeuse-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 105,
+      "expectedSha256": "8aa13c75fa69035e0b2e5ba0de9b42b65ac02abac2f4d9a6ca89c692a083d874",
+      "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "betelgeuse-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 291,
+      "expectedSha256": "f71d20052a460f741f99349f7583881ae57f4b71eaa595b27ccb74752aae2e2a",
+      "origin": "Repository-authored scene recipe: Joyce et al. (2020) radius 531,514,800 km, camera plan (defaultZoom 1.25, initial pitch 10, yaw 180 so the photographed hemisphere faces the camera)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -1190,7 +1282,7 @@
       }
     },
     {
-      "id": "prepared-radial-context",
+      "id": "reconstruction-context-marker",
       "path": "presentation/context.png",
       "origin": "https://oidb.jmmc.fr/",
       "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
@@ -1198,32 +1290,26 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 179041,
-      "expectedSha256": "3a43f9452fd2ff04fe2091dee9f875f5c207b8570b2ce6953799f1c1135fc4d6",
+      "expectedBytes": 131002,
+      "expectedSha256": "a46a8b17d4bf4e766206f90d9178213cb5be9bdc39ce152a645c62481296502f",
       "recipe": {
-        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
           "betelgeuse-matisse-2020-02-continuum"
-        ],
-        "size": 512,
-        "longitudeDegrees": 0,
-        "latitudeDegrees": 0,
-        "ambient": 1,
-        "diffuse": 0,
-        "lensId": "matisse"
+        ]
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Rendered by preparation from the prepared MATISSE surface and the reference sphere."
+        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the lens's palette and percentile stretch."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3758,
-      "expectedSha256": "ce4bc0dcaeaa3be906cf7d4498663f8088b2cf5638453004c123e401098adb48",
+      "expectedBytes": 4216,
+      "expectedSha256": "e6270d94800e3d3b8e5838427ba766591867f92edb9b867c74862ef9cd9d21fb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -1245,18 +1331,13 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1316,
-      "expectedSha256": "e80570ce45657186195fe8229bbc41ce199f6dc1adb30b82331a88b6d7cb8551"
+      "expectedBytes": 1228,
+      "expectedSha256": "5e60978ef9045f7ddb303e425bd984e9a4f7528892b09557c12e8c461ce529a2"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 1253,
       "expectedSha256": "6f88fa21b4c86ac52686089f763185752e87035386999aceff99a6b9cbe352a4"
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 5185,
-      "expectedSha256": "5d0a10749460ed500015a82c531243aa2df8e890467f7732721e00321c1e5d13"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1288,8 +1369,8 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 703429,
-      "expectedSha256": "6495ad4208a211fd530256af554952aa884650033f64809c42849f9d35c6874c",
+      "expectedBytes": 822274,
+      "expectedSha256": "3633d92c6c8822cd7910204f2236e58be833d0cb09754967d4acf35dd0be915b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /betelgeuse/ with the default camera, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after preparation."

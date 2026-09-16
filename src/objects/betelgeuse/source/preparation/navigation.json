@@ -6,10 +6,10 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
+    "id": "reconstruction-context-marker",
     "path": "presentation/context.png",
     "origin": "https://oidb.jmmc.fr/",
-    "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
+    "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0); rendered through the lens palette by author.mts",
     "license": "Public calibrated interferometric data; the reconstruction and this marker are attributed display derivatives.",
     "consumers": [
       "navigation"
@@ -17,18 +17,12 @@
     "expectedBytes": 113695,
     "expectedSha256": "3e4400240f03e6f3734acdcdb5c18641b4aa628bdde57f9d06722421546e672f",
     "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
       "inputs": [
         "betelgeuse-matisse-2020-02-continuum"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 0,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "matisse"
+      ]
     },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "generator": "tools/objects/source-authoring/betelgeuse/author.mts"
   },
   "operations": [
     {
