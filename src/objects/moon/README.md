@@ -90,9 +90,9 @@ chosen, at both prepared densities. Unit checks live under
 
 ## Scene and sky
 
-- The OpenSpace globe configuration snapshot (commit
-  `56e29b54b8592084ff1fef47c2e08de0b22ce516`) is retained as provenance; no
-  preparation step reads it.
+- The lighting model is a full-phase Lambert model with a cubic sky term,
+  implemented in the repository; its formulation is adapted from the OpenSpace
+  globe shader (MIT).
 - The directional Sun follows the repository's clean-room directional-sun
   preparation standard. Its direction,
   the pole and the prime meridian at the shared epoch come from the IAU/WGCCRE

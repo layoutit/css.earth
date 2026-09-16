@@ -30,7 +30,7 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "Five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame and the sky threshold is one stated fraction of its peak. The 2018 apparition sees the opposite hemisphere but sits about seventeen times fainter than this set after level matching, past the route's budget, so it is not combined here. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "Five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. The 2018 apparition sees the opposite hemisphere but sits about seventeen times fainter than this set after level matching, past the route's budget, so it is not combined here. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
         },
         "frames": [
           {
@@ -39,15 +39,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 3.3827,
             "observerLatitude": 25.2506,
-            "observerWestLongitude": 310.2572,
+            "observerWestLongitude": 312.4903,
             "sunLatitude": 33.4753,
-            "sunWestLongitude": 306.3926,
+            "sunWestLongitude": 308.6257,
             "rangeKm": 258097738.2,
             "northAzimuthDegrees": 318.7971,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              127.967,
-              127.765
+              127.991,
+              127.619
             ]
           },
           {
@@ -56,15 +56,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 3.4051,
             "observerLatitude": 25.2518,
-            "observerWestLongitude": 324.1327,
+            "observerWestLongitude": 326.3658,
             "sunLatitude": 33.4737,
-            "sunWestLongitude": 320.2652,
+            "sunWestLongitude": 322.4983,
             "rangeKm": 258090954.7,
             "northAzimuthDegrees": 318.7978,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              127.785,
-              128.298
+              127.858,
+              127.779
             ]
           },
           {
@@ -73,15 +73,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 3.8796,
             "observerLatitude": 26.4042,
-            "observerWestLongitude": 148.4616,
+            "observerWestLongitude": 150.6947,
             "sunLatitude": 31.9958,
-            "sunWestLongitude": 142.0475,
+            "sunWestLongitude": 144.2806,
             "rangeKm": 253029282.9,
             "northAzimuthDegrees": 319.4229,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              128.792,
-              125.816
+              128.306,
+              126.496
             ]
           },
           {
@@ -90,15 +90,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 4.2834,
             "observerLatitude": 27.2225,
-            "observerWestLongitude": 234.107,
+            "observerWestLongitude": 236.3402,
             "sunLatitude": 31.0529,
-            "sunWestLongitude": 226.1485,
+            "sunWestLongitude": 228.3816,
             "rangeKm": 251072410.5,
             "northAzimuthDegrees": 319.8079,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              127.818,
-              126.61
+              127.321,
+              127.573
             ]
           },
           {
@@ -107,15 +107,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 2.9142,
             "observerLatitude": 29.7037,
-            "observerWestLongitude": 91.6489,
+            "observerWestLongitude": 93.882,
             "sunLatitude": 28.3256,
-            "sunWestLongitude": 79.7706,
+            "sunWestLongitude": 82.0037,
             "rangeKm": 250527846.6,
             "northAzimuthDegrees": 320.7376,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              127.545,
-              126.086
+              128.142,
+              127.201
             ]
           }
         ],

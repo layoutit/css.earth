@@ -144,9 +144,10 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       'Prepare the declared registered surface lens and affine atmospheric presentation.'));
   } else if (recipe('shape-model')) {
     const plan = record(recipe('shape-model'));
-    for (const lens of controls) add(lens.id, 'shape-model', '', [text(plan.surfaceModel)],
-      'Extract the source model base color and project it onto the authored shape.', {
-        observationAttribution: 'none', interpretation: { kind: 'illustrative-model', resolvedSurfaceObservation: false },
+    // The shape source is the measurement record the manifest binds to this recipe.
+    for (const lens of controls) add(lens.id, 'shape-model', '', group('shape-model'),
+      'Fill the authored shape with the shared neutral gray display convention; no surface texture.', {
+        observationAttribution: 'none', interpretation: { kind: 'neutral-shape', resolvedSurfaceObservation: false },
       });
   } else if (recipe('observations')?.lenses) {
     namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`, paths(plan),

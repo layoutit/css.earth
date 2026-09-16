@@ -318,127 +318,21 @@
       }
     },
     {
-      "id": "openspace-venus-globe-specification",
-      "path": "openspace/globe.asset",
-      "expectedSha256": "2b2e17710105c994c5d66a500af4e8dba33797c45840ec80e48139a32d703590",
-      "expectedBytes": 1641,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
+      "id": "venus-atmosphere-model",
+      "path": "atmosphere/model.json",
+      "expectedSha256": "7ad11c7d6c8ba5b733373ce061043313434c36541d95f9b7e470c642eac0a30b",
+      "expectedBytes": 1632,
+      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team\u2019s RenderableAtmosphere tuning (MIT)",
+      "license": "Repository-authored record; adapted values credited inside the file",
+      "acquisition": "authored in the repository",
+      "redistribution": "permitted with the credit stated in the record",
       "consumers": [
         "scene"
       ],
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-venus-openspace-venus-globe-specification",
-            "role": "method",
-            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-venus-atmosphere-specification",
-      "path": "openspace/atmosphere.asset",
-      "expectedSha256": "85d202bbf1d029256ec388da9ea25be45420ba3e5294f401ff1e22268f598b20",
-      "expectedBytes": 2142,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/atmosphere.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "scene",
-        "materials"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-venus-openspace-venus-atmosphere-specification",
-            "role": "method",
-            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-venus-cloud-layer-specification",
-      "path": "openspace/clouds.asset",
-      "expectedSha256": "068f205567c288bb11a4b30692966735e0c3007d59241daa927fa12226ad2451",
-      "expectedBytes": 1171,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "scene",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-venus-openspace-venus-cloud-layer-specification",
-            "role": "method",
-            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-venus-radar-tms-specification",
-      "path": "openspace/radar.wms",
-      "expectedSha256": "61459d5dddd80ae94826ee62f3a3ad14365bcbc967059cb93c5f6f6cc2df0373",
-      "expectedBytes": 772,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/magellan_mosaic_newyork.wms",
-      "credit": "OpenSpace Team, USGS, and NASA PDS",
-      "license": "OpenSpace MIT configuration describing public-domain USGS/NASA data",
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "scene",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-venus-openspace-venus-radar-tms-specification",
-            "role": "method",
-            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-venus-dem-tms-specification",
-      "path": "openspace/dem.wms",
-      "expectedSha256": "a9948f3b05f66269782530e83d697c8ffd1f23e543a6e92008b85075e3d56be1",
-      "expectedBytes": 753,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/heightlayers/magellan_newyork.wms",
-      "credit": "OpenSpace Team, USGS, and NASA PDS",
-      "license": "OpenSpace MIT configuration describing public-domain USGS/NASA data",
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "scene",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-venus-openspace-venus-dem-tms-specification",
-            "role": "method",
-            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
-          }
-        ]
+        "kind": "local",
+        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
       }
     },
     {
@@ -493,8 +387,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "62769a28cebf29343d8602f2ebbb982b44e9f82eb74501dbcabfd0ae7d539143",
-      "expectedBytes": 16260,
+      "expectedSha256": "097efa027d4e4b6ed0f0ce0206ac68452accd2e7bfd17ab3cf4ed745a60b6c86",
+      "expectedBytes": 16334,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -533,8 +427,8 @@
     {
       "id": "venus-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "ecaaf97873d0afd76da0a1e04a527918d695547c467dfe0685affdbcc9633d93",
-      "expectedBytes": 4801,
+      "expectedSha256": "42dca12421494031e1f2eaf664cde1fe62a7138af6e66b0d2adc618e9548e923",
+      "expectedBytes": 3244,
       "origin": "Repository-authored Venus acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -629,8 +523,8 @@
     {
       "id": "venus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "f9d6012bdc95dde09dce5406d8b8fa04050d9a19e10d3981d4e4660b24485d14",
-      "expectedBytes": 2203,
+      "expectedSha256": "bb275a58b5f56e21062cecc72805dab4287de0ae50cd21c64e9516cc15ff891e",
+      "expectedBytes": 2198,
       "origin": "Repository-authored Venus raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -672,7 +566,7 @@
       "expectedSha256": "d0a7aa47d482c0b9471fee7a9bd6ef0fecdd2a77aa42b71a8bdafdb65081bd4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],

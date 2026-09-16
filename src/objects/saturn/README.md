@@ -1,13 +1,14 @@
 # Saturn sources
 
-Saturn combines OpenSpace and Cassini visible imagery, Hubble spectral maps,
-a ring model, schematic thermal and interior views, and modeled atmosphere charts.
+Saturn combines Hubble OPAL and Cassini visible imagery, Hubble spectral maps,
+a Cassini UVIS ring opacity profile, schematic thermal and interior views, and modeled atmosphere charts.
 
 ## Sources
 
 | View or quantity | Source |
 | --- | --- |
-| Visible body and ring profiles | Pinned OpenSpace assets and [Cassini PIA21611](https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/) |
+| Visible body | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) rotation-A F395N/F502N/F631N global map, 2025-08-29, and [Cassini PIA21611](https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/) for the north polar cap |
+| Ring opacity profile | [Cassini UVIS HSP alpha Virginis occultation, 2006 day 285](https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL), 1 km bins, PDS CO-SR-UVIS-HSP-2/4-OCC-V3.0 |
 | Ultraviolet and methane bands | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32), 2025 |
 | Ring boundaries and motion | [PDS ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html) and JPL SAT441 |
 | Interior | [Mankovich and Fuller (2021)](https://doi.org/10.1038/s41550-021-01448-3) and [Movshovitz density profiles](https://doi.org/10.7291/D1P07G) |
@@ -37,18 +38,11 @@ which uses the shared radial, cutaway, sky and content preparation modules.
 
 ## Body and rings
 
-The primary implementation reference is OpenSpace's MIT-licensed
-[`globe.asset`](https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset).
-It defines:
-
-- Saturn's radii as 60,268 km, 60,268 km, and 54,364 km.
-- Saturn's body transform as a SPICE translation and SPICE rotation.
-- The principal ring texture extent as 74,500 km to 140,445 km.
-- Separate radial color and transparency profiles for the lit ring system.
-
-The associated OpenSpace
-[`kernels.asset`](https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/kernels.asset)
-loads NASA/NAIF's `sat441.bsp` Saturn kernel.
+The geometry recipe states Saturn's radii as 60,268 km, 60,268 km and
+54,364 km (the IAU values in NAIF `pck00011.tpc`), the body transform as a
+SPICE translation and rotation, and the ring extent as 66,900 km to
+140,612 km. Ring opacity comes from the UVIS occultation profile below; the
+ring plane is bound to NASA/NAIF's `sat441.bsp` Saturn kernel.
 
 ## Prepared motion
 
@@ -86,7 +80,7 @@ camera.
 
 ## Context billboard
 
-The navigation portrait crops the pinned OpenSpace surface map. Because this is a flat map rather than an already-lit disc photograph, the shared marker preparer applies full-phase curvature inside its existing oblate ellipse (35% ambient, 65% diffuse). The centre retains the map brightness and the limb darkens symmetrically; no directional terminator or new surface detail is added. Both the small navigation atlas and the resolved Saturn context image use this same authored recipe.
+The navigation portrait crops the pinned Hubble OPAL global map. Because this is a flat map rather than an already-lit disc photograph, the shared marker preparer applies full-phase curvature inside its existing oblate ellipse (35% ambient, 65% diffuse). The centre retains the map brightness and the limb darkens symmetrically; no directional terminator or new surface detail is added. Both the small navigation atlas and the resolved Saturn context image use this same authored recipe.
 
 </details>
 
@@ -95,26 +89,47 @@ The navigation portrait crops the pinned OpenSpace surface map. Because this is 
 
 ## Texture assets
 
-The body map and original 1 x 1500 ring color/transparency profiles are the
-official OpenSpace synchronized `saturn_textures` version 4 resources. Their
-OpenSpace asset metadata identifies the OpenSpace Team as author and MIT as the
-license. The pinned license and attribution notice are included in
-`LICENSE.OPENSPACE-MIT` and `NOTICE.md`.
+The body map is the Hubble OPAL Cycle 32 rotation-A global map of
+2025-08-29, the archive's F395N/F502N/F631N composite
+(`hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif`,
+1,800 x 900, NASA, ESA, STScI and the OPAL team). The map never observed three
+row ranges: rows 0-35 (north of 82.8 degrees), rows 431-444 (3.8 to 1.0
+degrees north, behind the rings) and rows 887-899 (south of 87.4 degrees).
+The geometry recipe names those rows and preparation fills them by linear
+interpolation in latitude between the nearest observed rows before resampling
+the map to the 2,880 x 1,440 grid; nothing is detected from pixel values.
+The north cap is then replaced by the Cassini polar projection as described
+below. The rotation-B map of the same year has the same unobserved rows, so
+it cannot fill them.
+
+The ring opacity is the Cassini UVIS high-speed photometer stellar
+occultation of alpha Virginis on 2006 day 285 at 1 km radial bins (PDS
+`COUVIS_8001`, Colwell, Jerousek, Becker and Esposito). Of the 73,713 bins
+between 66,900 and 140,612 km, 60,886 carry a measured normal optical depth,
+4,518 are clean bins below the instrument's detection floor and count as
+empty, and 8,309 are flagged corrupted and are interpolated from their
+neighbours. Each bin becomes a transmission byte, 255 times exp of minus the
+optical depth. No qualified radial colour dataset exists: the Cassini ISS
+natural-colour ring mosaics in the Photojournal are perspective views, not
+radius-indexed strips, so the ring colour is uniform white under the declared
+solar tint. The earlier hand-authored gap clearings, alpha caps and F-ring
+core are gone; the Encke and Keeler gaps, the Cassini division and the F
+ring come from the occultation.
+
+[`evidence/opal-surface-uvis-rings.webp`](evidence/opal-surface-uvis-rings.webp) shows
+the prepared solar-tinted body surface and the prepared ring texture from this
+source pair, as inspected before acceptance.
 
 `source/approved/saturn-fixed-material.webp` is a comparison reference. The
 default frame is regenerated by the same model as the orbit bank; the reference
 is not a source of runtime pixels.
 
-- [`saturn.jpg`](https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg):
-  `5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0`
-- [`color_original_single.png`](https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png):
-  `952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda`
-- [`trans_original_single.png`](https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png):
-  `37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a`
+- OPAL global map: `c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7`
+- UVIS occultation profile `UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB`:
+  `65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341`
 
-OpenSpace provides no separate resolved polar color layer: its default Saturn
-color layer is the same single `saturn.jpg`. The north-polar surface therefore
-uses NASA Cassini product
+The OPAL map does not observe the pole itself. The north-polar surface
+therefore uses NASA Cassini product
 [`PIA21611`](https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/),
 credited to NASA/JPL-Caltech/Space Science Institute/Hampton University. The
 downloaded 2,048 x 1,024 JPEG contains the 2013 and 2017 natural-color maps side
@@ -148,8 +163,8 @@ The maps are 1,800 by 900 single-band measurements. Preparation retains
 rotation A intact instead of averaging temporally separated cloud detail with
 rotation B. It fills only unmeasured polar and ring-occluded rows in the same
 longitude and applies a declared false-color palette. A bounded prepare-time
-pansharpening pass transfers only high-frequency detail from the synchronized
-OpenSpace visible-light surface. Its scale is clamped to 0.88 through 1.12, so
+pansharpening pass transfers only high-frequency detail from the prepared
+OPAL visible-light surface. Its scale is clamped to 0.88 through 1.12, so
 the Hubble maps retain authority over broad spectral luminance and atmospheric
 bands. Preparation writes lossless 2,880 by 1,440 and DPR-2 4,096 by 2,048
 retained-globe surfaces. These views are therefore source-backed spectral
@@ -172,7 +187,7 @@ rather than being claimed nonexistent.
 The broad ring response is cross-checked against the same Hubble WFC3 program
 17843 sequence from 2025-08-29: `ifcu37ccq` in F225W, `ifcu37cdq` in F631N,
 and `ifcu37ceq` in FQ889N. The prepared lens textures modify broad ring-band
-color and luminance while retaining the accepted OpenSpace alpha profile,
+color and luminance while retaining the UVIS occultation alpha profile,
 narrow gaps, ringlets, and DPR-specific readability floors. Hubble does not
 resolve a complete replacement profile for the D, G, and E rings in these
 frames, so those details remain qualified visible-light morphology.
@@ -262,7 +277,7 @@ physically resolved. It prepares 200 deterministic main-ring motion candidates.
 The 190 visible C-, B-, and A-ring accents are rasterized into four rotating
 DPR-specific plates. The 10 imperceptible F-ring candidates are omitted instead
 of adding retained leaves or another large transparent compositor surface. The
-OpenSpace ring RGB profile receives the same `#fff1ea`
+uniform ring colour receives the same `#fff1ea`
 linear-light solar chromatic multiplication as the planet surface. Its band/gap
 morphology and relative brightness ordering remain unchanged outside the
 declared inner opacity presentation; the motion accents target the same warm
@@ -275,10 +290,10 @@ dust candidates are not published. The four C-, B-, and A-ring plates provide th
 <summary>Surface and polar map projection</summary>
 
 The shared material-composition preparer projects the oblate globe and ring
-plane. It maps the official 2,880 x 1,440 OpenSpace
-equirectangular image directly onto the retained longitude-latitude grid. The
-byte-identical source is retained as `source/saturn-surface-original.jpg`.
-Preparation applies the declared solar color to it in linear light and writes
+plane. It fills the OPAL map's unobserved rows, resamples the 1,800 x 900 map
+to the 2,880 x 1,440 longitude-latitude grid with a Lanczos-3 kernel, and maps
+that onto the retained grid. The byte-identical source is retained under
+`source/observations/`. Preparation applies the declared solar color to it in linear light and writes
 the continuous derived `saturn-surface.jpg`. The retained projective leaves use
 `saturn-surface-body.jpg`, which reverses the rows inside each 90-pixel latitude
 strip because the direct projective image leaf maps its first polygon edge to
@@ -290,12 +305,12 @@ raster leaf, giving the textured bands a 2,048 x 896 prepared paint density.
 The polar regions are projected offline into the lossless 4,096 x 512
 `saturn-poles.webp` atlas instead of being represented by solid triangle fans.
 The north disc inversely maps each prepared sample into PIA21611's declared
-25 km-per-pixel stereographic projection using OpenSpace's 60,268 km
+25 km-per-pixel stereographic projection using the 60,268 km
 equatorial radius. The outer six percent of the disc uses a smooth prepared
-transition to the OpenSpace map after matching the three mean boundary
+transition to the OPAL map after matching the three mean boundary
 channels; this removes the source-product edge without hiding the hexagon or
-adding a runtime blend. The south disc remains sourced from OpenSpace's
-equirectangular map. The atlas contains separate 512 x 512 north/south albedo
+adding a runtime blend. The south disc remains sourced from the OPAL
+equirectangular map, whose southernmost observed row is at 87.4 degrees. The atlas contains separate 512 x 512 north/south albedo
 and fixed-world material tiles for both visible polar discs and two larger caps
 inset behind their boundaries. The inset tiles clamp their outer samples to the
 visible caps' exact source and material boundary, so they close subpixel raster
@@ -308,28 +323,23 @@ the visible and inset caps.
 <details>
 <summary>Prepared lighting, storm illustration and mutual shadows</summary>
 
-The separate material overlays start from the pinned OpenSpace
-`RenderableGlobe` illumination model. OpenSpace uses the Sun scene node when no
-other light source is declared, a neutral RGB albedo multiplier, a `0.05`
-ambient intensity, and Oren-Nayar roughness `0` (Lambert). This adapter replaces
-OpenSpace's neutral multiplier with a prepared warm solar presentation. NASA's
+The separate material overlays use a Lambert illumination model with a
+`0.05` ambient intensity, Oren-Nayar roughness `0` and a smoothstep terminator;
+the formulation and these parameter values are adapted from the OpenSpace
+globe shader (MIT, OpenSpace Team) and are stated in the geometry recipe. This
+adapter replaces the neutral albedo multiplier with a prepared warm solar
+presentation. NASA's
 [Sun fact sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html)
 gives the solar photosphere an effective temperature of 5,772 K. The prepared
 `#fff1ea` multiplier is derived from a 5,772 K Planck distribution through the
 CIE 1931 observer and linear sRGB/D65, normalized by its maximum channel. This
 is a declared colorimetric display approximation, not flat white light or a
 full spectral renderer. The constant solar spectrum is multiplied into the
-surface texels once during preparation. OpenSpace's globe shader multiplies the
-Lambert term by `smoothstep(0, 0.1, N dot L)` to soften the terminator.
-Preparation applies that same source model to continuous per-texel oblate
-normals. The prepared material solves black-alpha intensity attenuation against
+surface texels once during preparation. The Lambert term is multiplied by
+`smoothstep(0, 0.1, N dot L)` to soften the terminator, applied to continuous
+per-texel oblate normals. The prepared material solves black-alpha intensity attenuation against
 the declared sRGB reference channel `160`, then source-over composites the
-prepared pearl-blue atmospheric response into that same texel. The pinned
-geometry authority is OpenSpace
-[`renderableglobe.cpp`](https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/modules/globebrowsing/src/renderableglobe.cpp)
-and
-[`texturetilemapping.glsl`](https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/modules/globebrowsing/shaders/texturetilemapping.glsl).
-The 5,188 x 4,160 `saturn-orbit-material.webp` RGBA preparation master packs
+prepared pearl-blue atmospheric response into that same texel. The 5,188 x 4,160 `saturn-orbit-material.webp` RGBA preparation master packs
 256 prepared camera-elevation material fields in a 16 x 16 grid. Each field has
 a 256-pixel tile and a two-pixel gutter. Runtime export retains one active
 variant atlas and one generated high-resolution default frame. The four lenses
@@ -346,8 +356,10 @@ visible-color storm overlays are intentionally absent from the observation
 lenses, which use their source-backed spectral body maps. The snapshot is
 `source/saturn-weather-static.webp`, SHA-256
 `04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3`.
-It is the accepted three-storm texel result prepared from the declared
-OpenSpace Saturn surface and the three storm kernels recorded in the scene
+It is the accepted three-storm texel result that was prepared from the
+earlier OpenSpace surface texels and the three storm kernels; it is retained
+byte-identical as an illustration and has not been re-sampled from the OPAL
+map recorded in the scene
 preparer. It is explicitly qualified as an adapter-owned artistic presentation,
 not scientific storm data. Preparation validates the snapshot's hash and
 dimensions, then copies its encoded bytes without re-encoding.
@@ -451,10 +463,7 @@ not rendered as embedded bodies in Saturn's current recipe.
 
 ### Detailed moons
 
-The source archive includes the eight bodies enumerated by OpenSpace's
-MIT-licensed
-[`major_moons.asset`](https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/major_moons.asset):
-Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Hyperion, and Iapetus. Their mean
+The source archive lists the eight major moons Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Hyperion, and Iapetus. Their mean
 radii, semimajor axes, eccentricities, inclinations, nodes, arguments of
 periapsis, mean anomalies, and periods come from JPL Solar System Dynamics'
 [SAT441 physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html)
@@ -462,20 +471,8 @@ and
 [mean elements](https://ssd.jpl.nasa.gov/sats/elem/sep.html), whose declared
 epoch is `2000-01-01.5 TDB`.
 
-The archive retains seven OpenSpace synchronized maps. Their checked inputs
-and SHA-256 values are:
-
-- Dione `dione.jpg`: `418fdc4ea2b53103350be26ee8a1569e9d9abd21be32aafaf2e801eeff495077`
-- Enceladus `enceladus.jpg`: `5ba6590ca057565369bcb5e5785a3d4c0deeb9635af2e20701aa25e5d330ce31`
-- Iapetus `iapetus.jpg`: `d49a3795bf5e831fb1ce040c58b66a0c81ca1a5d73badca077b24c3c8e67ec9b`
-- Mimas `mimas.jpg`: `d55601e1661a9c47046a06303f308f6f32b5e53eeed69ca708ff37b6d0580ffb`
-- Rhea `rhea.jpg`: `17df9b4dae4c7e40aa42f0d06e44ca4f7962817a7764e936a01395f6aa2e159f`
-- Tethys `tethys.jpg`: `a0c4a0344f2361b781977e9ef9679a8cd99dd6cffacf2c1f1212a3afafa2f7d9`
-- Titan `Titan_ISS_P19658_Mosaic_Global_4km_os.tif`: `5052b9f679d5e5a3e5c35c19bbac8349fcb0a6c17a8b0027b00ed8d735cc1477`
-
-OpenSpace attributes the grayscale Titan global mosaic to USGS and NASA/PDS
-Cassini ISS. The pinned OpenSpace Hyperion asset has physical axes and a SPICE
-transform but no color layer; it does not supply a Hyperion surface map.
+Each of these moons is its own object package with its own surface sources;
+this package pins no moon maps.
 
 ### Minor moons
 

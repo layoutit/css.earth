@@ -7,10 +7,10 @@ Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations 
 | View or quantity | Source |
 | --- | --- |
 | Visible surface | [Viking MDIM 2.1](https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg), colorized by NASA Ames |
-| Elevation display | MOLA color shaded relief from the [pinned OpenSpace tile source](source/manifest.json) |
-| Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [pinned OpenSpace tile source](source/manifest.json) |
-| Atmosphere material | [OpenSpace Mars RenderableAtmosphere](source/openspace/atmosphere.asset) parameters |
-| Dimensions, placement and charts | USGS, JPL, OpenSpace and NASA PSG records below |
+| Elevation display | MOLA color shaded relief from [NASA Trek WMTS tiles](source/manifest.json) |
+| Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
+| Atmosphere material | [Authored atmosphere record](source/atmosphere/model.json) |
+| Dimensions, placement and charts | USGS, JPL and NASA PSG records below |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
@@ -34,11 +34,11 @@ Landing sites: 14 spacecraft landing, touchdown or impact sites and 2 published 
 Feature notes: 644 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic has exact-zero fill in rows 0–26 (north of about 87.6° N) and rows 1894–2047 (south of about 76.5° S) and 15.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
-- The MOLA and THEMIS lens mosaics were re-stitched from the OpenSpace tile server on 2026-09-11 with the pinned tile recipe because the server no longer reproduced the bytes pinned earlier; the source manifest pins the refreshed mosaics.
-- The atmosphere is a display approximation from OpenSpace scattering parameters; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
+- The MOLA lens mosaic is stitched from NASA Trek zoom-3 WMTS tiles and the THEMIS lens is a USGS Astrogeology WMS GetMap of the global day-IR mosaic (2026-09-16); the source manifest pins those bytesed mosaics.
+- The atmosphere is a display approximation from the authored scattering parameters in `source/atmosphere/model.json`, adapted from the OpenSpace RenderableAtmosphere tuning; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
 - The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
-- Phobos and Deimos are standalone bodies with their own packages; this package keeps only the pinned OpenSpace kernel record.
+- Phobos and Deimos are standalone bodies with their own packages.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
@@ -62,9 +62,6 @@ the shared epoch come from the IAU/WGCCRE rotation model in the astronomy
 package through `src/platform/solar-geometry.mts`, as for every prepared body.
 The 48-second visual rotation is an accelerated presentation choice.
 
-The pinned OpenSpace `globe.asset` and `kernels.asset` snapshots record the
-source scene radii and the MAR097 SPICE kernel selection. OpenSpace is a
-configuration and provenance reference; the browser never loads OpenSpace data.
 
 ## Camera
 
@@ -116,8 +113,8 @@ There is no Mars cross-section, methane lens, or fabricated interior view.
 
 The atmosphere material is the shared composite material used by Venus: a
 32-frame phase bank (31 directional frames from light-view Z -0.98 through
-0.98 plus one flood frame) derived from the pinned OpenSpace Mars
-`RenderableAtmosphere` parameters (atmosphere height 76.98 km over a 3,386.19 km
+0.98 plus one flood frame) derived from the authored atmosphere record
+`source/atmosphere/model.json` (atmosphere height 76.98 km over a 3,386.19 km
 source radius, Rayleigh and Mie coefficients and scale heights, average ground
 reflectance 0.1). The material uses the accepted 1.002 coverage margin and
 0.992 content scale and a 0-to-0.1 terminator smoothstep. Visible lenses use
@@ -156,7 +153,7 @@ executable code. No source-authority request is permitted at runtime.
 ## Reproduction
 
 The [acquisition plan](source/preparation/acquisition.json) restores the pinned
-OpenSpace, USGS and tile-mosaic files, the NASA PSG configuration and spectrum,
+USGS and Trek tile-mosaic files, the NASA PSG configuration and spectrum,
 the Gazetteer archive and the sky and Sun inputs. Returned products must match
 their pins before replacing local files. See the
 [contributor guide](../README.md) for shared commands. Body checks live under

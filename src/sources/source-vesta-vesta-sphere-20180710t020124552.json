@@ -1,0 +1,37 @@
+{
+  "id": "source-vesta-vesta-sphere-20180710t020124552",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Vesta · vesta sphere 20180710t020124552",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_01_24.552_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/vesta/source/manifest.json",
+      "revision": "ba3b7a2f7bbda69ea441f52528a6373f4c6221b0",
+      "sha256": "71c8c6e8080db4292f71ea1d228f7d33e3b5370ceede5fdbbc526aa2e4cd4940",
+      "locator": "/inputs/31"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The vesta sphere 20180710t020124552 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -2,13 +2,13 @@
 
 ## Sources
 
-The surface is unresolved. Its displayed color comes from the illustrative [NASA VTAD Haumea 3D model](https://science.nasa.gov/resource/haumea-3d-model/), not spacecraft mapping. The Dataset and Surface Lens panels expose it as “Illustrative model,” with the source credit and flat texture preview. No atmospheric layer is depicted.
+The surface is unresolved and is shown in the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour or albedo. The Dataset panel exposes it as “Shape”; no terrain, texture or map is claimed.
 
 The triaxial ellipsoid and equatorial ring use the nominal occultation/lightcurve solution in [Ortiz et al. (2017)](https://doi.org/10.1038/nature24051): semiaxes 1,161 × 852 × 513 km; ring radius 2,287 km and width 70 km. The preferred pole is J2000 RA 285.1°, declination −10.6°. This is an inferred shape, not a resolved mesh or unique interior model. Main text and Methods give different uncertainties for the middle axis (4 and 2 km); the nominal value agrees.
 
 ## Evidence
 
-No dated test report is cited in the existing source notes.
+Run of 2026-09-16 (this version): `node tools/objects/dist/prepare-authored.js haumea --write` prepared the package with the neutral gray shape lens; `node --test tests/objects/unit/haumea/shape.test.mts site/test/object-discovery.test.mts` passes.
 
 ## Known problems
 
@@ -21,7 +21,7 @@ Ring gray and fixed opacity are schematic. The ring has no invented bands and re
 <details>
 <summary>Methods and source notes</summary>
 
-Preparation samples the original GLB mesh and UV coordinates, including its polar islands, into the shared projective surface atlas. Only the base-color texture is used; its normal map and PBR material are not reproduced. The NASA model has semiaxes 1,161 × 852 × 569 km; its texture is transferred by normalized surface direction onto the published 1,161 × 852 × 513 km shape. The shared full-phase curvature raster is fitted to the projected triaxial ellipsoid, with its plane inside the retained 3D scene so the foreground ring can occlude it. This is illustrative flood lighting, not a measured reflectance model or a Sun-direction dark hemisphere. The base-color texture is unchanged.
+Preparation fills the shared projective surface atlas with the neutral gray and prepares the ring, lighting and poles as before; no model texture is sampled.
 
 1,444 body quads + 128 ring quads + one curvature quad = 1,573, below the 2,000-quad budget. Source parameters and acquisition recipes are kept here; the shared astronomy and sky sources supply the environment.
 

@@ -130,6 +130,7 @@ export const parsePdsRgbPolicy = shape({member:optional(text),targetName:text,ce
 export function parseEllipsoidParameters(value: unknown) {
  const source = requireRecord(value);
  if (source.scaleConvention === 'published-semiaxes') return shape({schema:text,scaleConvention:choice('published-semiaxes'),semiaxesKm:array(number),subdivisions:number})(value);
+ if (source.scaleConvention === 'effective-radius-as-volume-equivalent') return shape({schema:text,scaleConvention:choice('effective-radius-as-volume-equivalent'),axisRatioAB:number,axisRatioBC:number,effectiveRadiusKm:number,subdivisions:number})(value);
  return shape({schema:text,scaleConvention:choice('thermal-radius-as-volume-equivalent'),axisRatioAB:number,axisRatioBC:number,thermalRadiusKm:number,subdivisions:number})(value);
 }
 export const parseContactModel = shape({schema:text,origin:text,lobes:array(shape({semiaxesKm:array(number)})),fluxScale:number,subdivisions:number});

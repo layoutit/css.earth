@@ -5,8 +5,8 @@
     {
       "id": "celestia-native-illustration",
       "subject": "Celestia native nucleus illustration and catalog scale",
-      "status": "included",
-      "finding": "Retained intake decision: asteroid.cms is exported through the pinned Celestia generator and scaled with catalog radius 2.1 km. It is shared illustrative geometry with grid material and a fixed illustrative attitude, not a measured nucleus reconstruction.",
+      "status": "excluded",
+      "finding": "Superseded 2026-09-16: the Celestia generic mesh was a shared illustration with no relation to this nucleus, and its catalogue radius was an estimate. The package now shows a smooth ellipsoid at the published effective radius (Harmon et al. (1997), Science 278, 1921); no mesh from Celestia is retained.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1996-b2/source/reference/source-record.json",
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1996-b2/source/shape/model.json",
@@ -16,8 +16,13 @@
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-16",
+          "commit": "694e9130f7bdfb601972026adf3dcc33217d47b7"
         }
-      ]
+      ],
+      "revisitWhen": "A measured shape model of this nucleus (radar, spacecraft or a convex lightcurve inversion with a stated pole) would replace the ellipsoid."
     },
     {
       "id": "measured-shape-archive-route",
@@ -66,6 +71,21 @@
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "published-nucleus-size",
+      "subject": "Published effective nucleus radius",
+      "status": "included",
+      "finding": "Harmon et al. (1997), Science 278, 1921: effective radius 1.25 km. Unresolved; the midpoint of the radar diameter range is displayed as a sphere. Used as the volume-equivalent radius of the displayed ellipsoid.",
+      "evidence": [
+        "https://doi.org/10.1126/science.278.5345.1921"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "694e9130f7bdfb601972026adf3dcc33217d47b7"
         }
       ]
     }

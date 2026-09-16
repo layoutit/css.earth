@@ -845,8 +845,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10603,
-      "expectedSha256": "8059edecae529cfd6798f48aa07fab2c56a697ee6b5e48752e63be8b3eb6d36a",
+      "expectedBytes": 10644,
+      "expectedSha256": "089195e2075f9816d0fe5c232248bc4a301e5b2c536e471083b8d1da9e51545b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -854,8 +854,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 7967,
-      "expectedSha256": "8bbc1ee406b157cea448c18144ce8e2747ebc5e2bc61693eab21cabba339391b"
+      "expectedBytes": 9401,
+      "expectedSha256": "9172ce93d1b54c0882e0339b70056c73f5799d3cb21694c09278ad2a165ec917"
     },
     {
       "path": "preparation/navigation.json",
@@ -869,8 +869,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 15872,
-      "expectedSha256": "baa76742b0a1f90ab5596e7c0958c43454f962971274d39ca9eb00e0916724d5"
+      "expectedBytes": 15952,
+      "expectedSha256": "f60c12e39e49d9aacf4b82762a1f658082dc2945c11ca11c0741d634c524aca5"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -925,6 +925,11 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 3291,
       "expectedSha256": "6636f0ffc7898b37caf5a6a9bf03b4d9a03cefc459eecc7d1ee4fb3dfdae3ea9"
+    },
+    {
+      "path": "preparation/observer-cameras.json",
+      "expectedBytes": 441,
+      "expectedSha256": "234c0bfdeddcc938a21eb32625c3629dc60ccc99ae6aed02d599ed89d64efe86"
     }
   ]
 }

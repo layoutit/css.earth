@@ -49,7 +49,7 @@ for (const body of bodies) {
   if (body.id === 'dactyl') {
     await mkdir(`${s}/reference`, { recursive: true });
     await copyFile('output/galileo-lucy/celestia/asteroids.ssc', `${s}/reference/asteroids.ssc`);
-    await copyFile('tools/objects/celestia-comets/source/GPL-2.0-or-later.txt', `${s}/reference/GPL-2.0-or-later.txt`);
+    await copyFile('tools/objects/source-authoring/galileo-lucy/source/GPL-2.0-or-later.txt', `${s}/reference/GPL-2.0-or-later.txt`);
     await write(`${s}/reference/celestia.json`, { repository: 'CelestiaProject/CelestiaContent', commit: celestiaCommit,
       license: 'GPL-2.0-or-later', use: 'Dactyl candidate semimajor axis, eccentricity and period; retain the catalog copyright header. Generic rough sphere, stock texture and SSC reference frame are excluded.' });
   }

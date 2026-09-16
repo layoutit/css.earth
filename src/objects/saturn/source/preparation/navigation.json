@@ -18,20 +18,20 @@
     }
   },
   "source": {
-    "path": "saturn-surface-original.jpg",
-    "expectedBytes": 1036492,
-    "expectedSha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
-    "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg",
-    "credit": "OpenSpace Team",
-    "license": "OpenSpace MIT license"
+    "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+    "expectedBytes": 4885052,
+    "expectedSha256": "c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7",
+    "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+    "credit": "NASA, ESA, Amy Simon (NASA-GSFC), Michael H. Wong (UC Berkeley); OPAL program, HLSP hosted by STScI/MAST",
+    "license": "NASA media usage guidelines; STScI HLSP public data"
   },
   "operations": [
     {
       "type": "extract",
-      "left": 720,
+      "left": 450,
       "top": 0,
-      "width": 1440,
-      "height": 1440
+      "width": 900,
+      "height": 900
     },
     {
       "type": "resize",

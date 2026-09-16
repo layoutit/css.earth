@@ -1,55 +1,20 @@
 {
-  "catalog": {
-    "repository": "CelestiaProject/CelestiaContent",
-    "commit": "1993a082ee6307c0df7fdc0828eb117a0e8e9958",
-    "files": [
-      {
-        "path": "comets.ssc",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-        "sha256": "437aa2e5ad66f26470829b9ee5f1ddb21b4514446b16c601c1d328a1b186b14f",
-        "bytes": 22363
-      },
-      {
-        "path": "asteroid.cms",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/asteroid.cms",
-        "sha256": "5616a5cb3471013ce423195be29c7bda31d292e0f16d95240472ccaaa4ea5361",
-        "bytes": 273
-      },
-      {
-        "path": "roughsphere.cms",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/roughsphere.cms",
-        "sha256": "744168aa06e2a33c3b87911fb7cbdbcc211f209d7e9554dd23fcdee7f68a6ef2",
-        "bytes": 330
-      },
-      {
-        "path": "GPL-2.0-or-later.txt",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/LICENSES/GPL-2.0-or-later.txt",
-        "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3",
-        "bytes": 17337
-      }
-    ],
-    "entry": "C/2014 UN271",
-    "mesh": "roughsphere.cms",
-    "radiusKm": 68.5,
-    "license": "GPL-2.0-or-later",
-    "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
-  },
   "editorial": {
     "introduction": "Bernardinelli–Bernstein has an exceptionally large nucleus. ALMA detected carbon monoxide escaping while the comet was still more than 16 AU from the Sun.",
     "url": "https://ntrs.nasa.gov/api/citations/20250006397/downloads/UN271_ALMA_ApJL_aasv7_Accepted.pdf"
   },
   "selected": {
-    "identity": "Celestia designation",
-    "size": "Catalog Radius scales Celestia-normalized maximum half-extent",
+    "identity": "JPL Small-Body Database designation and Horizons elements",
+    "size": "Published effective nucleus radius 68.5 km (Lellouch et al. (2022), A&A 659, L1) as the volume-equivalent radius",
     "position": "Independent JPL heliocentric elements and vectors at JD2461286.5",
-    "shape": "Native export of Celestia roughsphere.cms; shared illustrative geometry",
+    "shape": "Sphere; no measured shape",
     "texture": "Shared missing-imagery grid",
-    "attitude": "Fixed illustration"
+    "attitude": "Arbitrary display orientation"
   },
   "candidateSurvey": [
     {
-      "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-      "disposition": "Selected native roughsphere.cms geometry. Original SphereMesh and Perlin code compiled offline; seed pinned for reproducibility. No Celestia stock texture or invented rotation."
+      "url": "https://doi.org/10.1051/0004-6361/202243090",
+      "disposition": "Selected effective nucleus radius: Lellouch et al. (2022), A&A 659, L1."
     },
     {
       "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/",
@@ -58,63 +23,27 @@
     {
       "url": "https://ntrs.nasa.gov/api/citations/20250006397/downloads/UN271_ALMA_ApJL_aasv7_Accepted.pdf",
       "disposition": "Coma, tail, spectra and encounter context are useful source material; they do not establish a nucleus surface texture. Additional quantitative shape reconstruction remains a separate source qualification."
+    },
+    {
+      "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "disposition": "Formerly supplied the illustrative generic mesh and a catalogue radius; retired 2026-09-16 and no longer used."
     }
   ],
   "derivedFacts": {
-    "diameter": "2 * Celestia Radius (km), rounded to two significant figures; catalog estimate",
-    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date"
+    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date",
+    "radius": "Published effective radius, Lellouch et al. (2022), A&A 659, L1"
   },
   "assumptions": [
     "No observed albedo, mass, density, pole or placeholder rotation is imported.",
-    "The native Celestia procedural mesh is shared and illustrative; no nucleus terrain measurement is claimed.",
-    "No tail, coma or historical outburst is rendered."
+    "No tail, coma or historical outburst is rendered.",
+    "The ellipsoid is a smooth approximation at an effective radius; no nucleus terrain measurement is claimed."
   ],
-  "nativeMesh": {
-    "schema": "cssearth-celestia-mesh@1",
-    "source": "roughsphere.cms",
-    "catalogRadiusKm": 68.5,
-    "sourceCodeCommit": "e9997cc011a57fdcc507f4ef5352bfd03cb17a6b",
-    "nativeSeed": 20260909,
-    "nativeExport": {
-      "source": "roughsphere.cms",
-      "nativeArguments": [
-        "1",
-        "1",
-        "1",
-        "17",
-        "42",
-        "45",
-        "0.2",
-        "2",
-        "50",
-        "100",
-        "20260909"
-      ],
-      "nativeSha256": "310b5fa70a3c12161ff963738b699b8271ddcd3eb72871eb439baf8675434384",
-      "objSha256": "54e293c775af7e77756f55461f197c6532b566dd3c5bbe74b84af6e362a67056",
-      "nativeVertices": 5050,
-      "vertices": 4802,
-      "faces": 9600,
-      "omittedDegenerate": 200,
-      "normalization": {
-        "center": [
-          -0.002512749982997775,
-          -0.0020891448948532343,
-          0.007990299724042416
-        ],
-        "scale": 0.9815566539764404,
-        "method": "Celestia Model::normalize bounding-box maximum extent"
-      },
-      "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
-      "maximumWeldError": 1.7229467630386353e-7,
-      "volume": 3.807093522310331,
-      "volumeEquivalentRadius": 0.9686531878409028,
-      "repeatNativeExportIdentical": true
-    },
-    "scaling": "Celestia bounding-box normalization, then Catalog Radius * 1000 metres. This preserves maximum full extent = 2 * Catalog Radius.",
-    "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
-    "volumeEquivalentRadiusKm": 66.35274336710184,
-    "illustrative": true,
-    "qualification": "The actual Celestia CMS mesh is reused. It is a shared illustrative shape, not a measured nucleus reconstruction. Grid surface; fixed illustrative attitude."
+  "shape": {
+    "record": "shape/model.json",
+    "effectiveRadiusKm": 68.5,
+    "citation": "Lellouch et al. (2022), A&A 659, L1",
+    "url": "https://doi.org/10.1051/0004-6361/202243090",
+    "method": "ALMA thermal diameter 137 ± 17 km with a 5.3 percent albedo",
+    "convention": "effective-radius-as-volume-equivalent ellipsoid; unit axis ratios unless a lightcurve ratio is cited"
   }
 }

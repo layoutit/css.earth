@@ -8,7 +8,7 @@ The geometry is the original `216_Kleopatra_mpcd.obj` from the [LAM VLT/SPHERE a
 
 The photographic lens uses a second mesh from the same release, `216_Kleopatra_adam.obj`. The survey's published pole and period describe that ADAM frame rather than the separately re-optimised MPCD one, so the photograph is registered to the mesh its own rotation parameters belong to while Shape keeps MPCD. Measured over seven frames spanning both apparitions, projecting through ADAM reproduces the observed limb position angle to 3.3 degrees; the same parameters through MPCD give 6.8 degrees.
 
-**SPHERE photograph** casts five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017 onto that mesh. The camera's pointing and orientation are derived, not fitted: the pole, period and phase epoch come from the release's own parameter record, the observing geometry from pinned JPL Horizons responses for Paranal, and the plate scale, exposure time and filter from each frame's own header. The rotation convention is [Ďurech, Sidorin and Kaasalainen (2010)](https://doi.org/10.1051/0004-6361/200912693) equation 1. Two quantities in each frame are measured from the photograph rather than derived: the disc centre, and the sky threshold, which is one stated fraction of that frame's own peak. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so it is not measured albedo, color or composition.
+**SPHERE photograph** casts five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017 onto that mesh. The camera's pointing and orientation are derived, not fitted: the pole, period and phase epoch come from the release's own parameter record, the observing geometry from pinned JPL Horizons responses for Paranal, and the plate scale, exposure time and filter from each frame's own header. The rotation convention is [Ďurech, Sidorin and Kaasalainen (2010)](https://doi.org/10.1051/0004-6361/200912693) equation 1. One quantity in each frame is measured from the photograph rather than derived: the sky threshold, one stated fraction of that frame's own peak. The disc centre is fitted to the limb the mesh projects, the epoch is the midpoint of the stated exposure, and `source/preparation/observer-cameras.json` names every input, so `tools/objects/observer-cameras.mts` re-derives the recipe and `observer-cameras.test.mts` refuses one that drifts. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so it is not measured albedo, color or composition.
 
 The frames' own world-coordinate solution is used for one thing only, the plate scale, which its `CD` matrix states. Its reference pixel is 512,512 on a 256 by 256 array, inherited from an uncropped frame, so it locates nothing; the pointing comes from the ephemeris and the spin record instead.
 
@@ -35,6 +35,18 @@ revision of this lens shipped a body mirrored in longitude and every silhouette,
 passed on it unchanged.
 
 [Source test definitions](../../../tests/objects/unit/kleopatra/source.test.mts).
+
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 5 | 5 | 3.63° | 0.00° | 3.63° | its other 5 frames | 0 of 5 | — | 3 of 5, 0.00° |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset.
+<!-- registration-report:end -->
 
 ## Known problems
 
