@@ -58,6 +58,24 @@
           "pr": 192
         }
       ]
+    },
+    {
+      "id": "sphere-cross-frame-registration",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "status": "unresolved",
+      "finding": "The survey holds 10 deconvolved ZIMPOL frames (camera 1) for this body; the cross-frame registration test could not be run on them in this pass.",
+      "revisitWhen": "Frames and a pinned Horizons table for this body, to run the cross-frame registration test.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/48Doris/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        }
+      ]
     }
   ]
 }
