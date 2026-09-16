@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "polaris",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Polaris",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 32184239
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/polaris-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f8200fe530855805bf0b3522382682fa082d454211ed417134b90dc4c7025db2"
+      }
+    },
+    "catalog": {
+      "name": "Polaris",
+      "classification": "star",
+      "color": "#fff1dc",
+      "distanceAu": 28237559.6,
+      "description": "Supergiant Cepheid at the celestial pole; its photosphere is not imaged here.",
+      "systemName": "Ursa Minor",
+      "order": 1004,
+      "context": {
+        "order": 1001
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        42769347550336910,
+        33391299640039868,
+        4223930289565270500
+      ],
+      "presentationToReference": [
+        0.010123442704135418,
+        0.7884337309265217,
+        -0.615036395545094,
+        0.007903673198399139,
+        0.6149856094480161,
+        0.7884987204313176,
+        0.9999175205274629,
+        -0.012843368294080304,
+        -0.0000057509667229964
+      ],
+      "orbitUpReference": [
+        -0.7884337309265217,
+        -0.6149856094480161,
+        0.012843368294080304
+      ],
+      "metersPerUnit": 103820125.80645162,
+      "bodyRadiusM": 32184239000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "aaff370e7fa2eb52fb3f36b7819f56447e8eb4e3f7417dc77fc00d623bbeae7a"
+  }
+}
