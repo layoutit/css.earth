@@ -1,0 +1,32 @@
+{
+  "id": "simbad-ce-tau",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * 119 Tau (CE Tauri)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ce-tauri/text.json",
+      "revision": "c073f58a8c03314266a0c50e86ad973d9b6ff723",
+      "sha256": "3e51f769ac9207c48ee4ab8f820db8fd3a09fc34105cb7392e0a2af52dff4189",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; position, proper motion and parallax from Gaia DR3 (Gaia Collaboration 2020), radial velocity from Famaey et al. (2005)",
+      "scope": "citation",
+      "evidence": "src/objects/ce-tauri/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "antares",
+  "displayName": "Antares",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "682 solar radii"
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "170 parsecs"
+      },
+      {
+        "id": "angular-diameter",
+        "label": "Angular diameter (2.2 µm)",
+        "value": "37.38 milliarcseconds"
+      },
+      {
+        "id": "rotation-axis",
+        "label": "Rotation axis",
+        "value": "not measured"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published angular diameter; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "antares-lens-shape.webp",
+        "surface": "antares-surface-shape.webp",
+        "poles": "antares-poles-shape.webp",
+        "source": {
+          "id": "antares-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1304.4800"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere is cast here. The public 2014 VLTI/PIONIER visibilities do not fit a single image (see the investigation ledger) and the published VLTI/AMBER movies are not deposited as data. Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Angular diameter",
+      "role": "facts",
+      "description": "Ohnaka et al. (2013): VLTI/AMBER imaging of Antares in the CO lines, diameter and stellar parameters",
+      "href": "https://arxiv.org/abs/1304.4800"
+    },
+    {
+      "label": "PIONIER data",
+      "role": "terrain",
+      "description": "Montargès et al. (2017): the convective surface of Antares with VLTI/PIONIER",
+      "href": "https://arxiv.org/abs/1705.07829"
+    },
+    {
+      "label": "Placement",
+      "role": "facts",
+      "description": "SIMBAD record for alf Sco: Hipparcos position, parallax and proper motion",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Sco"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1304.4800",
+      "credit": "K. Ohnaka, K.-H. Hofmann, D. Schertl et al. (2013); M. Montargès et al. (2017); ESO/VLTI/AMBER and PIONIER"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Published angular diameter at the Hipparcos distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}
