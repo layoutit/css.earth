@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
+import { type AuthoredObjectDescriptor } from '@cssearth/objects';
+import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { parseGeometryProfile, prepareGeometryScene, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '../../src/renderers/css/preparation/presentation/index.js';
@@ -16,18 +17,10 @@ import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/a
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
   /** Write mode: regenerated reviewed images replace their source copies and pins instead of failing. */
   readonly replaceReviewedImages?: boolean; }
-export interface VerifiedSource { readonly reference: SourceReference; readonly path: string; readonly value: unknown; }
 export interface AuthoredPreparationResult { readonly descriptor: AuthoredObjectDescriptor; readonly sources: ReadonlyMap<string, VerifiedSource>; readonly raster?: unknown; readonly celestial?: unknown; readonly scene?: unknown; readonly definition?: unknown; }
 type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
-function contained(root: string, path: string): string { const resolved = resolve(root, path), offset = relative(root, resolved); if (offset === '..' || offset.startsWith(`..${String.fromCharCode(47)}`) || offset.startsWith(`..${String.fromCharCode(92)}`)) throw new TypeError(`Source ${path} escapes its object directory.`); return resolved; }
-export async function verifiedSource(root: string, reference: SourceReference): Promise<VerifiedSource> {
-  const path = contained(root, reference.path), bytes = await readFile(path);
-  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Source ${reference.path} does not match its descriptor digest.`);
-  try { return Object.freeze({ reference, path, value: JSON.parse(bytes.toString('utf8')) as unknown }); }
-  catch { throw new TypeError(`Source ${reference.path} must be JSON configuration.`); }
-}
 function source(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource | undefined { return sources.get(id); }
 function required(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource { const value = source(sources, id); if (!value) throw new TypeError(`Authored recipe requires ${id}.`); return value; }
 function sourceRecord(value: unknown, at: string): Record<string, unknown> { return record(value, at); }
@@ -92,9 +85,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     } finally { await rm(stage, { recursive: true, force: true }); }
   }
   const descriptorPath = resolve(objectDirectory, 'object.json');
-  const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);
-  const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));
-  const sources = new Map(entries.map(entry => [entry.reference.id, entry]));
+  // Every recipe source is verified against the source manifest, the one owner of input pins.
+  const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   // Nomenclature labels ride the generic sphere lane; other lanes declare no mesh anchor frame yet.
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   await mkdir(outputDirectory, { recursive: true });

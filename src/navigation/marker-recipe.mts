@@ -1,5 +1,7 @@
 import { isArray } from '../platform/is-array.mts';
 export interface MarkerSource { path: string; expectedBytes: number; expectedSha256: string; origin: string; credit: string; license: string; raster?: { kind: string }; width?: number; height?: number; }
+/** Fields an object's marker recipe may add to its source: decoding hints its manifest record does not carry. */
+export const MARKER_SOURCE_HINTS = ['raster'] as const;
 export type MarkerOperation =
   | { type: "linear"; multiplier: number; offset: number }
   | { type: "rotate" | "ensure-alpha" | "png" }

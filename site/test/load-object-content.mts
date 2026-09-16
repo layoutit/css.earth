@@ -6,7 +6,6 @@ import { requireArray, requireRecord, requireString } from "../../tools/source-v
 interface SourceReference {
   readonly id: string;
   readonly path: string;
-  readonly sha256: string;
 }
 
 interface ObjectDescriptor extends Record<string, unknown> {
@@ -33,8 +32,11 @@ export async function loadObjectContent(id: string): Promise<LoadedObjectContent
     const reference = descriptor.properties.recipe.sources.find(entry => entry.id === name);
     assert.ok(reference, `${id}: missing ${name} source reference`);
     const bytes = await readFile(new URL(reference.path, root));
-    assert.equal(createHash("sha256").update(bytes).digest("hex"), reference.sha256,
-      `${id}: ${name} must match its descriptor pin`);
+    const manifest = requireRecord(await readJson("source/manifest.json"), `${id}: source manifest`);
+    const pin = ["inputs", "documents", "generatedIntermediates"].flatMap(key => requireArray(manifest[key] ?? [], key).map(entry => requireRecord(entry, key)))
+      .find(entry => `source/${String(entry.path)}` === reference.path);
+    assert.ok(pin, `${id}: ${name} is declared in the source manifest`);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), pin.expectedSha256, `${id}: ${name} must match its manifest pin`);
     return requireRecord(JSON.parse(bytes.toString("utf8")), `${id}: ${name} source`);
   }
   return { descriptor, source, prepared: requireRecord(await readJson("prepared/content.json"), `${id}: prepared content`),
@@ -47,8 +49,7 @@ function requireDescriptor(value: unknown, label: string): ObjectDescriptor {
   const recipe = requireRecord(properties.recipe, `${label}.properties.recipe`);
   const sources = requireArray(recipe.sources, `${label}.properties.recipe.sources`).map((entry, index): SourceReference => {
     const source = requireRecord(entry, `${label}.properties.recipe.sources[${index}]`);
-    return { id: requireString(source.id, `${label} source id`), path: requireString(source.path, `${label} source path`),
-      sha256: requireString(source.sha256, `${label} source sha256`) };
+    return { id: requireString(source.id, `${label} source id`), path: requireString(source.path, `${label} source path`) };
   });
   return { ...descriptor, properties: { ...properties, recipe: { ...recipe, sources } } };
 }

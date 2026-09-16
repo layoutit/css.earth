@@ -51,7 +51,10 @@ test("an unknown object loads its own marker; missing packages fail without fall
   await mkdir(dir, { recursive: true });
   const source = (await loadMarkerDescriptors())[0];
   const fixture = { ...source, planetId: "new-body", presentation: { size: 8 } };
-  await writeFile(resolve(dir, "navigation.json"), JSON.stringify(fixture));
+  // The recipe names its source by path; the source manifest owns the record the loader merges in.
+  const { path, ...record } = source.source;
+  await writeFile(resolve(dir, "navigation.json"), JSON.stringify({ ...fixture, source: { path } }));
+  await writeFile(resolve(root, "src/objects/new-body/source/manifest.json"), JSON.stringify({ inputs: [], generatedIntermediates: [], documents: [{ ...record, path }] }));
   await writeFile(resolve(root, "src/objects/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
   assert.deepEqual(await loadMarkerDescriptors({ projectRoot: root, planets: [{ id: "new-body", classification: "planet" }] }), [fixture]);
   await rm(resolve(dir, "navigation.json"));

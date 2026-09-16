@@ -1,4 +1,5 @@
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
+import { readAuthoredSources } from './authored-sources.ts';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
@@ -18,7 +19,7 @@ import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.mts';
 import { renderRadialSnapshot } from './terrestrial-layers/radial-snapshot.mts';
 import { parseRadialSnapshot } from './terrestrial-layers/radial-source.mts';
-import { prepareBodyMarkers } from '../prepare-navigation.mts';
+import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare-navigation.mts';
 import { validateMarkerDescriptor, renderMarker } from '../../src/navigation/marker-recipe.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 
@@ -65,10 +66,6 @@ export async function refreshShapeMaterialDescriptions(id: string) {
       entry.expectedBytes = bytes.length; entry.expectedSha256 = hash(bytes);
     }
     await pretty(manifestPath, manifest);
-    const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = await json(descriptorPath);
-    for (const reference of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))
-      if (reference.path === 'source/content/object.json') reference.sha256 = hash(bytes);
-    await pretty(descriptorPath, descriptor);
   }
   const readmePath = resolve(objectDirectory, 'README.md'), readme = await readFile(readmePath, 'utf8');
   // A body can also have photographed/scientific gaps. Only change sentences
@@ -100,9 +97,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   const recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json'), recipeBytes = await readFile(recipePath);
   const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = config.raster.shapeViews ?? [];
   if (!views.length) throw new Error(`${id} has no shape-only lens.`);
-  const descriptor = await json(resolve(objectDirectory, 'object.json'));
-  for (const reference of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))
-    if (hash(await readFile(resolve(objectDirectory, requireString(reference.path)))) !== reference.sha256) throw new Error(`Unpinned source: ${reference.path}.`);
+  await readAuthoredSources(objectDirectory);
   const originals = new Map<string, Buffer>();
   for (const name of ['scene.json', 'surfaces.json', 'material.json', 'runtime-assets.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
   const scene = requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8')));
@@ -167,8 +162,8 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   const lensIds = views.map(view => view.id);
   // Context images and tiny navigation icons use the same material and retained mesh.
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
-  const navigationPath = resolve(sourceDirectory, 'preparation/navigation.json'), navigation = await json(navigationPath);
-  let changedContext = false;
+  const navigation = await json(resolve(sourceDirectory, 'preparation/navigation.json'));
+  let contextRecord: Record<string, unknown> | null = null;
   for (const entry of records(manifest.generatedIntermediates ?? [])) {
     const recipe = entry.recipe === undefined ? null : requireRecord(entry.recipe);
     if (!recipe || !lensIds.includes(requireString(recipe.lensId ?? '')) || !String(entry.generator).includes('radial-snapshot.')) continue;
@@ -180,22 +175,11 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     const stagedContext = resolve(stage, `context-${surface.id}.png`);
     await writeFile(stagedContext, png); await replaceAsset(stagedContext, contextPath);
     entry.expectedBytes = png.length; entry.expectedSha256 = hash(png);
-    if (requireRecord(navigation.source).path === entry.path) {
-      navigation.source = { ...requireRecord(navigation.source), expectedBytes: png.length, expectedSha256: hash(png) };
-      changedContext = true;
-    }
+    if (requireRecord(navigation.source).path === entry.path) contextRecord = entry;
   }
-  if (changedContext) {
-    await pretty(navigationPath, navigation);
-    const bytes = await readFile(navigationPath);
-    for (const entry of records(manifest.documents)) if (entry.path === 'preparation/navigation.json') {
-      entry.expectedBytes = bytes.length; entry.expectedSha256 = hash(bytes);
-    }
-    for (const reference of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))
-      if (reference.path === 'source/preparation/navigation.json') reference.sha256 = hash(bytes);
-    await pretty(resolve(objectDirectory, 'object.json'), descriptor);
+  if (contextRecord) {
     const markerStage = resolve(stage, 'navigation'); await mkdir(markerStage, { recursive: true });
-    const descriptors = [validateMarkerDescriptor(navigation)];
+    const descriptors = [validateMarkerDescriptor(await loadObjectMarkerDescriptor(id, resolve('.')))];
     await prepareBodyMarkers({ projectRoot: resolve('.'), outputRoot: markerStage, descriptors });
 
     // Radial snapshots already own their crop and size. Use the same marker

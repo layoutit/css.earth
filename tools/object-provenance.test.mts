@@ -45,9 +45,9 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
     writeFile(resolve(publicDirectory, 'surface.webp'), output),
     writeFile(resolve(source, 'preparation/raster.json'), recipe),
-    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [], generatedIntermediates: [] })),
+    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
-      { id: 'raster', path: 'source/preparation/raster.json', sha256: hash(recipe) },
+      { id: 'raster', path: 'source/preparation/raster.json' },
     ] } } })),
     writeFile(resolve(root, 'runtime-assets.json'), JSON.stringify({ assets: [{ filename: 'surface.webp', sha256: hash(output), bytes: output.length }] })),
     writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface.webp' }] })),
@@ -71,10 +71,10 @@ test('controlled photographic inserts bind every consumed photograph alongside t
     profile: { displayRange: [0, 2], filter: 'CLEAR' },levelMatching:{boundaryPixels:4}} };
   const bytes = JSON.stringify(recipe);
   await writeFile(recipePath, bytes);
-  const descriptorPath = resolve(context.objectDirectory, 'object.json'), descriptor = await read(descriptorPath);
-  const sources = requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources);
-  requireRecord(sources[0]).sha256 = hash(bytes);
-  await writeFile(descriptorPath, JSON.stringify(descriptor));
+  // The manifest owns the recipe pin; the descriptor only names the recipe.
+  const manifestPath = resolve(context.source, 'manifest.json'), manifest = await read(manifestPath);
+  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(bytes), expectedBytes: Buffer.byteLength(bytes) });
+  await writeFile(manifestPath, JSON.stringify(manifest));
   const document = await prepareObjectProvenance(context);
   assert.deepEqual(productSourceIds(document, 'surface').sort(), ['observation', 'unused']);
   assert.ok(document.sources.every(source => source.verification === 'bytes-verified'));
@@ -114,7 +114,7 @@ test('composition lineage follows the pinned conversion recipe to the native arc
     selections: [{id: 'surface', kind: 'posterior', field: 'ice', statistic: 'median'}]});
   await writeFile(resolve(context.source, 'conversion.json'), recipe);
   const manifest = await read(manifestPath);
-  manifest.documents = [{id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
+  manifest.documents = [...requireArray(manifest.documents), {id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
     sourceBinding: {kind: 'local', reason: 'Authored conversion fixture'}, consumers: ['surfaces']}];
   await writeFile(manifestPath, JSON.stringify(manifest));
   await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations: [
@@ -145,7 +145,7 @@ test('document storage does not assign project authorship to an archive input', 
   const observation = requireEntry(requireValue(inputs[0], 'fixture observation'), 'fixture observation');
   manifest.inputs = inputs.slice(1);
   delete observation.id; delete observation.credit; delete observation.acquisition;
-  manifest.documents = [observation];
+  manifest.documents = [observation, ...requireArray(manifest.documents)];
   await writeFile(path, JSON.stringify(manifest));
   await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({ operations: [
     { kind: 'download', path: requireString(observation.path, 'fixture observation path'), url: requireString(observation.origin, 'fixture observation origin') },
@@ -173,10 +173,11 @@ test('authored records and generated intermediates retain their declared ownersh
   manifest.inputs = inputs.slice(1);
   delete observation.credit; delete observation.acquisition;
   observation.kind = 'authored-document';
-  manifest.documents = [observation];
+  const recipeDocuments = requireArray(manifest.documents);
+  manifest.documents = [observation, ...recipeDocuments];
   await writeFile(path, JSON.stringify(manifest));
   assert.equal((await prepareObjectProvenance(context)).sources[0].credit, 'cssEarth contributors');
-  manifest.documents = []; manifest.generatedIntermediates = [observation];
+  manifest.documents = recipeDocuments; manifest.generatedIntermediates = [observation];
   delete observation.kind;
   Object.assign(observation, { generator: 'fixture converter', credit: 'Fixture archive; conversion by fixture author' });
   await writeFile(path, JSON.stringify(manifest));

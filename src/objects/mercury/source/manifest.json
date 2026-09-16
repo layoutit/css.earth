@@ -40,7 +40,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS monochrome mosaic",
-      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
+      "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -89,7 +89,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS enhanced-color mosaic",
-      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
+      "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -135,7 +135,7 @@
         "scene"
       ],
       "title": "MESSENGER global shaded relief",
-      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
+      "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -285,7 +285,7 @@
         "charts"
       ],
       "title": "MESSENGER MASCS spectral cube",
-      "displayCredit": "M. D\u2019Amore \u00b7 DLR \u00b7 NASA/MESSENGER",
+      "displayCredit": "M. D’Amore · DLR · NASA/MESSENGER",
       "sourceUrl": "https://doi.org/10.5281/zenodo.7433033",
       "sourceBinding": {
         "kind": "catalogued",
@@ -437,8 +437,8 @@
     {
       "id": "mercury-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "c986f2e8e412262fb838357f2724842e1878045a8c83ef6b4f43931035c44424",
-      "expectedBytes": 833,
+      "expectedSha256": "4d7af8d4c28303bb55585a416e22829b414cd58d002d6083ced532be450d144c",
+      "expectedBytes": 497,
       "origin": "Repository-authored Mercury navigation asset recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -555,7 +555,7 @@
       "expectedSha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -631,7 +631,7 @@
         "features"
       ],
       "title": "A Global Tectonic Map of Mercury (Klimczak, Byrne and Crane)",
-      "displayCredit": "Klimczak, Byrne and Crane \u00b7 Mendeley Data",
+      "displayCredit": "Klimczak, Byrne and Crane · Mendeley Data",
       "sourceUrl": "https://data.mendeley.com/datasets/p43b9wttpj/2",
       "sourceBinding": {
         "kind": "catalogued",

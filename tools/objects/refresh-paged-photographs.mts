@@ -1,3 +1,4 @@
+import { readAuthoredSources } from './authored-sources.ts';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
@@ -49,8 +50,8 @@ export async function refreshPagedPhotographs(id: string, mapNames: readonly str
   const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
   const recipePath=resolve(sourceDirectory,'preparation/paged-ellipsoid.json'),manifestPath=resolve(sourceDirectory,'manifest.json'),scenePath=resolve(outputDirectory,'surface-raster-plan.json'),textureLevelsPath=resolve(outputDirectory,'texture-levels.json');
   const [descriptorBytes,recipeBytes,manifestBytes,sceneBytes,textureLevelsBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath),readFile(scenePath),readFile(textureLevelsPath)]);
-  const descriptor=parseAuthoredObjectDescriptor(JSON.parse(descriptorBytes.toString('utf8'))),recipeSource=descriptor.recipe.sources.find(source=>source.id==='paged-ellipsoid');
-  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/paged-ellipsoid.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Paged photographic refresh requires the current descriptor recipe pin.');
+  const authored=await readAuthoredSources(objectDirectory,JSON.parse(descriptorBytes.toString('utf8'))),descriptor=authored.descriptor,recipeSource=authored.sources.get('paged-ellipsoid')?.reference;
+  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/paged-ellipsoid.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Paged photographic refresh requires the current manifest recipe pin.');
   const manifest=JSON.parse(manifestBytes.toString('utf8')),config=parsePagedProfile(JSON.parse(recipeBytes.toString('utf8'))),surfaceRasterPlan=parsePreparedSurfaceRasterPlan(JSON.parse(sceneBytes.toString('utf8')));
   if(surfaceRasterPlan.atlas.pageSize!==config.atlas.pageSize||surfaceRasterPlan.atlas.density!==config.atlas.density||surfaceRasterPlan.atlas.gutter!==config.atlas.gutter||surfaceRasterPlan.atlas.sourceWidth!==config.atlas.sourceWidth||surfaceRasterPlan.atlas.sourceHeight!==config.atlas.sourceWidth/2)throw new Error('Prepared surface raster layout differs from the selected recipe.');
   const selected=config.surface.maps.filter(map=>mapNames.includes(map.name));
