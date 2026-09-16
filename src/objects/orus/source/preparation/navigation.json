@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-    "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "occultation-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 73045,
-    "expectedSha256": "78f347c2caeda8abe6636417a808bfcf1574d869690c9ef465bde4105371d707"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

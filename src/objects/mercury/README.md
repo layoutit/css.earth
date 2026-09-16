@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 | View or property | Source and interpretation |
 | --- | --- |
 | Monochrome | USGS MESSENGER MDIS BDR, from NASA Trek WMTS tiles; NAC or WAC 750 nm reflectance imagery. |

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbn.psi.edu/pds/resource/stookemaps.html",
-    "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
-    "license": "Public-domain NASA mission data and published PDS cartographic product; cite Stooke.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "stooke-mosaic",
-        "ernst-2023-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 20,
-      "latitudeDegrees": 10,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 90860,
-    "expectedSha256": "c087dddad132508d31b892a771b2e7d4c69eb13679d7cdbdec9ccbf14c3067d5"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj",
-    "credit": "Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive",
-    "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 30973,
-    "expectedSha256": "56e7d939bc520d1db966baa42da33bcf76f5eabe2db9fa54f5a2c3b658f689e7",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "asteroid-1996-hw1-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

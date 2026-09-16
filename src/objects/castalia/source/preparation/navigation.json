@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/castalia.obj",
-    "credit": "Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL",
-    "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 31725,
-    "expectedSha256": "6124b9e6b86ab70aec166e4a5851f1b2311b353d7c2544e112188550e201700c",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "castalia-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

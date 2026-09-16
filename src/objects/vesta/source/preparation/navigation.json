@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
-    "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
-    "license": "Dawn source derivative; see NOTICE.md.",
-    "expectedBytes": 304346,
-    "expectedSha256": "31c4174cffe718db773866b85045e45c12bfbc76e686ad9315731ceffccaeee3",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "dlr-hamo-natural-color",
-        "dlr-hamo-radius-model"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": -25,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

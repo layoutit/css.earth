@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png",
-    "credit": "NASA/JPL-Caltech/Space Science Institute",
-    "license": "NASA/JPL imagery with attribution",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "cassini-iss-2017-mimas",
-        "cassini-spc-2025-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 248,
-      "latitudeDegrees": 0,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 221018,
-    "expectedSha256": "078d41eef18a92fec177620eec8c1b153a3b578cf07b560fc67eab12b3b6a9f5"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

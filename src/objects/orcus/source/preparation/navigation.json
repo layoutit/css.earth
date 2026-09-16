@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/1801.07221",
-    "credit": "Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling.",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 91693,
-    "expectedSha256": "ba9559e451fde6e3823cacda6a4fe7b317b09b854ea530e3612d17c8012ce510"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

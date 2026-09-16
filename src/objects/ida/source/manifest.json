@@ -586,8 +586,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7573,
-      "expectedSha256": "cfa3ac1ae93ef8139d7e53be79aee0df7badb47e9a459e2277fcc2c0e4ff6003",
+      "expectedBytes": 8291,
+      "expectedSha256": "b37080df6e162cf83f3991d4e0d62d5f6d7f819bd68318d4272da7ac3bfc1481",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -600,8 +600,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1296,
-      "expectedSha256": "7563e9e8c7ee415a0260131e9f831014f3c103ccebb1000c1f5ac0e16b9a05df"
+      "expectedBytes": 440,
+      "expectedSha256": "71617b488cd7122b11a5b0fc18dd5cdb8aa8e8ae09393fb9ba60888004af2fb3"
     },
     {
       "path": "preparation/rotation.json",
@@ -722,7 +722,10 @@
             "locator": "Abstract"
           }
         ]
-      }
+      },
+      "origin": "https://doi.org/10.1006/icar.1996.0036",
+      "credit": "Published Hapke parameters: Helfenstein et al. (1996), doi:10.1006/icar.1996.0036. Selection and transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
     }
   ]
 }

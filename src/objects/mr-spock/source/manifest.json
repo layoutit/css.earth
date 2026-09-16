@@ -95,8 +95,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9534,
-      "expectedSha256": "9ce6b2955ecdf70a8e2be582b5aec8cc8b3b203ee742ff1930fd72c1b5255c71",
+      "expectedBytes": 10732,
+      "expectedSha256": "d4723e1b57a35157ad10a5fa6568dfa829ea325fc6a6f513e94292db661d1719",
       "sha256": "47e58ee2691ab422dfe7927afab436898b994f389021f442825cd73ea0da9995",
       "sourceBinding": {
         "kind": "local",
@@ -110,8 +110,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1290,
-      "expectedSha256": "c9e5bb4db79ce82f361b7dc92cb24686bd344137b56e31a6f806faabf4f1758e"
+      "expectedBytes": 445,
+      "expectedSha256": "281bb1d461702522a4a9c008d73142089005d3c302ddbf7bfa145c06f4332be1"
     },
     {
       "path": "preparation/rotation.json",

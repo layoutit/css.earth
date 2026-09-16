@@ -6,33 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.26033/3k3c-5713",
-    "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
-    "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "phoebe-2023-shape",
-        "phoebe-2023-albedo",
-        "phoebe-2023-numimg",
-        "phoebe-2023-bestmap"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": -20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal",
-      "displaySampling": "nearest"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 115290,
-    "expectedSha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

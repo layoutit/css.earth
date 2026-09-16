@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/2308.08062",
-    "credit": "Rommel et al. (2023), A&A 678, A167; nine stellar-occultation campaigns",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 87119,
-    "expectedSha256": "7ae4ba6a1d92cfad6c25422820657e9f6e03a878a17ddac26855613b5517efa0"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

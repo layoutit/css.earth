@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 [Margoti et al. (2026), accepted ApJ](https://arxiv.org/abs/2607.06450) fits a
 three-dimensional oblate body to 36 stellar-occultation campaigns, using the ring
 plane as a pole constraint. [Pereira et al. (2023)](https://doi.org/10.1051/0004-6361/202346365)

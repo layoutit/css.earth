@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1006/icar.1996.0045",
-    "credit": "Veverka et al. (1996), Galileo imaging team",
-    "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "shape-model"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "expectedBytes": 31736,
-    "expectedSha256": "86d349a295efddd6ee345d269dfb6c8390507ed8d32dae3bd612aad8d6a660af"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

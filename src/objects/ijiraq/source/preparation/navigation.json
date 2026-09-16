@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
-    "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
-    "license": "MIT display representation from published scientific measurements; retain source citation.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "lightcurve-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 86588,
-    "expectedSha256": "b1f4e492d472069f1c0a4b632bc513f85c8ec5e472faacc3c381e2d1e224ec64"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

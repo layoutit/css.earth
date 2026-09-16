@@ -2,6 +2,8 @@
 
 2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | Source | Display interpretation |

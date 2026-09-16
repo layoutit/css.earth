@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 | View | Source and meaning |
 | --- | --- |
 | LORRI, opening view | [Native calibrated CA06 photograph](https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl), 1 January 2019, about 33 m per native pixel. Original photographed illumination remains visible. |

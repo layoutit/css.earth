@@ -1,5 +1,7 @@
 # IBEX heliopause surface
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ```text
 heliosphere/
 ├── object.json                         Physical frame and source/prepared pins
