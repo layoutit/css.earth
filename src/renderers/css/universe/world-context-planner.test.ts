@@ -199,7 +199,7 @@ test('system zoom and rotation never publish an unidentified context orbit or ci
   let paths = 0, crowded = 0;
   for (const distance of [20, 75, 205, 75, 20]) for (const angle of [0, .3, .7, .3, 0]) {
     input.world.pose.positionM = [0, 0, distance * 149597870700];
-    input.world.pose.orientationXyzw = [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)];
+    Object.assign(input.world.pose, { orientationXyzw: [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)] });
     const frame = calculate(input);
     for (const body of frame.projectedBodies) {
       if (body.indicatorShown) expect(body.labelShown).toBe(true);
@@ -221,7 +221,7 @@ test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-s
   const input = view(), points = [plan.focus, ...plan.bodies];
   input.bodies.forEach((body, index) => { body.bodyHidden = !['sun', 'earth'].includes(points[index].id); });
   const calculate = createWorldContextPlanner(plan, {
-    sun: labelImportance('star', true, 'sun'), earth: labelImportance('planet', true, 'earth'),
+    sun: labelImportance('star', true, 5), earth: labelImportance('planet', true, 4),
   });
   input.world.pose.positionM = [0, 0, 5 * 149597870700];
   expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toContain('earth');

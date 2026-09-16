@@ -204,7 +204,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
       // A dynamic import with a literal specifier is followed like a static one; only a computed specifier hides its owner.
       node.type === "ImportExpression" && node.source.type === "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) {
     if (isRecord(node) && (node.importKind === 'type' || node.exportKind === 'type')) return;
-    const imported = requireString(node.source?.value);
+    const imported = requireString(node.type === "ImportExpression" ? (node.source.type === "Literal" ? node.source.value : undefined) : node.source?.value);
     const onServer = node.type !== "ImportExpression" && (astroRoot ? frontmatterImports.has(node) : serverOnly);
     (onServer ? serverImports : clientImports).add(imported);
     if (!registryDescriptors.has(imported) && !(onServer && isBuiltin(imported))) imports.push(imported);
