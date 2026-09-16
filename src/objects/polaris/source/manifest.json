@@ -207,6 +207,15 @@
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /polaris/ with the default camera, Chrome via Playwright at 1200 by 800, taken 2026-09-16 after preparation."
       }
+    },
+    {
+      "path": "reference/spotless-disc-comparison.png",
+      "expectedBytes": 32274,
+      "expectedSha256": "055745894058773caa1a6f7b7cee681447f1e85ffee4a42fa1473881c71107ab",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence figure for the excluded April 2021 image: SQUEEZE reconstructions of the OiDB file and of a spotless disc simulated on its sampling by tools/objects/interferometry/spotless-disc.mts, beam-convolved and divided by their limb profiles, made 2026-09-16."
+      }
     }
   ]
 }

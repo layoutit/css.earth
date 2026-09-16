@@ -23,6 +23,8 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
   | Betelgeuse | 2.90 | −0.02 |
   | Polaris, April 2021 | 1.05 | 0.58 |
 
+  [`source/reference/spotless-disc-comparison.png`](source/reference/spotless-disc-comparison.png) shows the Polaris maps side by side.
+
   `tools/objects/interferometry/spotless-disc.test.mts` checks its disc model against the known nulls, its noise, its spot maps and a simulation of the π¹ Gruis file.
 - `tests/objects/unit/polaris/source.test.mts` verifies every pin, that no observation is pinned, that the radius and GM are the published diameter and mass at the adopted distance, that the lens is the neutral shape, and that the marker is the scaffold's disc.
 - `tests/objects/unit/polaris/default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up.
