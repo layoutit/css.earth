@@ -1,0 +1,335 @@
+{
+  "schema": "csspi1-gruis-authoritative-sources@2",
+  "inputs": [
+    {
+      "expectedBytes": 135360,
+      "expectedSha256": "a0740cb08cf5a984e85a1411403427760eeccf5760cd1e63880ff3481d461cc8",
+      "id": "pi1-gruis-pionier-2014-09",
+      "path": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from the VLTI/PIONIER calibrated visibilities of Paladini et al. (2018) via the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-pionier-pi1-gruis",
+            "evidence": "The image is reconstructed from the calibrated PIONIER file pinned below; see reference/squeeze-command.txt for the build and command."
+          }
+        ]
+      },
+      "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
+      "acquisition": "Written by tools/objects/source-authoring/pi1-gruis/author.mts: the SQUEEZE posterior mean in observations/pi1-gruis-pionier-2014-09-squeeze.fits convolved with a 2.1 mas Gaussian beam; `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Posterior-mean maximum-entropy image convolved to the 2.1 milliarcsecond beam, 128 x 128 pixels of 0.4 milliarcseconds, of π¹ Gruis in the H band from four nights of September 2014. Reduced chi-squared 2.45 on squared visibilities and 1.06 on closure phases.",
+      "width": 128,
+      "height": 128,
+      "lensId": "pionier",
+      "label": "PIONIER reconstruction",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "expectedBytes": 65105,
+      "expectedSha256": "938ad59f72c9a5570ead358b70a086458c8a829d0594ab08fd23b27ea1e4d10d",
+      "id": "uniform-disc-sphere",
+      "path": "shape/uniform-disc.tab",
+      "origin": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
+      "credit": "Radius from the fitted angular diameter at the Gaia DR3 distance; sphere written by this repository",
+      "license": "Project-authored reference surface from a fitted radius.",
+      "acquisition": "Written by tools/objects/source-authoring/pi1-gruis/author.mts from measurements.json (radius 219710723 km, 5 degree steps); `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain"
+      ],
+      "projection": {
+        "kind": "body-fixed-radius-table",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 219710723000
+      },
+      "coverage": "A sphere of the fitted radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of an asymptotic giant branch star has no sharp limb.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",
+        "inputs": [
+          "measurements"
+        ],
+        "stepDegrees": 5
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-uniform-disc-sphere",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "expectedBytes": 152640,
+      "expectedSha256": "a40957e402029713b858f34083b25924eefbf9de6d3c106a978b706c773b532f",
+      "id": "pionier-2014-09-for-image",
+      "path": "observations/PI_GRU_forImage.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+      "credit": "ESO/VLTI/PIONIER, September 2014, as calibrated and published by C. Paladini (Paladini et al. 2018, Nature 553, 310); distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-pionier-pi1-gruis",
+            "evidence": "Calibrated PIONIER OIFITS, the image-ready file of the Nature paper: nights 2014-09-25, 26, 29 and 30, three H-band channels."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, data PI C. Paladini); ESO data policy asks for the instrument and the paper to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "reconstruction-input",
+        "reconstruction-check"
+      ],
+      "coverage": "PIONIER H band, three channels per setting (1.624, 1.676, 1.729 um), 303 squared-visibility and 201 closure-phase rows over four nights, none flagged.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "expectedBytes": 5907,
+      "expectedSha256": "fb7f28747c741998c26b6cd163931a0d7b90ea0e0a54d4b26e5e8cf030d61f81",
+      "id": "pi1-gruis-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the PIONIER reconstruction cast onto the reference sphere by the surface-observation route, polar bands, off-limb plate",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "expectedBytes": 1868,
+      "expectedSha256": "3dde8260783803c17e14d679b1f0652f48e79582218b741bb3cbc0ddbfc54ada",
+      "id": "pi1-gruis-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "id": "pi1-gruis-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "expectedBytes": 104,
+      "expectedSha256": "0723132d8aa3aa40dc916f96b30445a8fa8ef4c3a1b5ef832a0df3f273be5496",
+      "id": "pi1-gruis-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "expectedBytes": 288,
+      "expectedSha256": "7ae08e8ed6fa2d430ff4e4a1e6a9e7eaa5f4b274938c612a14fdbe09319a19b8",
+      "id": "pi1-gruis-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: fitted radius 219,710,723 km, camera plan so the photographed hemisphere faces the camera",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "expectedBytes": 84260,
+      "expectedSha256": "86a78e46a1d1704e87c7b2578678342536f62321196b2db47139f1a7e2b62af7",
+      "id": "reconstruction-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://oidb.jmmc.fr/",
+      "credit": "ESO/VLTI/PIONIER calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
+      "license": "Public calibrated interferometric data; the reconstruction and this marker are attributed display derivatives.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",
+        "inputs": [
+          "pi1-gruis-pionier-2014-09"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the lens's palette and percentile stretch."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "expectedBytes": 4233,
+      "expectedSha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "expectedBytes": 1329,
+      "expectedSha256": "0ab463ef98063843f73bc8c8bc2d27508ef4d1c63ebf32f01414f702fab9dd08",
+      "path": "measurements.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Fitted angular diameter, distance and radius with their sources."
+      }
+    },
+    {
+      "expectedBytes": 607,
+      "expectedSha256": "0c86dfc7fca672120ae30921da2d51dcc8797ca61a115a5642dc66d669ad06d2",
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "expectedBytes": 446,
+      "expectedSha256": "156de2fdcb050d44a0bcaa203239892036baf7546d59c956b1c8fa838f30b3c4",
+      "path": "preparation/navigation.json"
+    },
+    {
+      "expectedBytes": 1091,
+      "expectedSha256": "22f0ef21ecbf57cf63585daf3e88afa53ec1832e23237cb06e4a4a7c5bd2c86a",
+      "path": "preparation/rotation.json"
+    },
+    {
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
+      "path": "presentation/LICENSE.INTER-OFL"
+    },
+    {
+      "expectedBytes": 3266,
+      "expectedSha256": "6f88d7baf9dddaa893578a967f0023de1c260b488b74d3e1e4aa2dcdc4bdb2e0",
+      "path": "presentation/title-mark.json"
+    },
+    {
+      "expectedBytes": 2006,
+      "expectedSha256": "5ce1392ccdafc80ea6041589fa40d5a7076b4772bb47b5ea3c61d26df72af629",
+      "path": "reference/squeeze-command.txt",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The exact reconstruction build and command."
+      }
+    },
+    {
+      "expectedBytes": 141120,
+      "expectedSha256": "ca8a3d83680141311274c16e3a52ae2b4bc5493d4551555ddd3b99f6db55a84a",
+      "path": "observations/pi1-gruis-pionier-2014-09-squeeze.fits",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "SQUEEZE's raw posterior mean at 0.4 mas pixels, the input to the beam convolution and the image the reconstruction test fits to the visibilities; not displayed."
+      }
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 291968,
+      "expectedSha256": "c7371d00b29e5087dd9445e7d9cd7f8618f5163acb3783a54652fcd4d3f69473",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /pi1-gruis/ with the default camera, Chrome via Playwright at 1200 by 800, taken 2026-09-16 after preparation."
+      }
+    }
+  ]
+}

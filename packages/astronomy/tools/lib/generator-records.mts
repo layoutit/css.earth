@@ -53,6 +53,7 @@ export function readStarRecord(value: unknown): StarRecord {
     positionEpochJulianYear: numberValue(record.positionEpochJulianYear), distanceParsecs: numberValue(record.distanceParsecs),
     properMotionRaMasPerYear: numberValue(record.properMotionRaMasPerYear), properMotionDecMasPerYear: numberValue(record.properMotionDecMasPerYear),
     radialVelocityKmPerS: numberValue(record.radialVelocityKmPerS),
+    ...(record.presentationUp === undefined ? {} : { presentationUp: record.presentationUp === 'display-axis' ? 'display-axis' as const : (() => { throw new TypeError('Star presentationUp must be display-axis when stated.'); })() }),
     sources: { position: stringValue(sources.position), distance: stringValue(sources.distance), properMotion: stringValue(sources.properMotion), radialVelocity: stringValue(sources.radialVelocity) } };
   if (star.rightAscensionDegrees < 0 || star.rightAscensionDegrees >= 360 || Math.abs(star.declinationDegrees) > 90 || !(star.distanceParsecs > 0) ||
       Object.values(star.sources).some(text => !text.trim())) throw new TypeError('Invalid star astrometry.');

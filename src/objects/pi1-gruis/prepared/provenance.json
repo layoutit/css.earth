@@ -1,0 +1,666 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "pi1-gruis",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "fa038c4a0750052395e0d5ac35aa761c55e0af2be8678c9f7aaded15aee88bea"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "fb7f28747c741998c26b6cd163931a0d7b90ea0e0a54d4b26e5e8cf030d61f81",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/pi1-gruis/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "pi1-gruis-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "csspi1-gruis-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "pionier",
+            "source": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
+            "falseColor": true,
+            "output": "pi1-gruis-surface-{id}{suffix}.webp",
+            "thumbnail": "pi1-gruis-lens-{id}.webp",
+            "science": {
+              "kind": "surface-observation",
+              "shape": {
+                "path": "shape/uniform-disc.tab",
+                "format": "pds-radius-table",
+                "grid": {
+                  "metersPerUnit": 1000,
+                  "expectedVertices": 2522,
+                  "expectedFaces": 5040,
+                  "stepDegrees": 5,
+                  "longitudeDirection": "east-positive"
+                },
+                "radiusKm": 219710723,
+                "rows": 36,
+                "columns": 72,
+                "flatFaceErrorMeters": 420000000
+              },
+              "lens": {
+                "format": "controlled-shape-camera",
+                "metadata": {
+                  "label": "PIONIER reconstruction",
+                  "falseColor": true,
+                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 909 squared visibilities and 603 closure phases measured by VLTI/PIONIER on four nights of September 2014 in the H band (1.62-1.73 micrometres, three channels), convolved to the 2.1 milliarcsecond interferometric beam and cast onto a sphere of the radius the disc and the Gaia parallax imply. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown. The colours are a legend for reconstructed relative intensity in one infrared band, not colour or temperature. The far hemisphere is unobserved."
+                },
+                "frames": [
+                  {
+                    "id": "pionier-2014-09-h-band",
+                    "path": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
+                    "encoding": "fits-oi-reconstruction",
+                    "backgroundMaximum": 0.00001,
+                    "observerLatitude": 0,
+                    "observerWestLongitude": 0,
+                    "sunLatitude": 0,
+                    "sunWestLongitude": 0,
+                    "rangeKm": 4988287254762928,
+                    "northAzimuthDegrees": 0,
+                    "pixelAngleMicroradians": 0.0019392547244381439,
+                    "center": [
+                      64.002,
+                      63.001
+                    ],
+                    "reconstruction": {
+                      "startTime": "2014-09-25T23:26:00",
+                      "filter": "H band 1.62-1.73 um, three spectral channels",
+                      "visibilitiesPath": "observations/PI_GRU_forImage.fits"
+                    }
+                  }
+                ],
+                "transfer": {
+                  "maximumSeparationFootprints": 2,
+                  "visibilityToleranceMeters": 1,
+                  "maximumEmissionDegrees": 70,
+                  "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 9.7 million kilometres at the disc centre from 162 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+                },
+                "photometry": {
+                  "model": "retained-observation",
+                  "referenceIncidenceDegrees": 0,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "maximumGain": 1
+                },
+                "display": {
+                  "percentiles": [
+                    1,
+                    99.5
+                  ],
+                  "palette": [
+                    "#3b0500",
+                    "#9a1e00",
+                    "#e0641a",
+                    "#ffb340",
+                    "#ffe9a0",
+                    "#fffbf0"
+                  ]
+                },
+                "consumer": "sphere-photograph"
+              },
+              "offLimb": {
+                "rotationDegrees": 0,
+                "mirror": true
+              }
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 1398,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "pi1-gruis-context-{id}{suffix}.webp",
+          "limbOutput": "pi1-gruis-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "csspi1-gruis-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 1398,
+              "source": "the same beam-convolved reconstruction: its light outside the 18.17 mas disc on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 51 mas field",
+              "composition": "sky-plane image registered to the disc (496 px = 18.17 mas), mirrored and turned to the scene's handedness so its north meets the rendered display axis at the default camera",
+              "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "pi1-gruis",
+        "displayName": "π¹ Gruis",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "316 solar radii"
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "162 parsecs"
+            },
+            {
+              "id": "angular-diameter",
+              "label": "Angular diameter (1.65 µm)",
+              "value": "18.17 milliarcseconds"
+            },
+            {
+              "id": "rotation-axis",
+              "label": "Rotation axis",
+              "value": "not measured"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "pionier",
+          "controls": [
+            {
+              "id": "pionier",
+              "label": "PIONIER reconstruction",
+              "thumbnail": "pi1-gruis-lens-pionier.webp",
+              "surface": "pi1-gruis-surface-pionier.webp",
+              "poles": "pi1-gruis-poles-pionier.webp",
+              "source": {
+                "id": "pi1-gruis-pionier-2014-09",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from the public VLTI/PIONIER visibilities and closure phases of four nights in September 2014, in the H band (1.62-1.73 micrometres), convolved to the 2.1 milliarcsecond interferometric beam and cast onto a sphere of the fitted radius, so nothing finer than the beam is shown. The star has no measured rotation axis: the axis shown is celestial north, a display convention. The far hemisphere is unobserved and carries the no-data grid.",
+              "noData": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity at 1.65 µm",
+                "labels": [
+                  "0.45",
+                  "0.72",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.45",
+                    "0.72",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://doi.org/10.1038/nature25001"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Large granulation cells on the surface of the giant star π¹ Gruis (Nature, 2018)",
+            "href": "https://doi.org/10.1038/nature25001"
+          },
+          {
+            "label": "Visibilities",
+            "role": "terrain",
+            "description": "Calibrated PIONIER OIFITS, September 2014, JMMC OiDB",
+            "href": "https://oidb.jmmc.fr/"
+          },
+          {
+            "label": "Reconstruction code",
+            "role": "facts",
+            "description": "SQUEEZE (F. Baron), the code that made the image",
+            "href": "https://github.com/fabienbaron/squeeze"
+          },
+          {
+            "label": "Placement",
+            "role": "facts",
+            "description": "SIMBAD record for pi1 Gru: Gaia DR3 position, parallax and proper motion",
+            "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1093/mnrasl/slad138",
+            "credit": "C. Paladini, F. Baron, A. Jorissen et al.; ESO/VLTI/PIONIER; JMMC OiDB; reconstruction by this repository with SQUEEZE"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Fitted angular diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "pi1-gruis-pionier-2014-09",
+      "path": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from the VLTI/PIONIER calibrated visibilities of Paladini et al. (2018) via the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "evidence": "The image is reconstructed from the calibrated PIONIER file pinned below; see reference/squeeze-command.txt for the build and command.",
+            "missionId": "eso-vlti-pionier-pi1-gruis"
+          }
+        ]
+      },
+      "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
+      "acquisition": "Written by tools/objects/source-authoring/pi1-gruis/author.mts: the SQUEEZE posterior mean in observations/pi1-gruis-pionier-2014-09-squeeze.fits convolved with a 2.1 mas Gaussian beam; `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Posterior-mean maximum-entropy image convolved to the 2.1 milliarcsecond beam, 128 x 128 pixels of 0.4 milliarcseconds, of π¹ Gruis in the H band from four nights of September 2014. Reduced chi-squared 2.45 on squared visibilities and 1.06 on closure phases.",
+      "width": 128,
+      "height": 128,
+      "lensId": "pionier",
+      "label": "PIONIER reconstruction",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "a0740cb08cf5a984e85a1411403427760eeccf5760cd1e63880ff3481d461cc8",
+      "bytes": 135360,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "uniform-disc-sphere",
+      "path": "shape/uniform-disc.tab",
+      "origin": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
+      "credit": "Radius from the fitted angular diameter at the Gaia DR3 distance; sphere written by this repository",
+      "license": "Project-authored reference surface from a fitted radius.",
+      "acquisition": "Written by tools/objects/source-authoring/pi1-gruis/author.mts from measurements.json (radius 219710723 km, 5 degree steps); `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-radius-table",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 219710723000
+      },
+      "coverage": "A sphere of the fitted radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of an asymptotic giant branch star has no sharp limb.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",
+        "inputs": [
+          "measurements"
+        ],
+        "stepDegrees": 5
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-uniform-disc-sphere",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/1"
+          }
+        ]
+      },
+      "sha256": "938ad59f72c9a5570ead358b70a086458c8a829d0594ab08fd23b27ea1e4d10d",
+      "bytes": 65105,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "pionier-2014-09-for-image",
+      "path": "observations/PI_GRU_forImage.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+      "credit": "ESO/VLTI/PIONIER, September 2014, as calibrated and published by C. Paladini (Paladini et al. 2018, Nature 553, 310); distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "evidence": "Calibrated PIONIER OIFITS, the image-ready file of the Nature paper: nights 2014-09-25, 26, 29 and 30, three H-band channels.",
+            "missionId": "eso-vlti-pionier-pi1-gruis"
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, data PI C. Paladini); ESO data policy asks for the instrument and the paper to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "coverage": "PIONIER H band, three channels per setting (1.624, 1.676, 1.729 um), 303 squared-visibility and 201 closure-phase rows over four nights, none flagged.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/2"
+          }
+        ]
+      },
+      "sha256": "a40957e402029713b858f34083b25924eefbf9de6d3c106a978b706c773b532f",
+      "bytes": 152640,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/PI_GRU_forImage.fits",
+        "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
+      "bytes": 4233,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "pionier",
+      "label": "PIONIER reconstruction",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "pionier"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true,
+        "surfaceObservation": {
+          "format": "controlled-shape-camera",
+          "shape": {
+            "path": "shape/uniform-disc.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "radiusKm": 219710723,
+            "rows": 36,
+            "columns": 72,
+            "flatFaceErrorMeters": 420000000
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 9.7 million kilometres at the disc centre from 162 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "originalIllumination": true
+        }
+      },
+      "inputs": [
+        "pi1-gruis-pionier-2014-09",
+        "uniform-disc-sphere",
+        "pionier-2014-09-for-image"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier.webp",
+          "bytes": 22586,
+          "sha256": "6ca19cf33073577f323d679cd42c6187d26fcaf73b16a3b882d3d7bd76d706da",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier@2x.webp",
+          "bytes": 48764,
+          "sha256": "6f090e8d7d3d9b4efea065ca08174ca1dba7374e68b8a7828450aa43610727fd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-lens-pionier.webp",
+          "bytes": 468,
+          "sha256": "10aea70dd53ce9c5d4a0390462f86cb69f364275980bcaa75d985ef02d8de91c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-poles-pionier.webp",
+          "bytes": 6700,
+          "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-poles-pionier@2x.webp",
+          "bytes": 16222,
+          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier.webp",
+          "bytes": 44670,
+          "sha256": "ae882e30590a5c432037221e74d475f280649d25204a0ffbefb8a3cf505a8d99",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-limb-pionier.webp",
+          "bytes": 52,
+          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier@2x.webp",
+          "bytes": 109220,
+          "sha256": "14ef32696dbfdbf1c769bec3fc710662c756717ada739efc5a446c61b00ad1b9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/pi1-gruis/pi1-gruis-limb-pionier@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pi1-gruis-pionier-2014-09",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4819,
+          "sha256": "5a84a8eaa365b30a3660542ee8bd0ad99df86c2231edfce47e375f0ceee63ba1",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:pionier",
+      "label": "PIONIER reconstruction preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "pionier"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/pionier.webp",
+          "bytes": 8988,
+          "sha256": "0e0f321bec38cf4213151182f882d04fa66968335b3315a81c8347f0847919cf",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "pi1-gruis",
+    "materialSha256": "b6b8febf185d7235ba90004077a7b8cb53e2a835c849e211467b44a0f56c3f37",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
+    }
+  }
+}

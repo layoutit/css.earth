@@ -1,0 +1,37 @@
+{
+  "id": "source-pi1-gruis-inter-title-font",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "π¹ Gruis · inter title font",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pi1-gruis/source/manifest.json",
+      "revision": "86534f6388bb099cd25eb60341ec2cba13a8e039",
+      "sha256": "b20bfe1d45a3a09f0ab7c4f0c8c3c35dc4052b49a07d7a2ed293b00447706660",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Inter Project Authors / Rasmus Andersson",
+      "scope": "The inter title font input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "SIL Open Font License 1.1",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

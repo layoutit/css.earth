@@ -14,6 +14,9 @@ export interface StarAstrometry {
   readonly properMotionRaMasPerYear: number
   readonly properMotionDecMasPerYear: number
   readonly radialVelocityKmPerS: number
+  /** Which direction the prepared presentation frame puts up: the J2000 ecliptic north pole by default, or the star's own
+   * display axis (its rotation record's +z) so the camera orbit lies in the star's equator and reaches its sub-Earth point. */
+  readonly presentationUp?: 'display-axis'
   readonly sources: { readonly position: string; readonly distance: string; readonly properMotion: string; readonly radialVelocity: string }
 }
 export type StarId = keyof typeof STAR_ASTROMETRY
