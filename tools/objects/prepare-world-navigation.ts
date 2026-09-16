@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { readAuthoredSources } from './authored-sources.js';
 import { parseWorldContextSource } from '../../src/preparation/spatial-context.js';
 import { authoredPresentationBasis } from './world-navigation-sources.js';
 import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
@@ -14,22 +14,17 @@ const hash = (bytes: Uint8Array): string => createHash('sha256').update(bytes).d
 
 /** Final preparation stage, shared by isolated authored builds and canonical JSON publication. */
 export async function prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot = resolve(objectDirectory, '../../..') }: WorldNavigationOptions) {
-  const raw = JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as Input;
-  const descriptor = parseAuthoredObjectDescriptor(raw), sources = new Map<string, Input>();
+  const bound = await readAuthoredSources(objectDirectory), descriptor = bound.descriptor;
+  // The receipt names the manifest pins each source had, so a later reader can tell which inputs this frame came from.
+  const pinnedSources = bound.entries.map(entry => entry.reference);
+  const sources = new Map<string, Input>([...bound.sources].map(([id, entry]) => [id, entry.value as Input]));
   if (definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') throw new TypeError('Physical navigation runtime identity differs.');
-  for (const reference of descriptor.recipe.sources) {
-    const path = resolve(objectDirectory, reference.path), offset = relative(objectDirectory, path);
-    if (offset.startsWith('..')) throw new TypeError('Navigation source escapes the object directory.');
-    const bytes = await readFile(path);
-    if (hash(bytes) !== reference.sha256) throw new TypeError(`Navigation source pin differs: ${reference.path}`);
-    sources.set(reference.id, JSON.parse(bytes.toString('utf8')) as Input);
-  }
   const contextSource = sources.get('world-context');
   if (contextSource) {
     const context = parseWorldContextSource(contextSource);
     if (context.focus.id !== descriptor.id) throw new TypeError('Authored context focus differs.');
     return { definition, frame: context.frame, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
-      sources: descriptor.recipe.sources, frame: context.frame, model: 'authored-context-focus' } };
+      sources: pinnedSources, frame: context.frame, model: 'authored-context-focus' } };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
   const presentation = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-presentation-frame.mts')).href) as Input;
@@ -59,7 +54,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const prepared = preparePhysicalMaterialTracks({ definition: { ...definition, camera, sky, sun }, ...authored, sources,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
   return { definition: prepared, frame,
-    receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources,
+    receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: pinnedSources,
       frame, bodyToPresentation: authored.bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
       tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits,
       sourceGeometryConvention: 'PolyCSS authored mesh axes; world raster X/Y transport is shared with the retained source geometry',

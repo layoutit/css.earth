@@ -1,3 +1,4 @@
+import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from './data-schema.mts';
 import {PREPARED_CSS_OBJECT_FORMAT} from '../../../src/renderers/css/dist/index.js';
 import {layeredRecipe} from './layered-recipe.mts';
@@ -44,15 +45,8 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   // previous separate-process pipeline never reused cached file-loader nodes.
   sharp.cache(false);
   const objectRoot=await realpath(objectDirectory),descriptorPath=resolve(objectRoot,'object.json');
-  const rawDescriptor=requireRecord(await json(descriptorPath)),descriptor=parseAuthoredObjectDescriptor(rawDescriptor),sources=new Map<string,{reference:typeof descriptor.recipe.sources[number];path:string;value:unknown}>();
+  const rawDescriptor=requireRecord(await json(descriptorPath)),{descriptor,sources}=await readAuthoredSources(objectRoot,rawDescriptor);
   if(!write&&resolve(publicDirectory)===resolve(objectRoot,'../../../public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');
-  for(const reference of descriptor.recipe.sources) {
-    const path=await realpath(resolve(objectRoot,reference.path)),offset=relative(objectRoot,path);
-    if(offset==='..'||offset.startsWith(`..${sep}`)||offset.startsWith(sep))throw new TypeError('Authored source escapes object directory.');
-    const bytes=await readFile(path);
-    if(hash(bytes)!==reference.sha256)throw new Error(`Authored source pin changed: ${reference.path}`);
-    sources.set(reference.id,{reference,path,value:JSON.parse(bytes.toString('utf8'))});
-  }
   const requiredSource=(id:string)=>{const source=sources.get(id);if(!source)throw new TypeError(`Layered preparation requires ${id}.`);return source;};
   const required=(id:string)=>requiredSource(id).value;
   const geometry=parse(required('geometry'),layeredRecipe,'layered geometry'),surface=parse(required('surface'),spectralRecipe,'spectral material'),materials=parse(required('materials'),cutawayRecipe,'cutaway material'),radialMotion=parse(required('radial-motion'),radialMotionRecipe,'radial motion'),rings=parseRadialLayerRecipe(required('rings')),presentationConfig=parse(required('presentation'),layeredPresentationRecipe,'layered presentation');

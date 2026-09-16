@@ -19,7 +19,4 @@ for (const { id } of bodies) {
     }
   }
   await walk(s); manifest.documents = documents.sort((a, b) => a.path.localeCompare(b.path)); await write(resolve(s, 'manifest.json'), manifest);
-  const descriptor = parseAuthoringDescriptor(await read(resolve(p, 'object.json')));
-  for (const source of descriptor.properties.recipe.sources) source.sha256 = pin(await readFile(resolve(p, source.path))).expectedSha256;
-  await write(resolve(p, 'object.json'), descriptor);
 }

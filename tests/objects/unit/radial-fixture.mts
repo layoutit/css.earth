@@ -96,7 +96,7 @@ export function requireHistoricalContent(value: unknown) {
   return { settings: { controls }, panel: { facts: requireArray(panel.facts, 'Historical body facts').map((entry, index) => { const fact=requireRecord(entry, `Historical body fact ${index}`); return {id:requireString(fact.id, `Historical body fact ${index} id`), label:requireString(fact.label, `Historical body fact ${index} label`)}; }) } };
 }
 
-export function requireObjectRotationReference(value: unknown): { readonly path: string; readonly sha256: string } {
+export function requireObjectRotationReference(value: unknown): { readonly path: string } {
   const descriptor = requireRecord(value, 'Object descriptor');
   const properties = requireRecord(descriptor.properties, 'Object descriptor properties');
   const recipe = requireRecord(properties.recipe, 'Object descriptor recipe');
@@ -104,7 +104,7 @@ export function requireObjectRotationReference(value: unknown): { readonly path:
   const rotation = sources.find(source => requireRecord(source, 'Object descriptor recipe source').id === 'rotation');
   if (rotation === undefined) throw new TypeError('Expected an object descriptor rotation source.');
   const reference = requireRecord(rotation, 'Object descriptor rotation source');
-  return { path: requireString(reference.path, 'Object descriptor rotation source path'), sha256: requireString(reference.sha256, 'Object descriptor rotation source hash') };
+  return { path: requireString(reference.path, 'Object descriptor rotation source path') };
 }
 
 export function requireMl14Content(value: unknown) {

@@ -225,23 +225,27 @@ function authoredRecipe(descriptor: Record<string, unknown>) {
   if (!isRecord(recipe) || recipe.schema !== 'cssearth-authored-object@1' || !isArray(recipe.sources)) return null;
   const sources = recipe.sources.map(value => requireRecord(value));
   if (!sources.length || sources.some(reference => !reference || typeof reference !== 'object' ||
-      !/^[a-z][a-z0-9.-]*$/.test(requireString(reference.id)) || typeof reference.path !== 'string' ||
-      !/^[a-f0-9]{64}$/.test(requireString(reference.sha256)))) {
+      !/^[a-z][a-z0-9.-]*$/.test(requireString(reference.id)) || typeof reference.path !== 'string')) {
     throw new TypeError('Authored recipe sources are invalid.');
   }
   if (new Set(sources.map(reference => reference.id)).size !== sources.length) throw new TypeError('Authored recipe sources are duplicated.');
-  return { ...recipe, sources: sources.map(reference => ({ id: requireString(reference.id), path: requireString(reference.path), sha256: requireString(reference.sha256) })) };
+  return { ...recipe, sources: sources.map(reference => ({ id: requireString(reference.id), path: requireString(reference.path) })) };
 }
 
 async function readAuthoredDefinition({ objectId, descriptor, root, source, closure }: {objectId: string; descriptor: Record<string, unknown>; root: string; source: RuntimeSourceReader; closure: Set<string>}) {
   const recipe = authoredRecipe(descriptor);
   if (!recipe) return null;
-  const directory = resolve(root, `src/objects/${objectId}`);
+  const directory = resolve(root, `src/objects/${objectId}`), manifestPath = resolve(directory, 'source/manifest.json');
+  const manifest = requireRecord(JSON.parse(await source(manifestPath)));
+  closure.add(manifestPath);
+  const records = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => (isArray(manifest[key]) ? manifest[key] : []).map(value => requireRecord(value)));
   for (const reference of recipe.sources) {
     const path = resolve(directory, reference.path);
     if (relative(directory, path).startsWith('../')) throw new TypeError(`Authored source escapes its object package: ${reference.path}.`);
+    const record = records.find(entry => `source/${String(entry.path)}` === reference.path);
+    if (!record) throw new TypeError(`Authored source is not pinned by the manifest: ${reference.path}.`);
     const bytes = await source(path);
-    if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
+    if (createHash('sha256').update(bytes).digest('hex') !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
   const preparation = resolve(directory, 'prepared');

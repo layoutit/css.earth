@@ -138,12 +138,16 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
   const directory = resolve(root, `src/objects/${objectId}`);
+  const manifest = requireRecord(JSON.parse(await readText(resolve(directory, 'source/manifest.json'))), 'Source manifest');
+  const records = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => requireArray(manifest[key] ?? [], key).map(value => requireRecord(value, key)));
   for (const value of requireArray(recipe.sources)) {
     const source = requireRecord(value, 'Authored source');
-    if (!source || typeof source.path !== 'string' || (typeof source.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(source.sha256))) throw new TypeError('Authored source reference is invalid.');
+    if (!source || typeof source.path !== 'string') throw new TypeError('Authored source reference is invalid.');
     const path = resolve(directory, source.path);
     if (relative(directory, path).startsWith('../')) throw new TypeError('Authored source escapes its object package.');
-    if (createHash('sha256').update(await readText(path)).digest('hex') !== source.sha256) throw new TypeError(`Authored source digest drifted: ${source.path}.`);
+    const record = records.find(entry => `source/${String(entry.path)}` === source.path);
+    if (!record || typeof record.expectedSha256 !== 'string') throw new TypeError(`Authored source is not pinned by the manifest: ${source.path}.`);
+    if (createHash('sha256').update(await readText(path)).digest('hex') !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${source.path}.`);
   }
   const preparedDirectory = resolve(directory, 'prepared');
   const payloadPath = resolve(directory, reference.url);

@@ -118,7 +118,7 @@ const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promi
   const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
   if (!ref) return [id, null];
   const { readAuthoredRotation } = await import('./objects/authored-rotation.mts');
-  return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path), sha256: requireString(ref.sha256) }, EPOCH_JD_TT)];
+  return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path) }, EPOCH_JD_TT)];
 })));
 const rotationAtEpoch = (id: BodyId): RotationElements => {
   const authored = authoredRotations.get(id);

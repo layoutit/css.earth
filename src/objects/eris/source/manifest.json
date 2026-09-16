@@ -152,8 +152,8 @@
     {
       "id": "eris-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 852,
-      "expectedSha256": "ec4926b5bc3275601ec90f907e6cd0fb77b873c9f99bc9c8fd2bef198525b7ea",
+      "expectedBytes": 385,
+      "expectedSha256": "c8b108f78dceef2dbbb14fa662992d83b45cdce2cd64f081e717e9d8312ccd91",
       "origin": "Repository-authored Eris navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -228,7 +228,11 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 114,
-      "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2"
+      "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2",
+      "id": "eris-shape-marker",
+      "origin": "https://doi.org/10.1038/nature10550",
+      "credit": "cssEarth schematic sphere using Sicardy et al. (2011) shape result; color is illustrative",
+      "license": "MIT, cssEarth authored schematic; factual measurements attributed"
     }
   ],
   "generatedIntermediates": []
