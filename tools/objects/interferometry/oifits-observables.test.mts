@@ -61,3 +61,18 @@ test('OI_VIS rows keep their declared types and flags, and a spotless simulation
     else assert.ok(Math.abs(mean - 1) < 0.05, `a differential amplitude is normalised to its row: ${mean}`);
   }
 });
+
+test('selection flags channels outside the windows in every observable table and scales wavelengths without touching data', async () => {
+  const { selectOifits } = await import('./oifits-select.mts');
+  const wavelengths = [2.28e-6, 2.29e-6, 2.3e-6];
+  const table = (extname: string, data: string) => binaryTableHdu(extname, [{ name: data, form: '3D' }, { name: 'UCOORD', form: 'D' }, { name: 'VCOORD', form: 'D' }, { name: 'FLAG', form: '3L' }],
+    [[[0.4, 0.5, 0.6], 10, 0, [false, false, true]]], [['INSNAME', 'TEST']]);
+  const input = Buffer.concat([primaryHdu(), binaryTableHdu('OI_WAVELENGTH', [{ name: 'EFF_WAVE', form: 'D' }, { name: 'EFF_BAND', form: 'D' }], wavelengths.map(w => [w, 1e-8]), [['INSNAME', 'TEST']]), table('OI_VIS2', 'VIS2DATA')]);
+  const { bytes, keptVis2, newlyFlaggedVis2 } = selectOifits(input, { windowsMetres: [[2.285e-6, 2.31e-6]], wavelengthScale: 1.0054 });
+  assert.equal(keptVis2, 1); assert.equal(newlyFlaggedVis2, 1);
+  const hdus = readFitsHdus(bytes), vis2 = binaryTable(hdus.find(hdu => hdu.extname === 'OI_VIS2')!), wave = binaryTable(hdus.find(hdu => hdu.extname === 'OI_WAVELENGTH')!);
+  assert.deepEqual(numbers(bytes, vis2, 0, tableColumn(vis2, 'FLAG')), [1, 0, 1], 'outside flagged, inside kept, flagged stays flagged');
+  assert.deepEqual(numbers(bytes, vis2, 0, tableColumn(vis2, 'VIS2DATA')), [0.4, 0.5, 0.6], 'measurements untouched');
+  assert.ok(Math.abs(numbers(bytes, wave, 1, tableColumn(wave, 'EFF_WAVE'))[0]! - 2.29e-6 / 1.0054) < 1e-15);
+  assert.throws(() => selectOifits(input, { wavelengthScale: 2 }), /spectrograph/u);
+});
