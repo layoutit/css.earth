@@ -114,7 +114,9 @@
       "bodyRadiusM": 22123.561411961255
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Hale–Bopp",
       "classification": "comet",
       "color": "#b8b6b2",

@@ -114,7 +114,9 @@
       "bodyRadiusM": 353329.0693408871
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Ixion",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

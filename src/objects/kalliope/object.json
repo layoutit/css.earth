@@ -31,6 +31,11 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "zimpol",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -51,7 +56,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "2d0fac8cc2e842d20ce693964b66f6f3e535373a0c6042ebb705b66c97d30bad"
+          "sha256": "29bc4690bee8b7e7a0b9649613119cd8ef712b091060534757f8d487e374f757"
         },
         {
           "id": "rotation",
@@ -61,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b089cdeb44dcc19492a850b16fc91f87d8ac8017d6bfc869520e124d874002e9"
+          "sha256": "222eb1ba7d12c68aecc8360e07b97fe177a649638f61070a82c43db9639fc572"
         },
         {
           "id": "title",
@@ -76,7 +81,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e51dcce32079175b413fa94a789ba0ca6751faca868995864e4e3dc28c42f343"
+          "sha256": "524ea35cc9e4e4e9be0a6617308910462b7b4866851cffc3887fb614c731a07f"
         }
       ]
     },
@@ -113,7 +118,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3f34d6eb35e006584ebda9a265d5d16c575fcab7aafc724bf85714138f372bb7"
+        "sha256": "a3f01a155639d352dcbe0c866abf464c035446a7091cecf480a04341ea09c8a7"
       }
     },
     "catalog": {
@@ -134,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2d4f6fef2f17f80c1faa91332e07b8deeba0b97eef6d57f196826f9773c05a06"
+    "sha256": "a4d95b88fe0fbcafa6d45f45ab73b20564b0bf25adb9abba37908557519e65b8"
   }
 }

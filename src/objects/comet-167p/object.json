@@ -114,7 +114,9 @@
       "bodyRadiusM": 24398.600977157937
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "CINEOS",
       "classification": "comet",
       "color": "#b8b6b2",
