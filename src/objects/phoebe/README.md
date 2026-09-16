@@ -77,6 +77,10 @@ The SBIB regional RGB candidate uses a different reference ellipsoid/shape conve
 
 Before refinement, the unrefined kernel camera put the projected limb 4 to 26 pixels from the photographed one in eight approach frames. That is about 7 to 10 km on Phoebe in the sky plane, consistent with a target position offset rather than pointing. Replacing Phoebe's position with JPL's full-mission `sat441` ephemeris doubled the offset, because the 2004 trajectory kernel's Cassini and Phoebe positions are solved together, so it is not used.
 
+![N1465662798_2 with Phoebe's outline from the kernel camera (red) and after limb refinement (green)](evidence/iss-limb-refinement.png)
+
+![Map previews: relative albedo (top) and the ISS photograph lens (bottom)](evidence/iss-map-comparison.png)
+
 ### Registration
 
 <!-- registration-report:begin -->
