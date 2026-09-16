@@ -16,6 +16,7 @@ for (const [name, raw] of Object.entries(fixture.cases)) test(`Astropy conforman
     values.push(...readFitsImage(bytes, { start: entry.extension === 1 ? hdus[0]!.nextOffset : 0, plane }).values);
   assert.deepEqual(values.map(v => Number.isNaN(v) ? null : v), entry.values);
   if (entry.hierarchy) assert.deepEqual(Object.fromEntries(Object.entries(hdu.header).filter(([key]) => key.startsWith('ESO '))), entry.hierarchy);
+  if (entry.longString) assert.equal(hdu.header.CPYRIGHT, entry.longString);
   if (entry.units) {
     assert.equal(hdu.header.BUNIT, entry.units); assert.equal(hdu.header.OBSERVER, entry.observer);
     assert.ok(Object.hasOwn(hdu.header, 'UNUSED')); assert.equal(hdu.header.UNUSED, undefined);

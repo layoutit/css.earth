@@ -118,15 +118,22 @@
     },
     {
       "id": "spitzer-mid-infrared",
-      "label": "Spitzer · mid-infrared",
-      "url": "https://www.spitzer.caltech.edu/system/avm_images/binaries/4757/original/sig11-012.tif?1603796898",
-      "page": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
-      "bytes": 5591662,
-      "sha256": "94ab668c21880706ae4fa6e401f8a7237f440cdcf4bcf3f93b45c0794c21ff34",
+      "label": "Spitzer · IRAC mid-infrared (FITS)",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSPITZER%2FIRAC4&width=1757&height=1417&projection=TAN&fov=0.59542973&coordsys=icrs&ra=270.92629672565334&dec=-24.37339360321821&format=fits",
+      "page": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
+      "sha256": "8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e",
+      "bytes": 5769508,
       "width": 1757,
       "height": 1417,
-      "bitDepth": 8,
-      "channels": 3,
+      "fieldArcminutes": [
+        35.726105329611514,
+        28.812687109880205
+      ],
+      "centerIcrsDegrees": [
+        270.92629672565334,
+        -24.37339360321821
+      ],
+      "northRightDegrees": 0,
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
@@ -143,29 +150,19 @@
           -24.37339360321821
         ],
         "scaleDeg": [
-          -0.00033889,
-          0.00033889
+          -0.000338893049986829,
+          0.000338893049986829
         ],
-        "rotationDeg": 0.8
+        "rotationDeg": 0
       },
-      "centerIcrsDegrees": [
-        270.92629672565334,
-        -24.37339360321821
-      ],
-      "fieldArcminutes": [
-        35.7257838,
-        28.8124278
-      ],
-      "northRightDegrees": -0.8,
-      "credit": "NASA/JPL-Caltech",
+      "bands": "Mid-infrared · IRAC 8.0 / 4.5 / 3.6 µm, band-normalized false colour",
+      "credit": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
       "termsUrl": "https://www.spitzer.caltech.edu/page/image-use-policy",
-      "bands": "Mid-infrared · IRAC 3.6 / 4.5 / 5.8 / 8.0 µm + MIPS 24 µm",
-      "master": {
-        "url": "https://www.spitzer.caltech.edu/system/avm_images/binaries/4757/original/sig11-012.tif?1603796898",
-        "width": 1757,
-        "height": 1417
+      "skyBands": {
+        "path": "src/objects/m8/source/sky-bands/spitzer-irac.json",
+        "sha256": "68a22ff2c6bce4ddc3a24c48e7c8eea2b962b96c730bcec7e396a682cae2a4da"
       },
-      "metadataNote": "Exact publisher AVM recovered from IPAC AstroPix sig11-012; the downloaded TIFF has credit/caption XMP but no spatial AVM."
+      "metadataNote": "Composed from pinned CDS hips2fits IRAC maps in MJy/sr, calibrated with IRAC Handbook surface-brightness factors, one measured background and range per band, then one Lupton asinh display. WCS is the recipe grid. MIPS 24 µm is omitted: its HiPS has no data over the Hourglass core."
     }
   ],
   "nativeRemoval": {

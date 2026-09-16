@@ -52,6 +52,17 @@ test('invalid or unsupported card conventions are explicit errors', () => {
     assert.throws(() => readFitsHeader(imageFixture(16, [0, 1], [line.padEnd(80)])), /Unsupported/);
 });
 
+test('CONTINUE records extend only an ampersand-terminated string that they immediately follow', () => {
+  const long = [card('CPYRIGHT', "'IPAC/NASA - &'"), "CONTINUE  'http://example.org/a&'".padEnd(80), "CONTINUE  'b.html' / end".padEnd(80)];
+  const header = readFitsHeader(imageFixture(16, [0, 1], long));
+  assert.equal(header.header.CPYRIGHT, 'IPAC/NASA - http://example.org/ab.html');
+  assert.deepEqual(header.cards.slice(5, 8), long);
+  assert.equal(readFitsHeader(imageFixture(16, [0, 1], [card('NOTE', "'ends in &'")])).header.NOTE, 'ends in &');
+  for (const records of [[card('NOTE', "'no ampersand'"), long[1]], [long[0], 'COMMENT between'.padEnd(80), long[2]],
+    [card('NOTE', '1'), long[2]], [long[0], 'CONTINUE  12'.padEnd(80)], [long[0], "CONTINUE= 'x'".padEnd(80)]])
+    assert.throws(() => readFitsHeader(imageFixture(16, [0, 1], records)), /CONTINUE/);
+});
+
 test('ESO HIERARCH values retain their full names and original cards', () => {
   const records = ["HIERARCH ESO OBS AIRM = 2D0 / Requested airmass", "HIERARCH ESO INS NAME = 'O''Brien / field'",
     'HIERARCH ESO DET ACTIVE = T', 'HIERARCH ESO DET UNUSED = / undefined'].map(c => c.padEnd(80));

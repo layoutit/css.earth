@@ -1,6 +1,7 @@
 import type { Affine, SkyFrame, SkyRaster } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { NativeRemoval } from '../../server/workflows/emission-inference/native-source.ts';
 import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 export interface ObservationSource extends SkyRaster {
   id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string;
   registrationMode?: 'field-stars' | 'compact-stars' | 'publisher-wcs';
@@ -12,6 +13,8 @@ export interface ObservationSource extends SkyRaster {
   matchedStarCatalogue?: { path: string; sha256: string };
   astrometricCalibration?: { path: string; sha256: string };
   registrationTransfer?: { referenceId: string; pixelToReference: Affine; evidence: { path: string; sha256: string } };
+  /** Working raster composed from pinned calibrated survey bands; `url` then names the survey page. */
+  skyBands?: { path: string; sha256: string };
 }
 export interface ObservationRecipe { schema: 'cssearth-nebula-observation-recipe@1'; id: string; referenceId: string; frame: SkyFrame; images: ObservationSource[]; nativeRemoval: Omit<NativeRemoval, 'directory'>;
   nativeSeparationCache?: { recipe: { path: string; sha256: string } } }
@@ -35,6 +38,10 @@ function transfer(value: unknown): NonNullable<ObservationSource['registrationTr
   if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Transfer evidence requires a repository-relative path.');
   return { referenceId: id(row.referenceId), pixelToReference: matrix, evidence: { path, sha256: pin(evidence.sha256) } };
 }
+/** Cached working raster name: publisher downloads keep `<id>.tif`; composed sky band rasters carry their hash, so an
+ * existing checkout's retired publisher file is never read as, or overwritten by, the composite. */
+export const observationSourceFile = (source: Pick<ObservationSource, 'id' | 'sha256' | 'skyBands'>) =>
+  source.skyBands ? skyBandCompositeFile(source.id, source.sha256) : `${source.id}.tif`;
 export const scienceObservationSources = (recipe: ObservationRecipe): ObservationSource[] => recipe.images.filter(image => image.processingRole !== 'registration-reference');
 function sky(value: Record<string, unknown>) {
   const result = { width: dimension(value.width), height: dimension(value.height), fieldArcminutes: pair(value.fieldArcminutes), centerIcrsDegrees: pair(value.centerIcrsDegrees) };
@@ -84,6 +91,13 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
       if (path.startsWith('/') || path.split('/').includes('..') || !matchedStarCatalogue) throw new TypeError('Astrometric calibration requires pinned explicit stars and a relative evidence path.');
       astrometricCalibration = { path, sha256: pin(calibration.sha256) };
     }
+    let skyBands: ObservationSource['skyBands'];
+    if (image.skyBands !== undefined) {
+      const bands = record(image.skyBands), path = string(bands.path);
+      if (path.startsWith('/') || path.split('/').includes('..') || !path.endsWith('.json') || image.matchedStarCatalogue || image.registrationTransfer)
+        throw new TypeError('Sky band sources need a repository-relative recipe and direct registration.');
+      skyBands = { path, sha256: pin(bands.sha256) };
+    }
     const wcs: ImageWcs = { projection: w.projection, coordinateFrame: w.coordinateFrame, referenceDimension: pair(w.referenceDimension),
       referencePixel: pair(w.referencePixel), referenceValueDeg: pair(w.referenceValueDeg), scaleDeg: pair(w.scaleDeg), rotationDeg: finite(w.rotationDeg) };
     validateImageWcs(wcs);
@@ -97,7 +111,8 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
       ...(image.coordinateOrigin === undefined ? {} : { coordinateOrigin: image.coordinateOrigin }),
       ...(matchedStarCatalogue === undefined ? {} : { matchedStarCatalogue }),
       ...(astrometricCalibration === undefined ? {} : { astrometricCalibration }),
-      ...(image.registrationTransfer === undefined ? {} : { registrationTransfer: transfer(image.registrationTransfer) }) };
+      ...(image.registrationTransfer === undefined ? {} : { registrationTransfer: transfer(image.registrationTransfer) }),
+      ...(skyBands === undefined ? {} : { skyBands }) };
   });
   const referenceId = id(row.referenceId);
   if (new Set(images.map(image => image.id)).size !== images.length || !images.some(image => image.id === referenceId)) throw new TypeError('Observation ids/reference must be unique and present.');
