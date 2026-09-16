@@ -3,7 +3,7 @@ type TerrainContext = Parameters<typeof loadRadialTerrain>[0];
 const lensGroups = ['observations', 'scientific', 'observedColors', 'shapeViews', 'surfaceObservations'] as const;
 interface ModelConfig {
   namespace: string;
-  geometry: {radius: number; radiusKm: number; radialTerrain?: unknown; radialTerrainAlternatives?: (Record<string, unknown> & {lensId: string})[]};
+  geometry: {radius: number; radiusKm: number; radialTerrain?: unknown; radialTerrainAlternatives?: (Record<string, unknown> & {lensId: string; additionalLensIds?: string[]})[]};
   presentation: {defaultLens: string};
   raster: Partial<Record<typeof lensGroups[number], {id: string}[]>>;
 }
@@ -15,6 +15,7 @@ export interface LoadedRadialModel {
 }
 interface CombinedRadial {faces: RadialState['faces']; leaves: RadialState['leaves']; lensRanges?: {lensId: string; start: number; count: number}[];}
 import { loadRadialTerrain } from './radial-terrain.mts';
+import { alternativeForLens, alternativeLensIds } from './alternative-lenses.mts';
 
 /** Separate source meshes share a physical scale and one retained scene. */
 export async function loadRadialModels<T extends ModelConfig>(context: Omit<TerrainContext, 'config'> & {config: T}) {
@@ -22,7 +23,7 @@ export async function loadRadialModels<T extends ModelConfig>(context: Omit<Terr
   const alternatives = config.geometry.radialTerrainAlternatives ?? [];
   if (!Array.isArray(alternatives) || alternatives.length > 7) throw new TypeError('Invalid alternative surface models.');
   if (!config.geometry.radialTerrain && !alternatives.length) return [];
-  const ids = [config.presentation.defaultLens, ...alternatives.map(model => model.lensId)];
+  const ids = [config.presentation.defaultLens, ...alternatives.flatMap(alternativeLensIds)];
   const lenses = lensGroups
     .flatMap(key => (config.raster[key] ?? []).map(lens => lens.id));
   if (new Set(ids).size !== ids.length ||
@@ -31,11 +32,11 @@ export async function loadRadialModels<T extends ModelConfig>(context: Omit<Terr
   const base = await loadRadialTerrain(context);
   if (!base) return [];
   const models = [{ id: ids[0], lensIds: lenses.filter(id => !ids.slice(1).includes(id)), radial: base, config }];
-  for (const { lensId, ...profile } of alternatives) {
+  for (const { lensId, additionalLensIds: _additional, ...profile } of alternatives) {
     const selected = { ...config, geometry: { ...config.geometry, radialTerrain: profile } };
     const radial = await loadRadialTerrain({ ...context, config: selected });
     if (!radial) throw new TypeError('Alternative model lacks its terrain source.');
-    models.push({ id: lensId, lensIds: [lensId], config: selected, radial });
+    models.push({ id: lensId, lensIds: alternativeLensIds({ lensId, additionalLensIds: _additional }), config: selected, radial });
   }
   return models;
 }
@@ -51,9 +52,9 @@ export function radialModelForLens<T extends Pick<LoadedRadialModel, 'lensIds'>>
 /** Return the declared mesh profile for a lens before terrain is loaded, so
  * profile validation applies each observation's transfer limit to its owner. */
 export function radialTerrainForLens(config: ModelConfig, lensId: string) {
-  const alternative = config.geometry.radialTerrainAlternatives?.find(model => model.lensId === lensId);
+  const alternative = alternativeForLens(config.geometry.radialTerrainAlternatives ?? [], lensId);
   if (!alternative) return config.geometry.radialTerrain;
-  const { lensId: _lensId, ...terrain } = alternative;
+  const { lensId: _lensId, additionalLensIds: _additional, ...terrain } = alternative;
   return terrain;
 }
 

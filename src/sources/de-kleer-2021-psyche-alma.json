@@ -1,0 +1,44 @@
+{
+  "id": "de-kleer-2021-psyche-alma",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "de Kleer, Cambioni & Shepard (2021): The Surface of (16) Psyche from Thermal Emission and Polarization Mapping",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/ac01ec"
+    },
+    {
+      "type": "arXiv",
+      "value": "2105.11372"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/ac01ec",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2105.11372",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2105.11372",
+      "checkedOn": "2026-09-16",
+      "locator": "Section 2 observations; Table 1 image times and sub-observer longitudes"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Planetary Science Journal 2, 149",
+  "creators": [
+    "K. de Kleer",
+    "S. Cambioni",
+    "M. Shepard"
+  ],
+  "publicationDate": "2021"
+}

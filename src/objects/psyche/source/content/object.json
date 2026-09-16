@@ -89,11 +89,11 @@
             "0",
             "40"
           ],
-          "meta": "km · 111.5 km reference sphere",
+          "meta": "km \u00b7 111.5 km reference sphere",
           "sourceUrl": "https://observations.lam.fr/astero/3Dshape/16_Psyche_mpcd.obj",
           "image": "/scenes/psyche/psyche-elevation-legend.webp"
         },
-        "notes": "Source shape · radial height"
+        "notes": "Source shape \u00b7 radial height"
       },
       {
         "id": "zimpol",
@@ -108,6 +108,60 @@
         "falseColor": false,
         "noData": true,
         "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-04-24 to 2018-05-05, cast onto the ADAM reconstruction from the same survey. The survey's rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "thumbnail": "/scenes/psyche/psyche-thermal-inertia-thumbnail.webp",
+        "surface": "psyche-thermal-inertia-surface@2x.webp",
+        "poles": "psyche-thermal-inertia-surface@2x.webp",
+        "source": {
+          "id": "psyche-alma-thermal-inertia",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.6321315"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Thermal inertia",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "meta": "J m\u207b\u00b2 K\u207b\u00b9 s\u207b\u00bd \u00b7 ALMA 1.3 mm, 2019",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.6321315",
+          "image": "/scenes/psyche/psyche-thermal-inertia-legend.webp"
+        },
+        "notes": "How slowly the top centimetres of the surface heat and cool, fitted to ALMA thermal images taken over two-thirds of one rotation on 2019 June 19 (Cambioni et al. 2022). One colour per 5-degree cell at about 30 km resolution; the typical uncertainty is about 130. The authors flag 60 to 120 degrees west in their frame as possibly affected by model artifacts. Placed on the ADAM mesh through the published spin states. The grid marks cells the authors did not map."
+      },
+      {
+        "id": "dielectric-constant",
+        "label": "Dielectric constant",
+        "thumbnail": "/scenes/psyche/psyche-dielectric-constant-thumbnail.webp",
+        "surface": "psyche-dielectric-constant-surface@2x.webp",
+        "poles": "psyche-dielectric-constant-surface@2x.webp",
+        "source": {
+          "id": "psyche-alma-dielectric-constant",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.6321315"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Dielectric constant",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "30",
+            "60"
+          ],
+          "meta": "relative permittivity \u00b7 ALMA 1.3 mm, 2019",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.6321315",
+          "image": "/scenes/psyche/psyche-dielectric-constant-legend.webp"
+        },
+        "notes": "How strongly the near-surface material responds to an electric field, fitted to the same ALMA thermal images (Cambioni et al. 2022); higher values suggest more metal in the regolith. One colour per 5-degree cell at about 30 km resolution; the typical uncertainty is about 2. The authors flag 60 to 120 degrees west in their frame as possibly affected by model artifacts. Placed on the ADAM mesh through the published spin states. The grid marks cells the authors did not map."
       }
     ]
   },

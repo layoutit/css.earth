@@ -20,6 +20,7 @@ import { loadPdsRadialTable } from './pds-radial-table.mts';
 import { loadShapeScalarGrid } from './obj-shape.mts';
 import { loadObjUvFits } from './obj-uv-fits.mts';
 import { loadFitsImageMap } from './fits-image-map.mts';
+import { loadNpyLonLatGrid } from './npy-lonlat-grid.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -143,6 +144,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   }
   if (lens.format === 'pds3-float-map') return loadPdsFloatMap(root, lens);
   if (lens.format === 'fits-image-map') return loadFitsImageMap(root, lens);
+  if (lens.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
   if (lens.format === 'isis3') {
     const grid = parseScienceGrid(lens.grid);
     const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);

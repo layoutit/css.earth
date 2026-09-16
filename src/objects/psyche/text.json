@@ -56,6 +56,16 @@
       "title": "ZIMPOL deconvolved imaging",
       "detail": "16 frames, 2018",
       "summary": "Telescope images of the lit surface, placed by the asteroid's own measured spin. Grey is photographed light, not colour."
+    },
+    "thermal-inertia": {
+      "title": "ALMA thermal inertia map",
+      "detail": "ALMA, 2019",
+      "summary": "How slowly the surface heats and cools, fitted cell by cell to radio thermal images. Coarse cells, large uncertainties."
+    },
+    "dielectric-constant": {
+      "title": "ALMA dielectric constant map",
+      "detail": "ALMA, 2019",
+      "summary": "How metal-rich the upper surface looks to radio waves, fitted cell by cell to the same images. Coarse cells."
     }
   }
 }

@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-spin-frame-transfer@1",
+  "purpose": "Place the Cambioni et al. (2022) ALMA longitude/latitude grids, defined in the Shepard et al. (2021) body frame, on the ADAM mesh whose frame the LAM spin parameter file defines.",
+  "epoch": {
+    "utc": "2019-06-19T07:52:12.5Z",
+    "jdUtc": 2458653.8279225,
+    "source": "Midpoint of the ALMA observations, 2019 June 19 06:33:12 to 09:11:13 UT: de Kleer, Cambioni & Shepard (2021), PSJ 2, 149, section 2 and Table 1, arXiv:2105.11372."
+  },
+  "timeScales": {
+    "tdbMinusUtcSeconds": 69.184,
+    "source": "TAI-UTC = 37 s from 2017 January 1 (IERS Bulletin C) plus TT-TAI = 32.184 s; TDB-TT is below 2 ms and is neglected."
+  },
+  "grid": {
+    "frame": "Shepard et al. (2021) body frame: +x on the major axis (longitude 0), +z on the positive spin pole, east-positive longitude",
+    "convention": "durech-2010-equation-1",
+    "timeScale": "TDB",
+    "spin": {
+      "longitudeDegrees": 36,
+      "latitudeDegrees": -8,
+      "periodHours": 4.195948,
+      "epochJd": 2451545.0,
+      "phaseDegrees": 341.56
+    },
+    "source": "Cambioni, de Kleer & Shepard (2022), JGR Planets, e2021JE007091, doi:10.1029/2021JE007091, section 2.3, equation 2 (theta1 = 36 deg, theta2 = -8 deg, phi0 = 341.56 deg at J2000) and period 4.195948 h (Shepard et al. 2021, PSJ 2, 125, Table 5), arXiv:2402.03422."
+  },
+  "mesh": {
+    "frame": "ADAM mesh body frame of the VLT/SPHERE survey release",
+    "convention": "durech-2010-equation-1",
+    "timeScale": "UTC",
+    "path": "reference/16_Psyche_param.txt",
+    "order": "longitude-first",
+    "source": "LAM release parameter file, read as the SPHERE photograph lens reads it (tools/objects/observer-cameras.mts)."
+  }
+}
