@@ -1,3 +1,4 @@
+import {SHAPE_MATERIAL} from '../../../../tools/objects/terrestrial-layers/shape-material.mts';
 import {preparedModelTerrain, modelConfig, modelSurfaces} from './model-fixture.mts';
 import {requireObjectRotationReference} from '../radial-fixture.mts';
 import assert from 'node:assert/strict';
@@ -17,7 +18,7 @@ export function testLightcurveModel(id:string,ab:number,bc:number,radius:number,
   assert.equal(terrain.faces.length,800);
   const surfaces=modelSurfaces(await json(`${root}/prepared/surfaces.json`));
   assert.equal(surfaces.surfaces[0].missingPixels,config.raster.width*config.raster.height,'The entire nucleus has no photographic texels');
-  assert.match(surfaces.surfaces[0].appearance,/no-imagery grid/);
+  assert.equal(surfaces.surfaces[0].appearance,SHAPE_MATERIAL.appearance);
   assert.equal(surfaces.surfaces[0].layout.tileSize,64);
   assert.deepEqual(config.raster.observations,[]);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true,'Shadows off must not bake directional shading into the grid');

@@ -31,7 +31,7 @@ try {
     await page.goto(`${origin}/saturn/`, { waitUntil: 'domcontentloaded' });
     if (viewport.width < 821) {
       await page.locator('.planet-sheet-handle').check(); await settleSheet(page);
-      assert.equal(await page.locator('.explorer-brand-row').isVisible(), false, 'The expanded native sheet hides the scene watermark');
+      assert.equal(await page.locator('.explorer-brand-row').isVisible(), true, 'The wordmark heads the controls and stays with the header behind the sheet');
     }
     const initial = await page.locator('.planet-stage').innerHTML();
     for (const id of ['ultraviolet', 'cross-section', 'normal']) {

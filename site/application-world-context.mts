@@ -33,7 +33,7 @@ const hiddenOrbitIds = [
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.id)]));
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {

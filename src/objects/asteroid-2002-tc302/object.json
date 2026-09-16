@@ -114,7 +114,9 @@
       "bodyRadiusM": 256865.05029826975
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "2002 TC302",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

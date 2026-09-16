@@ -80,7 +80,8 @@ try {
           uiInScene: test.element('.planet-stage').querySelectorAll('.planet-sidebar, .explorer-shell-header, .planet-view-readout, .space-minimap').length,
           wordmarkSlot: box(".explorer-shell-wordmark"),
           search: box(".planet-sidebar-search-card"), toolbar: box(".planet-search-toolbar"),
-          categories: box(".planet-search-categories"),
+          categories: box(".planet-search-categories"), categoriesShown: shown(".planet-search-categories"),
+          brand: box(".explorer-brand-row"), machineAction: box(".planet-machine-action"),
           categoryCount: document.querySelectorAll(".planet-search-category").length,
           githubShown: shown(".planet-header-link"), github: box(".planet-header-link"),
           settings: box(".planet-settings-action"), machine: box(".planet-machine-toggle"),
@@ -124,13 +125,20 @@ try {
           near(result.sidebar.top, config.height - result.peek, "peek shows the declared height");
           assert.ok(result.header.top >= 0 && result.header.bottom <= result.sidebar.top,
             `${config.name}: the header clears the peeking sheet`);
-          assert.ok(result.categories.top > result.search.bottom, "filters sit under the search field");
+          assert.equal(result.categoriesShown, false, "phones carry no filter row: search reaches every classification");
           assert.ok(result.status.bottom <= result.sidebar.top + .1, "the readout rides above the sheet");
           assert.equal(result.minimapShown, false, "phones leave the scene uncovered");
           assert.equal(result.sourcesShown, true, "phones carry the shared Sources card in the sheet");
           assert.equal(result.githubShown, false, "the version link carries GitHub on phones");
-          assert.ok(result.settings.right <= result.search.right,
-            "Settings sits inside the search pill's end");
+          assert.ok(result.settings.left >= result.search.right,
+            "Settings ends the header row, clear of the search field");
+          assert.ok(result.machineAction.left >= result.search.right
+            && result.machineAction.right <= result.settings.left,
+            "Spacecraft sits between the search field and Settings");
+          assert.ok(Math.abs(result.settings.height - result.search.height) < 1
+            && Math.abs(result.machineAction.height - result.search.height) < 1,
+            "both header buttons match the search field's height");
+          assert.ok(result.brand.right <= result.search.left, "the wordmark heads the row");
         } else {
           near(result.sidebar.x, 12, "panel left margin");
           near(result.sidebarFrame.width, 340, "independent panel width");

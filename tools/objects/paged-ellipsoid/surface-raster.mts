@@ -148,7 +148,7 @@ function createSurfaceRasterPlan() {
 // instead of relying on Chrome to flatten a perspective-warped child.
 function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, cells: readonly PagedSurfaceRasterBakeCell[], density = 8, page = 0,
   nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1) {
-  if (channels !== 3 || data.length !== width * height * channels ||
+  if (channels !== 3 || !(height > 0) || data.length !== width * height * channels ||
       ![2, 4, 8].includes(density) || width !== height * 2 ||
       (nativeClouds && (nativeClouds.channels !== 3 || nativeClouds.width !== nativeClouds.height * 2 ||
         nativeClouds.data.length !== nativeClouds.width * nativeClouds.height * nativeClouds.channels))) {

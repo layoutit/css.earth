@@ -58,12 +58,19 @@ const spatialRelations = await readFile(new URL('../packages/catalog/src/spatial
 const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
 const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
 const browserTypes = await readFile(new URL("../site/browser-types.mts", import.meta.url), "utf8");
+// object-schema.mts validates discovery through these real modules; the overlay follows the same closure.
+const objectDiscovery = await readFile(new URL("../site/object-discovery.mts", import.meta.url), "utf8");
+const objectCategories = await readFile(new URL("../site/object-categories.mts", import.meta.url), "utf8");
+const arrivalView = await readFile(new URL("../site/arrival-view.mts", import.meta.url), "utf8");
+const worldCameraMath = await readFile(new URL("../src/renderers/css/navigation/world-camera-math.ts", import.meta.url), "utf8");
 const shared = `import { createPolyCamera } from '@layoutit/polycss';
 export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
 function fixture(extra: SourceOverlay = {}, definitionTail = ""): AuditOptions {
   const files: SourceOverlay = { [client]: binding, [definitionPath]: definition + definitionTail,
     "site/navigation-distance.mts": navigationDistance, "packages/catalog/src/spatial-relations.ts": spatialRelations,
     "site/objects.mts": registrySource, "site/object-schema.mts": objectSchema, "site/browser-types.mts": browserTypes, "src/platform/is-array.mts": isArray,
+    "site/object-discovery.mts": objectDiscovery, "site/object-categories.mts": objectCategories, "site/arrival-view.mts": arrivalView,
+    "src/renderers/css/navigation/world-camera-math.ts": worldCameraMath,
     "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
     "src/objects/sun/prepared/world-context.json": sunContext,
@@ -110,7 +117,7 @@ for (const source of [
   "node.addEventListener('click', handler);", "function hidden() { return Promise.resolve({}); }",
   "function hidden() { return work.then(commit); }", "const handle = setTimeout(pump, 120);",
   "animation.playbackRate = 2;", "animation.currentTime = 0;", "animation.play();",
-  "async function hidden() { await loader(); }", "import('./loader.mjs');", "new Function('return 1')();",
+  "async function hidden() { await loader(); }", "import('./load' + 'er.mjs');", "new Function('return 1')();",
   "createPolyCamera({});", "node.animate([], {});", "globalThis.secret = node;",
 ]) test(`rejects a private runtime owner: ${source.slice(0, 65)}`, () => {
   assert.ok(inspectObjectRuntimeModule(source, prefix + "presentation.mjs").violations.length > 0);
@@ -147,7 +154,7 @@ test("shared owners reject private packages, fixed asset namespaces, v1 hooks an
     [shared + '\nconst valid = /^\\/scenes\\/earth\\/wmts/;', /object-specific asset namespace/],
     [shared + '\nfunction hidden(value) { return value.createPresentation(); }', /Legacy object callbacks/],
     [shared + '\ncreatePolyCamera({});', /native camera factory site; found 2/],
-    [shared + '\nimport("./hidden.mjs");', /Dynamic runtime imports/],
+    [shared + '\nimport("./hid" + "den.mjs");', /Computed dynamic imports/],
   ];
   for (const [source, expected] of cases) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mts": source })), expected);
 });
@@ -175,7 +182,7 @@ interface Props { title: string }
     [{ [helper]: "export const label = 'Details'; if (object.id === 'moon') act();" }, /shared-content.mjs.*object-ID dispatch/],
     [{ "site/shared-client.mjs": "import { createPolyCamera } from '@layoutit/polycss'; createPolyCamera({});" }, /native camera factory site; found 2/],
     [{ [shell]: files[shell].replace("{label}", "{object.id === 'moon' ? label : ''}") }, /PlanetShell.astro.*object-ID dispatch/],
-    [{ [shell]: files[shell].replace("import '../shared-client.mjs';", "import('../shared-client.mjs');") }, /PlanetShell.astro.*Dynamic runtime imports/],
+    [{ [shell]: files[shell].replace("import '../shared-client.mjs';", "import('../shared-' + 'client.mjs');") }, /PlanetShell.astro.*Computed dynamic imports/],
     [{ [helper]: "export { data } from '../src/objects/moon/site/generated.mjs';" }, /Shared runtime imports an object package/],
     [{ [shell]: "<script>const broken = ;</script>" }, /Invalid runtime source/],
   ];
@@ -376,7 +383,7 @@ test('typed renderer closure rejects forbidden scene APIs, styles, hidden import
     ["function hidden(node: HTMLElement) { node.style.filter = 'blur(2px)'; }", /Forbidden runtime CSS/],
     ["function hidden(node: HTMLElement) { node.style.background = 'linear-gradient(red, blue)'; }", /Forbidden runtime CSS/],
     ["function hidden(node: HTMLElement) { node.style.setProperty('mask-image', 'url(mask.png)'); }", /Forbidden runtime CSS/],
-    ["import('./hidden.js');", /Dynamic runtime imports/],
+    ["import('./hid' + 'den.js');", /Computed dynamic imports/],
     ["import { createPolyCamera } from '@layoutit/polycss'; (createPolyCamera as typeof createPolyCamera)({});", /native camera factory site; found 2/],
     ["function hidden() { createObjectRuntime({}); }", /actual shared factory call/],
   ];
@@ -528,7 +535,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   assert.equal((await audit({ [contextFile]: JSON.stringify(orbitless) })).complete, true,
     'An orbitless physical point does not require fabricated orbital geometry');
   const contextMutations: [SourceOverlay, RegExp][] = [
-    [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Dynamic runtime imports/],
+    [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Computed dynamic imports/],
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],

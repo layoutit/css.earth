@@ -13,8 +13,9 @@
   display: inline;
 }
 
+/* Both forms ship; the layout shows one. Wide layouts keep the single line. */
 .planet-wordmark-two-line {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: flex-start;
   gap: 5px;

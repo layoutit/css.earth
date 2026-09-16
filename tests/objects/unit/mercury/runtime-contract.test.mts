@@ -17,8 +17,8 @@ test("Mercury's actual import closure has only shared runtime owners", async () 
 test("Mercury uses one shared exclusive lens and the prepared playback owner for cutaway pose", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    assert.equal(f.animations.length, 1);
-    const pose = f.animations[0], records = f.stage.querySelectorAll("*");
+    // The playback owner animates the body spin (rotateZ) and the cutaway pose (rotateX); the pose is the exclusive lens's.
+    const pose = required(f.animations.find(animation => JSON.stringify(animation.keyframes).includes("rotateX"))), records = f.stage.querySelectorAll("*");
     for (const id of ["interior", "interior", "enhanced", "interior", "normal"]) {
       const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
       assert.equal(required(f.selection.state().committed).lensId, id);

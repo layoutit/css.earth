@@ -21,8 +21,9 @@ export function rotate(angle: number, axis: 1 | 2 | 3): Matrix3 {
 }
 export const identity: Matrix3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
 
-/** Body-fixed rotation from J2000 at ET for a body described by BODYnnn_POLE_RA/_POLE_DEC/_PM (degrees; per century or per day). */
-export function pckRotation(pool: KernelPool, body: number, et: number): Matrix3 {
+/** The IAU pole model's angles at ET for a body described by BODYnnn_POLE_RA/_POLE_DEC/_PM (degrees; per century or per day):
+ * the pole's right ascension and declination and the prime meridian angle W, with any nutation-precession terms applied. */
+export function pckAngles(pool: KernelPool, body: number, et: number): { ra: number; dec: number; w: number } {
   const key = (name: string) => `BODY${body}_${name}`;
   if (!has(pool, key('POLE_RA')) || !has(pool, key('POLE_DEC')) || !has(pool, key('PM'))) throw new Error(`No PCK orientation for body ${body}.`);
   const days = et / 86400, centuries = days / 36525;
@@ -36,6 +37,12 @@ export function pckRotation(pool: KernelPool, body: number, et: number): Matrix3
       ra += (terms('NUT_PREC_RA')[k] ?? 0) * Math.sin(theta); dec += (terms('NUT_PREC_DEC')[k] ?? 0) * Math.cos(theta); w += (terms('NUT_PREC_PM')[k] ?? 0) * Math.sin(theta);
     }
   }
+  return { ra, dec, w };
+}
+
+/** Body-fixed rotation from J2000 at ET for a body described by BODYnnn_POLE_RA/_POLE_DEC/_PM (degrees; per century or per day). */
+export function pckRotation(pool: KernelPool, body: number, et: number): Matrix3 {
+  const { ra, dec, w } = pckAngles(pool, body, et);
   return multiply(rotate(w * RAD, 3), multiply(rotate((90 - dec) * RAD, 1), rotate((90 + ra) * RAD, 3)));
 }
 

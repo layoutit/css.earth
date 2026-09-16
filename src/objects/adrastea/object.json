@@ -109,7 +109,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Adrastea",
       "classification": "satellite",
       "color": "#a0a0a0",
