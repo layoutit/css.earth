@@ -20,6 +20,7 @@ Betelgeuse is the first body here that is not in the Solar System and the first 
 - `packages/astronomy/src/stars.test.ts` checks the placement: distance, direction, proper motion and radial velocity round-trip.
 - [`source/reference/reconstruction-comparison.png`](source/reference/reconstruction-comparison.png) places the published February 2020 image beside three SQUEEZE reconstructions of the pinned visibilities (entropy 10 and 1, total variation 1) convolved to the 4 mas beam; their peak-to-median contrast inside the disc is 1.30, 1.44 and 1.52.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/betelgeuse/` with the default camera: the photographed hemisphere faces the camera above the grid of the unobserved side.
+- [`source/reference/stellar-locators.png`](source/reference/stellar-locators.png) is the same dev server at `/sun/` with the camera 1,050 light years out: Betelgeuse keeps a ring and a name beside the Sun's, because a placed body without an orbit stays a locator past the Solar System fade instead of vanishing with the planets. `src/renderers/css/universe/world-context-planner.test.ts` checks that rule; the marker navigates to `/betelgeuse/` on click.
 - Preparation accepted 2,032 of 2,313 pixels with geometry; the 281 rejected lie beyond 70 degrees of incidence at the limb. No lit shape falls on sky.
 
 ## Known problems

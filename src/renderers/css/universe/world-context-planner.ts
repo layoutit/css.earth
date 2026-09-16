@@ -150,7 +150,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
     });
     const selectedEntry = bodies.find(entry => entry.body.id === selectedId);
     if (!selectedEntry) throw new TypeError('Selected context body is unavailable.');
-    const publishingBodies = view.anchorOnly ? bodies.slice(0, 1) : bodies;
+    // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
+    const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
     const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
     const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
     const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
@@ -225,11 +226,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isAnchor = body.id === plan.focus.id;
+        const isLocator = isAnchor || entry.orbit === null;
         const inFrame = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2;
         const visible = inFrame && !occlusion.hidden(eye, body.id);
-        // The one retained anchor indicator is also the galactic locator.
+        // The retained locator indicators (the anchor and placed stars) are also the galactic locators.
         // Unresolved foreground points cannot occlude this annotation; physical sprites keep exact occlusion.
-        const annotationVisible = isAnchor ? inFrame && !(selectedId !== body.id &&
+        const annotationVisible = isLocator ? inFrame && !(selectedId !== body.id &&
           focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
         const hovered = entry.hovered, highlighted = entry.highlighted === true;
@@ -279,15 +281,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const proxyOpacity = highlighted ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
-          (isAnchor ? 1 : opacity * (isSelected || flightDestination ? 1 : proxyOpacity));
+          (isLocator ? 1 : opacity * (isSelected || flightDestination ? 1 : proxyOpacity));
         const orbitVisibility = skipped ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? opacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
-          isAnchor && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
+          isLocator && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
           (!entry.indicatorHidden || hovered || isSelected);
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
-        const priority = (isAnchor ? 1000 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
+        const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
           annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
@@ -296,8 +298,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         projected.segments = segments; projected.labelPosition = undefined;
         projectedBodies.push(projected);
       }
-      // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
-      projectedBodies[0].lineWidth = anchorLineWidth;
+      // Orbitless locators use the same stroke as the visible system, then thin as they recede.
+      for (const projected of projectedBodies) if (projected.entry.orbit === null && (projected === projectedBodies[0] || !projected.entry.bodyHidden)) projected.lineWidth = anchorLineWidth;
       const labelBudget = createLabelBudget(width, height, [], view.labelBlockers);
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {

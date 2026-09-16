@@ -1296,6 +1296,15 @@
       }
     },
     {
+      "path": "reference/stellar-locators.png",
+      "expectedBytes": 285580,
+      "expectedSha256": "179fa2b048a95d87c4fae2c0ee4b85e15823eab0d04e0cc28389b5951dc15d3a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /sun/ with the world camera 300 pc above the Sun-Betelgeuse midpoint, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after the locator change."
+      }
+    },
+    {
       "path": "observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
       "expectedBytes": 141120,
       "expectedSha256": "372ed3278212fc3a51788e2c695b58d35108d91e3fcda80213b8d440af581dd6",
