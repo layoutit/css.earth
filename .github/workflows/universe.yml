@@ -139,7 +139,7 @@ jobs:
         run: |
           pnpm typecheck:nebula
           pnpm check:nebula-boundaries
-          node --test tools/nebula/package-boundaries.test.mts
+          node --test tools/nebula/package-boundaries.test.mts tools/nebula/inbound-boundaries.test.mts tools/nebula/application/*.test.mts tools/nebula/application/*.test.ts tools/nebula-provenance-source-closure.test.mts
       - name: Test numerical owners, durable jobs and isolated React controls
         # Explicit cache-independent selection. Do not substitute test:lab:nebula:
         # that command restores real source assets before running the wider suite.

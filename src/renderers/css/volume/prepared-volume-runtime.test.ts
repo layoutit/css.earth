@@ -245,7 +245,7 @@ test('material replacement survives first visibility of every deferred axis', ()
 });
 
 test('tone callbacks update a hidden axis without revealing it before rotation', async () => {
-  const { createToneResourceController } = await import('../../../../labs/nebula/packages/volume-viewer/src/scene/tone-resources.ts');
+  const { createToneResourceController } = await import('@cssearth/volume-viewer/scene/tone-resources');
   const originalImage = globalThis.Image;
   globalThis.Image = class { src = ''; naturalWidth = 10; naturalHeight = 10; async decode() {} } as unknown as typeof Image;
   try {

@@ -4,6 +4,7 @@ import { dirname, resolve, relative, extname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import ts from 'typescript';
 import { isBuiltin } from 'node:module';
+import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
 
 export const nebulaPackages = {
   lab: '@cssearth/nebula-lab',
@@ -159,7 +160,7 @@ export function checkNebulaBoundaries(root: string, requireAll = true): string[]
       }
     }
   }
-  return errors;
+  return [...errors, ...checkNebulaInboundBoundaries(root)];
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

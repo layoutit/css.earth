@@ -39,6 +39,33 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 
 `pnpm lab:nebula:bake --research` selects the saved native LMC processing workflow. Lab startup and `pnpm test:lab:nebula` first run the assets stage, which can acquire missing original images. Those commands are therefore separate from the cache-independent CI job. See [baking](baking.md) for native prerequisites and [workflows](workflows.md) for the interactive app.
 
+## Application dependency boundary
+
+| Consumer | Allowed nebula dependencies |
+| --- | --- |
+| Browser/runtime | Explicitly erased public `volume-core` types only; no package runtime implementation |
+| Application preparation | Public `volume-core` and `volume-bake` exports |
+| Research workspace | The five private packages, through their declared public exports |
+| Tests | Public package APIs; tests cannot act as wrappers that bypass production restrictions |
+
+The inbound guard traces imports through local wrappers, resolves static imports, re-exports, module loaders and TypeScript aliases, and rejects direct lab source paths. It also rejects statically resolvable filesystem reads into the lab. Computed module loading is rejected in compact application preparation and nebula-bearing loaders. It is not a general proof about arbitrary opaque plugin loaders.
+
+Application bake fingerprints resolve package-owned implementation inventories through public package manifests. Moving those packages does not change identity; changing their implementation does. The host does not assume their location under this lab.
+
+Current manifests and presentation recipes use object-owned source evidence. Historical receipts retain their original paths, revisions and hashes; source catalogue statements link to those pinned revisions. Historical metadata does not require the current lab files to exist.
+
+### Isolated application delivery proof
+
+This bounded gate bundles the actual application preparation entrypoint, copies declared object inputs, relocates only core/bake, and provides no lab tree. A filesystem guard blocks lab reads and `fetch` is disabled. It bakes M42 (compiler), M2–9 (symmetry) and LMC (density), verifies resource hashes, then repeats each with `--if-missing`. LMC retains its manifest-pinned lens metadata; no prepared images are supplied. Each invocation has a three-minute deadline. This proves these three delivery paths, not every scientific reconstruction.
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm -r --filter "./packages/**" build
+node tools/nebula/application-isolation.gate.ts
+```
+
+Logs and the resolved implementation closure are written under ignored `output/nebula-application-isolation/`. The gate is separate from routine unit discovery because it generates real atlases.
+
 ## Routine CI
 
 The `nebula` job in [the maintained workflow](../../../.github/workflows/universe.yml) installs dependencies with lifecycle scripts disabled, builds shared TypeScript dependencies, typechecks all five packages and test roots, checks dependency boundaries, and runs an explicit small test selection. It installs Chromium because the portal and browser-helper tests open real isolated browser contexts.
