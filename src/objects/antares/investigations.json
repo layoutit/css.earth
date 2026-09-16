@@ -7,6 +7,7 @@
       "subject": "VLTI/PIONIER April-May 2014 H-band visibilities, JMMC OiDB (Montargès et al. 2017)",
       "status": "excluded",
       "finding": "The OiDB holds 23 calibration-level-2 files from the nights of 23 and 29 April and 4 and 7 May 2014 on three configurations (longest projected baseline 139 m): 1470 squared-visibility and 763 closure-phase channel rows, the JMMC pipeline's automated product. The paper never imaged them; its best models reach reduced chi-squared 25 to 44 and it reports that the star differs between the three spectral channels. SQUEEZE at the pinned commit on the merged set, started from a 37.38 mas disc, stalls at reduced chi-squared 30 with the Betelgeuse recipe and 15.5 with 10,000 elements over 8,000 iterations, never reaching burn-in; the compact-array night alone (1080 rows, five hours, one configuration) stays at 18.7; only the 7 May night (318 rows) converges, at 2.2, to a disc without resolved features. A uniform disc fits the merged set at reduced chi-squared 50,000. No image from these files is cast.",
+      "revisitWhen": "A published image reconstruction of the April-May 2014 PIONIER data, or a SQUEEZE run on the merged set that converges below reduced chi-squared 3.",
       "evidence": [
         "https://oidb.jmmc.fr/",
         "https://arxiv.org/abs/1705.07829"
@@ -14,7 +15,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "c073f58a8c"
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
         }
       ]
     },
@@ -32,7 +33,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "c073f58a8c"
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
         }
       ]
     },
@@ -48,7 +49,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "c073f58a8c"
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
         }
       ]
     },
@@ -63,7 +64,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "c073f58a8c"
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
         }
       ]
     }

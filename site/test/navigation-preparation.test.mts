@@ -137,7 +137,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
     }
     const outputRoot = resolve(root, "public/navigation");
     const previous = new Map<string, string>([
-      ...expectedOutputFiles.filter((filename) => filename !== "download-marker@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`] as const),
+      ...expectedOutputFiles.filter((filename) => filename !== "body-download@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`] as const),
       [resolve(outputRoot, "new-body.webp"), "accepted legacy marker"],
       [resolve(outputRoot, "unrelated.txt"), "unrelated output"],
       [resolve(root, "site/prepared-navigation-markers.mjs"), "accepted presentation"],

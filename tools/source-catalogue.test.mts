@@ -235,9 +235,10 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-restoration-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
-  const source = 'src/objects/asteroid-1998-ml14/source';
-  const paper = `${source}/reference/warner-2014.pdf`;
-  // The cited paper is a pinned download, so no checkout tracks it. Restoring
+  // Dinkinesh's shape fact cites the pinned TEMPEST mesh, the one fact whose evidence is a plain download.
+  const source = 'src/objects/dinkinesh/source';
+  const paper = `${source}/shape/tempest-dinkinesh.stl`;
+  // The cited file is a pinned download, so no checkout tracks it. Restoring
   // it needs the provider, which this suite must not depend on; a checkout
   // without it reports the skip instead of failing on the fixture.
   const bytes = await readFile(paper).catch((error: unknown) => {
@@ -245,7 +246,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
     throw error;
   });
   if (bytes === null) {
-    t.skip(`${paper} is not restored here; run "node tools/restore-source-inputs.mts asteroid-1998-ml14" to cover this.`);
+    t.skip(`${paper} is not restored here; run "node tools/restore-source-inputs.mts --object=dinkinesh" to cover this.`);
     return;
   }
   const paths = new Set([...Object.keys(prepared.closure), ...explorationCompilerClosure,
@@ -260,7 +261,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   const requests: string[] = [];
   const fetchPaper = async (url: string) => {
     requests.push(url);
-    assert.equal(url, 'https://mpbulletin.org/issues/MPB_41-2.pdf');
+    assert.equal(url, 'https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl');
     return new Response(bytes);
   };
   await assert.rejects(prepareMachines({ root,
@@ -269,7 +270,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   await assert.rejects(readFile(join(root, paper)), { code: 'ENOENT' });
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   const result = await prepareMachines({ root, sourceTransport: { fetch: fetchPaper } });
-  assert.deepEqual(requests, ['https://mpbulletin.org/issues/MPB_41-2.pdf']);
+  assert.deepEqual(requests, ['https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl']);
   assert.deepEqual(await readFile(join(root, paper)), bytes);
   assert.equal(result.preparedSources.closure[paper], createHash('sha256').update(bytes).digest('hex'));
   const offline = await prepareMachines({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
