@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "alphonsina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6950110514f956b1557157fcbbd3dde3b91efc3340d21e9ef5b2a630ca95849c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "e1a0b1c0f4a18bb6e2995c8f7e45c53b62ff5bb4e155da84d1367b7cf2e94486"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "8ca5c066f8feda632970baa9fe3dc73797d253c9fce1fe34901ef1d711a23708",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "d7cdad70d9804dfd87cd40c48361eb7626712f67b01be2689f76fc0ffb444fa0",
       "bytes": 8758,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/alphonsina/alphonsina-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "5a820f5d00e2fb7357d93f04725cf904ac548e40886986c13a79fd1b077b0fc5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-surface@2x.webp",
           "bytes": 360286,
           "sha256": "1cc1fc386de0ffc662ae2be3076a6c89c1b623477ea66ef639898302c8d26464",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/alphonsina/alphonsina-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
           "bytes": 67244,
           "sha256": "3717a011ac56a14ba3cc05fad38046c77512e3372f2591552aa222e0496fd2a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "22504a5b503d84bf215fc0c8e3fff662f12f43e12554fade191ae25cbcaa8e9a",
+    "materialSha256": "fd77ec75620c7dccef4b106809e8d3e4ffd7d9d8ef711b729aad7926a0a4c2fb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "e1a0b1c0f4a18bb6e2995c8f7e45c53b62ff5bb4e155da84d1367b7cf2e94486"
     }
   }
 }

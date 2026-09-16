@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "johanna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "8d428d29869de4230dc439fca4845a1ca83232441ddfe6ff77d9b3acccd58de4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "805ac6f01b52e39d68d8c9411579bdfcd12d3eb9607aa33aa7d3b79f519272f2"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "641a0c871a4f30afcfb42761be86fd53ef4a6c72566c5ad87e3a6e3dbf5a1923",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "e603619d30dd5f68581e54d25e7cf3e8b4d79d4a5fd15769b4c18015df2efeda",
       "bytes": 10184,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/johanna/johanna-elevation-thumbnail.webp",
           "bytes": 4810,
           "sha256": "69cf9c3441fc33a58af2ee4d7899b4713ddc06e7e1d884aa81618c672868fa5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/johanna/johanna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/johanna/johanna-elevation-surface@2x.webp",
           "bytes": 273734,
           "sha256": "d111aedfd77f210481aa5e501f62e513ff8b4688c220dc3ff7b73333b9a2bc6d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/johanna/johanna-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/johanna/johanna-shape-surface@2x.webp",
           "bytes": 61608,
           "sha256": "db1487b16efa56d40137ba8bee41c0cd6b442c013ff998c86ce9e6e345fa754e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "johanna",
-    "materialSha256": "830f37cb1c38cef1c0348ba7c768391e6b900da879d6e81646479f22fdc87498",
+    "materialSha256": "ca4c8fa18fd5cfff00f2113177145d8af83344f9f908fe9e2e5940295fac89fa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "805ac6f01b52e39d68d8c9411579bdfcd12d3eb9607aa33aa7d3b79f519272f2"
     }
   }
 }

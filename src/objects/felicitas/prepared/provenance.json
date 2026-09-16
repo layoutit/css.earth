@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "felicitas",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "e9437650441326ce889a68908ab002db581663a7dc532130359ac6916d71cbf5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "a7ea6dc998ea6dd0299145903bbdeac21c80563f6ccc0871618b38105e45c469"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "7c4aa5b44d5ef71a8caa8719f647e29ac0d4dc23d64f50ca30c682718df9a9e0",
       "bytes": 79953,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "bc538227bd978b10585c6688534490e05eb9abd90aab793b12c9e41472bafd6c",
       "bytes": 10096,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/felicitas/felicitas-elevation-thumbnail.webp",
           "bytes": 6228,
           "sha256": "80ae5c37d208730fa7101a179b65c583f6d1ff694edbdebbdae8c6c734e1d9ca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/felicitas/felicitas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/felicitas/felicitas-elevation-surface@2x.webp",
           "bytes": 316328,
           "sha256": "8a9281329bb9a67cc6e8bae78e51bca174590caf264a47c79e362cc19579698f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/felicitas/felicitas-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/felicitas/felicitas-shape-surface@2x.webp",
           "bytes": 63696,
           "sha256": "10c6b3ca9134a44d3ba52363af7be1f8bb55f7a074b92544955fdf66684ed9ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "felicitas",
-    "materialSha256": "1e695d55369b4956ab23fc1f7f76eef06f60845bd777b6cff8962d365893fd6c",
+    "materialSha256": "d3cef75aa091fb152bb7f73a3be3e44752fe7474c87827fdb103a269ce1cfad3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "a7ea6dc998ea6dd0299145903bbdeac21c80563f6ccc0871618b38105e45c469"
     }
   }
 }

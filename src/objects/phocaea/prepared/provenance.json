@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phocaea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "7131f2952ffcc052193e44dbcd970071d9a1b851d790fac439076fc18b1fdeac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "03320dbd1c07805c0dbc301c6999febaede65779ed86e6c2a2671ea8716cff14"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "508b7c0d7855f6aa60a8aa63d9ed3f2f7226718ca88d3eb72b0427228b69804e",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "f72a84197e248577dc575c9ce92e444efae997a69221856f869adf155e24c194",
       "bytes": 10988,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/phocaea/phocaea-elevation-thumbnail.webp",
           "bytes": 5188,
           "sha256": "0f4dd4cbce28ae3e57c3cba67ff8cf2fcdf2944f5f46a8940c487d240565128a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phocaea/phocaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phocaea/phocaea-elevation-surface@2x.webp",
           "bytes": 258658,
           "sha256": "1037289079eefa6390e3781c84462738971ac7ca53e1bcca874e5b106e0814ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/phocaea/phocaea-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
           "bytes": 63526,
           "sha256": "fe44be4ac99b2759c16678fc3a8e7a0e5c208ee30334bd78c2bb17e8fbc2a156",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "phocaea",
-    "materialSha256": "f874fb66d2bcf458ac17a1f6d0e219c0b3c5c4aabee91c3df4dd36f29193bd3a",
+    "materialSha256": "1ac95ab6e8fb59389fbe09db6abba77afa62510a16f63fa250affc2e43d5599c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "03320dbd1c07805c0dbc301c6999febaede65779ed86e6c2a2671ea8716cff14"
     }
   }
 }

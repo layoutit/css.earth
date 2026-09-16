@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "oenone",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "fa5acb35c2b630f2f09a09f57a5358671a8eecca833b0a64236344210f8cdd73"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "9761aff82120d21ef207cd1b08373ddb881cef0c2155b926077c5e868fbfe9a5"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "27a2a816bb4696dec5bc7a31dd1bc50cf6018abaaca213311ba81a0fdb33a4b9",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "4d66a6ce42fe2539dbfa296329faf05c73ac16620440c791664c090084f5e370",
       "bytes": 9218,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/oenone/oenone-elevation-thumbnail.webp",
           "bytes": 5680,
           "sha256": "56daf6489c6864e101217178eebb1b2319bc03d67a8ebd15b40f29f599ed9ed8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oenone/oenone-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oenone/oenone-elevation-surface@2x.webp",
           "bytes": 291172,
           "sha256": "eaf7d00b33af94c5cc850ce707ad0d4f665b4ce17ca04001d62c1233b16f3912",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/oenone/oenone-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oenone/oenone-shape-surface@2x.webp",
           "bytes": 61634,
           "sha256": "1c6b6a2ea78981b6a088dc29e14c125056555ccddb916982dfec531882ca8c74",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "oenone",
-    "materialSha256": "3a497b4840322e05f26bdd498a443bf9e0098ec8d2ca234a8e3aca92a4e79c57",
+    "materialSha256": "dfb5bf0f5f7a0d3dff31ae8c41cab381b1b981b186f0fe5ef7a7d8d0bb474fb4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "9761aff82120d21ef207cd1b08373ddb881cef0c2155b926077c5e868fbfe9a5"
     }
   }
 }

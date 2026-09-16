@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "huberta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6d1aa4de7aef5e04fbd1a0ec6bd2dabd45046a1a503768ec50d3d744e75728a9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "d1f85a4a400396d971162a561b55dc1514cc37ffedb4a54176c9c6567f7b3983"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "d4074decf77b04ae946a4cde54bd9a3ea1179f3ab447ac7721d81d8ea378873c",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "224ab8111f7cd68d9b7e0666b8e469e294ec0e65803892cee9ac9c15567dbe38",
       "bytes": 9619,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/huberta/huberta-elevation-thumbnail.webp",
           "bytes": 5606,
           "sha256": "8b507a54391dc642872852f9a75830290b84b1d501d9420fb98cd0d4d0488652",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/huberta/huberta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/huberta/huberta-elevation-surface@2x.webp",
           "bytes": 290594,
           "sha256": "9c7b55bf013a093fb79f37771a288aef33559eb6c3e7d6ebb42f0833f924a78a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/huberta/huberta-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/huberta/huberta-shape-surface@2x.webp",
           "bytes": 63632,
           "sha256": "93e9c649dba626e2af5fb955b49f15bd41b4e55439d8561f3ec4d26de322603b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "huberta",
-    "materialSha256": "2d96b903ce903a7eefa2b37e2f458aa5d51487429a96eee36c1d5b910cbc91d2",
+    "materialSha256": "b64d554945d0f18e362fd796dcf0f4b29eb75ffca2128511d5005d3432d51024",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "d1f85a4a400396d971162a561b55dc1514cc37ffedb4a54176c9c6567f7b3983"
     }
   }
 }

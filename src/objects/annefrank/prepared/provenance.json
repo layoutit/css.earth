@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "annefrank",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "18f5c40c9951ccc053cb6491639d84f166274ffbbd40db7db89e0481b2482835"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "84bb7fdefd08e26c658d600ba942b6d94e7d217929727b11d2b32b0f91af7371"
   },
   "recipes": [
     {
@@ -235,7 +235,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -270,7 +270,7 @@
       "sha256": "7d15c5d4554fde8ccd344b21c4102e8d9431a951ae248f0c7cbd7bb33e8ed5b8",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -290,7 +290,7 @@
       "sha256": "11c025d0378fbf45f5c29b380c047a80d15d2633c46e59fc735aa41d5fe3e060",
       "bytes": 2324,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -327,13 +327,13 @@
           "url": "/scenes/annefrank/annefrank-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/annefrank/annefrank-model-surface@2x.webp",
           "bytes": 48228,
           "sha256": "bdc6ba4fc1582341c3dd88c47bb098f2d015f4a02c331a9a63050908274da857",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -411,8 +411,8 @@
     "materialSha256": "b99e178ea0b33fba5e15feac6d40d35a6e31e236a245e91e38a5d2aa15af9aab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "84bb7fdefd08e26c658d600ba942b6d94e7d217929727b11d2b32b0f91af7371"
     }
   }
 }

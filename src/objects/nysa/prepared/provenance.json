@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nysa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "2321a444025cc849ed28e2b01f5017cd1ff7b6fc90340d58d76f6c995880d032"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "99ac9cd13032b2c127c561c996e1312795a54273404f24cdbef88554c85b8f66"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "49ddba465ca9b6391d7dc8299c49c2309a360f30268bece4d8c1a7adadee7fa5",
       "bytes": 129688,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "766ce34191ebfce30ac065bd6b09a54c2fb683209db06e64b02a8f8df6b13c39",
       "bytes": 6575,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/nysa/nysa-elevation-thumbnail.webp",
           "bytes": 4998,
           "sha256": "6e401cf417ae9dda94d21a9508c57ed727ad9d5b4ae38d3fdc58db49bba2823b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nysa/nysa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nysa/nysa-elevation-surface@2x.webp",
           "bytes": 302888,
           "sha256": "a502f05e025a34a63fc573925233573590f7ae12c2eebc22ff5857a7618b6e25",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/nysa/nysa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nysa/nysa-shape-surface@2x.webp",
           "bytes": 67588,
           "sha256": "3c36ed1d9cc69b08a7e73608a9363952978dcb65c4147a6b7e41bb6cd6ced35d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "nysa",
-    "materialSha256": "92d8f4321254579bc98cfaa093053b8bf9c6a415cd65102de936c8d1922be0dd",
+    "materialSha256": "e215b5a8bba7d19ef21addb674a100ee6d7b86ac96bf67e59846bff9006fe5f9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "99ac9cd13032b2c127c561c996e1312795a54273404f24cdbef88554c85b8f66"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "cybele",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "d44230d85d8be32f7f784bc47e8fdfae8477409c4f1c089edee2812de14348e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "149b32b3666aabcf0ab2a6cbd5b8e5b18a5f692812b3724f0276e200f81b2453"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "e9648065de0673532a759e5148dbead9e4bbba55edaf1231e21b2d911e55e35f",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "ba389e44c76b3725d7c6f33b69ae0efbb8bcf7a7d3705820e281e3a56e0f8b00",
       "bytes": 7180,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/cybele/cybele-elevation-thumbnail.webp",
           "bytes": 5628,
           "sha256": "83f3970ab33f0d18112a8b30dea42d54401f111cfad2096d2b9856f5f3311c8a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cybele/cybele-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cybele/cybele-elevation-surface@2x.webp",
           "bytes": 288026,
           "sha256": "87f147ebd3d32edde732a017bf90e70d4ca144295f9bc0adba8b882682fe817c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/cybele/cybele-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cybele/cybele-shape-surface@2x.webp",
           "bytes": 55386,
           "sha256": "1af90f7458723e863dcbe666ca2fe94332f7aa865533437cacbda94984230127",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "cybele",
-    "materialSha256": "cdb1fb8023f12f9b835108332ff64371ca54e00125c304fb0137831b088e1512",
+    "materialSha256": "77b6eeb9c7e1dd5cf8bf499f52e81eeb77528e358c16cc8eb8c25e3be2e6741d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "149b32b3666aabcf0ab2a6cbd5b8e5b18a5f692812b3724f0276e200f81b2453"
     }
   }
 }

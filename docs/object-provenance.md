@@ -51,23 +51,23 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 
 ## Existing assets versus a new preparation run
 
-`pnpm prepare:provenance` recovers records for `OBJECTS` from checked recipes,
-source manifests and prepared asset receipts. Development/build preparation
-also runs this recovery. Catalogue preparation restores missing cited factsheet
-documents from their pinned acquisition recipes before validating the citations.
-It does not download or rebuild body rendering assets.
+`pnpm prepare:provenance` brings the records for `OBJECTS` up to date from
+checked recipes, source manifests and prepared asset receipts, and never weakens
+one. Development/build preparation also runs it. Catalogue preparation restores
+missing cited factsheet documents from their pinned acquisition recipes before
+validating the citations. It does not download or rebuild body rendering assets.
 
-- `basis: recovered` means existing declared pins were bound. It does not prove
-  that source bytes are present, that an acquisition happened in this run, or
-  that a complete body was freshly reproduced. This is also the default when
-  calling the lineage helper directly, even with byte verification.
-- `basis: prepared` is emitted by the preparation pipeline after checking the
-  bound source and output bytes. Only that pipeline requests `prepared`.
-  A changed input, recipe, output or binding
-  invalidates that record. Recovery preserves a prepared record only when its
-  full identity still matches.
-- `pnpm prepare:provenance mercury --verify` checks locally available source and
-  output bytes without claiming a fresh preparation run.
+- A body whose identity (pins, recipes, outputs, bindings) is unchanged keeps
+  its record.
+- A body whose identity changed is byte-verified: when every pinned input and
+  output is on disk and matches, the new record is `basis: prepared`.
+- When a pinned file is not on this checkout, a `prepared` record stays as it
+  is, the body is named and the command exits 1; prepare it where its sources
+  are. `--recover` writes a `basis: recovered` record instead, which binds the
+  declared pins without proving the bytes were present. A record that was never
+  prepared is recovered without the flag.
+- `basis: prepared` is also emitted by the preparation pipeline itself after
+  checking the bound source and output bytes.
 
 `lastPreparation` separately retains the fingerprint of the last byte-verified
 preparation and the lineage verifier's identity. It covers object identity,

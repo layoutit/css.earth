@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "stephania",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "0cfeadb1a90987f5c9260044ddf0d2971c9badce74eca4bd6d7aa1257429233d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "978cbaaecb52df0ac1d75fb6a897436edca31a118e6ec0a37e94c0870b81cc45"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "1d751e789d79cdd53abcc6fdc6a78c1e78b560175824f814a41c5c41e8d28fc4",
       "bytes": 81898,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "75104f5c36c64b74fe702f63072ad2aaf44ed5491f789a73d9ff976f3d39145f",
       "bytes": 11730,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/stephania/stephania-elevation-thumbnail.webp",
           "bytes": 5314,
           "sha256": "1ec6fb4444960077b313513c7c3c64566089b3c013da0461a6c3c427ce884377",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/stephania/stephania-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/stephania/stephania-elevation-surface@2x.webp",
           "bytes": 294580,
           "sha256": "2fdb3697ab1849c9dc0b0c28ec1453132c07ef6dd9e6f44e25cd60888a09f8a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/stephania/stephania-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/stephania/stephania-shape-surface@2x.webp",
           "bytes": 64358,
           "sha256": "7ee16c3607e42fc054d6c1f6e56d913bf08d1ed5b7ad0491aa88d4a10feb8ea3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "stephania",
-    "materialSha256": "a16284c1ea5220e3d08aa2956e2cb3d24a596ddca374c495964aeb89150e7ae6",
+    "materialSha256": "a0d7eec7c30514e07509fd370bee6cc470c7de66cd7ad120a4b09997664d768b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "978cbaaecb52df0ac1d75fb6a897436edca31a118e6ec0a37e94c0870b81cc45"
     }
   }
 }

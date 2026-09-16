@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2003-vs2",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "e6fdbc18e06208da87f4efd33085dcbf58ef800b8bab6f1bf51a15cf793c09ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "48738fb56a90cb8efb203ec16a60731f4900230156dd16609e938e24b950aad5"
   },
   "recipes": [
     {
@@ -233,7 +233,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -268,7 +268,7 @@
       "sha256": "46ce5d051cc7192152bcb6c4628b14de72e9c1fe304d1cf805aad080983cf46c",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +288,7 @@
       "sha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
       "bytes": 3376,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -325,13 +325,13 @@
           "url": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-surface@2x.webp",
           "bytes": 55368,
           "sha256": "754427bd2f6830c3de98754af8928ddc0a1d2e074beb32d8b33e0809b959c377",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -409,8 +409,8 @@
     "materialSha256": "c9184adb679d5cf70e1c06fe6b20077528595f97022e1f3a329dc77a9a833840",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "48738fb56a90cb8efb203ec16a60731f4900230156dd16609e938e24b950aad5"
     }
   }
 }

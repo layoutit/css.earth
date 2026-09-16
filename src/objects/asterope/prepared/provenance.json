@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asterope",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "ccdc2a1af2e6501e2675cb99c6b7a88a0c952765cfc9f24c6d08b59861ab96d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "df8ec9492cd41647ea58d15b82644f389b22f68b3b88ea391e39a05a3cca5934"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "a54cba1bc20a55006d6a113902c2d73b80134391a7dd4489db3a0fecc607310a",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "a1b9bf97642e32b677e3d2b22f5cfcd0508e464109a75b9f35e5a691230a6bfb",
       "bytes": 10273,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/asterope/asterope-elevation-thumbnail.webp",
           "bytes": 5208,
           "sha256": "45d1b3e20442226efc44b160b6e4a2a56db1035a43d4c479a46b8fb683b10df3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asterope/asterope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asterope/asterope-elevation-surface@2x.webp",
           "bytes": 254424,
           "sha256": "f6ce257da744c9de85b1f652b06d0bcefeb417022f8f4d5d8bd3aeea66cbb5f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/asterope/asterope-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asterope/asterope-shape-surface@2x.webp",
           "bytes": 58570,
           "sha256": "2736377e730f29dba34f21b2491809af6f842d6dc1ab628150cff2cdd8cd7e6e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "asterope",
-    "materialSha256": "2bd445f15cb16f67fcdfb4df08eeb805570e3072c5fc127e421c48dc66f0e2e6",
+    "materialSha256": "63f2018540fd83b8289d71554b52f2690ea9c060158794b02d88caff2be016c7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "df8ec9492cd41647ea58d15b82644f389b22f68b3b88ea391e39a05a3cca5934"
     }
   }
 }

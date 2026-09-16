@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "loreley",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "e900ca81e986cf6abcc546aca9cfbe82055b4394ae89ca48c000249c65330287"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "7f128478404461451b1531e2b3050b3a94ab5c817e60abf46047ef097dbb0478"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "97025d294583211429452eb4c8d151b1f84b85b49f2649f0fa759ed981a9f269",
       "bytes": 8817,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/loreley/loreley-elevation-thumbnail.webp",
           "bytes": 6112,
           "sha256": "4d6358501add844df181936f27c1fe21cf4646713c86d025130e7d00db22946f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/loreley/loreley-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/loreley/loreley-elevation-surface@2x.webp",
           "bytes": 340198,
           "sha256": "7c6315aee17c59dce2ab498784a55fd065d73c73ae852ac2e4033d6ad7e8d071",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/loreley/loreley-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/loreley/loreley-shape-surface@2x.webp",
           "bytes": 58810,
           "sha256": "f02dd5c4f45551e07d33de209dcf56ad126dc5e1a50a691a1a51303dfe93116c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "loreley",
-    "materialSha256": "0147ef6cf136eb059a1e055ab4d741749b8e96144db84162b135d4c19779b8b6",
+    "materialSha256": "5b25346d64ebf28b0e76669e219a8733d11de3452066fe1a1af558509772ecf6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "7f128478404461451b1531e2b3050b3a94ab5c817e60abf46047ef097dbb0478"
     }
   }
 }
