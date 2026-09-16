@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1fb4443dff8ff73795ec14ac9072fc8a74c0b18d144e87bedd7d7adeed1f1622"
+    "sha256": "d6e1fe1c9a199e3d9ae42aed2161b7b6da0f618b1f42ca0caa4262031d5830b7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3cea8f8452eb308304df98b5ac5b2b40edf5be43f10904e930d517d0b65a03e9"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1772be1c4493c6b64b9d317488e065858fefb02436d221143c05c30bcfbeeed5",
+      "sha256": "c4de464e21aa1b30469493b1838b00b642452cdc782c4f1d0345d307ce764b5c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech et al. (2009), Hanuš (2011); model 146, version 2011-04-19."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/alkmene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1772be1c4493c6b64b9d317488e065858fefb02436d221143c05c30bcfbeeed5",
-      "bytes": 8846,
+      "sha256": "c4de464e21aa1b30469493b1838b00b642452cdc782c4f1d0345d307ce764b5c",
+      "bytes": 8868,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6246,
-          "sha256": "9fa6d4061a54c42e137935df2ec68a9297606c75586e36f95c13a97a6a5825f5",
+          "bytes": 6268,
+          "sha256": "607eaf9ab60b968950b597157659f3cbe7a70ec5faecade15aae3f240f60ce2b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "alkmene",
-    "materialSha256": "6739116edffc8f4e0832e0513cf28ac998491dcde7161dd898298177b7493b51",
+    "materialSha256": "c4ff7d69fe2d19cc6dba544dba7e5e3b0201fa7f9172b4a4e07123a072fd99e5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3cea8f8452eb308304df98b5ac5b2b40edf5be43f10904e930d517d0b65a03e9"
     }
   }

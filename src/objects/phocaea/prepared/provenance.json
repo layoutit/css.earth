@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7131f2952ffcc052193e44dbcd970071d9a1b851d790fac439076fc18b1fdeac"
+    "sha256": "b67a8f80e19fc874595b15e09cfa73ca778f4baeb54e1689e87a65a98ff4761f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "03320dbd1c07805c0dbc301c6999febaede65779ed86e6c2a2671ea8716cff14"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f72a84197e248577dc575c9ce92e444efae997a69221856f869adf155e24c194",
+      "sha256": "7d829b9cd3b79b7232756c9e625ba39e7a7c9d2e81246851cd9fb7796577d63b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 697, version 2013-02-20."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/phocaea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f72a84197e248577dc575c9ce92e444efae997a69221856f869adf155e24c194",
-      "bytes": 10988,
+      "sha256": "7d829b9cd3b79b7232756c9e625ba39e7a7c9d2e81246851cd9fb7796577d63b",
+      "bytes": 11010,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8383,
-          "sha256": "3231ee26ffc48c9ddb4324e0bd4e4a0d6342fee018a9e8fa0d23faa8e06e4e6a",
+          "bytes": 8405,
+          "sha256": "2d4d9584906ec1d2361d0db8c8b2a7d28a634f8e66f1e1e9e9684c03100a7a1a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "phocaea",
-    "materialSha256": "1ac95ab6e8fb59389fbe09db6abba77afa62510a16f63fa250affc2e43d5599c",
+    "materialSha256": "10f2515d346f385d0154d1f304db76fcc8d83f385f9fa5398ac4870a889bd17d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "03320dbd1c07805c0dbc301c6999febaede65779ed86e6c2a2671ea8716cff14"
     }
   }

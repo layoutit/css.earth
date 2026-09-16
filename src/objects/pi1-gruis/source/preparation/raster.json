@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/pi1-gruis/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "pi1-gruis-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csspi1-gruis-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "pionier",
+      "source": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
+      "falseColor": true,
+      "output": "pi1-gruis-surface-{id}{suffix}.webp",
+      "thumbnail": "pi1-gruis-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 219710723,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 420000000
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "PIONIER reconstruction",
+            "falseColor": true,
+            "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 909 squared visibilities and 603 closure phases measured by VLTI/PIONIER on four nights of September 2014 in the H band (1.62-1.73 micrometres, three channels), convolved to the 2.1 milliarcsecond interferometric beam and cast onto a sphere of the radius the disc and the Gaia parallax imply. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown. The colours are a legend for reconstructed relative intensity in one infrared band, not colour or temperature. The far hemisphere is unobserved."
+          },
+          "frames": [
+            {
+              "id": "pionier-2014-09-h-band",
+              "path": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 1e-05,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 4988287254762928.0,
+              "northAzimuthDegrees": 0,
+              "pixelAngleMicroradians": 0.0019392547244381439,
+              "center": [
+                64.002,
+                63.001
+              ],
+              "reconstruction": {
+                "startTime": "2014-09-25T23:26:00",
+                "filter": "H band 1.62-1.73 um, three spectral channels",
+                "visibilitiesPath": "observations/PI_GRU_forImage.fits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 9.7 million kilometres at the disc centre from 162 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "sphere-photograph"
+        },
+        "offLimb": {
+          "rotationDegrees": 0,
+          "mirror": true
+        }
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 1398,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "pi1-gruis-context-{id}{suffix}.webp",
+    "limbOutput": "pi1-gruis-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csspi1-gruis-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 1398,
+        "source": "the same beam-convolved reconstruction: its light outside the 18.17 mas disc on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 51 mas field",
+        "composition": "sky-plane image registered to the disc (496 px = 18.17 mas), mirrored and turned to the scene's handedness so its north meets the rendered display axis at the default camera",
+        "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

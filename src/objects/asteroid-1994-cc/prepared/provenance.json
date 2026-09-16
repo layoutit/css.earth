@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1994-cc",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81b00ab827ae8df223f204d50acfd55386b74b6556e730681fac1bad30aeefa0"
+    "sha256": "caf737f7785ec72b11007fa6432be78c9de674daf7d0ddfec7d60a0635da319b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "b20d2617fceadea73139c3c7cecb8edd8a6d0f46be97cf5d02946d6aaf00c138"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5fd9820eee5362720ca817008b12002a05e9efb72e7968f955f33c33669160c8",
+      "sha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,17 +169,41 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "1.638 AU (mean)"
+              "value": "1.638 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27136617%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "2.10 years"
+              "value": "2.10 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27136617%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "2.3886 hours"
+              "value": "2.3886 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -271,7 +295,7 @@
             "credit": "Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1994-cc.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -326,7 +350,7 @@
       "sha256": "8df685e9f555ba71a07ba4364af3ea59e485fcb5afa43fb54e5a12f645fca78b",
       "bytes": 120595,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -351,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5fd9820eee5362720ca817008b12002a05e9efb72e7968f955f33c33669160c8",
-      "bytes": 10200,
+      "sha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
+      "bytes": 11793,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +410,19 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
           "bytes": 7542,
           "sha256": "6f2021266b63661777f52557d74476ecdb9b854d2fd94b7899be440bef49d1ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-surface@2x.webp",
           "bytes": 450112,
           "sha256": "548e772fe603a1d90c1f68b81cdb235acd21db190cfeea17b42aefd8ed78af7c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -436,13 +460,13 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
           "bytes": 61604,
           "sha256": "df57b97e63f755f519afec29d66c16201456b6933d06d1cf04fa95633ca8ac59",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -473,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7955,
-          "sha256": "78cf60440dbedd3de929188ac7f98d14248c6762a4c5a09867719496e44bd638",
+          "bytes": 9275,
+          "sha256": "5734202f7df41072bec869486ca970ed7179c7352125d2ecd4f13cc29f7cfc3a",
           "verification": "bytes-verified"
         }
       ],
@@ -537,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1994-cc",
-    "materialSha256": "32dffcfa55496e5259c4f1673f84adc6dbcf38bdcd2ec4ca176be82c67aa2319",
+    "materialSha256": "83772106006f5fbae194a6f5b6f4111f4fc20731b9b8981ac5f72d55d35dc0ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "b20d2617fceadea73139c3c7cecb8edd8a6d0f46be97cf5d02946d6aaf00c138"
     }
   }
 }

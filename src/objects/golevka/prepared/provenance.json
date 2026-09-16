@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "golevka",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7293b18036ea597ec35c10dcafff5cae90f99d74bb154e5c0db1ff13c9741956"
+    "sha256": "55a32898feaae80581b12b5e60e59c7d85134bd72495a3bd7e7858018731824f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "76f572252c93f24d113501fb99e6db7fc1064661012bac9509ae150203b993c1"
   },
   "recipes": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b1278e83b4b9d50811f7019ef31a8fe9e9f103d698e6a69fc72f90373c0d6cb3",
+      "sha256": "2d83a515166eaf6fb89636859ae690bfda0bbb84aa84d1ce69be14daa5a6a6d3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,17 +168,41 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.265 km"
+              "value": "0.265 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.474 AU"
+              "value": "2.474 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%276489%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "3.89 years"
+              "value": "3.89 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%276489%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -275,7 +299,7 @@
             "credit": "Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/golevka.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -324,7 +348,7 @@
       "sha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
       "bytes": 123654,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -349,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b1278e83b4b9d50811f7019ef31a8fe9e9f103d698e6a69fc72f90373c0d6cb3",
-      "bytes": 8173,
+      "sha256": "2d83a515166eaf6fb89636859ae690bfda0bbb84aa84d1ce69be14daa5a6a6d3",
+      "bytes": 9751,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -384,19 +408,19 @@
           "url": "/scenes/golevka/golevka-elevation-thumbnail.webp",
           "bytes": 7048,
           "sha256": "265c96dbfba1fb178487c2358684b7b74e682941697b0d126ad6f5938d25fc56",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-surface@2x.webp",
           "bytes": 441626,
           "sha256": "9567bd03765a15f29328386a53f85c202da5701414d64c6c98c9a49333bc0a01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -434,13 +458,13 @@
           "url": "/scenes/golevka/golevka-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "bytes": 76230,
           "sha256": "5f3a2f559cedbce49d66914c562b0858811f49cbb0712fc45c0f9edb7a1fb093",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -471,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5268,
-          "sha256": "b81e56d98f8e7f84cf75c7d8af697372829dc2704a20d04502ea99912c4d5176",
+          "bytes": 6573,
+          "sha256": "1b9e361d320f097610bd6bd31a59aa7fb998f4222ddd328a95f70bdb6129d86c",
           "verification": "bytes-verified"
         }
       ],
@@ -535,11 +559,11 @@
   },
   "lastPreparation": {
     "objectId": "golevka",
-    "materialSha256": "d3a2b8df8b82d1c127aefd1c1eefe07e7761779853e4a1d4526cc4352e23ad39",
+    "materialSha256": "70e7ac4b2fa54052697a4c22a67e6b759ae33d78c2eec466da920c61f80598c4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "76f572252c93f24d113501fb99e6db7fc1064661012bac9509ae150203b993c1"
     }
   }
 }

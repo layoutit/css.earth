@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7699eaf751f27ec91c6c992b1ffd10403828d44bb290b767c464f995c361a26e"
+    "sha256": "8773ce67a672eafacf8d762ccbb458d96871a384bd9cfef10fc3a7d9be23a527"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "0189f9cdee487405f1451973d83da6b681b367c73ebff473c2369120739125c4"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "64487b821dcbade5c2b67fafc2e850b3b96e05cd63bd7ccadd5909df7ddced2b",
+      "sha256": "4580a27592e9beb71e31ca0f8cfa95e0bc536f17f457e5d953d9f430858afd54",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak (2011); model 304, version 2011-02-18."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/phaedra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "64487b821dcbade5c2b67fafc2e850b3b96e05cd63bd7ccadd5909df7ddced2b",
-      "bytes": 10597,
+      "sha256": "4580a27592e9beb71e31ca0f8cfa95e0bc536f17f457e5d953d9f430858afd54",
+      "bytes": 10619,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7995,
-          "sha256": "c0196b6f88ad691ffc54b7581497e774097b9e2070d389c3f6b342c1cd42d25d",
+          "bytes": 8017,
+          "sha256": "a2c2f4e48c05e4c8e71f86143264e232cb31985d4cbd64594f0fe8541563c6e1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "phaedra",
-    "materialSha256": "b12c8a95a85c2eb583df1523dc42e9f3758061f02a7d7c4e8f3c61136e85e851",
+    "materialSha256": "538f5e27adbaa52b842160928e4090cf3308b822cf91fc9c2ba0e3e9990cb79b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "0189f9cdee487405f1451973d83da6b681b367c73ebff473c2369120739125c4"
     }
   }

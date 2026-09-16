@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6415b041f5721e6b4e2d16a325ab8eb19733cae04984e69bd74631efd5894ad5"
+    "sha256": "3df9b4638739cfb8168bdab2a7e3b7078ac6bbe13be7463d3b356b5950933c4f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "90df47892c8e23f3f932c4ce261545089c93cba80c5e3a7aa2fe86b2ca5b7f2e"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9eaed49c10a9c46571b90d89222d2d9b34ac29fbc56d0bc0c65d22f7b3d56664",
+      "sha256": "bbf17e3988c4bc8e89ec0f6c6bbb8ee725376f7bee54177fa5c88ecbbb9d0a0e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4281, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/mentor.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9eaed49c10a9c46571b90d89222d2d9b34ac29fbc56d0bc0c65d22f7b3d56664",
-      "bytes": 9352,
+      "sha256": "bbf17e3988c4bc8e89ec0f6c6bbb8ee725376f7bee54177fa5c88ecbbb9d0a0e",
+      "bytes": 9373,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6451,
-          "sha256": "9f071bd18a521498b8941cfc33d9b34443a3861137e37040053dbdc59bdcd258",
+          "bytes": 6472,
+          "sha256": "96b7d13027695b7ebce0f678ceb6a677da6d9be7cfaa4809f742c7caedc8034c",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "mentor",
-    "materialSha256": "d6ca1cacc92f0e59856e2e1a60549436dcf71f4152eda7a0fce19105e7e28936",
+    "materialSha256": "b07570e8298f7a156785d8840bf7c39e2d15fd9933744400c56ccb13cc6560c9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "90df47892c8e23f3f932c4ce261545089c93cba80c5e3a7aa2fe86b2ca5b7f2e"
     }
   }

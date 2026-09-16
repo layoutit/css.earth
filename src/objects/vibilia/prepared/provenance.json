@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bdbee655fddfe40ab42ee6df0cc722ea71f9c33dee9728f40540f4ec7845b87a"
+    "sha256": "cbd3e621302c726f21031618de31c944d4e45c54b2a6b73558babad3f91e3a21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "17501a877f5508cae9ad2d3178d63229e47d1a7937db70df1ec78376794dd4c8"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fbfed6352a5ca25651d6eddedd0f58ec01789b1f19df7829067c6a21a9793ea0",
+      "sha256": "a6f97dbce1ac11cb78cabbe1bf8f8cef10cb276b693259edca39b317d36775bd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1824, version 2017-06-16."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/vibilia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fbfed6352a5ca25651d6eddedd0f58ec01789b1f19df7829067c6a21a9793ea0",
-      "bytes": 8638,
+      "sha256": "a6f97dbce1ac11cb78cabbe1bf8f8cef10cb276b693259edca39b317d36775bd",
+      "bytes": 8660,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6035,
-          "sha256": "03da6fa80e8f6e6a864f98833d0f776c7217ff0442a82cc9948e42fc44d8e31a",
+          "bytes": 6057,
+          "sha256": "2c6c4a87b1a3696d09a9eceebb1abf1fbaeb93dacd2ec9eed69ff086e8a386aa",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "vibilia",
-    "materialSha256": "fc652fe1370d9dab5a24ff196f8d2d58799427067f0c18fe82faafe5645caf8b",
+    "materialSha256": "e40f61783fdcf269ec2b4155a307698f91fdb3942307e35720b3b2e885d51078",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "17501a877f5508cae9ad2d3178d63229e47d1a7937db70df1ec78376794dd4c8"
     }
   }

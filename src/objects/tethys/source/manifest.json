@@ -1520,13 +1520,13 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 14864,
-      "expectedSha256": "c356276a9e393c78bb96446f361a923f4e81e1c511a9b5872db2dc00286085a0"
+      "expectedBytes": 14899,
+      "expectedSha256": "9ecf2b1edaa01ca7203495b81c8dd1a17a56490883eff61563bc0c306c231ac5"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1928,
-      "expectedSha256": "7301216b47f25c99c212ba352971718e320b7d8220f7fe8d05d49505031e68c1"
+      "expectedBytes": 702,
+      "expectedSha256": "acc42c9ace72dee1841a63b1659f0101e8f1ff6cce946bf8641b8cc005eb44a1"
     },
     {
       "path": "preparation/acquisition.json",
@@ -1535,8 +1535,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 15607,
-      "expectedSha256": "247de8858f59d2b2c2a0c877680d2d215c6b626e0640d8e82715a91431eafa9c",
+      "expectedBytes": 15628,
+      "expectedSha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."

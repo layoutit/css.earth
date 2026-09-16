@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nemesis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "260dc03034d594e92e401734ce2152f1c9a52d8ad465e01fa260a7729ac1eb39"
+    "sha256": "4160d39fe8dad71247487def90ae39ef6e08e62afd1f42581eb1e263cb13551f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "40c6201190cf869f4ea3841a2a5345a09627a714640a6863874c921975e9943d"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "17856088dab3d17ad824c5d8f41142b0f8ce444656ce494927f6562286853c2a",
+      "sha256": "c1cfef491abe6457d7f2bf12a6dfdda293ea065d134c215ebb83fd681ec5bc85",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,17 +169,41 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "2.750 AU (mean)"
+              "value": "2.750 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27128%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.56 years"
+              "value": "4.56 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27128%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "38.9325 hours"
+              "value": "38.9325 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -271,7 +295,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nemesis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -320,7 +344,7 @@
       "sha256": "901457d4b545e16eb6fa7c3094c9ba54961fbc3554628df147d836d0500cac7c",
       "bytes": 328699,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -348,10 +372,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "17856088dab3d17ad824c5d8f41142b0f8ce444656ce494927f6562286853c2a",
-      "bytes": 8006,
+      "sha256": "c1cfef491abe6457d7f2bf12a6dfdda293ea065d134c215ebb83fd681ec5bc85",
+      "bytes": 9584,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +407,19 @@
           "url": "/scenes/nemesis/nemesis-elevation-thumbnail.webp",
           "bytes": 5830,
           "sha256": "48f7c4d716113a42016037419b1bb48130b1ab59e52b291b53f3d422ca730f5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-surface@2x.webp",
           "bytes": 320354,
           "sha256": "e4568fbf6d9053ae5182368199a7a6bf13d06df80fa227ec70304ad874f08c58",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -433,13 +457,13 @@
           "url": "/scenes/nemesis/nemesis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemesis/nemesis-shape-surface@2x.webp",
           "bytes": 61138,
           "sha256": "05ff1d0dd4c3a1acc53c40d5e0a9ab306f4bdd0579dca5035d1f919b287953f3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -470,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5888,
-          "sha256": "1ff1a299973f8d782a133c59972d70c5dfa30f5b7c9198d63f399da843e4685e",
+          "bytes": 7193,
+          "sha256": "5b0146b65ff027b298272c9d2eb9fadca4ed1c81d99ac337ccde351f54043882",
           "verification": "bytes-verified"
         }
       ],
@@ -534,11 +558,11 @@
   },
   "lastPreparation": {
     "objectId": "nemesis",
-    "materialSha256": "f70788d94918c9e1527aa9067dc7073fa024b9c1aada88cff14103d01edf9d32",
+    "materialSha256": "cf090c10c24b0e9246dbf49343f082fe01843d06d00bcebd98169ae95fba6b45",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "40c6201190cf869f4ea3841a2a5345a09627a714640a6863874c921975e9943d"
     }
   }
 }

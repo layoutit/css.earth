@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f8c0612fc240bccaf34dda00b823183b1d56d8cc5f226e30a9491b361785a01"
+    "sha256": "f2583ce8886c280098081f028c2d52da78762e4e3ed2cf00b36e08e7a6944025"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "9d2c2dc75c763f1d27fea25bbc8a0b34daa140e71b497dda9625bfbda406f063"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "60b2c055635816a86448b1c60dfa5d4272687d79b29f50b9972b8527881db47e",
+      "sha256": "7b889156e07e3652b983ef4f298f1bbebbdc29634f19669c0983942a8b41398f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech & Hanuš (2023); model 8131, version 2022-11-29."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/menelaus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "60b2c055635816a86448b1c60dfa5d4272687d79b29f50b9972b8527881db47e",
-      "bytes": 11099,
+      "sha256": "7b889156e07e3652b983ef4f298f1bbebbdc29634f19669c0983942a8b41398f",
+      "bytes": 11122,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8174,
-          "sha256": "38a2a793f4da5f6e7381dd4d63039a9c278beb72754483ebb375a8df03450c3c",
+          "bytes": 8197,
+          "sha256": "860de21ce4f2ce6526669b9fc972662ad51e87dbb02465460ab5005aeb60ae77",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "menelaus",
-    "materialSha256": "d6a097212ab8431ecaee818a5838bde26a7f89ddd1c2b818dc939c708e6b2cca",
+    "materialSha256": "10e93bf614e3107ab3cbcad54f959b637cb924a2d5582bd9897ed7743a73a580",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "9d2c2dc75c763f1d27fea25bbc8a0b34daa140e71b497dda9625bfbda406f063"
     }
   }

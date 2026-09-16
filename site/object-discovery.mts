@@ -31,6 +31,8 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     const illustration = object.discovery.illustration;
     const featured = object.discovery.featured || isDiscoveryAnchor(object);
     const asteroid = object.classification === 'asteroid';
+    // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search.
+    if (object.classification === 'star' && !object.discovery.imagery) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }
     const highlighted = matchesObjectClassification(object.classification, options.highlighted) && (!illustration || options.illustrations);
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration ? !options.illustrations : asteroid && !featured && !options.asteroids && !highlighted) hiddenBodies.push(object.id);

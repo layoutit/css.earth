@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "07e6bae67779a4089d5eaa641fb0fcaf17c4a6730e79217fac4789e312109c19"
+    "sha256": "a1bc4d793ea81a54566607f73e9e7e817b03856805818afce68df84cae5ae980"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "8ca9d2c149ffb1ee38916de4d3cac79b90302e4abaa993fddb66c6e9f484f544"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "996b0092617d2d825d085c1d7f6d265c4f7b609698f7b123ea0b03b74547e1e6",
+      "sha256": "ae76167bebb07ced99ec068da40ed2fa1fd706c09df2cbe01d60303aa8641bc8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 702, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/silesia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "996b0092617d2d825d085c1d7f6d265c4f7b609698f7b123ea0b03b74547e1e6",
-      "bytes": 9976,
+      "sha256": "ae76167bebb07ced99ec068da40ed2fa1fd706c09df2cbe01d60303aa8641bc8",
+      "bytes": 9998,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7375,
-          "sha256": "01439efbd71f82872a78c476384902393b0101c534008862a2fc67ec79d47e34",
+          "bytes": 7397,
+          "sha256": "4d83e0e5ff3f6b63fc48c36a6d54adca825a17a0475fd6a18022f12bfcb59790",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "silesia",
-    "materialSha256": "ca9844ca5e31359be2fd894b3413d9aab8fb4db1c7256f047f18416592a93cff",
+    "materialSha256": "57b76e55cf0b4869f47e1d7649acd8917912fcb87e85b738364e42d40ef6dfcf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "8ca9d2c149ffb1ee38916de4d3cac79b90302e4abaa993fddb66c6e9f484f544"
     }
   }

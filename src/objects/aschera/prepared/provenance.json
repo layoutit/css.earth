@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c1d5970399e8461a87f98f43103be476344f2aa5a9e90ca6874af615b89f4393"
+    "sha256": "a2be60bbec4aa7021130db8416f69390ece47df24c5e094204a0a8b1e4c6d2bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "6e90f9971a19ec0a649eecd583e16eb6502ec4c40f815c5720c885de39838312"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "73c67d5a6ef0c31fcd87c9d80886e2e4ce65fd7e8a64a40e68a7e8d4db635eb4",
+      "sha256": "7381eeac84a54231b9e44c1e8a725ca7fd9deda7f1662b7975edd2e0bfa99fcd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2016); model 1435, version 2016-01-12."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/aschera.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "73c67d5a6ef0c31fcd87c9d80886e2e4ce65fd7e8a64a40e68a7e8d4db635eb4",
-      "bytes": 10133,
+      "sha256": "7381eeac84a54231b9e44c1e8a725ca7fd9deda7f1662b7975edd2e0bfa99fcd",
+      "bytes": 10155,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7530,
-          "sha256": "ccfa182409ecc8a5e58fce264d068a0c6bc2b560b63d2066c27a2187cb9a5042",
+          "bytes": 7552,
+          "sha256": "ebf563f07b944d477d11262423f9a29a135ee2dbf4f2cdcaea168c98c9cd30b9",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "aschera",
-    "materialSha256": "bfb72fee095382c54b3d9df058c1059c498f9fdae3822dd3ed402ea9ecbe441c",
+    "materialSha256": "d2538f022667a40be9223e919d7c3242056d0102ab9dd033d484d8f430a225e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "6e90f9971a19ec0a649eecd583e16eb6502ec4c40f815c5720c885de39838312"
     }
   }

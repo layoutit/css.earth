@@ -460,8 +460,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1256,
-      "expectedSha256": "e7dc0403db56018a9aefb0b02a9594a76c8b3b7d79f31fe04ac4241e9ca0b0dd"
+      "expectedBytes": 445,
+      "expectedSha256": "412d9759b87bd0d68bbd4c7e846cfdd64ee66bcf7e524a6046a1ea078d11e0fb"
     },
     {
       "path": "preparation/rotation.json",
@@ -470,8 +470,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5927,
-      "expectedSha256": "849a16ad63a4285db8ca600b32b6428dc39d83854ea5e5e4c84080d6e7b60943"
+      "expectedBytes": 5989,
+      "expectedSha256": "029042584476527697af9cbac677fc09141b9e9c775ad05807d7feb3b8c8f1b4"
     },
     {
       "path": "presentation/minimap.json",

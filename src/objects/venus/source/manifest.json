@@ -323,7 +323,7 @@
       "expectedSha256": "7ad11c7d6c8ba5b733373ce061043313434c36541d95f9b7e470c642eac0a30b",
       "expectedBytes": 1632,
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
-      "credit": "cssEarth; parameter values adapted from the OpenSpace Team\u2019s RenderableAtmosphere tuning (MIT)",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
       "license": "Repository-authored record; adapted values credited inside the file",
       "acquisition": "authored in the repository",
       "redistribution": "permitted with the credit stated in the record",
@@ -387,8 +387,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "097efa027d4e4b6ed0f0ce0206ac68452accd2e7bfd17ab3cf4ed745a60b6c86",
-      "expectedBytes": 16334,
+      "expectedSha256": "f0e8575fa97bfdb037498192d20d36ecd4de6fb69090b14a57f7781a9154f16d",
+      "expectedBytes": 16293,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -448,8 +448,8 @@
     {
       "id": "venus-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "9b2a5130c2d04973ea519c39c40a764c6c6f746e3f684b8791df1f3a8abaffb7",
-      "expectedBytes": 786,
+      "expectedSha256": "993fc048a5f9714c49087d332d30960790eecb8829321d506d6a7789f81b70d2",
+      "expectedBytes": 494,
       "origin": "Repository-authored Venus navigation asset recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -566,7 +566,7 @@
       "expectedSha256": "d0a7aa47d482c0b9471fee7a9bd6ef0fecdd2a77aa42b71a8bdafdb65081bd4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],

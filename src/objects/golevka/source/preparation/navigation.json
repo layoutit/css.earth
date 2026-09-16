@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj",
-    "credit": "Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL",
-    "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 40321,
-    "expectedSha256": "04fc3b41ac10116cf1054c0306741547ebfc646655fb910e06178d264cc79685",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "golevka-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

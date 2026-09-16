@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a57a8541a8e49d17f0528841c0acb7f92007ca456dce5799070973007511836"
+    "sha256": "9c70a9015bd7f8686c15461874ca39bc9fc8233ead92392fd72a4941d2dc2b95"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "6fa94b0ac4daf5a10a56f1f48a53fd416361822b3eb9db7a16c7549728e058d2"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "33415fd194937d4bcc097c4c6e935ae31637803e2b1f52d390fb8a9d7faf5a49",
+      "sha256": "f2546d8e6b292eff33056e1190807f9fcf789cf6740d71a2775c73e8bb0422fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4787, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kallisto.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "33415fd194937d4bcc097c4c6e935ae31637803e2b1f52d390fb8a9d7faf5a49",
-      "bytes": 9333,
+      "sha256": "f2546d8e6b292eff33056e1190807f9fcf789cf6740d71a2775c73e8bb0422fd",
+      "bytes": 9356,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6716,
-          "sha256": "8883fc6287635eb746cd7631a4976ddf1de063786d89a7c2f88620bbfa09fe4e",
+          "bytes": 6739,
+          "sha256": "09318ed37bc6261192aa043fa58b982fbc7662190f1253c0790eb0d3c4bf852f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "kallisto",
-    "materialSha256": "a73d1f9b08742d81e426fc505fa856df5824b15a0725832244135115e78d9634",
+    "materialSha256": "79bb17608873c4447c9589e9c790c91c3b2da0087bfe239565fe1723b85aaf45",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "6fa94b0ac4daf5a10a56f1f48a53fd416361822b3eb9db7a16c7549728e058d2"
     }
   }

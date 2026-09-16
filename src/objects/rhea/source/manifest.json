@@ -785,8 +785,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 2073,
-      "expectedSha256": "ef3c78fe1b17960108c07b7bc7507e767836d15a6499293bd94a2aba97334cc7"
+      "expectedBytes": 706,
+      "expectedSha256": "0ff6e06bc635c8cfb23d0ab6ac5776f1816d3d3ffdc6502b5e9d06e712405ba9"
     },
     {
       "path": "preparation/acquisition.json",
@@ -795,8 +795,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13842,
-      "expectedSha256": "fe5b2e7217a3cb46bb0aff53efac592a064433d5a5bef8f89e547ceaa0711f78",
+      "expectedBytes": 13861,
+      "expectedSha256": "47a4fc5ba01ba0e3a045080ad6dda268e20412cd170a92e024770de0ad4f785b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."

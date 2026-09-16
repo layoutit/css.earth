@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "695ab3937ddab1e647cb25f600062f75aba3f9f800b7a5ea77e34a59580226fb"
+    "sha256": "79ac68b1385c56b58d4f3dbfb988d313095961a1141ad0ae5b8557d09a0e1bff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "57e3a00e2945bbca47527ae73dea4cacc4a970eadddbdea9a7e2967b9dfb9d35"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3776a35ae58d52ff905ed0480477a36334408a5dd6fb1820b4991b15ec9c8699",
+      "sha256": "4b9b97dcc6881efa49bbf58a7f281786cac476d0f58195bacbf2423fa60f914d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2011), Hanuš (2011), Hanuš et al. (2013); model 290, version 2011-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/leto.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3776a35ae58d52ff905ed0480477a36334408a5dd6fb1820b4991b15ec9c8699",
-      "bytes": 7639,
+      "sha256": "4b9b97dcc6881efa49bbf58a7f281786cac476d0f58195bacbf2423fa60f914d",
+      "bytes": 7658,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5081,
-          "sha256": "8249d41e5b4b4f7f24d2a3c8f9f917c7ce722c22d8dd2922e176f9be0573df36",
+          "bytes": 5100,
+          "sha256": "2489c5e1d7c51acb365fab0fd3b186fc3b5cf9fdc6b4855ab4a117eeaa747730",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "leto",
-    "materialSha256": "eb060f21e4401b89d4d15ab68fa7d9dfa9173f36c3d98b0fa1e3052223be4294",
+    "materialSha256": "437ac00ed38b0cdabd6735fac914467ed371b8f59d9d1194587c2307af2d89da",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "57e3a00e2945bbca47527ae73dea4cacc4a970eadddbdea9a7e2967b9dfb9d35"
     }
   }

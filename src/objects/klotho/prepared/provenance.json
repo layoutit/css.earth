@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "094cce098a0376e247bac35eb67ff25cf11bd207b1a18720d9a78b433e5b65dd"
+    "sha256": "93cef3de1d5f826bca74057b364afa21a3812379fc98c7aad3d467e7bf59062d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "8498abcd53a95bbf3505b1c9aa90d42e233c7c8a2f86a1baa44ba06e363ee963"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b5192570f7fdfe6ad9d7742d8aea979671bcc97fec794a81eeb01b2d91b1981c",
+      "sha256": "5f90563b8375683d8c4c011807ab73a570f5a4376c880e56f8ce69df8a06d8e6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011), Hanuš et al. (2013); model 321, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/klotho.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b5192570f7fdfe6ad9d7742d8aea979671bcc97fec794a81eeb01b2d91b1981c",
-      "bytes": 8134,
+      "sha256": "5f90563b8375683d8c4c011807ab73a570f5a4376c880e56f8ce69df8a06d8e6",
+      "bytes": 8155,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5546,
-          "sha256": "02361db17dbcb6f0a31a0763c6723e8f4a6de584d8dbcf328c846101c71d661a",
+          "bytes": 5567,
+          "sha256": "871480d1cd50efb5b013555aa2527b5a2c6647b6f3e90fa17f75c294f7c65cf2",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "klotho",
-    "materialSha256": "2855ed8f41e30bf1cb92e301e9da6f674e36e531cb8b9cdd0a459ad44c953c16",
+    "materialSha256": "fc62bb93546163ac44b6b577c1715738a0237f2c0fc48aa4fb4616c0635fc804",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "8498abcd53a95bbf3505b1c9aa90d42e233c7c8a2f86a1baa44ba06e363ee963"
     }
   }

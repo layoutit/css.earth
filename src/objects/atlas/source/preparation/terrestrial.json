@@ -177,6 +177,7 @@
           "maximumGain": 2.5
         },
         "display": {
+          "basis": "authored",
           "displayRange": [
             0,
             0.928
@@ -283,6 +284,7 @@
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "displayRange": [
             0,
             0.8

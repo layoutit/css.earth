@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6950110514f956b1557157fcbbd3dde3b91efc3340d21e9ef5b2a630ca95849c"
+    "sha256": "a36f39e68c5dddb11db7bf8bafec37cef95daed662a4866ceca716d59642fa2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "e1a0b1c0f4a18bb6e2995c8f7e45c53b62ff5bb4e155da84d1367b7cf2e94486"
   },
   "recipes": [
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7cdad70d9804dfd87cd40c48361eb7626712f67b01be2689f76fc0ffb444fa0",
+      "sha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,17 +166,41 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "29 km"
+              "value": "29 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "2.701 AU (mean)"
+              "value": "2.701 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27925%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.44 years"
+              "value": "4.44 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27925%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -273,7 +297,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Alphonsina model 301, version 2011-02-18; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/alphonsina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -337,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7cdad70d9804dfd87cd40c48361eb7626712f67b01be2689f76fc0ffb444fa0",
-      "bytes": 8758,
+      "sha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
+      "bytes": 10337,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -459,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6607,
-          "sha256": "511b9a4af80bc6c2e923fe8787d59b99f46438489b0428c0efccbf8048280c1b",
+          "bytes": 7913,
+          "sha256": "b4b05791b2ea47dc55b7e22d83bb39de7f31a65c5a5c6fcaa3e3e321b297f629",
           "verification": "bytes-verified"
         }
       ],
@@ -523,10 +547,10 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "fd77ec75620c7dccef4b106809e8d3e4ffd7d9d8ef711b729aad7926a0a4c2fb",
+    "materialSha256": "5a26a7efd23d31301282e2f9fccb9b5b4a838cb78a1bfa2fe8eaa9a1de6e1e62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "e1a0b1c0f4a18bb6e2995c8f7e45c53b62ff5bb4e155da84d1367b7cf2e94486"
     }
   }

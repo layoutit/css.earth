@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "apophis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b925970ae3a9f22e637c11e55e8abb69adbdceb688daf4a1828a7e956bf8b72a"
+    "sha256": "92457ffbc56fd86b3aa78388b0321c1726fa14b777b05dfee58aa11e809018f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "d2d4ade961ce6aba101d559df95c8188bf618eae1e9d68f142e9d58852052c33"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e8006d6114ed8b53a9cc8fecae26c5703ec3fdcc2cf9f3079d7b0cf944e3d83b",
+      "sha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,17 +164,41 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.17 km"
+              "value": "0.17 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "0.922 AU (mean)"
+              "value": "0.922 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2799942%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "0.89 years"
+              "value": "0.89 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2799942%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "precession-period",
@@ -276,7 +300,7 @@
             "credit": "Brozović et al. (2018), Icarus 300, 115–128; Lawrence and Benner (2026), NASA PDS radar shape release V1.0, doi:10.26033/ydyq-5756"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/apophis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -315,7 +339,7 @@
       "sha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266",
       "bytes": 197868,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e8006d6114ed8b53a9cc8fecae26c5703ec3fdcc2cf9f3079d7b0cf944e3d83b",
-      "bytes": 7668,
+      "sha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
+      "bytes": 9248,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -375,19 +399,19 @@
           "url": "/scenes/apophis/apophis-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "80d669897d8cbff83ce1ab396ac19aa1b8d7be68c597de26f2bbfe9da10c05ad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-elevation-surface@2x.webp",
           "bytes": 381086,
           "sha256": "11c740abede5da8cf14e7a026814f5bb636cc974d4988f97e3c09993309357fb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -425,13 +449,13 @@
           "url": "/scenes/apophis/apophis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-shape-surface@2x.webp",
           "bytes": 69512,
           "sha256": "4cd1a35393e418c969d93e18ea52251c80806080d82f5d812e6fb98e2a32a26b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5447,
-          "sha256": "6170dbe197f8b357a320bd89fd9c11c741533abaad753d769603dd87741a66d4",
+          "bytes": 6754,
+          "sha256": "420fe3db2dc3344621d401630238a652e5bdb38bc0f674cdc699ddb2ce387787",
           "verification": "bytes-verified"
         }
       ],
@@ -526,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "apophis",
-    "materialSha256": "6c9541c9d83e6e0a8c2799e563f5afc33dfd91c62d783cb60afcc3d93dee8a5d",
+    "materialSha256": "5b4f3af4314224a6f07fdb8f27b6f45516169034cfc45b860a9271aa4758002f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "d2d4ade961ce6aba101d559df95c8188bf618eae1e9d68f142e9d58852052c33"
     }
   }
 }

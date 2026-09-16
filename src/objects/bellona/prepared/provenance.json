@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b0fd26918b31e4e70cffa0d43a30f7be647019ffd0bb12cc2135ecc460f65824"
+    "sha256": "54c2a92b4581f61366730f30627db54419b50c6e8285e76a167b1b25627519b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "f088ff3530878a76f480900178e33ca7d8293c5f49e49b5ffa78c3ce5738a9e8"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0642709529b5e2215bfbb3284e5c3c20fad94374efee408c8d243a25e61208ca",
+      "sha256": "22cf53fb131201071eed4127862be6e001a620420f381744ff1107dadfd2a623",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1839, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/bellona.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0642709529b5e2215bfbb3284e5c3c20fad94374efee408c8d243a25e61208ca",
-      "bytes": 9376,
+      "sha256": "22cf53fb131201071eed4127862be6e001a620420f381744ff1107dadfd2a623",
+      "bytes": 9398,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6774,
-          "sha256": "0a34a0063068cde16d877dc2be624ad53c6f5913c54e4350777d1253bd94bfdb",
+          "bytes": 6796,
+          "sha256": "60718b7a38c14a5795eeafb7fdf790796fde3df19031aa35ca75abc3fc495621",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "bellona",
-    "materialSha256": "ba31a5460964cbf1d7f508f141ec639e47c19dcbff1154f4c794838701b98e96",
+    "materialSha256": "13a357380b0c425a4a73dc622a261d57fe4d4213f5a46075ef330e913520cc7c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "f088ff3530878a76f480900178e33ca7d8293c5f49e49b5ffa78c3ce5738a9e8"
     }
   }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c99c8f2afeb221e9e5bf6047733ab92c462d60505ce3425ed67427a37726013"
+    "sha256": "8a22eb8d222eaf2c224c2baa3c21400c72cce66cec9d0a67d1ea467bc1bf2802"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "f753f94a8a21ebb9e8c34d57ee9c17475b7450ca6f684ee0d81b7908ada6d079"
   },
   "recipes": [
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0065f15e8144e428ec1011b085aaa0e6f133a3f73eea50a0e0a043cf364d0703",
+      "sha256": "548804f97a20e0c483bfaff35f45b6c76032a50d758b19f78bd44dacac3098cd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +171,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "3.114 AU (mean)"
+              "value": "3.114 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2748%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "5.49 years"
+              "value": "5.49 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2748%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -273,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Doris model 1845, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/doris.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -337,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0065f15e8144e428ec1011b085aaa0e6f133a3f73eea50a0e0a043cf364d0703",
-      "bytes": 6244,
+      "sha256": "548804f97a20e0c483bfaff35f45b6c76032a50d758b19f78bd44dacac3098cd",
+      "bytes": 7458,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -459,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4154,
-          "sha256": "0807a490cb4c0c3aa0fa67d192f5c1b5eda97c9b5368b471974f4c5643770419",
+          "bytes": 5186,
+          "sha256": "4003e08d06534320c75700d331f3bd61644e2aeada7fde5df36bfb6730e59df5",
           "verification": "bytes-verified"
         }
       ],
@@ -523,10 +539,10 @@
   },
   "lastPreparation": {
     "objectId": "doris",
-    "materialSha256": "ef8a9941e06e70a07ad15efee648c9f9da3a4959886a242f5f59ae7c1e902628",
+    "materialSha256": "5aa51b4c3c6b3e10236c864584d28889fd1c358f5861443ab31b53f452ada026",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "f753f94a8a21ebb9e8c34d57ee9c17475b7450ca6f684ee0d81b7908ada6d079"
     }
   }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9439e5a25e0ff27b6923faffff85d7e0abad20587301435c10ed7e3dea44350d"
+    "sha256": "bfcd869fe0be7ac62d6924597d322e4030a1e1828b0a5c923b6bd155fc6d31d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "28535ebc8baf5cd253382050bfeddf530248b6aef6aac7ce0e097f8ca2be32bb"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b157c9a4b1d17a31a227f159f8ccca539046e0548c899441f34060a7daf7fbbe",
+      "sha256": "74dd304de003ca398ab2c600273c0662c55bd22ff1dc269faecee6a9fe854d6d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2018); model 1862, version 2017-11-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/toro.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b157c9a4b1d17a31a227f159f8ccca539046e0548c899441f34060a7daf7fbbe",
-      "bytes": 7722,
+      "sha256": "74dd304de003ca398ab2c600273c0662c55bd22ff1dc269faecee6a9fe854d6d",
+      "bytes": 7741,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5005,
-          "sha256": "da595a7b541dd24b3a3dbbfc8734295b561fd287627c855f7108f26cc12ed00c",
+          "bytes": 5024,
+          "sha256": "00278467ba9f48f9282c6fb8c21f5a5d8dccf721b3ac4456938b7bf4d1cf8a00",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "toro",
-    "materialSha256": "092772cf408772b32bc3a5eac4a32e26356b924f3069d2668b620221a0689d9c",
+    "materialSha256": "3a0047c708d7d58108ee0e85cfcbd5e2c6f3788878479076683f851530ec7d28",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "28535ebc8baf5cd253382050bfeddf530248b6aef6aac7ce0e097f8ca2be32bb"
     }
   }

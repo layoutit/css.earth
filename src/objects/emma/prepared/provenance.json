@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ef25f1a6aebe1ff10ac1ba61f4cdf77d1fb09867964e8c803e0fc6ebca48539"
+    "sha256": "2441b31b96dac6038ca1660110e13bc72448ac793303469a57dec16f426764b7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "6dda89c8deec52608c70228ed37f1a12e5152ee68e3e2f6c331e67ec7c72ceec"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d6dce996f313420edccd52340fa2a617b7b6cf118387bb5d074d56cfa176dc5b",
+      "sha256": "3da3bba20b8389862db1028c360fe1559151b41370b1f620e9e73fa746c3dd7d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1859, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/emma.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d6dce996f313420edccd52340fa2a617b7b6cf118387bb5d074d56cfa176dc5b",
-      "bytes": 8421,
+      "sha256": "3da3bba20b8389862db1028c360fe1559151b41370b1f620e9e73fa746c3dd7d",
+      "bytes": 8440,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5857,
-          "sha256": "d10635e65fd4fa82846ccd7180545778420e3239e441399e06677314ae4b16a2",
+          "bytes": 5876,
+          "sha256": "bc35c62d44d314e6e31c7d7fadd3c40078147f923e651078799d832c6c4a17aa",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "emma",
-    "materialSha256": "4cb3436da781b13ba9e38d65d09d6c2c93545d616d1bff7e77acf25bfd9a6ad0",
+    "materialSha256": "b9e1aeadc5c08ebe053cfebb143d2166d7d5ff88ce1d8079bc66634ed98f0a19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "6dda89c8deec52608c70228ed37f1a12e5152ee68e3e2f6c331e67ec7c72ceec"
     }
   }

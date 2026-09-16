@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7489c0f1a122431c7e2411bc8ffd9ea5522d49c879f98b5ce6d3525a7c20b0af"
+    "sha256": "9cb63203b8bc11a879858bcdb6451f5f85029251c2d8bd7eb65a4fc2bfdae8fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "53c518bde73edb54e11f68eec39afefbaea675d4a8a4310c45868ccc385ee934"
   },
   "recipes": [
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c1756bdb55d9ca346707851af576e0ea1ff17b0eeb94e17c7356f23362dfaab3",
+      "sha256": "74ce18cfd12aedf29346922a45179a44596cf7e1aea44a1d9ad328a406e5a248",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +171,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "3.091 AU (mean)"
+              "value": "3.091 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27100%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "5.43 years"
+              "value": "5.43 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27100%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -273,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hekate model 3088, version 2019-06-24; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hekate.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -337,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c1756bdb55d9ca346707851af576e0ea1ff17b0eeb94e17c7356f23362dfaab3",
-      "bytes": 7013,
+      "sha256": "74ce18cfd12aedf29346922a45179a44596cf7e1aea44a1d9ad328a406e5a248",
+      "bytes": 8230,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -459,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4909,
-          "sha256": "cb76b5262cb782a5e7da542af1e56884c51646b07664f5492aaef005bbc62d20",
+          "bytes": 5944,
+          "sha256": "276186088a9b2a560536dee83f83f30441810d96439a118289b4b9383f68bc28",
           "verification": "bytes-verified"
         }
       ],
@@ -523,10 +539,10 @@
   },
   "lastPreparation": {
     "objectId": "hekate",
-    "materialSha256": "2f12422acc7f1239fce1c448832319996983895de02ad469908acf0fa9575fc2",
+    "materialSha256": "c38037d092ac6289752a47a1b4dbf5ec494822d1d2d5f612073f6ae3f6ddd452",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "53c518bde73edb54e11f68eec39afefbaea675d4a8a4310c45868ccc385ee934"
     }
   }

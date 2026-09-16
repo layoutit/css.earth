@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "pi1-gruis",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/pi1-gruis/pi1-gruis-poles-pionier.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#ffb070"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 1
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csspi1-gruis-prepared-runtime-scene@1",
+    "materialSchema": "csspi1-gruis-prepared-emission@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 36525,
+      "sourceProjection": "one VLTI/PIONIER reconstruction of September 2014 cast onto the reference sphere by the surface-observation route and delivered as equal-latitude equirectangular projective leaves",
+      "polarPreparation": "orthographic-bilinear polar tiles from the same map; the poles were not observed and carry the no-data grid",
+      "axialTiltNote": "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame"
+    }
+  }
+}

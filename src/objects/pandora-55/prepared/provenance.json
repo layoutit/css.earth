@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "25d903a688065145593fbbb030fce6affcddfd1082c22f5268f15366916dc50c"
+    "sha256": "434111933522f56051baa4d245f491cf9d499685f8b95ebecc185f3d06341c6a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "2c717f1f9ac2b3d68579334660049c89c431eccaf7b88371e6c067b76c3f99b8"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "feecd7bf2359a53abf097f9a22a371cc678929b3dbbbb067fdb57dd3530bd9f4",
+      "sha256": "bce1c457d081109111c46d9e7070553f21913992363355e191a4d9d5eaf7022d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Torppa et al. (2003), Ďurech et al. (2011); model 139, version 2011-03-28."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pandora-55.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "feecd7bf2359a53abf097f9a22a371cc678929b3dbbbb067fdb57dd3530bd9f4",
-      "bytes": 11836,
+      "sha256": "bce1c457d081109111c46d9e7070553f21913992363355e191a4d9d5eaf7022d",
+      "bytes": 11861,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9204,
-          "sha256": "c55849ebe5b257212898c08edd2d8af460577e75cd9d970144690e1048d4d1f2",
+          "bytes": 9229,
+          "sha256": "d26152d174962d7c95eae1bb2cb0e1c9a8265b201cb0f58f155e593fe088234f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "pandora-55",
-    "materialSha256": "25ce16eabd3f240dc4773f8002d917b94b198f0a6d959e72156c16a4a069b945",
+    "materialSha256": "67623f0f20c106a6dc7e3382c4a6607befa10de36b6bc67e6473b71af5e89936",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "2c717f1f9ac2b3d68579334660049c89c431eccaf7b88371e6c067b76c3f99b8"
     }
   }

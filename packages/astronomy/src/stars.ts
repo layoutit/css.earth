@@ -14,6 +14,9 @@ export interface StarAstrometry {
   readonly properMotionRaMasPerYear: number
   readonly properMotionDecMasPerYear: number
   readonly radialVelocityKmPerS: number
+  /** Which direction the prepared presentation frame puts up: the J2000 ecliptic north pole by default, or the star's own
+   * display axis (its rotation record's +z) so the camera orbit lies in the star's equator and reaches its sub-Earth point. */
+  readonly presentationUp?: 'display-axis'
   readonly sources: { readonly position: string; readonly distance: string; readonly properMotion: string; readonly radialVelocity: string }
 }
 export type StarId = keyof typeof STAR_ASTROMETRY
@@ -40,11 +43,35 @@ export const skyBasis = (rightAscensionDegrees: number, declinationDegrees: numb
   return { east: [-Math.sin(ra), Math.cos(ra), 0], north: [-Math.sin(dec) * Math.cos(ra), -Math.sin(dec) * Math.sin(ra), Math.cos(dec)] }
 }
 
+/** The authored orientation of a star whose rotation axis lies in the plane of the sky: the axis at a position angle
+ * (degrees east of north) and the display meridian that turns body longitude 0 toward the Earth. A star with a measured
+ * position angle passes it (Betelgeuse's ALMA 48 degrees); a star with no measured axis passes 0, sky north.
+ * The meridian is measured from the ascending node of the body equator on the ICRF equator, as an IAU W angle. */
+export const skyPlaneOrientation = (star: Pick<StarAstrometry, 'rightAscensionDegrees' | 'declinationDegrees'>, positionAngleDegrees = 0):
+  { rightAscensionDegrees: number; declinationDegrees: number; displayMeridianDegrees: number } => {
+  const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+  const angle = positionAngleDegrees * RAD_PER_DEG
+  const pole: Vec3 = [0, 1, 2].map(axis => Math.cos(angle) * north[axis]! + Math.sin(angle) * east[axis]!) as unknown as Vec3
+  if (Math.hypot(pole[0], pole[1]) < 1e-12) throw new TypeError('A sky-plane axis on the celestial pole has no node.')
+  const toEarth = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees).map(value => -value) as unknown as Vec3
+  const nodeLength = Math.hypot(pole[0], pole[1]), node: Vec3 = [-pole[1] / nodeLength, pole[0] / nodeLength, 0]
+  const cross: Vec3 = [node[1] * toEarth[2] - node[2] * toEarth[1], node[2] * toEarth[0] - node[0] * toEarth[2], node[0] * toEarth[1] - node[1] * toEarth[0]]
+  const dot = (a: Vec3, b: Vec3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+  const degrees = (radians: number) => radians / RAD_PER_DEG
+  return {
+    rightAscensionDegrees: (degrees(Math.atan2(pole[1], pole[0])) + 360) % 360,
+    declinationDegrees: degrees(Math.asin(Math.max(-1, Math.min(1, pole[2])))),
+    displayMeridianDegrees: degrees(Math.atan2(dot(pole, cross), dot(node, toEarth))),
+  }
+}
+
 /** Heliocentric ICRF state of a star at an epoch: the catalogue position carried linearly by its space velocity.
  * Solar-System-barycentric and heliocentric differ by under 0.01 AU, negligible against a stellar distance.
  * Perspective acceleration and light-time are ignored; over a few decades they move Betelgeuse by metres. */
-export const starStateKm = (id: StarId, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3 } => {
-  const star = starAstrometry(id)
+export const starStateKm = (id: StarId, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3 } => starStateFromAstrometryKm(starAstrometry(id), epochJdTt)
+
+/** The same state from an astrometry record that is not compiled into the package yet (a new star's scaffold). */
+export const starStateFromAstrometryKm = (star: Omit<StarAstrometry, 'sources' | 'presentationUp'>, epochJdTt: number): { positionKm: Vec3; velocityKmPerDay: Vec3 } => {
   const distanceKm = star.distanceParsecs * PARSEC_KM
   const direction = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
   const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)

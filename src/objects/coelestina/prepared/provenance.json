@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3958f6b7899b2d8c081a4c46d9c9eaf130be66274851ea4481cfefb997f64ad"
+    "sha256": "04384abb89231009bfb4f27a6be65d8ecb7657f100384911df13a668098db1b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "8a5df5a9889ca557fe4aa018d8e5554c63f5fe4f3320a872512cd356ed191920"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f0a184a001377e3b93fdee02f9534806b24fe3ebf1ee53a814b73e7cb587b09b",
+      "sha256": "9898621470e4cbea7c272189db455abdfeebbc4ef0cf72933a25b096b1b79749",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1218, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/coelestina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f0a184a001377e3b93fdee02f9534806b24fe3ebf1ee53a814b73e7cb587b09b",
-      "bytes": 11582,
+      "sha256": "9898621470e4cbea7c272189db455abdfeebbc4ef0cf72933a25b096b1b79749",
+      "bytes": 11607,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8941,
-          "sha256": "03f863d937365b5d936fa5196f07ce279502b6284282af3c118f095f4979779d",
+          "bytes": 8966,
+          "sha256": "4fcca1f38b42c1b83bf8723cfa8edb42cf309f6123ebb3800d065229a1c89831",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "coelestina",
-    "materialSha256": "c57c89f269d2b488054e66b0d5016fb9447adb3dfc1837b8cc871a960a30e1f5",
+    "materialSha256": "a49af576bc2570e65ad23df3dc3353347d5fcd44dfcfab1d331d9de1a9169c75",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "8a5df5a9889ca557fe4aa018d8e5554c63f5fe4f3320a872512cd356ed191920"
     }
   }

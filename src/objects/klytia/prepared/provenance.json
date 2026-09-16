@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d47ae6b8b269e95f3dfbfd3a752fe3a9c2787cb7a09a014bd2ad675ab7bbd94"
+    "sha256": "dae663132f2dcfac75d39c6e03cf9d1cedc64d4e5d559e3c856f3c425f2e2bdf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "66da3d2e89350adfae7eb3d64743d130b3194056c10e1e57cd84e6b75a709e65"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82666209a7532fe477ecf8caf922d24fd96a0298cbceecc97af9e941693fcc89",
+      "sha256": "98634edfbcc694b447848939b8c8cba0f1db8285def72308807133fd03c4a51b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2008), Hanuš (2011); model 142, version 2011-04-20."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/klytia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82666209a7532fe477ecf8caf922d24fd96a0298cbceecc97af9e941693fcc89",
-      "bytes": 8274,
+      "sha256": "98634edfbcc694b447848939b8c8cba0f1db8285def72308807133fd03c4a51b",
+      "bytes": 8295,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5686,
-          "sha256": "42a61b30e8480d5b2299c8280b9b2d90d2550d94db22429d12b549b4b71ea726",
+          "bytes": 5707,
+          "sha256": "fe548287b8bce462bf3a1e3cc9cd2c01a691f8411d22a39f83b7387304773048",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "klytia",
-    "materialSha256": "39f75c841a442791204f464a86b31ef18c5f364e88448bcc722cf25607d2e3ac",
+    "materialSha256": "dcd06e3418a70cf9a15d221ba7282d874b09ab71dc716e3583555dfefb13bad2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "66da3d2e89350adfae7eb3d64743d130b3194056c10e1e57cd84e6b75a709e65"
     }
   }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb9dbc6315626c4c0fcd39e9594a1b0e8ef9758e577320b678b145c53e1a9d15"
+    "sha256": "872c53b6f7d03eea0901a84e134d90a69f736258ce0c0678a063416f5d3d8d10"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "25d95e987050cf9658c9169367f5dbba033c17a90b18bc5441a3bb3dff3e58ce"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b90b063fd6cd9eb5cbc152ffc8b550d4a497aa027eb11872e098934ed13f79e4",
+      "sha256": "07cf855d29701102cbde152909520ddade2432978b35d4cada7f57cc88aecbe3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 591, version 2013-02-19."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/dejanira.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b90b063fd6cd9eb5cbc152ffc8b550d4a497aa027eb11872e098934ed13f79e4",
-      "bytes": 10592,
+      "sha256": "07cf855d29701102cbde152909520ddade2432978b35d4cada7f57cc88aecbe3",
+      "bytes": 10615,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7976,
-          "sha256": "7a1e28ed7f8039150fc29f663b6949819273fbe8143a7cff7b6eace0ce12052a",
+          "bytes": 7999,
+          "sha256": "6f8100619201dedf1230c25e1b219d29e34982c7ce74789ccebaa8ea852afd4e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "dejanira",
-    "materialSha256": "1cf0428c293b4fde6bcd4b6e964cec8b1be3657a3f2c7b8dc78da3e3797baaa6",
+    "materialSha256": "d51ae7d7c3e991b09202d211e3e2808f6e3ace844f5d78d0ca6fa2dff4b7d7f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "25d95e987050cf9658c9169367f5dbba033c17a90b18bc5441a3bb3dff3e58ce"
     }
   }

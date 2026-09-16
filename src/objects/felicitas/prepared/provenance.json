@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9437650441326ce889a68908ab002db581663a7dc532130359ac6916d71cbf5"
+    "sha256": "c4b7773d473c1f24b750358b54d93cdf7c349887918b6ce95e02aaa70fb97ad0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "a7ea6dc998ea6dd0299145903bbdeac21c80563f6ccc0871618b38105e45c469"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bc538227bd978b10585c6688534490e05eb9abd90aab793b12c9e41472bafd6c",
+      "sha256": "17184048fe68bcc421daab5d1df77ee9def2e4c6f4e380409515e0e7af54bb59",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2019); model 3097, version 2019-06-24."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/felicitas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bc538227bd978b10585c6688534490e05eb9abd90aab793b12c9e41472bafd6c",
-      "bytes": 10096,
+      "sha256": "17184048fe68bcc421daab5d1df77ee9def2e4c6f4e380409515e0e7af54bb59",
+      "bytes": 10120,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7470,
-          "sha256": "1d7452e4bc509f34b4b5c65d4f22958c0c39c51e3e461aaef27a60ed3c3614e6",
+          "bytes": 7494,
+          "sha256": "724cdf1dfd37af29468e43a81c491d30f0b15c48c4310fda6fd3448b78c1c067",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "felicitas",
-    "materialSha256": "d3cef75aa091fb152bb7f73a3be3e44752fe7474c87827fdb103a269ce1cfad3",
+    "materialSha256": "2d4fe93812ecba865eab8c4463a1771850c255bd6c4248472659aef72668f7e9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "a7ea6dc998ea6dd0299145903bbdeac21c80563f6ccc0871618b38105e45c469"
     }
   }

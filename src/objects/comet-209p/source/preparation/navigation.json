@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 10681,
-    "expectedSha256": "fc15bc63ca0e642af733402782d7c328a6e585b0d51cf076346ae49f80233fb2",
-    "origin": "https://doi.org/10.3847/0004-6256/152/4/89",
-    "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016); cssEarth approximation",
-    "license": "Published scientific parameters; cssEarth implementation MIT",
-    "licenseEvidence": [
-      "https://doi.org/10.3847/0004-6256/152/4/89",
-      "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
-    ],
-    "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
-    "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "shape-parameters"
-      ],
-      "size": 512,
-      "longitudeDegrees": 70,
-      "latitudeDegrees": 20,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

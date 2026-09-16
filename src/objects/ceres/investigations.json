@@ -1,0 +1,192 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ceres",
+  "entries": [
+    {
+      "id": "usgs-dawn-fc-140m-mosaic",
+      "subject": "USGS Dawn FC global mosaic at 140 m/pixel",
+      "status": "included",
+      "finding": "Monochrome samples the orthorectified, body-fixed Dawn FC2 mosaic through WMS at 4096 by 2048 over 0-360 degrees east and 90N-90S; the PDS record documents a bundle-block adjustment using Dawn orbit and attitude, the high-resolution shape model and the Kait-anchored longitude system, so the image-to-Ceres frame is documented and no visual crater match is performed here. It is visible-light grayscale, not an unlit albedo map, and the release states the extreme south pole was unilluminated with gaps remaining.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L38",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L53",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "pia19977-enhanced-color",
+      "subject": "NASA PIA19977 false-colour map",
+      "status": "included",
+      "finding": "Enhanced color uses the 3078 by 1537 false-colour image from 920, 750 and 440 nm filters, retained as a distinct map interpretation rather than calibrated monochrome; it keeps its published equirectangular map frame, and the review asserts no pixel-for-pixel pairing with the DTM.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L8",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L46",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L49",
+        "https://science.nasa.gov/resource/hints-at-ceres-composition-from-color/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "pia19977-edge-columns",
+      "subject": "Bright final columns of the PIA19977 source map",
+      "status": "unresolved",
+      "finding": "The last two columns of the enhanced-colour source are brighter than their neighbours, mean brightness 173 and 193 against about 135, so a thin light line can show along 0 degrees at close zoom.",
+      "revisitWhen": "A corrected release of the enhanced-colour map removes the bright edge columns.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L69"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "dawn-hamo-dtm-elevation",
+      "subject": "DLR/USGS Dawn HAMO global DTM at 137 m",
+      "status": "included",
+      "finding": "Elevation uses the 21,600 by 10,800 signed 16-bit DTM sampled without filling missing values, as metres above a 470 km sphere including the body's overall shape, mapped to a fixed -30 to +20 km scale with shading derived from neighbouring model heights.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L100",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L104",
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "elevation-polar-caps",
+      "subject": "Elevation coverage in permanently shadowed polar areas",
+      "status": "unresolved",
+      "finding": "The publisher describes approximately 98 percent coverage with interpolation in permanently shadowed polar areas but supplies no validity mask separating interpolation from stereo samples, so the lens withholds both caps at latitudes of 60 degrees or more as a conservative display boundary.",
+      "revisitWhen": "A validity mask separating interpolated from stereo samples is published.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L66"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "coverage-black-heuristic",
+      "subject": "Southern-edge-connected black as a fill indicator",
+      "status": "unresolved",
+      "finding": "Both pinned rasters have three colour channels and no alpha or validity mask, so southern-edge-connected exact black is used as a conservative indication of fill and marked with the neutral gray grid; the README calls this a heuristic, not a surveyed coverage boundary, and JPEG compression can make fill pixels nonzero.",
+      "revisitWhen": "A validity mask or alpha channel is published with these maps.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L64",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L88",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L90"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "iau-usgs-gazetteer-names",
+      "subject": "IAU/USGS Gazetteer of Planetary Nomenclature centre points",
+      "status": "included",
+      "finding": "Named features use the Ceres centre-point export, snapshot 2026-09-11 and public domain per its FGDC metadata; preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and folds repeated rows, and labels appear at the closest zoom only.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L60",
+        "https://planetarynames.wr.usgs.gov/Page/CERES/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "wikipedia-feature-notes",
+      "subject": "English Wikipedia lead summaries as caption notes",
+      "status": "included",
+      "finding": "31 labelled names carry a caption note from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L62"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "jpl-physical-and-orbit-data",
+      "subject": "Vendored JPL body data through the astronomy package",
+      "status": "included",
+      "finding": "Physical and orbital data come from the vendored JPL body data, Kepler state vectors and IAU rotation, with mean radius 469.7 km and a fixed geometry epoch of 2026-09-04T00:00:00 TT; the mesh is a sphere at that mean radius and claims no resolved shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L85",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L92",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L119"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "nasa-ceres-facts",
+      "subject": "NASA Ceres facts page",
+      "status": "included",
+      "finding": "The prepared facts summarise the NASA page: asteroid-belt location, Dawn observations, about nine hours per rotation and no moons.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L86",
+        "https://science.nasa.gov/dwarf-planets/ceres/facts/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "published-shadows-retained",
+      "subject": "Original crater shadows in the Dawn observations",
+      "status": "included",
+      "finding": "The lighting decision is to retain the published Dawn observations including their original crater shadows; the optional Shadows setting adds approximate directional illumination and neither mode reconstructs unlit albedo or relights the photographed shadows.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L68",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L96"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ce-tauri",
+  "entries": [
+    {
+      "id": "published-images",
+      "subject": "Published SQUEEZE reconstructions, November and December 2016 (Montargès et al. 2018, CDS J/A+A/614/A12)",
+      "status": "included",
+      "finding": "The authors deposited both epochs' averaged images and their standard-deviation maps at the CDS as 32 by 32 pixel FITS files of 0.5 milliarcseconds, north up and east left. They are cast onto the sphere as published; the paper reports reduced chi-squared 1.53 (November) and 2.08 (December) against its own reduction and a convective contrast of 5 and 6 percent.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/614/A12",
+        "https://doi.org/10.1051/0004-6361/201731471"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    },
+    {
+      "id": "oidb-visibilities",
+      "subject": "VLTI/PIONIER calibrated visibilities in the JMMC OiDB (calibration level 2)",
+      "status": "unresolved",
+      "finding": "The OiDB holds 16 files from 14 and 22 November 2016, 22 and 23 December 2016 and 25 February 2017, the JMMC pipeline's automated product, not the authors' reduction (pipeline 3.51 with the calibrators of their Table 1). Against them the published November image fits at reduced chi-squared 17.8 on squared visibilities and 35 on closure phases, the December image at 11.2 and 3.1 (14.4 and 3.0 against 23 December alone, the night the paper keeps). SQUEEZE run on these files directly does not converge (165 and 400). The images are shown as published; the fit recorded by reconstruction.test.mts is against the public files, not the authors' data.",
+      "revisitWhen": "The authors' calibrated OIFITS appear in the OiDB, or a re-reduction with their calibrators is made.",
+      "evidence": [
+        "https://oidb.jmmc.fr/",
+        "https://doi.org/10.1051/0004-6361/201731471"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    },
+    {
+      "id": "rotation-axis",
+      "subject": "Rotation axis, period and prime meridian",
+      "status": "unresolved",
+      "finding": "No publication measures the rotation axis or period of CE Tauri. The object uses the display-orientation record: the axis shown is celestial north in the plane of the sky and the display meridian faces the Earth at the scene epoch, both labelled as a convention.",
+      "revisitWhen": "A measured position angle of the rotation axis is published.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201731471"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    },
+    {
+      "id": "distance",
+      "subject": "Distance",
+      "status": "included",
+      "finding": "Gaia DR3 1.5207 +/- 0.2661 mas, 658 pc, is adopted for the placement as for the other placed stars; Montargès et al. (2018) use Hipparcos 1.82 +/- 0.26 mas (549 pc), which is why their radius is 587 to 593 solar radii where the same diameter at the Gaia distance is 720. The choice moves the physical radius by 20 percent and nothing else in the scene.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau",
+        "https://doi.org/10.1051/0004-6361/201731471"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,990 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "ce-tauri",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "97cfb9db31dbb4e0a8f83699757e80757d64822d6c77bb93e1d53209cbb2647f"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "9877eb5a9a214491892d8e9ad88994decf9ff894489f8fb824a592b7e97f4ae0"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "71a914af6a1cc09c911c77af0044c66a85de9948327dea48922be4d3ca38045b",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/ce-tauri/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "ce-tauri-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssce-tauri-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "pionier-2016-11",
+            "source": "observations/nov_avg.fit",
+            "falseColor": true,
+            "output": "ce-tauri-surface-{id}{suffix}.webp",
+            "thumbnail": "ce-tauri-lens-{id}.webp",
+            "science": {
+              "kind": "surface-observation",
+              "shape": {
+                "path": "shape/uniform-disc.tab",
+                "format": "pds-radius-table",
+                "grid": {
+                  "metersPerUnit": 1000,
+                  "expectedVertices": 2522,
+                  "expectedFaces": 5040,
+                  "stepDegrees": 5,
+                  "longitudeDirection": "east-positive"
+                },
+                "radiusKm": 500725430,
+                "rows": 36,
+                "columns": 72,
+                "flatFaceErrorMeters": 960000000
+              },
+              "lens": {
+                "format": "controlled-shape-camera",
+                "metadata": {
+                  "label": "PIONIER image, November 2016",
+                  "falseColor": true,
+                  "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for November 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colours are a legend for reconstructed relative intensity in the H band, not colour or temperature. The far hemisphere is unobserved."
+                },
+                "frames": [
+                  {
+                    "id": "pionier-2016-11",
+                    "path": "observations/nov_avg.fit",
+                    "encoding": "fits-oi-reconstruction",
+                    "backgroundMaximum": 1e-9,
+                    "observerLatitude": 0,
+                    "observerWestLongitude": 0,
+                    "sunLatitude": 0,
+                    "sunWestLongitude": 0,
+                    "rangeKm": 20291168826312556,
+                    "northAzimuthDegrees": 0,
+                    "pixelAngleMicroradians": 0.0024240684055476798,
+                    "center": [
+                      15.996,
+                      15.006
+                    ],
+                    "reconstruction": {
+                      "startTime": "2016-11-14T04:16:39",
+                      "filter": "H band 1.51-1.77 um, six channels merged by the authors",
+                      "visibilitiesPath": "observations/oifits"
+                    }
+                  }
+                ],
+                "transfer": {
+                  "maximumSeparationFootprints": 2,
+                  "visibilityToleranceMeters": 1,
+                  "maximumEmissionDegrees": 70,
+                  "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 49 million kilometres at the disc centre from 658 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+                },
+                "photometry": {
+                  "model": "retained-observation",
+                  "referenceIncidenceDegrees": 0,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "maximumGain": 1
+                },
+                "display": {
+                  "percentiles": [
+                    1,
+                    99.5
+                  ],
+                  "palette": [
+                    "#3b0500",
+                    "#9a1e00",
+                    "#e0641a",
+                    "#ffb340",
+                    "#ffe9a0",
+                    "#fffbf0"
+                  ]
+                },
+                "consumer": "photograph-pionier-2016-11"
+              },
+              "offLimb": {
+                "rotationDegrees": 0,
+                "mirror": true
+              }
+            }
+          },
+          {
+            "id": "pionier-2016-12",
+            "source": "observations/dec_avg.fit",
+            "falseColor": true,
+            "output": "ce-tauri-surface-{id}{suffix}.webp",
+            "thumbnail": "ce-tauri-lens-{id}.webp",
+            "science": {
+              "kind": "surface-observation",
+              "shape": {
+                "path": "shape/uniform-disc.tab",
+                "format": "pds-radius-table",
+                "grid": {
+                  "metersPerUnit": 1000,
+                  "expectedVertices": 2522,
+                  "expectedFaces": 5040,
+                  "stepDegrees": 5,
+                  "longitudeDirection": "east-positive"
+                },
+                "radiusKm": 500725430,
+                "rows": 36,
+                "columns": 72,
+                "flatFaceErrorMeters": 960000000
+              },
+              "lens": {
+                "format": "controlled-shape-camera",
+                "metadata": {
+                  "label": "PIONIER image, December 2016",
+                  "falseColor": true,
+                  "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for December 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colours are a legend for reconstructed relative intensity in the H band, not colour or temperature. The far hemisphere is unobserved."
+                },
+                "frames": [
+                  {
+                    "id": "pionier-2016-12",
+                    "path": "observations/dec_avg.fit",
+                    "encoding": "fits-oi-reconstruction",
+                    "backgroundMaximum": 1e-9,
+                    "observerLatitude": 0,
+                    "observerWestLongitude": 0,
+                    "sunLatitude": 0,
+                    "sunWestLongitude": 0,
+                    "rangeKm": 20291168826312556,
+                    "northAzimuthDegrees": 0,
+                    "pixelAngleMicroradians": 0.0024240684055476798,
+                    "center": [
+                      15.976,
+                      15.001
+                    ],
+                    "reconstruction": {
+                      "startTime": "2016-12-23T03:43:22",
+                      "filter": "H band 1.51-1.77 um, six channels merged by the authors",
+                      "visibilitiesPath": "observations/oifits"
+                    }
+                  }
+                ],
+                "transfer": {
+                  "maximumSeparationFootprints": 2,
+                  "visibilityToleranceMeters": 1,
+                  "maximumEmissionDegrees": 70,
+                  "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 49 million kilometres at the disc centre from 658 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+                },
+                "photometry": {
+                  "model": "retained-observation",
+                  "referenceIncidenceDegrees": 0,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "maximumGain": 1
+                },
+                "display": {
+                  "percentiles": [
+                    1,
+                    99.5
+                  ],
+                  "palette": [
+                    "#3b0500",
+                    "#9a1e00",
+                    "#e0641a",
+                    "#ffb340",
+                    "#ffe9a0",
+                    "#fffbf0"
+                  ]
+                },
+                "consumer": "photograph-pionier-2016-12"
+              },
+              "offLimb": {
+                "rotationDegrees": 0,
+                "mirror": true
+              }
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 780,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "ce-tauri-context-{id}{suffix}.webp",
+          "limbOutput": "ce-tauri-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssce-tauri-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 780,
+              "source": "the same published image: its light outside the 10.18 mas disc on the lens palette and stretch with alpha fading to the background; the plate spans the 16 mas field",
+              "composition": "sky-plane image registered to the disc (496 px = 10.18 mas), mirrored and turned to the scene's handedness so its north meets the rendered display axis at the default camera",
+              "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "ce-tauri",
+        "displayName": "CE Tauri",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "720 solar radii"
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "658 parsecs"
+            },
+            {
+              "id": "angular-diameter",
+              "label": "Angular diameter (1.62 µm)",
+              "value": "10.18 milliarcseconds"
+            },
+            {
+              "id": "rotation-axis",
+              "label": "Rotation axis",
+              "value": "not measured"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "pionier-2016-12",
+          "controls": [
+            {
+              "id": "pionier-2016-11",
+              "label": "PIONIER image, November 2016",
+              "thumbnail": "ce-tauri-lens-pionier-2016-11.webp",
+              "surface": "ce-tauri-surface-pionier-2016-11.webp",
+              "poles": "ce-tauri-poles-pionier-2016-11.webp",
+              "source": {
+                "id": "cds-nov-avg",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "notes": "The SQUEEZE reconstruction its authors published for November 2016 (Montargès et al. 2018, CDS J/A+A/614/A12), 32 pixels of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter. Shown as published, finer than the 1.8 milliarcsecond beam of the longest baseline: the features are the authors' reconstruction, with a convective contrast they measure at 5 to 6 percent. The star has no measured rotation axis: the axis shown is celestial north, a display convention. The far hemisphere is unobserved and carries the no-data grid.",
+              "noData": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity in the H band",
+                "labels": [
+                  "0.41",
+                  "0.71",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.41",
+                    "0.71",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
+              }
+            },
+            {
+              "id": "pionier-2016-12",
+              "label": "PIONIER image, December 2016",
+              "thumbnail": "ce-tauri-lens-pionier-2016-12.webp",
+              "surface": "ce-tauri-surface-pionier-2016-12.webp",
+              "poles": "ce-tauri-poles-pionier-2016-12.webp",
+              "source": {
+                "id": "cds-dec-avg",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "notes": "The SQUEEZE reconstruction its authors published for December 2016 (Montargès et al. 2018, CDS J/A+A/614/A12), 32 pixels of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter. Shown as published, finer than the 1.8 milliarcsecond beam of the longest baseline: the features are the authors' reconstruction, with a convective contrast they measure at 5 to 6 percent. The star has no measured rotation axis: the axis shown is celestial north, a display convention. The far hemisphere is unobserved and carries the no-data grid.",
+              "noData": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity in the H band",
+                "labels": [
+                  "0.40",
+                  "0.70",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.40",
+                    "0.70",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "The convective photosphere of the red supergiant CE Tauri, I: VLTI/PIONIER H-band interferometric imaging (A&A, 2018)",
+            "href": "https://doi.org/10.1051/0004-6361/201731471"
+          },
+          {
+            "label": "Images",
+            "role": "terrain",
+            "description": "The published reconstructed images and stellar parameters, CDS J/A+A/614/A12",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/614/A12"
+          },
+          {
+            "label": "Visibilities",
+            "role": "terrain",
+            "description": "Calibrated PIONIER OIFITS, November 2016 to February 2017, JMMC OiDB",
+            "href": "https://oidb.jmmc.fr/"
+          },
+          {
+            "label": "Placement",
+            "role": "facts",
+            "description": "SIMBAD record for 119 Tau: Gaia DR3 position, parallax and proper motion",
+            "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/201731471",
+            "credit": "M. Montargès, R. Norris, A. Chiavassa et al. (2018); ESO/VLTI/PIONIER; images from CDS J/A+A/614/A12"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/ce-tauri.json",
+            "credit": "Published limb-darkened diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "cds-nov-avg",
+      "path": "observations/nov_avg.fit",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_avg.fit",
+      "credit": "Montargès, Norris, Chiavassa, Tessore, Lèbre and Baron (2018), A&A 614, A12; CDS J/A+A/614/A12",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "evidence": "Averaged reconstructed image for the November 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
+            "missionId": "eso-vlti-pionier-ce-tauri"
+          }
+        ]
+      },
+      "license": "Published research data at the CDS; cite the paper and the catalogue.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the CDS.",
+      "redistribution": "Not redistributed; cast onto the sphere and cited.",
+      "coverage": "Averaged reconstructed image, November 2016, H band (1.51-1.77 um merged), 32 x 32 pixels of 0.5 milliarcseconds, north up, east left.",
+      "width": 32,
+      "height": 32,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ce-tauri-cds-nov-avg",
+            "role": "material",
+            "evidence": "src/objects/ce-tauri/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/0"
+          }
+        ]
+      },
+      "lensId": "pionier-2016-11",
+      "label": "PIONIER image, November 2016",
+      "sha256": "1df61d1032da8c02f5657e676e43d9afef75e95b9e4bd533d3033737571fd46a",
+      "bytes": 17280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/nov_avg.fit",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_avg.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "uniform-disc-sphere",
+      "path": "shape/uniform-disc.tab",
+      "origin": "https://doi.org/10.1051/0004-6361/201731471",
+      "credit": "Radius from the Montargès et al. (2018) limb-darkened diameter at the Gaia DR3 distance; sphere written by this repository",
+      "license": "Project-authored reference surface from a published diameter.",
+      "acquisition": "Written by tools/objects/source-authoring/ce-tauri/author.mts from measurements.json (radius 500725430 km, 5 degree steps); `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-radius-table",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 500725430000
+      },
+      "coverage": "A sphere of the published radius: the reference surface the published images are cast onto, not a measured shape.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/ce-tauri/author.mts",
+        "inputs": [
+          "measurements"
+        ],
+        "stepDegrees": 5
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ce-tauri-uniform-disc-sphere",
+            "role": "material",
+            "evidence": "src/objects/ce-tauri/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "375e2d54c5532af6baf738ef42ed4f61b26cca7664b4033723f5321ab92956a6",
+      "bytes": 65105,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cds-dec-avg",
+      "path": "observations/dec_avg.fit",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
+      "credit": "Montargès, Norris, Chiavassa, Tessore, Lèbre and Baron (2018), A&A 614, A12; CDS J/A+A/614/A12",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "evidence": "Averaged reconstructed image for the December 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
+            "missionId": "eso-vlti-pionier-ce-tauri"
+          }
+        ]
+      },
+      "license": "Published research data at the CDS; cite the paper and the catalogue.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the CDS.",
+      "redistribution": "Not redistributed; cast onto the sphere and cited.",
+      "coverage": "Averaged reconstructed image, December 2016, H band (1.51-1.77 um merged), 32 x 32 pixels of 0.5 milliarcseconds, north up, east left.",
+      "width": 32,
+      "height": 32,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ce-tauri-cds-dec-avg",
+            "role": "material",
+            "evidence": "src/objects/ce-tauri/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/1"
+          }
+        ]
+      },
+      "lensId": "pionier-2016-12",
+      "label": "PIONIER image, December 2016",
+      "sha256": "3023df2e057335b82941d5d327f5fb07d424b16c89f31099c52e3cd20153581a",
+      "bytes": 11520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/dec_avg.fit",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
+      "bytes": 6510,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "pionier-2016-11",
+      "label": "PIONIER image, November 2016",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "pionier-2016-11"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true,
+        "surfaceObservation": {
+          "format": "controlled-shape-camera",
+          "shape": {
+            "path": "shape/uniform-disc.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "radiusKm": 500725430,
+            "rows": 36,
+            "columns": 72,
+            "flatFaceErrorMeters": 960000000
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 49 million kilometres at the disc centre from 658 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "originalIllumination": true
+        }
+      },
+      "inputs": [
+        "cds-nov-avg",
+        "uniform-disc-sphere"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-11.webp",
+          "bytes": 23800,
+          "sha256": "a0e868ce413eb21174119b80cb10c26543b0a9b6fae807b4fd0e2529a7f27a8d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-11@2x.webp",
+          "bytes": 50534,
+          "sha256": "3dcafd09349640f10f400117def3090a08e4f398b08f527f5657be689e0e2eb4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-lens-pionier-2016-11.webp",
+          "bytes": 592,
+          "sha256": "842aacf5ef2b6ed7c12fda933ebdd1151dc42e908fdd9c333184770c7e053224",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-poles-pionier-2016-11.webp",
+          "bytes": 6700,
+          "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-poles-pionier-2016-11@2x.webp",
+          "bytes": 16222,
+          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-11.webp",
+          "bytes": 25132,
+          "sha256": "2fe6ad08733d3da40d31581ce4332b1148733c6f1a093f8d39a1bf6406d120c7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-limb-pionier-2016-11.webp",
+          "bytes": 52,
+          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-11@2x.webp",
+          "bytes": 53888,
+          "sha256": "702d4462e32dfb724ffe8e5db2b00c62089724a0cfaa64233bed65bccc6a67cc",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-limb-pionier-2016-11@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "cds-nov-avg",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "pionier-2016-12",
+      "label": "PIONIER image, December 2016",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "pionier-2016-12"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true,
+        "surfaceObservation": {
+          "format": "controlled-shape-camera",
+          "shape": {
+            "path": "shape/uniform-disc.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "radiusKm": 500725430,
+            "rows": 36,
+            "columns": 72,
+            "flatFaceErrorMeters": 960000000
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 49 million kilometres at the disc centre from 658 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "originalIllumination": true
+        }
+      },
+      "inputs": [
+        "cds-dec-avg",
+        "uniform-disc-sphere"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-12.webp",
+          "bytes": 24084,
+          "sha256": "5de8cffc9dfd1c2fb06b08793ec7dee9a58fcde537a1b3617657734bfdd0573c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-12@2x.webp",
+          "bytes": 51966,
+          "sha256": "cf7fcdf2c9ff307fd0c91f798030966075a5dbc3847dab3255f742fcec913081",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-lens-pionier-2016-12.webp",
+          "bytes": 560,
+          "sha256": "b6a57f0c9b39cb97458f7164ea2422be58610a7b9d92b670dec4fe8449d7ab8b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-poles-pionier-2016-12.webp",
+          "bytes": 6700,
+          "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-poles-pionier-2016-12@2x.webp",
+          "bytes": 16222,
+          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-12.webp",
+          "bytes": 27760,
+          "sha256": "2caa40a016812da6f7915c1780dd6db0f419f2ee134d538cab45d98bf7942989",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-limb-pionier-2016-12.webp",
+          "bytes": 52,
+          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-12@2x.webp",
+          "bytes": 59786,
+          "sha256": "61949f3c947e2e120c6eec5314f68ea088bfa17ca2a3cadebd7bcc269c32c308",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-limb-pionier-2016-12@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "cds-dec-avg",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5038,
+          "sha256": "13cb4e0019d60447e499b529c157201fca8a9fd457e8170b913df919cdcd2ac6",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:pionier-2016-11",
+      "label": "PIONIER image, November 2016 preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "pionier-2016-11"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/pionier-2016-11.webp",
+          "bytes": 9468,
+          "sha256": "29c6a7920a577eb0b7514933cfb8fbbeeb8e7aab70f44aeca63c61553813834c",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:pionier-2016-12",
+      "label": "PIONIER image, December 2016 preview",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "pionier-2016-12"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/pionier-2016-12.webp",
+          "bytes": 9804,
+          "sha256": "447d690472909e0a4f3d471025f2511b0385882e6c89158924188af62afc28af",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "ce-tauri",
+    "materialSha256": "1dd55363869a5c0e49fa3985493f32153fb17b1f90187ed43c31066717cdff66",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "9877eb5a9a214491892d8e9ad88994decf9ff894489f8fb824a592b7e97f4ae0"
+    }
+  }
+}

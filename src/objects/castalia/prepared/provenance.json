@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "castalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcfa7b20643548a1a33a975f12e2be76a750a6529147149955be54a6325f0411"
+    "sha256": "9ee3f0318df7197e27323ec49ba2cd1fcf306347d9baea88671ae450370602ca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "8e52f5f38cc650290c64daf93806016dd707d66a54af6badcd4d2527481c6bd8"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "df6e03c24bcb1c42345875e9cec55ad47ea818d6ad98e50b337179b9b291de20",
+      "sha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,12 +169,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "1.063 AU (mean)"
+              "value": "1.063 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274769%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.10 years"
+              "value": "1.10 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274769%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -271,7 +287,7 @@
             "credit": "Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/castalia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -320,7 +336,7 @@
       "sha256": "5301e6ebc10bf771c2cd563b736190903d23ccb1ddcfcc7c494a39ab4cfc8fe8",
       "bytes": 148112,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -345,10 +361,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "df6e03c24bcb1c42345875e9cec55ad47ea818d6ad98e50b337179b9b291de20",
-      "bytes": 9088,
+      "sha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
+      "bytes": 10309,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -380,19 +396,19 @@
           "url": "/scenes/castalia/castalia-elevation-thumbnail.webp",
           "bytes": 5368,
           "sha256": "6bd288ba9c06722265a160e921b2f98812b0e0f31372156dae16e2792fa8b84b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/castalia/castalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/castalia/castalia-elevation-surface@2x.webp",
           "bytes": 338008,
           "sha256": "4ba7bab43f754cbf29d5cee6376037b7ab50451338bb840d3b6e26b6e8f3f45c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -430,13 +446,13 @@
           "url": "/scenes/castalia/castalia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/castalia/castalia-shape-surface@2x.webp",
           "bytes": 67866,
           "sha256": "c04f19f595d3c5a0120c8dc9092d3e0966dc38d038f77fc2268ac068098ca82e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -467,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6948,
-          "sha256": "11d16b96dfbfdb1ddd4667de048bfff7f0556bbeef32d2e25ae4550b8ea365d4",
+          "bytes": 7987,
+          "sha256": "1cbeb30a893461116462cc162bdbade62be3ff31f43dd7be28f377e2988d10fb",
           "verification": "bytes-verified"
         }
       ],
@@ -531,11 +547,11 @@
   },
   "lastPreparation": {
     "objectId": "castalia",
-    "materialSha256": "6e3d453569a7176ae906492cc4cefec9d610e742e730d728201003c6562f7816",
+    "materialSha256": "92266f4abe4abcab9c68d610bd5748cf6de388041a66312b0d96a198c3d0df13",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "8e52f5f38cc650290c64daf93806016dd707d66a54af6badcd4d2527481c6bd8"
     }
   }
 }

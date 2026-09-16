@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f82d5164e9d48d6f551102daf4d948ea626fd72da2096abb803aecfc40f1154c"
+    "sha256": "2e1c7801415b8030e117f2db03a3bbc21c2bb33e1f8945fc80b90084b74cf4d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "f234111618bd64962b6fc5ff021fd685e5ec4f61fd437568a6a99550fd6fc206"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "60c3a78b3201c538cc8fed26c51e55fd5e5d9559eea1f76364a99e5c1bfe1924",
+      "sha256": "d361cb255e22504b21912fde60d0c93888703a71532f028e2a79265172dff08b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 5668, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "60c3a78b3201c538cc8fed26c51e55fd5e5d9559eea1f76364a99e5c1bfe1924",
-      "bytes": 8375,
+      "sha256": "d361cb255e22504b21912fde60d0c93888703a71532f028e2a79265172dff08b",
+      "bytes": 8394,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5808,
-          "sha256": "dcae0a80fcebdacbaff6c0363123364b2aa178aa0c8131e9a6e21718ae222d94",
+          "bytes": 5827,
+          "sha256": "948e6c521008d4a23a438b2a1c69cb24a12992f6d3809de639916d800ef62d75",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "asia",
-    "materialSha256": "f13a0f6cf6581391eb2daaf26f3bac93d55f73757838c27400107d530c70e972",
+    "materialSha256": "311249f3c248c0e2f07ad378d192db613900c2dc0ea8b2561b0768110e9d4c4f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "f234111618bd64962b6fc5ff021fd685e5ec4f61fd437568a6a99550fd6fc206"
     }
   }

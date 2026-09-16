@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8cf3aecda3a6e0939ab7e2c39c3ccf6649f7678ca4843de935659a02897b31c5"
+    "sha256": "a3b1d13b0d1c288d91cd3d0c085139ece4e504ba3988852d3e231ef8c979c779"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "a6ec02396d67b670be3fa2c50b214c79f90103d2b1079702d89cb054763a56e7"
   },
   "recipes": [
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b089cdeb44dcc19492a850b16fc91f87d8ac8017d6bfc869520e124d874002e9",
+      "sha256": "df123c11d5f7e84b19a5574934ddcbd0974258eec3a817ce6e88622b7cb6b60e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,12 +169,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "2.909 AU (mean)"
+              "value": "2.909 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2722%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.96 years"
+              "value": "4.96 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2722%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -271,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kalliope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -348,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b089cdeb44dcc19492a850b16fc91f87d8ac8017d6bfc869520e124d874002e9",
-      "bytes": 7441,
+      "sha256": "df123c11d5f7e84b19a5574934ddcbd0974258eec3a817ce6e88622b7cb6b60e",
+      "bytes": 8658,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -470,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5311,
-          "sha256": "f2920782d80cf119f72d2f45be34952bd5c16df9a843a754bfb4196ae4a04165",
+          "bytes": 6346,
+          "sha256": "0cc161a884ff0c7a043109be21c57698c98e4c5d5e04cd9cd8af5c0ace0fea30",
           "verification": "bytes-verified"
         }
       ],
@@ -534,10 +550,10 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "db413ae59eb39bc29ba5ea40cfb9c7fc7191a4775f25f9cf6c115c751a2c4ef9",
+    "materialSha256": "c943d226aab1e81af6ba7bb3d681200c0cb382c39cfda266b859126335bbe152",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "a6ec02396d67b670be3fa2c50b214c79f90103d2b1079702d89cb054763a56e7"
     }
   }

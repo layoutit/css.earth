@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "499386d71142c49afd4c98dfcd5dd009b057c2ad4cd3317128d569c894e3a20b"
+    "sha256": "cb8695db5dc61a8fd6988abb9b9b8f84102cb1c17852a309d06a09318f51e528"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "82e41d5e704c59bac9b3026f231a34306a0df56081cea711ab1d856273f45eff"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c1e6c2ba3d7d4a839631283f7a3ad2cdb1b02183ca74c2a52d4857fba079790a",
+      "sha256": "c7aaa20b61c5a1df05c2c0e250b10af7712732ef16eee3a6fe3ee504449d7fbe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,12 +183,28 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.977 AU"
+              "value": "2.977 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780000%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "5.14 years"
+              "value": "5.14 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780000%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -293,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; 1999 FR33 model 15145; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1999-fr33.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -347,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "c1e6c2ba3d7d4a839631283f7a3ad2cdb1b02183ca74c2a52d4857fba079790a",
+      "sha256": "c7aaa20b61c5a1df05c2c0e250b10af7712732ef16eee3a6fe3ee504449d7fbe",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10853,
+      "bytes": 12086,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -480,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8083,
-          "sha256": "405f1adb384575ed81e8b3fecb958f90e8a05066df5a56d9348ec964c2db7dd6",
+          "bytes": 9134,
+          "sha256": "080d9e49034c29fa1388c6d7e2478b447e57573794aed305dfcdd03c43965e49",
           "verification": "bytes-verified"
         }
       ],
@@ -544,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1999-fr33",
-    "materialSha256": "3fc49235c9dfc6c3beeb160535aeee6b4b72c5fd26407178e37a53b930c11379",
+    "materialSha256": "4595dded90fc61bfffa94d925786faba1a3a331b9ba30e05a7947628f0bab87d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "82e41d5e704c59bac9b3026f231a34306a0df56081cea711ab1d856273f45eff"
     }
   }

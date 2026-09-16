@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "42d6d1b869c325c392daadadb120e7e75b978ceae47cdaad57d85a8cd647e3d0"
+    "sha256": "e74fbca27e96e30868caf7be4e700e2d0be272b8723d9f53a703c52686ab9c1e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "4b2955c98b25980e13d492fe2e33f069692df82030898bc24183cf2dce39430f"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2bee95d2497d61633313abd2faf44440171964900c054106e52d1355294b5465",
+      "sha256": "0ef14b88647385885d14bbd246813305241d6bc21c4d4321de96405264acfa2a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Franco et al. (2013); model 720, version 2013-10-16."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/leda-38.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2bee95d2497d61633313abd2faf44440171964900c054106e52d1355294b5465",
-      "bytes": 10633,
+      "sha256": "0ef14b88647385885d14bbd246813305241d6bc21c4d4321de96405264acfa2a",
+      "bytes": 10655,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8030,
-          "sha256": "1a33224c1ca3d7959cc0068b75340fd65854beb025f5644fcf400991b86b684a",
+          "bytes": 8052,
+          "sha256": "87772d1a58ee84e8e05518126286f997a4120b0ca518c084835e29540b130e64",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "leda-38",
-    "materialSha256": "87caa1d07044b75949bd0cc9625393a6166e4947bcefd32318bd4e0bbffe6a33",
+    "materialSha256": "7be25ccdb7dfdf86eb498cdf12c75c1e4fdf8e87c037cde3de3d20ed85229690",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "4b2955c98b25980e13d492fe2e33f069692df82030898bc24183cf2dce39430f"
     }
   }

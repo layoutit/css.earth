@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a5fe5fece01d93289942a9897d3028456cce165f146730e3ba60b1551f84a55"
+    "sha256": "662c746ac0f35e5cc412e573e98e17910cc710266197ec10d420585f29e710cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "e46a76563eb5a7a638cb6d71cf98fd27dd2df45ae81a22e8ddd1cd88b154ac82"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e79f7386fe3c5fcd439a212a929c4e567699eae9e054887b12e2a399118eb29e",
+      "sha256": "1203f1736f5f7eb073ce3e2772ccf10e99ec890e5fc24f5b0eb1c064b54e1e23",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,12 +183,28 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.615 AU"
+              "value": "2.615 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27999%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.23 years"
+              "value": "4.23 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27999%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -293,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Zachia model 5901; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/zachia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -347,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "e79f7386fe3c5fcd439a212a929c4e567699eae9e054887b12e2a399118eb29e",
+      "sha256": "1203f1736f5f7eb073ce3e2772ccf10e99ec890e5fc24f5b0eb1c064b54e1e23",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8794,
+      "bytes": 10011,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -480,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6176,
-          "sha256": "67241cdd56df2fc0a68f42ddb5463a60d6b4e04a9e3f95ad366d21064e40dc8b",
+          "bytes": 7211,
+          "sha256": "3aca96a88876406d42696c0773a07acabd8de6220c07f0242914421e402163a1",
           "verification": "bytes-verified"
         }
       ],
@@ -544,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "zachia",
-    "materialSha256": "f9f4f4aa31809edeae1e1dbf5198a1a713031b82ba983000fe1b3ecb5f6b28a8",
+    "materialSha256": "5ceddc74254a4c7275db0170f068aa6a9c60d805a0edc6f1a8977f77aea39a86",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "e46a76563eb5a7a638cb6d71cf98fd27dd2df45ae81a22e8ddd1cd88b154ac82"
     }
   }

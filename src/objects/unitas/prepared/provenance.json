@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "40b8ce6cc8c8a230ae091d5b42823738f605080d213da6c261ccbe75e10ff3ca"
+    "sha256": "94641e08a8d35d5c0038cb303b72b8f061bacec8e8c6d41b1ffffbc92ba338d8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "88b0a5fdcb826d34b8d87a86347a0b25f7c78b79235292268a3e5e258a3be72c"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "937d92cbb7fa9faeffe2533a10275c75527ef8cf4b95da85c72cd1450fe760db",
+      "sha256": "a8d9a4becefad8a6b8be68c836bdf22c1cc4fef77f31e3548dfe3ec8106f66e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech (2007), M. Delbo and P. Tanga (2009), Ďurech et al. (2011); model 197, version 2009-02-26."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/unitas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "937d92cbb7fa9faeffe2533a10275c75527ef8cf4b95da85c72cd1450fe760db",
-      "bytes": 9001,
+      "sha256": "a8d9a4becefad8a6b8be68c836bdf22c1cc4fef77f31e3548dfe3ec8106f66e7",
+      "bytes": 9022,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6415,
-          "sha256": "0121b99affb32c26bfcf2e0cccf2bd894956de20f5ff6ae6c6c1bc6f48b22d75",
+          "bytes": 6436,
+          "sha256": "0183b5f7401323585fadcd354ea74bf3cb9842ed0274850e51246a41aa19c306",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "unitas",
-    "materialSha256": "572c6a7dca1d525901e12dca0b73faf0cd1d000ac240af420e1567feb76c3ad7",
+    "materialSha256": "16fccc81e54fbf6f342bd8c65dd5ecfd83bc0d031897ccaf90f0dac853f6668a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "88b0a5fdcb826d34b8d87a86347a0b25f7c78b79235292268a3e5e258a3be72c"
     }
   }

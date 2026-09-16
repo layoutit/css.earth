@@ -532,8 +532,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10257,
-      "expectedSha256": "1ff35975cbfe93f3ec06d81b28d4cf3801be97b19cea8c69a40649cc7302decd",
+      "expectedBytes": 10278,
+      "expectedSha256": "200826b43945ab958f7e12b24faac5e643b42fa7ee9f3b5b31665aa325641ff5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -546,8 +546,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1310,
-      "expectedSha256": "dee47e04d6e3eb8f283c2c847e7699400b19294117ecbf39b45901007e0e46b5"
+      "expectedBytes": 443,
+      "expectedSha256": "ed3fb5c3f8f19aa9b9690581fcfa9e59551fd1107893ab17c21fbc6843b4a0e7"
     },
     {
       "path": "preparation/rotation.json",
@@ -556,8 +556,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6560,
-      "expectedSha256": "7fafe4abb5cc9d9eaccda89f7aec7822670ac41864d222bcc3bbe256da770e0c"
+      "expectedBytes": 6591,
+      "expectedSha256": "90193a15b4d1339b9ada3687b9247d9d0623b03a0c787c2326500b584f58dea5"
     },
     {
       "path": "presentation/title-mark.json",
@@ -702,7 +702,10 @@
             "locator": "Table 7, row printed as (941) Gaspra"
           }
         ]
-      }
+      },
+      "origin": "https://doi.org/10.1006/icar.1994.1005",
+      "credit": "Published Hapke parameters: Helfenstein et al. (1994), doi:10.1006/icar.1994.1005. Selection and transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
     }
   ]
 }

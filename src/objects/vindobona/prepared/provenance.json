@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3852287a73b80f0ad388faf634964804c8707d36905fad4f0abafa200755dec9"
+    "sha256": "f4c46b0b412a8d53745b22a5b1dfe5b251d90064f43e6b36408644d96655f995"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "a44d2078f0c95811b9ba359a82282185d331fb09abba2f6d7cee8472cc53d4cf"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "76d401de8b7528ee6cc5abc57d9ce7064aa0e6beabd8d0ed0f78863cbcd3251f",
+      "sha256": "5acbd504afe8569a89ce45e041f849bcb74fb6be8ba4adc112e80ba2cf4bb814",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4148, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/vindobona.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "76d401de8b7528ee6cc5abc57d9ce7064aa0e6beabd8d0ed0f78863cbcd3251f",
-      "bytes": 10934,
+      "sha256": "5acbd504afe8569a89ce45e041f849bcb74fb6be8ba4adc112e80ba2cf4bb814",
+      "bytes": 10958,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8304,
-          "sha256": "e4a6699240725bee2276b328b6cc2295b77fdec43f78b6457acad67379f97947",
+          "bytes": 8328,
+          "sha256": "7c80daccc2c04cdb471828c6b65acfb1d90a7989d5b1c0ac88d9c493fbc7a9c0",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "vindobona",
-    "materialSha256": "9bc23584c2c9c4e8d6de578a9c03c27f6eb8d3dd75aaea0c23dcf0862276efd0",
+    "materialSha256": "bcd30eeeff977824da3b5820f86b43f870cffb07466bb7480d65ba8f46604c0c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "a44d2078f0c95811b9ba359a82282185d331fb09abba2f6d7cee8472cc53d4cf"
     }
   }

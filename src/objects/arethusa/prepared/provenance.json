@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aa8e105b5628fd30b80f9c9b6df72068e6ccbc78d7c39ae3d96f461bec2edc41"
+    "sha256": "5d3f2265daccf6c545dfe5e7d7e0a640697d61694aff9fd9f15c481c07cfef21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "d63ab244a4b1a6510a2f45c7c957bf6c9b5a7bf6e1e84cc0aff248745b978260"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5aa0a52e1e5d279ca95ce30fdedfba64bd5e2b7c9d380287b63758d88ab6cb4",
+      "sha256": "f8aee84a1cf97511a29a961d24c3a634931b188e2adc7b06cc06839b39052083",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2011); model 294, version 2011-02-16."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/arethusa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f5aa0a52e1e5d279ca95ce30fdedfba64bd5e2b7c9d380287b63758d88ab6cb4",
-      "bytes": 10039,
+      "sha256": "f8aee84a1cf97511a29a961d24c3a634931b188e2adc7b06cc06839b39052083",
+      "bytes": 10062,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7425,
-          "sha256": "93e651ee125fbeb56b6c8946b3ccb0627a4461bc994f9e812dc12fb72e449416",
+          "bytes": 7448,
+          "sha256": "9c17df96de2142fdb3bb7b1e766acd456891ed9c4056436742c785ea240ba8c0",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "arethusa",
-    "materialSha256": "31b4532a850ef8daccdc0323a399fd62e93b5f2bd52f9147d1bdb4b228f2ced5",
+    "materialSha256": "b33c12fb4eeaac6976b95024b27135439cd4a8efe6ec853713d302b5165b4f49",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "d63ab244a4b1a6510a2f45c7c957bf6c9b5a7bf6e1e84cc0aff248745b978260"
     }
   }

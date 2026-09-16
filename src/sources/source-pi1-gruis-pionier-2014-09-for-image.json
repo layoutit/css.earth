@@ -1,0 +1,37 @@
+{
+  "id": "source-pi1-gruis-pionier-2014-09-for-image",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "π¹ Gruis · pionier 2014 09 for image",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pi1-gruis/source/manifest.json",
+      "revision": "86534f6388bb099cd25eb60341ec2cba13a8e039",
+      "sha256": "b20bfe1d45a3a09f0ab7c4f0c8c3c35dc4052b49a07d7a2ed293b00447706660",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLTI/PIONIER, September 2014, as calibrated and published by C. Paladini (Paladini et al. 2018, Nature 553, 310); distributed by the JMMC OiDB",
+      "scope": "The pionier 2014 09 for image input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public calibrated data (OiDB calibration level 3, data PI C. Paladini); ESO data policy asks for the instrument and the paper to be acknowledged.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

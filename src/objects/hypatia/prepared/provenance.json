@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c577a57674a54564caa4277f2b9dc4f99c51c283b9b1c758cc0b243eb04fe24"
+    "sha256": "50c3be6c0cbbfc981760ed4d84e75ea9fd6db8dd6719413b54da74ca32e33dd8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "667e9513740a910f1541936c900ae79dbd2c6281d57869349779bacfad52a15f"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "26613bb4876555130a23c2a58315149a2a3aa2e236a40ca4926688c627fe673b",
+      "sha256": "75a33f1f1662dc4af63c3563eda502d5391d006a683a9d63b14a76150b9a1208",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3844, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hypatia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "26613bb4876555130a23c2a58315149a2a3aa2e236a40ca4926688c627fe673b",
-      "bytes": 9910,
+      "sha256": "75a33f1f1662dc4af63c3563eda502d5391d006a683a9d63b14a76150b9a1208",
+      "bytes": 9932,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7303,
-          "sha256": "61b0baa60039fbc8cede866db6c41053339a9719f6ff434d7988a1332d541aed",
+          "bytes": 7325,
+          "sha256": "88e58dd5d8b0ddb5d3003e1f352bcff7dc64939e59aee28e84c55a34a230a570",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "hypatia",
-    "materialSha256": "082a09472b02c36fcb9087af25475abf6ee94a9511e86140c8141d3eed3fd9c7",
+    "materialSha256": "7da162d93bc4c99a2f86b885cbd3708637d3864f2ce350978ad2aa56e89ef906",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "667e9513740a910f1541936c900ae79dbd2c6281d57869349779bacfad52a15f"
     }
   }

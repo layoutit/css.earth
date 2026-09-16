@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "693c3a20ee9f67463e43291f3aafbe873541b68f5ce4ba778287c0597213e174"
+    "sha256": "139bd822fb3f6862473ce904ca29d3a3304aec5db2b85eacd0951119bb4a96e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "5454ae90a5e5e8fe4f7b6ee4479d7ae3eefb279f5a86826d2bf61d134767f2cf"
   },
   "recipes": [
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "43de9f25f828ef8d907e69bdea01dd541cec38e3daf95a1e0a8baff0c990e61e",
+      "sha256": "12dad23346b126bfd170ba2ac90079f07c2b72002a91ed0fe9c8ae7cb7db7e1f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +171,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "2.589 AU (mean)"
+              "value": "2.589 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2714%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.16 years"
+              "value": "4.16 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2714%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -273,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Irene model 1842, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/irene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -337,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "43de9f25f828ef8d907e69bdea01dd541cec38e3daf95a1e0a8baff0c990e61e",
-      "bytes": 6054,
+      "sha256": "12dad23346b126bfd170ba2ac90079f07c2b72002a91ed0fe9c8ae7cb7db7e1f",
+      "bytes": 7268,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -459,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3962,
-          "sha256": "8f582dcc69b4c6b92f10b247f0174c4e00f1d370a6692bf9f2d97e3176f18a61",
+          "bytes": 4994,
+          "sha256": "e3355037bcd15ac98d8ebab064d89d5e1eb712ce9310ce03ab8829ca0001647c",
           "verification": "bytes-verified"
         }
       ],
@@ -523,10 +539,10 @@
   },
   "lastPreparation": {
     "objectId": "irene",
-    "materialSha256": "2c50fc01cfc23a48af55b9ec87c2c777f5b58d58be3bb1e34fc099f98d19ff28",
+    "materialSha256": "e530efc723610ee008bcda0c9613c68675845c5fe639f62377c2f95eea806ed9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "5454ae90a5e5e8fe4f7b6ee4479d7ae3eefb279f5a86826d2bf61d134767f2cf"
     }
   }

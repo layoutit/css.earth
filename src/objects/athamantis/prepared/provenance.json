@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5beeeb1c1d51e86d47e82fd54814ffd2cb01f0ab4de0cdb9c08c7749d4d690b3"
+    "sha256": "abe52dbac157258325b6bc031cb0d365ec7acec6cd8885a6124fa2f8cad28088"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "00a4dc6983b4ff7b97531b7041a6b7e4ec48246eca63fd89f0e788a312eeeaca"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0581286a2a4af84ada168995075a1d6a9803c97d9a87ee3232c0a718202e8e32",
+      "sha256": "b58638a10133882e3594b0e7e3943f1a3823364977d110f8c00e7b49dc738c64",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Torppa et al. (2003), Hanuš et al. (2013); model 185, version 2007-02-27."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/athamantis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0581286a2a4af84ada168995075a1d6a9803c97d9a87ee3232c0a718202e8e32",
-      "bytes": 11337,
+      "sha256": "b58638a10133882e3594b0e7e3943f1a3823364977d110f8c00e7b49dc738c64",
+      "bytes": 11362,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8699,
-          "sha256": "3e5c34f4e03f043ab353fa585b0cedf2fdedbc6d0fe53fde16e4398e999b4f6d",
+          "bytes": 8724,
+          "sha256": "80e76751ca7de621d76a6181c90370f7247b06bfbaebcc33cf553d42bb73e39f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "athamantis",
-    "materialSha256": "2bc993c7c9b673fbcd8047778c6dd8f682956bef57259d7bf5da4e1cab933fb6",
+    "materialSha256": "06cbbcc87b5571750eaa171277aba676047b0239cd8b594dca94ac161d65ac2e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "00a4dc6983b4ff7b97531b7041a6b7e4ec48246eca63fd89f0e788a312eeeaca"
     }
   }

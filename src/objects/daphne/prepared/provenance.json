@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "daphne",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a9f77a2dbe779c94c47f2f7c3e75b718f23a82bec6b54824ec0ae64cc04a21f"
+    "sha256": "d34bd4b0deb8b64ef9278f5340e113b82dea0a2d6fe2b8a4d8d22bfdd4bff0b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "db05a693e6fbb350d8cd4e6502b19549c367e61a37270b6186375a428484feb6"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b3f5c2580e44f6a6c20b6bb91d1750d6f24d661e5e6b577b9a50fb1b4b508bd9",
+      "sha256": "9a06571d0c6936b5314da46efb60db29f49d43786cdf1ee38f15b9914cf377ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,12 +169,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "2.767 AU (mean)"
+              "value": "2.767 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2741%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.60 years"
+              "value": "4.60 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2741%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -271,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/daphne.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -320,7 +336,7 @@
       "sha256": "46e59ffff48f91e62bac9d3d3c195549698092e721b487e8187b0ae0980d026d",
       "bytes": 344059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -348,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b3f5c2580e44f6a6c20b6bb91d1750d6f24d661e5e6b577b9a50fb1b4b508bd9",
-      "bytes": 7342,
+      "sha256": "9a06571d0c6936b5314da46efb60db29f49d43786cdf1ee38f15b9914cf377ea",
+      "bytes": 8557,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +399,19 @@
           "url": "/scenes/daphne/daphne-elevation-thumbnail.webp",
           "bytes": 4990,
           "sha256": "6f54d54d6f0857ef1326ab5ac4e50420cd976977c459cd68605c5371ea040eb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-elevation-surface@2x.webp",
           "bytes": 289234,
           "sha256": "cc543b0d5fada3b45a1880545b3de1400fa56e6f3ba4a8f33be2dfcd24a98090",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -433,13 +449,13 @@
           "url": "/scenes/daphne/daphne-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-shape-surface@2x.webp",
           "bytes": 62582,
           "sha256": "60e64022e28b32c4741dc6056b242dacb50c75cbcee4f77a6840bf6db7ac704f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -470,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5238,
-          "sha256": "29135237007a33e9cd1b87bb14e28b4b23d435a15a0ed8c7630cba6899255dd8",
+          "bytes": 6271,
+          "sha256": "3a84320782d889916f063c672e79ccc7324b59d7d94291d91c05dc80ce04536b",
           "verification": "bytes-verified"
         }
       ],
@@ -534,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "daphne",
-    "materialSha256": "cac917e0d5159aca1708b9792ab39c9587d894b52372ec06d1991e757c1f411f",
+    "materialSha256": "c3857c5a8167b64931d1c9b611be757620ef2eba947f3e61490fe1c2fc3c9ab5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "db05a693e6fbb350d8cd4e6502b19549c367e61a37270b6186375a428484feb6"
     }
   }
 }

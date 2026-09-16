@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sylvia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "23e63584bb8917ec184f099ca24cd77cbafc8f840733bdb391b90388ca445e78"
+    "sha256": "65fb59aeb13abbc66fc25ec4dd771a9df05f1294ed9ccfcb7f0d60c78cdf56a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "c0ba55ea1cc2281a7c2d2fc2084aac706f8b0b1e6319e1b8e2304ee2ea2cf5f0"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c5294eb0e5c6bd3a5b1b8556f0354f91062383a3fa4a490e9d4fcb20588218d6",
+      "sha256": "dbb44c095c7041ddd725283b8c89d4e287538cf5abab786092de66278888be7c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -388,6 +388,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1,
                   99.5
@@ -473,7 +474,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5531fe1d15bdd1c29b3953b22379011cc184f3b8ce9dd837ae222b1ab9c3ee03",
+      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -506,12 +507,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "3.493 AU (mean)"
+              "value": "3.493 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2787%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "6.53 years"
+              "value": "6.53 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2787%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -622,7 +639,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sylvia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -671,7 +688,7 @@
       "sha256": "4fe61233cee4cd479cfb38977c47c5e13236fa394b22bd03277a8ec267dcd7a6",
       "bytes": 347899,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -723,7 +740,7 @@
       "sha256": "1bf17c065df2fb0d2ad91e7461cbcdff709e4adb9765a042fdfb989a5d5530df",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -775,7 +792,7 @@
       "sha256": "65846f82ea44283e10e5b3fa9530c755b8da566085057b9647df43ea1de10708",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -827,7 +844,7 @@
       "sha256": "a2df36107f37e82686c6a8e8535fd21526a362e51adc8a47b8e4ed9804ce45c6",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -879,7 +896,7 @@
       "sha256": "d670313ed3b5cfecd30831478525d6df3016a3d1aaef51dc46189586b4b435ab",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -931,7 +948,7 @@
       "sha256": "84d01758dedae68e9e1304ff746f86fc8065486721d48f8c6df361e6db687973",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -983,7 +1000,7 @@
       "sha256": "870eb34576b8df2f000b41d28db42204d5b443090b13186212a5712bec31c510",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1035,7 +1052,7 @@
       "sha256": "5f60ddb8426613c427617f93df2ad36bb6075eb09634d246e02186b87b085eb4",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1087,7 +1104,7 @@
       "sha256": "48b2027a2166f74369a23489579d1f0b197e8a805171632886d208b35fcbfb93",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1139,7 +1156,7 @@
       "sha256": "36248003f62ce39ff17f9852fc314b74a5f7f4e5557db68c961386fce6779414",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1191,7 +1208,7 @@
       "sha256": "0dca070d292486370740657fd19c32baa5785cd267c956599286d553c6ce73a7",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1243,7 +1260,7 @@
       "sha256": "f51040a8aa0e2692a5cbe074615dc59f8870f02671c5789aebbd4f4be3947046",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1295,7 +1312,7 @@
       "sha256": "7498c2af408b6c57c59eb3cb7a3ef8ec0fff8de9c5097d93c829af9c666af291",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1347,7 +1364,7 @@
       "sha256": "2eb3f18cb3a6c17cee9a51ece59d6a9b1bd30bd20d537b0c3a299303ad777085",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1399,7 +1416,7 @@
       "sha256": "e2b050ef928a7ac1482481e27f9ad2bf26e92bcb213eecf75e2d26a1cb3064a4",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1451,7 +1468,7 @@
       "sha256": "3f3772a5329c3e9d364bd59920f5b1fc5ef6b31fb85682cb338a630b223032de",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1503,7 +1520,7 @@
       "sha256": "28e4a763c6a82135d1a8ddc583350f0f2dd486754f195261bef1be3ce0437dd3",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1557,7 +1574,7 @@
       "sha256": "cbc1fbd3770af5d0ef8562fda35475cf7a08ff216c859474843d0fa0dd9f772a",
       "bytes": 31599,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1585,10 +1602,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5531fe1d15bdd1c29b3953b22379011cc184f3b8ce9dd837ae222b1ab9c3ee03",
-      "bytes": 7756,
+      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
+      "bytes": 8971,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1620,19 +1637,19 @@
           "url": "/scenes/sylvia/sylvia-elevation-thumbnail.webp",
           "bytes": 4888,
           "sha256": "a5a5a30c014603f5b6fd7a414792deac0cefa2a05c5800e44c1c69ee9c098741",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-surface@2x.webp",
           "bytes": 291540,
           "sha256": "b618699e4c7cd8d2184193ff1180ed42701e70b7d9d9cd5d47d540945bbbe2e4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1670,13 +1687,13 @@
           "url": "/scenes/sylvia/sylvia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
           "bytes": 57726,
           "sha256": "59de7434f40b45568c1a495d99bf2e54fcabdd66971924a981f5cec695316c34",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1728,15 +1745,15 @@
       "outputs": [
         {
           "url": "/scenes/sylvia/sylvia-zimpol-thumbnail.webp",
-          "bytes": 1354,
-          "sha256": "26e2579d1a354fe1ebf69edebd3facffaa0a8b1e56c26a9494ee4fbe2e22dc8c",
-          "verification": "asset-manifest-pin"
+          "bytes": 1336,
+          "sha256": "5a07781da8f09d2092265e7dfa7d0751a2fc8c6c1215af12e2a68f44d7e9c6f9",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 416016,
-          "sha256": "7f287fdf5250aef1a781f61d42c149ca5c1fe4c6279ca33b9c6fb0aecbeb2711",
-          "verification": "asset-manifest-pin"
+          "bytes": 360804,
+          "sha256": "26b85bcb445655c3cbbc5cd0f4fa2559454f4a27bffa9c80f8a09745f0c9af07",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1767,8 +1784,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4547,
-          "sha256": "686507e351afd9f0196929c0be8ede5029a726e4e823c64d6d95edb45b52db54",
+          "bytes": 5580,
+          "sha256": "cfd0ee75a49006be0f94494d000ff942a87d097a192c53d185ce7abfcc986fcb",
           "verification": "bytes-verified"
         }
       ],
@@ -1818,8 +1835,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8588,
-          "sha256": "50458de8e0fb5cb3bf4daed54b2d43896341b26e25a75158e1b001b72f4933c6",
+          "bytes": 8530,
+          "sha256": "06f2659507a6d317b875f08d93834b7d883756082280595e3baab5112c9a9c38",
           "verification": "bytes-verified"
         }
       ]
@@ -1856,11 +1873,11 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "788040706838184ae544fe56f563725fe8d2aab4afe9a1c43a4c062f1c96b451",
+    "materialSha256": "406f275f7f5cb2f620003621b1d67bf73bd2289a11f286f8c33a9bb3ca2ee122",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c0ba55ea1cc2281a7c2d2fc2084aac706f8b0b1e6319e1b8e2304ee2ea2cf5f0"
     }
   }
 }

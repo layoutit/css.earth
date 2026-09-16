@@ -1,0 +1,37 @@
+{
+  "id": "source-ce-tauri-pionier-2016-12-23t050722",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CE Tauri · pionier 2016 12 23t050722",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T05:07:22.365_oidataCalibrated.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ce-tauri/source/manifest.json",
+      "revision": "601be8f893b7926a4e466ed3ec50824210640634",
+      "sha256": "44c1b8849343e9089a8e27fa5b77a79e41e16b142f0ed01f643f3ef3c09bacc1",
+      "locator": "/inputs/18"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLTI/PIONIER, programme 298.D-5005 (PI: M. Montargès), calibrated by the JMMC PIONIER pipeline; distributed by the JMMC OiDB",
+      "scope": "The pionier 2016 12 23t050722 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public calibrated data (OiDB calibration level 2); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

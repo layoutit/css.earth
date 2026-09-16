@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7db656166ba7605411672c50cdfef88b192c70e6cb5db391ea7e418f46c42450"
+    "sha256": "338f656ca845f51874220f6ceb28277785b3a656ccec32b103bd7730e6066271"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "fe02acde76b71b48d977eb8200f4da99e1e0d0a8f37f92cf7d0527640f50f943"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0c9867007dcc1a8db7bea1f54f8d38c28a9bb876bef3bdd3ad9265df335e5039",
+      "sha256": "fa403c88203684132a6f5c62ddb477913bd1518fd58ce68ce8ea655fd34bee56",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,12 +183,28 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "5.729 AU"
+              "value": "5.729 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27944%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "13.71 years"
+              "value": "13.71 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27944%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -293,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hidalgo model 1057; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hidalgo.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -347,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "0c9867007dcc1a8db7bea1f54f8d38c28a9bb876bef3bdd3ad9265df335e5039",
+      "sha256": "fa403c88203684132a6f5c62ddb477913bd1518fd58ce68ce8ea655fd34bee56",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8686,
+      "bytes": 9904,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -480,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6085,
-          "sha256": "8f0fec4bd9eefe3429e5a6817882a9dbea823dec60fd8e91f95f023d9eff3259",
+          "bytes": 7121,
+          "sha256": "9c6b50b193b0160fcd582382b626cd0efaff9f2bf433aaa271515b24d00f4039",
           "verification": "bytes-verified"
         }
       ],
@@ -544,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "hidalgo",
-    "materialSha256": "008598f8eb14650e9ce9d883ad75137d5e7dda26dde7b908cc9717519060c696",
+    "materialSha256": "68929135068f7b7315977755b908805c0c232d9b89073db3a10357ac142b5e01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "fe02acde76b71b48d977eb8200f4da99e1e0d0a8f37f92cf7d0527640f50f943"
     }
   }

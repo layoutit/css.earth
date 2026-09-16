@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d12dc3719665b32e6695727eecf73dc4ea65d8610aa146741c92cbe4feecd70"
+    "sha256": "6227c48020e3c5867c3891a48e784d5503636a1e5ed48840a77ba10e16f0b509"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "81bd07bc3273df458b8edb488d1de12c66fd7fb1a42ce236c8ccc4d61f4aa56f"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "856c874a303db7d54e814841933cfd3c42fad1f79d6ceede3842c36b260dd166",
+      "sha256": "f5495be92a67743816117171ce879940c5617c0591194ca507fe4b9ed123ea71",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3659, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/dido.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "856c874a303db7d54e814841933cfd3c42fad1f79d6ceede3842c36b260dd166",
-      "bytes": 7977,
+      "sha256": "f5495be92a67743816117171ce879940c5617c0591194ca507fe4b9ed123ea71",
+      "bytes": 7996,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5410,
-          "sha256": "298dbc5454c83faf499b15383bdfc8722b573b49e58b2d640f029834bbecb856",
+          "bytes": 5429,
+          "sha256": "d9b2ce356678cc82b528338cc5bdbe296c5240a81df6ff652915fdf1e09c8d1a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "dido",
-    "materialSha256": "fd90bb5957a3adb607e0d3dc8c94af2d6724076cec46d71f30b9babc2bed397f",
+    "materialSha256": "eaa7873fb8c9bad2b807fd3db97478ec95b745eff6835f0b7aae6722aed8fe64",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "81bd07bc3273df458b8edb488d1de12c66fd7fb1a42ce236c8ccc4d61f4aa56f"
     }
   }

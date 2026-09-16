@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab",
-    "credit": "R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
-    "license": "Public scientific archive; retain the dataset citation and attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 34402,
-    "expectedSha256": "010a2ccde353a6a89da016ab9917f6bc4c5d018499a1a6347364698269429f12",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "toutatis-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 90,
-      "latitudeDegrees": 15,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c16223ddcdbc12cb2cc888894859ed72856722c2e4fe457e389317f489b52c5c"
+    "sha256": "f4539bf9f00e0d824b652079e5cbb1bf578c68fbe4122ae39a864c3de4662970"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "392d073d8039daa3b8e7e8ce71c78d615e33070a04bee38955c64f1ac03eb5c1"
   },
   "recipes": [
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1654009511b8a2c424cdd65258a1a008bd074bccfb7d5fad5666226ebd6671fd",
+      "sha256": "6465d91050941a0788b18bf4a196a8d691ea1143bc3d7143633452301c6a0c14",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -150,7 +150,15 @@
             {
               "id": "perihelion",
               "label": "Closest to Sun",
-              "value": "0.159 AU"
+              "value": "0.159 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1973+E1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; QR (km) / 149597870.7"
+              }
             }
           ],
           "moreFacts": []
@@ -272,8 +280,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1654009511b8a2c424cdd65258a1a008bd074bccfb7d5fad5666226ebd6671fd",
-      "bytes": 2727,
+      "sha256": "6465d91050941a0788b18bf4a196a8d691ea1143bc3d7143633452301c6a0c14",
+      "bytes": 3347,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -344,8 +352,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4828,
-          "sha256": "9241537489db803c90cc017d699a5c90092821238b4a1fe6c7863d4eb3fd53b9",
+          "bytes": 5357,
+          "sha256": "52bf5765aa75ae585a39ec15962b22a51c14ba87fac4e28f0dfae6c4f7c0146e",
           "verification": "bytes-verified"
         }
       ],
@@ -358,10 +366,10 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1973-e1",
-    "materialSha256": "6a35f18e2e1e3988dd9b41f2c4d10be01f64fef6eb598060384d9bf25eb2a5ed",
+    "materialSha256": "fc92370501bc21758cf8362adcbf42475987ba0e09c4aa256a1977e557710a05",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "392d073d8039daa3b8e7e8ce71c78d615e33070a04bee38955c64f1ac03eb5c1"
     }
   }

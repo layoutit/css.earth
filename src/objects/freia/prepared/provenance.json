@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "907feffd64fc816ea64af7f84fa359f44e60308fb6704999bc45da45c80e7901"
+    "sha256": "2c05070d127a6a16f233442d01dc2660b4125515eb790324ac8e65a14fded3ef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3d1a42606ad8db050569ee602fd38bb43ca8cd0359af762c225c3816dd448ee7"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7d8fcdf412664278e880f72ca01bc8ebb531f971908939cbb6a8eff8a33f79d0",
+      "sha256": "74824646323cbcd2a237d43a5cb2df867d6f686e6246385365ae68209ce8b38e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2012); model 442, version 2012-07-30."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/freia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7d8fcdf412664278e880f72ca01bc8ebb531f971908939cbb6a8eff8a33f79d0",
-      "bytes": 8524,
+      "sha256": "74824646323cbcd2a237d43a5cb2df867d6f686e6246385365ae68209ce8b38e",
+      "bytes": 8544,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5947,
-          "sha256": "26f5fdcba827a8fceb2adfd138446bb573fd5b2a7eb6ae81560f8193dff2f172",
+          "bytes": 5967,
+          "sha256": "116f4c44245d6f7efffc3b0c32868b81c309091d2ddb55b243028bd9556018fb",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "freia",
-    "materialSha256": "4adb186c79e5b25b1835b4d9a241834a9b1babd2b6424f8fbc4821938297c629",
+    "materialSha256": "5dd11c2fcf0a3fb28853c29727392edd9b90130ba83851d8ca11c030da9143cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3d1a42606ad8db050569ee602fd38bb43ca8cd0359af762c225c3816dd448ee7"
     }
   }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5fe927ba99b6d16ffb8b4bfd8f52eb8d607d6c894c1fe1fb94af5acf10d89f3d"
+    "sha256": "a144c67240cece9ace1dc7bda129caa8960d5307afb1f3bfd53b9ec6e55ded85"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "a99c0100e05e524c5b182af0be35832c9cd371ed3f370942c8053ce71ac2ebc8"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a8f08d3fa852c9a4e32ce2f7901a12be665accdcefefe1512038138a3c2de0a3",
+      "sha256": "eb47aa3116c9534675b90dc529ae68d276b2b2a51e1e9f5277578c07db6c3bbb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 838, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lomia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a8f08d3fa852c9a4e32ce2f7901a12be665accdcefefe1512038138a3c2de0a3",
-      "bytes": 8731,
+      "sha256": "eb47aa3116c9534675b90dc529ae68d276b2b2a51e1e9f5277578c07db6c3bbb",
+      "bytes": 8751,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6154,
-          "sha256": "986357b128069db8f5a8a54c01539486c7433fbca7653ea4ddfdbaabd314be10",
+          "bytes": 6174,
+          "sha256": "6f8beb14df9846f7903569baf495db21dbda93bfd0e4755e0290339ab93cee85",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "lomia",
-    "materialSha256": "de2161c120b23bae2f24a46df620c86dacf72b7bcdab0a8a6099472ae6f5f05e",
+    "materialSha256": "c4ef6c27c63a1292616ce030697ebe5fdc5fcc0ee02484605ceae834480f5ff0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "a99c0100e05e524c5b182af0be35832c9cd371ed3f370942c8053ce71ac2ebc8"
     }
   }

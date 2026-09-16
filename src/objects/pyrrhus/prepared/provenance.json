@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5c96a109e02df8c68f60743ecd1a859f0e5959be2352d619ef54d29613b5754"
+    "sha256": "fba0aae19c0ff7af6a0d3db23a5faabbe4aaf0c7f3ede6a5ae188a929d55e104"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "f46fd2d5f0351867986f258383c26135eb6ca3ee647a91bc901853e14959b845"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0ae63a2d9d9f223697521a0ff3a9aaa5bfeb011a98c621561397afc8ab132a92",
+      "sha256": "fe545df9dbf222e60bccc1f5d5bc389528aa4be42ca0b596c0b94ebad2c83ef1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4373, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pyrrhus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0ae63a2d9d9f223697521a0ff3a9aaa5bfeb011a98c621561397afc8ab132a92",
-      "bytes": 9221,
+      "sha256": "fe545df9dbf222e60bccc1f5d5bc389528aa4be42ca0b596c0b94ebad2c83ef1",
+      "bytes": 9243,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6308,
-          "sha256": "8b7ac29eb8f6d8aeff8408c6aae4cd6904c40f60545b86361f8487f38d3f8a35",
+          "bytes": 6330,
+          "sha256": "66016e5b5b5edaf81d3332aa03a6e336df55767dc44cd69664823fc5ed0f6aa3",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "pyrrhus",
-    "materialSha256": "1673dc9bb5833b3472dd8dd942bdf6038085726d0d0ca083e84dc6eba8cb68a8",
+    "materialSha256": "cff4a0a005123045f338875801e2196e347867e97cb9f13a159f88f75dddd7ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "f46fd2d5f0351867986f258383c26135eb6ca3ee647a91bc901853e14959b845"
     }
   }

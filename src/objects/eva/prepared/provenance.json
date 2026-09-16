@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14a0c79d820b22489c9a109d0af5d01bab231171d9f20033c325cccd76c7ea37"
+    "sha256": "be3a646ad97becabd17f669a452d8fd545808aeaac593a7b100436f91b1d4fbf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "47c0076fbc420fd7819138c4449614f278c1ea4b7dc640d4699bc7bf5f1fd20a"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "54ff058aeba5d8a973ca957775e7024a8731cececb7a4e7299c828641cfc8b31",
+      "sha256": "920dabf2927390cbe196247cf52ce84091ab3336cb1fd3e473a4caf75b897d28",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1021, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eva.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "54ff058aeba5d8a973ca957775e7024a8731cececb7a4e7299c828641cfc8b31",
-      "bytes": 7499,
+      "sha256": "920dabf2927390cbe196247cf52ce84091ab3336cb1fd3e473a4caf75b897d28",
+      "bytes": 7517,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4946,
-          "sha256": "e4de18df23674376b8087a0461b2bb37717d6008ed9d72600d9eebeb228c5806",
+          "bytes": 4964,
+          "sha256": "1b7d2c96c94f2f30507e0ead23f335670ec20b0005c781867ec061cfb5842fb8",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "eva",
-    "materialSha256": "e93870d02c303991b2ac09179343faafb1c33b8bc83e8d25f43e1e44d550270f",
+    "materialSha256": "c44078bdb6d4e351632056d8a28b5bbc32af7c222e807fe251a66cbebfaf61ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "47c0076fbc420fd7819138c4449614f278c1ea4b7dc640d4699bc7bf5f1fd20a"
     }
   }

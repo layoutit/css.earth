@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "76eb026b0447186632c3b34b1b96d02b41849a49cad5997ed1ad1b2b34afcb60"
+    "sha256": "e9fdfec10f332a175ab656fb87e415476478cef084dc9dfe02bfb0e8494e5285"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "7bbe48590990a17286883de894e8d28ba65286a33a7d2bdbe30b15b52890279a"
   },
   "recipes": [
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4605fc3881deddb17f0e19557f3227ef422211e44e07a00f58194802ef2394ef",
+      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,17 +166,41 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "64 km"
+              "value": "64 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "2.614 AU (mean)"
+              "value": "2.614 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2770%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.23 years"
+              "value": "4.23 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2770%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -273,7 +297,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Panopaea model 6171, version 2023-10-03; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/panopaea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -337,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4605fc3881deddb17f0e19557f3227ef422211e44e07a00f58194802ef2394ef",
-      "bytes": 9913,
+      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
+      "bytes": 11488,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -459,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7787,
-          "sha256": "c95d91019178293839e26e8751e0580d0a4110f09d6a72b66586fd3e74662591",
+          "bytes": 9089,
+          "sha256": "0ff8afdbbb2e859c8495680c1e447ea127e079152ff40c7530583b251a3a2ef4",
           "verification": "bytes-verified"
         }
       ],
@@ -523,10 +547,10 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "a44ed00f685d2a39483d6be073bb1867740294dc454991c2bfbc0431f9354d99",
+    "materialSha256": "4a42e65d5a9e8f1f98608e71c6d2a13d915b18a869ea8c2a698583acfae463e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "7bbe48590990a17286883de894e8d28ba65286a33a7d2bdbe30b15b52890279a"
     }
   }

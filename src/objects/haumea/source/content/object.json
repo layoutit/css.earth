@@ -48,7 +48,7 @@
       {
         "id": "appearance",
         "label": "Surface representation",
-        "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
+        "value": "One measured whole-disc colour and albedo, spread evenly; the surface is unresolved and no terrain is shown"
       },
       {
         "id": "orbital-period",
@@ -67,21 +67,21 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
-        "thumbnail": "shape-thumbnail.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "color-thumbnail.webp",
         "surface": "surface.webp",
         "poles": "poles.webp",
         "source": {
-          "id": "ortiz-2017-shape",
+          "id": "haumea-disc-color",
           "path": "../manifest.json",
-          "url": "https://doi.org/10.1038/nature24051"
+          "url": "https://doi.org/10.1086/499575"
         },
-        "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
+        "notes": "One measured mean colour and albedo for the whole disc, averaged over rotation. Display coordinates are arbitrary; the known darker, redder region and any other colour variation are not shown."
       }
     ]
   },
@@ -102,6 +102,12 @@
       "role": "shape",
       "description": "2017 occultation shape and ring measurements",
       "href": "https://doi.org/10.1038/nature24051"
+    },
+    {
+      "label": "Rabinowitz et al.",
+      "role": "color",
+      "description": "2006 rotation-corrected BVRI colours",
+      "href": "https://doi.org/10.1086/499575"
     }
   ],
   "provenance": {

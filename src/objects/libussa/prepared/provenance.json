@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d99363ccc79131dd6403a8bdc864fcab005024f52601a18e3c253d1d0f0e11e7"
+    "sha256": "c7f1ffb4a84cf3799d8933d86ee3edefd460b8682df8a8ad90be114f1d96db83"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3692802648ec69f77cc7edf2138d8953b4b2474b9a924272c658a93e6b765642"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "91c616d772317706ecd31601a7cdd48343ac34df61b77b1be1924ae7c8b05468",
+      "sha256": "faa59c30e82c16fb8dd6608a5ca6cd5373f7643cc92b53d76c7d97f09caccb3f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011); model 331, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/libussa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "91c616d772317706ecd31601a7cdd48343ac34df61b77b1be1924ae7c8b05468",
-      "bytes": 9954,
+      "sha256": "faa59c30e82c16fb8dd6608a5ca6cd5373f7643cc92b53d76c7d97f09caccb3f",
+      "bytes": 9976,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7349,
-          "sha256": "7787b1135dc8f151e03a1c5fc971224e2c4c92ddd9d279eb00ce609d62878acf",
+          "bytes": 7371,
+          "sha256": "6fe2945d94156c8f3b23ad856f10b3884a6513823de983b9e51edd72063f9424",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "libussa",
-    "materialSha256": "0b3cc107d8e7e64901af6a5f2b05ea3b5290b5625908d3569ecbd3b8ac59888c",
+    "materialSha256": "73097a7147562701f81aeca9d18d846c4caea272c2923d12993e7dbc99e2d6be",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3692802648ec69f77cc7edf2138d8953b4b2474b9a924272c658a93e6b765642"
     }
   }

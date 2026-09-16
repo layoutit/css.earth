@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e0157fa439cfb60de1a35357428d0f712691cfc85a988e99d579a92701d67da0"
+    "sha256": "69f955aaccc42867b22aa6d79a74debc63d0495505bd60d5ee30235a54bbe0b1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "178fa253493b8ada64a38df0fc4cd46935f57089f55687611fff5d145260013f"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2c7b6eff3ac2b6143d1284f52dea49b9acd8eb8170c48615429a786aae0831b5",
+      "sha256": "c406ac65d6004774c09e359075f6663b9f4881efc74f2477b111ab38024e3ddb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 994, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/iphigenia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2c7b6eff3ac2b6143d1284f52dea49b9acd8eb8170c48615429a786aae0831b5",
-      "bytes": 10796,
+      "sha256": "c406ac65d6004774c09e359075f6663b9f4881efc74f2477b111ab38024e3ddb",
+      "bytes": 10820,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8168,
-          "sha256": "8fdf7b169d50dfe4971dc762c5f51a52813bc75de468122d7eeef3b76a0e1f5b",
+          "bytes": 8192,
+          "sha256": "77b7766498e012f60d1df75c54f4bfc8b04fec3fa7578dc02d61d8bd14cfcf70",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "iphigenia",
-    "materialSha256": "33439b6e0f78976a0049415aaff299617465adbcd2cb49514cc2867f1fc25a2b",
+    "materialSha256": "e3c486e2eb01ead5e4d61417723716e6dd20b4466ef8c729adbed8eb008dd41c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "178fa253493b8ada64a38df0fc4cd46935f57089f55687611fff5d145260013f"
     }
   }

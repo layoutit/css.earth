@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj",
-    "credit": "Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL",
-    "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 37686,
-    "expectedSha256": "4833fd89b9dc04cb244a3232b7d50a1fab687ed52ffee3a79308eaa4ec73cbe5",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "asteroid-1998-wt24-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

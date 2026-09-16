@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7e0f462d101d87b0862850a04f0babe2a76048fac46fdd74502a41aa0ed727b1"
+    "sha256": "30bc6ec0b58f3c17348d36fd85308bb7d38ac8f127d575a87048d965fceb2179"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "50170207d3365fa34e3b111763fda5a0cd21635aef8c31905338a9568bcc1736"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d319cb7d6b4ddf9d974dc48ab3901be7d60a8735ff0856f7282be0005d3bb09b",
+      "sha256": "dfdbbeb80bc4160da5992a3c661c379e814e1a82253f6ba5cc0e198cf0ff8d66",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Franco & Pilcher (2019); model 4383, version 2019-07-19."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hestia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d319cb7d6b4ddf9d974dc48ab3901be7d60a8735ff0856f7282be0005d3bb09b",
-      "bytes": 9272,
+      "sha256": "dfdbbeb80bc4160da5992a3c661c379e814e1a82253f6ba5cc0e198cf0ff8d66",
+      "bytes": 9293,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6681,
-          "sha256": "d4d2d2028d6630f7de36e75f18ef55b9429aaa39a176a8c1f8de4572e1beaee3",
+          "bytes": 6702,
+          "sha256": "c3e461e0d3475b89e3c50f7d7ab6a49fd335242e3f6fbd297c51b444ec731b81",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "hestia",
-    "materialSha256": "97c4b4e211195491f8fe9017c37bbba764bf28a870f697892039284a178405c1",
+    "materialSha256": "df808d5e790fea8bd636087ad12fe7cb065774b338122f0ee0ed1a327fa0551b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "50170207d3365fa34e3b111763fda5a0cd21635aef8c31905338a9568bcc1736"
     }
   }

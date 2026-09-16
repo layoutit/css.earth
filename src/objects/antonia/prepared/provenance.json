@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c31ff532f0b81d7aedab6eb9ef150072dd04a5fa6305cb78b4e7e46ff1c42581"
+    "sha256": "1a8308794d9dadd8e55a98e50b0467341d87d99b805b189f930331c06a3eed55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "75c5b6488aa4d9aa61429c9a72e50f114b8780dbfe4c1b3038ad14d0908d24be"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "14bc2b00756e7e76dff1f425fc05451e4204838e40f231152f29abfbc0e40adc",
+      "sha256": "72faee166e5337e4e0f854f8b1ec1dfe91cf754787c38f39893899af1bc7515d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 637, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/antonia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "14bc2b00756e7e76dff1f425fc05451e4204838e40f231152f29abfbc0e40adc",
-      "bytes": 9262,
+      "sha256": "72faee166e5337e4e0f854f8b1ec1dfe91cf754787c38f39893899af1bc7515d",
+      "bytes": 9284,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6659,
-          "sha256": "75999b21c90925e26865bc9def91b067682d8888e6e8374109ba872b76574943",
+          "bytes": 6681,
+          "sha256": "7c3a4030572374be3cb800d4320a0df82abd920ae198e9b606608e24b69ca413",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "antonia",
-    "materialSha256": "ed412855d4610fd78a64c6cf1f8b2b49e1e86ed452b4f42cf7c34fa3c9752894",
+    "materialSha256": "5a0370ee2d23f74624dc1e60724f88652c71dd04501a1404c71baa3e18bca7b5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "75c5b6488aa4d9aa61429c9a72e50f114b8780dbfe4c1b3038ad14d0908d24be"
     }
   }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "73b71f1bb86c9c102d72b53c4be45bad43cc9eb16db3dbf17536049cbe5c71f0"
+    "sha256": "3bc80f8abe5575ed07c6e87e60616d03355dbf78b7d479056dc739e0acbf0898"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "55c299fcf36534a48dc4b3f98c12a50dd7e768feb35cf54cda1cc3dc930640d8"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ceb5899019f2b70ef5ca5d94c9c525d87120bbcd109e436739c899b5fc97c996",
+      "sha256": "4dd5e5f1aac761a4baa5c055799e604239cceaa5217473643a72acfbae3550d3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2012); model 454, version 2012-07-30."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hela.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ceb5899019f2b70ef5ca5d94c9c525d87120bbcd109e436739c899b5fc97c996",
-      "bytes": 8150,
+      "sha256": "4dd5e5f1aac761a4baa5c055799e604239cceaa5217473643a72acfbae3550d3",
+      "bytes": 8169,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5362,
-          "sha256": "eef9d5be55c4f99df20f361d79dc7392ae3c1205bb629ffae0d93d7a0378c230",
+          "bytes": 5381,
+          "sha256": "8f1c03b6096b8bd628faaef0cb52ff9acad45c0c99f4845712f540b9566c49e7",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "hela",
-    "materialSha256": "efd4828a7941e48a6cb534b1b52d9f6336aaaa9a1cc2fd5e921520aff5785c1d",
+    "materialSha256": "7903795ece70dce70fe2042cb67a53c4e9b64693db9cd0e702e4e1e7a5639992",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "55c299fcf36534a48dc4b3f98c12a50dd7e768feb35cf54cda1cc3dc930640d8"
     }
   }

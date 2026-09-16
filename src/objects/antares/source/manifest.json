@@ -1,0 +1,218 @@
+{
+  "schema": "cssantares-authoritative-sources@2",
+  "inputs": [
+    {
+      "expectedBytes": 1329,
+      "expectedSha256": "7a4da76292257fb316333f2f4521f473df9b5e38b372c55f5aad5affaed65b3a",
+      "id": "antares-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/1304.4800",
+      "credit": "Ohnaka et al. (2013), A&A 555, A24; van Leeuwen (2007), A&A 474, 653",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-antares-antares-observational-measurements",
+            "role": "material",
+            "evidence": "src/objects/antares/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-antares-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/antares/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "expectedBytes": 1981,
+      "expectedSha256": "356a2bf146adf64901b696e357d1f76e192701b26bfe8eaed9390f6aa25b42a3",
+      "id": "antares-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, no observation, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "expectedBytes": 1684,
+      "expectedSha256": "11702548e7647f666e069c99cb129105474b0bb0a970c1b75a716f313f63bfa6",
+      "id": "antares-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "id": "antares-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "expectedBytes": 102,
+      "expectedSha256": "89f6d3670f778b75a7d6bbbe6fcf9574c7a495c26bbed1dbb0322d4b11e80e55",
+      "id": "antares-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "expectedBytes": 283,
+      "expectedSha256": "b25cb96af6ea06ee178afe2d1cd816ff3dc801765d985f16dfad92f40981cd97",
+      "id": "antares-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/1304.4800",
+      "credit": "Sphere of the Ohnaka et al. (2013) diameter; marker written by this repository",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/antares/author.mts",
+        "inputs": [
+          "antares-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/antares/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Rendered by author.mts: a flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "expectedBytes": 2948,
+      "expectedSha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c",
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "expectedBytes": 444,
+      "expectedSha256": "2b1d7ab67ee5112cb4708f825634bb641aef4457577d553ff06509b555116d60",
+      "path": "preparation/navigation.json"
+    },
+    {
+      "expectedBytes": 1084,
+      "expectedSha256": "725beec672264575d627b85c2d587dc5637fc62894fb489c14b5703716715d08",
+      "path": "preparation/rotation.json"
+    },
+    {
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
+      "path": "presentation/LICENSE.INTER-OFL"
+    },
+    {
+      "expectedBytes": 4129,
+      "expectedSha256": "013c962a4306a5e65554d8ac7d7b34fcfeedd93dd0587370a2c04b89ea2455da",
+      "path": "presentation/title-mark.json"
+    },
+    {
+      "expectedBytes": 74603,
+      "expectedSha256": "e59763af517a453a7800b4da7d565de251047b9f577b87cfe36f4f02acc9cd1d",
+      "path": "reference/rendered-default-view.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /antares/ with the default camera, Chrome via Playwright at 1200 by 800, taken 2026-09-16 after preparation."
+      }
+    }
+  ]
+}

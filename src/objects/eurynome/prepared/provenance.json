@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c7fefe3957fbc82ea5a1de299fbd2a12b691b433475e9ca24705fd77c0df0fd4"
+    "sha256": "fb67763d89bda8f8623795ee98c1d67a821ac645f79eef7341a3911b1626d9f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "7253663d9749631a69a8739ffaddb13dc5de9ff1e157a8006d65bcb1731f80b9"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "71337f07e7eef2fdd554604d84290846dc1868e31e014557cdf5c14b3247c0d6",
+      "sha256": "ea6113fbc6e6f280befb249940bdbee99ba7f107b406ae43ab74dc81746292c0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 496, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eurynome.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "71337f07e7eef2fdd554604d84290846dc1868e31e014557cdf5c14b3247c0d6",
-      "bytes": 9745,
+      "sha256": "ea6113fbc6e6f280befb249940bdbee99ba7f107b406ae43ab74dc81746292c0",
+      "bytes": 9768,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7129,
-          "sha256": "816245b803f3d5cd120a989df199fd444a2ff4506df1a1d8ae2756edefbc316c",
+          "bytes": 7152,
+          "sha256": "6bbbdd9b42573c983b8c2b45e38070dcf0fe56d28c59bad75c3d056b11906f81",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "eurynome",
-    "materialSha256": "033e6731d59096c8bf5dd6bb19f329d87cd53e73cbd35f7b2580fa162849bfed",
+    "materialSha256": "e174674ba93b5a244407fd1f637d73a5d914dcd1671c2b00f466cd88b4ec1eaa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "7253663d9749631a69a8739ffaddb13dc5de9ff1e157a8006d65bcb1731f80b9"
     }
   }

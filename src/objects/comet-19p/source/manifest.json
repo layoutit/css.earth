@@ -403,8 +403,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 61739,
-      "expectedSha256": "dfd488df8488052545e8dc47d0d2cf8a9f1f7faf32ce8dbfd845dbdab09020f7",
+      "expectedBytes": 56604,
+      "expectedSha256": "81fece820ed4800d8ed02d5c4cc2f3109e2ea90c5468aa504d01dd9b32523821",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub",
       "credit": "NASA/JPL/MICAS; USGS; cssEarth preparation",
       "license": "Source-credited prepared visualization",
@@ -453,8 +453,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1805,
-      "expectedSha256": "77cc72a8f6d90444a051399509c09b3afc47a902938d1acd93bbc8a390b7aba1"
+      "expectedBytes": 446,
+      "expectedSha256": "27b7c0cdfd888ae990051fc02afdaefaaf15c5034e3c751554026c526ca68be7"
     },
     {
       "path": "preparation/rotation.json",
@@ -463,8 +463,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9605,
-      "expectedSha256": "bbf99beb80912d15ad375b72b557acf24bcfba9129040433b9e6e5f4316c8c5f"
+      "expectedBytes": 9636,
+      "expectedSha256": "9a9bb61fdadf33af8d3819cce78750137f494f88c7f327865a39dcbee2f67817"
     },
     {
       "path": "presentation/minimap.json",

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53626d1460ba1f2dc2b658be7218275d648b6c2d853bc928fbead031bae08154"
+    "sha256": "9483d2c464d4ba68b64945b08aeaed5770ef9209e866a33186e45ee76e8b50ef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "737d324b9d8e9b9ae3f43c7bfbdb90df7214cb56383b13df43eaf8783c21a83c"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5317f3a5c5a8c221ebe2527dea87a18c06bfc493264f8e31e664416317aa7948",
+      "sha256": "96a3c34f4f386c3a94077141372184ab43513d38f71098a1fbc621800173a3bc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4072, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kolga.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5317f3a5c5a8c221ebe2527dea87a18c06bfc493264f8e31e664416317aa7948",
-      "bytes": 8959,
+      "sha256": "96a3c34f4f386c3a94077141372184ab43513d38f71098a1fbc621800173a3bc",
+      "bytes": 8979,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6379,
-          "sha256": "ce8addbe8efa4f06b78ca410891835493f7bfcf5d96b1d4497a9ecd80f0c2509",
+          "bytes": 6399,
+          "sha256": "4f90cf2d32dca737a4ea64717b3ce99a0364cce5081fdc002c5f252a1855595c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "kolga",
-    "materialSha256": "5231174cac30259e720037dd46eb904adbf143490e674a79fd11cf00c47bdd07",
+    "materialSha256": "95d1d3b378977d707d6b1bc8fd785a247c288d3c89ebb55062c84f1efb5b7d37",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "737d324b9d8e9b9ae3f43c7bfbdb90df7214cb56383b13df43eaf8783c21a83c"
     }
   }

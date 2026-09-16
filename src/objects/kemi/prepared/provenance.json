@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f7fa77a33552714cc348f84203217028966583b3f8eb671beaa505d2e0173de"
+    "sha256": "1178bd9019c940d488b61e783a97dc248a0bb69f9ec5965015775574e87514e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "1b9c4574f1d42d2682715a55444eff251bd4a484b638a68a801d8dda080aa913"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5256e91f36bcd8ecf3eda60bf2c60117bd82451ccac186e30e171f9eb255b540",
+      "sha256": "332761435cdd73cbd2b06ee384c1bb752d9e8160bebc39d6763f4e39b9d11aca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1202, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kemi.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5256e91f36bcd8ecf3eda60bf2c60117bd82451ccac186e30e171f9eb255b540",
-      "bytes": 8070,
+      "sha256": "332761435cdd73cbd2b06ee384c1bb752d9e8160bebc39d6763f4e39b9d11aca",
+      "bytes": 8089,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5282,
-          "sha256": "806ae67fc775b95c5ba30d75b31843cc83295c8f00cc6b1ae23a143b09c5ccc0",
+          "bytes": 5301,
+          "sha256": "99c942ae13418ec06a93420a8e35190e111aa835b4a9325a99a9dc4c1530f71f",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "kemi",
-    "materialSha256": "bca5da3a61d359f0b2f19658a3223d342fa83e94ecb8f640aee74b4b2df36059",
+    "materialSha256": "e06ae77abbef31eea65158bb7680e493f3cb71ebaf6be02e07362883493e74a2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "1b9c4574f1d42d2682715a55444eff251bd4a484b638a68a801d8dda080aa913"
     }
   }

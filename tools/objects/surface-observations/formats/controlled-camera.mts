@@ -8,7 +8,7 @@ import { array, boolean, decodeProfile, number, optional, shape, text, parseCame
 import { requireArray, requireRecord } from '../../../source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { checkBandRegistration, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '../../terrestrial-layers/shape-camera-mosaic.mts';
+import { checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '../../terrestrial-layers/shape-camera-mosaic.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { pds3Keyword, pds3Values } from '../../pds-labels.mts';
@@ -18,7 +18,7 @@ import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.mts';
 
 const CONTEXT = 'controlled camera recipe';
 /** The camera a control network states for one photograph. A frame that names an image catalog takes these from the catalog instead. */
@@ -36,13 +36,13 @@ const lens = { id: text, format: text, consumer: text, metadata: shape({ label: 
 export const parseControlledCameraLens = shape({ ...lens, frames: array(parseCameraFrame) });
 export const parseControlledColorLens = shape({ ...lens, bands: array(shape({ channel: text, filter: text })),
   frames: array(shape({ id: text, red: parseCameraFrame, green: parseCameraFrame, blue: parseCameraFrame })),
-  registration: optional(shape({ references: array(parseCameraFrame), checks: array(shape({ reference: text, targets: array(text) })) })) });
+  bandAlignment: optional(shape({ references: array(parseCameraFrame), checks: array(shape({ reference: text, targets: array(text) })) })) });
 type CameraLens = ReturnType<typeof parseControlledCameraLens>;
 type ColorLens = ReturnType<typeof parseControlledColorLens>;
 type CameraFrameRecipe = CameraLens['frames'][number];
 
 const cameraPaths = (frames: readonly CameraFrameRecipe[]) => [...new Set(frames.flatMap(framePaths))];
-const colorPaths = (recipe: ColorLens) => cameraPaths([...recipe.frames.flatMap(set => BANDS.map(band => set[band])), ...(recipe.registration?.references ?? [])]);
+const colorPaths = (recipe: ColorLens) => cameraPaths([...recipe.frames.flatMap(set => BANDS.map(band => set[band])), ...(recipe.bandAlignment?.references ?? [])]);
 
 /** Encodings whose archive ships no detached label: the frame's own header states its identity. */
 const SELF_DESCRIBING = ['fits-zimpol-intensity', 'fits-oi-reconstruction'];
@@ -91,14 +91,14 @@ function validateCameraLens(value: unknown, sourceGeometry: unknown) {
 function validateColorLens(value: unknown, sourceGeometry: unknown) {
   const record = requireRecord(value), context = `${CONTEXT} for filter colour`;
   if (requireRecord(record.display).palette !== undefined) throw new TypeError(`Invalid source-bound ${context}: a palette belongs to a monochrome lens.`);
-  checkKeys(value, [...LENS_KEYS, 'bands'], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, 'registration'], context);
+  checkKeys(value, [...LENS_KEYS, 'bands'], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, 'bandAlignment'], context);
   for (const set of requireArray(record.frames)) {
     checkKeys(set, ['id', ...BANDS], [], `${context} band set`);
     for (const band of BANDS) checkFrame(requireRecord(set)[band], `${context} frame`);
   }
-  if (record.registration !== undefined) {
-    checkKeys(record.registration, ['references', 'checks'], [], `${context} registration`);
-    for (const frame of requireArray(requireRecord(record.registration).references)) checkFrame(frame, `${context} registration reference`);
+  if (record.bandAlignment !== undefined) {
+    checkKeys(record.bandAlignment, ['references', 'checks'], [], `${context} bandAlignment`);
+    for (const frame of requireArray(requireRecord(record.bandAlignment).references)) checkFrame(frame, `${context} bandAlignment reference`);
   }
   const recipe = decodeProfile(parseControlledColorLens, value, `Invalid source-bound ${context}.`), filters = recipe.bands.map(band => band.filter);
   if (recipe.format !== 'controlled-shape-color' || recipe.bands.length !== 3 || recipe.bands.some((band, i) => band.channel !== BANDS[i] || !band.filter) ||
@@ -216,9 +216,9 @@ function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly Observation
   const policy: SurfacePolicy = { format: recipe.format,
     selection: frames.length === 1 ? 'single' : recipe.selection === 'lowest-emission' ? 'lowest-emission' : 'finest-resolution',
     levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-    display: { ...(range ? { range: 'authored', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }
-      : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units }), ...(recipe.display.palette ? { palette: recipe.display.palette } : {}) },
-    photometry: photometry.report, limits };
+    display: { ...(range ? { range: 'stated-range', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }
+      : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units }), ...(recipe.display.palette ? { palette: recipe.display.palette } : {}), ...displayBasis(recipe.display) },
+    photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };
   return { frames: [...frames], policy, exceeded };
 }
 
@@ -246,8 +246,8 @@ export const controlledColorFormat: SurfaceObservationFormat = {
   async load(value, context) {
     const recipe = parseControlledColorLens(value), photometry = await lensPhotometry(recipe.photometry, context);
     // Registered cameras are measured again against their reference images before any pixel is sampled.
-    const registration = recipe.registration ? await checkBandRegistration(context.sourceDirectory,
-      recipe.bands.map(band => ({ channel: band.channel, filter: band.filter, frames: recipe.frames.map(set => set[band.channel as Band]) })), recipe.registration, context.radial.grid) : undefined;
+    const bandAlignment = recipe.bandAlignment ? await checkBandAlignment(context.sourceDirectory,
+      recipe.bands.map(band => ({ channel: band.channel, filter: band.filter, frames: recipe.frames.map(set => set[band.channel as Band]) })), recipe.bandAlignment, context.radial.grid) : undefined;
     const frames: ObservationFrame[] = [];
     for (const set of recipe.frames) {
       const bands: ObservationFrame[] = [];
@@ -261,6 +261,6 @@ export const controlledColorFormat: SurfaceObservationFormat = {
     }
     const units = `relative I/F in each filter${retained(recipe.photometry) ? ', with original illumination' : ', disk-normalized'}; false colour`;
     const result = lensPolicy(recipe, frames, photometry, context, units, bandColorDisplay(recipe.bands.map(band => band.filter), 'radiance-factor', recipe.display.displayRange));
-    return registration ? { ...result, policy: { ...result.policy, registration } } : result;
+    return bandAlignment ? { ...result, policy: { ...result.policy, bandAlignment } } : result;
   },
 };

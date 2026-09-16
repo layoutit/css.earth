@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86febc65605cf0f2dbf58d4409ece9461269046790035d48d7cd1390758ac14f"
+    "sha256": "b88af97177c36cf5ca32bae896b0b4cb4871994f307ce00af3d0c184a65fcfb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "605f28e4e9c3268d6017499831f6ffef1461a2dadc0077c84877aa320445a2f1"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "198781cdce29282c0e0dec37dc9e61c6e335f9965ff4d486db4efac115d35f37",
+      "sha256": "fe9d72bbbbf2d8aab31007e3bbca85954d92515570f862227760db1f39a18c77",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; DAMIT archive (no linked publication in this model record); model 4397, version 2020-04-26."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/peitho.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "198781cdce29282c0e0dec37dc9e61c6e335f9965ff4d486db4efac115d35f37",
-      "bytes": 8742,
+      "sha256": "fe9d72bbbbf2d8aab31007e3bbca85954d92515570f862227760db1f39a18c77",
+      "bytes": 8763,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6151,
-          "sha256": "ce48b31c3ff84d5ccd8896548e8e595a1fcefd59543932ea50b354f53bdb2c3b",
+          "bytes": 6172,
+          "sha256": "be3c192c32d51a28fcea8507e8705b8724787f09a26c4216f63c0041194eff8a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "peitho",
-    "materialSha256": "4238ea07d25014c02baa8307535f0f36e722c2fb0b6e97d136674adcfb572aef",
+    "materialSha256": "dc85501e03ffc4165a760d1f9ccccd824db7c4c22390d7a83600f1a4623248da",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "605f28e4e9c3268d6017499831f6ffef1461a2dadc0077c84877aa320445a2f1"
     }
   }

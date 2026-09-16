@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e900ca81e986cf6abcc546aca9cfbe82055b4394ae89ca48c000249c65330287"
+    "sha256": "a164f02feffc031e234c2ba24404c3099d6d97260381b8815d3686163e4c7385"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "7f128478404461451b1531e2b3050b3a94ab5c817e60abf46047ef097dbb0478"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "97025d294583211429452eb4c8d151b1f84b85b49f2649f0fa759ed981a9f269",
+      "sha256": "52e42d90c7a43092904220bb3e40caeb6119cb05f64a8a7e092b789879f647bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1809, version 2017-06-16."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/loreley.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "97025d294583211429452eb4c8d151b1f84b85b49f2649f0fa759ed981a9f269",
-      "bytes": 8817,
+      "sha256": "52e42d90c7a43092904220bb3e40caeb6119cb05f64a8a7e092b789879f647bf",
+      "bytes": 8839,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6215,
-          "sha256": "35867ba97a633ba6a95a94add58fb06a47435924a727e2394f7ee42ca69791c2",
+          "bytes": 6237,
+          "sha256": "aca5b4425b13450be6dcd65f7942a7d3d4afe69119208d951fdb12e9d3f68370",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "loreley",
-    "materialSha256": "5b25346d64ebf28b0e76669e219a8733d11de3452066fe1a1af558509772ecf6",
+    "materialSha256": "92aee34a1d00ebea1a3aa66cc23479f282a920b3b0ed02ef516dd3b6c3aa0bb3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "7f128478404461451b1531e2b3050b3a94ab5c817e60abf46047ef097dbb0478"
     }
   }

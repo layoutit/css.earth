@@ -110,6 +110,7 @@
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "percentiles": [
             1.4,
             98.8

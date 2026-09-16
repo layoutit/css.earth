@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "deffd218c851cc6907157d25b3011b011f484f21cacff443658a96050634cdf5"
+    "sha256": "8ac218dd12a137a183630adb28b46bc8682c8408b152e60b677c857984ea3630"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3a815dc160c52dc53018e20cf14ed1d4da89d021df3c7edaef7331193e397832"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "072a1380fb0568866396a474ebd96ebf44a73b27d65d094c1ddbad8568262462",
+      "sha256": "4633a82ed7b90459cab33e46b80a7739018276cc805de00d5a9ba17a9abf712e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 6039, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/vanadis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "072a1380fb0568866396a474ebd96ebf44a73b27d65d094c1ddbad8568262462",
-      "bytes": 10335,
+      "sha256": "4633a82ed7b90459cab33e46b80a7739018276cc805de00d5a9ba17a9abf712e",
+      "bytes": 10357,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7729,
-          "sha256": "d13fff60f631858f3588a1291659be677f357084f75cfd8e278020f2c657ca51",
+          "bytes": 7751,
+          "sha256": "f1484fad4a77eed3ea6833f839d04b4b20341f76ea7c6afcb5e08f84ab9d067c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "vanadis",
-    "materialSha256": "f7e83896b352f0918b059ed36f9e4c1483150913e9905752a3bb30e2ad010cdb",
+    "materialSha256": "318f3670ca0bceb11504f85068def6248367a454c12438b85c6a6594292a8df6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3a815dc160c52dc53018e20cf14ed1d4da89d021df3c7edaef7331193e397832"
     }
   }

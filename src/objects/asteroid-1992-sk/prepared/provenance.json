@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1992-sk",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ad074df9c035ef1b370d9a4d518e0142f4b5c780240458c8ff1b155b437a0acd"
+    "sha256": "b90cea206e6824167ffff1efcc2ba6c5fac69bca1c5fd918679870da7e183411"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "20446afc63786d2f9145681d77446f668756e628939b2ccb2c8c781a15dc8835"
   },
   "recipes": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "65c2d092f12803811b182aa1bc9fe9989ae68c07535f1185acd317192525e52c",
+      "sha256": "471d8be0b5b16d5d1609755af317a437b79b3378d8038bbd665337dfc16c5c7c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,12 +173,28 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "1.249 AU"
+              "value": "1.249 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710115%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.40 years"
+              "value": "1.40 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710115%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -275,7 +291,7 @@
             "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1992-sk.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -324,7 +340,7 @@
       "sha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c",
       "bytes": 29083,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -349,10 +365,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "65c2d092f12803811b182aa1bc9fe9989ae68c07535f1185acd317192525e52c",
-      "bytes": 8514,
+      "sha256": "471d8be0b5b16d5d1609755af317a437b79b3378d8038bbd665337dfc16c5c7c",
+      "bytes": 9745,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -384,19 +400,19 @@
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-thumbnail.webp",
           "bytes": 5794,
           "sha256": "ffc4b504c3a2344bd090d8cfadca944c319cd4903913462bf3c570bd6b00721f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-surface@2x.webp",
           "bytes": 293980,
           "sha256": "3460ae47533593d05562d2116a79a66ed99fee6d756cd643e42cb86122c521be",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -434,13 +450,13 @@
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "bytes": 61634,
           "sha256": "541c2ca9304f4c31f7cc7e56aa2d28d9d767cf8f8556a0cc546bdaeaa0a590b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -471,8 +487,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5590,
-          "sha256": "c5d28d2c1622d10c9cbe51c4783e9215ed336cc69f0de93934eb239f22dfb0e6",
+          "bytes": 6639,
+          "sha256": "af657328546fe9f2bdb118ea5627e368edb174d61588140224730fe1a78e1f58",
           "verification": "bytes-verified"
         }
       ],
@@ -535,11 +551,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1992-sk",
-    "materialSha256": "7bebd6a874e28bdb129c27c3ae99df1084a64194167b251b845dfdd5734163a5",
+    "materialSha256": "bbe6d3bd21a06ad3727b7833296f81f8edb763504143051521d1b97415b621c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "20446afc63786d2f9145681d77446f668756e628939b2ccb2c8c781a15dc8835"
     }
   }
 }

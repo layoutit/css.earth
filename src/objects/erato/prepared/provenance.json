@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba1789695a0d32dfec075a9abd2935577372e3635b00bac301fa2047f7cbd6a3"
+    "sha256": "e148af1f3ea39ba06175432a3bf3988278a8bf46a84b8a3c7b84fa3d19596917"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "59f1a3c90fdc068a5e8fa863b41440257edcbd9ade5105b29892e3ae1fd2ead3"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e9437ed988ce441c83436fe720dd708f18e4d7606dc51962c609caedd3db591b",
+      "sha256": "1b350be9465086d60d1dc2fee7b02914bee5df9071f5e089c382e18973644aa2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011); model 317, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/erato.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e9437ed988ce441c83436fe720dd708f18e4d7606dc51962c609caedd3db591b",
-      "bytes": 8490,
+      "sha256": "1b350be9465086d60d1dc2fee7b02914bee5df9071f5e089c382e18973644aa2",
+      "bytes": 8510,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5913,
-          "sha256": "617fcafab47f7942b3c1ae848867f24db13ccc66ac2f100e6c6bbb38ff97266b",
+          "bytes": 5933,
+          "sha256": "634679d2d4aef028bd0f5d3a53cd2358039f94f5500be987d1e3521185bfbbb6",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "erato",
-    "materialSha256": "de6e8f2228a2328a4990abd1967d6216f6e25ec7063a50ab455b5302ed764dac",
+    "materialSha256": "e615e3373e307cc78c435063100a2c4bdd03d410754f321234e7ed3bb09e2aea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "59f1a3c90fdc068a5e8fa863b41440257edcbd9ade5105b29892e3ae1fd2ead3"
     }
   }

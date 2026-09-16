@@ -1,0 +1,42 @@
+{
+  "id": "eso-release-eso1741",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Giant Bubbles on Red Giant Star's Surface (ESO science release eso1741)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/nature25001"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/news/eso1741/",
+      "label": "ESO release eso1741"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/nature25001",
+      "label": "Nature 553, 310 (2018)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pi1-gruis/text.json",
+      "revision": "4245a2b16294809184b678f0a55d1bdcecb09969",
+      "sha256": "2eb7a20529b97e63697dd8458edef7a29ce4389affb2f82e518781372745e390",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO; the research is C. Paladini, F. Baron, A. Jorissen, J.-B. Le Bouquin, B. Freytag, S. Van Eck, M. Wittkowski, J. Hron, A. Chiavassa, J.-P. Berger, C. Siopis, A. Mayer, G. Sadowski, K. Kravchenko, S. Shetye, F. Kerschbaum, J. Kluska and S. Ramstedt, Nature 553, 310 (2018)",
+      "scope": "citation",
+      "evidence": "src/objects/pi1-gruis/text.json#/introduction/sources/0"
+    }
+  ],
+  "publisher": "European Southern Observatory"
+}

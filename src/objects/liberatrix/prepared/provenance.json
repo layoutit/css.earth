@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5fde1702aaf69249057da81de1ae1ade918270dcb3aaa6965c35d7be09267f37"
+    "sha256": "8b36e48995794fb34d1922725b311a8a3d2181f783be0b61e53a65623fa18fd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "0338c12dc27b11ba239906611b0fec3d9ae41023ad146f8d38c90c3400c445ac"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1e0925f0d5bd26fbfdd8c1727a2e03631592b74ec00e5cee2ebc2fa4a1b135cb",
+      "sha256": "09c041ba3bd5409b59af0d2d0e28b011b982df1ec7ecc57e9110335dba000877",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech (2007); model 157, version 2007-02-27."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/liberatrix.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1e0925f0d5bd26fbfdd8c1727a2e03631592b74ec00e5cee2ebc2fa4a1b135cb",
-      "bytes": 10212,
+      "sha256": "09c041ba3bd5409b59af0d2d0e28b011b982df1ec7ecc57e9110335dba000877",
+      "bytes": 10237,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7573,
-          "sha256": "83f0a64412a23916ccc86c6b20cc8e836672d95f336025b4aa1ac9658220396e",
+          "bytes": 7598,
+          "sha256": "56626fbb37325248445c2a72dc9c51aadf6f33491f09cb4cfd0e4c531ca08667",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "liberatrix",
-    "materialSha256": "f3aa577f895fe790ff0ec3582afe066fa59105716d9e03872b48aad1e1a62667",
+    "materialSha256": "1e49010ebc45c599ed47715236b772012d26d3c147d212d5dc0d1555356f7e28",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "0338c12dc27b11ba239906611b0fec3d9ae41023ad146f8d38c90c3400c445ac"
     }
   }

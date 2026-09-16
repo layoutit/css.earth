@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e74daa2a1f58abbc8a8830bcd07abae4914243e0b0a659b1b0b2e77421cc1ba6"
+    "sha256": "47f389c763e24d49971b6d7704075e272caeaa1350a1dea2235b5f2ebf6a047d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "84c5be0c40ba0d2e5ccd7c2851c78efef9e26d14ced66b976be59ca9b9e0a86f"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9df56ce238509eb421e86fa4bddbb9a53cda5f1315de6713e54a8b1c6e345854",
+      "sha256": "d1201c5d28aff6390838e46b565841d4b302674ecfdb4ef5c017b389b4c78e98",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4859, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/henrietta.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9df56ce238509eb421e86fa4bddbb9a53cda5f1315de6713e54a8b1c6e345854",
-      "bytes": 10205,
+      "sha256": "d1201c5d28aff6390838e46b565841d4b302674ecfdb4ef5c017b389b4c78e98",
+      "bytes": 10229,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7574,
-          "sha256": "63d59f0569813dfce37d1dd1600eefa71e278d852fb2637fe4dfdfa937ce09bf",
+          "bytes": 7598,
+          "sha256": "c1ea70b413d540bc6b08750b3a16299f15b64be62704f89135415fce19a0d67d",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "henrietta",
-    "materialSha256": "38155aeebf9fe2c83b049226dc82767f8187ad119ccbd882c0bf6562eb4b11c6",
+    "materialSha256": "4404bc6f91acffce4cef60fd4d30dde55eee37fd02e413fd86e486c3127c5ced",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "84c5be0c40ba0d2e5ccd7c2851c78efef9e26d14ced66b976be59ca9b9e0a86f"
     }
   }

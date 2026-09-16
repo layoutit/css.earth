@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "calypso",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50103a7efa901ae81a6a5e8d299f6dc2f11459c48605925aa4b18abb2a4a6353"
+    "sha256": "a000e9f32c81fe5674ebca081d3c527b46fc53d215d89a47cf34ad624977a5f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "cf1a8c7076cde6f7e8e97eaf5c757f40c24d06253d03c2c08956e28906dcbb4d"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "070ebd95bc4a75e5ed4464291ace6a378f2fbdd0bebc0856dd10e64a171572de",
+      "sha256": "992b8f78e7320a4ed98e22abe7df3599d026682c874f17ef4e466bde493a277e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -216,6 +216,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.13
@@ -320,6 +321,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.05
@@ -383,7 +385,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "811c793678744183026263d0dfb396414ee00ab167b32a16f1606b73e7b669f8",
+      "sha256": "b5fb5b15d5d8e505760cb066f6aa0c6d929f0f490db47fee42c6a657fd948a7b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -533,7 +535,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/calypso.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -586,7 +588,7 @@
       "sha256": "840fc381659291b29fbaa51bdaf09c870da6bcc96b4ae791709e2a354048fb63",
       "bytes": 2120850,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -640,7 +642,7 @@
       "sha256": "0ee9c5e4d7a3a99c41698b975da561991932d5809d2c053a5321d5ea2344b4bd",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -687,7 +689,7 @@
       "sha256": "1cf87f1821323ab7c78e22303c99a0999ea9f73f422936722d2d8e7adc230801",
       "bytes": 3821,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -741,7 +743,7 @@
       "sha256": "b3a3f70a3ff562937099c36fd7f2638341fbfe80ba4d18d9d5598f7f4a682237",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -788,7 +790,7 @@
       "sha256": "bb3cf286532af151da58864d86a5b749d25e5d4af9dc2ee496c2ba09fbbce593",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -842,7 +844,7 @@
       "sha256": "892d48c10a42f6144408bc94c6010cb1cda689146c91e13106e072ba2146fcc8",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -889,7 +891,7 @@
       "sha256": "f1be56d59aa8b847a8ffe26eb419668ebfd2b017c071064f8cb8d07de1c3d7a3",
       "bytes": 3846,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -943,7 +945,7 @@
       "sha256": "cb02955542d85f16c96d6f8ee31392185417876c2e913c69c53bfba7f0a43f56",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -990,7 +992,7 @@
       "sha256": "78bd0afb7754a4e3cb4b2a2cece76aa548f0df8c80aa8a7c585837b4928aa630",
       "bytes": 3846,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1044,7 +1046,7 @@
       "sha256": "7cf3ab2e0df179cbda7e6f8e2b6e09504dfd27a7b6a2166f8e1897dc2316843b",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1091,7 +1093,7 @@
       "sha256": "96511a2858b1d4c2c7ea66fa6ae74f3d0e56721a0498c012011f8296eb84ee4f",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1145,7 +1147,7 @@
       "sha256": "54471e72a479d75668f0744717bb9e4d1ac3dab1a337367b4622697836db7ded",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1192,7 +1194,7 @@
       "sha256": "a712b84565fa995d770463b12d2cbb31193d5419a310628dd0bda1ef0eab07dd",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1246,7 +1248,7 @@
       "sha256": "61d31cc9af9e4b6e88d74ea8e26d278b6dc7ad6a3819cc43f60b4b3b03ed915f",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1293,7 +1295,7 @@
       "sha256": "fe452c6fa7fe2d3027c38de50b6ee8a7ab511d64ac947bd9ed057cc3c426dfa6",
       "bytes": 3847,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1347,7 +1349,7 @@
       "sha256": "103e5fe61f63b2d2bf7b255fc95656d49a66fe0507643c76550a790c1440d1ca",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1394,7 +1396,7 @@
       "sha256": "fa97e916303126c0bc41fd9c2e81b4f5f9cd900cdb684b2398fcf9bfc3e473de",
       "bytes": 3847,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1448,7 +1450,7 @@
       "sha256": "758ab961ee2f2d857f840a9aaf0cbfdb35d0e2cd14b7d7149761b9e393b87936",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1495,7 +1497,7 @@
       "sha256": "3a2c79b2dbadd0307326f5669f54cb0afc55cdec4fbdb25f59e8cb02974f6f98",
       "bytes": 3856,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1519,10 +1521,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "811c793678744183026263d0dfb396414ee00ab167b32a16f1606b73e7b669f8",
-      "bytes": 5346,
+      "sha256": "b5fb5b15d5d8e505760cb066f6aa0c6d929f0f490db47fee42c6a657fd948a7b",
+      "bytes": 5368,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1554,19 +1556,19 @@
           "url": "/scenes/calypso/calypso-elevation-thumbnail.webp",
           "bytes": 5342,
           "sha256": "9a19e832557eb1210fbd2a7fedcc497619df800503a70a5e8b6cc5fa54c7a2fa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-elevation-surface@2x.webp",
           "bytes": 395062,
           "sha256": "f00ccd34e415eceb7610b18ed6bfbcc7f9afc92f602058b88ff5807a094b51da",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1614,15 +1616,15 @@
       "outputs": [
         {
           "url": "/scenes/calypso/calypso-normal-thumbnail.webp",
-          "bytes": 1448,
-          "sha256": "eca738d5ff03ad077ae4a1f6a132663c5da27121a7c6d236ed42f349b428f875",
-          "verification": "asset-manifest-pin"
+          "bytes": 1472,
+          "sha256": "06ad126d0a007409860e10e71ea8905596bb6a1e5d20a1ad0acdf07baeca598c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-normal-surface@2x.webp",
-          "bytes": 307866,
-          "sha256": "5ee57cec0cd75be1acf1498d57257633417a04b38a752ceaaa9b0bc6cd6b8a53",
-          "verification": "asset-manifest-pin"
+          "bytes": 316410,
+          "sha256": "9cbfb1c746bd470441213ffb9967b4403ba05c4512cb7763e7c1b351c049324a",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1666,13 +1668,13 @@
           "url": "/scenes/calypso/calypso-false-color-thumbnail.webp",
           "bytes": 1638,
           "sha256": "3d9933a7bb76aa47fe5a1fc99fbe2b2b5f2a9135da0343767a3c570829cf7f9a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-false-color-surface@2x.webp",
-          "bytes": 308854,
-          "sha256": "9fe70525b7dbf48cbdaa7f4110b56986233e988e8f105d29bb8f1418261a9410",
-          "verification": "asset-manifest-pin"
+          "bytes": 326960,
+          "sha256": "5025a5bf7c861da01e100b6410e670e7649dea6695d54ebc56cdf31bd0fc666e",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1703,8 +1705,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6142,
-          "sha256": "ade4b4cacae0153b82329b42b15829ce16fa4b30e78025b5a647d22ff4285986",
+          "bytes": 6164,
+          "sha256": "65a0b2d03ca567f2c70a97dc84ad329072bca84ae188bcdd2488b47a8a71aece",
           "verification": "bytes-verified"
         }
       ],
@@ -1729,8 +1731,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 10694,
-          "sha256": "3a24f9ca4818b86cf817ee314a271d8aa4241788db8e5c65e096f5f1e3ce7a6a",
+          "bytes": 12062,
+          "sha256": "257b916cf230bbe0a616c3abaff39587ee35efc14e700f5432f21a39111baed7",
           "verification": "bytes-verified"
         }
       ]
@@ -1792,11 +1794,11 @@
   },
   "lastPreparation": {
     "objectId": "calypso",
-    "materialSha256": "f93c77a04ee71cd7808188567764fd2460b1c1b8448e2b3e837f014252c85bd3",
+    "materialSha256": "ae1c7d2879fc5c200a5e9d6e2db1f587b3831bf0a6f73ad91fc181c19e2497e4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "cf1a8c7076cde6f7e8e97eaf5c757f40c24d06253d03c2c08956e28906dcbb4d"
     }
   }
 }

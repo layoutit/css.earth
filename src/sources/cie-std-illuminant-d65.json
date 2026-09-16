@@ -1,0 +1,50 @@
+{
+  "id": "cie-std-illuminant-d65",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CIE (2019): CIE standard illuminant D65",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.25039/CIE.DS.hjfjmt59"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.25039/CIE.DS.hjfjmt59",
+      "label": "CIE dataset"
+    },
+    {
+      "role": "original",
+      "url": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "label": "CSV file"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "label": "CC BY-SA 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json",
+      "checkedOn": "2026-09-16",
+      "locator": "identifier, titles, rightsList, checksums sha256"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0 International",
+      "scope": "Dataset file",
+      "evidence": "CIE dataset metadata rightsList"
+    }
+  ],
+  "publisher": "International Commission on Illumination (CIE), Vienna",
+  "creators": [
+    "International Commission on Illumination (CIE)"
+  ],
+  "publicationDate": "2019"
+}

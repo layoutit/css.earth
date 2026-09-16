@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f607fac44c681c00e58536aadc665f48657b3ea98f2a6b0bbac8f54f6cbe2f3"
+    "sha256": "c00062d0025ed3a517acb850b8874d70f1ccc5eda0f38716107d3d4d42bb650c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "29eba44ec5680bdbee3283db5f925059cfe2749db22a4562ef2df7573eed02da"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c4f6e20bf3fd8cb98672a55a5ac0c816cf92abeb0ae72924f7acc9c9187026e9",
+      "sha256": "0f33e8ca4db6059423090c76fe0350c4e7a0ce271ad182de0481aab56a31e963",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Rożek et al. (2022); model 6205, version 2022-07-13."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/tantalus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c4f6e20bf3fd8cb98672a55a5ac0c816cf92abeb0ae72924f7acc9c9187026e9",
-      "bytes": 10123,
+      "sha256": "0f33e8ca4db6059423090c76fe0350c4e7a0ce271ad182de0481aab56a31e963",
+      "bytes": 10146,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7339,
-          "sha256": "ee72587dec8bca239836cbc5574e9e46a84ad81210e14ba8134cfaf7bc4b094a",
+          "bytes": 7362,
+          "sha256": "6889ecc7ae7fba87bcff6186a11d0dd53ea1fa82a89bf22ab71c0e0478250716",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "tantalus",
-    "materialSha256": "e7e078d9c0ec859f1ea01ad13d43a94841ae1cb08bfa67fee0d8260037937511",
+    "materialSha256": "e69a74101b21c5d194d5b86ec0be8b51c250549356edc3925e2fa7a1678e1bc4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "29eba44ec5680bdbee3283db5f925059cfe2749db22a4562ef2df7573eed02da"
     }
   }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "76c9e901f0f09913ba58f5d41ded1bb784438fa11e0204c08b92dd1b09a6db2d"
+    "sha256": "1281127c9e1712142a8ce8fb5916df6a449898261bf42980123c8a5de29bdbbb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "c8ce4981517e65383d2e9243f30691d6e4060dadc4fb9f8dc4ba6553b2d2506d"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7e60376709e76eda6b03ab96eff3cf1ff1f4c8bc628e788b0e9f4f14855f4fdd",
+      "sha256": "f634cc5b88563a411db972994e1679c3da7559dd45b07cf49c1614f14229b9f3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Franco et al. (2012); model 461, version 2012-09-25."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/athor.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7e60376709e76eda6b03ab96eff3cf1ff1f4c8bc628e788b0e9f4f14855f4fdd",
-      "bytes": 7907,
+      "sha256": "f634cc5b88563a411db972994e1679c3da7559dd45b07cf49c1614f14229b9f3",
+      "bytes": 7927,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5332,
-          "sha256": "6cdd78f6c19f3175fbb538ea40294d8f8d7e03b4d9338724a30dd0df80189ca0",
+          "bytes": 5352,
+          "sha256": "f4a56b338ba3fa972ea662e7b8449270f3751debefb3376cdf50c14b33fe89b2",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "athor",
-    "materialSha256": "c9feb7288aa95333bd46dfa004871ad1bb807d371c8e34f9980d042b7724c053",
+    "materialSha256": "e557f8d6bf895c092011884009ae7dca3fb2085cef13825de86b254fa3160cd0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "c8ce4981517e65383d2e9243f30691d6e4060dadc4fb9f8dc4ba6553b2d2506d"
     }
   }

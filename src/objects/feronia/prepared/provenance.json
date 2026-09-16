@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bc0aa17e506916cb0968b3bb60295e9fae115d52125defc4e9b5b5493d557c56"
+    "sha256": "802e9c35fa0a3a9b2f3d97520103a04dcbda548eeb10a9dcf29a67f8247c4ebd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "d20545497faae11f249998d0cff2b7e0c4e27c78988f2d8687231551b42c81da"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7a74d19988cf26edfd7d08c7d1dad173517cd758d3467ebc32d9cf776f83e5e7",
+      "sha256": "879b5cf0a6b0cc3c4db3e07cc6d4c62a161ab642fa2aa231a72f169e973fd767",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1853, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/feronia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7a74d19988cf26edfd7d08c7d1dad173517cd758d3467ebc32d9cf776f83e5e7",
-      "bytes": 9326,
+      "sha256": "879b5cf0a6b0cc3c4db3e07cc6d4c62a161ab642fa2aa231a72f169e973fd767",
+      "bytes": 9348,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6724,
-          "sha256": "9ecb5d4db4983836928df9918726e05b6ff4ca77647793ff8c3d2650c163a595",
+          "bytes": 6746,
+          "sha256": "d9c22935a133e9d9165b04cddc4277a3799475e54f04441a7f2a2150b635548b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "feronia",
-    "materialSha256": "cb6a442d407deadef9d5b2f720faa7b93b2d8f09f91b45db98df914275581062",
+    "materialSha256": "ee60dc8ab8fcd8a5ec621cd2d2e0fdef95308fdbfc37a7990bbf5f582473a050",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "d20545497faae11f249998d0cff2b7e0c4e27c78988f2d8687231551b42c81da"
     }
   }

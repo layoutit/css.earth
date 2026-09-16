@@ -567,8 +567,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10176,
-      "expectedSha256": "90946b384216cf4018964acb8de9b7ddb8940a39bc8be6116cd90955eaf1c0b3",
+      "expectedBytes": 10557,
+      "expectedSha256": "10e192b36427399d0bf735fd2ff542aeefb03bb5c1903af0988f521ddf9c111a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -586,8 +586,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1296,
-      "expectedSha256": "5181ff924ac1d2b44bb6685f5b0279d783e1691ee3627f772871311143180d57"
+      "expectedBytes": 445,
+      "expectedSha256": "3fc1c368577461a7881c22a1d2758fd2ff96929cf2f34c226d16fef835268ae3"
     },
     {
       "path": "preparation/rotation.json",
@@ -596,8 +596,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6401,
-      "expectedSha256": "5c44931db0f5c1e9627ab5d9a519b4903ad17e9adae3caed4fc31111028ce7ab"
+      "expectedBytes": 6436,
+      "expectedSha256": "e95b14e1aaf27b458dbbba32902bcde3302ec0858e53833a5e8a0a75e59c4e45"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

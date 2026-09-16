@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf0b87410d41891db4d1010cfbc828ab39ebe09f1e4ebc8a06c15ddb75a0cd93"
+    "sha256": "b1729c10306df6cb06c7a76ea92531213b17014f09e937f43394ec257397a224"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3dcc2614a8994760b6b624a6c28f9f263e432bcfcb16c4e0320ce4cd9f5dbcdc"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b34f7da33440a853c44b9d550f8ee098167e7dc0d2bf85376d8b11df3fd9aaa0",
+      "sha256": "46b8e5aed9327ef0830deb0a033f31ff54ff29d6bc5396a35f05066e45eb31c4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011); model 325, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/laurentia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b34f7da33440a853c44b9d550f8ee098167e7dc0d2bf85376d8b11df3fd9aaa0",
-      "bytes": 10618,
+      "sha256": "46b8e5aed9327ef0830deb0a033f31ff54ff29d6bc5396a35f05066e45eb31c4",
+      "bytes": 10642,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7990,
-          "sha256": "447b3ce95612e5695e8df259a0d1942930c58d05bb34939790c0e2ba95b3dcd6",
+          "bytes": 8014,
+          "sha256": "d158b3bdf8bb1a17a26e9159913f1eb861d814021c9074466630a4741a4528dd",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "laurentia",
-    "materialSha256": "8d51e8e52297d8c8c07f8f08a752c7f32e9038e39761da8cf280e06ea7097a4e",
+    "materialSha256": "549215df5be067d573ac46ba20cb987462b115cc991107527c6c48fbf5734c89",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3dcc2614a8994760b6b624a6c28f9f263e432bcfcb16c4e0320ce4cd9f5dbcdc"
     }
   }

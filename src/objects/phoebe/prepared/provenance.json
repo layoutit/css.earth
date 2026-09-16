@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phoebe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "18e1d2d8b006c7697758e69865fb28f463d3e1ab74fd5b6281aad35c7900d4cb"
+    "sha256": "0da4275a1cb4a296fd0928c8eed4d93f4a46aca1d66d3f4fae65535a88cbc9c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "c6d10cbb5ef67bd9254b0e626334b4f73861b078f2c1a01a5a9b7248a4447d64"
   },
   "recipes": [
     {
@@ -431,7 +431,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2aa13f507d54e3e258494d6c81417ed490ff01e35d33df1db2e10645cdbe7862",
+      "sha256": "47a44a0949cc9493a1ce2a1c9761761f7e3ad30491ba331fdd977cca617cd7f1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -713,7 +713,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/phoebe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -833,7 +833,7 @@
       "sha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
       "bytes": 52468,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -869,7 +869,7 @@
       "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
       "bytes": 17787240,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -933,7 +933,7 @@
       "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
       "bytes": 9941545,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -997,7 +997,7 @@
       "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
       "bytes": 326413,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1061,7 +1061,7 @@
       "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
       "bytes": 326427,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1125,7 +1125,7 @@
       "sha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
       "bytes": 9942047,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1186,7 +1186,7 @@
       "sha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
       "bytes": 57492,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1203,10 +1203,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2aa13f507d54e3e258494d6c81417ed490ff01e35d33df1db2e10645cdbe7862",
-      "bytes": 10949,
+      "sha256": "47a44a0949cc9493a1ce2a1c9761761f7e3ad30491ba331fdd977cca617cd7f1",
+      "bytes": 10970,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1226,7 +1226,7 @@
       "sha256": "a59fac018757fc0cf8c4a6a792b6f0a1363eee128294f3fac9431fc8b563da26",
       "bytes": 1005,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1252,7 +1252,7 @@
       "sha256": "0e5998039dacbd9301441347a883b8a419782c9f791562c0f610a8507e6450ed",
       "bytes": 102659,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1279,7 +1279,7 @@
       "sha256": "cd6e8b9772febaa12eb1fc6fc3314f8166e31b560f0bc0765a9aeebb9b13ec54",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1306,7 +1306,7 @@
       "sha256": "1a3e6466a0d402adbbc1dc0cdddd215ae471d9ec82599d8deb7afad8912f4419",
       "bytes": 780,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1360,13 +1360,13 @@
           "url": "/scenes/phoebe/phoebe-infrared-thumbnail.webp",
           "bytes": 1200,
           "sha256": "8a348424f96af08e5849410420681d14fc6cc05f67a5c260314f3cd792551bf3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-infrared-surface@2x.webp",
           "bytes": 293422,
           "sha256": "cc3f4a0439bcbd5ef9c86392817a1e00ed9fa94b9531756a41e1da06ebffd7e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1413,19 +1413,19 @@
           "url": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
           "bytes": 2690,
           "sha256": "22fd1e7fc37d0c1304e199681e64b898daf1f879701222aef6076377e2509fc0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-legend.webp",
           "bytes": 64,
           "sha256": "cfcce4825630d19b1fe535df129ca62108704286888e2482065eeb73ded6217a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
           "bytes": 6997442,
           "sha256": "e7c05e093131d0885c8b2a3d68d39e0b31124ff3b64c1e64fc166a901f327d13",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1467,19 +1467,19 @@
           "url": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
           "bytes": 9002,
           "sha256": "3bbbbac756d9d15c0b634dccef99527ddd7b106ea122edc2443b64cf9344f3cc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-surface@2x.webp",
           "bytes": 25764046,
           "sha256": "83b434713bda50da8d89caccace7a9aaf6a86e4eb14e5c0f527dee3e272d1cb9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1521,19 +1521,19 @@
           "url": "/scenes/phoebe/phoebe-maplet-resolution-thumbnail.webp",
           "bytes": 626,
           "sha256": "08f676d93b80114b2cc58fd611107418a1d2617bf5d979c81609691a2bcba64d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-maplet-resolution-legend.webp",
           "bytes": 166,
           "sha256": "075b018d6c1483c9c6626ab6f74ed823a82e2eb39d9df182e036f5d6f19f5522",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-maplet-resolution-surface@2x.webp",
           "bytes": 368656,
           "sha256": "9ec14c15d1ef5c240fe623068ddab85ba9069d79925cffdd1784f710acaa215c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1575,19 +1575,19 @@
           "url": "/scenes/phoebe/phoebe-image-count-thumbnail.webp",
           "bytes": 3126,
           "sha256": "2e1b82aaea5747fc9aa28ff5433547d6898b267121eb022694f0b37c0e20680a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-image-count-legend.webp",
           "bytes": 200,
           "sha256": "675054ccb3d587a2dd85173bf42182b89fcdd9a64d75134d64089d68b526aba9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-image-count-surface@2x.webp",
           "bytes": 2451914,
           "sha256": "4f70881a6295eebec8ba53d133879d6d04f4b16173f59e697151289d9f382735",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1627,19 +1627,19 @@
           "url": "/scenes/phoebe/phoebe-ice-absorption-thumbnail.webp",
           "bytes": 676,
           "sha256": "cbb7f35149f474b801603d8907897f2a5cf630e31e7dc5c0365854a95320153a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phoebe/phoebe-ice-absorption-surface@2x.webp",
           "bytes": 306326,
           "sha256": "35d4b6c771c85f84d9e7683dd76b1f21bf135ee08f67db20b155909e5f7133a1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1670,8 +1670,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6446,
-          "sha256": "11dce6f6fc4581573063d21f77590556fb760238daa53aace3086feb844ad8ed",
+          "bytes": 6349,
+          "sha256": "c983ea469ecb32ca91f36322028955ba7110901dda99f3c25f598bd4fd4cbd08",
           "verification": "bytes-verified"
         }
       ],
@@ -1708,7 +1708,7 @@
           "url": "/scenes/phoebe/phoebe-features.json",
           "bytes": 17309,
           "sha256": "d62758dd938dfefad9c055c2a51bab1a0c122a92d77d68f2910f03b5a4b3d78d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1870,11 +1870,11 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "b9307d9ffb7afdb54a6e6887c9dfe684ba635f7c673c3a6e363214781dd29eac",
+    "materialSha256": "54aa2e24c1615b7997934db56440b90f93c9c0e4ef6a37ad3035058024213006",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c6d10cbb5ef67bd9254b0e626334b4f73861b078f2c1a01a5a9b7248a4447d64"
     }
   }
 }

@@ -4,7 +4,7 @@ import { resolve, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { decodeEncounterFits } from '../terrestrial-layers/encounter-fits.mts';
 import { encounterCamera } from '../terrestrial-layers/encounter-camera.mts';
-import { validateEncounterRegistration } from '../terrestrial-layers/encounter-registration.mts';
+import { validateEncounterControls } from '../terrestrial-layers/encounter-controls.mts';
 import { loadPdsPlateShape } from '../terrestrial-layers/obj-shape.mts';
 import { fitImageControls } from './image-controls.mts';
 import type { ImageControlsFit } from './image-controls.mts';
@@ -148,7 +148,7 @@ export async function projectEncounterLandmarks(objectId: string, write = false)
   const cameraControl = record(JSON.parse(get(configuration.cameraControlId).toString('utf8')), 'encounter camera control');
   const decoded = decodeEncounterFits(get(configuration.nativeImageId), cameraControl.observation);
   const camera = encounterCamera(decoded.header, cameraControl.camera);
-  const shapeBytes = get(configuration.shapeId), registration = validateEncounterRegistration(camera, cameraControl.registration, sha256(shapeBytes));
+  const shapeBytes = get(configuration.shapeId), registration = validateEncounterControls(camera, cameraControl.registration, sha256(shapeBytes));
   const shapeInput = configuration.inputs.find(input => input.id === configuration.shapeId)!;
   const shape = await loadPdsPlateShape(shapeInput.absolute, configuration.shapeProfile);
   const stageFits = configuration.stages.map((stage, index) => {

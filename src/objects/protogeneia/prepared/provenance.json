@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d9899beddf6a7c57b165f454e5803dc828dd2d4ad7290b438ef0e5bf0ae08ca"
+    "sha256": "fd108e46c26d9d77d4c4f67a8506634ebd63415032c255c1357eb57fa8008d22"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "2a815c51de0ca1cfd708897d074c989950adf2f3d67d936e7c78238e929be380"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cadd9555d7ab65d828d309d6657dbc53788cc900c913da71806bcb2d0b3ef874",
+      "sha256": "b591df3f3db92bd222cef07c982fba9336146e45233c5c4d941cadf92352a2b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 557, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/protogeneia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cadd9555d7ab65d828d309d6657dbc53788cc900c913da71806bcb2d0b3ef874",
-      "bytes": 12493,
+      "sha256": "b591df3f3db92bd222cef07c982fba9336146e45233c5c4d941cadf92352a2b4",
+      "bytes": 12519,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9838,
-          "sha256": "33b53d37a0c7c9df831cd22a7bc7b00eb8d33a7269966f451020244bb2477a84",
+          "bytes": 9864,
+          "sha256": "a26ffe3528f78a417265de11b49f86939d75035bdc5b6685b777f4dbb9e53175",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "protogeneia",
-    "materialSha256": "8c8c21d67f7e0670b19a150f91f8ac7e247cd30967aeb807d198135a464311f4",
+    "materialSha256": "7b95344a7cb2715366f75493f158874c210968994377e51e071d746f7e398635",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "2a815c51de0ca1cfd708897d074c989950adf2f3d67d936e7c78238e929be380"
     }
   }

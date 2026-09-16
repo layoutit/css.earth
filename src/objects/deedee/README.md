@@ -2,6 +2,8 @@
 
 DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | Source | Display interpretation |

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hygiea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "24c4d36121a2cf61471d82be2f89c217d351c0676a7e1f5683a5ddc4c39afd2e"
+    "sha256": "10ce6e2f4d1573d695b5151cc0c7416aa59411124e467ebfa7096d4ac5785437"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "6da43d2bc809ef7f02d0fedaf251d7fac4b86d4a0bcc0c7242ccf7ebc87bff36"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "322ec5877fc156e0f8e23e111e4638e4f578ac414bc82cf49f7ce8f755294911",
+      "sha256": "b372cfbb9872ec8f9622c5bb425f3fc92b9550408e0db591d72cc6e4a9badbdf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,12 +169,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "3.151 AU (mean)"
+              "value": "3.151 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "5.59 years"
+              "value": "5.59 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -271,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hygiea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -320,7 +336,7 @@
       "sha256": "caaf2ab054168680b4962a16b480998ed1c2a5364c7e392ebb99fb211d6ba4bd",
       "bytes": 1060219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -348,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "322ec5877fc156e0f8e23e111e4638e4f578ac414bc82cf49f7ce8f755294911",
-      "bytes": 7316,
+      "sha256": "b372cfbb9872ec8f9622c5bb425f3fc92b9550408e0db591d72cc6e4a9badbdf",
+      "bytes": 8531,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +399,19 @@
           "url": "/scenes/hygiea/hygiea-elevation-thumbnail.webp",
           "bytes": 5814,
           "sha256": "c6f27892beee4b3ebeddb030c3a63710e1649a7795eecb16a02f7fe6ccdfa8c5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-surface@2x.webp",
           "bytes": 282434,
           "sha256": "098f17f46803025d64f81754d66f38ff8f0ed96acea1f19028e3f1256d0a370d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -433,13 +449,13 @@
           "url": "/scenes/hygiea/hygiea-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
           "bytes": 58372,
           "sha256": "12042ce5fea31d89dd67ca7ce92bd77ca9aadad277e1a4c9ee4aa7054afd8b3a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -470,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5211,
-          "sha256": "871ba39702970012858ff4809d06007d36c84ef6638b8298e343828cc9047acf",
+          "bytes": 6244,
+          "sha256": "87ddf9f5f4b5fe4f273ab606add99b61d547a88c267812cc906b4c66e5f92b0d",
           "verification": "bytes-verified"
         }
       ],
@@ -534,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "hygiea",
-    "materialSha256": "6aca296feea16152d5b54b49ec43c6116479b42e2090751912eac8c37af79e84",
+    "materialSha256": "696df7a9eab055459a5233ebb3d4d61901b4661799c286fc7087c0c53abdacf0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "6da43d2bc809ef7f02d0fedaf251d7fac4b86d4a0bcc0c7242ccf7ebc87bff36"
     }
   }
 }

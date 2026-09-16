@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "25430765d824aa84f545ebc7d7e788d5f73c0a2b846c7bd05d2ddf002119be8a"
+    "sha256": "67c35138e4ee79d6a17c34d2df2c367bf3c06beb5acebfbc3bf1e40bae46323d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "c4f8e86dc3c01b4d6f74e772f235643dcde11391f0bca634ebc0d8022a1390a3"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ac2575e4d7a27b5592ae3d42889ccdc6f42d93264b136cfc82172db62cac9d49",
+      "sha256": "a17782e9a37bc82b37e86a1333590781c6c053fe93c13b738dfea9e738599b3e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4625, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/abundantia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ac2575e4d7a27b5592ae3d42889ccdc6f42d93264b136cfc82172db62cac9d49",
-      "bytes": 11560,
+      "sha256": "a17782e9a37bc82b37e86a1333590781c6c053fe93c13b738dfea9e738599b3e",
+      "bytes": 11585,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8920,
-          "sha256": "51f883be23c823eeb01ea5392b8d11fd3e3fbf822d8c0df81bb2dad80f97700d",
+          "bytes": 8945,
+          "sha256": "e97d702a4fe81023a547067d57a4711e202f5a58358e1823e08172b891641a48",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "abundantia",
-    "materialSha256": "c59ac234836f4487b41505f7cd54ab8f1c3c9da2b9bd262efe28085e2c0cbb37",
+    "materialSha256": "e71cccb827f7424d811108a856ab7bc01831c1e77ecd0fc1b00d8934276b0863",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "c4f8e86dc3c01b4d6f74e772f235643dcde11391f0bca634ebc0d8022a1390a3"
     }
   }

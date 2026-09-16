@@ -2,6 +2,8 @@
 
 Jupiter combines Hubble observations, qualified polar illustrations, a faint ring model, and modeled atmosphere charts.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | View or quantity | Source |

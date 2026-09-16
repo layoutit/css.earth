@@ -457,8 +457,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9488,
-      "expectedSha256": "4fa01c09ff8ab742bd5e65c3d8262701a008c49cbfb3556b11db832fcb1e7ad1",
+      "expectedBytes": 10227,
+      "expectedSha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -471,8 +471,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1395,
-      "expectedSha256": "b947e5524ca6f8a2af80dc844d3c2bc13bbd0b1e6ed0b3a82884d618453016db"
+      "expectedBytes": 443,
+      "expectedSha256": "9cbe68ce9e7f72309b72828964cfe438aa5ec6b86e45e57ed2f92d7a79a86950"
     },
     {
       "path": "preparation/rotation.json",
@@ -481,8 +481,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4824,
-      "expectedSha256": "65f62d859904de4d58fbcf6f49d59829b3356b738b4f0c1909268bdabe01b561"
+      "expectedBytes": 4855,
+      "expectedSha256": "061b4c17d1a064df5ce576e00c334d5c97c60307eb6f4eccaec91ed322c702f3"
     },
     {
       "path": "presentation/title-mark.json",

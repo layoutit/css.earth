@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "faf5511167ef1e53523194c1b2c78d3c96a73543446c8c1212d310840bb9eeb6"
+    "sha256": "420d816b605b6449e8e83fe6468353a72b01aa04b83aff35c8354c57de8ad5b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "e06e8b71fe5d92405443de8690c723e8b71f80165582a3f8c95b0d030c1a0a93"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a843d4eb1608d66c8a63be0ff698dbbe417f057b4248539a473aceef78711b6",
+      "sha256": "3f543099f83e0e60650262e160883a0dfce58c3fa20b932811ab23d20698d073",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 933, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/penthesilea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5a843d4eb1608d66c8a63be0ff698dbbe417f057b4248539a473aceef78711b6",
-      "bytes": 11812,
+      "sha256": "3f543099f83e0e60650262e160883a0dfce58c3fa20b932811ab23d20698d073",
+      "bytes": 11838,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9165,
-          "sha256": "3dce1319b0ea7fa526549ee1289009a9de58323b6f490c2338f5da095aae2756",
+          "bytes": 9191,
+          "sha256": "8c43b4c216ed422a985e98f288fd0a923f1e52a6d09b91547b9da24888edba0e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "penthesilea",
-    "materialSha256": "46d68999322491a3441ff864f6fc5712cb77183e1431c03f37069065b5b7cbdc",
+    "materialSha256": "0933453e612aa65814693d6c5876da86fa1d53f555e2cf48babe96d12c3f3609",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "e06e8b71fe5d92405443de8690c723e8b71f80165582a3f8c95b0d030c1a0a93"
     }
   }

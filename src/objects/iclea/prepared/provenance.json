@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd1db85b6fede5141344c8a515ecffdc2a18deac216455583fd54bbaf25f75fd"
+    "sha256": "a7b3b2183e024e99addad345875c3bf6d45ef99df5c6d4dc1ac7c5a373bf446f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "a3be1bb93fe4c10be9ba8d893d63fcc8f08df6701aa3b94b35096607cc7fb3c7"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1642ba602fef94e8c3e5ee5cf9dfb49a9adc11f20cf04517edaca3dbf9e9ed75",
+      "sha256": "b1d361d84bfef17e050d6fd0ab99e000365aaf733981ea572280405dfd553f8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2023); model 5017, version 2023-10-03."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/iclea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1642ba602fef94e8c3e5ee5cf9dfb49a9adc11f20cf04517edaca3dbf9e9ed75",
-      "bytes": 8476,
+      "sha256": "b1d361d84bfef17e050d6fd0ab99e000365aaf733981ea572280405dfd553f8a",
+      "bytes": 8496,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5903,
-          "sha256": "c7bc4841923a708f375ebc4fed6d4f33235e92133509e80ff3b86e80cf14ae4d",
+          "bytes": 5923,
+          "sha256": "44465c17a0d9935d2a127db524c8caeefbbcc3a1ac743dbe6c0026c2e529dc26",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "iclea",
-    "materialSha256": "2273f86833b4602755952289e04636f728f26826e4860f4b4a9fe7020fcddd1c",
+    "materialSha256": "fc5aa8c05240cf51696f803de7b4fa802dc6ff3a947868feaa0472a83a678908",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "a3be1bb93fe4c10be9ba8d893d63fcc8f08df6701aa3b94b35096607cc7fb3c7"
     }
   }

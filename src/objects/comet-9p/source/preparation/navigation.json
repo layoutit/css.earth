@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 77009,
-    "expectedSha256": "c5f29901da5a74f1009082cc29548a2b87cdb15c9fdcc3a11aab529ff4f2ff9a",
-    "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
-    "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
-    "license": "PDS public scientific archive",
-    "licenseEvidence": [
-      "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
-    ],
-    "acquisition": "Checked-in derived context image; reproduced and hash-verified by preparation.",
-    "redistribution": "Public scientific data; retain dataset identification and author attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "pds-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 15,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

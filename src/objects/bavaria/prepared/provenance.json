@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8bfc85b732da8713ec45f53d750f4e57661e283067a25cc23b87b3fc74c78510"
+    "sha256": "eb3c1eb93069d9d39389d8156f035db19a2993806adf70099a634bab071175c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "4471676982dc6012cb8f32c1fa03c4c74a0c475c3183a31d3187a76f300ace21"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d13b0588d20a7d31873237d87ab15d04ce129bdca51ea7e1ebb2d9d0d9c61da3",
+      "sha256": "70ca9f2a9e8c9b712d85cc7919f9950534c10a79f318cb65292b1b81109c88ca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2019); model 3090, version 2019-06-24."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/bavaria.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d13b0588d20a7d31873237d87ab15d04ce129bdca51ea7e1ebb2d9d0d9c61da3",
-      "bytes": 10425,
+      "sha256": "70ca9f2a9e8c9b712d85cc7919f9950534c10a79f318cb65292b1b81109c88ca",
+      "bytes": 10447,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7824,
-          "sha256": "99b375f5afd61caea523e6eb66cd9d78e3578146ac6566b5904415fbfac72ae8",
+          "bytes": 7846,
+          "sha256": "ab49a566f7e3173d4428b1ff927b53d50e42322d175289cbf1101f8600ecba7e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "bavaria",
-    "materialSha256": "9584048459a7885fbd4177fc4eb940bb8b72b4c4111b1f0b7664a87ccd0a991b",
+    "materialSha256": "02d6275db22fbf94696657095f083bad6305c85868e93af9266b3cbc3b104e79",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "4471676982dc6012cb8f32c1fa03c4c74a0c475c3183a31d3187a76f300ace21"
     }
   }

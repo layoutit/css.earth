@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
-    "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
-    "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 28483,
-    "expectedSha256": "c9924ae134882675c894b78b6e0356780439004443ed72219cab89cc159b2464",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "bacchus-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

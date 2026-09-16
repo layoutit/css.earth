@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "36c875993138c0801d294cd6ce89d1669437a908b132f005fe315e1fb959c702"
+    "sha256": "425e5d4c6061296b1fbb237bb64c5d9e66c13a9096244702cf44f454f261e700"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "786a30d179eea538f2dc348a74e03e0325c9875936fe45b97c8fcc8667931490"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a810cbb3954a0735ea6d2216f72771a76357d22e45e876354e690712e711dbf9",
+      "sha256": "962a04bc7d03e1cff19c3a40a046690eef0feb422fd25c58802efd51856e96fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 5942, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/dione-106.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a810cbb3954a0735ea6d2216f72771a76357d22e45e876354e690712e711dbf9",
-      "bytes": 10186,
+      "sha256": "962a04bc7d03e1cff19c3a40a046690eef0feb422fd25c58802efd51856e96fd",
+      "bytes": 10210,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7558,
-          "sha256": "ba8b87575cadb908c787faf72b8aad4bd223d7ea2d1868e44301c677dd26dc9f",
+          "bytes": 7582,
+          "sha256": "2bb2b6a941e996710c04ad08f203eec22a6dae982a0255c9b0764f41b20b359c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "dione-106",
-    "materialSha256": "f660676b2632a16d289ad42d7485a20d618f712570db645194da2729ed237caa",
+    "materialSha256": "3168794a8b5f3e5398e6e70f602ff3949fe533ea17076b27b7854e1b6131e469",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "786a30d179eea538f2dc348a74e03e0325c9875936fe45b97c8fcc8667931490"
     }
   }

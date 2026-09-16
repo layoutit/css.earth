@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd444b91dc813e6237d484209b3d50fac32e79f37c02b3badf70cd0a2e30a61a"
+    "sha256": "eb4bc02f408641ebf560f6b7b0782e8f2028d995af308da21c7e9e98847bca48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "94af820770db7d7f2e81543200470f0a4e96c72fc7286206a2af7f024df45cb9"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8f6599db2baf1627d3160e4bac3d79179a04f12ac18bd8f55ff860ad4781b90f",
+      "sha256": "97d957a7b5c929b2d24550a3d3442d0bf0d9df95940c45d4c7f1312a7fa48f9f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2007), Hanuš et al. (2013); model 175, version 2007-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/dejopeja.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8f6599db2baf1627d3160e4bac3d79179a04f12ac18bd8f55ff860ad4781b90f",
-      "bytes": 10877,
+      "sha256": "97d957a7b5c929b2d24550a3d3442d0bf0d9df95940c45d4c7f1312a7fa48f9f",
+      "bytes": 10900,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8263,
-          "sha256": "1692592d759f48b0fa179ea2a0e0fde433a4c7cd99368f2a0eb5f616dbd3dd4a",
+          "bytes": 8286,
+          "sha256": "417f6d6226f360c7c48aead12b7e86edec894284ca52eca8f7b79ab74df0478b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "dejopeja",
-    "materialSha256": "16de262cadf6b304905f0cf63572539b695a0306349d16e55b07b092ef97e844",
+    "materialSha256": "ac746067510dea0729b7877bd93abfad64df7750d07ea4f440cd129d829b6d17",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "94af820770db7d7f2e81543200470f0a4e96c72fc7286206a2af7f024df45cb9"
     }
   }

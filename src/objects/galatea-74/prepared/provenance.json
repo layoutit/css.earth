@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14a875f03d6d14d5499a344d906a1075dddba67f64bb91f6f595dc0f769c8ab2"
+    "sha256": "bda8ca79720ec991f83c27460288215d74b6e2ea68e528c5d32f0cf8df7dd28c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "c243161c1b2d8c7b278d560e12cd579233a6cc6ce0b03e01c55112888c17e093"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "564c7899e4b76e2085f3a230d270107ae06f9ca0d95b55abe77db33e17fa0ff2",
+      "sha256": "40d5e363649813d47c8354f0b2b9beea4c0a4c6b940be755098dd1619d08271e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 6181, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/galatea-74.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "564c7899e4b76e2085f3a230d270107ae06f9ca0d95b55abe77db33e17fa0ff2",
-      "bytes": 11453,
+      "sha256": "40d5e363649813d47c8354f0b2b9beea4c0a4c6b940be755098dd1619d08271e",
+      "bytes": 11478,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8812,
-          "sha256": "bd15a8ffa77f00a36e8ec29a314b186fd3c58acd8131073036fd078ecb1023d0",
+          "bytes": 8837,
+          "sha256": "ad6d0c69579a44ee5cb7e8dce6f646dc45acf2ecf7ec961b982ba1692ee73e08",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "galatea-74",
-    "materialSha256": "1048cc8e3bdfc13286d206daa097e90e0beffd64d7e0e333d9a50b9749726307",
+    "materialSha256": "dc362c5282084952cb6f3ac023b1274f53fbae08d99b48b32f032b7dc4dcd150",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "c243161c1b2d8c7b278d560e12cd579233a6cc6ce0b03e01c55112888c17e093"
     }
   }

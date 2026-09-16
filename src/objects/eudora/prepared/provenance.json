@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fb5b4ff764c867c27c42b3cf4047c88a356d1affb9229c689fe3a7908ab7753f"
+    "sha256": "1d57eb10d242e1bcd9540c21e8f2418921fe4bf2f69bc17a72b9a46d44a362d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "bb7d2bddf65f417ab7b6db57d36eb9f5a73af1b897409fba1c72b5caeebec052"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "50dea3b0e9fdeaafbabe84a8652a426d1fde6bb0524d46a662384fa0f04a0c66",
+      "sha256": "35eb32e16509733b9250ddfac98c8bf5d9a9044d3597a9a7051e9ff6bad574a4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3998, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eudora.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "50dea3b0e9fdeaafbabe84a8652a426d1fde6bb0524d46a662384fa0f04a0c66",
-      "bytes": 9177,
+      "sha256": "35eb32e16509733b9250ddfac98c8bf5d9a9044d3597a9a7051e9ff6bad574a4",
+      "bytes": 9198,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6588,
-          "sha256": "8618786529f9a89208695c1771986e9a37be8741bfaefcbaf5d2d803f6ef48a5",
+          "bytes": 6609,
+          "sha256": "5ebe06f53245245499310bac46efbdcc852106011724fc6cd26ecad8e2af5a68",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "eudora",
-    "materialSha256": "ee61bf43d5abd96392cbb198a57f20e5bff5b6ed5e3b0df1c1de978fdb3ff2f7",
+    "materialSha256": "fadb975748b18905a7a725acdaba66a3a39c5cfab00e5749671bdcbd5241d5fb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "bb7d2bddf65f417ab7b6db57d36eb9f5a73af1b897409fba1c72b5caeebec052"
     }
   }

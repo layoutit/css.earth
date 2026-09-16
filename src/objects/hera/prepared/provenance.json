@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e83b6f21c68e4bc5722d10ad60e316dee26c792f734e3df1b2f33355fb8ecbc9"
+    "sha256": "98cb973c4d5f93562f30ac59348855a838827c3d5a4a7ffe19b21de010acd7e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "5046c0a19bb0873cb47fef2fbb994cae0c152aced204352fc470575d809cf934"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "12e7324eba5fec2233008f32c0ef0afe46ab131dbb813682b4c654c68ebc25c9",
+      "sha256": "ff189a93a690b303db17c2ad1ecefa39282c14cfa91173cff90dd30563d0285c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 917, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hera.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "12e7324eba5fec2233008f32c0ef0afe46ab131dbb813682b4c654c68ebc25c9",
-      "bytes": 8293,
+      "sha256": "ff189a93a690b303db17c2ad1ecefa39282c14cfa91173cff90dd30563d0285c",
+      "bytes": 8312,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5726,
-          "sha256": "31fbdf6d03eef28cadbd535f45a7df8721a6915dd5887521974c462763823e5c",
+          "bytes": 5745,
+          "sha256": "ef3200b9a0b7a5d5390eddb5708be1ec0b37ee4b63cbb5fac3c4bb6e681ae3ac",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "hera",
-    "materialSha256": "95e78a8040fca1d1c739fbc5e9d1ad976b2abe7ac5a442a43bccca1d6607aa39",
+    "materialSha256": "a0af3e707ba32372a0ea53df1059c266222c48ccc9181525cd2335e14203397b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "5046c0a19bb0873cb47fef2fbb994cae0c152aced204352fc470575d809cf934"
     }
   }

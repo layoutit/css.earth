@@ -6,37 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
-    "credit": "Peter Thomas, Joe Joseph, Trey Ansty; NASA PDS Small Bodies Node",
-    "license": "Public NASA PDS scientific data release; cite Thomas, Joseph and Ansty (2018), doi:10.26033/ewy3-jy61.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "n1867604669",
-        "n1867604117",
-        "n1867602962",
-        "n1867606181",
-        "n1867606742",
-        "n1530371111_1",
-        "n1524970213_1",
-        "n1867600368_1",
-        "thomas-2018-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 143.29,
-      "latitudeDegrees": 39.21,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 91376,
-    "expectedSha256": "e2051400cbc36c026e481ed6bb8787f60fb8016bc93afb4d912b909f3cc92240"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

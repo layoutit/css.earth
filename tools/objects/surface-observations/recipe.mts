@@ -29,9 +29,15 @@ export function checkKeys(value: unknown, required: readonly string[], allowed: 
   if (unknown.length || missing.length) throw new TypeError(`Invalid source-bound ${context}: ${[...unknown.map(key => `unknown ${key}`), ...missing.map(key => `missing ${key}`)].join(', ')}.`);
 }
 
-/** A display maps either a percentile range of the qualified values or one authored display range to display levels; a colour product's bands share that range.
- * A monochrome lens may present those levels through an authored palette of at least two hex colours instead of linear grey. */
-export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)), palette: optional(array(text)) });
+/** A display maps either a percentile range of the qualified values or one stated display range to display levels; a colour product's bands share that range.
+ * A monochrome lens may present those levels through a palette of at least two hex colours instead of grey. `basis` says where the stretch comes from:
+ * `authored` when a contributor chose it, `source` when a pinned input the lens consumes states it, named by `sourceId`. */
+export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)), palette: optional(array(text)), basis: text, sourceId: optional(text) });
+/** The stretch's basis as the policy and report carry it. */
+export function displayBasis(display: LensDisplay): { basis: 'authored' | 'source'; sourceId?: string } {
+  if (display.basis !== 'authored' && display.basis !== 'source') throw new TypeError('A display states its basis, authored or source.');
+  return { basis: display.basis, ...(display.sourceId === undefined ? {} : { sourceId: display.sourceId }) };
+}
 const hexColor = /^#[0-9a-f]{6}$/;
 export type LensDisplay = ReturnType<typeof parseDisplay>;
 
@@ -56,7 +62,9 @@ export interface EnvelopeRules {
  * distinct safe input paths and one valid display. */
 export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
   const { frames, levelMatching: levels, display } = recipe, mosaic = frames.length > 1;
-  checkKeys(display, [], ['percentiles', 'displayRange', 'palette'], `${context} display`);
+  checkKeys(display, ['basis'], ['percentiles', 'displayRange', 'palette', 'sourceId'], `${context} display`);
+  if (!(display.basis === 'authored' ? display.sourceId === undefined : display.basis === 'source' && typeof display.sourceId === 'string' && identifier.test(display.sourceId)))
+    throw new TypeError(`Invalid source-bound ${context}: a display states its basis, authored or source, and only a source basis names its sourceId.`);
   if (display.palette !== undefined && (!rules.palette || !Array.isArray(display.palette) || display.palette.length < 2 || display.palette.some(color => !hexColor.test(color))))
     throw new TypeError(`Invalid source-bound ${context}: a display palette needs at least two #rrggbb colours on a monochrome lens.`);
   if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);

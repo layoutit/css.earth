@@ -1487,8 +1487,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9283,
-      "expectedSha256": "97b4de406a5fa5f45c6c511b2b0cb0692f1f88bfe7ebf8a4372ca14918d31925",
+      "expectedBytes": 10021,
+      "expectedSha256": "4765ca31462d5f54c0ca436b3c528b498f5fdabac7812b057fc0cb8e63c74643",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1501,8 +1501,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1232,
-      "expectedSha256": "258d1305e2ff0c1f5545f83bd00dde95abf6a22b32a5d760dd2a19cd0a1053ca"
+      "expectedBytes": 442,
+      "expectedSha256": "0279e18f6a956084b0223f0cdf705689715b42e433bc68ba3e9716b718832721"
     },
     {
       "path": "preparation/rotation.json",
@@ -1580,7 +1580,11 @@
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip"
           }
         ]
-      }
+      },
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "acquisition": "Extracted unmodified from the released PDS zip archive beside the pinned mosaic."
     }
   ]
 }

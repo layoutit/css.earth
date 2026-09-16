@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e617637d16409078c0fb71c552c0187c2d819453accd082daf3d601f9cdfa92a"
+    "sha256": "1959841a3ec1c147bf04a1a0baef63057a55c875c49b29b4812722392f515313"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "f6cc5b8ac863176f6a213c8e542a08be3b7bb73bb72a0dc48ff01a762a3dd516"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2434d492ba1ffc5c3bf2d9f32705c0e1525be4237fd68cf6c006e6bf6013e260",
+      "sha256": "8c3e495b27fa928caa4c07b5a36b09e6edd11974845481c9e3cec0315da76ce0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1850, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/bettina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2434d492ba1ffc5c3bf2d9f32705c0e1525be4237fd68cf6c006e6bf6013e260",
-      "bytes": 9500,
+      "sha256": "8c3e495b27fa928caa4c07b5a36b09e6edd11974845481c9e3cec0315da76ce0",
+      "bytes": 9522,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6901,
-          "sha256": "a222ec22ff2866b138214fa2d8d248110b7faced46a5d9d8d4fb88b1661706a7",
+          "bytes": 6923,
+          "sha256": "c601731b4e6ee19e9aed09ea857e42f3d65fd82bf6e64f9456ead1f63eaa79da",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "bettina",
-    "materialSha256": "5b8063c8dc72d9b1475efec435d7eefd1f86621ba09c6a4fc22f0337f5543c9f",
+    "materialSha256": "a8c9cc28a08c131e19df55148fdfa011093e2170858fb42a6dd1aea551f436b3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "f6cc5b8ac863176f6a213c8e542a08be3b7bb73bb72a0dc48ff01a762a3dd516"
     }
   }

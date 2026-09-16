@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8fa0a45b002279f5b7d5e9a8028ec206058276bfb99226da3082b80380428452"
+    "sha256": "687d8b176a9b4adb9b262e3b3c04583dfe203d975a9157cfeeca027a2d5cc56c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "bc8b8a2347804a1e32105d57596a996fa11614a0d67b0711670491f87f889f98"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1ad56a26f231b0935d1dacd230af013270f700391957c19fd3184679932e3ddb",
+      "sha256": "d44b28d0c32865a82013bb10bea49428c268128db1b8465f44b2a24fe24fbf49",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2018); model 2012, version 2018-07-18."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lyyli.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1ad56a26f231b0935d1dacd230af013270f700391957c19fd3184679932e3ddb",
-      "bytes": 7474,
+      "sha256": "d44b28d0c32865a82013bb10bea49428c268128db1b8465f44b2a24fe24fbf49",
+      "bytes": 7494,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4672,
-          "sha256": "dfce7a3297131de0a85f0e688b8f814e22b6cad0999d8305282e5fa576cd080e",
+          "bytes": 4692,
+          "sha256": "7de4eb7c209216aa030680bd8c69c9e198d3071604a51ec4f8abbfcc7ab69c5f",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "lyyli",
-    "materialSha256": "caaced381f0a7c0b7c64b31d5212ffa6b6ab69781067ad863a6e925b7364ec68",
+    "materialSha256": "5f056e13cf7795c4fcfe070a9d7fc0d43bde0648b6f46c5401da6a0e9ca5fe7a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "bc8b8a2347804a1e32105d57596a996fa11614a0d67b0711670491f87f889f98"
     }
   }

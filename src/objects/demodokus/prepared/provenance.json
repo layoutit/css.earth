@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "204ddd0331952918720ee132cec90921a961c131339dedf90ca7419ea76c9bb1"
+    "sha256": "5752648ae8feb85f931f71d884011dd50a682ea82e89efb3137919bbdf3578ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3a2b5ac231f68537ee8d85224bb9c70da6192dd1c01ea572e870d9c731dbc97c"
   },
   "recipes": [
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "17cc7567793ca41842829acfbfcde8a68264230916f8dd79b77d39d99bb0b897",
+      "sha256": "ee3dce77d7fbfe618f7eef29262008dc4fb0b6b67b7e6de93da77c08d5f696d9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3896, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/demodokus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "17cc7567793ca41842829acfbfcde8a68264230916f8dd79b77d39d99bb0b897",
-      "bytes": 11392,
+      "sha256": "ee3dce77d7fbfe618f7eef29262008dc4fb0b6b67b7e6de93da77c08d5f696d9",
+      "bytes": 11416,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8458,
-          "sha256": "cbe2e85001ff1ef2c3b3a1cde5826548a82af4f13116253ab063f0db7f1eebf5",
+          "bytes": 8482,
+          "sha256": "ea8d4d7ad30d87dc915e7fe70d0f1f9942bbd7e0edf6f19cbbf2d3c7fdc39ffb",
           "verification": "bytes-verified"
         }
       ],
@@ -561,10 +561,10 @@
   },
   "lastPreparation": {
     "objectId": "demodokus",
-    "materialSha256": "99e17d6a121504b40b0a0135de603fbb73a4f40b9a9f3feabc4c98158783cdb2",
+    "materialSha256": "7365e28ffa440353147e7b8c18dd0b7c7715921645d4c3980ff1518b763e5f54",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3a2b5ac231f68537ee8d85224bb9c70da6192dd1c01ea572e870d9c731dbc97c"
     }
   }

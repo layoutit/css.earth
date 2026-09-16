@@ -153,15 +153,15 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 113352,
-      "expectedSha256": "ca398ffc9d4152c8924784d5283c4ecef757262bf77f0410315f249aa4fe10ef"
+      "expectedBytes": 101814,
+      "expectedSha256": "655779362b3622adae77817183edcf576f13f00d1583ed8d04ae67b2854d53ff"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4610,
-      "expectedSha256": "357196eddef9f5675d4a90c8bad5818df2aa8d4b35ea4e7ccb46eee94f909b80",
+      "expectedBytes": 4632,
+      "expectedSha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -209,13 +209,13 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1236,
-      "expectedSha256": "6d2d11ad3cf33b2f22097f15da2a18f5a66168773cc3fffc20c521e3c2c1097b"
+      "expectedBytes": 444,
+      "expectedSha256": "291e3db66534e828b35c4319c9dbc84ac3b6cad7feb9ec41cad64e66c342f13b"
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4748,
-      "expectedSha256": "fa7192074a4eeda465c3c325a7cff9335cafa200269eba42afd4ada26952682c"
+      "expectedBytes": 4779,
+      "expectedSha256": "08d92acd410be5336a16cf6b31c110b0abf930bab938103aeffc08e07c5844df"
     },
     {
       "path": "presentation/minimap.json",

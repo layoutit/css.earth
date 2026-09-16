@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f08bcaae5c0b7fd54d64b9e38b3d18f232f44a96350c1799b72f8218ff3b137"
+    "sha256": "b90de69e68982e8422481775685c9a7502e256235d311389987a9859095b59f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "c26f1e94a3fb970e54ad33277126dd6727605e77b0c2fcc263ecb758c998f6f7"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9bfb842d10ff75c56086bf695388f477f51804e32224787514fd8c666739d97e",
+      "sha256": "481f1857b32a77238019f21c981e7fc0326e95c2aa804f334f68d28612002e72",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Franco et al. (2025); model 16309, version 2025-07-08."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pales.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9bfb842d10ff75c56086bf695388f477f51804e32224787514fd8c666739d97e",
-      "bytes": 9011,
+      "sha256": "481f1857b32a77238019f21c981e7fc0326e95c2aa804f334f68d28612002e72",
+      "bytes": 9031,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6432,
-          "sha256": "e1cf5ee52ac4232b52c3b1b73f78096d95f35610f8cac5d95f05f610a76ca1f6",
+          "bytes": 6452,
+          "sha256": "702a599bbcf0df7ca3438f439bf1a5acda446c15922303632f7a7ac60969553b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "pales",
-    "materialSha256": "f6a1b8f21781ad3b123a9e99f02c7195c30165be75921f3a1d3bd43aec678836",
+    "materialSha256": "db37fd2731f53ead4130ce3286de41785e9774b79a17c0e835e30569b1a4f4bc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "c26f1e94a3fb970e54ad33277126dd6727605e77b0c2fcc263ecb758c998f6f7"
     }
   }

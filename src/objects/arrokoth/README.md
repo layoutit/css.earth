@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 | View | Source and meaning |
 | --- | --- |
 | LORRI, opening view | [Native calibrated CA06 photograph](https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl), 1 January 2019, about 33 m per native pixel. Original photographed illumination remains visible. |
@@ -96,12 +98,12 @@ show mapped southern detail separately.
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `lorri` | 1 | 0 | — | — | — | none (one frame and no reference observation) | 0 of 0 | — | 0 of 1 | — | no verdict |
-| `mvic` | 1 | 1 | 3.00° | — | — | none (one frame and no reference observation) | 0 of 0 | — | 0 of 1 | — | no verdict |
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `lorri` | 1 | 0 | — | — | — | none (one frame and no reference observation) | 0 of 0 | — | 0 of 1 | — | — | no verdict |
+| `mvic` | 1 | 1 | 3.00° | — | — | none (one frame and no reference observation) | 0 of 0 | — | 0 of 1 | — | — | no verdict |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
 <!-- registration-report:end -->
 
 ## Known problems

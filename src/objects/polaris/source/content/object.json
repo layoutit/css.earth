@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "polaris",
+  "displayName": "Polaris",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "46 solar radii"
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "137 parsecs"
+      },
+      {
+        "id": "rotation-axis",
+        "label": "Rotation axis",
+        "value": "not measured"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "polaris-lens-shape.webp",
+        "surface": "polaris-surface-shape.webp",
+        "poles": "polaris-poles-shape.webp",
+        "source": {
+          "id": "polaris-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2407.09641"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere is cast here. The public CHARA/MIRC-X visibilities of April 2021 resolve the disc only about six beams across, and a reconstruction from them shows the same spots as one from a spotless disc sampled the same way (see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190",
+      "href": "https://arxiv.org/abs/2407.09641"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2407.09641",
+      "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/polaris.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

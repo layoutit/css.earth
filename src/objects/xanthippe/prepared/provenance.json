@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd5ad7484a10bc5b2b33695926cb7225ebeedf32d2097f82b2561b5dc47fcaf1"
+    "sha256": "d8067e3d2a9527582b6536984800a7476b3600ccc258ced6353c8f7bb66f4c9e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3749110ef0f911b3a81726e0e6cee0cd92037922bd04468258f3616f2d7f22c8"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6cb2e00b47e983d4ed6be246a2e50d707c3751b0b8f6a995ff448d4297c00c61",
+      "sha256": "0774221647a85683147c4bdd10b6f141985f945b85d3593db1bcc66d4a2799b7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4643, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/xanthippe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6cb2e00b47e983d4ed6be246a2e50d707c3751b0b8f6a995ff448d4297c00c61",
-      "bytes": 11018,
+      "sha256": "0774221647a85683147c4bdd10b6f141985f945b85d3593db1bcc66d4a2799b7",
+      "bytes": 11042,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8388,
-          "sha256": "b8c98ae24dd7d7ed2d19f4d098411008b439cb89614e505d69d42442d185b167",
+          "bytes": 8412,
+          "sha256": "6aaa8e9a0c95b7129832c911253954530d1710c2c3971fc4f6fdeb114da25082",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "xanthippe",
-    "materialSha256": "d495eaa8ee6ed97f00fcff401ab5b67d9dfc1e42c823e6dec96a82484b3e95f1",
+    "materialSha256": "d9d8443593397a6f7681ec362ddfe605785ac9687c999ea77eab7ccff0c6e86a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3749110ef0f911b3a81726e0e6cee0cd92037922bd04468258f3616f2d7f22c8"
     }
   }

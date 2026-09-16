@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9cfa29e4e1465fa50f066738d31de82a4702721a94acfb1a370753649a829467"
+    "sha256": "5d5332da425bc3a707c9f6125becaca89cb211176bb988f6e1c661da637af556"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "768fa4b8aacaa7322eeb15fbb271d3c0723c3f12806d9d2cc0591adcae387bef"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4354b9025613654e78476e08e972d3c2562d9b634415254655cfcd9b760cdd13",
+      "sha256": "e470a4711f5033802e4828bef5f572b6445d32d60c17941671cdd4c7ec14023e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 5792, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/klio.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4354b9025613654e78476e08e972d3c2562d9b634415254655cfcd9b760cdd13",
-      "bytes": 7279,
+      "sha256": "e470a4711f5033802e4828bef5f572b6445d32d60c17941671cdd4c7ec14023e",
+      "bytes": 7298,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4714,
-          "sha256": "eba34ca17c45d083bea1c21316d3d5a39f399dc118537927876a4b3a3b3047a0",
+          "bytes": 4733,
+          "sha256": "0ee48c31d2a77fb889940cc1387b7de1e1397095c822196813f21a24e6194c91",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "klio",
-    "materialSha256": "239e3c2e9c86657ed87ba9e9bde90db0ebf20de9074f8db9d24de1a09945a5f7",
+    "materialSha256": "4d67f3cd11a27064ee493f3b0aa376c9d884f3ee9096f9b6c4512d8191f509df",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "768fa4b8aacaa7322eeb15fbb271d3c0723c3f12806d9d2cc0591adcae387bef"
     }
   }

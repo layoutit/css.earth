@@ -530,8 +530,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9384,
-      "expectedSha256": "db4a75972d63dc51ed2150a60e99b37e9cb0bf7d815e8601db217889b13aa624",
+      "expectedBytes": 9764,
+      "expectedSha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -544,8 +544,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1337,
-      "expectedSha256": "80608fca359e6d3caf6b53f18fe5b3a44b6138dd6fed36a3b3969ee7bf532371"
+      "expectedBytes": 444,
+      "expectedSha256": "97a0fb0c23f8611ef8f62e2acfbe7a3558eb27ea08488401a0384a8686b6fc11"
     },
     {
       "path": "preparation/rotation.json",
@@ -554,8 +554,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5145,
-      "expectedSha256": "f1f0aabbcda3bad21ed38bf235fb61da07ea9d96d194a85f63d582241b16ac8a"
+      "expectedBytes": 5176,
+      "expectedSha256": "8b8067366179ab05c93720b4d482a640d10cd7b75f165134ced01849fcec98ba"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -660,7 +660,10 @@
             "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
           }
         ]
-      }
+      },
+      "origin": "https://doi.org/10.1016/j.icarus.2015.11.023",
+      "credit": "Published Hapke parameters: Hasselmann et al. (2016), doi:10.1016/j.icarus.2015.11.023. Selection and transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
     }
   ]
 }

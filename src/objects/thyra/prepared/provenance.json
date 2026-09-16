@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b744e9758c474ec82b1dfa5704862a69937dc33eba2244a198d219f9683d2450"
+    "sha256": "060fc8c704669ad6a04882529babbbca05e25b4f4c34b35846d1c98bf4d3e63d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "1e5c3f456c253005129ee31b60132e86724766d8bdf51fb65cc6fab4c4a580bd"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7f187c19eda9c1643a091dc22d97374d22f79a5ae5a6f7bbff49304bf847bdf5",
+      "sha256": "b251571bbbb807ee54f4d8f7f5caa3f4f2a60d00b07bf7f9d9df383fcfc0b718",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; T. Michalowski (2004), M. Delbo and P. Tanga (2009); model 154, version 2009-02-26."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/thyra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7f187c19eda9c1643a091dc22d97374d22f79a5ae5a6f7bbff49304bf847bdf5",
-      "bytes": 8180,
+      "sha256": "b251571bbbb807ee54f4d8f7f5caa3f4f2a60d00b07bf7f9d9df383fcfc0b718",
+      "bytes": 8200,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5609,
-          "sha256": "10cbb8acc14b1960233e833909a1e14c655e4f2f9d60be986f590ab7f95ced4b",
+          "bytes": 5629,
+          "sha256": "53d5c93ad6afdef59e5cc5d9e8b294a1101a3c2fe9a824f240bff6a25d4a3844",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "thyra",
-    "materialSha256": "9569d32e098291c943cd0ca7f9e17621bfa115d43d33fd6c95cb3d58b91787b3",
+    "materialSha256": "128d1dc37aa9046ed5d3fd46ecd2d65d6b2ab1ee5980ccded54498e34dee342d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "1e5c3f456c253005129ee31b60132e86724766d8bdf51fb65cc6fab4c4a580bd"
     }
   }

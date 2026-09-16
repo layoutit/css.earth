@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mithra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f53c97f59cc95a277ee9df74a0b7ed2966720c2b6a2ec2fba3ea427c048703e4"
+    "sha256": "ac6314ef2f2741e0b80c3ea0c5fe289b70af6badef0a7b94b4dc084ebf913477"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "72127797d9677fa49f9419bd0f672490d9e445d76b6971b6c72cb2809a5d27bd"
   },
   "recipes": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6d823eb29334642b3d7fc7c46dfd6b6296b3145f83b8ad005a7e713245aa5de4",
+      "sha256": "6075f7da5b32e7b58dba1d1919b396c99af952599093eaed82e42e3f34d5a34d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,17 +173,41 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.205 AU"
+              "value": "2.205 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274486%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "3.27 years"
+              "value": "3.27 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274486%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "67.5 ± 6.0 hours"
+              "value": "67.5 ± 6.0 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -276,7 +300,7 @@
             "credit": "Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/mithra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -331,7 +355,7 @@
       "sha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e",
       "bytes": 186529,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +380,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6d823eb29334642b3d7fc7c46dfd6b6296b3145f83b8ad005a7e713245aa5de4",
-      "bytes": 7341,
+      "sha256": "6075f7da5b32e7b58dba1d1919b396c99af952599093eaed82e42e3f34d5a34d",
+      "bytes": 8920,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +415,19 @@
           "url": "/scenes/mithra/mithra-elevation-thumbnail.webp",
           "bytes": 6276,
           "sha256": "f9169169b11664bc02a8787c4bd4e1234c137aa220565aa115162e69aebd6264",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mithra/mithra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mithra/mithra-elevation-surface@2x.webp",
           "bytes": 425398,
           "sha256": "ae9c144a0228777ae9aa9a2e425d30dab8098042fb0ad4a2b4635a88fb03c57c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +465,13 @@
           "url": "/scenes/mithra/mithra-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mithra/mithra-shape-surface@2x.webp",
           "bytes": 76448,
           "sha256": "94125120bd5a29a89741d520d496d5c8d033d84e33d45b6ccfeeea824285824b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4816,
-          "sha256": "d485d6f859fb6ccb4ef58b261c8df654c27302eabc3c60c46e599cd3b8f0a524",
+          "bytes": 6122,
+          "sha256": "5a0250d20494e85480166ff07fa4912bc126f804d4b6c932f6508495cf1f6dd3",
           "verification": "bytes-verified"
         }
       ],
@@ -542,11 +566,11 @@
   },
   "lastPreparation": {
     "objectId": "mithra",
-    "materialSha256": "54114984a8432b9575bfb276bcda48f6ee3e89b28f7e0dbc4025203ab800a431",
+    "materialSha256": "e9fec0957d6cb35845ce399e70825343da8fbb3966b44ee7fe32b563300bec72",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "72127797d9677fa49f9419bd0f672490d9e445d76b6971b6c72cb2809a5d27bd"
     }
   }
 }

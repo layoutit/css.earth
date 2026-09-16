@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { SCENE_OBJECTS, requireSceneObject } from '../objects.mts';
-import { deriveObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
+import { deriveObjectDiscovery, prepareObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
 import { discoveryVisibility, parseObjectDiscovery } from '../object-discovery.mts';
 import { parseArrivalView } from '../arrival-view.mts';
 import { record } from '../browser-types.mts';
@@ -58,6 +60,9 @@ test('model textures, shape-derived elevation and featured overrides cannot prom
   // A neutral-gray shape surface is measured geometry with no imagery: "Shape only", never an illustration.
   const shape = [{ surfaces: [{ id: 'shape', science: { kind: 'neutral-shape' } }] }];
   assert.deepEqual(deriveObjectDiscovery({}, controls('shape'), shape), { featured: false, imagery: false, illustration: false });
+  // A whole-disc measured colour is photometry of an unresolved body, not surface imagery.
+  const color = [{ surfaces: [{ id: 'color', science: { kind: 'disc-integrated-color' } }] }];
+  assert.deepEqual(deriveObjectDiscovery({}, controls('color'), color), { featured: false, imagery: false, illustration: false });
 });
 
 test('partial photographic coverage still counts; source and lens counts do not', () => {
@@ -83,6 +88,17 @@ test('default discovery admits photographed asteroids and hides illustrations ac
   }
   // Occultation-measured shapes in neutral gray are "Shape only", like reconstructed asteroid meshes.
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'eris', 'haumea', 'makemake']) assert.equal(requireSceneObject(id).discovery.illustration, false, id);
+});
+
+test('a star with only its shape stays off the map, whatever the settings', () => {
+  for (const options of [defaults, { illustrations: true, asteroids: true, asteroidLabels: true, highlighted: 'star' }]) {
+    const scene = discoveryVisibility(SCENE_OBJECTS, options);
+    for (const id of ['antares', 'polaris']) {
+      assert.equal(requireSceneObject(id).discovery.imagery, false, id);
+      assert.ok(scene.hiddenBodies.includes(id) && scene.hiddenLabels.includes(id) && !scene.highlightedBodies.includes(id), id);
+    }
+    for (const id of ['sun', 'betelgeuse', 'pi1-gruis', 'ce-tauri']) assert.equal(scene.hiddenBodies.includes(id), false, id);
+  }
 });
 
 test('category browsing and asteroid settings cannot bypass Illustration models', () => {
@@ -114,4 +130,14 @@ test('photographic arrivals use the prepared package camera, excluding modeled a
   assert.throws(() => deriveObjectDiscovery(policy, preparedControls, recipes, { ...camera, defaultControlYawDegrees: NaN }));
   assert.throws(() => parseArrivalView({ defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,1,0,0,0,-1] }));
   assert.ok(requireSceneObject('arrokoth').discovery.arrival?.lensIds.includes('lorri'));
+});
+
+test('a package that was never prepared is discoverable as shape only instead of failing the catalogue', async () => {
+  const folder = await mkdtemp(join(tmpdir(), 'discovery-unprepared-'));
+  try {
+    await mkdir(join(folder, 'source/preparation'), { recursive: true });
+    await writeFile(join(folder, 'source/preparation/raster.json'), JSON.stringify({ surfaces: [{ id: 'photo', science: { kind: 'surface-observation' } }] }));
+    const descriptor = { properties: { catalog: {}, recipe: { sources: [{ id: 'raster', path: 'source/preparation/raster.json' }] } } };
+    assert.deepEqual(await prepareObjectDiscovery(descriptor, folder), { imagery: false, illustration: false, featured: false });
+  } finally { await rm(folder, { recursive: true, force: true }); }
 });

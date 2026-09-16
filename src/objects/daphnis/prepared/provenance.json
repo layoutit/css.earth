@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "daphnis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f1fd4ed565d64443d61f7694af99555cfedddadb87d63af73b23eb3a73c9fb5a"
+    "sha256": "fc3555e94dc4047d179df05eeb1acb80289f2470fea4ac259a5527fc498d9b2b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "309389c9d6a00ce96c8fdf5166d56ae618179ae8bdd28869bb3ca7ad4b8d141c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f27493529d3fab069842a6ef4ab716f12dd0684fda0dde335638170e50cafd3",
+      "sha256": "7dcaee707a97d36bca4f5fe6c6ce5d1bcf8a2c1faee51dd1e523b49ea09426d0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -165,6 +165,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.528
@@ -271,6 +272,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -334,7 +336,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "43b97e56bb6be50b17ece30e8dad68527199260dbd730f5f2c2c00001930689e",
+      "sha256": "62841d0d2ec141ef161afc525dd9794caa3b70fd5cfefe4812390e4ffb37fd1f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -484,7 +486,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/daphnis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -537,7 +539,7 @@
       "sha256": "8fc85246848ad05de7c68b0686f9fde7d3c23529d02db9c1e7287864b74c34be",
       "bytes": 2019600,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -591,7 +593,7 @@
       "sha256": "d13c92192552c1c7a7cc4146b6767da7b7cc3dd1b753e80438670b08c1b16320",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -638,7 +640,7 @@
       "sha256": "4e9288fef8b341477517ceb86d5daaf12bedbf0b21178657b881628308563423",
       "bytes": 3829,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -692,7 +694,7 @@
       "sha256": "c8c1b35ac229a1b69b6767088298b1c412e7e6f9c28b762f1ccaf30a73a39eb0",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -739,7 +741,7 @@
       "sha256": "4c6172fabd9dadeb93d70b6896bdf78194c8350ceed7e5ef81fd429f27fae940",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -793,7 +795,7 @@
       "sha256": "b026a3faac020e7829dd36c6b7e69f7e5cb17995961117bd3c9dbdc86c93d3ac",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -840,7 +842,7 @@
       "sha256": "25e85a27af3d62e800738d7819cd5022dc21140bc6b215c74b3e27b54dae93cc",
       "bytes": 3865,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -895,7 +897,7 @@
       "sha256": "82678aef88673ec6bd4b1bea7987eb04606295a904a535c09ad1c50d2961b6b5",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -942,7 +944,7 @@
       "sha256": "770bd966143aeb525caeb88bdbbb96ce5017dcb8a06ca2276dd812406d5474e6",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -997,7 +999,7 @@
       "sha256": "86c6033321f89e1b8b5e56ee964098c1bdecee7643265eea6ed106bec748b562",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1044,7 +1046,7 @@
       "sha256": "cd51d655fabfaf4c6bb1b7dcc2f20bd7044c3c6ff55be6db5e8aa70ed24337d7",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1099,7 +1101,7 @@
       "sha256": "b1a19650d4aca16fa48cea205070a30b3baafcf427ae5aba9e6e79bc6483e157",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1146,7 +1148,7 @@
       "sha256": "1f52334470142a743b6efe7b0f20f172f6981ac3ec12a90f7827fdb64f80952b",
       "bytes": 3829,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1170,10 +1172,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "43b97e56bb6be50b17ece30e8dad68527199260dbd730f5f2c2c00001930689e",
-      "bytes": 4900,
+      "sha256": "62841d0d2ec141ef161afc525dd9794caa3b70fd5cfefe4812390e4ffb37fd1f",
+      "bytes": 4922,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1205,19 +1207,19 @@
           "url": "/scenes/daphnis/daphnis-elevation-thumbnail.webp",
           "bytes": 4514,
           "sha256": "5a7fab90da67b55a8cffcfc0e9e1b006549959b3c2d206077e1dbecc02040b70",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-surface@2x.webp",
           "bytes": 267548,
           "sha256": "b6a819ab54e43a39431d3e04d0eb2060fd02229d8382a0c00c050f88f5914993",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1259,15 +1261,15 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
-          "bytes": 1632,
-          "sha256": "ccb21269ba469c77071d78832bb8f113dd68f91ee45890b9b41637feb776ac38",
-          "verification": "asset-manifest-pin"
+          "bytes": 1534,
+          "sha256": "d6abec5daf5f5d5d33002bd254bb6e1acbe7557480eb65555cb23b841dccdb84",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 190648,
-          "sha256": "f8b64793a200f81a88d19658a0ae16c486c7087112280ea5aabd6c21511605cb",
-          "verification": "asset-manifest-pin"
+          "bytes": 184148,
+          "sha256": "b50f2dd87b3491689ef0f2f1933d90a5372e301f236fc04f7059e1fa22c816ec",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1311,13 +1313,13 @@
           "url": "/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
           "bytes": 1926,
           "sha256": "f947f37b7e5009453c9650d27063955be3c79bdc62a0edbe137a457de49ebc10",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "bytes": 170796,
-          "sha256": "b47fc0ddadaaed1a8a98304f98533aed374038ccf635ff5736e4fe33be0f5636",
-          "verification": "asset-manifest-pin"
+          "bytes": 179644,
+          "sha256": "9955e0ae98ca5a98ee01c49a19597dbb9b672dd9c37b63c562d98d7064573be4",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1348,8 +1350,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5716,
-          "sha256": "c98b8c4e7350989d310757c936014b2b12da0cafa3dbf6bb7c221e60dc8e15fc",
+          "bytes": 5738,
+          "sha256": "48639e1f69f8bf6f19f8bd01a32f71a7cb18f50f4a98a11729c27baa45b87eb2",
           "verification": "bytes-verified"
         }
       ],
@@ -1374,8 +1376,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 8094,
-          "sha256": "b93cfa770c931d17aff424e176e6094a3ac0d015ef554f2161d26b170086bf3a",
+          "bytes": 7772,
+          "sha256": "62ac6a9a5a979197eb803f296265a8c4c365f591d77528679620343e84451b75",
           "verification": "bytes-verified"
         }
       ]
@@ -1437,11 +1439,11 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "15fa6a53c061e1d491d3697fa0aacc138bf373d8e4580ea9de92fc0af0750ef2",
+    "materialSha256": "a26dbe6c776a6cc8a26eeb833f510680a835b9063515db9d6d92ee6fb0d27413",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "309389c9d6a00ce96c8fdf5166d56ae618179ae8bdd28869bb3ca7ad4b8d141c"
     }
   }
 }

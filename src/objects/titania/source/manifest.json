@@ -612,8 +612,8 @@
     {
       "id": "titania-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 3296,
-      "expectedSha256": "0b65cf876da337da6fa9fe38e3cbca12bb224f99910a8bf263d88fe4cf98a273",
+      "expectedBytes": 1345,
+      "expectedSha256": "18fe6be36f2d2a2a69aa8117dbac33379608dbdb09045ed88a7b205fcfabc659",
       "origin": "Repository-authored Titania navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -649,8 +649,8 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12161,
-      "expectedSha256": "67a37d8f0fee8476e93302e9c6edec44bdc84b3f773984b529ebdd38a3515afd",
+      "expectedBytes": 12183,
+      "expectedSha256": "54e9b6bd935a806552c29c91042b205dc942c2d3ff846ef6881160198b783709",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

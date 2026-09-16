@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "91a40c9fd8ae1b41271b6d75a686394414a731c8dc31b887b02814726adf176b"
+    "sha256": "fbada4feeffadd4cbed1b1a2ccca96b85de383ed4b343b9c12b340bac3fe823a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "b55218436674723914235194548ac314d1aec9614eced8132fa51f60cbfb67d2"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c1a790717907e94301c9ceecdf9c8dd875986dab6d1b2af3e754d30ba6caffa2",
+      "sha256": "536c1cf8139c494a8a2d5eb585451873ea16dcd8670b5ed8692c12f2666d1ec8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011); model 329, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/tyche.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c1a790717907e94301c9ceecdf9c8dd875986dab6d1b2af3e754d30ba6caffa2",
-      "bytes": 8393,
+      "sha256": "536c1cf8139c494a8a2d5eb585451873ea16dcd8670b5ed8692c12f2666d1ec8",
+      "bytes": 8413,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5813,
-          "sha256": "1e4438798d056b4c7fbc928cebc251faeec3e0850d2614c3bc4eff43a0f1b743",
+          "bytes": 5833,
+          "sha256": "1a747937a27bbf78202ee6551dcc0dee46a725c851b7312b8e1065637bd76319",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "tyche",
-    "materialSha256": "77df698a24ec9412e21176b9bc270427c43a1cdde4b8580384542db314fc760b",
+    "materialSha256": "89d409abd639a46285383d2f3a2bafa7ad689893d8458c77fd516dcdda5c51dc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "b55218436674723914235194548ac314d1aec9614eced8132fa51f60cbfb67d2"
     }
   }

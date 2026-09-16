@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1998-wt24",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1e63b127109d00fae5d51261c322724d8d44ad3be2d68a7f0d44f23da718820"
+    "sha256": "8f695cfd39040bc47660c224e13b022bab92d90dc1d3df1c9e699725f96bda91"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "7376a8301c6260b7abfcf58199391dcb566ba85f39fb357c3f53769535b06905"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f4a3428156a9326041e396d89ad31fdb424a025273ad9252a17e5afb1992010a",
+      "sha256": "fbbc96f5af122f3de08118b7b38f1849d1254e17c75cef949e19150c679bdb41",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,17 +169,41 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "0.719 AU (mean)"
+              "value": "0.719 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2733342%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "0.61 years"
+              "value": "0.61 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2733342%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.697 hours"
+              "value": "3.697 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -271,7 +295,7 @@
             "credit": "Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1998-wt24.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -326,7 +350,7 @@
       "sha256": "dade62d25e160a1d19099aae9b1e316946d034e7ae9d8cd234888c60387c37a8",
       "bytes": 248733,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -351,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f4a3428156a9326041e396d89ad31fdb424a025273ad9252a17e5afb1992010a",
-      "bytes": 8651,
+      "sha256": "fbbc96f5af122f3de08118b7b38f1849d1254e17c75cef949e19150c679bdb41",
+      "bytes": 10244,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +410,19 @@
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-thumbnail.webp",
           "bytes": 5906,
           "sha256": "227b9705387394a69c396b105b9f3e2736ffa11f856825c70b54e7d386b5b941",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-surface@2x.webp",
           "bytes": 347114,
           "sha256": "594efba3688ea0348707a69117cc2fbc4642362998cf2772f7a391ce498973e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -436,13 +460,13 @@
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-surface@2x.webp",
           "bytes": 63306,
           "sha256": "709e1d76ba708d649dec5c582501e5315cdfb1953a1e17f0e2e5b0aa068acc59",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -473,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6398,
-          "sha256": "b0f6ce77b4ee4bf4f1674b79860615e241cf42c6409891ec893a92d55f18ca64",
+          "bytes": 7718,
+          "sha256": "c355a493197b1536bd4b559b52b276e250400061db4add72cda15ad4d1925df5",
           "verification": "bytes-verified"
         }
       ],
@@ -537,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-wt24",
-    "materialSha256": "d2bcb3232b887d40482c3fc44cceb6e368131c13a8391dc8ce361a8b92271475",
+    "materialSha256": "650560cbbf40e9dad7e83a2e6d1a9456444ff3968e9c91c08a580400be85b3c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "7376a8301c6260b7abfcf58199391dcb566ba85f39fb357c3f53769535b06905"
     }
   }
 }

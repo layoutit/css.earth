@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32844733a2be54aaab4be937986c1f7f9db94484996243e3da5dbcc2935cc007"
+    "sha256": "435fd840f1d1ab503304402dc82ccb6e41485d3377e522b1584a9fd591e290ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "eb5dbfcbfb7a08744173267a81dc0eda6221526b8fc861abba55c8223b0ce94a"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3fafc44f7938a8a99824d7d1bebf8bdabf7c584414410384c8920ca790102505",
+      "sha256": "40abd00f32b43b7107a91b17d78aefa315d2296b656fbba6e796fede5e4b8a86",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4799, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hedda.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3fafc44f7938a8a99824d7d1bebf8bdabf7c584414410384c8920ca790102505",
-      "bytes": 9268,
+      "sha256": "40abd00f32b43b7107a91b17d78aefa315d2296b656fbba6e796fede5e4b8a86",
+      "bytes": 9288,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6690,
-          "sha256": "e9d287ff05702a3a384dcf78fa388705a74d6cade229114c0af965a728d227a0",
+          "bytes": 6710,
+          "sha256": "919c1116703ab8f7903ef319191ad1aceeaa388ca3e1999e97413a3ba33ffbf4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "hedda",
-    "materialSha256": "de8420ae42b9949a5824fc2d276ed5f34a92f763e03f977d9a42a21bfec9d4f3",
+    "materialSha256": "0e6da7eb544140e11a8f3c1d2fb86ef5f5322ffabfb1f5c6e1e0b806d7e01014",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "eb5dbfcbfb7a08744173267a81dc0eda6221526b8fc861abba55c8223b0ce94a"
     }
   }

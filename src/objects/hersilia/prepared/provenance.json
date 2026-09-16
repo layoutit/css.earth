@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a03101f4eb7e1f347be96876813d172baee5acb311f0ac1a01506879e4608fd"
+    "sha256": "c5ebce02b82ed4d81635520c29e075bc0cafc09f170027ea1355ded878e4b213"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "eb42a5ed78a119d06365b09e85037d6830f802dca62e64e0572e8862be56676d"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2266e381a62a798c3fdba1655b3d7c68a6fd43a5eed5f675b8137ff09c09c902",
+      "sha256": "44906d86cd6acf4033e273d62c8640aecb2dabd60aab39eb5ff8a0bbb7e33d11",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3217, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hersilia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2266e381a62a798c3fdba1655b3d7c68a6fd43a5eed5f675b8137ff09c09c902",
-      "bytes": 9515,
+      "sha256": "44906d86cd6acf4033e273d62c8640aecb2dabd60aab39eb5ff8a0bbb7e33d11",
+      "bytes": 9538,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6896,
-          "sha256": "0aa2d008c2b1bb8af44160dcfc79634c2ca6735a677104c81aa1d9bc3f730f63",
+          "bytes": 6919,
+          "sha256": "50f1d99a0b09b7297a288aada837466fbe0c8ec49834b04088b73aafa27bf571",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "hersilia",
-    "materialSha256": "ee8ee976da977cd48881f901b82d559f6aafb4ec33eaa4ae4dc37b0c04cc21be",
+    "materialSha256": "c73869f72df64be43f0991c649a77983eb8a71c48b6af17bd65fbcee9fa79e2d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "eb42a5ed78a119d06365b09e85037d6830f802dca62e64e0572e8862be56676d"
     }
   }

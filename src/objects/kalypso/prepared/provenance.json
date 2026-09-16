@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "15284c89424ec32eff07f0cce32d7d0a073ef41b86581a2e6ea9e9e6219942fa"
+    "sha256": "e5db4e583a9855d81070f28292466b1b73650a66687987d59fc400db322d1cf1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "b1327a4de10f7be5019f21645586e094212e412e405e0cea705232658ff6af2a"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0492df4d544c3830b6892241b68c7618a74cdd1bb1e9f816f6f52fd1e64ca1c9",
+      "sha256": "d7156d92ee94350d2ee674414652f2a9119a62a6edcb1ba60047c079674052c1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Franco et al. (2016); model 1732, version 2016-07-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kalypso.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0492df4d544c3830b6892241b68c7618a74cdd1bb1e9f816f6f52fd1e64ca1c9",
-      "bytes": 9890,
+      "sha256": "d7156d92ee94350d2ee674414652f2a9119a62a6edcb1ba60047c079674052c1",
+      "bytes": 9912,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7286,
-          "sha256": "a357b48551d9190e4671e896fe1bd04059768c29588295b4a40e77b58155ad83",
+          "bytes": 7308,
+          "sha256": "bfb8b3c375a38035fe11f070e73df3c31595d685938f9e5d6b5089cdb8cde128",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "kalypso",
-    "materialSha256": "966d4774b85d6bfc5229c6cb4460b8f692cc4dc78b62939fb53300bd5a2b566b",
+    "materialSha256": "4532eefd50cdf007adf406c044b4284cdfb1075f75ec969f00742a7f702b1f4c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "b1327a4de10f7be5019f21645586e094212e412e405e0cea705232658ff6af2a"
     }
   }

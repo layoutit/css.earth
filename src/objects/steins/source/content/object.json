@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Reference radius",
-        "value": "2.58 km"
+        "value": "2.58 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-physical.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "Target physical data: RAD (km)"
+        }
       },
       {
         "id": "distance-from-sun",
@@ -40,7 +48,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "6.05 hours"
+        "value": "6.05 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-physical.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "Target physical data: ROTPER (h)"
+        }
       }
     ],
     "moreFacts": [
@@ -177,7 +193,7 @@
       "credit": "ESA/Rosetta/MPS for OSIRIS Team; Jorda, Gaskell and Kaasalainen; Phil Stooke/NASA PDS"
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/steins.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

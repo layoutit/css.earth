@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0bc90dd8738086c2eaa491d4bcb0cf51c21b890483fbbb3a3767380c24dfc04"
+    "sha256": "d69a437e734de87b6680d37398bf694b78c3f3169d20df889445d59eee3c3c25"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "acd072dc052cec38abeb6baeaa736a4ebcdeeee563980ac0535667871a7d8ebb"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aa663e38fdc8db058603b0436ceabedef49fda1239ae1b030a05493bd4bf689f",
+      "sha256": "4617a8fcffb7228dd6bc4a8652027c963d989b5db1b00b3049fd2de98562393f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 845, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/augusta.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aa663e38fdc8db058603b0436ceabedef49fda1239ae1b030a05493bd4bf689f",
-      "bytes": 10104,
+      "sha256": "4617a8fcffb7228dd6bc4a8652027c963d989b5db1b00b3049fd2de98562393f",
+      "bytes": 10126,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7504,
-          "sha256": "23123a2842ff832b61ea185526d2871514a6ca3ff781111e5e9775a3c404f717",
+          "bytes": 7526,
+          "sha256": "9f17a828c67806466523d0f56091d5a86e10df04e52b5be9d710b698489adaa4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "augusta",
-    "materialSha256": "d7e4d9676d236431f4c1dabcfe1182ef774a9fdacbfe7e05089418d2e151d3b0",
+    "materialSha256": "34e42164ce74793aa80241668860b82a69c3f332b2634a17242caad9bd7410d8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "acd072dc052cec38abeb6baeaa736a4ebcdeeee563980ac0535667871a7d8ebb"
     }
   }

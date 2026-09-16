@@ -283,19 +283,22 @@ export function createShapeSurfaceSampler(mesh: SourceMesh, value: unknown, vali
   } };
 }
 
-/** Euclidean projection onto a triangle, including its boundary. The returned
- * barycentric weights identify the source point independently of any ray. */
-export function closestTrianglePoint(point: readonly number[], a: readonly number[], ab: readonly number[], ac: readonly number[]) {
-  const ap = sub(point, a), d1 = dot(ab, ap), d2 = dot(ac, ap);
+/** Barycentric weights (u on AB, v on AC) of the Euclidean projection of a point onto a triangle, including its boundary.
+ * Scalar and allocation-free: the mesh search runs it for every candidate face. */
+function projectionWeights(px: number, py: number, pz: number, a: readonly number[], ab: readonly number[], ac: readonly number[], weights: { u: number; v: number }) {
+  const apx = px - a[0], apy = py - a[1], apz = pz - a[2];
+  const d1 = ab[0] * apx + ab[1] * apy + ab[2] * apz, d2 = ac[0] * apx + ac[1] * apy + ac[2] * apz;
   let u = 0, v = 0;
   if (!(d1 <= 0 && d2 <= 0)) {
-    const bp = sub(ap, ab), d3 = dot(ab, bp), d4 = dot(ac, bp);
+    const bpx = apx - ab[0], bpy = apy - ab[1], bpz = apz - ab[2];
+    const d3 = ab[0] * bpx + ab[1] * bpy + ab[2] * bpz, d4 = ac[0] * bpx + ac[1] * bpy + ac[2] * bpz;
     if (d3 >= 0 && d4 <= d3) u = 1;
     else {
       const vc = d1 * d4 - d3 * d2;
       if (vc <= 0 && d1 >= 0 && d3 <= 0) u = d1 / (d1 - d3);
       else {
-        const cp = sub(ap, ac), d5 = dot(ab, cp), d6 = dot(ac, cp);
+        const cpx = apx - ac[0], cpy = apy - ac[1], cpz = apz - ac[2];
+        const d5 = ab[0] * cpx + ab[1] * cpy + ab[2] * cpz, d6 = ac[0] * cpx + ac[1] * cpy + ac[2] * cpz;
         if (d6 >= 0 && d5 <= d6) v = 1;
         else {
           const vb = d5 * d2 - d1 * d6;
@@ -309,6 +312,15 @@ export function closestTrianglePoint(point: readonly number[], a: readonly numbe
       }
     }
   }
+  weights.u = u; weights.v = v;
+}
+
+/** Euclidean projection onto a triangle, including its boundary. The returned
+ * barycentric weights identify the source point independently of any ray. */
+export function closestTrianglePoint(point: readonly number[], a: readonly number[], ab: readonly number[], ac: readonly number[]) {
+  const weights = { u: 0, v: 0 };
+  projectionWeights(point[0], point[1], point[2], a, ab, ac, weights);
+  const { u, v } = weights;
   return { point: a.map((n, i) => n + u * ab[i] + v * ac[i]), barycentric: [1 - u - v, u, v] };
 }
 
@@ -363,13 +375,15 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
       }
       if (!n.items) {visit(n.left);visit(n.right);return;}
       for (const f of n.items) {
-        const h=cross(d,f.ac),det=dot(f.ab,h);
+        // Scalar Möller–Trumbore in the order the vector helpers used; every candidate face of every ray passes here.
+        const ab=f.ab, ac=f.ac, fa=f.a;
+        const h0=d[1]*ac[2]-d[2]*ac[1], h1=d[2]*ac[0]-d[0]*ac[2], h2=d[0]*ac[1]-d[1]*ac[0], det=ab[0]*h0+ab[1]*h1+ab[2]*h2;
         if(Math.abs(det)<1e-12)continue;
-        const s=sub(origin,f.a),u=dot(s,h)/det;
+        const s0=origin[0]-fa[0], s1=origin[1]-fa[1], s2=origin[2]-fa[2], u=(s0*h0+s1*h1+s2*h2)/det;
         if(u < -1e-9 || u > 1+1e-9)continue;
-        const q=cross(s,f.ab),v=dot(d,q)/det;
+        const q0=s1*ab[2]-s2*ab[1], q1=s2*ab[0]-s0*ab[2], q2=s0*ab[1]-s1*ab[0], v=(d[0]*q0+d[1]*q1+d[2]*q2)/det;
         if(v < -1e-9 || u+v > 1+1e-9)continue;
-        const t=dot(f.ac,q)/det;
+        const t=(ac[0]*q0+ac[1]*q1+ac[2]*q2)/det;
         if (t > 0 && t < maximumDistance) {
           farthest = Math.max(farthest, t);
           if (t < nearest) { nearest = t; faceId = f.id; }
@@ -392,7 +406,9 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
     // Coincident hits at an edge identify the same point; equal-distance hits
     // on distinct surfaces do not establish a unique correspondence.
     const tieSquared = 1e-12;
-    const boxDistance = (node: FaceTree) => point.reduce((sum, p, i) => sum + Math.max(node.min[i] - p, 0, p - node.max[i]) ** 2, 0);
+    const [px, py, pz] = point, weights = { u: 0, v: 0 };
+    const axisGap = (min: number, p: number, max: number) => Math.max(min - p, 0, p - max) ** 2;
+    const boxDistance = (node: FaceTree) => 0 + axisGap(node.min[0], px, node.max[0]) + axisGap(node.min[1], py, node.max[1]) + axisGap(node.min[2], pz, node.max[2]);
     function visit(node: FaceTree) {
       if (boxDistance(node) > distanceSquared + tieSquared) return;
       if (!node.items) {
@@ -400,14 +416,18 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
         visit(leftFirst ? node.left : node.right); visit(leftFirst ? node.right : node.left); return;
       }
       for (const face of node.items) {
-        const projected = closestTrianglePoint(point, face.a, face.ab, face.ac);
-        const delta = sub(point, projected.point), squared = dot(delta, delta);
+        // Scalar arithmetic in the order closestTrianglePoint uses, so results are bit-identical without allocating per face.
+        projectionWeights(px, py, pz, face.a, face.ab, face.ac, weights);
+        const { u, v } = weights, { a, ab, ac } = face;
+        const qx = a[0] + u * ab[0] + v * ac[0], qy = a[1] + u * ab[1] + v * ac[1], qz = a[2] + u * ab[2] + v * ac[2];
+        const dx = px - qx, dy = py - qy, dz = pz - qz, squared = dx * dx + dy * dy + dz * dz;
         if (squared > distanceSquared + tieSquared) continue;
         if (result && Math.abs(squared - distanceSquared) <= tieSquared) {
-          const separation = sub(result.point, projected.point);
-          if (dot(separation, separation) > tieSquared) ambiguous = true;
+          const sx = result.point[0] - qx, sy = result.point[1] - qy, sz = result.point[2] - qz;
+          if (sx * sx + sy * sy + sz * sz > tieSquared) ambiguous = true;
           continue;
         }
+        const projected = { point: [qx, qy, qz], barycentric: [1 - u - v, u, v] };
         const normal = cross(face.ab, face.ac), length = Math.hypot(...normal);
         distanceSquared = squared; ambiguous = false;
         result = { ...projected, faceId: face.id, normal: normal.map(n => n / length),

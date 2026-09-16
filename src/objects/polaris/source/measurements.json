@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "polaris",
+  "angularDiameterMas": 3.143,
+  "angularDiameterSource": "Evans et al. (2024, ApJ 971, 190; arXiv:2407.09641, Section III.1): mean limb-darkened diameter 3.143 +/- 0.027 mas and linear limb-darkening coefficient 0.120 +/- 0.043 from CHARA/MIRC and MIRC-X H-band squared visibilities of 2016-2021, after dividing MIRC-X sizes by the wavelength-scale factor 1.0054.",
+  "distanceParsecs": 136.9,
+  "distanceSource": "136.90 +/- 0.34 pc, the distance Evans et al. (2024, ApJ 971, 190) adopt: the Gaia DR3 parallax of the wide companion Polaris B (7.2869 +/- 0.0178 mas via SIMBAD) with the Lindegren zero-point offset. Polaris Aa itself is too bright for a reliable Gaia parallax; Hipparcos gives 7.54 mas (133 pc).",
+  "radiusKm": 32184239,
+  "radiusSource": "The Evans et al. (2024) diameter at their adopted distance: 3.143 mas at 136.90 pc is 32,184,239 km, 46.26 solar radii at 695700 km; the paper gives 46.27 +/- 0.42 solar radii.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, shown in the shared neutral gray because no image of the photosphere is cast here (see investigations.json). The photosphere of a pulsating supergiant is not a solid surface and its limb is not sharp."
+  }
+}

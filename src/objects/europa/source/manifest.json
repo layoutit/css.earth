@@ -1990,8 +1990,8 @@
     {
       "id": "europa-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1715,
-      "expectedSha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836",
+      "expectedBytes": 403,
+      "expectedSha256": "52e1b280781ced6b9d63834b36b796779d8e74536443a63afc3754502e7bc9a2",
       "origin": "Repository-authored Europa navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2027,8 +2027,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 20591,
-      "expectedSha256": "d387a30b1a49bfba547b8c82b704dc91d89d89781bb5f37b4aef39631a88e148",
+      "expectedBytes": 20612,
+      "expectedSha256": "7829ad211d2f36338f465492a1065473b6f5b29d2d796586e04bc4d289eb5b60",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
