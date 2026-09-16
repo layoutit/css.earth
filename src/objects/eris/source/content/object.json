@@ -53,21 +53,21 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
-        "thumbnail": "eris-lens-shape.webp",
-        "surface": "eris-shape.webp",
-        "poles": "eris-poles-shape.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "eris-lens-color.webp",
+        "surface": "eris-color.webp",
+        "poles": "eris-poles-color.webp",
         "source": {
-          "id": "eris-observational-measurements",
+          "id": "eris-disc-color",
           "path": "../manifest.json",
-          "url": "https://doi.org/10.1038/nature10550"
+          "url": "https://doi.org/10.1051/0004-6361:20066526"
         },
-        "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
+        "notes": "One measured mean colour and albedo for the whole disc. Display coordinates are arbitrary; no terrain, albedo pattern or colour variation is claimed."
       }
     ]
   },
