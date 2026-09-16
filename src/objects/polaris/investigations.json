@@ -25,6 +25,7 @@
       "subject": "Whether the close companion Polaris Ab causes the closure phases",
       "status": "excluded",
       "finding": "Evans et al. (2024, Table 3) place Ab at 84.4 mas, position angle 315.8 degrees and flux ratio 0.0011 in April 2021. On the file's own sampling, with each channel's bandwidth, adding that point source to the 3.16 mas disc makes the closure-phase fit worse, reduced chi-squared 18.9 for the disc alone against 19.0 or 19.8 with the companion on either side. The asymmetry is on the star, as the paper found; the companion is not the reason the image fails.",
+      "revisitWhen": "A published position or flux ratio for Polaris Ab at the 2021 epoch that differs from Evans et al. (2024) enough to change the closure-phase fit.",
       "evidence": [
         "https://arxiv.org/abs/2407.09641"
       ],
