@@ -81,7 +81,7 @@ function validateCameraLens(value: unknown, sourceGeometry: unknown) {
   for (const frame of requireArray(requireRecord(value).frames)) checkFrame(frame, `${CONTEXT} frame`);
   const recipe = decodeProfile(parseControlledCameraLens, value, `Invalid source-bound ${CONTEXT}.`);
   if (recipe.format !== 'controlled-shape-camera') throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
-  validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['percentiles', 'displayRange'] }, CONTEXT);
+  validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['percentiles', 'displayRange'], palette: true }, CONTEXT);
   // A uniformly bright body has no dark samples, so an authored range starts at zero instead of stretching between its own extremes.
   if (recipe.display.displayRange !== undefined && recipe.display.displayRange[0] !== 0) throw new TypeError(`Invalid source-bound ${CONTEXT}: a monochrome display range starts at zero.`);
   validateTransfer(recipe.transfer, parseSurfaceGeometry(sourceGeometry), CONTEXT);
@@ -90,6 +90,7 @@ function validateCameraLens(value: unknown, sourceGeometry: unknown) {
 
 function validateColorLens(value: unknown, sourceGeometry: unknown) {
   const record = requireRecord(value), context = `${CONTEXT} for filter colour`;
+  if (requireRecord(record.display).palette !== undefined) throw new TypeError(`Invalid source-bound ${context}: a palette belongs to a monochrome lens.`);
   checkKeys(value, [...LENS_KEYS, 'bands'], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, 'registration'], context);
   for (const set of requireArray(record.frames)) {
     checkKeys(set, ['id', ...BANDS], [], `${context} band set`);
@@ -215,8 +216,8 @@ function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly Observation
   const policy: SurfacePolicy = { format: recipe.format,
     selection: frames.length === 1 ? 'single' : recipe.selection === 'lowest-emission' ? 'lowest-emission' : 'finest-resolution',
     levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-    display: range ? { range: 'authored', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }
-      : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units },
+    display: { ...(range ? { range: 'authored', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }
+      : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units }), ...(recipe.display.palette ? { palette: recipe.display.palette } : {}) },
     photometry: photometry.report, limits };
   return { frames: [...frames], policy, exceeded };
 }
@@ -234,7 +235,7 @@ export const controlledCameraFormat: SurfaceObservationFormat = {
       : recipe.frames.some(frame => frame.encoding === 'fits-zimpol-intensity') ? 'deconvolved intensity'
       : recipe.frames.some(frame => frame.encoding === 'fits-oi-reconstruction') ? 'reconstructed intensity'
       : 'I/F';
-    const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear grayscale display`;
+    const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear ${recipe.display.palette ? 'palette' : 'grayscale'} display`;
     return lensPolicy(recipe, frames, photometry, context, units);
   },
 };

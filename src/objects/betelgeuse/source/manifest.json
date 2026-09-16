@@ -1198,8 +1198,8 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 113695,
-      "expectedSha256": "3e4400240f03e6f3734acdcdb5c18641b4aa628bdde57f9d06722421546e672f",
+      "expectedBytes": 179041,
+      "expectedSha256": "3a43f9452fd2ff04fe2091dee9f875f5c207b8570b2ce6953799f1c1135fc4d6",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -1222,8 +1222,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3251,
-      "expectedSha256": "97d670b2b303fc9f8e86554d2988edb92ee93a4cfeb01dac5761a2eba8da6402",
+      "expectedBytes": 3758,
+      "expectedSha256": "ce4bc0dcaeaa3be906cf7d4498663f8088b2cf5638453004c123e401098adb48",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -1255,8 +1255,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4950,
-      "expectedSha256": "82f4936bfcd9b859491ac657654a5a67090fb5681d0fafdaef2a6c08684e1954"
+      "expectedBytes": 5185,
+      "expectedSha256": "5d0a10749460ed500015a82c531243aa2df8e890467f7732721e00321c1e5d13"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1288,8 +1288,8 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 238448,
-      "expectedSha256": "e42cde6e38260b54e462192266b58ca0a5680d0c7cfafb3b7d98b06151f5f9e5",
+      "expectedBytes": 703429,
+      "expectedSha256": "6495ad4208a211fd530256af554952aa884650033f64809c42849f9d35c6874c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /betelgeuse/ with the default camera, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after preparation."

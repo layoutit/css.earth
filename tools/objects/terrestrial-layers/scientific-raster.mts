@@ -13,7 +13,7 @@ import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import {composeCorrectedColor} from './photometric-observations.mts';
-import { bandColorDisplay, encodeBandColor, bandColorEvidence } from '../color-transfer.mts';
+import { bandColorDisplay, encodeBandColor, bandColorEvidence, interpolatePalette } from '../color-transfer.mts';
 import { checkKeys } from '../surface-observations/recipe.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable } from './pds-radial-table.mts';
@@ -25,11 +25,7 @@ import { loadFitsImageMap } from './fits-image-map.mts';
 export function colorForValue(value: number, recipe: SciencePalette) {
   if (recipe.categories) return categoryColorForValue(value, recipe);
   const { minimum, maximum, colors } = recipe;
-  const t = Math.max(0, Math.min(1, (value - minimum) / (maximum - minimum))) * (colors.length - 1);
-  const i = Math.min(colors.length - 2, Math.floor(t)), fraction = t - i;
-  const rgb = (hex: string) => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
-  const a = rgb(colors[i]), b = rgb(colors[i + 1]);
-  return a.map((v, c) => Math.round(v + (b[c] - v) * fraction));
+  return interpolatePalette(colors, (value - minimum) / (maximum - minimum));
 }
 
 /** Local finite differences on the source's own reference sphere. */

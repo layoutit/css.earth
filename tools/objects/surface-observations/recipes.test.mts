@@ -26,6 +26,9 @@ test('a lens refuses keys its format does not declare and a second display', () 
     // A lens without transfer limits refuses a transfer block; a lens with them refuses an undeclared limit.
     ['transfer key', lens => { const record = fixtureRecord(lens); if (record.transfer === undefined) record.transfer = { maximumSeparationMeters: 1 }; else fixtureRecord(lens, 'transfer')['maximumSeparation'] = 1; }],
     ['second display', lens => { const display = fixtureRecord(lens, 'display'); display[display.percentiles ? 'displayRange' : 'percentiles'] = [1, 99]; }],
+    // A palette needs two hex colours, and only a monochrome camera lens may carry one.
+    ['one-colour palette', lens => { fixtureRecord(lens, 'display')['palette'] = ['#ffffff']; }],
+    ['named-colour palette', lens => { fixtureRecord(lens, 'display')['palette'] = ['black', 'white']; }],
   ];
   for (const { id, profile } of authored) profile.raster.surfaceObservations.forEach((_, index) => {
     for (const [name, change] of changes) {
