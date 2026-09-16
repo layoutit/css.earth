@@ -44,6 +44,7 @@ jobs:
         run: |
           pnpm build:packages
           pnpm build:renderer
+          pnpm prepare:catalog
           pnpm build:preparation
           pnpm prepare:object-json
       - name: Test unavailable prepared packages and focus controls

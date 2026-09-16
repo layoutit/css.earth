@@ -17,9 +17,9 @@ test("the prepared Io nomenclature catalogue is pinned by the runtime plan and t
   assert.equal(createHash("sha256").update(bytes).digest("hex"), plan.catalog.sha256);
   assert.equal(catalog.features.length, plan.catalog.count);
   assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
-  assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
-  assert.equal(plan.catalog.count, 254, "the unchanged features recipe now labels the nine Mensae the earlier lane skipped");
-  assert.deepEqual(descriptor.skipped, {"diameter:ER":{"count":6,"reason":"Features without a published diameter cannot be ranked or outlined."}}, "six eruptive centres carry no diameter; the Mensae are now labelled as regions");
+  assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 0, "the authored recipe (source/preparation/features.json) places the map left edge at 0°");
+  assert.equal(plan.catalog.count, 260, "the default-label recipe labels the Mensae and the landmark class the earlier lane skipped");
+  assert.deepEqual(descriptor.skipped, {}, "the default-label recipe skips no Gazetteer row; unsized eruptive centres are searchOnly");
 });
 
 test("the plan anchors labels to the single body mesh for every surface lens", () => {
@@ -29,5 +29,5 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   assert.deepEqual(plan.lensIds, ["normal","enhanced","geology","spectral-slope","visible-absorption"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0, "labels are not zoom-gated since the default label policy");
 });

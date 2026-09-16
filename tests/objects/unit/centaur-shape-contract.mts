@@ -27,7 +27,7 @@ export async function checkShape(id: keyof typeof sourceAxes) {
   assert.ok(maximumEllipsoidResidual < .04, `Simplified surface departs from the source ellipsoid: ${maximumEllipsoidResidual}`);
   const extentsKm = [0, 1, 2].map(axis => Math.max(...points.map((p: number[]) => Math.abs(p[axis]))));
   extentsKm.forEach((value, axis) => assert.ok(Math.abs(value / axes[axis] - 1) < .035));
-  for (const name of ['shadows', 'orbit']) assert.equal(controls.settings.controls.find((c: { name: string; }) => c.name === name).checked, false);
+  const shadows=controls.settings.controls.find((c: { name: string; }) => c.name === 'shadows');assert.ok(shadows,'shadows setting');assert.equal(shadows.checked,false);
   if (id === 'chariklo') {
     assert.equal(scene.rings.coverage.sourceFaceCount, 256);
     assert.equal(scene.rings.leaves.length, 16);

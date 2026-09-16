@@ -28,7 +28,8 @@ src/objects/<id>/
 
 public/scenes/<id>/                    prepared assets
 site/pages/[id].astro                  one shared route for all body ids
-tests/objects/unit/<id>/               focused body tests
+tests/objects/unit/<id>/               focused hand-written body tests
+tests/objects/unit/anchors/*.json      per-body anchors for the shared contract runners (asteroid calibration, asteroid packages)
 tests/objects/browser/<id>/browser-profile.mts
 ```
 
@@ -381,7 +382,7 @@ selected objects to shared acquisition; it also restores Earth's pinned WMTS
 inputs. `setup:assets` installs prepared files independently of source preparation.
 
 `tools/run-implemented-planets.mts` discovers registered objects and selects the
-authored commands. It routes `test:planets` to `tests/objects/unit/<id>/`.
+authored commands. It routes `test:planets` to `tests/objects/unit/<id>/` plus the shared contract runners in `tests/objects/unit/*.test.mts`, scoped to one body through `CSSEARTH_TEST_OBJECTS`.
 `pnpm test` currently runs packages, renderer, platform and shell checks;
 `test:planets` and `test:preparation` are separate commands.
 
