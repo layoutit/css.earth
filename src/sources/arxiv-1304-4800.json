@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1304-4800",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "High spectral resolution imaging of the dynamical atmosphere of the red supergiant Antares in the CO first overtone lines with VLTI/AMBER",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1304.4800"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201321063"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1304.4800",
+      "label": "arXiv"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201321063",
+      "label": "A&A 555, A24 (2013)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/antares/text.json",
+      "revision": "c073f58a8c03314266a0c50e86ad973d9b6ff723",
+      "sha256": "7ec9d7a59ae6e79e3472156e26d0b1881013259e089355caac6d918dc2272ae1",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "K. Ohnaka, K.-H. Hofmann, D. Schertl, G. Weigelt, C. Baffa, A. Chelli, R. Petrov, S. Robbe-Dubois",
+      "scope": "citation",
+      "evidence": "src/objects/antares/text.json#/introduction/sources/0"
+    }
+  ]
+}

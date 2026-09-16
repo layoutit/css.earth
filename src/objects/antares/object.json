@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "antares",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Antares",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 474700204
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/antares-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b51e41dcfd98a851119693991cb42469351a73e45680ed5cca83129b25ebf790"
+      }
+    },
+    "catalog": {
+      "name": "Antares",
+      "classification": "star",
+      "color": "#ff8a5a",
+      "distanceAu": 34652487.4,
+      "description": "Red supergiant in Scorpius; its photosphere is not imaged here.",
+      "systemName": "Scorpius",
+      "order": 1002,
+      "context": {
+        "order": 996
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1806440290415290000,
+        -4329428001168024000,
+        -2332006636735465000
+      ],
+      "presentationToReference": [
+        -0.344817465445451,
+        0.1714082822048145,
+        0.922886838304334,
+        -0.8264111457894487,
+        0.4108098519154896,
+        -0.38507127091506616,
+        -0.4451354104525341,
+        -0.895463269129878,
+        -6.970228382491718e-7
+      ],
+      "orbitUpReference": [
+        -0.1714082822048145,
+        -0.4108098519154896,
+        0.895463269129878
+      ],
+      "metersPerUnit": 1531290980.6451614,
+      "bodyRadiusM": 474700204000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "e93bb47495ee42aa9dcaf4f98966a00e9e1087e1ab4a5ed462637914d2a151e3"
+  }
+}
