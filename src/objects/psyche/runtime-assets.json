@@ -2,6 +2,26 @@
   "schema": "csspsyche-runtime-assets@1",
   "assets": [
     {
+      "filename": "psyche-dielectric-constant-legend.webp",
+      "bytes": 224,
+      "sha256": "2446b91632f2327cdd693c991b60c83b07fa4f088f8c33f1682f0bf09ef88fde"
+    },
+    {
+      "filename": "psyche-dielectric-constant-shadow@2x.webp",
+      "bytes": 748406,
+      "sha256": "649d2535ff7094da8210f50b6577488eee07e47499a85908774091c92d2424b1"
+    },
+    {
+      "filename": "psyche-dielectric-constant-surface@2x.webp",
+      "bytes": 232812,
+      "sha256": "aa26e5cc87033ee3a35f1cfbc40b7919da21217177372d3e350b0f7453dd6a2d"
+    },
+    {
+      "filename": "psyche-dielectric-constant-thumbnail.webp",
+      "bytes": 1282,
+      "sha256": "2754bc3724bbb4e3f745de51d420dba70720fab99579a5e94a6b7252a9137194"
+    },
+    {
       "filename": "psyche-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -40,6 +60,26 @@
       "filename": "psyche-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "filename": "psyche-thermal-inertia-legend.webp",
+      "bytes": 252,
+      "sha256": "9517bd1032336a7ed39e866c8de461d1d8d2b959b187066b497b8f1d46c54667"
+    },
+    {
+      "filename": "psyche-thermal-inertia-shadow@2x.webp",
+      "bytes": 930252,
+      "sha256": "e0a1c79aa7620e9c901c20e9ce6d115645bd4cf400f6453b872d74bba7f8cfa8"
+    },
+    {
+      "filename": "psyche-thermal-inertia-surface@2x.webp",
+      "bytes": 272464,
+      "sha256": "d1ae9c0107c91c79b776812e7bd9ae2e9a0570d06d46c819c598dc9ec7b858ba"
+    },
+    {
+      "filename": "psyche-thermal-inertia-thumbnail.webp",
+      "bytes": 1538,
+      "sha256": "acd91966f5aa75e8878d41df0a4cebcc2eb2a795c92924d71af5c0eaa263dd68"
     },
     {
       "filename": "psyche-zimpol-surface@2x.webp",
