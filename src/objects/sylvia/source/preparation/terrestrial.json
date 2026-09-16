@@ -72,7 +72,7 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame and the sky threshold is one stated fraction of its peak. Predicted limb position angles match the observed contour to 3.28 degrees over the 15 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Predicted limb position angles match the observed contour to 3.28 degrees over the 15 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
         },
         "frames": [
           {
@@ -81,15 +81,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 13.7895,
             "observerLatitude": -18.0954,
-            "observerWestLongitude": 326.6981,
+            "observerWestLongitude": 329.2651,
             "sunLatitude": -17.6764,
-            "sunWestLongitude": 338.2464,
+            "sunWestLongitude": 340.8134,
             "rangeKm": 379706254.6,
             "northAzimuthDegrees": 4.2776,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              139.235,
-              146.06
+              140.105,
+              145.666
             ]
           },
           {
@@ -98,15 +98,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 11.9516,
             "observerLatitude": -18.0954,
-            "observerWestLongitude": 332.0342,
+            "observerWestLongitude": 334.6013,
             "sunLatitude": -17.6766,
-            "sunWestLongitude": 343.5817,
+            "sunWestLongitude": 346.1487,
             "rangeKm": 379702351.5,
             "northAzimuthDegrees": 4.2775,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              140.559,
-              143.9
+              141.25,
+              143.602
             ]
           },
           {
@@ -115,15 +115,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 14.8338,
             "observerLatitude": -18.0954,
-            "observerWestLongitude": 337.3734,
+            "observerWestLongitude": 339.9404,
             "sunLatitude": -17.6768,
-            "sunWestLongitude": 348.92,
+            "sunWestLongitude": 351.487,
             "rangeKm": 379698448.7,
             "northAzimuthDegrees": 4.2775,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              138.331,
-              143.758
+              138.987,
+              143.348
             ]
           },
           {
@@ -132,15 +132,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 12.1311,
             "observerLatitude": -18.0954,
-            "observerWestLongitude": 342.6757,
+            "observerWestLongitude": 345.2427,
             "sunLatitude": -17.677,
-            "sunWestLongitude": 354.2214,
+            "sunWestLongitude": 356.7884,
             "rangeKm": 379694575.3,
             "northAzimuthDegrees": 4.2775,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              138.54,
-              144.499
+              139.813,
+              143.87
             ]
           },
           {
@@ -149,15 +149,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 9.4486,
             "observerLatitude": -18.0955,
-            "observerWestLongitude": 347.9929,
+            "observerWestLongitude": 350.5599,
             "sunLatitude": -17.6772,
-            "sunWestLongitude": 359.5377,
+            "sunWestLongitude": 2.1048,
             "rangeKm": 379690693.6,
             "northAzimuthDegrees": 4.2775,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              140.3,
-              145.412
+              141.98,
+              144.634
             ]
           },
           {
@@ -166,15 +166,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 8.713,
             "observerLatitude": -18.0955,
-            "observerWestLongitude": 9.9288,
+            "observerWestLongitude": 12.4958,
             "sunLatitude": -17.678,
-            "sunWestLongitude": 21.4701,
+            "sunWestLongitude": 24.0371,
             "rangeKm": 379674705.3,
             "northAzimuthDegrees": 4.2774,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              140.082,
-              144.807
+              141.274,
+              144.4
             ]
           },
           {
@@ -183,15 +183,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 9.613,
             "observerLatitude": -18.0955,
-            "observerWestLongitude": 15.2264,
+            "observerWestLongitude": 17.7934,
             "sunLatitude": -17.6781,
-            "sunWestLongitude": 26.7668,
+            "sunWestLongitude": 29.3338,
             "rangeKm": 379670850.3,
             "northAzimuthDegrees": 4.2774,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              139.829,
-              142.909
+              140.472,
+              142.348
             ]
           },
           {
@@ -200,15 +200,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 8.4414,
             "observerLatitude": -18.0956,
-            "observerWestLongitude": 20.5127,
+            "observerWestLongitude": 23.0797,
             "sunLatitude": -17.6783,
-            "sunWestLongitude": 32.0523,
+            "sunWestLongitude": 34.6193,
             "rangeKm": 379667005.9,
             "northAzimuthDegrees": 4.2774,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              139.315,
-              144.561
+              140.161,
+              143.828
             ]
           },
           {
@@ -217,15 +217,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 6.7834,
             "observerLatitude": -18.0956,
-            "observerWestLongitude": 25.7932,
+            "observerWestLongitude": 28.3602,
             "sunLatitude": -17.6785,
-            "sunWestLongitude": 37.332,
+            "sunWestLongitude": 39.899,
             "rangeKm": 379663167.9,
             "northAzimuthDegrees": 4.2773,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              139.827,
-              143.161
+              140.393,
+              142.182
             ]
           },
           {
@@ -234,15 +234,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 8.0371,
             "observerLatitude": -18.0956,
-            "observerWestLongitude": 31.1084,
+            "observerWestLongitude": 33.6754,
             "sunLatitude": -17.6787,
-            "sunWestLongitude": 42.6463,
+            "sunWestLongitude": 45.2133,
             "rangeKm": 379659307.1,
             "northAzimuthDegrees": 4.2773,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              139.334,
-              142.797
+              140.61,
+              142.011
             ]
           },
           {
@@ -251,15 +251,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 19.9926,
             "observerLatitude": -18.1156,
-            "observerWestLongitude": 261.3426,
+            "observerWestLongitude": 263.9096,
             "sunLatitude": -17.9049,
-            "sunWestLongitude": 271.8344,
+            "sunWestLongitude": 274.4014,
             "rangeKm": 375220980.2,
             "northAzimuthDegrees": 4.252,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              150.608,
-              150.037
+              151.543,
+              149.996
             ]
           },
           {
@@ -268,15 +268,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 18.9831,
             "observerLatitude": -18.1156,
-            "observerWestLongitude": 266.6718,
+            "observerWestLongitude": 269.2388,
             "sunLatitude": -17.905,
-            "sunWestLongitude": 277.1627,
+            "sunWestLongitude": 279.7297,
             "rangeKm": 375217391.4,
             "northAzimuthDegrees": 4.252,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              149.546,
-              150.943
+              150.819,
+              150.782
             ]
           },
           {
@@ -285,15 +285,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 12.1705,
             "observerLatitude": -18.1157,
-            "observerWestLongitude": 272.0239,
+            "observerWestLongitude": 274.5909,
             "sunLatitude": -17.9052,
-            "sunWestLongitude": 282.5139,
+            "sunWestLongitude": 285.0809,
             "rangeKm": 375213789.4,
             "northAzimuthDegrees": 4.252,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              150.284,
-              151.145
+              153.366,
+              150.063
             ]
           },
           {
@@ -302,15 +302,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 12.3459,
             "observerLatitude": -18.1157,
-            "observerWestLongitude": 277.3281,
+            "observerWestLongitude": 279.8951,
             "sunLatitude": -17.9054,
-            "sunWestLongitude": 287.8171,
+            "sunWestLongitude": 290.3841,
             "rangeKm": 375210221.9,
             "northAzimuthDegrees": 4.252,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              149.801,
-              149.132
+              152.133,
+              148.632
             ]
           },
           {
@@ -319,15 +319,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 11.9842,
             "observerLatitude": -18.1157,
-            "observerWestLongitude": 282.6215,
+            "observerWestLongitude": 285.1885,
             "sunLatitude": -17.9056,
-            "sunWestLongitude": 293.1096,
+            "sunWestLongitude": 295.6767,
             "rangeKm": 375206663.8,
             "northAzimuthDegrees": 4.2519,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              151.167,
-              150.7
+              153.496,
+              150.23
             ]
           },
           {
@@ -336,15 +336,15 @@
             "encoding": "fits-zimpol-intensity",
             "backgroundMaximum": 13.7685,
             "observerLatitude": -18.255,
-            "observerWestLongitude": 54.8382,
+            "observerWestLongitude": 57.4053,
             "sunLatitude": -19.28,
-            "sunWestLongitude": 57.3604,
+            "sunWestLongitude": 59.9274,
             "rangeKm": 359821428.4,
             "northAzimuthDegrees": 4.0026,
             "pixelAngleMicroradians": 0.017599,
             "center": [
-              119,
-              137.485
+              119.945,
+              136.45
             ]
           }
         ],

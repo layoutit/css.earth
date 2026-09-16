@@ -102,6 +102,22 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27216%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&TLIST_TYPE=%27JD%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27309%27&TLIST=2457948.709022002%2C2457948.717670000%2C2457956.685044005%2C2457961.674347998%2C2457975.720700996%2C2458462.780685995%2C2458471.789870000&QUANTITIES=%271%2C13%2C20%2C43%27&ANG_FORMAT=%27DEG%27"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27216%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&TLIST_TYPE=%27JD%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&REF_PLANE=%27FRAME%27&VEC_TABLE=%271%27&TLIST=2457948.699057634%2C2457948.707705894%2C2457956.675275314%2C2457961.664654856%2C2457975.711028878%2C2458462.771771931%2C2458471.781152239&OUT_UNITS=%27AU-D%27"
     }
   ]
 }
