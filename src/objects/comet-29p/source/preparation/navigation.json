@@ -8,13 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 10202,
-    "expectedSha256": "05d2e371fab2b2b16f6cca57ff96ff493907b40c08ecffc3a1288da0766ec9a6",
+    "expectedBytes": 13209,
+    "expectedSha256": "69c526633fc4def35a28824f1d5d44e0f7bcbcaf4a75ea57e9da531f003ad624",
     "origin": "https://doi.org/10.3847/PSJ/abfe6f",
     "credit": "Schambeau et al. (2021), PSJ 2, 126",
-    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
     "licenseEvidence": [],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"

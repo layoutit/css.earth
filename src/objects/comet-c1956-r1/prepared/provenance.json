@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c1956-r1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f525eca02be1a139b804c5bfc30c7810e09dcded6e5965a6b879957934b165b2"
+    "sha256": "7c679c856afc90a88a48efe97e51e57d2c8d80de0f67492aab4c6e158b5c84db"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+    "bindingsSha256": "9d08e217ebb96a3768df00b2689f84989982613771017e12ddce8b6857c3ea0a"
   },
   "recipes": [
     {
@@ -255,7 +255,7 @@
       "sha256": "d13ab5abee32e7c0d24ac81159aaced31e84bc486073cce4eea47c0ad9502441",
       "bytes": 1003,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -275,7 +275,7 @@
       "sha256": "cc4e7912c15330f25f532cb799fa444539fcffc91bdaa637aa4de39f6a39585a",
       "bytes": 2820,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -307,13 +307,13 @@
           "url": "/scenes/comet-c1956-r1/comet-c1956-r1-model-thumbnail.webp",
           "bytes": 970,
           "sha256": "3b697619def833e0338ab0ed7d52d4295ae183872b23fbacdd2d29570510d79f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c1956-r1/comet-c1956-r1-model-surface@2x.webp",
           "bytes": 41926,
           "sha256": "67bca0944855f2ae06b78ac110014d7b342f02808395d2348368bdc0649522c5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -361,8 +361,8 @@
     "materialSha256": "5bda5384010995e38596846c0ce6f845060a65ed57091da90487ecedf8af7a07",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+      "bindingsSha256": "9d08e217ebb96a3768df00b2689f84989982613771017e12ddce8b6857c3ea0a"
     }
   }
 }

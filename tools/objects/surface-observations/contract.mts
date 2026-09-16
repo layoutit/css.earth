@@ -37,7 +37,8 @@ export interface ObservationCamera {
   project(point: readonly number[]): readonly number[] | null;
   ray(x: number, y: number): readonly number[];
   positionMeters: readonly number[]; positionKm: readonly number[];
-  sunDirection?: readonly number[];
+  /** Unit direction to the Sun in the body frame. Every camera states one: from its label, its kernels, its ephemeris, or the archive's own phase plane. */
+  sunDirection: readonly number[];
   /** Whether detector bounds may be taken from projected mesh vertices; false for cameras with lens distortion. */
   pinhole: boolean;
   /** The pixel scale the camera's source states at the target, used to rank finest-resolution selection. */
@@ -94,6 +95,8 @@ export interface ObservationFrame {
   footprint: FrameFootprint;
   /** The photograph, its camera and the mesh it was cast on, kept for the registration stage; absent for a frame without a camera. */
   detector?: FrameDetector;
+  /** The same frame under another camera, its rays cast again on the source mesh; absent for a frame without a camera. */
+  withCamera?(camera: ObservationCamera): ObservationFrame;
   report: Record<string, unknown>;
 }
 

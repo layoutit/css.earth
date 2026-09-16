@@ -51,11 +51,11 @@ separates those results from the comet checks. Earlier runs are retained below.
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `osiris` | 8 | 3 | 3.32° | — | — | none (no frame carries a camera with a Sun direction) | 0 of 8 | — | 0 of 8 |
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `osiris` | 8 | 0 | — | — | — | its other 8 frames | 2 of 8 | — | 5 of 8, -0.50° | — |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens.
 <!-- registration-report:end -->
 
 ## Known problems

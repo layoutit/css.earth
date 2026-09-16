@@ -9,13 +9,13 @@
     "id": "reconstruction-context-marker",
     "path": "presentation/context.png",
     "origin": "https://oidb.jmmc.fr/",
-    "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0); rendered through the lens palette by author.mts",
+    "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
     "license": "Public calibrated interferometric data; the reconstruction and this marker are attributed display derivatives.",
     "consumers": [
       "navigation"
     ],
-    "expectedBytes": 113695,
-    "expectedSha256": "3e4400240f03e6f3734acdcdb5c18641b4aa628bdde57f9d06722421546e672f",
+    "expectedBytes": 131002,
+    "expectedSha256": "a46a8b17d4bf4e766206f90d9178213cb5be9bdc39ce152a645c62481296502f",
     "recipe": {
       "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
       "inputs": [

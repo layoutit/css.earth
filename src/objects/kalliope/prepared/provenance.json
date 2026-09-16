@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kalliope",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db8b81e96fc472d57036e6c1381222fc5c9d48f491dd175537534275f3a85bc5"
+    "sha256": "b89d52044f6cc280456388679c23a079741d9d0f799f9b7faff35d0ed3cd102d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "238d32aef6f588bd159f21416fb737761a5bfb1c6ec8a829a48888557b99ea47",
+      "sha256": "204d8c47a9fbf2f71ad56c19011cd35453e01e3839283051315b647d5ea426e5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -392,6 +392,9 @@
                   1,
                   99.5
                 ]
+              },
+              "refinement": {
+                "by": "relief"
               }
             }
           ]
@@ -647,7 +650,7 @@
       "sha256": "034f925d1e76ae7022d29ffa0488ffbc322f2cc0b8c5d32f7eabc82060f83b0c",
       "bytes": 154459,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -699,7 +702,7 @@
       "sha256": "540c87cc18a0785898a6bbf738888bd889f2f6ad51857c773bf6b50254e23453",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -751,7 +754,7 @@
       "sha256": "91ed39ba9949395273e2444511b039345345b3343abfec7335ca4125e6694d64",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -803,7 +806,7 @@
       "sha256": "3df38f5c9c3c5f747b69e44c2da2f347e2f9f9fe9a3b480882592f5604d9194f",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -855,7 +858,7 @@
       "sha256": "bd5c503e3bfbc8a4f1b3040a7f4ac0c2a354e14eb468a2c48dcfe426d0706c95",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -907,7 +910,7 @@
       "sha256": "b9f736f11951c237c66a35b86b8e0c876565941acf71a4da76fed64419cfeb4f",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -959,7 +962,7 @@
       "sha256": "29e622a628dd2cc054a5a0f78a5c091a07e8db7aeae62ede6ea55e6c0ab772b9",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1011,7 +1014,7 @@
       "sha256": "32dc8473b3a014d1e29a149f33337ecdaaf0490ce4e58716080790605d23e02d",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1063,7 +1066,7 @@
       "sha256": "9d214751ebb547949439567979502b590781af017889beb4efe6acde8460bdd1",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1115,7 +1118,7 @@
       "sha256": "91c4d4a2746c5a50d2bfc6566d27488c11f1634a6d8e946a22eb33aa56360113",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1167,7 +1170,7 @@
       "sha256": "5846738d9674bc94d9cc873eb57b038c61ce8595f85da28a60b1540fa4e526d4",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1219,7 +1222,7 @@
       "sha256": "a4caac4a107914c7e9dba47969d15ed8dad6e23aa0d6bc4ef72743b4ea8c4152",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1271,7 +1274,7 @@
       "sha256": "588cfa830e9aecfa779d145a9c7fcadbb34a781386c7d21b969017e850a93c77",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1323,7 +1326,7 @@
       "sha256": "64aac56c59be800fda8ad54fba2c798fef08a20db58f96f94e7f554271d65a1c",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1375,7 +1378,7 @@
       "sha256": "ebc31b23a665daf60e13f8726b61d48004008e850205ae1e29b5bfb3468db070",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1427,7 +1430,7 @@
       "sha256": "6646a7c677918ea0d4723dda90b2edc455728d3adc9b232d31a35f442c9e8d4d",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1479,7 +1482,7 @@
       "sha256": "614896b0ce446f6386a23074f2803120bd60c1152a98d1a20ef827adf9c741c3",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1510,7 +1513,7 @@
       "sha256": "06a027c36c0fdc14e2b90f804fd1e7f5624fdabf446847ad2179cf30ef223293",
       "bytes": 8536,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1542,19 +1545,19 @@
           "url": "/scenes/kalliope/kalliope-elevation-thumbnail.webp",
           "bytes": 5202,
           "sha256": "672e1399769c300a422b4d124415554069acd94cbe692e518c02feceb1f2c716",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-surface@2x.webp",
           "bytes": 320338,
           "sha256": "4b91419175b297c4835cf91727b7758e0023d3275f623db61d2e5068b72908a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1592,13 +1595,13 @@
           "url": "/scenes/kalliope/kalliope-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "bytes": 64510,
           "sha256": "bfcc1bc36242d583d77f49e7cddb1443c5ef985d8c46cf8212d2d83c7558bf3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1650,15 +1653,15 @@
       "outputs": [
         {
           "url": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
-          "bytes": 1378,
-          "sha256": "f9b2de617f90df01e12215ba2f306b5c79786ec984552f6ce81a3e1f4a682ed9",
-          "verification": "asset-manifest-pin"
+          "bytes": 1386,
+          "sha256": "9c783f78f6b3f7f22f8e0b512c1fc9910f0cdeffac8700f5e7790ac1e8fb23c4",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-zimpol-surface@2x.webp",
-          "bytes": 358376,
-          "sha256": "ccc92bb36c8d41b2377524fe475a62074745c88408a76c83ed9b36ae24d69fb6",
-          "verification": "asset-manifest-pin"
+          "bytes": 362386,
+          "sha256": "1d5f3709b589ec98d7056d210af39d6d6b4e124a1a0535e4f8081a7c2774c4ce",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1740,8 +1743,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7686,
-          "sha256": "99752c551b3a769f91b76a734b52c4849e3b325a22ec6c445b3ea4e7129715a0",
+          "bytes": 7828,
+          "sha256": "9fbce893f7102adc48473e740272cd9e9a8abd28c606ba85982a307d32c8cce4",
           "verification": "bytes-verified"
         }
       ]
@@ -1778,7 +1781,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "9bdefc72363a80150e86156da3882fd6c4607afa98fa2d4a0aa2e7186213d51d",
+    "materialSha256": "62baf7e369a36ba9a8c748665442f9de2570f08a249239c4e5c9f83c5196dd9f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",

@@ -13,8 +13,8 @@ import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 export const LENS_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;
 export const MOSAIC_KEYS = ['selection', 'levelMatching'] as const;
 /** A lens may name where the camera looks when the lens opens. */
-/** `reference` names the observation of the same body the registration stage measures the lens against; without it the lens's own frames are the reference. */
-export const OPTIONAL_LENS_KEYS = ['focus', 'reference'] as const;
+/** `reference` names the observation of the same body the registration stage measures the lens against; without it the lens's own frames are the reference. `refinement` names which of the stage's references may turn the cameras, and by how many degrees the others must agree. */
+export const OPTIONAL_LENS_KEYS = ['focus', 'reference', 'refinement'] as const;
 
 export const safePath = (path: unknown): path is string => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');
 export const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;
