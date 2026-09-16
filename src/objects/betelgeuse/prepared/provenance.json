@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4237cd864e7d0293f3dff37bf2fd3788017d6b25afdcc2910d6162931148666"
+    "sha256": "3f60e1660cb15ea37fc39d6af1001f09de5e968b776fa3ccc96411cdb893a5e1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -281,7 +281,7 @@
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@e1a9f82c8707f01cb4db28ded79928ddda80ccf5#/inputs/0"
           }
         ]
       },
