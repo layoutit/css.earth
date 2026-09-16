@@ -25,7 +25,7 @@ const repository = resolve(import.meta.dirname, '../../..');
 export interface SurfaceOptions {
   readonly diameterMas: number; readonly limbDarkening?: number; readonly inclinationDegrees?: number; readonly positionAngleDegrees?: number;
   readonly regularizer?: 'tv' | 'sobel2' | 'none'; readonly weight?: number; readonly level?: number; readonly iterations?: number;
-  readonly skyPixelMas?: number; readonly skyPixels?: number;
+  readonly skyPixelMas?: number; readonly skyPixels?: number; readonly gridColumns?: number; readonly gridRows?: number;
 }
 
 /** The key=value arguments surface.jl reads, in a fixed order so a run is reproducible from its record. */
@@ -39,7 +39,8 @@ export function surfaceArguments(oifits: string, directory: string, options: Sur
   return [
     `oifits=${resolve(oifits)}`, `radius_mas=${diameterMas / 2}`, 'ld_law=1', `ld1=${limbDarkening}`, `inclination=${inclinationDegrees}`, `position_angle=${positionAngleDegrees}`,
     `regularizer=${regularizer}`, `weight=${weight}`, `level=${level}`, `maxiter=${iterations}`,
-    `map=${resolve(directory, 'surface-map.fits')}`, `sky=${resolve(directory, 'surface-sky.fits')}`, `sky_pixel_mas=${skyPixelMas}`, `sky_pixels=${skyPixels}`,
+    `map=${resolve(directory, 'surface-map.fits')}`, `grid=${resolve(directory, 'surface-grid.fits')}`, `grid_columns=${options.gridColumns ?? 360}`, `grid_rows=${options.gridRows ?? 180}`,
+    `sky=${resolve(directory, 'surface-sky.fits')}`, `sky_pixel_mas=${skyPixelMas}`, `sky_pixels=${skyPixels}`,
     `summary=${resolve(directory, 'surface-summary.txt')}`,
   ];
 }

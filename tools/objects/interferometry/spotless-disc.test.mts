@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readChannelRows } from './oifits-rows.mts';
-import { compareSpotMaps, limbDarkenedVisibility, normalStream, reconstructionVerdict, simulateSpotlessDisc, spotMap, SPOT_CONTRAST_RATIO } from './spotless-disc.mts';
+import { compareSpotMaps, limbDarkenedVisibility, normalStream, reconstructionVerdict, reproducibility, simulateSpotlessDisc, spotMap, SPOT_CONTRAST_RATIO } from './spotless-disc.mts';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;
 /** The baseline at which x = pi B theta / lambda equals the given argument, for a 10 mas disc at 1.6 micrometres. */
@@ -19,6 +19,9 @@ test('the disc visibility is 1 at zero baseline and has the uniform and fully da
 });
 
 test('the noise stream is reproducible and standard normal', () => {
+  const first = (seed: number) => Array.from({ length: 256 }, normalStream(seed));
+  const [two, three] = [first(2), first(3)], r = two.reduce((sum, value, i) => sum + value * three[i]!, 0) / Math.sqrt(two.reduce((sum, v) => sum + v * v, 0) * three.reduce((sum, v) => sum + v * v, 0));
+  assert.ok(Math.abs(r) < 0.2, `nearby seeds give independent noise: correlation ${r.toFixed(3)}`);
   const a = normalStream(7), b = normalStream(7), values = Array.from({ length: 20000 }, () => a());
   assert.equal(values[123], Array.from({ length: 124 }, () => b())[123]);
   const mean = values.reduce((sum, value) => sum + value, 0) / values.length, variance = values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / values.length;
@@ -62,10 +65,24 @@ test('simulating a spotless disc keeps the sampling and errors and recovers its 
   assert.ok(after.t3.every(row => Math.abs(((row.phaseDegrees % 180) + 270) % 180 - 90) < 90), 'closure phases stay finite');
 });
 
-test('a reconstruction is cast only when it fits its data and beats the spotless disc', () => {
-  // Measured: π¹ Gruis SQUEEZE, Polaris SQUEEZE, Polaris ROTIR sphere (reduced chi-squared V2 and closure phase; spot ratio).
-  assert.equal(reconstructionVerdict({ vis2: 2.45, closurePhase: 1.06 }, { ratio: 5.22 }).cast, true);
-  assert.deepEqual(reconstructionVerdict({ vis2: 1.76, closurePhase: 2.28 }, { ratio: 1.05 }).reasons.length, 1);
-  const sphere = reconstructionVerdict({ vis2: 1.45, closurePhase: 5.58 }, { ratio: 2.32 });
+test('a reconstruction is cast only when it fits its data, beats the spotless disc and comes back from both halves', () => {
+  // Measured: π¹ Gruis and Betelgeuse SQUEEZE (shipped), Polaris SQUEEZE, Polaris ROTIR sphere (reduced chi-squared V2 and closure
+  // phase; spot ratio; correlation of the spots beyond the spotless twins between interleaved halves).
+  assert.equal(reconstructionVerdict({ vis2: 2.45, closurePhase: 1.06 }, { ratio: 5.22 }, { correlation: 0.94 }).cast, true);
+  assert.equal(reconstructionVerdict({ vis2: 0.35, closurePhase: 1.12 }, { ratio: 2.90 }, { correlation: 0.80 }).cast, true);
+  const flat = reconstructionVerdict({ vis2: 1.76, closurePhase: 2.28 }, { ratio: 1.05 }, { correlation: -0.26 });
+  assert.equal(flat.reasons.length, 2); assert.match(flat.reasons.join(), /halves/u);
+  const sphere = reconstructionVerdict({ vis2: 1.45, closurePhase: 5.58 }, { ratio: 2.32 }, { correlation: 0.94 });
   assert.equal(sphere.cast, false); assert.match(sphere.reasons.join(), /does not fit/u);
+});
+
+test('reproducibility subtracts each half\'s spotless twin, so shared coverage artefacts cannot agree for it', () => {
+  const size = 64, field = (seed: number, scale: number) => { const noise = normalStream(seed); return Float64Array.from({ length: size * size }, () => noise() * scale); };
+  const spot = Float64Array.from({ length: size * size }, (_, i) => 0.1 * Math.exp(-((i % size - 20) ** 2 + (Math.floor(i / size) - 40) ** 2) / 50));
+  const add = (...maps: Float64Array[]) => maps[0]!.map((_, i) => maps.reduce((sum, map) => sum + map[i]!, 0));
+  const artefact = field(1, 0.05), [a1, a2, b1, b2] = [2, 3, 4, 5].map(seed => field(seed, 0.002)) as [Float64Array, Float64Array, Float64Array, Float64Array];
+  // The same strong artefacts in both halves and their twins, and a spot only in the data: the halves agree on the spot.
+  assert.ok(reproducibility(add(artefact, spot, a1), add(artefact, a2), add(artefact, spot, b1), add(artefact, b2)).correlation > 0.8);
+  // Artefacts alone, identical between the halves, leave only independent noise.
+  assert.ok(Math.abs(reproducibility(add(artefact, a1), add(artefact, a2), add(artefact, b1), add(artefact, b2)).correlation) < 0.1);
 });
