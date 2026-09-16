@@ -38,7 +38,7 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 - The Venera photographs include archive assembly and tonal processing. PDS distributes this material outside its formally archived collection.
 - The camera and background sky do not represent an observer at a stated epoch.
 
-[Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
 <details>
 <summary>Planet facts, clouds and atmosphere display</summary>
