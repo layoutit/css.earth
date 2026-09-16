@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61233617846e2baf1559723ea10c854dab48233b63339235304318887b4d020d"
+    "sha256": "836a87a29aa6831c7f291af80fad5db431779c26c3514a1f3b446b689db8a12c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -244,7 +244,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
+      "sha256": "a8586cf3a42b0499fde71d9264705fb48d57be34d55da6c69997407583d51ccd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -270,19 +270,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "165 m"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "1.323 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.52 years"
+              "value": "1.52 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=25143",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -1613,8 +1611,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
-      "bytes": 8933,
+      "sha256": "a8586cf3a42b0499fde71d9264705fb48d57be34d55da6c69997407583d51ccd",
+      "bytes": 9062,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1866,8 +1864,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5901,
-          "sha256": "628f49d825dfb0dc5d35efb52794dd883ea1eeda905f38ffb72a6e8a4b98735a",
+          "bytes": 6027,
+          "sha256": "d853fda2162ed524fd7aa1ef15097f677d461a3a5fb64e52689369159cfaa070",
           "verification": "bytes-verified"
         }
       ],
@@ -1966,7 +1964,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "a798212e45ad538b339ae092d569e768ec1e05eb9fd51d738874f72d3e43d2e6",
+    "materialSha256": "da440259a8becb6d77971c0220985af02db6b841a606c3e3d9d058beb7845921",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

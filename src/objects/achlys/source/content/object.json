@@ -6,33 +6,33 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published Jacobi ellipsoid"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "940 × 766 × 490 km"
+        "value": "940 × 766 × 490 km",
+        "source": {
+          "url": "https://arxiv.org/abs/1705.10895",
+          "label": "Research publication · arXiv 1705.10895",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1705-10895",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
       },
       {
         "id": "rotation",
         "label": "Rotation",
-        "value": "About 6.75 hours in the adopted shape interpretation; display phase is illustrative"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Trans-Neptunian object"
+        "value": "About 6.75 hours in the adopted shape interpretation; display phase is illustrative",
+        "source": {
+          "url": "https://arxiv.org/abs/1705.10895",
+          "label": "Research publication · arXiv 1705.10895",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1705-10895",
+          "locator": "/numericEvidence/periodModelHours"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

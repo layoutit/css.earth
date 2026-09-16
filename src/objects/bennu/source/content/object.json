@@ -23,19 +23,17 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Mean radius",
-        "value": "241 m"
-      },
-      {
-        "id": "distance-from-sun",
-        "label": "Solar semimajor axis",
-        "value": "1.126 AU"
-      },
-      {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "1.20 years"
+        "value": "1.20 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=101955",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "orbit.elements.per (d) / 365.25"
+        }
       },
       {
         "id": "rotation-period",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "78843b3f04a048fe68e1c4113d5b8b5b34285e06891279a86c6c149436608dd2"
+    "sha256": "0d75b212a359adff5e274f2483b5905e4e0d6487425776f0643677765d9817f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
+      "sha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +112,45 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published triaxial example model"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "778 × 706 × 496 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; photometric aliases and synchronous rotation remain alternatives"
+              "value": "778 × 706 × 496 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "Trans-Neptunian object",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=174567",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape."
+              "value": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape.",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -297,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
-      "bytes": 3477,
+      "sha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
+      "bytes": 4203,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -379,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5499,
-          "sha256": "539d9ec019234e7e5f9bb66518f26b3e44dd6f3573c5b026b7a7ec8d87bab78b",
+          "bytes": 6040,
+          "sha256": "700502ae5bfe8a49c7842720e1ac989755fd3db773d36b5ec2ade95f9eee679c",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "varda",
-    "materialSha256": "666700048eb666a29b6bc251cbfb2868aaa634528c517596f7de13cb08ec309a",
+    "materialSha256": "0b7542921919bbbbf5aae13dbd3571eb3a4a998b71bc83670474c9117b6d92aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

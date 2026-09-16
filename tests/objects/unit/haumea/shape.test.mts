@@ -20,10 +20,10 @@ test('Haumea retains its measured triaxial shape and ring within the actual leaf
   assert.ok(runtime.tree.nodes.filter((node: { tag: string; }) => node.tag === 's').length <= 2000);
   assert.deepEqual([scene.model.ring.innerRadiusKm, scene.model.ring.outerRadiusKm], [2252, 2322]);
 });
-test('the neutral shape lens stays evenly lit with an identified model dataset and no shadow control', async () => {
+test('the measured colour lens stays evenly lit with an identified model dataset and no shadow control', async () => {
   const runtime = await json('prepared/runtime.json');
-  assert.equal(runtime.controls.lenses.defaultLens, 'shape');
-  assert.deepEqual(runtime.controls.lenses.controls.map((lens:unknown) => requireRecord(lens).label), ['Shape']);
+  assert.equal(runtime.controls.lenses.defaultLens, 'color');
+  assert.deepEqual(runtime.controls.lenses.controls.map((lens:unknown) => requireRecord(lens).label), ['Color']);
   const lens = (await json('prepared/lenses.json')).controls[0];
   assert.ok(lens.surfaceUrl && lens.polesUrl);
   assert.equal(lens.surfaceUrl, lens.surface2xUrl);
@@ -35,7 +35,7 @@ test('the neutral shape lens stays evenly lit with an identified model dataset a
   assert.equal(images[0].attribution.url, lens.source.url);
   assert.ok((await readFile(new URL('prepared/' + images[0].path, root))).length < 100_000);
   assert.deepEqual(runtime.controls.settings.controls, []);
-  assert.deepEqual(runtime.variants.map((v:unknown) => requireRecord(v).when), [{ lensId: 'shape' }]);
+  assert.deepEqual(runtime.variants.map((v:unknown) => requireRecord(v).when), [{ lensId: 'color' }]);
   assert.ok(runtime.assets.entries.some((a: { key: string; }) => a.key === 'surface'));
   assert.ok(runtime.assets.entries.every((a: { key: string|string[]; }) => !a.key.includes('lit-')));
   const material = runtime.materials[0];

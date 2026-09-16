@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8395,
-      "expectedSha256": "f4a69732b9ed41c976f86b385330eb4150fe6c6e15a575c9c150564fe04841e1",
+      "expectedBytes": 8600,
+      "expectedSha256": "3ae5482453113e572ada9cb6497ae529bc9a5a9d669fbfc746b1e0be23f6d66c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1796,
       "expectedSha256": "19a309ddd5a56dfb328432dd8bab873cae721b07df793e981d2a7e498891e5f7"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5130,
+      "expectedSha256": "1fb49d71447daa4882c86047cea3792233135002b0c6a917283f34e30e4d622c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Cybele: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

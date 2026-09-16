@@ -13,6 +13,7 @@ lane; the runtime renderer only receives prepared display assets.
 | Calibrated spectral bands | Validate the native band identities and units, register each observation, retain floating values through sampling and compositing, and apply an explicit scientific display at the end. | A band composite. Calibration or an sRGB output does not qualify it as natural color. |
 | Archive-derived, sharpened spectral mosaic | Preserve the archive's band identities and processing. Treat the values according to the archive, without relabeling them as untouched radiance or reflectance. | The published derived/enhanced interpretation, with our additional display transfer identified. |
 | One measured band | Use its documented monochrome display and coverage. | Monochrome observations, not recovered surface color. |
+| Calibrated sky survey bands (nebula lab) | Calibrate each band to MJy/sr, subtract one measured background, divide by that band's own measured range, then apply one common asinh display. See [sky survey bands](#sky-survey-bands). | A band-normalized false-color view that shows where each band is bright. Hue does not show physical band ratios. |
 | Numeric scientific field or categories | Use the declared palette, range, units and legend. | A visualization of that field, not photographed color. |
 | Shape-only model | Use the existing model presentation. | Measured or modeled shape, without a photographic color claim. |
 
@@ -101,6 +102,41 @@ matrices, white balance, saturation and tonal overrides; the only matching
 active color-space fields were Io's existing sRGB decoder settings. That search
 is a configuration inventory, not independent scientific validation of every
 published image or a claim that every body has measured natural color.
+
+## Sky survey bands
+
+The [sky band composer](../tools/objects/observation/sky-band-composite.mts) turns
+calibrated infrared survey bands into the nebula lab's working images. Its route
+table owns the calibration: the WISE Explanatory Supplement DN-to-Jy factors for
+1.375 arcsec atlas pixels, and the IRAC Handbook surface-brightness corrections
+for the CDS IRAC maps. A recipe names bands, a grid, one background percentile,
+one peak percentile and one display. It cannot hold a band gain.
+
+Surface bodies keep one common range, so that measured band ratios survive.
+Sky bands do not. At M8, the median 8 µm brightness above background is about
+eight times the 3.6 and 4.5 µm values. With one common range, the image is red
+everywhere and shows no structure in the shorter bands. Each sky band is
+therefore divided by its own range: from its background percentile to its peak
+percentile. This is the usual practice for survey false color. It is still a
+visualization, and the lens description must say that hue shows each band's
+relative brightness, not physical band ratios.
+
+Dividing by the band's own range cancels its calibration factor, so the MJy/sr
+conversion does not change the image. It gives the recorded background and peak
+physical units, and lets a later common-range display compare bands. What the
+image shows comes from the band selection and the declared normalization and
+stretch, not from calibration.
+
+The shared [Lupton et al. (2004)](https://doi.org/10.1086/382245) asinh display then
+maps the mean of the normalized bands and scales every band by the same factor.
+Pixels brighter than the display are scaled down as a whole, which keeps their hue.
+`tools/objects/color-transfer.oracle.test.mts` matches every byte of Astropy's
+`make_lupton_rgb` for color and one-band cases.
+
+The WISE HiPS maps carry a separate level for each atlas tile, which shows as
+rectangles once faint emission is stretched. WISE bands are therefore built from
+the AllWISE atlas tiles, with one level fitted for each tile from its overlaps
+([wise-atlas-mosaic.mts](../tools/objects/observation/wise-atlas-mosaic.mts)).
 
 ## Evidence must match the claim
 

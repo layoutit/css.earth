@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "thalassa",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "441",
+        "Neptune",
+        "Thalassa",
+        "804",
+        "NEP097",
+        "Laplace",
+        "2000-01-01.5",
+        "50100.",
+        "0.000",
+        "0.0",
+        "165.7",
+        "0.2",
+        "130.6",
+        "0.311078",
+        "0.000",
+        "0.654",
+        "299.7",
+        "42.7",
+        "0.4",
+        "24"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Neptune",
+        "Thalassa",
+        "804",
+        "0.02359 0.00522 NEP097",
+        "40.00 8.00 1",
+        "1.3184 0.8432 *"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "IV",
+        "Thalassa",
+        "S/1989 N5",
+        "1989",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

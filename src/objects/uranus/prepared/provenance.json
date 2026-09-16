@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1fd9b4ea11ecb7a869adba0a61a9580e58618c54d6ad812fad4a9bd0d5f3b8e9"
+    "sha256": "026a9e3b3f3d53e01c23a68a4e176167baef59c4ae8a2764c2bbed9c4f361d6d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5d229eb23722aae97d1d9a1bdc44e6b7811ac37be2211cd9559515fa378fb8e9",
+      "sha256": "18674fd58cd534fce93ebdef5dcb366daba2786c7aadec10396ce2f7b95b8b96",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -93,11 +93,6 @@
               }
             },
             {
-              "id": "axial-tilt",
-              "label": "Axial tilt",
-              "value": "97.77°"
-            },
-            {
               "id": "moon-count",
               "label": "Known moons",
               "value": "29 · Sep 2026",
@@ -109,24 +104,9 @@
                 "catalogueId": "nasa-uranus-moons",
                 "locator": "/references/2; moon-count"
               }
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "Present"
             }
           ],
           "moreFacts": [
-            {
-              "id": "minimum-temperature",
-              "label": "Minimum temperature",
-              "value": "49 K"
-            },
-            {
-              "id": "wind-speed",
-              "label": "Cloud-top winds",
-              "value": "Up to 900 km/h"
-            },
             {
               "id": "mass",
               "label": "Mass",
@@ -1142,8 +1122,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "5d229eb23722aae97d1d9a1bdc44e6b7811ac37be2211cd9559515fa378fb8e9",
-      "bytes": 14621,
+      "sha256": "18674fd58cd534fce93ebdef5dcb366daba2786c7aadec10396ce2f7b95b8b96",
+      "bytes": 14186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1453,8 +1433,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9653,
-          "sha256": "3157ff5b7145921bb8ae57dd79730f2326d0fb74ca9d680a2407be3768353b97",
+          "bytes": 9394,
+          "sha256": "81b46e5f327ec52beb992808fe10960c15d1876ca14349fd8274f22956f975d2",
           "verification": "bytes-verified"
         }
       ],
@@ -1628,7 +1608,7 @@
   },
   "lastPreparation": {
     "objectId": "uranus",
-    "materialSha256": "4cbf3c8f316e88ee8df409bf7d159b3c8f75005baf3bfb5b7bdf178fdc4b7fe9",
+    "materialSha256": "6b6947ddd5722c2883cec5449821da0e1e94da4b0cf2234a44d7bdf8b552391d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

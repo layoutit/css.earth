@@ -64,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "7.87754 hours"
+        "value": "7.87754 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/301",
+          "label": "DAMIT model 301",
+          "checked": "2026-09-16",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "fields.Period (h)"
+        }
       }
     ],
     "moreFacts": []

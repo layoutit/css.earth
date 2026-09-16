@@ -26,6 +26,102 @@
       }
     },
     {
+      "id": "eris-disc-color",
+      "path": "photometry/disc-color.json",
+      "expectedBytes": 2009,
+      "expectedSha256": "b5e0a84064b6d2d3cf270b5109839a86c2bed2b2760a5cc65af19adc243c98f7",
+      "origin": "https://doi.org/10.1051/0004-6361:20066526",
+      "credit": "Carraro et al. (2006), A&A 460, L39; albedo Sicardy et al. (2011), Nature 478, 493; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed B-V, V-R and V-I (Carraro 2006 section 4), V geometric albedo (Sicardy 2011 abstract), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "carraro-2006-eris",
+            "role": "material",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "doi-10-1038-nature10550",
+            "role": "material",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/effectiveWavelengths"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eris-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eris-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "expectedBytes": 6820,
+      "expectedSha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
       "id": "eris-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 1941,
@@ -76,8 +172,8 @@
     {
       "id": "eris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2225,
-      "expectedSha256": "a4822e9efaeb1381ccc50544fb6e34ad425d063f07bdc851c3af3975ee8e787e",
+      "expectedBytes": 2418,
+      "expectedSha256": "4c2ac39813e385bfdbc4d0be3fc642790915bc29830c054787907be69003d4e2",
       "origin": "Repository-authored Eris raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -96,7 +192,7 @@
       "id": "eris-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1575,
-      "expectedSha256": "c4578c70eb6cee41cc8f269e966fb083c79003469e531f630e301e8619ce625b",
+      "expectedSha256": "9ddaf728ecc4194c45880bc2bd1895864884bedf75f2f270b872631e6083e674",
       "origin": "Repository-authored Eris geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -207,8 +303,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5172,
-      "expectedSha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
+      "expectedBytes": 4943,
+      "expectedSha256": "94c13db8f5c921218f09e74d525c958f7ae7807be590bf86d88bf6f07182e7d7",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -228,11 +324,35 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 114,
-      "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2",
+      "expectedSha256": "34d7e719fbb3eb36a5aab972d351573c340bc38eee6fc28d70a97f107ab1a445",
       "id": "eris-shape-marker",
       "origin": "https://doi.org/10.1038/nature10550",
-      "credit": "cssEarth schematic sphere using Sicardy et al. (2011) shape result; color is illustrative",
+      "credit": "cssEarth schematic; fill is the measured whole-disc colour",
       "license": "MIT, cssEarth authored schematic; factual measurements attributed"
+    },
+    {
+      "expectedBytes": 525765,
+      "expectedSha256": "688cdfa92f6ffb5d32420f20c18383e9d55a1c590af72da4abcd8ee00d3dd086",
+      "path": "reference/rendered-default-view.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /eris/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3198,
+      "expectedSha256": "ad1b526c155fb257e901f7863d7808085e64914e3e06ccff30e69453eb07e3e8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eris: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []

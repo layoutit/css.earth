@@ -13,35 +13,55 @@ function esoHierarchy(card: string) {
   return { key: name.replace(/ +/gu, ' '), valueStart: equals + 1 };
 }
 
-/** Scan value cards, leaving repeatable COMMENT/HISTORY cards alone. */
-export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string, card: string) => void, limit = 64 * RECORD) {
+/** Scan value cards, leaving repeatable COMMENT/HISTORY cards alone. A string value
+ * ending in `&` may continue on the CONTINUE cards that immediately follow it
+ * (FITS 4.0, section 4.2.1.2); those records reach the visitor with their value card. */
+export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string, card: string, continuation: readonly string[]) => void, limit = 64 * RECORD) {
   if (!Number.isSafeInteger(start) || start < 0 || start % RECORD || start >= bytes.length)
     throw new Error('Invalid FITS header offset.');
   const stop = Math.min(bytes.length, start + Math.min(limit, 64 * RECORD));
+  let pending: [string, string, string[]] | undefined;
+  const flush = () => { if (pending) visit(...pending); pending = undefined; };
   for (let offset = start; offset + CARD <= stop; offset += CARD) {
     const card = bytes.toString('latin1', offset, offset + CARD), key = card.slice(0, 8).trim();
     if (!/^[\x20-\x7e]{80}$/u.test(card)) throw new Error('Invalid FITS header characters.');
+    if (key === 'CONTINUE') {
+      if (!pending || card.slice(8, 10) !== '  ') throw new Error('Unsupported FITS CONTINUE convention.');
+      pending[2].push(card); continue;
+    }
+    flush();
     if (key === 'END') {
       if (card.slice(8).trim()) throw new Error('Invalid FITS END card.');
       const end = padded(offset + CARD);
       if (end > bytes.length) throw new Error('Truncated FITS header padding.');
       return end;
     }
-    if (key === 'CONTINUE') throw new Error('Unsupported FITS CONTINUE convention.');
-    if (key === 'HIERARCH') { visit(esoHierarchy(card).key, card); continue; }
+    if (key === 'HIERARCH') { pending = [esoHierarchy(card).key, card, []]; continue; }
     if (card[8] === '=') {
       // Released SDO synoptic ORIGIN/TELESCOP cards put the opening quote in
       // column 10. Preserve this bounded archive exception without losing it.
       if (!/^[A-Z0-9_-]{1,8}$/u.test(key) || (card[9] !== ' ' && card[9] !== "'")) throw new Error('Invalid FITS value card.');
-      visit(key, card);
+      pending = [key, card, []];
     }
   }
   throw new Error('FITS header has no END card within the bounded scan.');
 }
 
-/** Quoted slashes are data; doubled quotes are escapes; an empty value is undefined. */
-export function fitsCardValue(card: string): FitsValue {
-  const text = card.slice(card.startsWith('HIERARCH') ? esoHierarchy(card).valueStart : 9).trimStart();
+/** Quoted slashes are data; doubled quotes are escapes; an empty value is undefined.
+ * Each CONTINUE record replaces the final `&` of the string so far with its own string. */
+export function fitsCardValue(card: string, continuation: readonly string[] = []): FitsValue {
+  let value = fitsLiteral(card.slice(card.startsWith('HIERARCH') ? esoHierarchy(card).valueStart : 9), card);
+  for (const next of continuation) {
+    if (typeof value !== 'string' || !value.endsWith('&')) throw new Error('Unsupported FITS CONTINUE convention.');
+    const part = fitsLiteral(next.slice(10), next);
+    if (typeof part !== 'string') throw new Error('Unsupported FITS CONTINUE convention.');
+    value = value.slice(0, -1) + part;
+  }
+  return value;
+}
+
+function fitsLiteral(field: string, card: string): FitsValue {
+  const text = field.trimStart();
   if (text[0] === "'") {
     let value = '';
     for (let i = 1; i < text.length; i++) {
@@ -69,9 +89,9 @@ export function fitsCardValue(card: string): FitsValue {
 
 export function readFitsHeader(bytes: Buffer, start = 0) {
   const header: FitsHeader = {};
-  const dataOffset = scanFitsCards(bytes, start, (key, card) => {
+  const dataOffset = scanFitsCards(bytes, start, (key, card, continuation) => {
     if (Object.hasOwn(header, key)) throw new Error(`Duplicate FITS field: ${key}`);
-    header[key] = fitsCardValue(card);
+    header[key] = fitsCardValue(card, continuation);
   });
   // Preserve original 80-byte records, including commentary and END, separately
   // from parsed values. Do not rewrite or strip the archived header.

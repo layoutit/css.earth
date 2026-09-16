@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b5a43cf7acb6bc71b2262c02fa7ae43a7bc158e37d216bb8e174b73763b56905"
+    "sha256": "3c19c3e19d9ebdae551c9c6a8e6514e574ac8bfd75be6cf5d57473037c1399b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -284,7 +284,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
+      "sha256": "7baf5119816cc696e4a437bad9682f19cf297007badf729bee0fee1c6d6ff0bc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -310,19 +310,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "448 m"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "1.19 AU"
+              "value": "1.19 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.30 years"
+              "value": "1.30 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -948,8 +959,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
-      "bytes": 12007,
+      "sha256": "7baf5119816cc696e4a437bad9682f19cf297007badf729bee0fee1c6d6ff0bc",
+      "bytes": 12597,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1461,8 +1472,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4817,
-          "sha256": "6f0d75b66dff0e9a10ad53e8c5ed2aea28c5599b57345292503dc5e29998041b",
+          "bytes": 5269,
+          "sha256": "76080b6e12740cbd8bba02722d35a3c8e235e1a6ec457ac2c48e1b5cedafdc41",
           "verification": "bytes-verified"
         }
       ],
@@ -1662,7 +1673,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "215c33b37bad12b9f06f9704d8c9e52bd4fb08cd3e43bb5fde88caf6700b340b",
+    "materialSha256": "5637dd8a9254578894ee80cc647c93b6c6578a08d652f503c6c91f048ce1acc4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

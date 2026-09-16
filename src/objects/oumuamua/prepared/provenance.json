@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb8c8a1893f60990017b703f932c2fdf83cc14c7eeb0eda861751f6152792a9b"
+    "sha256": "8ec614fd93a400ce409841528f4cbadded5bdce58fa992a275fc8a277f8c9db7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db2c691f31ffc8fcb1b2e546fed79e64919c2658e9a9de62383731b311a5b36b",
+      "sha256": "677d8501a52cb41bacb9c86c82c92d1ee4e654d57bede554364ac76bc119e5a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published light-curve interpretation"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "115 × 111 × 19 m"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Tumbling; no unique single rotation period"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Interstellar visitor"
+              "value": "115 × 111 × 19 m",
+              "source": {
+                "url": "https://doi.org/10.1093/mnras/stz2378",
+                "label": "Research publication · DOI 10.1093/mnras/stz2378",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1093-mnras-stz2378",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -291,8 +278,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db2c691f31ffc8fcb1b2e546fed79e64919c2658e9a9de62383731b311a5b36b",
-      "bytes": 3354,
+      "sha256": "677d8501a52cb41bacb9c86c82c92d1ee4e654d57bede554364ac76bc119e5a7",
+      "bytes": 2959,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +360,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7437,
-          "sha256": "f6f19c533ad4ea469e2b90dbabff1a4af0c2c3fcdfce70fab6bd0e7b91bf4267",
+          "bytes": 7132,
+          "sha256": "b0e78525739be74559e614f3a64acb890fd65de39469439ac15c846e09ae9fb0",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +399,7 @@
   },
   "lastPreparation": {
     "objectId": "oumuamua",
-    "materialSha256": "34bcbc4830504080c6ce31be26f9945da66c9aea2c580a8d9b9c7a5ffb6c3dd7",
+    "materialSha256": "7b39d2ff11159336705a865595f6ba3083e4ab4fd86edf90edca847bc91d038d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

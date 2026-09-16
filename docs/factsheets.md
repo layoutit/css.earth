@@ -38,13 +38,19 @@ uncertainty threshold; those dated selections are not a current catalogue.
    For extracted values, also set `path` to the existing pinned evidence, or
    `source/editorial/factsheet-review.json`, and pin that file in the manifest.
    Keep the source units, uncertainty and any calculation in that record.
-   A value copied from the body's pinned JPL Horizons record needs no hand-written
-   citation: `pnpm cite:facts -- <object-id>` cites `distance-from-sun`,
-   `perihelion`, `orbital-period`, `radius` and `rotation-period` from
-   `reference/horizons-elements.txt` and `reference/horizons-physical.txt` when
-   the displayed value equals the record at its displayed precision. A value that
-   differs in any digit came from elsewhere and stays uncited until its author
-   names the source; `--check` lists what the tool would cite without writing.
+   A value copied from a record the body pins needs no hand-written citation:
+   `pnpm cite:facts -- <object-id>` cites it when the displayed value equals the
+   record at its displayed precision. It reads the JPL Horizons queries, the JPL
+   Small-Body Database record (`--fetch` pins a missing one), the DAMIT model
+   record, the JPL satellite table rows it copies into
+   `editorial/factsheet-review.json`, and the body's own pinned measurement and
+   model JSON. A measurement record proves a value only through a numeric field
+   that measures the same kind of quantity (a size for a length, a period for a
+   time), directly, as a diameter or radius, or converted between units of that
+   kind, and only when the record names a catalogued source. Numbers inside prose,
+   names or URLs, and text a record repeats, are not evidence: the same author
+   wrote them. A discovery matches by year and every surname. `--check` reports
+   without writing; `--prune` removes what no record proves.
 3. Run `pnpm pin:documents -- <object-id>` to re-pin the content in the source
    manifest; the manifest is the only owner of that pin.
 4. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their
@@ -57,8 +63,11 @@ Each fact names its own source even when several references share one evidence
 file. A source on one fact does not support its neighbors. Sources checks the
 canonical IDs and that published facts match the authored content, then includes
 the cited facts in the prepared source catalogue. The dataset's Sources card
-shows product citations, not this factsheet index. Preparation reports how many
-facts still lack individual citations; those facts acquire no inferred source.
+shows product citations, not this factsheet index. A published fact names its
+source: preparation and Sources refuse a fact without one, and no source is
+ever inferred. A value no record proves is not a fact the site shows; remove it
+(`pnpm cite:facts -- <object-id> --prune` removes what the pinned records cannot
+cite) rather than leaving it uncited.
 
 The facts-only preparer preserves the other content and scene data, and rejects
 changed source pins. Card lines, introductions and dataset text are not content:

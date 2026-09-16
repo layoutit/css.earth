@@ -807,8 +807,8 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "expectedSha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
-      "expectedBytes": 34459,
+      "expectedSha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
+      "expectedBytes": 35627,
       "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -933,8 +933,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 854,
-      "expectedSha256": "482c3cbbba8892ec24ec4aea56f974d0d49a1546e9ba7be4f1467d533e8667eb"
+      "expectedBytes": 1702,
+      "expectedSha256": "b0d8b6df1aa1d1fe804b90eaa5c53d20ae1e120acf97c7171102ff040c278e73"
     },
     {
       "path": "science/ldem_16.lbl",

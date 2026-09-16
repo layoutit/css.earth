@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Conditional occultation-shape illustration"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "363 × 363 × 289 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "About 8.15 hours; arbitrary phase"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Haumea-family trans-Neptunian object"
+        "value": "363 × 363 × 289 km",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/201732564",
+          "label": "Research publication · DOI 10.1051/0004-6361/201732564",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-201732564",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

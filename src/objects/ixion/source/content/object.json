@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Occultation-outline illustration"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "727 × 727 × 668 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "No secure rotation period"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Plutino (3:2 resonance with Neptune)"
+        "value": "727 × 727 × 668 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2601.09639",
+          "label": "Research publication · arXiv 2601.09639",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2601-09639",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "The 2020–2023 global projected ellipse has semiaxes 363.42 (+3.53/−3.85) and 333.98 (+7.07/−4.96) km. This axisymmetric edge-on illustration assumes equatorial depth equal to the long projected diameter; the 726.84 × 726.84 × 667.96 km full axes are not a measured 3D shape. True flattening and depth remain unresolved."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

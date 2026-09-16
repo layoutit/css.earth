@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10189,
-      "expectedSha256": "3326fc5790dc47c1c95618fbba86047f9da1681e45ba6de929bd71c4d2f6954e",
+      "expectedBytes": 10069,
+      "expectedSha256": "5c1c15ead2925b23fc540c6ffdbf9ec11528d57b75b41683d8b12909fadb26b8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 39,
       "expectedSha256": "8124b12c7ec5e0324d20b0953a11cb6b412c2d22ed74efc9ec7bd13c39586e34"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5195,
+      "expectedSha256": "08071e126b19c4e5a816d8a91fb1b921d8e0c7bc367d6ac021b88a766bee81a6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Euphrosyne: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

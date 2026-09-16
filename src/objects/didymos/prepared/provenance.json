@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3e5aaa66cd6368d73acd0fc19fd63f4abfa7ae150a2bac643fbf542f26c5daa"
+    "sha256": "6ec6a61cc630b54e9ce99f0189d1999416c0151840e55267469a9d981b88485c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -287,7 +287,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
+      "sha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -296,24 +296,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Reference radius",
-              "value": "365 m"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "1.643 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "2.11 years"
+              "value": "2.11 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "2.26 hours"
+              "value": "2.26 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -842,8 +848,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
-      "bytes": 11426,
+      "sha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
+      "bytes": 11887,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1168,8 +1174,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5876,
-          "sha256": "512b8743b5d307a67e9aafd2c20c300d39353470b4cb2bcf7f507441ddd2140e",
+          "bytes": 6243,
+          "sha256": "a6ecdd9ec27f1a49bc8bc0e712b23d3513de9630c5a092fa7487d4b51ece2900",
           "verification": "bytes-verified"
         }
       ],
@@ -1318,7 +1324,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "b6c953728cb676d56e90d764efede2394bfc48d3cf69892981379293f25086fb",
+    "materialSha256": "1432ebbc51ae637b788b22e7fa4741a2055378cd7d923fa793213a3c28114a0f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

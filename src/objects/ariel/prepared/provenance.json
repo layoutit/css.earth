@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c06f0134a4de0ae8f4efb620317805e4d38d39220e05f189247ba22024b003a"
+    "sha256": "e68da4633151c8ab7b8eb509f8ab6e77639d221adb340260de5bf3ca833b6157"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -189,7 +189,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
+      "sha256": "4d9ef00cd74a270d2eb3fe411d664128cc29b19bf7e6bb68cf95f628c7efcf68",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,22 +226,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 2.52 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 2.52 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Uranus",
-              "value": "About 190,900 km"
+              "value": "About 2.52 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Lassell · 1851"
+              "value": "William Lassell · 1851",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -606,8 +612,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
-      "bytes": 7296,
+      "sha256": "4d9ef00cd74a270d2eb3fe411d664128cc29b19bf7e6bb68cf95f628c7efcf68",
+      "bytes": 7761,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1276,8 +1282,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4047,
-          "sha256": "a469b8e35a29e34aadea97a0a04ffe16a1622066bd1f8c8ce6bda86f04ae6e91",
+          "bytes": 4418,
+          "sha256": "10973abd5fdcd9ca49d42023958c72bc212bce6fd912d7041f2d7884c5bb7531",
           "verification": "bytes-verified"
         }
       ],
@@ -1376,7 +1382,7 @@
   },
   "lastPreparation": {
     "objectId": "ariel",
-    "materialSha256": "a7a2b9d2ef484ea39f4541eebf6009f240431b31fe19f4eca6e54cafb51258fd",
+    "materialSha256": "9b625e91d7aa317ac2dc6e7715c2d818c4b9b8a740b1a0563ac2029c1f48200a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

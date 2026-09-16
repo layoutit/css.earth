@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f68713b63a4e23a7d2c8ce05fa2ec4bb087cd7691837f8c25d88ed3c161fad12"
+    "sha256": "b1ada255276f9e4fc25dfd4e4d609303847dca61b005325e79f596618c58180f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "52c56aa5deeb762e846438f35e4978df2591fd97b0e9ef04fbd9dfb838ec6c9c",
+      "sha256": "2aec1c0ec897960825a429a7c60d674c9213d77c7f4dfeaeccc95fa3b70b599c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,7 +168,15 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.0564 km"
+              "value": "0.0564 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
+                "label": "Yorp · yorp research yorp",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-yorp-yorp-research-yorp",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -195,11 +203,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period (2001)",
-              "value": "12.17 minutes"
             }
           ],
           "moreFacts": []
@@ -371,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "52c56aa5deeb762e846438f35e4978df2591fd97b0e9ef04fbd9dfb838ec6c9c",
-      "bytes": 7642,
+      "sha256": "2aec1c0ec897960825a429a7c60d674c9213d77c7f4dfeaeccc95fa3b70b599c",
+      "bytes": 7863,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -493,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4436,
-          "sha256": "26b6ac7ffe6948ac793fad5407eb2c9e5f39a6f27124bbfd41f204192b599cf5",
+          "bytes": 4610,
+          "sha256": "5931ba82780ae5c8ac5ac86dae29943bb7b1354e1ca907377d9c70fd0c930aac",
           "verification": "bytes-verified"
         }
       ],
@@ -557,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "884703afa24f572474793b8b3684d8bae36f2d356036bd66b01755cd62e36cc8",
+    "materialSha256": "1a9305f2e6202a6283ce54aecba2f9d5d1d35791ae57e4b3c3bd004dade009a2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

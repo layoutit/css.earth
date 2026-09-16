@@ -8,7 +8,9 @@ Three lenses color one authored cloud front; **ESO optical is the default**. Loc
 | --- | --- |
 | [ESO optical, eso0936a](https://www.eso.org/public/images/eso0936a/) | Hα/R/V/B display; 4000 × 2679 pixels, 93.49′ × 62.61′. |
 | [ESO VISTA, eso1101d](https://www.eso.org/public/images/eso1101d/) | J/H/Ks display; 4000 × 2202 pixels, 71.81′ × 39.54′. The publisher’s Hα metadata label conflicts with its near-IR caption. |
-| [Spitzer, sig11-012](https://www.spitzer.caltech.edu/image/sig11-012-the-lagoon-nebula) | IRAC 3.6/4.5/5.8/8 µm + MIPS 24 µm false color; 1757 × 1417 pixels, 35.73′ × 28.81′. |
+| [Spitzer IRAC maps, CDS HiPS](../../sources/cds-hips-spitzer-irac.json) | IRAC 8.0/4.5/3.6 µm in MJy/sr from CDS hips2fits, [composed](source/sky-bands/spitzer-irac.json) on a 1757 × 1417 pixel, 35.73′ × 28.81′ TAN grid. Each band is scaled to its own measured range, so hue shows where a band is bright, not physical band ratios. MIPS 24 µm is left out: its map has no data over the Hourglass core. |
+
+The Spitzer lens used the publisher's sig11-012 TIFF until the FITS composite replaced it; [preview comparison](evidence/spitzer-fits/preview-comparison.jpg) (publisher left, FITS right). The composite registers against ESO optical with 214 matched stars, 0.12 px held-out RMS (the publisher TIFF: 199 stars).
 
 The ESO publication TIFFs preserve the full master footprints at reduced sampling. Pixel spacing is not measured PSF resolution. Different bands, stretches and masks cannot be interpreted as interchangeable calibrated flux.
 
@@ -19,7 +21,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 ## Evidence
 
 - [Final Helix/Lagoon app inspection](../../../site/test/evidence/nebulae/2026-09-14/final-helix-m8.json) records front/oblique views of all three Lagoon lenses after the edge correction. The [earlier field report](../../../site/test/evidence/nebulae/2026-09-14/field-m8.json) predates that correction; [report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) states reproduction gaps.
-- The final app report identifies cloud result `7545a7a3af30…`; the [object descriptor](object.json) pins its installed bank. The [edge-taper evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/edge-taper-evidence.json) measures source-target preservation, not screen brightness: 99.917% of bright-core target retained with 3.819% of the previous outermost-strip signal.
+- The final app report identifies cloud result `7545a7a3af30…` and predates the FITS Spitzer lens. The current result `37a8918fb195…` replays byte for byte from the compact inputs; its [app inspection](evidence/spitzer-fits/app-inspection.json) records front, oblique and side captures of all three lenses ([views](evidence/spitzer-fits/app-views.jpg)), not a comparison with the earlier bank; the [object descriptor](object.json) pins its installed bank. The [edge-taper evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/edge-taper-evidence.json) measures source-target preservation, not screen brightness: 99.917% of bright-core target retained with 3.819% of the previous outermost-strip signal.
 - [Historical processing evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/processing-evidence.json) covers relative registration and native separation. No fresh cold replay or scientific/material acceptance is asserted.
 
 ## Known problems

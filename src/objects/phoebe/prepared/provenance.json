@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9be83141206acde8f8417e07bdcaff2995ce6560ddab3829926806433c76a959"
+    "sha256": "4a4f376f28fa0b2e67265e235233dcee5ed9dec6890dba775b2ed9558206fbbe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -533,7 +533,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7fe6b1619f2eeec9632fae36e71b7c2e12ef352bdb51e7173fa81851540d648d",
+      "sha256": "a9e85d2501a17786d9f2d73dbe35df207429809619ef6162071896e63540a501",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -570,22 +570,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 550 days (retrograde)"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 9 hours 16 minutes"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 12.95 million km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "William Henry Pickering · 1899"
+              "value": "About 550 days (retrograde)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             }
           ],
           "moreFacts": [
@@ -1356,7 +1349,7 @@
           {
             "catalogueId": "source-phoebe-n1465662798",
             "role": "material",
-            "evidence": "src/objects/phoebe/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+            "evidence": "src/objects/phoebe/source/manifest.json@2f2fd66326d20b2ab9111bab6e147135d777defb#/inputs/17"
           }
         ]
       },
@@ -1404,7 +1397,7 @@
           {
             "catalogueId": "source-phoebe-n1465662798-label",
             "role": "material",
-            "evidence": "src/objects/phoebe/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+            "evidence": "src/objects/phoebe/source/manifest.json@2f2fd66326d20b2ab9111bab6e147135d777defb#/inputs/18"
           }
         ]
       },
@@ -1436,8 +1429,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7fe6b1619f2eeec9632fae36e71b7c2e12ef352bdb51e7173fa81851540d648d",
-      "bytes": 12309,
+      "sha256": "a9e85d2501a17786d9f2d73dbe35df207429809619ef6162071896e63540a501",
+      "bytes": 12266,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1949,8 +1942,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6467,
-          "sha256": "3a0a5ef747357f0edb5c71a95ef1eb985dfc35f84d67bbd60f8ad14f54869b8c",
+          "bytes": 6347,
+          "sha256": "916ebf4e32fc1aca671224b7c1cb7ca54bb35f868d4fa5069159335bd07fbf06",
           "verification": "bytes-verified"
         }
       ],
@@ -2174,7 +2167,7 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "b52d0537271a187d9fbbbed9ce47825a1965acea1f52d95d9fe5b79e6c158dc2",
+    "materialSha256": "67e237e06a2310f8d97f6a4f210547c3c4c251863b42afee85e5bb757960b85f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

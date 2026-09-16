@@ -2,9 +2,19 @@
   "schema": "csseris-runtime-assets@1",
   "assets": [
     {
-      "filename": "eris-lens-shape.webp",
+      "filename": "eris-color.webp",
+      "bytes": 178,
+      "sha256": "6c636da3b1dff004bc7118ff587b80aea6d4655b404d9a4673b5662b251afbc6"
+    },
+    {
+      "filename": "eris-color@2x.webp",
+      "bytes": 558,
+      "sha256": "5336afbbf0f4b49dc6bdde302deab9582e1b143869730f6387d4300fb8bb4aa0"
+    },
+    {
+      "filename": "eris-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "3e7bec4ec1ea0c42194d2df906e9c5eac6f650c04bd4988479f7bd614191d785"
     },
     {
       "filename": "eris-lighting-1x-billboard.webp",
@@ -337,24 +347,14 @@
       "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
     },
     {
-      "filename": "eris-poles-shape.webp",
+      "filename": "eris-poles-color.webp",
       "bytes": 680,
-      "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4"
+      "sha256": "236a10810d45acfb6fa7eacd82b6146dbe11d629c9a0516271bb774ab1b4084a"
     },
     {
-      "filename": "eris-poles-shape@2x.webp",
+      "filename": "eris-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
-    },
-    {
-      "filename": "eris-shape.webp",
-      "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
-    },
-    {
-      "filename": "eris-shape@2x.webp",
-      "bytes": 558,
-      "sha256": "29cb9b42eae9164dc2e5144eeee49eaa035b4970c376c0d04c190b7a8ee808ef"
+      "sha256": "53a92a924945c6220b53c116ffdf18ec54c42b44d90e90f8eed9c3303f507668"
     }
   ]
 }

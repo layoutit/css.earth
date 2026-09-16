@@ -44,7 +44,7 @@ test('documentation preparation rejects missing owners and paths outside object 
 
 test('the footer prepares compact provider credits without changing the README destination', () => {
   assert.equal(sourceDocumentation('bennu', 'Bennu').label, 'Sources: NASA, CSA, USGS, JPL');
-  assert.equal(sourceDocumentation('saturn', 'Saturn').label, 'Sources: NASA, ESA, STScI, OpenSpace, JPL');
+  assert.equal(sourceDocumentation('saturn', 'Saturn').label, 'Sources: NASA, ESA, STScI, JPL');
   assert.equal(overviewSourceDocumentation('milky-way', 'Milky Way').label, 'Sources: NASA SVS, OpenSpace');
 });
 

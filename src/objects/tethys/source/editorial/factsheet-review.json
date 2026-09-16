@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "9.537 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "120",
+        "Saturn",
+        "Tethys",
+        "603",
+        "SAT441",
+        "Laplace",
+        "2000-01-01.5",
+        "295000.",
+        "0.001",
+        "335.3",
+        "0.0",
+        "1.1",
+        "273.0",
+        "1.887802",
+        "0.005",
+        "4.982",
+        "40.6",
+        "83.5",
+        "0.0",
+        "36"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "III",
+        "Tethys",
+        "",
+        "1684",
+        "G.D. Cassini",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

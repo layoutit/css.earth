@@ -64,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "6.0289 hours"
+        "value": "6.0289 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+          "label": "Golevka · golevka research golevka",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-golevka-golevka-research-golevka",
+          "locator": "/periodHours"
+        }
       }
     ],
     "moreFacts": []

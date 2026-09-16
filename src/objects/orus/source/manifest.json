@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2777,
-      "expectedSha256": "c5f1d7b1519f9570606ec62180cf6a2a5990e48d9c0aa48bcc1f67bc51bde2e7",
+      "expectedBytes": 3935,
+      "expectedSha256": "fd02c2f6b9b4276d3fe1fd486a6542fea58034539f4adaa1d26b77d25d88336d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 2477,
       "expectedSha256": "5de23d87016acf6d705e0c8b5a5e8f64bff46204b46946c7770362e94d87d307"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3525,
+      "expectedSha256": "614d7a2cd760d53663c3f164704fc127c74bc59b607b1a1bf25052e72fa50715",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Orus: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

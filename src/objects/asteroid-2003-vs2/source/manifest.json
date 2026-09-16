@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3376,
-      "expectedSha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
+      "expectedBytes": 3751,
+      "expectedSha256": "dd879752ab5860d2d6aaf219bf895ef77eebbc87deb153f092cc95af96ad8031",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -155,6 +155,21 @@
       "path": "reference/vs2-vara-lubiano-2022-publisher.pdf",
       "expectedBytes": 2151178,
       "expectedSha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2831,
+      "expectedSha256": "b987c058e1c51b9914b7523b6af9ad9edb86715896ff40d55d7a34fbb188c9dd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 2003 VS2: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

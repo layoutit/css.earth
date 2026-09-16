@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10a312509e93f95332fad6b475dccf8febbdd9d7ede165258e5830b1f07c2506"
+    "sha256": "e098c8b3d6f3879993c86edd64b41261e0de7117c28e80fc75e8166252b330b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -126,7 +126,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f005bcb7d3c410dc400f3651482e89ba7588e30930299536b7c93fe8bb5b13b2",
+      "sha256": "b8ceb55be627e371b367d86fdab0e4e7011b5de17363fbaae5a4795fd2664ee3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -135,36 +135,45 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published occultation model"
-            },
-            {
               "id": "dimensions",
               "label": "Model extents",
-              "value": "1132.2 × 1132.2 × 1022.4 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; display orientation is illustrative"
+              "value": "1132.2 × 1132.2 × 1022.4 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2607.06450",
+                "label": "Research publication · arXiv 2607.06450",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2607-06450",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "Trans-Neptunian object",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=50000",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved."
-            },
-            {
-              "id": "rings",
-              "label": "Ring interpretation",
-              "value": "Circular schematic at measured radius. Q1R uses the 76.4 km Gemini chord width; true width varies with azimuth and its dense arc is not reconstructed. Uniform gray and display alpha are illustrative, not measured reflectance or optical depth. Q2R radius 2520 km, typical width 10 km."
+              "value": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved.",
+              "source": {
+                "url": "https://arxiv.org/abs/2607.06450",
+                "label": "Research publication · arXiv 2607.06450",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2607-06450",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -319,8 +328,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f005bcb7d3c410dc400f3651482e89ba7588e30930299536b7c93fe8bb5b13b2",
-      "bytes": 3568,
+      "sha256": "b8ceb55be627e371b367d86fdab0e4e7011b5de17363fbaae5a4795fd2664ee3",
+      "bytes": 3914,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -401,8 +410,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6336,
-          "sha256": "4e203367d4d6b022b2434defe026ab28746681d26307ffb16db30b566ea7705d",
+          "bytes": 6541,
+          "sha256": "fc57d1c9114e4658c273ee31ffb66c52fab4ba5ecb61ce6c66b25f226d30f382",
           "verification": "bytes-verified"
         }
       ],
@@ -440,7 +449,7 @@
   },
   "lastPreparation": {
     "objectId": "quaoar",
-    "materialSha256": "9ed9523a943fa4cdcb9148b1102148b78519dde44e522d1a178b72b7b823b7f4",
+    "materialSha256": "7ee8271a74d9c4b35c1a88b2e1b8cc2ad774fd4e687f7cedf4db189259cf6881",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

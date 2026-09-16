@@ -247,8 +247,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8305,
-      "expectedSha256": "c657496b84fa7cbb7f25e615dff88a4606ef34e0c072e51733d47f20b91faa68",
+      "expectedBytes": 8530,
+      "expectedSha256": "8986671caeea652e5cb345c53dfea6ebe270316dee4cf59d88477747d47ba05d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -415,6 +415,21 @@
             "catalogueId": "sbmt-m0146235607f4-2p-cif-dbl-fit",
             "role": "reference",
             "evidence": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT"
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6560,
+      "expectedSha256": "c79f70a823aa8baf7f128a3a7863a3a0e93dae9b86e9d51d5452d01b7341bbb8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eros: physical parameters, orbit elements and discovery circumstances."
           }
         ]
       }

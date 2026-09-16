@@ -75,14 +75,9 @@
         }
       },
       {
-        "id": "axial-tilt",
-        "label": "Axial tilt",
-        "value": "3\u00b0"
-      },
-      {
         "id": "moon-count",
         "label": "Known moons",
-        "value": "115 \u00b7 Sep 2026",
+        "value": "115 · Sep 2026",
         "source": {
           "url": "https://science.nasa.gov/jupiter/jupiter-moons/",
           "label": "NASA/JPL reference",
@@ -91,19 +86,9 @@
           "catalogueId": "nasa-jupiter-moons",
           "locator": "/references/2; moon-count"
         }
-      },
-      {
-        "id": "ring-system",
-        "label": "Rings",
-        "value": "Present"
       }
     ],
     "moreFacts": [
-      {
-        "id": "wind-speed",
-        "label": "Cloud-top winds",
-        "value": "Up to 539 km/h"
-      },
       {
         "id": "great-red-spot-depth",
         "label": "Great Red Spot depth",
@@ -120,7 +105,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "1.898 \u00d7 10\u00b2\u2077 kg",
+        "value": "1.898 × 10²⁷ kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -133,7 +118,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "1.326 g/cm\u00b3",
+        "value": "1.326 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -146,7 +131,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "24.79 m/s\u00b2",
+        "value": "24.79 m/s²",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",

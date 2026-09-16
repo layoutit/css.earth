@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0496b4f60a37bdfebb6046856f922797120cd4c3c7bdacf58e978da1a89470c"
+    "sha256": "56223452982f60c15e38aa16a8181901affd9b70216acab9d53ecfadd06284aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -188,7 +188,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4765ca31462d5f54c0ca436b3c528b498f5fdabac7812b057fc0cb8e63c74643",
+      "sha256": "59f14367074c20b9a99dba23bbc41ceb2af3fdfa15906ba19d7f38ed8220eca0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -229,12 +229,15 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.36 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "3.63 years"
+              "value": "2.36 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=4",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "rotation-period",
@@ -690,8 +693,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4765ca31462d5f54c0ca436b3c528b498f5fdabac7812b057fc0cb8e63c74643",
-      "bytes": 10021,
+      "sha256": "59f14367074c20b9a99dba23bbc41ceb2af3fdfa15906ba19d7f38ed8220eca0",
+      "bytes": 10241,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1052,8 +1055,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5570,
-          "sha256": "e489cbf7cd2be2f3a08d633116be7e06e20034a019cf340878bbabd9654d6387",
+          "bytes": 5743,
+          "sha256": "9f3f33ea3ab842a3ebb21c32b59725be8c67a024304dede95b41f77006e8424d",
           "verification": "bytes-verified"
         }
       ],
@@ -1202,7 +1205,7 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "3b60038732b8e5db559c84d4eb89edb5bc1f78fb4c3176a7412980cd82d484c3",
+    "materialSha256": "3b62e707e64ae9a92078326f46846fac2787a3f3d11e6241da90858ce16f33e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81a03dae56bdc5dbe7fb4433b0bb8e4fc2ab6311c0275f893bdd4b0297b01e02"
+    "sha256": "89b95e76a88455fa916b6765c7110a4ce24e01da5e2c247a33194cc881bdf393"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7f1643191b0053bc92f97c3ab15d29df0e85c55464348ff9a31910912d11d938",
+      "sha256": "8f93be69e69a3cadc533e4caf85d658daf26a071e76850581a838e173e70630a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,27 +114,54 @@
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Uranus"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
+              "value": "Uranus",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "dimensions",
               "label": "Full model dimensions",
-              "value": "46.3 × 40 × 40 km"
+              "value": "46.3 × 40 × 40 km",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1"
+              }
             },
             {
               "id": "scale",
               "label": "Size evidence",
-              "value": "42 (+20/−12) km · tentative thermal model"
+              "value": "42 (+20/−12) km · tentative thermal model",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/constraints/referenceRadiusKm"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation interpretation",
-              "value": "9.948 ± 0.019 h"
+              "value": "9.948 ± 0.019 h",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/spin/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -321,8 +348,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7f1643191b0053bc92f97c3ab15d29df0e85c55464348ff9a31910912d11d938",
-      "bytes": 2754,
+      "sha256": "8f93be69e69a3cadc533e4caf85d658daf26a071e76850581a838e173e70630a",
+      "bytes": 3985,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -403,8 +430,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5856,
-          "sha256": "7b5a975206a528f3979d8696f585e92a44bf6cb2414a10176538e774f369b5b8",
+          "bytes": 6767,
+          "sha256": "977951991e7a4b2e4e239c1e05b9cd018efc26878226c67db1f70f1c32d4a407",
           "verification": "bytes-verified"
         }
       ],
@@ -442,7 +469,7 @@
   },
   "lastPreparation": {
     "objectId": "caliban",
-    "materialSha256": "e8ad80456244110a03def64af5f4629e3dcdf73fddf090a3f1a8f7f3662ecb8e",
+    "materialSha256": "5d7782bcdae3b43a3c606d2eb4ee3f6ba66148d2872c691b8087564d44982cc2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

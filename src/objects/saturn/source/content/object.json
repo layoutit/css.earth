@@ -75,14 +75,9 @@
         }
       },
       {
-        "id": "axial-tilt",
-        "label": "Axial tilt",
-        "value": "26.73\u00b0"
-      },
-      {
         "id": "moon-count",
         "label": "Known moons",
-        "value": "293 \u00b7 Sep 2026",
+        "value": "293 · Sep 2026",
         "source": {
           "url": "https://science.nasa.gov/saturn/moons/",
           "label": "NASA/JPL reference",
@@ -91,28 +86,13 @@
           "catalogueId": "nasa-saturn-moons",
           "locator": "/references/2; moon-count"
         }
-      },
-      {
-        "id": "ring-system",
-        "label": "Rings",
-        "value": "Present"
       }
     ],
     "moreFacts": [
       {
-        "id": "ring-span",
-        "label": "Main ring span",
-        "value": "About 282,000 km"
-      },
-      {
-        "id": "ring-thickness",
-        "label": "Typical ring thickness",
-        "value": "About 10 m"
-      },
-      {
         "id": "mass",
         "label": "Mass",
-        "value": "5.683 \u00d7 10\u00b2\u2076 kg",
+        "value": "5.683 × 10²⁶ kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -125,7 +105,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.687 g/cm\u00b3",
+        "value": "0.687 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -138,7 +118,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "10.44 m/s\u00b2",
+        "value": "10.44 m/s²",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",

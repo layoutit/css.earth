@@ -32,7 +32,7 @@ test('a scaffold derives every number from the astronomy record and writes names
 test('prose the scaffold cannot know is marked, and the package it writes matches a shipped shape-only star', async () => {
   const record = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/antares.json'), 'utf8'));
   const files = scaffoldStarFiles(spec, record, EPOCH);
-  for (const path of ['text.json', 'README.md', 'NOTICE.md', 'source/measurements.json']) assert.match(files.get(`src/objects/antares/${path}`)!, new RegExp(TODO.replace(/[()]/gu, '\\$&'), 'u'), path);
+  for (const path of ['text.json', 'README.md', 'NOTICE.md', 'source/measurements.json', 'source/content/object.json']) assert.match(files.get(`src/objects/antares/${path}`)!, new RegExp(TODO.replace(/[()]/gu, '\\$&'), 'u'), path);
   // The records a shipped shape-only star keeps structurally as generated.
   for (const path of ['source/preparation/celestial.json', 'source/preparation/presentation.json', 'source/preparation/navigation.json']) {
     assert.equal(files.get(`src/objects/antares/${path}`), await readFile(resolve(root, 'src/objects/antares', path), 'utf8'), path);

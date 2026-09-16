@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "17a1f750d3c0ba97230db92b418f00b824aeeb3ad62f75aade19408114d901ca"
+    "sha256": "a1eb5c7ed73f6c055c93879348f63d9c255d9fec0285f0989d8911a0e7b38fae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
+      "sha256": "35a34b36f10a3a3bfedbef5dfabaa9c5e854ca935775de71569be9ded308df15",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +112,30 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Full approximation dimensions",
-              "value": "27 × 24.4 × 10.4 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "Unresolved in this model"
+              "value": "27 × 24.4 × 10.4 km",
+              "source": {
+                "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-polymele-model-surface",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Jupiter Trojan"
+              "value": "Jupiter Trojan",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=15094",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -293,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
-      "bytes": 2638,
+      "sha256": "35a34b36f10a3a3bfedbef5dfabaa9c5e854ca935775de71569be9ded308df15",
+      "bytes": 3132,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -375,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5431,
-          "sha256": "b6e3b6aa231d57f8af179ea68f3dcd2a710a33fcf98f60e15a4bca18805abe75",
+          "bytes": 5831,
+          "sha256": "86216b363b4db53273ea770bedc8daf07840290df6cdb925aaa25cbac6790010",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "polymele",
-    "materialSha256": "7b0ae58a13f14df44237af5b9259b9afac6495e23b87ad0ec66fcb25e011a94b",
+    "materialSha256": "ae7805b223ea93ed67e6cce0f7e046a9c2df8131d50b0f7b862be6d726b4ef25",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

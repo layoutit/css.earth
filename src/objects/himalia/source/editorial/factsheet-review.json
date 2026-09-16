@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "himalia",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "11",
+        "Jupiter",
+        "Himalia",
+        "506",
+        "JUP347",
+        "ecliptic",
+        "2000-01-01.5",
+        "11439000.",
+        "0.160",
+        "321.1",
+        "78.3",
+        "28.4",
+        "64.2",
+        "249.9090",
+        "187.4",
+        "297.1",
+        "",
+        "",
+        "",
+        "47"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Jupiter",
+        "Himalia",
+        "506",
+        "0.15155 0.05763 JUP344",
+        "85.00 10.00 1",
+        "0.8827 0.4580 *"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "VI",
+        "Himalia",
+        "",
+        "1904",
+        "C.D. Perrine",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

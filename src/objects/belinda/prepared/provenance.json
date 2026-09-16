@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dff05caf7288178a740d1f9be084f1d8a6fc28b1377d6f4841db8738f9fe45c5"
+    "sha256": "39a5c4b819959aae54c8e0fc4144481944961057e29bf06a06989b97d50bc5f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "69ccb0e27b20257c6fa27f42850607a164f35c4ecebde3e4352d257a398f0347",
+      "sha256": "f7b50542c3a79b8fef77ec1bc9dbb01fa813d3f61d78e14ea4c22b87807fbfa7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,32 +113,67 @@
             {
               "id": "radius",
               "label": "Volume-equivalent model radius",
-              "value": "40.3 km"
+              "value": "40.3 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/referenceRadiusKm"
+              }
             },
             {
               "id": "dimensions",
               "label": "Approximate dimensions",
-              "value": "128 × 64 × 64 km (prolate model)"
+              "value": "128 × 64 × 64 km (prolate model)",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/semiaxesKm/0"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 15.0 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 75,255 km"
+              "value": "About 15.0 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager 2 · 1986"
+              "value": "Voyager 2 · 1986",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/1; discoverer(s); year discovered"
+              }
             },
             {
               "id": "uncertainty",
               "label": "Projected equivalent radius",
-              "value": "45 ± 8 km"
+              "value": "45 ± 8 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/projectedEquivalentRadiusKm/value"
+              }
             }
           ],
           "moreFacts": []
@@ -311,8 +346,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "69ccb0e27b20257c6fa27f42850607a164f35c4ecebde3e4352d257a398f0347",
-      "bytes": 3117,
+      "sha256": "f7b50542c3a79b8fef77ec1bc9dbb01fa813d3f61d78e14ea4c22b87807fbfa7",
+      "bytes": 4763,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -393,8 +428,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5646,
-          "sha256": "f114a5c061392a85ada2f9ec752147f41c8cb006f34944f24074ad5ed8068346",
+          "bytes": 6881,
+          "sha256": "eab45a2489546a27676d3bf32d8dc0c0a5269fae127802f8143b6f0d2dc1f4c2",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +467,7 @@
   },
   "lastPreparation": {
     "objectId": "belinda",
-    "materialSha256": "26e223e213fe73429cb48f342f80ab640f9f5acfb3929a4d80cb1bbe066dc84e",
+    "materialSha256": "57aaabbd9a27a55fbfb926181cd6512a996ce58e4a60f909a0b0edb12a52f76f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

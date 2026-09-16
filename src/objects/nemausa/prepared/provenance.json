@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53c27651bd138aeba55d441254556b112920927b8e5c54b4c01c36359c0ea800"
+    "sha256": "1af210f9c332cb1c12f897c2c01455c8a5332c6af223ca270c17fc68a7f5abc6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "55bc10422224acf3b8c96a989ba2ef17b4c82464cefbbbcacfad3d0d2bd16581",
+      "sha256": "ae9a83c976e2209ffa67a2414012e4368662a1b2e988392eef6bfabb6bd36789",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "75 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.366 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7.78484 hours"
             }
           ],
           "moreFacts": []
@@ -364,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "55bc10422224acf3b8c96a989ba2ef17b4c82464cefbbbcacfad3d0d2bd16581",
-      "bytes": 10062,
+      "sha256": "ae9a83c976e2209ffa67a2414012e4368662a1b2e988392eef6bfabb6bd36789",
+      "bytes": 9832,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7766,
-          "sha256": "b8add9905d141acaa3fa80a87bfc7480e263479d5685e17a17efe5f7905127e6",
+          "bytes": 7624,
+          "sha256": "413e3022a735d5a6ffc7b9ee7fcd3ef3ecfd91711cc16425bd5bf8a0d357ca29",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +540,7 @@
   },
   "lastPreparation": {
     "objectId": "nemausa",
-    "materialSha256": "eecaf049f1216681e68d514786f1427381dfb4f2a824ddf61b8d11725ba236de",
+    "materialSha256": "6fa63ea447d72f6c7a02ead1e47341f91b1bf40ee73b57443b5fc55d139f9e44",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

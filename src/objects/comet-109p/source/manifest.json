@@ -79,8 +79,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3380,
-      "expectedSha256": "8b73f0231c2675298ff1a1fde816fdcee413353affed2fdfd5208e182550dc31",
+      "expectedBytes": 3272,
+      "expectedSha256": "6643157c63acd24c6506565f4e6376fb45f1ef866811c0ec9a3c7e5e693eb4a9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -130,6 +130,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 2835,
       "expectedSha256": "3b29335fe663b920689b3df79874f3eb50f48ffda618371f69b2a85be7cc8641"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3148,
+      "expectedSha256": "d66251867175006ee43aded22e1d037e6fb507ad79d811ae01a780b10c91dc69",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 109P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

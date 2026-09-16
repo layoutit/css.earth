@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7f7bf6a1e63975d1059f379f4312796424debf5c15aa7262552d5ffb0dcd1142"
+    "sha256": "0fe68fdf888814f7fb81b3f12acabd46b151b041b330acbf2dc8121c9e704f39"
   },
   "properties": {
     "preparation": {
@@ -81,7 +81,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "lighting"
             }
@@ -129,14 +129,14 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bc1dc315ce4c97cd6a281172869506edca1650b2342bcadcf60eb97105df82fe"
+        "sha256": "74c18cd95a5439b9af1ee399547acd097409cbb98edf40c82658531cb994f7d4"
       }
     },
     "catalog": {
       "illustrationLenses": [],
       "name": "Eris",
       "classification": "dwarf-planet",
-      "color": "#ddd6cf",
+      "color": "#fffaea",
       "distanceAu": 67.78,
       "description": "Bright, icy dwarf planet far beyond Neptune.",
       "systemName": "Solar System",

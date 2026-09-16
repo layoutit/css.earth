@@ -6,14 +6,17 @@
   "panel": {
     "facts": [
       {
-        "id": "period",
-        "label": "Orbital period",
-        "value": "About 13.5 years"
-      },
-      {
         "id": "rotation",
         "label": "Rotation period",
-        "value": "About 11.4 hours"
+        "value": "About 11.4 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+          "label": "Comet 8P · arecibo model",
+          "checked": "2026-09-16",
+          "path": "source/shape/arecibo.json",
+          "catalogueId": "source-comet-8p-arecibo-model",
+          "locator": "/synodicPeriodHours"
+        }
       }
     ],
     "moreFacts": []

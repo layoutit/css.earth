@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c85abda2fdd6558ef623d37f5222288f42e8e32878dc9e8cffc2fd42cd50c3f2"
+    "sha256": "a0daf9b1ce6e152c93a4459b6a04ed5bb06ecdfafb966f245608c48de4efa57b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "299e73a1dc73474d9d1713196550df8074cc002c8b51d65dcfe9fcb222f539ea",
+      "sha256": "76f585b17c32dc9426faefb38c5ebe2a77b0e80d220134c28eb6ac3ceab41b42",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -126,27 +126,41 @@
             {
               "id": "dimensions",
               "label": "Dimensions",
-              "value": "204 × 184 × 144 km"
+              "value": "204 × 184 × 144 km",
+              "source": {
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+                "label": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "About 10.29 hours"
+              "value": "About 10.29 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 62,000 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Assumed synchronous"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · July 1989"
+              "value": "About 62,000 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; a (km)"
+              }
             }
           ],
           "moreFacts": []
@@ -311,8 +325,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "299e73a1dc73474d9d1713196550df8074cc002c8b51d65dcfe9fcb222f539ea",
-      "bytes": 3277,
+      "sha256": "76f585b17c32dc9426faefb38c5ebe2a77b0e80d220134c28eb6ac3ceab41b42",
+      "bytes": 4124,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -393,8 +407,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6836,
-          "sha256": "0e1cdf43f928cb4e6d417e368d678f57dd415709b46b6dd3ed0896112389e4ac",
+          "bytes": 7498,
+          "sha256": "49ff91fbd1e86ec703bf257bd122d100d24a01f917b78c913a9604faf3a63e1a",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +446,7 @@
   },
   "lastPreparation": {
     "objectId": "galatea",
-    "materialSha256": "51c3d0c813e9b016ad2d027cb7498712d3ed9ca7017e036d3ff175924dbb08e8",
+    "materialSha256": "834cce150f18f569a0605e0ecebff55a59fce79117ddc576ba58c63b0007335b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

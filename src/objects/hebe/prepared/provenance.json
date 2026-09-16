@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "90b4353c29c6079d885d0c7288fdac2f7247411c633211b360a005885f6ebabc"
+    "sha256": "609e24d09552bcc1be581c1dbde488ad493a7961502b0bbfe3cf527119bd4686"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f14cf1b68d564453aec52618a55a330ae4b3b359d330df6c9dbbfcfa0a791424",
+      "sha256": "d5f235d266e4213ef35f301fc48dd3e13d5bbbd53a1312dd968b16c15367471d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "97.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.426 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7.274467 hours"
             }
           ],
           "moreFacts": []
@@ -364,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f14cf1b68d564453aec52618a55a330ae4b3b359d330df6c9dbbfcfa0a791424",
-      "bytes": 7220,
+      "sha256": "d5f235d266e4213ef35f301fc48dd3e13d5bbbd53a1312dd968b16c15367471d",
+      "bytes": 6987,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4964,
-          "sha256": "9499f703054dd6cbedc4d6530df7b661413639da5678cd69cc2de084c713a898",
+          "bytes": 4819,
+          "sha256": "cc337135ae9f019be3b667063c43b8cd355a738548f20f58b49c27cf41161465",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +540,7 @@
   },
   "lastPreparation": {
     "objectId": "hebe",
-    "materialSha256": "a80dd5836dfb15ac60c4aa30d21419a5f255d7303dc0835927ddb20a33ce109a",
+    "materialSha256": "407454fcbb1f91ca76316bfe9c07e889011a653f135f829387daf55b054a06f9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

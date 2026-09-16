@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cce83b1dd23f47df4eed3e33217251bd279baddd67b89a50f0c07160e091911a"
+    "sha256": "73e79c19bdd241784e2b31923427c0b8087c75b59309c80927b64adb9364ca21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
+      "sha256": "be4d91ee9cb8ea83ae53ff59dc83cae6c20b06640ae6faba0a274ce58af9d7f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "42.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.747455 hours"
+              "value": "3.747455 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/180",
+                "label": "DAMIT model 180",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
-      "bytes": 9383,
+      "sha256": "be4d91ee9cb8ea83ae53ff59dc83cae6c20b06640ae6faba0a274ce58af9d7f5",
+      "bytes": 9587,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7073,
-          "sha256": "92409ac885ba46e27c4d243852b6d9d4e3bb2fc2b2503a04b00e572e8327207e",
+          "bytes": 7230,
+          "sha256": "95e899bc67c48319617f5d5b6ae5a677ba503db8ac455695dba55d5819443eb1",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "penelope",
-    "materialSha256": "813e30c6dbbb6ddfbbb0837438190bf2abf17f4a07dae62fbdd7af08347b55b8",
+    "materialSha256": "1b0396ab018118e7d9937b42cde04db4cf5e345ea06df91776d3bd2244cd6374",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

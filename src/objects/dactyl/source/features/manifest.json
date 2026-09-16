@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-surface-features-source@1",
   "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Dactyl centre points",
-  "snapshotDate": "2026-09-11",
+  "snapshotDate": "2026-09-16",
   "sourcePage": "https://planetarynames.wr.usgs.gov/Page/DACTYL/target",
   "license": "Public domain (United States Government work)",
   "licenseEvidence": "metadata_nomenclature_points_DACTYL.xml inside the archive declares the use constraint “Public domain.”",
@@ -11,7 +11,7 @@
       "path": "DACTYL_nomenclature_center_pts.zip",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DACTYL_nomenclature_center_pts.zip",
       "bytes": 42071,
-      "sha256": "90b788ae7b1212174e6f98bf2fe305040883a0404afbd62c38f186eb63fdee09"
+      "sha256": "f9b0a51bbadab614072090fdb2269015d52d79fac1afda5b2fa7ca5781d657a8"
     }
   ]
 }

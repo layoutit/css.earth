@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a033565a7ca8de215bab013ff07bdcc7890fa40a29fdd4141c8c809d62bc222"
+    "sha256": "b76268036aad6628050c4ec770e85ec72f4ff40fcb4a3d730898bdf2272e1ca6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -366,7 +366,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8219e86cf8924d36b3b7e5a7b7e747b240356bde0d1e16af4bcdc18d056f102",
+      "sha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -403,22 +403,41 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto",
-              "value": "6.387 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "6.387 days (synchronous)"
+              "value": "6.387 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Pluto",
-              "value": "About 19,600 km"
+              "value": "About 19,600 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "James Christy · 1978"
+              "value": "James Christy · 1978",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -1229,8 +1248,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "f8219e86cf8924d36b3b7e5a7b7e747b240356bde0d1e16af4bcdc18d056f102",
-      "bytes": 15759,
+      "sha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
+      "bytes": 16719,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2174,8 +2193,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6300,
-          "sha256": "3c1f666c043234cff2eb3dbcedda5f9aac15864bccd3fef200591c0d820b37af",
+          "bytes": 7031,
+          "sha256": "cfae5aef5a72191c9322a7216d014b3585d98d7a9525756a9f9f29bf25fb4e31",
           "verification": "bytes-verified"
         }
       ],
@@ -2375,7 +2394,7 @@
   },
   "lastPreparation": {
     "objectId": "charon",
-    "materialSha256": "695eebfeb1cc198711c568d09ca723897d1780e3d350eebbeb341707145806e9",
+    "materialSha256": "a344d8b7fae8870c9b484f20e300a8e7ec616106a50db5d1a2ab422fedb79275",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

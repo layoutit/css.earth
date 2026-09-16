@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19845911b5038c662ef13472b942e9dee3b9e4b49207a49826efcc80c0288da5"
+    "sha256": "9474078550b39fa466ba282d47551d0b7977738668aca72c4f7fdf4e1046298a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e66b502d54558b7b83f103194bb1eb89336ea89bf8fb13d187833417d8cd932",
+      "sha256": "9eb85982180034ee5c5bbf9acbbcb88d8927f00bfa9a50a93c2a87694a5e790c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,41 +114,44 @@
             {
               "id": "diameter",
               "label": "Diameter estimate",
-              "value": "10 (+3/−2) km"
+              "value": "10 (+3/−2) km",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/scale/adoptedReferenceRadiusKm"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.51:1 · uniform-reflectivity model"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "rotation",
               "label": "Observed rotation period",
-              "value": "28.15 ± 0.25 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2000"
+              "value": "28.15 ± 0.25 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +315,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3e66b502d54558b7b83f103194bb1eb89336ea89bf8fb13d187833417d8cd932",
-      "bytes": 3078,
+      "sha256": "9eb85982180034ee5c5bbf9acbbcb88d8927f00bfa9a50a93c2a87694a5e790c",
+      "bytes": 3616,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +397,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5701,
-          "sha256": "c5bc32f59cbdc1e7bedd789345350760a7a48b2cf764a89ee487d9e6fe499674",
+          "bytes": 6147,
+          "sha256": "1b92ddcb951809eac9134c4c70aff055e0697ef8d7bb44ad52cb109baa3da8df",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +436,7 @@
   },
   "lastPreparation": {
     "objectId": "erriapus",
-    "materialSha256": "99dd8e750afa128368e5759902c724eed66f858ee29da4d284d9dec29056c255",
+    "materialSha256": "1d902effdb86635f10eb624b2cd658cab5d535a96df5f91e9a2709ed620e7a7c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

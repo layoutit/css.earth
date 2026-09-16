@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca25d7eb18d1c80b7dda5f19d6816fe53c6ae4bc3a88adfa213ac5079caed311"
+    "sha256": "fb21918d17364ac08421d6ee0edb79fde55c44e26c3a141d996a6d8ce819bfed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -86,7 +86,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1a1d45686d8b6f140902632a43c5de41c356b5fd20445987a8a774b56a7f8dd2",
+      "sha256": "bee2f60ecd117c800bc58d5172ec55c29e0bdf00f06681e97745ba4435d9980e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -97,17 +97,28 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "46 solar radii"
+              "value": "46 solar radii",
+              "source": {
+                "url": "https://arxiv.org/abs/2407.09641",
+                "label": "Evans et al. (2024) diameter at their adopted distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2407-09641",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "137 parsecs"
-            },
-            {
-              "id": "rotation-axis",
-              "label": "Rotation axis",
-              "value": "not measured"
+              "value": "137 parsecs",
+              "source": {
+                "url": "https://arxiv.org/abs/2407.09641",
+                "label": "Evans et al. (2024), adopted distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2407-09641",
+                "locator": "distanceParsecs; distanceSource"
+              }
             }
           ],
           "moreFacts": []
@@ -173,8 +184,14 @@
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2407-09641",
+            "role": "reference",
+            "evidence": "Evans et al. (2024), Section III.1: the limb-darkened diameter, the adopted distance and the radius the record transcribes."
+          }
+        ]
       },
       "sha256": "3fbd45b669bfac6993a32a9ea852200ee787efa8861001806da5ed7d1b729544",
       "bytes": 1315,
@@ -196,8 +213,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1a1d45686d8b6f140902632a43c5de41c356b5fd20445987a8a774b56a7f8dd2",
-      "bytes": 2406,
+      "sha256": "bee2f60ecd117c800bc58d5172ec55c29e0bdf00f06681e97745ba4435d9980e",
+      "bytes": 2950,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -312,8 +329,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4804,
-          "sha256": "f42a90c5fcf55b0c07f4b1cddafc65a8b71d1b15b4632f80cf4cb06f8570acb5",
+          "bytes": 5210,
+          "sha256": "fc1cd7c99143ee8bf77a2b135830d4dd468731bfa94dd6fde7f515d6677fdb6e",
           "verification": "bytes-verified"
         }
       ],
@@ -351,7 +368,7 @@
   },
   "lastPreparation": {
     "objectId": "polaris",
-    "materialSha256": "4613e558430322683252b9df9168f35d8c28df3b5f951e3143c5ef85dd28cbe8",
+    "materialSha256": "4e7a1e2f93097473dd49225ad0fa5d00c9badc3b2d0976bea526e5cff4778a64",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

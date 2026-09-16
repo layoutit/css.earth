@@ -269,8 +269,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10929,
-      "expectedSha256": "65e73bc536959a970373b090a033abc18102e79bd431c8d97bdea223403d39e1",
+      "expectedBytes": 11399,
+      "expectedSha256": "f84855d2df8856e95b04c2ce72a19581598208562e18998d75ae355cb33b1ffc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -310,8 +310,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1082,
-      "expectedSha256": "13d39cfb648abe035f79e4bb5d004978e05925c0ea62f7cb22680c0496c33ee2"
+      "expectedBytes": 2315,
+      "expectedSha256": "ade7ed150d2b41da1d43228583bda90537d2e26ed85ed5c6fb08f662beaad1a7"
     },
     {
       "id": "deimos-surface-feature-notes",

@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7404,
-      "expectedSha256": "a11cf97fc909ca839aa43fe2ae68c4e8453fcdb8f719d770e03262e25504860b",
+      "expectedBytes": 7608,
+      "expectedSha256": "5a273a7f3cc420a4210fe1ea4a2b27e4bcb38e589d8725396b36b4207661f0c5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1817,
       "expectedSha256": "cfdb5baeb093fad7ab637d4048283f3f130b141c5c363facb93be9668399f092"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5613,
+      "expectedSha256": "2819810ead7bfc5fe698880446e940763d771589f9b11d64bbee59b090db5100",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Hektor: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

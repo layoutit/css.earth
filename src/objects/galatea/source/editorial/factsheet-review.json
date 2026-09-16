@@ -33,6 +33,72 @@
         "5.5695",
         "*"
       ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "443",
+        "Neptune",
+        "Galatea",
+        "806",
+        "NEP097",
+        "Laplace",
+        "2000-01-01.5",
+        "62000.",
+        "0.000",
+        "0.0",
+        "86.7",
+        "0.0",
+        "0.0",
+        "0.428744",
+        "0.000",
+        "0.000",
+        "299.8",
+        "43.1",
+        "0.4",
+        "24"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "VI",
+        "Galatea",
+        "S/1989 N4",
+        "1989",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

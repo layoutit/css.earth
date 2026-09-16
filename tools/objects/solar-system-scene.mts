@@ -104,7 +104,8 @@ export async function prepareSolarSystemScene({
     starfield: Object.freeze({ ...starfield, cameraContract: "scene-locked-unbounded-accumulated-matrix3d",
       sceneRegistration: registration.cssTransform, sceneRegistrationModel: registration.model,
       sceneRegistrationChain: registration.chain, sceneRegistrationEpoch: registration.epoch }),
-    worldFrame: prepareWorldFrame(bodyId, frame, bodyRadiusUnits, bodyRadiusKilometers),
+    // The mesh is drawn at geometryScale times its source radius; the world frame measures what is drawn.
+    worldFrame: prepareWorldFrame(bodyId, frame, bodyRadiusUnits * geometryScale, bodyRadiusKilometers),
   });
 }
 

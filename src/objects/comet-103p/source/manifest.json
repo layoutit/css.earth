@@ -3892,8 +3892,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8657,
-      "expectedSha256": "f5ef1ced48bfb6d55c7f3c02e2614380bbad4523704075d2ebf14e331672fedb",
+      "expectedBytes": 9536,
+      "expectedSha256": "fc3d62b984b5b88bed7698c0f3ccb187a686248ac3da14381819daa5765f743f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -3958,6 +3958,21 @@
       "path": "reference/epoxi-sis.pdf",
       "expectedBytes": 6311705,
       "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4083,
+      "expectedSha256": "83b7d025fe22bd4ef9f59625b53451d4fd741cb2e2cbe57bd0698a0f3f0dcb7d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 103P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

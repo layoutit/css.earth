@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "23de0ac391b03b878eb65d62e1ccf737489865616bf612eee50397534e25dbeb"
+    "sha256": "864b1ee2845a0b8aeececb38ee178c78ed0c04f29023f783821f7463b2a277eb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "52c463ec219a160378b2f9b4acb22ebad5fe3bf72b6eb780b685f97141a421d4",
+      "sha256": "ba8f618a406f83e418c82f2bdf1090371e6b5740360c7b5d2c920f5c9bca5b39",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,43 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "6 (+1.5/−1) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.11:1 · uniform-reflectivity model"
-            },
-            {
-              "id": "rotation",
-              "label": "Tentative rotation period",
-              "value": "7 or 9.5 h · tentative"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2004"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +289,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "52c463ec219a160378b2f9b4acb22ebad5fe3bf72b6eb780b685f97141a421d4",
-      "bytes": 3080,
+      "sha256": "ba8f618a406f83e418c82f2bdf1090371e6b5740360c7b5d2c920f5c9bca5b39",
+      "bytes": 2629,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4620,
-          "sha256": "2bdd82567898b9d1d06ad47f1f73e584c26e98617f5494fdc5925dae1576fcd8",
+          "bytes": 4347,
+          "sha256": "9438c13bb5dd9f3965d21c00be0e3ad3ed6411629a10a8aafd3c6180daabe5e8",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +410,7 @@
   },
   "lastPreparation": {
     "objectId": "fornjot",
-    "materialSha256": "325d06919752c2f5eca056d92a91ee46d127a83ee8ec52473563b4976a33e727",
+    "materialSha256": "330bacad1f6827196c82bdff39210584dee5f3586337b45809d6deb745d34100",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

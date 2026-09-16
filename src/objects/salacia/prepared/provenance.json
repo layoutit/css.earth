@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a0a7704fa776cf1fd456897655f0b50c7a3c46488ed3d429f148b35d438517e"
+    "sha256": "914c94c21077e2aaf89f758afde7da27dc706a174b4ece77d4d98056118e26fa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
+      "sha256": "41ece38c3667912dccfc03687f7db3191dc908c2f8573996f78aa11ffa73b6f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published size model; shape unresolved"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "838 × 838 × 838 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea."
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Hot classical trans-Neptunian object"
+              "value": "838 × 838 × 838 km",
+              "source": {
+                "url": "https://doi.org/10.5194/epsc-dps2025-905",
+                "label": "Research publication · DOI 10.5194/epsc-dps2025-905",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-5194-epsc-dps2025-905",
+                "locator": "/fullAxesKm/0"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -297,8 +284,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
-      "bytes": 3528,
+      "sha256": "41ece38c3667912dccfc03687f7db3191dc908c2f8573996f78aa11ffa73b6f5",
+      "bytes": 3135,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -379,8 +366,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7293,
-          "sha256": "a78656c0b4feb78047eaf1af6a740e786da4d8b6b32db2af70c418366d605dd5",
+          "bytes": 6990,
+          "sha256": "012836daaa6f470eeaa192803769f1d36a6e1d08f013f599064dcaa25573d52e",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +405,7 @@
   },
   "lastPreparation": {
     "objectId": "salacia",
-    "materialSha256": "89e3ce5d89c044d0577901db7240401ea6632fd3bb36826f0b496891ae34efb9",
+    "materialSha256": "e11d7362308e5c94c1798c8374fcc122701c40fa48b92db367a9d0df4e7a0d85",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

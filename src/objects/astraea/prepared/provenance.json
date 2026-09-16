@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c0fdbc9cf0368f127c766a5e6bc4fbd19ef51b389d12be32f1a7e47ae0dbd60f"
+    "sha256": "fad86db082f699c3bcc7558769e746bf250e05f869b0f828ceef971c691bf8f4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
+      "sha256": "34b4b11e2ec6b88af2282236a3fc37dbf544d9bd6037231c2c8bc86781ba55e8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "56 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "16.80059 hours"
+              "value": "16.80059 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1816",
+                "label": "DAMIT model 1816",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
-      "bytes": 9508,
+      "sha256": "34b4b11e2ec6b88af2282236a3fc37dbf544d9bd6037231c2c8bc86781ba55e8",
+      "bytes": 9716,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7210,
-          "sha256": "9cbc27dd2cd6b0e6efc5eb0651c5fa62b9d1758f19667d3477008364604f3cfd",
+          "bytes": 7371,
+          "sha256": "403208ebaf875fdbbc58f179a67ed41e96c22ebcc7e41623a9672c4cae0f19cd",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "astraea",
-    "materialSha256": "b044c0f82d1a766775a4dba8629dd2a1e8f12db5f172263e11905b3a48deaac4",
+    "materialSha256": "11e171770545074d217bd697f113fdca61539b288ed8e1c5df2ee3a8f180a2fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

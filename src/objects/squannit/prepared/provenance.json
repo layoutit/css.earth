@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "squannit",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8ae537a8dcd6b89c55be301b18cfa2809c25c6d0bc9ed564e71bf17d94d3c60"
+    "sha256": "ec59f9dd50a6f44280d66b4e4561c5e1bab12535eb5de471d790b291df06967f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "711420ccf63b4604de84ccbc46953210831e9b06c2d484650266de6f89b6453e",
+      "sha256": "8d77ba7e664859570961009e7e9d9012b1dd442eb095f23336c2522e12f51b5e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,38 +111,20 @@
         "panel": {
           "facts": [
             {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Moshup"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Radar-derived mesh"
-            },
-            {
               "id": "dimensions",
               "label": "Mesh extents",
-              "value": "0.571 × 0.463 × 0.349 km"
-            },
-            {
-              "id": "scale",
-              "label": "Size evidence",
-              "value": "Original radar model · dimensions in kilometres"
+              "value": "0.571 × 0.463 × 0.349 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+                "label": "JPL radar shape model of Squannit: kw4b.obj",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "jpl-squannit-kw4b",
+                "locator": "/constraints/fullExtentsKm/0; /constraints/fullExtentsKm/1; /constraints/fullExtentsKm/2"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "later-size",
-              "label": "Later size estimate",
-              "value": "2021 photometry favors a larger body · original radar scale shown"
-            },
-            {
-              "id": "orbital-position",
-              "label": "Orbital position",
-              "value": "Published orbit extrapolated beyond observations · current phase approximate"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -252,7 +234,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -287,7 +269,7 @@
       "sha256": "3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256",
       "bytes": 67298,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "shape/kw4b.obj",
@@ -312,10 +294,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "711420ccf63b4604de84ccbc46953210831e9b06c2d484650266de6f89b6453e",
-      "bytes": 3364,
+      "sha256": "8d77ba7e664859570961009e7e9d9012b1dd442eb095f23336c2522e12f51b5e",
+      "bytes": 3063,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -352,13 +334,13 @@
           "url": "/scenes/squannit/squannit-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/squannit/squannit-model-surface@2x.webp",
           "bytes": 68658,
           "sha256": "5cec7c32fcb87b473ac61b0c133f630674b0bd6071c58fec85d26e03b9103a38",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -394,8 +376,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6308,
-          "sha256": "de62f43741c089507a030dea803bc18088d277c2b16be449dbd7f5c68174f2a3",
+          "bytes": 6141,
+          "sha256": "c4707af7e940e952169222981583031077ee77d17c2b0f2517ec4bc60930b1b9",
           "verification": "bytes-verified"
         }
       ],
@@ -433,11 +415,11 @@
   },
   "lastPreparation": {
     "objectId": "squannit",
-    "materialSha256": "b6eb3395bc09949d789fb4975c5e2478e9397d6384e83078b00653af0e70cd73",
+    "materialSha256": "e679f03d49d50dabc4878984a77dc56a78240e91ca97a6f20101e4dca6f46507",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "19703b59da10081f55d21056966e4476f89843966dce4029a8d22354699ee481"
     }
   }
 }

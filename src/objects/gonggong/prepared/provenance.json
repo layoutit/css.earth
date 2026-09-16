@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64fe42296dd14df003f8cf977a0112aed6a3641fcc486b43f373d1eb6aff52ae"
+    "sha256": "8bb408156a65f441f41bd670f64c040d0d9c456821a9f361d7d293b3605ca4c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bde0de4a9d5361b893f9dae485996880e9a094525eb09af785b42cec5b6ab509",
+      "sha256": "8b22c7760b34c473b49abc4325b9fbe0d6d6bbd7431383d1d3cbe6277885ae77",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +112,45 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published size model; shape unresolved"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "1230 × 1230 × 1230 km"
+              "value": "1230 × 1230 × 1230 km",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+                "label": "Research publication · DOI 10.1016/j.icarus.2019.03.013",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-j-icarus-2019-03-013",
+                "locator": "/fullAxesKm/0"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation",
-              "value": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved."
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Scattered trans-Neptunian object"
+              "value": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved.",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=225088",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid."
+              "value": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid.",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+                "label": "Research publication · DOI 10.1016/j.icarus.2019.03.013",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-j-icarus-2019-03-013",
+                "locator": "/fullAxesKm/0"
+              }
             }
           ]
         },
@@ -291,8 +305,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bde0de4a9d5361b893f9dae485996880e9a094525eb09af785b42cec5b6ab509",
-      "bytes": 3303,
+      "sha256": "8b22c7760b34c473b49abc4325b9fbe0d6d6bbd7431383d1d3cbe6277885ae77",
+      "bytes": 4093,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +387,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7674,
-          "sha256": "65038e37a1421ca8af94d5f93be6a846c3a9731339b374163d4c126bc3348b48",
+          "bytes": 8279,
+          "sha256": "3d8cc46b5cadb0159840c86322f523abcee809bfb997995492f0f8a7dffce34d",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +426,7 @@
   },
   "lastPreparation": {
     "objectId": "gonggong",
-    "materialSha256": "7d866dafb5fe584f9cc676327b19435961d92bff01ed7a1b7fe7c6da4d8bfdbc",
+    "materialSha256": "09a723e66505720bfa49164e971301dafa0481a48055d94b9679bb4737b621f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

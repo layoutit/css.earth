@@ -6,19 +6,17 @@
   "panel": {
     "facts": [
       {
-        "id": "giotto-approach",
-        "label": "Giotto closest approach",
-        "value": "596 km"
-      },
-      {
-        "id": "vega-approach",
-        "label": "Vega 2 closest approach",
-        "value": "8,032 km"
-      },
-      {
-        "id": "uncertainty",
-        "label": "Shape uncertainty",
-        "value": "About 0.5–1 km"
+        "id": "mission",
+        "label": "Shape from",
+        "value": "Giotto and Vega",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+          "label": "Comet 1P · stooke halley",
+          "checked": "2026-09-16",
+          "path": "source/shape/1682q1halley.xml",
+          "catalogueId": "source-comet-1p-stooke-halley",
+          "locator": "Investigation_Area names: Giotto Mission; Vega Mission - Vega 1; Vega Mission - Vega 2"
+        }
       }
     ],
     "moreFacts": []

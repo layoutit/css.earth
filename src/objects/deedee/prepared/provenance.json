@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d58f48b6c6e81057110330dfa640e67a2b275e4e01cb3c463e9b5d0c1f430b8d"
+    "sha256": "d51d47934af778cbecce1ee1f9b9cc73cb66e24e2c06128250417e306b9df572"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a8d161b10812303df2ea9c0d335167e07326b41f69cc3567f4c4e1b344e52564",
+      "sha256": "90a5a3497684dcb7b0bc384cd964af8e1083d61e60fc58c3e90e166ecf52e9fc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Thermal-size illustration"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "635 × 635 × 635 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Rotation period and pole unresolved"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Detached trans-Neptunian object"
+              "value": "635 × 635 × 635 km",
+              "source": {
+                "url": "https://doi.org/10.3847/2041-8213/aa64d8",
+                "label": "Research publication · DOI 10.3847/2041-8213/aa64d8",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-2041-8213-aa64d8",
+                "locator": "/fullAxesKm/0"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -291,8 +278,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a8d161b10812303df2ea9c0d335167e07326b41f69cc3567f4c4e1b344e52564",
-      "bytes": 3736,
+      "sha256": "90a5a3497684dcb7b0bc384cd964af8e1083d61e60fc58c3e90e166ecf52e9fc",
+      "bytes": 3206,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +360,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5936,
-          "sha256": "da3d84c0d33d7c782ce524f79b02d08bfa92d733cc7ca8f3e2ec50a01786359e",
+          "bytes": 5496,
+          "sha256": "8d6961a53e8973f2abe50c83e35e9f335577e277b98b7a6391af954766546457",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +399,7 @@
   },
   "lastPreparation": {
     "objectId": "deedee",
-    "materialSha256": "a0d7f01591d2a96e2f7d990b0178e5ef59eb526c2381e7c74194767ecb5fa666",
+    "materialSha256": "918a51defd2ceae0d1de695746e7bc7c5f2b2ba8c48aeb4ec72037a646fa86aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ee3f0318df7197e27323ec49ba2cd1fcf306347d9baea88671ae450370602ca"
+    "sha256": "a96fbf6eaad3aa85b703e7904161c58719cee0e4ad2d2de7be1f868512b63a9e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
+      "sha256": "e68e3c14a8868b03215d20b6ab9e885eb8808ecb5e18f17b43c4f9d62ea2707f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,7 +164,15 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "0.542238 km"
+              "value": "0.542238 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
+                "label": "Castalia · castalia research castalia 1997",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-castalia-castalia-research-castalia-1997",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -195,7 +203,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.089 hours"
+              "value": "4.089 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
+                "label": "Castalia · castalia research castalia 1997",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-castalia-castalia-research-castalia-1997",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -361,8 +377,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
-      "bytes": 10309,
+      "sha256": "e68e3c14a8868b03215d20b6ab9e885eb8808ecb5e18f17b43c4f9d62ea2707f",
+      "bytes": 11102,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7987,
-          "sha256": "1cbeb30a893461116462cc162bdbade62be3ff31f43dd7be28f377e2988d10fb",
+          "bytes": 8598,
+          "sha256": "e701326bae3afc8e3250b0eacda0bfdda926b3774592da7fc65a529f4fa14c17",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +563,7 @@
   },
   "lastPreparation": {
     "objectId": "castalia",
-    "materialSha256": "92266f4abe4abcab9c68d610bd5748cf6de388041a66312b0d96a198c3d0df13",
+    "materialSha256": "46847b105cc04c04a08194491885b110ce4f1f7fcd591a7c62c306a8046e1240",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

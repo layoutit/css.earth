@@ -264,8 +264,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3364,
-      "expectedSha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
+      "expectedBytes": 3599,
+      "expectedSha256": "9d3d06bfe7a8a1b277c165762c7a65198697222ecfe4efd1c967295c6458a7cc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -320,6 +320,21 @@
       "path": "reference/model-alternatives.json",
       "expectedBytes": 1819,
       "expectedSha256": "6fe0824166a0d9ee2f6d0601ca052935453a071c2c2c0f74e9758b39b6242c69"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3644,
+      "expectedSha256": "4e9f526e89ec7d16df54169f9e0b3f2b74b45c563ce504b4e16050c7f47ba125",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 8P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8b6108cff3ff6ab31778c280a001ab77cd6b76e0b05c11fb26165af9266c9367"
+    "sha256": "eab5c14ee91013b90c99fe204d91ff992ef8e1db0041d59790cc1d347374d786"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "20124fc502e97a11e927fdeb4285384d585eeab553fc0f5427a16a626e443343",
+      "sha256": "1e43fa03723f34829d16eda73c50e360313a22a3b8430609f57f321fea567745",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,42 +113,28 @@
             {
               "id": "radius",
               "label": "Projected radius",
-              "value": "21 ± 3 km"
+              "value": "21 ± 3 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/projectedRadiusKm/value"
+              }
             },
             {
               "id": "dimensions",
               "label": "Model dimensions",
-              "value": "50 × 36 × 36 km"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbit around Uranus",
-              "value": "About 8.04 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 49,752 km"
-            },
-            {
-              "id": "mass",
-              "label": "Mass from ring dynamics",
-              "value": "(6.08 ± 0.57) × 10¹⁶ kg"
-            },
-            {
-              "id": "ring-role",
-              "label": "Ring shepherd",
-              "value": "Inner edge of the epsilon ring"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation",
-              "value": "Synchronous model"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
+              "value": "50 × 36 × 36 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
             }
           ],
           "moreFacts": []
@@ -313,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "20124fc502e97a11e927fdeb4285384d585eeab553fc0f5427a16a626e443343",
-      "bytes": 3193,
+      "sha256": "1e43fa03723f34829d16eda73c50e360313a22a3b8430609f57f321fea567745",
+      "bytes": 3084,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -395,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6249,
-          "sha256": "bab9c1304e6680b7aa2c4399e778b031c49e4f9678cfdd81c8828d1b1ac0fcbc",
+          "bytes": 6222,
+          "sha256": "e45cac7fd816452750471162e7abf3f46718898d9562ed0b0e26c2853bcd8c21",
           "verification": "bytes-verified"
         }
       ],
@@ -434,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "cordelia",
-    "materialSha256": "c0fe7a58ce78896a6f01446a291da89c2d38b8c9ffb851ebc722bea08160e2cd",
+    "materialSha256": "1e7a64d034d4ff570616386c5b65c142cac3e593e8be06bf45b8d5cec7793e62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

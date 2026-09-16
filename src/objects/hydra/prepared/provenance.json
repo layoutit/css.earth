@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf9542cfc0ff7349c502e9cca553b7bbd34c7f97669006f79f923da4af0fd7af"
+    "sha256": "0e6f5b01b3aa3dad407e961e38d071f0d361965e422c6326e00efc88d5af8d4a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
+      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,32 +153,28 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "18.1 km (released shape model)"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "52.0 × 36.5 × 29.3 km"
+              "value": "18.1 km (released shape model)",
+              "source": {
+                "url": "https://doi.org/10.6084/m9.figshare.12779975.v1",
+                "label": "Published archive · DOI 10.6084/m9.figshare.12779975.v1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
+                "locator": "/referenceRadiusKm"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 38.2 days"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from system barycenter",
-              "value": "About 64,738 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 10.3 hours (not synchronous)"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Hubble Space Telescope · 2005"
+              "value": "About 38.2 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days)"
+              }
             }
           ],
           "moreFacts": []
@@ -447,8 +443,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
-      "bytes": 3800,
+      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
+      "bytes": 3989,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -575,8 +571,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4565,
-          "sha256": "3f67f8b63d846af98ef2d8370ed49301e598b13fd07c5187bfa5c257fe76043f",
+          "bytes": 4748,
+          "sha256": "a40e0bfb29fe163acd20ed5eb8bd6d8bd6e2dcae0c5af09582735b3feb9bbca9",
           "verification": "bytes-verified"
         }
       ],
@@ -639,7 +635,7 @@
   },
   "lastPreparation": {
     "objectId": "hydra",
-    "materialSha256": "2fe6f8dce0eac2fadb3d9a3b7bf72cff36998be2c1fdf6d43d5d1c924999bb01",
+    "materialSha256": "92a73100652cf5d4bad2459ed442e71c3a0d6ab6d7b3140955669b4627b36eab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
