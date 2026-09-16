@@ -3,7 +3,8 @@
  *
  *   node tools/objects/interferometry/spotless-disc.mts simulate <oifits> <out.fits> --diameter-mas <d> [--limb-darkening <u>] [--seed <n>]
  *   node tools/objects/interferometry/spotless-disc.mts compare <real-reconstruction.fits> <spotless-reconstruction.fits> --diameter-mas <d> --beam-mas <b>
- *     [--chi2 <vis2>:<closure-phase>]
+ *     [--chi2 <vis2>:<closure-phase> --halves-correlation <r>]
+ *   node tools/objects/interferometry/spotless-disc.mts reproduce <real-a> <spotless-a> <real-b> <spotless-b> --diameter-mas <d> --beam-mas <b>
  *
  * `simulate` keeps every sampled point of an OIFITS file and replaces its squared visibilities and closure phases by those of a
  * limb-darkened disc without spots, plus Gaussian noise of each point's own error. That is how Evans et al. (2024, ApJ 971,
@@ -35,9 +36,12 @@ export function limbDarkenedVisibility(baselineMetres: number, wavelengthMetres:
   return ((1 - limbDarkening) * besselJ1(x) / x + limbDarkening * Math.sqrt(Math.PI / 2) * j32 / x ** 1.5) / ((1 - limbDarkening) / 2 + limbDarkening / 3);
 }
 
-/** A reproducible standard normal stream (xorshift32 and Box-Muller). */
+/** A reproducible standard normal stream (xorshift32 and Box-Muller). The seed is scrambled first (the MurmurHash3 finaliser):
+ * unscrambled, nearby seeds such as 2 and 3 start xorshift on nearly the same values, and their noise correlates. */
 export function normalStream(seed: number) {
-  let state = (seed >>> 0) || 1;
+  let state = seed >>> 0;
+  state = Math.imul(state ^ (state >>> 16), 0x85ebca6b) >>> 0; state = Math.imul(state ^ (state >>> 13), 0xc2b2ae35) >>> 0; state = (state ^ (state >>> 16)) >>> 0;
+  state ||= 1;
   const uniform = () => { state ^= state << 13; state >>>= 0; state ^= state >>> 17; state ^= state << 5; state >>>= 0; return (state + 0.5) / 4294967296; };
   return () => Math.sqrt(-2 * Math.log(uniform())) * Math.cos(2 * Math.PI * uniform());
 }
@@ -151,12 +155,28 @@ export const SPOT_CONTRAST_RATIO = 2;
  * surface that explains the data, however much stronger they are than the spotless disc's. */
 export const RECONSTRUCTION_CHI2_LIMIT = 3;
 
-/** Both checks a reconstruction must pass before it is cast: it fits its data, and its spots beat the spotless disc's. */
-export function reconstructionVerdict(fit: { readonly vis2: number; readonly closurePhase: number }, spots: { readonly ratio: number }) {
+/** The correlation two independent halves of the data must reach on the spots left after subtracting each half's spotless twin
+ * (reproducibility). Measured with the pinned SQUEEZE recipe: π¹ Gruis 0.94, Betelgeuse 0.80, Polaris -0.26. Single nights are
+ * not used: one night alone lacks the coverage (π¹ Gruis's first night fails the spotless check by itself). */
+export const REPRODUCIBILITY_CORRELATION = 0.5;
+
+/** The checks a reconstruction must pass before it is cast: it fits its data, its spots beat the spotless disc's, and those spots
+ * come back from each independent half of the data. */
+export function reconstructionVerdict(fit: { readonly vis2: number; readonly closurePhase: number }, spots: { readonly ratio: number }, halves: { readonly correlation: number }) {
   const reasons: string[] = [];
   if (!(fit.vis2 <= RECONSTRUCTION_CHI2_LIMIT) || !(fit.closurePhase <= RECONSTRUCTION_CHI2_LIMIT)) reasons.push(`it does not fit its data (reduced chi-squared ${fit.vis2.toFixed(2)} and ${fit.closurePhase.toFixed(2)}, limit ${RECONSTRUCTION_CHI2_LIMIT})`);
   if (!(spots.ratio >= SPOT_CONTRAST_RATIO)) reasons.push(`its spots are no stronger than a spotless disc's (ratio ${spots.ratio.toFixed(2)}, limit ${SPOT_CONTRAST_RATIO})`);
+  if (!(halves.correlation >= REPRODUCIBILITY_CORRELATION)) reasons.push(`its spots do not come back from independent halves of the data (correlation ${halves.correlation.toFixed(2)}, limit ${REPRODUCIBILITY_CORRELATION})`);
   return { cast: reasons.length === 0, reasons };
+}
+
+/** Whether the spots that remain once each reconstruction's own spotless twin is subtracted agree between two independent halves
+ * of the data (oifits-select.mts --half). The halves share their coverage, so coverage artefacts would agree too; subtracting
+ * the spotless twin removes them, and only structure the data demand is left to correlate. */
+export function reproducibility(realA: Float64Array, spotlessA: Float64Array, realB: Float64Array, spotlessB: Float64Array) {
+  const residual = (real: Float64Array, spotless: Float64Array) => real.map((value, index) => value - spotless[index]!);
+  const comparison = compareSpotMaps(residual(realA, spotlessA), residual(realB, spotlessB));
+  return { correlation: comparison.correlation, residualRmsA: comparison.realRms, residualRmsB: comparison.spotlessRms, pixels: comparison.pixels };
 }
 
 const plane = async (path: string): Promise<ReconstructionPlane> => {
@@ -184,14 +204,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const result = await compareReconstructions(first, second, diameterMas, option('--beam-mas')!);
     console.log(`Spot contrast (rms, beam-convolved, limb profile removed): real ${(result.realRms * 100).toFixed(2)}%, spotless ${(result.spotlessRms * 100).toFixed(2)}%, real minus spotless ${(result.differenceRms * 100).toFixed(2)}%; correlation ${result.correlation.toFixed(2)}; ratio ${result.ratio.toFixed(2)}.`);
     const chi2 = rest[rest.indexOf('--chi2') + 1];
-    if (rest.includes('--chi2') && chi2) {
+    if (rest.includes('--chi2') && chi2 && option('--halves-correlation') !== undefined) {
       const [vis2, closurePhase] = chi2.split(':').map(Number);
-      const verdict = reconstructionVerdict({ vis2: vis2!, closurePhase: closurePhase! }, result);
-      console.log(verdict.cast ? 'Verdict: cast. The reconstruction fits its data and its spots beat the spotless disc\'s.' : `Verdict: do not cast: ${verdict.reasons.join('; ')}.`);
+      const verdict = reconstructionVerdict({ vis2: vis2!, closurePhase: closurePhase! }, result, { correlation: option('--halves-correlation')! });
+      console.log(verdict.cast ? 'Verdict: cast. The reconstruction fits its data, its spots beat the spotless disc\'s, and they come back from both halves.' : `Verdict: do not cast: ${verdict.reasons.join('; ')}.`);
     } else console.log(result.ratio < SPOT_CONTRAST_RATIO
       ? `Verdict: the spots are no stronger than the coverage draws on a plain disc (ratio below ${SPOT_CONTRAST_RATIO}). Do not cast this image as a surface.`
-      : `Verdict: the real image carries structure beyond the coverage artefacts (ratio ${SPOT_CONTRAST_RATIO} or more); check the fit with --chi2.`);
+      : `Verdict: the real image carries structure beyond the coverage artefacts (ratio ${SPOT_CONTRAST_RATIO} or more); give --chi2 and --halves-correlation (from reproduce) for the full verdict.`);
+  } else if (mode === 'reproduce' && first && second && rest.length >= 2 && diameterMas !== undefined && option('--beam-mas') !== undefined) {
+    const [thirdPath, fourthPath] = rest as [string, string];
+    const maps = await Promise.all([first, second, thirdPath, fourthPath].map(async path => spotMap(await plane(path), diameterMas, option('--beam-mas')!)));
+    const result = reproducibility(maps[0]!, maps[1]!, maps[2]!, maps[3]!);
+    console.log(`Spots beyond the spotless twins: rms ${(result.residualRmsA * 100).toFixed(2)}% and ${(result.residualRmsB * 100).toFixed(2)}%; correlation between the halves ${result.correlation.toFixed(2)} (limit ${REPRODUCIBILITY_CORRELATION}).`);
   } else {
-    throw new TypeError('Usage: spotless-disc simulate <oifits> <out> --diameter-mas <d> [--limb-darkening <u>] [--seed <n>] | compare <real> <spotless> --diameter-mas <d> --beam-mas <b>');
+    throw new TypeError('Usage: spotless-disc simulate <oifits> <out> --diameter-mas <d> [--limb-darkening <u>] [--seed <n>] | compare <real> <spotless> --diameter-mas <d> --beam-mas <b> | reproduce <real-a> <spotless-a> <real-b> <spotless-b> --diameter-mas <d> --beam-mas <b>');
   }
 }

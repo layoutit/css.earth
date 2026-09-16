@@ -79,4 +79,6 @@ test('selection flags channels outside the windows in every observable table and
   const nights = Buffer.concat([primaryHdu(), binaryTableHdu('OI_WAVELENGTH', [{ name: 'EFF_WAVE', form: 'D' }, { name: 'EFF_BAND', form: 'D' }], wavelengths.map(w => [w, 1e-8]), [['INSNAME', 'TEST']]), timed(56925.1), timed(56929.2)]);
   const first = selectOifits(nights, { mjdRange: [56925, 56926] });
   assert.equal(first.keptVis2, 3); assert.equal(first.newlyFlaggedVis2, 3, 'the other night is flagged whole');
+  const even = selectOifits(nights, { half: 'even' }), odd = selectOifits(nights, { half: 'odd' });
+  assert.deepEqual([even.keptVis2, odd.keptVis2], [3, 3], 'the two exposure times fall in different halves');
 });

@@ -3,9 +3,9 @@
 #   julia --project=tools/objects/interferometry/rotir surface.jl oifits=<file> radius_mas=<r> ld1=<u> map=<out> ...
 #
 # tools/objects/interferometry/surface-reconstruction.mts writes the arguments and documents each one. This script only runs
-# the pinned code and writes what it computed: ROTIR's surface map (its own FITS), the star as ROTIR projects it on the sky,
-# and a key=value summary. Casting the map onto a lens is not done here: no star has passed the reconstruction checks yet, and
-# the longitude convention from ROTIR's surface to a lens needs its own end-to-end check when one does.
+# the pinned code and writes what it computed: ROTIR's surface map (its own FITS), the same map on a grid of ROTIR's own
+# coordinates, the star as ROTIR projects it on the sky, and a key=value summary. tools/objects/interferometry/surface-lens.mts
+# turns the grid into a lens map; its test checks that conversion against the sky projection.
 #
 # ROTIR's coordinates, measured on this commit: colatitude from the rotation pole, longitude right-handed about it. The sky
 # frame is x toward celestial West, y toward North, z toward the observer. Inclination 90 with position angle 0 puts the pole
@@ -42,6 +42,20 @@ star = stars[1]
 
 save_surface_map(String(need("map")), x, params; nside_exp=level, tepochs=[zero(T)], field=:temperature,
                  chi2=final.v2 + final.t3phi, ndata=final.nv2 + final.nt3phi, comment="ROTIR $(regtype) $(get(args, "weight", "0")); V2 and T3PHI only")
+
+# The map on ROTIR's own coordinates: row r holds colatitude (r - 1/2) * 180 / rows from the pole, column c longitude
+# (c - 1/2) * 360 / columns; each cell takes the tile whose centre is nearest, so no value is invented between tiles.
+grid_columns, grid_rows = Int(number("grid_columns", 360)), Int(number("grid_rows", 180))
+centres = tessels.unit_spherical[:, 5, :]
+direction(θ, φ) = [sin(θ) * cos(φ), sin(θ) * sin(φ), cos(θ)]
+tile_vectors = reduce(hcat, [direction(centres[i, 2], centres[i, 3]) for i in 1:npix])
+grid = Array{Float32}(undef, grid_columns, grid_rows)
+for r in 1:grid_rows, c in 1:grid_columns
+    grid[c, r] = Float32(x[argmax(tile_vectors' * direction((r - 0.5) / grid_rows * π, (c - 0.5) / grid_columns * 2π))])
+end
+FITS(String(need("grid")), "w") do io
+    write(io, grid; header=FITSHeader(["CTYPE1", "CTYPE2", "ROWORDER"], ["ROTIR-LONGITUDE", "ROTIR-COLATITUDE", "pole-first"], ["right-handed about the pole", "from the pole", "FITS row 1 is colatitude 0"]))
+end
 
 # The sky as ROTIR sees it: surface brightness times limb darkening, rasterized on its own projection. Columns run East to
 # West and rows South to North, so the header states CDELT1 negative like an interferometric reconstruction.
