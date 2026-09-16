@@ -43,7 +43,7 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
 
 export interface CameraFrameOptions {
   id: string; image: ObservationImage; camera: ObservationCamera; geometry: PixelGeometry; photometry: ObservationPhotometry;
-  limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect'>;
+  limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect' | 'positions' | 'indices'>;
   report?: Record<string, unknown>;
 }
 
@@ -71,7 +71,7 @@ export function cameraFrame({ id, image, camera, geometry, photometry, limits, m
   const separation = maximumSeparationFootprints === undefined ? maximumSeparationMeters ?? NaN : (ids: readonly number[]) => maximumSeparationFootprints * Math.max(...ids.map(diagonal));
   const eye = camera.positionMeters, tolerance = limits.visibilityToleranceMeters;
   return { id, startTime: image.startTime, filter: image.filter, positionKm: camera.positionKm, cameraKind: camera.kind, geometrySource: geometry.source,
-    nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint,
+    nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint, detector: { image, camera, mesh },
     sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
     visible: point => {
       const delta = point.map((n, i) => n - eye[i]), distance = Math.hypot(...delta), hit = mesh.intersect(eye, delta.map(n => n / distance), distance + tolerance);

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { rotate } from '../../spice/frames.mts';
 import { controlledShapeCamera, type CameraImage } from './shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from './observer-camera.mts';
-import { framesReference, limbCentre, radiusFieldMesh, registrationSweep, turnedOrientation, type SurfaceReference } from './observer-registration.mts';
+import { framesReference, limbCentre, observationCaster, observerCaster, radiusFieldMesh, reduced, registrationSweep, turnedOrientation, type SurfaceReference } from './observer-registration.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;
 
@@ -69,7 +69,7 @@ test('the limb places the disc centre where the frame was rendered, not at its b
 test('the sweep recovers a turn of the body and prefers the true handedness', () => {
   const center: [number, number] = [64, 64];
   const turned = render(turnedOrientation(base, 7), center, markings);
-  const result = registrationSweep(turned, sighting(center), base, sphere, markings);
+  const result = registrationSweep(turned, observerCaster(sighting(center), base), sphere, markings);
   assert.ok(Math.abs(result.exact.offsetDegrees - 7) <= 0.5, `exact peak ${result.exact.offsetDegrees} recovers the seven-degree turn`);
   assert.ok(result.exact.correlation > 0.9, `the prediction at the peak matches the rendering (${result.exact.correlation})`);
   assert.ok(result.atZero < result.exact.correlation - 0.1, 'the untreated model scores lower than the peak');
@@ -81,7 +81,7 @@ test('the sweep recovers a turn of the body and prefers the true handedness', ()
 test('a frame rendered with reversed longitudes is told apart from the model', () => {
   const center: [number, number] = [64, 64];
   const mirrored = render(base, center, { sample: (lon, lat) => markings.sample(-lon, lat) });
-  const result = registrationSweep(mirrored, sighting(center), base, sphere, markings);
+  const result = registrationSweep(mirrored, observerCaster(sighting(center), base), sphere, markings);
   assert.ok(result.mirrorLongitude.correlation > 0.9, 'the reversed reference explains the frame');
   assert.ok(result.mirrorMargin < 1, `the model does not beat its mirror on a mirrored frame (${result.mirrorMargin})`);
 });
@@ -90,12 +90,33 @@ test('the body\'s other frames stand in for a map and expose a turned frame', ()
   const center: [number, number] = [64, 64];
   const frames = [0, 0.05, 0.1, 0.4].map(days => {
     const s = { ...sighting(center), epochJd: J2000 + 3.1 + days };
-    return { image: render(base, center, markings, s.epochJd), sighting: s, orientation: base };
+    return { image: render(base, center, markings, s.epochJd), sighting: s, camera: observerCaster(s, base) };
   });
   const reference = framesReference(frames.slice(1), sphere);
-  const held = registrationSweep(frames[0].image, frames[0].sighting, base, sphere, reference, { exactHalfWidth: 4 });
+  const held = registrationSweep(frames[0].image, frames[0].camera, sphere, reference, { exactHalfWidth: 4 });
   assert.ok(Math.abs(held.exact.offsetDegrees) <= 1, `a consistent frame peaks at zero (${held.exact.offsetDegrees})`);
   assert.ok(held.mirrorMargin > 1.5, `the frames agree on handedness (${held.mirrorMargin})`);
-  const turned = registrationSweep(frames[0].image, frames[0].sighting, turnedOrientation(base, 5), sphere, reference, { exactHalfWidth: 8 });
+  const turned = registrationSweep(frames[0].image, observerCaster(frames[0].sighting, turnedOrientation(base, 5)), sphere, reference, { exactHalfWidth: 8 });
   assert.ok(Math.abs(turned.exact.offsetDegrees + 5) <= 1, `a frame under a turned model reports the turn (${turned.exact.offsetDegrees})`);
+});
+
+test('any observation camera turns the same way the observer route does, and a reduced frame measures the same turn', () => {
+  const center: [number, number] = [64, 64], camera = controlledShapeCamera(observerCamera(sighting(center), base));
+  // The same camera as the surface pipeline sees it: position, Sun and rays in body-fixed metres, no orientation to hand back.
+  const generic = observationCaster({ positionMeters: Array.from(camera.position), sunDirection: Array.from(camera.sun), ray: (x, y) => Array.from(camera.ray(x, y)), project: p => camera.project(p) });
+  const route = observerCaster(sighting(center), base);
+  for (const turn of [0, 7, -33]) {
+    const a = generic.turned(turn), b = route.turned(turn);
+    for (const [x, y] of [[40, 60], [64, 64], [80, 30]]) {
+      const ra = a.ray(x, y), rb = b.ray(x, y);
+      assert.ok(Math.hypot(ra[0] - rb[0], ra[1] - rb[1], ra[2] - rb[2]) < 1e-9, `turn ${turn}: rays agree at ${x},${y}`);
+    }
+    assert.ok(Math.hypot(...a.positionMeters.map((n, i) => n - b.positionMeters[i])) < 1e-3, `turn ${turn}: positions agree`);
+    const pa = a.project([50_000, 20_000, 10_000]), pb = b.project([50_000, 20_000, 10_000]);
+    assert.ok(pa && pb && Math.hypot(pa[0] - pb[0], pa[1] - pb[1]) < 1e-6, `turn ${turn}: projections agree`);
+  }
+  const rendered = render(turnedOrientation(base, 7), [128, 128], markings, undefined, 256);
+  const small = registrationSweep(rendered, observerCaster(sighting([128, 128]), base), sphere, markings, { maximumPixels: 2000 });
+  assert.ok(small.reduction === 2, `a disc of some 7,800 lit pixels over a 2,000-pixel budget is reduced twofold (${small.reduction})`);
+  assert.ok(Math.abs(small.exact.offsetDegrees - 7) <= 1, `the reduced frame still reports the seven-degree turn (${small.exact.offsetDegrees})`);
 });

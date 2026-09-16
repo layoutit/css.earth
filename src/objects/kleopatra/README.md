@@ -36,6 +36,18 @@ passed on it unchanged.
 
 [Source test definitions](../../../tests/objects/unit/kleopatra/source.test.mts).
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 5 | 5 | 3.63° | 0.00° | 3.63° | its other 5 frames | 1 of 5 | — |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors, and their median offset from the stated camera, stated only over three or more decisive frames.
+<!-- registration-report:end -->
+
 ## Known problems
 
 Shadows defaults off. Existing preparation bakes diffuse directional lighting, available by switching Shadows on. There are no terrain-cast shadows. Pole orientation is source-supported, but absolute rotation phase is deliberately arbitrary, so the lit view is not a predicted observation at the displayed date.
