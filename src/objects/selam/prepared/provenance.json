@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10053a5381545b73620bb1364545e50f2a89a6d535ee47099566621b09795522"
+    "sha256": "afc93efd50c41e89db2188d38588526d548cf5931b251c7ef03f045e441a5cee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,14 +93,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "084fcfaff54ef122b193b9c48cee156f06ae625fd6398eaf79a34eb709a87b46",
+      "sha256": "de1f44439a6c2a188464687b4960a1bcafa11e5ab6c777162da0e339d37c6838",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "selam",
         "displayName": "Selam",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Dinkinesh",
+              "source": {
+                "url": "https://doi.org/10.1038/s41586-024-07378-0",
+                "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+                "checked": "2026-09-16",
+                "path": "source/orbit/published-parameters.json",
+                "catalogueId": "doi-10-1038-s41586-024-07378-0",
+                "locator": "centerBodyId: dinkinesh"
+              }
+            },
+            {
+              "id": "size",
+              "label": "Size",
+              "value": "About 520 m end to end",
+              "source": {
+                "url": "https://doi.org/10.1038/s41586-024-07378-0",
+                "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "doi-10-1038-s41586-024-07378-0",
+                "locator": "lobes semiaxesKm: 2 × (0.12 + 0.14) km along the long axes"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -214,8 +241,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "084fcfaff54ef122b193b9c48cee156f06ae625fd6398eaf79a34eb709a87b46",
-      "bytes": 2005,
+      "sha256": "de1f44439a6c2a188464687b4960a1bcafa11e5ab6c777162da0e339d37c6838",
+      "bytes": 2977,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -286,8 +313,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4687,
-          "sha256": "7dde9bcbf0838096d065cc94f4759674f10993a497b8ee85d18f957bd7437eb8",
+          "bytes": 5384,
+          "sha256": "924f82339ab3cd31af8ce94d1798920fe2aab8f513dbbcbd71f2c00d7918fdae",
           "verification": "bytes-verified"
         }
       ],
@@ -325,7 +352,7 @@
   },
   "lastPreparation": {
     "objectId": "selam",
-    "materialSha256": "cc4a3707eaaa11112fbb6fb53a33e8f3725856d2037b6e69937fadc4e96ac42c",
+    "materialSha256": "c912cc90e6441040ee88806220017e6a1ae8fa8cd1099b45628230f1af5d513d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
