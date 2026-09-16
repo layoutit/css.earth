@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {parse, object, string, dictionary, number, union} from '../material-composition/data-schema.mts';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.mts';
 import type {MaterialAsset} from './material-contract.mts';
@@ -5,7 +6,6 @@ import type {OverlayOptions} from 'sharp';
 export type ResolvedPhotometricRecipe = PhotometricRecipe & {minnaertChannels: number[]};
 // The observed composite also names its source product, so an entry is a channel coefficient or that label.
 const minnaertSource = object({photometricLaw:object({name:string}),mapComposite:dictionary(union(object({minnaertK:number}),string))});
-import {createHash} from 'node:crypto';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -94,7 +94,7 @@ export async function preparePhotometricDisc({sourceDirectory,publicDirectory,co
   if(write&&!publicDirectory)throw new TypeError('Photometric output directory is required for writing.');
   if(write)await mkdir(outputDirectory,{recursive:true});
   const{bank}=config,stride=config.frameSize+bank.gutter*2,rowCount=Math.ceil(bank.frames/bank.framesPerRow),assets:MaterialAsset[]=[],rows=[],presentations=[];
-  const output=async(filename: string,data: Buffer,width: number,height: number)=>{const asset={filename,width,height,bytes:data.length,sha256:createHash('sha256').update(data).digest('hex'),data};if(write)await writeFile(resolve(outputDirectory,filename),data);assets.push(asset);return asset;};
+  const output=async(filename: string,data: Buffer,width: number,height: number)=>{const asset={filename,width,height,bytes:data.length,sha256:sha256(data),data};if(write)await writeFile(resolve(outputDirectory,filename),data);assets.push(asset);return asset;};
   for(let row=0;row<rowCount;row++){
     const first=row*bank.framesPerRow,count=Math.min(bank.framesPerRow,bank.frames-first),columns=Math.min(bank.columns,count),lines=Math.ceil(count/bank.columns),width=columns*stride,height=lines*stride,composites: OverlayOptions[]=[],filename=config.rowOutput.replace('{row}',String(row).padStart(2,'0'));
     for(let column=0;column<count;column++){

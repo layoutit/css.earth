@@ -6,7 +6,7 @@
  *   node tools/objects/observer-cameras.mts <object-id>          report the derived fields beside the stated ones
  *   node tools/objects/observer-cameras.mts <object-id> --write  state the derived fields in the recipe and re-pin it
  */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '../source-values.mts';
@@ -45,7 +45,7 @@ if (flag === '--write') {
     await writeFile(recipePath, JSON.stringify(document, null, 2) + '\n');
   }
   // The manifest owns the recipe document's pin; a written recipe is re-pinned in the same step so the two never disagree.
-  const bytes = await readFile(recipePath), digest = createHash('sha256').update(bytes).digest('hex');
+  const bytes = await readFile(recipePath), digest = sha256(bytes);
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')));
   for (const entry of requireArray(manifest.documents).map(value => requireRecord(value))) if (entry.path === 'preparation/terrestrial.json') { entry.expectedBytes = bytes.length; entry.expectedSha256 = digest; }
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');

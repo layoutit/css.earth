@@ -1,10 +1,10 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {hasErrorCode,requireRecord} from '../../source-values.mts';
 import {shape,text,number,array} from '../terrestrial-layers/source-records.mts';
 export interface PinnedIntakeFile {file:string;url:string;bytes:number;sha256:string;}
 export const parsePinnedIntakeFile=shape({file:text,url:text,bytes:number,sha256:text});
 const parseManifest=shape({shape:shape({path:text,sha256:text,absoluteUncertaintyKm:array(number)}),guide:parsePinnedIntakeFile,
   frames:array(shape({id:text,imageId:number,sensor:text,filter:text,header:parsePinnedIntakeFile,image:parsePinnedIntakeFile,label:parsePinnedIntakeFile}))});
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -12,7 +12,6 @@ import { pathToFileURL } from 'node:url';
 const root = resolve(import.meta.dirname, '../../..');
 const sourceRoot = resolve(root, 'src/objects/comet-1p/source');
 const manifestPath = resolve(sourceRoot, 'reference/giotto-hmc-intake.json');
-const sha256 = (bytes:string|Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 // The IHW release separates its FITS header and raster. This is deliberately
 // a narrow intake decoder, not a runtime format or a qualified camera model.

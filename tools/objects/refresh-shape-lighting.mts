@@ -1,5 +1,5 @@
 /** Refresh only the default shape atlas; retain every other prepared asset. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, copyFile, rename } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -13,27 +13,25 @@ import { createRasterEmitter } from './terrestrial-layers/solid-raster.mts';
 import { retainedShapeAtlas } from './refresh-shape-materials.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 const files = ['prepared/scene.json', 'prepared/surfaces.json', 'prepared/material.json',
-  'prepared/runtime-assets.json', 'runtime-assets.json', 'object.json', 'source/manifest.json',
+  'runtime-assets.json', 'object.json', 'source/manifest.json',
   'source/preparation/terrestrial.json'];
 const generators = ['tools/objects/terrestrial-layers/shape-material.mts', 'tools/objects/refresh-shape-lighting.mts'];
 
 async function stageShapeLighting(id: string) {
   const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
   await mkdir(stage, { recursive: true });
-  const originals = await Promise.all(files.map(async file => ({ file, sha256: hash(await readFile(resolve(directory, file))) })));
-  const generatorPins = await Promise.all(generators.map(async file => ({ file, sha256: hash(await readFile(file)) })));
+  const originals = await Promise.all(files.map(async file => ({ file, sha256: sha256(await readFile(resolve(directory, file))) })));
+  const generatorPins = await Promise.all(generators.map(async file => ({ file, sha256: sha256(await readFile(file)) })));
   const config = parseSolidPreparationSource(await json(resolve(directory, 'source/preparation/terrestrial.json')));
   const scene = await json(resolve(directory, 'prepared/scene.json'));
   const surfaces = await json(resolve(directory, 'prepared/surfaces.json'));
   const material = await json(resolve(directory, 'prepared/material.json'));
   const inventory = await json(resolve(directory, 'runtime-assets.json'));
-  const preparedInventory = await json(resolve(directory, 'prepared/runtime-assets.json'));
-  if (JSON.stringify(inventory) !== JSON.stringify(preparedInventory)) throw new Error(`${id}: inventory mismatch.`);
   const views = config.raster.shapeViews ?? [];
   const replacements = new Map<string, Record<string, unknown>>();
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
@@ -58,7 +56,7 @@ async function stageShapeLighting(id: string) {
   // the baseline proving that Shadows-on and all other lenses stay untouched.
   for (const asset of records(inventory.assets)) {
     const bytes = await readFile(resolve('public/scenes', id, requireString(asset.filename)));
-    if (hash(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`${id}: stale asset ${asset.filename}.`);
+    if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`${id}: stale asset ${asset.filename}.`);
   }
   for (const document of [surfaces, material])
     document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
@@ -74,12 +72,12 @@ async function validateStage(id: string) {
   const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
   const receipt = await json(resolve(stage, 'receipt.json'));
   for (const pin of records(receipt.originals))
-    if (hash(await readFile(resolve(directory, requireString(pin.file)))) !== pin.sha256)
+    if (sha256(await readFile(resolve(directory, requireString(pin.file)))) !== pin.sha256)
       throw new Error(`${id}: ${pin.file} changed since staging.`);
   for (const pin of records(receipt.generatorPins))
-    if (hash(await readFile(requireString(pin.file))) !== pin.sha256) throw new Error('Lighting generator changed since staging.');
+    if (sha256(await readFile(requireString(pin.file))) !== pin.sha256) throw new Error('Lighting generator changed since staging.');
   for (const asset of records(receipt.changedAssets))
-    if (hash(await readFile(resolve(stage, requireString(asset.filename)))) !== asset.sha256) throw new Error('Staged atlas changed.');
+    if (sha256(await readFile(resolve(stage, requireString(asset.filename)))) !== asset.sha256) throw new Error('Staged atlas changed.');
 }
 
 async function publishShapeLighting(id: string) {
@@ -94,19 +92,17 @@ async function publishShapeLighting(id: string) {
   }
   for (const file of ['surfaces.json', 'material.json', 'runtime-assets.json']) {
     const value = await json(resolve(stage, file));
-    if (file === 'runtime-assets.json') {
-      await save(resolve(directory, 'prepared', file), value);
-      await save(resolve(directory, file), value);
-    } else await writeFile(resolve(directory, 'prepared', file), JSON.stringify(value) + '\n');
+    if (file === 'runtime-assets.json') await save(resolve(directory, file), value);
+    else await writeFile(resolve(directory, 'prepared', file), JSON.stringify(value) + '\n');
   }
   await prepareObjectProvenance({ objectDirectory: directory, publicDirectory: resolve('public/scenes', id),
     outputDirectory: resolve(directory, 'prepared'), basis: 'recovered' });
   const changed = new Set(records(receipt.changedAssets).map(asset => requireString(asset.filename)));
   for (const asset of records(receipt.baselineAssets)) if (!changed.has(requireString(asset.filename)))
-    if (hash(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
+    if (sha256(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
       throw new Error(`${id}: unrelated asset changed during publication.`);
   const scenePin = records(receipt.originals).find(pin => pin.file === 'prepared/scene.json');
-  if (hash(await readFile(resolve(directory, 'prepared/scene.json'))) !== scenePin?.sha256) throw new Error(`${id}: scene changed.`);
+  if (sha256(await readFile(resolve(directory, 'prepared/scene.json'))) !== scenePin?.sha256) throw new Error(`${id}: scene changed.`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

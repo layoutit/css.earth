@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -7,7 +7,7 @@ import {gunzipSync} from 'node:zlib';
 import {requireArray,requireRecord,requireFiniteNumber} from '../../source-values.mts';
 import {parseMappedCompositionRecipe,prepareMappedComposition} from './mapped-composition.mts';
 import {loadScienceSurface} from '../terrestrial-layers/scientific-raster.mts';
-const sha256=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 const nativeGrid=(value:unknown)=>requireArray(value).map(row=>requireArray(row).map(v=>requireFiniteNumber(v)));
 
 /** Independently read the native fields, then query the delivered GeoTIFF at every

@@ -7,7 +7,7 @@ import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-
 import { replayCompactCompiler } from '@cssearth/volume-bake/compact-inputs/compiler';
 import { replayCompactSymmetry } from '@cssearth/volume-bake/compact-inputs/symmetry';
 import { replayCompactSampled } from '@cssearth/volume-bake/compact-inputs/sampled';
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
@@ -18,7 +18,6 @@ import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import type { PreparedVolumeLens } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
-const sha = (v: Uint8Array | string) => createHash('sha256').update(v).digest('hex');
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
@@ -52,7 +51,7 @@ function pin(v: unknown): Pin {
   if (!/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Invalid nebula source identity.');
   return { path,sha256 };
 }
-async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); if (sha(bytes) !== p.sha256) throw new TypeError(`Nebula source hash mismatch: ${p.path}`); return bytes; }
+async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); if (sha256(bytes) !== p.sha256) throw new TypeError(`Nebula source hash mismatch: ${p.path}`); return bytes; }
 export function readNebulaDelivery(v: unknown) {
   const r = record(v), frame = record(r.sky), center = frame.centerIcrsDegrees;
   if (r.schema !== 'cssearth-nebula-delivery@1' || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
@@ -100,8 +99,8 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     'src/renderers/css/navigation/world-camera-math.ts', 'src/renderers/css/stars/prepared-catalogue-points.ts'] : [])];
   // Package inventories define numerical owners without exposing their installation layout.
   const packagePins = await packageImplementationPins(root, ['@cssearth/volume-core', '@cssearth/volume-bake']);
-  const implementationSha256 = sha(json([...await Promise.all(owners.map(async path => ({path,sha256:sha(await readFile(local(root,path)))}))), ...packagePins]));
-  if (ifMissing && await installed(directory,sha(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
+  const implementationSha256 = sha256(json([...await Promise.all(owners.map(async path => ({path,sha256:sha256(await readFile(local(root,path)))}))), ...packagePins]));
+  if (ifMissing && await installed(directory,sha256(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
   const staging = resolve(directory,`.prepared-${process.pid}`); await mkdir(staging,{recursive:true});
   const lenses: PreparedVolumeLens[] = []; let sourceResult = recipe.acceptedLabResult;
   let fieldStars: Awaited<ReturnType<typeof prepareNebulaCatalogueField>>['receipt'] | undefined;
@@ -181,14 +180,14 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:lenses[0]!.stars.points.length>0,lenses});
     const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-lens-bank',format:'cssearth-volume-lenses@1',data});
     await put(resolve(staging,'lenses.json'),envelope);
-    await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@1',recipeSha256:sha(recipeBytes),implementationSha256,sourceResult,
+    await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@1',recipeSha256:sha256(recipeBytes),implementationSha256,sourceResult,
       acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}),
       lenses:lenses.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length}))}));
     // Install complete generated files only. Authored source inputs stay untouched.
     await mkdir(resolve(directory,'prepared'),{recursive:true});
     for (const entry of await readdir(staging)) { await rm(resolve(directory,'prepared',entry),{recursive:true,force:true}); await rename(resolve(staging,entry),resolve(directory,'prepared',entry)); }
     await put(resolve(directory,'object.json'),json({schema:'cssearth-object@1',id:recipe.id,type:'volume-lens-bank',properties:{frame:lenses[0]!.volume.frame,
-      preparation:{source:'source/delivery.json',sha256:sha(recipeBytes)}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json',sha256:sha(envelope)}}));
+      preparation:{source:'source/delivery.json',sha256:sha256(recipeBytes)}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json',sha256:sha256(envelope)}}));
     return { id:recipe.id,status:'prepared',sourceResult,lenses:lenses.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

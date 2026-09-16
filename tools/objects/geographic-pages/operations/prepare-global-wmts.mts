@@ -1,3 +1,4 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parseGeographicScene, parseRegionReceipt, text } from '../source-records.mts';
 import {commandContext} from './context.mts';
 const context=commandContext();
@@ -8,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 import { readWorldCoverCatalog } from "../worldcover-catalog.mts";
 import { prepareWmtsCoverage } from "../wmts-coverage.mts";
-import { coverageLookup,prepareTreeSection,hashBytes,tileKey } from "../prepare-wmts-tree.mts";
+import { coverageLookup,prepareTreeSection,tileKey } from "../prepare-wmts-tree.mts";
 import {geographicPreparationInputs} from './preparation-inputs.mts';
 const root=context.projectUrl(""),arg=(name: string,fallback: string)=>context.args.find(v=>v.startsWith(`--${name}=`))?.split("=").slice(1).join("=")??fallback;
 const lastLevel=Number(arg("last-level","14")),workers=Number(arg("workers","4")),limit=Number(arg("limit","Infinity"));
@@ -16,8 +17,8 @@ if(!Number.isInteger(lastLevel)||lastLevel<8||lastLevel>14||!Number.isInteger(wo
 const catalog=await readWorldCoverCatalog({directory:context.sourceUrl("city/")}),entries=[...catalog.entries.values()];
 const levels=Array.from({length:lastLevel-4},(_,i)=>prepareWmtsCoverage(entries,i+5,{includePolar:true}));
 const inputs=geographicPreparationInputs(context);
-const hashes=Object.fromEntries(await Promise.all(inputs.map(async path=>[path,hashBytes(await readFile(context.projectUrl(path)))] as const)));
-const version=hashBytes(JSON.stringify({schema:1,lastLevel,source:catalog.pin.expectedSha256,hashes})).slice(0,16);
+const hashes=Object.fromEntries(await Promise.all(inputs.map(async path=>[path,sha256(await readFile(context.projectUrl(path)))] as const)));
+const version=sha256(JSON.stringify({schema:1,lastLevel,source:catalog.pin.expectedSha256,hashes})).slice(0,16);
 const directory=new URL(`.local/wmts-global/${version}/`,root).pathname;await mkdir(directory,{recursive:true});
 const hasTile=coverageLookup(levels),addresses=[];
 for(const band of levels.find(l=>l.zoom===8)!.bands)for(let y=band.y0;y<band.y1;y++)for(const [a,b] of band.ranges)for(let x=a;x<b;x++)addresses.push({zoom:8,x,y});

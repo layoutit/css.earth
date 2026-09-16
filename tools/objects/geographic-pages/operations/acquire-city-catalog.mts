@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import {commandContext} from './context.mts';
 const context=commandContext();
 
-import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync, gunzipSync } from "node:zlib";
@@ -17,7 +17,7 @@ const snapshotPath=resolve(output,"worldcover-rgbnir-2021.json.gz");
 const sourceDirectory=context.sourcePath("city");
 const pin=parseCatalogPin(JSON.parse(await readFile(resolve(sourceDirectory,"catalog-pin.json"),"utf8")));
 const offline=context.args.includes("--offline");
-const digest=(bytes: string | Uint8Array)=>createHash("sha256").update(bytes).digest("hex");
+
 await mkdir(output,{recursive:true});
 const entries=[];
 const pages: {file:string;sha256:string;bytes:number;next:string|null}[]=[];
@@ -27,7 +27,7 @@ for(let index=0;;index++) {
   const url=new URL(WORLDCOVER_BUCKET);
   url.searchParams.set("list-type","2");url.searchParams.set("prefix",WORLDCOVER_PREFIX);url.searchParams.set("max-keys","1000");
   if(next)url.searchParams.set("continuation-token",next);
-  const filename=`${String(index).padStart(2,'0')}-${digest(url.href).slice(0,16)}.xml`;
+  const filename=`${String(index).padStart(2,'0')}-${sha256(url.href).slice(0,16)}.xml`;
   const path=resolve(output,filename);
   let bytes;
   try { bytes=await readFile(path); }
@@ -51,7 +51,7 @@ for(let index=0;;index++) {
   }
   const page=parseWorldCoverInventory(bytes.toString());
   if(page.next&&pages.some(p=>p.next===page.next))throw new Error("Repeated WorldCover inventory cursor.");
-  pages.push({file:filename,sha256:digest(bytes),bytes:bytes.length,next:page.next});
+  pages.push({file:filename,sha256:sha256(bytes),bytes:bytes.length,next:page.next});
   entries.push(...page.entries);next=page.next;
   console.log(JSON.stringify({inventoryPage:index+1,objects:entries.length,downloadedBytes}));
   if(!next)break;
@@ -63,14 +63,14 @@ const snapshot={schema:"cssearth-worldcover-inventory@1",dataset:pin.dataset,
   sourcePage:"https://esa-worldcover.org/en/data-access",bucket:WORLDCOVER_BUCKET,prefix:WORLDCOVER_PREFIX,
   qualification:"Complete publisher object listing; not pixel-validity or prepared runtime coverage.",entries};
 const bytes=gzipSync(Buffer.from(`${JSON.stringify(snapshot)}\n`),{level:9});
-if(bytes.length!==pin.expectedBytes||digest(bytes)!==pin.expectedSha256||
+if(bytes.length!==pin.expectedBytes||sha256(bytes)!==pin.expectedSha256||
   entries.length!==pin.tileCount||entries.reduce((sum,e)=>sum+e.sourceBytes,0)!==pin.sourceBytes) {
   throw new Error("The WorldCover inventory changed; review and explicitly repin it before publication.");
 }
 await writeFile(snapshotPath,bytes);
 if(context.args.includes("--write-source-snapshot"))await writeFile(resolve(sourceDirectory,pin.path),bytes);
 const bounds=entries.map(entry=>worldCoverTileBounds(entry.tile));
-const report={snapshotPath,sha256:digest(bytes),bytes:bytes.length,decodedBytes:gunzipSync(bytes).length,
+const report={snapshotPath,sha256:sha256(bytes),bytes:bytes.length,decodedBytes:gunzipSync(bytes).length,
   tiles:entries.length,sourceBytes:entries.reduce((sum,entry)=>sum+entry.sourceBytes,0),
   south:Math.min(...bounds.map(b=>b.south)),north:Math.max(...bounds.map(b=>b.north)),
   downloadedBytes,pages:pages.map(({next,...page})=>page)};

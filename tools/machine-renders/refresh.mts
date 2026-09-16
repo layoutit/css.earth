@@ -1,7 +1,7 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '../source-values.mts';
 import { parsePreparedSources, sourceCatalogDigest } from '../../src/platform/prepared-sources.mts';
@@ -11,14 +11,13 @@ import { readSourceCatalog } from '../read-source-catalogue.mts';
 /** Refresh only artwork bytes/crops. Existing attribution and every unrelated
  * input must still match; this does not reacquire or rebake celestial datasets. */
 export async function prepareArtworkRefresh(root: string, before: Buffer, after: Buffer, images: ReadonlyMap<string, Buffer>) {
-  const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
   const libraryPath = 'site/source/machines/render-library.json';
   const previous = requireRecord(JSON.parse(before.toString())), next = requireRecord(JSON.parse(after.toString()));
   const machines = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-machines.json'), 'utf8')));
   const sources = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-sources.json'), 'utf8')));
   const validatedSources = parsePreparedSources(sources), validatedMachines = parsePreparedExploration(machines, validatedSources.sources);
-  assert.deepEqual(validatedMachines.closure, validatedSources.closure, 'Existing source graphs disagree');
-  assert.equal(digest(before), validatedSources.closure[libraryPath], 'Previous artwork library does not match the prepared graph');
+  assert.equal(sha256(before), validatedSources.closure[libraryPath], 'Previous artwork library does not match the prepared graph');
   assert.equal(sourceCatalogDigest(await readSourceCatalog(root)), validatedSources.catalogSha256, 'Source records changed; full preparation required');
   const previousEntries = requireArray(previous.entries).map(value => requireRecord(value));
   const nextEntries = requireArray(next.entries).map(value => requireRecord(value));
@@ -34,7 +33,7 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
       kind: source.kind, sourceUrl: source.sourcePage, credit: source.credit, ...(entry.subject === undefined ? {} : { subject: entry.subject }) });
     const path = 'public' + image.src;
     const bytes = images.get(path) ?? await readFile(resolve(root, path));
-    assert.equal(bytes.length, image.bytes, `${id}: artwork size`); assert.equal(digest(bytes), image.sha256, `${id}: artwork digest`);
+    assert.equal(bytes.length, image.bytes, `${id}: artwork size`); assert.equal(sha256(bytes), image.sha256, `${id}: artwork digest`);
     const metadata = await sharp(bytes).metadata();
     assert.equal(metadata.format, 'webp'); assert.equal(metadata.width, image.width); assert.equal(metadata.height, image.height);
     assert.equal(validatedSources.closure[path], old.sha256, `${id}: prior artwork pin`);
@@ -44,11 +43,11 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
   // Preserve the proof behind the existing attribution graph, including absent,
   // changed or added source records failing above. Only these image pins move.
   for (const [path, hash] of Object.entries(validatedSources.closure)) if (!mutable.has(path)) {
-    assert.equal(digest(await readFile(resolve(root, path))), hash, `Unrelated source input changed: ${path}`);
+    assert.equal(sha256(await readFile(resolve(root, path))), hash, `Unrelated source input changed: ${path}`);
   }
-  const closure: Record<string, string> = { ...validatedSources.closure, [libraryPath]: digest(after) };
+  const closure: Record<string, string> = { ...validatedSources.closure, [libraryPath]: sha256(after) };
   for (const image of prepared) closure['public' + image.src] = image.sha256;
-  machines.images = prepared; machines.closure = closure; sources.closure = closure;
+  machines.images = prepared; sources.closure = closure;
   parsePreparedExploration(machines, validatedSources.sources); parsePreparedSources(sources);
   return [{ path: resolve(root, 'site/prepared-machines.json'), text: JSON.stringify(machines, null, 2) + '\n' },
     { path: resolve(root, 'site/prepared-sources.json'), text: JSON.stringify(sources, null, 2) + '\n' }];

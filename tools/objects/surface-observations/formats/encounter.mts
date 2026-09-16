@@ -1,10 +1,10 @@
 /** Encounter FITS photographs: calibrated flyby images whose cameras come from a registered control network. */
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.mts';
 import type { SourceMesh } from '../../terrestrial-layers/contracts.mts';
 import { array, decodeProfile, number, optional, shape, text, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
 import { requireArray, requireRecord } from '../../../source-values.mts';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from '../../terrestrial-layers/encounter-fits.mts';
 import { encounterCamera } from '../../terrestrial-layers/encounter-camera.mts';
@@ -17,7 +17,6 @@ import { deriveLimits } from '../limits.mts';
 import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 const CONTEXT = 'encounter photography recipe';
-const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 
 export const parseEncounterLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
   frames: array(shape({ id: text, path: text, labelPath: text, controlPath: text })), transfer: surfaceTransfer,

@@ -4,8 +4,8 @@
  * pinned requirements, so a comparison is bound to exact inputs and an exact
  * oracle.
  */
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../source-values.mts';
@@ -55,7 +55,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; sha256
 
 /** Verify the actual buffer about to be decoded, not just two declarations. */
 export function verifyOracleBytes(input: { path: string; sha256: string; bytes: number }, bytes: Buffer) {
-  if (bytes.length !== input.bytes || createHash('sha256').update(bytes).digest('hex') !== input.sha256)
+  if (bytes.length !== input.bytes || sha256(bytes) !== input.sha256)
     throw new Error(`Oracle source bytes differ from their pin: ${input.path}`);
   return bytes;
 }

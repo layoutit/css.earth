@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
@@ -19,7 +19,7 @@ if (manifest.schema !== 'cssearth-photograph-investigation-inputs@1' || manifest
 const display = requireRecord(manifest.display);
 const gain = requireFiniteNumber(display.gain), scale = requireFiniteNumber(display.scale);
 if (gain !== 20 || scale !== 6 || display.offset !== 0 || display.resize !== 'nearest') throw new Error('Unexpected source-inspection stretch.');
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+
 async function input(value: unknown) {
   const record = requireRecord(value), file = requireString(record.path), origin = requireString(record.origin);
   if (basename(file) !== file || !/^N\d+_1_CALIB\.(IMG|LBL)$/u.test(file) || !origin.startsWith('https://opus.pds-rings.seti.org/holdings/calibrated/')) throw new Error('Unexpected image input.');
@@ -31,11 +31,11 @@ async function input(value: unknown) {
     const response = await fetch(origin, { signal: AbortSignal.timeout(45000) });
     if (!response.ok) throw new Error(`${response.status}: ${origin}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== record.expectedBytes || digest(bytes) !== record.expectedSha256) throw new Error(`Source pin mismatch: ${file}`);
+    if (bytes.length !== record.expectedBytes || sha256(bytes) !== record.expectedSha256) throw new Error(`Source pin mismatch: ${file}`);
     await mkdir(inputDirectory, { recursive: true });
     await writeFile(path, bytes);
   }
-  if (bytes.length !== record.expectedBytes || digest(bytes) !== record.expectedSha256) throw new Error(`Source pin mismatch: ${file}`);
+  if (bytes.length !== record.expectedBytes || sha256(bytes) !== record.expectedSha256) throw new Error(`Source pin mismatch: ${file}`);
   return bytes;
 }
 
@@ -66,14 +66,14 @@ for (const [index, value] of frames.entries()) {
   }
   panels.push({ input: await sharp(pixels, { raw: { width, height, channels: 1 } }).resize(width * scale, height * scale, { kernel: 'nearest' }).png().toBuffer(), left: index * 480, top: 32 });
   panels.push({ input: Buffer.from(`<svg width="480" height="32"><rect width="480" height="32" fill="#171717"/><text x="12" y="22" font-family="sans-serif" font-size="17" fill="white">${id} · I/F ×20 · native pixels ×6</text></svg>`), left: index * 480, top: 0 });
-  reports.push({ id, productId: pds3Keyword(label, 'PRODUCT_ID'), imageMidTime: pds3Keyword(label, 'IMAGE_MID_TIME'), filter: 'CL1,CL2', imageBytes: imageBytes.length, imageSha256: digest(imageBytes), labelSha256: digest(labelBytes), dimensions: [image.width, image.height], rasterByteOffset: image.offset, crop, minimum, maximum, lowClipped, highClipped });
+  reports.push({ id, productId: pds3Keyword(label, 'PRODUCT_ID'), imageMidTime: pds3Keyword(label, 'IMAGE_MID_TIME'), filter: 'CL1,CL2', imageBytes: imageBytes.length, imageSha256: sha256(imageBytes), labelSha256: sha256(labelBytes), dimensions: [image.width, image.height], rasterByteOffset: image.offset, crop, minimum, maximum, lowClipped, highClipped });
 }
 const png = await sharp({ create: { width: 960, height: 512, channels: 3, background: '#171717' } }).composite(panels).png().toBuffer();
 await writeFile(resolve(outputDirectory, 'native-pair.png'), png);
 const report = { schema: 'cssearth-aegaeon-source-review@1', qualifiedSurface: false,
-  inputManifestSha256: digest(manifestBytes), generatorSha256: digest(await readFile(new URL(import.meta.url))),
-  decoderSha256: digest(await readFile(resolve('tools/objects/terrestrial-layers/shape-camera-mosaic.mts'))),
-  outputSha256: digest(png), display, frames: reports,
+  inputManifestSha256: sha256(manifestBytes), generatorSha256: sha256(await readFile(new URL(import.meta.url))),
+  decoderSha256: sha256(await readFile(resolve('tools/objects/terrestrial-layers/shape-camera-mosaic.mts'))),
+  outputSha256: sha256(png), display, frames: reports,
   result: 'A diffuse disc candidate is visible in both source crops. No image-to-surface registration, interior-control validation or photographic coverage is established.' };
 await writeFile(resolve(outputDirectory, 'review.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ qualifiedSurface: false, outputDirectory, frames: reports.map(({ id, lowClipped, highClipped }) => ({ id, lowClipped, highClipped })) }));

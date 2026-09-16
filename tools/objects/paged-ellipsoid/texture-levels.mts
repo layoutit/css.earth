@@ -1,16 +1,15 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import type { SurfaceBankPlan, SurfaceBankLenses } from './contracts.mts';
 export interface TextureLevelConfiguration {widths:readonly number[];hysteresis:number;texelsPerCssPixel:number}
 interface TextureLevelAsset {url:string;decodedBytes:number}
 interface TextureLevelReceipt {source:string;sourceSha256:string;url:string;sha256:string;width:number;height:number;bottomPadding:number}
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { requireSurfacePages, surfaceBankInventory } from './surface-banks.mts';
 
 export interface TextureLevelBank {id: string; urls: readonly string[]}
 
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
@@ -55,7 +54,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
           await writeFile(resolve(publicDirectory, targetUrl.slice(config.publicBase.length)), output);
         }
         prepared.push({ url: targetUrl, decodedBytes: targetWidth * outputHeight * 4 });
-        receipts.push({ source: url, sourceSha256: digest(source), url: targetUrl, sha256: digest(output), width: targetWidth, height: outputHeight, bottomPadding: padding });
+        receipts.push({ source: url, sourceSha256: sha256(source), url: targetUrl, sha256: sha256(output), width: targetWidth, height: outputHeight, bottomPadding: padding });
       }
       urls.set(url, prepared);
     }

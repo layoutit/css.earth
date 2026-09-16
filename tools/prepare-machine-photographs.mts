@@ -1,6 +1,6 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from './source-values.mts';
 
@@ -14,7 +14,6 @@ const records = path.join(root, 'site/source/machines/photograph-records.json');
 const output = path.join(root, 'public/shell/machine-renders');
 const cache = process.env.CSSEARTH_PHOTO_CACHE ?? path.join(root, 'output/machine-photos');
 const WIDTH = 592, HEIGHT = 296, BACKGROUND = '#0d0d0d';
-const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 interface Pinned {
   readonly id: string; readonly url: string; readonly sourcePage: string;
@@ -40,7 +39,7 @@ async function original(entry: Pinned): Promise<Buffer> {
     await fs.writeFile(local, downloaded);
     return downloaded;
   });
-  if (bytes.length !== entry.bytes || sha(bytes) !== entry.sha256) throw new Error(`Pinned photograph changed: ${entry.id}`);
+  if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Pinned photograph changed: ${entry.id}`);
   return bytes;
 }
 
@@ -59,7 +58,7 @@ for (const entry of pinned) {
   await fs.writeFile(path.join(output, `${entry.id}.webp`), webp);
   entries.push({ id: entry.id, path: `images/${entry.id}.webp`, url: `/shell/machine-renders/${entry.id}.webp`,
     width: WIDTH, height: HEIGHT, displayWidth: WIDTH / 2, displayHeight: HEIGHT / 2,
-    composition: { scale: 1, offsetXCssPixels: 0 }, bytes: webp.length, sha256: sha(webp),
+    composition: { scale: 1, offsetXCssPixels: 0 }, bytes: webp.length, sha256: sha256(webp),
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `artwork-photo-${entry.id}`, role: 'artwork',
       evidence: `site/source/machines/photograph-records.json#/${pinned.indexOf(entry)}` }] },
     source: { id: entry.id, url: entry.url, sourcePage: entry.sourcePage, credit: entry.credit,

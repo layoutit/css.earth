@@ -1,3 +1,4 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import sharp from 'sharp';
 import { readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
@@ -56,7 +57,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  }
  return plan as unknown as AcquisitionPlan;
 }
-const digest=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch}}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
@@ -127,7 +128,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    if(step.trimEnd)text=text.trimEnd();if(step.appendText!==undefined)text+=step.appendText;
    await publish(step.path,new TextEncoder().encode(text));
   }
-  else if(step.kind==='verify-download'){if(digest(await bytes(step.url))!==step.sha256)throw new Error(`Pinned upstream bytes drifted: ${step.url}.`);}
+  else if(step.kind==='verify-download'){if(sha256(await bytes(step.url))!==step.sha256)throw new Error(`Pinned upstream bytes drifted: ${step.url}.`);}
   else if(step.kind==='verify-json'){const expected=record(JSON.parse(await readFile(containedPath(sourceRoot,step.expectedPath),'utf8')) as unknown),actual=record(await(await request(step.url)).json());for(const [remote,local] of Object.entries(step.fields))if(actual[remote]!==expected[local])throw new Error(`Source identity field ${remote} drifted.`);}
   else if(step.kind==='verify-request'){
    const form={...step.form};if(step.fileSource)form.file=await readFile(containedPath(sourceRoot,step.fileSource),'utf8');

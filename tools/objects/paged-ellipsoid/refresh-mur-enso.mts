@@ -1,10 +1,11 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readJsonSource, hasErrorCode, requireRecord, requireString} from '../../source-values.mts';
 import {parseMurReceipt} from './source-contract.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes} from './refresh-source.mts';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
-import { acquireMurImagery, murEnsoContent, murEnsoText, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer, sha256 } from './mur-imagery.mts';
+import { acquireMurImagery, murEnsoContent, murEnsoText, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer } from './mur-imagery.mts';
 import { parseEnsoAdvisory } from './enso-advisory.mts';
 
 const json = (value: unknown) => JSON.stringify(value, null, 2) + '\n';

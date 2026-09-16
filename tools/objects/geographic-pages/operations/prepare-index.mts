@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { prepareCityPageGeometry, pageKey } from "../page-geometry.mts";
 import { preparedCityAssetUrl } from "../../../../src/platform/prepared-map/city-asset-url.mts";
 
@@ -55,10 +55,10 @@ export function prepareCityIndex(pages: readonly CityRuntimePage[], dataset: str
     const bytes = Buffer.from(`${JSON.stringify({ schema: "cssearth-city-index@1", dataset, key,
       nodes: members, external })}\n`);
     if (bytes.length > 131072) throw new Error(`City index ${key} exceeds its prepared directory budget.`);
-    const sha256 = createHash("sha256").update(bytes).digest("hex");
+    const digest = sha256(bytes);
     const url = preparedCityAssetUrl(delivery.assetOrigin, delivery.keyPrefix,
-      `city-index-${dataset}-${key}-${sha256.slice(0, 16)}.json`);
-    references.set(key, { url, bytes: bytes.length, sha256 });
+      `city-index-${dataset}-${key}-${digest.slice(0, 16)}.json`);
+    references.set(key, { url, bytes: bytes.length, sha256: digest });
     files.push({ url, bytes });
   }
   return { files, heads: [...nodes.values()].filter(node => node.level === 0)

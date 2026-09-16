@@ -14,7 +14,7 @@
  * bank's first kernel unless the flags give others. A recipe names the bank with
  * `spice.kernelSet` and lists kernels by their paths inside it, in load order.
  */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { lstat, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -49,7 +49,7 @@ async function download(url: string) {
   if (!response.ok) throw new Error(`Kernel download failed with ${response.status}: ${url}`);
   return new Uint8Array(await response.arrayBuffer());
 }
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 async function publish(path: string, bytes: Uint8Array) {
   await mkdir(dirname(path), { recursive: true });
   const temporary = `${path}.partial`;

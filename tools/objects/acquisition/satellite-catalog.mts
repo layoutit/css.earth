@@ -1,8 +1,8 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
 import {shape,text,number,optional,array,dictionary} from '../terrestrial-layers/source-records.mts';
 const parseOrbit=shape({identity:text,document:optional(text),radiusPattern:optional(text),semiMajorAxisKm:optional(number),sourceRecord:text,parameterQualification:text});
 const parseRecipe=shape({schema:text,outputSchema:text,retrievedAt:text,expectedDiscoveryCount:number,expectedElementCount:number,gravitationalParameterKm3PerS2:number,sources:dictionary(text),discoverySection:shape({start:text,end:text}),elementPrimary:text,ringFrame:text,discoveryOnly:array(parseOrbit),authority:(value:unknown)=>value});
-import {createHash} from 'node:crypto';
 /** Normalize declared JPL-format discovery/element tables and optional published approximate orbits. */
 export function prepareSatelliteCatalog({config:configValue,documents}:{config:unknown;documents:Record<string,string>}) {
 const config=validateSatelliteCatalogRecipe(configValue);
@@ -229,7 +229,7 @@ function moonId(value:string) {
 function sourceRecord(url:string, body:string) {
   return Object.freeze({
     url,
-    sha256: createHash("sha256").update(body).digest("hex"),
+    sha256: sha256(body),
   });
 }
 

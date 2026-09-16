@@ -1,6 +1,7 @@
 /** Stage one selected raster lane without rebuilding the object's bands, lighting, geometry, or scene.
  * `node tools/objects/dist/refresh-sphere-photographs.js <body-id> <lens-id>` writes only that lens below
  * output/sphere-photographs/<body-id>/<lens-id>. The caller decides whether and how to apply the receipt. */
+import { sha256 } from '../../src/platform/sha256.mts';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -21,7 +22,7 @@ type NativeSampler = {sample(longitudeDegrees:number, latitudeDegrees:number, co
 type Surface = {id:string; source:string; output:string; nativeSourcePoles?:boolean; science?:RecordValue; coverage?:{normal:string;topography:string;references:string[]}; exposure?:number[]; encoding?:RecordValue};
 type Recipe = {sourceWidth:number;sourceHeight:number;width:number;height:number;latitudeBands:number;polarTile:number;densities:number[];resample:string;unpackedResizeBeforePack?:boolean;polesCombined:boolean;polesOutput:string;publicBase:string;surfaces:Surface[]};
 
-const hash = (bytes:Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const outputName = (template:string, density=1, id='') => template.replaceAll('{density}',String(density)).replaceAll('{suffix}',density===1?'':'@2x').replaceAll('{id}',id);
 const repositoryPath = (path:string) => relative(process.cwd(),path).replaceAll('\\','/');
 const json = async (path:string) => requireRecord(JSON.parse(await readFile(path,'utf8')));
@@ -122,10 +123,10 @@ async function stagePoles({lens,config,sourceDirectory,manifest,stage,publicDire
     if(old&&(old.width!==tile*2||old.height!==tile)) throw new Error(`Existing pole dimensions changed: ${filename}`);
     const bytes=await sharp(createNativePhotographPolarSprite(tile,config.latitudeBands,sampler,missingCoverageColor),{raw:{width:tile*2,height:tile,channels:4}}).webp({lossless:true,effort:6}).toBuffer();
     const stagePath=resolve(stage,filename); await writeFile(stagePath,bytes);
-    const staged=await fingerprint(stagePath); if(staged.bytes!==bytes.length||staged.sha256!==hash(bytes)) throw new Error(`Staged pole hash drifted: ${filename}`);
+    const staged=await fingerprint(stagePath); if(staged.bytes!==bytes.length||staged.sha256!==sha256(bytes)) throw new Error(`Staged pole hash drifted: ${filename}`);
     const current=await sharp(stagePath).metadata();
     if(current.width!==tile*2||current.height!==tile||(old&&(current.width!==old.width||current.height!==old.height))) throw new Error(`Staged pole dimensions changed: ${filename}`);
-    assets.push({filename,url:config.publicBase+filename,width:current.width!,height:current.height!,bytes:bytes.length,sha256:hash(bytes)});
+    assets.push({filename,url:config.publicBase+filename,width:current.width!,height:current.height!,bytes:bytes.length,sha256:sha256(bytes)});
   }
   return assets;
 }
@@ -146,10 +147,10 @@ async function stageMercuryBand({lens,config,sourceDirectory,manifest,stage,publ
     const packed=packLatitudeRaster(target,width,height,config.latitudeBands,Math.max(2,height/config.latitudeBands/4)), filename=outputName(lens.output,density,lens.id), previous=contained(publicDirectory,filename);
     const old=await existingMetadata(previous), bytes=await encodeBand(sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels:4}}),lens.encoding,density).toBuffer();
     const stagePath=resolve(stage,filename); await writeFile(stagePath,bytes);
-    const staged=await fingerprint(stagePath); if(staged.bytes!==bytes.length||staged.sha256!==hash(bytes)) throw new Error(`Staged band hash drifted: ${filename}`);
+    const staged=await fingerprint(stagePath); if(staged.bytes!==bytes.length||staged.sha256!==sha256(bytes)) throw new Error(`Staged band hash drifted: ${filename}`);
     const current=await sharp(stagePath).metadata();
     if(current.width!==packed.packedWidth||current.height!==packed.packedHeight||(old&&(old.width!==current.width||old.height!==current.height))) throw new Error(`Staged band dimensions changed: ${filename}`);
-    assets.push({filename,url:config.publicBase+filename,width:current.width!,height:current.height!,bytes:bytes.length,sha256:hash(bytes)});
+    assets.push({filename,url:config.publicBase+filename,width:current.width!,height:current.height!,bytes:bytes.length,sha256:sha256(bytes)});
   }
   return assets;
 }
@@ -171,7 +172,7 @@ export async function refreshSpherePhotographs(id:string,lensId:string) {
   const inputs:Record<string,string>={
     [repositoryPath(resolve(sourceDirectory,'manifest.json'))]:(await fingerprint(resolve(sourceDirectory,'manifest.json'))).sha256,
     [repositoryPath(recipePath)]:recipePin.sha256,
-    [repositoryPath(resolve(objectDirectory,'prepared/scene.json'))]:hash(scene)
+    [repositoryPath(resolve(objectDirectory,'prepared/scene.json'))]:sha256(scene)
   };
   for(const selectedFile of selectedFiles) inputs[repositoryPath(selectedFile.path)]=selectedFile.actual.sha256;
   if(lens[0]!.coverage) for(const path of [lens[0]!.coverage!.normal,lens[0]!.coverage!.topography]) { const source=sourceRecord(sourceManifest,path),file=await verifySourcePin(sourceDirectory,source); inputs[repositoryPath(file.path)]=file.actual.sha256; }

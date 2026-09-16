@@ -1,5 +1,5 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
@@ -10,12 +10,12 @@ import { shadeRadialFaces } from './terrestrial-layers/radial-terrain.mts';
 import { parseNativePhotographicSampling, prepareNativePhotographicAtlas, type PhotographicAtlas } from './terrestrial-layers/native-photograph.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 
-const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 const json=async(path:string)=>requireRecord(JSON.parse(await readFile(path,'utf8')));
 const save=async(path:string,value:unknown)=>writeFile(path,JSON.stringify(value,null,2)+'\n');
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));
 const vector=(value:unknown)=>{const result=requireArray(value).map(value=>requireFiniteNumber(value));if(result.length!==3)throw new Error('Expected a 3D point.');return result;};
-const fingerprint=async(path:string)=>{const bytes=await readFile(path);return {bytes:bytes.length,sha256:hash(bytes)};};
+const fingerprint=async(path:string)=>{const bytes=await readFile(path);return {bytes:bytes.length,sha256:sha256(bytes)};};
 const receiptName='stage-receipt.json';
 
 /** Recover the exact retained triangles and texture layout; never simplify or replan. */
@@ -66,7 +66,7 @@ async function refreshContext(id:string,ids:readonly string[]) {
 
 async function currentBindings(context:Awaited<ReturnType<typeof refreshContext>>) {
   const recipe=await fingerprint(resolve(context.sourceDirectory,'preparation/terrestrial.json'));
-  return {scene:{bytes:context.sceneBytes.length,sha256:hash(context.sceneBytes)},recipe,
+  return {scene:{bytes:context.sceneBytes.length,sha256:sha256(context.sceneBytes)},recipe,
     sourceManifest:await fingerprint(resolve(context.sourceDirectory,'manifest.json')),
     descriptor:await fingerprint(resolve(context.objectDirectory,'object.json')),
     inputs:context.selected.map(({lensId,input})=>({lensId,path:requireString(input.path),expectedBytes:requireFiniteNumber(input.expectedBytes),expectedSha256:requireString(input.expectedSha256)}))};
@@ -156,15 +156,15 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   for(const asset of newAssets.values())await copyFile(resolve(context.stage,asset.filename),resolve(context.publicDirectory,asset.filename));
   for(const [path,document] of documents)await save(path,document);
   inventory.assets=assets.map(asset=>newAssets.get(requireString(asset.filename))??asset);
-  await save(resolve(context.objectDirectory,'runtime-assets.json'),inventory);await save(resolve(context.outputDirectory,'runtime-assets.json'),inventory);
+  await save(resolve(context.objectDirectory,'runtime-assets.json'),inventory);
   const recipeBytes=await readFile(resolve(context.sourceDirectory,'preparation/terrestrial.json'));
   for(const entry of records(context.source.documents))if(entry.path==='preparation/terrestrial.json') {
-    entry.expectedBytes=recipeBytes.length;entry.expectedSha256=hash(recipeBytes);
+    entry.expectedBytes=recipeBytes.length;entry.expectedSha256=sha256(recipeBytes);
   }
-  for(const reference of records(requireRecord(requireRecord(context.descriptor.properties).recipe).sources))if(reference.id==='terrestrial')reference.sha256=hash(recipeBytes);
+  for(const reference of records(requireRecord(requireRecord(context.descriptor.properties).recipe).sources))if(reference.id==='terrestrial')reference.sha256=sha256(recipeBytes);
   await save(resolve(context.sourceDirectory,'manifest.json'),context.source);await save(resolve(context.objectDirectory,'object.json'),context.descriptor);
   await prepareObjectProvenance({objectDirectory:context.objectDirectory,publicDirectory:context.publicDirectory,outputDirectory:context.outputDirectory,basis:'recovered'});
-  if(hash(await readFile(resolve(context.outputDirectory,'scene.json')))!==hash(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
+  if(sha256(await readFile(resolve(context.outputDirectory,'scene.json')))!==sha256(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
   return results;
 }
 

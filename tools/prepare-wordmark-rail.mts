@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -8,7 +9,6 @@ import * as fontkit from "fontkit";
 
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mts";
-import { sha256 } from "../src/platform/prepared-title.mts";
 
 interface WordmarkSegment {label: string; text?: string; weight: number; tail?: {text: string; weight: number}; renderedHeight: number;}
 

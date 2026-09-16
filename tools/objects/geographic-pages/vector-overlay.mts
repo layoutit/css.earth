@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile,writeFile,mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { gunzipSync } from "node:zlib";
 import sharp from "sharp";
 import { prepareCityPageGeometry } from "./page-geometry.mts";
@@ -11,7 +11,7 @@ export async function prepareVectorOverlay({sourceDirectory,publicDirectory,conf
 const config=parseOverlayConfig(value);
 const recipe=config.geographic.noise;
 const source=new URL(recipe.directory+'/',new URL('file://'+sourceDirectory+'/')),pin=parseOverlayPin(JSON.parse(await readFile(new URL("manifest.json",source),"utf8")));
-const hash=(bytes: Uint8Array)=>createHash("sha256").update(bytes).digest("hex"),packed=await readFile(new URL(pin.file,source));
+const hash=(bytes: Uint8Array)=>sha256(bytes),packed=await readFile(new URL(pin.file,source));
 if(packed.length!==pin.bytes||hash(packed)!==pin.sha256)throw new Error("Noise source archive does not match its pin.");
 const bytes=gunzipSync(packed,{maxOutputLength:pin.decodedBytes});
 if(bytes.length!==pin.decodedBytes||hash(bytes)!==pin.decodedSha256)throw new Error("Noise source content does not match its pin.");

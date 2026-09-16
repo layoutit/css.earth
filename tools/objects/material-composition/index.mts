@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from './data-schema.mts';
 import {PREPARED_CSS_OBJECT_FORMAT} from '../../../src/renderers/css/dist/index.js';
@@ -11,7 +12,6 @@ import {shape,text,number,boolean,array} from '../terrestrial-layers/source-reco
 import {isRecord,requireRecord} from '../../source-values.mts';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {createHash} from 'node:crypto';
 import {mkdir,readFile,realpath,writeFile} from 'node:fs/promises';
 import {relative,resolve,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -32,7 +32,7 @@ import {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import {prepareLayeredOblatePresentation} from './presentation.mts';
 import {withFocusedCamera} from '../focused-camera.mts';
 
-const hash=(bytes:string|Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,JSON.stringify(value)+'\n');
 
@@ -92,7 +92,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});
   await writeFile(resolve(outputDirectory,'object.json'),payload);
   if(write) {
-    await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json',sha256:hash(payload)}},null,2)+'\n');
+    await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json',sha256:sha256(payload)}},null,2)+'\n');
     await writeFile(resolve(objectRoot,'runtime-assets.json'),JSON.stringify(manifest,null,2)+'\n');
   }
   await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:'cssearth-authored-preparation@1',id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}});

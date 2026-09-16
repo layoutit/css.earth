@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { sha256 } from '../src/platform/sha256.mts';
 import {requireRecord,requireString,requireFiniteNumber} from './source-values.mts';
 import {shape,optional,dictionary,text} from './objects/terrestrial-layers/source-records.mts';
 interface FileRecord {sha256?:string;bytes?:number;symlink?:string;upstreamSha256?:string;upstreamBytes?:number;identityRules?:string[];}
@@ -49,7 +50,6 @@ const parseAssetEntry=(value:unknown)=>Object.assign({},requireRecord(value),sha
 // identity that leaks back in.
 
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
 import { existsSync, lstatSync } from "node:fs";
 import { mkdir, readdir, readFile, readlink, rm, symlink, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
@@ -318,9 +318,7 @@ export async function listVendoredFiles(target:SyncTarget) {
   return files.filter((path) => !isOwnedFile(target, relative(target.dest, path)));
 }
 
-export function sha256(content:string|Uint8Array) {
-  return createHash("sha256").update(content).digest("hex");
-}
+
 
 async function describeFile(path:string) {
   if (lstatSync(path).isSymbolicLink()) return { symlink: toPosix(await readlink(path)) };

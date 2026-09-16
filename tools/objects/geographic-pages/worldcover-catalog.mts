@@ -1,7 +1,7 @@
 // Preparation-only publisher inventory. This is object availability, not a
 // promise that every pixel in a listed COG contains usable imagery.
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { gunzipSync } from "node:zlib";
 import type { GeographicBounds, WorldCoverEntry } from './contracts.mts';
 import { parseCatalogPin, parseWorldCoverEntry, parseWorldCoverSnapshot } from './source-records.mts';
@@ -104,7 +104,7 @@ export async function readWorldCoverCatalog({directory}: { directory: URL }) {
   if(pin.schema!=="cssearth-worldcover-inventory-pin@1"||pin.path!=="worldcover-rgbnir-2021.json.gz"||
     pin.expectedBytes>1024*1024||pin.expectedDecodedBytes>16*1024*1024)throw new Error("Invalid WorldCover catalog pin.");
   const bytes=await readFile(new URL(pin.path,directory));
-  if(bytes.length!==pin.expectedBytes||createHash("sha256").update(bytes).digest("hex")!==pin.expectedSha256) {
+  if(bytes.length!==pin.expectedBytes||sha256(bytes)!==pin.expectedSha256) {
     throw new Error("WorldCover catalog snapshot hash mismatch.");
   }
   const decoded=gunzipSync(bytes,{maxOutputLength:16*1024*1024});
