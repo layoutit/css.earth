@@ -1,3 +1,5 @@
+import { InfoTip } from '../../ui/info-tip';
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { GeometryMap } from '../observations/models/geometry-model';
@@ -91,9 +93,9 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   return <section className="shape-cloud-workbench" hidden={!visible} aria-label="Shape cloud controls" data-image-id={image.id}
     data-preview-quality={result?.quality ?? ''} data-result-id={result?.id ?? ''} data-preview-active={state.active} data-preview-current={!state.dirty}>
     <div className="image-layer-buttons shape-cloud-modes" role="group" aria-label="Cloud comparison mode">
-      {modes.map(item => <button type="button" key={item.id} aria-pressed={mode === item.id} title={item.title} onClick={() => setMode(item.id)}>
+      {modes.map(item => <InfoTip key={item.id} content={item.title}><button type="button" aria-pressed={mode === item.id} onClick={() => setMode(item.id)}>
         <span aria-hidden="true">{item.symbol}</span><span>{item.label}</span>
-      </button>)}
+      </button></InfoTip>)}
     </div>
     <div className="shape-cloud-feedback" data-active={state.active}>
       <progress aria-label="Cloud preparation progress" aria-hidden={!state.active}
@@ -105,9 +107,12 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
     {state.error && <button type="button" onClick={state.retry}>Retry preview</button>}
     {mode === 'structure' ? <div className="shape-cloud-diagnostic-controls">
       <div className="shape-cloud-channels" role="group" aria-label="Structure channel">
-        {(['luminosity', 'edges', 'difference'] as const).map(value => <button type="button" key={value} aria-pressed={channel === value}
-          title={value === 'luminosity' ? 'Grayscale source and neutral model projection.' : value === 'edges' ? 'Prepared structure edges, with the same display gain.' : 'White: missing model signal. Black: excess model signal. Midgray: match.'}
-          onClick={() => setChannel(value)}>{value === 'luminosity' ? 'Luminance' : value === 'edges' ? 'Edges' : 'Difference'}</button>)}
+        {(['luminosity', 'edges', 'difference'] as const).map(value => {
+          const label = value === 'luminosity' ? 'Luminance' : value === 'edges' ? 'Edges' : 'Difference';
+          const help = value === 'luminosity' ? 'Grayscale source and neutral model projection.' : value === 'edges' ? 'Prepared structure edges, with the same display gain.' : 'White: missing model signal. Black: excess model signal. Midgray: match.';
+          return <InfoTip key={value} content={help}><button type="button" aria-pressed={channel === value}
+            onClick={() => setChannel(value)}>{label}</button></InfoTip>;
+        })}
       </div>
       <Slider id="shape-cloud-levels" label="Levels" value={level} min={0} max={3} step={1} display={`×${2 ** level}`}
         title="Shared display gain above a source-derived white point. Does not change the cloud or trigger processing." onChange={setLevel} />
@@ -121,13 +126,13 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
     </>}
     <div className="shape-cloud-foot"><button type="button" className="text-button" onClick={onDetected}>Detected lines</button>
       <span className="interaction-hint" title="Nearby duplicate contours are merged. Shell depth, thickness and falloff are model assumptions, not physical measurements.">{settings.components.length} inferred components</span></div>
-    {host && createPortal(<aside className="floating-panel workspace-model-panel" hidden={!visible} aria-label="Camera and model">
-      <fieldset><legend>Camera</legend>
-        {mode === 'structure' ? <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setComparisonView(earthComparisonView)}>Earth view</button></div> :
-          <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setView(earthCloudView)}>Earth view</button>
-            <button type="button" aria-pressed={!view.locked} onClick={() => setView(view.locked ? { ...view, locked: false } : { ...view, locked: true, yaw: 0, pitch: 0 })}>
-              {view.locked ? 'Unlock rotation' : 'Lock to Earth'}</button></div>}
-      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+    {host && createPortal(<CameraModelPanel hidden={!visible} camera={{
+      earth: { pressed: mode === 'structure' || view.locked, onActivate: () => mode === 'structure' ? setComparisonView(earthComparisonView) : setView(earthCloudView) },
+      orbit: mode === 'structure' ? 'Structure diagnostics are registered 2D projections.' : {
+        pressed: !view.locked, onActivate: () => setView(view.locked ? { ...view, locked: false } : { ...view, locked: true, yaw: 0, pitch: 0 }) },
+      reset: { onActivate: () => mode === 'structure' ? setComparisonView(earthComparisonView) : setView(earthCloudView) },
+      fit: 'This comparison uses its registered Earth framing; separate fit is not available.',
+    }}>
       {modelTools}
     <div className="shape-cloud-editing">
       <div className="shape-cloud-scope" role="group" aria-label="Edit scope">{(['all', 'group', 'selected'] as const).map(value =>
@@ -166,8 +171,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
       {formulaError && <p className="interaction-hint shape-cloud-error" role="alert">{formulaError}</p>}
       <button type="button" className="text-button" onClick={() => { state.reset(); setBeforeSolo(null); }}>{preset ? 'Reset to saved fit' : 'Reset to detected'}</button>
     </div>
-      </fieldset>
-    </aside>, host)}
+      </CameraModelPanel>, host)}
     {host && createPortal(<section className="shape-cloud-workspace" hidden={!visible} aria-label="Shape cloud comparison">
       <div className="shape-cloud-three-d" hidden={mode === 'structure'}>
       <ShapeCloudStage mode={stageMode} result={result} source={source} width={image.width} height={image.height} matrix={workingMatrix} frame={frame}

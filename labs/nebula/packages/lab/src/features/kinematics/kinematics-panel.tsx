@@ -1,3 +1,4 @@
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { KinematicParameters, PreparedKinematics } from '@cssearth/nebula-reconstruction/methods/kinematics/types';
@@ -74,9 +75,7 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
     data-updating={updating} data-prediction-settings={JSON.stringify(result.parameters)}>
     <header><div><h2>Independent shell</h2><p>Measured [O III] slit</p></div></header>
     {error && <p className="kinematics-error" role="alert">{error}</p>}</section>
-    {workspace && createPortal(<aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
-      <fieldset disabled title="The measured slit chart has fixed published axes."><legend>Camera</legend><p className="interaction-hint">Fixed slit axes</p></fieldset>
-      <fieldset className="workspace-model"><legend>Model</legend>
+    {workspace && createPortal(<CameraModelPanel unavailableReason="The measured slit chart has fixed published axes." cameraHint="Fixed slit axes">
     <aside className="kinematics-controls">
       {controls.map(control => <div className="kinematics-slider" key={control.key}>
         <label htmlFor={`kinematics-${control.key}`} title={control.title}>{control.label}</label>
@@ -88,8 +87,7 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
       <button type="button" onClick={() => setParameters(evidence.defaults)}>Reset hypothesis</button>
       <p className="kinematics-small" role="status">{updating ? 'Updating prediction…' : 'Hypothesis ready'}</p>
       {metrics.outsideProjectedShell > 0 && <p className="kinematics-small">{metrics.outsideProjectedShell} samples lie outside this shell’s projected extent.</p>}
-    </aside>      </fieldset>
-    </aside>, workspace)}
+    </aside>      </CameraModelPanel>, workspace)}
     {workspace && createPortal(<section className="kinematics-workspace" aria-label="Measured slit workspace"><header><h2>{evidence.title}</h2></header><div className="kinematics-comparison">
       <div className="kinematics-legend"><span className="kinematics-observed-key">● Observed centroids ≈</span><span className="kinematics-model-key">— Predicted shell surfaces</span></div>
       <svg className="kinematics-chart" viewBox={`0 0 ${chart.width} ${chart.height}`} role="img" aria-label="Measured line velocity versus slit offset, with two predicted shell surfaces">

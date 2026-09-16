@@ -1,8 +1,12 @@
+import { InfoTip } from '../../ui/info-tip';
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { readStructureCatalogue, type StructureCatalogue } from '../observations/models/structures-model';
 import { adjustedMatrix, savedObservationFit, unchanged } from '../observations/models/model';
 import { localFile } from '../legacy-viewer/controller';
+import { ImageCredit } from '../workspace/image-credit';
+import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 import { readFusionSettings, type FusionRequest } from '../evidence-fusion/jobs-model.ts';
 import { useEvidenceFusion } from './evidence-fusion-state';
 import './evidence-fusion.css';
@@ -77,22 +81,21 @@ function FusionSession({ catalogue, cataloguePath, observationManifest }: { cata
     <legend>Image and appearance</legend>
     <div className="emission-layer-buttons" role="group" aria-label="Evidence display">
       {([['union','Signal','Strongest supported feature; single-image evidence is retained.'],['colors','Sources','Each color identifies its source; overlaps combine colors.'],['agreement','Shared','Compatible evidence supported by at least two observations; not a probability.']] as const).map(([id,label,title]) =>
-        <button key={id} type="button" title={title} aria-pressed={display === id} onClick={() => setDisplay(id)}>{label}</button>)}
+        <InfoTip key={id} content={title}><button type="button" aria-pressed={display === id} onClick={() => setDisplay(id)}>{label}</button></InfoTip>)}
     </div>
     <div className="fusion-status" role={state.error ? 'alert' : 'status'}>{state.error || (state.busy ? state.progress || 'Preparing evidence…' : 'Up to date')}{state.error && <button type="button" onClick={state.retry}>Retry</button>}</div>
     <label className="observation-check"><input type="checkbox" checked={showImage} onChange={event => setShowImage(event.target.checked)} />Image background</label>
-    <label className="field-label" htmlFor="fusion-background">Image</label>
-    <select id="fusion-background" value={background} onChange={event => setBackground(event.target.value)}>{catalogue.images.map(image => <option key={image.id} value={image.id}>{image.label}</option>)}</select>
+    <WorkspaceImagePicker><label className="visually-hidden" htmlFor="fusion-background">Image</label>
+    <select id="fusion-background" value={background} onChange={event => setBackground(event.target.value)}>{catalogue.images.map(image => <option key={image.id} value={image.id}>{image.label}</option>)}</select></WorkspaceImagePicker>
+    <ImageCredit credit={catalogue.images.find(image => image.id === background)?.credit} />
     <div className="structure-slider"><label htmlFor="fusion-opacity">Overlay</label><input id="fusion-opacity" type="range" min="0" max="1" step=".05" value={opacity} onChange={event => setOpacity(event.target.valueAsNumber)} /><output>{Math.round(opacity * 100)}%</output></div>
     <section className="fusion-inspect" aria-label="Feature contributors"><p className="interaction-hint">{sample ? `Sample ${sample.x}, ${sample.y}` : 'Click a feature to inspect its sources.'}</p>
       {sample?.sources.map(s => <p key={s.id}><span style={{ color: result?.sources.find(source => source.id === s.id)?.color }}>{catalogue.images.find(source => source.id === s.id)?.label}</span><output>{s.value === null ? (settings.weights[catalogue.images.findIndex(source => source.id === s.id)] === 0 ? 'Excluded' : 'No support') : s.value.toFixed(2)}</output></p>)}
       {sampleError && <p role="alert">{sampleError}</p>}
     </section>
     <p className="interaction-hint" title="Noise-normalized image evidence, not calibrated flux, gas density or physical membership. Matching traces in different bands may still overlap only in projection. Working rasters limit detail; star-removal artifacts can remain.">Projected evidence · depth unknown ⓘ</p>
-    {host && createPortal(<aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
-      <fieldset><legend>Camera</legend><button type="button" onClick={fit}>Fit field</button>
-        <p className="interaction-hint">Drag to pan · scroll to zoom</p></fieldset>
-      <fieldset className="workspace-model"><legend>Model</legend>
+    {host && createPortal(<CameraModelPanel camera={{ fit: { onActivate: fit, description: 'Fit all registered evidence in the shared sky frame.' } }}
+      unavailableReason="Combined evidence is a fixed 2D sky projection." cameraHint="Drag to pan · scroll to zoom">
     <div className="emission-layer-buttons" role="group" aria-label="Evidence scale">
       {([['all','All'],['broad','Broad'],['ridges','Ridges'],['compact','Knots']] as const).map(([channel,label]) => <button key={channel} type="button" aria-pressed={settings.channel === channel} onClick={() => update({ ...settings, channel })}>{label}</button>)}
     </div>
@@ -102,8 +105,7 @@ function FusionSession({ catalogue, cataloguePath, observationManifest }: { cata
       <input id={`fusion-${source.id}`} type="range" min="0" max="1" step=".05" value={settings.weights[index] ?? 1} onChange={event => update({ ...settings, weights: settings.weights.map((weight,i) => i === index ? event.target.valueAsNumber : weight) })} />
       <output>{Math.round((settings.weights[index] ?? 1) * 100)}%</output>
     </div>)}
-      </fieldset>
-    </aside>, host)}
+      </CameraModelPanel>, host)}
     {host && createPortal(<section className="evidence-fusion-workspace" aria-label="Combined registered evidence">
       <div className="fusion-viewport" ref={viewport} tabIndex={0} aria-label="Combined evidence sky" onPointerDown={event => { if (event.button !== 0) return; event.currentTarget.setPointerCapture(event.pointerId); drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, view }; }}
         onPointerMove={event => { const start = drag.current; if (start?.id === event.pointerId) setView({ ...start.view, x: start.view.x + event.clientX - start.x, y: start.view.y + event.clientY - start.y }); }}

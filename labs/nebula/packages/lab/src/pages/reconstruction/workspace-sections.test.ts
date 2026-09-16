@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { WorkspaceSections, type WorkspaceCapabilities } from './workspace-sections';
+import { WorkspaceSectionItems, type WorkspaceCapabilities } from './workspace-sections';
 
-const render = (capabilities: WorkspaceCapabilities) => renderToStaticMarkup(createElement(WorkspaceSections, {
+const render = (capabilities: WorkspaceCapabilities) => renderToStaticMarkup(createElement(WorkspaceSectionItems, {
   active: 'compiler', capabilities, onChange() {},
 }));
-const buttons = (markup: string) => [...markup.matchAll(/<button\b([^>]*)>([^<]*)<\/button>/g)].map(match => ({ attributes: match[1]!, label: match[2]! }));
+const buttons = (markup: string) => [...markup.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].filter(match => match[1]!.includes('data-workspace-section')).map(match => ({ attributes: match[1]!, label: /aria-label="([^"]+)"/.exec(match[1]!)?.[1] }));
 const ids = ['compiler', 'sources', 'structure', 'combined', 'kinematics', 'joint', 'volume'];
 
 test('all workspaces show the same ordered sections regardless of available capabilities', () => {
@@ -22,11 +22,11 @@ test('all workspaces show the same ordered sections regardless of available capa
 test('configured tools stay enabled and unavailable velocity keeps its explanatory reason', () => {
   const available = buttons(render({ compiler: true, sources: true, kinematics: true, volume: true }));
   for (const id of ['compiler', 'sources', 'kinematics', 'volume'])
-    assert.doesNotMatch(available[ids.indexOf(id)]!.attributes, /disabled/);
+    assert.match(available[ids.indexOf(id)]!.attributes, /aria-disabled="false"/);
   const missing = buttons(render({ compiler: true }))[ids.indexOf('kinematics')]!;
-  assert.match(missing.attributes, /disabled=""/);
-  assert.match(missing.attributes, /title="Velocity evidence is not configured for this object\."/);
+  assert.match(missing.attributes, /aria-disabled="true"/);
+  assert.match(render({ compiler: true }), /Velocity evidence is not configured for this object\./);
   const qualified = buttons(render({ kinematics: 'Only registered image evidence is available.' }))[ids.indexOf('kinematics')]!;
-  assert.match(qualified.attributes, /disabled=""/);
-  assert.match(qualified.attributes, /title="Only registered image evidence is available\."/);
+  assert.match(qualified.attributes, /aria-disabled="true"/);
+  assert.match(render({ kinematics: 'Only registered image evidence is available.' }), /Only registered image evidence is available\./);
 });

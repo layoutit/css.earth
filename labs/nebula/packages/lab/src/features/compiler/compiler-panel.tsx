@@ -1,3 +1,5 @@
+import { ImageAppearancePanel, ImageAppearanceCheckbox } from '../../ui/image-appearance-panel';
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { adjustedMatrix, imageCorners, readObservations, savedObservationFit, unchanged, type Observations } from '../observations/models/model';
@@ -11,6 +13,8 @@ import { CompilerStage } from './compiler-stage';
 import type { CompilerInspectionFrame } from '@cssearth/volume-viewer/camera/inspection';
 import { useCompiler } from './compiler-state';
 import { CompilerPipeline } from './compiler-pipeline';
+import { ImageCredit } from '../workspace/image-credit';
+import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 import './compiler.css';
 
 export interface CompilerPanelProps { recipePath: string; cataloguePath: string; observationManifest?: string; publishedPath?: string }
@@ -137,7 +141,19 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   return <fieldset className="compiler-controls" data-result-id={result?.id ?? ''} data-job-id={state.job?.id ?? ''}
     data-job-status={state.job?.status ?? ''} data-busy={state.busy}
     data-compiler-operator={fixedGeometry === null ? 'loading' : fixedGeometry ? 'sampled-prior' : 'emission-fit'}>
-    <legend>Image and processing</legend>
+    <legend>Processing</legend>
+    <WorkspaceImagePicker>
+      <ImageAppearancePanel image={<>
+      <label className="visually-hidden" htmlFor="compiler-lens">Image</label>
+      <select id="compiler-lens" value={source?.id ?? ''} disabled={!result} onChange={event => updatePresentation({ ...presentation, lensId: event.target.value })}>
+        {!result && <option value="">Available after compilation</option>}
+        {result?.sources.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
+      </select>
+      </>} material={result ? { mode: presentation.mode, onChange: mode => updatePresentation({ ...presentation, mode }) } : { reason: 'A prepared cloud is required to inspect its materials.' }}
+        stars={<ImageAppearanceCheckbox label="Stars" control={result ? { checked: presentation.stars, onChange: stars => updatePresentation({ ...presentation, stars }) } : { reason: 'Prepared catalogue stars are not loaded.' }} />}
+        original={<ImageAppearanceCheckbox label="Original" control={result ? { checked: presentation.original, onChange: original => updatePresentation({ ...presentation, original }) } : { reason: 'A prepared original image reference is not loaded.' }} />} />
+    </WorkspaceImagePicker>
+    <ImageCredit credit={source?.credit} />
     <div className="compiler-actions">
       <button type="button" className="compiler-primary" disabled={state.busy} onClick={state.error ? state.retry : state.compile}>
         {state.error ? 'Retry compile' : 'Compile nebula'}</button>
@@ -149,26 +165,12 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
         value={state.job?.progress ? state.job.progress.current : undefined} />
     </div>
     {result && <CompilerPipeline result={result} busy={state.busy} fixedGeometry={fixedGeometry === true} />}
-    <label className="field-label" htmlFor="compiler-lens">Lens</label>
-    <select id="compiler-lens" value={source?.id ?? ''} disabled={!result} onChange={event => updatePresentation({ ...presentation, lensId: event.target.value })}>
-      {!result && <option value="">Available after compilation</option>}
-      {result?.sources.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
-    </select>
-    <div className="compiler-modes" role="group" aria-label="Cloud material">
-      <button type="button" aria-pressed={presentation.mode === 'neutral'} onClick={() => updatePresentation({ ...presentation, mode: 'neutral' })}>Neutral</button>
-      <button type="button" aria-pressed={presentation.mode === 'textured'} onClick={() => updatePresentation({ ...presentation, mode: 'textured' })}>Textured</button>
-    </div>
-    <div className="compiler-toggles">
-      <label className="observation-check" title="Prepared stellar overlay. Catalogue sources use optical brightness and colors across all image lenses; depths may be inferred."><input type="checkbox" checked={presentation.stars} onChange={event => updatePresentation({ ...presentation, stars: event.target.checked })} />Stars</label>
-      <label className="observation-check"><input type="checkbox" checked={presentation.original} onChange={event => updatePresentation({ ...presentation, original: event.target.checked })} />Original</label>
-    </div>
-    {host && createPortal(<aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
-      <fieldset><legend>Camera</legend>
-    <div className="compiler-camera-actions">
-      <button type="button" aria-pressed={presentation.view.locked} onClick={() => updatePresentation({ ...presentation, view: { ...earthCloudView } })}>Earth view</button>
-      <button type="button" aria-pressed={!presentation.view.locked} onClick={() => updatePresentation({ ...presentation, view: { ...presentation.view, locked: !presentation.view.locked } })}>Orbit</button>
-    </div>
-      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+    {host && createPortal(<CameraModelPanel camera={{
+      earth: { pressed: presentation.view.locked, onActivate: () => updatePresentation({ ...presentation, view: { ...earthCloudView } }) },
+      orbit: { pressed: !presentation.view.locked, onActivate: () => updatePresentation({ ...presentation, view: { ...presentation.view, locked: !presentation.view.locked } }) },
+      reset: { onActivate: () => updatePresentation({ ...presentation, view: { ...earthCloudView } }) },
+      fit: 'The prepared cloud uses its saved Earth framing; separate fit is not available.',
+    }} cameraHint={presentation.view.locked ? 'Drag to pan · scroll to zoom' : 'Drag to orbit · Shift-drag to pan · scroll to zoom'}>
     {fixedGeometry === false && <>
     <CompilerSlider id="compiler-detail" label="Detail" value={controls.detail} min={0} max={1} step={.05} display={`${Math.round(controls.detail * 100)}%`}
       title="Retain more prepared small-scale image structure in the inferred cloud." onChange={detail => updateControls({ ...controls, detail })} />
@@ -179,8 +181,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
     <p className="compiler-auto-note" title={sourceStatus || 'After the first completed compile, changes update automatically. Processing survives refresh.'}>{result ? 'Controls update automatically' : 'Prepared sources restored on compile'}</p>
     </>}
     {fixedGeometry && <p className="compiler-auto-note" title="Depth and component weights are fixed by the qualified model. Detail, faint-emission and depth refits are unavailable.">Fixed reconstructed geometry</p>}
-      </fieldset>
-    </aside>, host)}
+      </CameraModelPanel>, host)}
     {host && createPortal(<section className="compiler-workspace" aria-label="Compiled nebula" data-result-id={result?.id ?? ''}>
       <CompilerStage result={result} lensId={source?.id ?? null} mode={presentation.mode} stars={presentation.stars}
         showOriginal={presentation.original} view={presentation.view} onView={onView} inspectionFrame={inspectionFrame} />

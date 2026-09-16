@@ -1,3 +1,4 @@
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { readStructureCatalogue, type StructureCatalogue } from '../observations/models/structures-model';
@@ -7,6 +8,8 @@ import type { JointRequest } from './model.ts';
 import type { JointCandidate } from './result.ts';
 import { readFusionSettings } from '../evidence-fusion/jobs-model.ts';
 import { localFile } from '../legacy-viewer/controller';
+import { ImageCredit } from '../workspace/image-credit';
+import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 import { earthJointFitView, JointFitStage, type CloudView } from './joint-fit-stage';
 import { useJointFit } from './joint-fit-state';
 import './joint-fit.css';
@@ -78,10 +81,11 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
     <legend>Image and processing</legend>
     <div className="joint-fit-status" role={state.error || storageError ? 'alert' : 'status'} title={status}>{status}</div>
     {state.error && <button type="button" onClick={state.retry}>Retry</button>}
-    <label className="field-label" htmlFor="joint-fit-source">Source image</label>
+    <WorkspaceImagePicker><label className="visually-hidden" htmlFor="joint-fit-source">Image</label>
     <select id="joint-fit-source" value={source?.id ?? ''} disabled={!result} onChange={event => setSourceId(event.target.value)}>
       {result?.sources.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
-    </select>
+    </select></WorkspaceImagePicker>
+    <ImageCredit credit={catalogue.images.find(image => image.id === source?.id)?.credit} />
     <div className="joint-fit-toggles">
       <label className="observation-check"><input type="checkbox" checked={showRidges} onChange={event => setShowRidges(event.target.checked)} /> Ridges</label>
       <label className="observation-check"><input type="checkbox" checked={showPointings} onChange={event => setShowPointings(event.target.checked)} /> Pointings</label>
@@ -103,13 +107,14 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
       <p className="joint-fit-withheld" data-mismatch={withheldMismatch} title="Descriptive held-out comparison only; this is not a calibrated uncertainty or significance test.">{withheldMismatch ? 'Withheld mismatch advisory' : 'Withheld check'} · {candidate.fit.metrics.heldOutRmsKmS.toFixed(1)} km/s vs {metric(candidate.fit.metrics.trainingRmsKmS)} training</p>}
     <details><summary>Meaning and assumptions</summary><p>{result?.interpretation || 'The server compares projected image ridges with molecular velocities.'}</p>
       <p>Angular depth and simple expansion belong to the candidate model. They are not measured gas density or a physical-distance reconstruction.</p></details>
-    <details><summary>Sources</summary><p>{result ? `${result.accounting.ridgePoints} ridge samples from ${result.sources.length} registered images; ${result.accounting.pointings} molecular pointings at ${result.accounting.beamFwhmArcsec.toFixed(0)}″ beam FWHM.` : 'Registered source accounting is prepared with the result.'}</p>
+    <details><summary>Evidence accounting</summary><p>{result ? `${result.accounting.ridgePoints} ridge samples from ${result.sources.length} registered images; ${result.accounting.pointings} molecular pointings at ${result.accounting.beamFwhmArcsec.toFixed(0)}″ beam FWHM.` : 'Registered image accounting is prepared with the result.'}</p>
       <p>Combine sensitivity {evidence.sensitivity.toFixed(2)}×; source weights {evidence.weights.map(weight => weight.toFixed(2)).join(', ')}. Held-out velocities do not select the candidate.</p></details>
-    {host && createPortal(<aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
-      <fieldset><legend>Camera</legend>
-    <div className="joint-fit-camera-actions"><button type="button" onClick={() => setView(earthJointFitView)}>Earth view</button>
-      <button type="button" aria-pressed={!view.locked} onClick={() => setView({ ...view, locked: !view.locked })}>Orbit</button></div>
-      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+    {host && createPortal(<CameraModelPanel camera={{
+      earth: { pressed: view.locked, onActivate: () => setView(earthJointFitView) },
+      orbit: { pressed: !view.locked, onActivate: () => setView({ ...view, locked: !view.locked }) },
+      reset: { onActivate: () => setView(earthJointFitView) },
+      fit: 'This model uses its saved Earth framing; separate fit is not available.',
+    }}>
     <ControlSlider id="joint-ridge" label="Ridge threshold" value={controls.ridgeThreshold} min={.05} max={.9} step={.01}
       display={controls.ridgeThreshold.toFixed(2)} onChange={ridgeThreshold => updateControls({ ...controls, ridgeThreshold })} />
     <ControlSlider id="joint-length" label="Minimum length" value={controls.minLengthArcseconds} min={10} max={240} step={5}
@@ -123,8 +128,7 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
         aria-pressed={candidate?.fit.parameters.family === id} disabled={!result?.candidates.some(item => item.fit.parameters.family === id)}
         onClick={() => setFamily(id)}>{label}</button>)}
     </div>
-      </fieldset>
-    </aside>, host)}
+      </CameraModelPanel>, host)}
     {host && createPortal(<JointWorkspace resultId={result?.id ?? ''} source={imageUrl} candidate={candidate}
       ridgePaths={result?.ridgePaths ?? []} diagramSize={result?.diagramSize ?? 512} showRidges={showRidges}
       showPointings={showPointings} spanArcsec={result?.spanArcsec} view={view} setView={setView} />, host)}

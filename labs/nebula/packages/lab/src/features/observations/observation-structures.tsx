@@ -1,8 +1,12 @@
+import { CameraModelPanel } from '../../ui/camera-model-panel';
+import { InfoTip } from '../../ui/info-tip';
 import { shapeCloudPresets } from '../shape-cloud/shape-cloud-presets';
 import { validateShapeCloudPreset } from '../../server/workflows/shape-cloud/presets.ts';
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { localFile } from '../legacy-viewer/controller';
+import { ImageCredit } from '../workspace/image-credit';
+import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 import { GeometryControls, GeometryOverlay } from '../geometry/observation-geometry';
 import { ShapeCloudWorkbench } from '../shape-cloud/shape-cloud-workbench';
 import { useGeometryDetection } from '../geometry/geometry-detection-state';
@@ -177,10 +181,11 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   const status = error || mapErrors[selected] || (shapes ? geometryErrors[selected] : '') || (!data ? 'Loading structure catalogue…' : !map ? 'Loading prepared support…' : shapes && !geometry ? 'Loading detected shapes…' : '');
   return <fieldset className="observation-structures">
     <legend>Structure review</legend>
-    <label className="field-label" htmlFor="structure-image">Image</label>
+    <WorkspaceImagePicker><label className="visually-hidden" htmlFor="structure-image">Image</label>
     <select id="structure-image" disabled={!data} value={selected} onChange={event => { selectPreset(''); setSelected(event.target.value); setRegionId(''); setShapeId(''); }}>
       {data?.images.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
-    </select>
+    </select></WorkspaceImagePicker>
+    <ImageCredit credit={image?.credit} />
     {image && shapeCloudPresets.some(item => item.cataloguePath === cataloguePath && item.imageId === image.id) && <>
       <label className="field-label" htmlFor="shape-cloud-fit">Fit</label>
       <select id="shape-cloud-fit" value={preset?.id ?? ''} onChange={event => selectPreset(event.target.value)}>
@@ -191,20 +196,20 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       {presetError && <p className="shape-cloud-error" role="alert">{presetError}</p>}
     </>}
     <div className="emission-layer-buttons" role="group" aria-label="Structure layer" hidden={cloudActive}>
-      {map?.panels.map(panel => <button key={panel.id} type="button" title={panel.description} aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button>)}
+      {map?.panels.map(panel => <InfoTip key={panel.id} content={panel.description}><button type="button" aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button></InfoTip>)}
     </div>
     {image && <div className="emission-layer-buttons" role="group" aria-label="Structure inspection mode">
-      <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
-      <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
+      <InfoTip content={'Inspect projected shape hypotheses and their inferred cloud preview.'}><button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button></InfoTip>
+      <InfoTip content={'Inspect and review detected image regions without assigning depth.'}><button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button></InfoTip>
     </div>}
+    <p className="interaction-hint emission-structure-status" style={{ minHeight: '1.4em' }} role={error || mapErrors[selected] || (shapes && geometryErrors[selected]) ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected] || (shapes && geometryErrors[selected]))}>{status || storageError}</p>
     {cloudMounted && effectiveImage && geometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
       modelTools={!preset && <GeometryDetectionControls detector={detector} image={image} />}
       image={effectiveImage} geometry={geometry} preset={preset} initialQuality={preset ? 'detailed' : detector.quality} cataloguePath={cataloguePath} host={host}
       matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
     {map && <p className="interaction-hint" title={`Maximum additive reconstruction error ${map.metrics.reconstructionMaxError}. Unassigned signal and imperfect star-removal residuals remain. Decisions indicate human review, never depth or physical membership.`}>
       {map.metrics.reconstructionMaxError < 1e-5 ? 'All input accounted for' : 'Inspect accounting error'} · {(map.metrics.unassignedFraction * 100).toFixed(1)}% unassigned</p>}
-    {image && <p className="interaction-hint"><a href={image.page} target="_blank" rel="noreferrer" title={image.credit}>Source & credit ↗</a></p>}
-    {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] || (shapes && geometryErrors[selected]) ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected] || (shapes && geometryErrors[selected]))}>{status || storageError}</p>}
+
     {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection" data-cloud-active={cloudActive}>
       <div ref={viewport} className="observation-sky" aria-label="Structure inspection sky" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
         onPointerUp={event => { const start = drag.current; drag.current = null;
@@ -220,14 +225,10 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
             selectedShapeId={item.id === selected ? selectedShape?.id ?? '' : ''} onSelectShape={setShapeId} /> : null; })}
         </div>
         <div className="observation-compass">N ↑ · E ←</div>
-        {status && <p className="observation-loading">{status}</p>}
       </div>
-      <aside className="floating-panel observation-camera" aria-label="Structure camera"><fieldset><legend>Camera</legend>
-        <button type="button" onClick={fitAll} disabled={!data}>Fit all images</button>
-        <p className="interaction-hint">Drag to pan. Scroll to zoom.</p>
-        <p className="interaction-hint" title="Same full native footprints and common sky frame as Alignment. Image selection never changes the camera.">Full field · north up · 2D</p>
-        <p className="interaction-hint" title="Fine adjustments saved in Alignment are applied only for inspection; measured registration is unchanged.">{manuallyAdjusted ? 'Manual inspection adjustment' : 'Registered positioning'}</p>
-      </fieldset><fieldset className="workspace-model"><legend>Model</legend>
+      <CameraModelPanel className="observation-camera" camera={{ fit: data ? { onActivate: fitAll, description: 'Fit all full native image footprints in the common sky frame.' } : 'The registered images are loading.' }}
+        unavailableReason="Structure inspection uses a fixed north-up 2D sky projection."
+        cameraHint={<><p>Drag to pan · scroll to zoom</p><p>Full field · north up · 2D</p><p>{manuallyAdjusted ? 'Manual inspection adjustment' : 'Registered positioning'}</p></>}>
     {shapes && !cloudActive && image && !preset && <GeometryDetectionControls detector={detector} image={image} />}
     <div hidden={!shapes || cloudActive}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
       showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
@@ -270,7 +271,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       </> : <p className="interaction-hint">No regions match these filters.</p>}
     </section>
     </div>
-      </fieldset></aside>
+      </CameraModelPanel>
     </section>, host)}
   </fieldset>;
 }
