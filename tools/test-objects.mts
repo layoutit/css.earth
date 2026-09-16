@@ -5,6 +5,7 @@
 // input is reported as skipped with the missing path; an assertion failure
 // still fails the run. Without the flag every failure fails the run.
 import { spawn } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { readdir } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
 import { relative, resolve } from 'node:path';
@@ -14,12 +15,16 @@ export interface ObjectTestFileResult { file: string; status: 'passed' | 'failed
 export interface ObjectTestOptions { root?: string; files?: readonly string[]; skipMissingInputs?: boolean; concurrency?: number;
   run?: (file: string, root: string) => Promise<{ exitCode: number | null; output: string }>; }
 
+// A failure counts as a missing local input only when the path it names is absent on disk.
 const MISSING_INPUT = [
-  /ENOENT: no such file or directory, (?:open|realpath|scandir|stat|lstat) '([^']+)'/u,
-  /source manifest coverage failed\. Undeclared: [^.]*\. Missing: ([^\n]+?)\.?$/mu,
-  /Source coverage failed\. Undeclared: [^.]*\. Missing: ([^\n]+?)\.?$/mu,
-  /spawn (\S+cwebp\S*) ENOENT/u,
+  /ENOENT: no such file or directory, (?:open|realpath|scandir|stat|lstat|access) '([^']+)'/u,
+  /Cannot find module '([^']+)'/u,
+  /Command failed: unzip -p (\S+)/u,
+  /spawn (\S+) ENOENT/u,
 ];
+// Source coverage names the missing path relative to the object's source directory; the object id
+// comes from the test directory or, for a shared contract runner, from the "<id>: " test name prefix.
+const MISSING_COVERAGE = /(?:source manifest coverage|Source coverage) failed\. Undeclared: [^.]*\. Missing: ([^\n]+?)\.?$/mu;
 
 export async function discoverObjectTests(root: string): Promise<string[]> {
   const files: string[] = [];
@@ -49,16 +54,36 @@ export function failingDiagnostics(output: string): string[] {
   return failures;
 }
 
-/** A failing file is skipped only when each of its failures names a missing local input. */
-export function classify(exitCode: number | null, output: string, skipMissingInputs: boolean): Pick<ObjectTestFileResult, 'status' | 'detail'> {
+function objectIdOf(file: string, failure: string): string | undefined {
+  const fromDirectory = /tests\/objects\/unit\/([a-z][a-z0-9-]*)\//u.exec(file)?.[1];
+  return fromDirectory ?? /^\s*not ok \d+ - ([a-z][a-z0-9-]*): /u.exec(failure)?.[1];
+}
+
+function missingInput(text: string, file: string, root: string, exists: (path: string) => boolean): string | undefined {
+  for (const pattern of MISSING_INPUT) {
+    const path = pattern.exec(text)?.[1];
+    if (path !== undefined) return exists(resolve(root, path)) ? undefined : path;
+  }
+  const covered = MISSING_COVERAGE.exec(text)?.[1], id = objectIdOf(file, text);
+  if (covered !== undefined && id !== undefined) {
+    const path = resolve(root, 'src/objects', id, 'source', covered);
+    return exists(path) ? undefined : relative(root, path);
+  }
+  return undefined;
+}
+
+/** A failing file is skipped only when each of its failures names a local input that is absent. */
+export function classify(exitCode: number | null, output: string, skipMissingInputs: boolean, file = '', root = '/', exists: (path: string) => boolean = existsSync): Pick<ObjectTestFileResult, 'status' | 'detail'> {
   if (exitCode === 0) return { status: 'passed', detail: '' };
   const failures = failingDiagnostics(output);
-  const missing = failures.map(text => MISSING_INPUT.map(pattern => pattern.exec(text)?.[1]).find(value => value !== undefined));
+  // A file that fails to load reports one "test failed" entry; its error is on stderr, in the whole output.
+  const texts = failures.map(text => /error: 'test failed'/u.test(text) ? output : text);
+  const missing = texts.map(text => missingInput(text, file, root, exists));
   if (skipMissingInputs && failures.length > 0 && missing.every(value => value !== undefined)) {
     return { status: 'skipped', detail: `missing local input ${[...new Set(missing)].join(', ')}` };
   }
-  const lines = failures[0]?.split('\n') ?? [];
-  const errorLine = lines.find(line => /^\s+[A-Z]\w*Error\b/u.test(line)) ?? lines[lines.findIndex(line => /^\s+error: \|-?$/u.test(line)) + 1];
+  const lines = (texts[0] ?? '').split('\n');
+  const errorLine = lines.find(line => /^\s*(?:[A-Z]\w*Error\b|Error \[)/u.test(line)) ?? lines[lines.findIndex(line => /^\s+error: \|-?$/u.test(line)) + 1];
   const first = failures.length ? (errorLine ?? lines[0])?.trim() : undefined;
   return { status: 'failed', detail: first || `exit ${exitCode}` };
 }
@@ -81,7 +106,7 @@ export async function runObjectTests({ root = process.cwd(), files, skipMissingI
   async function worker(): Promise<void> {
     for (let file = queue.shift(); file !== undefined; file = queue.shift()) {
       const { exitCode, output } = await run(file, root);
-      results.push({ file: relative(root, file), ...classify(exitCode, output, skipMissingInputs) });
+      results.push({ file: relative(root, file), ...classify(exitCode, output, skipMissingInputs, file, root) });
     }
   }
   await Promise.all(Array.from({ length: Math.min(concurrency, queue.length) }, worker));
