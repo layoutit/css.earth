@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79d598e7a698c995306f470d0e60d80fdc2f6fa0c5b70ce82c95d83b18c27ea4"
+    "sha256": "2e35e8421c7c68ad1300ba86473d872565c157fffb505d60830efb3dc4e355af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -778,14 +778,54 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
+      "sha256": "aadb2fdb3c96bb15e1a43a8bdf06672dab57681f76efa859606ce0a230554396",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-67p",
         "displayName": "67P",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "rotation-period",
+              "label": "Rotation before perihelion",
+              "value": "12.4041 hours",
+              "source": {
+                "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC",
+                "label": "Comet 67P · virtis shap5 info asc",
+                "checked": "2026-09-16",
+                "path": "source/science/shap5-info.asc",
+                "catalogueId": "source-comet-67p-virtis-shap5-info-asc",
+                "locator": "Rotation Period: 12.4041 +/- 0.0001 hr (pre-perihelion)"
+              }
+            },
+            {
+              "id": "mission",
+              "label": "Explored by",
+              "value": "Rosetta",
+              "source": {
+                "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+                "label": "Comet 67P · mtp019",
+                "checked": "2026-09-16",
+                "path": "source/shape/mtp019.lbl",
+                "catalogueId": "source-comet-67p-mtp019",
+                "locator": "MISSION_NAME = \"INTERNATIONAL ROSETTA MISSION\""
+              }
+            },
+            {
+              "id": "shape",
+              "label": "Nucleus model",
+              "value": "ESA/RMOC MTP019",
+              "source": {
+                "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+                "label": "Comet 67P · mtp019",
+                "checked": "2026-09-16",
+                "path": "source/shape/mtp019.lbl",
+                "catalogueId": "source-comet-67p-mtp019",
+                "locator": "\"SPC-ESA MTP019 CARTESIAN TRIPLATE MODEL FOR COMET 67P/C-G\""
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -2904,8 +2944,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
-      "bytes": 17266,
+      "sha256": "aadb2fdb3c96bb15e1a43a8bdf06672dab57681f76efa859606ce0a230554396",
+      "bytes": 19009,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3489,8 +3529,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4390,
-          "sha256": "390eb5cecd010ff2bf653130401dbe7549c956bcc8d0ae69a747e25ca4456b61",
+          "bytes": 5723,
+          "sha256": "f0ec7435587c98f4c97bc6f3feeff923158d81c9ba0a79fe58df5c845f63e39e",
           "verification": "bytes-verified"
         }
       ],
@@ -3713,7 +3753,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "ac873f136efc5629a0e321b47d7eb28619b053d890224a75e012e57ad8f17c70",
+    "materialSha256": "182def6afe9a2b5bfe12632ea39d57cd1ccae1d807cdaef4b02b2072c5ffc0e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
