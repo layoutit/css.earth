@@ -5,7 +5,7 @@ import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contrac
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import { fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
 import { qualifiedFace } from './geometry.mts';
-import { bandColorByte, bandColorEvidence, interpolatePalette } from '../color-transfer.mts';
+import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '../color-transfer.mts';
 
 export const SURFACE_OBSERVATION_REPORT = 'cssearth-surface-observation-report@1';
 const PREVIEW_POLICY = 'The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.';
@@ -20,6 +20,8 @@ export interface SurfaceObservation {
   samplePoint(point: readonly number[]): SurfaceColorSample;
   preview(width: number, height: number): { rgb: Buffer; missing: Uint8Array };
   report: SurfaceObservationReport;
+  /** The photograph already carries its acquisition lighting; the atlas must not light it again. */
+  retainsIllumination: boolean;
 }
 
 export function createSurfaceObservation({ frames, policy, radial, config, entries }: { frames: readonly ObservationFrame[]; policy: SurfacePolicy; radial: RadialSurface; config: SurfaceConfig; entries: readonly SourceInput[] }): SurfaceObservation {
@@ -74,13 +76,14 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     if (index < 0) return frames.length === 1 && first.reason !== undefined ? first : missing(point, 'no-qualified-observation');
     const value = values[index];
     if (value.reason !== undefined) return value;
-    const gain = levels.gains[index], radiance = value.radiance * gain, level = (v: number) => Math.round(Math.max(0, Math.min(1, (v - low) / (high - low))) * 255), gray = level(radiance);
+    // The stretch is linear in the observed quantity; grey is sRGB-encoded like the colour bands, and a palette indexes the linear fraction.
+    const gain = levels.gains[index], radiance = value.radiance * gain, fraction = Math.max(0, Math.min(1, (radiance - low) / (high - low)));
     const colorDisplay = policy.display.range === 'authored' ? policy.display.colorDisplay : undefined;
     if (Boolean(value.color) !== Boolean(colorDisplay)) throw new Error('Floating color samples require their source-bound band display policy.');
     // The shared footprint and level matching retain floats; encode the selected bands once here.
     const palette = policy.display.palette;
     return { ...value, color: value.color && colorDisplay ? value.color.map(channel => bandColorByte(channel * gain,colorDisplay))
-      : palette ? interpolatePalette(palette, gray / 255) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
+      : palette ? interpolatePalette(palette, fraction) : Array(3).fill(Math.round(255 * linearToSrgb(fraction))), radiance, frameId: frames[index].id, frameIndex: index };
   };
   const sourceSquareMeters: Record<string, number> = {};
   const areaCoverage = { method: 'Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed', samplesPerTriangle: policy.samplesPerTriangle,
@@ -117,5 +120,5 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     }
     return { rgb, missing: missingPixels };
   };
-  return { samplePoint, preview, report };
+  return { samplePoint, preview, report, retainsIllumination: policy.retainsIllumination };
 }

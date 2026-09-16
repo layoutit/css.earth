@@ -218,7 +218,7 @@ function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly Observation
     levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
     display: { ...(range ? { range: 'authored', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }
       : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units }), ...(recipe.display.palette ? { palette: recipe.display.palette } : {}) },
-    photometry: photometry.report, limits };
+    photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };
   return { frames: [...frames], policy, exceeded };
 }
 
