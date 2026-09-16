@@ -194,8 +194,13 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp.' } });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
-    panel: { facts: [{ id: 'radius', label: 'Radius', value: `${Math.round(radiusKm / SOLAR_RADIUS_KM)} solar radii` }, { id: 'distance', label: 'Distance from the Sun', value: `${Math.round(astrometry.distanceParsecs)} parsecs` },
-      { id: 'rotation-axis', label: 'Rotation axis', value: 'not measured' }], moreFacts: [] },
+    // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.
+    panel: { facts: [
+      { id: 'radius', label: 'Radius', value: `${Math.round(radiusKm / SOLAR_RADIUS_KM)} solar radii`,
+        source: { catalogueId: `${TODO}-radius-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'radiusKm; radiusSource' } },
+      { id: 'distance', label: 'Distance from the Sun', value: `${Math.round(astrometry.distanceParsecs)} parsecs`,
+        source: { catalogueId: `${TODO}-distance-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'distanceParsecs; distanceSource' } },
+    ], moreFacts: [] },
     lenses: { titleKey: 'lenses', defaultLens: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: 'A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.',
       thumbnail: `${id}-lens-shape.webp`, surface: `${id}-surface-shape.webp`, poles: `${id}-poles-shape.webp`, source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: spec.paper },
       falseColor: false, notes: `No image of the photosphere is cast here (${TODO}: say why, and point at the ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention.` }] },
