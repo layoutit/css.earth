@@ -1,6 +1,6 @@
 /** Preparation-only inspection of published planetocentric controls in native
  * image pixels. This measures discrepancies; it never fits or qualifies a camera. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -17,7 +17,7 @@ interface Shape { intersect(origin: readonly number[], ray: readonly number[]): 
 const number = requireFiniteNumber, record = requireRecord;
 const text = (v: unknown, at: string) => { const s = requireString(v, at); if (!s.trim()) throw new Error(`${at} must not be empty.`); return s; };
 const tuple = (v: unknown, n: number, at: string) => { const a = requireArray(v, at); if (a.length !== n) throw new Error(`${at} needs ${n} values.`); return a.map(x => number(x, at)); };
-const hash = (v: Uint8Array) => createHash('sha256').update(v).digest('hex');
+
 const xml = (v: string) => v.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]!);
 
 export function parseProjectedControls(value: unknown, width: number, height: number): Control[] {
@@ -67,9 +67,9 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
   const input = async (v: unknown) => {
     const p = record(v, 'pinned input'), file = text(p.file, 'input filename');
     if (basename(file) !== file || file === '.' || file === '..' || file.includes('\\')) throw new Error('Input must be a filename in the input directory.');
-    const bytes = await readFile(resolve(inputDirectory, file)), expectedBytes = number(p.bytes, 'input bytes'), sha256 = text(p.sha256, 'input hash');
-    if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0 || !/^[a-f0-9]{64}$/.test(sha256) || bytes.length !== expectedBytes || hash(bytes) !== sha256) throw new Error(`Pinned input changed: ${file}.`);
-    return { file, bytes, sha256, path: resolve(inputDirectory, file) };
+    const bytes = await readFile(resolve(inputDirectory, file)), expectedBytes = number(p.bytes, 'input bytes'), pin = text(p.sha256, 'input hash');
+    if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0 || !/^[a-f0-9]{64}$/.test(pin) || bytes.length !== expectedBytes || sha256(bytes) !== pin) throw new Error(`Pinned input changed: ${file}.`);
+    return { file, bytes, sha256: pin, path: resolve(inputDirectory, file) };
   };
   if (image.format !== 'fits-primary' || image.pixelConvention !== 'zero-based-x-right-y-down-reversed-fits-rows') throw new Error('Unsupported native image convention.');
   const native = await input(image), fits = readFitsPrimary(native.bytes);
@@ -99,7 +99,7 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
     panels.push(await sharp(nativePng).composite([{ input: svg }]).png().toBuffer());
   }
   if (!results.length || results.length > 4) throw new Error('Need one to four source models.');
-  const report = { status: 'diagnostic-unqualified', recipeSha256: hash(recipeBytes), source, limitations,
+  const report = { status: 'diagnostic-unqualified', recipeSha256: sha256(recipeBytes), source, limitations,
     image: { file: native.file, bytes: native.bytes.length, sha256: native.sha256, width, height, pixelConvention: image.pixelConvention },
     method: 'Project published coordinates without fitting. Residuals are against tentative native-image identifications; regions are not confidence intervals or acceptance limits. No aggregate camera-accuracy claim.',
     display: 'Linear zero-to-maximum stretch; nearest-neighbour enlargement. Yellow regions and dots are tentative native picks. Cyan crosses are projected catalogue positions.', models: results };

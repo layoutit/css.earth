@@ -1,10 +1,10 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {shape,array,number,optional} from '../terrestrial-layers/source-records.mts';
 import {parse} from '../material-composition/data-schema.mts';
 import {ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial} from './material-contract.mts';
 import type {Vector3, ReadonlyVector3} from '../material-composition/ellipsoid.mts';
 import type {WebpOptions} from 'sharp';
-import {createHash} from 'node:crypto';
 import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
@@ -18,7 +18,7 @@ import {optimizePreparedDisplayLosslessWebp,optimizePreparedQ75Webp,PREPARED_Q75
 const clamp=(value: number,low=0,high=1)=>Math.max(low,Math.min(high,value));
 const scale=(vector: ReadonlyVector3,value: number): Vector3=>[vector[0]*value,vector[1]*value,vector[2]*value];
 const add=(...vectors: ReadonlyVector3[]): Vector3=>[vectors.reduce((sum,v)=>sum+v[0],0),vectors.reduce((sum,v)=>sum+v[1],0),vectors.reduce((sum,v)=>sum+v[2],0)];
-const hash=(bytes: Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 const safeName=(name: unknown)=>typeof name==='string'&&/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(name);
 function transform(vector: ReadonlyVector3,steps: readonly Orientation[],state: MaterialPose){for(const step of steps){if(step.kind==='normalize')vector=normalizeVector(vector);else vector=rotateSequence(vector,[{axis:step.axis,degrees:'state' in step?state[step.state]*step.factor:step.degrees}]);}return vector;}
 
@@ -133,7 +133,7 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
   const config = parseEllipsoidMaterialRecipe(input);
   if(Boolean(config.radialLayer)!==Boolean(radialLayer)||radialLayer&&(!Buffer.isBuffer(radialLayer.data)||radialLayer.data.length!==radialLayer.size*radialLayer.size*4))throw new TypeError('Prepared radial input differs from material capability.');
   const assets: MaterialAsset[]=[],lenses: Record<string, PreparedLensMaterial>={};
-  const publish=async(filename: string,frame: Buffer,width: number,height: number,encoding: WebpOptions,optimization?: 'display-lossless' | 'q75')=>{if(!safeName(filename))throw new TypeError('Invalid material output.');const data=await encodeMaterial(frame,width,height,encoding,optimization);const record={filename,width,height,bytes:data.length,sha256:hash(data),data};assets.push(record);return record;};
+  const publish=async(filename: string,frame: Buffer,width: number,height: number,encoding: WebpOptions,optimization?: 'display-lossless' | 'q75')=>{if(!safeName(filename))throw new TypeError('Invalid material output.');const data=await encodeMaterial(frame,width,height,encoding,optimization);const record={filename,width,height,bytes:data.length,sha256:sha256(data),data};assets.push(record);return record;};
   for(const lens of config.lenses){
     const inputMap=maps.get(lens.id);if(!inputMap)throw new Error(`Material lens ${lens.id} has no observed map.`);
     const map=shape({atmosphereColor:optional(array(number)),coverage:optional(shape({baselineColor:array(number)}))})(inputMap);
@@ -153,7 +153,7 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
         const state={scenePitchDegrees,systemObliquityDegrees:bank.systemObliquity?bank.systemObliquity.degrees*scenePitchDegrees/bank.systemObliquity.referencePitch:config.fixedState.systemObliquityDegrees};
         if (lens.bankBaseFromCoverage && !map.coverage) throw new TypeError('Material coverage base colour is unavailable.');
         const frame=rasterEllipsoidMaterial(config.raster,{size:bank.frameSize,state,palette:{atmosphere,base:lens.bankBaseFromCoverage?map.coverage?.baselineColor:lens.fixedBase},radialLayer,textureUrl:`${config.urlPrefix}${filename}`});
-        frameRawSha256.push(hash(frame.rgba));frameForegroundRingTexelCounts.push(frame.foregroundRingTexelCount);frameRingShadowTexelCounts.push(frame.ringShadowTexelCount);
+        frameRawSha256.push(sha256(frame.rgba));frameForegroundRingTexelCounts.push(frame.foregroundRingTexelCount);frameRingShadowTexelCounts.push(frame.ringShadowTexelCount);
         const frameX=column*stride+bank.gutter;writeMaterialAtlasTile({output:row,outputWidth:width,source:frame.rgba,sourceSize:bank.frameSize,frameX,frameY:bank.gutter,gutter:bank.gutter});
         const scale=bank.presentationSize/bank.frameSize;
         presentations.push({frameIndex,rowIndex,...(bank.presentationAssetUrl?{assetUrl:`${config.urlPrefix}${filename}`}:{scenePitchDegrees:Number(scenePitchDegrees.toFixed(6))}),backgroundPosition:`${-frameX*scale}px ${-bank.gutter*scale}px`,backgroundSize:`${width*scale}px ${height*scale}px`});

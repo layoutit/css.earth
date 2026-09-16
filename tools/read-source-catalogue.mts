@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, readdir } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { parseSourceCatalog } from '../src/platform/source-catalog.mts';
 import { sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
@@ -30,7 +30,7 @@ export async function checkSourceCatalog(root: string, prepared: {
 }) {
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path));
-    if (createHash('sha256').update(bytes).digest('hex') !== prepared.closure[path]) {
+    if (sha256(bytes) !== prepared.closure[path]) {
       throw new Error(`Stale sources catalogue: ${path}. Run pnpm prepare:sources.`);
     }
     return bytes;

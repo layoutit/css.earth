@@ -1,6 +1,6 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
 import { mathildeImageCamera, decodeNearMsi } from '../terrestrial-layers/near-msi.mts';
 import { pds4Field } from '../pds-labels.mts';
@@ -11,7 +11,7 @@ const profile = shape({ mesh: text, imageGeometry: text, references: array(text)
   met: number, filter: text, image: text, raw: text, label: text, output: text,
 })) })(JSON.parse(await readFile(resolve(source, profilePath), 'utf8')));
 const bytes = (path: string) => readFile(resolve(source, path));
-const digest = async (path: string) => createHash('sha256').update(await bytes(path)).digest('hex');
+const digest = async (path: string) => sha256(await bytes(path));
 const table = (await bytes(profile.imageGeometry)).toString('utf8');
 for (const frame of profile.frames) {
   const label = (await bytes(frame.label)).toString('utf8');

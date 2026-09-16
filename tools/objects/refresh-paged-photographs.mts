@@ -1,3 +1,4 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readAuthoredSources } from './authored-sources.ts';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
@@ -13,7 +14,6 @@ import { parsePagedProfile } from './paged-ellipsoid/profile-source.mts';
 import { createPagedSurfaceRaster, parsePreparedSurfaceRasterPlan } from './paged-ellipsoid/surface-raster.mts';
 import { prepareTextureLevels, type TextureLevelBank } from './paged-ellipsoid/texture-levels.mts';
 
-const hash=(bytes: Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 
 async function verifyPinnedSource(sourceDirectory: string, id: string, manifest: unknown, path: string) {
   if(!/^[a-z0-9][a-z0-9@._/-]*$/iu.test(path)||path.split('/').includes('..'))throw new TypeError('Photographic source path is unsafe.');
@@ -51,7 +51,7 @@ export async function refreshPagedPhotographs(id: string, mapNames: readonly str
   const recipePath=resolve(sourceDirectory,'preparation/paged-ellipsoid.json'),manifestPath=resolve(sourceDirectory,'manifest.json'),scenePath=resolve(outputDirectory,'surface-raster-plan.json'),textureLevelsPath=resolve(outputDirectory,'texture-levels.json');
   const [descriptorBytes,recipeBytes,manifestBytes,sceneBytes,textureLevelsBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath),readFile(scenePath),readFile(textureLevelsPath)]);
   const authored=await readAuthoredSources(objectDirectory,JSON.parse(descriptorBytes.toString('utf8'))),descriptor=authored.descriptor,recipeSource=authored.sources.get('paged-ellipsoid')?.reference;
-  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/paged-ellipsoid.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Paged photographic refresh requires the current manifest recipe pin.');
+  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/paged-ellipsoid.json'||recipeSource.sha256!==sha256(recipeBytes))throw new Error('Paged photographic refresh requires the current manifest recipe pin.');
   const manifest=JSON.parse(manifestBytes.toString('utf8')),config=parsePagedProfile(JSON.parse(recipeBytes.toString('utf8'))),surfaceRasterPlan=parsePreparedSurfaceRasterPlan(JSON.parse(sceneBytes.toString('utf8')));
   if(surfaceRasterPlan.atlas.pageSize!==config.atlas.pageSize||surfaceRasterPlan.atlas.density!==config.atlas.density||surfaceRasterPlan.atlas.gutter!==config.atlas.gutter||surfaceRasterPlan.atlas.sourceWidth!==config.atlas.sourceWidth||surfaceRasterPlan.atlas.sourceHeight!==config.atlas.sourceWidth/2)throw new Error('Prepared surface raster layout differs from the selected recipe.');
   const selected=config.surface.maps.filter(map=>mapNames.includes(map.name));
@@ -69,11 +69,11 @@ export async function refreshPagedPhotographs(id: string, mapNames: readonly str
   const assets=await Promise.all(expected.map(async url=>{
     const filename=url.slice(config.publicBase.length),bytes=await readFile(resolve(stage,filename)),metadata=await sharp(bytes).metadata();
     if(!metadata.width||!metadata.height)throw new Error(`Staged photographic asset dimensions are missing: ${filename}`);
-    return {filename,url,width:metadata.width,height:metadata.height,bytes:bytes.length,sha256:hash(bytes)};
+    return {filename,url,width:metadata.width,height:metadata.height,bytes:bytes.length,sha256:sha256(bytes)};
   }));
   const files=await readdir(stage);
   if(files.some(filename=>filename!=='receipt.json'&&!assets.some(asset=>asset.filename===filename)))throw new Error('Selective refresh stage contains an unexpected file.');
-  const receipt={id,inputs:{[`src/objects/${id}/prepared/surface-raster-plan.json`]:hash(sceneBytes),[`src/objects/${id}/prepared/texture-levels.json`]:hash(textureLevelsBytes),[`src/objects/${id}/source/preparation/paged-ellipsoid.json`]:hash(recipeBytes),[`src/objects/${id}/source/manifest.json`]:hash(manifestBytes),...Object.fromEntries(sourcePins.map(pin=>[pin.path,pin.sha256]))},assets,
+  const receipt={id,inputs:{[`src/objects/${id}/prepared/surface-raster-plan.json`]:sha256(sceneBytes),[`src/objects/${id}/prepared/texture-levels.json`]:sha256(textureLevelsBytes),[`src/objects/${id}/source/preparation/paged-ellipsoid.json`]:sha256(recipeBytes),[`src/objects/${id}/source/manifest.json`]:sha256(manifestBytes),...Object.fromEntries(sourcePins.map(pin=>[pin.path,pin.sha256]))},assets,
     textureLevelUpdates:{entries:levels.entries,receipts:levels.provenance.receipts}};
   await writeFile(resolve(stage,'receipt.json'),`${JSON.stringify(receipt,null,2)}\n`);
   return receipt;

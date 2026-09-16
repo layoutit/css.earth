@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readJsonSource, requireString} from '../../source-values.mts';
 import {parseMurReceipt} from './source-contract.mts';
 import type {EnsoRecipe, MurInventory, MurMosaic, MurTile} from './contracts.mts';
@@ -6,7 +7,6 @@ interface AcquiredMurInventory extends MurInventory {
   grid: {crs: string; level: number; columns: number; rows: number; tileSize: number; west: number; north: number; cellDegrees: number};
   sourceBytes: number; capabilitiesSha256: string; mosaic?: MurMosaic; archiveSha256?: string; archiveBytes?: number;
 }
-import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, mkdtemp, rm, stat } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -21,7 +21,7 @@ export const murCapabilitiesUrl = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326
 export const murColormapUrl = 'https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml';
 export const murProductUrl = 'https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1';
 export const murDescriptionUrl = 'https://raw.githubusercontent.com/nasa-gibs/worldview/main/config/default/common/config/metadata/layers/multi-mission/ghrsst/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies.md';
-export const sha256 = (data: string | Uint8Array) => createHash('sha256').update(data).digest('hex');
+
 const json = (data: unknown) => JSON.stringify(data, null, 2) + '\n';
 function demand(ok: unknown, why: string): asserts ok { if (!ok) throw new Error(`MUR imagery: ${why}`); };
 

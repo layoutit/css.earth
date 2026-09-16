@@ -1,8 +1,8 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from './sha256.mts';
 import { parseSourceCatalog, parseSourceBinding, sourceResolver, sourceArray, sourceObject, sourceText, sourceDigest, sourcePath, sourceUnique } from './source-catalog.mts';
 import type { SourceCatalog } from './source-catalog.mts';
 import { parseSourceUsage } from './source-usage.mts';
-export const sourceCatalogDigest = (catalog: SourceCatalog) => createHash('sha256').update(JSON.stringify(catalog)).digest('hex');
+export const sourceCatalogDigest = (catalog: SourceCatalog) => sha256(JSON.stringify(catalog));
 export function parsePreparedSources(raw: unknown) {
   const value = sourceObject(raw,['schema','catalog','catalogSha256','usage','inventory','closure']);
   if (value.schema !== 'cssearth-prepared-sources@1') throw new TypeError('Unsupported prepared sources.');

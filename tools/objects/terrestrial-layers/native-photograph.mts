@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
@@ -83,7 +83,7 @@ export async function prepareNativePhotographicAtlas({radial,sourceDirectory,sou
     const filename=`${id}-${suffix}@2x.webp`;
     const bytes=await sharp(pixels,{raw:{width,height,channels:4}}).webp({quality:sampling.quality,alphaQuality:100,effort:4}).toBuffer();
     await writeFile(resolve(publicDirectory,filename),bytes);
-    return {url:publicBase+filename,width,height,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};
+    return {url:publicBase+filename,width,height,bytes:bytes.length,sha256:sha256(bytes)};
   };
   const surface=await emit('surface',flood),shadowSurface=await emit('shadow',shadow);
   return {surface,shadowSurface,polesUrl:surface.url,layout:{kind:'triangle-atlas',width,height,tileSize,faceCount:radial.plans.length},

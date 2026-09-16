@@ -1,5 +1,5 @@
 /** Dactyl source/registration diagnostic. Never writes a preparation recipe or scene. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -20,7 +20,7 @@ const root = 'src/objects/dactyl/evidence/registration';
 const output = resolve(process.argv[2] ?? 'output/dactyl-registration');
 const checkLimbExtent = process.argv[3] === '--limb-extent';
 if (process.argv[3] && !checkLimbExtent) throw new Error('Unknown diagnostic option.');
-const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+
 const inputBytes = await readFile(`${root}/inputs.json`);
 const input = requireRecord(JSON.parse(inputBytes.toString('utf8')));
 if (input.objectId !== 'dactyl' || input.schema !== 'cssearth-dactyl-registration-input@1') throw new Error('Wrong registration inputs.');
@@ -29,7 +29,7 @@ for (const item of requireArray(input.files)) {
   const file = requireRecord(item), path = requireString(file.path);
   if ((!path.startsWith('src/objects/') && !path.startsWith('tests/objects/fixtures/dactyl/')) || path.split('/').includes('..')) throw new Error('Invalid source path.');
   const bytes = await readFile(path);
-  if (bytes.length !== file.expectedBytes || sha(bytes) !== file.expectedSha256) throw new Error(`Changed input: ${path}`);
+  if (bytes.length !== file.expectedBytes || sha256(bytes) !== file.expectedSha256) throw new Error(`Changed input: ${path}`);
   pinned.set(requireString(file.id), bytes);
 }
 function bytes(id: string) {
@@ -237,8 +237,8 @@ await sharp({ create: { width: 800, height: 490, channels: 3, background: '#1519
 
 const dependencies = ['tools/objects/terrestrial-layers/shape-camera-mosaic.mts', 'tools/objects/observation/fits.mts', 'tools/spice/ck.mts', 'tools/spice/daf.mts', 'tools/spice/sclk.mts', 'tools/spice/lsk.mts', 'tools/spice/text-kernel.mts'];
 const report = { schema: 'cssearth-dactyl-registration-result@1', qualifiedSurface: false,
-  baseCommit: input.baseCommit, inputSha256: sha(inputBytes), generatorSha256: sha(await readFile(new URL(import.meta.url))),
-  dependencySha256: await Promise.all(dependencies.map(async path => ({ path, sha256: sha(await readFile(path)) }))),
+  baseCommit: input.baseCommit, inputSha256: sha256(inputBytes), generatorSha256: sha256(await readFile(new URL(import.meta.url))),
+  dependencySha256: await Promise.all(dependencies.map(async path => ({ path, sha256: sha256(await readFile(path)) }))),
   runtime: { node: process.version, sharp: sharp.versions.sharp },
   originalDetector: { orientation, vicarPixelOffset: original.offset, width: 800, height: 800, originalLabelUtc: field(bytes('vicar-label').toString('ascii'), 'IMAGE_TIME') },
   pointing, oracleComparison: { oracle: oracle.tool, matrixMaxAbsoluteError: matrixError, etErrorSeconds: etError, clockErrorTicks: ticksError,

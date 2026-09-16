@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { sha256 } from '../src/platform/sha256.mts';
 import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -10,7 +10,7 @@ import { runtimeAssets, setupObjectIds } from "./runtime-assets.mts";
 const assets = await runtimeAssets(resolve(import.meta.dirname, ".."), setupObjectIds(process.argv.slice(2)));
 for (const asset of assets) {
   const bytes = await readFile(asset.file);
-  if (bytes.length !== asset.bytes || createHash("sha256").update(bytes).digest("hex") !== asset.sha256) {
+  if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) {
     throw new Error(`Prepare ${asset.id}/${asset.filename} before publishing it.`);
   }
 }

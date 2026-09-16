@@ -10,7 +10,7 @@
  * evidence is pinned the same way, for this manifest and locator only. Existing
  * records and pinned evidence are never rewritten.
  */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { execFile } from 'node:child_process';
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -22,7 +22,7 @@ import { requireArray, requireRecord, requireString } from './source-values.mts'
 export const PLACEHOLDER_REVISION = '0'.repeat(40);
 const exec = promisify(execFile);
 const text = (value: unknown) => typeof value === 'string' && value.trim() ? value.trim() : undefined;
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const exists = (path: string) => access(path).then(() => true, () => false);
 
 export interface AuthoringOptions {
@@ -51,7 +51,7 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
   const objectName = text(content.displayName) ?? text(content.title) ?? objectId.replace(/-/gu, ' ').replace(/\b[a-z]/gu, letter => letter.toUpperCase());
   const productIds = inputs.map(input => text(input.productId)), result: AuthoringResult = { bindings: [], records: [], pinned: [] };
   let manifestChanged = false;
-  const pinned = evidence ? { revision: evidence, sha256: digest(await (manifestAt ?? ((revision, path) => gitShow(revision, path, root)))(evidence, repositoryPath)) } : null;
+  const pinned = evidence ? { revision: evidence, sha256: sha256(await (manifestAt ?? ((revision, path) => gitShow(revision, path, root)))(evidence, repositoryPath)) } : null;
   if (pinned && !/^[a-f0-9]{40}$/u.test(pinned.revision)) throw new TypeError('Evidence revision must be a full 40-character commit hash.');
 
   for (const [index, input] of inputs.entries()) {

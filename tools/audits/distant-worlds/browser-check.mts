@@ -1,8 +1,8 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { bodies, ids, reportDirectory, captureDirectory, runtimeDirectory } from './selection.mts';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {SCENE_OBJECTS} from '../../../site/objects.mts';
@@ -28,7 +28,7 @@ try{
   await page.route(new RegExp('/scenes/('+ids.join('|')+')/'),async route=>{
    const [,,id,filename]=new URL(route.request().url()).pathname.split('/');
    const bytes=await readFile(resolve(runtimeDirectory,id,filename));
-   loads.push({id,filename,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
+   loads.push({id,filename,bytes:bytes.length,sha256:sha256(bytes)});
    await route.fulfill({body:bytes,contentType:filename.endsWith('.webp')?'image/webp':'application/octet-stream'});
   });
   for(const id of navigationOnly?[]:ids){
@@ -60,7 +60,7 @@ try{
     assert.equal(await page.locator('input[name="shadows"]').isChecked(),true);
     await page.waitForTimeout(300);
     const after=await page.screenshot({clip:{x:400,y:160,width:650,height:600}});
-    assert.notEqual(createHash('sha256').update(before).digest('hex'),createHash('sha256').update(after).digest('hex'));
+    assert.notEqual(sha256(before),sha256(after));
     await page.screenshot({path:`${output}/${id}-shadows-on.png`});
     await page.locator('input[name="shadows"]').evaluate(node=>{if(!(node instanceof HTMLElement))throw new Error('Shadows control is not an HTML element.');node.click();});
     await page.locator('input[name="orbit"]').evaluate(node=>{if(!(node instanceof HTMLElement))throw new Error('Orbit control is not an HTML element.');node.click();});

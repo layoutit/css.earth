@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeVtkCategories } from '../terrestrial-layers/vtk-categories.mts';
@@ -74,7 +74,7 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
   if (doc.vtk) {
     if (!hit || !preparedMesh) throw new TypeError('Mapped regions require the prepared picking mesh.');
     const bytes = await readFile(resolve(context.sourceDirectory, doc.vtk.path));
-    if (bytes.length !== doc.vtk.bytes || createHash('sha256').update(bytes).digest('hex') !== doc.vtk.sha256) throw new TypeError('Landmark region mesh changed.');
+    if (bytes.length !== doc.vtk.bytes || sha256(bytes) !== doc.vtk.sha256) throw new TypeError('Landmark region mesh changed.');
     const decoded = decodeVtkCategories(bytes.toString('utf8'), doc.vtk.grid);
     const sourceMesh = createIndexedShape(decoded.positions, decoded.indices, { metersPerUnit: 1, expectedVertices: decoded.positions.length, expectedFaces: decoded.indices.length });
     const means = new Map<number, { sum: number[]; weight: number }>();

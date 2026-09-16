@@ -1,5 +1,5 @@
 /** Offline Gaia/Bailer-Jones neighbourhoods in the shared physical volume frame. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';
@@ -71,14 +71,14 @@ function outside(root: string, path: string): boolean {
   const rel = relative(root, path); return rel === '..' || rel.startsWith(`..${sep}`) || isAbsolute(rel);
 }
 async function readPinned(root: string, inputPin: unknown) {
-  const p = record(inputPin), path = text(p.path), sha256 = text(p.sha256);
+  const p = record(inputPin), path = text(p.path), pin = text(p.sha256);
   if (isAbsolute(path) || /[\\\u0000]/.test(path) || path.split('/').some(part => !part || part === '.' || part === '..') ||
-      !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Invalid catalogue field pin or repository-relative path.');
+      !/^[a-f0-9]{64}$/.test(pin)) throw new TypeError('Invalid catalogue field pin or repository-relative path.');
   const owner = await realpath(root), target = await realpath(resolve(owner, path));
   if (outside(owner, target)) throw new TypeError('Catalogue field source escapes its repository owner.');
   const bytes = await readFile(target);
-  if (createHash('sha256').update(bytes).digest('hex') !== sha256) throw new TypeError('Catalogue field source hash mismatch.');
-  return { input: { path, sha256, bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
+  if (sha256(bytes) !== pin) throw new TypeError('Catalogue field source hash mismatch.');
+  return { input: { path, sha256: pin, bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
 }
 
 function direction(raDeg: number, decDeg: number): Vector {

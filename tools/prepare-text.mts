@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -29,7 +29,7 @@ async function readBody(projectRoot: string, object: { id: string; name: string 
   const lenses = requireRecord(page.controls).lenses;
   const provenance = validateObjectProvenance(await readJson(resolve(directory, 'prepared/provenance.json')), object.id);
   return {
-    id: object.id, directory, sha256: createHash('sha256').update(bytes).digest('hex'),
+    id: object.id, directory, sha256: sha256(bytes),
     text: parseObjectText(JSON.parse(bytes.toString('utf8')), object.id),
     context: {
       name: object.name, catalogue,

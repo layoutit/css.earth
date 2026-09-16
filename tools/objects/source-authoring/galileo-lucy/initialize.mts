@@ -1,3 +1,4 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
 import assert from 'node:assert/strict';
 import { parseAuthoringSolid, parseAuthoringManifest, parseAuthoringDescriptor } from '../../../source-authoring-templates.mts';
@@ -9,7 +10,7 @@ import {bodies} from './catalog.mts';
 import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';import {resolve} from 'node:path';import {createHash} from 'node:crypto';
 import * as fontkit from 'fontkit';import {createPlanetTitleSource} from '../../../../tools/prepare-planet-title-sources.mts';import {PLANET_TITLE_RECIPE} from '../../../../src/platform/planet-title-recipe.mts';
 import {loadRadialTerrain} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';import {prepareSolidRasters} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';import {renderRadialSnapshot} from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
-const read=async (p: string): Promise<unknown>=>JSON.parse(await readFile(p,'utf8')),write=async(p: string,o: unknown)=>writeFile(p,JSON.stringify(o,null,2)+'\n'),pin=(b: Uint8Array)=>({expectedBytes:b.length,expectedSha256:createHash('sha256').update(b).digest('hex')});
+const read=async (p: string): Promise<unknown>=>JSON.parse(await readFile(p,'utf8')),write=async(p: string,o: unknown)=>writeFile(p,JSON.stringify(o,null,2)+'\n'),pin=(b: Uint8Array)=>({expectedBytes:b.length,expectedSha256:sha256(b)});
 const loadedFont=fontkit.openSync('src/objects/dactyl/source/presentation/InterVariable.ttf');
 assert('getVariation' in loadedFont);
 const font=loadedFont.getVariation({wght:PLANET_TITLE_RECIPE.weight,opsz:PLANET_TITLE_RECIPE.opticalSize});

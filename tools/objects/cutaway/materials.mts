@@ -1,9 +1,9 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {parse} from '../material-composition/data-schema.mts';
 import {cutawayRecipe} from './recipe-contract.mts';
 import {interiorSource, type InteriorSource} from './source-contract.mts';
 import type {ReadonlyVector3, Vector3} from '../material-composition/ellipsoid.mts';
 interface InteriorLensPlan {id:string;model:string;qualification:string;palette:InteriorSource['palette'];sectionResponse:{innerFloor:number;startRadius:number;exponent:number};shellGain:{metallic:number;core:number};filter?:string;wavelength?:string}
-import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -602,9 +602,7 @@ function clampByte(value:number) {
 
 function publicPath(url:string) { const filename=url.startsWith(config.publicPrefix)?url.slice(config.publicPrefix.length):'';if(!/^[a-z0-9@.-]+$/u.test(filename))throw new TypeError('Invalid cutaway texture URL.');return resolve(publicDirectory,filename); }
 
-function sha256(value:Uint8Array) {
-  return createHash("sha256").update(value).digest("hex");
-}
+
 
 return prepared;
 }

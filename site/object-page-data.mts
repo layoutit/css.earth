@@ -1,6 +1,6 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { requireAssets, requireControls } from '../src/renderers/css/dist/index.js';
 import { record } from './browser-types.mts';
@@ -14,7 +14,7 @@ export async function readPreparedObjectBytes(id: string, root = process.cwd()) 
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
   const bytes = await readFile(resolve(directory, 'prepared/object.json'));
-  if (createHash('sha256').update(bytes).digest('hex') !== descriptor.prepared.sha256) {
+  if (sha256(bytes) !== descriptor.prepared.sha256) {
     throw new Error(`${id}: prepared page data differs from its descriptor pin.`);
   }
   return { descriptor, bytes };
@@ -30,7 +30,7 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
   const bytes = await readFile(resolve(directory, reference.url));
-  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) {
+  if (sha256(bytes) !== reference.sha256) {
     throw new Error(`${id}: prepared page data differs from its descriptor pin.`);
   }
   const object: unknown = JSON.parse(bytes.toString('utf8'));
