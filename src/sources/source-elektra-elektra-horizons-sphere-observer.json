@@ -1,8 +1,8 @@
 {
-  "id": "source-psyche-psyche-horizons-sphere-observer",
+  "id": "source-elektra-elektra-horizons-sphere-observer",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Psyche · psyche horizons sphere observer",
+  "title": "Elektra · elektra horizons sphere observer",
   "identifiers": [],
   "links": [
     {
@@ -13,10 +13,10 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/psyche/source/manifest.json",
-      "revision": "dae54dd62dc07b87326359a427b7ba622c9fa7db",
-      "sha256": "d0a0d2f2b0a796c204b3bc55881e8dffcd60ec8f6365a291ae6664b36349ad8f",
-      "locator": "/inputs/5"
+      "path": "src/objects/elektra/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/20"
     }
   ],
   "relations": [],
@@ -24,7 +24,7 @@
     {
       "kind": "credit",
       "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
-      "scope": "The psyche horizons sphere observer input.",
+      "scope": "The elektra horizons sphere observer input.",
       "evidence": "Manifest credit field."
     },
     {

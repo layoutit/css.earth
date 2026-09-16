@@ -88,6 +88,20 @@
           "image": "/scenes/elektra/elektra-elevation-legend.webp"
         },
         "notes": "Source shape · radial height"
+      },
+      {
+        "id": "zimpol",
+        "label": "SPHERE photograph",
+        "thumbnail": "/scenes/elektra/elektra-zimpol-thumbnail.webp",
+        "surface": "elektra-zimpol-surface@2x.webp",
+        "poles": "elektra-zimpol-surface@2x.webp",
+        "source": {
+          "id": "elektra-sphere-20190730t083246922",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "noData": true,
+        "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2019-07-30 to 2019-08-04, cast onto the ADAM reconstruction from the same survey, the mesh its rotation record describes, while the Shape view keeps the MPCD model. Pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
       }
     ]
   },

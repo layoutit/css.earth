@@ -11,11 +11,8 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord, requireString } from '../source-values.mts';
-import { loadRadialModels, radialModelForLens } from './terrestrial-layers/radial-models.mts';
-import { requireTerrainMesh } from './terrestrial-layers/radial-terrain.mts';
-import { loadSurfaceObservation } from './surface-observations/index.mts';
+import { requireArray, requireRecord } from '../source-values.mts';
+import { measureBody } from './measure-lens.mts';
 import { registrationBlockFor, withRegistrationBlock } from './report-registration.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
@@ -38,13 +35,9 @@ if (selector === '--all') {
   console.log(`${bodies.length - failures.length} of ${bodies.length} bodies measured${failures.length ? `; failed: ${failures.join(', ')}` : ''}.`);
   process.exit(failures.length ? 1 : 0);
 }
-const objectId = selector, objectDirectory = resolve(ROOT, 'src/objects', objectId), sourceDirectory = resolve(objectDirectory, 'source');
-const config = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8')));
-const lenses = requireArray(requireRecord(config.raster).surfaceObservations ?? []).map(value => requireRecord(value));
-if (!lenses.length) { console.log(`${objectId}: no surface observation lens.`); process.exit(0); }
-const source = await createSourceManifest({ planetId: objectId, planetName: requireString(config.displayName), sourceRoot: sourceDirectory });
-await source.verify();
-const models = await loadRadialModels({ config: config as unknown as Parameters<typeof loadRadialModels>[0]['config'], sourceDirectory, source });
+const objectId = selector, objectDirectory = resolve(ROOT, 'src/objects', objectId);
+const measured = await measureBody(ROOT, objectId);
+if (!measured.length) { console.log(`${objectId}: no surface observation lens.`); process.exit(0); }
 
 // Preparation writes the observation report into two intermediates; both are rewritten so neither disagrees with the other.
 const documents = await Promise.all(['prepared/surfaces.json', 'prepared/material.json'].map(async path => {
@@ -52,12 +45,8 @@ const documents = await Promise.all(['prepared/surfaces.json', 'prepared/materia
   return { file, document, lenses: requireArray(document.surfaces).map(value => requireRecord(value)) };
 }));
 let changed = 0;
-for (const recipe of lenses) {
-  const id = requireString(recipe.id), model = radialModelForLens(models, id);
-  const observation = await loadSurfaceObservation({ sourceDirectory, source, recipe,
-    radial: { ...model.radial, grid: requireTerrainMesh(model.radial.grid) },
-    config: { geometry: model.config.geometry as Parameters<typeof loadSurfaceObservation>[0]['config']['geometry'], raster: config.raster as Parameters<typeof loadSurfaceObservation>[0]['config']['raster'] } });
-  const registration = observation.report.registration, after = JSON.stringify(registration ?? null);
+for (const { id, report: lensReport } of measured) {
+  const registration = lensReport.registration, after = JSON.stringify(registration ?? null);
   let differs = false;
   for (const { file, lenses: prepared } of documents) {
     const target = prepared.find(lens => lens.id === id);
@@ -77,3 +66,4 @@ if (flag === '--write') {
   if (replaced) await writeFile(readmePath, readme);
   console.log(`${objectId}: ${changed ? `${changed} lens report(s) rewritten` : 'reports unchanged'}${replaced ? ', README block written' : ''}.`);
 }
+void requireArray;

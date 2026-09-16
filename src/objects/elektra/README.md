@@ -25,6 +25,20 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
+**SPHERE photograph** casts 16 deconvolved VLT/SPHERE/ZIMPOL frames from 2019-07-30 to 2019-08-04 onto the ADAM reconstruction from the same survey, the mesh its rotation record describes. The camera's pointing and orientation are derived, not fitted: the pole, period and phase epoch come from the release's own parameter record (`source/reference/130_Elektra_param.txt`, read longitude-first), the observing geometry from pinned JPL Horizons responses for Paranal, and the plate scale, exposure and filter from each frame's own header, at the midpoint of the exposure. The disc centre is fitted to the limb the mesh projects; the sky threshold is one stated fraction of each frame's peak. `source/preparation/observer-cameras.json` names every input, so `tools/objects/observer-cameras.mts` re-derives the recipe and its test refuses one that drifts. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so it is not measured albedo, colour or composition.
+
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 16 | 16 | 8.14° | 3.63° | 7.29° | its other 16 frames | 0 of 16 | — | 10 of 16, -2.00° | turned -4.75° by relief; tilt declined: the median residual 2.00° is within the frames' floor of 4.35° |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens.
+<!-- registration-report:end -->
+
 ## Known problems
 
 Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 99.5 km reference sphere, with a -30 to 40 km legend. This includes global shape, not height above a gravitational equipotential.

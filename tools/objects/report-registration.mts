@@ -32,7 +32,11 @@ export function registrationBlock(surfaces: unknown): string | null {
     const relief = registration.relief === undefined ? undefined : requireRecord(registration.relief);
     const reliefCell = relief ? `${String(relief.decisive)} of ${requireArray(relief.frames).length}${Number(relief.decisive) >= Number(requireRecord(relief.rule).minimumFrames ?? 3) ? `, ${degrees(relief.medianOffsetDegrees)}` : ''}` : '—';
     const refinement = registration.refinement === undefined ? undefined : requireRecord(registration.refinement);
-    const refinedCell = !refinement ? '—' : refinement.applied ? `${degrees(refinement.turnDegrees)} by ${String(refinement.by)}` : `declined: ${String(refinement.reason)}`;
+    const turn = refinement?.turn === undefined ? undefined : requireRecord(refinement.turn), tilt = refinement?.tilt === undefined ? undefined : requireRecord(refinement.tilt);
+    const reverted = refinement?.reverted === undefined ? {} : requireRecord(refinement.reverted);
+    const parts = [turn ? (turn.applied ? `turned ${degrees(turn.turnDegrees)} by ${String(turn.by)}` : reverted.turn ? `turn reverted: ${String(reverted.turn)}` : `turn declined: ${String(turn.reason)}`) : '',
+      tilt ? (tilt.applied ? `tilted ${degrees(tilt.tiltDegrees)} by the silhouette` : reverted.tilt ? `tilt reverted: ${String(reverted.tilt)}` : `tilt declined: ${String(tilt.reason)}`) : ''].filter(Boolean);
+    const refinedCell = !refinement ? '—' : parts.join('; ');
     rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} | ${refinedCell} |`);
   }
   if (!rows.length) return null;

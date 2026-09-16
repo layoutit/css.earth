@@ -7,8 +7,8 @@ import { encounterFormat } from './formats/encounter.mts';
 import { orthographicFormat } from './formats/orthographic.mts';
 import { controlledCameraFormat, controlledColorFormat } from './formats/controlled-camera.mts';
 import { createSurfaceObservation, type SurfaceObservation } from './surface.mts';
-import { parseRefinement, refinementDecision, registrationStage } from './registration.mts';
-import { turnedCamera } from './cameras.mts';
+import { TILT, parseRefinement, refinementDecision, refinementKept, registrationStage, tiltDecision } from './registration.mts';
+import { tiltedCamera, turnedCamera } from './cameras.mts';
 
 export type { SurfaceObservation, SurfaceObservationReport } from './surface.mts';
 
@@ -48,16 +48,39 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
   // A format's own refinement, such as the kernel route's limb refinement, states a `method` and is the format's business;
   // a refinement that names a reference `by` is the stage's, and may turn every camera of the lens by that reference's
   // decisive median, once, when no other reference disagrees. The turned lens is measured again.
-  if (lens.refinement !== undefined && requireRecord(lens.refinement).by !== undefined) {
+  if (lens.refinement !== undefined && requireRecord(lens.refinement).method === undefined) {
     const wanted = parseRefinement(lens.refinement);
     if (!stage) throw new Error('A refinement needs frames that carry cameras.');
-    const decision = refinementDecision(stage, wanted);
-    refinement = { ...decision, rule: { minimumFrames: stage.reference.rule.minimumFrames } };
-    if (decision.applied && decision.turnDegrees !== null && decision.turnDegrees !== 0) {
+    // The turn about the pole comes from the named sweep, the tilt about the line of sight from the silhouette; both are
+    // decided on the untouched measurement, applied once, and the corrected lens is measured again.
+    const turn = wanted.by ? refinementDecision(stage, wanted) : undefined, tilt = wanted.tilt ? tiltDecision(stage) : undefined;
+    refinement = { ...(turn ? { turn } : {}), ...(tilt ? { tilt } : {}), rule: { minimumFrames: stage.reference.rule.minimumFrames, minimumScored: TILT.minimumScored, agreementDegrees: wanted.agreementDegrees } };
+    let turnBy = turn?.applied && turn.turnDegrees ? turn.turnDegrees : 0, tiltBy = tilt?.applied && tilt.tiltDegrees ? tilt.tiltDegrees : 0;
+    const corrected = (turnDegrees: number, tiltDegrees: number) => frames.map(frame => {
+      if (!frame.detector || !frame.withCamera) return frame;
+      let camera = frame.detector.camera;
+      if (turnDegrees) camera = turnedCamera(camera, turnDegrees, { by: wanted.by });
+      if (tiltDegrees) camera = tiltedCamera(camera, tiltDegrees, { tilt: wanted.tilt });
+      return frame.withCamera(camera);
+    });
+    const summary = (report: NonNullable<typeof stage>) => ({ silhouette: { rmsDegrees: report.silhouette.rmsDegrees, noiseFloorDegrees: report.silhouette.noiseFloorDegrees, systematicDegrees: report.silhouette.systematicDegrees }, reference: { decisive: report.reference.decisive, medianOffsetDegrees: report.reference.medianOffsetDegrees }, relief: { decisive: report.relief.decisive, medianOffsetDegrees: report.relief.medianOffsetDegrees } });
+    if (turnBy || tiltBy) {
       const before = stage;
-      measured = frames.map(frame => frame.detector && frame.withCamera ? frame.withCamera(turnedCamera(frame.detector.camera, decision.turnDegrees as number, { by: wanted.by })) : frame);
-      stage = await registrationStage(measured, lens, context);
-      refinement.before = { silhouette: { rmsDegrees: before.silhouette.rmsDegrees, systematicDegrees: before.silhouette.systematicDegrees }, reference: { decisive: before.reference.decisive, medianOffsetDegrees: before.reference.medianOffsetDegrees }, relief: { decisive: before.relief.decisive, medianOffsetDegrees: before.relief.medianOffsetDegrees } };
+      // A correction is kept only if the second measurement improves what it came from; one that does not is reverted and the rest measured again.
+      const measure = async (turnDegrees: number, tiltDegrees: number) => { const report = await registrationStage(corrected(turnDegrees, tiltDegrees), lens, context); if (!report) throw new Error('The corrected lens lost its cameras.'); return report; };
+      let attempt = await measure(turnBy, tiltBy), kept = refinementKept(before, attempt, turnBy ? wanted.by : undefined, tiltBy !== 0);
+      refinement.before = summary(before);
+      if ((kept.turn && !kept.turn.kept) || (kept.tilt && !kept.tilt.kept)) {
+        refinement.reverted = { ...(kept.turn && !kept.turn.kept ? { turn: kept.turn.reason } : {}), ...(kept.tilt && !kept.tilt.kept ? { tilt: kept.tilt.reason } : {}) };
+        if (kept.turn && !kept.turn.kept) turnBy = 0;
+        if (kept.tilt && !kept.tilt.kept) tiltBy = 0;
+        attempt = turnBy || tiltBy ? await measure(turnBy, tiltBy) : before;
+        kept = turnBy || tiltBy ? refinementKept(before, attempt, turnBy ? wanted.by : undefined, tiltBy !== 0) : {};
+      }
+      refinement.kept = kept;
+      if (turn) (refinement.turn as Record<string, unknown>).applied = turnBy !== 0;
+      if (tilt) (refinement.tilt as Record<string, unknown>).applied = tiltBy !== 0;
+      if (turnBy || tiltBy) { measured = corrected(turnBy, tiltBy); stage = attempt; }
     }
   }
   const registration = policy.registration || stage ? { ...(policy.registration ? { bands: policy.registration } : {}), ...(stage ?? {}), ...(refinement ? { refinement } : {}) } : undefined;
