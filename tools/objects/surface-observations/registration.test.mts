@@ -4,8 +4,8 @@ import { rotate } from '../../spice/frames.mts';
 import { multiply } from '../../spice/ck.mts';
 import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '../terrestrial-layers/observer-camera.mts';
-import { radiusFieldMesh, type SurfaceReference } from '../terrestrial-layers/observer-registration.mts';
-import { DECISIVE, referenceRegistration, silhouetteRegistration } from './registration.mts';
+import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/observer-registration.mts';
+import { DECISIVE, referenceRegistration, reliefRegistration, silhouetteRegistration } from './registration.mts';
 import type { FrameDetector, LoadContext, ObservationCamera, ObservationFrame, ObservationImage } from './contract.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;
@@ -14,8 +14,12 @@ const DEGREE = Math.PI / 180, J2000 = 2451545;
 const upright: BodyOrientation = { rotation: jd => rotate((30 + 720 * (jd - J2000)) * DEGREE, 3), phaseDegrees: jd => 30 + 720 * (jd - J2000) };
 /** The same body with its pole tilted twenty degrees about the J2000 x axis: a wrong pole, which turns the projected outline on the sky. */
 const tilted: BodyOrientation = { rotation: jd => multiply(upright.rotation(jd), rotate(20 * DEGREE, 1)), phaseDegrees: upright.phaseDegrees };
-/** An elongated body: a 100 km sphere stretched to 160 km along its x axis. */
-const shape = radiusFieldMesh((lon, lat) => { const x = Math.cos(lat * DEGREE) * Math.cos(lon * DEGREE); return 100_000 / Math.sqrt(1 - x * x * (1 - 1 / 1.6 ** 2)); }, 5);
+/** An elongated body with one hill: a 100 km sphere stretched to 160 km along its x axis, raised by an eighth around longitude 40, latitude 20, so no turn short of a whole one repeats its relief. */
+const shape = radiusFieldMesh((lon, lat) => {
+  const x = Math.cos(lat * DEGREE) * Math.cos(lon * DEGREE), y = Math.cos(lat * DEGREE) * Math.sin(lon * DEGREE), z = Math.sin(lat * DEGREE);
+  const toward = x * Math.cos(20 * DEGREE) * Math.cos(40 * DEGREE) + y * Math.cos(20 * DEGREE) * Math.sin(40 * DEGREE) + z * Math.sin(20 * DEGREE);
+  return 100_000 / Math.sqrt(1 - x * x * (1 - 1 / 1.6 ** 2)) * (1 + 0.12 * Math.max(0, toward) ** 6);
+}, 5);
 const sighting = (epochJd: number, center: [number, number]): ObserverSighting => ({ epochJd, targetRightAscensionDegrees: 0, targetDeclinationDegrees: 0, rangeAu: 1,
   sunRightAscensionDegrees: 190, sunDeclinationDegrees: 0, pixelAngleMicroradians: 0.0134, center });
 const markings: SurfaceReference = { sample(lon, lat) {
@@ -96,4 +100,16 @@ test('a lens without cameras is left to its own report', async () => {
   const report = await referenceRegistration([frame], {} as LoadContext);
   assert.equal(report.kind, 'none');
   assert.equal(silhouetteRegistration([frame]).frames.length, 0);
+});
+
+test('the body\'s own relief places a frame of an irregular shape, and a smooth sphere says nothing', () => {
+  const frames = [0, 0.05].map((days, i) => photograph(`r${i}`, J2000 + 3.1 + days, upright, upright));
+  const report = reliefRegistration(frames);
+  assert.equal(report.frames.length, 2);
+  for (const row of report.frames) {
+    assert.ok(row.exact && Math.abs(row.exact.offsetDegrees) <= 2, `${row.id}: the relief of the stretched body peaks at the stated turn (${row.exact?.offsetDegrees})`);
+  }
+  const turned = reliefRegistration([photograph('t', J2000 + 3.1, turnedOrientation(upright, 25), upright)]);
+  assert.ok(turned.frames[0].exact && Math.abs((turned.frames[0].exact.offsetDegrees ?? 0) + 25) <= 3 || (turned.frames[0].exact?.correlation ?? 1) < (report.frames[0].exact?.correlation ?? 0),
+    `a frame of the body turned 25° is reported turned or scores lower than the true one (${turned.frames[0].exact?.offsetDegrees}, ${turned.frames[0].exact?.correlation})`);
 });

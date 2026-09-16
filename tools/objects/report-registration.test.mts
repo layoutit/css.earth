@@ -8,14 +8,14 @@ const OBJECTS = resolve(import.meta.dirname, '../../src/objects');
 
 const surfaces = (lenses: unknown[]) => ({ objectId: 'x', surfaces: lenses });
 const staged = (id: string, silhouette: Record<string, unknown>, reference: Record<string, unknown>) =>
-  ({ id, observation: { registration: { stage: 'cssearth-registration-stage@1', silhouette: { frames: [{}, {}, {}], scored: 2, rmsDegrees: 3.28, noiseFloorDegrees: 3.41, systematicDegrees: 0, ...silhouette }, reference: { kind: 'frames', referenceFrames: 3, frames: [{}, {}, {}], decisive: 3, medianOffsetDegrees: -0.5, rule: { minimumFrames: 3 }, ...reference } } } });
+  ({ id, observation: { registration: { stage: 'cssearth-registration-stage@1', silhouette: { frames: [{}, {}, {}], scored: 2, rmsDegrees: 3.28, noiseFloorDegrees: 3.41, systematicDegrees: 0, ...silhouette }, reference: { kind: 'frames', referenceFrames: 3, frames: [{}, {}, {}], decisive: 3, medianOffsetDegrees: -0.5, rule: { minimumFrames: 3 }, ...reference }, relief: { rule: { minimumFrames: 3 }, frames: [{}, {}, {}], decisive: 3, medianOffsetDegrees: 0.75 } } } });
 
 test('the block states every staged lens and nothing for a body without one', () => {
   assert.equal(registrationBlock(surfaces([{ id: 'shape' }, { id: 'map', observation: { frames: [] } }])), null);
   const block = registrationBlock(surfaces([{ id: 'shape' }, staged('zimpol', {}, {}), staged('iss', { scored: 0, rmsDegrees: null, noiseFloorDegrees: null, systematicDegrees: null }, { kind: 'observation', observation: 'normal', decisive: 1, medianOffsetDegrees: 1.25, frames: [{}] })]));
   assert.ok(block);
-  assert.match(block, /\| `zimpol` \| 3 \| 2 \| 3\.28° \| 3\.41° \| 0\.00° \| its other 3 frames \| 3 of 3 \| -0\.50° \|/);
-  assert.match(block, /\| `iss` \| 3 \| 0 \| — \| — \| — \| the `normal` map \| 1 of 1 \| — \|/, 'one decisive frame states no median');
+  assert.match(block, /\| `zimpol` \| 3 \| 2 \| 3\.28° \| 3\.41° \| 0\.00° \| its other 3 frames \| 3 of 3 \| -0\.50° \| 3 of 3, 0\.75° \|/);
+  assert.match(block, /\| `iss` \| 3 \| 0 \| — \| — \| — \| the `normal` map \| 1 of 1 \| — \| 3 of 3, 0\.75° \|/, 'one decisive frame states no median');
   assert.ok(!block.includes('shape'));
 });
 

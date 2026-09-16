@@ -22,6 +22,18 @@ The [additional color-sequence trial](evidence/cassini-coverage/calypso-color-tr
 
 - [Browser capture](evidence/close-encounters/capture.json): Chrome 152, DPR 1/2, Shadows off/on, drag with retained DOM, and a 390-pixel mobile selector passed. Inspect the [False color product view](evidence/close-encounters/product.png), [rotated lighting](evidence/close-encounters/oblique-shadows-dpr1.png), [mobile view](evidence/close-encounters/mobile.png) and [Monochrome close-up](evidence/close-encounters/monochrome.png). These captures identify the uncommitted moon changes over ebd16155a by recipe, runtime and served-image hashes. The later main merge 3b40e0723 leaves these inputs and the shared browser code unchanged; the [Monochrome capture](evidence/close-encounters/monochrome.json) also mounts successfully after that merge.
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `normal` | 6 | 0 | — | — | — | its other 6 frames | 3 of 6 | 0.00° | 1 of 6 |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset.
+<!-- registration-report:end -->
+
 ## Known problems
 
 - **Elevation:** Includes the broad irregular figure; it is not local altitude above a geoid. Published regional radius uncertainty is 0.2–1.4 km. Small crater morphology is not reliably represented.
