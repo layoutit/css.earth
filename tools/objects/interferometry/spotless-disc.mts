@@ -15,7 +15,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction } from './beam-convolve.mts';
-import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable, type TableColumn } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell, writeComplexCell, type BinaryTable, type TableColumn } from './fits-table.mts';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;
 
@@ -41,17 +41,13 @@ export function normalStream(seed: number) {
   return () => Math.sqrt(-2 * Math.log(uniform())) * Math.cos(2 * Math.PI * uniform());
 }
 
-function writeCell(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn, index: number, value: number) {
-  const at = table.hdu.dataOffset + row * table.rowBytes + column.offset;
-  if (column.type === 'D') bytes.writeDoubleBE(value, at + index * 8);
-  else if (column.type === 'E') bytes.writeFloatBE(value, at + index * 4);
-  else throw new TypeError(`${column.name} is not a floating-point column.`);
-}
-
 export interface SpotlessOptions { readonly diameterMas: number; readonly limbDarkening?: number; readonly seed?: number }
 
-/** The OIFITS bytes with every squared visibility and closure phase replaced by the spotless disc's, noise included. Flags,
- * errors, (u, v) and every other table are kept, so the reconstruction sees the same sampling and weights. */
+/** The OIFITS bytes with every squared visibility, closure phase and OI_VIS amplitude and phase replaced by the spotless
+ * disc's, noise included. Flags, errors, (u, v) and every other table are kept, so the reconstruction sees the same sampling and
+ * weights. OI_VIS follows its table's declared types: an absolute amplitude is the disc's |V|, a differential or unstated one is
+ * |V| over the row's mean, and a correlated flux is left as measured; the phase is the disc's own 0 or 180 degrees, which a
+ * differential phase's offset and slope do not change. Complex VISDATA and GRAVITY's RVIS and IVIS follow the same values. */
 export function simulateSpotlessDisc(input: Buffer, { diameterMas, limbDarkening = 0, seed = 1 }: SpotlessOptions) {
   if (!(diameterMas > 0) || !(limbDarkening >= 0 && limbDarkening <= 1)) throw new TypeError('A spotless disc needs a positive diameter and a limb-darkening coefficient between 0 and 1.');
   const bytes = Buffer.from(input), hdus = readFitsHdus(bytes), noise = normalStream(seed);
@@ -83,7 +79,32 @@ export function simulateSpotlessDisc(input: Buffer, { diameterMas, limbDarkening
       }
     }
   }
-  return { bytes, vis2, t3, complexVisibilityTables: hdus.filter(hdu => hdu.extname === 'OI_VIS').length };
+  let vis = 0;
+  for (const hdu of hdus.filter(hdu => hdu.extname === 'OI_VIS')) {
+    const table = binaryTable(hdu), list = channels(table), has = (name: string) => table.columns.some(column => column.name === name);
+    if (!has('VISPHI')) continue;
+    const amplitudeType = hdu.header.AMPTYP;
+    const [u, v, amp, ampError, phase, phaseError] = ['UCOORD', 'VCOORD', 'VISAMP', 'VISAMPERR', 'VISPHI', 'VISPHIERR'].map(name => tableColumn(table, name)) as TableColumn[];
+    const complex = has('VISDATA') ? tableColumn(table, 'VISDATA') : null, real = has('RVIS') ? tableColumn(table, 'RVIS') : null, imaginary = has('IVIS') ? tableColumn(table, 'IVIS') : null;
+    for (let row = 0; row < table.rows; row++) {
+      const uu = numbers(bytes, table, row, u!)[0]!, vv = numbers(bytes, table, row, v!)[0]!, ampErrors = numbers(bytes, table, row, ampError!), phaseErrors = numbers(bytes, table, row, phaseError!);
+      const model = list.map(wavelength => visibility(uu, vv, wavelength));
+      const scale = amplitudeType === 'absolute' ? 1 : model.reduce((sum, value) => sum + Math.abs(value), 0) / model.length || 1;
+      for (let k = 0; k < list.length; k++) {
+        const angle = (model[k]! < 0 ? 180 : 0) + noise() * phaseErrors[k]!;
+        writeCell(bytes, table, row, phase!, k, angle);
+        if (amplitudeType === 'correlated flux') { vis++; continue; }
+        const magnitude = Math.abs(model[k]!) / scale + noise() * ampErrors[k]!;
+        writeCell(bytes, table, row, amp!, k, magnitude);
+        const re = magnitude * Math.cos(angle * Math.PI / 180), im = magnitude * Math.sin(angle * Math.PI / 180);
+        if (complex) writeComplexCell(bytes, table, row, complex, k, re, im);
+        if (real) writeCell(bytes, table, row, real, k, re);
+        if (imaginary) writeCell(bytes, table, row, imaginary, k, im);
+        vis++;
+      }
+    }
+  }
+  return { bytes, vis2, t3, vis };
 }
 
 export interface ReconstructionPlane { readonly width: number; readonly height: number; readonly values: ArrayLike<number>; readonly pixelMas: number }
@@ -145,7 +166,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (mode === 'simulate' && first && second && diameterMas !== undefined) {
     const result = simulateSpotlessDisc(await readFile(first), { diameterMas, limbDarkening: option('--limb-darkening') ?? 0, seed: option('--seed') ?? 1 });
     await writeFile(second, result.bytes);
-    console.log(`${second}: ${result.vis2} squared visibilities and ${result.t3} closure phases of a spotless ${diameterMas} mas disc.${result.complexVisibilityTables ? ` The file also has ${result.complexVisibilityTables} OI_VIS tables, left as measured: reconstruct both files with -novis.` : ''}`);
+    console.log(`${second}: ${result.vis2} squared visibilities, ${result.t3} closure phases and ${result.vis} OI_VIS channels of a spotless ${diameterMas} mas disc.`);
   } else if (mode === 'compare' && first && second && diameterMas !== undefined && option('--beam-mas') !== undefined) {
     const result = await compareReconstructions(first, second, diameterMas, option('--beam-mas')!);
     console.log(`Spot contrast (rms, beam-convolved, limb profile removed): real ${(result.realRms * 100).toFixed(2)}%, spotless ${(result.spotlessRms * 100).toFixed(2)}%, real minus spotless ${(result.differenceRms * 100).toFixed(2)}%; correlation ${result.correlation.toFixed(2)}; ratio ${result.ratio.toFixed(2)}.`);

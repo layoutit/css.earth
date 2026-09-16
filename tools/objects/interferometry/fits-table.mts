@@ -1,11 +1,15 @@
 /** FITS headers and binary tables (OIFITS) read with the standard's own byte layout: 2880-byte blocks, 80-character cards,
- * big-endian columns whose TFORM states a repeat count and a type. No heap (variable-length) columns are read. */
+ * big-endian columns whose TFORM states a repeat count and a type. No heap (variable-length) columns are read. Complex columns
+ * (C single, M double precision; OIFITS 2 VISDATA and VISERR) read as real and imaginary pairs, so a table that carries them,
+ * as AMBER and GRAVITY files do, can be read and rewritten. */
 export interface FitsHdu { readonly header: Readonly<Record<string, string | number | boolean>>; readonly dataOffset: number; readonly dataBytes: number; readonly extname: string }
-export interface TableColumn { readonly name: string; readonly repeat: number; readonly type: 'D' | 'E' | 'I' | 'J' | 'L' | 'A'; readonly offset: number; readonly bytes: number }
+export interface TableColumn { readonly name: string; readonly repeat: number; readonly type: 'D' | 'E' | 'I' | 'J' | 'K' | 'L' | 'A' | 'B' | 'C' | 'M'; readonly offset: number; readonly bytes: number }
 export interface BinaryTable { readonly hdu: FitsHdu; readonly columns: readonly TableColumn[]; readonly rows: number; readonly rowBytes: number }
 
 const BLOCK = 2880, CARD = 80;
-const TYPE_BYTES = { D: 8, E: 4, I: 2, J: 4, L: 1, A: 1 } as const;
+/** Bytes per cell; a complex cell is two floating-point numbers. */
+const TYPE_BYTES = { D: 8, E: 4, I: 2, J: 4, K: 8, L: 1, A: 1, B: 1, C: 8, M: 16 } as const;
+const FORM = /^(\d*)([DEIJKLABCM])$/;
 
 function parseCardValue(text: string): string | number | boolean {
   const trimmed = text.trim();
@@ -62,7 +66,7 @@ export function binaryTable(hdu: FitsHdu): BinaryTable {
   const columns: TableColumn[] = [];
   let offset = 0;
   for (let index = 1; index <= fields; index++) {
-    const form = String(hdu.header[`TFORM${index}`]).trim(), match = /^(\d*)([DEIJLA])$/.exec(form);
+    const form = String(hdu.header[`TFORM${index}`]).trim(), match = FORM.exec(form);
     if (!match) throw new Error(`Unsupported FITS column form ${form} in ${hdu.extname}.`);
     const repeat = match[1] ? Number(match[1]) : 1, type = match[2] as TableColumn['type'], bytes = repeat * TYPE_BYTES[type];
     columns.push({ name: String(hdu.header[`TTYPE${index}`]).trim(), repeat, type, offset, bytes });
@@ -78,15 +82,39 @@ export function tableColumn(table: BinaryTable, name: string): TableColumn {
   return column;
 }
 
-/** Numeric cells of one row: a repeat-count array of numbers (logicals as 0/1). */
+/** Numeric cells of one row: a repeat-count array of numbers (logicals as 0/1; complex cells as re, im pairs, twice as long). */
 export function numbers(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn): number[] {
-  const base = table.hdu.dataOffset + row * table.rowBytes + column.offset, out = new Array<number>(column.repeat);
+  const base = table.hdu.dataOffset + row * table.rowBytes + column.offset;
+  if (column.type === 'C' || column.type === 'M') {
+    const out = new Array<number>(column.repeat * 2), size = column.type === 'C' ? 4 : 8;
+    for (let i = 0; i < out.length; i++) out[i] = size === 4 ? bytes.readFloatBE(base + i * 4) : bytes.readDoubleBE(base + i * 8);
+    return out;
+  }
+  const out = new Array<number>(column.repeat);
   for (let i = 0; i < column.repeat; i++) {
     const at = base + i * TYPE_BYTES[column.type];
     out[i] = column.type === 'D' ? bytes.readDoubleBE(at) : column.type === 'E' ? bytes.readFloatBE(at) : column.type === 'I' ? bytes.readInt16BE(at)
-      : column.type === 'J' ? bytes.readInt32BE(at) : column.type === 'L' ? (bytes[at] === 0x54 ? 1 : 0) : bytes[at]!;
+      : column.type === 'J' ? bytes.readInt32BE(at) : column.type === 'K' ? Number(bytes.readBigInt64BE(at)) : column.type === 'L' ? (bytes[at] === 0x54 ? 1 : 0) : bytes[at]!;
   }
   return out;
+}
+
+/** Overwrite one complex cell (C or M) in place with its real and imaginary parts. */
+export function writeComplexCell(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn, index: number, re: number, im: number) {
+  if (column.type !== 'C' && column.type !== 'M') throw new TypeError(`${column.name} (${column.type}) is not a complex column.`);
+  if (index < 0 || index >= column.repeat) throw new RangeError(`${column.name} has ${column.repeat} cells, not ${index + 1}.`);
+  const at = table.hdu.dataOffset + row * table.rowBytes + column.offset + index * TYPE_BYTES[column.type];
+  if (column.type === 'C') { bytes.writeFloatBE(re, at); bytes.writeFloatBE(im, at + 4); } else { bytes.writeDoubleBE(re, at); bytes.writeDoubleBE(im, at + 8); }
+}
+
+/** Overwrite one cell in place: a floating-point value or a logical flag. The column's own type decides the encoding. */
+export function writeCell(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn, index: number, value: number | boolean) {
+  if (index < 0 || index >= column.repeat) throw new RangeError(`${column.name} has ${column.repeat} cells, not ${index + 1}.`);
+  const at = table.hdu.dataOffset + row * table.rowBytes + column.offset + index * TYPE_BYTES[column.type];
+  if (column.type === 'D') bytes.writeDoubleBE(Number(value), at);
+  else if (column.type === 'E') bytes.writeFloatBE(Number(value), at);
+  else if (column.type === 'L') bytes[at] = value ? 0x54 : 0x46;
+  else throw new TypeError(`${column.name} (${column.type}) is not a floating-point or logical column.`);
 }
 export function text(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn): string {
   const base = table.hdu.dataOffset + row * table.rowBytes + column.offset;
@@ -118,7 +146,7 @@ export function padBlock(data: Buffer): Buffer {
 export interface WriteColumn { readonly name: string; readonly form: string }
 /** A binary-table HDU. Strings are padded with spaces; logicals are written as T/F bytes. */
 export function binaryTableHdu(extname: string, columns: readonly WriteColumn[], rows: readonly (readonly (number | boolean | string | readonly number[] | readonly boolean[])[])[], extra: readonly Card[]): Buffer {
-  const specs = columns.map(({ name, form }) => { const match = /^(\d*)([DEIJLA])$/.exec(form); if (!match) throw new Error(`Unsupported form ${form}`); return { name, repeat: match[1] ? Number(match[1]) : 1, type: match[2] as TableColumn['type'] }; });
+  const specs = columns.map(({ name, form }) => { const match = /^(\d*)([DEIJLA])$/.exec(form); if (!match) throw new Error(`Unsupported form ${form} for writing`); return { name, repeat: match[1] ? Number(match[1]) : 1, type: match[2] as TableColumn['type'] }; });
   const rowBytes = specs.reduce((sum, spec) => sum + spec.repeat * TYPE_BYTES[spec.type], 0), data = Buffer.alloc(rowBytes * rows.length);
   rows.forEach((row, r) => {
     let at = r * rowBytes;
