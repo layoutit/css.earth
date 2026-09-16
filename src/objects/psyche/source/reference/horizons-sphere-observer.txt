@@ -1,0 +1,174 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+
+
+*******************************************************************************
+Ephemeris / API_USER Tue Sep 15 20:07:42 2026 Pasadena, USA      / Horizons    
+*******************************************************************************
+Target body name: 16 Psyche (A852 FA)             {source: JPL#92}
+Center body name: Earth (399)                     {source: DE441}
+Center-site name: Cerro Paranal
+*******************************************************************************
+Start time      : A.D. 2018-Apr-24 08:42:52.0530 UT      
+Stop  time      : A.D. 2018-May-05 01:34:27.8160 UT      
+Step-size       : 0 steps
+*******************************************************************************
+Target pole/equ : IAU                             {East-longitude positive}
+Target radii    : 139.0, 119.0, 85.5 km           {Equator_a, b, pole_c}       
+Center geodetic : 289.5957, -24.6272128, 2.63514  {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 289.5957,5803.73915,-2642.69127 {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ITRF93                          {East-longitude positive}
+Center radii    : 6378.137, 6378.137, 6356.752 km {Equator_a, b, pole_c}       
+Target primary  : Sun
+Vis. interferer : MOON (R_eq= 1737.400) km        {source: DE441}
+Rel. light bend : Sun                             {source: DE441}
+Rel. lght bnd GM: 1.3271E+11 km^3/s^2                                          
+Small-body perts: Yes                             {source: SB441-N16}
+Atmos refraction: NO (AIRLESS)
+RA format       : DEG
+Time format     : CAL 
+Calendar mode   : Mixed Julian/Gregorian
+EOP file        : eop.260915.p261212                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-15. PREDICTS-> 2026-DEC-11
+Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
+Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
+Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2457856.5 ! 2017-Apr-13.00 (TDB)         Residual RMS= .1514         
+   EC= .1354428631790678   QR= 2.527888467382581   TP= 2457129.4685003939      
+   OM= 150.2750236911914   W=  227.3612622931746   IN= 3.098574197998143       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X=-3.198228540743174E+00  Y= 5.444066039441158E-01  Z= 2.979295093331773E-01
+  VX=-2.332260322758251E-03 VY=-8.121403709973612E-03 VZ=-3.009699354931045E-03
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= 1.601               RAD= 111.               ROTPER= 4.196               
+   H= 6.2                  G= .200                 B-V= .729                   
+                           ALBEDO= .1203           STYP= X                     
+*********************************************************************************************************************
+ Date__(UT)__HR:MN:SC.fff     R.A.___(ICRF)___DEC  Ang-diam             delta      deldot       phi  PAB-LON  PAB-LAT
+*********************************************************************************************************************
+$$SOE
+ 2018-Apr-24 08:42:52.053     231.21961 -14.25000  0.167339  2.29058499459580  -9.1780849    5.7971 229.6640   3.6523
+ 2018-Apr-24 08:47:07.753     231.21908 -14.24983  0.167341  2.29056931306929  -9.1709811    5.7961 229.6640   3.6524
+ 2018-Apr-24 08:51:24.326     231.21854 -14.24966  0.167342  2.29055359012768  -9.1639494    5.7951 229.6640   3.6524
+ 2018-Apr-24 08:55:38.922     231.21801 -14.24949  0.167343  2.29053800017427  -9.1570694    5.7941 229.6639   3.6524
+ 2018-Apr-24 08:59:53.491     231.21748 -14.24932  0.167344  2.29052242349948  -9.1502890    5.7932 229.6639   3.6524
+ 2018-Apr-28 07:42:39.977  m  230.50265 -14.02344  0.168773  2.27112553805240  -7.3548380    4.4965 229.6108   3.6764
+ 2018-Apr-28 07:46:54.996  m  230.50209 -14.02327  0.168774  2.27111300707384  -7.3468846    4.4955 229.6108   3.6764
+ 2018-Apr-28 07:51:11.013  m  230.50152 -14.02309  0.168775  2.27110044063466  -7.3389754    4.4945 229.6107   3.6764
+ 2018-Apr-28 07:55:25.706  m  230.50095 -14.02292  0.168776  2.27108795254213  -7.3311843    4.4935 229.6107   3.6764
+ 2018-Apr-28 07:59:39.297  m  230.50039 -14.02275  0.168777  2.27107553159816  -7.3235055    4.4925 229.6106   3.6764
+ 2018-May-04 05:44:47.115  m  229.36213 -13.67705  0.170343  2.25019032906734  -4.6087723    2.5871 229.4983   3.7050
+ 2018-May-04 05:49:02.948  m  229.36153 -13.67688  0.170344  2.25018245516099  -4.5997144    2.5862 229.4982   3.7051
+ 2018-May-04 05:53:17.570  m  229.36092 -13.67670  0.170345  2.25017463389281  -4.5907225    2.5853 229.4981   3.7051
+ 2018-May-04 05:57:31.602  m  229.36032 -13.67653  0.170345  2.25016684597246  -4.5817768    2.5844 229.4980   3.7051
+ 2018-May-04 06:01:45.485  m  229.35972 -13.67635  0.170346  2.25015907777959  -4.5728644    2.5835 229.4980   3.7051
+ 2018-May-05 01:34:27.816     229.19899 -13.62834  0.170504  2.24807585094995  -4.5871002    2.3418 229.4807   3.7085
+$$EOE
+*********************************************************************************************************************
+Column meaning:
+ 
+TIME
+
+  Times PRIOR to 1962 are UT1, a mean-solar time closely related to the
+prior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current
+civil or "wall-clock" time-scale. UTC is kept within 0.9 seconds of UT1
+using integer leap-seconds for 1972 and later years.
+
+  Conversion from the internal Barycentric Dynamical Time (TDB) of solar
+system dynamics to the non-uniform civil UT time-scale requested for output
+has not been determined for UTC times after the next July or January 1st.
+Therefore, the last known leap-second is used as a constant over future
+intervals.
+
+  Time tags refer to the UT time-scale conversion from TDB on Earth
+regardless of observer location within the solar system, although clock
+rates may differ due to the local gravity field and no analog to "UT"
+may be defined for that location.
+
+  Any 'b' symbol in the 1st-column denotes a B.C. date. First-column blank
+(" ") denotes an A.D. date.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+  NOTE: "n.a." in output means quantity "not available" at the print-time.
+ 
+SOLAR PRESENCE (OBSERVING SITE)
+  Time tag is followed by a blank, then a solar-presence symbol:
+
+       '*'  Daylight (refracted solar upper-limb on or above apparent horizon)
+       'C'  Civil twilight/dawn
+       'N'  Nautical twilight/dawn
+       'A'  Astronomical twilight/dawn
+       ' '  Night OR geocentric ephemeris
+
+LUNAR PRESENCE (OBSERVING SITE)
+  The solar-presence symbol is immediately followed by a lunar-presence symbol:
+
+       'm'  Refracted upper-limb of Moon on or above apparent horizon
+       ' '  Refracted upper-limb of Moon below apparent horizon OR geocentric
+            ephemeris
+ 
+ 'R.A.___(ICRF)___DEC' =
+  Astrometric right ascension and declination of the target center with
+respect to the observing site (coordinate origin) in the reference frame of
+the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
+aberration.
+
+  Units: RA  in decimal degrees,  ddd.fffff{ffff}
+         DEC in decimal degrees,  sdd.fffff{ffff}
+ 
+ 'Ang-diam' =
+   The equatorial angular width of the target body full disk, if it were fully
+illuminated and visible to the observer. If the target body diameter is unknown
+"n.a." is output.
+
+   Units: ARCSECONDS
+ 
+ 'delta      deldot' =
+   Apparent range ("delta", light-time aberrated) and range-rate ("delta-dot")
+of the target center relative to the observer. A positive "deldot" means the
+target center is moving away from the observer, negative indicates movement
+toward the observer.  Units: AU and KM/S
+ 
+ 'phi  PAB-LON  PAB-LAT' =
+   "phi" is the true PHASE ANGLE at the observers' location at print time.
+"PAB-LON" and "PAB-LAT" are the J2000 ecliptic longitude and latitude of the
+phase angle bisector direction; the outward directed angle bisecting the arc
+created by the apparent vector from Sun to target center and the astrometric
+vector from observer to target center. For an otherwise uniform ellipsoid, the
+time when its long-axis is perpendicular to the PAB direction approximately
+corresponds to lightcurve maximum (or maximum brightness) of the body. PAB is
+discussed in Harris et al., Icarus 57, 251-258 (1984).
+
+   Units: DEGREES, DEGREES, DEGREES
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+
+*********************************************************************************************************************
