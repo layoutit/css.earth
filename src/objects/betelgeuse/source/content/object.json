@@ -35,9 +35,9 @@
       {
         "id": "matisse",
         "label": "MATISSE reconstruction",
-        "thumbnail": "/scenes/betelgeuse/betelgeuse-matisse-thumbnail.webp",
-        "surface": "betelgeuse-matisse-surface@2x.webp",
-        "poles": "betelgeuse-matisse-surface@2x.webp",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "surface": "betelgeuse-surface-matisse.webp",
+        "poles": "betelgeuse-poles-matisse.webp",
         "source": {
           "id": "betelgeuse-matisse-2020-02-continuum",
           "path": "../manifest.json"
@@ -48,30 +48,59 @@
         "legend": {
           "kind": "scale",
           "title": "Relative intensity at 4 µm",
-          "width": 256,
-          "height": 16,
           "labels": [
             "0.37",
             "0.68",
             "1.00"
           ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.37",
+              "0.68",
+              "1.00"
+            ]
+          },
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
-          "sourceUrl": "https://arxiv.org/abs/2401.12404",
-          "image": "/scenes/betelgeuse/betelgeuse-matisse-legend.webp"
+          "sourceUrl": "https://arxiv.org/abs/2401.12404"
         }
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": [
-      {
-        "kind": "toggle",
-        "name": "shadows",
-        "label": "Shadows",
-        "checked": false
-      }
-    ]
+    "controls": []
   },
   "charts": [],
   "resources": [

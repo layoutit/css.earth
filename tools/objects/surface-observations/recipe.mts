@@ -79,7 +79,8 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
 export function validateTransfer(transfer: { maximumSeparationMeters?: number; maximumSeparationFootprints?: number; visibilityToleranceMeters: number; maximumEmissionDegrees: number },
   geometry: { simplification?: { method?: string; maximumErrorMeters: number } } | undefined, context: string) {
   checkKeys(transfer, ['visibilityToleranceMeters', 'maximumEmissionDegrees'], ['maximumSeparationMeters', 'maximumSeparationFootprints', 'interpretation'], `${context} transfer`);
-  if (geometry?.simplification?.method !== 'source-meshoptimizer' ||
+  // The display mesh is the source mesh or a source-preserving simplification of it, so every closest source point lies on the displayed surface.
+  if (!['source-meshoptimizer', 'source-mesh'].includes(geometry?.simplification?.method ?? '') ||
       !(transfer.maximumSeparationFootprints === undefined ? positive(transfer.maximumSeparationMeters)
         : transfer.maximumSeparationMeters === undefined && positive(transfer.maximumSeparationFootprints) && transfer.maximumSeparationFootprints <= MAXIMUM_SEPARATION_FOOTPRINTS) ||
       !positive(transfer.visibilityToleranceMeters) || transfer.visibilityToleranceMeters > 1 ||

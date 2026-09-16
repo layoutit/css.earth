@@ -2,29 +2,49 @@
   "schema": "cssbetelgeuse-runtime-assets@1",
   "assets": [
     {
-      "filename": "betelgeuse-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+      "filename": "betelgeuse-context-matisse.webp",
+      "bytes": 66,
+      "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46"
     },
     {
-      "filename": "betelgeuse-matisse-legend.webp",
-      "bytes": 164,
-      "sha256": "ea63ca043fcef98608dae82e46043dd041d2b34e8166f7945c6de1b8d5f33b6c"
+      "filename": "betelgeuse-context-matisse@2x.webp",
+      "bytes": 140,
+      "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc"
     },
     {
-      "filename": "betelgeuse-matisse-shadow@2x.webp",
-      "bytes": 266204,
-      "sha256": "4f72d7de5490d5bb762abada42ff62ccb5b5f7afd1e64b7321485bf402d4ed0d"
+      "filename": "betelgeuse-lens-matisse.webp",
+      "bytes": 596,
+      "sha256": "66a045c24cd5f589d1929008cacac8e2ef09b5bfeaa92581bcdd63da07c85ab6"
     },
     {
-      "filename": "betelgeuse-matisse-surface@2x.webp",
-      "bytes": 401820,
-      "sha256": "3330d6504817f8dcf0c774adb894e773b1d68d0aae5d06ffc1fdda8086959a06"
+      "filename": "betelgeuse-limb-matisse.webp",
+      "bytes": 52,
+      "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af"
     },
     {
-      "filename": "betelgeuse-matisse-thumbnail.webp",
-      "bytes": 3776,
-      "sha256": "486f645d70a12441881123c19cbdfd75ff99cff195bb431fd7710443d6561c28"
+      "filename": "betelgeuse-limb-matisse@2x.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "filename": "betelgeuse-poles-matisse.webp",
+      "bytes": 6700,
+      "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78"
+    },
+    {
+      "filename": "betelgeuse-poles-matisse@2x.webp",
+      "bytes": 16222,
+      "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f"
+    },
+    {
+      "filename": "betelgeuse-surface-matisse.webp",
+      "bytes": 24992,
+      "sha256": "b1d77327da008a278804cb212222edd56840be9b707f9bb6ab16b834d4c60b4a"
+    },
+    {
+      "filename": "betelgeuse-surface-matisse@2x.webp",
+      "bytes": 56030,
+      "sha256": "d541811383256da3553aba931c045473ae6c6520fb2a44539a7f986754545715"
     }
   ]
 }

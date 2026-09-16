@@ -4,156 +4,164 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c5fe58415044a301d33ca436cd6e0f74c71b8a24d433d6f58435f26abd75c5f"
+    "sha256": "935dea1dfdd242f8bfaf9f83df53aeec6d351c34cdc93ba2f18637c5e1f689c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "2f98a429601e40d3222dd98a2aed8d741b9b02a150112c16787ed32122606f86"
   },
   "recipes": [
     {
-      "id": "terrestrial",
-      "path": "source/preparation/terrestrial.json",
-      "sha256": "5d0a10749460ed500015a82c531243aa2df8e890467f7732721e00321c1e5d13",
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "c6bbb40ebbdde32670fdc7eea9c58952065edfc702d7d3e849a35183d326fe6a",
       "parameters": {
-        "schema": "cssearth-terrestrial-preparation@1",
-        "kind": "solid-observation-body",
-        "namespace": "betelgeuse",
-        "displayName": "Betelgeuse",
+        "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
-        "raster": {
-          "width": 4096,
-          "height": 2048,
-          "bandCount": 16,
-          "gutter": 64,
-          "poleSize": 512,
-          "reportMissingPixels": true,
-          "observations": [],
-          "scientific": [],
-          "observedColors": [],
-          "surfaceQuality": 90,
-          "shapeViews": [],
-          "surfaceObservations": [
-            {
-              "id": "matisse",
-              "format": "controlled-shape-camera",
-              "consumer": "sphere-photograph",
-              "metadata": {
-                "label": "MATISSE reconstruction",
-                "falseColor": true,
-                "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "betelgeuse-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssbetelgeuse-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "matisse",
+            "source": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+            "falseColor": true,
+            "output": "betelgeuse-surface-{id}{suffix}.webp",
+            "thumbnail": "betelgeuse-lens-{id}.webp",
+            "science": {
+              "kind": "surface-observation",
+              "shape": {
+                "path": "shape/uniform-disc.tab",
+                "format": "pds-radius-table",
+                "grid": {
+                  "metersPerUnit": 1000,
+                  "expectedVertices": 2522,
+                  "expectedFaces": 5040,
+                  "stepDegrees": 5,
+                  "longitudeDirection": "east-positive"
+                },
+                "radiusKm": 531514800,
+                "rows": 36,
+                "columns": 72,
+                "flatFaceErrorMeters": 1020000000
               },
-              "frames": [
-                {
-                  "id": "matisse-2020-02-continuum",
-                  "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
-                  "encoding": "fits-oi-reconstruction",
-                  "backgroundMaximum": 0.00001,
-                  "observerLatitude": 0,
-                  "observerWestLongitude": 0,
-                  "sunLatitude": 0,
-                  "sunWestLongitude": 0,
-                  "rangeKm": 5183938336905497,
-                  "northAzimuthDegrees": 312,
-                  "pixelAngleMicroradians": 0.003781546712654381,
-                  "center": [
-                    63.994,
-                    63.001
-                  ],
-                  "reconstruction": {
-                    "startTime": "2020-02-08T00:12:31",
-                    "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
-                    "visibilitiesPath": "observations/betelgeuse-matisse-2020-02-continuum.oifits"
+              "lens": {
+                "format": "controlled-shape-camera",
+                "metadata": {
+                  "label": "MATISSE reconstruction",
+                  "falseColor": true,
+                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
+                },
+                "frames": [
+                  {
+                    "id": "matisse-2020-02-continuum",
+                    "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+                    "encoding": "fits-oi-reconstruction",
+                    "backgroundMaximum": 0.00001,
+                    "observerLatitude": 0,
+                    "observerWestLongitude": 0,
+                    "sunLatitude": 0,
+                    "sunWestLongitude": 0,
+                    "rangeKm": 5183938336905497,
+                    "northAzimuthDegrees": 312,
+                    "pixelAngleMicroradians": 0.003781546712654381,
+                    "center": [
+                      63.994,
+                      63.001
+                    ],
+                    "reconstruction": {
+                      "startTime": "2020-02-08T00:12:31",
+                      "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+                      "visibilitiesPath": "observations/betelgeuse-matisse-2020-02-continuum.oifits"
+                    }
                   }
-                }
-              ],
-              "transfer": {
-                "maximumSeparationFootprints": 2,
-                "visibilityToleranceMeters": 1,
-                "maximumEmissionDegrees": 70,
-                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
-              },
-              "photometry": {
-                "model": "retained-observation",
-                "referenceIncidenceDegrees": 0,
-                "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 70,
-                "maximumEmissionDegrees": 70,
-                "maximumGain": 1
-              },
-              "display": {
-                "percentiles": [
-                  1,
-                  99.5
                 ],
-                "palette": [
-                  "#3b0500",
-                  "#9a1e00",
-                  "#e0641a",
-                  "#ffb340",
-                  "#ffe9a0",
-                  "#fffbf0"
-                ]
+                "transfer": {
+                  "maximumSeparationFootprints": 2,
+                  "visibilityToleranceMeters": 1,
+                  "maximumEmissionDegrees": 70,
+                  "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+                },
+                "photometry": {
+                  "model": "retained-observation",
+                  "referenceIncidenceDegrees": 0,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "maximumGain": 1
+                },
+                "display": {
+                  "percentiles": [
+                    1,
+                    99.5
+                  ],
+                  "palette": [
+                    "#3b0500",
+                    "#9a1e00",
+                    "#e0641a",
+                    "#ffb340",
+                    "#ffe9a0",
+                    "#fffbf0"
+                  ]
+                },
+                "consumer": "sphere-photograph"
               }
             }
-          ]
-        },
-        "lighting": {
-          "frameSize": 512,
-          "columns": 8,
-          "frameCount": 128,
-          "logicalSize": 220,
-          "terminatorWidth": 0.1,
-          "directionalAmbient": 0.05,
-          "fullPhaseAmbient": 0.35,
-          "fullPhaseDiffuse": 0.65,
-          "maximumOpacity": 0.95
-        },
-        "geometry": {
-          "radius": 110,
-          "radiusKm": 531514800,
-          "camera": {
-            "initialScenePitchDegrees": 10,
-            "defaultControlYawDegrees": 180,
-            "framingScale": 0.75
-          },
-          "mapUrl": "/scenes/betelgeuse/betelgeuse-matisse-surface@2x.webp",
-          "polesUrl": "/scenes/betelgeuse/betelgeuse-matisse-surface@2x.webp",
-          "radialTerrain": {
-            "path": "shape/uniform-disc.tab",
-            "format": "pds-radius-table",
-            "grid": {
-              "metersPerUnit": 1000,
-              "expectedVertices": 2522,
-              "expectedFaces": 5040,
-              "stepDegrees": 5,
-              "longitudeDirection": "east-positive"
-            },
-            "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
-            "primitive": "u",
-            "simplification": {
-              "method": "source-meshoptimizer",
-              "targetFaces": 800,
-              "maximumErrorMeters": 15000000000,
-              "regularize": true
-            }
           }
-        },
-        "celestial": {
-          "sunSource": "The Sun is a point 168 parsecs away in the direction of the observer; the sphere is self-luminous and the scene's illumination direction is the viewing direction, not a light source on the star"
-        },
-        "presentation": {
-          "defaultLens": "matisse"
+        ],
+        "emission": {
+          "offLimbSize": 768,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "betelgeuse-context-{id}{suffix}.webp",
+          "limbOutput": "betelgeuse-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssbetelgeuse-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 768,
+              "source": "none: an interferometric reconstruction images the photosphere only; the off-limb plate is transparent",
+              "composition": "transparent",
+              "rotation": "stationary; nothing is drawn",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the reconstruction's limb darkening is in the surface itself",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ce4bc0dcaeaa3be906cf7d4498663f8088b2cf5638453004c123e401098adb48",
+      "sha256": "e6270d94800e3d3b8e5838427ba766591867f92edb9b867c74862ef9cd9d21fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -191,9 +199,9 @@
             {
               "id": "matisse",
               "label": "MATISSE reconstruction",
-              "thumbnail": "/scenes/betelgeuse/betelgeuse-matisse-thumbnail.webp",
-              "surface": "betelgeuse-matisse-surface@2x.webp",
-              "poles": "betelgeuse-matisse-surface@2x.webp",
+              "thumbnail": "betelgeuse-lens-matisse.webp",
+              "surface": "betelgeuse-surface-matisse.webp",
+              "poles": "betelgeuse-poles-matisse.webp",
               "source": {
                 "id": "betelgeuse-matisse-2020-02-continuum",
                 "path": "../manifest.json"
@@ -204,30 +212,59 @@
               "legend": {
                 "kind": "scale",
                 "title": "Relative intensity at 4 µm",
-                "width": 256,
-                "height": 16,
                 "labels": [
                   "0.37",
                   "0.68",
                   "1.00"
                 ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.37",
+                    "0.68",
+                    "1.00"
+                  ]
+                },
                 "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
-                "sourceUrl": "https://arxiv.org/abs/2401.12404",
-                "image": "/scenes/betelgeuse/betelgeuse-matisse-legend.webp"
+                "sourceUrl": "https://arxiv.org/abs/2401.12404"
               }
             }
           ]
         },
         "settings": {
           "titleKey": "settings",
-          "controls": [
-            {
-              "kind": "toggle",
-              "name": "shadows",
-              "label": "Shadows",
-              "checked": false
-            }
-          ]
+          "controls": []
         },
         "charts": [],
         "resources": [
@@ -315,6 +352,47 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "uniform-disc-sphere",
+      "path": "shape/uniform-disc.tab",
+      "origin": "https://arxiv.org/abs/2006.09837",
+      "credit": "Radius from Joyce et al. (2020); sphere written by this repository",
+      "license": "Project-authored reference surface from a published radius.",
+      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts from measurements.json (radius 531514800 km, 5 degree steps); `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-radius-table",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 531514800000
+      },
+      "coverage": "A sphere of the published radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of a red supergiant has no sharp limb.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "inputs": [
+          "measurements"
+        ],
+        "stepDegrees": 5
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-uniform-disc-sphere",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/1"
+          }
+        ]
+      },
+      "sha256": "943a0a8e6d43c6fffe522995a13e6dfaefc4ad1b246a0dd7ac1fd6cc81bbad58",
+      "bytes": 65105,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "id": "continuum-visibilities-merged",
       "path": "observations/betelgeuse-matisse-2020-02-continuum.oifits",
       "origin": "https://oidb.jmmc.fr/",
@@ -385,47 +463,6 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "uniform-disc-sphere",
-      "path": "shape/uniform-disc.tab",
-      "origin": "https://arxiv.org/abs/2006.09837",
-      "credit": "Radius from Joyce et al. (2020); sphere written by this repository",
-      "license": "Project-authored reference surface from a published radius.",
-      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts from measurements.json (radius 531514800 km, 5 degree steps); `--check` recomputes it.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
-      "projection": {
-        "kind": "body-fixed-radius-table",
-        "longitudeDirection": "east",
-        "latitudeType": "planetocentric",
-        "units": "kilometers",
-        "referenceRadiusMeters": 531514800000
-      },
-      "coverage": "A sphere of the published radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of a red supergiant has no sharp limb.",
-      "recipe": {
-        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
-        "inputs": [
-          "measurements"
-        ],
-        "stepDegrees": 5
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-betelgeuse-uniform-disc-sphere",
-            "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/1"
-          }
-        ]
-      },
-      "sha256": "943a0a8e6d43c6fffe522995a13e6dfaefc4ad1b246a0dd7ac1fd6cc81bbad58",
-      "bytes": 65105,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -438,8 +475,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ce4bc0dcaeaa3be906cf7d4498663f8088b2cf5638453004c123e401098adb48",
-      "bytes": 3758,
+      "sha256": "e6270d94800e3d3b8e5838427ba766591867f92edb9b867c74862ef9cd9d21fb",
+      "bytes": 4216,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -450,51 +487,134 @@
     {
       "id": "matisse",
       "label": "MATISSE reconstruction",
-      "recipe": "terrestrial",
-      "selector": "/raster/surfaceObservations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
       "lensIds": [
         "matisse"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "interpretation": {
-        "kind": "surfaceObservations"
+        "falseColor": true,
+        "surfaceObservation": {
+          "format": "controlled-shape-camera",
+          "shape": {
+            "path": "shape/uniform-disc.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "radiusKm": 531514800,
+            "rows": 36,
+            "columns": 72,
+            "flatFaceErrorMeters": 1020000000
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "originalIllumination": true
+        }
       },
       "inputs": [
         "betelgeuse-matisse-2020-02-continuum",
-        "continuum-visibilities-merged",
-        "uniform-disc-sphere"
+        "uniform-disc-sphere",
+        "continuum-visibilities-merged"
       ],
       "outputs": [
         {
-          "url": "/scenes/betelgeuse/betelgeuse-matisse-thumbnail.webp",
-          "bytes": 3776,
-          "sha256": "486f645d70a12441881123c19cbdfd75ff99cff195bb431fd7710443d6561c28",
+          "url": "/scenes/betelgeuse/betelgeuse-surface-matisse.webp",
+          "bytes": 24992,
+          "sha256": "b1d77327da008a278804cb212222edd56840be9b707f9bb6ab16b834d4c60b4a",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/betelgeuse/betelgeuse-matisse-legend.webp",
-          "bytes": 164,
-          "sha256": "ea63ca043fcef98608dae82e46043dd041d2b34e8166f7945c6de1b8d5f33b6c",
+          "url": "/scenes/betelgeuse/betelgeuse-surface-matisse@2x.webp",
+          "bytes": 56030,
+          "sha256": "d541811383256da3553aba931c045473ae6c6520fb2a44539a7f986754545715",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/betelgeuse/betelgeuse-matisse-surface@2x.webp",
-          "bytes": 401820,
-          "sha256": "3330d6504817f8dcf0c774adb894e773b1d68d0aae5d06ffc1fdda8086959a06",
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 596,
+          "sha256": "66a045c24cd5f589d1929008cacac8e2ef09b5bfeaa92581bcdd63da07c85ab6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-poles-matisse.webp",
+          "bytes": 6700,
+          "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-poles-matisse@2x.webp",
+          "bytes": 16222,
+          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-context-matisse.webp",
+          "bytes": 66,
+          "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-limb-matisse.webp",
+          "bytes": 52,
+          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-context-matisse@2x.webp",
+          "bytes": 140,
+          "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-limb-matisse@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "uniform-disc-sphere",
-          "role": "geometry",
-          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+          "sourceId": "betelgeuse-matisse-2020-02-continuum",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -528,10 +648,10 @@
     {
       "id": "preview:matisse",
       "label": "MATISSE reconstruction preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/surfaceObservations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "observationAttribution": "source-lineage",
       "inputs": [],
@@ -544,8 +664,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/matisse.webp",
-          "bytes": 9398,
-          "sha256": "46a03049009f21f94532f883782a61e6265b9344b069e116d3df285433866a7e",
+          "bytes": 9838,
+          "sha256": "867ce1158725c393b251cbfe87e34e3c0089ac52c2c2c6f7a1426aa760d7c102",
           "verification": "bytes-verified"
         }
       ]
@@ -557,11 +677,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "5ae9fcca80f29d03ac50d150d4e6f51979521a56197c6a41a7b812c52c8fba4f",
+    "materialSha256": "bdbabfe2d575d041d05d8df4e92438ea405a04cdb4695fc134be5e103a108f58",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "2f98a429601e40d3222dd98a2aed8d741b9b02a150112c16787ed32122606f86"
     }
   }
 }

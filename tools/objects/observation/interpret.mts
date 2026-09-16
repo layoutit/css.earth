@@ -11,7 +11,10 @@ import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-syn
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '../material-composition/data-schema.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
+import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
+import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readObservation } from '../terrestrial-layers/solid-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';
 import { validateGeologyProfile } from '../terrestrial-layers/categorical-geology.mts';
@@ -60,6 +63,29 @@ export function selectSurfaceDependencies(recipe: InterpreterRecipe, ids: readon
 }
 type Surface = Parameters<ObservationInterpretation>[0];
 interface Rgb { rgb: Uint8Array; missing: Uint8Array; report?: Record<string, unknown>; }
+interface SurfaceObservationScience {
+  shape: { path: string; format: string; grid: Record<string, unknown>; radiusKm: number; rows: number; columns: number; flatFaceErrorMeters: number };
+  lens: Record<string, unknown> & { frames: readonly unknown[] };
+}
+/** `science.shape` is the reference sphere table and its sampling; `science.lens` is one surface-observation lens without its id. */
+function parseSurfaceObservationScience(value: Record<string, unknown>): SurfaceObservationScience {
+  const unknown = Object.keys(value).filter(key => !['kind', 'shape', 'lens'].includes(key));
+  if (unknown.length) throw new TypeError(`A surface-observation science block declares only shape and lens, not ${unknown.join(', ')}.`);
+  const shape = requireRecord(value.shape, 'surface-observation shape'), lens = requireRecord(value.lens, 'surface-observation lens');
+  const parsed = { path: requireString(shape.path), format: requireString(shape.format), grid: requireRecord(shape.grid, 'shape grid'), radiusKm: requireFiniteNumber(shape.radiusKm),
+    rows: requireFiniteNumber(shape.rows), columns: requireFiniteNumber(shape.columns), flatFaceErrorMeters: requireFiniteNumber(shape.flatFaceErrorMeters) };
+  if (parsed.format !== 'pds-radius-table' || !Number.isInteger(parsed.rows) || !Number.isInteger(parsed.columns) || parsed.rows < 4 || parsed.columns < 4 || !(parsed.radiusKm > 0)) {
+    throw new TypeError('A surface-observation shape is a radius table sampled on an integer latitude and longitude grid.');
+  }
+  // Flat faces sit inside the sphere by the sagitta of their diagonal; the declared error must cover it.
+  const sagitta = parsed.radiusKm * 1000 * (1 - Math.cos(Math.hypot(180 / parsed.rows, 360 / parsed.columns) / 2 * Math.PI / 180));
+  if (!(parsed.flatFaceErrorMeters >= sagitta)) throw new TypeError(`A surface-observation shape must declare at least its flat-face error of ${sagitta.toExponential(3)} m.`);
+  if (lens.id !== undefined || !Array.isArray(lens.frames)) throw new TypeError('A surface-observation lens takes its id from the surface and lists its frames.');
+  return { shape: parsed, lens: lens as SurfaceObservationScience['lens'] };
+}
+const transparentPlates = (offLimb: number, limb: number) => ({
+  offLimb: { data: new Uint8Array(offLimb * offLimb * 4), size: offLimb, lossless: true }, limb: { data: new Uint8Array(limb * limb * 4), size: limb, lossless: true } });
+
 const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height: number, nearest: boolean): InterpretedSurface =>
   ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing) : rgb, channels: 3, nearest });
 
@@ -97,7 +123,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     if (sourceVerification === 'complete') await source.verify();
     else for (const surface of recipe.surfaces) {
       const kind = surface.science?.kind ?? 'static-observation';
-      if (sourceVerification === 'photographs' && (!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind)) ||
+      if (sourceVerification === 'photographs' && (!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color', 'surface-observation'].includes(String(kind)) ||
           surface.science?.scientific || surface.science?.elevation || surface.science?.synoptic))
         throw new TypeError('A photographic refresh cannot reprepare scientific, modeled or emissive views.');
       // Solar maps use multiple time samples and emission plates; keep their full-package check.
@@ -122,6 +148,27 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
   const observations = new Map<string, Promise<Rgb>>();
   const science = new Map<string, ReturnType<typeof loadScienceSurface>>();
   const nativePhotographs = new Map<string, Promise<NativePhotograph>>();
+  const surfaceObservations = new Map<string, Promise<SurfaceObservation>>();
+  /** A photograph lens cast onto its reference sphere by the shared surface-observation route (the same validators, footprints,
+   * photometry and report as the triangle-atlas lane), delivered as the equirectangular map the band-projected sphere consumes. */
+  const surfaceObservation = (surface: Surface, plan: SurfaceObservationScience, height: number): Promise<SurfaceObservation> => {
+    let pending = surfaceObservations.get(surface.id);
+    if (!pending) {
+      pending = (async () => {
+        const source = await manifest;
+        await source.validatePath(plan.shape.path);
+        const grid = requireTerrainMesh(await loadPdsRadiusTable(resolve(sourceDirectory, plan.shape.path), plan.shape.grid));
+        // One display unit is the sphere radius; the source mesh is sampled at the table's own step, never simplified.
+        const scale = 1 / (plan.shape.radiusKm * 1000);
+        const faces = sampleRadialTriangles(grid.sample, plan.shape.rows, plan.shape.columns, scale).map(face => ({ ...face, vertexNormals: [face.normal, face.normal, face.normal] }));
+        const radialTerrain = { path: plan.shape.path, format: plan.shape.format, simplification: { method: 'source-mesh', maximumErrorMeters: plan.shape.flatFaceErrorMeters } };
+        return loadSurfaceObservation({ sourceDirectory, source, recipe: { id: surface.id, ...plan.lens }, radial: { grid, faces },
+          config: { geometry: { radius: 1, radiusKm: plan.shape.radiusKm, radialTerrain }, raster: { height } } });
+      })();
+      surfaceObservations.set(surface.id, pending);
+    }
+    return pending;
+  };
 
   /** Terrestrial observation at one density; the monochrome base is filled from the same-density base decode. */
   const observation = (surface: Surface, width: number, height: number): Promise<Rgb> => {
@@ -266,6 +313,15 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return {...rgb3(rgb, color.missing, width, height, false),report:{colorDisplay:color.colorDisplay,sourceIds:color.sourceIds,
           ...('photometry' in color ? {photometry:color.photometry} : {}),...(levels?{levelMatching:levels}:{}),
           monochromeBase:plan.monochromeBase,monochromeMeaning:'Existing display brightness and missing-color fallback; no inferred surface color.'}};
+      }
+      case 'surface-observation': {
+        const plan = parseSurfaceObservationScience(surface.science);
+        if (!plan.lens.frames.some(frame => requireRecord(frame).path === surface.source)) throw new TypeError(`${objectId}/${surface.id}: the surface source must be one of the lens frames.`);
+        const observation = await surfaceObservation(surface, plan, height);
+        const { rgb, missing } = observation.preview(width, height);
+        return { ...rgb3(rgb, missing, width, height, false), report: observation.report,
+          // An emissive body without observed off-limb light: transparent context and limb plates at the recipe's sizes.
+          ...(recipe.emission ? { plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : {}) };
       }
       case 'glb-base-color': {
         const model = requireString(surface.science.model);

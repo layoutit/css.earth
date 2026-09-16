@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { BODIES, type BodyId } from '@cssearth/astronomy';
+import { BODIES, STAR_IDS, type BodyId } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
 import type { ScenePreparationAdapters } from '../../src/renderers/css/preparation/scene/index.js';
 
@@ -28,7 +28,9 @@ export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> 
           context: input.worldContext });
       }
       if (!Object.hasOwn(BODIES, input.bodyId)) throw new TypeError('Physical scene requires a known astronomy body.');
-      if (input.sun === null) throw new TypeError('Physical scene requires its prepared directional Sun.');
+      // A placed star is self-luminous: it has a presentation frame and a world frame from its astrometry, but no directional Sun.
+      const placedStar = (STAR_IDS as readonly string[]).includes(input.bodyId);
+      if ((input.sun === null) !== placedStar) throw new TypeError(placedStar ? 'A placed star carries no directional Sun.' : 'Physical scene requires its prepared directional Sun.');
       return scene.prepareSolarSystemScene({ bodyId: input.bodyId as BodyId,
         bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
         defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),
