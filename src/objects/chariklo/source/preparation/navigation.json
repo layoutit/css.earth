@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1051/0004-6361/202141543",
-    "credit": "Morgado et al. (2021), Astronomy & Astrophysics 652, A141; Santos-Sanz et al. (2025), arXiv:2510.06366v1 for the 2022 JWST ring measurements.",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "occultation-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 71194,
-    "expectedSha256": "4ff32db8171e71e146d15007850cb082efb6bfcf6380ee9f03372376bd690c1d"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

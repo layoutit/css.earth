@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
-    "credit": "ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model102; Marciniak et al. (2018), A&A610,A7; Bartczak and collaborators.",
-    "license": "ISAM scientific shape data; no explicit reuse license is stated in the retrieved source record. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 37459,
-    "expectedSha256": "be3519630d6666def2c88d5b748a442d0d9764dc6ef14cc18ec67e60eea7fe5e",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "aemilia-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

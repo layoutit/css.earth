@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65d5fa350f03f89fd599b31e39b9cafa61160d0b205ff39f1260a9745215f4fc"
+    "sha256": "db18c14466fe554659b326ba289afd664a4f948ac317cded6bc5bc353ccada26"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "56857faf3daca70e0545137d192be72b61221584342e65478de7783309926074"
   },
   "recipes": [
     {
@@ -239,7 +239,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "90946b384216cf4018964acb8de9b7ddb8940a39bc8be6116cd90955eaf1c0b3",
+      "sha256": "db41bc91b8004132fb6686538e6f45d6d0acc3a354e800f999d0541735a565a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,7 +267,15 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "26.4 km"
+              "value": "26.4 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -868,8 +876,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "90946b384216cf4018964acb8de9b7ddb8940a39bc8be6116cd90955eaf1c0b3",
-      "bytes": 10176,
+      "sha256": "db41bc91b8004132fb6686538e6f45d6d0acc3a354e800f999d0541735a565a2",
+      "bytes": 10534,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1160,8 +1168,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6341,
-          "sha256": "d85647383322cd7aca6198356c3c0ca87bed14e67abda8beefabf3fde19c4186",
+          "bytes": 6608,
+          "sha256": "40ff1f351de4699027bbe0c4129ae28202b16c90ce245210282adb2d0ac4d1c9",
           "verification": "bytes-verified"
         }
       ],

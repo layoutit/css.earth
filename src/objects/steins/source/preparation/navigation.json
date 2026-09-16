@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
-    "credit": "Phil Stooke/NASA PDS; ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
-    "license": "Stooke Small Bodies Maps V3.0 states these maps are public domain; credit required.",
-    "expectedBytes": 95137,
-    "expectedSha256": "ffabff67434043f3953304863d9d1615b782c1c7d5497d827fbb43c20f9b3208",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "steins-normal",
-        "steins-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 20,
-      "latitudeDegrees": 10,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
-    "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
-    "license": "NASA PDS archived scientific data; retain citation and attribution. See NOTICE.md.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "radar-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "expectedBytes": 31234,
-    "expectedSha256": "a824b662fe5ee59f51d15d4e90ad711f1e01f7ee1ae0d95d7d421767a365aef6"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

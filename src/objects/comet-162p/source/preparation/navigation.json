@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 7354,
-    "expectedSha256": "3002eb5ecbdef855d0c5010482ad17de65527a2e4d22b3dfda204dd0a675038e",
-    "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
-    "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
-    "license": "Published scientific parameters; cssEarth implementation MIT",
-    "licenseEvidence": [
-      "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
-      "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
-    ],
-    "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
-    "redistribution": "Preserve attribution and the distinction from the original convex mesh.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "shape-parameters"
-      ],
-      "size": 512,
-      "longitudeDegrees": 70,
-      "latitudeDegrees": 20,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

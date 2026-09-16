@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f2ed9a2cc0f8408402dd56f6f82a260cb38716deb11bce870a64259e657dde5f"
+    "sha256": "2f938dd1177e8371f82c9499746a2ba7c35b57db65ff147e4fe8874b2c1547e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "1c262b957e9204e32db61d7c684274734f88f96aa58af533d71b173aad7a04e3"
   },
   "recipes": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "33f20e7a2cab8d043b1ce7d3117e88dbb2a831e4a913ab5099f56f090636a789",
+      "sha256": "bb548e435440e62bcff36502d04ecdad235e37f9778d3b49f8d37ba5a40e09db",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,22 +168,54 @@
             {
               "id": "radius",
               "label": "Model equivalent radius",
-              "value": "0.2 km"
+              "value": "0.2 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "0.960 AU"
+              "value": "0.960 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27341843%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "0.94 years"
+              "value": "0.94 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27341843%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.725 ± 0.001 hours"
+              "value": "3.725 ± 0.001 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -360,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "33f20e7a2cab8d043b1ce7d3117e88dbb2a831e4a913ab5099f56f090636a789",
-      "bytes": 8850,
+      "sha256": "bb548e435440e62bcff36502d04ecdad235e37f9778d3b49f8d37ba5a40e09db",
+      "bytes": 10770,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -482,8 +514,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5743,
-          "sha256": "28bedf77a617d0f9de05c1401cf23c04c3157802b0070250e941e32163ccd5ae",
+          "bytes": 7299,
+          "sha256": "f7a6437408a39e53970e4e1e6e013c6fdd53645ddaa7764b313eb90094b49158",
           "verification": "bytes-verified"
         }
       ],

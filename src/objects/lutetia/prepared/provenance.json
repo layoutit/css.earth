@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d7ff34fa7f834529fd1adeb24be6480ee092c09f20a52e804815d8de6e45095"
+    "sha256": "304fba3356c26146120a6f12360c2a95d9f3811681172f79ec754a604a306d32"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "28afd396586179c010e7f0761de6d26e4d3574dd59948fb050287fcfdc0e28ba"
   },
   "recipes": [
     {
@@ -205,7 +205,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db4a75972d63dc51ed2150a60e99b37e9cb0bf7d815e8601db217889b13aa624",
+      "sha256": "f8648040a934ce2d6247ecda66242bc09806867f51d8ba694508de225b52b4fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -233,7 +233,15 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "49 km"
+              "value": "49 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -684,12 +692,12 @@
           }
         ]
       },
+      "origin": "https://doi.org/10.1016/j.icarus.2015.11.023",
+      "credit": "Published Hapke parameters: Hasselmann et al. (2016), doi:10.1016/j.icarus.2015.11.023. Selection and transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded.",
       "id": "source-document:photometry/hasselmann-2016-hapke-1993.json",
       "kind": "source-document",
-      "origin": "object:source/photometry/hasselmann-2016-hapke-1993.json",
       "title": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
       "upstreamLineage": "not-recorded",
       "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
       "bytes": 663,
@@ -711,8 +719,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db4a75972d63dc51ed2150a60e99b37e9cb0bf7d815e8601db217889b13aa624",
-      "bytes": 9384,
+      "sha256": "f8648040a934ce2d6247ecda66242bc09806867f51d8ba694508de225b52b4fb",
+      "bytes": 9742,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -984,8 +992,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5520,
-          "sha256": "aca37b264934af01be004f1124e8ad587c9d1e2ad5a60e1b770f1c31468f2c2e",
+          "bytes": 5787,
+          "sha256": "55ff3d198590a7bc27200e9100e2735cfacf71dfea881f8bc9c5eca77f187310",
           "verification": "bytes-verified"
         }
       ],

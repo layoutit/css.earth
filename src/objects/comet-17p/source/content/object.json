@@ -13,7 +13,15 @@
       {
         "id": "perihelion",
         "label": "Closest to Sun",
-        "value": "2.09 AU"
+        "value": "2.09 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D17P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; QR (km) / 149597870.7"
+        }
       }
     ],
     "moreFacts": []

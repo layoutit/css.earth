@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1093/mnras/stz2378",
-    "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 37448,
-    "expectedSha256": "c87888e54a3bebd8027e12251bb6296f85fc0bed3a5fe933816493d1c581a381"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

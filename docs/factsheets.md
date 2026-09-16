@@ -38,8 +38,15 @@ uncertainty threshold; those dated selections are not a current catalogue.
    For extracted values, also set `path` to the existing pinned evidence, or
    `source/editorial/factsheet-review.json`, and pin that file in the manifest.
    Keep the source units, uncertainty and any calculation in that record.
-3. Update the content SHA-256 in the descriptor and source manifest, and its
-   `expectedBytes` in the manifest.
+   A value copied from the body's pinned JPL Horizons record needs no hand-written
+   citation: `pnpm cite:facts -- <object-id>` cites `distance-from-sun`,
+   `perihelion`, `orbital-period`, `radius` and `rotation-period` from
+   `reference/horizons-elements.txt` and `reference/horizons-physical.txt` when
+   the displayed value equals the record at its displayed precision. A value that
+   differs in any digit came from elsewhere and stays uncited until its author
+   names the source; `--check` lists what the tool would cite without writing.
+3. Run `pnpm pin:documents -- <object-id>` to re-pin the content in the source
+   manifest; the manifest is the only owner of that pin.
 4. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their
    preparation references. Add `--check` to verify without writing; omit the ID
    only when intentionally processing all bodies.

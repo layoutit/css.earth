@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
-    "credit": "NASA/JPL/Space Science Institute; Peter Thomas and NASA PDS",
-    "license": "Public PDS scientific data; retain mission and model attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "n1649342285_1",
-        "n1711586834_1",
-        "n1627319581_1",
-        "n1582238183_1",
-        "n1590458717_1",
-        "n1594708747_1",
-        "thomas-2018-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 216,
-      "latitudeDegrees": 0,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 129444,
-    "expectedSha256": "bdba55cfab5e2c3a29c754c1fc90741740b7ac13033b62aca232f60548335e86"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

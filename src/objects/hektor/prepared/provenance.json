@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a074869f44fa9b988a2f710dac27d3da7313d56467a309d62b632ac361f94205"
+    "sha256": "5b0d7678a47bf018b8e1dff474af29d9271e067ff84bcbd520d6831c5e8f4d11"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "4a7ef1291dda1c3ed9698833479d74737c602ecceb3808e03f21c94e171ccf68"
   },
   "recipes": [
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6253fef1c64d3c4f177035d536ea52a20f4eb5aeaa72dc34869a649b82fe325e",
+      "sha256": "db4e32b66767ff3456069d992056a0e1198abea72789333fb90bb466c16207f9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +171,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "5.277 AU (mean)"
+              "value": "5.277 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27624%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "12.12 years"
+              "value": "12.12 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27624%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -337,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6253fef1c64d3c4f177035d536ea52a20f4eb5aeaa72dc34869a649b82fe325e",
-      "bytes": 6187,
+      "sha256": "db4e32b66767ff3456069d992056a0e1198abea72789333fb90bb466c16207f9",
+      "bytes": 7383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -459,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4083,
-          "sha256": "4a4d3200209a93f5919b377ddb791773841a5c43817a071b7931e14685127edb",
+          "bytes": 5097,
+          "sha256": "d6e1526c2257c44795393cf32b9c41ce2355d6ed7e5dc04f17f180e15f94cf3b",
           "verification": "bytes-verified"
         }
       ],
@@ -523,10 +539,10 @@
   },
   "lastPreparation": {
     "objectId": "hektor",
-    "materialSha256": "9ddfe6a3d35f50d746e52d7b0ec376f82a5478909a5a6b84393ee5ee3f3f4a36",
+    "materialSha256": "9a6742443d326735819380ca11b6b7be52f9da0b3396c3a752ca6abc80e8c88a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "4a7ef1291dda1c3ed9698833479d74737c602ecceb3808e03f21c94e171ccf68"
     }
   }

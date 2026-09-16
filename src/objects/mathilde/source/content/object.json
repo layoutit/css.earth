@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "26.4 km"
+        "value": "26.4 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-physical.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "Target physical data: RAD (km)"
+        }
       },
       {
         "id": "distance-from-sun",

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd576fe45222003c2e3a2d856c3a578fb5b1a419f9667aa123a9bf0af88f7249"
+    "sha256": "ff227a43b0cc64d8d085d2a04bb771cd03ecd384912acdfd0a1d714fd7f3d12a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "680edacb5b2b3376ba1c0b6e98142e4123502d6ce9a5b84dac368ad92680fcd9"
   },
   "recipes": [
@@ -564,7 +564,7 @@
     "materialSha256": "a0c7ec73425b6ab94c42581f3b401519527bc8d9f50fd33a849e7cdaa047e03f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "680edacb5b2b3376ba1c0b6e98142e4123502d6ce9a5b84dac368ad92680fcd9"
     }
   }
