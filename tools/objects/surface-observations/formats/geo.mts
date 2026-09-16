@@ -28,7 +28,7 @@ import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 /** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
 interface GeoSchema {
@@ -54,12 +54,12 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
   [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, lens: { required: ['filter', 'cube'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Archived cameras close over the exact source mesh, so they may also keep the acquisition illumination.
-  'osiris-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['refinement'] },
+  'osiris-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['limbRefinement'] },
     photometry: ['lommel-seeliger', 'minnaert', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   'llorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Paired raw frames supply detector validity; the native decoder rejects compressed inputs.
-  'near-msi-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'originalPath'] }, lens: { required: ['filter', 'refinement'] },
+  'near-msi-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'originalPath'] }, lens: { required: ['filter', 'limbRefinement'] },
     photometry: ['retained-observation'], published: false, display: 'percentiles', maximumFrames: 8 },
   'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
@@ -68,7 +68,7 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
     photometry: ['retained-observation'], published: false, display: 'displayRange', maximumFrames: 1,
     color: { bands: ['NIR', 'RED', 'BLUE'], inputQuantity: 'derived-band-value', units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color' } },
   // A VICAR frame brings its PDS3 label; a FITS frame carries its own header.
-  [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['refinement'] },
+  [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
 };
 export const GEO_FORMATS = Object.keys(GEO_SCHEMAS);
@@ -77,7 +77,7 @@ const CONTEXT = 'georeferenced observation recipe';
 export const parseGeoLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
   frames: array(shape({ id: text, path: text, startTime: text, qualityPath: optional(text), labelPath: optional(text), originalPath: optional(text), cameraPath: optional(text) })),
   filter: text, allowLossy: optional(boolean), radiometry: optional(text), flatPath: optional(text),
-  cube: optional(parseGeometryCube), spice: optional(parseSpiceCamera), refinement: optional(parseLimbRefinement),
+  cube: optional(parseGeometryCube), spice: optional(parseSpiceCamera), limbRefinement: optional(parseLimbRefinement),
   selection: optional(text), levelMatching: optional(parseLevelMatching), transfer: surfaceTransfer,
   photometry: publishedOr(shape({ model: text, phaseCorrection: optional(parsePhasePhotometry), coefficient: optional(number), phaseCoefficientPerDegree: optional(number),
     referenceIncidenceDegrees: number, referenceEmissionDegrees: number, maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number })),
@@ -112,7 +112,7 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   if (recipe.radiometry !== undefined && recipe.radiometry !== 'radiance-factor') throw new TypeError('Invalid observation radiometry.');
   validatePhotometry(recipe, schema);
   if (recipe.spice) validateSpice(recipe.spice, recipe.frames);
-  if (recipe.refinement) validateRefinement(recipe.refinement);
+  if (recipe.limbRefinement) validateLimbRefinement(recipe.limbRefinement);
 }
 
 /** A published model record, or one of the format's historical disk functions within the bounds every camera route shares. */
@@ -151,7 +151,7 @@ function validateSpice(spice: SpiceCameraDeclaration, frames: readonly GeoFrame[
       (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity) throw new TypeError('Invalid SPICE camera declaration.');
 }
 
-function validateRefinement(refinement: ReturnType<typeof parseLimbRefinement>) {
+function validateLimbRefinement(refinement: ReturnType<typeof parseLimbRefinement>) {
   if (refinement.method !== 'mesh-limb' ||
       !positive(refinement.maximumCorrectionDegrees) || refinement.maximumCorrectionDegrees > 2 || !positive(refinement.maximumResidualPixels) || refinement.maximumResidualPixels > 5 ||
       !Number.isInteger(refinement.minimumControls) || refinement.minimumControls < 16 || refinement.minimumControls > 5000 ||
@@ -180,11 +180,11 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     return { startTime: frame.startTime, filter: recipe.filter };
   };
   const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid };
-  // A declared refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
+  // A declared limb refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
   const refined = <T extends { camera: unknown; width: number; height: number; planes: Record<string, NumericRaster>; acceptPixel?(index: number): boolean; qualityReport: Record<string, unknown> }>(decoded: T): T => {
-    if (!recipe.refinement) return decoded;
-    const result = refineCameraByLimb({ ...decoded, planes: { IMAGE: decoded.planes.IMAGE } }, radial.grid, recipe.refinement);
-    decoded.qualityReport.refinement = result.report;
+    if (!recipe.limbRefinement) return decoded;
+    const result = refineCameraByLimb({ ...decoded, planes: { IMAGE: decoded.planes.IMAGE } }, radial.grid, recipe.limbRefinement);
+    decoded.qualityReport.limbRefinement = result.report;
     return { ...decoded, camera: result.camera };
   };
   // Cameras without archived backplanes cast their rays onto the full source mesh.
@@ -275,9 +275,9 @@ export const geoFormat: SurfaceObservationFormat = {
       selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
       // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
-      display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
+      display: { ...(range && color ? { range: 'stated-range', low: range[0], high: range[1], units: color.units,
           colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
-        : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };
+        : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }), ...displayBasis(recipe.display) }, photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };
     return { frames, policy, exceeded };
   },
 };

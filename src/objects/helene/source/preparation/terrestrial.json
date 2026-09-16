@@ -317,6 +317,7 @@
           "maximumGain": 2.5
         },
         "display": {
+          "basis": "authored",
           "displayRange": [
             0,
             1.26
@@ -460,7 +461,7 @@
             }
           }
         ],
-        "registration": {
+        "bandAlignment": {
           "references": [
             {
               "id": "n1687120497_1",
@@ -542,6 +543,7 @@
           "maximumGain": 2.5
         },
         "display": {
+          "basis": "authored",
           "displayRange": [
             0,
             1.05

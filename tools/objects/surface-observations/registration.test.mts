@@ -4,7 +4,7 @@ import { rotate } from '../../spice/frames.mts';
 import { multiply } from '../../spice/ck.mts';
 import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '../terrestrial-layers/observer-camera.mts';
-import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/observer-registration.mts';
+import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';
 import { DECISIVE, parseRefinement, refinementDecision, refinementKept, referenceRegistration, reliefRegistration, silhouetteRegistration, tiltDecision, type RegistrationStageReport } from './registration.mts';
 import { tiltedCamera } from './cameras.mts';
 import type { FrameDetector, LoadContext, ObservationCamera, ObservationFrame, ObservationImage } from './contract.mts';

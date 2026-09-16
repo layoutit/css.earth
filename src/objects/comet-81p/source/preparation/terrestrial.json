@@ -73,10 +73,11 @@
           "visibilityToleranceMeters": 0.5
         },
         "photometry": {
-          "model": "observed",
+          "model": "retained-observation",
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "percentiles": [
             1,
             99.7
