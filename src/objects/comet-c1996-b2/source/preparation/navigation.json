@@ -8,13 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 9832,
-    "expectedSha256": "cccf0ed121d6de37300d7aa947bf6c38a165884cfc8c24b199262327f5da0911",
+    "expectedBytes": 13421,
+    "expectedSha256": "e5f94ba51088b6f0d1dbb99ef0258a0b7c196bf805a20dad7a0b060e23d9b3f4",
     "origin": "https://doi.org/10.1126/science.278.5345.1921",
     "credit": "Harmon et al. (1997), Science 278, 1921",
-    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
     "licenseEvidence": [],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"
