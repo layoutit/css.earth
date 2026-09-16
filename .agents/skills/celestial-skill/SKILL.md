@@ -275,7 +275,8 @@ close-ups and image delivery size before accepting the larger texture.
 
 For an authored object, `node tools/prepare-object.mts <id>` runs the whole preparation chain in order for that object only and
 names the step that failed; resume with `--from <step>`. A placed star starts with
-`node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and `node tools/objects/new-star.mts <id>`; see the
+`node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and `node tools/objects/new-star.mts <id>`. Before imagery work on
+a moon or small body, `node tools/objects/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.
 
 Generate the assets actually consumed by each selected view—surface and pole
