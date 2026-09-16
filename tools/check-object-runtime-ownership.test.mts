@@ -58,12 +58,19 @@ const spatialRelations = await readFile(new URL('../packages/catalog/src/spatial
 const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
 const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
 const browserTypes = await readFile(new URL("../site/browser-types.mts", import.meta.url), "utf8");
+// object-schema.mts validates discovery through these real modules; the overlay follows the same closure.
+const objectDiscovery = await readFile(new URL("../site/object-discovery.mts", import.meta.url), "utf8");
+const objectCategories = await readFile(new URL("../site/object-categories.mts", import.meta.url), "utf8");
+const arrivalView = await readFile(new URL("../site/arrival-view.mts", import.meta.url), "utf8");
+const worldCameraMath = await readFile(new URL("../src/renderers/css/navigation/world-camera-math.ts", import.meta.url), "utf8");
 const shared = `import { createPolyCamera } from '@layoutit/polycss';
 export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
 function fixture(extra: SourceOverlay = {}, definitionTail = ""): AuditOptions {
   const files: SourceOverlay = { [client]: binding, [definitionPath]: definition + definitionTail,
     "site/navigation-distance.mts": navigationDistance, "packages/catalog/src/spatial-relations.ts": spatialRelations,
     "site/objects.mts": registrySource, "site/object-schema.mts": objectSchema, "site/browser-types.mts": browserTypes, "src/platform/is-array.mts": isArray,
+    "site/object-discovery.mts": objectDiscovery, "site/object-categories.mts": objectCategories, "site/arrival-view.mts": arrivalView,
+    "src/renderers/css/navigation/world-camera-math.ts": worldCameraMath,
     "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
     "src/objects/sun/prepared/world-context.json": sunContext,

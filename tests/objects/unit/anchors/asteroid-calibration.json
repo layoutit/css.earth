@@ -1,0 +1,5624 @@
+{
+ "abundantia": {
+  "claim": "Abundantia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4625,
+   "shapeSha256": "30c56d5b9f294437dfb49eec0cc71c4ff68980845df2ef72f0ccfed1bac61478",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.305783,
+    0.018524,
+    0.574423
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000047121335,
+   "diameterKm": 42.18,
+   "uncertaintyKm": 0.49,
+   "lambda": 188.0,
+   "beta": 32.0,
+   "periodHours": 9.8643,
+   "name": "Abundantia",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "achilles": {
+  "claim": "Achilles preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Achilles",
+   "modelId": 3934,
+   "modelVersion": "2019-05-07",
+   "shapeSha256": "38db827d7d93b048832ba643e1644e072e5fb5a681e122f3085e9735600220ca",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.213856,
+    0.137399,
+    0.527411
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001105953205,
+   "diameterKm": 131.0,
+   "uncertaintyKm": 8.0,
+   "beta": -5.0,
+   "periodHours": 7.3063,
+   "lambda": 172.0
+  }
+ },
+ "adelheid": {
+  "claim": "Adelheid preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 189,
+   "shapeSha256": "10aace4ab515e08cf5ecbfe77fd3a7fc9f559519d9202ef6a2edd7b106ffe187",
+   "vertices": 1598,
+   "faces": 3192,
+   "firstVertex": [
+    10.096305,
+    -1.454118,
+    60.893704
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1022653.8517369278,
+   "diameterKm": 104.0,
+   "uncertaintyKm": 11.0,
+   "lambda": 9.0,
+   "beta": -4.0,
+   "periodHours": 6.3192,
+   "name": "Adelheid",
+   "modelVersion": "2011-03-28"
+  }
+ },
+ "aegina": {
+  "claim": "Aegina preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5831,
+   "shapeSha256": "8f40507e4c1c4fcf4858c89d9490e22ed2cbbea81363305f993f8f5a9cf7a5de",
+   "vertices": 570,
+   "faces": 1136,
+   "firstVertex": [
+    0.261335,
+    0.330729,
+    0.546019
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998666300286,
+   "diameterKm": 100.17,
+   "uncertaintyKm": 1.23,
+   "lambda": 40.0,
+   "beta": 32.0,
+   "periodHours": 6.02819,
+   "name": "Aegina",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "aethra": {
+  "claim": "Aethra preserves its source model and approximate raster scale",
+  "expected": {
+   "modelId": 161,
+   "shapeSha256": "c05291e6311058380b5fa35a033df4579bbfc67922699d57fba7c5898c8d5e41",
+   "vertices": 1012,
+   "faces": 2020,
+   "firstVertex": [
+    0.108006,
+    0.081931,
+    0.502092
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000250796424,
+   "diameterKm": 44.47,
+   "uncertaintyKm": 0.74,
+   "lambda": 326,
+   "beta": 67,
+   "periodHours": 5.168274,
+   "name": "Aethra",
+   "modelVersion": "2011-04-19"
+  }
+ },
+ "agenor": {
+  "claim": "Agenor preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4273,
+   "shapeSha256": "b6c5a04a7f568ec3a11326f659040cb0fedf1e06fa0e426e7776b5c4ba35f8a2",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.022529,
+    -0.245683,
+    0.572431
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000002162420796,
+   "diameterKm": 50.799,
+   "uncertaintyKm": 1.181,
+   "lambda": 328.0,
+   "beta": 28.0,
+   "periodHours": 20.6338,
+   "name": "Agenor",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "aglaja": {
+  "claim": "Aglaja preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3233,
+   "shapeSha256": "5d85d9ffc8185618d1fb1a32c0b452dc7d5f1efcfc0008f25dd00f2a54d738e5",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.041106,
+    0.030911,
+    0.753909
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999881701129,
+   "diameterKm": 147.05,
+   "uncertaintyKm": 3.58,
+   "lambda": 150.0,
+   "beta": 17.0,
+   "periodHours": 13.1771,
+   "name": "Aglaja",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "ajax": {
+  "claim": "Ajax preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3327,
+   "shapeSha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.062709,
+    0.239759,
+    0.50178
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000570265766,
+   "diameterKm": 83.99,
+   "uncertaintyKm": 1.279,
+   "lambda": 294.0,
+   "beta": 42.0,
+   "periodHours": 29.3874,
+   "name": "Ajax",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "alexandra": {
+  "claim": "Alexandra preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1817,
+   "shapeSha256": "aac6326c6087972265e999ec6778be6f932abf27a7643fc745dc055b3b79c643",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -6.967972,
+    12.969707,
+    63.507757
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1535802.1750024606,
+   "diameterKm": 143.0,
+   "uncertaintyKm": 5.0,
+   "lambda": 154.0,
+   "beta": 17.0,
+   "periodHours": 7.02264,
+   "name": "Alexandra",
+   "modelVersion": "2017-06-07"
+  }
+ },
+ "alkeste": {
+  "claim": "Alkeste preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4511,
+   "shapeSha256": "6b1581ba2bde44e3dbd3c799e1e2bea6562f10dcfd5b83ee8d07481ae37f1ed6",
+   "vertices": 562,
+   "faces": 1120,
+   "firstVertex": [
+    0.505462,
+    0.262454,
+    0.554141
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999997189230792,
+   "diameterKm": 81.39,
+   "uncertaintyKm": 0.93,
+   "lambda": 136.0,
+   "beta": 16.0,
+   "periodHours": 9.907,
+   "name": "Alkeste",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "alkmene": {
+  "claim": "Alkmene preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 146,
+   "shapeSha256": "b1248125111cb430f90a711830816a8132f7fed1682bbebab7e10ee127af24d5",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    0.152736,
+    0.109561,
+    0.702907
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998770391936,
+   "diameterKm": 58.6,
+   "uncertaintyKm": 1.2,
+   "lambda": 164.0,
+   "beta": -28.0,
+   "periodHours": 13.00079,
+   "name": "Alkmene",
+   "modelVersion": "2011-04-19"
+  }
+ },
+ "althaea": {
+  "claim": "Althaea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 323,
+   "shapeSha256": "6d8297de717271593165d8e34c141a3d1565e851957dd91ddaea2ce0f15945c3",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.233668,
+    0.173417,
+    0.453842
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999250627601,
+   "diameterKm": 58.79,
+   "uncertaintyKm": 0.62,
+   "lambda": 339.0,
+   "beta": -67.0,
+   "periodHours": 11.46514,
+   "name": "Althaea",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "ambrosia": {
+  "claim": "Ambrosia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 548,
+   "shapeSha256": "f448756b26da376283009caf5049d40dc1054ed2370c003ee80fe2cf831ecf49",
+   "vertices": 1002,
+   "faces": 2000,
+   "firstVertex": [
+    0.074764,
+    0.054831,
+    0.365783
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998442290257,
+   "diameterKm": 37.89,
+   "uncertaintyKm": 0.65,
+   "lambda": 141.0,
+   "beta": -11.0,
+   "periodHours": 6.58167,
+   "name": "Ambrosia",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "anahita": {
+  "claim": "Anahita preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1183,
+   "shapeSha256": "8d486e3f083430418ce79d7578da3ebb901e03d365b1d37324e3b437c6f25065",
+   "vertices": 1014,
+   "faces": 2024,
+   "firstVertex": [
+    0.109297,
+    0.055098,
+    0.543432
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000002903595095,
+   "diameterKm": 46.93,
+   "uncertaintyKm": 0.69,
+   "lambda": 15.0,
+   "beta": -50.0,
+   "periodHours": 15.05906,
+   "name": "Anahita",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "anna": {
+  "claim": "Anna preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 686,
+   "shapeSha256": "afffd52ce5fa7564a907f0a7aa6b0dd4c63842ac4dfb0ab6182b57e9968335be",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.042738,
+    0.144966,
+    0.430075
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000035700685,
+   "diameterKm": 26.54,
+   "uncertaintyKm": 0.58,
+   "lambda": 109.0,
+   "beta": -53.0,
+   "periodHours": 11.69033,
+   "name": "Anna",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "antigone": {
+  "claim": "Antigone preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1810,
+   "shapeSha256": "e011dbcecac18acc61b6cb82327ee948983b348ccc3b7c20b2c4ba11078318cf",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    2.93744,
+    -5.257798,
+    43.316337
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1052275.475911973,
+   "diameterKm": 126.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 205.0,
+   "beta": 63.0,
+   "periodHours": 4.95716,
+   "name": "Antigone",
+   "modelVersion": "2017-06-14"
+  }
+ },
+ "antonia": {
+  "claim": "Antonia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 637,
+   "shapeSha256": "536fd7168d0691b0111d6362045134cacaa1f1bf92f9f767e949357d5fe04adf",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.363739,
+    0.20017,
+    0.459702
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000079085254,
+   "diameterKm": 23.89,
+   "uncertaintyKm": 0.49,
+   "lambda": 293.0,
+   "beta": -90.0,
+   "periodHours": 3.854798,
+   "name": "Antonia",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "arethusa": {
+  "claim": "Arethusa preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 294,
+   "shapeSha256": "d0e611cbfa92edf2dc21d0d4efae8ce2b4efb7460e63d038e63f61e115b11429",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    38.330989,
+    9.338831,
+    66.3131
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1663223.6727674808,
+   "diameterKm": 147.0,
+   "uncertaintyKm": 32.0,
+   "lambda": 149.0,
+   "beta": 33.0,
+   "periodHours": 8.70221,
+   "name": "Arethusa",
+   "modelVersion": "2011-02-16"
+  }
+ },
+ "ariadne": {
+  "claim": "Ariadne preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1825,
+   "shapeSha256": "c51298a00d557411c88c4d49eafcb6afc80fd1906891e9eb6c23829820f0c76f",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -4.68769,
+    2.441266,
+    17.865688
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 112418.90091404796,
+   "diameterKm": 60.0,
+   "uncertaintyKm": 4.0,
+   "lambda": 251.0,
+   "beta": -10.0,
+   "periodHours": 5.761987,
+   "name": "Ariadne",
+   "modelVersion": "2017-06-07"
+  }
+ },
+ "artemis": {
+  "claim": "Artemis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5939,
+   "shapeSha256": "94fc92d360a1f3a2717868f1d57a9198a413398e84683329b60707f2f5a10b9b",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    0.042707,
+    0.189922,
+    0.452063
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999472806751,
+   "diameterKm": 123.53,
+   "uncertaintyKm": 1.5,
+   "lambda": 47.0,
+   "beta": 24.0,
+   "periodHours": 37.118,
+   "name": "Artemis",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "aschera": {
+  "claim": "Aschera preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1435,
+   "shapeSha256": "425c5eaa458c41fc0ecd53191819cd902e7f242a38b77aa0d4860b788d403674",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.009546,
+    0.103936,
+    0.714301
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000046371027,
+   "diameterKm": 26.07,
+   "uncertaintyKm": 0.34,
+   "lambda": 123.0,
+   "beta": -37.0,
+   "periodHours": 6.8337,
+   "name": "Aschera",
+   "modelVersion": "2016-01-12"
+  }
+ },
+ "asia": {
+  "claim": "Asia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5668,
+   "shapeSha256": "784a802ce9b6fe162194a958f5f66d20f06b591d3b50733fc93aa4e7bc50a453",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.328608,
+    0.094218,
+    0.445501
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999884659112,
+   "diameterKm": 61.63,
+   "uncertaintyKm": 0.65,
+   "lambda": 117.0,
+   "beta": 42.0,
+   "periodHours": 15.8504,
+   "name": "Asia",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "asporina": {
+  "claim": "Asporina preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 872,
+   "shapeSha256": "e6bad1a6ce84bdc4c206b59b166082c2c28e56dff40f22e1febc5df90f122f55",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.031688,
+    -0.113816,
+    0.682931
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999116337043,
+   "diameterKm": 59.93,
+   "uncertaintyKm": 0.66,
+   "lambda": 235.0,
+   "beta": -10.0,
+   "periodHours": 16.25222,
+   "name": "Asporina",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "asteroid-1999-fr33": {
+  "claim": "1999 FR33 preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "1999 FR33",
+   "modelId": 15145,
+   "modelVersion": "2022-12-01",
+   "shapeSha256": "4b80f749069df27aeffc6c40e144a9b7a75ee36025e0845e5fe2a313eb0bc8c5",
+   "vertices": 570,
+   "faces": 1136,
+   "firstVertex": [
+    0.460809,
+    -0.278559,
+    0.443818
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998177032914,
+   "diameterKm": 5.754,
+   "uncertaintyKm": 0.174,
+   "lambda": 145.0,
+   "beta": -85.0,
+   "periodHours": 3.38833
+  }
+ },
+ "asteroid-2001-qw16": {
+  "claim": "2001 QW16 preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "2001 QW16",
+   "modelId": 15015,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "e41e4dae7371422f0d9aa7c771b916832311f7b74ca5cc3995dc9f1317433f33",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.155903,
+    0.223944,
+    0.544964
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998790833026,
+   "diameterKm": 10.403,
+   "uncertaintyKm": 0.259,
+   "lambda": 209.0,
+   "beta": 74.0,
+   "periodHours": 7.3402
+  }
+ },
+ "asterope": {
+  "claim": "Asterope preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1823,
+   "shapeSha256": "a54cba1bc20a55006d6a113902c2d73b80134391a7dd4489db3a0fecc607310a",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -3.779491,
+    2.016733,
+    43.901867
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 640108.623234575,
+   "diameterKm": 107.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 318.0,
+   "beta": 61.0,
+   "periodHours": 19.698,
+   "name": "Asterope",
+   "modelVersion": "2017-06-16"
+  }
+ },
+ "atalante": {
+  "claim": "Atalante preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 823,
+   "shapeSha256": "8e623150e9c87568b82037ea5fae18d26f649948b9f7bb1a765c54d0c56abe03",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.10264,
+    0.166076,
+    0.575381
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000159165026,
+   "diameterKm": 110.54,
+   "uncertaintyKm": 1.57,
+   "lambda": 190.0,
+   "beta": -55.0,
+   "periodHours": 9.92692,
+   "name": "Atalante",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "athamantis": {
+  "claim": "Athamantis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 185,
+   "shapeSha256": "ca781392c88cb7da8f861e4f7a98da4c5d7677394a5bc8a3e79d6c7e766707d3",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -4.09076,
+    -3.054028,
+    57.706467
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 796328.212495522,
+   "diameterKm": 115.0,
+   "uncertaintyKm": 12.0,
+   "lambda": 74.0,
+   "beta": 27.0,
+   "periodHours": 23.9845,
+   "name": "Athamantis",
+   "modelVersion": "2007-02-27"
+  }
+ },
+ "athor": {
+  "claim": "Athor preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 461,
+   "shapeSha256": "bb13c3b5a03f3f095adfface5145e8780cf80bc7e1ad0d48172c367cb669c4fd",
+   "vertices": 1008,
+   "faces": 2012,
+   "firstVertex": [
+    0.179,
+    0.349342,
+    0.490586
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000064037925,
+   "diameterKm": 40.84,
+   "uncertaintyKm": 0.52,
+   "lambda": 350.0,
+   "beta": -6.0,
+   "periodHours": 7.280086,
+   "name": "Athor",
+   "modelVersion": "2012-09-25"
+  }
+ },
+ "augusta": {
+  "claim": "Augusta preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 845,
+   "shapeSha256": "e0158056d0fcd78655afea95b3e0bff52c8430f45bd2c6c6b5efc1fdff30d188",
+   "vertices": 1014,
+   "faces": 2024,
+   "firstVertex": [
+    0.061572,
+    -0.091701,
+    0.636273
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998997490126,
+   "diameterKm": 12.17,
+   "uncertaintyKm": 0.23,
+   "lambda": 25.0,
+   "beta": -53.0,
+   "periodHours": 5.895048,
+   "name": "Augusta",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "auravictrix": {
+  "claim": "Auravictrix preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Auravictrix",
+   "modelId": 1654,
+   "modelVersion": "2016-01-12",
+   "shapeSha256": "477d88385d0212d76042c2ce706f5ea0b0adafc70b55e44bb0c73291e1a2256f",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.321476,
+    0.025834,
+    0.520229
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001502158486,
+   "diameterKm": 16.421,
+   "uncertaintyKm": 0.362,
+   "beta": 47.0,
+   "periodHours": 6.07488,
+   "lambda": 249.0
+  }
+ },
+ "ausonia": {
+  "claim": "Ausonia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5924,
+   "shapeSha256": "aa9daa8b781ee63a11e7a9efe3519ced4c1582ba90c9be3fd366ebaa6e177e76",
+   "vertices": 578,
+   "faces": 1152,
+   "firstVertex": [
+    0.002907,
+    -0.00696,
+    35.739547
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 423136.4387843295,
+   "diameterKm": 93.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 121.0,
+   "beta": -27.0,
+   "periodHours": 9.29759,
+   "name": "Ausonia",
+   "modelVersion": "2021-11-12"
+  }
+ },
+ "badenia": {
+  "claim": "Badenia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Badenia",
+   "modelId": 3298,
+   "modelVersion": "2019-05-07",
+   "shapeSha256": "d980d1f15c81c92866789a3a2728cbcfdf57908045eaed0022b5dc22e01ebfef",
+   "vertices": 572,
+   "faces": 1140,
+   "firstVertex": [
+    0.220602,
+    0.326196,
+    0.555599
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.00000000195728,
+   "diameterKm": 69.73,
+   "uncertaintyKm": 2.8,
+   "lambda": 5.0,
+   "beta": -54.0,
+   "periodHours": 9.86107
+  }
+ },
+ "baucis": {
+  "claim": "Baucis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4695,
+   "shapeSha256": "f5b9e2aa2266ce412b20de2bddc7242224f042d7aa0aecbb1a579d00ab6d18ba",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.282909,
+    -0.006634,
+    0.655229
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000004253036394,
+   "diameterKm": 66.89,
+   "uncertaintyKm": 0.82,
+   "lambda": 203.0,
+   "beta": -52.0,
+   "periodHours": 27.41,
+   "name": "Baucis",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "bavaria": {
+  "claim": "Bavaria preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3090,
+   "shapeSha256": "5ee16a0fbf9aee1a4f1dbe206cbb2c80dc0f125c7f430595b4b128676eb21584",
+   "vertices": 1010,
+   "faces": 2016,
+   "firstVertex": [
+    1.709223,
+    7.314681,
+    26.496573
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 87113.74661016026,
+   "diameterKm": 55.0,
+   "uncertaintyKm": 2.0,
+   "lambda": 226.0,
+   "beta": 70.0,
+   "periodHours": 12.2409,
+   "name": "Bavaria",
+   "modelVersion": "2019-06-24"
+  }
+ },
+ "beatrix": {
+  "claim": "Beatrix preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 6195,
+   "shapeSha256": "b6849947b8a92ca5438a2e91740256fc20bef247cdadb94b6ad8bdda723e4d4a",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    0.047265,
+    0.408759,
+    0.528238
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999964246603,
+   "diameterKm": 87.42,
+   "uncertaintyKm": 0.84,
+   "lambda": 182.0,
+   "beta": -9.0,
+   "periodHours": 10.1107,
+   "name": "Beatrix",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "bellona": {
+  "claim": "Bellona preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1839,
+   "shapeSha256": "ff1d83697f66dfc11511783c70c93f8cc5c44e88373e91d68b5103f19bfa5644",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    3.495762,
+    -2.827641,
+    68.708377
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1238792.6848966654,
+   "diameterKm": 133.0,
+   "uncertaintyKm": 7.0,
+   "lambda": 98.0,
+   "beta": -10.0,
+   "periodHours": 15.70785,
+   "name": "Bellona",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "bertha": {
+  "claim": "Bertha preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Bertha",
+   "modelId": 939,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "6abfad40c2918c98a2918bcf4257174cb58c7a75871bb00f9f4cdf382241a32f",
+   "vertices": 1010,
+   "faces": 2016,
+   "firstVertex": [
+    0.077069,
+    0.061401,
+    0.666754
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999525456609,
+   "diameterKm": 185.83,
+   "uncertaintyKm": 2.72,
+   "lambda": 234.0,
+   "beta": 32.0,
+   "periodHours": 25.2287
+  }
+ },
+ "bettina": {
+  "claim": "Bettina preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1850,
+   "shapeSha256": "a57d764a9b9b83bb318bd9e36a6048f50f05326584a343092351d81c25a85489",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    14.532314,
+    -6.878471,
+    44.594108
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 698720.0358450098,
+   "diameterKm": 110.0,
+   "uncertaintyKm": 5.0,
+   "lambda": 99.0,
+   "beta": 10.0,
+   "periodHours": 5.05441,
+   "name": "Bettina",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "brucia": {
+  "claim": "Brucia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Brucia",
+   "modelId": 10666,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "5111fbd781aebf114af225f23fe0ce94fa6be333491e0d95299bc5105b0beddf",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.049412,
+    0.109722,
+    0.58499
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999997259521002,
+   "diameterKm": 37.29,
+   "uncertaintyKm": 0.76,
+   "lambda": 64.0,
+   "beta": -13.0,
+   "periodHours": 9.4596
+  }
+ },
+ "brunhild": {
+  "claim": "Brunhild preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4507,
+   "shapeSha256": "573126734566ace9227a24b38761a639cd45a87a447f44c115857f4e4aa904a7",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.234642,
+    -0.056273,
+    0.634659
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999955621184,
+   "diameterKm": 48.22,
+   "uncertaintyKm": 0.6,
+   "lambda": 242.0,
+   "beta": 38.0,
+   "periodHours": 9.8735,
+   "name": "Brunhild",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "byblis": {
+  "claim": "Byblis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 506,
+   "shapeSha256": "3482d76fa479e2335f9e524abeaa2a38a9f0d974298a2520006bfa807d2cd056",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.178419,
+    0.236949,
+    0.446121
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000080119383,
+   "diameterKm": 54.65,
+   "uncertaintyKm": 1.33,
+   "lambda": 165.0,
+   "beta": 9.0,
+   "periodHours": 5.22063,
+   "name": "Byblis",
+   "modelVersion": "2013-02-26"
+  }
+ },
+ "cerberus": {
+  "claim": "Cerberus preserves its source model, uncertain archive scale and raster triangles",
+  "expected": {
+   "modelId": 456,
+   "shapeSha256": "b573cb3c0b661359cab8c0bdedc9fdeadea2d2178fc7ffe783dc3b9b2db5915a",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.173035,
+    0.351832,
+    0.370047
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9047783602009508,
+   "diameterKm": 1.2,
+   "uncertaintyKm": null,
+   "lambda": 311.0,
+   "beta": -78.0,
+   "periodHours": 6.803286,
+   "name": "Cerberus",
+   "modelVersion": "2016-04-22"
+  }
+ },
+ "china": {
+  "claim": "China preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "China",
+   "modelId": 1119,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "3e128e4dda6c3ed434637ef727dc7e325b813107470d8c5a0964b7cfb6fe7d44",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    -0.255045,
+    0.063712,
+    0.664266
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999694504531,
+   "diameterKm": 26.084,
+   "uncertaintyKm": 0.199,
+   "lambda": 305.0,
+   "beta": -49.0,
+   "periodHours": 5.36863
+  }
+ },
+ "circe": {
+  "claim": "Circe preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 129,
+   "shapeSha256": "8f88f8efb84bd02178b61f335fd11196ed53786ddc60ec281bd834b9a3f1152f",
+   "vertices": 900,
+   "faces": 1796,
+   "firstVertex": [
+    -9.75142,
+    12.329097,
+    46.888594
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 641430.9567539276,
+   "diameterKm": 107.0,
+   "uncertaintyKm": 10.0,
+   "lambda": 275.0,
+   "beta": 51.0,
+   "periodHours": 12.17458,
+   "name": "Circe",
+   "modelVersion": "2011-03-28"
+  }
+ },
+ "clarissa": {
+  "claim": "Clarissa preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 296,
+   "shapeSha256": "5953c0a8528106a185d0da899f40a1ef7bfe63457888c10ffa3062affe29eaa7",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    3.738434,
+    17.618347,
+    12.069276
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 41629.77705097848,
+   "diameterKm": 43.0,
+   "uncertaintyKm": 4.0,
+   "lambda": 28.0,
+   "beta": -72.0,
+   "periodHours": 14.4767,
+   "name": "Clarissa",
+   "modelVersion": "2011-02-17"
+  }
+ },
+ "clementina": {
+  "claim": "Clementina preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1912,
+   "shapeSha256": "15e30ddcead93addfefb8473a689b601d549eab3710abf227abce3b7761d2be4",
+   "vertices": 554,
+   "faces": 1104,
+   "firstVertex": [
+    -0.046658,
+    0.502842,
+    0.504777
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000727612957,
+   "diameterKm": 67.67,
+   "uncertaintyKm": 0.82,
+   "lambda": 121.0,
+   "beta": 46.0,
+   "periodHours": 10.8619,
+   "name": "Clementina",
+   "modelVersion": "2018-07-18"
+  }
+ },
+ "coelestina": {
+  "claim": "Coelestina preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1218,
+   "shapeSha256": "427b7e385d125ecccedc0cbf7129a960bf32bcb5f793e1fb0c8464d464d6a784",
+   "vertices": 1000,
+   "faces": 1996,
+   "firstVertex": [
+    -0.147239,
+    -0.040674,
+    0.602354
+   ],
+   "firstFace": [
+    2,
+    3,
+    4
+   ],
+   "signedVolume": 0.9999998600536072,
+   "diameterKm": 39.51,
+   "uncertaintyKm": 0.69,
+   "lambda": 230.0,
+   "beta": 30.0,
+   "periodHours": 29.1753,
+   "name": "Coelestina",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "crimea": {
+  "claim": "Crimea preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Crimea",
+   "modelId": 403,
+   "modelVersion": "2011-04-21",
+   "shapeSha256": "8facba4b82f8c0b8a07506e24100ae6c721bb21661d113b7df51b6f9fd6d0117",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.567601,
+    0.094509,
+    0.330474
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999865197972,
+   "diameterKm": 29.179,
+   "uncertaintyKm": 0.155,
+   "lambda": 12.0,
+   "beta": -73.0,
+   "periodHours": 9.78693
+  }
+ },
+ "cyrene": {
+  "claim": "Cyrene preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5972,
+   "shapeSha256": "dc5fd920f10ed35377a2bbca5487dd096bd62756b3d78b4fa9007b127dc80d87",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.003686,
+    0.082794,
+    0.640291
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000082532208,
+   "diameterKm": 70.92,
+   "uncertaintyKm": 0.9,
+   "lambda": 348.0,
+   "beta": -52.0,
+   "periodHours": 12.7087,
+   "name": "Cyrene",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "dejanira": {
+  "claim": "Dejanira preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 591,
+   "shapeSha256": "9c67749dd7cb5a594927246b2f884cae7d17989b67e9f1c028793518705fdb65",
+   "vertices": 560,
+   "faces": 1116,
+   "firstVertex": [
+    0.212916,
+    0.279424,
+    0.520272
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000151881592,
+   "diameterKm": 22.47,
+   "uncertaintyKm": 1.24,
+   "lambda": 319.0,
+   "beta": -64.0,
+   "periodHours": 15.8287,
+   "name": "Dejanira",
+   "modelVersion": "2013-02-19"
+  }
+ },
+ "dejopeja": {
+  "claim": "Dejopeja preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 175,
+   "shapeSha256": "e455562c300f5594cb401f42d3237cb86e3e415ad7c03f54f2569637b435f9db",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -9.537533,
+    5.170952,
+    44.928776
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 421160.3284460244,
+   "diameterKm": 93.0,
+   "uncertaintyKm": 9.0,
+   "lambda": 200.0,
+   "beta": 52.0,
+   "periodHours": 6.441111,
+   "name": "Dejopeja",
+   "modelVersion": "2007-09-21"
+  }
+ },
+ "demodokus": {
+  "claim": "Demodokus preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3896,
+   "shapeSha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.218264,
+    0.089644,
+    0.543641
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998181039004,
+   "diameterKm": 37.63,
+   "uncertaintyKm": 1.307,
+   "lambda": 117.0,
+   "beta": -3.0,
+   "periodHours": 50.2193,
+   "name": "Demodokus",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "dido": {
+  "claim": "Dido preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3659,
+   "shapeSha256": "461086209e88b1043b79cc9e64ca58de488f781dec10fa938a0d7cc68dcb6dc4",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.380446,
+    -0.149895,
+    0.442047
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000106673672,
+   "diameterKm": 133.43,
+   "uncertaintyKm": 2.06,
+   "lambda": 217.0,
+   "beta": -39.0,
+   "periodHours": 5.73561,
+   "name": "Dido",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "dike": {
+  "claim": "Dike preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Dike",
+   "modelId": 1144,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "fa976b4d7167a12345ebcc95c09b74f06e4700a16ce25c9a8381e2a8de94626f",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.01634,
+    0.215417,
+    0.572039
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000222552459,
+   "diameterKm": 66.5,
+   "uncertaintyKm": 0.9,
+   "lambda": 233.0,
+   "beta": 50.0,
+   "periodHours": 18.11914
+  }
+ },
+ "diomedes": {
+  "claim": "Diomedes preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4215,
+   "shapeSha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.523132,
+    0.216566,
+    0.579465
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999510135614,
+   "diameterKm": 118.8,
+   "uncertaintyKm": 0.6,
+   "lambda": 153.73,
+   "beta": 12.69,
+   "periodHours": 24.4984,
+   "name": "Diomedes",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "dione-106": {
+  "claim": "106 Dione preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5942,
+   "shapeSha256": "992f3f5a9ca46623bc42548cff241e5735ede28e48817f20be88f3c054a55ea1",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    0.217471,
+    0.11555,
+    0.546958
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000067862713,
+   "diameterKm": 153.42,
+   "uncertaintyKm": 2.38,
+   "lambda": 237.0,
+   "beta": 1.0,
+   "periodHours": 16.2133,
+   "name": "106 Dione",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "dresda": {
+  "claim": "Dresda preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1163,
+   "shapeSha256": "eb9e234766f9bce4ed9fd95ff4e674802af3255a98ae411a37b3a36f5f52b230",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.168762,
+    0.22259,
+    0.534643
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000072370686,
+   "diameterKm": 25.74,
+   "uncertaintyKm": 0.57,
+   "lambda": 99.0,
+   "beta": 54.0,
+   "periodHours": 16.81385,
+   "name": "Dresda",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "ducrosa": {
+  "claim": "Ducrosa preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Ducrosa",
+   "modelId": 352,
+   "modelVersion": "2011-04-21",
+   "shapeSha256": "7ba02ff5a7a468e10461083f8b0fbc9bb54d6ac6cfc6c1ac14f7acf2445f24fa",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.170146,
+    -0.012232,
+    0.586875
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999997290794677,
+   "diameterKm": 34.1,
+   "uncertaintyKm": 0.5,
+   "lambda": 328.0,
+   "beta": 56.0,
+   "periodHours": 6.86788
+  }
+ },
+ "echo": {
+  "claim": "Echo preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Echo",
+   "modelId": 1695,
+   "modelVersion": "2016-01-12",
+   "shapeSha256": "ddc352f155debfd2b7982465401013ccfa65ab66e907975442f94c79fa937b72",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.19291,
+    0.469908,
+    0.460967
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001812373185,
+   "diameterKm": 58.95,
+   "uncertaintyKm": 1.24,
+   "lambda": 91.0,
+   "beta": -25.0,
+   "periodHours": 25.2285
+  }
+ },
+ "educatio": {
+  "claim": "Educatio preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Educatio",
+   "modelId": 9541,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "1aa7bf28a3514adb552d13c7061f7734b81e281b2d8e5a2f97958256ea2700f0",
+   "vertices": 568,
+   "faces": 1132,
+   "firstVertex": [
+    0.524751,
+    0.374259,
+    0.342497
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000139560106,
+   "diameterKm": 6.586,
+   "uncertaintyKm": 0.128,
+   "lambda": 168.0,
+   "beta": 56.0,
+   "periodHours": 231.2
+  }
+ },
+ "elpis": {
+  "claim": "Elpis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 6156,
+   "shapeSha256": "6a4303f1791e988fba36d8524815aa00799d0268b7f81d4d263da431f15b331f",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.066964,
+    0.06909,
+    0.512187
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000565150609,
+   "diameterKm": 156.18,
+   "uncertaintyKm": 2.31,
+   "lambda": 300.0,
+   "beta": -55.0,
+   "periodHours": 13.6747,
+   "name": "Elpis",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "emma": {
+  "claim": "Emma preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1859,
+   "shapeSha256": "69317058f905f986f877add7e2e51a6ff8c3870852a334e4551d8cfd0311a5a2",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    5.507804,
+    0.387291,
+    57.731355
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1674280.6278942444,
+   "diameterKm": 147.0,
+   "uncertaintyKm": 14.0,
+   "lambda": 257.0,
+   "beta": 23.0,
+   "periodHours": 6.895226,
+   "name": "Emma",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "eos": {
+  "claim": "Eos preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1743,
+   "shapeSha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.222672,
+    0.109761,
+    0.530011
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.00000002482977,
+   "diameterKm": 107.74,
+   "uncertaintyKm": 1.51,
+   "lambda": 289.0,
+   "beta": -23.0,
+   "periodHours": 10.44212,
+   "name": "Eos",
+   "modelVersion": "2017-03-31"
+  }
+ },
+ "erato": {
+  "claim": "Erato preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 317,
+   "shapeSha256": "c4ea27f6c40f983f44fd05f49f21a60e1d4a90a303a795361f109d13cf8c7bfb",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.17099,
+    0.076507,
+    0.5063
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000890705847,
+   "diameterKm": 78.62,
+   "uncertaintyKm": 0.9,
+   "lambda": 87.0,
+   "beta": 22.0,
+   "periodHours": 9.21819,
+   "name": "Erato",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "erigone": {
+  "claim": "Erigone preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1399,
+   "shapeSha256": "6aad46d87b3e7994de886e34871bc6c1d2979208ffaeeb345945cae43f2f778a",
+   "vertices": 1005,
+   "faces": 2006,
+   "firstVertex": [
+    0.439359,
+    -0.055689,
+    0.433499
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000484983402,
+   "diameterKm": 72.14,
+   "uncertaintyKm": 0.95,
+   "lambda": 191.0,
+   "beta": -75.0,
+   "periodHours": 16.14032,
+   "name": "Erigone",
+   "modelVersion": "2017-05-11"
+  }
+ },
+ "eudora": {
+  "claim": "Eudora preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3998,
+   "shapeSha256": "0f268a3c1e9d6d8999666bcfc41159f50c0fd0f023a7df1765a672442da2b183",
+   "vertices": 564,
+   "faces": 1124,
+   "firstVertex": [
+    0.01104,
+    0.462817,
+    0.447869
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999698225791,
+   "diameterKm": 67.8,
+   "uncertaintyKm": 1.18,
+   "lambda": 135.0,
+   "beta": -25.0,
+   "periodHours": 25.2626,
+   "name": "Eudora",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "eukrate": {
+  "claim": "Eukrate preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1207,
+   "shapeSha256": "ea6b5ad9251b69d29f43920366432979c8dc19158a1af0beb5560bbbc0f09d9a",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.191696,
+    -0.07563,
+    0.568221
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999390855049,
+   "diameterKm": 150.24,
+   "uncertaintyKm": 1.66,
+   "lambda": 103.0,
+   "beta": -22.0,
+   "periodHours": 12.0948,
+   "name": "Eukrate",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "eumelos": {
+  "claim": "Eumelos preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3920,
+   "shapeSha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.11327,
+    0.03276,
+    0.625727
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999560585365,
+   "diameterKm": 37.696,
+   "uncertaintyKm": 0.329,
+   "lambda": 272.0,
+   "beta": 22.0,
+   "periodHours": 21.2689,
+   "name": "Eumelos",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "eurykleia": {
+  "claim": "Eurykleia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3102,
+   "shapeSha256": "f357504dd44ea1e679c796b0878da27943b23109fd4c576ae8e8673abaee1eb9",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.775896,
+    -3.588127,
+    43.168289
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 344791.40013818286,
+   "diameterKm": 87.0,
+   "uncertaintyKm": 11.0,
+   "lambda": 101.0,
+   "beta": 71.0,
+   "periodHours": 16.52178,
+   "name": "Eurykleia",
+   "modelVersion": "2019-06-24"
+  }
+ },
+ "eurynome": {
+  "claim": "Eurynome preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 496,
+   "shapeSha256": "36b740ae2cab2874d468ab7340d77f5783abe3782285b88fe453547f82205661",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.062362,
+    0.115859,
+    0.629165
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000105082278,
+   "diameterKm": 74.75,
+   "uncertaintyKm": 0.94,
+   "lambda": 54.0,
+   "beta": 24.0,
+   "periodHours": 5.977723,
+   "name": "Eurynome",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "euterpe": {
+  "claim": "Euterpe preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 441,
+   "shapeSha256": "0805b6f32ecb1e5e05c9c5a2f79c4cfa521a2370860b4930a728613d2e9bbc9a",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.163634,
+    -0.075238,
+    0.527435
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999287216701,
+   "diameterKm": 109.79,
+   "uncertaintyKm": 1.54,
+   "lambda": 258.0,
+   "beta": -42.0,
+   "periodHours": 10.40828,
+   "name": "Euterpe",
+   "modelVersion": "2011-10-27"
+  }
+ },
+ "eva": {
+  "claim": "Eva preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1021,
+   "shapeSha256": "c9f55273db249c8adb0a08784259e0967e93a8f1876f48dd6afe7d7f634ad87d",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.225095,
+    0.075861,
+    0.573307
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000395765907,
+   "diameterKm": 97.7,
+   "uncertaintyKm": 1.56,
+   "lambda": 54.0,
+   "beta": -10.0,
+   "periodHours": 13.6638,
+   "name": "Eva",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "felicitas": {
+  "claim": "Felicitas preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3097,
+   "shapeSha256": "7c4aa5b44d5ef71a8caa8719f647e29ac0d4dc23d64f50ca30c682718df9a9e0",
+   "vertices": 988,
+   "faces": 1972,
+   "firstVertex": [
+    -11.224484,
+    -5.81428,
+    43.18301
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 321555.12813677243,
+   "diameterKm": 85.0,
+   "uncertaintyKm": 6.0,
+   "lambda": 77.0,
+   "beta": -26.0,
+   "periodHours": 13.19055,
+   "name": "Felicitas",
+   "modelVersion": "2019-06-24"
+  }
+ },
+ "feronia": {
+  "claim": "Feronia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1853,
+   "shapeSha256": "d8096c0152a3739961254f1d3b305b3c6da0ad42d80ce7fc073cb63702a40bcc",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -2.458903,
+    -0.619088,
+    45.15898
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 427472.7343481016,
+   "diameterKm": 93.0,
+   "uncertaintyKm": 10.0,
+   "lambda": 98.0,
+   "beta": -52.0,
+   "periodHours": 8.09068,
+   "name": "Feronia",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "freia": {
+  "claim": "Freia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 442,
+   "shapeSha256": "3762ea95ed2846b90e9df6c81300e467a7419b09236b6de8d9bf60209eeea848",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.01469,
+    -0.063002,
+    0.523918
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998914105835,
+   "diameterKm": 168.36,
+   "uncertaintyKm": 1.95,
+   "lambda": 140.0,
+   "beta": 14.0,
+   "periodHours": 9.97306,
+   "name": "Freia",
+   "modelVersion": "2012-07-30"
+  }
+ },
+ "galatea-74": {
+  "claim": "74 Galatea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 6181,
+   "shapeSha256": "6ddcee1db0ceec15c3dfae6c178336914650b00826fba507d8cd6dd3dab41087",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.114353,
+    -0.018228,
+    0.605881
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999930084961,
+   "diameterKm": 113.09,
+   "uncertaintyKm": 2.15,
+   "lambda": 289.0,
+   "beta": 14.0,
+   "periodHours": 17.2675,
+   "name": "74 Galatea",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "gallia": {
+  "claim": "Gallia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4618,
+   "shapeSha256": "dfae149a3e1dd7938f6bb711488c8d230804ca7efe942f776479be14f138ab0a",
+   "vertices": 572,
+   "faces": 1140,
+   "firstVertex": [
+    0.233641,
+    -0.116575,
+    0.630921
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001993945815,
+   "diameterKm": 80.87,
+   "uncertaintyKm": 1.04,
+   "lambda": 140.0,
+   "beta": -17.0,
+   "periodHours": 20.6636,
+   "name": "Gallia",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "gerda": {
+  "claim": "Gerda preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 968,
+   "shapeSha256": "d0b4a2670b3b5be50f4ea2a72901937964545ef598a904c82ba6b06d2e4c37cc",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.199075,
+    0.223437,
+    0.617603
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999285121318,
+   "diameterKm": 85.41,
+   "uncertaintyKm": 1.23,
+   "lambda": 23.0,
+   "beta": 20.0,
+   "periodHours": 10.68724,
+   "name": "Gerda",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "gryphia": {
+  "claim": "Gryphia preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Gryphia",
+   "modelId": 6121,
+   "modelVersion": "2022-02-14",
+   "shapeSha256": "05dc8e3b5778e2b2ae9b724299774be438553eb90b49329958fae9e42660f16b",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.350525,
+    -0.060509,
+    0.63576
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000403248857,
+   "diameterKm": 14.403,
+   "uncertaintyKm": 0.394,
+   "beta": 26.0,
+   "periodHours": 1049.0,
+   "lambda": 141.0,
+   "rotation": {
+    "schema": "cssearth-display-orientation@1",
+    "rightAscensionDegrees": 0,
+    "declinationDegrees": 90,
+    "phase": "arbitrary-display-phase"
+   }
+  }
+ },
+ "gyptis": {
+  "claim": "Gyptis preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Gyptis",
+   "modelId": 5394,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "94376fbdeea8797ce676895cb19d9fe4c3853b0672024314875c10dcb77b7fc1",
+   "vertices": 548,
+   "faces": 1092,
+   "firstVertex": [
+    0.349919,
+    -0.151761,
+    0.513012
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000605846517,
+   "diameterKm": 166.03,
+   "uncertaintyKm": 6.66,
+   "lambda": 58.0,
+   "beta": 15.0,
+   "periodHours": 6.21516
+  }
+ },
+ "hedda": {
+  "claim": "Hedda preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4799,
+   "shapeSha256": "2960870d9b24a38294260667c205abc1a2d88ca5b62af00ff47a50747cf67838",
+   "vertices": 552,
+   "faces": 1100,
+   "firstVertex": [
+    0.153801,
+    0.040916,
+    0.651541
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999952555217,
+   "diameterKm": 63.91,
+   "uncertaintyKm": 1.0,
+   "lambda": 264.0,
+   "beta": -48.0,
+   "periodHours": 30.105,
+   "name": "Hedda",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "hela": {
+  "claim": "Hela preserves its source model and approximate raster scale",
+  "expected": {
+   "modelId": 454,
+   "shapeSha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
+   "vertices": 1586,
+   "faces": 3168,
+   "firstVertex": [
+    0.000248,
+    0.021159,
+    0.408901
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000237186308,
+   "diameterKm": 13.39,
+   "uncertaintyKm": 0.45,
+   "lambda": 45,
+   "beta": 44,
+   "periodHours": 3.396232,
+   "name": "Hela",
+   "modelVersion": "2012-07-30"
+  }
+ },
+ "henrietta": {
+  "claim": "Henrietta preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4859,
+   "shapeSha256": "02061f1763d9d4005b8cf226e8abace734b5796a9ee5d651bf1e767ce8ab04f3",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.214628,
+    0.05516,
+    0.396533
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998728846586,
+   "diameterKm": 107.57,
+   "uncertaintyKm": 1.5,
+   "lambda": 184.0,
+   "beta": 54.0,
+   "periodHours": 7.3561,
+   "name": "Henrietta",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "hera": {
+  "claim": "Hera preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 917,
+   "shapeSha256": "155404c32e4202324ad5e4aaa574252ac2688e6f9f2b1c3fbc56ddc6514afa36",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.036945,
+    0.066452,
+    0.625979
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000002175644298,
+   "diameterKm": 83.23,
+   "uncertaintyKm": 1.04,
+   "lambda": 85.0,
+   "beta": 24.0,
+   "periodHours": 23.74265,
+   "name": "Hera",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "hersilia": {
+  "claim": "Hersilia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3217,
+   "shapeSha256": "8e2c5f76b6378e942e105825b60568612becb8902a67d2c7c4dfc34d92b31b2f",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.024505,
+    0.059226,
+    0.61116
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000803716926,
+   "diameterKm": 93.93,
+   "uncertaintyKm": 0.94,
+   "lambda": 250.0,
+   "beta": 43.0,
+   "periodHours": 11.11129,
+   "name": "Hersilia",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "hertha": {
+  "claim": "Hertha preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1799,
+   "shapeSha256": "78a7b01400fb50944ee01a4cfcd1a7c3b4b12ecbc7b83861081a49aebb565a6c",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    5.049976,
+    -13.84536,
+    19.225508
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 259354.97595498673,
+   "diameterKm": 79.0,
+   "uncertaintyKm": 2.0,
+   "lambda": 276.0,
+   "beta": 53.0,
+   "periodHours": 8.4006,
+   "name": "Hertha",
+   "modelVersion": "2017-06-14"
+  }
+ },
+ "hesperia": {
+  "claim": "Hesperia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 319,
+   "shapeSha256": "cbe8efe6448bf2e9ba29a52ca5f60b47f50d301f8f77c9610cf3d8ea63cf01c9",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -6.518471,
+    12.261634,
+    46.030434
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 678075.6020352487,
+   "diameterKm": 109.0,
+   "uncertaintyKm": 11.0,
+   "lambda": 250.0,
+   "beta": 17.0,
+   "periodHours": 5.65534,
+   "name": "Hesperia",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "hestia": {
+  "claim": "Hestia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4383,
+   "shapeSha256": "3c9b6ec13ef63607aaa3b4b2419bcf7b94232652d260b9b4f1a8e0eb5b49350a",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    0.018887,
+    0.029107,
+    0.581514
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999016560848,
+   "diameterKm": 120.62,
+   "uncertaintyKm": 1.53,
+   "lambda": 291.0,
+   "beta": 12.0,
+   "periodHours": 21.0401,
+   "name": "Hestia",
+   "modelVersion": "2019-07-19"
+  }
+ },
+ "hidalgo": {
+  "claim": "Hidalgo preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Hidalgo",
+   "modelId": 1057,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "8dcf880fd622ce2d704c95bae87e662a63ae63c5a92d4649ff232341222e4f00",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.106397,
+    0.554049,
+    0.343282
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999887372527,
+   "diameterKm": 61.4,
+   "uncertaintyKm": 12.7,
+   "beta": 16.0,
+   "periodHours": 10.05822,
+   "lambda": 277.0
+  }
+ },
+ "hopi": {
+  "claim": "Hopi preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Hopi",
+   "modelId": 10234,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "f461f5fbac0aae84e2a70bd02695fd6c7b30c048a41bc48fa99f0d48dc73f746",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.382133,
+    0.350842,
+    0.430408
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.99999999023891,
+   "diameterKm": 19.267,
+   "uncertaintyKm": 0.147,
+   "lambda": 49.0,
+   "beta": -80.0,
+   "periodHours": 4.76799
+  }
+ },
+ "huberta": {
+  "claim": "Huberta preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 578,
+   "shapeSha256": "d4074decf77b04ae946a4cde54bd9a3ea1179f3ab447ac7721d81d8ea378873c",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    0.036938,
+    -0.001135,
+    0.568536
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998537454374,
+   "diameterKm": 95.2,
+   "uncertaintyKm": 1.36,
+   "lambda": 206.0,
+   "beta": -19.0,
+   "periodHours": 8.29055,
+   "name": "Huberta",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "hypatia": {
+  "claim": "Hypatia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 3844,
+   "shapeSha256": "61b02e21efc8fa19b782a3c1828b46bd1d1bfdf2c35ad352fd995ec9b0aae399",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.287027,
+    0.316123,
+    0.491075
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999997037327296,
+   "diameterKm": 143.97,
+   "uncertaintyKm": 1.55,
+   "lambda": 261.0,
+   "beta": 45.0,
+   "periodHours": 8.87273,
+   "name": "Hypatia",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "ianthe": {
+  "claim": "Ianthe preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1088,
+   "shapeSha256": "0b7c71c3ad49bdc31f45d662a68f4f4a29a637c6399b280eeb74a8eee9377d94",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.233176,
+    0.201727,
+    0.491973
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998497823462,
+   "diameterKm": 104.24,
+   "uncertaintyKm": 1.29,
+   "lambda": 286.0,
+   "beta": 18.0,
+   "periodHours": 16.48013,
+   "name": "Ianthe",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "iau": {
+  "claim": "IAU preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "IAU",
+   "modelId": 12740,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "2ca32a686baf5562f447d268d0f7e7debeb9244b60871fb49dd6c70eb085aca7",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.877465,
+    0.779292,
+    0.324315
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.99999997769853,
+   "diameterKm": 4.242,
+   "uncertaintyKm": 0.917,
+   "lambda": 31.0,
+   "beta": -38.0,
+   "periodHours": 4.47862
+  }
+ },
+ "iclea": {
+  "claim": "Iclea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5017,
+   "shapeSha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe",
+   "vertices": 994,
+   "faces": 1984,
+   "firstVertex": [
+    -0.859148,
+    10.30857,
+    39.719421
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 333038.14017642365,
+   "diameterKm": 86.0,
+   "uncertaintyKm": 13.0,
+   "lambda": 31.0,
+   "beta": 13.0,
+   "periodHours": 15.3612,
+   "name": "Iclea",
+   "modelVersion": "2023-10-03"
+  }
+ },
+ "ilioneus": {
+  "claim": "Ilioneus preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4172,
+   "shapeSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.10184,
+    0.212947,
+    0.486064
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998637479034,
+   "diameterKm": 60.711,
+   "uncertaintyKm": 0.982,
+   "lambda": 307.0,
+   "beta": -26.0,
+   "periodHours": 14.73572,
+   "name": "Ilioneus",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "ilse": {
+  "claim": "Ilse preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 864,
+   "shapeSha256": "39f5363411a234415535e0ece44d5783636a4655bfd0bf0bcc8e1d00493414fc",
+   "vertices": 996,
+   "faces": 1988,
+   "firstVertex": [
+    -0.073999,
+    -0.016431,
+    0.467439
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000061697116,
+   "diameterKm": 37.03,
+   "uncertaintyKm": 0.61,
+   "lambda": 2.0,
+   "beta": 85.0,
+   "periodHours": 84.995,
+   "name": "Ilse",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "ino": {
+  "claim": "Ino preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5913,
+   "shapeSha256": "b6b64c30f487bfb7f146122cf99b49143693e622f2f182bcf5d80b44adc73564",
+   "vertices": 1766,
+   "faces": 3528,
+   "firstVertex": [
+    -3.311404,
+    9.253699,
+    59.116613
+   ],
+   "firstFace": [
+    591,
+    199,
+    596
+   ],
+   "signedVolume": 1574200.8917261746,
+   "diameterKm": 144.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 28.0,
+   "beta": -17.0,
+   "periodHours": 6.110939,
+   "name": "Ino",
+   "modelVersion": "2021-11-12"
+  }
+ },
+ "io-85": {
+  "claim": "85 Io preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1822,
+   "shapeSha256": "e36362e161a587298ba736fb964698d4ae4c01a846ce7cfb79c493eff6ddcc0f",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    1.310566,
+    -0.081425,
+    68.002264
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 2446349.1125020515,
+   "diameterKm": 167.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 92.0,
+   "beta": -68.0,
+   "periodHours": 6.874784,
+   "name": "85 Io",
+   "modelVersion": "2017-06-09"
+  }
+ },
+ "iphigenia": {
+  "claim": "Iphigenia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 994,
+   "shapeSha256": "76e84bb363bc61fff99cee400395d53d29cbb4b11ef0012f4513dfbb689b06cd",
+   "vertices": 528,
+   "faces": 1052,
+   "firstVertex": [
+    0.228375,
+    0.128282,
+    0.499255
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999835930124,
+   "diameterKm": 71.06,
+   "uncertaintyKm": 0.94,
+   "lambda": 286.0,
+   "beta": -50.0,
+   "periodHours": 31.4626,
+   "name": "Iphigenia",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "isabella": {
+  "claim": "Isabella preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 987,
+   "shapeSha256": "80fd70c2bfa59866664269efb052469476bfd35078b8842e6c21cbee4c9b1108",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    0.054553,
+    -0.252349,
+    0.585685
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000516887726,
+   "diameterKm": 69.58,
+   "uncertaintyKm": 0.92,
+   "lambda": 278.0,
+   "beta": -26.0,
+   "periodHours": 6.67191,
+   "name": "Isabella",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "isis": {
+  "claim": "Isis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1841,
+   "shapeSha256": "69468466831b229d880e8d0f58a4046ae973653da5d1155733fbbf8185ac9611",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -14.300674,
+    5.363346,
+    123.927794
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 12235730.36169017,
+   "diameterKm": 104.0,
+   "uncertaintyKm": 4.0,
+   "lambda": 108.0,
+   "beta": 44.0,
+   "periodHours": 13.58364,
+   "name": "Isis",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "ivar": {
+  "claim": "Ivar preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 271,
+   "shapeSha256": "6838a5ad71d37ea2d341cb2b4aa37a66d698bf84202b49cbb7084c4dc4095c24",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    0.000763,
+    0.059685,
+    2.846967
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 212.1747578652795,
+   "diameterKm": 7.4,
+   "uncertaintyKm": 0.2,
+   "lambda": 334.0,
+   "beta": 39.0,
+   "periodHours": 4.795168,
+   "name": "Ivar",
+   "modelVersion": "2016-04-22"
+  }
+ },
+ "johanna": {
+  "claim": "Johanna preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 444,
+   "shapeSha256": "641a0c871a4f30afcfb42761be86fd53ef4a6c72566c5ad87e3a6e3dbf5a1923",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.046832,
+    0.137018,
+    0.405702
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000380963694,
+   "diameterKm": 114.19,
+   "uncertaintyKm": 1.52,
+   "lambda": 98.0,
+   "beta": -60.0,
+   "periodHours": 12.79953,
+   "name": "Johanna",
+   "modelVersion": "2012-07-30"
+  }
+ },
+ "juewa": {
+  "claim": "Juewa preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Juewa",
+   "modelId": 5985,
+   "modelVersion": "2022-02-14",
+   "shapeSha256": "299db30077ce9e5c022971c38780e16113ad0716ce7de0ce6ffd9288a55acb0c",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.082553,
+    0.169146,
+    0.613837
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999619996515,
+   "diameterKm": 166.69,
+   "uncertaintyKm": 2.77,
+   "lambda": 271.0,
+   "beta": -25.0,
+   "periodHours": 20.9844
+  }
+ },
+ "kallisto": {
+  "claim": "Kallisto preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4787,
+   "shapeSha256": "3108ee1d5da9b4004ac87f550e1a5f5561e02214612a4237757764eed1830f1f",
+   "vertices": 564,
+   "faces": 1124,
+   "firstVertex": [
+    -0.006628,
+    0.262325,
+    0.708747
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999544970697,
+   "diameterKm": 51.03,
+   "uncertaintyKm": 0.6,
+   "lambda": 188.0,
+   "beta": 14.0,
+   "periodHours": 19.487,
+   "name": "Kallisto",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "kalypso": {
+  "claim": "Kalypso preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1732,
+   "shapeSha256": "c93cad2380849e859383f912f5f1ef6042c6be167151571b7dc9a27f261165b6",
+   "vertices": 1014,
+   "faces": 2024,
+   "firstVertex": [
+    0.404893,
+    0.039973,
+    0.424896
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999544477837,
+   "diameterKm": 101.9,
+   "uncertaintyKm": 1.03,
+   "lambda": 349.0,
+   "beta": 8.0,
+   "periodHours": 9.03506,
+   "name": "Kalypso",
+   "modelVersion": "2016-07-07"
+  }
+ },
+ "kemi": {
+  "claim": "Kemi preserves its source model and approximate raster scale",
+  "expected": {
+   "modelId": 1202,
+   "shapeSha256": "0be47f09f2798dd4aa3bc7288dac1168de6bfc905e516b02c081e7bb2b151490",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    -0.063328,
+    0.084822,
+    0.53641
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999876716573,
+   "diameterKm": 17.98,
+   "uncertaintyKm": 1.34,
+   "lambda": 166,
+   "beta": 73,
+   "periodHours": 9.19183,
+   "name": "Kemi",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "klio": {
+  "claim": "Klio preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5792,
+   "shapeSha256": "470fb94f84bd323b2b698252ff223a2bf7cd2cd4b30c7c996141135c18ec8cfb",
+   "vertices": 570,
+   "faces": 1136,
+   "firstVertex": [
+    0.099256,
+    0.357168,
+    0.497743
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998475820483,
+   "diameterKm": 78.32,
+   "uncertaintyKm": 0.96,
+   "lambda": 356.0,
+   "beta": -53.0,
+   "periodHours": 23.575,
+   "name": "Klio",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "klotho": {
+  "claim": "Klotho preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 321,
+   "shapeSha256": "11db1e440c1fdbe9f28f96d0750381d4238645ba651903e586b56fb08c1c7ccd",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    2.699555,
+    4.363997,
+    42.891431
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 321555.1345665133,
+   "diameterKm": 85.0,
+   "uncertaintyKm": 9.0,
+   "lambda": 359.0,
+   "beta": 30.0,
+   "periodHours": 35.251,
+   "name": "Klotho",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "klymene": {
+  "claim": "Klymene preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 797,
+   "shapeSha256": "f1d26036f42cd12a1a45edb1d953d4b064b85c83474b898368bfde1a6b5ac7cc",
+   "vertices": 994,
+   "faces": 1984,
+   "firstVertex": [
+    0.431942,
+    0.379222,
+    0.462676
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998167029801,
+   "diameterKm": 126.5,
+   "uncertaintyKm": 1.86,
+   "lambda": 112.0,
+   "beta": 2.0,
+   "periodHours": 8.98059,
+   "name": "Klymene",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "klytia": {
+  "claim": "Klytia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 142,
+   "shapeSha256": "32e8a509863ce93032e7d97e906d1b7413d1c5db35b9229bee8953d0a8af54f7",
+   "vertices": 1008,
+   "faces": 2012,
+   "firstVertex": [
+    -0.144752,
+    -0.053161,
+    0.553814
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000444553148,
+   "diameterKm": 45.4,
+   "uncertaintyKm": 1.3,
+   "lambda": 44.0,
+   "beta": 83.0,
+   "periodHours": 8.28307,
+   "name": "Klytia",
+   "modelVersion": "2011-04-20"
+  }
+ },
+ "kolga": {
+  "claim": "Kolga preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4072,
+   "shapeSha256": "74994217a690be9e8736a7709f52c8e70c80a0f63c0d7160f73e7cd9924ec078",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.007608,
+    -0.201829,
+    0.588915
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999908384961,
+   "diameterKm": 100.93,
+   "uncertaintyKm": 1.4,
+   "lambda": 170.0,
+   "beta": -39.0,
+   "periodHours": 17.60386,
+   "name": "Kolga",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "kressmannia": {
+  "claim": "Kressmannia preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Kressmannia",
+   "modelId": 382,
+   "modelVersion": "2011-04-21",
+   "shapeSha256": "401f6b6b3ac21253ebf4d13a34e2ed951e3f7212652bd0f84fd0099989e2bec6",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.286975,
+    -0.022171,
+    0.548467
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999997816670111,
+   "diameterKm": 15.429,
+   "uncertaintyKm": 0.325,
+   "beta": 37.0,
+   "periodHours": 4.460963,
+   "lambda": 345.0
+  }
+ },
+ "kriemhild": {
+  "claim": "Kriemhild preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 621,
+   "shapeSha256": "d1556ed22d1a7df79537f2d50d2cc6389142aa9eccda3e14f362efb2375bcb17",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.122216,
+    0.113006,
+    0.47177
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000210565527,
+   "diameterKm": 45.14,
+   "uncertaintyKm": 0.51,
+   "lambda": 284.0,
+   "beta": -15.0,
+   "periodHours": 4.545177,
+   "name": "Kriemhild",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "lachesis": {
+  "claim": "Lachesis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 943,
+   "shapeSha256": "71ab4e0c28a09ae451115ee438139b1772bdfcc1373ed9981d3fb216f6122262",
+   "vertices": 1004,
+   "faces": 2004,
+   "firstVertex": [
+    0.091141,
+    0.426785,
+    0.440608
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000127293381,
+   "diameterKm": 156.53,
+   "uncertaintyKm": 1.67,
+   "lambda": 256.0,
+   "beta": 39.0,
+   "periodHours": 46.5508,
+   "name": "Lachesis",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "laetitia": {
+  "claim": "Laetitia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1835,
+   "shapeSha256": "399e10e28457f6fe4aa93cb322ddd5d262681eeb9638ac092e55bbf138b5f747",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    8.470469,
+    -5.739412,
+    58.936905
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 2299415.8098790417,
+   "diameterKm": 164.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 323.0,
+   "beta": 33.0,
+   "periodHours": 5.138238,
+   "name": "Laetitia",
+   "modelVersion": "2017-06-06"
+  }
+ },
+ "lamberta": {
+  "claim": "Lamberta preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5914,
+   "shapeSha256": "2e81472c1dd7a834d7ab49f42b4d545f3a1a7e506194ef887534d3499bde492e",
+   "vertices": 902,
+   "faces": 1800,
+   "firstVertex": [
+    5.873481,
+    -12.402587,
+    63.304541
+   ],
+   "firstFace": [
+    303,
+    103,
+    308
+   ],
+   "signedVolume": 1470693.7403402955,
+   "diameterKm": 141.0,
+   "uncertaintyKm": 2.0,
+   "lambda": 115.0,
+   "beta": -80.0,
+   "periodHours": 10.66703,
+   "name": "Lamberta",
+   "modelVersion": "2021-11-12"
+  }
+ },
+ "laurentia": {
+  "claim": "Laurentia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 325,
+   "shapeSha256": "cf67b568322176e7a97e90964912e0100a8e9a552dfd757c9eac2686078cb864",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.099202,
+    -0.027335,
+    0.692197
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001330492443,
+   "diameterKm": 85.34,
+   "uncertaintyKm": 2.86,
+   "lambda": 139.0,
+   "beta": 64.0,
+   "periodHours": 11.86917,
+   "name": "Laurentia",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "leda-38": {
+  "claim": "38 Leda preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 720,
+   "shapeSha256": "109763528dc5541c8d5ee603522994a0c754eb2f8220a8b3fcef950ccd5f9f4c",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    0.043012,
+    0.003447,
+    0.600991
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000045317876,
+   "diameterKm": 114.22,
+   "uncertaintyKm": 1.52,
+   "lambda": 161.0,
+   "beta": -15.0,
+   "periodHours": 12.83612,
+   "name": "38 Leda",
+   "modelVersion": "2013-10-16"
+  }
+ },
+ "leto": {
+  "claim": "Leto preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 290,
+   "shapeSha256": "22c388028d5da32840503e4aaa9a0985447afaf34909ca834b26e941a313f019",
+   "vertices": 1016,
+   "faces": 2028,
+   "firstVertex": [
+    44.698542,
+    -13.471956,
+    53.008928
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1697398.7793295216,
+   "diameterKm": 148.0,
+   "uncertaintyKm": 25.0,
+   "lambda": 103.0,
+   "beta": 43.0,
+   "periodHours": 14.84547,
+   "name": "Leto",
+   "modelVersion": "2011-02-11"
+  }
+ },
+ "leukothea": {
+  "claim": "Leukothea preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Leukothea",
+   "modelId": 867,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "c2abe03b883ffd4ac42bee1f6c015a6badadb1d0cec330476c2c15828a9ff593",
+   "vertices": 1010,
+   "faces": 2016,
+   "firstVertex": [
+    -0.137052,
+    0.209158,
+    0.5256
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998494318009,
+   "diameterKm": 111.48,
+   "uncertaintyKm": 1.85,
+   "lambda": 196.0,
+   "beta": 0.0,
+   "periodHours": 31.901
+  }
+ },
+ "liberatrix": {
+  "claim": "Liberatrix preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 157,
+   "shapeSha256": "4142c7bbb6839eac603668cbe025516b0f70887c5d70202b39c2e0d2e954552a",
+   "vertices": 1598,
+   "faces": 3192,
+   "firstVertex": [
+    0.072748,
+    -0.157904,
+    0.528266
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998984796639,
+   "diameterKm": 51.1,
+   "uncertaintyKm": 2.1,
+   "lambda": 95.0,
+   "beta": 68.0,
+   "periodHours": 3.968198,
+   "name": "Liberatrix",
+   "modelVersion": "2007-02-27"
+  }
+ },
+ "libussa": {
+  "claim": "Libussa preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 331,
+   "shapeSha256": "90c6c85577e5615ac761ae75898680215bdae93bdb749b5aa4905a095fdca08c",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.209507,
+    0.318905,
+    0.429804
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999347925574,
+   "diameterKm": 57.57,
+   "uncertaintyKm": 0.62,
+   "lambda": 157.0,
+   "beta": 18.0,
+   "periodHours": 9.22794,
+   "name": "Libussa",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "lilaea": {
+  "claim": "Lilaea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 9003,
+   "shapeSha256": "0086f2f76f18239a5345be68633ff70bec9e91ef0e30318c0157c07c72bfd27d",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.073786,
+    0.00655,
+    0.559807
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001088520782,
+   "diameterKm": 76.31,
+   "uncertaintyKm": 0.97,
+   "lambda": 173.0,
+   "beta": 76.0,
+   "periodHours": 12.0395,
+   "name": "Lilaea",
+   "modelVersion": "2022-11-29"
+  }
+ },
+ "lomia": {
+  "claim": "Lomia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 838,
+   "shapeSha256": "9269270e3faf2394d48a7f1711bb68c161039e38109c09c0e92e6e92140f3d85",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.33964,
+    0.327974,
+    0.440485
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000073550754,
+   "diameterKm": 144.92,
+   "uncertaintyKm": 1.86,
+   "lambda": 117.0,
+   "beta": -19.0,
+   "periodHours": 9.12417,
+   "name": "Lomia",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "loreley": {
+  "claim": "Loreley preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1809,
+   "shapeSha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -0.839559,
+    0.645044,
+    92.826037
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 2901776.996502301,
+   "diameterKm": 177.0,
+   "uncertaintyKm": 5.0,
+   "lambda": 180.0,
+   "beta": 31.0,
+   "periodHours": 7.22439,
+   "name": "Loreley",
+   "modelVersion": "2017-06-16"
+  }
+ },
+ "lucia": {
+  "claim": "Lucia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Lucia",
+   "modelId": 523,
+   "modelVersion": "2013-02-11",
+   "shapeSha256": "295982d8c3626762ce96c29da3029b61b59e8e76fa35dcd9cf78d15b19fd7d14",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.168224,
+    -0.111247,
+    0.597288
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000977828636,
+   "diameterKm": 52.82,
+   "uncertaintyKm": 0.6,
+   "lambda": 293.0,
+   "beta": 49.0,
+   "periodHours": 7.8367
+  }
+ },
+ "lucina": {
+  "claim": "Lucina preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1837,
+   "shapeSha256": "667acd4065c0ea2b9930418669bc923020620d6bb64268b432a4f60cd2daa19c",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    0.84247,
+    7.325641,
+    72.711028
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1909126.222472582,
+   "diameterKm": 154.0,
+   "uncertaintyKm": 15.0,
+   "lambda": 304.0,
+   "beta": -41.0,
+   "periodHours": 18.5538,
+   "name": "Lucina",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "lycomedes": {
+  "claim": "Lycomedes preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4284,
+   "shapeSha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
+   "vertices": 570,
+   "faces": 1136,
+   "firstVertex": [
+    0.213147,
+    0.321057,
+    0.594659
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998529570281,
+   "diameterKm": 31.736,
+   "uncertaintyKm": 0.243,
+   "lambda": 133.0,
+   "beta": 54.0,
+   "periodHours": 18.1094,
+   "name": "Lycomedes",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "lydia": {
+  "claim": "Lydia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 152,
+   "shapeSha256": "ce4560318a58f130ddd60a01038a7fdb3bcc30554d3507ade899cda740975004",
+   "vertices": 1597,
+   "faces": 3190,
+   "firstVertex": [
+    8.329645,
+    -0.477627,
+    36.725626
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 394568.75938298897,
+   "diameterKm": 91.0,
+   "uncertaintyKm": 1.0,
+   "lambda": 149.0,
+   "beta": -55.0,
+   "periodHours": 10.9258,
+   "name": "Lydia",
+   "modelVersion": "2009-02-26"
+  }
+ },
+ "lyyli": {
+  "claim": "Lyyli preserves its source model and approximate raster scale",
+  "expected": {
+   "modelId": 2012,
+   "shapeSha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
+   "vertices": 572,
+   "faces": 1140,
+   "firstVertex": [
+    0.211825,
+    0.185707,
+    0.550867
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998263583666,
+   "diameterKm": 27.12,
+   "uncertaintyKm": 1.31,
+   "lambda": 64,
+   "beta": -66,
+   "periodHours": 11.06207,
+   "name": "Lyyli",
+   "modelVersion": "2018-07-18"
+  }
+ },
+ "maja": {
+  "claim": "Maja preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Maja",
+   "modelId": 1233,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "587900c8fa238632e992111688ea6ab5b2e373f730f7acd0a13030589275c327",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.247876,
+    -0.007918,
+    0.380875
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.00000003575545,
+   "diameterKm": 71.79,
+   "uncertaintyKm": 0.92,
+   "lambda": 49.0,
+   "beta": -70.0,
+   "periodHours": 9.7357
+  }
+ },
+ "massalia": {
+  "claim": "Massalia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Massalia",
+   "modelId": 16321,
+   "modelVersion": "2026-04-30 15:07:16",
+   "shapeSha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045",
+   "vertices": 1922,
+   "faces": 3840,
+   "firstVertex": [
+    0.0687205935,
+    0.24445146,
+    1.7466883
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 35.13365487698239,
+   "diameterKm": 147.0,
+   "uncertaintyKm": 2.0,
+   "lambda": 304.1,
+   "beta": 63.7,
+   "periodHours": 8.0975859
+  }
+ },
+ "medea": {
+  "claim": "Medea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1091,
+   "shapeSha256": "7002b307b1713a7ab911659586b73aac5175f32f77a06eadb506f9d2d3c8294f",
+   "vertices": 1007,
+   "faces": 2010,
+   "firstVertex": [
+    -0.052361,
+    -0.00215,
+    0.636403
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999780911848,
+   "diameterKm": 153.72,
+   "uncertaintyKm": 2.88,
+   "lambda": 40.0,
+   "beta": -24.0,
+   "periodHours": 10.28414,
+   "name": "Medea",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "medusa": {
+  "claim": "Medusa preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 570,
+   "shapeSha256": "ac8826e64a7f1eb168ab78c9ed24005a668817f2f32137eecf417ce94a9ee6c0",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.295125,
+    -0.036144,
+    0.378932
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998108064263,
+   "diameterKm": 21.41,
+   "uncertaintyKm": 0.35,
+   "lambda": 173.0,
+   "beta": -78.0,
+   "periodHours": 26.0455,
+   "name": "Medusa",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "melete": {
+  "claim": "Melete preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1851,
+   "shapeSha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -3.256883,
+    -2.481648,
+    45.163754
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 824677.6902846862,
+   "diameterKm": 116.0,
+   "uncertaintyKm": 5.0,
+   "lambda": 103.0,
+   "beta": -28.0,
+   "periodHours": 18.14817,
+   "name": "Melete",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "meliboea": {
+  "claim": "Meliboea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5983,
+   "shapeSha256": "a692afa2b908756462c3ecacb063c11f0c5ebed62afcab6936510f7b92421240",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.252814,
+    0.086849,
+    0.54473
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000000471554,
+   "diameterKm": 143.77,
+   "uncertaintyKm": 2.51,
+   "lambda": 173.0,
+   "beta": -7.0,
+   "periodHours": 25.6733,
+   "name": "Meliboea",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "menelaus": {
+  "claim": "Menelaus preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 8131,
+   "shapeSha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.336234,
+    0.358317,
+    0.454415
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998567750215,
+   "diameterKm": 42.716,
+   "uncertaintyKm": 0.517,
+   "lambda": 327.0,
+   "beta": 66.0,
+   "periodHours": 17.7464,
+   "name": "Menelaus",
+   "modelVersion": "2022-11-29"
+  }
+ },
+ "menippe": {
+  "claim": "Menippe preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 327,
+   "shapeSha256": "6edbc9d49a54ef72199ed7da9d5827c133f1aa1c2170e2ee8c65e747454c8077",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.054842,
+    0.217722,
+    0.570278
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000121974248,
+   "diameterKm": 35.3,
+   "uncertaintyKm": 0.9,
+   "lambda": 32.0,
+   "beta": 48.0,
+   "periodHours": 11.97647,
+   "name": "Menippe",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "mentor": {
+  "claim": "Mentor preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4281,
+   "shapeSha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
+   "vertices": 572,
+   "faces": 1140,
+   "firstVertex": [
+    -0.053264,
+    0.270474,
+    0.574945
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001243334133,
+   "diameterKm": 126.288,
+   "uncertaintyKm": 1.642,
+   "lambda": 237.0,
+   "beta": 57.0,
+   "periodHours": 7.69659,
+   "name": "Mentor",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "minerva": {
+  "claim": "Minerva preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1797,
+   "shapeSha256": "e8db727155bfaf5ccc6d996a603ed712b472a2585f75fc3c5ea9472039bbe434",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -10.327175,
+    -1.505909,
+    57.116159
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 2159264.132626666,
+   "diameterKm": 160.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 19.0,
+   "beta": 21.0,
+   "periodHours": 5.981768,
+   "name": "Minerva",
+   "modelVersion": "2017-06-13"
+  }
+ },
+ "moskva": {
+  "claim": "Moskva preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Moskva",
+   "modelId": 515,
+   "modelVersion": "2013-02-11",
+   "shapeSha256": "76ada158146d485d5ca583742e60825d7cdf15f7d4febff30655d63234863503",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.049821,
+    0.189969,
+    0.450224
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000434770595,
+   "diameterKm": 31.962,
+   "uncertaintyKm": 0.789,
+   "beta": 59.0,
+   "periodHours": 6.05581,
+   "lambda": 331.0
+  }
+ },
+ "mr-spock": {
+  "claim": "Mr. Spock preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Mr. Spock",
+   "modelId": 4874,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "ff1b2b9b522e5f7acc86b42876904882375f591146b706775e37525eac39b065",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.229144,
+    0.511282,
+    0.481333
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000406330114,
+   "diameterKm": 19.707,
+   "uncertaintyKm": 0.177,
+   "lambda": 255.0,
+   "beta": -41.0,
+   "periodHours": 6.72088
+  }
+ },
+ "musa": {
+  "claim": "Musa preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Musa",
+   "modelId": 504,
+   "modelVersion": "2013-02-26",
+   "shapeSha256": "5d72411f25fa692b22c7b8ccb786afcbaf6bbddc37b9b44b4975d75b4e10382b",
+   "vertices": 961,
+   "faces": 1918,
+   "firstVertex": [
+    -0.133786,
+    -0.274874,
+    0.531581
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000942934675,
+   "diameterKm": 25.115,
+   "uncertaintyKm": 0.221,
+   "beta": -46.0,
+   "periodHours": 5.886381,
+   "lambda": 208.0
+  }
+ },
+ "niobe": {
+  "claim": "Niobe preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1014,
+   "shapeSha256": "8b8480da8e3b48bf4e1a93f8e3ae2de0a69315a13dc947a105fe05a0c169338d",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.199047,
+    0.085001,
+    0.559548
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999361593085,
+   "diameterKm": 80.86,
+   "uncertaintyKm": 0.8,
+   "lambda": 88.0,
+   "beta": -33.0,
+   "periodHours": 35.8521,
+   "name": "Niobe",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "nuwa": {
+  "claim": "Nuwa preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1185,
+   "shapeSha256": "b576ef6ed10c1950eb578412561c1829d8d537c14ad28ac7ff30cb5ceb14135a",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.329663,
+    0.175362,
+    0.551068
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999175479006,
+   "diameterKm": 139.65,
+   "uncertaintyKm": 2.09,
+   "lambda": 359.0,
+   "beta": 25.0,
+   "periodHours": 8.13456,
+   "name": "Nuwa",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "oenone": {
+  "claim": "Oenone preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 16312,
+   "shapeSha256": "27a2a816bb4696dec5bc7a31dd1bc50cf6018abaaca213311ba81a0fdb33a4b9",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -3.597496,
+    4.693375,
+    16.29401
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 26521.847920031152,
+   "diameterKm": 37.0,
+   "uncertaintyKm": 2.0,
+   "lambda": 45.0,
+   "beta": 85.0,
+   "periodHours": 27.9077,
+   "name": "Oenone",
+   "modelVersion": "2025-07-15"
+  }
+ },
+ "pales": {
+  "claim": "Pales preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 16309,
+   "shapeSha256": "eb435f1eed2b7bdab2a018e10e761e55375947842b4627375cab9e9380a55e78",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    -0.139785,
+    0.358036,
+    0.465664
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001840238042,
+   "diameterKm": 148.02,
+   "uncertaintyKm": 2.56,
+   "lambda": 95.0,
+   "beta": -89.0,
+   "periodHours": 20.70802,
+   "name": "Pales",
+   "modelVersion": "2025-07-08"
+  }
+ },
+ "pandora-55": {
+  "claim": "55 Pandora preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 139,
+   "shapeSha256": "2f8825e7125544f7cbcf50fa479dc601268d3add0960b3acb46f0696c90eabb4",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    5.436602,
+    -3.629648,
+    33.085253
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 179594.36790669643,
+   "diameterKm": 70.0,
+   "uncertaintyKm": 7.0,
+   "lambda": 223.0,
+   "beta": 18.0,
+   "periodHours": 4.804043,
+   "name": "55 Pandora",
+   "modelVersion": "2011-03-28"
+  }
+ },
+ "parysatis": {
+  "claim": "Parysatis preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Parysatis",
+   "modelId": 5820,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "5d01fc5141682daead93573aef676e56dfd5cdee4f9608b15a0125d7887bf9bf",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.092275,
+    0.150323,
+    0.651266
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001788221407,
+   "diameterKm": 44.749,
+   "uncertaintyKm": 0.37,
+   "beta": -47.0,
+   "periodHours": 5.93333,
+   "lambda": 263.0
+  }
+ },
+ "peitho": {
+  "claim": "Peitho preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4397,
+   "shapeSha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d",
+   "vertices": 1009,
+   "faces": 2014,
+   "firstVertex": [
+    0.016838,
+    0.025359,
+    0.452128
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998323247126,
+   "diameterKm": 43.99,
+   "uncertaintyKm": 0.75,
+   "lambda": 179.0,
+   "beta": 60.0,
+   "periodHours": 7.806396,
+   "name": "Peitho",
+   "modelVersion": "2020-04-26"
+  }
+ },
+ "penthesilea": {
+  "claim": "Penthesilea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 933,
+   "shapeSha256": "e5e8054c9480dc77f4e07acaea828896f97a84bef3e60faad569047bb184efed",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.249131,
+    0.260158,
+    0.456955
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000272252658,
+   "diameterKm": 64.0,
+   "uncertaintyKm": 0.94,
+   "lambda": 225.0,
+   "beta": 49.0,
+   "periodHours": 18.7875,
+   "name": "Penthesilea",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "petrina": {
+  "claim": "Petrina preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Petrina",
+   "modelId": 1152,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "1189e6d6480532a0b3bd0dc2b18f9663f4e0154145640f0638bd5e6348033632",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.15386,
+    0.25639,
+    0.466694
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999888030343,
+   "diameterKm": 44.2,
+   "uncertaintyKm": 1.0,
+   "lambda": 281.0,
+   "beta": 61.0,
+   "periodHours": 11.79214
+  }
+ },
+ "phaedra": {
+  "claim": "Phaedra preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 304,
+   "shapeSha256": "1805d5dbef19e6956892f348a8f2bfea20036c710c9641352aebd224cde62acd",
+   "vertices": 998,
+   "faces": 1992,
+   "firstVertex": [
+    -0.100366,
+    0.020804,
+    0.564742
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999695071565,
+   "diameterKm": 64.08,
+   "uncertaintyKm": 0.77,
+   "lambda": 266.0,
+   "beta": 5.0,
+   "periodHours": 5.750249,
+   "name": "Phaedra",
+   "modelVersion": "2011-02-18"
+  }
+ },
+ "philagoria": {
+  "claim": "Philagoria preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 883,
+   "shapeSha256": "d00a5edc3e2c3ccfd5fc8ec04d264eb5fc651bf5b4015258f7878aa48f1bae1d",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.286241,
+    0.568167,
+    0.393378
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000004297950709,
+   "diameterKm": 27.32,
+   "uncertaintyKm": 0.71,
+   "lambda": 274.0,
+   "beta": -78.0,
+   "periodHours": 17.94082,
+   "name": "Philagoria",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "philosophia": {
+  "claim": "Philosophia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1873,
+   "shapeSha256": "e21f6191a0e78785b81cf603e3e0f86281aca58b705fc1cadfebb5a043afef6f",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    16.739489,
+    20.274099,
+    50.812326
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 641431.0428382676,
+   "diameterKm": 101.0,
+   "uncertaintyKm": 5.0,
+   "lambda": 95.0,
+   "beta": 19.0,
+   "periodHours": 26.4614,
+   "name": "Philosophia",
+   "modelVersion": "2018-03-22"
+  }
+ },
+ "phocaea": {
+  "claim": "Phocaea preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 697,
+   "shapeSha256": "508b7c0d7855f6aa60a8aa63d9ed3f2f7226718ca88d3eb72b0427228b69804e",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.141577,
+    0.186039,
+    0.556413
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999108089296,
+   "diameterKm": 83.21,
+   "uncertaintyKm": 0.96,
+   "lambda": 347.0,
+   "beta": 10.0,
+   "periodHours": 9.935397,
+   "name": "Phocaea",
+   "modelVersion": "2013-02-20"
+  }
+ },
+ "piazzia": {
+  "claim": "Piazzia preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Piazzia",
+   "modelId": 3529,
+   "modelVersion": "2019-05-07",
+   "shapeSha256": "fb52ac0fccad4ef29a233531a572785aedd8686267f4998d3a7b090c5a93850e",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.046184,
+    0.342396,
+    0.588595
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000513709053,
+   "diameterKm": 47.78,
+   "uncertaintyKm": 2.0,
+   "beta": -54.0,
+   "periodHours": 9.47747,
+   "lambda": 131.0
+  }
+ },
+ "polyhymnia": {
+  "claim": "Polyhymnia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Polyhymnia",
+   "modelId": 5163,
+   "modelVersion": "2024-04-08",
+   "shapeSha256": "ad4eef6efbc7473338d3a427724875eec7f1bf08e61afddb552a0668c44d4ee9",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.180403,
+    -0.019682,
+    0.606295
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999678467574,
+   "diameterKm": 53.98,
+   "uncertaintyKm": 0.91,
+   "lambda": 185.0,
+   "beta": -61.0,
+   "periodHours": 18.60888
+  }
+ },
+ "pomona": {
+  "claim": "Pomona preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 16306,
+   "shapeSha256": "348c1281cc6d9a359f9dfa7efa783ca0500239edfa49473380627394b9fcfb4e",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    19.38957,
+    -7.700915,
+    42.573761
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 369120.9110942592,
+   "diameterKm": 89.0,
+   "uncertaintyKm": 7.0,
+   "lambda": 102.0,
+   "beta": 47.0,
+   "periodHours": 9.447662,
+   "name": "Pomona",
+   "modelVersion": "2024-10-11"
+  }
+ },
+ "proserpina": {
+  "claim": "Proserpina preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Proserpina",
+   "modelId": 1189,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "5451a43f38b22110427c9ac5aee9fc2dba99a37ef7248f5f3986bca7f375f2f7",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.112063,
+    0.223624,
+    0.513633
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000002492354696,
+   "diameterKm": 87.45,
+   "uncertaintyKm": 0.95,
+   "lambda": 88.0,
+   "beta": -52.0,
+   "periodHours": 13.10977
+  }
+ },
+ "protogeneia": {
+  "claim": "Protogeneia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 557,
+   "shapeSha256": "903c54800b229e30bd4b5b7aed8a99f3bef189f87ccf99d29fdce35aea38979c",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.051621,
+    0.254446,
+    0.556608
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000565962182,
+   "diameterKm": 108.41,
+   "uncertaintyKm": 1.67,
+   "lambda": 90.0,
+   "beta": 14.0,
+   "periodHours": 7.85227,
+   "name": "Protogeneia",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "pyrrhus": {
+  "claim": "Pyrrhus preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4373,
+   "shapeSha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.024159,
+    -0.210889,
+    0.644061
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001562434626,
+   "diameterKm": 48.356,
+   "uncertaintyKm": 0.423,
+   "lambda": 332.0,
+   "beta": -12.0,
+   "periodHours": 7.31916,
+   "name": "Pyrrhus",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "raup": {
+  "claim": "Raup preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Raup",
+   "modelId": 5835,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "ffae22baf0155a59ff90c8363569c60c3261fce268cd2871126416261159367b",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.293362,
+    0.279159,
+    0.490325
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999997129937245,
+   "diameterKm": 4.839,
+   "uncertaintyKm": 0.167,
+   "lambda": 269.0,
+   "beta": 87.0,
+   "periodHours": 46.22
+  }
+ },
+ "reinmuthia": {
+  "claim": "Reinmuthia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Reinmuthia",
+   "modelId": 678,
+   "modelVersion": "2013-02-11",
+   "shapeSha256": "50276c546e6204efae333bb272a73d20881e5c435aa9d864ea4e348138a545bf",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.498013,
+    0.019567,
+    0.374181
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999156515121,
+   "diameterKm": 24.38,
+   "uncertaintyKm": 0.48,
+   "lambda": 153.0,
+   "beta": 78.0,
+   "periodHours": 4.007347
+  }
+ },
+ "rhodope": {
+  "claim": "Rhodope preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 619,
+   "shapeSha256": "dae8593e45bf9983934225c5d78355e71944cbfb2c023b762170ca7683b1f441",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.046448,
+    -0.102689,
+    0.62579
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000034331226,
+   "diameterKm": 53.26,
+   "uncertaintyKm": 0.62,
+   "lambda": 173.0,
+   "beta": -3.0,
+   "periodHours": 4.714799,
+   "name": "Rhodope",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "rosalinde": {
+  "claim": "Rosalinde preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Rosalinde",
+   "modelId": 561,
+   "modelVersion": "2013-02-11",
+   "shapeSha256": "b5ee9fab82357bf57d6dc810c5a2e0068f9bcd15ec20cc87c99de9da55b24425",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.09062,
+    0.138323,
+    0.463539
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001431692804,
+   "diameterKm": 19.618,
+   "uncertaintyKm": 0.057,
+   "beta": 70.0,
+   "periodHours": 16.68678,
+   "lambda": 276.0
+  }
+ },
+ "rusthawelia": {
+  "claim": "Rusthawelia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Rusthawelia",
+   "modelId": 3188,
+   "modelVersion": "2019-05-07",
+   "shapeSha256": "890c5ddc5bf62360d5e4369a8f35b30f4868233baf3da1eb4b8622c9ccb8af6a",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.117072,
+    -0.062808,
+    0.620253
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001637401592,
+   "diameterKm": 67.986,
+   "uncertaintyKm": 1.091,
+   "lambda": 13.0,
+   "beta": 59.0,
+   "periodHours": 11.00463
+  }
+ },
+ "sapientia": {
+  "claim": "Sapientia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 16284,
+   "shapeSha256": "420f22693cd4653eaae4ff9229b13793ead35898a874f4ab8738a779e91bc0c4",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    12.46698,
+    8.141599,
+    49.83691
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 572150.5235493955,
+   "diameterKm": 103.0,
+   "uncertaintyKm": 7.0,
+   "lambda": 264.0,
+   "beta": -2.0,
+   "periodHours": 14.93046,
+   "name": "Sapientia",
+   "modelVersion": "2023-10-03"
+  }
+ },
+ "schaber": {
+  "claim": "Schaber preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Schaber",
+   "modelId": 10836,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "ea0e69a263db99458dc7a9b4e3214a5c0eba1e40472ae713dae7d159fcfaec0e",
+   "vertices": 552,
+   "faces": 1100,
+   "firstVertex": [
+    0.081373,
+    0.122325,
+    0.745645
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000213930182,
+   "diameterKm": 26.538,
+   "uncertaintyKm": 0.262,
+   "lambda": 109.0,
+   "beta": 30.0,
+   "periodHours": 6.37023
+  }
+ },
+ "schorria": {
+  "claim": "Schorria preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Schorria",
+   "modelId": 5955,
+   "modelVersion": "2022-02-14",
+   "shapeSha256": "4a415264ae5f3a3d9feb32668b739e2a6b0750b285553425be2a5243f86760ea",
+   "vertices": 1020,
+   "faces": 2036,
+   "firstVertex": [
+    -0.159927,
+    0.225029,
+    0.353838
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001102494687,
+   "diameterKm": 5.55,
+   "uncertaintyKm": 1.11,
+   "lambda": 103.0,
+   "beta": -59.0,
+   "periodHours": 1304.1
+  }
+ },
+ "scylla": {
+  "claim": "Scylla preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 920,
+   "shapeSha256": "6ee6620929ec650a72d7f2133a74f796fd91c07e8b3e24463808f878170adab2",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.312586,
+    -0.101379,
+    0.511674
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999122153254,
+   "diameterKm": 39.21,
+   "uncertaintyKm": 0.97,
+   "lambda": 356.0,
+   "beta": 53.0,
+   "periodHours": 7.95879,
+   "name": "Scylla",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "selinur": {
+  "claim": "Selinur preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Selinur",
+   "modelId": 5480,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "0f6e095aa7d97f1e68e0bf67a68cd9c54c1700c09055ee92f60e743f9117e531",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.333836,
+    0.040355,
+    0.567468
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999725505557,
+   "diameterKm": 40.828,
+   "uncertaintyKm": 0.247,
+   "beta": -56.0,
+   "periodHours": 8.0117,
+   "lambda": 136.0
+  }
+ },
+ "semele": {
+  "claim": "Semele preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5799,
+   "shapeSha256": "1f263e11028e2a01358e54a68391c8cc9ccd70f4d4e7eae4fbcf09489d26c765",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.424986,
+    0.083231,
+    0.467153
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000072245893,
+   "diameterKm": 117.32,
+   "uncertaintyKm": 1.51,
+   "lambda": 213.0,
+   "beta": -31.0,
+   "periodHours": 16.642,
+   "name": "Semele",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "sibylla": {
+  "claim": "Sibylla preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 6009,
+   "shapeSha256": "f156336a2048015bfabaf6dc2be0d5a06683cdce4662d02c7e71931b33bbbb79",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.114645,
+    0.111754,
+    0.605015
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.00000006371333,
+   "diameterKm": 146.48,
+   "uncertaintyKm": 1.74,
+   "lambda": 108.0,
+   "beta": -62.0,
+   "periodHours": 47.015,
+   "name": "Sibylla",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "silesia": {
+  "claim": "Silesia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 702,
+   "shapeSha256": "a32b67db173623ddbff30c471278e92fb0925f0d0a1b787b0f9a7ed23c24ce96",
+   "vertices": 1018,
+   "faces": 2032,
+   "firstVertex": [
+    0.258809,
+    0.227388,
+    0.462485
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000862415732,
+   "diameterKm": 79.2,
+   "uncertaintyKm": 0.97,
+   "lambda": 5.0,
+   "beta": -53.0,
+   "periodHours": 15.7097,
+   "name": "Silesia",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "silvretta": {
+  "claim": "Silvretta preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Silvretta",
+   "modelId": 513,
+   "modelVersion": "2013-02-11",
+   "shapeSha256": "f2abcec4e89d1fbe1b297e546e91239b04bb94ce621998061ddeee09acee3724",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    -0.071702,
+    0.101342,
+    0.558953
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001227802775,
+   "diameterKm": 26.393,
+   "uncertaintyKm": 0.439,
+   "lambda": 161.0,
+   "beta": -46.0,
+   "periodHours": 7.067967
+  }
+ },
+ "siwa": {
+  "claim": "Siwa preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5987,
+   "shapeSha256": "a6cf15b20cd4bcfb839a14044d91774e83056e3457b568b0c3659da8d0607b67",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.032158,
+    -0.045727,
+    0.531076
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999951293131,
+   "diameterKm": 110.61,
+   "uncertaintyKm": 1.67,
+   "lambda": 88.0,
+   "beta": -27.0,
+   "periodHours": 34.398,
+   "name": "Siwa",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "sophrosyne": {
+  "claim": "Sophrosyne preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5976,
+   "shapeSha256": "3878aec42eda2f64254bc260a3c0497632f037da3e447fd65082822521883492",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.018006,
+    0.269113,
+    0.468353
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000688872217,
+   "diameterKm": 100.42,
+   "uncertaintyKm": 1.33,
+   "lambda": 100.0,
+   "beta": 35.0,
+   "periodHours": 17.1893,
+   "name": "Sophrosyne",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "stephania": {
+  "claim": "Stephania preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 588,
+   "shapeSha256": "1d751e789d79cdd53abcc6fdc6a78c1e78b560175824f814a41c5c41e8d28fc4",
+   "vertices": 1012,
+   "faces": 2020,
+   "firstVertex": [
+    0.104137,
+    0.095704,
+    0.508339
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000378801934,
+   "diameterKm": 32.29,
+   "uncertaintyKm": 0.33,
+   "lambda": 26.0,
+   "beta": -50.0,
+   "periodHours": 18.2087,
+   "name": "Stephania",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "susi": {
+  "claim": "Susi preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Susi",
+   "modelId": 5856,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "0d6eefa2c69e4fca23e18985316ab314faaa1cf25a3b7400bb1bc8ccc486b3a6",
+   "vertices": 562,
+   "faces": 1120,
+   "firstVertex": [
+    -0.046867,
+    0.15966,
+    0.555268
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999315929131,
+   "diameterKm": 21.82,
+   "uncertaintyKm": 1.4,
+   "beta": -10.0,
+   "periodHours": 4.6224,
+   "lambda": 301.0
+  }
+ },
+ "tantalus": {
+  "claim": "Tantalus preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 6205,
+   "shapeSha256": "deeba7099d07c93d2da587bec6974398634beb3ab21b95ab0a51f56aa4463d59",
+   "vertices": 1000,
+   "faces": 1996,
+   "firstVertex": [
+    -0.001055,
+    0.001013,
+    0.681091
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.5962562691861362,
+   "diameterKm": 1.45,
+   "uncertaintyKm": 0.2,
+   "lambda": 36.0,
+   "beta": 30.0,
+   "periodHours": 2.39006,
+   "name": "Tantalus",
+   "modelVersion": "2022-07-13"
+  }
+ },
+ "tartaglia": {
+  "claim": "Tartaglia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Tartaglia",
+   "modelId": 15683,
+   "modelVersion": "2022-11-29",
+   "shapeSha256": "ee1a402a083d8aa2ce1aad16d6efd9ad71641e82cf788c45c0b0c9b8fb171514",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.327785,
+    0.076625,
+    0.471665
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000137496902,
+   "diameterKm": 13.584,
+   "uncertaintyKm": 0.067,
+   "lambda": 284.0,
+   "beta": 88.0,
+   "periodHours": 7.2234
+  }
+ },
+ "taurinensis": {
+  "claim": "Taurinensis preserves its source model and approximate raster scale",
+  "expected": {
+   "modelId": 490,
+   "shapeSha256": "23d5892b451e70763b68e7edc06b731de621fd79a98820621f63c11de034580e",
+   "vertices": 1016,
+   "faces": 2028,
+   "firstVertex": [
+    0.024595,
+    0.105372,
+    0.518526
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998305234152,
+   "diameterKm": 20.87,
+   "uncertaintyKm": 0.36,
+   "lambda": 324,
+   "beta": 45,
+   "periodHours": 5.582028,
+   "name": "Taurinensis",
+   "modelVersion": "2013-02-11"
+  }
+ },
+ "thalia": {
+  "claim": "Thalia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1858,
+   "shapeSha256": "667be44f59441cbb117e91d5153cc6b6547810348ff58a7dc946a4d1dad4bf21",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -2.574271,
+    6.620751,
+    42.922828
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 782233.6727895029,
+   "diameterKm": 114.0,
+   "uncertaintyKm": 8.0,
+   "lambda": 343.0,
+   "beta": -74.0,
+   "periodHours": 12.31241,
+   "name": "Thalia",
+   "modelVersion": "2017-09-21"
+  }
+ },
+ "thetis": {
+  "claim": "Thetis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 116,
+   "shapeSha256": "4ab3bb84cf020ea326fe445362fbb7105effa1754ce56fccccc83f4eb861f8d3",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    16.549248,
+    1.300069,
+    33.950293
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 239040.12475906694,
+   "diameterKm": 77.0,
+   "uncertaintyKm": 8.0,
+   "lambda": 236.0,
+   "beta": 19.0,
+   "periodHours": 12.26603,
+   "name": "Thetis",
+   "modelVersion": "2011-03-28"
+  }
+ },
+ "thyra": {
+  "claim": "Thyra preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 154,
+   "shapeSha256": "d3e017daf4e6a4b91d1854af583a2e128397c945dc62d2c384b8420bf8094a2f",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    14.139903,
+    3.882207,
+    44.502844
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 407720.0509201346,
+   "diameterKm": 92.0,
+   "uncertaintyKm": 2.0,
+   "lambda": 35.0,
+   "beta": 33.0,
+   "periodHours": 7.23996,
+   "name": "Thyra",
+   "modelVersion": "2009-02-26"
+  }
+ },
+ "toro": {
+  "claim": "Toro preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1862,
+   "shapeSha256": "37dcd0f6ee31357b06abbd911720dcc46f36b7dd28bd1449a29a202c7dc8c373",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.468921,
+    -0.070505,
+    1.573095
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 22.44929757052581,
+   "diameterKm": 3.5,
+   "uncertaintyKm": 0.4,
+   "lambda": 71.0,
+   "beta": -69.0,
+   "periodHours": 10.19782,
+   "name": "Toro",
+   "modelVersion": "2017-11-21"
+  }
+ },
+ "transvaalia": {
+  "claim": "Transvaalia preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Transvaalia",
+   "modelId": 3722,
+   "modelVersion": "2019-05-07",
+   "shapeSha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.061493,
+    -0.052153,
+    0.66086
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999998689653705,
+   "diameterKm": 25.458,
+   "uncertaintyKm": 0.591,
+   "beta": 62.0,
+   "periodHours": 11.82586,
+   "lambda": 125.0
+  }
+ },
+ "tulipa": {
+  "claim": "Tulipa preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Tulipa",
+   "modelId": 1779,
+   "modelVersion": "2017-05-11",
+   "shapeSha256": "e9ca02b70409de00bfcf17b56680e573a8f3840e5e4a0a1446ae83c842206c55",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.048745,
+    -0.042918,
+    0.642321
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999854651239,
+   "diameterKm": 27.875,
+   "uncertaintyKm": 0.362,
+   "beta": 40.0,
+   "periodHours": 2.787153,
+   "lambda": 143.0
+  }
+ },
+ "tyche": {
+  "claim": "Tyche preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 329,
+   "shapeSha256": "0490bad5885c440c58b587c2bf6d2dd5b342afc976fb35ffbbe3dc0eac00f090",
+   "vertices": 1016,
+   "faces": 2028,
+   "firstVertex": [
+    0.239889,
+    0.266705,
+    0.470147
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999645722949,
+   "diameterKm": 64.37,
+   "uncertaintyKm": 0.89,
+   "lambda": 224.0,
+   "beta": -4.0,
+   "periodHours": 10.04008,
+   "name": "Tyche",
+   "modelVersion": "2011-04-21"
+  }
+ },
+ "una": {
+  "claim": "Una preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 169,
+   "shapeSha256": "69285eb63614042f0cdf3bf341190155b0785cda3399191b4393a002275c6c21",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.054275,
+    0.042407,
+    0.619615
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999169473277,
+   "diameterKm": 77.72,
+   "uncertaintyKm": 1.23,
+   "lambda": 125.0,
+   "beta": -33.0,
+   "periodHours": 11.03318,
+   "name": "Una",
+   "modelVersion": "2009-05-29"
+  }
+ },
+ "unitas": {
+  "claim": "Unitas preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 197,
+   "shapeSha256": "e3b4f00f07c7daec58d937c2ec27613c00c336979c81241dcfeb593048bbca64",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -1.294314,
+    8.919461,
+    24.076687
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 91952.32009268494,
+   "diameterKm": 49.0,
+   "uncertaintyKm": 5.0,
+   "lambda": 79.0,
+   "beta": -35.0,
+   "periodHours": 8.73875,
+   "name": "Unitas",
+   "modelVersion": "2009-02-26"
+  }
+ },
+ "united-nations": {
+  "claim": "United Nations preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "United Nations",
+   "modelId": 1154,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "9f8df63e5658a5f6657a6f9abaa9ca55ed8adbc4712304e6d313c23e28f9167a",
+   "vertices": 563,
+   "faces": 1122,
+   "firstVertex": [
+    0.11161,
+    0.126591,
+    0.406232
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999941836871,
+   "diameterKm": 11.0,
+   "uncertaintyKm": 0.295,
+   "lambda": 13.0,
+   "beta": -84.0,
+   "periodHours": 3.26191
+  }
+ },
+ "urda": {
+  "claim": "Urda preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 172,
+   "shapeSha256": "3dec127404347426e9b9f9cdcf8449c1c078b91e7e2f14f0d7fed7a4b6320dc4",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    5.614774,
+    1.860468,
+    21.981718
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 44602.2350783732,
+   "diameterKm": 44.0,
+   "uncertaintyKm": 15.0,
+   "lambda": 249.0,
+   "beta": -68.0,
+   "periodHours": 13.06133,
+   "name": "Urda",
+   "modelVersion": "2011-03-28"
+  }
+ },
+ "vanadis": {
+  "claim": "Vanadis preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 6039,
+   "shapeSha256": "616f9e9caf14dd14bfb662642e787d1d22478f53727d8f3eef207287cdfd109b",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.13068,
+    0.052512,
+    0.659811
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999145117763,
+   "diameterKm": 90.13,
+   "uncertaintyKm": 1.22,
+   "lambda": 64.0,
+   "beta": 12.0,
+   "periodHours": 10.5606,
+   "name": "Vanadis",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "velleda": {
+  "claim": "Velleda preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 5958,
+   "shapeSha256": "78ec4654953bce428c657665cc21c70e933184fdeb4952e7243df70d97be698e",
+   "vertices": 1021,
+   "faces": 2038,
+   "firstVertex": [
+    -0.079155,
+    0.076014,
+    0.525817
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999834036638,
+   "diameterKm": 43.94,
+   "uncertaintyKm": 0.49,
+   "lambda": 120.0,
+   "beta": 46.0,
+   "periodHours": 5.36708,
+   "name": "Velleda",
+   "modelVersion": "2022-02-14"
+  }
+ },
+ "vera": {
+  "claim": "Vera preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1212,
+   "shapeSha256": "2d0eb67cc470d629766b5c5f396820808162acbb1bd994548ffc9b38329268dc",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.126334,
+    0.308306,
+    0.496626
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999860387033,
+   "diameterKm": 72.88,
+   "uncertaintyKm": 0.91,
+   "lambda": 96.0,
+   "beta": -50.0,
+   "periodHours": 14.35651,
+   "name": "Vera",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "veritas": {
+  "claim": "Veritas preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Veritas",
+   "modelId": 833,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "4b038d538898e8c11f692d3f034461d6cd06c41ece0c30f1d0b72d7ee4bca39a",
+   "vertices": 1019,
+   "faces": 2034,
+   "firstVertex": [
+    0.208927,
+    -0.025453,
+    0.573633
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001853467448,
+   "diameterKm": 118.803,
+   "uncertaintyKm": 1.83,
+   "beta": 34.0,
+   "periodHours": 7.92811,
+   "lambda": 56.0
+  }
+ },
+ "vibilia": {
+  "claim": "Vibilia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1824,
+   "shapeSha256": "7ad4f599bff34a11ba1ead1d48effff2f784a32ac0d456e695fff177d625ba64",
+   "vertices": 402,
+   "faces": 800,
+   "firstVertex": [
+    -2.509132,
+    0.888169,
+    62.504877
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1532024.7323014515,
+   "diameterKm": 143.0,
+   "uncertaintyKm": 3.0,
+   "lambda": 251.0,
+   "beta": 63.0,
+   "periodHours": 13.82517,
+   "name": "Vibilia",
+   "modelVersion": "2017-06-16"
+  }
+ },
+ "vindobona": {
+  "claim": "Vindobona preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4148,
+   "shapeSha256": "b350d98f2dc934419375ae342ce7c825dc290eebe41efc3e943ca51ed62dc85b",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    -0.196179,
+    0.179196,
+    0.686575
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000905304047,
+   "diameterKm": 80.07,
+   "uncertaintyKm": 0.97,
+   "lambda": 223.0,
+   "beta": 49.0,
+   "periodHours": 14.2447,
+   "name": "Vindobona",
+   "modelVersion": "2019-05-07"
+  }
+ },
+ "virginia": {
+  "claim": "Virginia preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Virginia",
+   "modelId": 12738,
+   "modelVersion": "2024-04-09",
+   "shapeSha256": "8b1dc50c7f205bb4935eaab846f570620cca1443dfe383c2b6706ecc7bcf1a42",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    -0.05284,
+    0.089695,
+    0.537847
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000000995128715,
+   "diameterKm": 84.37,
+   "uncertaintyKm": 0.82,
+   "lambda": 295.0,
+   "beta": 47.0,
+   "periodHours": 14.31233
+  }
+ },
+ "virtanen": {
+  "claim": "Virtanen preserves original shape, independently measured scale and qualified retained output",
+  "expected": {
+   "name": "Virtanen",
+   "modelId": 1175,
+   "modelVersion": "2016-01-04",
+   "shapeSha256": "1f1b9833f39a6e6c348f2023554a2defac86b47531a8c3a0ac64b4b0bf562983",
+   "vertices": 1012,
+   "faces": 2020,
+   "firstVertex": [
+    -0.296629,
+    0.105226,
+    0.492191
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.000000282690485,
+   "diameterKm": 9.263,
+   "uncertaintyKm": 0.098,
+   "lambda": 307.0,
+   "beta": 58.0,
+   "periodHours": 30.5005
+  }
+ },
+ "weringia": {
+  "claim": "Weringia preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 1074,
+   "shapeSha256": "b5ea3c7a8dacc9eb8d62f5ea85376eeeec1d1d521461ea669a201a5f7d97646b",
+   "vertices": 1022,
+   "faces": 2040,
+   "firstVertex": [
+    0.36171,
+    0.030309,
+    0.533042
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 1.0000001234059464,
+   "diameterKm": 32.26,
+   "uncertaintyKm": 0.36,
+   "lambda": 284.0,
+   "beta": -14.0,
+   "periodHours": 11.14849,
+   "name": "Weringia",
+   "modelVersion": "2016-01-04"
+  }
+ },
+ "xanthippe": {
+  "claim": "Xanthippe preserves its source model and calibrated raster triangles",
+  "expected": {
+   "modelId": 4643,
+   "shapeSha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a",
+   "vertices": 574,
+   "faces": 1144,
+   "firstVertex": [
+    0.171236,
+    0.162699,
+    0.530404
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.9999999164314383,
+   "diameterKm": 115.49,
+   "uncertaintyKm": 1.74,
+   "lambda": 197.0,
+   "beta": 9.0,
+   "periodHours": 22.1157,
+   "name": "Xanthippe",
+   "modelVersion": "2019-10-23"
+  }
+ },
+ "zachia": {
+  "claim": "Zachia preserves original shape, measured size and qualified retained output",
+  "expected": {
+   "name": "Zachia",
+   "modelId": 5901,
+   "modelVersion": "2019-10-23",
+   "shapeSha256": "fa76a68f24cbff7a331e2ddb0f72a5080b431c4332d1f91ffc109d28088da6b4",
+   "vertices": 552,
+   "faces": 1100,
+   "firstVertex": [
+    -0.252995,
+    0.266479,
+    0.669881
+   ],
+   "firstFace": [
+    1,
+    2,
+    3
+   ],
+   "signedVolume": 0.999999842913777,
+   "diameterKm": 16.848,
+   "uncertaintyKm": 0.182,
+   "beta": 29.0,
+   "periodHours": 22.836,
+   "lambda": 28.0
+  }
+ }
+}
