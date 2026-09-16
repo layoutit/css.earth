@@ -114,7 +114,9 @@
       "bodyRadiusM": 324134.5526598759
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Varda",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

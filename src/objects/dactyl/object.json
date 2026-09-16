@@ -124,7 +124,9 @@
       "bodyRadiusM": 695.2053289772899
     },
     "catalog": {
-      "illustrationLenses": ["shape"],
+      "illustrationLenses": [
+        "shape"
+      ],
       "name": "Dactyl",
       "systemName": "Solar System",
       "classification": "satellite",

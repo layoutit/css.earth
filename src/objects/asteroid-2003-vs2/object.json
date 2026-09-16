@@ -114,7 +114,9 @@
       "bodyRadiusM": 262094.95810145818
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "2003 VS2",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

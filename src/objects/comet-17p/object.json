@@ -114,7 +114,9 @@
       "bodyRadiusM": 1261.0430004817913
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Holmes",
       "classification": "comet",
       "color": "#b8b6b2",

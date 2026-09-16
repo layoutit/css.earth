@@ -114,7 +114,9 @@
       "bodyRadiusM": 8701.934155371428
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Swift–Tuttle",
       "classification": "comet",
       "color": "#b8b6b2",
