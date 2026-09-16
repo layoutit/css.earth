@@ -110,7 +110,7 @@ test('source-lens binding and recipe pins fail closed when their properties are 
     { file: 'src/objects/helix/object.json', mutate(value) {
       sourceObject(value.prepared).sha256 = '0'.repeat(64);
     }, error: /Changed installed volume bank/ },
-    { file: 'labs/nebula/models/helix/joint-fit.json', mutate(value) { delete value.molecularSource; }, error: /Changed volume recipe/ },
+    { file: 'src/objects/helix/source/bake-inputs/references/04-joint-fit.json', mutate(value) { delete value.molecularSource; }, error: /Changed volume recipe/ },
   ];
   for (const mutation of mutations) await assert.rejects(prepareVolumeProvenance({ root, input: async path => {
     const bytes = await readFile(resolve(root, path));

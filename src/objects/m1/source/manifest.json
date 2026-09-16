@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/hubble-optical.tif",
       "origin": "https://esahubble.org/images/heic0515a/",
       "sourceUrl": "https://esahubble.org/images/heic0515a/",
-      "title": "Crab Nebula \u00b7 Hubble \u00b7 optical lines",
+      "title": "Crab Nebula · Hubble · optical lines",
       "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "displayCredit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/webb-infrared.tif",
       "origin": "https://esawebb.org/images/weic2326a/",
       "sourceUrl": "https://esawebb.org/images/weic2326a/",
-      "title": "Crab Nebula \u00b7 Webb \u00b7 near/mid-infrared",
+      "title": "Crab Nebula · Webb · near/mid-infrared",
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -65,7 +65,7 @@
           {
             "kind": "machine",
             "machineId": "webb",
-            "evidence": "https://esawebb.org/images/weic2326a/ \u2014 NIRCam and MIRI; Colours & filters"
+            "evidence": "https://esawebb.org/images/weic2326a/ — NIRCam and MIRI; Colours & filters"
           }
         ]
       }
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/webb-components.tif",
       "origin": "https://esawebb.org/images/weic2417a/",
       "sourceUrl": "https://esawebb.org/images/weic2417a/",
-      "title": "Crab Nebula \u00b7 Webb \u00b7 dust, sulfur, synchrotron",
+      "title": "Crab Nebula · Webb · dust, sulfur, synchrotron",
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -99,7 +99,7 @@
           {
             "kind": "machine",
             "machineId": "webb",
-            "evidence": "https://esawebb.org/images/weic2417a/ \u2014 Webb infrared components"
+            "evidence": "https://esawebb.org/images/weic2417a/ — Webb infrared components"
           }
         ]
       }
@@ -109,7 +109,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/spitzer-infrared.tif",
       "origin": "https://esahubble.org/images/potw1720c/",
       "sourceUrl": "https://esahubble.org/images/potw1720c/",
-      "title": "Crab Nebula \u00b7 Spitzer \u00b7 mid-infrared",
+      "title": "Crab Nebula · Spitzer · mid-infrared",
       "credit": "JPL/Caltech",
       "displayCredit": "JPL/Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -143,7 +143,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/vla-radio.tif",
       "origin": "https://esahubble.org/images/potw1720b/",
       "sourceUrl": "https://esahubble.org/images/potw1720b/",
-      "title": "Crab Nebula \u00b7 VLA \u00b7 radio synchrotron",
+      "title": "Crab Nebula · VLA · radio synchrotron",
       "credit": "NRAO/AUI/NSF",
       "displayCredit": "NRAO/AUI/NSF",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -167,7 +167,7 @@
           {
             "kind": "machine",
             "machineId": "vla",
-            "evidence": "https://esahubble.org/images/potw1720b/ \u2014 VLA radio observation"
+            "evidence": "https://esahubble.org/images/potw1720b/ — VLA radio observation"
           }
         ]
       }
@@ -177,7 +177,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/chandra-xray.tif",
       "origin": "https://esahubble.org/images/potw1720f/",
       "sourceUrl": "https://esahubble.org/images/potw1720f/",
-      "title": "Crab Nebula \u00b7 Chandra \u00b7 X-ray pulsar wind",
+      "title": "Crab Nebula · Chandra · X-ray pulsar wind",
       "credit": "CXC",
       "displayCredit": "CXC",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -201,7 +201,7 @@
           {
             "kind": "machine",
             "machineId": "chandra",
-            "evidence": "https://esahubble.org/images/potw1720f/ \u2014 Chandra X-ray observation"
+            "evidence": "https://esahubble.org/images/potw1720f/ — Chandra X-ray observation"
           }
         ]
       }
@@ -211,7 +211,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/hubble-2017-bridge.tif",
       "origin": "https://esahubble.org/images/potw1720d/",
       "sourceUrl": "https://esahubble.org/images/potw1720d/",
-      "title": "Crab Nebula \u00b7 Hubble \u00b7 2017 common-grid astrometric bridge",
+      "title": "Crab Nebula · Hubble · 2017 common-grid astrometric bridge",
       "credit": "NASA, ESA, and J. Hester (Arizona State University)",
       "displayCredit": "NASA, ESA, and J. Hester (Arizona State University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -241,12 +241,12 @@
     },
     {
       "id": "physical-evidence",
-      "path": "labs/nebula/models/m1/physical-evidence.json",
+      "path": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json",
       "origin": "https://arxiv.org/pdf/2101.02709v1",
       "sourceUrl": "https://arxiv.org/pdf/2101.02709v1",
       "title": "Crab Nebula physical evidence and authored limits",
       "credit": "Published structural studies; authored display assumptions",
-      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities.",
+      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
       "expectedSha256": "a03ec3e88e8d4aee345d89326da85e5d8cf93f6789ae54b18afe059e7963e1ff",
       "expectedBytes": 17007,
       "sourceBinding": {
@@ -255,27 +255,27 @@
           {
             "catalogueId": "martin-2021",
             "role": "method",
-            "evidence": "labs/nebula/models/m1/physical-evidence.json#/sources/4"
+            "evidence": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json#/sources/4"
           },
           {
             "catalogueId": "ng-romani-2004",
             "role": "method",
-            "evidence": "labs/nebula/models/m1/physical-evidence.json#/sources/0"
+            "evidence": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json#/sources/0"
           },
           {
             "catalogueId": "kaplan-2008",
             "role": "reference",
-            "evidence": "labs/nebula/models/m1/physical-evidence.json#/sources/3"
+            "evidence": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json#/sources/3"
           },
           {
             "catalogueId": "lin-2023",
             "role": "reference",
-            "evidence": "labs/nebula/models/m1/physical-evidence.json#/sources/9"
+            "evidence": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json#/sources/9"
           },
           {
             "catalogueId": "simbad-gaia-crab-pulsar",
             "role": "reference",
-            "evidence": "labs/nebula/models/m1/physical-evidence.json#/evidence/8"
+            "evidence": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json#/evidence/8"
           }
         ]
       },
@@ -286,7 +286,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZflux.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZflux.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE \u00b7 3dmap_XYZflux.fits",
+      "title": "Crab SITELLE · 3dmap_XYZflux.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
@@ -308,7 +308,7 @@
           {
             "kind": "machine",
             "machineId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ \u2014 SITELLE at CFHT generated Martin, Milisavljevic and Drissen\u2019s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
       }
@@ -318,7 +318,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZvel.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZvel.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE \u00b7 3dmap_XYZvel.fits",
+      "title": "Crab SITELLE · 3dmap_XYZvel.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
@@ -340,7 +340,7 @@
           {
             "kind": "machine",
             "machineId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ \u2014 SITELLE at CFHT generated Martin, Milisavljevic and Drissen\u2019s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
       }
@@ -350,7 +350,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/m1.deep_frame.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE \u00b7 m1.deep_frame.fits",
+      "title": "Crab SITELLE · m1.deep_frame.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
@@ -372,7 +372,7 @@
           {
             "kind": "machine",
             "machineId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ \u2014 SITELLE at CFHT generated Martin, Milisavljevic and Drissen\u2019s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
       }
@@ -437,7 +437,7 @@
           {
             "kind": "machine",
             "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite \u2014 Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
           }
         ]
       }
@@ -467,8 +467,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m1/source/presentation.json",
-      "expectedSha256": "dec7b83716265c031eed9dcb61a263da4e1637a3f76470a53186821c23e22501",
-      "expectedBytes": 13689,
+      "expectedSha256": "ec3b11edc513eab156756fb72016cfb926c4a87e10e51034f20a35e6ba81a74c",
+      "expectedBytes": 14001,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -482,6 +482,136 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "retained-evidence-5",
+      "path": "src/objects/m1/source/bake-inputs/references/01-chandra-xray-grid-transfer.json",
+      "expectedSha256": "38b8dfe2e5f4bb6d0e75c1b65b845e57df80c1710429fd1322ef7822f61d0ee7",
+      "expectedBytes": 1846,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-6",
+      "path": "src/objects/m1/source/bake-inputs/references/02-compiler.json",
+      "expectedSha256": "e455c763a99a1b155fe3617b1e804ac90af25426f9cc368d6de2985bcbb59014",
+      "expectedBytes": 1132,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-7",
+      "path": "src/objects/m1/source/bake-inputs/references/03-hubble-2017-bridge-matched-stars.json",
+      "expectedSha256": "23d3be909bc6a07de74713efdabb957946d291d4b46f38ac3fbc11c4fc883501",
+      "expectedBytes": 28015,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-8",
+      "path": "src/objects/m1/source/bake-inputs/references/04-observation-structures.json",
+      "expectedSha256": "bcb4bb8e2ba0e69b8e1056257d5fb2aa2a15b0595eadfc691021bd988a9d17e3",
+      "expectedBytes": 371,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-9",
+      "path": "src/objects/m1/source/bake-inputs/references/05-observations.json",
+      "expectedSha256": "6adf56098e54344fe8615772b27c871e84aa86613a5bd50351f0b8168b3c94f7",
+      "expectedBytes": 14682,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-10",
+      "path": "src/objects/m1/source/bake-inputs/references/07-sampled.json",
+      "expectedSha256": "b008424726e7c0cb520d05652c3f4b6b3d018505841d2a0bfb2af08597a92f0f",
+      "expectedBytes": 5839,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-11",
+      "path": "src/objects/m1/source/bake-inputs/references/08-sitelle-alignment-check.json",
+      "expectedSha256": "69e44977756ea8f730b8ee76b53816c5909ffd27c33423a20356f74245e14cf2",
+      "expectedBytes": 25298,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-12",
+      "path": "src/objects/m1/source/bake-inputs/references/09-spitzer-infrared-grid-transfer.json",
+      "expectedSha256": "6515e56408db67572fe2a965ffad0ab716a75b53a7242902bde8ae70a126b6d8",
+      "expectedBytes": 1850,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-13",
+      "path": "src/objects/m1/source/bake-inputs/references/10-vla-radio-grid-transfer.json",
+      "expectedSha256": "446316324a90f0205a835cbac3cd4554e32682aaa9677e765f2677dd49acc2eb",
+      "expectedBytes": 1843,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-14",
+      "path": "src/objects/m1/source/bake-inputs/references/11-webb-components-astrometric-calibration.json",
+      "expectedSha256": "0f84903f49281212aee3eeabe1d14ce936cc5509d5a61d1e169d9e6324861aaf",
+      "expectedBytes": 1862,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-15",
+      "path": "src/objects/m1/source/bake-inputs/references/12-webb-components-matched-stars.json",
+      "expectedSha256": "7b6da0c051926aecc4e4919ba5db0aeacdbc0ebe924149596c1f414af901f6f5",
+      "expectedBytes": 15572,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-16",
+      "path": "src/objects/m1/source/provenance-references.json",
+      "expectedSha256": "75f024ff4c67529ca4b73a63fbda5e098c79e8e2dad6452df13d04546aec031f",
+      "expectedBytes": 4249,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-17",
+      "path": "src/objects/m1/source/replay-references.json",
+      "expectedSha256": "e3d422e10ec9768fa1fb9e2c7dbf083e3a9546522d94c77d239095bc0f340799",
+      "expectedBytes": 3065,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
       }
     }
   ],

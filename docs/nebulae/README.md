@@ -185,10 +185,33 @@ checkout with that object's research result already delivered:
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-node labs/nebula/src/run.ts export-compact-nebula --object=m42
+node labs/nebula/run.mts export-compact-nebula --object=m42
 ```
 
 This writes compact inputs and prints their pin; it does not update the accepted
 delivery pin or publish. Inspect the input diff, verify replay, then update the
 source-owned recipe and manifest. LMC's historical registered-material snapshot
 is separately pinned; changing its method remains research work.
+
+## Application provenance without the lab
+
+Application replay and source-catalogue preparation read evidence from each
+object's `source/` directory. `source/provenance-references.json` maps the
+provenance compiler's retained evidence and recipe copies to their original
+research paths, Git revisions, SHA-256 hashes and byte counts. Existing compact
+replay copies are reused; the copied JSON bytes and scientific pins are unchanged.
+The source manifest covers those copies and the mapping itself.
+
+A research path inside a retained JSON record is historical metadata, not an
+instruction for application preparation to load that file. The shared
+`src/sources/` records likewise retain their original revision-pinned evidence;
+their statement links use GitHub permalinks to that same revision. These records
+do not need a second copy merely to cite an earlier processing account. Full
+research processing remains an explicit lab operation.
+
+Routine provenance tests verify the retained current bytes, manifest coverage,
+revision syntax and portable links without requiring Git history. The separate
+`node tools/nebula-provenance-history.gate.mts` audit compares every retained copy
+and historical source-record hash with its recorded Git revision. Run that audit
+from a checkout containing those revisions; it fails if history is missing rather
+than substituting current bytes or skipping verification.
