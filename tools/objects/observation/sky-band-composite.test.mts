@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { gzipSync } from 'node:zlib';
+import { sha256 as sha } from '../../../src/platform/sha256.mts';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '../color-transfer.mts';
 import { composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS } from './sky-band-composite.mts';
@@ -12,7 +12,6 @@ import { gridWcs } from './wise-atlas-mosaic.mts';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };
 const wcs = gridWcs(grid);
-const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 function hips2fits(hips: string, sample: (x: number, fitsRow: number) => number, extra: readonly string[] = []) {
   const cards = [card('SIMPLE', 'T'), card('BITPIX', '-32'), card('NAXIS', '2'), card('NAXIS1', String(width)), card('NAXIS2', String(height)),
     card('WCSAXES', '2'), card('CRPIX1', '8.0'), card('CRPIX2', '8.0'), card('CDELT1', String(wcs.scaleDeg[0])), card('CDELT2', String(wcs.scaleDeg[1])),

@@ -4,7 +4,7 @@
  * pair of overlapping tiles contributes the median of their difference, and one constant per tile
  * is solved by least squares with a zero-mean gauge. No pixel is interpolated: each tile pixel
  * centre lands in exactly one output pixel, whose value is the mean of what lands in it. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -35,8 +35,6 @@ export function parseTilePins(value: unknown): TilePins {
 export function wiseAtlasUrl(coaddId: string, band: WiseBand) {
   return `https://irsa.ipac.caltech.edu/ibe/data/wise/allwise/p3am_cdd/${coaddId.slice(0, 2)}/${coaddId.slice(0, 4)}/${coaddId}/${coaddId}-w${WISE_ATLAS_BANDS[band].band}-int-3.fits.gz`;
 }
-
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Pinned gzip bytes from `directory`, downloading only missing files. */
 export async function readWiseAtlasTile(pins: TilePins, tile: TilePins['tiles'][number], directory: string): Promise<Buffer> {

@@ -3,7 +3,7 @@
  * A band without pins is acquired and pinned; existing pins are verified, never silently replaced.
  * WISE tiles come from the IRSA IBE atlas search around the grid; a tile is kept when any sample of its
  * published footprint edges or its centre projects inside the grid. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -12,7 +12,6 @@ import { parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composi
 import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const stable = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 
 async function download(url: string, attempts = 8): Promise<Buffer> {
