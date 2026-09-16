@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37f3e5148e49799c5dbbe7d35203e140e0b7d72fa699f213a48f99f90d3da24a"
+    "sha256": "534512e6c3f4f32db0cd9b9a4aa62a7fcbe2c9b631ff66d53c822635f9f49faf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c4ebb105c11332082e797168a1e874f46e384cb5dd3a9a96174f17de97786aea",
+      "sha256": "648cded90d40887fb9ccfd84ef2ecaacb888305ab3248e74621050200bbcdc19",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +111,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Estimated radius",
-              "value": "About 0.5 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Nominal dimensions",
-              "value": "1 × 1 × 1 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Saturn",
-              "value": "About 197,700 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 24.9 hours"
+              "value": "About 24.9 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery images",
-              "value": "Cassini imaging team · 2007"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Nominal estimate; shape unresolved"
+              "value": "Cassini imaging team · 2007",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/1; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c4ebb105c11332082e797168a1e874f46e384cb5dd3a9a96174f17de97786aea",
-      "bytes": 2792,
+      "sha256": "648cded90d40887fb9ccfd84ef2ecaacb888305ab3248e74621050200bbcdc19",
+      "bytes": 3040,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -385,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3692,
-          "sha256": "65b49d255235c40d41d3c91cf6d36dd5f30678dbec41de990e22ac5e63b6b5cd",
+          "bytes": 3934,
+          "sha256": "9de43531a71e68b1598b9a4f5927d900c6a5dcd052ab399da6e2fe152e02bf75",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "anthe",
-    "materialSha256": "7f95de089925dd17f6dab20163843ecf74499a45c340d2bb907b5e1b9037e69c",
+    "materialSha256": "8e4178cea45dd928d6cbfc855f3dabcbce777c0719260a0c60e512eec5b67a01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

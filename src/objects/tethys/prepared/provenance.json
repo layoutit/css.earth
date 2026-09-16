@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d25d0c3a4d78ea6a975b6977ad9103e084f14be7bf1654d9bf49c4be2ca314d0"
+    "sha256": "91f6a673223260ff2e6528f72cb52493c45f1689c755a82f450a03a942c9d08d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -513,7 +513,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
+      "sha256": "53ec6282d61e9533ef495172f1246572b3685c148804b909c1da744f3af0c066",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -567,22 +567,41 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "1.89 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "1.89 days (synchronous)"
+              "value": "1.89 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 295,000 km"
+              "value": "About 295,000 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1684"
+              "value": "Giovanni Cassini · 1684",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -1655,8 +1674,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
-      "bytes": 15628,
+      "sha256": "53ec6282d61e9533ef495172f1246572b3685c148804b909c1da744f3af0c066",
+      "bytes": 16589,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2229,8 +2248,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5746,
-          "sha256": "63e333413d1515aa002a8d7372721b9a3514cef1d8d699670178796eb1ac5557",
+          "bytes": 6478,
+          "sha256": "9fe1d90d5b9402c67ae5a7dca61a54c8b3ebba6c3ce9adef1e755af413d16276",
           "verification": "bytes-verified"
         }
       ],
@@ -2479,7 +2498,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "af31045bfc018b1c0b31aacd7e4032d083f57f5ed07f26aa6ef477378b51d71a",
+    "materialSha256": "ed87d3799ae5fb8299a535a135f83d103e9ddc4f8366df5474460711ed95900b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

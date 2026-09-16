@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2675,
-      "expectedSha256": "0b09598023876fd4f8b77c7c8f9f54c26585402a7e5aa621fe7a2f805ed228af",
+      "expectedBytes": 3779,
+      "expectedSha256": "591b1cabd71c95aac91bf525ed86442868dd92343d6a305e91bd8571dca5d0d7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 3422,
       "expectedSha256": "cb8b46e5626a12005cb2a3320197958c64815d0f61790ec536922674c818ee59"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3629,
+      "expectedSha256": "af99d15732a310406514b0c56fe83f0763aada506addedd2e94f099c8cac47c3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Leucus: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f1945c2c98229ad7847582f0e96fcc21eda4bfc05b536a6bb735b04ca27200f"
+    "sha256": "4fcca4ec0317c0e1e56cb437684024e54bf561ef5a666b78b65b2b9ab6d9f42f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b0ac3904a0d2848d311901073cfcdea8765e8b442de5769451b68991e76b06f",
+      "sha256": "098befec6db655cb98adb076ac75acd67da829abc8ab5b85bdd1de27e7362e8e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +112,32 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published size model; shape unresolved"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "910 × 910 × 910 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Possibly synchronized with Vanth’s roughly 9.54-day orbit; no qualified sidereal spin is installed."
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Resonant trans-Neptunian object (plutino)"
+              "value": "910 × 910 × 910 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1801.07221",
+                "label": "Research publication · arXiv 1801.07221",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1801-07221",
+                "locator": "/fullAxesKm/0"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes."
+              "value": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes.",
+              "source": {
+                "url": "https://arxiv.org/abs/1801.07221",
+                "label": "Research publication · arXiv 1801.07221",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1801-07221",
+                "locator": "/fullAxesKm/0; /diameterUncertaintyKm/plus; /diameterUncertaintyKm/minus"
+              }
             }
           ]
         },
@@ -316,8 +317,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1b0ac3904a0d2848d311901073cfcdea8765e8b442de5769451b68991e76b06f",
-      "bytes": 3531,
+      "sha256": "098befec6db655cb98adb076ac75acd67da829abc8ab5b85bdd1de27e7362e8e",
+      "bytes": 3752,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +399,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4995,
-          "sha256": "81cd3291551adb5260c3c289e6341023c91912a0d928c04db5fc21df3cd09fa4",
+          "bytes": 5166,
+          "sha256": "a64ce70c18aa9ede395b53f3c5c131258ada632bf7cf338c60cb1341452b2739",
           "verification": "bytes-verified"
         }
       ],
@@ -437,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "orcus",
-    "materialSha256": "98368b7cb68a3c2368e4e47881be33cfdda64c26e5444ca5293f6a562431fa85",
+    "materialSha256": "fda91207e5042a4ed7ec5e51b4763c325ef14d9fd275014abaea95ec6e501b05",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -439,8 +439,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "08a3762c948b4d962735f9c6fd9976a1eff0a238de27f33fee2a51b26218220c",
-      "expectedBytes": 15495,
+      "expectedSha256": "98b33e99f5bf700cb308059c67d1c77f4e7c3aafd7d9617dc1c3bfce4172a94b",
+      "expectedBytes": 15307,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -572,6 +572,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2765,
+      "expectedSha256": "01716a7c26875fe0445b37624d2b2b82b4019f96ac2f779854178e6b223a5de3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Pluto: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

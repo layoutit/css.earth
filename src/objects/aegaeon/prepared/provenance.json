@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8aa16b4d67706e540cbf41606801e7abaf56f53c62166f87d48cc09558f256b"
+    "sha256": "4e01a872d80018e8ed72b89cd1d3762fcbc9b3bfca00eea8ac2f785b65685856"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c3506a2ea179a13e509d2c1236468f177d8ccdf9314632136dc799f22ebd9fb3",
+      "sha256": "73612dc552967fed4553803ca3a5574fe0217218fcb9c849ca639b0e4872a43e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,32 +114,41 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "0.33 ± 0.06 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Measured dimensions",
-              "value": "1.4 × 0.5 × 0.4 km"
+              "value": "0.33 ± 0.06 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1912.09192",
+                "label": "Research publication · arXiv 1912.09192",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1912-09192",
+                "locator": "/referenceRadiusKm"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Distance from Saturn",
-              "value": "About 167,500 km"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbit around Saturn",
-              "value": "About 19.3 hours"
+              "value": "About 167,500 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery images",
-              "value": "Cassini imaging team · 2008"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
+              "value": "Cassini imaging team · 2008",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/1; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -304,8 +313,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c3506a2ea179a13e509d2c1236468f177d8ccdf9314632136dc799f22ebd9fb3",
-      "bytes": 2826,
+      "sha256": "73612dc552967fed4553803ca3a5574fe0217218fcb9c849ca639b0e4872a43e",
+      "bytes": 3446,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -386,8 +395,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6413,
-          "sha256": "cc3b4b8c62d900af7dc04fc35350eadc8093b91e24fb4ab640ad60f761ad17c9",
+          "bytes": 6892,
+          "sha256": "2932b5d58211bdecc0016d793a25d177375dd6d6af817dd1868b8a4508e1148b",
           "verification": "bytes-verified"
         }
       ],
@@ -425,7 +434,7 @@
   },
   "lastPreparation": {
     "objectId": "aegaeon",
-    "materialSha256": "b02deeefec6e5c8c549125ba92f80f423a1757899e98fba937af9d3a2ea0bd34",
+    "materialSha256": "c4158ef855d180a0417199592ce4af8d77cd243a55d9a5a3c6b4e6b00086b9c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

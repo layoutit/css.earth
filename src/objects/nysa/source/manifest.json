@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7788,
-      "expectedSha256": "ab0b4727966e3d811f0c04822782a49c00303430e8fc6e0ea80b9b8b55ab73fb",
+      "expectedBytes": 7996,
+      "expectedSha256": "ab2b59804d32f5ab1b05c59be9cc43296da75af09079dbb85c786f759cc25f1e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -159,6 +159,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1828,
       "expectedSha256": "00c6778e3f5e3ca94aa35c7d054cd15cae1f0bbb6e1e136aaf61ad42ffdd7bd6"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6324,
+      "expectedSha256": "756e0cbddf0396efc39397c4cfd092dec9d7b626d594d1642f04f28492da08f1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Nysa: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

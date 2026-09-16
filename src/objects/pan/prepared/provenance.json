@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8422ba90d9b16c86e28b86d9da918bae98c77640be0964de11c95cb75e04c4ff"
+    "sha256": "35362e150728fd3d3243f96b37744f7ca435c5ed060542f71e2311956ecd8615"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -417,7 +417,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
+      "sha256": "731eaae6339ec14a6757675b452cb675c05bab98917a8dfee6225b13313fb4dc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -454,17 +454,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 13.8 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 134,000 km"
+              "value": "About 13.8 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Mark Showalter · 1990"
+              "value": "Mark Showalter · 1990",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -1721,8 +1732,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
-      "bytes": 4923,
+      "sha256": "731eaae6339ec14a6757675b452cb675c05bab98917a8dfee6225b13313fb4dc",
+      "bytes": 5529,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1909,8 +1920,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3891,
-          "sha256": "841068124a7d06ea727a2d1907eeda9d546199ffff90432453db058083931e91",
+          "bytes": 4359,
+          "sha256": "c988c4e9fa05b99f5d3029dc074cfaf8367cd1e841dc95540b4baf602464bb99",
           "verification": "bytes-verified"
         }
       ],
@@ -1998,7 +2009,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "ee2f54712d7d467a79e9d4e4ea4bc17cffc17eca358d9e18bb5b114d8e3323f7",
+    "materialSha256": "b6dc31c6185c83f940d16cef789593da144edccb732859de51b3ee4aa717fe18",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

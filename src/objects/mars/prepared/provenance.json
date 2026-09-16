@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3ff26342b237eb5a0b18f7d2d48a343c67207812e2b674dadb7ddf8117814fa9"
+    "sha256": "0c379817f5fca133bc87ea7b1fe41407069c67308aa3e7661d6854df97c48da9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -97,7 +97,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6fd63aac032545b77aefa9005667483f465b3e6c5363b6fb023054d942d8007a",
+      "sha256": "8a6fce4bbfbf89eae188618e42674be4e65ce7c0ce7b1e2b35ec805218123e95",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,21 +173,6 @@
                 "catalogueId": "source-pluto-orbit-jpl-physical-values",
                 "locator": "/references/1; rotation-period"
               }
-            },
-            {
-              "id": "axial-tilt",
-              "label": "Axial tilt",
-              "value": "25°"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "2"
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "None"
             }
           ],
           "moreFacts": [
@@ -838,8 +823,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "6fd63aac032545b77aefa9005667483f465b3e6c5363b6fb023054d942d8007a",
-      "bytes": 14006,
+      "sha256": "8a6fce4bbfbf89eae188618e42674be4e65ce7c0ce7b1e2b35ec805218123e95",
+      "bytes": 13694,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1390,8 +1375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9160,
-          "sha256": "5e82b8f87998dccd1f7094049d701d739c0a00cb3536ec2f09de41feeaa6e2fa",
+          "bytes": 9004,
+          "sha256": "8429219987ac2b9dd09222dced78461b8960302b8e23c602a344722481c68611",
           "verification": "bytes-verified"
         }
       ],
@@ -1604,7 +1589,7 @@
   },
   "lastPreparation": {
     "objectId": "mars",
-    "materialSha256": "498489fcc5099bc14d196b4fd695f7ed5b50767e057d541eaa6a8cf06768ab99",
+    "materialSha256": "ed5847bfacbcf3ff2f9fb0c3e03a1190960be0ee39aa165048bfc888650dc01e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

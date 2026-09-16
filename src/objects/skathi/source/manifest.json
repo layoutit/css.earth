@@ -105,8 +105,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3066,
-      "expectedSha256": "26f0092596e91e71100e554b2c47e89b067c4e4d04db94643785e583180cd7bf",
+      "expectedBytes": 3105,
+      "expectedSha256": "ed3f0fb54e7a39ce4150a59c355fbed6ae64a312dc123044d4adc83e5942c571",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -156,6 +156,15 @@
       "path": "validation/orbit-checks.json",
       "expectedBytes": 25859,
       "expectedSha256": "e00dfe4e63630132e8d08e26a044049d4a5b4342418d5e783b88e038969d888d"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1470,
+      "expectedSha256": "010e0105ba077a1ae57f935f3d71ed8df4a04a2e6f43e996eef6cc2be345576a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

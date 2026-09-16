@@ -177,6 +177,8 @@ Explain the following where relevant:
 
 Link generated processing records. For facts outside them, such as factsheet
 values or orbital assumptions, name the source field/table and show any calculation.
+A published factsheet value names its source on the fact itself; preparation
+refuses a fact without one, and a value no record proves is removed, not shown.
 Record useful alternatives and why they were selected, rejected or unresolved;
 a failed download does not establish that a dataset does not exist. Link the
 provider's reuse terms or state what is unresolved: a publisher name or repository

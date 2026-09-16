@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92457ffbc56fd86b3aa78388b0321c1726fa14b777b05dfee58aa11e809018f5"
+    "sha256": "3325fd88bddfef0276cdcfe631d6969f984081b871854bb2c6aeaeffc958998c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
+      "sha256": "43577d64e6eac24140089c7e572dc610a2224923e8e6677e6ffb9fd20349717a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,12 +203,28 @@
             {
               "id": "precession-period",
               "label": "Precession period",
-              "value": "27.45 hours"
+              "value": "27.45 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+                "label": "Apophis · apophis research apophis 2018",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-apophis-apophis-research-apophis-2018",
+                "locator": "/precessionPeriodHours"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Body rotation period",
-              "value": "265.7 hours"
+              "value": "265.7 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+                "label": "Apophis · apophis research apophis 2018",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-apophis-apophis-research-apophis-2018",
+                "locator": "/rotationPeriodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -364,8 +380,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
-      "bytes": 9248,
+      "sha256": "43577d64e6eac24140089c7e572dc610a2224923e8e6677e6ffb9fd20349717a",
+      "bytes": 10036,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6754,
-          "sha256": "420fe3db2dc3344621d401630238a652e5bdb38bc0f674cdc699ddb2ce387787",
+          "bytes": 7360,
+          "sha256": "49df8bc47aa795c831536d00e74f3339c616b05e1f0d34349f45853c60690b67",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "apophis",
-    "materialSha256": "5b4f3af4314224a6f07fdb8f27b6f45516169034cfc45b860a9271aa4758002f",
+    "materialSha256": "e5090ad5e394b415f59db6bb42dac86508a2a5d346d7fb9f41943e4a5d15be8f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

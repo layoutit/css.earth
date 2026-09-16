@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "30.070 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "445",
+        "Neptune",
+        "Proteus",
+        "808",
+        "NEP097",
+        "Laplace",
+        "2000-01-01.5",
+        "117600.",
+        "0.000",
+        "0.0",
+        "276.8",
+        "0.0",
+        "0.0",
+        "1.122315",
+        "0.000",
+        "0.000",
+        "299.8",
+        "42.6",
+        "0.9",
+        "24"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "VIII",
+        "Proteus",
+        "S/1989 N1",
+        "1989",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

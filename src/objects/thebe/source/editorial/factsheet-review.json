@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "5.203 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "8",
+        "Jupiter",
+        "Thebe",
+        "514",
+        "JUP365",
+        "Laplace",
+        "2000-01-01.5",
+        "221900.",
+        "0.018",
+        "26.6",
+        "182.1",
+        "1.1",
+        "340.4",
+        "0.676105",
+        "0.398",
+        "0.797",
+        "268.1",
+        "64.5",
+        "0.0",
+        "29"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XIV",
+        "Thebe",
+        "S/1979 J2",
+        "1979",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

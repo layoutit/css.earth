@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "9.537 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "121",
+        "Saturn",
+        "Dione",
+        "604",
+        "SAT441",
+        "Laplace",
+        "2000-01-01.5",
+        "377700.",
+        "0.002",
+        "116.0",
+        "212.0",
+        "0.0",
+        "0.0",
+        "2.736916",
+        "11.698",
+        "0.000",
+        "40.6",
+        "83.5",
+        "0.0",
+        "36"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "IV",
+        "Dione",
+        "",
+        "1684",
+        "G.D. Cassini",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4942dfd1917a21ab7b45a5b638cb7d78d0c70e213ebe1442e494da7add1033c2"
+    "sha256": "39aca3a6107138f91a21d5e11789bedcf50942a1bfef12a4972b61ba3ed2fdd4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "492f365255b7c42612cf337bd7b40d625c4f87f7576258bb7c33ac901cb1aa5e",
+      "sha256": "475540e5ab97f0b2b55b3ac134ecf6c8f138487dfc7fefde018a75c890baefc2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,7 +164,15 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "2.695 km"
+              "value": "2.695 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+                "label": "Betulia · betulia research betulia",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-betulia-betulia-research-betulia",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -195,7 +203,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.13836 hours"
+              "value": "6.13836 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+                "label": "Betulia · betulia research betulia",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-betulia-betulia-research-betulia",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -361,8 +377,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "492f365255b7c42612cf337bd7b40d625c4f87f7576258bb7c33ac901cb1aa5e",
-      "bytes": 8453,
+      "sha256": "475540e5ab97f0b2b55b3ac134ecf6c8f138487dfc7fefde018a75c890baefc2",
+      "bytes": 9222,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6148,
-          "sha256": "ee235f283868745b879fc94b2867fa30988aec8bb81f32b7343e3568cc5de68a",
+          "bytes": 6735,
+          "sha256": "cfab09ccc2d75d1bfc0f5bfbada176b617a6ac98b2f9f9e20750c7d7189cc392",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +563,7 @@
   },
   "lastPreparation": {
     "objectId": "betulia",
-    "materialSha256": "70c3fd84f87e7299cedfe11c52c7a444e9c2d4b6d707c767a3049e20d15ae145",
+    "materialSha256": "2d66ffb8f3839bbef3e61874e9e548b94c23c497404ae9c225d0462182d60fed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

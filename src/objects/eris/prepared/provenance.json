@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "014c131646e134b0ab58f5ec158641f6adc74034890611ade8bb392d4d996872"
+    "sha256": "850978b71c0151105614950041642a3f68fa934aa1e49c478ae163033ef207ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -101,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75e3401d067ea3cd0e05abc9c7dcd8bb22c04ffacc4c9bc3f30056eb5a11ac33",
+      "sha256": "94c13db8f5c921218f09e74d525c958f7ae7807be590bf86d88bf6f07182e7d7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -129,51 +129,31 @@
             {
               "id": "diameter",
               "label": "Diameter",
-              "value": "2,326 ± 12 km"
+              "value": "2,326 ± 12 km",
+              "source": {
+                "url": "https://doi.org/10.1038/nature10550",
+                "label": "Research publication · DOI 10.1038/nature10550",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature10550",
+                "locator": "/radiusKm"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "About 15.8 days"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "1 — Dysnomia"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "About 557 years"
+              "value": "About 15.8 days",
+              "source": {
+                "url": "https://doi.org/10.1038/nature10550",
+                "label": "Research publication · DOI 10.1038/nature10550",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature10550",
+                "locator": "/rotationPeriodDays"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "shape",
-              "label": "Shape",
-              "value": "Consistent with a sphere from a stellar occultation"
-            },
-            {
-              "id": "surface",
-              "label": "Surface coverage",
-              "value": "Unresolved; no terrain map"
-            },
-            {
-              "id": "appearance",
-              "label": "Surface representation",
-              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
-            },
-            {
-              "id": "orientation",
-              "label": "Orientation",
-              "value": "Arbitrary display pole and meridian"
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "None known"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -356,8 +336,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "75e3401d067ea3cd0e05abc9c7dcd8bb22c04ffacc4c9bc3f30056eb5a11ac33",
-      "bytes": 5209,
+      "sha256": "94c13db8f5c921218f09e74d525c958f7ae7807be590bf86d88bf6f07182e7d7",
+      "bytes": 4943,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -867,8 +847,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3566,
-          "sha256": "d9b580cbcbe76558bad0952c6dd1b9795d220ac7f8af026263e398bf2bf204ca",
+          "bytes": 3431,
+          "sha256": "4981cbacfd7bcdf2af450e2a15eb1367f0eee4b55e967e0d70c821b860e1987c",
           "verification": "bytes-verified"
         }
       ],
@@ -906,7 +886,7 @@
   },
   "lastPreparation": {
     "objectId": "eris",
-    "materialSha256": "99eb5f1449bf0d30410f82f1d3099f5173dc0617ec236dfd60d824eed354111d",
+    "materialSha256": "9e646511e76d3fa07f9da846a5a9dcda591ebdd5b664b5e199362dd05e50bbd8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

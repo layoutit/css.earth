@@ -25,51 +25,31 @@
       {
         "id": "diameter",
         "label": "Diameter",
-        "value": "2,326 ± 12 km"
+        "value": "2,326 ± 12 km",
+        "source": {
+          "url": "https://doi.org/10.1038/nature10550",
+          "label": "Research publication · DOI 10.1038/nature10550",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature10550",
+          "locator": "/radiusKm"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "About 15.8 days"
-      },
-      {
-        "id": "moon-count",
-        "label": "Moons",
-        "value": "1 — Dysnomia"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "About 557 years"
+        "value": "About 15.8 days",
+        "source": {
+          "url": "https://doi.org/10.1038/nature10550",
+          "label": "Research publication · DOI 10.1038/nature10550",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature10550",
+          "locator": "/rotationPeriodDays"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "shape",
-        "label": "Shape",
-        "value": "Consistent with a sphere from a stellar occultation"
-      },
-      {
-        "id": "surface",
-        "label": "Surface coverage",
-        "value": "Unresolved; no terrain map"
-      },
-      {
-        "id": "appearance",
-        "label": "Surface representation",
-        "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
-      },
-      {
-        "id": "orientation",
-        "label": "Orientation",
-        "value": "Arbitrary display pole and meridian"
-      },
-      {
-        "id": "ring-system",
-        "label": "Rings",
-        "value": "None known"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

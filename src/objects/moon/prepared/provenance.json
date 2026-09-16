@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03243844cd25d97879e622ef05bab0fe36b89076d287606ccd71cd805c680920"
+    "sha256": "8ecdf3d3436afbcea6755c388ea716b7d4f202f13a22ccb5abcf4fcabf8b9c0d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -635,7 +635,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
+      "sha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -663,7 +663,15 @@
             {
               "id": "distance-from-earth",
               "label": "Mean distance from Earth",
-              "value": "384,400 km"
+              "value": "384,400 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+                "label": "source-moon-prepared-moon-facts",
+                "checked": "2026-09-16",
+                "path": "source/orbit/moon.json",
+                "catalogueId": "source-moon-prepared-moon-facts",
+                "locator": "/meanOrbitRadiusKm"
+              }
             },
             {
               "id": "radius",
@@ -681,7 +689,15 @@
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "27.322 days"
+              "value": "27.322 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "rotation-period",
@@ -699,12 +715,28 @@
             {
               "id": "orbital-inclination",
               "label": "Inclination to ecliptic",
-              "value": "5.16°"
+              "value": "5.16°",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+                "label": "source-moon-prepared-moon-facts",
+                "checked": "2026-09-16",
+                "path": "source/orbit/moon.json",
+                "catalogueId": "source-moon-prepared-moon-facts",
+                "locator": "/inclinationDegrees"
+              }
             },
             {
               "id": "orbital-eccentricity",
               "label": "Orbital eccentricity",
-              "value": "0.0554"
+              "value": "0.0554",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+                "label": "source-moon-prepared-moon-facts",
+                "checked": "2026-09-16",
+                "path": "source/orbit/moon.json",
+                "catalogueId": "source-moon-prepared-moon-facts",
+                "locator": "/eccentricity"
+              }
             },
             {
               "id": "density",
@@ -2183,8 +2215,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
-      "bytes": 34459,
+      "sha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
+      "bytes": 35627,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3333,8 +3365,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5542,
-          "sha256": "df4c211edc6657f5c54149cb2d30152d800e9b5dc7436b515c1bf90bf5453397",
+          "bytes": 6531,
+          "sha256": "be974fb224e3b3be3e0de7d8833f4344a2f40a14ae17d3776d48bba4f604df20",
           "verification": "bytes-verified"
         }
       ],
@@ -3586,7 +3618,7 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "8c7b1b17ac3822a5e3d679d8a30d3fcc8c850a6baa4f8f4cb27e7c8f4ca13af4",
+    "materialSha256": "79b4390c993c9beaa5e40bbdf51c0690fd16ab13957296a15e7ead0d4e70902e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

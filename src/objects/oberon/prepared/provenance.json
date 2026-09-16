@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "181f99e3ed0abe7fc315b6dc167898e47fca0fd876169b879f598bfa55935d91"
+    "sha256": "b425610387c2b2e2539ae079f2900561b5e2d43bf9f5b2a31cfdee83803b99a9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -129,7 +129,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21d95851bc3b0cd901e8e42d39ff014c57ea84a1288f9d74fd1200e32f662bf6",
+      "sha256": "b0bc66dbb8ea9da730fd6897409400ae3880383366177fa7abba4a815211ba23",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,22 +166,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 13.46 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 13.46 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Uranus",
-              "value": "About 583,500 km"
+              "value": "About 13.46 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Herschel · 1787"
+              "value": "William Herschel · 1787",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -424,8 +430,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "21d95851bc3b0cd901e8e42d39ff014c57ea84a1288f9d74fd1200e32f662bf6",
-      "bytes": 7512,
+      "sha256": "b0bc66dbb8ea9da730fd6897409400ae3880383366177fa7abba4a815211ba23",
+      "bytes": 7976,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1032,8 +1038,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5691,
-          "sha256": "b09c709cdd17ae5f86323203dc3a0dbe56d05ad1e0712c2b3e2dc143f7fd9768",
+          "bytes": 6061,
+          "sha256": "eb1b425453b4c60cb4f63fd2a3eb65626437c69ebb86b97360c2f511688ec8e9",
           "verification": "bytes-verified"
         }
       ],
@@ -1107,7 +1113,7 @@
   },
   "lastPreparation": {
     "objectId": "oberon",
-    "materialSha256": "679aa138ce65dd06bdf16ca0e180f724b0e8c928d5e2ab3020e4b3d3fabef066",
+    "materialSha256": "ba585b8356ab2ee2f256504f04bbb0aedfb39d39def0869e7778f238f6b5e55d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

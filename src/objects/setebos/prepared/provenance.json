@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9dba6c1897c770e106f9b1efa9d394cd20a62cd47f9d96345ddb13d3744ca2c4"
+    "sha256": "c04714bce939b75ee5a9a515ee3127387a92a0d5238aae5f06735845bb1d65d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bec1392f36e6dacf9a8f822037bd7277ce4449b4966f47b4c5495d720708947c",
+      "sha256": "80b06bc22d0e66afd702254fff47eb8e8488a670b6e0974333cd10c7a44c8fd8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,27 +114,54 @@
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Uranus"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
+              "value": "Uranus",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "dimensions",
               "label": "Full model dimensions",
-              "value": "55.5 × 43.3 × 43.3 km"
+              "value": "55.5 × 43.3 × 43.3 km",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1"
+              }
             },
             {
               "id": "scale",
               "label": "Size evidence",
-              "value": "47 km · assumed-albedo estimate"
+              "value": "47 km · assumed-albedo estimate",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/constraints/referenceRadiusKm"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation interpretation",
-              "value": "8.51 ± 0.034 h"
+              "value": "8.51 ± 0.034 h",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/spin/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -320,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bec1392f36e6dacf9a8f822037bd7277ce4449b4966f47b4c5495d720708947c",
-      "bytes": 2505,
+      "sha256": "80b06bc22d0e66afd702254fff47eb8e8488a670b6e0974333cd10c7a44c8fd8",
+      "bytes": 3736,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -402,8 +429,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6313,
-          "sha256": "5787de08be645120d4c4e46c1d364f8c4927128309c7b381aa11aa3a8c0b84ac",
+          "bytes": 7224,
+          "sha256": "b94a863a79b1bca0a119c95a3f0e13de7e3df5bedfbf28db00000d3f165f10c0",
           "verification": "bytes-verified"
         }
       ],
@@ -441,7 +468,7 @@
   },
   "lastPreparation": {
     "objectId": "setebos",
-    "materialSha256": "796293754e612f9705f60a1f95d7d1f264bf39f6c5926b815cfdf23d55e28c4e",
+    "materialSha256": "60bf79b4bcce51e0abd736cf7e232f4c29af6e1660e6277214797b571fff3623",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

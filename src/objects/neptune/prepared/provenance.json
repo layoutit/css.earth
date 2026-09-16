@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a48a2b88b82255beb55ff8227485b1e89c3fc0107e9d024975d6e1da87e8131"
+    "sha256": "e7a266da7df50d86a451c83b3cc9c3dd8310dd1714d2e3801b375b3f983f5a1e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7a288f97390b9dcfddb898797a4b940a187d37736a1100f3d134db82c40224c2",
+      "sha256": "b2e20ab50675474aa9fd5d28ab0463abb93d155d43485e8356cbbea64e7ccf41",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -93,11 +93,6 @@
               }
             },
             {
-              "id": "axial-tilt",
-              "label": "Axial tilt",
-              "value": "28°"
-            },
-            {
               "id": "moon-count",
               "label": "Known moons",
               "value": "16 · Sep 2026",
@@ -109,19 +104,9 @@
                 "catalogueId": "nasa-neptune-moons",
                 "locator": "/references/2; moon-count"
               }
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "Present"
             }
           ],
           "moreFacts": [
-            {
-              "id": "wind-speed",
-              "label": "Cloud-top winds",
-              "value": "Over 2,000 km/h"
-            },
             {
               "id": "mass",
               "label": "Mass",
@@ -1261,8 +1246,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "7a288f97390b9dcfddb898797a4b940a187d37736a1100f3d134db82c40224c2",
-      "bytes": 14831,
+      "sha256": "b2e20ab50675474aa9fd5d28ab0463abb93d155d43485e8356cbbea64e7ccf41",
+      "bytes": 14477,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1575,8 +1560,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9922,
-          "sha256": "95ed8c28c0390ccb7ebd8482bba8cb2652e5044a64c7f1b055758bbc7dc2dfe4",
+          "bytes": 9739,
+          "sha256": "93d8a5ddbb55643d48fdd5916a0407b67a628b8bda5f9afe30d9c2c5f0f520bd",
           "verification": "bytes-verified"
         }
       ],
@@ -1750,7 +1735,7 @@
   },
   "lastPreparation": {
     "objectId": "neptune",
-    "materialSha256": "c90cfa49e66b018188f5a3ff282dd81bb845639a9361e1fc42b5b247b34fae87",
+    "materialSha256": "adf631c9d098f280272ef9268bbbe719ea2dc3b320ef35d7ef5ef9e8dc8256e5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

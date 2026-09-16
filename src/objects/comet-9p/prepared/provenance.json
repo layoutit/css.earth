@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b530eebb9d817e9af93266327168115502cddf4b69e5595f54abdacb38e18f60"
+    "sha256": "a9d7289831f27efc7b1bc7649cd28f5044fabc5d6b08d9120927f3de33bab8d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -379,30 +379,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
+      "sha256": "eaa435d37a8e0bcfa09c53daef3afbf8eecedb48a238d9ec6a3a8b291332993d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-9p",
         "displayName": "Tempel 1",
         "panel": {
-          "facts": [
-            {
-              "id": "diameter",
-              "label": "Equivalent diameter",
-              "value": "5.66 ± 0.20 km"
-            },
-            {
-              "id": "mission",
-              "label": "Explored by",
-              "value": "Deep Impact · Stardust-NExT"
-            },
-            {
-              "id": "source-epoch",
-              "label": "Shape observations",
-              "value": "2005 and 2011"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -5321,8 +5305,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
-      "bytes": 9856,
+      "sha256": "eaa435d37a8e0bcfa09c53daef3afbf8eecedb48a238d9ec6a3a8b291332993d",
+      "bytes": 9493,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5932,8 +5916,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5223,
-          "sha256": "13c6373adabed30d7b86cf639a1a854d285675250bde904637295162f566e2b1",
+          "bytes": 4997,
+          "sha256": "b607cb7f8883b1c5aed770663d86c12cf4b9a798705d159b055f6b5a4eb9ca0d",
           "verification": "bytes-verified"
         }
       ],
@@ -6104,7 +6088,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "d8f392c0270ad877a5cbbd3e9218e067a7c0e3119edb6f65994758c548790ac1",
+    "materialSha256": "806ba82135c76e007ab0b3cd63fdf58c4d05cbf0d2c800a07670d489222be6b0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

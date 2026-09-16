@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e354cc4b77dddd952a573e4ab259c95659c25d0deacbc83b953b65fcddf55f27"
+    "sha256": "51feb2a68e7cbb6f7f4bd2cbce8d4aac8d3a8d2b2de1e227978ca640fd413596"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -56,7 +56,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a801c02ae8a0420e15d36d6cd3e517013cba69dadcbf229dbe33ec3c1be2b845",
+      "sha256": "cab94a7d374eb7c261f252206014b2bd97f08bf6b2685dc8b9da7ba078affe53",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -70,44 +70,56 @@
             {
               "id": "dimensions",
               "label": "Model dimensions",
-              "value": "2,322 × 1,704 × 1,026 km"
+              "value": "2,322 × 1,704 × 1,026 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.03113",
+                "label": "doi-10-1038-nature24051",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature24051",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.915 hours"
+              "value": "3.915 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=136108",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             },
             {
               "id": "ring-width",
               "label": "Ring width",
-              "value": "About 70 km"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "2 — Hiʻiaka and Namaka"
+              "value": "About 70 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.03113",
+                "label": "doi-10-1038-nature24051",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature24051",
+                "locator": "/ringWidthKm"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "ring-radius",
               "label": "Ring radius",
-              "value": "About 2,287 km"
-            },
-            {
-              "id": "surface",
-              "label": "Surface coverage",
-              "value": "Unresolved; no terrain map"
-            },
-            {
-              "id": "phase",
-              "label": "Rotational phase",
-              "value": "Arbitrary display orientation"
-            },
-            {
-              "id": "appearance",
-              "label": "Surface representation",
-              "value": "One measured whole-disc colour and albedo, spread evenly; the surface is unresolved and no terrain is shown"
+              "value": "About 2,287 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.03113",
+                "label": "doi-10-1038-nature24051",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature24051",
+                "locator": "/ringRadiusKm"
+              }
             },
             {
               "id": "orbital-period",
@@ -324,8 +336,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a801c02ae8a0420e15d36d6cd3e517013cba69dadcbf229dbe33ec3c1be2b845",
-      "bytes": 3460,
+      "sha256": "cab94a7d374eb7c261f252206014b2bd97f08bf6b2685dc8b9da7ba078affe53",
+      "bytes": 4145,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -401,8 +413,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6213,
-          "sha256": "6352fffef19dde35c55556b90f9bd185ae799996f9a869a28c0ead8ea79f352e",
+          "bytes": 6710,
+          "sha256": "7b76e3899b0a795cbe83188c299c2bb55517241b3eacf6547103cde2eef2f363",
           "verification": "bytes-verified"
         }
       ],
@@ -440,7 +452,7 @@
   },
   "lastPreparation": {
     "objectId": "haumea",
-    "materialSha256": "6d878b72d3896fc06ab6ac48681da2dec5b726921725684689979ca48da77aa3",
+    "materialSha256": "13b1bb03a6a11d79c35974584ced23680d8c46735f8ab138c92d3602e9e39c6f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

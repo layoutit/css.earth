@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d9b1928c18de7448a37cf924e91619828732ae37da4e86efa1529137584a941"
+    "sha256": "50ba00931f0dcda13db30fe1b49477dbf84e4894afd866cdaadadffdf4682e65"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -548,7 +548,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "08a3762c948b4d962735f9c6fd9976a1eff0a238de27f33fee2a51b26218220c",
+      "sha256": "98b33e99f5bf700cb308059c67d1c77f4e7c3aafd7d9617dc1c3bfce4172a94b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -639,16 +639,6 @@
                 "catalogueId": "nssdc-pluto-factsheet",
                 "locator": "/references/2; axial-tilt"
               }
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "5"
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "None"
             }
           ],
           "moreFacts": [
@@ -1348,8 +1338,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "08a3762c948b4d962735f9c6fd9976a1eff0a238de27f33fee2a51b26218220c",
-      "bytes": 15495,
+      "sha256": "98b33e99f5bf700cb308059c67d1c77f4e7c3aafd7d9617dc1c3bfce4172a94b",
+      "bytes": 15307,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2282,8 +2272,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5948,
-          "sha256": "29cdad39f2d19fd4998839c7c5419688f1911e6624bd789e25bb128f662e2fa2",
+          "bytes": 5848,
+          "sha256": "5bd91a30b13872cc8727d2d17341a4fe0d7fdc4607529eb4760de45fc258ab7e",
           "verification": "bytes-verified"
         }
       ],
@@ -2482,7 +2472,7 @@
   },
   "lastPreparation": {
     "objectId": "pluto",
-    "materialSha256": "cbf9e65ed12aaaf7dd690f3e65ec8988c38745347cb81b467c72de7b02a4c3dc",
+    "materialSha256": "0f1494e943a60fe40c28f48c5d652e1b437ba7ad4f8be6fb90bacacd91818cd8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

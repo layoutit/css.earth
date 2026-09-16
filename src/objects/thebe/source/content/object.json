@@ -34,22 +34,15 @@
       {
         "id": "orbital-period",
         "label": "Orbit around Jupiter",
-        "value": "16.2 hours"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "Synchronous with its orbit"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Mean distance from Jupiter",
-        "value": "About 222,000 km"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Stephen Synnott · Voyager 1 · 1979"
+        "value": "16.2 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/2; P (days) × 24"
+        }
       }
     ],
     "moreFacts": []

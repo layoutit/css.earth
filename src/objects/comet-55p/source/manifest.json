@@ -79,8 +79,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3395,
-      "expectedSha256": "a29957d1f9a61e3a219748c6658d9fba2350d801fb9be2aee8965f2df9794ca5",
+      "expectedBytes": 3732,
+      "expectedSha256": "526e25153ffe4e6f190aa440c854febeaecc18986a79432075fd80b5ca7a547a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -130,6 +130,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 2836,
       "expectedSha256": "d0b92b38c48db58a6b68e0dc5d9153d4919223ac50454ca093fc9d35aeb0697d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3777,
+      "expectedSha256": "91a7b121218076b428bf0c78677a2c744a088f171ece72fc2c6a3e60016a62fb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 55P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

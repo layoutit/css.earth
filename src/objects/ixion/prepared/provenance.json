@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff066fb756d73287b20d7906bd92a378db03f744a4ff6f8ade34cdbf00b77d8a"
+    "sha256": "e8000cd55da2433a87090e511b2b054e6231af20ab81eb52f247ac97691727fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b20d9ac6826b7611c0e2a78d604ca95b338df9d0954ccd1135a43799baf4d9f",
+      "sha256": "8a774eca0332f69022df5a3b6546e421af573d4bf4f4b3b987e095f497270d3d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-outline illustration"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "727 × 727 × 668 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "No secure rotation period"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Plutino (3:2 resonance with Neptune)"
+              "value": "727 × 727 × 668 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2601.09639",
+                "label": "Research publication · arXiv 2601.09639",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2601-09639",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "The 2020–2023 global projected ellipse has semiaxes 363.42 (+3.53/−3.85) and 333.98 (+7.07/−4.96) km. This axisymmetric edge-on illustration assumes equatorial depth equal to the long projected diameter; the 726.84 × 726.84 × 667.96 km full axes are not a measured 3D shape. True flattening and depth remain unresolved."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6b20d9ac6826b7611c0e2a78d604ca95b338df9d0954ccd1135a43799baf4d9f",
-      "bytes": 3272,
+      "sha256": "8a774eca0332f69022df5a3b6546e421af573d4bf4f4b3b987e095f497270d3d",
+      "bytes": 2788,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3670,
-          "sha256": "d428581579b73494322a096a0a1a104c648e9b4b5bc23bcf6c515f4a7e44499f",
+          "bytes": 3276,
+          "sha256": "a1fb94f6d75869f5b429ea96ef016ccbdafba6f26c016709a74d583fc0d0d83b",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "ixion",
-    "materialSha256": "be0f29ee66e42f32e8bbcd751877dc00443899600910a623e3ec16a787f45cbf",
+    "materialSha256": "e3da57f30f3f94ecd289e64778797b8acf7eb1b95b6075fe9f9bb62dc577377e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

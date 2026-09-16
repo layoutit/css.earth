@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9acd84d7185203913660be8bce8e615159f7e254c33a2251e570b10994095a0e"
+    "sha256": "c440c5f000931136c3739cca1d7919b66654c4fe21b593cb5946aab659a22307"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -625,7 +625,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8e84bd921247951b616f30cdd059072389d8118856444284fca2dff2421cd7e",
+      "sha256": "f8288372112673114f736bbd2417a531585e9f10ce27a9066ac98a1298d1dada",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -662,22 +662,41 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "65.7 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
+              "value": "65.7 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 377,600 km"
+              "value": "About 377,600 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Pierre Laques and Jean Lecacheux · 1980"
+              "value": "Pierre Laques and Jean Lecacheux · 1980",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -2995,8 +3014,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f8e84bd921247951b616f30cdd059072389d8118856444284fca2dff2421cd7e",
-      "bytes": 5810,
+      "sha256": "f8288372112673114f736bbd2417a531585e9f10ce27a9066ac98a1298d1dada",
+      "bytes": 6774,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3203,8 +3222,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5147,
-          "sha256": "5d7ad6c2d37eccdeb5c7da29ab03702d23f10cceb84fbe9cdcde6f8a2bd86633",
+          "bytes": 5882,
+          "sha256": "7ca16213359e586a40c0dcd5bccbafd938a0d0a1d288f9980b8f2b7002ff7ba7",
           "verification": "bytes-verified"
         }
       ],
@@ -3292,7 +3311,7 @@
   },
   "lastPreparation": {
     "objectId": "helene",
-    "materialSha256": "2d14da60f09a1aa712d276a1e654ff0a92c2a5283a7de29d2d633eecc2320d3a",
+    "materialSha256": "7b3f164d2f8a04db64fdba8f2f6afa5ce72deb85b6881b11eef5d8dc1fe46edb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "9.537 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "124",
+        "Saturn",
+        "Hyperion",
+        "607",
+        "SAT441",
+        "Laplace",
+        "2000-01-01.5",
+        "1481500.",
+        "0.105",
+        "214.0",
+        "122.9",
+        "0.6",
+        "87.1",
+        "21.276658",
+        "20.843",
+        "257.625",
+        "40.2",
+        "83.6",
+        "0.1",
+        "36"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "VII",
+        "Hyperion",
+        "",
+        "1848",
+        "W.C Bond, G.P. Bond, W. Lassell",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

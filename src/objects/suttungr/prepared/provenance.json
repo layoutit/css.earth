@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fbedcea61f51f8e9c18e1e5587400bdb8817591cb0903a7eb6380ce212b9253b"
+    "sha256": "a1134ac330ec03d4556153728d55fe1e8603e0223c65a42fbb9f69cf68aa713e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "34ea1621751a5d97ccf34dc7edd585231821375670012e7b0e6b97579d95b962",
+      "sha256": "d5a834f6d94d374b26f7ae5143a4a89d58a1bf75880bd1937e14d8266149f38f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,43 +112,33 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "7 (+2/−1.25) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.18:1 · uniform-reflectivity model"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "rotation",
               "label": "Observed rotation period",
-              "value": "7.67 ± 0.02 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2000"
+              "value": "7.67 ± 0.02 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "34ea1621751a5d97ccf34dc7edd585231821375670012e7b0e6b97579d95b962",
-      "bytes": 3079,
+      "sha256": "d5a834f6d94d374b26f7ae5143a4a89d58a1bf75880bd1937e14d8266149f38f",
+      "bytes": 3121,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5715,
-          "sha256": "cd59f52e516bcc96a38ca5ccbc2a96fd8ec3c1a2e526b9c94dc9867136898567",
+          "bytes": 5800,
+          "sha256": "67c6eb270dd9ac08706524be94d65f5b5b7a3f52ee3efab906a33cf4f9383b4e",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "suttungr",
-    "materialSha256": "345a30a1c5fc2bcf54a04d6d2666d24a771ab3fbb59ac539c3fe3bdc709941a4",
+    "materialSha256": "729fab5cf2a65f3d4a2b3a401a3c1c76d00fe8bffbc08fe8b36ce893b3abfb4a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

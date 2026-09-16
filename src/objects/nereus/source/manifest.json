@@ -151,8 +151,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9127,
-      "expectedSha256": "54d65799cd39a785a78faacebbc8a709f9fcc62439f8f071efb59c2c342e64f2",
+      "expectedBytes": 9507,
+      "expectedSha256": "774095e5b700f1500e3dd3aa5eb9e6774368a3cbe8e810b61e0a3213f32555ea",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -213,6 +213,21 @@
       "purpose": "Independent full-source scalar correspondence anchors and coverage checks.",
       "expectedBytes": 3788,
       "expectedSha256": "8f68009eb6ff2a136cd8ac038c9af869fa5aa2f12e2ebdb7641e63e419cf100c"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4966,
+      "expectedSha256": "66fce6c93875e0d2f8c42120741d201e16fd49fff20fabe787b10549a5c51e31",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Nereus: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

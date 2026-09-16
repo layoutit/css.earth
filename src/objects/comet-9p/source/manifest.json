@@ -3681,8 +3681,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9856,
-      "expectedSha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
+      "expectedBytes": 9493,
+      "expectedSha256": "eaa435d37a8e0bcfa09c53daef3afbf8eecedb48a238d9ec6a3a8b291332993d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -3752,6 +3752,21 @@
       "path": "reference/tempel1_2012_cart.wrl",
       "expectedBytes": 3871120,
       "expectedSha256": "0a2baed9f6c3f6c243968310b949b07c57b5a249925903b6926a84be2b168d35"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3782,
+      "expectedSha256": "2bd09d1f557cb031cb1510c882349ae13228612b57ec546b9725b84e2159bd10",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 9P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

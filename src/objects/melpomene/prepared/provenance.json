@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aeb6b787ace45726aa4cbb05e309323183509eb1ac49f3f6e4684c64f783b58f"
+    "sha256": "5e3decc8f39fef3db1a650a07dcdaca1c9686f98f516cc1c95577678c3933a16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fe6cee2df550987156ab6c5e79980735ad2e463cda5a844d628760794b04485c",
+      "sha256": "3d425c08b73a34f8dbb6f246d64f812f7e6b44f0fd9efd1a5ee260500f956c71",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "70.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.296 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "11.570306 hours"
             }
           ],
           "moreFacts": []
@@ -364,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fe6cee2df550987156ab6c5e79980735ad2e463cda5a844d628760794b04485c",
-      "bytes": 10339,
+      "sha256": "3d425c08b73a34f8dbb6f246d64f812f7e6b44f0fd9efd1a5ee260500f956c71",
+      "bytes": 10105,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8013,
-          "sha256": "3c53b0efdd07b5c3d6bec41c8a58efb759f9b1c9b747a09905c5df72ac886c0c",
+          "bytes": 7867,
+          "sha256": "66322421d6c90ffd00564e9ad7808ed800bbdd2a21f0073620d871202c436b89",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +540,7 @@
   },
   "lastPreparation": {
     "objectId": "melpomene",
-    "materialSha256": "ad714218cc950057aa1e50ac39b3c0e46014fc2010e03c4d4ab0d595d9065828",
+    "materialSha256": "97354c70fb9f6fd0bd7abeae9e35b9ff814cab480c9187278fac490614096d2b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

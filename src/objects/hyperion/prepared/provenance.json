@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9940b3335bc57481576d23c8201c00fd06b0911def0d81f667d722fb1d66a56"
+    "sha256": "bd9ba2894c8b2873918a7a1a445c7e134d04ea83a241dca09eea34056e6607cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -843,7 +843,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
+      "sha256": "4d4b94687eda210fe24d408b410ca380e1c94e23edb5dc602fc521f107e7ffc2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -880,22 +880,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 21.3 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Chaotic tumbling"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 1.5 million km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "William Lassell and William and George Bond · 1848"
+              "value": "About 21.3 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             }
           ],
           "moreFacts": [
@@ -3780,8 +3773,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
-      "bytes": 5875,
+      "sha256": "4d4b94687eda210fe24d408b410ca380e1c94e23edb5dc602fc521f107e7ffc2",
+      "bytes": 5822,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -4110,8 +4103,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6040,
-          "sha256": "cd016a52bcd5227e0754328f9944c4bb0e166328ed4d04025db31e52d1172c8a",
+          "bytes": 6028,
+          "sha256": "2999ba761fdf1c72c0ca02a82d3dbfc9009ecdaafae66cac335a580b74592702",
           "verification": "bytes-verified"
         }
       ],
@@ -4235,7 +4228,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "0dec2b3f6cbdfd9cd34046ee36f269ce5f03372cd8010a02526514fd6f05e58a",
+    "materialSha256": "5f190b42b809d16e0a8782be31a8503e1965543efa153e86a342a3c3ee2cf692",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

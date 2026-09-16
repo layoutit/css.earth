@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "loge",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "165",
+        "Saturn",
+        "Loge",
+        "646",
+        "SAT456",
+        "ecliptic",
+        "2000-01-01.5",
+        "22919200.",
+        "0.191",
+        "20.5",
+        "32.1",
+        "168.1",
+        "333.0",
+        "1295.5243",
+        "161.8",
+        "299.8",
+        "",
+        "",
+        "",
+        "48"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XLVI",
+        "Loge",
+        "S/2006 S5",
+        "2006",
+        "S. Sheppard, D.C. Jewitt, J. Kleyna",
+        "IAUC 8727"
+      ]
+    }
+  ]
+}

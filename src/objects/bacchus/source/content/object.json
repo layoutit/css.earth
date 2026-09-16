@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Model equivalent radius",
-        "value": "0.315 km"
+        "value": "0.315 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+          "label": "Bacchus · bacchus research bacchus",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-bacchus-bacchus-research-bacchus",
+          "locator": "/diameterKm"
+        }
       },
       {
         "id": "distance-from-sun",
@@ -56,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "15.0 ± 0.2 hours"
+        "value": "15.0 ± 0.2 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+          "label": "Bacchus · bacchus research bacchus",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-bacchus-bacchus-research-bacchus",
+          "locator": "/periodHours"
+        }
       }
     ],
     "moreFacts": []

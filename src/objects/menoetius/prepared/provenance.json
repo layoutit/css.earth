@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e4bb62c3f4a0bd59e33d91f3df9917dee3046610233b5e1c526e79fc4d449ef3"
+    "sha256": "d940c54eaf606ae78097b83a70a7507577173d4abbe682095f9eca10c57338ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "eaac6e5257b7a7e212dd1cd8adae5318959d050ee513d447c3f020288b315242",
+      "sha256": "eea5678f443c55b990569dfc831ffb1006cf710da45273453a2e02df7ae850bc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,29 +112,43 @@
         "panel": {
           "facts": [
             {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Patroclus"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
               "id": "dimensions",
               "label": "Full model dimensions",
-              "value": "117 × 108 × 90 km"
+              "value": "117 × 108 × 90 km",
+              "source": {
+                "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-menoetius-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+              }
             },
             {
               "id": "scale",
               "label": "Size evidence",
-              "value": "117 × 108 × 90 km · inferred full axes"
+              "value": "117 × 108 × 90 km · inferred full axes",
+              "source": {
+                "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-menoetius-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Mutual orbital period",
-              "value": "4.282753 ± 2.3e-05 d"
+              "value": "4.282753 ± 2.3e-05 d",
+              "source": {
+                "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-menoetius-model-surface",
+                "locator": "/spin/periodDays"
+              }
             }
           ],
           "moreFacts": []
@@ -286,8 +300,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "eaac6e5257b7a7e212dd1cd8adae5318959d050ee513d447c3f020288b315242",
-      "bytes": 2222,
+      "sha256": "eea5678f443c55b990569dfc831ffb1006cf710da45273453a2e02df7ae850bc",
+      "bytes": 3099,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -368,8 +382,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6257,
-          "sha256": "1ba1217739733a00c2021116a3a5e14a6d8ef6075d02861e03a6ce299dca1fa5",
+          "bytes": 6949,
+          "sha256": "624580970e8c0ad7d491533ce03bba7367464335d5082965d7a607d99349b138",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +421,7 @@
   },
   "lastPreparation": {
     "objectId": "menoetius",
-    "materialSha256": "65fb91db82e92b843e77a18f9e8ba37e4e1a72e507d3ef9ce43d985539c219d1",
+    "materialSha256": "0303f28aafc5c126e94d67e0125aa9badc330e8dcc57ba88d7253fbcc2371650",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

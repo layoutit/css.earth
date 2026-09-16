@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "47cd89ee7d6618c30b786696cc4aa97a29766abb3a5cd2226531c6ffb194433a"
+    "sha256": "3161e98980d2dd3f2d491e7abaed788477f9d67c48e54a05e157a7ea2176d3f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "47aaf19591f05e6f71023426757234dc3818deb0734a35551ea3735325cf7507",
+      "sha256": "81e75f183b90817dd7af583df6c0694ffccbe410a3c978477c77daea9628cf73",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,29 +112,17 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "17 (+5/−3) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "2.32:1 · uniform-reflectivity model"
-            },
-            {
-              "id": "rotation",
-              "label": "Observed rotation period",
-              "value": "21.97 ± 0.16 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2000"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
           "moreFacts": []
@@ -301,8 +289,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "47aaf19591f05e6f71023426757234dc3818deb0734a35551ea3735325cf7507",
-      "bytes": 2733,
+      "sha256": "81e75f183b90817dd7af583df6c0694ffccbe410a3c978477c77daea9628cf73",
+      "bytes": 2608,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -383,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3688,
-          "sha256": "1e2fec4a1f15d33627e32a11dcfe620cd2ed8fce73306e267a18981909595228",
+          "bytes": 3648,
+          "sha256": "006393ad638bc6d6a6f436b227023e38bb9f38b9552cf23ef005c4fc029de6cd",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +410,7 @@
   },
   "lastPreparation": {
     "objectId": "kiviuq",
-    "materialSha256": "c1e901d04dbcdbbbe03728eadc4e1c7d6f5c7d2f66352b457628c2d4e701e44c",
+    "materialSha256": "ad8c14cde069d527e2e47a880d2db7e5e0e52e6a2682ff6215ae39fde9a4bdc2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

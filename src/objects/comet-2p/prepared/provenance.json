@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "996e2effe433648c66515a61b813780fe241098b87a09cf0fe1f9426852c8ea1"
+    "sha256": "57b9bcbb6c7b9a1e080441380deeae61ea215d9461cad33177bf352a4aaaaa50"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
+      "sha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,12 +145,28 @@
             {
               "id": "dimensions",
               "label": "Model length",
-              "value": "≈9.2 km"
+              "value": "≈9.2 km",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+                "label": "Research publication · DOI 10.1016/j.icarus.2005.01.012",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "doi-10-1016-j-icarus-2005-01-012",
+                "locator": "/semiaxesKm/0"
+              }
             },
             {
               "id": "rotation",
               "label": "Dominant period",
-              "value": "≈11.1 hours"
+              "value": "≈11.1 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2P",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -276,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
-      "bytes": 2512,
+      "sha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
+      "bytes": 3199,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3390,
-          "sha256": "120aa9696e5e5f63b61d46061d887f7cd8dc9b4465446d4cba04cde7ed06186d",
+          "bytes": 3895,
+          "sha256": "98dfe0827b5fce759bb90116a9d96268b6bdef8551c72eb04c9c97962a331578",
           "verification": "bytes-verified"
         }
       ],
@@ -362,7 +378,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-2p",
-    "materialSha256": "8196f9c694f804840832e8ee7a30e935720b98db7ae5e5b29629c24e14bc867f",
+    "materialSha256": "84887873dce8521e66609175a618063ac1c151e00a05e54708949674630cf44e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

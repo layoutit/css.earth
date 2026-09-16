@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2765,
-      "expectedSha256": "2625bc0c5c59b64f57001dfb750deafc47cbff87d18533f10a809d1caebbf1f0",
+      "expectedBytes": 3022,
+      "expectedSha256": "73923f7928a9b25a8578e060a58dd872af7a1400fcf1146e6e2756b66c32afdc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -179,6 +179,15 @@
       "path": "survey/surface-intersections.json",
       "expectedBytes": 660,
       "expectedSha256": "f36c8aef3d3fe1748918237d0fff6f60411e154b05322c2c39e55b6461d090da"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1397,
+      "expectedSha256": "e9c54f86eb093be575948dfb9e402876ccb80979089c051d76dcc7a2c986a43b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

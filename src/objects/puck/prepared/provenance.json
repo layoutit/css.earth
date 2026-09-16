@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79f02150f4eaa988a2b1e64d84a83d250ec8366ff8213659d0967035ce44ba13"
+    "sha256": "18a3951764de409dfb307ec345f40e42dfbe6bf673e91bd41bcd49a5ccade0d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -144,7 +144,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
+      "sha256": "efd72f1336a3ebcf649089fa116c998fd8f954e1479f61f1ed8be452cfc312f6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -155,27 +155,28 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "About 81 km"
+              "value": "About 81 km",
+              "source": {
+                "url": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+                "label": "Puck · reference sphere",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-puck-reference-sphere",
+                "locator": "/semiAxesKm/0"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 18.28 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 86,000 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation",
-              "value": "Synchronous model"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1985"
+              "value": "About 18.28 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -395,8 +396,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
-      "bytes": 2563,
+      "sha256": "efd72f1336a3ebcf649089fa116c998fd8f954e1479f61f1ed8be452cfc312f6",
+      "bytes": 2889,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -469,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3175,
-          "sha256": "f0dddedf8b038f3c55b86e707d96ec241999b906c6ac1aee3f25ccf323719a96",
+          "bytes": 3451,
+          "sha256": "baa720c264efe2c25ba4be4754b53fcb9763ec0f93edf72d75d0ab836e5194b0",
           "verification": "bytes-verified"
         }
       ],
@@ -508,7 +509,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "65ac63aeefe22f060df61edf6e7f991c1e62defb461b52c2df2df845a4faae20",
+    "materialSha256": "9d61a111718ae9c852f90bed0e45d190675933fa4f74547372faf3346354b08f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

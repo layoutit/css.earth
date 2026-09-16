@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ea37ae559577edecb7b3a2e3f6a148bfdb0735d6b81583a00cbf7de931ec374"
+    "sha256": "9c241a73bd0de6e2b32a2635a9e30f4b1ce8d4227868c511957c9f3db44ac6bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "57e4cc8ab945d3b7f111baa23f333cf7fccefd613d792b94954828511656860c",
+      "sha256": "e4c9d6f12f537dd02b62bd1518ff74417c638c6f024eb9bb708781c6e52a72c0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +112,32 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-constrained approximation"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "824 × 824 × 770 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; published alternatives include 7.33 and 10.44 hours"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "824 × 824 × 770 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2308.08062",
+                "label": "Research publication · arXiv 2308.08062",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2308-08062",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger."
+              "value": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger.",
+              "source": {
+                "url": "https://arxiv.org/abs/2308.08062",
+                "label": "Research publication · arXiv 2308.08062",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2308-08062",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -291,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "57e4cc8ab945d3b7f111baa23f333cf7fccefd613d792b94954828511656860c",
-      "bytes": 3315,
+      "sha256": "e4c9d6f12f537dd02b62bd1518ff74417c638c6f024eb9bb708781c6e52a72c0",
+      "bytes": 3565,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4561,
-          "sha256": "a1431aa0f309dade969cfee8f04c3115012457ae3c70f0fd180ab098464dcb41",
+          "bytes": 4761,
+          "sha256": "d25a53d91908602c3e4f87593471141c649b45be0b11396899babf38cd549834",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "mani",
-    "materialSha256": "0014eb6b52a0104b3bb573d9ad23ad99aad1516b89d8d84b11efd9513d09134e",
+    "materialSha256": "9406204cd90b9f852d2e41d100b48f0bb1579d8d743e2e3c3322ec64065f245d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

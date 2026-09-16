@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8939b515dbe0f69bbd22fd616a5aa1bd26ab25ec1042a4e36dcb9c5d4032aff9"
+    "sha256": "f616c959dfa4902d549e4ce5b9593cb13b8de2cf02dcb9d8fcf6107f7c05fd55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "70f70efb09039d6912f43edf6534723947d1fccd8d1a3bcce70eeea553e0b9de",
+      "sha256": "cd6e35c4543e4d6fce4f2d436621a1b8c8ea4d59c722ebccfb53454ad3f6c614",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +112,58 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published light-curve ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "1098 × 659 × 474 km"
+              "value": "1098 × 659 × 474 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1909.04698",
+                "label": "Research publication · arXiv 1909.04698",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1909-04698",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 6.34357 hours from photometry; display phase is illustrative"
+              "value": "About 6.34357 hours from photometry; display phase is illustrative",
+              "source": {
+                "url": "https://arxiv.org/abs/1909.04698",
+                "label": "Research publication · arXiv 1909.04698",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1909-04698",
+                "locator": "/numericEvidence/periodPhotometricHours"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "Trans-Neptunian object",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=20000",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain."
+              "value": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain.",
+              "source": {
+                "url": "https://arxiv.org/abs/1909.04698",
+                "label": "Research publication · arXiv 1909.04698",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1909-04698",
+                "locator": "/numericEvidence/axisRatioBA; /numericEvidence/axisRatioCB; /radiusKm"
+              }
             }
           ]
         },
@@ -291,8 +318,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "70f70efb09039d6912f43edf6534723947d1fccd8d1a3bcce70eeea553e0b9de",
-      "bytes": 3351,
+      "sha256": "cd6e35c4543e4d6fce4f2d436621a1b8c8ea4d59c722ebccfb53454ad3f6c614",
+      "bytes": 4607,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +400,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5340,
-          "sha256": "becd320e2d2d887273d1b9c3aab9efb9fabb262ba1044e8c7a60455cc4062a76",
+          "bytes": 6276,
+          "sha256": "c59aeefc13b359e397d6f7f7ebd5b290188848cb9775db62d42633f0c6bf4474",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +439,7 @@
   },
   "lastPreparation": {
     "objectId": "varuna",
-    "materialSha256": "3762b16b70605b67e206f172ccc15571099cbd03b5bc59b226c0da901cb0ca33",
+    "materialSha256": "cb577e1dd825635658ce6c4d611f3baeee96129fb9dd39da16efbfeb922c140c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

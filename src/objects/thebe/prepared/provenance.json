@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ca61fdcbdc987a94479649b18827683f8729923e148cce1ba82ce0bb4546172"
+    "sha256": "8f3bdd281c93c44805a38b766d6469c1ccafe23816aefc254721e72dbef61214"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -252,7 +252,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a111a25bb3c6673fb3f4d1b555427d1e216d38366c63e614451490137335cb90",
+      "sha256": "86cca89b59dacd91b323c6b06939645fe7ff922dfa35a7cdd9e1c852af613d67",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,22 +289,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "16.2 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 222,000 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Stephen Synnott · Voyager 1 · 1979"
+              "value": "16.2 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -924,8 +917,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a111a25bb3c6673fb3f4d1b555427d1e216d38366c63e614451490137335cb90",
-      "bytes": 4617,
+      "sha256": "86cca89b59dacd91b323c6b06939645fe7ff922dfa35a7cdd9e1c852af613d67",
+      "bytes": 4578,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1154,8 +1147,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4716,
-          "sha256": "a0b6df1617f04bffb0ea5ee9a88ce96b93b00069f8ab05beb6175c343d3f2b25",
+          "bytes": 4718,
+          "sha256": "0b9a4e0181ff7d246118ec84ed6a3c75feb36b1d12a9731f4815a0aa66b1b4d0",
           "verification": "bytes-verified"
         }
       ],
@@ -1254,7 +1247,7 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "21c2041d00b001a4b48c1b3f5d3535109f7b05fae8060dac3482dbf56c000adb",
+    "materialSha256": "d7117cd926647c36fe51b6d1ca61b110ce524e8dd5a0b747f3717928c773d914",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

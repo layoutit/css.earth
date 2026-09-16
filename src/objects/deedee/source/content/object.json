@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Thermal-size illustration"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "635 × 635 × 635 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Rotation period and pole unresolved"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Detached trans-Neptunian object"
+        "value": "635 × 635 × 635 km",
+        "source": {
+          "url": "https://doi.org/10.3847/2041-8213/aa64d8",
+          "label": "Research publication · DOI 10.3847/2041-8213/aa64d8",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-2041-8213-aa64d8",
+          "locator": "/fullAxesKm/0"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

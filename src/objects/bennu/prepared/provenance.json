@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d5188271876d8dd218ef8d67ec2daebcbe21ac7afc666ce58e6185ecd8563f6"
+    "sha256": "9d27163e92209205110bb39706f094a868b0c13976a0be0d6e573108141e0603"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -202,7 +202,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ab491d54b481f26f0ee3b18d170708e09abb0076f37b6e3f68edfd523fa48c2c",
+      "sha256": "60b5b2bd9e21d832ca4f69b50a2b46e89defe254b6d59711871dfc4f7c2c43b9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,19 +228,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "241 m"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "1.126 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.20 years"
+              "value": "1.20 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=101955",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -698,8 +696,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ab491d54b481f26f0ee3b18d170708e09abb0076f37b6e3f68edfd523fa48c2c",
-      "bytes": 9585,
+      "sha256": "60b5b2bd9e21d832ca4f69b50a2b46e89defe254b6d59711871dfc4f7c2c43b9",
+      "bytes": 9715,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -720,7 +718,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8498d3fbaa7ffefbe3c86d25f798de80df044be4973313f2fa8091f6e4344352",
+      "sha256": "c017ad68493fbe0daab1f8ad6820b2a1ecfb6b293cbde675702327e5df555c94",
       "bytes": 1303,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -746,7 +744,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f",
+      "sha256": "baad704dc0b3e070b5781d68205e145339df3eabacf48ba33ad3aa019928c7fa",
       "bytes": 95757,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1112,8 +1110,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4890,
-          "sha256": "7f7886dd71c12a83256147bf7dbb007a92c3ad845e62b8615f275a421cca5541",
+          "bytes": 5017,
+          "sha256": "83c0baa31bb8b1cd189a73b540924b25674b6091bca794e844b4a5f904772150",
           "verification": "bytes-verified"
         }
       ],
@@ -1150,7 +1148,7 @@
         {
           "url": "/scenes/bennu/bennu-features.json",
           "bytes": 36758,
-          "sha256": "d74c2302cc89f16ace50a06374e2fab71d942e875f17b99c10228e2d75513277",
+          "sha256": "b87d254983f0c75e428d10d5fe7915a171b853578b0bd03db3b90b2c8cf0fdf1",
           "verification": "bytes-verified"
         }
       ],
@@ -1263,7 +1261,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "047c48b0bb853e3abbc8b3e3dc75f770ab86a73896c71084f5f352bd8b45d1a9",
+    "materialSha256": "4bbfdadfbf0c96b3cb386b814d5c6aaca1e4e8f52f3ffab4c2993be31c3b0120",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

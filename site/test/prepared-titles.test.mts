@@ -9,7 +9,7 @@ import { sha256 } from "../../src/platform/sha256.mts";
 import { PLANET_TITLE_STANDARD, createPreparedTitleLayout } from "../../src/platform/prepared-title.mts";
 import { PLANET_TITLE_RECIPE } from
   "../../src/platform/planet-title-recipe.mts";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { prepareShellTitles } from "../../tools/prepare-shell-titles.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { SHELL_TITLE_SOURCES } from "../source/titles/manifest.mts";
@@ -48,7 +48,7 @@ test("generates all shared title assets once from checked source vectors", async
 });
 
 test("keeps planet title rendering facts object-owned and source-bound", async () => {
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const loaded = await loadObjectContent(id);
     const { schema, ...source } = await loaded.source("title");
     const expected = { ...source, ...requireRecord(Reflect.apply(createPreparedTitleLayout, undefined, [source]), 'validated title layout') };
@@ -61,7 +61,7 @@ test("keeps planet title rendering facts object-owned and source-bound", async (
 });
 
 test("normalizes every implemented planet title to the complete Saturn standard", async () => {
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const { prepared: content } = await loadObjectContent(id);
     const prepared = requireRecord(content.title, 'prepared title');
     assert.ok(prepared, `${id}: prepared title is missing`);

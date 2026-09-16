@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8bf17f2b39d1c65ee89cb926c1bafb2ed7ad8c1b7b71199345ec23f88681a5b1"
+    "sha256": "655f339372d31141cc98e10329ffb20375ecc8a86b868ad4da69fdafe9c1ba4d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
+      "sha256": "8b423651c4ad9b05d14a8976a2fef8bb1b0a34bc9d0a460cdd97244a0f30cd27",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,7 +168,15 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "1.284042 km"
+              "value": "1.284042 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
+                "label": "Geographos · geographos research geographos",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-geographos-geographos-research-geographos",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -199,7 +207,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "5.223327 hours (model)"
+              "value": "5.223327 hours (model)",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
+                "label": "Geographos · geographos research geographos",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-geographos-geographos-research-geographos",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -365,8 +381,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
-      "bytes": 12927,
+      "sha256": "8b423651c4ad9b05d14a8976a2fef8bb1b0a34bc9d0a460cdd97244a0f30cd27",
+      "bytes": 13716,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -487,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9599,
-          "sha256": "20cb9358a0d5084b7dc39694945197b1df210377bb052a6cbb2e68167dcdc112",
+          "bytes": 10206,
+          "sha256": "5b6332df22011ce866ff23fb975bbdd928d89aa8cdf75717ffa5e4a56705ff7f",
           "verification": "bytes-verified"
         }
       ],
@@ -551,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "geographos",
-    "materialSha256": "b57a586d691d424b177cc9f4ee79d8dc16624b54c57eaf37e280a4e9aef498ac",
+    "materialSha256": "10206b661c4a6807873d1a016946e0498e03e0e35fe24d9e57c054b0c16977da",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

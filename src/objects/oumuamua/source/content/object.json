@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published light-curve interpretation"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "115 × 111 × 19 m"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Tumbling; no unique single rotation period"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Interstellar visitor"
+        "value": "115 × 111 × 19 m",
+        "source": {
+          "url": "https://doi.org/10.1093/mnras/stz2378",
+          "label": "Research publication · DOI 10.1093/mnras/stz2378",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1093-mnras-stz2378",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

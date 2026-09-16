@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "thrymr",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "153",
+        "Saturn",
+        "Thrymr",
+        "630",
+        "SAT456",
+        "ecliptic",
+        "2000-01-01.5",
+        "20330500.",
+        "0.467",
+        "92.2",
+        "216.2",
+        "175.0",
+        "247.3",
+        "1082.2292",
+        "166.6",
+        "263.3",
+        "",
+        "",
+        "",
+        "48"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XXX",
+        "Thrymr",
+        "S/2000 S7",
+        "2000",
+        "B. Gladman, J. Kavelaars, J.-M. Petit, H. Scholl, M. Holman, B.G. Marsden, P. Nicholson, J.A. Burns",
+        "IAUC 7538"
+      ]
+    }
+  ]
+}

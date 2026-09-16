@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5cf54f5d5c88e0a48394cc2f2253863f5a886a78b9e029a44d61011f446bc2db"
+    "sha256": "4dd5de10fef87742f69213424873a30e13bf87eafeabbabcafa6b77c0688b4a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -366,7 +366,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "798912d0cf108e53291d601de7e43615edb1679b4b9f06c00333f2db9375eb89",
+      "sha256": "b96c79a23fcc731c2cc03c7bf85d89ada91c855ed51854b9ec62923d7d95081e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -401,19 +401,17 @@
               }
             },
             {
-              "id": "orbital-period",
-              "label": "Orbit around Saturn",
-              "value": "About 14.4 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 137,670 km"
-            },
-            {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Richard Terrile / Voyager 1 team · 1980"
+              "value": "Richard Terrile / Voyager 1 team · 1980",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -1396,8 +1394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "798912d0cf108e53291d601de7e43615edb1679b4b9f06c00333f2db9375eb89",
-      "bytes": 5440,
+      "sha256": "b96c79a23fcc731c2cc03c7bf85d89ada91c855ed51854b9ec62923d7d95081e",
+      "bytes": 5560,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1578,8 +1576,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4778,
-          "sha256": "db631ce2d966e7c0b03210e4984a2534f7c88e5e23dfd38763df7efc7e3d4935",
+          "bytes": 4895,
+          "sha256": "338b94dd3b40671da70c3a4047aafb61c94ec6c04d12c4b00750f806a2f33e68",
           "verification": "bytes-verified"
         }
       ],
@@ -1667,7 +1665,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "4d3a66ad2b4078d8fa80153f14baa5c66332a419c6498e5ff5647cef2d2af905",
+    "materialSha256": "22a18cb9574f868c6b6336e0287677fac2d281a421d0b347562abc3a1e26bfac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

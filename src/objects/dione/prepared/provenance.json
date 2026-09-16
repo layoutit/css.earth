@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b2be9ee1705c9b5c05dac6bcffa2aac1a3d5101ff513c403977befeb0d3d1c7"
+    "sha256": "a50a87a1bf72c3812dbda569fc61067b56f040f19a974953c124f2dcd4fd8f82"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -397,7 +397,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "837342aea6582c8597c9d22abd4bd7c7b0f5274dd5c5400a99564db34bf88e88",
+      "sha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -451,22 +451,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "2.74 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "2.74 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 377,400 km"
+              "value": "2.74 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1684"
+              "value": "Giovanni Cassini · 1684",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -1413,8 +1419,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "837342aea6582c8597c9d22abd4bd7c7b0f5274dd5c5400a99564db34bf88e88",
-      "bytes": 13594,
+      "sha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
+      "bytes": 14065,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1927,8 +1933,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5440,
-          "sha256": "49b1e8865d5b4bea20744e889f970346ae685267faedbffa4df41131b50c517f",
+          "bytes": 5817,
+          "sha256": "ae6eb1934698cd615164001b8f7d7b22caeab6c65d7fe9998f3e25245653dd46",
           "verification": "bytes-verified"
         }
       ],
@@ -2152,7 +2158,7 @@
   },
   "lastPreparation": {
     "objectId": "dione",
-    "materialSha256": "0dd2a8a0a94c864efc6bb8219034b1c7b96b004f69cf1e8abe68a1208bc21669",
+    "materialSha256": "b762de401bcaa0bb1e773bcde5713f20b0de79ca034ee4516a0672b16c007445",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

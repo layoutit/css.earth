@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e5f2a63df153fd47e84b5d8d91c6a5bca12149d6f2ee99d9963bc22bea8fbcbc"
+    "sha256": "2ae8f404ce1d4aff90ce75ad4e3f1627ee01694e54b0412b76d7da15d9dcc8ae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "11c025d0378fbf45f5c29b380c047a80d15d2633c46e59fc735aa41d5fe3e060",
+      "sha256": "c9f038063c0bffb231554e83994d1482ddf63e3668161c6978a84ec383d73302",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +112,30 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Full approximation dimensions",
-              "value": "6.6 × 5 × 3.4 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "Unresolved in this approximation"
+              "value": "6.6 × 5 × 3.4 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=5535",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.extent (km)"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Main-belt asteroid"
+              "value": "Main-belt asteroid",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=5535",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -287,8 +293,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "11c025d0378fbf45f5c29b380c047a80d15d2633c46e59fc735aa41d5fe3e060",
-      "bytes": 2324,
+      "sha256": "c9f038063c0bffb231554e83994d1482ddf63e3668161c6978a84ec383d73302",
+      "bytes": 2752,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -369,8 +375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5458,
-          "sha256": "278782ed3d86dac65304ca889eb70ec609f51a0d430a067255e0ef929e55ddfa",
+          "bytes": 5792,
+          "sha256": "13672d98d78d455c177d64e647d42ccff456215f527c3cff9a2c8cec96edf6c4",
           "verification": "bytes-verified"
         }
       ],
@@ -408,7 +414,7 @@
   },
   "lastPreparation": {
     "objectId": "annefrank",
-    "materialSha256": "b99e178ea0b33fba5e15feac6d40d35a6e31e236a245e91e38a5d2aa15af9aab",
+    "materialSha256": "b5c5abaa30c33e8694be154d972019d216197a0cd57a7fda46d04a2484f039d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

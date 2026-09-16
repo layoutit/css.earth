@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a663246a44f0e4473a76a9058f6e0b5a81c45e3b5c815127136189b2d2aa55e"
+    "sha256": "b7a4792cad62a957e428887a5f9c44e52afa2144ccad9d60ed723d99ded95d75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
+      "sha256": "1dbdad54b621161c41b7ad9f42cdd9720af9b046ae4b2d981e0836f3814f3aa4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +112,43 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Full approximation dimensions",
-              "value": "254 × 110 × 90 km"
+              "value": "254 × 110 × 90 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202450833",
+                "label": "Research publication · DOI 10.1051/0004-6361/202450833",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202450833",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "9.1736 ± 0.0002 h"
+              "value": "9.1736 ± 0.0002 h",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202450833",
+                "label": "Research publication · DOI 10.1051/0004-6361/202450833",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202450833",
+                "locator": "/spin/periodHours"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Centaur"
+              "value": "Centaur",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=54598",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -288,8 +307,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
-      "bytes": 3346,
+      "sha256": "1dbdad54b621161c41b7ad9f42cdd9720af9b046ae4b2d981e0836f3814f3aa4",
+      "bytes": 4342,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -370,8 +389,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4626,
-          "sha256": "05d36f0f1faa0eea733f8a1674cacf3570c1c1e634f733ce75c54882d6b2ff07",
+          "bytes": 5393,
+          "sha256": "b6efe3d06cc43ec2ffb38d12ad4da06eca901c34434b8a417e748b1138749fdd",
           "verification": "bytes-verified"
         }
       ],
@@ -409,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "bienor",
-    "materialSha256": "bd552c730addc674068b80363acf5b36a05b022f65832be20d9e67af156a6164",
+    "materialSha256": "4a0348848397d2a1c482e9018456b10893771e649a4cce47e788528a1ed80ad8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

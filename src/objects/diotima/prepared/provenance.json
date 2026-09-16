@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a64a12b2edd80ba3bf06e0923698627479f87da4ffc8593115a775f28058502"
+    "sha256": "d14e4efcdc7d27a3e543490d3ad5f83c6b3b2f8b3b658e44ed2f844354867a2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1522ae8061a917357a38c3a33a9c351c7acd6dcad021373a9795f7fa829b1f64",
+      "sha256": "3b43367e3c8c2a633c4b50bb03c3923622ac34338b4103a2d9585d10dcfe4568",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "104.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.775377 hours"
+              "value": "4.775377 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1836",
+                "label": "DAMIT model 1836",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1522ae8061a917357a38c3a33a9c351c7acd6dcad021373a9795f7fa829b1f64",
-      "bytes": 8667,
+      "sha256": "3b43367e3c8c2a633c4b50bb03c3923622ac34338b4103a2d9585d10dcfe4568",
+      "bytes": 8872,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6367,
-          "sha256": "2f9219e148f78778f671ecbac73daf8a33a5eee31fddbb35ee1af62a2a67e4bd",
+          "bytes": 6525,
+          "sha256": "3f62692eecd086ac22a7038e84920a02b2c3861bc5d618c5e7a2ca3ded5c6e48",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "diotima",
-    "materialSha256": "4077fdc209e2a1e278e51984e3e04671c3913620f6059ed08dd01d18980b1e16",
+    "materialSha256": "2e31d270c9f7082631e5d0ff49a244c6a9fe7820db60509509a41c9f53b8cabc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
