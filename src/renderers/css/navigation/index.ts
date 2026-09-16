@@ -7,6 +7,7 @@ export { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPo
 export type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 export type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export { createWorldSelectionTarget } from './selection-target.js';
+export { preparedDefaultViewRotation } from './prepared-arrival-view.js';
 export { savedWorldCamera } from './saved-world-camera.js';
 export type { PerspectiveWorldContext } from './perspective-dolly.js';
 export { bindObjectNavigationTarget, supportsObjectNavigation } from '../solar-system/heliocentric-navigation.js';

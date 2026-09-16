@@ -6,14 +6,16 @@ import { orderScientificCharts } from "../scientific-chart-order.mts";
 import PlanetCard from "./PlanetCard.astro";
 import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
-import PlanetMoonList from "./PlanetMoonList.astro";
-import { prepareBodyMoons } from "../prepare-body-moons.mts";
+import PlanetSystemList from "./PlanetSystemList.astro";
+import { prepareBodyRelations } from "../prepare-body-moons.mts";
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetLenses from "./DatasetLenses.astro";
 import InformationTabs from './InformationTabs.astro';
-const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const moons = prepareBodyMoons(objectId);
+const relations = prepareBodyRelations(objectId);
+const tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' },
+  ...(relations ? [{ id: 'moons', label: relations.label }] : [])];
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
@@ -28,7 +30,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       <PlanetCardHeader {objectId} heading={false} {title} {introduction}>
           <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
-      <InformationTabs idPrefix={objectId} />
+      <InformationTabs idPrefix={objectId} {tabs} />
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       <div class="planet-card-tabpanel planet-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset"
         role="region" aria-label="Datasets">
@@ -93,7 +95,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           ))}
         </div>
       </details>}
-      {hasLenses && lenses && <DatasetLenses {objectId} {lenses} {provenance} />}
+      {hasLenses && lenses && <DatasetLenses {objectId} {lenses} />}
       {galleries.map((gallery) => (
       <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel" hidden={gallery.hidden}>
         <summary class="planet-panel-summary">
@@ -129,8 +131,8 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <PlanetFactsheet id={objectId} {facts} {moreFacts} embedded />
       </div>
       <DatasetContextPanels {...Astro.props} />
-      <div class="planet-card-tabpanel planet-object-results-scroll" id={`${objectId}-moons-content`} data-information-panel="moons"
-        role="region" aria-label="Moons">
-        <PlanetMoonList {moons} />
-      </div>
+      {relations && <div class="planet-card-tabpanel planet-object-results-scroll" id={`${objectId}-moons-content`} data-information-panel="moons"
+        role="region" aria-label={relations.label}>
+        <PlanetSystemList {relations} />
+      </div>}
     </PlanetCard>

@@ -3,7 +3,9 @@ import { expect, test } from 'vitest';
 import { parsePreparedWorldContext } from './prepared-world-context.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
+import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
+import { labelImportance } from '../labels/universe-label-policy.js';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
   new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
@@ -94,6 +96,21 @@ test('overview uses its prepared billboard even when the retained surface is lar
   expect(marker(false).markerOpacity).toBe(0);
 });
 
+test('a departed focus outside the view cannot blank the surrounding orbit field', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  input.overview = false; input.navigationInFlight = true; input.selectionPreview = 'arrokoth';
+  for (const z of [0, -149597870700, 149597870]) {
+    input.world.pose.positionM = [20 * 149597870700, 0, z];
+    const packet = calculate(input);
+    expect(packet.projectedBodies.some(body => body.orbitVisibility > 0 && body.segments.length > 0),
+      `orbit field remains visible while the departed Sun crosses the eye plane at ${z}`).toBe(true);
+  }
+  // Preserve the close-up fade when the selected disc really fills the view:
+  // context lines soften to the shared close-detail floor.
+  input.world.pose.positionM = [0, 0, plan.focus.radiusM * 5];
+  expect(Math.max(...calculate(input).projectedBodies.map(body => body.orbitVisibility))).toBeLessThanOrEqual(.3);
+});
+
 test('zoom jitter does not repeatedly reverse annotation visibility at its exit threshold', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.anchorOnly = true; input.overview = false;
@@ -119,6 +136,30 @@ test('zoom jitter does not repeatedly reverse annotation visibility at its exit 
   expect(sample(7.7).indicatorShown).toBe(true);
 });
 
+test('a flight destination keeps its caption and its side across the preview fade', () => {
+  for (const overview of [false, true]) {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const target = plan.bodies.find(body => body.id === 'mercury')!;
+  const index = 1 + plan.bodies.indexOf(target);
+  // The shell can still own the source overview while destination detail activates.
+  input.selectedId = overview ? plan.focus.id : target.id;
+  input.selectionPreview = target.id; input.overview = overview; input.navigationInFlight = true;
+  for (const diameter of [4, 8, 13, 14, 17, 21, 50, 150, 300]) {
+    input.world.pose.positionM = [target.positionM[0], target.positionM[1],
+      target.positionM[2] + Math.hypot(target.radiusM, 2 * input.viewport.focalPixels * target.radiusM / diameter)];
+    const body = calculate(input).projectedBodies.find(body => body.index === index)!;
+    expect(body.labelShown, `${diameter}px destination must remain named`).toBe(true);
+    expect(body.labelPlacement).toBe(0);
+    expect(body.indicatorShown, `${diameter}px circle follows the preview handoff`).toBe(diameter < 20);
+    if (diameter >= 20) expect(body.markerOpacity).toBe(0);
+    Object.assign(input.bodies[index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
+      indicatorShown: body.indicatorShown });
+  }
+  input.navigationInFlight = false; input.overview = false; input.selectedId = target.id;
+  expect(calculate(input).projectedBodies.find(body => body.index === index)!.labelShown).toBe(false);
+  }
+});
+
 test('orbit settings do not change admitted names or label placement', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const labels = () => calculate(input).projectedBodies.filter(body => body.labelShown)
@@ -127,6 +168,78 @@ test('orbit settings do not change admitted names or label placement', () => {
   expect(before.length).toBeGreaterThan(0);
   input.bodies.forEach(body => { body.orbitHidden = true; });
   expect(labels()).toEqual(before);
+});
+
+test('highlighted moons remain identifiable when their orbits are too small to draw', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const bodies = [plan.focus, ...plan.bodies];
+  const moons = new Set(['moon', 'phobos', 'deimos', 'io', 'europa', 'ganymede', 'callisto', 'titan', 'rhea', 'triton', 'charon']);
+  input.bodies.forEach((body, index) => {
+    body.highlighted = moons.has(bodies[index].id);
+    body.orbitHidden = true;
+  });
+  for (const distance of [50, 100, 205]) {
+    input.world.pose.positionM = [0, 0, distance * 149597870700];
+    const frame = calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) });
+    const admitted = frame.projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown);
+    expect(admitted.length).toBeGreaterThan(0);
+    for (const body of admitted) {
+      expect(body.indicatorShown).toBe(true);
+      expect(body.markerOpacity).toBeGreaterThan(.5);
+      expect(body.segments).toHaveLength(0);
+    }
+  }
+  input.bodies.forEach(body => { body.highlighted = false; });
+  expect(calculate({ ...input, bodies: unpackWorldBodies(packWorldBodies(input.bodies)) })
+    .projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown)).toHaveLength(0);
+});
+
+test('system zoom and rotation never publish an unidentified context orbit or circle', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  let paths = 0, crowded = 0;
+  for (const distance of [20, 75, 205, 75, 20]) for (const angle of [0, .3, .7, .3, 0]) {
+    input.world.pose.positionM = [0, 0, distance * 149597870700];
+    input.world.pose.orientationXyzw = [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)];
+    const frame = calculate(input);
+    for (const body of frame.projectedBodies) {
+      if (body.indicatorShown) expect(body.labelShown).toBe(true);
+      if (body.segments.length) { paths++; expect(body.labelShown).toBe(true); }
+      if (!body.labelShown) {
+        expect(body.segments).toHaveLength(0);
+        expect(body.orbitVisibility).toBe(0);
+        if (body.visible) crowded++;
+      }
+      Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
+        indicatorShown: body.indicatorShown });
+    }
+  }
+  expect(paths).toBeGreaterThan(0);
+  expect(crowded).toBeGreaterThan(0);
+});
+
+test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-space distance', () => {
+  const input = view(), points = [plan.focus, ...plan.bodies];
+  input.bodies.forEach((body, index) => { body.bodyHidden = !['sun', 'earth'].includes(points[index].id); });
+  const calculate = createWorldContextPlanner(plan, {
+    sun: labelImportance('star', true, 'sun'), earth: labelImportance('planet', true, 'earth'),
+  });
+  input.world.pose.positionM = [0, 0, 5 * 149597870700];
+  expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toContain('earth');
+  input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
+  expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toEqual(['sun']);
+});
+
+test('the selected close-up path survives a blocked caption while other paths retire', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === 'saturn');
+  const saturn = plan.bodies[index - 1]!;
+  input.selectedId = 'saturn'; input.overview = false;
+  input.world.pose.positionM = [saturn.positionM[0], saturn.positionM[1], saturn.positionM[2] + saturn.radiusM * 8];
+  input.labelBlockers = [{ left: -1000, right: 1000, top: -1000, bottom: 1000 }];
+  const frame = calculate(input);
+  expect(frame.projectedBodies.every(body => !body.labelShown && !body.indicatorShown)).toBe(true);
+  expect(frame.projectedBodies[index].segments.length).toBeGreaterThan(0);
+  expect(frame.projectedBodies.filter(body => body.index !== index).every(body => body.segments.length === 0)).toBe(true);
 });
 
 test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidden, then retires on deselection', id => {

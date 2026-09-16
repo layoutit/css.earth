@@ -55,7 +55,9 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
     declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) };
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },
-    features: { searchLabel: 'Named features', description: features.catalog.landmarks || (features.catalog.sites && !parseSurfaceFeaturesConfig(config.value).archive)
+    features: { searchLabel: 'Named features', description: featureConfig.naturalEarth
+      ? `${features.plan.catalog.count.toLocaleString('en')} names from Natural Earth${features.catalog.landmarks ? ' and Wikidata landmarks' : ''}`
+      : features.catalog.landmarks || (features.catalog.sites && !parseSurfaceFeaturesConfig(config.value).archive)
       ? `${features.plan.catalog.count.toLocaleString('en')} surface places from mission maps and cited studies`
       : `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
 }

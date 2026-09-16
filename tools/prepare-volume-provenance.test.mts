@@ -3,7 +3,6 @@ import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
-import { datasetContext } from '../site/dataset-context.mts';
 import { parseSourceCatalog, sourceObject, sourceResolver } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import { parseAgencies, parseExplorationCatalog } from '../src/platform/exploration-catalog.mts';
@@ -12,7 +11,7 @@ import { productSourceIds } from '../src/platform/object-provenance.mts';
 import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 
 const root = resolve(import.meta.dirname, '..');
-test('all installed volume lenses produce standard source cards with real source-to-product edges', async () => {
+test('all installed volume lenses retain real source-to-product edges', async () => {
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
@@ -38,9 +37,15 @@ test('all installed volume lenses produce standard source cards with real source
       const inputs = productSourceIds(entry.provenance, product.id);
       const own = entry.provenance.sources.find(source => source.lensId === control.id);
       assert.ok(own && inputs.includes(own.id));
-      const context = datasetContext(entry.id, control.id, entry.provenance, graph, catalog, usage, sources);
-      assert.ok(context.sources.some(group => group.links.length));
-      if (product.inputs.length > 1) assert.ok(context.sources.some(group => group.supporting.length));
+      const uses = (usage.byObject[entry.id] ?? []).map(index => usage.edges[index])
+        .filter(use => use.consumerKind === 'object-product' && use.lensIds.includes(control.id));
+      assert.ok(uses.some(use => use.localSourceId === own.id));
+      for (const input of product.inputs) {
+        const source = entry.provenance.sources.find(source => source.id === input);
+        if (source?.sourceBinding?.kind === 'catalogued') {
+          assert.ok(uses.some(use => use.localSourceId === input), `${entry.id}/${control.id}: ${input} retains its source edge`);
+        }
+      }
       const output = entry.outputs.find(output => output.path.endsWith(control.thumbnailUrl));
       assert.ok(output && output.text instanceof Uint8Array);
       const image = await sharp(output.text).metadata();
