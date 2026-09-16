@@ -3,7 +3,7 @@
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-colour practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -103,8 +103,6 @@ export function skyBandUrl(grid: SkyGrid, hips: string): string {
     coordsys: 'icrs', ra: String(ra), dec: String(dec), format: 'fits' });
   return `${HIPS2FITS}?${query}`;
 }
-
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 export interface SkyBandIo {
   /** Repository-relative, pinned JSON (tile lists). */
