@@ -6,18 +6,24 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
+import { loadDiscIntegratedColor } from '../observation/disc-integrated-color.mts';
 
-function neutralSurface(width:number, height:number) {
+function uniformSurface(width:number, height:number, [red, green, blue]:readonly number[]) {
   const data = Buffer.alloc(width * height * 4);
-  for (let offset = 0; offset < data.length; offset += 4) { data[offset] = 128; data[offset + 1] = 128; data[offset + 2] = 128; data[offset + 3] = 255; }
+  for (let offset = 0; offset < data.length; offset += 4) data.set([red!, green!, blue!, 255], offset);
   return data;
 }
 
-/** Neutral base color; view-dependent lighting is a separate prepared layer. */
-export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId }:OutputDirectories & {config:ShapeModelConfig;axes:readonly number[];sourceDirectory:string;lensId?:string}) {
+/** Uniform base color; view-dependent lighting is a separate prepared layer. */
+export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId, readSource }:OutputDirectories & {config:ShapeModelConfig;axes:readonly number[];sourceDirectory:string;lensId?:string;readSource:(path:string)=>Promise<Buffer>}) {
   const { width, height, latitudeSegments, longitudeSegments, poleSize } = config.mesh;
-  // The body shows the shared neutral gray (#808080 sRGB): a display convention for an unresolved surface, not a colour.
-  const pixels = neutralSurface(width, height), source = { neutral: true as const };
+  const surface = config.surface;
+  if (surface && surface.science.kind !== 'disc-integrated-color') throw new TypeError(`${config.displayName}: unknown shape surface kind ${surface.science.kind}.`);
+  // Without a measured colour the body shows the shared neutral gray (#808080 sRGB): a display convention, not a colour.
+  // With one it shows the published whole-disc colour and V geometric albedo, uniform over the body: one mean, no map.
+  const color = surface ? await loadDiscIntegratedColor(readSource, surface.science, surface.source) : null;
+  const pixels = uniformSurface(width, height, color?.srgb ?? [128, 128, 128]);
+  const source = color && surface ? { discIntegratedColor: { source: surface.source, srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance } } : { neutral: true as const };
   const emit = async (name:string, data:Buffer, w:number, h:number) => {
     const bytes = await sharp(data, { raw: { width: w, height: h, channels: 4 } }).webp({ lossless: true, effort: 4 }).toBuffer();
     await writeFile(resolve(publicDirectory, name), bytes);

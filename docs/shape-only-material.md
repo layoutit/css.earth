@@ -12,7 +12,8 @@ the raster `disc-integrated-color` science kind
 Colour indices relative to the Sun give reflectance at the B, V, R and I effective
 wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
 1931 observer under D65 and scaled so V reflectance equals the albedo. The colour
-is uniform: it is one measured mean, not a map. Makemake uses it.
+is uniform: it is one measured mean, not a map. Makemake uses it on the raster
+route; Haumea uses the same method through the shape-model route's `surface` block.
 
 Photographic, observed-color, and scientific lenses retain their own pixels.
 Their missing-data grid continues to mark rejected or unavailable samples.
