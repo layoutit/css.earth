@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba58509180c4bc7c7096eee327b4f5163e766a0224fce1fcd1037d2cab200a46"
+    "sha256": "6ef3e33d13854ffe947c5d7372bd91b5f400cb2f52117e33bfacd71029c7d68f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -86,7 +86,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2bcb70838f57cc15fea7fc0a01aaa590e521dcd84cad776fd50708c5657a1226",
+      "sha256": "b82e382f68abd1b4823968a20c3f57a6683dd8bf0d7e5cbf570204c587bfcebc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -97,22 +97,41 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "682 solar radii"
+              "value": "682 solar radii",
+              "source": {
+                "url": "https://arxiv.org/abs/1304.4800",
+                "label": "Ohnaka et al. (2013) diameter at the Hipparcos distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1304-4800",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "170 parsecs"
+              "value": "170 parsecs",
+              "source": {
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Sco",
+                "label": "SIMBAD: Hipparcos parallax (van Leeuwen 2007)",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "simbad-alf-sco",
+                "locator": "distanceParsecs; distanceSource"
+              }
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (2.2 µm)",
-              "value": "37.38 milliarcseconds"
-            },
-            {
-              "id": "rotation-axis",
-              "label": "Rotation axis",
-              "value": "not measured"
+              "value": "37.38 milliarcseconds",
+              "source": {
+                "url": "https://arxiv.org/abs/1304.4800",
+                "label": "Ohnaka et al. (2013), VLTI/AMBER limb-darkened diameter",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1304-4800",
+                "locator": "angularDiameterMas; angularDiameterSource"
+              }
             }
           ],
           "moreFacts": []
@@ -219,8 +238,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2bcb70838f57cc15fea7fc0a01aaa590e521dcd84cad776fd50708c5657a1226",
-      "bytes": 2926,
+      "sha256": "b82e382f68abd1b4823968a20c3f57a6683dd8bf0d7e5cbf570204c587bfcebc",
+      "bytes": 3851,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -335,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5564,
-          "sha256": "d9fc2710caa8f6fa2f0c7a53607b20bf66dd1f78e74947be79c76c539f9803be",
+          "bytes": 6260,
+          "sha256": "4348412f89d928c7205f46390afb338f86941e5e1fbaadd857b4bee2be1720a2",
           "verification": "bytes-verified"
         }
       ],
@@ -374,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "antares",
-    "materialSha256": "b4f44e565d1979ac0c8dca50cf278f352b1971c55b8c255c35a5a22627ffc67b",
+    "materialSha256": "029c9323af54b52479af7eda9a5e0921b635299c3be116cfc8dc877c1a80593a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

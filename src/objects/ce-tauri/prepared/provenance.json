@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "304d3b2a39768ce81d649c97be66e2ca02f5bc9b5f4d0eaa07db2d0986a1873c"
+    "sha256": "3d03823ea37b14df6161fb722b24a71f32bf6d5c2922c54f503cc54af1c4fa66"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -255,7 +255,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0605d807a4936f39e42bb7e838ac2e0ee1053b261afed467be2b0c20b19defb5",
+      "sha256": "f9e94d872361daf44eee369f5aeaaea07db69f3531eb53ad69cc8f23378996db",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -266,22 +266,41 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "720 solar radii"
+              "value": "720 solar radii",
+              "source": {
+                "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
+                "label": "Montargès et al. (2018) diameter at the Gaia distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-ce-tauri-cds-dec-avg",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "658 parsecs"
+              "value": "658 parsecs",
+              "source": {
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau",
+                "label": "SIMBAD: Gaia DR3 parallax",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "simbad-ce-tau",
+                "locator": "distanceParsecs; distanceSource"
+              }
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (1.62 µm)",
-              "value": "10.18 milliarcseconds"
-            },
-            {
-              "id": "rotation-axis",
-              "label": "Rotation axis",
-              "value": "not measured"
+              "value": "10.18 milliarcseconds",
+              "source": {
+                "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
+                "label": "Montargès et al. (2018), VLTI/PIONIER December 2016 limb-darkened diameter",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-ce-tauri-cds-dec-avg",
+                "locator": "angularDiameterMas; angularDiameterSource"
+              }
             }
           ],
           "moreFacts": []
@@ -620,8 +639,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0605d807a4936f39e42bb7e838ac2e0ee1053b261afed467be2b0c20b19defb5",
-      "bytes": 6487,
+      "sha256": "f9e94d872361daf44eee369f5aeaaea07db69f3531eb53ad69cc8f23378996db",
+      "bytes": 7499,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -916,8 +935,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5015,
-          "sha256": "7efeaca5585066cdf8d905beb0262c4fbd55d5c873d09c4b6fad285925877db7",
+          "bytes": 5798,
+          "sha256": "10f4abd4fb401fc006816772c406b299d2d86ac385193b2326d59710b6124592",
           "verification": "bytes-verified"
         }
       ],
@@ -980,7 +999,7 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "00ffdd7e739a9e09edda0727d097c0cd49f03db3d80122616344e3e01c33c493",
+    "materialSha256": "bfea6afaac7ad88d255931dc4def2a3cf9acdfd1985427f67f46ca350b43dcdd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

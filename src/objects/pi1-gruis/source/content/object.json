@@ -10,11 +10,11 @@
         "label": "Radius",
         "value": "316 solar radii",
         "source": {
-          "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
-          "label": "VLTI/PIONIER 2014-09 uniform-disc fit at the Gaia distance",
+          "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+          "label": "Fitted diameter at the Gaia distance",
           "checked": "2026-09-16",
           "path": "source/measurements.json",
-          "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+          "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
           "locator": "radiusKm; radiusSource"
         }
       },
@@ -36,11 +36,11 @@
         "label": "Angular diameter (1.65 µm)",
         "value": "18.17 milliarcseconds",
         "source": {
-          "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
-          "label": "VLTI/PIONIER 2014-09 uniform-disc fit",
+          "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+          "label": "Uniform-disc fit to the September 2014 VLTI/PIONIER visibilities",
           "checked": "2026-09-16",
           "path": "source/measurements.json",
-          "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+          "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
       }
