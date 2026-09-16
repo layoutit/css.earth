@@ -33,6 +33,222 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/16_Psyche_adam.obj",
+      "url": "https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/16_Psyche_param.txt",
+      "url": "https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_42_52.053_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_47_07.753_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_51_24.326_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_55_38.922_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-24T08_59_53.491_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_42_39.977_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_46_54.996_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_55_25.706_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-04-28T07_59_39.297_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_44_47.115_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_49_02.948_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_53_17.570_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T05_57_31.602_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-04T06_01_45.485_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
     }
   ]
 }
