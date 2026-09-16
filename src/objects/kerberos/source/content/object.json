@@ -6,34 +6,43 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Equivalent radius",
-        "value": "About 4.75 km (2025 fit)"
-      },
-      {
         "id": "dimensions",
         "label": "Approximate dimensions",
-        "value": "14.5 × 8.2 × 7.2 km"
+        "value": "14.5 × 8.2 × 7.2 km",
+        "source": {
+          "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+          "label": "Kerberos · measured ellipsoid",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-kerberos-measured-ellipsoid",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Pluto–Charon",
-        "value": "About 32.17 days"
+        "value": "About 32.17 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days)"
+        }
       },
       {
         "id": "distance-from-parent",
         "label": "Distance from system barycenter",
-        "value": "About 58,300 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation at 2015 flyby",
-        "value": "About 5.31 days; uncertain pole"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Hubble Space Telescope · 2011"
+        "value": "About 58,300 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; a (km)"
+        }
       }
     ],
     "moreFacts": []

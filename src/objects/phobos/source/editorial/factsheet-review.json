@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "1.524 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "1",
+        "Mars",
+        "Phobos",
+        "401",
+        "MAR099",
+        "Laplace",
+        "2000-01-01.5",
+        "9375.",
+        "0.015",
+        "216.3",
+        "189.7",
+        "1.1",
+        "169.2",
+        "0.3187",
+        "1.1",
+        "2.3",
+        "317.7",
+        "52.9",
+        "0.0",
+        "7"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "I",
+        "Phobos",
+        "",
+        "1877",
+        "A. Hall",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

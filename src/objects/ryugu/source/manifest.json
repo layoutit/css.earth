@@ -442,8 +442,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12007,
-      "expectedSha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
+      "expectedBytes": 12597,
+      "expectedSha256": "7baf5119816cc696e4a437bad9682f19cf297007badf729bee0fee1c6d6ff0bc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -639,6 +639,21 @@
       "licenseEvidence": [
         "https://www.isas.jaxa.jp/en/researchers/data-policy/"
       ]
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5537,
+      "expectedSha256": "aac2448ebb2b0cc67a916639ec52bd9f005c260c536f70f8f0644b947b94b0e9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ryugu: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

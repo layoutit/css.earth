@@ -510,8 +510,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5123,
-      "expectedSha256": "58a890c0bc287d9a424a24628d8ecb1f88dc00d8a4c687fea040a6910ddb88a1",
+      "expectedBytes": 5605,
+      "expectedSha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -586,8 +586,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1089,
-      "expectedSha256": "cac7d991a2ef6c5ece98f64dc2dfe9e60b0a72a72ddb61b3b2801789f09c92b6"
+      "expectedBytes": 2343,
+      "expectedSha256": "6fe8cfa58f569fcc28ec5fb96dcc64093393ddb25753087304fb277739f8cbe6"
     },
     {
       "id": "amalthea-surface-feature-notes",

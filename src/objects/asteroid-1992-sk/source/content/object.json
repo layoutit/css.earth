@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Volume-equivalent radius",
-        "value": "0.50 ± 0.10 km"
+        "value": "0.50 ± 0.10 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+          "label": "Asteroid 1992 Sk · asteroid 1992 sk research sk",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
+          "locator": "/diameterKm"
+        }
       },
       {
         "id": "distance-from-sun",
@@ -56,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Model rotation period",
-        "value": "7.3182 ± 0.0003 hours (model)"
+        "value": "7.3182 ± 0.0003 hours (model)",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+          "label": "Asteroid 1992 Sk · asteroid 1992 sk research sk",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
+          "locator": "/periodHours"
+        }
       }
     ],
     "moreFacts": []

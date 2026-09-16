@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "methone",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "130",
+        "Saturn",
+        "Methone",
+        "632",
+        "SAT441",
+        "Laplace",
+        "2000-01-01.5",
+        "194700.",
+        "0.002",
+        "315.5",
+        "0.0",
+        "0.0",
+        "0.0",
+        "1.009549",
+        "0.003",
+        "0.000",
+        "40.6",
+        "83.5",
+        "0.0",
+        "36"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XXXII",
+        "Methone",
+        "S/2004 S1",
+        "2004",
+        "Cassini Imaging Science Team",
+        "IAUC 8389"
+      ]
+    }
+  ]
+}

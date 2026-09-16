@@ -298,8 +298,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 8698,
-      "expectedSha256": "56e41b55b24162e27d1993101be920215a135bbf11be94543acf44a52481912e",
+      "expectedBytes": 9506,
+      "expectedSha256": "73199d9cc328992a03616b9c686c6934b03fd720d76defb77d6160e4f6618920",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -332,6 +332,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /makemake/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3255,
+      "expectedSha256": "96109a6a97f9b0c41e89326aca24f7ad4af11a7da104b7c2702bf420e93fc01c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Makemake: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ],

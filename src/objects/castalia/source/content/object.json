@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Model volume-equivalent radius",
-        "value": "0.542238 km"
+        "value": "0.542238 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
+          "label": "Castalia · castalia research castalia 1997",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-castalia-castalia-research-castalia-1997",
+          "locator": "/diameterKm"
+        }
       },
       {
         "id": "distance-from-sun",
@@ -56,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "4.089 hours"
+        "value": "4.089 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
+          "label": "Castalia · castalia research castalia 1997",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-castalia-castalia-research-castalia-1997",
+          "locator": "/periodHours"
+        }
       }
     ],
     "moreFacts": []

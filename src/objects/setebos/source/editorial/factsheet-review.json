@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "setebos",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "432",
+        "Uranus",
+        "Setebos",
+        "719",
+        "URA117",
+        "ecliptic",
+        "2020-01-01.0",
+        "17519800.",
+        "0.579",
+        "356.1",
+        "148.0",
+        "153.9",
+        "244.7",
+        "2215.",
+        "48.",
+        "48.",
+        "",
+        "",
+        "",
+        "43"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XIX",
+        "Setebos",
+        "S/1999 U1",
+        "1999",
+        "J.J. Kavelaars, B. Gladman, M. Holman, J.-M. Petit, H. Scholl",
+        "IAUC 7230"
+      ]
+    }
+  ]
+}

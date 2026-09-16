@@ -15,7 +15,8 @@ const allFacts = orderFacts(facts, moreFacts);
 const hasFacts = allFacts.length > 0;
 ---
 
-<Container
+{/* A body with no cited facts shows no factsheet, not an empty one. */}
+{hasFacts && <Container
   id={`${id}-factsheet-panel`}
   class="planet-factsheet-section"
   aria-label={embedded ? "Factsheet" : undefined}
@@ -32,7 +33,7 @@ const hasFacts = allFacts.length > 0;
       alt=""
     />
   </summary>}
-  {hasFacts && <div class="planet-factsheet-body">
+  <div class="planet-factsheet-body">
     <div class="planet-facts">
       <ul class="planet-primary-facts">
         {allFacts.map((fact) => (
@@ -44,5 +45,5 @@ const hasFacts = allFacts.length > 0;
       </ul>
 
     </div>
-  </div>}
-</Container>
+  </div>
+</Container>}

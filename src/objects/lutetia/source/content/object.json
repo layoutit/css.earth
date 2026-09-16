@@ -34,21 +34,6 @@
           "catalogueId": "jpl-small-body-database",
           "locator": "Target physical data: RAD (km)"
         }
-      },
-      {
-        "id": "distance-from-sun",
-        "label": "Solar semimajor axis",
-        "value": "2.435 AU"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "3.80 years"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "8.168 hours"
       }
     ],
     "moreFacts": [

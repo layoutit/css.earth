@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "bestla",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "158",
+        "Saturn",
+        "Bestla",
+        "639",
+        "SAT456",
+        "ecliptic",
+        "2000-01-01.5",
+        "20337800.",
+        "0.486",
+        "85.6",
+        "33.1",
+        "138.3",
+        "283.0",
+        "1082.9444",
+        "333.3",
+        "333.6",
+        "",
+        "",
+        "",
+        "48"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XXXIX",
+        "Bestla",
+        "S/2004 S18",
+        "2004",
+        "S. Sheppard, D.C. Jewitt, J. Kleyna",
+        "IAUC 8523"
+      ]
+    }
+  ]
+}

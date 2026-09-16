@@ -34,7 +34,16 @@
     "iss": {
       "title": "Cassini ISS narrow-angle image",
       "detail": "ISS · Cassini",
-      "summary": "One Cassini photograph from the 2004 approach, projected onto the shape."
+      "summary": "One Cassini photograph from the 2004 approach, projected onto the shape.",
+      "sources": [
+        {
+          "catalogueId": "source-phoebe-n1465662798",
+          "url": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+          "label": "PDS RMS · Cassini ISS",
+          "checked": "2026-09-16",
+          "locator": "N1465662798_2_CALIB.IMG"
+        }
+      ]
     },
     "elevation": {
       "title": "Q512 radial height model",

@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2512,
-      "expectedSha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
+      "expectedBytes": 3199,
+      "expectedSha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 2390,
       "expectedSha256": "0648a59130f6b813f6850c8ca8e1bf2693a74d6a9ab139b32767217262820c0d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3840,
+      "expectedSha256": "b6f644cafb591fd771e47bbe2f4002c7687bcb2531a638b555ec78625fb3e307",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 2P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

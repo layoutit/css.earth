@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8230,
-      "expectedSha256": "74ce18cfd12aedf29346922a45179a44596cf7e1aea44a1d9ad328a406e5a248",
+      "expectedBytes": 8436,
+      "expectedSha256": "9afae7aa30aca534b3d256275c0f99b0047fc57963e1c05ed2a46f7007eb0845",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1805,
       "expectedSha256": "b6ccb49df6db1ac88d56964b050fed0166ca52f6b3aed3ca2f2eee21f0f1a30e"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4333,
+      "expectedSha256": "08b7a0b10f4438d48d778992808debfa8635687497a76c869bfde4a6e807757c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Hekate: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

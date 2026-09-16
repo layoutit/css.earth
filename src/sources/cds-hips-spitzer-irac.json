@@ -1,0 +1,61 @@
+{
+  "id": "cds-hips-spitzer-irac",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spitzer IRAC 3.6, 4.5 and 8.0 µm HiPS maps (CDS)",
+  "identifiers": [
+    {
+      "type": "HiPS",
+      "value": "CDS/P/SPITZER/IRAC1"
+    },
+    {
+      "type": "HiPS",
+      "value": "CDS/P/SPITZER/IRAC2"
+    },
+    {
+      "type": "HiPS",
+      "value": "CDS/P/SPITZER/IRAC4"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSPITZER%2FIRAC4&get=record&fmt=json",
+      "label": "HiPS record"
+    },
+    {
+      "role": "archive",
+      "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
+      "label": "IRAC documentation"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.spitzer.caltech.edu/page/image-use-policy",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m8/source/manifest.json",
+      "revision": "8482cf6f86e422f6a7fe7fd1f8595bb3fb59145f",
+      "sha256": "34dc33ecaedb533e55e526c6506e39aee8532e64825c6b8318190419046fa3f3",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
+      "scope": "Spitzer IRAC maps used for the Lagoon Nebula infrared lens.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy; CDS HiPS distribution under ODbL-1.0. Retain the complete recorded credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ],
+  "publisher": "CDS (CNRS/Unistra)"
+}

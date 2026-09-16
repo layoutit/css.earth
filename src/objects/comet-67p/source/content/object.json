@@ -6,29 +6,43 @@
   "panel": {
     "facts": [
       {
-        "id": "diameter",
-        "label": "Equivalent diameter",
-        "value": "About 3.3 km"
-      },
-      {
         "id": "rotation-period",
         "label": "Rotation before perihelion",
-        "value": "12.4041 hours"
+        "value": "12.4041 hours",
+        "source": {
+          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC",
+          "label": "Comet 67P · virtis shap5 info asc",
+          "checked": "2026-09-16",
+          "path": "source/science/shap5-info.asc",
+          "catalogueId": "source-comet-67p-virtis-shap5-info-asc",
+          "locator": "Rotation Period: 12.4041 +/- 0.0001 hr (pre-perihelion)"
+        }
       },
       {
         "id": "mission",
         "label": "Explored by",
-        "value": "Rosetta · 2014–2016"
+        "value": "Rosetta",
+        "source": {
+          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+          "label": "Comet 67P · mtp019",
+          "checked": "2026-09-16",
+          "path": "source/shape/mtp019.lbl",
+          "catalogueId": "source-comet-67p-mtp019",
+          "locator": "MISSION_NAME = \"INTERNATIONAL ROSETTA MISSION\""
+        }
       },
       {
         "id": "shape",
         "label": "Nucleus model",
-        "value": "ESA/RMOC MTP019"
-      },
-      {
-        "id": "source-epoch",
-        "label": "Shape observations",
-        "value": "6 August 2014 – 25 August 2015"
+        "value": "ESA/RMOC MTP019",
+        "source": {
+          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+          "label": "Comet 67P · mtp019",
+          "checked": "2026-09-16",
+          "path": "source/shape/mtp019.lbl",
+          "catalogueId": "source-comet-67p-mtp019",
+          "locator": "\"SPC-ESA MTP019 CARTESIAN TRIPLATE MODEL FOR COMET 67P/C-G\""
+        }
       }
     ],
     "moreFacts": []

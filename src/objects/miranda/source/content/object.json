@@ -34,22 +34,28 @@
       {
         "id": "orbital-period",
         "label": "Orbit around Uranus",
-        "value": "About 1.41 days"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "About 1.41 days (synchronous)"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Mean distance from Uranus",
-        "value": "About 129,900 km"
+        "value": "About 1.41 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/2; P (days)"
+        }
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Gerard Kuiper · 1948"
+        "value": "Gerard Kuiper · 1948",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "JPL Planetary Satellite Discovery Circumstances",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-discovery",
+          "locator": "/references/3; discoverer(s); year discovered"
+        }
       }
     ],
     "moreFacts": [

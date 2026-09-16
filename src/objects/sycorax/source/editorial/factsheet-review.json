@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "sycorax",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "430",
+        "Uranus",
+        "Sycorax",
+        "717",
+        "URA117",
+        "ecliptic",
+        "2020-01-01.0",
+        "12193200.",
+        "0.520",
+        "25.4",
+        "332.1",
+        "157.0",
+        "267.1",
+        "1286.",
+        "1394.",
+        "1863.",
+        "",
+        "",
+        "",
+        "43"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XVII",
+        "Sycorax",
+        "S/1997 U2",
+        "1997",
+        "P.D. Nicholson, B.J. Gladman, J.A. Burns, J.J. Kavelaars",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

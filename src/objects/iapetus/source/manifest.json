@@ -750,8 +750,8 @@
     {
       "id": "iapetus-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12417,
-      "expectedSha256": "926612a2ffc16eb0b0f5ebeef0c4265267a5ee79ad929bd3990da3a46c017ab1",
+      "expectedBytes": 12882,
+      "expectedSha256": "64800464bfa30a2aa9542aea6fc31b58f93cfd586f6c560ffeece411676b6d8d",
       "origin": "Repository-authored Iapetus object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -777,8 +777,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1089,
-      "expectedSha256": "371db3b124a84b59b1118ce6c643609cf87c2c65fd476cdda11bf3a4977edcee"
+      "expectedBytes": 2352,
+      "expectedSha256": "27adfdd57ef9603fd69b32d32a05d744dab63b7bd384dbe512077a33f312be18"
     },
     {
       "path": "cassini-ice/evidence/download-receipts.json",

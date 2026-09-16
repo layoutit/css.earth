@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "5.203 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "6",
+        "Jupiter",
+        "Callisto",
+        "504",
+        "JUP365",
+        "Laplace",
+        "2000-01-01.5",
+        "1882700.",
+        "0.007",
+        "43.8",
+        "87.4",
+        "0.3",
+        "309.1",
+        "16.690440",
+        "277.921",
+        "577.264",
+        "268.7",
+        "64.8",
+        "0.4",
+        "29"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "IV",
+        "Callisto",
+        "",
+        "1610",
+        "Galileo",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

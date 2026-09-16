@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Model volume-equivalent radius",
-        "value": "1.284042 km"
+        "value": "1.284042 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
+          "label": "Geographos · geographos research geographos",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-geographos-geographos-research-geographos",
+          "locator": "/diameterKm"
+        }
       },
       {
         "id": "distance-from-sun",
@@ -56,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "5.223327 hours (model)"
+        "value": "5.223327 hours (model)",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
+          "label": "Geographos · geographos research geographos",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-geographos-geographos-research-geographos",
+          "locator": "/periodHours"
+        }
       }
     ],
     "moreFacts": []

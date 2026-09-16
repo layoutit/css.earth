@@ -889,8 +889,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9444,
-      "expectedSha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
+      "expectedBytes": 9210,
+      "expectedSha256": "d38faa30c97eb715bc282459863d9e74ae13c0c27a13677e59d0bb13a900fdb5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -955,6 +955,21 @@
       "path": "preparation/observer-cameras.json",
       "expectedBytes": 441,
       "expectedSha256": "0621225576cc9328c88605ee2104ee3b98b481c889a1668828d0cfef8c7aae8f"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 7650,
+      "expectedSha256": "37536cdddaf3c61d56daab64b3bff4a29e89e608213ff414cbe9b3b4b3868adf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Psyche: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

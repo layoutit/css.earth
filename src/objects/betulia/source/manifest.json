@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8453,
-      "expectedSha256": "492f365255b7c42612cf337bd7b40d625c4f87f7576258bb7c33ac901cb1aa5e",
+      "expectedBytes": 9222,
+      "expectedSha256": "475540e5ab97f0b2b55b3ac134ecf6c8f138487dfc7fefde018a75c890baefc2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -195,6 +195,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1770,
       "expectedSha256": "5d2137fa2b4863c0c3695123eec913a9d0ba121eb7d024dc1f51aaf4a5ffcd82"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5327,
+      "expectedSha256": "fc34876958af59e815c4e62cbaac66220db2b4f6467f45123f94b58748e56551",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Betulia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }
