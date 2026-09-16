@@ -70,6 +70,77 @@
       ]
     },
     {
+      "id": "optical-interferometry-archives",
+      "subject": "VLTI, SPHERE and NACO data in the ESO archive and the JMMC OiDB",
+      "status": "excluded",
+      "finding": "Searched 2026-09-16 by object name (Haumea, 2003 EL61, 136108). The ESO raw archive holds SINFONI (80 frames), HAWK-I (88), WFI (341), FORS1 (26), EFOSC (9) and EMMI (1) observations from 2006 to 2013, and none from PIONIER, GRAVITY, MATISSE, AMBER, SPHERE or NACO. The OiDB returns no Haumea rows; the same query returns Polaris. The Betelgeuse and Polaris interferometric routes therefore have no input for Haumea.",
+      "revisitWhen": "Interferometric visibilities of Haumea are deposited, or an ELT instrument resolves its disc.",
+      "evidence": [
+        "https://archive.eso.org/tap_obs",
+        "https://oidb.jmmc.fr/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "bdeea71ca2748c3308b0144a70cf51b2024f4917"
+        }
+      ]
+    },
+    {
+      "id": "hst-imaging-programs",
+      "subject": "Hubble frames of Haumea in MAST",
+      "status": "excluded",
+      "finding": "MAST lists targets named Haumea or 2003 EL61 in HST programs 10860, 11169, 11518, 11971, 12004, 12037, 12243, 13873 and 18002 (WFPC2, NICMOS, STIS, COS and WFC3). The imaging pixels are about 0.04 arcsec (WFC3/UVIS) or coarser, against a disc of about 0.06 arcsec, so the frames record Haumea and its moons as points. Program 18002 (Proudfoot, cycle 33, observed March-April 2026, six-month proprietary period) is titled Probing the Interior of the Dwarf Planet Haumea; it is not surface imaging.",
+      "revisitWhen": "A published analysis extracts surface brightness structure from these frames.",
+      "evidence": [
+        "https://mast.stsci.edu/",
+        "https://www.stsci.edu/hst-program-info/program/?program=18002"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "bdeea71ca2748c3308b0144a70cf51b2024f4917"
+        }
+      ]
+    },
+    {
+      "id": "namaka-mutual-events",
+      "subject": "Namaka passing in front of Haumea as an albedo-mapping route",
+      "status": "excluded",
+      "finding": "When a moon crosses the primary, the brightness drop along its path measures the albedo of that strip, the method behind the first Pluto maps. HST program 12243 (Ragozzine, cycle 18) spent 10 orbits on a predicted Haumea-Namaka event in July 2010 (270 WFC3/UVIS frames). A 2026 review of trans-Neptunian mutual events says Haumea-Namaka attempts were hindered by uncertain predictions that prevented detection and interpretation; no albedo map has been published. The review's forward predictions were not checked for a new Haumea season.",
+      "revisitWhen": "A published analysis of the 2010 HST frames, or a new Haumea-Namaka event season with a reliable prediction.",
+      "evidence": [
+        "https://www.stsci.edu/hst-program-info/program/?program=12243",
+        "https://arxiv.org/abs/2603.05394",
+        "https://arxiv.org/abs/0903.4213"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "bdeea71ca2748c3308b0144a70cf51b2024f4917"
+        }
+      ]
+    },
+    {
+      "id": "rotational-lightcurves-and-spectra",
+      "subject": "Light curves and rotationally resolved spectra as a surface map",
+      "status": "excluded",
+      "finding": "Disc-integrated data taken as Haumea spins constrain brightness or composition by rotational phase only: optical light curves (Lacerda 2010), Herschel thermal light curves (Santos-Sanz et al. 2017), VLT/SINFONI spectra from 2006 to 2013 (Gourgeot et al. 2016, spectral slope 1.45 +/- 0.82 % per 100 nm redder at the Dark Red Spot, no significant water-ice band difference) and JWST NIRSpec IFU spectra from program 1273 (March and July 2023). None gives latitude. Lacerda (2010) shows the spot's size and darkness are degenerate: from a few percent of the cross-section at about 20% of the surrounding albedo to a full hemisphere only 5% darker. A texture drawn from these would be one chosen model, not a measurement.",
+      "revisitWhen": "A published two-dimensional albedo or colour map of Haumea with stated uncertainties.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.0009",
+        "https://arxiv.org/abs/1705.09117",
+        "https://arxiv.org/abs/1605.04145",
+        "https://www.stsci.edu/jwst-program-info/program/?program=1273"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "bdeea71ca2748c3308b0144a70cf51b2024f4917"
+        }
+      ]
+    },
+    {
       "id": "rabinowitz-2006-colours",
       "subject": "Rabinowitz et al. (2006) rotation-corrected BVRI colours",
       "status": "included",
