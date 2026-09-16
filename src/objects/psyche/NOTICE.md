@@ -5,3 +5,5 @@ P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM astero
 Vernazza et al. (2021), Astronomy & Astrophysics 654, A56, https://doi.org/10.1051/0004-6361/202141781. The article is CC-BY-4.0 and links the authors' public scientific model release. Retain the authors, ESO/VLT/SPHERE programme and release links with derived shape displays. This package does not attribute a photographic surface texture to NASA or ESO. The grid is cssEarth's missing-imagery convention.
 
 Title font: Inter Project Authors / Rasmus Andersson, SIL OFL 1.1; see source/presentation/LICENSE.INTER-OFL.
+
+Thermal inertia and dielectric constant maps: Saverio Cambioni, Katherine de Kleer and Michael Shepard (2022), Zenodo, doi:10.5281/zenodo.6321315, CC BY 4.0, redistributed unchanged in `source/thermal/`. Method: Cambioni, de Kleer & Shepard (2022), The Heterogeneous Surface of Asteroid (16) Psyche, JGR Planets, doi:10.1029/2021JE007091; observations: de Kleer, Cambioni & Shepard (2021), PSJ 2, 149, doi:10.3847/PSJ/ac01ec, using ALMA data. Body frame: Shepard et al. (2021), PSJ 2, 125, doi:10.3847/PSJ/abfdba. The colour scales are matplotlib's plasma and viridis.

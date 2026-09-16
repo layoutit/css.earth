@@ -106,7 +106,7 @@ export function parseTerrestrialProfile(input:unknown) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'npy-lonlat-grid', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && !facetTable && (typeof lens.grid.width !== 'number' || !Number.isSafeInteger(lens.grid.width) || typeof lens.grid.height !== 'number' || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(typeof lens.minimum === 'number' && typeof lens.maximum === 'number' && lens.minimum < lens.maximum) || !isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => typeof color !== "string" || !/^#[0-9a-f]{6}$/i.test(color)) ||
