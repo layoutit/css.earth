@@ -11,8 +11,8 @@
  * 190, Fig. 5) found which spots on their Polaris images were artefacts. Reconstruct the simulated file with the recipe used
  * on the real one, then `compare` the two images. Both are convolved to the beam and divided by their own mean radial
  * profile, so limb darkening drops out and only spots remain. The ratio of the real image's spot contrast to the spotless
- * one's is the verdict, advisory. Measured with the pinned SQUEEZE recipe on 2026-09-16: π¹ Gruis 5.22 (correlation 0.07) and
- * Betelgeuse 2.90 (-0.02), whose images match their papers, and Polaris 1.05 (0.58), whose April 2021 spots are the coverage's. */
+ * one's is the verdict. Measured with the pinned SQUEEZE recipe on 2026-09-16: π¹ Gruis 5.22 (correlation 0.10) and
+ * Betelgeuse 2.73 (0.02), whose images match their papers, and Polaris 1.05 (0.57), whose April 2021 spots are the coverage's. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -148,7 +148,7 @@ export function compareSpotMaps(real: Float64Array, spotless: Float64Array) {
 }
 
 /** The ratio below which the spots of a reconstruction are no stronger than the ones its coverage draws on a plain disc: between
- * Polaris (1.05) and Betelgeuse (2.90), the lowest of the stars shipped with a reconstruction. */
+ * Polaris (1.05) and Betelgeuse (2.73), the lowest of the stars shipped with a reconstruction. */
 export const SPOT_CONTRAST_RATIO = 2;
 /** The reduced chi-squared a reconstruction must reach on each fitted observable. The shipped reconstructions reach 2.45 and 1.06
  * (π¹ Gruis) and 0.35 and 1.12 (Betelgeuse); ROTIR's sphere on Polaris stays at 5.58 on closure phases, so its spots are not a
@@ -156,7 +156,7 @@ export const SPOT_CONTRAST_RATIO = 2;
 export const RECONSTRUCTION_CHI2_LIMIT = 3;
 
 /** The correlation two independent halves of the data must reach on the spots left after subtracting each half's spotless twin
- * (reproducibility). Measured with the pinned SQUEEZE recipe: π¹ Gruis 0.94, Betelgeuse 0.80, Polaris -0.26. Single nights are
+ * (reproducibility). Measured with the pinned SQUEEZE recipe: π¹ Gruis 0.95, Betelgeuse 0.79, Polaris -0.13. Single nights are
  * not used: one night alone lacks the coverage (π¹ Gruis's first night fails the spotless check by itself). */
 export const REPRODUCIBILITY_CORRELATION = 0.5;
 
