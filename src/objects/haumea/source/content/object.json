@@ -11,56 +11,44 @@
       {
         "id": "dimensions",
         "label": "Model dimensions",
-        "value": "2,322 × 1,704 × 1,026 km",
-        "source": {
-          "url": "https://arxiv.org/abs/2006.03113",
-          "label": "doi-10-1038-nature24051",
-          "checked": "2026-09-16",
-          "path": "source/measurements.json",
-          "catalogueId": "doi-10-1038-nature24051",
-          "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
-        }
+        "value": "2,322 × 1,704 × 1,026 km"
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "3.915 hours",
-        "source": {
-          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=136108",
-          "label": "JPL Small-Body Database",
-          "checked": "2026-09-16",
-          "path": "source/reference/sbdb.json",
-          "catalogueId": "jpl-small-body-database",
-          "locator": "phys_par.rot_per (h)"
-        }
+        "value": "3.915 hours"
       },
       {
         "id": "ring-width",
         "label": "Ring width",
-        "value": "About 70 km",
-        "source": {
-          "url": "https://arxiv.org/abs/2006.03113",
-          "label": "doi-10-1038-nature24051",
-          "checked": "2026-09-16",
-          "path": "source/measurements.json",
-          "catalogueId": "doi-10-1038-nature24051",
-          "locator": "/ringWidthKm"
-        }
+        "value": "About 70 km"
+      },
+      {
+        "id": "moon-count",
+        "label": "Moons",
+        "value": "2 — Hiʻiaka and Namaka"
       }
     ],
     "moreFacts": [
       {
         "id": "ring-radius",
         "label": "Ring radius",
-        "value": "About 2,287 km",
-        "source": {
-          "url": "https://arxiv.org/abs/2006.03113",
-          "label": "doi-10-1038-nature24051",
-          "checked": "2026-09-16",
-          "path": "source/measurements.json",
-          "catalogueId": "doi-10-1038-nature24051",
-          "locator": "/ringRadiusKm"
-        }
+        "value": "About 2,287 km"
+      },
+      {
+        "id": "surface",
+        "label": "Surface coverage",
+        "value": "Unresolved; no terrain map"
+      },
+      {
+        "id": "phase",
+        "label": "Rotational phase",
+        "value": "Arbitrary display orientation"
+      },
+      {
+        "id": "appearance",
+        "label": "Surface representation",
+        "value": "One measured whole-disc colour and albedo, spread evenly; the surface is unresolved and no terrain is shown"
       },
       {
         "id": "orbital-period",
@@ -79,21 +67,21 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
-        "thumbnail": "shape-thumbnail.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "color-thumbnail.webp",
         "surface": "surface.webp",
         "poles": "poles.webp",
         "source": {
-          "id": "ortiz-2017-shape",
+          "id": "haumea-disc-color",
           "path": "../manifest.json",
-          "url": "https://doi.org/10.1038/nature24051"
+          "url": "https://doi.org/10.1086/499575"
         },
-        "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
+        "notes": "One measured mean colour and albedo for the whole disc, averaged over rotation. Display coordinates are arbitrary; the known darker, redder region and any other colour variation are not shown."
       }
     ]
   },
@@ -114,6 +102,12 @@
       "role": "shape",
       "description": "2017 occultation shape and ring measurements",
       "href": "https://doi.org/10.1038/nature24051"
+    },
+    {
+      "label": "Rabinowitz et al.",
+      "role": "color",
+      "description": "2006 rotation-corrected BVRI colours",
+      "href": "https://doi.org/10.1086/499575"
     }
   ],
   "provenance": {
