@@ -46,6 +46,6 @@ Calibration from raw frames was checked against an author's file. One π¹ Gruis
 
 **Our wavelengths differ from the author's.** The spectral calibration gives 1.6376, 1.6857 and 1.7374 µm where Paladini's file states 1.6238, 1.6764 and 1.7287 µm, 0.5 to 0.9 percent longer. Calibrating from a whole block gives the same values. A reconstruction's angular scale from these files carries that uncertainty until the author's wavelength table is understood.
 
-**The PIONIER installer has not completed here.** The reduction above ran on an identical ESO build made by hand from the same pinned kit. `toolchain.mts install pionier` reached the GSL build before the disk ran out, so its full run is not verified. GRAVITY, MATISSE and AMBER reductions are not built.
+**Only PIONIER is calibrated from raw.** `toolchain.mts install pionier` builds Yorick and ESO's kit in 8 minutes (295 MB), and the comparison above ran on that install; the frames of the oracle came from the ESO data portal and the plan from its archive query, both checked live. GRAVITY, MATISSE and AMBER reductions are not built.
 
 **Only public frames.** Raw frames still in their proprietary period answer 401 and are refused.
