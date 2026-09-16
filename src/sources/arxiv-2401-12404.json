@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2401-12404",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Images of Betelgeuse with VLTI/MATISSE across the Great Dimming",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.12404"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnrasl/slad138"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2401.12404",
+      "label": "arXiv"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnrasl/slad138",
+      "label": "MNRAS Letters 527, L88 (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. Drevon, F. Millour, P. Cruzalèbes, C. Paladini, P. Scicluna, A. Matter, A. Chiavassa, M. Montargès et al.",
+      "scope": "citation",
+      "evidence": "src/objects/betelgeuse/text.json#/introduction/sources/0"
+    }
+  ]
+}

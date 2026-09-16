@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-uniform-disc-sphere",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse · uniform disc sphere",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2006.09837",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Radius from Joyce et al. (2020); sphere written by this repository",
+      "scope": "The uniform disc sphere input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Project-authored reference surface from a published radius.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

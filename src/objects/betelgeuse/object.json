@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "betelgeuse",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Betelgeuse",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "matisse",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 531514800
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "6cdfb6e874a3aa56b5ffdd19de0cd2f0ef59434a3c14d6602b5677c4e8161123"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "6f88fa21b4c86ac52686089f763185752e87035386999aceff99a6b9cbe352a4"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "4cebee6d27727851ad4a93b108edce6d0d5f80db05fb75df71cb9bdd51abc657"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "0ff55e886df1994f9b979602f87ed3a0018213eabe3ca7d652150a7d618eb342"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "62057538f3236dcea47ac319c04fb0676a604dd76dca56f933286ca7b3e51d61"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "1cab8465f78a07103120dd480f8af2ec7336a428f63da2ead0ae342d6ebc256b"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/betelgeuse-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1ba2c1b523d49e145a9fbae0838ccaade44d5cc5d1f0590fa2ab21bc082dbb8d"
+      }
+    },
+    "catalog": {
+      "name": "Betelgeuse",
+      "classification": "star",
+      "color": "#ff9a5a",
+      "distanceAu": 34652487.4,
+      "description": "Red supergiant in Orion, resolved by the VLT interferometer.",
+      "systemName": "Orion",
+      "order": 1000,
+      "context": {
+        "order": 999
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        108273570124095420,
+        5139556753316324000,
+        668312118652173700
+      ],
+      "presentationToReference": [
+        0.021730915641362952,
+        0,
+        -0.9997638557706454,
+        0.9172654039746878,
+        0.39777715593191365,
+        0.019937725293289132,
+        0.3976832231519713,
+        -0.9174820620691818,
+        0.008644061819617688
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 4831952727.272727,
+      "bodyRadiusM": 531514800000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "90743becdea916a607ce2737e4518a35bfdab30f977a10befca1ce572846e1f0"
+  }
+}

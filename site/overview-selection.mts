@@ -16,7 +16,10 @@ export function selectionAtCamera({ world, viewport, objects, objectId, overview
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
   if (!sun || !selected) return null;
   if (!overview) {
-    return distance(world.pose.positionM, sun.originM) >= policy.exitSunDistanceM
+    // Leaving the object's system opens the Solar System overview. A body placed outside the Solar System, such as a star,
+    // anchors that rule on itself: the camera is already far from the Sun while it looks at the body.
+    const anchorM = distance(selected.originM, sun.originM) >= policy.exitSunDistanceM ? selected.originM : sun.originM;
+    return distance(world.pose.positionM, anchorM) >= policy.exitSunDistanceM
       ? { overview: true, objectId: focus.id } : null;
   }
   const view = presentWorldCamera(world, sun, viewport);

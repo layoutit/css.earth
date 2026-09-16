@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { objectValue, stringValue, numberValue, readElementRecord, readVectorFixture } from './lib/generator-records.mts';
+import { objectValue, stringValue, numberValue, readElementRecord, readVectorFixture, readStarRecord } from './lib/generator-records.mts';
 import { shape, optional, boolean } from './lib/source-validation.mts';
 
 const nullableString = (value: unknown) => value === null ? null : stringValue(value);
@@ -11,7 +11,7 @@ const parseRecord = shape({
   id: stringValue, classification: stringValue, order: optional(numberValue), classificationOrder: optional(numberValue),
   physical: shape({ name: stringValue, horizonsCode: nullableString, meanRadiusKm: numberValue,
     gravitationalParameterKm3PerS2: numberValue, parent: nullableString }),
-  asteroid: optional(readElementRecord), comet: optional(readElementRecord),
+  asteroid: optional(readElementRecord), comet: optional(readElementRecord), star: optional(readStarRecord),
   asteroidFixture: optional(readVectorFixture), cometFixture: optional(readVectorFixture),
   acquisition: optional(shape({
     heliocentric: optional(shape({ target: stringValue, model: stringValue })),
@@ -34,6 +34,8 @@ function bodyRecord(value: unknown): BodyRecord {
   }
   const physical = record.physical;
   if (!physical.name || physical.meanRadiusKm <= 0 || physical.gravitationalParameterKm3PerS2 < 0) throw new TypeError(`Invalid physical data: ${record.id}.`);
+  // A star beyond the Solar System is placed by its astrometry and orbits nothing this package models.
+  if (record.star !== undefined && (record.classification !== 'star' || physical.parent !== null)) throw new TypeError(`Star astrometry belongs to a parentless star: ${record.id}.`);
   const acquisition = record.acquisition;
   if (acquisition?.heliocentric && !['asteroid', 'comet', 'dwarfPlanet'].includes(acquisition.heliocentric.model)) throw new TypeError('Invalid heliocentric model.');
   if (acquisition?.satellite && (!(acquisition.satellite.toJd > acquisition.satellite.fromJd) || !(acquisition.satellite.stepDays > 0))) throw new TypeError('Invalid satellite sampling window.');
@@ -51,6 +53,7 @@ const models = {
   dwarfPlanet: ['DWARF_PLANET_ELEMENTS', "import type { DwarfPlanetRecord } from '../dwarfPlanetElements.data.js'", 'DwarfPlanetRecord'],
   satellite: ['SATELLITE_ELEMENTS', "import type { SatelliteRecord } from '../satelliteElements.data.js'", 'SatelliteRecord'],
   sceneSatellite: ['SCENE_SATELLITE_STATES', "import type { SceneSatelliteRecord } from '../../sceneSatellites.js'", 'SceneSatelliteRecord'],
+  star: ['STAR_ASTROMETRY', "import type { StarAstrometry } from '../../stars.js'", 'StarAstrometry'],
   asteroidFixture: ['ASTEROID_FIXTURES', '', ''],
   cometFixture: ['COMET_FIXTURES', '', ''],
 };

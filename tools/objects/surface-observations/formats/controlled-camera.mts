@@ -23,7 +23,7 @@ import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, po
 const CONTEXT = 'controlled camera recipe';
 /** The camera a control network states for one photograph. A frame that names an image catalog takes these from the catalog instead. */
 const CAMERA_FIELDS = ['observerLatitude', 'observerWestLongitude', 'sunLatitude', 'sunWestLongitude', 'rangeKm', 'northAzimuthDegrees', 'pixelAngleMicroradians', 'center'];
-const FRAME_OPTIONAL = ['encoding', 'allowFiniteSigned', 'backgroundMaximum', 'backgroundOffset', 'coverageInsetPixels', 'cameraCatalog', 'quality', ...CAMERA_FIELDS];
+const FRAME_OPTIONAL = ['encoding', 'allowFiniteSigned', 'backgroundMaximum', 'backgroundOffset', 'coverageInsetPixels', 'cameraCatalog', 'quality', 'reconstruction', ...CAMERA_FIELDS];
 const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
 // Raw detector frames through different filters and exposures need wide levels: Amalthea's Galileo frames measure 10.3 from their reference.
@@ -45,12 +45,16 @@ const cameraPaths = (frames: readonly CameraFrameRecipe[]) => [...new Set(frames
 const colorPaths = (recipe: ColorLens) => cameraPaths([...recipe.frames.flatMap(set => BANDS.map(band => set[band])), ...(recipe.registration?.references ?? [])]);
 
 /** Encodings whose archive ships no detached label: the frame's own header states its identity. */
-const SELF_DESCRIBING = ['fits-zimpol-intensity'];
+const SELF_DESCRIBING = ['fits-zimpol-intensity', 'fits-oi-reconstruction'];
+/** An image reconstructed from interferometric visibilities has no exposure of its own: the recipe states the epoch and band
+ * of the visibilities it was made from, and the file's own header states only its pixel scale and axis directions. */
+const RECIPE_IDENTIFIED = ['fits-oi-reconstruction'];
 
 function checkFrame(frame: unknown, context: string) {
   const record0 = requireRecord(frame), selfDescribing = SELF_DESCRIBING.includes(String(record0.encoding));
   checkKeys(frame, selfDescribing ? ['id', 'path'] : ['id', 'path', 'labelPath'], FRAME_OPTIONAL, context);
   if (selfDescribing && record0.labelPath !== undefined) throw new TypeError(`Invalid source-bound ${context}: this encoding states its identity in the frame's own header, so it names no label.`);
+  if ((record0.reconstruction !== undefined) !== RECIPE_IDENTIFIED.includes(String(record0.encoding))) throw new TypeError(`Invalid source-bound ${context}: only a reconstructed image names the visibilities it was made from.`);
   const record = requireRecord(frame), catalog = record.cameraCatalog !== undefined;
   // A frame states its whole controlled camera, or names the catalog that states it; never a mix.
   if (CAMERA_FIELDS.some(key => (record[key] === undefined) !== catalog)) throw new TypeError(`Invalid source-bound ${context}: state every controlled camera field or name a camera catalog.`);
@@ -121,6 +125,10 @@ function controlNetworkCamera(frame: Awaited<ReturnType<typeof resolveCatalogCam
 
 /** The photograph's start time and filter from its native label. SSI companions state and check both. */
 async function frameIdentity(sourceDirectory: string, frame: CameraFrameRecipe) {
+  if (frame.encoding !== undefined && RECIPE_IDENTIFIED.includes(frame.encoding)) {
+    if (!frame.reconstruction) throw new Error(`Controlled camera frame ${frame.id} is a reconstruction and must state the epoch and band of its visibilities.`);
+    return { label: '', startTime: frame.reconstruction.startTime, filter: frame.reconstruction.filter };
+  }
   if (!frame.labelPath) {
     // A deconvolved ZIMPOL frame has no detached label of any kind. Its own header states the exposure and the filter.
     const { header } = readFitsPrimary(await readFile(resolve(sourceDirectory, frame.path)));
@@ -224,6 +232,7 @@ export const controlledCameraFormat: SurfaceObservationFormat = {
     for (const frame of recipe.frames) frames.push((await loadControlledFrame(frame, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context)).frame);
     const quantity = recipe.frames.some(frame => frame.encoding === 'vicar-byte-dn') ? 'detector brightness, DN / 255'
       : recipe.frames.some(frame => frame.encoding === 'fits-zimpol-intensity') ? 'deconvolved intensity'
+      : recipe.frames.some(frame => frame.encoding === 'fits-oi-reconstruction') ? 'reconstructed intensity'
       : 'I/F';
     const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear grayscale display`;
     return lensPolicy(recipe, frames, photometry, context, units);

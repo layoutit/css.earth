@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "betelgeuse",
+  "displayName": "Betelgeuse",
+  "publicBase": "/scenes/betelgeuse/",
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [],
+    "surfaceObservations": [
+      {
+        "id": "matisse",
+        "format": "controlled-shape-camera",
+        "consumer": "sphere-photograph",
+        "metadata": {
+          "label": "MATISSE reconstruction",
+          "falseColor": false,
+          "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. The interferometric beam is 4 milliarcseconds, five pixels, so finer structure is the regulariser's, not the star's. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. Grayscale is reconstructed relative intensity in one infrared band, not colour or temperature. The far hemisphere is unobserved."
+        },
+        "frames": [
+          {
+            "id": "matisse-2020-02-continuum",
+            "path": "observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
+            "encoding": "fits-oi-reconstruction",
+            "backgroundMaximum": 1e-05,
+            "observerLatitude": 0,
+            "observerWestLongitude": 0,
+            "sunLatitude": 0,
+            "sunWestLongitude": 0,
+            "rangeKm": 5183938336905497,
+            "northAzimuthDegrees": 312,
+            "pixelAngleMicroradians": 0.003781546712654381,
+            "center": [
+              63.996,
+              63.0
+            ],
+            "reconstruction": {
+              "startTime": "2020-02-08T00:12:31",
+              "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+              "visibilitiesPath": "observations/betelgeuse-matisse-2020-02-continuum.oifits"
+            }
+          }
+        ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 1,
+          "maximumEmissionDegrees": 70,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99.5
+          ]
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 220,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 110,
+    "radiusKm": 531514800,
+    "camera": {
+      "initialScenePitchDegrees": 10,
+      "defaultControlYawDegrees": 180,
+      "framingScale": 0.75
+    },
+    "mapUrl": "/scenes/betelgeuse/betelgeuse-matisse-surface@2x.webp",
+    "polesUrl": "/scenes/betelgeuse/betelgeuse-matisse-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/uniform-disc.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 15000000000,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "The Sun is a point 168 parsecs away in the direction of the observer; the sphere is self-luminous and the scene's illumination direction is the viewing direction, not a light source on the star"
+  },
+  "presentation": {
+    "defaultLens": "matisse"
+  }
+}
