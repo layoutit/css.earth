@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d216bdec4c638c6cf41cfd81acf9a135639cc1f9a75d3039e2e06dcd05bfd652"
+    "sha256": "a8ecec613cf9df7c45ce05c780d54f7b0c127d754fe4e2f27c66ec5ffbe1ed90"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "baa76742b0a1f90ab5596e7c0958c43454f962971274d39ca9eb00e0916724d5",
+      "sha256": "f60c12e39e49d9aacf4b82762a1f658082dc2945c11ca11c0741d634c524aca5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -95,7 +95,7 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-09-28 to 2018-09-29, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame and the sky threshold is one stated fraction of its peak. Predicted limb position angles match the observed contour to 2.52 degrees over the 11 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-09-28 to 2018-09-29, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Predicted limb position angles match the observed contour to 2.52 degrees over the 11 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
               "frames": [
                 {
@@ -104,15 +104,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 76.8401,
                   "observerLatitude": 15.324,
-                  "observerWestLongitude": 96.1228,
+                  "observerWestLongitude": 97.305,
                   "sunLatitude": 18.6267,
-                  "sunWestLongitude": 91.7241,
+                  "sunWestLongitude": 92.9063,
                   "rangeKm": 211295831.8,
                   "northAzimuthDegrees": 266.4979,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    130.8,
-                    134.976
+                    130.642,
+                    133.796
                   ]
                 },
                 {
@@ -121,15 +121,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 77.7004,
                   "observerLatitude": 15.3246,
-                  "observerWestLongitude": 98.5905,
+                  "observerWestLongitude": 99.7726,
                   "sunLatitude": 18.6261,
-                  "sunWestLongitude": 94.1924,
+                  "sunWestLongitude": 95.3745,
                   "rangeKm": 211295516.8,
                   "northAzimuthDegrees": 266.498,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    130.847,
-                    135.588
+                    130.787,
+                    134.6
                   ]
                 },
                 {
@@ -138,15 +138,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 73.0928,
                   "observerLatitude": 15.3253,
-                  "observerWestLongitude": 101.0722,
+                  "observerWestLongitude": 102.2544,
                   "sunLatitude": 18.6255,
-                  "sunWestLongitude": 96.6747,
+                  "sunWestLongitude": 97.8568,
                   "rangeKm": 211295201.9,
                   "northAzimuthDegrees": 266.4981,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    131.118,
-                    135.116
+                    130.828,
+                    134.348
                   ]
                 },
                 {
@@ -155,15 +155,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 69.3493,
                   "observerLatitude": 15.326,
-                  "observerWestLongitude": 103.5286,
+                  "observerWestLongitude": 104.7108,
                   "sunLatitude": 18.6249,
-                  "sunWestLongitude": 99.1317,
+                  "sunWestLongitude": 100.3139,
                   "rangeKm": 211294892,
                   "northAzimuthDegrees": 266.4982,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    131.014,
-                    135.631
+                    130.672,
+                    135.108
                   ]
                 },
                 {
@@ -172,15 +172,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 59.8499,
                   "observerLatitude": 15.3266,
-                  "observerWestLongitude": 105.9939,
+                  "observerWestLongitude": 107.176,
                   "sunLatitude": 18.6243,
-                  "sunWestLongitude": 101.5975,
+                  "sunWestLongitude": 102.7797,
                   "rangeKm": 211294582.9,
                   "northAzimuthDegrees": 266.4983,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    130.55,
-                    135.782
+                    130.572,
+                    135.05
                   ]
                 },
                 {
@@ -189,15 +189,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 60.0729,
                   "observerLatitude": 15.3392,
-                  "observerWestLongitude": 153.1407,
+                  "observerWestLongitude": 154.3228,
                   "sunLatitude": 18.613,
-                  "sunWestLongitude": 148.7556,
+                  "sunWestLongitude": 149.9377,
                   "rangeKm": 211289016.6,
                   "northAzimuthDegrees": 266.4999,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    130.927,
-                    138.394
+                    131.273,
+                    138.814
                   ]
                 },
                 {
@@ -206,15 +206,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 67.9166,
                   "observerLatitude": 15.3399,
-                  "observerWestLongitude": 155.6088,
+                  "observerWestLongitude": 156.7909,
                   "sunLatitude": 18.6124,
-                  "sunWestLongitude": 151.2242,
+                  "sunWestLongitude": 152.4064,
                   "rangeKm": 211288742.6,
                   "northAzimuthDegrees": 266.5,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.551,
-                    138.433
+                    132.905,
+                    138.673
                   ]
                 },
                 {
@@ -223,15 +223,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 64.9879,
                   "observerLatitude": 15.3405,
-                  "observerWestLongitude": 158.0845,
+                  "observerWestLongitude": 159.2666,
                   "sunLatitude": 18.6118,
-                  "sunWestLongitude": 153.7005,
+                  "sunWestLongitude": 154.8827,
                   "rangeKm": 211288469.5,
                   "northAzimuthDegrees": 266.5001,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.31,
-                    137.827
+                    132.686,
+                    138.045
                   ]
                 },
                 {
@@ -240,15 +240,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 65.1088,
                   "observerLatitude": 15.3412,
-                  "observerWestLongitude": 160.5248,
+                  "observerWestLongitude": 161.707,
                   "sunLatitude": 18.6112,
-                  "sunWestLongitude": 156.1414,
+                  "sunWestLongitude": 157.3236,
                   "rangeKm": 211288202,
                   "northAzimuthDegrees": 266.5002,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.173,
-                    137.637
+                    132.456,
+                    137.962
                   ]
                 },
                 {
@@ -257,15 +257,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 70.6086,
                   "observerLatitude": 15.3419,
-                  "observerWestLongitude": 162.9906,
+                  "observerWestLongitude": 164.1727,
                   "sunLatitude": 18.6106,
-                  "sunWestLongitude": 158.6078,
+                  "sunWestLongitude": 159.79,
                   "rangeKm": 211287933.2,
                   "northAzimuthDegrees": 266.5002,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.597,
-                    138.79
+                    132.761,
+                    139.053
                   ]
                 },
                 {
@@ -274,15 +274,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 57.493,
                   "observerLatitude": 15.3453,
-                  "observerWestLongitude": 175.92,
+                  "observerWestLongitude": 177.1021,
                   "sunLatitude": 18.6075,
-                  "sunWestLongitude": 171.5403,
+                  "sunWestLongitude": 172.7224,
                   "rangeKm": 211286550.1,
                   "northAzimuthDegrees": 266.5007,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.233,
-                    139.854
+                    132.734,
+                    140.133
                   ]
                 },
                 {
@@ -291,15 +291,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 67.772,
                   "observerLatitude": 15.346,
-                  "observerWestLongitude": 178.3942,
+                  "observerWestLongitude": 179.5763,
                   "sunLatitude": 18.607,
-                  "sunWestLongitude": 174.0151,
+                  "sunWestLongitude": 175.1972,
                   "rangeKm": 211286290.3,
                   "northAzimuthDegrees": 266.5008,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.469,
-                    140.214
+                    132.745,
+                    140.152
                   ]
                 },
                 {
@@ -308,15 +308,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 63.0997,
                   "observerLatitude": 15.3466,
-                  "observerWestLongitude": 180.8762,
+                  "observerWestLongitude": 182.0583,
                   "sunLatitude": 18.6064,
-                  "sunWestLongitude": 176.4977,
+                  "sunWestLongitude": 177.6798,
                   "rangeKm": 211286031.2,
                   "northAzimuthDegrees": 266.5009,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.483,
-                    140.177
+                    132.692,
+                    140.275
                   ]
                 },
                 {
@@ -325,15 +325,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 71.2472,
                   "observerLatitude": 15.3473,
-                  "observerWestLongitude": 183.3099,
+                  "observerWestLongitude": 184.492,
                   "sunLatitude": 18.6058,
-                  "sunWestLongitude": 178.9319,
+                  "sunWestLongitude": 180.1141,
                   "rangeKm": 211285778.6,
                   "northAzimuthDegrees": 266.5009,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.413,
-                    140.221
+                    132.57,
+                    140.566
                   ]
                 },
                 {
@@ -342,15 +342,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 61.913,
                   "observerLatitude": 15.3479,
-                  "observerWestLongitude": 185.7715,
+                  "observerWestLongitude": 186.9536,
                   "sunLatitude": 18.6052,
-                  "sunWestLongitude": 181.3941,
+                  "sunWestLongitude": 182.5763,
                   "rangeKm": 211285524.6,
                   "northAzimuthDegrees": 266.501,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    132.269,
-                    139.224
+                    132.624,
+                    139.493
                   ]
                 },
                 {
@@ -359,15 +359,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 64.8895,
                   "observerLatitude": 15.5762,
-                  "observerWestLongitude": 350.1495,
+                  "observerWestLongitude": 351.3316,
                   "sunLatitude": 18.3935,
-                  "sunWestLongitude": 345.9822,
+                  "sunWestLongitude": 347.1643,
                   "rangeKm": 211188777.2,
                   "northAzimuthDegrees": 266.5296,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    120.271,
-                    132.186
+                    120.219,
+                    132.171
                   ]
                 }
               ],
@@ -479,7 +479,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8059edecae529cfd6798f48aa07fab2c56a697ee6b5e48752e63be8b3eb6d36a",
+      "sha256": "089195e2075f9816d0fe5c232248bc4a301e5b2c536e471083b8d1da9e51545b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -598,7 +598,7 @@
               },
               "falseColor": false,
               "noData": true,
-              "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-09-28 to 2018-09-29, cast onto the ADAM reconstruction from the same survey. The survey's rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-09-28 to 2018-09-29, cast onto the ADAM reconstruction from the same survey. The survey's rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -1611,8 +1611,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8059edecae529cfd6798f48aa07fab2c56a697ee6b5e48752e63be8b3eb6d36a",
-      "bytes": 10603,
+      "sha256": "089195e2075f9816d0fe5c232248bc4a301e5b2c536e471083b8d1da9e51545b",
+      "bytes": 10644,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1754,14 +1754,14 @@
       "outputs": [
         {
           "url": "/scenes/ausonia/ausonia-zimpol-thumbnail.webp",
-          "bytes": 1496,
-          "sha256": "6c3c19ca63e3a1fc84edada94a390ae5568ce5e69e69b85f0eb0bf9c0fe700b5",
+          "bytes": 1480,
+          "sha256": "227007e94a22d466bc9dfd29b3335a9f04131de465e8d9c704de5ee92c0ad2f1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ausonia/ausonia-zimpol-surface@2x.webp",
-          "bytes": 632944,
-          "sha256": "e20c5f687894293c4c022b5fd3eb0f13ceb4187e5ac364497eb3acdff4dfd806",
+          "bytes": 572878,
+          "sha256": "1eb791cb88a5fdf4bc419a4706aab7753725ce313844accd5389991c10a8f7f8",
           "verification": "bytes-verified"
         }
       ],
@@ -1844,8 +1844,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 11276,
-          "sha256": "3b8fe6bfb17927bd8640d4329aa76a889d8bfdacf839f9536a1c008a8aebbfef",
+          "bytes": 10644,
+          "sha256": "8f5fda86d1eed0e6228c94cdeb0926801a716672be15a703dc6bc42e6851a47d",
           "verification": "bytes-verified"
         }
       ]
@@ -1882,7 +1882,7 @@
   },
   "lastPreparation": {
     "objectId": "ausonia",
-    "materialSha256": "fcd6598df7a5967c1abc48263be925feec9a3c9663b52d5c43cfad2299817c72",
+    "materialSha256": "77992528a819e4991e08d8d7d33726d96600ed14270da0fdb6490a8cd7ad48a4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",

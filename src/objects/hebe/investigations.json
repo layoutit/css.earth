@@ -90,6 +90,24 @@
           "pr": 192
         }
       ]
+    },
+    {
+      "id": "sphere-cross-frame-registration",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "status": "unresolved",
+      "finding": "Measured with the cross-frame registration test on 35 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 1671 pixels (median); peak correlation 0.14 (median) against a mirror margin of 0.54; 0 of 35 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists.",
+      "revisitWhen": "A registration reference for this body: a spacecraft map, or frames in which the cross-frame test resolves markings (peak correlation above 0.15 with a mirror margin above 1.5 on most frames).",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/6Hebe/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        }
+      ]
     }
   ]
 }
