@@ -24,6 +24,8 @@ test('different layers consume one density and collision budget', () => {
 });
 
 test('Earth is the second orientation reference after the Sun, ahead of other planets', () => {
-  expect(labelImportance('star', true, 'sun')).toBeGreaterThan(labelImportance('planet', true, 'earth'));
-  expect(labelImportance('planet', true, 'earth')).toBeGreaterThan(labelImportance('planet', true, 'jupiter'));
+  // Orientation references come from prepared discovery, never from object ids in shared code.
+  expect(labelImportance('star', true, 5)).toBeGreaterThan(labelImportance('planet', true, 4));
+  expect(labelImportance('planet', true, 4)).toBeGreaterThan(labelImportance('planet', true));
+  expect(labelImportance('planet', true, 0)).toBe(labelImportance('planet', true));
 });

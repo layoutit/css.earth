@@ -114,7 +114,9 @@
       "bodyRadiusM": 3392.2794165007253
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "IRAS–Araki–Alcock",
       "classification": "comet",
       "color": "#b8b6b2",

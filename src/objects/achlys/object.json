@@ -114,7 +114,9 @@
       "bodyRadiusM": 353308.6243153829
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Achlys (2003 AZ84)",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

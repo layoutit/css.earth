@@ -114,7 +114,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Encke",
       "classification": "comet",
       "color": "#b8b6b2",

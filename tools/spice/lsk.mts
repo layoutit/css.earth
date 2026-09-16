@@ -29,7 +29,12 @@ export function utcToEt(lsk: LeapSeconds, iso: string): number {
   const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d+)?)Z$/u.exec(iso);
   if (!match) throw new Error(`Expected an ISO 8601 UTC instant: ${iso}`);
   const seconds = Number(match[6]);
-  const utcSecondsPastJ2000 = (Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]), Number(match[4]), Number(match[5]), 0) - Date.UTC(2000, 0, 1, 12)) / 1000 + seconds;
+  return utcSecondsToEt(lsk, (Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]), Number(match[4]), Number(match[5]), 0) - Date.UTC(2000, 0, 1, 12)) / 1000 + seconds);
+}
+
+/** UTC seconds past J2000 (2000-01-01T12:00:00Z, counted without leap seconds as a Julian date does) to ephemeris time. */
+export function utcSecondsToEt(lsk: LeapSeconds, utcSecondsPastJ2000: number): number {
+  if (!Number.isFinite(utcSecondsPastJ2000)) throw new Error('Expected a finite UTC instant.');
   // The table lists the cumulative leap seconds in force from each UTC date.
   let leap = lsk.table[0].leapSeconds;
   for (const entry of lsk.table) if (utcSecondsPastJ2000 >= entry.at) leap = entry.leapSeconds;

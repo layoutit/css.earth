@@ -114,7 +114,9 @@
       "bodyRadiusM": 737.4520470653752
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Giacobini–Zinner",
       "classification": "comet",
       "color": "#b8b6b2",

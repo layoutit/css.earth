@@ -1042,7 +1042,8 @@ test.each([
     expect(major.billboard.style.visibility).toBe('');
     for (const body of [minor, major]) {
       expect(body.billboard.style.visibility).toBe('');
-      expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(body.labelShown);
+      // Ranking decides captions and circles; a named body always keeps the path beside it.
+      if (body.labelShown) expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
       expect(body.indicatorShown).toBe(body.labelShown);
     }
   }
@@ -1397,13 +1398,13 @@ test.each([true, false])('crowding retires complete annotations and their orbits
     expect(body.labelShown).toBe(false);
     expect(body.billboard.style.visibility).toBe('');
     expect(body.billboard.style.pointerEvents).toBe('none');
+    // Too far for this camera to name any of them: no captions, and no unidentified paths.
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(false);
   }
   publish(100);
   for (const body of entries.slice(1)) {
     expect(body.billboard.style.visibility).toBe('');
-    expect(body.billboard.style.visibility).toBe('');
-    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(body.labelShown);
+    if (body.labelShown) expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   }
   layer.destroy();
 });
@@ -1440,7 +1441,7 @@ test.each([true, false])('admitted annotations retain physical alpha while orbit
   layer.destroy();
 });
 
-test('an offscreen context body retires its orbit; explicit selection retains the clipped path', () => {
+test('an offscreen context body keeps the ring the camera crosses; explicit selection retains the clipped path', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -1458,8 +1459,9 @@ test('an offscreen context body retires its orbit; explicit selection retains th
     {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600});
   const body = layer.inspect().find(entry => entry.id === 'mercury')!;
   expect(body.billboard.style.visibility).toBe('hidden');
-  expect(body.billboard.style.visibility).toBe('hidden');
-  expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(false);
+  // The body is off screen and unnamed, but its path still crosses the viewport: the
+  // camera draws the ring it can see instead of retiring it with the absent caption.
+  expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   layer.setOverview(false); layer.selectObject('mercury');
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },

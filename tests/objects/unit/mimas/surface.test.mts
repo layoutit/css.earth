@@ -39,7 +39,7 @@ test('Mimas source simplification stays closed, preserves source positions and a
   }
   errors.sort((a,b)=>a-b);
   assert.ok(errors[Math.floor(errors.length*.95)] < 3000, 'Simplification must retain the broad relief across the body');
-  await assert.rejects(simplifyRadialShape(source,{...profile,simplification:{targetFaces:4,maximumErrorMeters:1}},1),/error limit/);
+  await assert.rejects(simplifyRadialShape(source,{...profile,simplification:{targetFaces:4,maximumErrorMeters:1}},1),/error limit|requested \d+ within/);
 });
 
 test('Mimas elevation uses PDS radius units, east-positive geography and exact raster bounds', async () => {

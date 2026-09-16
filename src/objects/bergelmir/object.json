@@ -114,7 +114,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Bergelmir",
       "classification": "satellite",
       "color": "#a0a0a0",

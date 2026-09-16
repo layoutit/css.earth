@@ -114,7 +114,9 @@
       "bodyRadiusM": 454999.9999999998
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Orcus",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
