@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "afd67786dc175719e25002b05474b7e92cb1b0d36f967abec8d3e05b07fd7dac"
+    "sha256": "150df62808cf42dd95210b9129a1b65b8dfcaf9cfd0330945b2598fcfa7553e0"
   },
   "properties": {
     "preparation": {
@@ -63,7 +63,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "lighting"
             }
@@ -114,14 +114,14 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cb5db038ba6750fbe17cdc15a3fea5a2bca502971ad2a597e97d26703e2215ca"
+        "sha256": "0b4f45feb298ab4200171dd72cf0362709f7475a341b9d64e70237078f8a02c8"
       }
     },
     "catalog": {
       "illustrationLenses": [],
       "name": "Haumea",
       "classification": "dwarf-planet",
-      "color": "#cccccc",
+      "color": "#bcbdbf",
       "distanceAu": 43.1,
       "description": "Rapidly spinning, elongated dwarf planet with a ring.",
       "systemName": "Solar System",
