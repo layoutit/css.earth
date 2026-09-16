@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f0ef77b317881d7a9a879488b10ce6d0b427bb85b897c391d18ea8c5a9c4a94e"
+    "sha256": "11d49e5beaf0b01d3f986db64a306110ab35b4707672beac538eb1035f658838"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -193,14 +193,54 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9049513c8333fbfe9d3bb2d33857be5f03f744166fc31b1d791f89a2d284877e",
+      "sha256": "af4a98c3e0da6b731e3c4176b876a1ffbea2dff1e708193ebae71eafabfd5501",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-81p",
         "displayName": "Wild 2",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "scale",
+              "label": "Fitted ellipsoid",
+              "value": "5.2 × 4.0 × 2.7 km",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+                "label": "Comet 81P · pds shape",
+                "checked": "2026-09-16",
+                "path": "source/shape/wild2_cart_full.lbl",
+                "catalogueId": "source-comet-81p-pds-shape",
+                "locator": "best-fitting triaxial ellipsoid radii (1.350 x 2.002 x 2.607 km) × 2"
+              }
+            },
+            {
+              "id": "mission",
+              "label": "Explored by",
+              "value": "Stardust",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+                "label": "Comet 81P · pds shape",
+                "checked": "2026-09-16",
+                "path": "source/shape/wild2_cart_full.lbl",
+                "catalogueId": "source-comet-81p-pds-shape",
+                "locator": "\"derived from the Stardust NavCam data\""
+              }
+            },
+            {
+              "id": "flyby",
+              "label": "Flyby",
+              "value": "2 January 2004",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.lbl",
+                "label": "Comet 81P · n2073we02 rr labelPath",
+                "checked": "2026-09-16",
+                "path": "source/photography/navcam/n2073we02_rr.lbl",
+                "catalogueId": "source-comet-81p-n2073we02-rr-labelpath",
+                "locator": "START_TIME = 2004-01-02T19:21:28.437"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -836,8 +876,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9049513c8333fbfe9d3bb2d33857be5f03f744166fc31b1d791f89a2d284877e",
-      "bytes": 3422,
+      "sha256": "af4a98c3e0da6b731e3c4176b876a1ffbea2dff1e708193ebae71eafabfd5501",
+      "bytes": 5032,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1166,8 +1206,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3549,
-          "sha256": "6d7ec2d554f24e3cf2a6c4ad6f518623d91265588f8be0a2df61ba0b67753e50",
+          "bytes": 4749,
+          "sha256": "f5c49388917fb4e31164d778547cb2f8cda6605abf5e913ab11ad32433d7f67d",
           "verification": "bytes-verified"
         }
       ],
@@ -1246,7 +1286,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-81p",
-    "materialSha256": "ec037b72f6eb92cfbf88ec87527f80f5364fb934eeff0133a0779fc63a2b7c8e",
+    "materialSha256": "7c410c08f3e68bdf1db6f0889902686795edd49741537cc5e12164aef74887ee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

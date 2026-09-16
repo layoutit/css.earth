@@ -1,0 +1,37 @@
+{
+  "id": "source-phoebe-n1465662798",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Phoebe · n1465662798",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/phoebe/source/manifest.json",
+      "revision": "2f2fd66326d20b2ab9111bab6e147135d777defb",
+      "sha256": "9be83141206acde8f8417e07bdcaff2995ce6560ddab3829926806433c76a959",
+      "locator": "/inputs/17"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "scope": "The n1465662798 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

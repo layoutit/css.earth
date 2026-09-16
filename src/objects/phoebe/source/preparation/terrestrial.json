@@ -360,7 +360,109 @@
         }
       }
     ],
-    "observedColors": []
+    "observedColors": [],
+    "surfaceObservations": [
+      {
+        "id": "iss",
+        "format": "spice-camera",
+        "consumer": "iss-observation",
+        "filter": "CL1,CL2",
+        "frames": [
+          {
+            "id": "n1465662798",
+            "path": "observations/N1465662798_2_CALIB.IMG",
+            "labelPath": "observations/N1465662798_2_CALIB.LBL",
+            "startTime": "2004-06-11T16:09:12.021Z"
+          }
+        ],
+        "spice": {
+          "kernelSet": "cassini",
+          "kernels": [
+            "lsk/naif0012.tls",
+            "pck/pck00011.tpc",
+            "sclk/cas00172.tsc",
+            "fk/cas_v43.tf",
+            "ik/cas_iss_v10.ti",
+            "spk/041014R_SCPSE_01066_04199.bsp",
+            "ck/04161_04164ra.bc"
+          ],
+          "observer": -82,
+          "target": 609,
+          "bodyFrame": "IAU_PHOEBE",
+          "instrument": -82360,
+          "clock": {
+            "start": "SPACECRAFT_CLOCK_START_COUNT",
+            "stop": "SPACECRAFT_CLOCK_STOP_COUNT",
+            "spacecraft": -82
+          },
+          "aberration": "LT+S",
+          "pixels": {
+            "focalLength": {
+              "key": "FOCAL_LENGTH",
+              "unit": "mm"
+            },
+            "pixelPitch": {
+              "key": "PIXEL_SIZE",
+              "unit": "micrometre"
+            },
+            "center": "CCD_CENTER",
+            "boresight": "BORESIGHT",
+            "samples": "PIXEL_SAMPLES",
+            "lines": "PIXEL_LINES",
+            "frame": "FOV_FRAME",
+            "origin": 1,
+            "column": "-X",
+            "row": "-Y"
+          },
+          "image": {
+            "format": "vicar-pds3",
+            "quantity": "I/F",
+            "header": {
+              "INSTRUMENT_ID": "ISSNA",
+              "TARGET_NAME": "PHOEBE",
+              "INSTRUMENT_MODE_ID": "FULL"
+            }
+          }
+        },
+        "limbRefinement": {
+          "method": "mesh-limb",
+          "maximumCorrectionDegrees": 0.2,
+          "maximumResidualPixels": 2.5,
+          "minimumControls": 24,
+          "searchPixels": 400,
+          "maximumControls": 1500
+        },
+        "refinement": {
+          "by": "relief"
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is the pixel range times the camera pixel angle, stretched by the emission angle, about 0.66 km across the diagonal at nadir from 78,000 km. Emission is limited to 75 degrees. The closest point must lie within 1.07 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 3
+        },
+        "display": {
+          "basis": "authored",
+          "percentiles": [
+            1.2,
+            99.4
+          ]
+        },
+        "metadata": {
+          "label": "ISS photograph",
+          "falseColor": false,
+          "coverage": "One Cassini narrow-angle clear-filter photograph from the approach of 11 June 2004 at 0.47 km per pixel and 86 degrees phase, projected onto the 2023 SPC shape through a camera derived from Cassini SPICE kernels and refined to the limb. Only the sunlit half of the disc is used. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,

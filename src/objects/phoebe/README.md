@@ -71,6 +71,28 @@ The SBIB regional RGB candidate uses a different reference ellipsoid/shape conve
 <details>
 <summary>Methods: Cassini VIMS calibration, masking and registration</summary>
 
+## Cassini ISS photograph
+
+**ISS photograph** casts one Cassini narrow-angle clear-filter photograph, `N1465662798_2`, taken on 11 June 2004 at 16:09 UTC from 77,935 km during the approach, onto the 2023 SPC shape. The frame is CISSCAL-calibrated I/F from the PDS Ring-Moon Systems Node. Its camera is derived from Cassini SPICE kernels in the shared bank: reconstructed attitude `04161_04164ra.bc` and trajectory `041014R_SCPSE_01066_04199.bsp`, which carries both Cassini and Phoebe, with `pck00011` for Phoebe's orientation. That orientation (Dec 77.80°) differs by 0.08° from the source model's recorded 77.88°, about 150 m at Phoebe's radius and below one 466 m pixel. The camera is refined to the lit limb by a 0.0095° rotation (21 pixels). Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo. The frame is at 86° phase, so only the sunlit half of the disc is used and the lens covers 14.6% of the surface.
+
+Before refinement, the unrefined kernel camera put the projected limb 4 to 26 pixels from the photographed one in eight approach frames. That is about 7 to 10 km on Phoebe in the sky plane, consistent with a target position offset rather than pointing. Replacing Phoebe's position with JPL's full-mission `sat441` ephemeris doubled the offset, because the 2004 trajectory kernel's Cassini and Phoebe positions are solved together, so it is not used.
+
+![N1465662798_2 with Phoebe's outline from the kernel camera (red) and after limb refinement (green)](evidence/iss-limb-refinement.png)
+
+![Map previews: relative albedo (top) and the ISS photograph lens (bottom)](evidence/iss-map-comparison.png)
+
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `iss` | 1 | 0 | — | — | — | none (one frame and no reference observation) | 0 of 0 | — | 1 of 1 | turn declined: the relief reference is not decisive over 3 frames | — | no verdict |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+<!-- registration-report:end -->
+
 ## Cassini VIMS infrared and water-ice maps (B9)
 
 The original calibrated RC19 C cubes, matched navigation N cubes and original PDS QUB detector/background data are retained beside the body. The [recipe](source/cassini-ice/prepare.json) and [manifest](source/manifest.json) pin exact wavelengths, source masks, calibration arithmetic, observer timing and prepared source maps.
