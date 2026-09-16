@@ -56,7 +56,8 @@ export function decodeOsirisGeo(bytes: Buffer) {
   }
   if (planeWidth === undefined || planeHeight === undefined) throw new Error('Missing OSIRIS image dimensions.');
   const width = planeWidth, height = planeHeight;
-  const xyz = (i: number) => ['X', 'Y', 'Z'].map(axis => planes[`COORDINATE_${axis}_IMAGE`][i]);
+  const X = planes.COORDINATE_X_IMAGE, Y = planes.COORDINATE_Y_IMAGE, Z = planes.COORDINATE_Z_IMAGE;
+  const xyz = (i: number) => [X[i], Y[i], Z[i]];
   // This is a geometry-backed footprint, not a detector-quality mask. Keep
   // finite zero/negative radiance. L5 has no accompanying L3/L4 quality plane.
   const valid = (i: number) => Number.isInteger(i) && i >= 0 && i < width * height &&
