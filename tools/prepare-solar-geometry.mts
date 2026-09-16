@@ -52,7 +52,7 @@ const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
   SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
-  STAR_IDS, starStateKm,
+  STAR_IDS, starAstrometry, starStateKm,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   systemBarycentreHeliocentricAu,
@@ -202,7 +202,9 @@ const entries = BODIES.map((body) => {
     matrix[2] * icrf[0] + matrix[5] * icrf[1] + matrix[8] * icrf[2],
   ]);
   const bodyFixed = toBodyFixed(toSunIcrf);
-  const eclipticNorth = toBodyFixed(ECLIPTIC_NORTH_ICRF);
+  // A placed star may put its own display axis up instead of the ecliptic pole: the camera orbit then lies in the star's
+  // equator, where its sub-Earth point is, instead of a plane the Earth may sit far outside of.
+  const eclipticNorth = star && starAstrometry(body as Parameters<typeof starAstrometry>[0]).presentationUp === 'display-axis' ? [0, 0, 1] : toBodyFixed(ECLIPTIC_NORTH_ICRF);
   const orbitNormal = toBodyFixed(orbitNormalIcrf);
   const orbitalVelocity = toBodyFixed(velocityIcrf);
   const elements = rotationAtEpoch(body);
