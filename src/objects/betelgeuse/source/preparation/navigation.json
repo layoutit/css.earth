@@ -6,23 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "reconstruction-context-marker",
-    "path": "presentation/context.png",
-    "origin": "https://oidb.jmmc.fr/",
-    "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
-    "license": "Public calibrated interferometric data; the reconstruction and this marker are attributed display derivatives.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 131002,
-    "expectedSha256": "a46a8b17d4bf4e766206f90d9178213cb5be9bdc39ce152a645c62481296502f",
-    "recipe": {
-      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
-      "inputs": [
-        "betelgeuse-matisse-2020-02-continuum"
-      ]
-    },
-    "generator": "tools/objects/source-authoring/betelgeuse/author.mts"
+    "path": "presentation/context.png"
   },
   "operations": [
     {
