@@ -253,14 +253,33 @@ export async function registrationStage(frames: readonly ObservationFrame[], rec
   return { stage: REGISTRATION_STAGE, silhouette: silhouetteRegistration(frames), reference: referenceReport, relief: reliefReport };
 }
 
-/** Which reference a lens lets turn its cameras, and how far the other decisive references may disagree before it declines. */
-export interface RefinementRecipe { by: 'relief' | 'frames' | 'map'; agreementDegrees: number }
+/**
+ * Which reference a lens lets turn its cameras about the pole (`by`), whether the silhouette may tilt them about the
+ * line of sight (`tilt`), and how far the other decisive references may disagree before a turn is declined.
+ */
+export interface RefinementRecipe { by?: 'relief' | 'frames' | 'map'; tilt?: 'silhouette'; agreementDegrees: number }
 export function parseRefinement(value: unknown): RefinementRecipe {
-  const record = requireRecord(value), by = record.by, agreement = record.agreementDegrees ?? 3;
-  if (by !== 'relief' && by !== 'frames' && by !== 'map') throw new TypeError('A refinement is by relief, frames or map.');
+  const record = requireRecord(value), by = record.by, tilt = record.tilt, agreement = record.agreementDegrees ?? 3;
+  if (by !== undefined && by !== 'relief' && by !== 'frames' && by !== 'map') throw new TypeError('A refinement is by relief, frames or map.');
+  if (tilt !== undefined && tilt !== 'silhouette') throw new TypeError('A tilt comes from the silhouette.');
+  if (by === undefined && tilt === undefined) throw new TypeError('A refinement names a turn reference, a tilt, or both.');
   if (typeof agreement !== 'number' || !(agreement > 0) || agreement > 30) throw new TypeError('A refinement states the agreement it asks of the other references, in degrees, under thirty.');
-  if (Object.keys(record).some(key => key !== 'by' && key !== 'agreementDegrees')) throw new TypeError('A refinement names only its reference and its agreement.');
-  return { by, agreementDegrees: agreement };
+  if (Object.keys(record).some(key => !['by', 'tilt', 'agreementDegrees'].includes(key))) throw new TypeError('A refinement names only its references and its agreement.');
+  return { ...(by ? { by } : {}), ...(tilt ? { tilt } : {}), agreementDegrees: agreement };
+}
+
+/** The rule a tilt must meet: enough scored frames, and a median residual that stands above the frames' own floor. */
+export const TILT = { minimumScored: 3 } as const;
+export interface TiltDecision { applied: boolean; tiltDegrees: number | null; reason: string; scored: number; medianResidualDegrees: number | null; noiseFloorDegrees: number | null }
+
+/** Whether the silhouette may tilt the lens: the median of its scored residuals, when there are enough and the floor does not swallow it. */
+export function tiltDecision(stage: RegistrationStageReport): TiltDecision {
+  const residuals = stage.silhouette.frames.map(frame => frame.residualDegrees).filter((r): r is number => r !== undefined).sort((a, b) => a - b);
+  const median = residuals.length ? residuals[Math.floor(residuals.length / 2)] : null, floor = stage.silhouette.noiseFloorDegrees;
+  const base = { scored: residuals.length, medianResidualDegrees: median, noiseFloorDegrees: floor };
+  if (median === null || residuals.length < TILT.minimumScored) return { ...base, applied: false, tiltDegrees: null, reason: `the silhouette scored ${residuals.length} frames, fewer than ${TILT.minimumScored}` };
+  if (floor !== null && Math.abs(median) <= floor) return { ...base, applied: false, tiltDegrees: null, reason: `the median residual ${median.toFixed(2)}° is within the frames' floor of ${floor.toFixed(2)}°` };
+  return { ...base, applied: true, tiltDegrees: median, reason: 'scored and above the floor' };
 }
 
 export interface RefinementDecision { by: RefinementRecipe['by']; applied: boolean; turnDegrees: number | null; reason: string; medians: Record<string, number | null> }
@@ -270,6 +289,7 @@ export interface RefinementDecision { by: RefinementRecipe['by']; applied: boole
  * reference that is decisive must put its median within the stated agreement. A conflict is reported, not resolved.
  */
 export function refinementDecision(stage: RegistrationStageReport, recipe: RefinementRecipe): RefinementDecision {
+  if (!recipe.by) throw new TypeError('A turn decision needs the reference the refinement names.');
   const medians: Record<string, number | null> = { relief: stage.relief.medianOffsetDegrees, [stage.reference.kind === 'observation' ? 'map' : 'frames']: stage.reference.medianOffsetDegrees };
   const named = medians[recipe.by];
   if (named === undefined || named === null) return { by: recipe.by, applied: false, turnDegrees: null, reason: `the ${recipe.by} reference is not decisive over ${DECISIVE.minimumFrames} frames`, medians };
@@ -278,4 +298,25 @@ export function refinementDecision(stage: RegistrationStageReport, recipe: Refin
     if (Math.abs(median - named) > recipe.agreementDegrees) return { by: recipe.by, applied: false, turnDegrees: null, reason: `the ${name} reference puts the turn at ${median}°, more than ${recipe.agreementDegrees}° from the ${recipe.by} reference's ${named}°`, medians };
   }
   return { by: recipe.by, applied: true, turnDegrees: named, reason: 'decisive and unopposed', medians };
+}
+
+/**
+ * Whether a correction earned its place: measured again, a turn must bring the reference it came from closer to zero,
+ * and a tilt must lower the silhouette residual it came from. A correction that does neither is reverted and the
+ * provider's camera stands; the report says which, and by how much it missed.
+ */
+export function refinementKept(before: RegistrationStageReport, after: RegistrationStageReport, by: RefinementRecipe['by'] | undefined, tilted: boolean) {
+  const verdict: { turn?: { kept: boolean; reason: string }; tilt?: { kept: boolean; reason: string } } = {};
+  if (by) {
+    const pick = (stage: RegistrationStageReport) => by === 'relief' ? stage.relief.medianOffsetDegrees : stage.reference.medianOffsetDegrees;
+    const was = pick(before), now = pick(after);
+    const kept = now === null ? true : was === null ? true : Math.abs(now) < Math.abs(was);
+    verdict.turn = { kept, reason: now === null ? `the ${by} reference is no longer decisive after the turn; the turn stands on the first measurement` : kept ? `the ${by} median moved from ${was}° to ${now}°` : `the ${by} median did not move toward zero (${was}° to ${now}°)` };
+  }
+  if (tilted) {
+    const was = before.silhouette.rmsDegrees, now = after.silhouette.rmsDegrees;
+    const kept = was !== null && now !== null && now < was;
+    verdict.tilt = { kept, reason: kept ? `the limb residual fell from ${was?.toFixed(2)}° to ${now?.toFixed(2)}°` : `the limb residual did not fall (${was?.toFixed(2)}° to ${now?.toFixed(2)}°)` };
+  }
+  return verdict;
 }
