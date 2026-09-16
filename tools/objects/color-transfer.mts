@@ -77,8 +77,7 @@ export const LUPTON_ASINH_REFERENCE = 'https://doi.org/10.1086/382245';
 
 export interface AsinhBandDisplay {
   readonly kind: 'band-asinh';
-  readonly inputQuantity: 'surface-brightness';
-  readonly unit: 'MJy/sr';
+  readonly inputQuantity: 'band-normalized-surface-brightness';
   readonly bands: readonly string[];
   readonly minimum: number;
   readonly stretch: number;
@@ -86,9 +85,10 @@ export interface AsinhBandDisplay {
   readonly outputEncoding: 'lupton-asinh';
 }
 
-/** Calibrated sky bands in one unit share one black level, one linear stretch and one
- * softening. The route names one band (monochrome) or three distinct bands in red, green,
- * blue order. There is no per-band gain, so band ratios decide hue. */
+/** Calibrated sky bands, each already divided by its own measured range, share one black level,
+ * one linear stretch and one softening. The route names one band (monochrome) or three distinct
+ * bands in red, green, blue order. The display has no gains of its own; hue shows where each band
+ * is bright relative to its own range, not physical band ratios. */
 export function asinhBandDisplay(bands: readonly string[], value: unknown): AsinhBandDisplay {
   const row = requireRecord(value, 'Asinh display');
   const keys = Object.keys(row).sort().join();
@@ -97,7 +97,7 @@ export function asinhBandDisplay(bands: readonly string[], value: unknown): Asin
   const softening = requireFiniteNumber(row.softening, 'Asinh softening');
   if (![1, 3].includes(bands.length) || new Set(bands).size !== bands.length || bands.some(band => !band) || !(stretch > 0) || !(softening > 0))
     throw new TypeError('An asinh display binds one band or three distinct bands with a positive stretch and softening.');
-  return { kind: 'band-asinh', inputQuantity: 'surface-brightness', unit: 'MJy/sr', bands: [...bands], minimum, stretch, softening, outputEncoding: 'lupton-asinh' };
+  return { kind: 'band-asinh', inputQuantity: 'band-normalized-surface-brightness', bands: [...bands], minimum, stretch, softening, outputEncoding: 'lupton-asinh' };
 }
 
 /** One floating value per band per pixel -> RGB bytes. Missing pixels stay black. */
@@ -125,5 +125,5 @@ export function encodeAsinhBands(values: Float32Array | Float64Array, missing: U
 
 export function asinhBandEvidence(display: AsinhBandDisplay) {
   return { ...display, interpretation: display.bands.length === 1 ? 'monochrome' : 'false-color', transferReference: LUPTON_ASINH_REFERENCE,
-    processing: 'Band values stay floating point in MJy/sr through reprojection. One common minimum is subtracted; one asinh curve maps the mean of the bands, and every band is scaled by the same factor, so their ratios decide hue. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color.' };
+    processing: 'Each band is calibrated to MJy/sr and divided by its own measured range, so hue shows where a band is bright relative to itself, not physical band ratios. One common minimum is subtracted; one asinh curve maps the mean of the bands and scales every band by the same factor. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color.' };
 }
