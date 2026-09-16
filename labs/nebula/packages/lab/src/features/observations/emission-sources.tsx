@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { localFile } from '../legacy-viewer/controller';
+import { ImageCredit } from '../workspace/image-credit';
+import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 
 type Candidate = {
   id: string; label: string; previewPath: string; previewUrl: string; sourcePageUrl: string;
@@ -39,17 +41,15 @@ export function EmissionSources({ catalogue }: { catalogue: string }) {
   const candidate = candidates.find(item => item.id === selected);
   return <fieldset className="emission-sources">
     <legend>Source coverage</legend>
-    <label>Image<select aria-label="Source candidate" value={selected} onChange={event => { setSelected(event.target.value); setRemote(false); setError(''); }}>
+    <WorkspaceImagePicker><label className="visually-hidden" htmlFor="source-candidate-image">Image</label><select id="source-candidate-image" aria-label="Source candidate" value={selected} onChange={event => { setSelected(event.target.value); setRemote(false); setError(''); }}>
       {candidates.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
-    </select></label>
+    </select></WorkspaceImagePicker>
+    <ImageCredit credit={candidate?.credit} />
     <p className="interaction-hint">Original preview · no processing</p>
     {candidate && <>
       <p className="interaction-hint">{candidate.fieldArcminutes.join(' × ')}′ · {candidate.nativePixels.join(' × ')} native pixels</p>
       <p className="interaction-hint">{candidate.bands}</p>
       <p className="interaction-hint">{candidate.note}</p>
-      <a className="model-source" href={candidate.sourcePageUrl} target="_blank" rel="noreferrer">Source & coordinates ↗</a>{' '}
-      <a className="model-source" href={candidate.originalUrl} target="_blank" rel="noreferrer">Native image ↗</a>
-      <p className="interaction-hint">{candidate.credit}</p>
     </>}
     {error && <p className="interaction-hint" role="alert">{error}</p>}
     {host && createPortal(<figure className="emission-structure-map" aria-label="Source coverage preview">

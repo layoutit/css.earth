@@ -70,7 +70,7 @@ From a clean source checkout with the tracked compact delivery inputs:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
+pnpm -r --filter "./packages/**" build
 node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.mts --timeout-seconds 1800
 ```
 

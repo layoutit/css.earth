@@ -1,3 +1,4 @@
+import { gestureCamera } from './browser-camera.ts';
 import { chooseLabObject } from './browser-object-picker.ts';
 /** Focused real-browser checks of retained prepared cloud parts and display attenuation. */
 import assert from 'node:assert/strict';
@@ -100,7 +101,7 @@ try {
   await ready(); await page.locator(selectors.panel).waitFor({ state: 'visible', timeout: 60000 });
   if (await page.locator('#cloud-stars-enabled').isVisible()) await page.locator('#cloud-stars-enabled').uncheck();
   await page.waitForFunction(selector => document.querySelectorAll(selector).length >= 3, selectors.parts);
-  await defaults(); await page.selectOption('#camera-pose', 'front'); await frame();
+  await defaults(); await gestureCamera(page, 'reference'); await frame();
   for (const axis of ['overall', 'x', 'y', 'z']) await control(axis, 1);
   await page.evaluate(() => { window.__cloudControlLeaves = [...document.querySelectorAll('#viewer .css-volume-mesh s')]; });
   const fullPage = `${output}/full-page-controls.png`;
@@ -145,15 +146,15 @@ try {
   await control('overall', 1);
   for (const [axis, value] of [['x', .2], ['y', .5], ['z', .8]] as const) await control(axis, value);
   retained(initial, await state(), 'axis brightness');
-  for (const pose of ['front', 'x-plus-30', 'x-plus-60', 'edge-x', 'y-plus-30', 'edge-y']) {
-    await page.selectOption('#camera-pose', pose); await frame(); const s = await state();
+  for (const pose of ['reference', 'vertical-positive-short', 'vertical-positive-wide', 'vertical-positive-long', 'horizontal-positive-short', 'horizontal-positive-long']) {
+    await gestureCamera(page, pose); await frame(); const s = await state();
     const expected = weightedOpacity(s, [.2, .5, .8], 1);
     assert.ok(Math.abs(s.opacity - expected) < 1e-6 && Math.abs(s.computedOpacity - expected) < 1e-5,
       `${pose}: attenuation does not match the effective composited axis weights`);
     report.checks.push({ pose, expected, actual: s.opacity, banks: s.banks });
   }
   // Small physical drag increments must cross an axis handoff without a discrete gain jump.
-  await page.selectOption('#camera-pose', 'front'); await frame();
+  await gestureCamera(page, 'reference'); await frame();
   const box = await page.locator('#viewer').boundingBox(); assert.ok(box);
   const gains: number[] = [(await state()).opacity];
   await page.mouse.move(box.x + box.width * .3, box.y + box.height * .5); await page.mouse.down();

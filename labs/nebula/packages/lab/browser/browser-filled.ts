@@ -1,3 +1,4 @@
+import { settleCamera, gestureCamera } from './browser-camera.ts';
 import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { basename } from 'node:path';
@@ -20,8 +21,8 @@ const output = process.argv[3] ?? '.local/nebula-lab/filled-review/browser';
 const screenshots = `${output}/screenshots`;
 const expectedIds = ['lmc-clouds-broad', 'lmc-clouds'];
 const expectedSources = ['registered-photo', 'target', 'compact', 'extended', 'diffuse'];
-const poses = ['front', 'x-minus-60', 'x-minus-30', 'x-plus-30', 'x-plus-60',
-  'y-minus-60', 'y-minus-30', 'y-plus-30', 'y-plus-60', 'edge-x', 'edge-y'] as const;
+const poses = ['reference', 'vertical-negative-wide', 'vertical-negative-short', 'vertical-positive-short', 'vertical-positive-wide',
+  'horizontal-negative-wide', 'horizontal-negative-short', 'horizontal-positive-short', 'horizontal-positive-wide', 'vertical-positive-long', 'horizontal-positive-long'] as const;
 const earthDistance = 49.59067275049;
 const records = JSON.parse(await readFile('labs/nebula/packages/lab/src/state/subjects.json', 'utf8')) as Subject[];
 const subjects = expectedIds.map(id => records.find(record => record.id === id));
@@ -70,7 +71,7 @@ async function runtimeState() {
       return bad;
     });
     return { subject: viewer.dataset.subject, distance: Number(viewer.dataset.distance), revision: viewer.dataset.cameraRevision,
-      pose: (document.querySelector<HTMLSelectElement>('#camera-pose'))!.value, hostTransform: getComputedStyle(viewer).transform,
+      pose: JSON.stringify((() => { const m = new DOMMatrix(document.querySelector<HTMLElement>('#viewer .css-volume-scene')!.style.transform); return [[m.m11,m.m12,m.m13],[m.m21,m.m22,m.m23],[m.m31,m.m32,m.m33]].flatMap(row => { const norm = Math.hypot(...row); return row.map(value => Number((value / norm).toFixed(6))); }); })()), hostTransform: getComputedStyle(viewer).transform,
       roots: roots.length, scenes: document.querySelectorAll('#viewer .css-volume-scene').length, leaves: leaves.length,
       transforms: [...document.querySelectorAll<HTMLElement>('#viewer .css-volume-scene')].map(node => node.style.transform),
       textures: leaves.map(node => node.style.backgroundImage), forbiddenNodes, forbiddenStyles };
@@ -89,9 +90,9 @@ function assertRuntime(value: Awaited<ReturnType<typeof runtimeState>>, id: stri
 
 async function capture(subject: string, pose: typeof poses[number]) {
   const before = await page.locator('#viewer').getAttribute('data-camera-revision');
-  await page.selectOption('#camera-pose', pose);
-  await page.waitForFunction(value => document.querySelector<HTMLSelectElement>('#camera-pose')?.value === value, pose);
-  if (pose !== 'front') await page.waitForFunction(value => document.querySelector<HTMLElement>('#viewer')?.dataset.cameraRevision !== value, before);
+  await gestureCamera(page, pose);
+  await settleCamera(page);
+  if (pose !== 'reference') await page.waitForFunction(value => document.querySelector<HTMLElement>('#viewer')?.dataset.cameraRevision !== value, before);
   const state = await runtimeState(); assertRuntime(state, `${subject}/${pose}`);
   assert.ok(Math.abs(state.distance - earthDistance) < 1e-10, `${subject}/${pose}: observer distance drifted`);
   const retained = await page.evaluate(() => { const now = [...document.querySelectorAll('#viewer .css-volume-mesh s')];
@@ -116,12 +117,12 @@ async function visibleRotation() {
 }
 
 async function dragDirection(id: string) {
-  await page.selectOption('#camera-pose', 'front');
+  await gestureCamera(page, 'reference');
   const box = await page.locator('#viewer').boundingBox(); assert.ok(box, `${id}: viewer has no bounds`);
   const drag = async (toFraction: number) => {
     await page.mouse.move(box.x + box.width * .5, box.y + box.height * .5); await page.mouse.down();
     await page.mouse.move(box.x + box.width * toFraction, box.y + box.height * .5, { steps: 12 }); await page.mouse.up();
-    await page.waitForFunction(() => document.querySelector<HTMLSelectElement>('#camera-pose')?.value === 'manual');
+    await settleCamera(page);
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     return visibleRotation();
   };
@@ -130,8 +131,8 @@ async function dragDirection(id: string) {
   // The east-left host reflection requires the viewer's conjugated input rotation:
   // screen-right is positive here; removing that conjugation makes these terms negative.
   assert.ok(right.m23 > .05 && right.m31 > .05, `${id}: rightward drag used the wrong east-left yaw sign`);
-  await page.selectOption('#camera-pose', 'front');
-  await page.waitForFunction(() => document.querySelector<HTMLSelectElement>('#camera-pose')?.value === 'front');
+  await gestureCamera(page, 'reference');
+  await settleCamera(page);
   const left = await drag(.42);
   assert.ok(left.m23 < -.05 && left.m31 < -.05, `${id}: leftward drag used the wrong east-left yaw sign`);
   return { right, left, pose: (await runtimeState()).pose };
@@ -227,7 +228,7 @@ try {
   await waitReady(subjects[1]!.id, 'density');
   assert.equal(new URL(page.url()).searchParams.get('tab'), 'alignment', 'legacy Source URL did not fall back to Alignment');
   await page.click('#render-tab'); await waitReady(subjects[1]!.id, 'photo');
-  await page.selectOption('#camera-pose', 'y-plus-60');
+  await gestureCamera(page, 'horizontal-positive-wide');
   const box = await page.locator('#viewer').boundingBox(); assert.ok(box);
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); const beforeZoom = await runtimeState();
   await page.mouse.wheel(0, -350); await page.waitForFunction(distance => Number(document.querySelector<HTMLElement>('#viewer')?.dataset.distance) !== distance, beforeZoom.distance);
@@ -239,10 +240,10 @@ try {
   assert.equal(switched.distance, retained.distance, 'variant switch changed camera distance');
   report.transitions.push({ from: subjects[1]!.id, to: subjects[0]!.id, pose: switched.pose, distance: switched.distance });
   // Both models intentionally preserve the same observer projection; changed depth must be visible off-axis.
-  for (const pose of ['front', 'y-plus-60']) {
+  for (const pose of ['reference', 'horizontal-positive-wide']) {
     const pair = report.captures.filter(item => item.pose === pose);
     const difference = await imageDifference(pair[0]!.path, pair[1]!.path);
-    if (pose !== 'front') assert.ok(difference.meanAbsolute > .05 && difference.changedFraction > .001,
+    if (pose !== 'reference') assert.ok(difference.meanAbsolute > .05 && difference.changedFraction > .001,
       'broad and filled oblique projections are visually identical');
     report.differences.push({ pair: expectedIds, pose, ...difference });
   }

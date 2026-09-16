@@ -1,3 +1,4 @@
+import { gestureCamera } from './browser-camera.ts';
 /** Saved-output acceptance only. Args: [result-ledger.json] [base-url] [output-directory]. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -82,7 +83,7 @@ async function prepareSeam(page: Page, row: Result, seam: typeof seams[number]) 
   await page.locator('#cloud-stars-enabled').uncheck();
   await page.locator('#cloud-brightness-reset').click();
   await page.locator('#cloud-all').click();
-  await page.selectOption('#camera-pose', 'front');
+  await gestureCamera(page, 'reference');
   await page.waitForFunction(() => {
     const host = document.querySelector<HTMLElement>('#viewer');
     return host?.dataset.cloudOpacity === '1' && host.dataset.cloudBrightness === '{"overall":1,"x":1,"y":1,"z":1}';

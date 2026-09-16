@@ -1,5 +1,7 @@
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { localFile } from '../legacy-viewer/controller';
+import { ImageCredit } from '../workspace/image-credit';
 import { ObservationSources } from './observation-sources';
 import { readSourceDossier, selectObservationCandidates, type SourceDossier } from './models/source-dossier';
 import { adjustedMatrix, imageCorners, observationFitStorageKey, savedObservationFit, readAdjustment, readObservations, transform, unchanged,
@@ -123,20 +125,16 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
         {error && onOpenCompiler && <p><button type="button" onPointerDown={event => event.stopPropagation()} onClick={onOpenCompiler} title="Compile restores the configured source images and validates their alignment before reconstruction.">Open nebula compiler</button></p>}
       </div>}
     </div>
-    <aside className="floating-panel observation-camera" aria-label="Alignment camera">
-      <fieldset disabled={!data}><legend>Camera</legend>
-        <div className="camera-actions"><button type="button" onClick={() => fitImages()} title="Fit every full image edge in the common north-up sky frame.">Earth view · fit all</button>
-          <button type="button" onClick={() => fitImages(true)} title="Fit this image at its true sky orientation; switching images retains this camera.">Fit image</button></div>
-        <p className="interaction-hint">Drag to pan · scroll to zoom</p>
-        <p className="interaction-hint" title="Images share one celestial coordinate frame. This is not a 3D depth model.">{data?.frame.fieldArcminutes.join(' × ')}′ sky frame</p>
-      </fieldset>
-      <fieldset className="workspace-model" disabled title="Alignment compares registered images before any volume model is selected."><legend>Model</legend>
-        <p className="interaction-hint">Registered sky frame · no volume in Alignment</p>
-      </fieldset>
-    </aside>
+    <CameraModelPanel className="observation-camera" busy={!data} camera={{
+      earth: { onActivate: () => fitImages(), description: 'Fit every full image edge in the common north-up sky frame.' },
+      fit: { onActivate: () => fitImages(true), description: 'Fit the selected image at its true sky orientation.' },
+    }} unavailableReason="Alignment uses a fixed north-up 2D sky projection."
+      cameraHint={<>Drag to pan · scroll to zoom<p>{data?.frame.fieldArcminutes.join(' × ')}′ sky frame</p></>}
+      modelReason="Registered sky frame · no volume in Alignment" />
     <aside className="image-overlay-panel observation-images" aria-label="Observation images">
-      <fieldset disabled={!data}><legend>Image</legend>
-        <label className="field-label" htmlFor="observation-image">Image</label>
+      <fieldset disabled={!data}><legend className="visually-hidden">Image adjustments</legend>
+        <ImageCredit credit={image?.source.credit} />
+        <label className="visually-hidden" htmlFor="observation-image">Image</label>
         <select id="observation-image" value={selected} title="Switch aligned images without moving the camera or changing their sky scale." onChange={event => {
           const id = event.target.value;
           if (!data?.images.find(item => item.id === id)?.layers[layer]) setLayer('original');
@@ -168,7 +166,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
           </section>
           <p className="overlay-detail" title="Full-resolution source treatment runs offline. Preserved maps retain compact emission and any foreground stars; their residual is zero.">{image.source.stellarTreatment === 'preserve' ? (image.layers.diffuse && image.layers.stars ? 'Compact structure preserved · removal not applicable' : 'Native preservation not prepared') : image.layers.diffuse && image.layers.stars ? 'Native star removal prepared' : 'Star removal not prepared'}</p>
           <div className="placement-actions"><button className="text-button" type="button" disabled={loading} onClick={() => setReload(value => value + 1)} title="Read newly completed star-removal layers without moving the camera or changing the alignment.">{loading ? 'Reloading…' : 'Reload prepared layers'}</button>
-          <a className="overlay-detail" href={image.source.page} target="_blank" rel="noreferrer" title={image.source.credit}>Source & credit ↗</a></div>
+          </div>
           {dossier && <ObservationSources data={dossier} image={image} />}
         </>}
         {(storageError || missingLayer.length > 0) && <p className="overlay-detail" role="status">{storageError || `Not prepared: ${missingLayer.map(item => item.label).join(', ')}`}</p>}

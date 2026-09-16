@@ -6,7 +6,7 @@ From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
+pnpm -r --filter "./packages/**" build
 pnpm lab:nebula
 ```
 
@@ -16,10 +16,12 @@ Do not restart an already running server to switch views. Legacy `?subject=…&t
 
 The research command entrypoint is `labs/nebula/run.mts`; its registry and server live in `packages/lab`. React owns one application tree and its control portals; the retained viewer owns scene nodes. Application installation separately uses `tools/nebula/prepare.mts` with accepted compact inputs. See [package ownership and validation](internal-packages.md).
 
+The centered object picker searches the available subjects. Camera and model controls are docked on the left; image selection and processing are on the right. Reconstruction views sit above the preview. Hover or focus a view button for its explanation, including missing-data requirements. The selected image credit appears at the bottom-right of the preview.
+
 ## 1. Align an image
 
 1. Choose **LMC** or **SMC** in the header, then **Alignment**.
-2. Use **Reference view** to return to the approximate solar observer. **Fit cloud** changes inspection framing; drag or scroll to explore the actual density volume.
+2. Use **Earth view** to return to the approximate solar observer. **Fit cloud** changes inspection framing; drag or scroll to explore the actual density volume.
 3. Choose the reference image on the right. Its publisher/star-registered projection is the starting point. Keep the entire image footprint and full density field visible while comparing them.
 4. Adjust position, rotation, size and opacity. Density and image brightness/gamma/levels are independent inspection controls. **Copy positioning** exports the fit; the browser also saves it per image.
 5. Verify direction, angular scale, matched-star coverage and missing edges before processing a new source. An authored fit to simulated density is not astrometric evidence. [Registration](registration.md) · [Candidate evidence](image-candidates.md).

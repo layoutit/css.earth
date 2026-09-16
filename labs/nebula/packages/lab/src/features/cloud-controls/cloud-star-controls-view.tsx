@@ -1,4 +1,6 @@
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
+import { ImageAppearanceCheckbox } from '../../ui/image-appearance-panel';
 import type { ControlPortals } from '../../ui/control-portals';
 import { createControlStore } from '../../state/control-store.ts';
 /** Visible lab controls for the independently prepared bright-star layer. */
@@ -35,10 +37,12 @@ export function createCloudStarControls({ host, controls, onChange }: {
   }
   function CloudStarControlsView() {
     const state = useSyncExternalStore(store.subscribe, store.snapshot);
-    if (!state.context) return null;
-    return <fieldset className="cloud-star-fieldset"><legend>Bright stars</legend>
-      <label className="cloud-density-removed" htmlFor="cloud-stars-enabled"><input id="cloud-stars-enabled" type="checkbox"
-        checked={state.options.enabled} onChange={event => { options = { ...options, enabled: event.currentTarget.checked }; publish(); }} /> Show catalog stars</label>
+    const [toggleHost, setToggleHost] = useState<HTMLElement | null>(null);
+    useEffect(() => { setToggleHost(document.getElementById('reconstruction-stars-toggle')); }, []);
+    const toggle = <ImageAppearanceCheckbox id="cloud-stars-enabled" label="Stars" control={state.context ? {
+      checked: state.options.enabled, onChange: enabled => { options = { ...options, enabled }; publish(); },
+    } : { reason: 'No prepared catalogue stars are available for this scene.' }} />;
+    return <>{toggleHost && createPortal(toggle, toggleHost)}{state.context && <fieldset className="cloud-star-fieldset"><legend>Bright stars</legend>
       {(['brightness', 'size'] as const).map(key => <div className="cloud-brightness-control" key={key}>
         <label htmlFor={`cloud-stars-${key}`}>{key === 'brightness' ? 'Exposure' : 'Size'}</label>
         <input type="range" title={key === 'brightness' ? 'Scale the prepared star light together, preserving relative brightness.' : 'Scale all point diameters together.'} id={`cloud-stars-${key}`} min={key === 'size' ? 50 : 0} max={key === 'size' ? 300 : 100} step={key === 'size' ? 5 : 1}
@@ -47,7 +51,7 @@ export function createCloudStarControls({ host, controls, onChange }: {
       </div>)}
       <p className="cloud-control-hint">{state.context.count.toLocaleString()} catalog stars. Sky positions are measured; depths are modeled.</p>
       <a className="cloud-star-source" href={state.context.sourceUrl} target="_blank" rel="noreferrer">Catalog source ↗</a>
-    </fieldset>;
+    </fieldset>}</>;
   }
   root.render(<CloudStarControlsView />);
   return {

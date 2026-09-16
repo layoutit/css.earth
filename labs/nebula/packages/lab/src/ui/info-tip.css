@@ -1,0 +1,6 @@
+.info-tip { position: relative; display: inline-flex; align-items: center; flex: none; }
+.info-tip-content { position: fixed; inset: auto; margin: 0; width: 260px; max-width: calc(100vw - 32px); padding: 11px 13px; border: 1px solid #45484d; border-radius: 5px; background: #22252a; color: #e1e3e7; font-size: 12px; font-weight: 400; line-height: 1.45; text-align: left; white-space: normal; box-shadow: 0 5px 18px #0008; }
+.workspace-mode-option { display: flex; align-items: center; min-width: 0; gap: 2px; }
+.workspace-mode-option > button { flex: 1; min-width: 0; }
+
+.info-tip-content::before { content: ""; position: absolute; left: 0; right: 0; top: -7px; height: 7px; }

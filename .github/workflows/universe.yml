@@ -130,7 +130,7 @@ jobs:
       - name: Install dependencies without preparing application assets
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared TypeScript dependencies
-        run: pnpm build:packages
+        run: pnpm -r --filter "./packages/**" build
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps chromium
       - name: Check all nebula packages, tests and dependency boundaries
@@ -154,6 +154,7 @@ jobs:
           acquisition footprint image-links image-ranking
           operation-jobs plugin-lifecycle implementation
           lab-shell shape-cloud-state shape-cloud-scheduler
-          control-portals browser-regression overlay-store
+          control-portals browser-regression browser-camera overlay-store
+          workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model

@@ -1,3 +1,4 @@
+import { CameraModelPanel } from '../../ui/camera-model-panel';
 import { WorkspaceSections } from '../../pages/reconstruction/workspace-sections';
 import '../workspace/workspace-controls.css';
 import { useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ import { EvidenceFusion } from '../evidence/evidence-fusion';
 import { KinematicsPanel } from '../kinematics/kinematics-panel';
 import { JointFitPanel } from '../joint-fit/joint-fit-panel';
 import { CompilerPanel } from '../compiler/compiler-panel';
+import { ImageCredit } from '../workspace/image-credit';
 
 /** Observation views and explicitly configured bounded inference workbenches. */
 export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, kinematicsSource, jointFitSource, compilerSource, compilerPublished, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
@@ -38,6 +40,7 @@ export function EmissionComparison({ directory, structureDirectory, observationS
     const url = new URL(location.href); url.searchParams.set('inspection', next); history.replaceState(history.state, '', url);
   }
   return <aside className={`floating-panel cloud-adjustment-panel${(structureMode && observationStructures || advanced) ? ' observation-structures-panel' : ''}`} aria-label="Emission inference comparison">
+    <div id="inference-image-picker" />
     <WorkspaceSections active={legacyModel && mode === 'volume' ? 'compiler' : mode} onChange={next => changeMode(legacyModel && next === 'compiler' ? 'volume' : next)} capabilities={{
       compiler: legacyModel || Boolean(compilerSource && observationStructures), sources: Boolean(sourceCatalogue),
       structure: Boolean(structureDirectory || observationStructures), combined: Boolean(observationStructures),
@@ -58,11 +61,8 @@ export function EmissionComparison({ directory, structureDirectory, observationS
       <p className="interaction-hint" title={modeled ? 'The published geometry sets a depth prior. Color is allocated along its rays; agreement with the photo does not prove the geometry.' : 'The depth is inferred under an authored axial-symmetry assumption. Physical size and gas mass density are not measured. The projection comparison is numerical; the PolyCSS display uses an approximate opacity transfer.'}>{modeled ? 'Authored depth · photo agreement imposed' : 'Symmetry-based experiment · unmeasured depth'}</p>
     </fieldset> : <p role="status">No baseline volume is configured.</p>}
     {host && (sourcesMode || structureMode && !observationStructures) && createPortal(
-      <aside className="floating-panel workspace-model-panel" aria-label="Camera and model">
-        <fieldset disabled title="This prepared image is fitted to the preview automatically."><legend>Camera</legend><p className="interaction-hint">Image fitted to view</p></fieldset>
-        <fieldset className="workspace-model" disabled title="Source and structure inspection uses prepared images, without a volume model."><legend>Model</legend><p className="interaction-hint">Prepared image inspection · no volume</p></fieldset>
-      </aside>, host)}
-    {directory && !structureMode && !sourcesMode && !advanced && <a className="model-source" href={methodUrl ?? 'https://doi.org/10.1111/cgf.12216'} target="_blank" rel="noreferrer">Reconstruction paper ↗</a>}
-    {!sourcesMode && !advanced && !(structureMode && observationStructures) && credit && <p className="interaction-hint">{credit}</p>}
+      <CameraModelPanel unavailableReason="This prepared image is fitted to the preview automatically."
+        cameraHint="Image fitted to view" modelReason="Prepared image inspection · no volume" />, host)}
+    {!sourcesMode && !advanced && !(structureMode && observationStructures) && <ImageCredit credit={credit} />}
   </aside>;
 }

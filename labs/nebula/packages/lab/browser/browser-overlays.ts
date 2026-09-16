@@ -1,3 +1,4 @@
+import { settleCamera } from './browser-camera.ts';
 import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -50,7 +51,7 @@ async function panelReady(subject: string, catalogue: Catalogue) {
 async function state() {
   return page.evaluate(() => {
     const viewer = document.querySelector<HTMLElement>('#viewer')!, planes = [...document.querySelectorAll<HTMLElement>('[data-overlay-mesh] > s')];
-    return { pose: (document.querySelector('#camera-pose') as HTMLSelectElement).value, distance: viewer.dataset.distance,
+    return { pose: JSON.stringify((() => { const m = new DOMMatrix(document.querySelector<HTMLElement>('#viewer .css-volume-scene')!.style.transform); return [[m.m11,m.m12,m.m13],[m.m21,m.m22,m.m23],[m.m31,m.m32,m.m33]].flatMap(row => { const norm = Math.hypot(...row); return row.map(value => Number((value / norm).toFixed(6))); }); })()), distance: viewer.dataset.distance,
       revision: viewer.dataset.cameraRevision, scenes: [...document.querySelectorAll<HTMLElement>('#viewer .css-volume-scene')].map(node => node.style.transform),
       densityTextures: [...document.querySelectorAll<HTMLElement>('#viewer .css-volume-mesh:not([data-overlay-mesh]) > s')].map(node => node.style.backgroundImage),
       planes: planes.map(node => ({ id: node.dataset.overlayLeaf!, transform: node.style.transform,
@@ -204,10 +205,10 @@ try {
   await page.waitForFunction(() => document.querySelector('#viewer')?.getAttribute('aria-busy') === 'false');
   await page.mouse.move(box.x + box.width * .45, box.y + box.height * .5); await page.mouse.down();
   await page.mouse.move(box.x + box.width * .58, box.y + box.height * .42, { steps: 12 }); await page.mouse.up();
-  await page.waitForFunction(() => (document.querySelector('#camera-pose') as HTMLSelectElement).value === 'manual');
+  await settleCamera(page);
   const dragged = await projectedCardinals(first.id, cardinalPoints);
   assert.ok(dragged.center[0] > cardinal.center[0], 'rightward drag moved the sky landmark left');
-  await page.click('#reference-view'); await page.waitForFunction(() => (document.querySelector('#camera-pose') as HTMLSelectElement).value === 'front');
+  await page.click('#reference-view'); await settleCamera(page);
   await page.locator(`#reset-placement-${first.id}`).click();
 
   await page.evaluate(() => { window.__overlayLeaves = [...document.querySelectorAll('#viewer .css-volume-mesh:not([data-overlay-mesh]) > s')]; });

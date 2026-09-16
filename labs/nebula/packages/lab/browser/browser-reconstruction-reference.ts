@@ -1,3 +1,4 @@
+import { gestureCamera } from './browser-camera.ts';
 /** Saved-output checks. Args: [result-ledger.json] [base-url] [output-directory] [--single-source]. Never starts processing. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -71,7 +72,7 @@ async function slider(page: Page, id: string, value: number) {
   }, value);
 }
 async function moveCamera(page: Page) {
-  await page.selectOption('#camera-pose', 'y-plus-30');
+  await gestureCamera(page, 'horizontal-positive-short');
   const box = await page.locator('#viewer').boundingBox(); assert.ok(box);
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.wheel(0, -180); await settle(page);

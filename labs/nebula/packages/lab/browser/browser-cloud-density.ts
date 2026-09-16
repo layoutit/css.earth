@@ -1,3 +1,4 @@
+import { gestureCamera } from './browser-camera.ts';
 /** Real prepared-density-filter browser checks; no synthetic scene or browser pixel processing. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -138,7 +139,7 @@ try {
   await page.locator(ui.cutoff).waitFor({ state: 'visible', timeout: 60000 });
   if (await page.locator('#cloud-stars-enabled').isVisible()) await page.locator('#cloud-stars-enabled').uncheck();
   await page.click('#cloud-default'); await page.click('#cloud-brightness-reset');
-  await page.selectOption('#camera-pose', 'front'); await page.click(ui.reset);
+  await gestureCamera(page, 'reference'); await page.click(ui.reset);
   const neutral: Filter = { cutoff: 0, softness: 0, showRemoved: false };
   // Reset softness is a UI default, not part of neutral-image semantics.
   neutral.softness = Number(await page.locator(ui.softness).inputValue()) / Number(await page.locator(ui.softness).getAttribute('max'));

@@ -22,8 +22,7 @@ async function earthReady(page: Page) {
   await page.locator('#reference-view').click();
   await page.waitForFunction(() => {
     const host = document.querySelector<HTMLElement>('#viewer');
-    return host?.dataset.ready === 'true' && Number(host.dataset.earthFramingRadius) > 0 &&
-      document.querySelector<HTMLSelectElement>('#camera-pose')?.value === 'front';
+    return host?.dataset.ready === 'true' && Number(host.dataset.earthFramingRadius) > 0;
   });
   await page.waitForTimeout(100);
 }

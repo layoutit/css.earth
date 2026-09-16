@@ -7,6 +7,8 @@ import { parseCloudAppearance, sameCloudAppearance, type CloudAppearance } from 
 import { readCloudAppearance, saveCloudAppearance } from './cloud-appearance-store.ts';
 import { CloudAppearanceControls } from './cloud-appearance-controls';
 import { saveLensSettings } from './lens-settings-export.ts';
+import { ImageCredit } from '../workspace/image-credit';
+import { WorkspaceImagePicker } from '../workspace/workspace-image-picker';
 
 interface Job {
   id: string; status: 'queued' | 'running' | 'cancelling' | 'completed' | 'failed' | 'cancelled' | 'interrupted';
@@ -233,12 +235,15 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
   return <section className="reconstruction-controls" data-selected-image={view.imageId}
     data-reconstruction-job={view.job?.id} data-reconstruction-job-status={view.job?.status}
     data-reconstruction-result={view.displayedResultId}>
-    <label className="field-label" htmlFor="reconstruction-image">Source image</label>
+    <WorkspaceImagePicker target="reconstruction-image-picker">
+    <label className="visually-hidden" htmlFor="reconstruction-image">Image</label>
     <select id="reconstruction-image" aria-describedby="reconstruction-image-status" value={view.imageId}
       disabled={view.selectDisabled} onChange={event => actions.current.choose?.(event.target.value)}>
       <option value="benchmark">Unpainted density</option>
       {view.candidates.map(row => <option key={row.imageId} value={row.imageId}>{row.label}{row.prepared ? ' · saved' : ''}</option>)}
     </select>
+    </WorkspaceImagePicker>
+    <ImageCredit credit={view.credit} active={context !== null && view.imageId !== 'benchmark' && view.candidates.some(row => row.imageId === view.imageId)} />
     {view.imageId !== 'benchmark' && <CloudAppearanceControls value={view.appearance} disabled={view.processDisabled}
       onChange={value => actions.current.appearance?.(value)} />}
     <div className="reconstruction-actions">
@@ -252,13 +257,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       max={total && Number.isFinite(current) ? total : undefined} value={total && Number.isFinite(current) ? current : undefined} />
     <button id="save-lens-settings" type="button" className="text-button" disabled={view.selectDisabled || view.running}
       title="Save this browser’s lens, filter, brightness and star settings locally for the app handoff. Includes stored settings for all images; does not bake."
-      onClick={() => actions.current.export?.()}>{exportLabel}</button>{' · '}
-    <button className="text-button" type="button" popoverTarget="reconstruction-source-info">ⓘ Source</button>
-    <div id="reconstruction-source-info" className="lab-info-popover" popover="auto">
-      <button type="button" popoverTarget="reconstruction-source-info" popoverTargetAction="hide" aria-label="Close source information">×</button>
-      <p id="reconstruction-image-credit">{view.credit}</p>
-      <a id="reconstruction-image-source" hidden={!view.sourcePageUrl} href={view.sourcePageUrl} target="_blank" rel="noreferrer">Publisher source ↗</a>
-    </div>
+      onClick={() => actions.current.export?.()}>{exportLabel}</button>
   </section>;
 }
 
