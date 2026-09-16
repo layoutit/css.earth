@@ -21,7 +21,7 @@
     },
     {
       "path": "labs/nebula/models/m8/processing-observations.json",
-      "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5"
+      "sha256": "ead054a15a28d3c7645a833f4e4a7d818d8b6ee0b4412fdb97b5ecd5fcab2482"
     },
     {
       "path": "labs/nebula/models/m8/processing-structures.json",
@@ -41,14 +41,14 @@
   "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses retain one geometry; surrounding stars use Gaia astrometry and estimated distances independently of source-image boundaries. No gas velocity is converted to depth.",
   "defaultLens": "eso-optical",
   "framingRadiusUnits": 3414.784262,
-  "acceptedLabResult": "1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864",
+  "acceptedLabResult": "37a8918fb195c57ecee4b6cbc47b62e465092adb324416e449e1d439d34a4b9c",
   "fieldStars": {
     "path": "src/objects/m8/source/stellar-field.json",
     "sha256": "9a39f21a5f81d319879be1540267c2faf593ee3363e9590800361e033f3c747e"
   },
   "compactInputs": {
     "path": "src/objects/m8/source/bake-inputs.json.gz",
-    "sha256": "ee8953cb7c95824bb8dadeb86d4029a964409fc4d36ea7339d4f866ea9e2d266"
+    "sha256": "2a8bf14cb7ee92bcb8adbe450036ac58110473d664c55279887fe2f9adc6d4b9"
   },
   "compactMethod": "compiler"
 }

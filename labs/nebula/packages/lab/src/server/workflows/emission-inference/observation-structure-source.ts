@@ -4,7 +4,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import { readObservations, type Observation } from '../../../features/observations/models/model.ts';
-import { readObservationRecipe, scienceObservationSources, type ObservationRecipe } from '../../../features/observations/recipe.ts';
+import { readObservationRecipe, scienceObservationSources, observationSourceFile, type ObservationRecipe } from '../../../features/observations/recipe.ts';
+import { verifySkyBandRecipe } from '../../../adapters/sources/sky-bands.ts';
 import { nativeStarless } from './native-source.ts';
 import { nativePreserved } from './native-preserved.ts';
 import { verifyTransferPins } from '../observations/registration-transfer.ts';
@@ -55,7 +56,8 @@ export async function readStructureObservations(observationRecipePath: string, c
 export async function loadObservationDiffuse(recipe: ObservationRecipe, image: Observation, workingWidth: number) {
   const source = recipe.images.find(source => source.id === image.id);
   if (!source) throw new Error('Unknown observation source.');
-  const directory = resolve('.local/nebula-lab/observations', recipe.id), sourcePath = resolve(directory, 'sources', `${source.id}.tif`);
+  const directory = resolve('.local/nebula-lab/observations', recipe.id), sourcePath = resolve(directory, 'sources', observationSourceFile(source));
+  if (source.skyBands) await verifySkyBandRecipe(source.skyBands, file => readFile(resolve(process.cwd(), file)));
   const sourceBytes = await readFile(sourcePath);
   if (sha(sourceBytes) !== source.sha256) throw new Error(`${source.id}: original source changed.`);
   const dimensions: [number, number] = [source.width, source.height];
