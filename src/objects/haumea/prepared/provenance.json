@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d37e62a98f25e496b0e3c3997da0d15e71b826b7c63f1e0aa6e10032e8f43514"
+    "sha256": "e354cc4b77dddd952a573e4ab259c95659c25d0deacbc83b953b65fcddf55f27"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
-    "bindingsSha256": "72abddfb5817027e13741b86dddeb0a04253e1a8c8a48523b1f767a7f2072cc5"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "6a393599bd06f65ca2aee21662d3190dd3343a814a8566d1758863dfac288a78"
   },
   "recipes": [
     {
       "id": "shape-model",
       "path": "source/preparation/shape-model.json",
-      "sha256": "98d19da766dfd2431a1fb6b8c0a58b12db43e2c216cbf12a411d977ff6826b3a",
+      "sha256": "7d9213689053c50c553bf8bf65e8a231b5dd89185d086ff746f32318a8173cfd",
       "parameters": {
         "schema": "cssearth-shape-model@1",
         "displayName": "Haumea",
@@ -37,6 +37,15 @@
           "displayOpacity": 0.5,
           "qualification": "Ring dimensions from the 2017 occultation. Gray appearance and constant display opacity are schematic; the measured 0.5 occultation opacity is not a view-independent optical model."
         },
+        "surface": {
+          "source": "photometry/disc-color.json",
+          "science": {
+            "kind": "disc-integrated-color",
+            "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+            "illuminant": "reference/CIE_std_illum_D65.csv",
+            "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+          }
+        },
         "camera": {
           "initialScenePitchDegrees": 40,
           "defaultControlYawDegrees": -50,
@@ -47,7 +56,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
+      "sha256": "a801c02ae8a0420e15d36d6cd3e517013cba69dadcbf229dbe33ec3c1be2b845",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -98,7 +107,7 @@
             {
               "id": "appearance",
               "label": "Surface representation",
-              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
+              "value": "One measured whole-disc colour and albedo, spread evenly; the surface is unresolved and no terrain is shown"
             },
             {
               "id": "orbital-period",
@@ -117,21 +126,21 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
-              "thumbnail": "shape-thumbnail.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+              "thumbnail": "color-thumbnail.webp",
               "surface": "surface.webp",
               "poles": "poles.webp",
               "source": {
-                "id": "ortiz-2017-shape",
+                "id": "haumea-disc-color",
                 "path": "../manifest.json",
-                "url": "https://doi.org/10.1038/nature24051"
+                "url": "https://doi.org/10.1086/499575"
               },
-              "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
+              "notes": "One measured mean colour and albedo for the whole disc, averaged over rotation. Display coordinates are arbitrary; the known darker, redder region and any other colour variation are not shown."
             }
           ]
         },
@@ -152,6 +161,12 @@
             "role": "shape",
             "description": "2017 occultation shape and ring measurements",
             "href": "https://doi.org/10.1038/nature24051"
+          },
+          {
+            "label": "Rabinowitz et al.",
+            "role": "color",
+            "description": "2006 rotation-corrected BVRI colours",
+            "href": "https://doi.org/10.1086/499575"
           }
         ],
         "provenance": {
@@ -198,6 +213,105 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "haumea-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1086/499575",
+      "credit": "Rabinowitz et al. 2006; Ortiz et al. 2017; Ramírez et al. 2012; SVO Filter Profile Service",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed rotation-corrected B-V, V-R, V-I (Rabinowitz 2006 Table 3 weighted average), V geometric albedo (Ortiz 2017 Methods), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rabinowitz-2006-haumea",
+            "role": "material",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "doi-10-1038-nature24051",
+            "role": "material",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/effectiveWavelengths"
+          }
+        ]
+      },
+      "sha256": "9537eff943560b6d733cdf0aa7b4d675d75e45a7e1b833cd7e56619f4331debc",
+      "bytes": 2084,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "haumea-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "haumea-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
+      "bytes": 6820,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -210,8 +324,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
-      "bytes": 3177,
+      "sha256": "a801c02ae8a0420e15d36d6cd3e517013cba69dadcbf229dbe33ec3c1be2b845",
+      "bytes": 3460,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -220,18 +334,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "shape-model",
       "selector": "",
       "observationAttribution": "none",
       "parents": [],
       "process": "Fill the authored shape with the shared neutral gray display convention; no surface texture.",
       "limitations": [
-        "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour."
+        "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "shape-model"
@@ -241,25 +355,28 @@
         "resolvedSurfaceObservation": false
       },
       "inputs": [
-        "ortiz-2017-shape"
+        "ortiz-2017-shape",
+        "haumea-disc-color",
+        "haumea-cie-1931-2deg-cmf",
+        "haumea-cie-std-illuminant-d65"
       ],
       "outputs": [
         {
-          "url": "/scenes/haumea/shape-thumbnail.webp",
+          "url": "/scenes/haumea/color-thumbnail.webp",
           "bytes": 44,
-          "sha256": "ac7e37e2b580ee1a0f876029c8e1fb7b51469486245d88810be250f1154a2de8",
+          "sha256": "18eb8433133e8c570dcb27ea02f94f8c5e69ac7a24c26bd22f9cdb9735d106e8",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/surface.webp",
           "bytes": 342,
-          "sha256": "287791a6be87fb06232978a0e21f8e018d4fa340b775cc28bd1f6e8cf187654e",
+          "sha256": "ad3e5db9db6f594a967970ac8cde7bab9724f4d208310efe95f7ef7233fed0a5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/poles.webp",
           "bytes": 680,
-          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
+          "sha256": "7bffec0b32dfa557e5cfdbbb2e1481d74c0d8ca95791b4befbb23f7eac9a95d3",
           "verification": "bytes-verified"
         }
       ],
@@ -284,16 +401,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6057,
-          "sha256": "fda132544b25bad6ebfc52754d7809e2444b0db023766cd822f00376f76c7a43",
+          "bytes": 6213,
+          "sha256": "6352fffef19dde35c55556b90f9bd185ae799996f9a869a28c0ead8ea79f352e",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "shape-model",
       "selector": "",
       "recipeDependencies": [
@@ -302,16 +419,16 @@
       "observationAttribution": "none",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 428,
+          "sha256": "5852c067b25d5d8744eb42ee898413b7621738bfc7072b2d29fd66c3247ec236",
           "verification": "bytes-verified"
         }
       ]
@@ -323,11 +440,11 @@
   },
   "lastPreparation": {
     "objectId": "haumea",
-    "materialSha256": "ad87afde0bc2bfce4257d99a0080976c07455932b93494627c25c0e5b0ee4162",
+    "materialSha256": "6d878b72d3896fc06ab6ac48681da2dec5b726921725684689979ca48da77aa3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
-      "bindingsSha256": "72abddfb5817027e13741b86dddeb0a04253e1a8c8a48523b1f767a7f2072cc5"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "6a393599bd06f65ca2aee21662d3190dd3343a814a8566d1758863dfac288a78"
     }
   }
 }
