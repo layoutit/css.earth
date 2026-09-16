@@ -22,17 +22,114 @@
     {
       "id": "neutral-gray-shape-lens",
       "subject": "Shared neutral gray for the unresolved surface",
-      "status": "included",
-      "finding": "No surface map is used: the Shape lens is painted with the shared neutral gray (#808080 sRGB) through the raster route's neutral-shape science kind, which the README calls a display convention rather than a measured colour or albedo, with no nomenclature and an arbitrary map edge.",
+      "status": "excluded",
+      "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Eris a measured uniform colour, which the shape-only convention does not supersede.",
+      "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L5",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L13",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L24"
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/docs/shape-only-material.md"
       ],
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
+        }
+      ]
+    },
+    {
+      "id": "resolved-surface-imagery",
+      "subject": "Disc-resolved images of Eris",
+      "status": "excluded",
+      "finding": "No usable resolved image exists. At about 96 AU the 2,326 km disc spans about 0.034 arcsec (computed from the occultation radius), about two diffraction widths of an 8 m telescope at 650 nm (0.016 arcsec); VLT/SPHERE frames of rounder bodies with far larger discs were already undecidable. No spacecraft has visited.",
+      "revisitWhen": "A disc-resolved image, a 30 m class telescope observation or a flyby is published.",
+      "evidence": [
+        "https://doi.org/10.1038/nature10550"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
+        }
+      ]
+    },
+    {
+      "id": "carraro-2006-colours",
+      "subject": "Carraro et al. (2006) BVRI colours",
+      "status": "included",
+      "finding": "B-V 0.823 +/-0.023, V-R 0.391 +/-0.023, V-I 0.777 +/-0.013 (section 4, weighted means over five nights in 2005; V-R stable night to night) give the uniform Color lens through the disc-integrated-color method.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0610619",
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
+        }
+      ]
+    },
+    {
+      "id": "sicardy-2011-albedo",
+      "subject": "Sicardy et al. (2011) V geometric albedo",
+      "status": "included",
+      "finding": "p_V 0.96 +0.09/-0.04 from the 2010 occultation radius scales the colour; the same value was already pinned in measurements.json.",
+      "evidence": [
+        "https://doi.org/10.1038/nature10550",
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
+        }
+      ]
+    },
+    {
+      "id": "mboss-mean-colours",
+      "subject": "MBOSS mean colours",
+      "status": "excluded",
+      "finding": "The MBOSS catalogue (J/A+A/546/A115) averages 64 epochs from Carraro et al. (2006), DeMeo et al. (2009) and Rabinowitz et al. (2007): B-V 0.805 +/-0.015, V-R 0.389 +/-0.049, V-I 0.792 +/-0.018. Measured with the same method and albedo, it gives sRGB 255, 250, 236 against 255, 250, 234 from Carraro; the single-run set is kept because its V-R is better constrained.",
+      "revisitWhen": "A newer multi-epoch colour set disagrees with Carraro et al. (2006) beyond their uncertainties.",
+      "evidence": [
+        "https://doi.org/10.26093/cds/vizier.35460115"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
+        }
+      ]
+    },
+    {
+      "id": "srgb-gamut-edge",
+      "subject": "Colour at the top of the sRGB range",
+      "status": "unresolved",
+      "finding": "The nominal colour is linear sRGB 0.999, 0.952, 0.827. Measured with the same method: B-V +0.023, V-R +0.023 or an albedo of 1.00 put red above 1, and the method refuses the colour. B-V -0.023 gives 255, 250, 237; V-R -0.023 gives 253, 249, 235; the albedo's lower bound 0.92 gives 250, 245, 230.",
+      "revisitWhen": "The colour or albedo is revised, or the shared method gains a stated rule for colours brighter than sRGB white.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/tools/objects/observation/disc-integrated-color.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
+        }
+      ]
+    },
+    {
+      "id": "dysnomia-light",
+      "subject": "Dysnomia light in the photometry",
+      "status": "unresolved",
+      "finding": "Carraro et al. (2006) state that the unresolved moon Dysnomia may contribute about 0.02 mag to the total brightness. The colours include it; the occultation albedo does not. No correction is applied.",
+      "revisitWhen": "Published colours that separate Eris from Dysnomia.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0610619"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
         }
       ]
     },

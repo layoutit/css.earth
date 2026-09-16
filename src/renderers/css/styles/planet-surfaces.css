@@ -1243,11 +1243,11 @@
 }
 
 .planet-stage[data-object-id="eris"] .polycss-scene s:not(.eris-polar) {
-  background-image: url("/scenes/eris/eris-shape@2x.webp") !important;
+  background-image: url("/scenes/eris/eris-color@2x.webp") !important;
 }
 
 .planet-stage[data-object-id="eris"] .polycss-scene s.eris-polar {
-  background-image: url("/scenes/eris/eris-poles-shape@2x.webp") !important;
+  background-image: url("/scenes/eris/eris-poles-color@2x.webp") !important;
 }
 
 
