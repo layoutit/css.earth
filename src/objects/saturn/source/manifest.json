@@ -2,85 +2,36 @@
   "schema": "csssaturn-authoritative-sources@2",
   "inputs": [
     {
-      "id": "openspace-saturn-surface",
-      "path": "saturn-surface-original.jpg",
-      "expectedSha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset",
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/layers/colorlayers/saturn_texture.asset"
-      ],
-      "acquisition": "checked snapshot from OpenSpace saturn_textures",
-      "redistribution": "permitted with the OpenSpace MIT notice",
+      "id": "hubble-opal-saturn-2025a-visible",
+      "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedSha256": "c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7",
+      "expectedBytes": 4885052,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, STScI, and the OPAL team",
+      "license": "STScI public science archive data",
+      "acquisition": "pinned Hubble OPAL Cycle 32 rotation-A global-map product (2025-08-29, F395N/F502N/F631N composite)",
+      "redistribution": "checked scientific archive product with full credit",
       "consumers": [
         "navigation",
         "scene"
       ],
-      "expectedBytes": 1036492,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
+      "capture": {
+        "attributions": [
           {
-            "catalogueId": "source-saturn-openspace-saturn-surface",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "kind": "machine",
+            "machineId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif"
           }
         ]
-      }
-    },
-    {
-      "id": "openspace-saturn-ring-color",
-      "path": "color_original_single.png",
-      "expectedSha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset"
-      ],
-      "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "assets",
-        "starfield"
-      ],
-      "expectedBytes": 2059,
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-saturn-openspace-saturn-ring-color",
+            "catalogueId": "source-saturn-hubble-opal-saturn-2025a-visible",
             "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-saturn-ring-transparency",
-      "path": "trans_original_single.png",
-      "expectedSha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset"
-      ],
-      "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "assets"
-      ],
-      "expectedBytes": 2303,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-saturn-ring-transparency",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "src/objects/saturn/source/manifest.json#/inputs/0"
           }
         ]
       }
@@ -268,195 +219,6 @@
       }
     },
     {
-      "id": "openspace-dione-map",
-      "path": "moons/dione.jpg",
-      "expectedSha256": "418fdc4ea2b53103350be26ee8a1569e9d9abd21be32aafaf2e801eeff495077",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/dione/textures/1/dione.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/dione/layers/colorlayers/dione_texture.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 5159886,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-dione-map",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-enceladus-map",
-      "path": "moons/enceladus.jpg",
-      "expectedSha256": "5ba6590ca057565369bcb5e5785a3d4c0deeb9635af2e20701aa25e5d330ce31",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/enceladus/textures/1/enceladus.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/enceladus/layers/colorlayers/enceladus_texture.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 4858450,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-enceladus-map",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-iapetus-map",
-      "path": "moons/iapetus.jpg",
-      "expectedSha256": "d49a3795bf5e831fb1ce040c58b66a0c81ca1a5d73badca077b24c3c8e67ec9b",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/iapetus/textures/1/iapetus.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/iapetus/layers/colorlayers/iapetus_texture.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 3998916,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-iapetus-map",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mimas-map",
-      "path": "moons/mimas.jpg",
-      "expectedSha256": "d55601e1661a9c47046a06303f308f6f32b5e53eeed69ca708ff37b6d0580ffb",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/mimas/textures/1/mimas.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/mimas/layers/colorlayers/mimas_texture.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 1370319,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-mimas-map",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-rhea-map",
-      "path": "moons/rhea.jpg",
-      "expectedSha256": "17df9b4dae4c7e40aa42f0d06e44ca4f7962817a7764e936a01395f6aa2e159f",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/rhea/textures/1/rhea.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/rhea/layers/colorlayers/rhea_texture.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 7578314,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-rhea-map",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-tethys-map",
-      "path": "moons/tethys.jpg",
-      "expectedSha256": "a0c4a0344f2361b781977e9ef9679a8cd99dd6cffacf2c1f1212a3afafa2f7d9",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/tethys/textures/1/tethys.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/tethys/layers/colorlayers/tethys_texture.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 1483819,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-tethys-map",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-titan-cassini-mosaic",
-      "path": "moons/titan.tif",
-      "expectedSha256": "5052b9f679d5e5a3e5c35c19bbac8349fcb0a6c17a8b0027b00ed8d735cc1477",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/titan/textures/2/Titan_ISS_P19658_Mosaic_Global_4km_os.tif",
-      "credit": "USGS and NASA/PDS Cassini ISS via OpenSpace",
-      "license": "NASA/PDS source data with OpenSpace attribution",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/titan/layers/colorlayers/cassini_iss_global_mosaic_4km_local.asset"
-      ],
-      "acquisition": "shared pinned download operation in preparation/acquisition.json",
-      "redistribution": "prepared derivative with USGS, NASA/PDS, and OpenSpace credit",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 8169258,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-titan-cassini-mosaic",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
-          }
-        ]
-      }
-    },
-    {
       "id": "hubble-opal-2025a-f225w",
       "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
       "expectedSha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
@@ -595,8 +357,8 @@
     {
       "id": "saturn-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 12952,
-      "expectedSha256": "592f1ef7ab8f4b6a8aaa745c5e74d0b6aa83f19eec7fd748d8ba456002ce86c1",
+      "expectedBytes": 12566,
+      "expectedSha256": "3bcf4c15e41de801e4f7e24c7b95c2373bdd6d049199c2175ab1205ada3f8329",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -613,8 +375,8 @@
     {
       "id": "saturn-authored-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1286,
-      "expectedSha256": "e7dcc2a44ad1b40e1fd2af966049face20495580d77bbf7fee8d36a8b4d7025f",
+      "expectedBytes": 1491,
+      "expectedSha256": "edd3b833366908d428295aecf8af6274448c1ba1184e9eba26da6f1f583a0450",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -674,8 +436,8 @@
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 17642,
-      "expectedSha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3",
+      "expectedBytes": 17684,
+      "expectedSha256": "7d946ad0bc7e77a9076cf57cb7e82f63feb408f904c08c10d6ce4a128a8e52d3",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -692,8 +454,8 @@
     {
       "id": "saturn-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 10046,
-      "expectedSha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf",
+      "expectedBytes": 10370,
+      "expectedSha256": "9622e8017d068049476a935d1cb3d9eb6f0c780f0f7df1d7d21aefd52f106fdb",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -800,8 +562,8 @@
     {
       "id": "saturn-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 7855,
-      "expectedSha256": "bc22d665a1b8bb0baeafae4c9b90a0a7dd16390d20b2b8ac71b69e1dbfb200f5",
+      "expectedBytes": 6296,
+      "expectedSha256": "fe7cee525001f69a2e0ac782fd554995155ab5205238e73d649a23b6e5e83e37",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
       "credit": "cssEarth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
@@ -831,6 +593,76 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored extraction settings for the moon catalogue; the extracted table retains its source citations."
+      }
+    },
+    {
+      "id": "cassini-uvis-alpvir-2006-285-occultation",
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "expectedSha256": "65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341",
+      "expectedBytes": 10591493,
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set",
+      "acquisition": "pinned PDS Ring-Moon Systems Node product: 1 km normal optical depth profile of the ring system from the alpha Virginis ingress occultation, 2006 day 285",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": [
+        "scene",
+        "rings"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-cassini-uvis-alpvir-2006-285-occultation",
+            "role": "material",
+            "evidence": "src/objects/saturn/source/manifest.json#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-uvis-alpvir-2006-285-occultation-label",
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "expectedSha256": "64858a36470a3d52df1056bb07df5f5aa4396b78924fa07c9861c9a67500b49c",
+      "expectedBytes": 12013,
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set",
+      "acquisition": "pinned PDS Ring-Moon Systems Node product: PDS3 label of the profile",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": [
+        "scene",
+        "rings"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-cassini-uvis-alpvir-2006-285-occultation-label",
+            "role": "material",
+            "evidence": "src/objects/saturn/source/manifest.json#/inputs/26"
+          }
+        ]
       }
     }
   ],

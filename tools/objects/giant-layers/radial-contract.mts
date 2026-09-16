@@ -29,7 +29,9 @@ const operation = s.union(
   obj({...operationCommon, kind: s.literal('alpha-gain'), gain: n}),
   obj({...operationCommon, kind: s.literal('edge-core'), center: n, sigma: n, baseDepth: n, peakDepth: n}),
 );
-const observed = obj({...common, kind: s.literal('observed-radial-profile'), bounds: vector2, sourceBounds: vector2, colorSource: str, transparencySource: str, channelFactors: vector3, interior: obj({color: vector3, centers: arr(n), sigma: n, baseAlpha: n, peakAlpha: n}), operations: arr(operation), readability: obj({features: arr(obj({kind: str, radius: n, additionalPixels: opt(n), alphaGain: opt(n), alphaScale: opt(n)})), alphaGain: n, minimumPixels: s.dictionary(n)})});
+/** A PDS3 occultation SERIES table: one row per radial bin with a normal optical depth column and a quality flag column. */
+const opticalDepthProfile = obj({path: str, radiusColumn: n, opticalDepthColumn: n, flagColumn: n, corruptedFlag: n, missingValue: n});
+const observed = obj({...common, kind: s.literal('observed-radial-profile'), bounds: vector2, sourceBounds: vector2, colorSource: opt(str), transparencySource: opt(str), opticalDepthProfile: opt(opticalDepthProfile), color: opt(vector3), channelFactors: vector3, interior: obj({color: vector3, centers: arr(n), sigma: n, baseAlpha: n, peakAlpha: n}), operations: arr(operation), readability: obj({features: arr(obj({kind: str, radius: n, additionalPixels: opt(n), alphaGain: opt(n), alphaScale: opt(n)})), alphaGain: n, minimumPixels: s.dictionary(n)})});
 export type ObservedRadialLayer = s.Infer<typeof observed>;
 export const radialRecipe = obj({schema: s.literal('cssearth-radial-layer-recipe@1'), units: s.literal('kilometers'), sources: arr(sourcePin), layers: arr(s.union(annular, observed))});
 export type RadialLayerRecipe = s.Infer<typeof radialRecipe>;

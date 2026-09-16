@@ -328,9 +328,9 @@ const SEAM_BLEED = config.parameters.seamBleed;
 const PLANET_SEAM_BLEED = config.parameters.planetSeamBleed;
 const SOLAR_EFFECTIVE_TEMPERATURE_KELVIN = config.parameters.solarEffectiveTemperatureKelvin;
 const OBJECT_SOLAR_ALBEDO_MULTIPLIER = config.parameters.objectSolarAlbedoMultiplier;
-const OPENSPACE_GLOBE_AMBIENT_INTENSITY = config.parameters.openspaceGlobeAmbientIntensity;
-const OPENSPACE_GLOBE_OREN_NAYAR_ROUGHNESS = config.parameters.openspaceGlobeOrenNayarRoughness;
-const OPENSPACE_GLOBE_TERMINATOR_SMOOTHSTEP = config.parameters.openspaceGlobeTerminatorSmoothstep;
+const GLOBE_AMBIENT_INTENSITY = config.parameters.globeAmbientIntensity;
+const GLOBE_OREN_NAYAR_ROUGHNESS = config.parameters.globeOrenNayarRoughness;
+const GLOBE_TERMINATOR_SMOOTHSTEP = config.parameters.globeTerminatorSmoothstep;
 const LIGHTING = Object.freeze({
   directionalLight: Object.freeze({
     direction: PREPARED_RING_SOURCE.shadowModel.worldLightDirection,
@@ -339,7 +339,7 @@ const LIGHTING = Object.freeze({
   }),
   ambientLight: Object.freeze({
     color: OBJECT_SOLAR_ALBEDO_MULTIPLIER,
-    intensity: OPENSPACE_GLOBE_AMBIENT_INTENSITY * Math.PI,
+    intensity: GLOBE_AMBIENT_INTENSITY * Math.PI,
   }),
 });
 const PLAN_OPTIONS = Object.freeze({
@@ -1221,7 +1221,7 @@ function prepareFixedMaterialPlane({
       }
       const tint = textureTintFactors(
         LIGHTING.directionalLight.intensity *
-          prepareOpenSpaceGlobeDiffusePower(lambert) * directTransmission,
+          prepareGlobeDiffusePower(lambert) * directTransmission,
         LIGHTING.directionalLight.color,
         LIGHTING.ambientLight.color,
         LIGHTING.ambientLight.intensity,
@@ -1903,9 +1903,10 @@ async function prepareNormalMaterialMasters() {
       .raw()
       .toBuffer({ resolveWithObject: true }),
   ]);
+  const [expectedSourceWidth, expectedSourceHeight] = config.surfaceSourceSize ?? [PLANET_SOURCE_TEXTURE_WIDTH, PLANET_SOURCE_TEXTURE_HEIGHT];
   if (
-    metadata.width !== PLANET_SOURCE_TEXTURE_WIDTH
-    || metadata.height !== PLANET_SOURCE_TEXTURE_HEIGHT
+    metadata.width !== expectedSourceWidth
+    || metadata.height !== expectedSourceHeight
   ) {
     throw new Error("Ellipsoid source texture dimensions changed.");
   }
@@ -2564,7 +2565,7 @@ async function composePlanetTextures({
       runtimeMatrixFormatting: false,
       extraDomLeaves: 1,
       materialModel:
-        "openspace-globe-solar-rgb-lambert-terminator-attenuation-oblate-texels",
+        "globe-solar-rgb-lambert-terminator-attenuation-oblate-texels",
       atmosphere: Object.freeze({
         model: "prepared-view-light-limb-scattering-oblate-texels",
         compositedIntoMaterialAsset: true,
@@ -2841,16 +2842,16 @@ async function composePlanetTextures({
         runtimeRasterization: false,
         extraDomLeaves: 0,
       }),
-      sourceRenderer:
-        "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      illuminationDirectionAuthority: "OpenSpace default scene-graph Sun direction",
+      lightingModel:
+        "lambert-with-ambient-and-smoothstep-terminator; parameter values adapted from the OpenSpace globe shader defaults (MIT), documented in the body README",
+      illuminationDirectionAuthority: "declared scene Sun direction",
       solarEffectiveTemperatureKelvin: SOLAR_EFFECTIVE_TEMPERATURE_KELVIN,
       rendererAlbedoMultiplier: OBJECT_SOLAR_ALBEDO_MULTIPLIER,
       rendererAlbedoMultiplierModel:
         "Planck-5772K-CIE1931-linear-sRGB-D65-max-normalized",
-      ambientIntensity: OPENSPACE_GLOBE_AMBIENT_INTENSITY,
-      orenNayarRoughness: OPENSPACE_GLOBE_OREN_NAYAR_ROUGHNESS,
-      terminatorSmoothstep: OPENSPACE_GLOBE_TERMINATOR_SMOOTHSTEP,
+      ambientIntensity: GLOBE_AMBIENT_INTENSITY,
+      orenNayarRoughness: GLOBE_OREN_NAYAR_ROUGHNESS,
+      terminatorSmoothstep: GLOBE_TERMINATOR_SMOOTHSTEP,
       directionalLight: LIGHTING.directionalLight,
       ambientLight: LIGHTING.ambientLight,
       mutualShadows: Object.freeze({
@@ -2879,11 +2880,40 @@ function prepareSurfaceChannelFactors(maximumTint:ReturnType<typeof textureTintF
     .map((factor) => factor / maximumLightingFactor);
 }
 
+/**
+ * Rows the source map never observed, filled by linear interpolation in latitude between the nearest observed rows.
+ * A range touching the top or bottom edge repeats its one observed neighbour. The recipe states the rows; nothing is
+ * detected from pixel values, so a genuinely dark observed row is never treated as a gap.
+ */
+function fillUnobservedRows(data: Buffer, info: { width: number; height: number; channels: number }, ranges: readonly (readonly [number, number])[]) {
+  const row = info.width * info.channels;
+  for (const [first, last] of ranges) {
+    if (!(Number.isInteger(first) && Number.isInteger(last) && first >= 0 && last >= first && last < info.height))
+      throw new Error(`Unobserved surface rows ${first}-${last} lie outside the ${info.height}-row source.`);
+    const above = first - 1, below = last + 1;
+    if (above < 0 && below >= info.height) throw new Error("Unobserved surface rows leave no observed row to fill from.");
+    for (let y = first; y <= last; y += 1) {
+      const t = above < 0 ? 1 : below >= info.height ? 0 : (y - above) / (below - above);
+      for (let i = 0; i < row; i += 1) {
+        const a = above < 0 ? data[below * row + i] : data[above * row + i];
+        const b = below >= info.height ? data[above * row + i] : data[below * row + i];
+        data[y * row + i] = Math.round(a + (b - a) * t);
+      }
+    }
+  }
+}
+
 async function prepareSolarTintedSurface(channelFactors:readonly number[]) {
-  const { data, info } = await sharp(PLANET_SOURCE_TEXTURE_PATH)
+  const source = await sharp(PLANET_SOURCE_TEXTURE_PATH)
     .removeAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
+  fillUnobservedRows(source.data, source.info, config.surfaceUnobservedRows ?? []);
+  // A source map smaller than the prepared grid is resampled once here, after its unobserved rows are filled.
+  const { data, info } = source.info.width === PLANET_SOURCE_TEXTURE_WIDTH && source.info.height === PLANET_SOURCE_TEXTURE_HEIGHT
+    ? source
+    : await sharp(source.data, { raw: source.info }).resize(PLANET_SOURCE_TEXTURE_WIDTH, PLANET_SOURCE_TEXTURE_HEIGHT, { kernel: sharp.kernel.lanczos3, fit: "fill" })
+      .raw().toBuffer({ resolveWithObject: true });
   for (let offset = 0; offset < data.length; offset += info.channels) {
     for (let channel = 0; channel < 3; channel += 1) {
       data[offset + channel] = applyLinearTint(
@@ -2974,7 +3004,7 @@ async function preparePolarTextureAtlas({
                 unitY * projectedScale,
                 projectedRadius,
               );
-              const openSpaceSurface = samplePolarSurfaceRgba(
+              const sourceSurface = samplePolarSurfaceRgba(
                 surfaceData,
                 surfaceInfo,
                 sample,
@@ -2982,14 +3012,14 @@ async function preparePolarTextureAtlas({
               );
               const surface = pole === "north"
                 ? samplePolarObservationNorthPolarRgba({
-                  openSpaceSurface,
+                  sourceSurface,
                   polarObservationNorthPolar,
                   sample,
                   radius: projectedRadius,
                   surfaceChannelFactors,
                   boundaryGains: polarObservationBoundaryGains,
                 })
-                : openSpaceSurface;
+                : sourceSurface;
               for (let channel = 0; channel < 3; channel += 1) {
                 surfaceChannels[channel] += surface[channel];
               }
@@ -3070,7 +3100,7 @@ function preparePolarObservationBoundaryGains({
   polarObservationNorthPolar,
   surfaceChannelFactors,
 }: {surfaceData:Uint8Array;surfaceInfo:PixelImage['info'];polarObservationNorthPolar:PixelImage;surfaceChannelFactors:readonly number[]}) {
-  const openSpaceTotals = [0, 0, 0];
+  const sourceTotals = [0, 0, 0];
   const polarObservationTotals = [0, 0, 0];
   const sampleCount = 720;
   const boundaryRadius = 0.965;
@@ -3079,7 +3109,7 @@ function preparePolarObservationBoundaryGains({
     const unitX = Math.cos(angle) * boundaryRadius;
     const unitY = Math.sin(angle) * boundaryRadius;
     const sample = preparePolarSample("north", unitX, unitY, boundaryRadius);
-    const openSpace = samplePolarSurfaceRgba(
+    const sourceSample = samplePolarSurfaceRgba(
       surfaceData,
       surfaceInfo,
       sample,
@@ -3091,24 +3121,24 @@ function preparePolarObservationBoundaryGains({
       surfaceChannelFactors,
     );
     for (let channel = 0; channel < 3; channel += 1) {
-      openSpaceTotals[channel] += openSpace[channel];
+      sourceTotals[channel] += sourceSample[channel];
       polarObservationTotals[channel] += polarObservation[channel];
     }
   }
-  return openSpaceTotals.map((total, channel) => Math.max(
+  return sourceTotals.map((total, channel) => Math.max(
     0.65,
     Math.min(1.45, total / polarObservationTotals[channel]),
   ));
 }
 
 function samplePolarObservationNorthPolarRgba({
-  openSpaceSurface,
+  sourceSurface,
   polarObservationNorthPolar,
   sample,
   radius,
   surfaceChannelFactors,
   boundaryGains,
-}: {openSpaceSurface:readonly number[];polarObservationNorthPolar:PixelImage;sample:ReturnType<typeof preparePolarSample>;radius:number;surfaceChannelFactors:readonly number[];boundaryGains:readonly number[]}) {
+}: {sourceSurface:readonly number[];polarObservationNorthPolar:PixelImage;sample:ReturnType<typeof preparePolarSample>;radius:number;surfaceChannelFactors:readonly number[];boundaryGains:readonly number[]}) {
   const polarObservation = samplePolarObservationSourceRgba(
     polarObservationNorthPolar,
     sample,
@@ -3121,9 +3151,9 @@ function samplePolarObservationNorthPolarRgba({
   );
   return [0, 1, 2].map((channel) => mix(
     Math.max(0, Math.min(255, polarObservation[channel] * boundaryGains[channel])),
-    openSpaceSurface[channel],
+    sourceSurface[channel],
     boundaryAmount,
-  )).concat(openSpaceSurface[3]);
+  )).concat(sourceSurface[3]);
 }
 
 function samplePolarObservationSourceRgba(
@@ -3241,7 +3271,7 @@ function preparePolarMaterialSample({
   maximumLightingFactor,
 }:Omit<RingRaster,'foregroundRingData'|'ringData'> & {ringData:Uint8Array;normal:ReadonlyVector3;position:ReadonlyVector3;objectLight:ReadonlyVector3;objectView:ReadonlyVector3}) {
   const lambert = Math.max(0, dotVector(normal, objectLight));
-  const diffusePower = prepareOpenSpaceGlobeDiffusePower(lambert);
+  const diffusePower = prepareGlobeDiffusePower(lambert);
   const ringOpacity = sampleRingShadowOpacity(
     position,
     objectLight,
@@ -3299,8 +3329,8 @@ function preparedLightingAlpha(tint:ReturnType<typeof textureTintFactors>, maxim
   ));
 }
 
-function prepareOpenSpaceGlobeDiffusePower(lambert:number) {
-  const [edge0, edge1] = OPENSPACE_GLOBE_TERMINATOR_SMOOTHSTEP;
+function prepareGlobeDiffusePower(lambert:number) {
+  const [edge0, edge1] = GLOBE_TERMINATOR_SMOOTHSTEP;
   const amount = Math.max(0, Math.min(1, (lambert - edge0) / (edge1 - edge0)));
   const terminator = amount * amount * (3 - 2 * amount);
   return lambert * terminator;

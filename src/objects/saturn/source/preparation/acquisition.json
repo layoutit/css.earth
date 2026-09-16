@@ -102,62 +102,6 @@
       }
     },
     {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/dione.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/dione/textures/1/dione.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/enceladus.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/enceladus/textures/1/enceladus.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/iapetus.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/iapetus/textures/1/iapetus.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/mimas.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/mimas/textures/1/mimas.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/rhea.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/rhea/textures/1/rhea.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/tethys.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/tethys/textures/1/tethys.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/titan.tif",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/titan/textures/2/Titan_ISS_P19658_Mosaic_Global_4km_os.tif"
-    },
-    {
       "kind": "satellite-catalog",
       "groups": [
         "refresh"
@@ -211,24 +155,24 @@
       "groups": [
         "restore"
       ],
-      "path": "saturn-surface-original.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg"
+      "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif"
     },
     {
       "kind": "download",
       "groups": [
         "restore"
       ],
-      "path": "color_original_single.png",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png"
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "url": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB"
     },
     {
       "kind": "download",
       "groups": [
         "restore"
       ],
-      "path": "trans_original_single.png",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png"
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "url": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL"
     }
   ]
 }

@@ -12,15 +12,6 @@
       "license": "NASA media usage guidelines and credited partner rights"
     },
     {
-      "id": "openspace-jupiter-globe",
-      "path": "openspace/globe.asset",
-      "expectedBytes": 1443,
-      "expectedSha256": "35f7f9cc623ff01803c2f2bb1e24a1680303ab70469e7b66660a7a5b2419f743",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT"
-    },
-    {
       "id": "nasa-galileo-jupiter-main-ring-halo",
       "path": "rings/pia00701.jpg",
       "expectedBytes": 10021,

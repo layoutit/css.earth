@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
-import { rasterAnnularField, rasterObservedRadialField, colorizeRadialField, rasterProjectedStripShadow } from './rings.mts';
+import { rasterAnnularField, rasterObservedRadialField, colorizeRadialField, rasterProjectedStripShadow, loadObservedProfile} from './rings.mts';
 export { mapRadius, ringRayOccluded, rasterAnnularField, rasterObservedRadialField, sampleRadialProfile } from './rings.mts';
 
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
@@ -79,8 +79,12 @@ export function parseRadialLayerRecipe(input: unknown) {
           !positive(layer.shadow.equatorialRadius) || !positive(layer.shadow.polarRadius) ||
           !Number.isFinite(layer.shadow.luminance) || layer.shadow.luminance < 0 || layer.shadow.luminance > 1)) fail('invalid shadow geometry.');
     } else {
-      if (!pair(layer.bounds) || !pair(layer.sourceBounds) || layer.sourceBounds[0] <= layer.bounds[0] ||
-          layer.sourceBounds[1] !== layer.bounds[1] || !sourcePaths.has(layer.colorSource) || !sourcePaths.has(layer.transparencySource) ||
+      const rowSources = layer.colorSource !== undefined && layer.transparencySource !== undefined &&
+        sourcePaths.has(layer.colorSource) && sourcePaths.has(layer.transparencySource) && layer.opticalDepthProfile === undefined;
+      const profileSource = layer.opticalDepthProfile !== undefined && sourcePaths.has(layer.opticalDepthProfile.path) &&
+        layer.colorSource === undefined && layer.transparencySource === undefined && layer.color !== undefined && color(layer.color);
+      if (!pair(layer.bounds) || !pair(layer.sourceBounds) || layer.sourceBounds[0] < layer.bounds[0] ||
+          layer.sourceBounds[1] !== layer.bounds[1] || !(rowSources || profileSource) ||
           !isArray(layer.channelFactors) || layer.channelFactors.length !== 3 || !layer.channelFactors.every(positive) ||
           !layer.interior || !color(layer.interior.color) || !isArray(layer.interior.centers) || !layer.interior.centers.length ||
           !layer.interior.centers.every(positive) || !positive(layer.interior.sigma) ||
@@ -106,11 +110,7 @@ async function verifyInputs(root: string, sources: readonly SourcePin[]) {
   return result;
 }
 async function observedInputs(layer: ObservedRadialLayer, inputs: ReadonlyMap<string, Buffer>) {
-  const color = await sharp(inputs.get(layer.colorSource)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-  const transparency = await sharp(inputs.get(layer.transparencySource)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-  if (color.info.height !== 1 || transparency.info.height !== 1 || color.info.width !== transparency.info.width ||
-      color.info.channels !== 3 || transparency.info.channels !== 3) fail('observed profiles must be matching RGB rows.');
-  return { color: color.data, transparency: transparency.data, width: color.info.width };
+  return loadObservedProfile(layer, inputs);
 }
 
 /** Generic preparation entry. It never imports a body module or runtime product. */
