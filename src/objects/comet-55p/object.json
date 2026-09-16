@@ -114,7 +114,9 @@
       "bodyRadiusM": 1327.4136847176753
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Tempel–Tuttle",
       "classification": "comet",
       "color": "#b8b6b2",

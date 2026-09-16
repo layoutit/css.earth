@@ -438,7 +438,7 @@
         "simplification": {
           "method": "source-meshoptimizer",
           "targetFaces": 800,
-          "maximumErrorMeters": 2500,
+          "maximumErrorMeters": 3200,
           "regularize": true
         }
       }

@@ -114,7 +114,9 @@
       "bodyRadiusM": 2359.8465506092007
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Machholz 1",
       "classification": "comet",
       "color": "#b8b6b2",
