@@ -305,7 +305,7 @@
         "expectedFaces": 32040
       },
       "faceBudget": 2000,
-      "tileSize": 128,
+      "tileSize": 64,
       "atlasColumns": 16,
       "simplification": {
         "method": "source-meshoptimizer",

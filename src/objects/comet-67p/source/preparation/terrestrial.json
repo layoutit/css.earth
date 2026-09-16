@@ -705,7 +705,7 @@
         "expectedFaces": 104192
       },
       "faceBudget": 2000,
-      "tileSize": 128,
+      "tileSize": 64,
       "atlasColumns": 16,
       "simplification": {
         "targetFaces": 1000,
