@@ -193,6 +193,14 @@ at the emission limit, plus the mesh error when the backplanes come from the
 archive's own shape model. Preparation stops when an authored limit exceeds the
 derived one.
 
+## Registration stage
+
+Every camera route is measured after it loads, the same way, by `registration.mts`, and the numbers go into the lens report instead of a body's prose. The stage never fails a build; the one hard rule stays where it was, on lit shape over sky in the format that loads the frame.
+
+Two measurements. The **silhouette** compares the limb the mesh projects (its vertices lit at least the edge fraction) with the contour the frame shows above that fraction of its peak, frame by frame, and reports the position-angle residual over the frames whose outline is elongated enough to define one, the floor set by exposures within fifteen minutes of each other, and the systematic remainder after the floor is removed in quadrature. A disc that runs off the detector is reported as partial, not scored. The **reference sweep** turns the body under each frame against a surface reference through `../terrestrial-layers/observer-registration.mts` and reports the exact peak, both mirrors, and whether the frame is decisive (a peak of at least 0.15 that clears the better mirror by ratio 1.5 or by 0.25, or a peak of at least 0.05 that stands four times above both mirrors, which is how a relief-shaded mosaic seen under other lighting places a frame); a median offset is stated only over three or more decisive frames. The reference is the observation the lens names in `reference.observation`, a map of the same body lit as a smooth disc because a photographic mosaic carries its own relief shading, or otherwise the lens's other frames more than an hour away, lit by the mesh's face normals; a constant phase error moves every frame together and is invisible to a frame reference, which only a map catches. A third sweep, **relief**, needs neither: the body's own shape lit by its face normals is the reference, so an irregular mesh places a frame by its shading alone, and a smooth mesh says nothing and says so. The silhouette applies only within 30 degrees of phase angle; past that the contour is a crescent's and the frame is left to the sweeps. Large detectors are reduced by a whole factor to a ray budget before the sweep, so the cost is bounded and the result is a measurement in degrees.
+
+The body README carries the stage's table between `<!-- registration-report:begin -->` and `<!-- registration-report:end -->`, written by `node tools/objects/report-registration.mts <object> --write` from `prepared/surfaces.json`; `report-registration.test.mts` refuses a README whose block differs from its report. `node tools/objects/registration-stage.mts <object> --write` runs the stage alone, through the same loaders, and rewrites only the registration in the prepared report and the README block: a changed rule or a re-derived camera is re-measured in seconds, without packing an atlas, and `--all --write` does it for every body with a camera lens in a few minutes. Every camera kind reaches the stage through one interface, a caster that can be turned about the pole, so a computed observer camera and a spacecraft kernel camera are judged alike.
+
 ## Report
 
 Each lens writes one `cssearth-surface-observation-report@1` report. Preparation
@@ -206,7 +214,7 @@ the atlas transfer counts.
 | `limits` | The authored transfer limits and the derived limits with their rule |
 | `photometry` | The model or disk function, its formula and limits |
 | `selection`, `levelMatching` | How frames were chosen, and for a mosaic the fitted gains, every pair's samples, spread and precision, and any unconnected groups |
-| `registration` | For a controlled colour lens, each band camera measured against its reference image |
+| `registration` | The registration stage for every lens whose frames carry a camera: `silhouette` (limb position-angle residual per frame, the noise floor from exposures minutes apart, the systematic remainder) and `reference` (each frame turned about the pole against the named map observation or the lens's other frames: exact peak, both mirrors, the decisive count and median offset). A controlled colour lens keeps its band check under `bands` |
 | `display` | Where the range came from, the range and its units |
 | `areaCoverage` | The share of the displayed surface each frame covers, from equal-area samples |
 | `sourceIds` | Every consumed input, with its sha256 |

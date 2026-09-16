@@ -28,6 +28,18 @@ All fifteen filtered cameras pass disjoint holdouts and checks against a separat
 
 - Recorded B3 source-mesh reprojection gives held-out correlations 0.99169 and 0.99276, with displacement magnitudes 1.62 and 5.70 detector pixels. The correction is source-relative; it does not override the mesh's published uncertainty or establish absolute 100 m accuracy. Exact pins, fit regions and independent checks are in [source/validation/n1506391424-registration.json](source/validation/n1506391424-registration.json).
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `normal` | 11 | 2 | 6.96° | — | — | its other 11 frames | 9 of 11 | 0.00° | 0 of 11 |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset.
+<!-- registration-report:end -->
+
 ## Known problems
 
 **False color:** Coverage is regional and the photographs retain acquisition shadows. The fifteen images span approximately 00:42–01:06 UTC and include changing viewpoints. They are not a simultaneous true-color view or a composition map. The camera fit is relative to the published 2005 control frame; it cannot improve the shape’s documented sub-kilometre uncertainty in this observed region. One UV3 fitting patch has a 4.88-pixel residual near a dark crater boundary; it is retained in the report rather than pruned. The fifth pointing has only 7–8 second-image holdouts per filter. Its other, diagnostic checkerboard partition includes residuals up to 2.62 pixels. All points remain in the reports; the disjoint holdouts pass the stated criteria.

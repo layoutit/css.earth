@@ -17,7 +17,7 @@ import { readFitsHdu } from '../../../../tools/fits.mts';
 import { decodeCalibratedCamera } from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 import { pckOrientation, type BodyOrientation } from '../../../../tools/objects/terrestrial-layers/observer-camera.mts';
 import { horizonsRows, zimpolExposure } from '../../../../tools/objects/terrestrial-layers/observer-cameras.mts';
-import { limbCentre, radiusFieldMesh, registrationSweep, type SurfaceReference } from '../../../../tools/objects/terrestrial-layers/observer-registration.mts';
+import { limbCentre, observerCaster, radiusFieldMesh, registrationSweep, type SurfaceReference } from '../../../../tools/objects/terrestrial-layers/observer-registration.mts';
 import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/pds-scalar-grid.mts';
 import { loadNativePhotograph } from '../../../../tools/objects/terrestrial-layers/native-photograph-source.mts';
 import { parseTextKernel } from '../../../../tools/spice/text-kernel.mts';
@@ -72,7 +72,7 @@ async function sightings() {
 const judge = (frame: Awaited<ReturnType<typeof sightings>>[number], orientation: BodyOrientation, { mesh, mosaic }: Awaited<ReturnType<typeof surface>>, exactHalfWidth: number) => {
   const limb = limbCentre(frame.image, frame.sighting, orientation, mesh.positions);
   // The mosaic carries Dawn's own relief shading, so the prediction is lit as a smooth disc and the relief is not applied twice.
-  return registrationSweep(frame.image, { ...frame.sighting, center: limb.center }, orientation, mesh, mosaic, { shading: 'radial', coarseStep: 5, exactHalfWidth });
+  return registrationSweep(frame.image, observerCaster({ ...frame.sighting, center: limb.center }, orientation), mesh, mosaic, { shading: 'radial', coarseStep: 5, exactHalfWidth });
 };
 
 test('the SPHERE frames register to the Dawn mosaic through the pinned Dawn pole model', async () => {
