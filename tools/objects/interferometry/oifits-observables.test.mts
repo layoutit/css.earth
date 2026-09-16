@@ -75,4 +75,8 @@ test('selection flags channels outside the windows in every observable table and
   assert.deepEqual(numbers(bytes, vis2, 0, tableColumn(vis2, 'VIS2DATA')), [0.4, 0.5, 0.6], 'measurements untouched');
   assert.ok(Math.abs(numbers(bytes, wave, 1, tableColumn(wave, 'EFF_WAVE'))[0]! - 2.29e-6 / 1.0054) < 1e-15);
   assert.throws(() => selectOifits(input, { wavelengthScale: 2 }), /spectrograph/u);
+  const timed = (mjd: number) => binaryTableHdu('OI_VIS2', [{ name: 'VIS2DATA', form: '3D' }, { name: 'MJD', form: 'D' }, { name: 'FLAG', form: '3L' }], [[[0.4, 0.5, 0.6], mjd, [false, false, false]]], [['INSNAME', 'TEST']]);
+  const nights = Buffer.concat([primaryHdu(), binaryTableHdu('OI_WAVELENGTH', [{ name: 'EFF_WAVE', form: 'D' }, { name: 'EFF_BAND', form: 'D' }], wavelengths.map(w => [w, 1e-8]), [['INSNAME', 'TEST']]), timed(56925.1), timed(56929.2)]);
+  const first = selectOifits(nights, { mjdRange: [56925, 56926] });
+  assert.equal(first.keptVis2, 3); assert.equal(first.newlyFlaggedVis2, 3, 'the other night is flagged whole');
 });

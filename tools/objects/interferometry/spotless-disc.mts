@@ -3,6 +3,7 @@
  *
  *   node tools/objects/interferometry/spotless-disc.mts simulate <oifits> <out.fits> --diameter-mas <d> [--limb-darkening <u>] [--seed <n>]
  *   node tools/objects/interferometry/spotless-disc.mts compare <real-reconstruction.fits> <spotless-reconstruction.fits> --diameter-mas <d> --beam-mas <b>
+ *     [--chi2 <vis2>:<closure-phase>]
  *
  * `simulate` keeps every sampled point of an OIFITS file and replaces its squared visibilities and closure phases by those of a
  * limb-darkened disc without spots, plus Gaussian noise of each point's own error. That is how Evans et al. (2024, ApJ 971,
@@ -145,6 +146,18 @@ export function compareSpotMaps(real: Float64Array, spotless: Float64Array) {
 /** The ratio below which the spots of a reconstruction are no stronger than the ones its coverage draws on a plain disc: between
  * Polaris (1.05) and Betelgeuse (2.90), the lowest of the stars shipped with a reconstruction. */
 export const SPOT_CONTRAST_RATIO = 2;
+/** The reduced chi-squared a reconstruction must reach on each fitted observable. The shipped reconstructions reach 2.45 and 1.06
+ * (π¹ Gruis) and 0.35 and 1.12 (Betelgeuse); ROTIR's sphere on Polaris stays at 5.58 on closure phases, so its spots are not a
+ * surface that explains the data, however much stronger they are than the spotless disc's. */
+export const RECONSTRUCTION_CHI2_LIMIT = 3;
+
+/** Both checks a reconstruction must pass before it is cast: it fits its data, and its spots beat the spotless disc's. */
+export function reconstructionVerdict(fit: { readonly vis2: number; readonly closurePhase: number }, spots: { readonly ratio: number }) {
+  const reasons: string[] = [];
+  if (!(fit.vis2 <= RECONSTRUCTION_CHI2_LIMIT) || !(fit.closurePhase <= RECONSTRUCTION_CHI2_LIMIT)) reasons.push(`it does not fit its data (reduced chi-squared ${fit.vis2.toFixed(2)} and ${fit.closurePhase.toFixed(2)}, limit ${RECONSTRUCTION_CHI2_LIMIT})`);
+  if (!(spots.ratio >= SPOT_CONTRAST_RATIO)) reasons.push(`its spots are no stronger than a spotless disc's (ratio ${spots.ratio.toFixed(2)}, limit ${SPOT_CONTRAST_RATIO})`);
+  return { cast: reasons.length === 0, reasons };
+}
 
 const plane = async (path: string): Promise<ReconstructionPlane> => {
   const image = readReconstruction(await readFile(path));
@@ -170,9 +183,14 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   } else if (mode === 'compare' && first && second && diameterMas !== undefined && option('--beam-mas') !== undefined) {
     const result = await compareReconstructions(first, second, diameterMas, option('--beam-mas')!);
     console.log(`Spot contrast (rms, beam-convolved, limb profile removed): real ${(result.realRms * 100).toFixed(2)}%, spotless ${(result.spotlessRms * 100).toFixed(2)}%, real minus spotless ${(result.differenceRms * 100).toFixed(2)}%; correlation ${result.correlation.toFixed(2)}; ratio ${result.ratio.toFixed(2)}.`);
-    console.log(result.ratio < SPOT_CONTRAST_RATIO
+    const chi2 = rest[rest.indexOf('--chi2') + 1];
+    if (rest.includes('--chi2') && chi2) {
+      const [vis2, closurePhase] = chi2.split(':').map(Number);
+      const verdict = reconstructionVerdict({ vis2: vis2!, closurePhase: closurePhase! }, result);
+      console.log(verdict.cast ? 'Verdict: cast. The reconstruction fits its data and its spots beat the spotless disc\'s.' : `Verdict: do not cast: ${verdict.reasons.join('; ')}.`);
+    } else console.log(result.ratio < SPOT_CONTRAST_RATIO
       ? `Verdict: the spots are no stronger than the coverage draws on a plain disc (ratio below ${SPOT_CONTRAST_RATIO}). Do not cast this image as a surface.`
-      : `Verdict: the real image carries structure beyond the coverage artefacts (ratio ${SPOT_CONTRAST_RATIO} or more).`);
+      : `Verdict: the real image carries structure beyond the coverage artefacts (ratio ${SPOT_CONTRAST_RATIO} or more); check the fit with --chi2.`);
   } else {
     throw new TypeError('Usage: spotless-disc simulate <oifits> <out> --diameter-mas <d> [--limb-darkening <u>] [--seed <n>] | compare <real> <spotless> --diameter-mas <d> --beam-mas <b>');
   }

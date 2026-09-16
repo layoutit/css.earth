@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-interferometry-toolchains@1",
+  "toolchains": {
+    "squeeze": {
+      "purpose": "Sky-plane image reconstruction from squared visibilities and closure phases (Baron et al.).",
+      "license": "GPL-3.0",
+      "source": { "kind": "git", "url": "https://github.com/fabienbaron/squeeze", "commit": "4d34e877606f16be73e7689fcb517d0b72d9d455", "submodules": true },
+      "build": ["cmake -S source -B build", "cmake --build build"],
+      "executable": "source/bin/squeeze"
+    },
+    "rotir": {
+      "purpose": "Surface reconstruction on a tessellated star (ROTIR.jl on OITOOLS.jl), the method Evans et al. (2024) used for Polaris.",
+      "license": "ROTIR.jl GPL-3.0; OITOOLS.jl LGPL-3.0; Julia MIT",
+      "downloads": [
+        { "path": "julia-1.12.7-macaarch64.tar.gz", "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz", "bytes": 230457194, "sha256": "af8fcedfb25b6b9c8c13d99695c38faa2d59bf0162b3f458c8b8b56f14c96919" }
+      ],
+      "registries": ["General", "https://github.com/emmt/EmmtRegistry"],
+      "environment": "tools/objects/interferometry/rotir",
+      "packages": {
+        "ROTIR": { "url": "https://github.com/fabienbaron/ROTIR.jl", "commit": "ad308759b741b861b6c19fedd001c323a3a64479" },
+        "OITOOLS": { "url": "https://github.com/fabienbaron/OITOOLS.jl", "commit": "f42d2beaf2760cb4beaeba0e0d0f1674a3c6c66a" }
+      },
+      "executable": "julia-1.12.7/bin/julia"
+    },
+    "pionier": {
+      "purpose": "ESO VLTI/PIONIER data reduction and calibration from raw frames (pndrs through esorex), so a star is not limited to the OiDB's automated calibration.",
+      "license": "PIONIER pipeline GPL-3.0; Yorick BSD",
+      "downloads": [
+        { "path": "yorick-2.2.04-1.fc41.src.rpm", "url": "https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/fedora/41/src/yorick/yorick-2.2.04-1.fc41.src.rpm", "bytes": 2376245, "sha256": "933607a6dcb02aee5e48afe3fbbfcf65954ef94cb60ebacacfb33d0e9d3dfa0c" },
+        { "path": "pionier-kit-4.0.4-5.tar.gz", "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/pionier/pionier-kit-4.0.4-5.tar.gz", "bytes": 138222771, "sha256": "a773bb923517956692263d401902d35debc91f02221fb41f960bef0c27724fe2" }
+      ],
+      "yorickPatches": ["yorick-pie.patch", "graph_int_argc.patch"],
+      "executable": "pipeline/bin/esorex"
+    }
+  }
+}
