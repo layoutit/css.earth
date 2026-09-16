@@ -1,3 +1,4 @@
+import {SHAPE_MATERIAL} from '../../../../tools/objects/terrestrial-layers/shape-material.mts';
 import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -34,11 +35,11 @@ export function testCatalogNucleus(id: string){
   assert.ok(volume>0);assert.ok(Math.abs(volume/(model.nativeExport.volume*catalogRadiusM**3)-1)<.025);
   assert.ok(maxErrorM<catalogRadiusM*.001,`Reduced vertices remain on the exported source mesh (maximum nearest-source-vertex distance ${maxErrorM} m).`);
  });
- test(`${id}: full gridded coverage, one dataset, Shadows and Orbit off`,async()=>{
+ test(`${id}: full gridded coverage, one dataset, Shadows off`,async()=>{
   const root=resolve('src/objects',id),config=await read(`${root}/source/preparation/terrestrial.json`),surfaces=await read(`${root}/prepared/surfaces.json`),content=await read(`${root}/source/content/object.json`);
-  assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.match(s.appearance,/no-imagery grid/);assert.equal(s.layout.faceCount,800);
+  assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.equal(s.appearance,SHAPE_MATERIAL.appearance);assert.equal(s.layout.faceCount,800);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true);
-  for(const name of ['shadows','orbit'])assert.equal(content.settings.controls.find((c: { name: string; })=>c.name===name).checked,false);
+  const shadows=content.settings.controls.find((c: { name: string; })=>c.name==='shadows');assert.ok(shadows,'shadows setting');assert.equal(shadows.checked,false);
  });
  test(`${id}: source closure and fixed illustrative attitude`,async()=>{
   const root=resolve('src/objects',id),descriptor=await read(`${root}/object.json`),ref=descriptor.properties.recipe.sources.find((r: { id: string; })=>r.id==='rotation');

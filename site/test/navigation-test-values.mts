@@ -27,7 +27,7 @@ export function navigationFixture(frame: PreparedWorldCameraFrame, capture: () =
 }
 export function objectFixture(id: string, worldFrame: PreparedWorldCameraFrame, overrides: Partial<ObjectEntry> = {}): ObjectEntry {
   return { kind: 'scene', id, name: id, systemName: id, classification: 'planet', color: '#000000', distance: testDistance(1),
-    route: `/${id}/`, description: id, worldFrame,
+    route: `/${id}/`, description: id, worldFrame, discovery: { featured: false, imagery: false, illustration: false },
     async loadScene() { throw new Error('This fixture does not mount a scene.'); }, ...overrides };
 }
 

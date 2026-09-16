@@ -10,10 +10,9 @@ export function labelEligible(facts: { named?: boolean; notable?: boolean }): bo
   return facts.named === true || facts.notable === true;
 }
 
-/** Sun and Earth are orientation references; other tiers come from prepared classification. */
-export function labelImportance(kind: string, major = false, id?: string): number {
-  if (id === 'sun') return 5;
-  if (id === 'earth') return 4;
+/** A prepared orientation reference (the Sun, then Earth) outranks every classification tier. */
+export function labelImportance(kind: string, major = false, orientationReference = 0): number {
+  if (orientationReference > 0) return orientationReference;
   if (['star', 'planet', 'environment', 'galaxy-cluster'].includes(kind)) return 3;
   if (major || kind === 'dwarf-planet') return 2;
   if (kind === 'asteroid') return 0;

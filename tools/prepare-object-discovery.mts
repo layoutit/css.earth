@@ -8,11 +8,12 @@ import { preparedDefaultViewRotation } from '../src/renderers/css/dist/navigatio
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
 export function discoveryPolicy(value: unknown) {
   if (!isRecord(value)) throw new TypeError('Missing discovery catalogue.');
-  const { featured = false, illustrationLenses = [] } = value;
+  const { featured = false, illustrationLenses = [], orientationReference } = value;
+  if (orientationReference !== undefined && (!Number.isInteger(orientationReference) || Number(orientationReference) < 1)) throw new TypeError('Invalid object orientation reference.');
   if (typeof featured !== 'boolean' || !Array.isArray(illustrationLenses) ||
       !illustrationLenses.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)) ||
       new Set(illustrationLenses).size !== illustrationLenses.length) throw new TypeError('Invalid object discovery policy.');
-  return { featured, illustrationLenses: illustrationLenses as string[] };
+  return { featured, illustrationLenses: illustrationLenses as string[], ...(orientationReference === undefined ? {} : { orientationReference: Number(orientationReference) }) };
 }
 
 /** Only prepared, exposed observation lenses count. A source download, an
@@ -51,7 +52,9 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
     arrival = parseArrivalView({ defaultLens: controls.lenses.defaultLens, lensIds: [...photographed],
       rotation: preparedDefaultViewRotation(camera) });
   }
-  return { imagery, illustration, featured: !illustration && (policy.featured || imagery), ...(arrival ? { arrival } : {}) };
+  return { imagery, illustration, featured: !illustration && (policy.featured || imagery), ...(arrival ? { arrival } : {}),
+    // An orientation reference outranks classification in universe annotations (the Sun, then Earth).
+    ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
 }
 
 export async function prepareObjectDiscovery(descriptor: unknown, objectDirectory: string) {

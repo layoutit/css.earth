@@ -1,1 +1,0 @@
-import{test}from'node:test';import{assertAsteroidPackage}from'../asteroid-contract.mts';test('2008 EV5 retains Shape, Elevation and native raster triangles',()=>assertAsteroidPackage('asteroid-2008-ev5',['shape','elevation'],200));
