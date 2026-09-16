@@ -29,8 +29,9 @@ export function ObjectPicker({ value, objects, disabled, onChange }: {
       setActive(index => Math.max(0, Math.min(matches.length - 1, index + (event.key === 'ArrowDown' ? 1 : -1))));
     }
   }
-  return <div className="object-picker" ref={host} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
+  return <div className="object-picker" data-open={open} ref={host} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
     <label className="visually-hidden" htmlFor="subject">Object</label>
+    <svg className="object-picker-search" aria-hidden="true" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 4 4" /></svg>
     <input id="subject" ref={input} role="combobox" autoComplete="off" spellCheck={false}
       data-object-id={value} aria-expanded={open} aria-autocomplete="list" aria-controls="object-results"
       aria-activedescendant={open && current ? `object-option-${current.id}` : undefined}
@@ -39,12 +40,12 @@ export function ObjectPicker({ value, objects, disabled, onChange }: {
       onChange={event => { setQuery(event.target.value); setActive(0); setOpen(true); }} />
     <button type="button" className="object-picker-toggle" aria-label={open ? 'Close object list' : 'Choose object'} disabled={disabled}
       aria-expanded={open} tabIndex={-1} onMouseDown={event => event.preventDefault()}
-      onClick={() => { if (open) setOpen(false); else { expand(); input.current?.focus(); } }}>⌄</button>
-    {open && <div className="object-picker-popup"><div id="object-results" role="listbox" aria-label="Objects">
+      onClick={() => { if (open) setOpen(false); else { expand(); input.current?.focus(); } }}><svg aria-hidden="true" viewBox="0 0 20 20"><path d="m4 7 6 6 6-6" /></svg></button>
+    {open && <div className="object-picker-popup"><div className="object-picker-heading"><span>Objects</span><span>{matches.length}</span></div><div id="object-results" role="listbox" aria-label="Objects">
       {matches.map(object => <button key={object.id} id={`object-option-${object.id}`} type="button" role="option" tabIndex={-1}
         data-object-id={object.id} data-active={current?.id === object.id} aria-selected={object.id === value}
         onMouseDown={event => event.preventDefault()} onClick={() => choose(object.id)}>
-        <span>{object.name}</span>{object.id === value && <span aria-hidden="true">✓</span>}
+        <span className="object-option-label">{object.name}</span><span className="object-option-check" aria-hidden="true">{object.id === value ? '✓' : ''}</span>
       </button>)}
     </div>{!matches.length && <p role="status">No matching objects</p>}</div>}
   </div>;
