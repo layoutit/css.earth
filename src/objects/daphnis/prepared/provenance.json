@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7611dbf88d13c677c6589d08f58c82f39533adfb4d18a80572d3f31bc7f6bcb1"
+    "sha256": "fc3555e94dc4047d179df05eeb1acb80289f2470fea4ac259a5527fc498d9b2b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f27493529d3fab069842a6ef4ab716f12dd0684fda0dde335638170e50cafd3",
+      "sha256": "7dcaee707a97d36bca4f5fe6c6ce5d1bcf8a2c1faee51dd1e523b49ea09426d0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -165,6 +165,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.528
@@ -271,6 +272,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -1437,7 +1439,7 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "80e7114fe3d7de44899c07e717384f1f1a4b2920ce3bbba8d9d3d8f45a18a1bf",
+    "materialSha256": "a26dbe6c776a6cc8a26eeb833f510680a835b9063515db9d6d92ee6fb0d27413",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

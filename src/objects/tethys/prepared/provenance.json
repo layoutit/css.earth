@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9e210db194ecfea68f82436df4ea2f5f4ee27193200af6c247002064b3684fa1"
+    "sha256": "d25d0c3a4d78ea6a975b6977ad9103e084f14be7bf1654d9bf49c4be2ca314d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c356276a9e393c78bb96446f361a923f4e81e1c511a9b5872db2dc00286085a0",
+      "sha256": "9ecf2b1edaa01ca7203495b81c8dd1a17a56490883eff61563bc0c306c231ac5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -422,7 +422,7 @@
                   }
                 }
               },
-              "refinement": {
+              "limbRefinement": {
                 "method": "mesh-limb",
                 "maximumCorrectionDegrees": 0.2,
                 "maximumResidualPixels": 2.5,
@@ -445,6 +445,7 @@
                 "maximumGain": 3
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.2,
                   99.4
@@ -2478,7 +2479,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "b475813da8c17eeca5c3f9b10c76a5b97cb952ce61355dc199fa86eb5b6cc23f",
+    "materialSha256": "af31045bfc018b1c0b31aacd7e4032d083f57f5ed07f26aa6ef477378b51d71a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

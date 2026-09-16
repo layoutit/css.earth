@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "369909247dce0b9d66da9f487f25d561d3077896785ce1c0394f3bcc28291c38"
+    "sha256": "c27c03aab0e5959fe173b28acada9f8e6749efcca018c848d5dd37e476298eb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f1f0aabbcda3bad21ed38bf235fb61da07ea9d96d194a85f63d582241b16ac8a",
+      "sha256": "8b8067366179ab05c93720b4d482a640d10cd7b75f165134ced01849fcec98ba",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -139,6 +139,7 @@
                 }
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   2.7,
                   97.6
@@ -1117,7 +1118,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "553a1c82db11f42a1daca4edf6259bdf66310630b2c86030713f7876ccc16715",
+    "materialSha256": "ad8c0cecf96a81af3d966bfd545652ee825b73ade47a1979741616301dbe0e6e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

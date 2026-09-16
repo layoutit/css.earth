@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f947dabb906545e5b0159dff2ec035caf25c836699a8ccaac7d42fee3568e09"
+    "sha256": "97a8d9e86d66414a017d845bb81c08fabc0b9f8affdc3abbcccb595b8af6387a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c3f463f54424bdf2966a0d73be040d5ee2a91272ccab8b9af1ca5194852f3fd8",
+      "sha256": "d2bbfd179bc2de99a4244abae90c53e1bc9550abb108ddda43d0466e9cb3fa30",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -192,6 +192,7 @@
                 "maximumGain": 2
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.133
@@ -1268,7 +1269,7 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "7933e9b22653ed9f43138ab8319baf39bd99f24253beade3d52d848ee26eb039",
+    "materialSha256": "57d24fa38f207ff085ba4adef34e52ff45772ca262eee0f6206ce7a2966c68e9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
