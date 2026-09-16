@@ -31,17 +31,19 @@ export function registrationBlock(surfaces: unknown): string | null {
     const rule = requireRecord(reference.rule), enough = Number(reference.decisive) >= Number(rule.minimumFrames ?? 3);
     const relief = registration.relief === undefined ? undefined : requireRecord(registration.relief);
     const reliefCell = relief ? `${String(relief.decisive)} of ${requireArray(relief.frames).length}${Number(relief.decisive) >= Number(requireRecord(relief.rule).minimumFrames ?? 3) ? `, ${degrees(relief.medianOffsetDegrees)}` : ''}` : '—';
-    rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} |`);
+    const refinement = registration.refinement === undefined ? undefined : requireRecord(registration.refinement);
+    const refinedCell = !refinement ? '—' : refinement.applied ? `${degrees(refinement.turnDegrees)} by ${String(refinement.by)}` : `declined: ${String(refinement.reason)}`;
+    rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} | ${refinedCell} |`);
   }
   if (!rows.length) return null;
   return [
     'Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.',
     '',
-    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |',
-    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
+    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     ...rows,
     '',
-    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset.',
+    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens.',
   ].join('\n');
 }
 

@@ -5,7 +5,7 @@ import { multiply } from '../../spice/ck.mts';
 import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '../terrestrial-layers/observer-camera.mts';
 import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/observer-registration.mts';
-import { DECISIVE, referenceRegistration, reliefRegistration, silhouetteRegistration } from './registration.mts';
+import { DECISIVE, parseRefinement, refinementDecision, referenceRegistration, reliefRegistration, silhouetteRegistration, type RegistrationStageReport } from './registration.mts';
 import type { FrameDetector, LoadContext, ObservationCamera, ObservationFrame, ObservationImage } from './contract.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;
@@ -112,4 +112,18 @@ test('the body\'s own relief places a frame of an irregular shape, and a smooth 
   const turned = reliefRegistration([photograph('t', J2000 + 3.1, turnedOrientation(upright, 25), upright)]);
   assert.ok(turned.frames[0].exact && Math.abs((turned.frames[0].exact.offsetDegrees ?? 0) + 25) <= 3 || (turned.frames[0].exact?.correlation ?? 1) < (report.frames[0].exact?.correlation ?? 0),
     `a frame of the body turned 25° is reported turned or scores lower than the true one (${turned.frames[0].exact?.offsetDegrees}, ${turned.frames[0].exact?.correlation})`);
+});
+
+test('a refinement applies the named reference\'s median only when it is decisive and unopposed', () => {
+  const stage = (reference: number | null, relief: number | null, kind: 'frames' | 'observation' = 'frames') => ({ stage: 'cssearth-registration-stage@1', silhouette: {}, reference: { kind, medianOffsetDegrees: reference, rule: DECISIVE }, relief: { medianOffsetDegrees: relief } } as unknown as RegistrationStageReport);
+  const relief = parseRefinement({ by: 'relief' });
+  assert.deepEqual(refinementDecision(stage(null, -6.75), relief).applied, true);
+  assert.equal(refinementDecision(stage(null, -6.75), relief).turnDegrees, -6.75);
+  assert.equal(refinementDecision(stage(-0.25, -6.75), relief).applied, false, 'frames at -0.25 oppose relief at -6.75');
+  assert.match(refinementDecision(stage(-0.25, -6.75), relief).reason, /frames reference puts the turn at -0.25/);
+  assert.equal(refinementDecision(stage(-1, -2.5), relief).applied, true, 'within the default three degrees');
+  assert.equal(refinementDecision(stage(-1, null), relief).applied, false, 'relief not decisive');
+  assert.equal(refinementDecision(stage(1.25, 0, 'observation'), parseRefinement({ by: 'map', agreementDegrees: 2 })).applied, true);
+  assert.throws(() => parseRefinement({ by: 'silhouette' }), /relief, frames or map/);
+  assert.throws(() => parseRefinement({ by: 'relief', agreementDegrees: 45 }), /under thirty/);
 });

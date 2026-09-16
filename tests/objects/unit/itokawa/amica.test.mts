@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeAmicaGeo } from '../../../../tools/objects/terrestrial-layers/amica-geo.mts';
-import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
+import { fitBackplaneCamera, fitBackplaneSun } from '../../../../tools/objects/surface-observations/cameras.mts';
 const root = resolve('src/objects/itokawa/source'), read = (name: string) => readFile(resolve(root, name));
 const [cube,label,original,flat] = await Promise.all([
   read('observations/st_2417589964_v_ddr.img.gz'), read('observations/st_2417589964_v_ddr.lbl'),
@@ -38,4 +38,15 @@ test('AMICA withholds defective flat-field samples without altering geometry', (
   const rejected = decode(original, changed);
   assert.ok(rejected.valid(498 * 1024 + 563));
   assert.equal(rejected.acceptPixel(498 * 1024 + 563), false);
+});
+
+test('the Sun fitted from the phase plane is the Sun the Gaskell SUM file states', async () => {
+  // The SUM file's SZ line is the Sun direction in the body frame; the fit uses only the archive's phase plane and surface points.
+  const [cube2, label2, original2, sum] = await Promise.all([read('observations/st_2402987304_v_ddr.img.gz'), read('observations/st_2402987304_v_ddr.lbl'), read('observations/st_2402987304_v.fit'), read('observations/N2402987304.SUM')]);
+  const decoded = decodeAmicaGeo(cube2, label2.toString(), original2, flat);
+  const stated = sum.toString().split('\n').find(line => /\bSZ\b/.test(line))!.trim().split(/\s+/).slice(0, 3).map(n => Number(n.replace(/[dD]/, 'e')));
+  const fit = fitBackplaneSun(decoded, fitBackplaneCamera(decoded).positionKm);
+  assert.ok(fit, 'the AMICA backplanes carry a phase plane');
+  const angle = Math.acos(Math.min(1, fit.sunDirection.reduce((total, n, k) => total + n * stated[k], 0))) * 180 / Math.PI;
+  assert.ok(angle < 0.1, `fitted Sun is ${angle.toFixed(3)}° from the SUM file's SZ (holdout RMS ${fit.fit.rmsDegrees.toFixed(4)}°)`);
 });
