@@ -26,6 +26,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "zimpol",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -46,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "ea05bacd392d1d101d935418fa628ec2745375b3a068dc3145789bcb6d12e88a"
+          "sha256": "fee5eef8cd7e4b34f21dcdb5b0c8a5880097f75f18421a00740c8cdda1b037ec"
         },
         {
           "id": "rotation",
@@ -56,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4"
+          "sha256": "2e22d39da3326abfae9c765d96e1be2da694d53b63bda765c0a1783f4f0b7ec9"
         },
         {
           "id": "title",
@@ -71,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f87b27f0445eb707467cab48f3ae1ebbadf70e415ee53c97c686ac0920fdc51e"
+          "sha256": "96049d5ccb682ab28e057ed56a135ec9547b11181b35d50450511a155c3ee84c"
         }
       ]
     },
@@ -108,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b5fd7b14e34d02c84e968ff65f8c8e4135d2f8c5c8234c4a5fdb0af0c5f86092"
+        "sha256": "c27b66ee7bfce0063a18f149041a08931c95b1ee800f302c4c787d3483494f1c"
       }
     },
     "catalog": {
@@ -129,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7942412e1921d4816d2ada932ec87f3597f9a8f5572d109515ee88637e2e437f"
+    "sha256": "f653979e8e1e65d171229f5d9bd183f4dedda571cfd0a5259c98959c1682b4c7"
   }
 }

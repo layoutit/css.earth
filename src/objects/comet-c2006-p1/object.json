@@ -114,7 +114,9 @@
       "bodyRadiusM": 1165.1742343632927
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "McNaught",
       "classification": "comet",
       "color": "#b8b6b2",

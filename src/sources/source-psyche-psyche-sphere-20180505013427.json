@@ -1,0 +1,37 @@
+{
+  "id": "source-psyche-psyche-sphere-20180505013427",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Psyche · psyche sphere 20180505013427",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-05-05T01_34_27.816_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/psyche/source/manifest.json",
+      "revision": "dae54dd62dc07b87326359a427b7ba622c9fa7db",
+      "sha256": "d0a0d2f2b0a796c204b3bc55881e8dffcd60ec8f6365a291ae6664b36349ad8f",
+      "locator": "/inputs/22"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The psyche sphere 20180505013427 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

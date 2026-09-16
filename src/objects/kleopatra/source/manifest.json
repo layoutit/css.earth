@@ -95,6 +95,293 @@
           }
         ]
       }
+    },
+    {
+      "id": "kleopatra-adam-shape",
+      "path": "shape/216_Kleopatra_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_adam.obj",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "adam-terrain"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 59100
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release's rotation parameters describe this frame, so the photographic lens is registered to this mesh rather than to the separately re-optimised MPCD model.",
+      "expectedBytes": 56102,
+      "expectedSha256": "b036bb4614534d49220a14cf9850e3e1e7916c01b6624f78a2352d8bdc844453",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-sphere-20170714t050059538",
+      "path": "observations/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2017-07-14 05:00:59.538 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "bb9d773d9248511ada0ffabac35d75c6e7a31c9fcf559b52655667102c125cec",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-sphere-20170714t050059538",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-sphere-20170714t051326665",
+      "path": "observations/d216Kleopatra_2017-07-14T05_13_26.665_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-14T05_13_26.665_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2017-07-14 05:13:26.665 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "3c13c30263ee040c70329162fc230c118abea111ff442f43f3a6328e813695f2",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-sphere-20170714t051326665",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-sphere-20170722t042627837",
+      "path": "observations/d216Kleopatra_2017-07-22T04_26_27.837_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-22T04_26_27.837_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2017-07-22 04:26:27.837 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "eee5b66d7d9582358837cfbf499f7149ecdf07962f19b7a92fa25747cb038f71",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-sphere-20170722t042627837",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-sphere-20170727t041103654",
+      "path": "observations/d216Kleopatra_2017-07-27T04_11_03.654_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-27T04_11_03.654_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2017-07-27 04:11:03.654 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e90c814a7de416e3656d34a7c34e59293d3387ecfdded15e78d1e6244710694c",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-sphere-20170727t041103654",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-sphere-20170810t051748553",
+      "path": "observations/d216Kleopatra_2017-08-10T05_17_48.553_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-08-10T05_17_48.553_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2017-08-10 05:17:48.553 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "ae5ab024f5d4dc0e5ab13b5408df11f33fda391be63060330f23e80993947283",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-sphere-20170810t051748553",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-horizons-sphere-observer",
+      "path": "reference/horizons-sphere-observer.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for target 216 and observer code 309, Paranal. The query and its epochs are stated in the body README.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
+      "expectedBytes": 9001,
+      "expectedSha256": "7679f0291d6476fa8dcd07d16867536cea8cc0d5102f1d5305e7b47cf51509a9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-observer",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@f34e674dc2c8bfe2183566a8dcdd3e1894d110e8#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kleopatra-horizons-sphere-heliocentric",
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for target 216 and observer code 309, Paranal. The query and its epochs are stated in the body README.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "heliocentric state vectors at the same epochs, corrected for light time, giving the direction to the Sun",
+      "expectedBytes": 6078,
+      "expectedSha256": "d3e3318c4ea90f8a4c38df08b343301bfc4e573aeb40b0565a821e210885d056",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-heliocentric",
+            "role": "material",
+            "evidence": "src/objects/kleopatra/source/manifest.json@f34e674dc2c8bfe2183566a8dcdd3e1894d110e8#/inputs/10"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -127,8 +414,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8328,
-      "expectedSha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4",
+      "expectedBytes": 9421,
+      "expectedSha256": "2e22d39da3326abfae9c765d96e1be2da694d53b63bda765c0a1783f4f0b7ec9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -136,8 +423,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 823,
-      "expectedSha256": "f87b27f0445eb707467cab48f3ae1ebbadf70e415ee53c97c686ac0920fdc51e"
+      "expectedBytes": 3223,
+      "expectedSha256": "96049d5ccb682ab28e057ed56a135ec9547b11181b35d50450511a155c3ee84c"
     },
     {
       "path": "preparation/navigation.json",
@@ -151,8 +438,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 1935,
-      "expectedSha256": "ea05bacd392d1d101d935418fa628ec2745375b3a068dc3145789bcb6d12e88a"
+      "expectedBytes": 7879,
+      "expectedSha256": "fee5eef8cd7e4b34f21dcdb5b0c8a5880097f75f18421a00740c8cdda1b037ec"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
