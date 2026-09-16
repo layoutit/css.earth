@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "haumea",
+  "object": {
+    "source": "Rabinowitz et al. (2006), Photometric observations constraining the size, shape, and albedo of 2003 EL61, a rapidly rotating, Pluto-sized object in the Kuiper Belt, ApJ 639, 1238, doi:10.1086/499575, arXiv:astro-ph/0509401",
+    "locator": "Section 3.4 and Table 3, weighted average of 2005 January 25-27 after subtracting the rotational light curve",
+    "system": "Johnson-Cousins BVRI",
+    "note": "Rotation-corrected mean colours. Lacerda (2010) describes a darker, redder region seen in the light curve, so the surface colour is known to vary with rotation; these are the rotational mean.",
+    "indices": {
+      "B-V": { "value": 0.626, "uncertainty": 0.025 },
+      "V-R": { "value": 0.343, "uncertainty": 0.020 },
+      "V-I": { "value": 0.683, "uncertainty": 0.020 }
+    }
+  },
+  "geometricAlbedo": {
+    "source": "Ortiz et al. (2017), The size, shape, density and ring of the dwarf planet Haumea from a stellar occultation, Nature 550, 219-223, doi:10.1038/nature24051, arXiv:2006.03113",
+    "locator": "Main text and Methods, Geometric albedo of Haumea: occultation projected area with H_V of the main body after removing the ring and satellites",
+    "band": "V",
+    "value": 0.51,
+    "uncertainty": 0.02
+  },
+  "sun": {
+    "source": "Ramírez et al. (2012), The UBV(RI)C colors of the Sun, ApJ 752, 5, doi:10.1088/0004-637X/752/1/5, arXiv:1204.0828",
+    "locator": "Abstract, model-independent line-depth-ratio solution",
+    "system": "Johnson-Cousins BVRI",
+    "indices": {
+      "B-V": { "value": 0.653, "uncertainty": 0.003 },
+      "V-R": { "value": 0.356, "uncertainty": 0.003 },
+      "V-I": { "value": 0.701, "uncertainty": 0.003 }
+    }
+  },
+  "effectiveWavelengths": {
+    "source": "SVO Filter Profile Service, Generic/Bessell.B, .V, .R and .I, WavelengthEff",
+    "url": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Generic/Bessell.V",
+    "checked": "2026-09-16",
+    "nanometres": { "B": 438.1, "V": 544.5, "R": 641.1, "I": 798.2 }
+  }
+}
