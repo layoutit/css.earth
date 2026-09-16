@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "90cc023c42177d7b1f77a8482cf515bcb980c6fc6f5ce3711ebe09773c3cb010"
+    "sha256": "89d5fe93101893bbed9f1f8b14841ea5f86a926ccdc9415e48bb0b0f19199a91"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "d61100b54ab3d67b84dce2738ee5158c40349f548a53af887ea1187ef81abdfa"
   },
   "recipes": [
     {
@@ -202,7 +202,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "53c164436bbf170f5fd1f2763cbbe17412178f90d83588bccf71b87fe8d9c26e",
+      "sha256": "329064bace61b3ce7fbd2ef1849fb090f4e55cafd8edb1c9d6d0c2f13bd7571f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,7 +245,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.30 hours"
+              "value": "4.30 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": [
@@ -690,8 +698,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "53c164436bbf170f5fd1f2763cbbe17412178f90d83588bccf71b87fe8d9c26e",
-      "bytes": 9205,
+      "sha256": "329064bace61b3ce7fbd2ef1849fb090f4e55cafd8edb1c9d6d0c2f13bd7571f",
+      "bytes": 9565,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1104,8 +1112,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4719,
-          "sha256": "6c1deff321f71713718249df628183175617851d8c7375b7585d68124f8b01a4",
+          "bytes": 4988,
+          "sha256": "2114c0e7bbf274a39172000c070187eb02df02f1793adcfd1a0d0e975471ea83",
           "verification": "bytes-verified"
         }
       ],

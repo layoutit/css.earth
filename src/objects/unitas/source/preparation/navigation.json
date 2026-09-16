@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/578/shape.txt",
-    "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech (2007), M. Delbo and P. Tanga (2009), Ďurech et al. (2011); model 197, version 2009-02-26.",
-    "license": "CC-BY-4.0",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 35510,
-    "expectedSha256": "1235daa66a58c801274d137e765996bb72de2b016ff0ec5252236296594f1e59",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "unitas-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/1912.09192",
-    "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
-    "license": "MIT display representation from published scientific measurements; retain source citation.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "measured-ellipsoid",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 37904,
-    "expectedSha256": "eaefd93cb624ec0ef35d65ad08d1d036cebdfb1186b49632726e33793b0c8a37"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

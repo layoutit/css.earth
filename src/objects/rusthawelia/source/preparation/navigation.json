@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/10084/shape.txt",
-    "credit": "DAMIT, Astronomical Institute of Charles University; Rusthawelia model 3188; original model authors identified in its pinned reference records.",
-    "license": "CC-BY-4.0",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 37460,
-    "expectedSha256": "be02437d0cb16db90138979af171202bbc126b1f2cbe6df7a4396836308a667a",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "rusthawelia-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

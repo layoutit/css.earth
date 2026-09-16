@@ -1,6 +1,7 @@
 import { open } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { number, object, parse, string } from '../material-composition/data-schema.mts';
+import { pds3Keyword } from '../pds-labels.mts';
 
 const profileSchema = object({ productId: string, productVersion: string, wavelengthNanometers: number,
   gain: number, gamma: number, referenceRadiusMeters: number, outputLongitudeOrigin: number });
@@ -16,9 +17,9 @@ export function parsePdsFloatProfile(value: unknown) {
  * This reader accepts only the documented unrotated spherical equirectangular frame. */
 export function parsePdsFloatLabel(label: string, expected: { productId: string; productVersion: string; wavelengthNanometers: number }, radiusMeters: number) {
   const field = (key: string) => {
-    const match = label.match(new RegExp(`^\\s*${key.replaceAll('^', '\\^')}\\s*=\\s*([^\\r\\n]+)`, 'm'));
-    if (!match) throw new TypeError(`PDS label is missing ${key}.`);
-    return match[1].trim().replaceAll('"', '');
+    const value = pds3Keyword(label, key);
+    if (value === undefined) throw new TypeError(`PDS label is missing ${key}.`);
+    return value;
   };
   const num = (key: string) => { const n = Number.parseFloat(field(key)); if (!Number.isFinite(n)) throw new TypeError(`Invalid PDS ${key}.`); return n; };
   const width = num('LINE_SAMPLES'), height = num('LINES'), recordBytes = num('RECORD_BYTES');

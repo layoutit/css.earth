@@ -1,5 +1,7 @@
 # Milky Way preparation
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ```text
 milky-way/
 ├── object.json                 Physical frame, source pin, prepared digest

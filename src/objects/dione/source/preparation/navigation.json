@@ -6,36 +6,7 @@
     "size": 5
   },
   "source": {
-    "credit": "NASA/JPL/Space Science Institute",
-    "license": "NASA/JPL imagery with attribution",
-    "licenseEvidence": [
-      "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-    ],
-    "acquisition": "Download the pinned original through the shared acquisition recipe.",
-    "redistribution": "Retain mission and source-author credits.",
-    "id": "cassini-voyager-2010-dione",
-    "path": "observations/Dione_Cassini_Voyager_mosaic_global_154m.tif",
-    "origin": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif",
-    "catalog": "https://astrogeology.usgs.gov/search/map/dione_cassini_voyager_global_mosaic_154m",
-    "consumers": [
-      "surfaces",
-      "navigation"
-    ],
-    "lensId": "normal",
-    "label": "Monochrome",
-    "falseColor": false,
-    "width": 23040,
-    "height": 11520,
-    "projection": {
-      "type": "equirectangular",
-      "referenceRadiusMeters": 563000,
-      "centerLongitude": 0,
-      "longitudeDirection": "east-positive",
-      "latitudeType": "planetocentric"
-    },
-    "coverage": "USGS 2010 Cassini/Voyager mosaic. Preserve all nonzero source values; exactly zero is GeoTIFF no-data. Photographed shading and native resolution vary.",
-    "expectedBytes": 265490551,
-    "expectedSha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5"
+    "path": "observations/Dione_Cassini_Voyager_mosaic_global_154m.tif"
   },
   "operations": [
     {

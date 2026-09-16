@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 104636,
-    "expectedSha256": "2ea23b6844dd6fd019679402137e2dbc825214bd480ebae53d1c82a9493e821a",
-    "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
-    "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
-    "license": "PDS public scientific archive",
-    "licenseEvidence": [
-      "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
-    ],
-    "acquisition": "Checked-in derived context image; regenerated and hash-verified by the radial snapshot recipe.",
-    "redistribution": "Public scientific data; retain dataset identification and author attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "pds-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 180,
-      "latitudeDegrees": 65,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

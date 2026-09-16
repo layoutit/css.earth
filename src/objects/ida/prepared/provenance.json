@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "415e3fc771e5978c3c67768b896a5ffa332016389324b6812bc696a78b186aaa"
+    "sha256": "902881e8ce84e293745c327c4b2e3a1ac30a4b26d32800c84b9fc4b8726427c5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "48d4fa7fc2923e30b2ed3e892cc2a1a77698ffef10278a6ee0ad25f5339d5895"
   },
   "recipes": [
     {
@@ -246,7 +246,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cfa3ac1ae93ef8139d7e53be79aee0df7badb47e9a459e2277fcc2c0e4ff6003",
+      "sha256": "b37080df6e162cf83f3991d4e0d62d5f6d7f819bd68318d4272da7ac3bfc1481",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -274,7 +274,15 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "16 km"
+              "value": "16 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -289,7 +297,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.634 hours · retrograde"
+              "value": "4.634 hours · retrograde",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": [
@@ -1118,12 +1134,12 @@
           }
         ]
       },
+      "origin": "https://doi.org/10.1006/icar.1996.0036",
+      "credit": "Published Hapke parameters: Helfenstein et al. (1996), doi:10.1006/icar.1996.0036. Selection and transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded.",
       "id": "source-document:photometry/helfenstein-1996-hapke.json",
       "kind": "source-document",
-      "origin": "object:source/photometry/helfenstein-1996-hapke.json",
       "title": "Published Hapke photometric model of Ida at 0.55 um, used to normalize the Galileo photograph mosaic.",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
       "upstreamLineage": "not-recorded",
       "sha256": "99f9e82b31e460a3f94f445a20d08a71bcae183cfa2d8d1b8210b54afc17c722",
       "bytes": 589,
@@ -1145,8 +1161,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cfa3ac1ae93ef8139d7e53be79aee0df7badb47e9a459e2277fcc2c0e4ff6003",
-      "bytes": 7573,
+      "sha256": "b37080df6e162cf83f3991d4e0d62d5f6d7f819bd68318d4272da7ac3bfc1481",
+      "bytes": 8291,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1446,8 +1462,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3977,
-          "sha256": "b03e5a40a9b99330b30c1290fd457ad60b643b9ba08ecafbe7bdfd1079d99e8f",
+          "bytes": 4513,
+          "sha256": "dfa47c5ae64f0eb4283c317698d54eada513e1dc98df825d8bc40bd15f1b1514",
           "verification": "bytes-verified"
         }
       ],

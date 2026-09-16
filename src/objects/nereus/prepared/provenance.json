@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "743c3777fb0f2ddad543c0a9a6233ae875f7f25357f6dd002310c15d68f91853"
+    "sha256": "151af01740f9e82e548c98ce490ac6c918e8bc06abb827cdaa49a768c1ff657a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "dd793ad88f300ea7bd73da4a3dfc98bf023974882e8a6c6fdb8294cde8b49d73"
   },
   "recipes": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dcdaa11c7c30d0b1dd9a2c9472df74a5362b710605809e152b4c4b502bf2fb6c",
+      "sha256": "f3192f37d8ecf90cee95fd1e5a7e877b1bc52d4d877c62038972eba04d9c426a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,17 +168,41 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.165 (+0.015/−0.005) km"
+              "value": "0.165 (+0.015/−0.005) km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "1.485 AU"
+              "value": "1.485 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274660%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.81 years"
+              "value": "1.81 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274660%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -356,8 +380,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dcdaa11c7c30d0b1dd9a2c9472df74a5362b710605809e152b4c4b502bf2fb6c",
-      "bytes": 7550,
+      "sha256": "f3192f37d8ecf90cee95fd1e5a7e877b1bc52d4d877c62038972eba04d9c426a",
+      "bytes": 9106,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -478,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5047,
-          "sha256": "da9fbd79486791aad3870d090c4cc46db867d8ff6bf039b822cfd1ee5a352099",
+          "bytes": 6330,
+          "sha256": "c83cf53aa27e20962dfa1a82f936b26918166a92deb77db1e824024b98e75f5b",
           "verification": "bytes-verified"
         }
       ],

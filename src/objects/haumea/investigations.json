@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "haumea",
+  "entries": [
+    {
+      "id": "ortiz-2017-triaxial-ellipsoid",
+      "subject": "Ortiz et al. (2017) occultation and lightcurve ellipsoid",
+      "status": "included",
+      "finding": "The body uses the nominal solution's semiaxes of 1,161 × 852 × 513 km with the preferred pole at J2000 right ascension 285.1° and declination -10.6°; the README states this is an inferred shape, not a resolved mesh or a unique interior model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/source/manifest.json",
+        "https://doi.org/10.1038/nature24051"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "ortiz-2017-ring",
+      "subject": "Ortiz et al. (2017) equatorial ring geometry",
+      "status": "included",
+      "finding": "The equatorial ring uses the same publication's 2,287 km radius and 70 km width; its gray and fixed opacity are schematic, it has no invented bands, it stays evenly lit and it uses no separate Shadows control.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L17",
+        "https://doi.org/10.1038/nature24051"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "neutral-gray-shape-lens",
+      "subject": "Shared neutral gray for the unresolved surface",
+      "status": "included",
+      "finding": "Preparation fills the shared projective surface atlas with the neutral gray (#808080 sRGB) and samples no model texture; the README calls the gray a display convention and claims no terrain, texture or map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L5",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L24"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "jpl-primary-state-shared-with-hiiaka",
+      "subject": "Retained JPL physical-primary state 920136108 at JD 2461286.5 TT",
+      "status": "included",
+      "finding": "The prepared orbital position and conic use the pinned primary vector and validated epoch record shared with Hi'iaka, which replaced the older heliocentric conic in the prepared scene; the README says this is not a new long-term ephemeris.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L15",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/hiiaka/source/validation/epoch-state.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "middle-axis-uncertainty-discrepancy",
+      "subject": "Disagreeing middle-axis uncertainty in Ortiz et al. (2017)",
+      "status": "unresolved",
+      "finding": "The README records that the paper's main text and Methods give different uncertainties for the middle axis, 4 km and 2 km, while the nominal value agrees, so the adopted semiaxis is used with an unsettled error.",
+      "revisitWhen": "An erratum or a later publication settles the middle-axis uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L7",
+        "https://doi.org/10.1038/nature24051"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "absolute-display-orientation",
+      "subject": "Absolute rotational orientation at the scene epoch",
+      "status": "unresolved",
+      "finding": "Known problems state that the pole is observationally constrained but the display meridian is arbitrary, because the measured 3.915341-hour period does not establish an absolute orientation at the application epoch; no fictitious rotational ephemeris is animated.",
+      "revisitWhen": "A published longitude system or absolute rotational ephemeris fixes Haumea's meridian at a known epoch.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L15"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

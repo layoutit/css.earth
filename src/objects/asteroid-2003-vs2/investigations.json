@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-2003-vs2",
+  "entries": [
+    {
+      "id": "vara-lubiano-2022-triaxial",
+      "subject": "Vara-Lubiano et al. (2022) 2019 occultation and light-curve solution",
+      "status": "included",
+      "finding": "The selected shape is the published triaxial interpretation with semiaxes 339 +/-5, 235 +/-6 and 226 +/-8 km from the observed light-curve amplitude and the original occultation chords; it is not a homogeneous Jacobi-equilibrium figure and the smooth model reproduces no local terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L33",
+        "https://doi.org/10.1051/0004-6361/202141842"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "aligned-chord-scenarios",
+      "subject": "Alternative aligned-chord scenarios in the same paper",
+      "status": "excluded",
+      "finding": "The README records that the observed-amplitude solution using the original chords was selected rather than the paper's alternative aligned-chord scenarios.",
+      "revisitWhen": "A later analysis prefers an aligned-chord scenario over the observed-amplitude solution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L33"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "2019-shape-fit",
+      "subject": "Older 2019 shape fit",
+      "status": "excluded",
+      "finding": "The older 2019 fit used a lower light-curve amplitude and the 2022 work explains why it is superseded, so it is not used.",
+      "revisitWhen": "A new analysis reinstates the lower light-curve amplitude or supersedes the 2022 solution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L34"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "published-pole",
+      "subject": "Published model-derived ecliptic pole",
+      "status": "included",
+      "finding": "The display uses the paper's model-derived ecliptic pole at longitude 228 degrees and latitude 39 degrees, converted with J2000 mean obliquity 23.439291111 degrees.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L14",
+        "https://doi.org/10.1051/0004-6361/202141842"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "pole-ambiguity",
+      "subject": "Pole equinox, aspect ambiguity and uncertainty",
+      "status": "unresolved",
+      "finding": "The README records that J2000 is assumed because the paper does not specify an equinox, and that the 59/121 degree aspect ambiguity and the unquoted pole uncertainty remain, with an arbitrary prime meridian and rotational phase.",
+      "revisitWhen": "The authors or a later publication state the pole equinox, resolve the aspect ambiguity or quote a pole uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L14"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "horizons-position",
+      "subject": "JPL Horizons elements and independent vectors",
+      "status": "included",
+      "finding": "Retained Horizons elements, cross-checked against independent vectors, give the heliocentric geometric position at the fixed 2026-09-03 epoch; the fixed-epoch two-body orbit does not simulate long-term perturbations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L28"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "unmapped-surface-grid",
+      "subject": "cssEarth missing-coverage grid as the surface",
+      "status": "included",
+      "finding": "No resolved global imagery is available in these source products, so the manifest supplies the project-authored missing-coverage grid and the normal grid marks unmapped terrain with Shadows off by default.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L16",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/README.md#L35",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2003-vs2/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "arrokoth",
+  "entries": [
+    {
+      "id": "lorri-ca06-photograph",
+      "subject": "Native calibrated LORRI CA06 exposure of 1 January 2019",
+      "status": "included",
+      "finding": "The opening view paints the native calibrated photograph at about 33 m per native pixel: every nonzero quality flag, nonfinite value and negative uncertainty is rejected, absolute-calibration keywords do not convert the stored DN to I/F, and a common linear grayscale stretch preserves the photographed illumination, so the relative DN/s display is not a measured albedo map and retains detector noise and acquisition shadows.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L116",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L129",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/source/manifest.json",
+        "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mvic-ca05-colour-cube",
+      "subject": "MVIC CA05 colour cube",
+      "status": "included",
+      "finding": "The MVIC lens uses the provider-aligned, blur-matched cube at 340 m per native pixel: NIR, red and blue share one zero-based 0-0.17 display scale followed by the shared IEC sRGB transfer, the original PDS label validates band order, wavelengths and data-number units, and no separate channel stretch or photometric correction changes their ratios, so this fixes screen encoding without reconstructing natural colour or claiming absolute reflectance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L8",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L18",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L118",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L143",
+        "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "porter-2024-albedo",
+      "subject": "Porter (2024) fitted LORRI single-scattering albedo",
+      "status": "included",
+      "finding": "Modeled albedo is the fitted scalar model stretched to grayscale over 0.03-0.08, retaining the release's uniform baseline unchanged: Porter fitted 30 approach images weighted by original resolution, the decoded release spans 0.031881675 to 0.079999998 entirely inside that range, and the lower approximate value discussed in the paper is not substituted for the actual release.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L198",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L222",
+        "https://doi.org/10.26007/97r3-1e19"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "porter-shape-mesh",
+      "subject": "Porter released shape mesh",
+      "status": "included",
+      "finding": "All four views use a 1,000-triangle reduction of the released 40,960-face, two-lobed mesh of 20,484 vertices; preparation simplifies the full source connectivity without constructing a joining neck or using centre-ray reconstruction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L185",
+        "https://doi.org/10.26007/97r3-1e19"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "lorri-camera-registration",
+      "subject": "Fitted encounter attitudes and the held-out LORRI validation exposure",
+      "status": "included",
+      "finding": "Spin phase and two image-pointing offsets were fitted against the lit source-mesh limb with alternating edge samples withheld, keeping the original WCS scale, TAN-SIP distortion, observer range and Sun vector; CA05 and CA06 phases differ by 4.56 degrees over 741 seconds against the approximately 4.65 degrees implied by the published period, and a separate exposure one second later, reserved for validation and never painted, has 2.29 px RMS residual on its held-out lit edges, which measures image-to-shape alignment rather than absolute terrain accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L31",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L136",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L140"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mvic-image-space-registration",
+      "subject": "Image-space similarity registering MVIC to CA05 LORRI",
+      "status": "included",
+      "finding": "An image-space similarity registers the cube to the contemporaneous LORRI exposure with held-out limb distances of 2.12 resampled pixels RMS, or 0.71 native MVIC pixels, retaining the LORRI SIP distortion and not reusing the cube label's older body-fixed geometry fields; it approximates the small geometry changes during the TDI scan and is not a new geometric backplane product.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L119",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L150"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "independent-astropy-checks",
+      "subject": "Independent Astropy and NumPy decoding of the native products",
+      "status": "included",
+      "finding": "The pinned Astropy 8.0.1 and NumPy 2.5.3 fixture covers all three FITS HDUs of both registration images and the four-band cube, comparing native pixels, quality decisions and 50 TAN-SIP camera projections, with both million-pixel detector quality masks matching Astropy's accepted-pixel counts; 24 independent PNG anchors reproduce FITS values within 3e-6 albedo despite the PDS PNG and raw FITS arrays having opposite row order.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L38",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L171",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L212"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "albedo-coverage-mask",
+      "subject": "Observation-coverage mask for the albedo release",
+      "status": "unresolved",
+      "finding": "The albedo release has no explicit observational coverage mask and its broad uniform baseline is retained source fill rather than evidence of measured global albedo; no confidence mask is invented from that fill and the default view states the limitation beside the active dataset.",
+      "revisitWhen": "The archive publishes an observation-coverage or confidence mask for the fitted albedo.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L109",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L199",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L220"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "pole-and-period-metadata",
+      "subject": "Disagreeing pole and period metadata",
+      "status": "unresolved",
+      "finding": "The bundled Porter paper and the PDS XML disagree on the pole, and the XML calls a sub-day period an orbital period: the revised paper pole at right ascension 319.37 degrees and declination -25.588 degrees is used with an arbitrary reference meridian, Buie et al. (2020) gives 15.9380 +/-0.0005 h against the archive's 0.6632553 days, the panel reports only about 15.9 hours and no precision spin rate is installed.",
+      "revisitWhen": "The archive metadata is corrected, or a publication settles the pole and rotation period.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L111",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L191",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L242"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "unseen-northern-shape",
+      "subject": "Shape of the unobserved northern side",
+      "status": "unresolved",
+      "finding": "The photographs cover part of the encounter-facing surface and the grid marks unseen, grazing or rejected coverage; the unseen northern shape remains a source model estimate, shared-edge triangle ties limit exact texture correspondence and no local terrain accuracy is inferred.",
+      "revisitWhen": "New observations or a revised mesh constrain the unobserved side.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L13",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L114",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L205"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "ca06-stack-normal-reflectance",
+      "subject": "2023 geophysics archive CA06_STACK_NORMALREFLECTANCE",
+      "status": "unresolved",
+      "finding": "The archive releases nine LORRI images transformed into the CA06 geometry with signed I/F samples and anomalously bright limb artefacts; because Porter 2024 revises the pole and recentres the body, the old image would need a controlled registration to this exact mesh, so the new photographic views do not promote it to a registered map.",
+      "revisitWhen": "A controlled registration of the normalized stack to the Porter 2024 mesh is performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L229",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L235",
+        "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri_mvic-5-geophys-v1.0/data/albedo/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "hemispherical-albedo-and-thermal",
+      "subject": "Companion hemispherical-albedo raster and archive thermal products",
+      "status": "excluded",
+      "finding": "The hemispherical-albedo raster differs from the selected product only by a multiplicative factor and would add no independent terrain detail, and the archive's thermal products are simulations on an older mesh rather than measured temperature images.",
+      "revisitWhen": "A thermal or albedo product is released that carries independent measured detail on the current mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L236"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "surface-spectra-as-texture",
+      "subject": "Surface spectra and unresolved observations as textures",
+      "status": "excluded",
+      "finding": "The source survey records that surface spectra and unresolved observations are not reconstructed surface textures.",
+      "revisitWhen": "A resolved spectral map registered to this mesh is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L203"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "registration-verdict",
+      "subject": "Registration verdict for the two photographic lenses",
+      "status": "unresolved",
+      "finding": "The prepared registration report records one frame per lens with no reference observation, so LORRI is unscored and MVIC has a 3.00-degree limb RMS, and both lenses end with no verdict.",
+      "revisitWhen": "A second frame or a reference observation lets the registration stage reach a verdict.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L97",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/arrokoth/README.md#L101"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

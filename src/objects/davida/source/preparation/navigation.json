@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://observations.lam.fr/astero/3Dshape/511_Davida_mpcd.obj",
-    "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
-    "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 35946,
-    "expectedSha256": "79e80458c66eb09f8a369d7cc818d43b8c9aa2402755743daef65cde6181369a",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "davida-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

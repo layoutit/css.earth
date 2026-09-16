@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c9d6389f2d2123ec2a0e04de2f3c67ec63212e7465f860bdebbda4d2fc85e1eb"
+    "sha256": "a4d26fa7788669bdd2037809cb837e5c63c7b5f7b7229fb920afe37a9a36f668"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "60ac43b739ccd72fa80705f46dd60b734e1fc5e539d8ac509ce3007cb581aed7"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9ce6b2955ecdf70a8e2be582b5aec8cc8b3b203ee742ff1930fd72c1b5255c71",
+      "sha256": "d4723e1b57a35157ad10a5fa6568dfa829ea325fc6a6f513e94292db661d1719",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,12 +183,28 @@
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "3.011 AU"
+              "value": "3.011 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272309%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "5.22 years"
+              "value": "5.22 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272309%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -347,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "9ce6b2955ecdf70a8e2be582b5aec8cc8b3b203ee742ff1930fd72c1b5255c71",
+      "sha256": "d4723e1b57a35157ad10a5fa6568dfa829ea325fc6a6f513e94292db661d1719",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -359,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9534,
+      "bytes": 10732,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -480,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6887,
-          "sha256": "177ba357fec67119a813e69013d532c9ee41d7dabe9301b508df32f74d2ebbe2",
+          "bytes": 7903,
+          "sha256": "1384bf75af003f48c0b2a13203b1d17dc3600d0ea4fc04fde185516a9e39545f",
           "verification": "bytes-verified"
         }
       ],
@@ -544,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "mr-spock",
-    "materialSha256": "dd47a104107a5eec50f15f1176ae74d98681a623e6c6a58c6dfad9bb409fb724",
+    "materialSha256": "1b1ccac090393374ebb62de97d6cd92d317003606a3092aea881f17a6191633b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "60ac43b739ccd72fa80705f46dd60b734e1fc5e539d8ac509ce3007cb581aed7"
     }
   }

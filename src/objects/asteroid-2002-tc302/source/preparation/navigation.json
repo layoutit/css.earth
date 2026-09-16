@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/2005.08881",
-    "credit": "Ortiz et al. (2020), combined occultation, photometry and astrometry, §3.",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 82981,
-    "expectedSha256": "6fe2253c0c2e75434bee3b936f99d3d0418bf302deef182c06a86acaf8886a01"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

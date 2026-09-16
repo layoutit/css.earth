@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "693dfe0c081f080650def24735e88f6c68a4c072af7cf073192bbbe634055b27"
+    "sha256": "2f5573cde5e45a5795eb354549473b2d168922faa1f8dfbaeb74a9aa9da211cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "1a876b250fa4e1567b38ca41a4af73e97a586fe7212cd3e71fd19bf9b934688a"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1ce06f85ca148790bbaa7913b5f97780e88a0bb4b8b40d61a740c852dc4fd170",
+      "sha256": "c72ada6c10de2a8d5d56c1842b3b97679dd5035f0dd6c77269b254ea0f323f2b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,12 +169,28 @@
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
-              "value": "3.161 AU (mean)"
+              "value": "3.161 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27511%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "5.62 years"
+              "value": "5.62 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27511%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -348,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1ce06f85ca148790bbaa7913b5f97780e88a0bb4b8b40d61a740c852dc4fd170",
-      "bytes": 7410,
+      "sha256": "c72ada6c10de2a8d5d56c1842b3b97679dd5035f0dd6c77269b254ea0f323f2b",
+      "bytes": 8606,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -470,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5306,
-          "sha256": "a7ff3dd54933732bfa16b3c84bfc768598ee552a9fef03e5ca53a7f830112209",
+          "bytes": 6320,
+          "sha256": "aae473c76e3ad9f6508e90445ded19ed0f30b1c6a75b03212a06a60817533f41",
           "verification": "bytes-verified"
         }
       ],

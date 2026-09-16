@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/52179/shape.txt",
-    "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4511, version 2019-10-23.",
-    "license": "CC-BY-4.0",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 32849,
-    "expectedSha256": "5e854325fd11b648762dad701c2f7ddb106ff434bd1761e9082ef52a1fffc69c",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "alkeste-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

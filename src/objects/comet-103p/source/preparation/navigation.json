@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 74996,
-    "expectedSha256": "5ff80a2ce37c4e9b017de88ee917a53c40f55ed47ead38304ce6403b0bb9003d",
-    "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
-    "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
-    "license": "PDS public scientific archive",
-    "licenseEvidence": [
-      "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
-    ],
-    "acquisition": "Checked-in derived context image; reproduced and hash-verified by preparation.",
-    "redistribution": "Public scientific data; retain dataset identification and author attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "pds-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 15,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

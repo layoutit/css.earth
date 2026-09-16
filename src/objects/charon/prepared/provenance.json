@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "507e3634c95a497b8cd91e17edebba4b80e5be403044b8b92573da589e282159"
+    "sha256": "ea7395f2423db7505f56fd8549a3274275167b803927bceb6fc592c50300b609"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "76c10e6c2b18c14cd2544af77bf7d3de8981b4f767517691ac030f83dd879b65"
   },
   "recipes": [
     {
@@ -980,11 +980,16 @@
           }
         ]
       },
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "observations/nh-plutosystem-composition-overview.pdf"
+      ],
       "id": "source-document:observations/nh_charon_color_mosaic.lblx",
       "kind": "source-document",
       "title": "Exact PDS4 identity, band wavelengths/order, float byte layout, missing code and metric map coordinates.",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
       "upstreamLineage": "not-recorded",
       "sha256": "939f23390f8d7f525821b822d06bf15d08ba49ee5bc472af6ed4c41c4f2a2a40",
       "bytes": 14320,

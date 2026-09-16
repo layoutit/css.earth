@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.26007/97r3-1e19",
-    "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": -25,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 53076,
-    "expectedSha256": "a9107c3a96dc51dd575d0ca8ee2393d6640b564cb5e40f5ad4ac30db14677922"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

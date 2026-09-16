@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
-    "credit": "NASA/JHUAPL/NEAR; R. Gaskell; D. Golish and colleagues",
-    "license": "Public mission scientific data; retain attribution and source notices.",
-    "expectedBytes": 71352,
-    "expectedSha256": "2023a49dcde1be44545b024ec29a0734762c183747196e1f83b3e1feb1185e2a",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "eros-normal",
-        "eros-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 90,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

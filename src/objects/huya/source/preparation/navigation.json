@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/2501.09739",
-    "credit": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C.",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 84434,
-    "expectedSha256": "79b718308f6782aa611d0a86511e3c907758ad770a18132f5e9869bf910620ef"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

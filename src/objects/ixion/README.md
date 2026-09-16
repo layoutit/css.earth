@@ -2,6 +2,8 @@
 
 Ixion is a large world beyond Neptune. Several stellar occultations constrain its flattened outline; the displayed depth is assumed and its surface is unmapped.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | Source | Display interpretation |

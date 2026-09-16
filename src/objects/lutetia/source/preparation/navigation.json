@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
-    "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
-    "license": "Public mission scientific data; retain the dataset citation and source notices.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 42548,
-    "expectedSha256": "71886fd2a2751c197207313f123674080841158b75b1f23b4c8cf8f78fba6871",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "lutetia-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

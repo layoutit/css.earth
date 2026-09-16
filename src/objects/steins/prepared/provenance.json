@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55cc90ae24f0e518805e688605824b0a8f9e6fc24283e46db618df162970e399"
+    "sha256": "52dbaf111c54484f3d47489f6ef433dd6ec07a1f681071f23973865dffa9fb7d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "856803faeb4ccfc32f1ca2e7f90175cf0a7b86ab37ed7ad82eb6ced84e9d9d0d"
   },
   "recipes": [
     {
@@ -200,7 +200,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4fa01c09ff8ab742bd5e65c3d8262701a008c49cbfb3556b11db832fcb1e7ad1",
+      "sha256": "9c5a62438a33bce61da0fa23d42ddc9be9303036b5346ba3d1cc8e26df725f6a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,7 +228,15 @@
             {
               "id": "radius",
               "label": "Reference radius",
-              "value": "2.58 km"
+              "value": "2.58 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: RAD (km)"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -243,7 +251,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.05 hours"
+              "value": "6.05 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: ROTPER (h)"
+              }
             }
           ],
           "moreFacts": [
@@ -678,8 +694,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4fa01c09ff8ab742bd5e65c3d8262701a008c49cbfb3556b11db832fcb1e7ad1",
-      "bytes": 9488,
+      "sha256": "9c5a62438a33bce61da0fa23d42ddc9be9303036b5346ba3d1cc8e26df725f6a",
+      "bytes": 10206,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -967,8 +983,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5657,
-          "sha256": "44ea23fadca3517e40a72255255f3f7e3542c5d0f0dffd2b6d70b8756a605068",
+          "bytes": 6193,
+          "sha256": "a3075ad25264e3f7a6f35b211b18523cff785493f58522e477c93ab35ccd6dc9",
           "verification": "bytes-verified"
         }
       ],

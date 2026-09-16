@@ -2,6 +2,8 @@
 
 2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | Source | Display interpretation |

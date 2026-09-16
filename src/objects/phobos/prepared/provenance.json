@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b96596b97479ec686d979773e372099c70561f22130b09fa0adab8b131def4e"
+    "sha256": "40ef1a946ae145e6be6476865ff912a11fe403dccfb806d5ea30d1ed6978f8dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "1a726a4afd2f8e74de252deaa00b58acb693a40fd2a2deeff1f6b8a5d991a44d"
   },
   "recipes": [
     {

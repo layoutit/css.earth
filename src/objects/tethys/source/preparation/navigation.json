@@ -6,36 +6,7 @@
     "size": 5
   },
   "source": {
-    "credit": "NASA/JPL-Caltech/Space Science Institute",
-    "license": "NASA/JPL imagery with attribution",
-    "licenseEvidence": [
-      "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-    ],
-    "acquisition": "Download the pinned original through the shared acquisition recipe.",
-    "redistribution": "Retain mission and source-author credits.",
-    "id": "cassini-iss-2012-tethys",
-    "path": "observations/Tethys_Cassini_mosaic_global_293m.tif",
-    "origin": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif",
-    "catalog": "https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m",
-    "consumers": [
-      "surfaces",
-      "navigation"
-    ],
-    "lensId": "normal",
-    "label": "Monochrome",
-    "falseColor": false,
-    "width": 11520,
-    "height": 5760,
-    "projection": {
-      "type": "equirectangular",
-      "referenceRadiusMeters": 536300,
-      "centerLongitude": 0,
-      "longitudeDirection": "east-positive",
-      "latitudeType": "planetocentric"
-    },
-    "coverage": "GeoTIFF no-data is exactly 0; preserve all other source values. Native image resolution and photographed shading vary.",
-    "expectedBytes": 66401923,
-    "expectedSha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640"
+    "path": "observations/Tethys_Cassini_mosaic_global_293m.tif"
   },
   "operations": [
     {

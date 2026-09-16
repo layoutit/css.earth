@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12055aaa8e5498bc720bd5e55e22390da11e36fa0a021d41de3863a09551f17e"
+    "sha256": "463c430e9d9d79559bf46f47dd0783d5c3972cd0ce37678e6a1e2b37ac4d1486"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "352a301e65f9dd65bfc776a8e928010e7407078a2da08cca5cbaee9b8af651fa"
   },
   "recipes": [
     {
@@ -1123,12 +1123,12 @@
           }
         ]
       },
+      "origin": "https://doi.org/10.1006/icar.1994.1005",
+      "credit": "Published Hapke parameters: Helfenstein et al. (1994), doi:10.1006/icar.1994.1005. Selection and transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded.",
       "id": "source-document:photometry/helfenstein-1994-hapke.json",
       "kind": "source-document",
-      "origin": "object:source/photometry/helfenstein-1994-hapke.json",
       "title": "Published Hapke photometric model of Gaspra, used to normalize the Galileo photograph mosaic.",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
       "upstreamLineage": "not-recorded",
       "sha256": "6cf5b5780d9bcbab552bc7e8b5b7f83d31532b082c76d5d521f565024a4b050d",
       "bytes": 579,
