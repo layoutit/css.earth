@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nix",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "ad2a198d93f25a23f1e3ab954a8436ebabdb05e0aee1bc8175bcf59f25ccd0e9"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -311,7 +311,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -359,7 +359,7 @@
       "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "bytes": 4586869,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -402,7 +402,7 @@
       "sha256": "78f83c9887e252cfddbf4232002659d44cb0b1763df7fd1629a429cc9844fa1c",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -429,7 +429,7 @@
       "sha256": "de22290d16e8a1713cc762b262a2a42972298a67d563535aedfbca9fab1567e3",
       "bytes": 2921,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -449,7 +449,7 @@
       "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
       "bytes": 3770,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -486,13 +486,13 @@
           "url": "/scenes/nix/nix-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nix/nix-model-surface@2x.webp",
           "bytes": 73950,
           "sha256": "ca35a6ea514c2cde36091f4e29990720b80050b1241b278fe697c487d5639c41",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -537,13 +537,13 @@
           "url": "/scenes/nix/nix-monochrome-thumbnail.webp",
           "bytes": 1812,
           "sha256": "430b14f48f3eb4077b78c226f8bdb49ef9e49fdfb7f766220f8dd607e8f8a199",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
           "bytes": 144698,
           "sha256": "7ffc31a3716573ce24cb2e9eea51283aaaed3eb10996979e85473b4d88d45874",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

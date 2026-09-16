@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "uranus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6a97d1105f89ca430dceb46cc6b608d27f84282b2c692e5e68dc478a1174bc56"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -1032,7 +1032,7 @@
       "sha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
       "bytes": 787756,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
@@ -1075,7 +1075,7 @@
       "sha256": "36ff34743fff69c09ec03b90b3d3e193d9b17e5dfdc41a3cacb2fae878d37c79",
       "bytes": 1045440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
@@ -1118,7 +1118,7 @@
       "sha256": "96afebec48e8da3b5b72a80909a0041ddd50255ce5101f51cab3ffda1e151ac8",
       "bytes": 1045440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
@@ -1145,7 +1145,7 @@
       "sha256": "5d229eb23722aae97d1d9a1bdc44e6b7811ac37be2211cd9559515fa378fb8e9",
       "bytes": 14621,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1171,7 +1171,7 @@
       "sha256": "84ab228415b34a5871182dd64285ba653ee6de495767af2c190ff441ff7e2567",
       "bytes": 11944,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -1215,7 +1215,7 @@
       "sha256": "8bca8db27545003285fdf45d84ed06cb82c2a0365e3c07dedfb87715df9c0d0c",
       "bytes": 8815,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -1263,43 +1263,43 @@
           "url": "/scenes/uranus/uranus-lens-normal.webp",
           "bytes": 182,
           "sha256": "ea4b60694d819f552c75d7dd5929c4ed523f843eeec56d8ebe766fc93137ee15",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-surface-normal.webp",
           "bytes": 51094,
           "sha256": "2964d16818955a3ccd164a80409f32fb72cc888d56ed36b4820bbaea9124f889",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-surface-normal@2x.webp",
           "bytes": 146004,
           "sha256": "f4510a09c036e9f0e0a6a9e0c687f42ea64760bd9cd2873b77c6bf23ba2bdf39",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-poles-normal.webp",
           "bytes": 2046,
           "sha256": "319e98cc01567b6d7e47c0b27cca4035889a87e8e548fb85a080d7ccf66908ac",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-poles-normal@2x.webp",
           "bytes": 4308,
           "sha256": "d840fff007ed6b0b65c029b2004e1bef500e7bc18aa8980a3583d34aceba788b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-fixed-material-normal.webp",
           "bytes": 56350,
           "sha256": "b7fd32fdac4531496c90b9f358a45c70ff8227477b391bef1e40016aec8c71f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-fixed-material-normal@2x.webp",
           "bytes": 151818,
           "sha256": "82f6080211977703388729d5cf244abee8926e3f705ab380ba5d38023776b27f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1328,43 +1328,43 @@
           "url": "/scenes/uranus/uranus-lens-methane.webp",
           "bytes": 326,
           "sha256": "6acff579b51e8374fa45d2236eb5852d20139906730aa03e634c02b8d9ca890f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-surface-methane.webp",
           "bytes": 87046,
           "sha256": "843484ae2d8ca70e4401a0601fdfc93c96fbcda791325be479e2905120d52fb8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-surface-methane@2x.webp",
           "bytes": 236338,
           "sha256": "f370d177ca3ed38e6d75459e1a5dcd9388784c904a8bf80e29b8bff577b86894",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-poles-methane.webp",
           "bytes": 2862,
           "sha256": "d6c671a0104ced0bb5b967442e829f80831465b689570d84bceef0a087bb986f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-poles-methane@2x.webp",
           "bytes": 6136,
           "sha256": "da085c5f53a5dbe5af82afa82cc383df7c968d7eaa8c89af975ed221bee826e8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-fixed-material-methane.webp",
           "bytes": 55722,
           "sha256": "5ad0b5d2ba149c8fbb8e416cad3d99e709aa5729c5b00dcb0000f0d58d0cd223",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-fixed-material-methane@2x.webp",
           "bytes": 150776,
           "sha256": "3b2a3421af261fc396c52fd8a642da29836574d2e43761f1eced8e80a602be84",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1393,43 +1393,43 @@
           "url": "/scenes/uranus/uranus-lens-near-infrared.webp",
           "bytes": 196,
           "sha256": "91ed8eb8bee1cdbc5371042f0706ad893935d1981c6007160b8eceddc29bb9d8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-surface-near-infrared.webp",
           "bytes": 47430,
           "sha256": "95f3fbdad0f5dc20af6446784b7442cce95d63bde26b05abaea01c418444a404",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-surface-near-infrared@2x.webp",
           "bytes": 131270,
           "sha256": "261508daf78f199006a63becbfc0ff47db16d245c8c54e9fa9bd4ace30ea7cc4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-poles-near-infrared.webp",
           "bytes": 2054,
           "sha256": "881e5d5079e8f07dcffd97b2d727af0b0d1a053f2063799df19a3e7097560322",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-poles-near-infrared@2x.webp",
           "bytes": 4472,
           "sha256": "81a5a9a346e2bbc55885819fba94a3c447f81541cb075eb5855589808a9e6294",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-fixed-material-near-infrared.webp",
           "bytes": 53934,
           "sha256": "0371beae42e3ff26f542317857a1e32576c8e0096c88019a2d112eb0d9fed654",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/uranus/uranus-fixed-material-near-infrared@2x.webp",
           "bytes": 146006,
           "sha256": "11acb533dc68f680b2255b203bb22e7cd8cf0e10f9e6a3c651b5c584a7301220",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1484,7 +1484,7 @@
           "url": "/scenes/uranus/uranus-atmosphere-spectrum.svg",
           "bytes": 5663,
           "sha256": "ba54a9ff388ead8fb89d750ec014f996e746f1b00832c1f1caeb7e8af9a0924b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1513,7 +1513,7 @@
           "url": "/scenes/uranus/uranus-temperature-pressure-profile.svg",
           "bytes": 2033,
           "sha256": "085e1a338657174ceb28bd6dd50cf57ef9c8636406455fa6519018b235d1f2c7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1541,7 +1541,7 @@
           "url": "/scenes/uranus/uranus-photometric-phase-curve.svg",
           "bytes": 4479,
           "sha256": "70c8573641ff1671a3025885b22336fe5601ec5b963f9e85a877c51130e45c7a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"

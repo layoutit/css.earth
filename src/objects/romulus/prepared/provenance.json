@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "romulus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "4224899abcdd8e7bb4e2036a2d24ad0663b749bb4ba71a7c9cfc1cb65e9c29e1"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -247,7 +247,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -282,7 +282,7 @@
       "sha256": "5c69e809aa9b9e5c5e91080423fc6f22fbdce4630923efbb94f0331bde192bce",
       "bytes": 60130,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -302,7 +302,7 @@
       "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
       "bytes": 2809,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -339,13 +339,13 @@
           "url": "/scenes/romulus/romulus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/romulus/romulus-model-surface@2x.webp",
           "bytes": 51692,
           "sha256": "8fe8f2d650ef4dc1ad40c39a22314aa82ed2d79ce9ff0e076c745bc23aed124d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

@@ -1,4 +1,4 @@
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -25,6 +25,32 @@ describe('native source pole sampling', () => {
             expect([pole.width,pole.height]).toEqual([32,16]);
             expect(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]})).toThrow(/integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
+    });
+    it('centres the lens thumbnail on a declared longitude, wrapping across the map edge', async () => {
+        const directory = await mkdtemp(join(tmpdir(), 'cssearth-thumbnail-centre-'));
+        try {
+            // Red at the left edge (longitude 0), blue elsewhere: a crop centred on longitude 0 straddles the seam.
+            const pixels = Buffer.alloc(128 * 64 * 3);
+            for (let y = 0; y < 64; y++) for (let x = 0; x < 128; x++) pixels.set(x < 4 || x >= 124 ? [255, 0, 0] : [0, 0, 255], (y * 128 + x) * 3);
+            await sharp(pixels, { raw: { width: 128, height: 64, channels: 3 } }).png().toFile(join(directory, 'source.png'));
+            const base = { schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
+                width: 128, height: 64, latitudeBands: 4, polarTile: 16, densities: [1, 2], resample: 'density-before-pack',
+                polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                surfaces: [{ id: 'seam', source: 'source.png', falseColor: false, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp' }] };
+            const centre = async (thumbnail: Record<string, unknown>) => {
+                const config = parseRasterRecipe({ ...base, thumbnail });
+                await prepareRasterAssets({ config, sourceDirectory: directory, publicDirectory: directory, outputDirectory: directory });
+                // Read the bytes: sharp caches decoded files by path, and the thumbnail is rewritten between calls.
+                const { data } = await sharp(await readFile(join(directory, 'thumb-seam.webp'))).raw().toBuffer({ resolveWithObject: true });
+                return [...data.subarray((4 * 8 + 4) * 3, (4 * 8 + 4) * 3 + 3)];
+            };
+            // Downscaling blends the narrow seam band with its blue surroundings, so compare channels rather than exact colours.
+            const [defaultRed, , defaultBlue] = await centre({ size: 8, quality: 100 });
+            expect(defaultBlue).toBeGreaterThan(defaultRed + 200);
+            const [seamRed, , seamBlue] = await centre({ size: 8, quality: 100, centerLongitudeDegrees: 0 });
+            expect(seamRed).toBeGreaterThan(seamBlue);
+            expect(() => parseRasterRecipe({ ...base, thumbnail: { size: 8, quality: 100, centerLongitudeDegrees: 'east' } })).toThrow(/finite/);
+        } finally { await rm(directory, { recursive: true, force: true }); }
     });
     it('uses original image texels in the established wrapped normalized map domain', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-native-pole-'));

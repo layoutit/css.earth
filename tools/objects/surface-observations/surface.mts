@@ -5,7 +5,7 @@ import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contrac
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import { fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
 import { qualifiedFace } from './geometry.mts';
-import { bandColorByte, bandColorEvidence } from '../color-transfer.mts';
+import { bandColorByte, bandColorEvidence, interpolatePalette } from '../color-transfer.mts';
 
 export const SURFACE_OBSERVATION_REPORT = 'cssearth-surface-observation-report@1';
 const PREVIEW_POLICY = 'The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.';
@@ -78,7 +78,9 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     const colorDisplay = policy.display.range === 'authored' ? policy.display.colorDisplay : undefined;
     if (Boolean(value.color) !== Boolean(colorDisplay)) throw new Error('Floating color samples require their source-bound band display policy.');
     // The shared footprint and level matching retain floats; encode the selected bands once here.
-    return { ...value, color: value.color && colorDisplay ? value.color.map(channel => bandColorByte(channel * gain,colorDisplay)) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
+    const palette = policy.display.palette;
+    return { ...value, color: value.color && colorDisplay ? value.color.map(channel => bandColorByte(channel * gain,colorDisplay))
+      : palette ? interpolatePalette(palette, gray / 255) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
   };
   const sourceSquareMeters: Record<string, number> = {};
   const areaCoverage = { method: 'Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed', samplesPerTriangle: policy.samplesPerTriangle,
@@ -100,7 +102,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     camera: { kind: frames[0].cameraKind, positionKm: frames[0].positionKm },
     frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection,
     levelMatching: frames.length > 1 ? { ...policy.levelMatching, ...levels, sampledPoints: points.length } : null,
-    display: { range: display.range, ...(display.range === 'authored' ? {} : { percentiles: display.percentiles }), low, high, units: display.units,
+    display: { range: display.range, ...(display.range === 'authored' ? {} : { percentiles: display.percentiles }), low, high, units: display.units, ...(display.palette ? { palette: display.palette } : {}),
       ...(display.range === 'authored' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
     areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })), previewPolicy: PREVIEW_POLICY,
     ...(policy.registration ? { registration: policy.registration } : {}), ...(policy.limitations ? { limitations: policy.limitations } : {}) };

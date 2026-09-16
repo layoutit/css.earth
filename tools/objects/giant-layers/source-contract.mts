@@ -1,3 +1,4 @@
+import { readAuthoredSources } from '../authored-sources.ts';
 import {parse,object,array,string} from '../material-composition/data-schema.mts';
 import assert from 'node:assert/strict';
 import{readFile,readdir}from'node:fs/promises';
@@ -10,7 +11,7 @@ export async function assertAuthoredGiantSourceContract(id: string){
  const directory=resolve('src/objects',id),sourceRoot=resolve(directory,'source'),manifest=validateSourceManifest(id,JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')));
  await verifySourceManifest({manifest,planetName:id,sourceRoot});
  const descriptor=parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(directory,'object.json'),'utf8')));
- for(const source of descriptor.recipe.sources){const bytes=await readFile(resolve(directory,source.path));assert.equal(createHash('sha256').update(bytes).digest('hex'),source.sha256,source.path);}
+ await readAuthoredSources(directory,descriptor);
  async function inspect(path: string):Promise<void>{for(const entry of await readdir(path,{withFileTypes:true})){if(entry.isDirectory())await inspect(resolve(path,entry.name));else assert.doesNotMatch(entry.name,/\.(?:[cm]?js|tsx?|astro|css|sh)$/u,`Object owns no executable preparation/runtime/shell: ${path}/${entry.name}`);}}
  await inspect(directory);
  // Only a download names a source path; a verify-request carries a URL and an expected path instead.

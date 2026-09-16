@@ -6,16 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "makemake-schematic-marker",
-    "path": "presentation/navigation-marker.svg",
-    "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
-    "credit": "cssEarth schematic; warm color denotes the illustrative surface",
-    "license": "MIT, cssEarth authored schematic",
-    "licenseEvidence": [
-      "https://science.nasa.gov/dwarf-planets/makemake/"
-    ],
-    "expectedBytes": 137,
-    "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5"
+    "path": "presentation/navigation-marker.svg"
   },
   "operations": [
     {

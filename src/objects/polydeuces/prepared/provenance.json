@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "polydeuces",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "f0ed49116290fb9ab578e102443dc853eacebdd93493dee5f0c7e3b4ba4c0437"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -296,7 +296,7 @@
       "sha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -348,7 +348,7 @@
       "sha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
       "bytes": 3858,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -390,7 +390,7 @@
       "sha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -410,7 +410,7 @@
       "sha256": "05d1f8a6d1d065da6432a7181301663fcd396d56362e717c7ed88089855095f1",
       "bytes": 2992,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -444,13 +444,13 @@
           "url": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
           "bytes": 1894,
           "sha256": "2e28d19ecd32824054c6bce9b053f96b9c7ab77d29856fc555ae483583ab747c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
           "bytes": 66582,
           "sha256": "52eb9cab48c7892a0077b321f8cb650fb1779e7ff1105c221d592802eb626460",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

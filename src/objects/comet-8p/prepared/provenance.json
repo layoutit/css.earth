@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-8p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6d7f4c31d31be432aec787daef0ac269e440ec0637522fc49593e051fd3c4b66"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -415,7 +415,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -445,7 +445,7 @@
       "sha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
       "bytes": 896,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -479,7 +479,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -509,7 +509,7 @@
       "sha256": "1ce08f3c47306e7bd0fa70685e55e111cfdbd01ede582c167bb9eb2093bc2022",
       "bytes": 1154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -529,7 +529,7 @@
       "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
       "bytes": 3364,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -549,7 +549,7 @@
       "sha256": "4ec0506d8e02b4fcc8fd5bb42bfb9584c0ac9c0ca2b703b268d335bd92a1a22e",
       "bytes": 1010,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -569,7 +569,7 @@
       "sha256": "c44248203014bbbaacb4b926763a747f4dc0fce5536d672bbeef191671ba4bac",
       "bytes": 155,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -595,7 +595,7 @@
       "sha256": "8c9a1e0d2803bed6d99a69492b943693ff5b5fecf9bf17b25654c17d1fb647ad",
       "bytes": 2066,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -632,13 +632,13 @@
           "url": "/scenes/comet-8p/comet-8p-model-thumbnail.webp",
           "bytes": 1458,
           "sha256": "01d5ce463e113416edbebb42a1cacc4bf75718c3debdd9297c6546de9d330dfd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-8p/comet-8p-model-surface@2x.webp",
           "bytes": 105472,
           "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -686,13 +686,13 @@
           "url": "/scenes/comet-8p/comet-8p-arecibo-thumbnail.webp",
           "bytes": 1298,
           "sha256": "40841a80d448e25210b873a102bf2c9ff11ca27e060cddd24a2a58af12022ef3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-8p/comet-8p-arecibo-surface@2x.webp",
           "bytes": 109186,
           "sha256": "63f03008ebbfcd2d767e3ea6bc7779970897a084bcaa89388f493e2ac0bc2930",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -763,7 +763,7 @@
           "url": "/scenes/comet-8p/comet-8p-features.json",
           "bytes": 3454,
           "sha256": "9facda5bfcfcbfe502828c83e72538e1e479b96e1dae80007b1c96d56a9d7df0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

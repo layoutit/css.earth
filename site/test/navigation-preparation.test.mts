@@ -120,8 +120,10 @@ for (const failure of ["object source", "late utility source", "publication", "r
     }
     await copyFile(resolve(projectRoot, "src/objects/sun/swatch.json"), resolve(root, "src/objects/sun/swatch.json"));
     const original = (await loadMarkerDescriptors())[0];
-    const descriptor = { ...original, planetId: "new-body", source: { ...original.source, path: "source.jpg" } };
-    await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify(descriptor));
+    // The marker names its source by path; the source manifest owns the record.
+    await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify({ ...original, planetId: "new-body", source: { path: "source.jpg" } }));
+    const { path: _path, ...record } = original.source;
+    await writeFile(resolve(root, "src/objects/new-body/source/manifest.json"), JSON.stringify({ schema: "cssnew-body-authoritative-sources@2", inputs: [], generatedIntermediates: [], documents: [{ ...record, path: "source.jpg" }] }));
     await writeFile(resolve(root, "src/objects/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
     const sourcePath = resolve(root, "src/objects/new-body/source/source.jpg");
     await copyFile(resolve(projectRoot, "src/objects", original.planetId, "source", original.source.path), sourcePath);

@@ -6,16 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "haumea-shape-marker",
-    "path": "presentation/navigation-marker.svg",
-    "origin": "https://doi.org/10.1038/nature24051",
-    "credit": "cssEarth schematic using Ortiz et al. (2017) semiaxis ratio",
-    "license": "MIT, cssEarth authored schematic; factual measurements attributed",
-    "licenseEvidence": [
-      "https://doi.org/10.1038/nature24051"
-    ],
-    "expectedBytes": 127,
-    "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666"
+    "path": "presentation/navigation-marker.svg"
   },
   "operations": [
     {

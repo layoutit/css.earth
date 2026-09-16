@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "neptune",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9ec59f40bf81ca8408b1d4d04474be6eeeaab2089e8041e4f42c13425adcb79a"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -1106,7 +1106,7 @@
       "sha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
       "bytes": 789926,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
@@ -1143,7 +1143,7 @@
       "sha256": "2f7d106d547adde83f356a3bd5f97053cd314a199fd6fb2c7d8d9c470df55ec7",
       "bytes": 338632,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
@@ -1190,7 +1190,7 @@
       "sha256": "b1ad52870f9fdcf36cde019705209005d07f927ab99ea00305f36ebe36967a1b",
       "bytes": 1045440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
@@ -1237,7 +1237,7 @@
       "sha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
       "bytes": 1045440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
@@ -1264,7 +1264,7 @@
       "sha256": "7a288f97390b9dcfddb898797a4b940a187d37736a1100f3d134db82c40224c2",
       "bytes": 14831,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1291,7 +1291,7 @@
       "sha256": "141ebc0bc62a9dbb668718c4e59a91900214931a9383bcefeadf1b12e3a974ef",
       "bytes": 12113,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -1336,7 +1336,7 @@
       "sha256": "0a51c9b0ede933a9d9875197b960702514c39b291624ae02dd3bdc9b3ea01fe0",
       "bytes": 8864,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -1385,43 +1385,43 @@
           "url": "/scenes/neptune/neptune-lens-normal.webp",
           "bytes": 238,
           "sha256": "3ed7c32964f2a5a56de2bb2a9f5774ea3831947d3c1fc1927ae935285f311739",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-surface-normal.webp",
           "bytes": 104812,
           "sha256": "b0cac21dfcc32a73767696908bacbfc95394cb078fecd650e92e2d9bb6f95135",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-surface-normal@2x.webp",
           "bytes": 188994,
           "sha256": "c48aa9bbc66893cb65dd6521dd7649f52b34bce1aa12e440aa34aebfda731c12",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-poles-normal.webp",
           "bytes": 4524,
           "sha256": "e0779d1a7c0457e2a0ed1ece5ff8fc8c1b3d74c3148221a75884595240f128d2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-poles-normal@2x.webp",
           "bytes": 11348,
           "sha256": "63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-material-normal.webp",
           "bytes": 67596,
           "sha256": "085e3f0ea4952edca52db166f504ab8d33ab1bcfc022a61b4e144de2022679b8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-material-normal@2x.webp",
           "bytes": 192124,
           "sha256": "0adbf33ef6dfbedfaed4e9113d1d7ec8a6ba4e3a952daa3edd8b58ce6730d7bd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1450,43 +1450,43 @@
           "url": "/scenes/neptune/neptune-lens-methane.webp",
           "bytes": 490,
           "sha256": "87340f2be6071a4195e2bd522bb6b6b56ce0d21a186f371889883ea21ac6f681",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-surface-methane.webp",
           "bytes": 161114,
           "sha256": "c247caadd3db25d77c40c51f8ff430b08e6e40db2d3bb65f6e23c2ca9a20d916",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-surface-methane@2x.webp",
           "bytes": 288044,
           "sha256": "509fe52e07466fbae77b4170056761ca946231350b2853bf8245221910d91818",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-poles-methane.webp",
           "bytes": 4868,
           "sha256": "601a631e22c98f39fac791ed9378624ee111671d6632f30751e1817549fb1840",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-poles-methane@2x.webp",
           "bytes": 11594,
           "sha256": "bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-material-methane.webp",
           "bytes": 67038,
           "sha256": "2dd3876370eb4a56b099917fd974228b709e13055fd12083d12dc75924acc715",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-material-methane@2x.webp",
           "bytes": 190302,
           "sha256": "adde6785924ede245a7a948c12b4ab80f67047789a5eba23a171b955375f4b0c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1515,43 +1515,43 @@
           "url": "/scenes/neptune/neptune-lens-near-infrared.webp",
           "bytes": 352,
           "sha256": "d1cc245defcacb3fc251f26f804bdba1b424311af177b12bdf255c1e573c9ff4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-surface-near-infrared.webp",
           "bytes": 128466,
           "sha256": "c8c466d8ef412fd16bdf3db7daf0cdd50dcd7f2f0910c261dcb64c4ad865d792",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-surface-near-infrared@2x.webp",
           "bytes": 235582,
           "sha256": "a31fa4f8160f21034bd2df0535409b209196a1450d9f1853e9c7bde1bb116781",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-poles-near-infrared.webp",
           "bytes": 4298,
           "sha256": "be95fcd06421f806fe0514b6548ab5d142845c49bc4dc3b5b287b1dbdd42643b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-poles-near-infrared@2x.webp",
           "bytes": 10202,
           "sha256": "f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-material-near-infrared.webp",
           "bytes": 65664,
           "sha256": "0e43fab98fe29ee417d1559f2baa65a5e1824224927043f64facd4868d0fd627",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/neptune/neptune-material-near-infrared@2x.webp",
           "bytes": 182704,
           "sha256": "eae4280e38357fb02cf77dc61293f830fd1982cadf00525705cf55fbd693dca5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1606,7 +1606,7 @@
           "url": "/scenes/neptune/neptune-atmosphere-spectrum.svg",
           "bytes": 5801,
           "sha256": "8007dc42c6527e8a6d0137fceea07bd2afc156ca9665934d62d24603c0822c7f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1635,7 +1635,7 @@
           "url": "/scenes/neptune/neptune-temperature-pressure-profile.svg",
           "bytes": 2240,
           "sha256": "ad0a341d6832fbca2ff3ca969eb90c013c8d0ec58b878f4ba5120688c2cdb70b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1663,7 +1663,7 @@
           "url": "/scenes/neptune/neptune-photometric-phase-curve.svg",
           "bytes": 4485,
           "sha256": "2d4a4054c5ba6956a3f521156bacf459cbc02a2130236bd90c8ea4bfc555fc8f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"

@@ -1,4 +1,4 @@
-import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, readRefreshDescriptor, requireUpdateBytes} from './refresh-source.mts';
+import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes} from './refresh-source.mts';
 import {parseCoraltempRecipe} from './source-contract.mts';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, writeFile, rename, rm } from 'node:fs/promises';
@@ -89,11 +89,6 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
       const changed = updates.get(entry.path);
       if (changed) Object.assign(entry, { expectedSha256: digest(changed), expectedBytes: changed.length });
     }
-    const descriptor = await readRefreshDescriptor(resolve(object, 'object.json'));
-    for (const reference of descriptor.properties.recipe.sources) {
-      const changed = updates.get(reference.path.replace(/^source\//, ''));
-      if (changed) reference.sha256 = digest(changed);
-    }
     // Parse and verify the complete scientific input before changing any pins.
     await mkdir(resolve(source, 'science'), { recursive: true });
     for (const [path, value] of updates) {
@@ -101,7 +96,6 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
       await writeFile(staging, value); await rename(staging, destination);
     }
     await writeFile(resolve(source, 'manifest.json'), json(manifest));
-    await writeFile(resolve(object, 'object.json'), json(descriptor));
     // The dated reader text lives beside object.json; pnpm prepare:text publishes it.
     const text = JSON.parse(await readFile(resolve(object, 'text.json'), 'utf8'));
     text.datasets.enso = ensoText(recipe);

@@ -1,4 +1,3 @@
-import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {array, number, object, optional, parse, record, string} from '../material-composition/data-schema.mts';
 import {readJsonSource} from '../../source-values.mts';
@@ -17,11 +16,6 @@ const manifest = object({inputs: array(object({...entry, id: string})), document
 export async function readRefreshManifest(path: string) {
   const value = await readJsonSource(path); validateSourceManifest('earth', value);
   return mutable(parse(value, manifest, 'source manifest to update'));
-}
-const descriptor = object({properties: object({recipe: object({sources: array(object({id: string, path: string, sha256: string}))})})});
-export async function readRefreshDescriptor(path: string) {
-  const value = await readJsonSource(path); parseAuthoredObjectDescriptor(value);
-  return mutable(parse(value, descriptor, 'descriptor to update'));
 }
 export function requireUpdateBytes(updates: ReadonlyMap<string, Buffer>, path: string): Buffer {
   const bytes = updates.get(path); if (!bytes) throw new Error(`Source update is missing ${path}.`); return bytes;

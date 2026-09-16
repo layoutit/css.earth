@@ -1,6 +1,6 @@
 import {readJsonSource, hasErrorCode, requireRecord, requireString} from '../../source-values.mts';
 import {parseMurReceipt} from './source-contract.mts';
-import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, readRefreshDescriptor, requireUpdateBytes} from './refresh-source.mts';
+import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes} from './refresh-source.mts';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -69,13 +69,8 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   for (const collection of ['inputs', 'documents', 'generatedIntermediates'] as const) for (const entry of manifest[collection]) {
     const bytes = updates.get(entry.path); if (bytes) Object.assign(entry, { expectedSha256: sha256(bytes), expectedBytes: bytes.length });
   }
-  const descriptor = await readRefreshDescriptor(join(object, 'object.json'));
-  for (const reference of descriptor.properties.recipe.sources) {
-    const bytes = updates.get(reference.path.replace(/^source\//, '')); if (bytes) reference.sha256 = sha256(bytes);
-  }
   for (const [path, bytes] of updates) await writeFile(join(source, path), bytes);
   await writeFile(join(source, 'manifest.json'), json(manifest));
-  await writeFile(join(object, 'object.json'), json(descriptor));
   // The dated reader text lives beside object.json; pnpm prepare:text publishes it.
   const text = JSON.parse(await readFile(join(object, 'text.json'), 'utf8'));
   text.datasets.enso = murEnsoText(recipe);

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eros",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "0f660685394517e891f73abb5e1e07f3e395c8591ea7ee4f82d26b70fc740b2c"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -453,7 +453,7 @@
       "sha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -509,7 +509,7 @@
       "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "bytes": 16897935,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -565,7 +565,7 @@
       "sha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -596,7 +596,7 @@
       "sha256": "3adf476ea82137d704e81490bc9e1045bd5a17fa6400623eb38766e50e8b1570",
       "bytes": 7568,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -616,7 +616,7 @@
       "sha256": "ceb31a5e361d2d38e47a902c773d9da9d28c03d7f881d35340eecde2d92740c7",
       "bytes": 995,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -642,7 +642,7 @@
       "sha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
       "bytes": 144223,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -669,7 +669,7 @@
       "sha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
       "bytes": 151,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -696,7 +696,7 @@
       "sha256": "00a18eafb133828c3a67250ae9b89e4c1b98cedbeebc4a33e2ebbf55d44163e0",
       "bytes": 1269,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -721,7 +721,7 @@
       "sha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
       "bytes": 1771,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -772,13 +772,13 @@
           "url": "/scenes/eros/eros-normal-thumbnail.webp",
           "bytes": 3270,
           "sha256": "77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
           "bytes": 3749508,
           "sha256": "89bf8f7305a3a51835dcc1d312dd4d24804bf9d04d838896fbfe9f676e4285b1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -840,13 +840,13 @@
           "url": "/scenes/eros/eros-infrared-thumbnail.webp",
           "bytes": 3388,
           "sha256": "ff552f2688e6ed2444b8c3d0f11971cd6c4b08b8f29ccc0b979468474c8c1bbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-infrared-surface@2x.webp",
           "bytes": 5190968,
           "sha256": "90da7b2f956bd6fbf590487389080b93269dabf526feb5a797e6f7fdf1b0e859",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -889,19 +889,19 @@
           "url": "/scenes/eros/eros-elevation-thumbnail.webp",
           "bytes": 5950,
           "sha256": "c539675bb3866856c490255573e9e4c46533f3080a8b533686f53f7f75caf57b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-elevation-surface@2x.webp",
           "bytes": 922744,
           "sha256": "deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -971,7 +971,7 @@
           "url": "/scenes/eros/eros-features.json",
           "bytes": 30631,
           "sha256": "d1e44142941619effde97f03cb71670e8491f93f1c9e5eee4a50b25c637d694a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
