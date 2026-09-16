@@ -40,6 +40,7 @@ function fixture({ replace = (text: string) => text } = {}) {
   let label = `PDS_VERSION_ID = PDS3\nRECORD_TYPE = FIXED_LENGTH\nRECORD_BYTES = 512\nFILE_RECORDS = 18\nLABEL_RECORDS = 8\nINSTRUMENT_ID = "OSINAC"\nIMAGE_ID = "12000700"\nSOFTWARE_VERSION_ID = "2.9.0"\nSTART_TIME = 2014-08-05T19:44:22.918\nFILTER_NAME = "FFP-Vis_Orange"\n`;
   for (const [i, name] of PLANE_NAMES.entries()) label += `^${name} = ${10 + i}\n`;
   for (const name of PLANE_NAMES) label += `OBJECT = ${name}\nLINE_SAMPLES = 2\nLINES = 2\nSAMPLE_BITS = 32\nSAMPLE_TYPE = ${name === 'FACET_INDEX_IMAGE' ? 'LSB_INTEGER' : 'PC_REAL'}\nBANDS = 1\nFIRST_LINE = 1\nFIRST_LINE_SAMPLE = 1\nLINE_DISPLAY_DIRECTION = DOWN\nSAMPLE_DISPLAY_DIRECTION = LEFT\nUNIT = "${name === 'IMAGE' ? 'W/M**2/SR/NM' : name === 'FACET_INDEX_IMAGE' ? 'INTEGER' : name.includes('ANGLE') ? 'RAD' : 'KM'}"\nEND_OBJECT = ${name}\n`;
+  label += 'END\n';
   assert.ok(label.length < 4096);
   const bytes = Buffer.alloc(18 * 512, 32);
   bytes.write(replace(label), 0, 'ascii');
@@ -70,6 +71,7 @@ function qualityFixture() {
   const names = ['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE'];
   for (const [i, name] of names.entries()) label += `^${name} = ${5 + i}\n`;
   for (const name of names) label += `OBJECT = ${name}\nLINE_SAMPLES = 2\nLINES = 2\nBANDS = 1\nFIRST_LINE = 1\nFIRST_LINE_SAMPLE = 1\nLINE_DISPLAY_DIRECTION = DOWN\nSAMPLE_DISPLAY_DIRECTION = LEFT\nSAMPLE_BITS = ${name === 'QUALITY_MAP_IMAGE' ? 8 : 32}\nSAMPLE_TYPE = ${name === 'QUALITY_MAP_IMAGE' ? 'LSB_UNSIGNED_INTEGER' : 'PC_REAL'}\nUNIT = "W/M**2/SR/NM"\nEND_OBJECT = ${name}\n`;
+  label += 'END\n';
   assert.ok(label.length < 2048);
   const bytes = Buffer.alloc(7 * 512, 32); bytes.write(label);
   for (let i = 0; i < 4; i++) { bytes.writeFloatLE([-2, 0, 2, 4][i], 2048 + i * 4); bytes.writeFloatLE(.1, 2560 + i * 4); }

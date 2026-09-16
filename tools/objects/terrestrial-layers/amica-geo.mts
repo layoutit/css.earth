@@ -1,11 +1,12 @@
 import {requireRecord} from '../../source-values.mts';
 import { gunzipSync } from 'node:zlib';
 import { readFitsPrimary } from '../observation/fits.mts';
+import { pds3Keyword } from '../pds-labels.mts';
 
 const field = (label: string, key: string) => {
-  const matches = [...label.matchAll(new RegExp(`^\\s*${key}\\s*=\\s*([^\\r\\n]+)`, 'gm'))];
-  if (matches.length !== 1) throw new Error(`Expected one AMICA label field: ${key}`);
-  return matches[0][1].trim().replace(/^"(.*)"$/, '$1');
+  const value = pds3Keyword(label, key);
+  if (value === undefined) throw new Error(`Expected one AMICA label field: ${key}`);
+  return value;
 };
 const string = (value: unknown) => typeof value === 'string' ? value.replace(/^'(.*)'$/, '$1').trim() : undefined;
 
