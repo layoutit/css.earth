@@ -8,7 +8,7 @@ The shell is shared across three configured methods: **Density model** (LMC/SMC)
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
+pnpm -r --filter "./packages/**" build
 pnpm lab:nebula
 ```
 
