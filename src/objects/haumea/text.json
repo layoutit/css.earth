@@ -26,9 +26,10 @@
     ]
   },
   "datasets": {
-    "illustration": {
-      "title": "Surface illustration",
-      "summary": "The terrain is imagined; no spacecraft has seen this surface, and its orientation is arbitrary."
+    "shape": {
+      "title": "Occultation and lightcurve ellipsoid",
+      "detail": "Measured size",
+      "summary": "The measured shape in neutral gray. The surface is unresolved; no terrain or colour is shown."
     }
   }
 }

@@ -6,11 +6,11 @@
   "physical": {
     "name": "96P Machholz 1",
     "horizonsCode": "DES=96P;CAP;",
-    "meanRadiusKm": 2.3598465506092006,
+    "meanRadiusKm": 3.4,
     "gravitationalParameterKm3PerS2": 0,
     "parent": "sun"
   },
-  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "physicalNotes": "Effective nucleus radius, Eisner et al. (2019), AJ 157, 186 (https://doi.org/10.3847/1538-3881/ab0f42), used as the volume-equivalent radius of the displayed ellipsoid.",
   "comet": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D96P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

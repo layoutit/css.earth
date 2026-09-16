@@ -305,8 +305,8 @@
     {
       "id": "neptune-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3945,
-      "expectedSha256": "8ca67cf11677b7892d745970247206232fbb935583fccc7fe5d1898d141ddb5b",
+      "expectedBytes": 3984,
+      "expectedSha256": "266002458603e019c52d3d3fdd998a59b36c5f6ad619a1320a233c8bfb748e68",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -455,7 +455,7 @@
             "catalogueId": "arxiv-1808-01973",
             "role": "method",
             "evidence": "Phase-equation coefficients transcribed from Mallama and Hilton. The local record states the angle limits and terms held fixed.",
-            "locator": "Equations 2\u201317; body-specific phase equation"
+            "locator": "Equations 2–17; body-specific phase equation"
           }
         ]
       }

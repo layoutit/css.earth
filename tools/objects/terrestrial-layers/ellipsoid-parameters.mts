@@ -18,11 +18,13 @@ export function ellipsoidParameterMesh(value: unknown) {
     }
     axesMeters = axes.map(n => n * 1000);
   } else {
-    if (model.scaleConvention !== 'thermal-radius-as-volume-equivalent' || 'semiaxesKm' in model ||
-        ![model.axisRatioAB, model.axisRatioBC, model.thermalRadiusKm].every(n => Number.isFinite(n) && n > 0) ||
+    // A published effective radius (thermal or optical) scales the axis ratios as a volume-equivalent sphere.
+    const radiusKm = model.scaleConvention === 'effective-radius-as-volume-equivalent' ? model.effectiveRadiusKm
+      : model.scaleConvention === 'thermal-radius-as-volume-equivalent' ? model.thermalRadiusKm : Number.NaN;
+    if ('semiaxesKm' in model || ![model.axisRatioAB, model.axisRatioBC, radiusKm].every(n => Number.isFinite(n) && n > 0) ||
         model.axisRatioAB < 1 || model.axisRatioBC < 1) throw new TypeError('Invalid published ellipsoid parameters.');
     const ratios = [model.axisRatioAB * model.axisRatioBC, model.axisRatioBC, 1];
-    const scale = model.thermalRadiusKm * 1000 / Math.cbrt(ratios.reduce((a,b) => a*b, 1));
+    const scale = radiusKm * 1000 / Math.cbrt(ratios.reduce((a,b) => a*b, 1));
     axesMeters = ratios.map(n => n * scale);
   }
   const { unit, faces } = subdividedOctahedron(model.subdivisions);

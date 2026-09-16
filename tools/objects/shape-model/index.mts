@@ -46,7 +46,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const declaredLenses = descriptor.recipe.surfaces.flatMap(surface => surface.lenses);
   if (lenses.length > 1 || lenses.length !== declaredLenses.length ||
       lenses.some(lens => lens.id !== declaredLenses[0].id || lens.thumbnail !== `${lens.id}-thumbnail.webp`)) {
-    throw new TypeError('A shape model exposes its one base-color surface through the authored lens contract.');
+    throw new TypeError('A shape model exposes its one neutral surface through the authored lens contract.');
   }
   const lens = lenses[0];
   const source = await createSourceManifest({ planetId: id, planetName: config.displayName, sourceRoot: sourceDirectory });
@@ -145,7 +145,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     ...(ringRaster ? { ringCoverage: { sourceFaceCount: sourceRingLeaves.length, preparedTileCount: ringLeaves.length,
       width: ringRaster.width, height: ringRaster.height, sourceFaces: ringFaces } } : {}),
     counts: { bodyQuads: bodyLeaves.length, ringQuads: ringLeaves.length, lightingQuads: 1, totalQuads: bodyLeaves.length + ringLeaves.length + 1, budget: config.quadBudget },
-    model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surface: 'NASA VTAD illustrative model texture; no observed terrain', modelSource, phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'prepared illustrative full-phase curvature fitted to the projected shape; no directional Sun shadows' } };
+    model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surface: 'shared neutral gray display convention; unresolved surface, no observed terrain', modelSource, phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'prepared illustrative full-phase curvature fitted to the projected shape; no directional Sun shadows' } };
   await Promise.all([writeJson(outputDirectory, 'scene', geometry), writeJson(outputDirectory, 'runtime', definition),
     writeJson(outputDirectory, 'sky', scene.starfield), writeJson(outputDirectory, 'sun', sun)]);
   return { scene: geometry, definition, content: preparedContent.content };

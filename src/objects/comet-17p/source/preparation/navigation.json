@@ -10,13 +10,10 @@
     "path": "presentation/context.png",
     "expectedBytes": 10301,
     "expectedSha256": "d3bd396cf73cc181d1bc255fb8daf60bd79ae4d065f48d181001cc0e8b0a4dd5",
-    "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-    "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
-    "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
-    "licenseEvidence": [
-      "reference/celestia.ssc",
-      "reference/GPL-2.0-or-later.txt"
-    ],
+    "origin": "https://doi.org/10.1111/j.1365-2966.2006.11121.x",
+    "credit": "Snodgrass, Lowry and Fitzsimmons (2006), MNRAS 373, 1590",
+    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "licenseEvidence": [],
     "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [

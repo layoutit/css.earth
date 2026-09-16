@@ -40,7 +40,7 @@
       {
         "id": "moon-count",
         "label": "Moons",
-        "value": "1 — nicknamed MK 2"
+        "value": "1 \u2014 nicknamed MK 2"
       }
     ],
     "moreFacts": [
@@ -62,27 +62,27 @@
       {
         "id": "appearance",
         "label": "Surface representation",
-        "value": "NASA VTAD illustration; terrain details are not observations"
+        "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
       }
     ]
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "illustration",
+    "defaultLens": "shape",
     "controls": [
       {
-        "id": "illustration",
-        "label": "Illustrative model",
-        "qualification": "Illustration; not an observed surface map.",
-        "thumbnail": "makemake-lens-illustration.webp",
-        "surface": "makemake-illustration.webp",
-        "poles": "makemake-poles-illustration.webp",
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
+        "thumbnail": "makemake-lens-shape.webp",
+        "surface": "makemake-shape.webp",
+        "poles": "makemake-poles-shape.webp",
         "source": {
-          "id": "nasa-vtad-makemake-model",
+          "id": "nasa-makemake-size",
           "path": "../manifest.json",
-          "url": "https://science.nasa.gov/resource/makemake-3d-model/"
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/"
         },
-        "notes": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+        "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
       }
     ]
   },
@@ -104,12 +104,6 @@
       "role": "facts",
       "description": "Makemake overview",
       "href": "https://science.nasa.gov/dwarf-planets/makemake/"
-    },
-    {
-      "label": "NASA VTAD",
-      "role": "illustration",
-      "description": "Makemake model and illustrative surface texture",
-      "href": "https://science.nasa.gov/resource/makemake-3d-model/"
     },
     {
       "label": "Ortiz et al.",
