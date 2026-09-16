@@ -400,6 +400,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Repin authored, generated and tool-written files; adopt a new download's first pin | `node tools/pin-object-documents.mts <id> [--check] [--adopt-downloads]` (write mode runs it; manifests pinning a repository output follow the world-context writer) |
 | Re-prepare only the content record after a credit or provenance edit | `node tools/objects/refresh-content.mts <id> ...` (refuses if any other prepared file would change) |
 | Find what the literature published for a resolved-star candidate | `node tools/objects/star-candidates.mts "<SIMBAD identifier>"`: OiDB calibration levels, VizieR image deposits from the star's own papers, and the route that worked for the placed stars |
+| Find whether an archive holds finer frames than a body ships | `node tools/objects/imagery-candidates.mts [<id> ...] [--minimum-pixels 50] [--json]`: OPUS's finest body-centre image resolution per covered body against the finest frame its photograph lenses cast, with pixels across and phase; advisory, since a frame still needs a camera, registration and reuse terms |
 | Scaffold a placed star from its astronomy record | `node tools/objects/new-star.mts <id> --name ... --paper ...`: every number derived, prose marked `TODO(new-star)`, then `prepare-object` |
 | Restore sources before root preparation | `pnpm prepare:checkout` |
 | Build the site and assemble declared runtime files | `pnpm build` |
