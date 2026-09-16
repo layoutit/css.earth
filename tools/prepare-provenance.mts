@@ -14,7 +14,8 @@ import { writePreparedSet } from './write-prepared-set.mts';
 // A fresh run stays a fresh run when its pinned lineage still matches. A changed
 // source/recipe/output/binding requires a new record and loses that run claim.
 export function provenanceIdentity(document: ProvenanceDocument) {
-  const { basis, lastPreparation, ...identity } = document;
+  // The verifier's own identity is metadata: a rule or compiler edit that yields the same material keeps the record.
+  const { basis, lastPreparation, generator, ...identity } = document;
   return JSON.stringify({ ...identity,
     sources: identity.sources.map(({ verification, ...source }) => source),
     products: identity.products.map(product => ({ ...product,

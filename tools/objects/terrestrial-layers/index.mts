@@ -281,7 +281,7 @@ export function prepareTerrestrialSun({ config }:{config:SolidConfig}) {
 }
 
 /** Source inputs feed reusable raster, geometry, celestial and presentation operations. */
-export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent }:Directories & {config:unknown;prepareContent:typeof prepareObjectContentAssets}) {
+export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent, replaceReviewedImages = false }:Directories & {config:unknown;prepareContent:typeof prepareObjectContentAssets;replaceReviewedImages?:boolean}) {
   const config = parseTerrestrialProfile(input);
   if (typeof prepareContent !== 'function') throw new TypeError('Terrestrial preparation requires the shared content preparer.');
   const source = await createSourceManifest({ planetId: config.namespace, planetName: config.displayName, sourceRoot: sourceDirectory });
@@ -300,7 +300,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
       artifactId: model === models[0] ? null : model.id,
       snapshotEntries: models.length === 1 ? source.manifest.generatedIntermediates
         : source.manifest.generatedIntermediates.filter(entry => model.lensIds.includes(requireString(requireRecord(requireRecord(entry).recipe).lensId))),
-      sunDirection: requireBodyFixedSunDirection(config.namespace) });
+      sunDirection: requireBodyFixedSunDirection(config.namespace), replaceReviewedImages });
     }
     await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ objectId: config.namespace, surfaces }) + '\n');
     await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');

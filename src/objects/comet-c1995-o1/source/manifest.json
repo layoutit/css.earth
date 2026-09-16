@@ -34,7 +34,7 @@
       "expectedSha256": "4647ac204ae7e561dc60fe3f1ec161db13e86bead5f0fef3aab5bd92696d026a",
       "expectedBytes": 995,
       "origin": "https://doi.org/10.1088/0004-637X/761/1/8",
-      "credit": "Szab\u00f3 et al. (2012), ApJ 761, 8",
+      "credit": "Szabó et al. (2012), ApJ 761, 8",
       "license": "Factual measurement transcribed from the cited publication; no text or figures reproduced",
       "acquisition": "authored record of the published effective nucleus radius and shape statement",
       "redistribution": "permitted; facts are cited, not copied",
@@ -54,7 +54,7 @@
       "expectedBytes": 13402,
       "expectedSha256": "a791d00b72357b1033e6ed3809f7bfb3188b96645644b504c96a524a017f79b0",
       "origin": "https://doi.org/10.1088/0004-637X/761/1/8",
-      "credit": "Szab\u00f3 et al. (2012), ApJ 761, 8",
+      "credit": "Szabó et al. (2012), ApJ 761, 8",
       "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
       "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
       "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
@@ -93,8 +93,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1450,
-      "expectedSha256": "0f538517a78a5d47818eaf2ef3a5f6d02bb4809b9122c65256c9c01518167693"
+      "expectedBytes": 1463,
+      "expectedSha256": "69488bf75fe01b3325c7776279f88577c13e4258de88d46d2a30af6b851ee47a"
     },
     {
       "path": "preparation/rotation.json",

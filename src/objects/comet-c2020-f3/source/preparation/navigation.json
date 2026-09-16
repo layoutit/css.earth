@@ -8,13 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 10156,
-    "expectedSha256": "e3221cd4a75af06bd4e1bfcbc777d0eae9016bee02d8399201201f4356e2b0fe",
+    "expectedBytes": 13151,
+    "expectedSha256": "0b44706697e145ae8097c5d5181ef3c6534fccb4d21721bd3b5a8d858f490c92",
     "origin": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=C%2F2020%20F3&phys-par=true",
     "credit": "Repository assumption; no published nucleus size",
-    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
     "licenseEvidence": [],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"
