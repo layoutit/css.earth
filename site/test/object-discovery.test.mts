@@ -60,6 +60,9 @@ test('model textures, shape-derived elevation and featured overrides cannot prom
   // A neutral-gray shape surface is measured geometry with no imagery: "Shape only", never an illustration.
   const shape = [{ surfaces: [{ id: 'shape', science: { kind: 'neutral-shape' } }] }];
   assert.deepEqual(deriveObjectDiscovery({}, controls('shape'), shape), { featured: false, imagery: false, illustration: false });
+  // A whole-disc measured colour is photometry of an unresolved body, not surface imagery.
+  const color = [{ surfaces: [{ id: 'color', science: { kind: 'disc-integrated-color' } }] }];
+  assert.deepEqual(deriveObjectDiscovery({}, controls('color'), color), { featured: false, imagery: false, illustration: false });
 });
 
 test('partial photographic coverage still counts; source and lens counts do not', () => {

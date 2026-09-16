@@ -2,9 +2,19 @@
   "schema": "cssmakemake-runtime-assets@1",
   "assets": [
     {
-      "filename": "makemake-lens-shape.webp",
+      "filename": "makemake-color.webp",
+      "bytes": 178,
+      "sha256": "abcc28dc817c8051d048b9c854d2e5862ebae027fc11bac82c2b2cdc64ded68f"
+    },
+    {
+      "filename": "makemake-color@2x.webp",
+      "bytes": 558,
+      "sha256": "8c44ecf55aaa511765bc671e669e03a2a4db3aff311a8f8bd2862f8e60f1e545"
+    },
+    {
+      "filename": "makemake-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "fe10fa4cfb63bdda07f53a7db7eda2fbd5c4e99f2450a3da2e8245ecb6656058"
     },
     {
       "filename": "makemake-lighting-1x-billboard.webp",
@@ -337,24 +347,14 @@
       "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
     },
     {
-      "filename": "makemake-poles-shape.webp",
+      "filename": "makemake-poles-color.webp",
       "bytes": 680,
-      "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4"
+      "sha256": "1c265bbca87175e6a43dd528851296540d40fad1078a2b9535b2187c601fd66e"
     },
     {
-      "filename": "makemake-poles-shape@2x.webp",
+      "filename": "makemake-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
-    },
-    {
-      "filename": "makemake-shape.webp",
-      "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
-    },
-    {
-      "filename": "makemake-shape@2x.webp",
-      "bytes": 558,
-      "sha256": "29cb9b42eae9164dc2e5144eeee49eaa035b4970c376c0d04c190b7a8ee808ef"
+      "sha256": "2c1261c32d00977e9dbacb50650f81b6ec4d11b45e7823b7d157bcdf3f347aaf"
     }
   ]
 }

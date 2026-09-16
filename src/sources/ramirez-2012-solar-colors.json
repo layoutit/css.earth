@@ -1,0 +1,43 @@
+{
+  "id": "ramirez-2012-solar-colors",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ramírez et al. (2012): The UBV(RI)C colors of the Sun",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/752/1/5"
+    },
+    {
+      "type": "arXiv",
+      "value": "1204.0828"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/752/1/5",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1204.0828",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1204.0828",
+      "checkedOn": "2026-09-16",
+      "locator": "Abstract, model-independent solar colours"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 752, 5",
+  "creators": [
+    "I. Ramírez",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}
