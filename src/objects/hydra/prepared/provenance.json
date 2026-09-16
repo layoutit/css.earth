@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hydra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "4cd6cf80a765d9de29f46299301ef9f5149a639cdc05b2fb77f6a7ba07618f81"
@@ -311,7 +311,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -359,7 +359,7 @@
       "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
       "bytes": 3043916,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -402,7 +402,7 @@
       "sha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -429,7 +429,7 @@
       "sha256": "52d4415d0070d87828cf0a4794223bce26bfd5e32d411b3d988c10c8b349bddb",
       "bytes": 2917,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -449,7 +449,7 @@
       "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
       "bytes": 3800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -486,13 +486,13 @@
           "url": "/scenes/hydra/hydra-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-model-surface@2x.webp",
           "bytes": 71382,
           "sha256": "a44dab31a19630cf501154fcfac5c659aa9ca5fe20da3e214dc040d58593a5ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -535,15 +535,15 @@
       "outputs": [
         {
           "url": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
-          "bytes": 1806,
-          "sha256": "1fbbc6a8ad6ef48bf64d273cd5e9d91beeb0b5d610ea7547abb5c13fcfef6bf6",
-          "verification": "asset-manifest-pin"
+          "bytes": 1786,
+          "sha256": "a054a86592aff90fd3c50f068035e85221ccb4efed0ca29c13ca5a85a167a611",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
-          "bytes": 100400,
-          "sha256": "aeb9345b6492f3e4443433bb02e0dbe91eb8ac966bf5faa0de067b9119ad0e68",
-          "verification": "asset-manifest-pin"
+          "bytes": 98700,
+          "sha256": "724b1368c6ce4d4f2ffe6529f8b7e42aae55d99ba5f062096f1f5be8d2136cb6",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -625,8 +625,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 4968,
-          "sha256": "b7c6234912d7aae6624b7ecd6855571bac18903834ea7e3d4a1236c2aebbda09",
+          "bytes": 4668,
+          "sha256": "853fe1f64d02ee0345abc27bb733221806861d24d8824498fa4745512320cc90",
           "verification": "bytes-verified"
         }
       ]
@@ -638,11 +638,11 @@
   },
   "lastPreparation": {
     "objectId": "hydra",
-    "materialSha256": "de1530b424cd5243564a29805ff3d1c2cf03e9bbb16c7de6f3e22a367258ddf5",
+    "materialSha256": "2bd8b0ad5e454d40f63f400db80a8a91a9c9d0bcaef88d6f9804dab4193e9440",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "07f461ac41af6c85bbddc7a11d02a94dd15c8c53473e92d7103993c9b1ca166e"
     }
   }
 }

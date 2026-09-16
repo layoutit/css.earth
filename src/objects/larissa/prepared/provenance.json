@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "larissa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "784dd76148804818de380d5b45fd1416c66f2c243a8cc73bdb8c6a5713429e1d"
+    "sha256": "8743f0ca8b2ba668740d31937efff56ea2ead84400d6f685483ecabeed32f748"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -372,7 +372,7 @@
       "sha256": "c22e8f6968eeab0519c238851542780f9a94b15ee1c7bbe6067fe1ce774deaeb",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -416,7 +416,7 @@
       "sha256": "c39ac58bbc5c4fe39c43adea9807a614b1510b63c886b0a3d90c7b4f75c9f26e",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -453,7 +453,7 @@
       "sha256": "681845179a0c761d7b427d44095978c94b872d83e18de95e657a4e23dc8045ef",
       "bytes": 3285,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -480,7 +480,7 @@
       "sha256": "357196eddef9f5675d4a90c8bad5818df2aa8d4b35ea4e7ccb46eee94f909b80",
       "bytes": 4610,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -512,19 +512,19 @@
           "url": "/scenes/larissa/larissa-elevation-thumbnail.webp",
           "bytes": 5462,
           "sha256": "2370cb2b2eab1b5341bbfa27e1b38e34e0909163e93c0635844e673aadc7e42d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-elevation-surface@2x.webp",
           "bytes": 157004,
           "sha256": "1bd870e8c77fa3a06102eff4bf3f17a190b1895e805c2b6abaea494330fced01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -562,15 +562,15 @@
       "outputs": [
         {
           "url": "/scenes/larissa/larissa-normal-thumbnail.webp",
-          "bytes": 2152,
-          "sha256": "3ff98cbfd1831a22f1c976f308ca59ec1d68b25c7b71938ef86e7c011a0a209c",
-          "verification": "asset-manifest-pin"
+          "bytes": 2084,
+          "sha256": "3a84bf89f0c8c589497dcd3fd85f2deb8740afddaf9c79d2a0f14ad7d1534a83",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-normal-surface@2x.webp",
-          "bytes": 108488,
-          "sha256": "5b20af29cb40d9465dddb0997ac8f771d851cc9f7f55c1a272fcd1bc243d36f2",
-          "verification": "asset-manifest-pin"
+          "bytes": 104952,
+          "sha256": "f5b4e96144d7b0b9a50e53d9e9d00f365454cf10eb287a9a67e9bd93589d9dde",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -627,8 +627,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 8186,
-          "sha256": "dcc6c2cda4e3383e6f9395a2e8d991b77221b3376bf14749f078769253249f0f",
+          "bytes": 8054,
+          "sha256": "9f746a3edd5a61fe67923278518aeb87710cf876f735933df3d6acb53d1a3836",
           "verification": "bytes-verified"
         }
       ]
@@ -665,11 +665,11 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "b340d8a8e715beafc14789db389acebce9153cbe45e391fe35e0e855047d037c",
+    "materialSha256": "fc444d855a6845d9f4e3098b4a953df35f920cae8b24f05a77dea1db7702d33d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "5692940808f39ae7f65370c0f53e6ccdccdf546386a5f2b2e5fd8b7f855ed918"
     }
   }
 }

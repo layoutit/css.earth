@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pallene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a548acae8c45a957aec7962cdeb7cf57acd7ea90cfee1e49cc326efd147859e"
+    "sha256": "b4c270c75aec17912be51c0d112a28e5b9ca1472504e752ed781efaa0405009b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -297,7 +297,7 @@
       "sha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -349,7 +349,7 @@
       "sha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,7 +394,7 @@
       "sha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -414,7 +414,7 @@
       "sha256": "fc031b93d0be5a5035e8c909262c7f1b865714d90144ad962edb6847dbd54f85",
       "bytes": 3056,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -446,15 +446,15 @@
       "outputs": [
         {
           "url": "/scenes/pallene/pallene-normal-thumbnail.webp",
-          "bytes": 1816,
-          "sha256": "af697b55c121f343c8351ef32c64831bf485ff5f873416d2c40c38d07ba8a09c",
-          "verification": "asset-manifest-pin"
+          "bytes": 1774,
+          "sha256": "e18485a43f80bfe35d703240b6912a71b570be26933d7393fc2e80c2aaef943d",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
-          "bytes": 64508,
-          "sha256": "e1c2fd265ec28f13462a6277abcc8e0e59f20bb0cee18df5872c25de23f9c45d",
-          "verification": "asset-manifest-pin"
+          "bytes": 63712,
+          "sha256": "0ea75538a362a6c53a77d57c635297721bde8b1b867472e1d96f91f5ea213359",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -511,8 +511,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 4270,
-          "sha256": "41a7c1170aef3b404d06823a69917fa3c410333ed63edab3b7a3cd6647737789",
+          "bytes": 4222,
+          "sha256": "24955ff6cd275ca41c9ca9fb8cce98d1dbba633339fa3c8fc0cdbf7fe149fdef",
           "verification": "bytes-verified"
         }
       ]
@@ -524,11 +524,11 @@
   },
   "lastPreparation": {
     "objectId": "pallene",
-    "materialSha256": "7996e5f47531619a296a911e05ba02b53c6cfc454944ae71c53b60c1f9952e0d",
+    "materialSha256": "d3382fedbea7ce11852e1cda15f76395f98ced10e8000245041a3427967e8890",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "ae1533d776a146b701836152e2ef681b934483f9c8d5a35dd61b11d5e0b2a402"
     }
   }
 }

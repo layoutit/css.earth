@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nix",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "d40f739dfb22b77341cf22cc420d532de039a786e4607abcb459a8a5cf052382"
@@ -311,7 +311,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -359,7 +359,7 @@
       "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "bytes": 4586869,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -402,7 +402,7 @@
       "sha256": "78f83c9887e252cfddbf4232002659d44cb0b1763df7fd1629a429cc9844fa1c",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -429,7 +429,7 @@
       "sha256": "de22290d16e8a1713cc762b262a2a42972298a67d563535aedfbca9fab1567e3",
       "bytes": 2921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -449,7 +449,7 @@
       "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
       "bytes": 3770,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -486,13 +486,13 @@
           "url": "/scenes/nix/nix-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-model-surface@2x.webp",
           "bytes": 73950,
           "sha256": "ca35a6ea514c2cde36091f4e29990720b80050b1241b278fe697c487d5639c41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -535,15 +535,15 @@
       "outputs": [
         {
           "url": "/scenes/nix/nix-monochrome-thumbnail.webp",
-          "bytes": 1812,
-          "sha256": "430b14f48f3eb4077b78c226f8bdb49ef9e49fdfb7f766220f8dd607e8f8a199",
-          "verification": "asset-manifest-pin"
+          "bytes": 1766,
+          "sha256": "58a146b497c44eb57f69c4c0decb5e7599667fa1a7a24668f4dc137c07566423",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
-          "bytes": 144698,
-          "sha256": "7ffc31a3716573ce24cb2e9eea51283aaaed3eb10996979e85473b4d88d45874",
-          "verification": "asset-manifest-pin"
+          "bytes": 131312,
+          "sha256": "7e67c58b1ee00c5d94dbe4abc3dc79e29eec4f362f176a8ddca058c3f8b25dec",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -625,8 +625,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 10078,
-          "sha256": "8aab96d3a981083ab7f96a098fbc64d1bf0d806ffbfe8c780ec38601103d7927",
+          "bytes": 7932,
+          "sha256": "30cf1e8ed2b0ba8ac104b951a160f04a4115ad657f51c778e28ae0ac1e3e71ea",
           "verification": "bytes-verified"
         }
       ]
@@ -638,11 +638,11 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "e22a76b9098361d8d7faa4b92964decb7a1f40319c202bd16e3641bc6a198e4f",
+    "materialSha256": "e9e9af6b6b19d5f0e6675c2b9f4d799f8b78ef74b75b5df9722a1710c6d4d8bf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "cb28b8660761800b3c64c36fe453cd68be3703f6da7602782f8082bce49910df"
     }
   }
 }
