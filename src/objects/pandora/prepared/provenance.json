@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f03583f5068062325c29c2d3dbd4ece142420d17e5ea71665ef1e7bbeec4bb2"
+    "sha256": "900daa9898f40e0956dc71ef807c71e8b0a768d4f28bd1b9bccf94f508d96f32"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -453,7 +453,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82c6c8547d59ad9e2bc44257598ef332b292970e0a59395989e5e6340168c33a",
+      "sha256": "35c91d35253fb732f720976c9a114664b94ccffe5cb90362dad4d480b6233370",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -488,24 +488,30 @@
               }
             },
             {
-              "id": "orbital-period",
-              "label": "Orbit around Saturn",
-              "value": "About 15.1 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 141,700 km"
+              "value": "About 141,700 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager 1 science team · 1980"
+              "value": "Voyager 1 science team · 1980",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -2018,8 +2024,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82c6c8547d59ad9e2bc44257598ef332b292970e0a59395989e5e6340168c33a",
-      "bytes": 5661,
+      "sha256": "35c91d35253fb732f720976c9a114664b94ccffe5cb90362dad4d480b6233370",
+      "bytes": 6139,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2210,8 +2216,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6885,
-          "sha256": "8d63fdace6ee55e2b70b5aeabc1aed180f5b30515c2b7e3047696aa7cea105b0",
+          "bytes": 7269,
+          "sha256": "9f4365a9058d0f45cdd10020aeaecbe49dec0ed9ea5dad7b61eb2fbceffa4b24",
           "verification": "bytes-verified"
         }
       ],
@@ -2299,7 +2305,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "712889af2bafdc810cb7239661393854abd75653314672ab2e3bc12c50add111",
+    "materialSha256": "6e43a82ed1727ada3f73461a502695e348ff92032e01ebed0c62dacc28b38a9d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e07992c078e791c1399c1a3d472fe4b2ec90a3658fa3fe9c9094765466b16228"
+    "sha256": "e11c1fe5c7cfeff937ae71ecc68a35be91ffd0411e436e101aa526aa79f9490e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -231,7 +231,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "65e73bc536959a970373b090a033abc18102e79bd431c8d97bdea223403d39e1",
+      "sha256": "f84855d2df8856e95b04c2ce72a19581598208562e18998d75ae355cb33b1ffc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -268,22 +268,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Mars",
-              "value": "30 hours 18 minutes"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "30 hours 18 minutes (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Mars",
-              "value": "About 23,463 km"
+              "value": "30 hours 18 minutes",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Asaph Hall · 1877"
+              "value": "Asaph Hall · 1877",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -698,8 +704,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "65e73bc536959a970373b090a033abc18102e79bd431c8d97bdea223403d39e1",
-      "bytes": 10929,
+      "sha256": "f84855d2df8856e95b04c2ce72a19581598208562e18998d75ae355cb33b1ffc",
+      "bytes": 11399,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1037,8 +1043,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5792,
-          "sha256": "81322ef6b567ef4934be6ec769be0e08006f5f6e4bb4bbbbfb7120a371157606",
+          "bytes": 6168,
+          "sha256": "235601533ad1e9bcd14c2c93026d0a904229da70b22c5e2160a8b149286a6fed",
           "verification": "bytes-verified"
         }
       ],
@@ -1187,7 +1193,7 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "bca58074d05d97550e5bfb5721d29d794a6f55fe94ec8476cc5dd9d8aa5be77c",
+    "materialSha256": "1a00e5e245dd865b41f94466f692586adec327b4079d71c533b172d74bc49df4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

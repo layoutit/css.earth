@@ -990,8 +990,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13594,
-      "expectedSha256": "837342aea6582c8597c9d22abd4bd7c7b0f5274dd5c5400a99564db34bf88e88",
+      "expectedBytes": 14065,
+      "expectedSha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1006,8 +1006,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1084,
-      "expectedSha256": "6b5e24ee84b3fb7382dfee9f0160b7e74e2d0eaa47827a52ad1561b64d7da11e"
+      "expectedBytes": 2332,
+      "expectedSha256": "b409457e3f73a32aa71e3847944d33b3b5e98b31bb9a4b5d3eb8f2deee6e51d2"
     },
     {
       "path": "science/b2-intake/dione_128_o.xml",

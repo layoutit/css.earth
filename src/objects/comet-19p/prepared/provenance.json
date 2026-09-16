@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "78fe7cfa409f32dec6d20520c6c7cbd6aceb5890844bd4fd842a6f2348cfa834"
+    "sha256": "1d938db3403f6260878c8512a6b13e3258ca3b3c98a4d45586a623b210f49cdc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -395,25 +395,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
+      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-19p",
         "displayName": "Borrelly",
         "panel": {
-          "facts": [
-            {
-              "id": "length",
-              "label": "Nucleus length",
-              "value": "About 8 km"
-            },
-            {
-              "id": "encounter",
-              "label": "Spacecraft",
-              "value": "Deep Space 1 · 2001"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -998,8 +987,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
-      "bytes": 7383,
+      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
+      "bytes": 7158,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1403,8 +1392,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4725,
-          "sha256": "7aa340fa94f656903b2ab02eb8b52569acce7f20a8cce66f99d74d4ca6132e8e",
+          "bytes": 4593,
+          "sha256": "5736a8203f6aaeac7ed8bc6cb717c5787c6f08440a2597a7b09e8954e0d84172",
           "verification": "bytes-verified"
         }
       ],
@@ -1457,7 +1446,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-19p",
-    "materialSha256": "98dbdb2c79ddf256199e0dc1154548f95271b4699e2a9bf0c1dccebeeeae660d",
+    "materialSha256": "f778ae022d1625f01046239747e06d73c0acb1f9fac46d5f03562184ff905275",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "73220b0fe77f790d86eb8579ddadbc22caa2f549d68a7f5bdf8aa58e49e46964"
+    "sha256": "92b4024f9c83e770be5b2ae965a39bd093574da42ea43f78693fc14526c7445f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0703114cca2119e927d1d1836220ad8321d0b0e64cb77d5862a24e065f406702",
+      "sha256": "ab80b9a550445aa19889472514b078dad517458efda6a9ce3ccd0b29bb9bfeb1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "99.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.127 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.224663 hours"
             }
           ],
           "moreFacts": []
@@ -364,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0703114cca2119e927d1d1836220ad8321d0b0e64cb77d5862a24e065f406702",
-      "bytes": 7760,
+      "sha256": "ab80b9a550445aa19889472514b078dad517458efda6a9ce3ccd0b29bb9bfeb1",
+      "bytes": 7527,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5460,
-          "sha256": "3f726c10ef9e097a07b6b6f408644f57a488a189eb0ee8971929aabe6309d4cc",
+          "bytes": 5315,
+          "sha256": "c8a551ce16e428d3fca3f9c97e184c87966b732cfbb4c69a385fb9139c414fa5",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +540,7 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "c21d24515fa9dc2bb49b14eda2fe813d7c7876c40b3af43fe20943389216d2ed",
+    "materialSha256": "b287f94baf021bde2b7fbc633287ef2aeb3c51257291c8d2aef650219f402336",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8b6e3155a4bbcdf40e38298b210f87b749bf357fda6eb8c6c8648c2e5d2ac20"
+    "sha256": "4e673545aeadd7ab5440016692cff79150fa919e97640c8e461ed468b63af940"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -237,7 +237,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fa49539f8a8f7554147a1f418450d60485986842a1a029138542338fd9abe8dc",
+      "sha256": "65e813fd59e09bde95a1ee1e8412866e53022dd3393b66fa1836156f50b816e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -272,24 +272,17 @@
               }
             },
             {
-              "id": "orbital-period",
-              "label": "Orbit around Mars",
-              "value": "7 hours 39 minutes"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7 hours 39 minutes (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Mars",
-              "value": "About 9,376 km"
-            },
-            {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Asaph Hall · 1877"
+              "value": "Asaph Hall · 1877",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -697,8 +690,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fa49539f8a8f7554147a1f418450d60485986842a1a029138542338fd9abe8dc",
-      "bytes": 10627,
+      "sha256": "65e813fd59e09bde95a1ee1e8412866e53022dd3393b66fa1836156f50b816e7",
+      "bytes": 10613,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1046,8 +1039,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5838,
-          "sha256": "b07e28a5dec9e0f94728e307a2996878c259a276ddded02d5f752a50daff60f4",
+          "bytes": 5865,
+          "sha256": "d1fd6e4e5d4d7e60fc415e25a82bde49fad459d6ee7f94d557e8e90739963cce",
           "verification": "bytes-verified"
         }
       ],
@@ -1196,7 +1189,7 @@
   },
   "lastPreparation": {
     "objectId": "phobos",
-    "materialSha256": "40d54283d4b8f7d21dc6ff5e58567aef90442b8e65e5e5d6163701a9986e46c3",
+    "materialSha256": "429300fb2bbf202131535ba1f260a9e0cd320b9b183f69cb9b3516be3fb8a0ab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

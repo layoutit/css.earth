@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd08d97335a21116e1c29c52d6cbabae124bff6d86410671cd472262acc9df55"
+    "sha256": "379f2378d10c6fdff7a42c2cc614f820f6354185094671c0282308b7ca31164d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -246,7 +246,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e1fa0fac61ba4d636cbdbe6b00852a40211192fce11948267a1dda3a353b8aaa",
+      "sha256": "46c8b7db71e43756d5d95601a71cf71d47e967cf8412513cfc1caaad6594c81d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -283,16 +283,6 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "Target physical data: RAD (km)"
               }
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.861 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "4.84 years"
             },
             {
               "id": "rotation-period",
@@ -1161,8 +1151,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e1fa0fac61ba4d636cbdbe6b00852a40211192fce11948267a1dda3a353b8aaa",
-      "bytes": 8309,
+      "sha256": "46c8b7db71e43756d5d95601a71cf71d47e967cf8412513cfc1caaad6594c81d",
+      "bytes": 8074,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1462,8 +1452,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4413,
-          "sha256": "c1488b0802d894c3d5478de4b729e2cdeb11af76fd806c4a50d5b5036aaf3a42",
+          "bytes": 4266,
+          "sha256": "e3f131ef3109b7bb7ca59a00582c1a099b19f57f99a7945154e8226263b88b04",
           "verification": "bytes-verified"
         }
       ],
@@ -1587,7 +1577,7 @@
   },
   "lastPreparation": {
     "objectId": "ida",
-    "materialSha256": "c0cc262ea6fb27fcce1cc9128922851d803a97a058e13407862eaa7e0078b86c",
+    "materialSha256": "2b2876494cec350259ddb2e9b8d6b4df839dc938bb5bfdad4f3ea5a5ec2d48a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

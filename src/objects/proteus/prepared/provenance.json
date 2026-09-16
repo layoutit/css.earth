@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0a3ee9a7ec1d510b52e8dc91c8eb1a10afdf94641d0ed7679e2e23c4febe88d2"
+    "sha256": "6fc720c014867bd50f234236f362595989011d46f4365c80484fd87093a17ee9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -329,7 +329,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b68e878403ab96fc1eba5e6b0723800a8417a99d697507ea29998964af356c9",
+      "sha256": "c07fe7e3fa598d7b9bf57a1b7f65111a6429bf7951cd855d19029f085878ad78",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -366,22 +366,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "26.94 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Neptune",
-              "value": "About 117,674 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1989"
+              "value": "26.94 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -1059,8 +1052,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2b68e878403ab96fc1eba5e6b0723800a8417a99d697507ea29998964af356c9",
-      "bytes": 5622,
+      "sha256": "c07fe7e3fa598d7b9bf57a1b7f65111a6429bf7951cd855d19029f085878ad78",
+      "bytes": 5589,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1235,8 +1228,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5519,
-          "sha256": "2e39bdc1d57700484ec2004816533d97923b588bb255cf0d0bef8818a2412dee",
+          "bytes": 5527,
+          "sha256": "86cbe79593332df09d6af95b756ada2eac3cd6e51e44b19f83912f53f9606344",
           "verification": "bytes-verified"
         }
       ],
@@ -1324,7 +1317,7 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "0c5d3ba8552eadc72d395831757ac64bd2c2bf6d6ceded6c7d19bfa8fe368c0b",
+    "materialSha256": "7fb102f3ceaa69a027fb5b46169e4f3a03108e1082397a06146278e44483bb16",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

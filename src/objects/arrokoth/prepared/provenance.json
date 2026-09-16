@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3feec70ec79bf5ea04dfa914d13adf3ae46cbb4ff884e9bfaf35fa00ab73f87a"
+    "sha256": "58c1457c0775b7fb4cd9ec8144534b9d1edfb60d8557d0103a28ad8b2d150f5e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -209,7 +209,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
+      "sha256": "11b3468898c01da5670e40d1883166806f9b8dc8fe2bd150105284a06d273e04",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,33 +218,33 @@
         "panel": {
           "facts": [
             {
-              "id": "dimensions",
-              "label": "Size",
-              "value": "34.5 × 19.8 × 13.8 km"
-            },
-            {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 15.9 hours"
+              "value": "About 15.9 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=486958",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "Trans-Neptunian object",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=486958",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate."
-            },
-            {
-              "id": "albedo-coverage",
-              "label": "Albedo coverage",
-              "value": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -688,8 +688,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
-      "bytes": 6118,
+      "sha256": "11b3468898c01da5670e40d1883166806f9b8dc8fe2bd150105284a06d273e04",
+      "bytes": 5972,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -915,8 +915,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5132,
-          "sha256": "141045eb51b0de943a2ae23c38c732c2dba542d0b16816bb6ae5692367a763e4",
+          "bytes": 4941,
+          "sha256": "265db933b11c7681b00997075735bb41f4f6ff858dacf50f9ee1b514fbf6a243",
           "verification": "bytes-verified"
         }
       ],
@@ -1029,7 +1029,7 @@
   },
   "lastPreparation": {
     "objectId": "arrokoth",
-    "materialSha256": "26d17094db0ae001bfe3789ed2983919db88eca6c0409e41abe20487ade2eaa4",
+    "materialSha256": "84a9e0dd110a1a287f24709e88a4ba440579942d2a69b1e2120b621bf78ff185",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

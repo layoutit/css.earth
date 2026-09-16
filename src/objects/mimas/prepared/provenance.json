@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "98a34f3aed13f39e588f5bc282d6b0b6d549f8d3fad63587c9f8cde227ab946b"
+    "sha256": "53c97cee687d7cdf8d3653821c9f8b6b8c189986972f1604beac46de7521ad01"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -161,7 +161,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ed5061be70199ccec6e6097f36a1884c2d7e657ce201f110690326f92057cff6",
+      "sha256": "459ed1a722c2fdfccaa43f57acbba95b0624a3914a12dfe12c36e9eb9d0c8b5f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -196,24 +196,30 @@
               }
             },
             {
-              "id": "orbital-period",
-              "label": "Orbit around Saturn",
-              "value": "22 hours 36 minutes"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "22 hours 36 minutes (synchronous)"
-            },
-            {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 186,000 km"
+              "value": "About 186,000 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Herschel · 1789"
+              "value": "William Herschel · 1789",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -699,8 +705,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ed5061be70199ccec6e6097f36a1884c2d7e657ce201f110690326f92057cff6",
-      "bytes": 10034,
+      "sha256": "459ed1a722c2fdfccaa43f57acbba95b0624a3914a12dfe12c36e9eb9d0c8b5f",
+      "bytes": 10502,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -995,8 +1001,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6196,
-          "sha256": "f07c3cb0f9759a93086f43dd55ab5aa7e94c597aef4872513c7ecdfce63d2ea9",
+          "bytes": 6570,
+          "sha256": "33523eea4d0ffd1b203e6ed2c652c757eb9d5976e62cd01fbd37d00feedda3e2",
           "verification": "bytes-verified"
         }
       ],
@@ -1120,7 +1126,7 @@
   },
   "lastPreparation": {
     "objectId": "mimas",
-    "materialSha256": "1c6c3a4b0b8fba098bb6a06ad193f2a646e243f771d8d23f0dd790c326911444",
+    "materialSha256": "dcecfe166e6ddf419de9a2fc3c8e8681779cd6218f722319ba3f6c0e77b435e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -530,8 +530,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9764,
-      "expectedSha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
+      "expectedBytes": 9412,
+      "expectedSha256": "e17d3cdf156fe36153e55e06780afd61fde6e5cd74ae9015f26a8f3fdda377fb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -664,6 +664,21 @@
       "origin": "https://doi.org/10.1016/j.icarus.2015.11.023",
       "credit": "Published Hapke parameters: Hasselmann et al. (2016), doi:10.1016/j.icarus.2015.11.023. Selection and transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6805,
+      "expectedSha256": "c74413b363edf07ac903341f4576ad3a88506bd59000701cdcf71181766a5bec",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Lutetia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

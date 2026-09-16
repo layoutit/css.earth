@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8e90c7bb6150470fbe708abe9a34c0e5ce60de15bc740e0429039d4883cb1e2"
+    "sha256": "28a1fe711d6e824f0b47956bf43d05dd996fb84826759e78978ad2bea540c1e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "98aa9eef25943783e1012b85ed54ab652d17758ee85828cdebee11ddec189114",
+      "sha256": "e9fd1137c119f5d99c78ba4c19fd862a976608ee049bb5901c8cb6d815b691ba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,11 +199,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7.046664 hours"
             }
           ],
           "moreFacts": []
@@ -372,8 +367,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "98aa9eef25943783e1012b85ed54ab652d17758ee85828cdebee11ddec189114",
-      "bytes": 8780,
+      "sha256": "e9fd1137c119f5d99c78ba4c19fd862a976608ee049bb5901c8cb6d815b691ba",
+      "bytes": 8660,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -494,8 +489,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6405,
-          "sha256": "0027b88d60367185b992da9fa221b5612a468d9825de7dc4d88e8ed8eb5295a2",
+          "bytes": 6329,
+          "sha256": "b69f761403c840c2c03669853d6885b51330ba12d9d646dd87fbd3a643e822fe",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +553,7 @@
   },
   "lastPreparation": {
     "objectId": "egeria",
-    "materialSha256": "c458ed22a0f255040c4cb005e0b4ee1cfe320966be30c7abc67e7a7746f8ba47",
+    "materialSha256": "88b0e33a4a49033c53848fa47e0435b65cc29e9e2a14f0acc86702a0b94ac8d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

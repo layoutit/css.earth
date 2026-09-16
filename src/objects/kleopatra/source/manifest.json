@@ -127,8 +127,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8352,
-      "expectedSha256": "6ce1adb91d75650294ea1a5b16074e6d1fa1df1a8454090be7cadb13f14b4087",
+      "expectedBytes": 8339,
+      "expectedSha256": "e2da8c106d63f3666d35574ccf3d42abd78498918978f36dbecc4d89d859bc31",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -178,6 +178,21 @@
       "path": "reference/sphere-example-header.txt",
       "expectedBytes": 66339,
       "expectedSha256": "48edf4dc904eb68d599dff0ad515588fdd565002f7ffe6b0ca5056dbcf47809a"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 7470,
+      "expectedSha256": "10eff8d9c42ac86c478de5549e3ff1d21cf8ed86f7841a9356f308d62825285d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Kleopatra: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

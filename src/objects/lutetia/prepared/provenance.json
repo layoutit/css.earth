@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "369909247dce0b9d66da9f487f25d561d3077896785ce1c0394f3bcc28291c38"
+    "sha256": "d2281cae5af48b7e68c9e24c042721342fc7e92f0d2f71773e0d2134a3676bf3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -205,7 +205,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
+      "sha256": "e17d3cdf156fe36153e55e06780afd61fde6e5cd74ae9015f26a8f3fdda377fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -242,21 +242,6 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "Target physical data: RAD (km)"
               }
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.435 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "3.80 years"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "8.168 hours"
             }
           ],
           "moreFacts": [
@@ -719,8 +704,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
-      "bytes": 9764,
+      "sha256": "e17d3cdf156fe36153e55e06780afd61fde6e5cd74ae9015f26a8f3fdda377fb",
+      "bytes": 9412,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -992,8 +977,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5691,
-          "sha256": "6010dfaff3237299714cf24cd22af7382fe550b8368cf406ef5cfdb2db61df51",
+          "bytes": 5471,
+          "sha256": "374644412fafc7da6bda7123cdbf91be6f7734fb4ae84db2119ac03eedf31c3d",
           "verification": "bytes-verified"
         }
       ],
@@ -1117,7 +1102,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "553a1c82db11f42a1daca4edf6259bdf66310630b2c86030713f7876ccc16715",
+    "materialSha256": "5b476907a4092b5315554591c887803cc764c43b7c9ab3a65217e42da3fe6601",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

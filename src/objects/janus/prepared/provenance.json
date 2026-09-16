@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1ed5e5e816767282e60de56f58b2eb70cde848d9008338dfc5c10c01eb23c29"
+    "sha256": "5ce03b563416b35504347f9d165c50e0a24196a0ef4249edfc0117f5ece8ccad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -393,7 +393,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5bbb758b251c5556a9f73f5e987fc9c07c8736fa6e645d4922e8ee4bcd2e3317",
+      "sha256": "8ea4af39349885f857d5d55ee6486b31dfa6a00266dae87c0c76ba8c4750ba0a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -430,22 +430,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 16.7 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
+              "value": "About 16.7 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 151,500 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Audouin Dollfus · 1966"
+              "value": "About 151,500 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             }
           ],
           "moreFacts": [
@@ -1554,8 +1560,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5bbb758b251c5556a9f73f5e987fc9c07c8736fa6e645d4922e8ee4bcd2e3317",
-      "bytes": 5614,
+      "sha256": "8ea4af39349885f857d5d55ee6486b31dfa6a00266dae87c0c76ba8c4750ba0a",
+      "bytes": 6079,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1739,8 +1745,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5274,
-          "sha256": "00ad197e00f650ad2d460ed0b96011d26bfd37f8260b7dd3ed730f7b254a4f5e",
+          "bytes": 5645,
+          "sha256": "3de37d1f2d676972d8684bc57058f2b670f2411871f4a57f8e59647bcf856492",
           "verification": "bytes-verified"
         }
       ],
@@ -1828,7 +1834,7 @@
   },
   "lastPreparation": {
     "objectId": "janus",
-    "materialSha256": "3536e81765429ed79a248902cb163e994cfc6121b893898ee908cb3083821195",
+    "materialSha256": "7446c609ed3d17a2ff3844be976080b3d74f4fbb4ea6e4448f82d40990c4b970",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

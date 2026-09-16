@@ -889,8 +889,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8971,
-      "expectedSha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
+      "expectedBytes": 8740,
+      "expectedSha256": "0bb8bbd1a26dece43731bfbf4eef42bbf64d46799071fd006c8c5d9668b8fc87",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -955,6 +955,21 @@
       "path": "preparation/observer-cameras.json",
       "expectedBytes": 440,
       "expectedSha256": "33d7e7fda9fb06a34da05a81b00c5e80744e113d96c3371597df2b873389953b"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6108,
+      "expectedSha256": "390e851735a44953655401981a5fb83ef6d70c77c0a30066f0b263923f906558",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Sylvia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

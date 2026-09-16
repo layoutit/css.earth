@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8780,
-      "expectedSha256": "98aa9eef25943783e1012b85ed54ab652d17758ee85828cdebee11ddec189114",
+      "expectedBytes": 8660,
+      "expectedSha256": "e9fd1137c119f5d99c78ba4c19fd862a976608ee049bb5901c8cb6d815b691ba",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 39,
       "expectedSha256": "01211a263cd90cb56d60cb20328bc6366c84bda3c9dee4abea92fc411052a1ae"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5121,
+      "expectedSha256": "3e524528b07f6e0ae1083d3b75c7766f6c65fd5ecdf104cd63451e799f48a570",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Egeria: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -1863,8 +1863,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5810,
-      "expectedSha256": "f8e84bd921247951b616f30cdd059072389d8118856444284fca2dff2421cd7e",
+      "expectedBytes": 6774,
+      "expectedSha256": "f8288372112673114f736bbd2417a531585e9f10ce27a9066ac98a1298d1dada",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1919,8 +1919,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1084,
-      "expectedSha256": "0e8db30f8a0aa925dc6793105f90a1f7277023eb63ea47faa53ebd1ffa6d8995"
+      "expectedBytes": 2360,
+      "expectedSha256": "e20474d830aeedbd2ce36fe407c5cc373c9d21ad3ed65a55f4fc56089456006b"
     },
     {
       "path": "preparation/close-encounters-reference.json",

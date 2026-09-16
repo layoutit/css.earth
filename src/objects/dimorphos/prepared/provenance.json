@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c583f90f40ec07986f48acf789938919eb73c8e3e088fe51d2780bfbf70ae36"
+    "sha256": "1caaf6039143fd2a7a0b78af255fc4061f8615919be1fd3391c61a98247ad378"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -334,7 +334,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7d5791a07dd2cd1209ddfbb23344118f3c58d2f36cd87270c05a8d6882b130ab",
+      "sha256": "814f23ba7a9323d477a14fd1fd4396115e26272796a2ca0764232273a6bc3866",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -358,28 +358,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Shape reference radius",
-              "value": "75 m"
-            },
-            {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Didymos"
-            },
-            {
-              "id": "dimensions",
-              "label": "Encounter shape",
-              "value": "178 × 169 × 115 m"
-            },
-            {
-              "id": "impact",
-              "label": "DART impact",
-              "value": "26 September 2022"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -1152,8 +1131,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7d5791a07dd2cd1209ddfbb23344118f3c58d2f36cd87270c05a8d6882b130ab",
-      "bytes": 13629,
+      "sha256": "814f23ba7a9323d477a14fd1fd4396115e26272796a2ca0764232273a6bc3866",
+      "bytes": 13192,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1559,8 +1538,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6738,
-          "sha256": "75d6eea2a9242e062e7c30baefb6cabe81091f4851c965d9862aaccff75a8571",
+          "bytes": 6482,
+          "sha256": "62b190a1b9d45b7aaee55b15deb4839313ef16dba5110ec13366ca3faf2e56be",
           "verification": "bytes-verified"
         }
       ],
@@ -1735,7 +1714,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "33ee4ab0599c722362d8612c1ab89959fbd7050ef40a0506fbb798d4e499649e",
+    "materialSha256": "aed71ab06fe4f4682423a6c884d3cb3d505f308884f100d2510825b06d9cecdd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

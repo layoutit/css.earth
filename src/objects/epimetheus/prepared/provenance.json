@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf9b2bce3eed8b152a90b768c6593f20cffe8661c16254988a35e0e9b4c574f0"
+    "sha256": "89fd076817cbaff4edc8440461aab70eb791c119f67faedcc2971f678e7261ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -471,7 +471,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
+      "sha256": "49280c349748cf7bedc1e1694831e80ada4fd943f7e9ba390a614c7b8b562843",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -508,22 +508,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 16.7 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
+              "value": "About 16.7 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 151,400 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Richard Walker · 1966; identified separately in 1978"
+              "value": "About 151,400 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             }
           ],
           "moreFacts": [
@@ -2036,8 +2042,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
-      "bytes": 5744,
+      "sha256": "49280c349748cf7bedc1e1694831e80ada4fd943f7e9ba390a614c7b8b562843",
+      "bytes": 6179,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2229,8 +2235,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7481,
-          "sha256": "eb48fca7e8c08cfd7f4783aa5570762ba95e76ad9163b83dd1f2c9c0a794f4b4",
+          "bytes": 7822,
+          "sha256": "38d4d37a9ad5d056122dfff4ed59067ed20bebf6b122ce4861ed2c1c1fc13dec",
           "verification": "bytes-verified"
         }
       ],
@@ -2318,7 +2324,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "68b9e7707d6c5904f1c27bc9fe44b8655eb7760dde74c6c1b36404ca408beed7",
+    "materialSha256": "fd15a0017bb7cf6b72a408907955b20d727b69ee8fc997670340e877e11839fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

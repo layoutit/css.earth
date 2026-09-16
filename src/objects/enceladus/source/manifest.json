@@ -730,8 +730,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 14681,
-      "expectedSha256": "e81d2e9f0032fe21cf4316a56ced13c49c900fc7dff914e8549f0a6ff5abf0ad",
+      "expectedBytes": 14614,
+      "expectedSha256": "0b9d2f9b46fda06e9b1b2de6757488c0306921f0c256f76e6574f3dabc624310",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -791,8 +791,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1091,
-      "expectedSha256": "bda700b0cbc4204e62df9c64377db7a32bcc44ccd002d3d08a36204da3db25d8"
+      "expectedBytes": 2344,
+      "expectedSha256": "223f90e92ceef12257a00296904cf40e0b8300018969f1d893e68f99eeb3104f"
     },
     {
       "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.lbl",

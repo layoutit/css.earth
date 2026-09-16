@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "202dcf5958e30ab89930690ef4b37e65aba77d6e8d2f01ae8a597d0800da5bda"
+    "sha256": "cb0c613e5e241632f64ee6974bc3a909bc2dee51e0feb19acf639f379df5a4c9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -246,7 +246,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "200826b43945ab958f7e12b24faac5e643b42fa7ee9f3b5b31665aa325641ff5",
+      "sha256": "425868d8de95a6b26ea688c336b47d7927570bd92b974b568b5d88c53f3b2c3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -274,22 +274,41 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "6.1 km"
+              "value": "6.1 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.diameter (km) / 2"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.210 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "3.28 years"
+              "value": "2.210 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "7.04 hours"
+              "value": "7.04 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": [
@@ -1150,8 +1169,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "200826b43945ab958f7e12b24faac5e643b42fa7ee9f3b5b31665aa325641ff5",
-      "bytes": 10278,
+      "sha256": "425868d8de95a6b26ea688c336b47d7927570bd92b974b568b5d88c53f3b2c3b",
+      "bytes": 11176,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1451,8 +1470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6482,
-          "sha256": "1d699c3bed02f3891f3f169ce71db91b169b85b7f2481179fb44d4db20c9c42f",
+          "bytes": 7151,
+          "sha256": "d66cdc55bf4de6ce45ef3858165153232e1ca14ce5e1eda81f96397a0e05bc5d",
           "verification": "bytes-verified"
         }
       ],
@@ -1576,7 +1595,7 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "407ecad009b3a1df79c7018893d96c25b32cc5d61f7eb05eaee83a295b987b3d",
+    "materialSha256": "70152f25588244814ed716e9271ebb01a705ee47f35667a137ede85c05138691",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

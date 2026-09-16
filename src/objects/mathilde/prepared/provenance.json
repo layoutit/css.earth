@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "84af7eb469a52a92b3a27345aa51ddb7f45976a0c325ce4c897f4f6b16d5f8f6"
+    "sha256": "458ecdd7bbcffab7f439ff88e6e11229a49f5a81ff5badd62b015b7084b99dce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -239,7 +239,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "10e192b36427399d0bf735fd2ff542aeefb03bb5c1903af0988f521ddf9c111a",
+      "sha256": "b48c55f753bde7a69af5277d3ab8b49aa124bf0fb0b14da592e51a551673fb95",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -276,21 +276,6 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "Target physical data: RAD (km)"
               }
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.647 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "4.31 years"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "17.4 days · pole unresolved"
             }
           ],
           "moreFacts": [
@@ -876,8 +861,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "10e192b36427399d0bf735fd2ff542aeefb03bb5c1903af0988f521ddf9c111a",
-      "bytes": 10557,
+      "sha256": "b48c55f753bde7a69af5277d3ab8b49aa124bf0fb0b14da592e51a551673fb95",
+      "bytes": 10188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1168,8 +1153,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6513,
-          "sha256": "e4c041c5e700f5335601df1349d0e284937c04d367a5daed336303710d953a99",
+          "bytes": 6276,
+          "sha256": "8fb2dad6d7e486faf1e2cd7d07b537cb1a34e138c4d45695ddef3995b476b11f",
           "verification": "bytes-verified"
         }
       ],
@@ -1293,7 +1278,7 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "e2cbe555b8157db968a1c5577c45fe0d41c0fe572174bd05267a857a699aae96",
+    "materialSha256": "b8e9458cfbfec9ab951945bd6e68f1e62bdb9a1f44d45b6c1da15b03e47f226e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2106d15899c488a8c801bb6364cf275c804a809151ee162853ba37aa13022b07"
+    "sha256": "930aa47ca3404a50c2e64173fefee78e9a16326e677eb3b705d178404c52bece"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
+      "sha256": "637508f38cd5ee831b555f60993bd888a7f1895311809e38f95c1c72d6063c5f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "55.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.908485 hours"
+              "value": "8.908485 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1855",
+                "label": "DAMIT model 1855",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
-      "bytes": 9672,
+      "sha256": "637508f38cd5ee831b555f60993bd888a7f1895311809e38f95c1c72d6063c5f",
+      "bytes": 9878,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7362,
-          "sha256": "a091b99d00f61fd583c7649df1e20d0b08f8ced08a3e32afdbccb59a003c0e3f",
+          "bytes": 7521,
+          "sha256": "041ed5a261d394d98d60117abb7a65537e2d5a5e42f6f44a4abb6f8e146b6db2",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "harmonia",
-    "materialSha256": "3efdcb7e504d7a40e8ccd812fbd1cee7ca2f11d7b5b8e7ee7a2035df1650667d",
+    "materialSha256": "133ac81f1f06ed3775b012b56b5f9676f910573ea7697ae510d865a52973b14b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
