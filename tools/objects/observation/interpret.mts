@@ -88,14 +88,14 @@ function parseSurfaceObservationScience(value: Record<string, unknown>): Surface
   if (offLimb && Object.keys(requireRecord(value.offLimb)).some(key => !['rotationDegrees', 'mirror'].includes(key))) throw new TypeError('A surface-observation offLimb block declares only rotationDegrees and mirror.');
   return { shape: parsed, lens: lens as SurfaceObservationScience['lens'], ...(offLimb ? { offLimb } : {}) };
 }
-/** The band-projected sphere reads its map with the prime meridian at a quarter turn (mesh +y) and east-positive longitude toward
- * mesh +x, the convention every planet's `presentation/surface-map.json` records (prime [0,1,0], east [1,0,0]). The observation
- * preview is east-positive with longitude 0 in its first column, so columns are remapped without resampling: column x shows
- * longitude 90 - (x + 1/2) * 360 / width. */
+/** Lay the east-positive preview on the band-projected sphere the way a planet atlas is laid: east longitude grows with the
+ * mesh column, and body longitude 0 sits a quarter turn along the mesh (mesh +x), where the runtime places the sub-observer
+ * meridian of an observed-pole record (measured through the leaf under the sub-Earth point, 2026-09-16). Column x shows
+ * longitude (x + 1/2) * 360 / width - 90. */
 function rendererLongitudes({ rgb, missing }: { rgb: Buffer; missing: Uint8Array }, width: number, height: number) {
   const outRgb = Buffer.alloc(rgb.length), outMissing = new Uint8Array(missing.length);
   for (let x = 0; x < width; x++) {
-    const source = ((width / 4 - 1 - x) % width + width) % width;
+    const source = ((x - width / 4) % width + width) % width;
     for (let y = 0; y < height; y++) {
       const from = y * width + source, to = y * width + x;
       outRgb.set(rgb.subarray(from * 3, from * 3 + 3), to * 3); outMissing[to] = missing[from]!;
