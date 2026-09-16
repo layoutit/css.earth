@@ -1,8 +1,11 @@
 # Surface observations
 
-A surface-observation lens drapes spacecraft photographs over a body's retained
-mesh. Preparation carries every photograph through the same stages, whatever
-archive it came from. The runtime only displays the prepared atlas.
+A surface-observation lens drapes photographs over a body's retained mesh.
+Preparation carries every photograph through the same stages, whatever archive
+it came from. Most come from spacecraft; a ground-based telescope frame enters
+the same way once its camera is computed from an ephemeris and a published spin
+state, because the route takes the camera as numbers rather than as a mission's
+own geometry file. The runtime only displays the prepared atlas.
 
 ```text
 decode → camera → pixel geometry → photometry → footprint → surface transfer → report
