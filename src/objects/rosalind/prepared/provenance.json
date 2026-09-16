@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5167cecaa52d8dd519edca75e0938d1574dd5545d2c04645f0e8e25196f05ed3"
+    "sha256": "4ed0464426ca3a48b4e9273c75ee61f69c6375479b456e6f0efa1a69c36c96e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,40 +102,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "88462a1d7ffc4547948bc53cc3cb95d8930cf2663089f0a87893246a1c131834",
+      "sha256": "6f5cb0d6e9bc187346a3714f1a34b384bea3e96844f0b90805ba4cf10de725f8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "rosalind",
         "displayName": "Rosalind",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Projected radius",
-              "value": "36 ± 6 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "72 × 72 × 72 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 69,927 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Sphere consistent with measured outline"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -298,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "88462a1d7ffc4547948bc53cc3cb95d8930cf2663089f0a87893246a1c131834",
-      "bytes": 2762,
+      "sha256": "6f5cb0d6e9bc187346a3714f1a34b384bea3e96844f0b90805ba4cf10de725f8",
+      "bytes": 2136,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -380,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5816,
-          "sha256": "5a916dc398103097942accd6bfc2a01eb0ff3cf0c0cfe0c916c3f45cf701ab0f",
+          "bytes": 5415,
+          "sha256": "062c0fda739799ca01cbb69973dfff96d9e42db207bac530ab4e687c73b04857",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalind",
-    "materialSha256": "0f7cc22057d2d86c0bea39a9b21f36d2ffda5ba0affa0e6697570092e303c283",
+    "materialSha256": "d5db03db75adc04089f026019ac77fa819dfffc256e4c31fdbb12d3820ecf003",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

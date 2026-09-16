@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bamberga",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5eb62bddfafa9f3b5dfbc9ac5950693887f28276d745bf9c3ad2bb56c085b5c1"
+    "sha256": "6247acbffbc86338d80281d5c01ce182dfc53aa4fc8123cbb59feb30a8c9a303"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ad7e6fe2ddef605f860ff534c809768478963a5f42b82f0ae00287aaaa3805dd",
+      "sha256": "4ade303091539b226cc5979c60d8f982d838bd979cbd2a989a358f23c6ed2d47",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "113.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.683 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "29.4403 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "3d482651df43b25da8753a3eb4cd356664fbf365ddce2c88170d3013a81fcd38",
       "bytes": 539899,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ad7e6fe2ddef605f860ff534c809768478963a5f42b82f0ae00287aaaa3805dd",
-      "bytes": 11129,
+      "sha256": "4ade303091539b226cc5979c60d8f982d838bd979cbd2a989a358f23c6ed2d47",
+      "bytes": 10896,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/bamberga/bamberga-elevation-thumbnail.webp",
           "bytes": 5002,
           "sha256": "d003ccc1d55447c4c57e15391b60babce9b4f08647f2060476677c90bf8d1f5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bamberga/bamberga-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bamberga/bamberga-elevation-surface@2x.webp",
           "bytes": 270080,
           "sha256": "1b3d34f14f6675e4921800b292256018c209c23b5ac50c697f7d45d31c879282",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/bamberga/bamberga-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
           "bytes": 58516,
           "sha256": "21a933a6941ef8396a395338733e5252e31a8a1ed1400e551596904a3a3837a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8816,
-          "sha256": "4d3182ed053c0e1bf49be0810a91d42a8700f085887eda8be14058e98714da80",
+          "bytes": 8671,
+          "sha256": "1d1948d93baaab18f04d09504aaf7ce92ccf4c0374a4cc9efcc3add6305b3442",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "bamberga",
-    "materialSha256": "bee78e9cb1c2a104f076a4daa85b4e133a096587ee71357d47ea79ced6364068",
+    "materialSha256": "93b952e9e44cf8a34c17891b0825b6acdbbec0d93f28bd91cc3e2cdd64944052",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "5428af9f1a0c140d4b073dbff9b7c8fb518ce761638b4e44f60251010aef4783"
     }
   }
 }

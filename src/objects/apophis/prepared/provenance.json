@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "apophis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "30c2647d8884b9bed8ce9cb04fe3d03cf87e6fdb0ef47dc08a02891106c53468"
+    "sha256": "92f86015e5171bb09be9d8d92982babb852bd4f90788b4a93d10af56545a251a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3ea73e79fe975abaea1fed1810661aedb1b1ced9ab304c78f68eba90bca4d52e",
+      "sha256": "ce9874d7f41ababb6e564da2c5fc7631890dc4da1b0c9f258762f3aafd2ab663",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,16 +199,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "precession-period",
-              "label": "Precession period",
-              "value": "27.45 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Body rotation period",
-              "value": "265.7 hours"
             }
           ],
           "moreFacts": []
@@ -339,7 +329,7 @@
       "sha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266",
       "bytes": 197868,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3ea73e79fe975abaea1fed1810661aedb1b1ced9ab304c78f68eba90bca4d52e",
-      "bytes": 9226,
+      "sha256": "ce9874d7f41ababb6e564da2c5fc7631890dc4da1b0c9f258762f3aafd2ab663",
+      "bytes": 8983,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/apophis/apophis-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "80d669897d8cbff83ce1ab396ac19aa1b8d7be68c597de26f2bbfe9da10c05ad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-elevation-surface@2x.webp",
           "bytes": 381086,
           "sha256": "11c740abede5da8cf14e7a026814f5bb636cc974d4988f97e3c09993309357fb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/apophis/apophis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-shape-surface@2x.webp",
           "bytes": 69512,
           "sha256": "4cd1a35393e418c969d93e18ea52251c80806080d82f5d812e6fb98e2a32a26b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6732,
-          "sha256": "456cbb60185cae890e30c2bc5ab7fdcf3da181790286e7ac200899bdece3ffac",
+          "bytes": 6577,
+          "sha256": "3ed1cf28a62f0c4e7b9ae9af47b6e745469ff1cb3e99107046a18413581cf48f",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "apophis",
-    "materialSha256": "6c9541c9d83e6e0a8c2799e563f5afc33dfd91c62d783cb60afcc3d93dee8a5d",
+    "materialSha256": "0c4381283bbd0115249f403beaebfdb0dd1f48742e194383f5f57c47f9f03c14",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "d2d4ade961ce6aba101d559df95c8188bf618eae1e9d68f142e9d58852052c33"
     }
   }
 }

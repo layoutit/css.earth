@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "195412522b150275f4dca199d621f82a59ca10eedbf3737b2059592514a1a9f4"
+    "sha256": "922631b9d8a40dcb24ccedd41714688137e849ee7a4a452fe9429a37c0f67e24"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,25 +134,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ff9d8ce50c6c3f832822aabd3984059b856d223069c11abc7bcd5b9371fc68fc",
+      "sha256": "733e593ebe9853f242e1ec944f5468d804f67598f3c7ab624a67488f7cd206b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-209p",
         "displayName": "LINEAR",
         "panel": {
-          "facts": [
-            {
-              "id": "dimensions",
-              "label": "Nucleus size",
-              "value": "≈3.9 × 2.7 × 2.6 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "≈10.9 hours"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -276,8 +265,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ff9d8ce50c6c3f832822aabd3984059b856d223069c11abc7bcd5b9371fc68fc",
-      "bytes": 2712,
+      "sha256": "733e593ebe9853f242e1ec944f5468d804f67598f3c7ab624a67488f7cd206b4",
+      "bytes": 2475,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,8 +337,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2795,
-          "sha256": "d6b9cd6819063f5523142597cfaeb3eb772e4e22ac6ec845133d69675f775832",
+          "bytes": 2651,
+          "sha256": "3da8cddcc71cf05d92f65f273ad5d06a2b2e1095022e794e129ff4dd99d424ff",
           "verification": "bytes-verified"
         }
       ],
@@ -362,7 +351,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-209p",
-    "materialSha256": "4c84c2e3c9dfbfc9fc47b82fdda06771bb383d5875dd3806caa959719f74234f",
+    "materialSha256": "5928ed39b5e1fcf251b01b62629c59313ab5ec89bce0cc69e647ceb330a4d4e1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

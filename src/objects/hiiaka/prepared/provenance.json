@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87dd5058015854e928daa198a48f174aafee0905a9c5ad6accbabf912e890436"
+    "sha256": "893cd7d7adaf62d72a64033a6d098100f592de93db9384cebc42d78dbdbb4bcc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,47 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "456c37685a4977b842c58295be74cdfe429a682dfea2a7e2d6615efb2998ec55",
+      "sha256": "a7c4301b2e9dea54c20315cedee7fae9d4a7fbdb54a74d110d5b17ebd4205fbe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hiiaka",
         "displayName": "Hiʻiaka",
         "panel": {
-          "facts": [
-            {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Haumea"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full model dimensions",
-              "value": "480 × 360 × 286 km"
-            },
-            {
-              "id": "scale",
-              "label": "Size evidence",
-              "value": "370 ± 20 km · reported volume-equivalent diameter"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation interpretation",
-              "value": "9.68 ± 0.02 h"
-            }
-          ],
-          "moreFacts": [
-            {
-              "label": "Orbital position",
-              "value": "Retained JPL solution from older observations; limited phase accuracy.",
-              "id": "orbital-position"
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -304,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "456c37685a4977b842c58295be74cdfe429a682dfea2a7e2d6615efb2998ec55",
-      "bytes": 2897,
+      "sha256": "a7c4301b2e9dea54c20315cedee7fae9d4a7fbdb54a74d110d5b17ebd4205fbe",
+      "bytes": 2112,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -386,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5110,
-          "sha256": "0a410da3fde5fd23a7bc484ee7ca9dd23ca5f452812e0eb71a890710a6e55f63",
+          "bytes": 4599,
+          "sha256": "fda5fbc3ccbc88b91433d018a1c00f017372c351e8696018d35ccf5294eadb81",
           "verification": "bytes-verified"
         }
       ],
@@ -425,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "hiiaka",
-    "materialSha256": "8904a6456158264b4fbce265e33b3c47fb6be1f5f4b186933c58a02e731a7c83",
+    "materialSha256": "8e5ec53b0cf04801527381d3cc4dccc5cfd7c67ab3dcea3690bb5b4bc91392f1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

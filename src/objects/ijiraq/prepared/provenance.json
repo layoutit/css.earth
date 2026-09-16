@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c057bab31ea002e95085f881cba752517704b47017e17e77bf9dc21c2eaabb8"
+    "sha256": "ff26126b9f6d5bdfeafe48cdd31a63d305f8d76e4222d9c17d4334a48882bc21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b73396ef9c7863a1f890b1612397fc8176e7bda84c5b05362fb71c66cb96d504",
+      "sha256": "638782a8fb0c2586f78621e61f23a2bb65dbcbca5d934f0c04557c89647aa500",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,43 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "13 (+4/−2) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.08:1 · uniform-reflectivity model"
-            },
-            {
-              "id": "rotation",
-              "label": "Observed rotation period",
-              "value": "13.03 ± 0.14 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2000"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +289,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b73396ef9c7863a1f890b1612397fc8176e7bda84c5b05362fb71c66cb96d504",
-      "bytes": 3062,
+      "sha256": "638782a8fb0c2586f78621e61f23a2bb65dbcbca5d934f0c04557c89647aa500",
+      "bytes": 2621,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4606,
-          "sha256": "3f67b5af689fea498908dcffb53bd0d0985a91e64d6cb342858e11c2d094f352",
+          "bytes": 4343,
+          "sha256": "48cf39b50cbe7da4b6e684d73c4cc8e67fc6a939348e0b0086131e4d2a04e9b7",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +410,7 @@
   },
   "lastPreparation": {
     "objectId": "ijiraq",
-    "materialSha256": "eed26f402acea3e580e520f43cef75538fd42251b8db745eee4a6942a8d32c2c",
+    "materialSha256": "c7fb54207087b284c22ba7ed6d34bfc302b42e6db6ac9bbd62e197d2dbae66a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "elektra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8ae70b8a8ae2f797cfc98478964bdc4e46bba5a41ff44bcf3dc83435a2bc8b3"
+    "sha256": "d61cd04ce2d25acde250c0be12e60d8408a8adc0b86752d11c45457b4f6e7224"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a3f56ad7ebc84062bafc0b5c18e241fadde4ca3400d2e0051cf70c244ea200f5",
+      "sha256": "5740b5c1094d20e2e53a4ea4ba9e48c5f8389ef3e6268a96751c66116c2e0913",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "99.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.127 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.224663 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "fbda436c7c355e1e15554c69147c02f053d77d97cf20a39bc30179704b91a7a2",
       "bytes": 317179,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a3f56ad7ebc84062bafc0b5c18e241fadde4ca3400d2e0051cf70c244ea200f5",
-      "bytes": 7738,
+      "sha256": "5740b5c1094d20e2e53a4ea4ba9e48c5f8389ef3e6268a96751c66116c2e0913",
+      "bytes": 7505,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/elektra/elektra-elevation-thumbnail.webp",
           "bytes": 4874,
           "sha256": "811ec9cff5150f83f1476d32504e93c368ee1de18853df6a3463e6da04f7d5c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elektra/elektra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elektra/elektra-elevation-surface@2x.webp",
           "bytes": 301670,
           "sha256": "012227f126c77c488373181628db685c5614f98f7fdb541a2802caf8135da721",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/elektra/elektra-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elektra/elektra-shape-surface@2x.webp",
           "bytes": 55850,
           "sha256": "70f60705899b88d89b2102724a2bb0c99a0a10027855126d12aa8aa3e8c10d2e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5438,
-          "sha256": "d36e1514d63bc90e92302605e51f8e12312434ce7f4a5344776506b400e084f5",
+          "bytes": 5293,
+          "sha256": "662ec6904b9732d9f3763c831b6b644940bf5ee7591b0300bd0c11e65872b79b",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "3b92c0bbdddc0e8af704c01ee534509d904fabb2c1cd5cddcce767a2eefa3a3c",
+    "materialSha256": "9c9cb13540dc88eff82bd779b49eb425ba015be80f279b8cfc71b72f5e55a8a3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "10e309e7b35b21e7078162e2c5204d5dd108eaa6adeb16bf72fa6822e6a5fae1"
     }
   }
 }

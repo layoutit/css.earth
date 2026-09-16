@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "40941f44d2d894b75e82c4b7357f6b2e0420bdf003b942e2f9ae45f2f31c5f49"
+    "sha256": "9700634c71af9dcaf15de76335f95ba64e43b86df58d2778be7a45b5829e08a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1c67392313f8357dc0ca2e499994dcbe8833fc007532ddd97434a565f411df4e",
+      "sha256": "125ca72c1266974224417b5370ddd6dd157ae4eed72f632dffd33f5d22a9a69b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,7 +145,15 @@
             {
               "id": "diameter",
               "label": "Catalog diameter",
-              "value": "≈60 km"
+              "value": "≈60 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=29P",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.diameter (km)"
+              }
             },
             {
               "id": "perihelion",
@@ -280,8 +288,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1c67392313f8357dc0ca2e499994dcbe8833fc007532ddd97434a565f411df4e",
-      "bytes": 3419,
+      "sha256": "125ca72c1266974224417b5370ddd6dd157ae4eed72f632dffd33f5d22a9a69b",
+      "bytes": 3756,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -352,8 +360,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 15178,
-          "sha256": "c584c6cb190f30f9954a02322b3467530e51751b8a9a47aa1f37e41de4785101",
+          "bytes": 15424,
+          "sha256": "5265b80dc9776be9bee9c62e36ffe1df1b05832e6b85d2683eb09dbc95aec784",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +374,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-29p",
-    "materialSha256": "b5c77b5c114f5164e0507958efc738c204d7476f429c2e8c2222eeff6a8d2cc5",
+    "materialSha256": "eb0ca834782e9daccdcfdaeb5cf44955f009054e9867d2da71105296ab210c73",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

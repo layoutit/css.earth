@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "daphne",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "272784bfb0b04e1f17ab3b86611ada81e50d8d8ccda5b4df5989eb52571e2387"
+    "sha256": "41d78092b0c9fbf07693d151a22852ffc615ea2b01b9f73782ba703dede025ef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ec9de4bc01cca24775af63d9b88a1f8bb319afdf30e1bdb16f32f1cac396f992",
+      "sha256": "5c8552f3a29c75675e8bb2d79d797c035e63106c06b8c0b7de2c74293d313a34",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "93.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.767 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.98798 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "46e59ffff48f91e62bac9d3d3c195549698092e721b487e8187b0ae0980d026d",
       "bytes": 344059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ec9de4bc01cca24775af63d9b88a1f8bb319afdf30e1bdb16f32f1cac396f992",
-      "bytes": 8536,
+      "sha256": "5c8552f3a29c75675e8bb2d79d797c035e63106c06b8c0b7de2c74293d313a34",
+      "bytes": 8304,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/daphne/daphne-elevation-thumbnail.webp",
           "bytes": 4990,
           "sha256": "6f54d54d6f0857ef1326ab5ac4e50420cd976977c459cd68605c5371ea040eb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-elevation-surface@2x.webp",
           "bytes": 289234,
           "sha256": "cc543b0d5fada3b45a1880545b3de1400fa56e6f3ba4a8f33be2dfcd24a98090",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/daphne/daphne-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-shape-surface@2x.webp",
           "bytes": 62582,
           "sha256": "60e64022e28b32c4741dc6056b242dacb50c75cbcee4f77a6840bf6db7ac704f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6250,
-          "sha256": "a0895c05c37ac17da6827cd24dda230b5a59ae9f57bec1913189c17d3736d5b4",
+          "bytes": 6106,
+          "sha256": "5eb5681ef959da96be310e48fe3e5e28de0bb210a443d9cd31be646b41f42231",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "daphne",
-    "materialSha256": "cac917e0d5159aca1708b9792ab39c9587d894b52372ec06d1991e757c1f411f",
+    "materialSha256": "1976c55783ebeb640146678825ed3cc959ff1a6afb47023a0c29ac54a883c751",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "db05a693e6fbb350d8cd4e6502b19549c367e61a37270b6186375a428484feb6"
     }
   }
 }

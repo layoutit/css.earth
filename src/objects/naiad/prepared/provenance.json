@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c63495cdcdb94900ac37645c9c961916ed8fb839b8bf82763df7dee360e378dd"
+    "sha256": "dc178c5996be6fe817ac100213908d42843156ab1720a34aaffcee859f551408"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "53e5389960cd7a2e7a13316d35dc93c7ce0bfa7be2255129240ec69bcb14bb1d",
+      "sha256": "690b67d7c26f3ca4a453357ea8e82ed64d2bcf4e03776ed5409d3912c814e4c0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,32 +113,54 @@
             {
               "id": "radius",
               "label": "Reference mean radius",
-              "value": "29 ± 6 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Dimensions",
-              "value": "About 96 × 60 × 52 km"
+              "value": "29 ± 6 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "JPL Planetary Satellite Physical Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/1; Mean Radius (km) value"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "About 7.06 hours"
+              "value": "About 7.06 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 48,200 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Modeled as synchronous"
+              "value": "About 48,200 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager Science Team · 1989"
+              "value": "Voyager Science Team · 1989",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/2; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +325,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "53e5389960cd7a2e7a13316d35dc93c7ce0bfa7be2255129240ec69bcb14bb1d",
-      "bytes": 2890,
+      "sha256": "690b67d7c26f3ca4a453357ea8e82ed64d2bcf4e03776ed5409d3912c814e4c0",
+      "bytes": 4114,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -385,8 +407,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5179,
-          "sha256": "b5d80bf73416d889c3f71525927c66db311a476c8602f22052664c745609f121",
+          "bytes": 6127,
+          "sha256": "79303f0f09b75b990e5104511aff1793c9b348ff1697a5baee65dc02c102bb74",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +446,7 @@
   },
   "lastPreparation": {
     "objectId": "naiad",
-    "materialSha256": "75766644f32d08104ff61aed05a24c272c0e04b9420e3abb394cfe68a5341e56",
+    "materialSha256": "e0f9da0713f74f93c30cc16bc92af69306b22d26ffbe57520caf8445d8015420",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

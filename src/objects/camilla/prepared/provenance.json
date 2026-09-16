@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4ffe39d53340fc9063f3a27de5b31a3ba421c28fafee1adc2e98dd69ddbfffb"
+    "sha256": "afca41a946be509eb34c9aff6fb4584a140c4247e84a645f9e1029adc7b822db"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d55ccc786faf18ab4f41872f016b9f7de6d00bb2c4e2bddab3f8069ad15b042a",
+      "sha256": "208bdf90da2a6b02369aa8651e655446cc2ef7941e9bf1f48dcbf8d9552b3bf3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "130 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.843928 hours"
+              "value": "4.843928 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1813",
+                "label": "DAMIT model 1813",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d55ccc786faf18ab4f41872f016b9f7de6d00bb2c4e2bddab3f8069ad15b042a",
-      "bytes": 8905,
+      "sha256": "208bdf90da2a6b02369aa8651e655446cc2ef7941e9bf1f48dcbf8d9552b3bf3",
+      "bytes": 9112,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6605,
-          "sha256": "31c1eaf1e7ac1561b66d2d0cc6e3f955932da21e39ac1a5cfb03bf9567db154a",
+          "bytes": 6765,
+          "sha256": "c6370db9b15e262076e7d154bc5eaa9da60a8a1770db5cde4c572ddcf7f7f730",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "camilla",
-    "materialSha256": "f01e2562746ce553bccf97368beae2d93f14e3307db52417386595a2d84f5d9a",
+    "materialSha256": "95f80f9126744103e20b46c4286b49fbf11bdf6cf360e75f01f5353e1031f2c5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

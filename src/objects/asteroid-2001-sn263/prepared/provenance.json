@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e7f7e96fc4b264e53dc0b349f53f9b80b94ba6aac99a4537289ff5e403728ab7"
+    "sha256": "85960f0b5cd1195e51a3dab45fef78b6384f96f587b34c67ed9e971d14fe57f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,57 +93,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3b309dfab696b851c16eb4bce1eb156fed7851979be60f9f6c8d81206dd21f79",
+      "sha256": "ea98ded40750c4bf19fe24a556c195929242406f4f4adf591f4bb544dc193fe0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2001-sn263",
         "displayName": "2001 SN263 Alpha",
         "panel": {
-          "facts": [
-            {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Sun"
-            },
-            {
-              "id": "diameter",
-              "label": "Estimated diameter",
-              "value": "2.5 ± 0.3 km"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Radar and light curves"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "3.4256 hours"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "shape-epoch",
-              "label": "Observations",
-              "value": "January–March 2008"
-            },
-            {
-              "id": "shape-scale",
-              "label": "Model extents",
-              "value": "2.754 × 2.720 × 2.857 km"
-            },
-            {
-              "id": "phase",
-              "label": "Orientation",
-              "value": "Measured pole · illustrative spin phase"
-            },
-            {
-              "id": "orbit-limit",
-              "label": "Position",
-              "value": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -284,8 +242,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3b309dfab696b851c16eb4bce1eb156fed7851979be60f9f6c8d81206dd21f79",
-      "bytes": 3323,
+      "sha256": "ea98ded40750c4bf19fe24a556c195929242406f4f4adf591f4bb544dc193fe0",
+      "bytes": 2300,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -356,8 +314,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10370,
-          "sha256": "9220c44fddd279e792088343e9ef5d303c052d68f275a254785d2d36c63d5112",
+          "bytes": 9709,
+          "sha256": "1733419cba5b51e2db631b3a64d7f51f5da3a7886cbe6fc266cc83290ee65a6c",
           "verification": "bytes-verified"
         }
       ],
@@ -395,7 +353,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-sn263",
-    "materialSha256": "de31dab8b14fe70faea06f04b84d217ce6a6fa71cbb0b4c276e2b72655b916f7",
+    "materialSha256": "0837b45498135eed9a95b073732a2faef21a23e8f976e1ba193adfbdc5b9502c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

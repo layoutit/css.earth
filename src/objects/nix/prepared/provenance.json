@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nix",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d40f739dfb22b77341cf22cc420d532de039a786e4607abcb459a8a5cf052382"
+    "sha256": "04da9598eb6a4132a0780d852d3bd6f1e1adc4e0bb5260b83baabdefffaa2272"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
+      "sha256": "87f5ecc9cd8ab254194fdb2c9d6f4e7038d1c57613df04cd1954c56ca6ed48d0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -150,34 +150,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "18.3 km (released shape model)"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "48.4 × 33.8 × 31.4 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 24.9 days"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from system barycenter",
-              "value": "About 48,694 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 43.9 hours (not synchronous)"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Hubble Space Telescope · 2005"
+              "value": "About 24.9 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days)"
+              }
             }
           ],
           "moreFacts": []
@@ -311,7 +294,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -359,7 +342,7 @@
       "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "bytes": 4586869,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -402,7 +385,7 @@
       "sha256": "78f83c9887e252cfddbf4232002659d44cb0b1763df7fd1629a429cc9844fa1c",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -429,7 +412,7 @@
       "sha256": "de22290d16e8a1713cc762b262a2a42972298a67d563535aedfbca9fab1567e3",
       "bytes": 2921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -446,10 +429,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
-      "bytes": 3770,
+      "sha256": "87f5ecc9cd8ab254194fdb2c9d6f4e7038d1c57613df04cd1954c56ca6ed48d0",
+      "bytes": 3458,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -486,13 +469,13 @@
           "url": "/scenes/nix/nix-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-model-surface@2x.webp",
           "bytes": 73950,
           "sha256": "ca35a6ea514c2cde36091f4e29990720b80050b1241b278fe697c487d5639c41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -537,13 +520,13 @@
           "url": "/scenes/nix/nix-monochrome-thumbnail.webp",
           "bytes": 1812,
           "sha256": "430b14f48f3eb4077b78c226f8bdb49ef9e49fdfb7f766220f8dd607e8f8a199",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
           "bytes": 144698,
           "sha256": "7ffc31a3716573ce24cb2e9eea51283aaaed3eb10996979e85473b4d88d45874",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -574,8 +557,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3044,
-          "sha256": "c7ec867c8ea70a98b8f0a5bc4c75dc665388b436af5116a831e5eb3af630b20e",
+          "bytes": 2861,
+          "sha256": "8a0bcb8a27bf4c870ca4c25b1a3c46231633584bd62b689d953692e2e2094907",
           "verification": "bytes-verified"
         }
       ],
@@ -638,11 +621,11 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "e22a76b9098361d8d7faa4b92964decb7a1f40319c202bd16e3641bc6a198e4f",
+    "materialSha256": "40827ac312e5582fcf32db768a21184c721bb852cbdbd00b645fbb1cceb3089b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "cb28b8660761800b3c64c36fe453cd68be3703f6da7602782f8082bce49910df"
     }
   }
 }

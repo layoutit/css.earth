@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "918a66d9807f191033b03beb23e63db296fd26fb637f81fe4f8a7bd25645f25d"
+    "sha256": "3a8154c5a04966cd293f46f0c1fbd7ce53cdf084f6651e3e44d8d8f16f042492"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "87d71136ee17007b72814228c2751d74971931ab1c3cf58a4851f9042607c2d2",
+      "sha256": "b5cdde1bc42961e9033b4657b9521b31d96a93e25d95afa9759f629c5bfd0cad",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "2.55 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.603957 hours"
+              "value": "3.603957 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394",
+                "label": "DAMIT model 4394",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "87d71136ee17007b72814228c2751d74971931ab1c3cf58a4851f9042607c2d2",
-      "bytes": 9299,
+      "sha256": "b5cdde1bc42961e9033b4657b9521b31d96a93e25d95afa9759f629c5bfd0cad",
+      "bytes": 9505,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6984,
-          "sha256": "9d129a34f8b76f4f5ae3d0c63efd7b92f6ec493ce32b6af74106add964a53e7a",
+          "bytes": 7143,
+          "sha256": "8b6df4b486036672e9bec58a61fcff28c240c72ace76c16bdc2d80faf9806ad7",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "phaethon",
-    "materialSha256": "19a4f06aee4bdaa528a0a27b9abaef80dbce6bc27e199f66f27d75bbadc16620",
+    "materialSha256": "073bb8ec550ca9829100df51f0918a72ce24fc52ce00720f0fde90a62ba9d4f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

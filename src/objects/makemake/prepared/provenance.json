@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2852a4db879aeb95fe4f567e45635f74cc2312cca44accf92479805911069813"
+    "sha256": "38752b2a57938db41ec50fa682b0caf33bf726f0081669d820ae35f9749547c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "652c28ae26d03b0b758d83bc9a0597b8333a99a17c8a2f24c65f0ce5c3539442"
   },
   "recipes": [
@@ -99,7 +99,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
+      "sha256": "2264b3426f2b6ca250c6a146629243f04ee8e4de324e8e3ad10404e9d492ea89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -123,50 +123,8 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Approximate radius",
-              "value": "715 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 22.5 hours"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "About 305 years"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "1 — nicknamed MK 2"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "45.8 AU"
-            },
-            {
-              "id": "surface",
-              "label": "Surface coverage",
-              "value": "Unresolved; no terrain map"
-            },
-            {
-              "id": "shape",
-              "label": "Display shape",
-              "value": "Spherical approximation"
-            },
-            {
-              "id": "appearance",
-              "label": "Surface representation",
-              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -270,8 +228,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
-      "bytes": 8659,
+      "sha256": "2264b3426f2b6ca250c6a146629243f04ee8e4de324e8e3ad10404e9d492ea89",
+      "bytes": 7631,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -779,8 +737,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7123,
-          "sha256": "e54ba5f995e45d567e50b36d57e8b89e86fd1a397737d52e6a87f830b24d38be",
+          "bytes": 6460,
+          "sha256": "44ca0657b8aefd45477f31fd2229e61715dcebdc983adf1c79485b15e3a363de",
           "verification": "bytes-verified"
         }
       ],
@@ -818,10 +776,10 @@
   },
   "lastPreparation": {
     "objectId": "makemake",
-    "materialSha256": "5fe09e3e023cd7ca0e642aec10fef8a01c79004e892cf4ea4a577ca8d8162879",
+    "materialSha256": "f03c30d390acb9251711d2ae5cbf686c59860dd0eee683253025d391498cc98d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "652c28ae26d03b0b758d83bc9a0597b8333a99a17c8a2f24c65f0ce5c3539442"
     }
   }

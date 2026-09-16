@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "25a1124c3d473fe096b66a2e7119827ebb6e8ca7e710fc7e9850872aca5ed131"
+    "sha256": "bfecee71ed43a7e6ef2abc112a03bbf8d59a77743fc8bc2339e91cdc7d0fb621"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ded4759921cf2b842c89d03713dfcacbaa7e2b00b6229bc8df5808d9ecefcb0a",
+      "sha256": "708275f7e38aa20f4f82b8689db26ce117d5403f949209f16020692542b29fb6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published size model; shape unresolved"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "995 × 995 × 995 km"
-            },
-            {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 10.3 hours from photometry; aliases and a possible doubled shape period remain unresolved."
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Detached trans-Neptunian object"
+              "value": "About 10.3 hours from photometry; aliases and a possible doubled shape period remain unresolved.",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=90377",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -306,8 +293,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ded4759921cf2b842c89d03713dfcacbaa7e2b00b6229bc8df5808d9ecefcb0a",
-      "bytes": 3500,
+      "sha256": "708275f7e38aa20f4f82b8689db26ce117d5403f949209f16020692542b29fb6",
+      "bytes": 3161,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -388,8 +375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5939,
-          "sha256": "7926c493b20e66cb0b8b064ee697e05b1ad909583ba59641f2fa585908059582",
+          "bytes": 5690,
+          "sha256": "259dab6654ce2958bf3f6c0f30f743a9520cdbdcf1d0322bd80d677a45701e3c",
           "verification": "bytes-verified"
         }
       ],
@@ -427,7 +414,7 @@
   },
   "lastPreparation": {
     "objectId": "sedna",
-    "materialSha256": "3c976865bd0191d2d914c463ee9f392150a62d6e5f23631c4a6cc225d345940d",
+    "materialSha256": "e83b5fe567182fd30ce6151dd9e715f140dba0218c053a9a22d241fd68c9f91a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

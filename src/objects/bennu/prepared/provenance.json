@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bennu",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "89d5fe93101893bbed9f1f8b14841ea5f86a926ccdc9415e48bb0b0f19199a91"
+    "sha256": "3056cc4e662b081c508cc5c9d6c96975dbcc477a22207c9a0b08cf5fb04061a8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -202,7 +202,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "329064bace61b3ce7fbd2ef1849fb090f4e55cafd8edb1c9d6d0c2f13bd7571f",
+      "sha256": "b861d7639a3acf861ef882ea7fd4789a33fe932a2d0283dbbaaf4b8b7468ec6e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,19 +228,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "241 m"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "1.126 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.20 years"
+              "value": "1.20 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=101955",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -508,7 +506,7 @@
       "sha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "bytes": 315960161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -561,7 +559,7 @@
       "sha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "bytes": 195300487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -617,7 +615,7 @@
       "sha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "bytes": 493624548,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -673,7 +671,7 @@
       "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
       "bytes": 114072003,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -698,10 +696,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "329064bace61b3ce7fbd2ef1849fb090f4e55cafd8edb1c9d6d0c2f13bd7571f",
-      "bytes": 9565,
+      "sha256": "b861d7639a3acf861ef882ea7fd4789a33fe932a2d0283dbbaaf4b8b7468ec6e",
+      "bytes": 9695,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -720,10 +718,10 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8498d3fbaa7ffefbe3c86d25f798de80df044be4973313f2fa8091f6e4344352",
+      "sha256": "c017ad68493fbe0daab1f8ad6820b2a1ecfb6b293cbde675702327e5df555c94",
       "bytes": 1303,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -746,10 +744,10 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f",
+      "sha256": "baad704dc0b3e070b5781d68205e145339df3eabacf48ba33ad3aa019928c7fa",
       "bytes": 95757,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -778,7 +776,7 @@
       "sha256": "fb29f3953b009b6ddf6555b7b5c4be8996b07f93311d015ff9c94d8fb04c5ea7",
       "bytes": 152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -805,7 +803,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -830,7 +828,7 @@
       "sha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
       "bytes": 1863,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -881,13 +879,13 @@
           "url": "/scenes/bennu/bennu-normal-thumbnail.webp",
           "bytes": 3050,
           "sha256": "d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "bytes": 5785660,
           "sha256": "120b3a40a9df725de19c6e1dbe4affc337fa08f3ce8cf15d80a5fdea1231e26a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -949,13 +947,13 @@
           "url": "/scenes/bennu/bennu-surface-thumbnail.webp",
           "bytes": 3486,
           "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
           "bytes": 8305220,
           "sha256": "4eb704e0b0b1851da98769de1ab7a5f9c4a53f521d8bbf47181a41e733470e26",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1020,13 +1018,13 @@
           "url": "/scenes/bennu/bennu-spectral-thumbnail.webp",
           "bytes": 7048,
           "sha256": "d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
           "bytes": 5680926,
           "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1069,19 +1067,19 @@
           "url": "/scenes/bennu/bennu-elevation-thumbnail.webp",
           "bytes": 7640,
           "sha256": "b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
           "bytes": 2846108,
           "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1112,8 +1110,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4988,
-          "sha256": "2114c0e7bbf274a39172000c070187eb02df02f1793adcfd1a0d0e975471ea83",
+          "bytes": 5115,
+          "sha256": "2c449e53c46446cc1c6f4919eba459dcbeeaff7dfac9f6ceefad72aedaf95bda",
           "verification": "bytes-verified"
         }
       ],
@@ -1150,8 +1148,8 @@
         {
           "url": "/scenes/bennu/bennu-features.json",
           "bytes": 36758,
-          "sha256": "d74c2302cc89f16ace50a06374e2fab71d942e875f17b99c10228e2d75513277",
-          "verification": "asset-manifest-pin"
+          "sha256": "b87d254983f0c75e428d10d5fe7915a171b853578b0bd03db3b90b2c8cf0fdf1",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1263,11 +1261,11 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "a1addf408708745bea1d470e91fde901d38d687862fead5194104508da00e1ff",
+    "materialSha256": "46775d13cb60cba29bff4af079ddaa81cbb9580ecf80b882af721c9317b698c4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "d61100b54ab3d67b84dce2738ee5158c40349f548a53af887ea1187ef81abdfa"
     }
   }
 }

@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "296448a4e2ed6cc13d72492c3aa28837a23c9a487b532a2fb046f1edb0661972"
+    "sha256": "157a8c20ba74258717c7f75398814fa21b62bc7fb1a4b22217d05bca269adb8d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "10344eb0434520a7a8d1121f7c546181790dc65dd6c6bba25e88a5ea9a36039a"
   },
   "recipes": [
@@ -95,7 +95,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4",
+      "sha256": "7911497871bac97bdca7d338097c4b91f60b2330a02020cb1ad04d6afa5df0e5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,24 +121,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "59.1 km"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.795 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "4.67 years"
-            },
-            {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "5.385 hours"
+              "value": "5.385 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=216",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -280,8 +273,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4",
-      "bytes": 8328,
+      "sha256": "7911497871bac97bdca7d338097c4b91f60b2330a02020cb1ad04d6afa5df0e5",
+      "bytes": 8315,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -352,8 +345,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6720,
-          "sha256": "1dc9d39d735c02cd41d4e3a1e49dd6563056321e7336975acbbee4858a50d5b0",
+          "bytes": 6748,
+          "sha256": "4f5b02b86fd6658a31f4a81f50c16a9d5fd0163600c297130da0bf4b0c82ce9a",
           "verification": "bytes-verified"
         }
       ],
@@ -391,10 +384,10 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "d008e760fc30a53ccf71b87b852acc157040efee035c90f2ac33d235d9f41308",
+    "materialSha256": "6372108e821f925dbfb2adb004c1107be07dbc71ed9bf848fad11cb23b82657e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "10344eb0434520a7a8d1121f7c546181790dc65dd6c6bba25e88a5ea9a36039a"
     }
   }

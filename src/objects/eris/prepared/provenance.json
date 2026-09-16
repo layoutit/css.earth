@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12b1a01ed5caed19132b77798e43003c4a640033754449e599ffe4c32f30212f"
+    "sha256": "7eecd8bdbe68899ae0fc2d425f3e9b823405e0b06da743aaed6f3ff62a52c012"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "7c8385e9cd07e2b6a7b10bd93c0c9bb1b9677e3301b8c58b94367111da5359ad"
   },
   "recipes": [
@@ -99,7 +99,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
+      "sha256": "9654fcaf14a3f87f9e2eb70515067947a54c33ba1f789e0b062036780a7bfbb7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -123,55 +123,8 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [
-            {
-              "id": "diameter",
-              "label": "Diameter",
-              "value": "2,326 ± 12 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 15.8 days"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "1 — Dysnomia"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "About 557 years"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "shape",
-              "label": "Shape",
-              "value": "Consistent with a sphere from a stellar occultation"
-            },
-            {
-              "id": "surface",
-              "label": "Surface coverage",
-              "value": "Unresolved; no terrain map"
-            },
-            {
-              "id": "appearance",
-              "label": "Surface representation",
-              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
-            },
-            {
-              "id": "orientation",
-              "label": "Orientation",
-              "value": "Arbitrary display pole and meridian"
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "None known"
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -281,8 +234,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
-      "bytes": 5172,
+      "sha256": "9654fcaf14a3f87f9e2eb70515067947a54c33ba1f789e0b062036780a7bfbb7",
+      "bytes": 4019,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -790,8 +743,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3566,
-          "sha256": "d9b580cbcbe76558bad0952c6dd1b9795d220ac7f8af026263e398bf2bf204ca",
+          "bytes": 2819,
+          "sha256": "d68c02e325f10a9495fbcd31cdaff00673ac2c6485838b452accb10955adb83f",
           "verification": "bytes-verified"
         }
       ],
@@ -829,10 +782,10 @@
   },
   "lastPreparation": {
     "objectId": "eris",
-    "materialSha256": "7dcefe12d0ea61063090c49b025704b4280f7ffe624f59f8ad38dc4739baa4c9",
+    "materialSha256": "a9c4f644c638485215919769c573c16c4f491fe9fe7cee0c022f0da21f3b53bf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "7c8385e9cd07e2b6a7b10bd93c0c9bb1b9677e3301b8c58b94367111da5359ad"
     }
   }

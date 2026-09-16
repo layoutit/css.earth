@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2c943f14d5bea442c24e0f28646244d6637b0148e6010c979e625dcec3b5acf0"
+    "sha256": "b93b973f920f34ad7dccff4a501a96022e846b2eea1fed9a28904518666882f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -303,7 +303,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aa46441f21942bb8e9212ddbb8f32cafb283bbbdb78646bc4d1f0d82fadbefac",
+      "sha256": "9cf0817c1084c25202535fd603de1bcff07bdef57cc0f927cefd88ebb9d49cc5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -329,16 +329,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Approximate radius",
-              "value": "700,000 km"
-            },
-            {
-              "id": "distance-from-earth",
-              "label": "Mean distance from Earth",
-              "value": "150 million km"
-            },
-            {
               "id": "rotation-period",
               "label": "Equatorial rotation",
               "value": "About 25 days",
@@ -350,34 +340,9 @@
                 "catalogueId": "nasa-sun-facts",
                 "locator": "/references/0; rotation-period"
               }
-            },
-            {
-              "id": "galactic-orbit",
-              "label": "Galactic orbit",
-              "value": "230 million years"
             }
           ],
           "moreFacts": [
-            {
-              "id": "age",
-              "label": "Age",
-              "value": "4.5 billion years"
-            },
-            {
-              "id": "solar-system-mass",
-              "label": "Share of system mass",
-              "value": "About 99.8%"
-            },
-            {
-              "id": "photosphere-temperature",
-              "label": "Photosphere temperature",
-              "value": "5,500 °C"
-            },
-            {
-              "id": "core-temperature",
-              "label": "Core temperature",
-              "value": "15 million °C"
-            },
             {
               "id": "activity-cycle",
               "label": "Activity cycle",
@@ -2153,8 +2118,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "aa46441f21942bb8e9212ddbb8f32cafb283bbbdb78646bc4d1f0d82fadbefac",
-      "bytes": 11564,
+      "sha256": "9cf0817c1084c25202535fd603de1bcff07bdef57cc0f927cefd88ebb9d49cc5",
+      "bytes": 10724,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2672,8 +2637,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5089,
-          "sha256": "80c13cc0b50c1327b660209bc0512cd2c4806d718c05bf2bc17cb32730e53397",
+          "bytes": 4557,
+          "sha256": "60cc5415629adbc255817e98616df3efdcb13976a6e90b491ef96814b319d2d1",
           "verification": "bytes-verified"
         }
       ],
@@ -2786,7 +2751,7 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "e40dac6ef765bd937c64328b9f444aec237f567ae9e775ce4389f4c3215d1a75",
+    "materialSha256": "1be285772ea61466393638a796c38900f635277c4433d33307be2f99e2635900",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

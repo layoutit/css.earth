@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e77e51507d052b05c7ba921957a9e9d1570d80c48e5a2649efb95ede3eab3a4"
+    "sha256": "ff1655ce1b298e44fe551c3cc4f6ec4f52a5c6f5a973891dc735ce403dad135c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aea0d62d7040cc6be1945a05e8f39d964de440e91bf45e4fe27db781cc12c7d0",
+      "sha256": "66629c77bdb1cb851fe49107a180d2b30aae8df21dd00d1dffd30dff4c2eb4ca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,27 +114,15 @@
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Uranus"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full model dimensions",
-              "value": "169 × 151 × 151 km"
-            },
-            {
-              "id": "scale",
-              "label": "Size evidence",
-              "value": "157 (+23/−15) km · thermophysical model"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation interpretation",
-              "value": "6.9162 ± 0.0013 h"
+              "value": "Uranus",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
           "moreFacts": []
@@ -321,8 +309,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aea0d62d7040cc6be1945a05e8f39d964de440e91bf45e4fe27db781cc12c7d0",
-      "bytes": 2748,
+      "sha256": "66629c77bdb1cb851fe49107a180d2b30aae8df21dd00d1dffd30dff4c2eb4ca",
+      "bytes": 2601,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -403,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6091,
-          "sha256": "ba2d7c904bd5392e939542a33b3a4ca7fccdc28b879d750cb98717a9bbfb5f9f",
+          "bytes": 6029,
+          "sha256": "f87af42ac9fb6795b2c0beee8979c61bc11f97f4ab101157958244c239682435",
           "verification": "bytes-verified"
         }
       ],
@@ -442,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "sycorax",
-    "materialSha256": "f67048b55c8713994596096aa2fddc27695963d62a3d5f8f70ffb5233a93469d",
+    "materialSha256": "f2b4d972080d092936e139722ca45457dac88b4aaa377dff4809ef77a9d952cb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

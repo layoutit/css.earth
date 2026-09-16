@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "melpomene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72f71ba06ed1b9b4cc5813e6fa43c26d9d1065c4677ac51c3a16c4e5406bb8eb"
+    "sha256": "93a73df6d7c518954bedf9bdf0ab178298990550d35858b06a7643a7a7d49211"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fac021ff1d30ac64b9ebdaac09e3550960978d2ef9acddd82b5757610614b371",
+      "sha256": "9de4c2c8fdaa32a737ffcba8553aa984d32d96b7aed9e615c264716149d0bd3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "70.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.296 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "11.570306 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "fae676cee24081eaf0a64d460c09b13b848db90c68b2fc1df89b3ccf9c55b495",
       "bytes": 259579,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fac021ff1d30ac64b9ebdaac09e3550960978d2ef9acddd82b5757610614b371",
-      "bytes": 10315,
+      "sha256": "9de4c2c8fdaa32a737ffcba8553aa984d32d96b7aed9e615c264716149d0bd3b",
+      "bytes": 10081,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/melpomene/melpomene-elevation-thumbnail.webp",
           "bytes": 5378,
           "sha256": "71451e376286893fcb552e34e788af8c508f3dc1a28906647b38099597fb081c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melpomene/melpomene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melpomene/melpomene-elevation-surface@2x.webp",
           "bytes": 318574,
           "sha256": "73a2604e041aa696a186aeaa54c22b39653b56305c428f19141db3337f29f357",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/melpomene/melpomene-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
           "bytes": 60150,
           "sha256": "24ebce7870d54353ab2e1527e1bcb26dfded86471e4cb2964b688f53ae30a905",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7989,
-          "sha256": "74a03360c84c0dea162e5a2383281944d7f2e731de51be7ae7d70e584be0864c",
+          "bytes": 7843,
+          "sha256": "855057de2647ca78d009496fe188c9bff7d8480eeb856325e1c3ca47e32d76b9",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "melpomene",
-    "materialSha256": "370d84f0ed994c6222bdc0d2cbc38a1e0f7a5c442ec1517ed40a96769ae215b3",
+    "materialSha256": "0e0c55d1cae6ff7b889d5c5bcc923be5e1c7c6102916585e429653b161487f73",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "ffcaa5fded80ca047583979b04c09835de0e177329d8e62ee39139ab37c82a66"
     }
   }
 }

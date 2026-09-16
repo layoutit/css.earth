@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "flora",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d274b6aac17fabbd12a42982c92a6840e677c324afda0b3edf8f8ebc9bbb0dfe"
+    "sha256": "0a8043ad20123b19220b0ae6696a3a02d5f3f0a222678a7545d3f0f2eacabe85"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "91d977927469e5ccd49c2596f7c19b897511f27c1df0c12e711d56a9b96837b6",
+      "sha256": "90c60714a68dbc27e0451a37d5b5e4cad485c9f9788b1a5f69fb3e9599797f2f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "73 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.202 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "12.86667 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "e023ac4feda25e06599505cccb6c442ccb258b0d01d6d9b921717eab44c7d21f",
       "bytes": 480379,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "91d977927469e5ccd49c2596f7c19b897511f27c1df0c12e711d56a9b96837b6",
-      "bytes": 7125,
+      "sha256": "90c60714a68dbc27e0451a37d5b5e4cad485c9f9788b1a5f69fb3e9599797f2f",
+      "bytes": 6894,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/flora/flora-elevation-thumbnail.webp",
           "bytes": 6162,
           "sha256": "6177ec8ccefb65120562f6c98944ef78a55be5548468145f0eec3abc29a81dd4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/flora/flora-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/flora/flora-elevation-surface@2x.webp",
           "bytes": 337492,
           "sha256": "dac64ed2fec75a7f763e09ff1d960a450320b206a3b3aa1df04e51f3601ba251",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/flora/flora-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/flora/flora-shape-surface@2x.webp",
           "bytes": 61586,
           "sha256": "9130ad89732f2dde4dd9d655d37f6ed6961afeeae19dfc81d1903b9117797281",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4856,
-          "sha256": "5a0285a867567138fc8d4f41b9c872aa05c14f956044f975bcabbff51f74cf42",
+          "bytes": 4713,
+          "sha256": "6b93db741674e8beffdff746ab80ea21ce13a58c5a2bd8aa99b1074fe2ea0261",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "flora",
-    "materialSha256": "0e56e47f8a9cba09a8ddfa28f8a53b548c339c3a6314daa02078dff1ff700781",
+    "materialSha256": "8bee317ba57da3746491f8307d731176f5e4032b43256ac6695d994dcc1b019d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c18ced1f51b07b376b3c5356943ce652d45abab51d0a2a46dec7a725d86e11a9"
     }
   }
 }

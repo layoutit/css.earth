@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c4c3e9ba130822fd3490f636e9e5a482d34e900d9b443741e04293b01187999b"
+    "sha256": "4bbf32a4b6143a33d53dace59b4b4c168d44743acfa30b1035d53188b61cc4a2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6eb8acab34343099109017c6b001855a7b2bcad8d26643c75fc49bd08a3156c9",
+      "sha256": "59138280117cd6ca6e8e089dc6f81de07206ecd34b8e8c073056497db69210b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +111,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "About 4.75 km (2025 fit)"
-            },
-            {
-              "id": "dimensions",
-              "label": "Approximate dimensions",
-              "value": "14.5 × 8.2 × 7.2 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 32.17 days"
+              "value": "About 32.17 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days)"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Distance from system barycenter",
-              "value": "About 58,300 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation at 2015 flyby",
-              "value": "About 5.31 days; uncertain pole"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Hubble Space Telescope · 2011"
+              "value": "About 58,300 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; a (km)"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6eb8acab34343099109017c6b001855a7b2bcad8d26643c75fc49bd08a3156c9",
-      "bytes": 3139,
+      "sha256": "59138280117cd6ca6e8e089dc6f81de07206ecd34b8e8c073056497db69210b6",
+      "bytes": 3327,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -385,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6231,
-          "sha256": "ccac734770bb643c1570035c1e8b4bc27fe20b2bd57468e5b1ccf8287b6beb53",
+          "bytes": 6413,
+          "sha256": "e7880f0941b0baf740a0397d13679ea18bd51ff347e81aca5a391c06fe8d6870",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "kerberos",
-    "materialSha256": "9dc19c244cba21c30e65c82f45cd80c5218d0b97e68f01e3cf8ae08b66eacc55",
+    "materialSha256": "78a94624b74db2f7c0a80ec331239dfa0422ee9ff0e62112b6a8d8320816dcd0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

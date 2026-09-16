@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8c89a57038b644fb1097e0448cc063c2a0a9515620c1aa91e81d0fafbada85d"
+    "sha256": "5c43d23393e7eabde27f7e0f5d290f280acbcb1af1b64a3839e41110d2ee6afe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "855a6bbbb846851c099bf6b18db1dfd2b2e2df9ac593ed4540ad9227832a9289",
+      "sha256": "914402435f17aff19e9ede4d487b4c2d9c94688a6904ef1241cd6d3a0fa5866c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "156.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.081435 hours"
+              "value": "6.081435 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1843",
+                "label": "DAMIT model 1843",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "855a6bbbb846851c099bf6b18db1dfd2b2e2df9ac593ed4540ad9227832a9289",
-      "bytes": 8374,
+      "sha256": "914402435f17aff19e9ede4d487b4c2d9c94688a6904ef1241cd6d3a0fa5866c",
+      "bytes": 8579,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6086,
-          "sha256": "92a618cceac557f55ffd1c6c0ec992d5ef9b2e2473ccd0ef17b3b1777509582d",
+          "bytes": 6244,
+          "sha256": "70fa14837538b481ce9e16f845c15bfb1aab90a851c12da67d538ba9f0d7fa76",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "cybele",
-    "materialSha256": "d0fbbcbf1e752056dbaf9f889699a0adeb3d2f42e2d26381080497753decf4cf",
+    "materialSha256": "a207f53d9398197b5694d4c445490c89a862459ef142ce2b7ec43b3cdbbfc721",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

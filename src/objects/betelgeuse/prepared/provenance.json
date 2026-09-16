@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a933351c6c3a3db2066a92a9357b0855a2ad3b5bfd35342a2250c1c5cd551ad"
+    "sha256": "526bd1f499730f712ad93274da427d597d2c1edfde9aeccaf2d1eca671210176"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "589b94286ec097b5027f9ece6afb13ee0d0969915639c7c8d02722e19dfc6d90"
   },
   "recipes": [
@@ -165,35 +165,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "edf1888f6ac5613b6140789fcf304533fec6a153cd260d164b06af7c160e6ade",
+      "sha256": "433de9c6632ea56317826db7dfb4aa0b9c64e7c11b91ad6842b4806e7e576c26",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "betelgeuse",
         "displayName": "Betelgeuse",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Radius",
-              "value": "764 solar radii"
-            },
-            {
-              "id": "distance",
-              "label": "Distance from the Sun",
-              "value": "168 parsecs"
-            },
-            {
-              "id": "angular-diameter",
-              "label": "Angular diameter (4 µm)",
-              "value": "42.45 milliarcseconds"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period (P / sin i)",
-              "value": "36 years"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -479,8 +458,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "edf1888f6ac5613b6140789fcf304533fec6a153cd260d164b06af7c160e6ade",
-      "bytes": 4421,
+      "sha256": "433de9c6632ea56317826db7dfb4aa0b9c64e7c11b91ad6842b4806e7e576c26",
+      "bytes": 3935,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -642,8 +621,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7771,
-          "sha256": "77e83e45a0beb8e5eea59f98541df19926c8b9a842adaa1321dfc87fb9730b52",
+          "bytes": 7466,
+          "sha256": "7f67fc470d0893911405e3fd20eff0794c045f8e3cfeb73002fbba7d1fe7767c",
           "verification": "bytes-verified"
         }
       ],
@@ -681,10 +660,10 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "76fc1acc15b77d23038912e6c172082cf008283122d917fb069f1c029f8b4832",
+    "materialSha256": "68de022631baa666349ea1123de1a3f669bdfd4a4d1e2ac2048c1b3e7cee2433",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "589b94286ec097b5027f9ece6afb13ee0d0969915639c7c8d02722e19dfc6d90"
     }
   }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82b649ab7057181e9ffb702ceaee791620ea54525447511f89a12ca1a72660f6"
+    "sha256": "5d05663e1a6f7c931d1e1b800633de349e07fb5309544ccb8b25296e98a1ae49"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d832ffc1737d1ab7624d13b51158f628bceaf39ac95e18572d4efb1be746ab8c",
+      "sha256": "f1c4d2fa60398c29878876ab90b290a5ae7e05060c0205cc5268cd2bdf75d507",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "19.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "10.31304 hours"
+              "value": "10.31304 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1849",
+                "label": "DAMIT model 1849",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d832ffc1737d1ab7624d13b51158f628bceaf39ac95e18572d4efb1be746ab8c",
-      "bytes": 9756,
+      "sha256": "f1c4d2fa60398c29878876ab90b290a5ae7e05060c0205cc5268cd2bdf75d507",
+      "bytes": 9962,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7459,
-          "sha256": "f631845087745aed535e298ec117cce2e56902c4f36c716556d33c41e54d7929",
+          "bytes": 7618,
+          "sha256": "f74c9ee8a1a8cde4fddabef66ac635bfe1fdfc6747333bc3c382bb4d49ce7f46",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "ganymed",
-    "materialSha256": "5cc26c7a6baecead949652092ebb9f87a067aac0796717e7b959c44bed8db017",
+    "materialSha256": "afbf8d583e56b1ec215924ed93cf14c9832ea4bc0dcd5e9bb8e395e917e6e6b4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

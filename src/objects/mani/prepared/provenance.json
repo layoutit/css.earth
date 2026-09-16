@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ea37ae559577edecb7b3a2e3f6a148bfdb0735d6b81583a00cbf7de931ec374"
+    "sha256": "176b16ad6e59dacbb6874f333a97d4f36a7bd51d230f62cba4a10b3f75c61c67"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "57e4cc8ab945d3b7f111baa23f333cf7fccefd613d792b94954828511656860c",
+      "sha256": "7beab0c88bce29bf50c9250602a68e25a271cb217d6ccdf5a1ffcbd270610552",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "mani",
         "displayName": "Máni",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-constrained approximation"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "824 × 824 × 770 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; published alternatives include 7.33 and 10.44 hours"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Trans-Neptunian object"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -291,8 +264,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "57e4cc8ab945d3b7f111baa23f333cf7fccefd613d792b94954828511656860c",
-      "bytes": 3315,
+      "sha256": "7beab0c88bce29bf50c9250602a68e25a271cb217d6ccdf5a1ffcbd270610552",
+      "bytes": 2429,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +346,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4561,
-          "sha256": "a1431aa0f309dade969cfee8f04c3115012457ae3c70f0fd180ab098464dcb41",
+          "bytes": 3905,
+          "sha256": "a82e9559cab3dee2df5d9f608346537ef40371665cae99afca7638b2b0d23daf",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +385,7 @@
   },
   "lastPreparation": {
     "objectId": "mani",
-    "materialSha256": "0014eb6b52a0104b3bb573d9ad23ad99aad1516b89d8d84b11efd9513d09134e",
+    "materialSha256": "5b726b2691113ace35b57f9d6987c057949163e953753d65140139df1df9e3a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

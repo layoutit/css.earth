@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "moshup",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1ce45d2dfc5134a6998f93810a12de4bb2ceabaabfe0d7f78764e75e9a8bbd61"
@@ -358,7 +358,7 @@
       "sha256": "2bdeafb28dbb20b0aa74d79dbee76021ca7dd09e43fc72ff6cf43445dcc812bf",
       "bytes": 288969,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -386,7 +386,7 @@
       "sha256": "57a7d25349d28ac5091cb8a27f460d60950a4573921a6f787c1c6d3abd0063e4",
       "bytes": 9304,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -418,19 +418,19 @@
           "url": "/scenes/moshup/moshup-elevation-thumbnail.webp",
           "bytes": 7032,
           "sha256": "4f4349d30da1c7ae976b9324ea5319173fa5de0cf7304192b631d9db7b2ea58d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moshup/moshup-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moshup/moshup-elevation-surface@2x.webp",
           "bytes": 485900,
           "sha256": "fedefd2e58a2c29ee079ff827b11d64748864a9e2203bbcbd87548c93ab9b468",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -468,13 +468,13 @@
           "url": "/scenes/moshup/moshup-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moshup/moshup-shape-surface@2x.webp",
           "bytes": 60524,
           "sha256": "e3d2e991275ce9f30b97f9f96e833261e54a1e24fe56db02fa8eb0684b951e8f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -569,11 +569,11 @@
   },
   "lastPreparation": {
     "objectId": "moshup",
-    "materialSha256": "6629ccff9c14535c51124d8bd1ed5adba33f9d8d3ab29ba60009eebde64b66c1",
+    "materialSha256": "0d0e04b16fe24c6d21598b3ea2877bb65023a9330cd14845c2b021a9f58c490c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "80537caf656050a1b692a81b750abe1a2aaf705b77ad3169b345116896203b1e"
     }
   }
 }

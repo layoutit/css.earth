@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dff05caf7288178a740d1f9be084f1d8a6fc28b1377d6f4841db8738f9fe45c5"
+    "sha256": "40cfc450033dcde68408848d07a75d36474c8afe35556e31a5fceb5d06c67f25"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "69ccb0e27b20257c6fa27f42850607a164f35c4ecebde3e4352d257a398f0347",
+      "sha256": "28059d75dbe7ca296d67a5816288ddf3d7435646d0f1d1188e4ed6135ad34dc4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +111,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent model radius",
-              "value": "40.3 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Approximate dimensions",
-              "value": "128 × 64 × 64 km (prolate model)"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 15.0 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 75,255 km"
+              "value": "About 15.0 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager 2 · 1986"
-            },
-            {
-              "id": "uncertainty",
-              "label": "Projected equivalent radius",
-              "value": "45 ± 8 km"
+              "value": "Voyager 2 · 1986",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/1; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -311,8 +307,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "69ccb0e27b20257c6fa27f42850607a164f35c4ecebde3e4352d257a398f0347",
-      "bytes": 3117,
+      "sha256": "28059d75dbe7ca296d67a5816288ddf3d7435646d0f1d1188e4ed6135ad34dc4",
+      "bytes": 3344,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -393,8 +389,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5646,
-          "sha256": "f114a5c061392a85ada2f9ec752147f41c8cb006f34944f24074ad5ed8068346",
+          "bytes": 5867,
+          "sha256": "3fa721883c6625779f268d53fd28eb4658959373504eeeefbf552b39b550f4cd",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "belinda",
-    "materialSha256": "26e223e213fe73429cb48f342f80ab640f9f5acfb3929a4d80cb1bbe066dc84e",
+    "materialSha256": "65e21631eb958dad7af5831b72981c196d347c98afc7f340e6e21c2a50e8d6e1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

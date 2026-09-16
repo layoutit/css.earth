@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79728a6a3fb7617f15d6c659643e8804690a0fe6decbcde329934a78c605adc7"
+    "sha256": "b0943b93ca2719a3e0d0c56513965c76e0f61f5aa71c6f12ad428f1b78b1d2f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,40 +102,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2625bc0c5c59b64f57001dfb750deafc47cbff87d18533f10a809d1caebbf1f0",
+      "sha256": "91ba9cfcc90f7cce969c4f0ddea023b741dc15a869bc1dff3a80e4a4e13ed1e6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "desdemona",
         "displayName": "Desdemona",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Projected radius",
-              "value": "35 ± 4 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "90 × 54 × 54 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 62,659 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Prolate model; third axis assumed"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -298,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2625bc0c5c59b64f57001dfb750deafc47cbff87d18533f10a809d1caebbf1f0",
-      "bytes": 2765,
+      "sha256": "91ba9cfcc90f7cce969c4f0ddea023b741dc15a869bc1dff3a80e4a4e13ed1e6",
+      "bytes": 2145,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -380,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7668,
-          "sha256": "0a56c5aa0ca9cb42470d354e3dc3f72b7e6179639b67a2b07d4c80a4129f3ffe",
+          "bytes": 7273,
+          "sha256": "26573d24deda21a08b42b9079e0d29c80cba30a8688522998a44616ef4e291a8",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "desdemona",
-    "materialSha256": "fab095d73bb4c30dfb53be0f6ca92cf82baffc775a3673720e1849db9dd25e70",
+    "materialSha256": "d156f8881ff93230bb0b802fba3f7531aa09c32174a1a97b50e7d4351cd556f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

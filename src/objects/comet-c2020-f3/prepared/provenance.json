@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e028f12cc6cfdf673e8caa743a5b06572ac92d7de0bd748a95b5a09d097ac91"
+    "sha256": "f04cec13c698492c2c2a8e80faab1135bd4307e89616be481f54db1e9a02e40f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a0f334eeddb77406cd7a9499ad5da263529e57d2199ac8bc3be987732af95255",
+      "sha256": "695a4651edbb70e24fa7b37af9d123c0e454847086c430dfeb8ed3dff1d76a47",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,11 +142,6 @@
         "displayName": "NEOWISE",
         "panel": {
           "facts": [
-            {
-              "id": "diameter",
-              "label": "Catalog diameter",
-              "value": "≈5 km"
-            },
             {
               "id": "perihelion",
               "label": "Closest to Sun",
@@ -280,8 +275,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a0f334eeddb77406cd7a9499ad5da263529e57d2199ac8bc3be987732af95255",
-      "bytes": 3623,
+      "sha256": "695a4651edbb70e24fa7b37af9d123c0e454847086c430dfeb8ed3dff1d76a47",
+      "bytes": 3516,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -352,8 +347,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4961,
-          "sha256": "af533fd5f6d1822ad074cd8bbb999248e166e0e9b78ec938d7880a512f5bf66a",
+          "bytes": 4898,
+          "sha256": "4dfcfd5dfa6ff608a555249cbf6421e290e40a5799fb81597c8129b000f23a79",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +361,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2020-f3",
-    "materialSha256": "0070023927d6641e2b72c8cb33624f2da4a9865b3d25345eb3e0d3d3eabce27f",
+    "materialSha256": "08243ccfd1a65a894b5fe4c370b1e01fe6e905131bb1ffeef45653037ade9077",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

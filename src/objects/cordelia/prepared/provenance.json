@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8b6108cff3ff6ab31778c280a001ab77cd6b76e0b05c11fb26165af9266c9367"
+    "sha256": "41047e7e3bfa004901180ae06fb0ab00728af62c4b1128af5f6cf22bfc02fd85"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,55 +102,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "20124fc502e97a11e927fdeb4285384d585eeab553fc0f5427a16a626e443343",
+      "sha256": "ff5fd1c62175f076dc6652c64133ba4273b8a8caaaa254d27aabf9b39c54402d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "cordelia",
         "displayName": "Cordelia",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Projected radius",
-              "value": "21 ± 3 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "50 × 36 × 36 km"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbit around Uranus",
-              "value": "About 8.04 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 49,752 km"
-            },
-            {
-              "id": "mass",
-              "label": "Mass from ring dynamics",
-              "value": "(6.08 ± 0.57) × 10¹⁶ kg"
-            },
-            {
-              "id": "ring-role",
-              "label": "Ring shepherd",
-              "value": "Inner edge of the epsilon ring"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation",
-              "value": "Synchronous model"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -313,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "20124fc502e97a11e927fdeb4285384d585eeab553fc0f5427a16a626e443343",
-      "bytes": 3193,
+      "sha256": "ff5fd1c62175f076dc6652c64133ba4273b8a8caaaa254d27aabf9b39c54402d",
+      "bytes": 2207,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -395,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6249,
-          "sha256": "bab9c1304e6680b7aa2c4399e778b031c49e4f9678cfdd81c8828d1b1ac0fcbc",
+          "bytes": 5620,
+          "sha256": "919d95469b9ba0537b11d85b7e642247f36f898c58a4f57fd37fced350ea32cd",
           "verification": "bytes-verified"
         }
       ],
@@ -434,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "cordelia",
-    "materialSha256": "c0fe7a58ce78896a6f01446a291da89c2d38b8c9ffb851ebc722bea08160e2cd",
+    "materialSha256": "7626edfddc7aaecfe2bd4a4c36308caf2c5d01d6b5b389e1c1f4990987ff93f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

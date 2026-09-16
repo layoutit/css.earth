@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd4e015de6a61901af8c2ad1f1b7f2df4a395c87a656f7bb6f2f5977edc94a29"
+    "sha256": "3a60bb8446631426d52a8105839306272575048a0f86b27ad5b2e13151f7524b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7cca695e6192b1268a34fb43f9567298aaa5ecee9543776299699f5e8cc3b2a4",
+      "sha256": "b1ac13641b8d42ec266daf6b56be689a65b6026ca499744a0722d95fca0a1be9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "75 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.909 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "4.1482 hours"
             }
           ],
           "moreFacts": []
@@ -364,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7cca695e6192b1268a34fb43f9567298aaa5ecee9543776299699f5e8cc3b2a4",
-      "bytes": 8635,
+      "sha256": "b1ac13641b8d42ec266daf6b56be689a65b6026ca499744a0722d95fca0a1be9",
+      "bytes": 8406,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6323,
-          "sha256": "9eb173c0ba6ad184f04a8b0ccff3dec2da078dabdb9d13fce6071e964c764c3c",
+          "bytes": 6182,
+          "sha256": "3c9874cfe742005de2c7e8b4b6f696581d64f50ce77812a26234b3876c8d6ee5",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +540,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "65f5298dfa08a14c2e987b588278bb9d564d3ed30f0d1911900dd3e4ce4593b8",
+    "materialSha256": "d04381a193f6dedf7a3ef74819535d002d1359ded606aa6d84a083444a78c43e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

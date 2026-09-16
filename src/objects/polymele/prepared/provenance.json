@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "17a1f750d3c0ba97230db92b418f00b824aeeb3ad62f75aade19408114d901ca"
+    "sha256": "7ccca7fa2b2a5952de77f009b1a0ee3e1c985d9d933c86b8bcd43a8354f71061"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
+      "sha256": "6013db88da7f5bfcce439f1f81962546acfbe12c1e8619b337a965db5d072ebb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +112,17 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full approximation dimensions",
-              "value": "27 × 24.4 × 10.4 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "Unresolved in this model"
-            },
-            {
               "id": "class",
               "label": "Population",
-              "value": "Jupiter Trojan"
+              "value": "Jupiter Trojan",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=15094",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -293,8 +286,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
-      "bytes": 2638,
+      "sha256": "6013db88da7f5bfcce439f1f81962546acfbe12c1e8619b337a965db5d072ebb",
+      "bytes": 2603,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -375,8 +368,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5431,
-          "sha256": "b6e3b6aa231d57f8af179ea68f3dcd2a710a33fcf98f60e15a4bca18805abe75",
+          "bytes": 5437,
+          "sha256": "9e2252e761c934de2d304c6a052b8946bee0989659dfecea2a70da1a44cb85cd",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "polymele",
-    "materialSha256": "7b0ae58a13f14df44237af5b9259b9afac6495e23b87ad0ec66fcb25e011a94b",
+    "materialSha256": "5e8da81c6add299288c51316f0da25dc4f7b7df85838b4ee08f8a8762262b377",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

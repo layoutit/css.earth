@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eunomia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd07d2adcc21a26125614dd631ebb58a8e1d02fb78fd9d6d4d7bae24615b74f0"
+    "sha256": "cde2b935e00c3ec5ca93b6a69f08736e4b196cafdba9684f64ee609a1ba4026c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3bb638a6ed5f518d7856dc1905ceeabce7a4b262156e01f624bc43575810e80b",
+      "sha256": "dff7b36cd72ec06fffd9c695e8a584fcd6bf0aae2edf4d10070e6286f8db7448",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "135 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.642 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "6.082753 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "cccea9c27b0bdb573f79573281e196b6148e12dd280f324e92ddd37ee1ca5411",
       "bytes": 699259,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3bb638a6ed5f518d7856dc1905ceeabce7a4b262156e01f624bc43575810e80b",
-      "bytes": 8473,
+      "sha256": "dff7b36cd72ec06fffd9c695e8a584fcd6bf0aae2edf4d10070e6286f8db7448",
+      "bytes": 8241,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/eunomia/eunomia-elevation-thumbnail.webp",
           "bytes": 5104,
           "sha256": "b0c2c38edd1cda988655b48edb4867f73cf6cec734fc2a4e2b7c02e4aca61f77",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eunomia/eunomia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eunomia/eunomia-elevation-surface@2x.webp",
           "bytes": 286246,
           "sha256": "2e79cfefe35b8210cfc257132218321268180dabebddef80226c705e80392036",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/eunomia/eunomia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eunomia/eunomia-shape-surface@2x.webp",
           "bytes": 60118,
           "sha256": "9e2b05b4b8dfb8dbe435bd8472f5d7574deaa127e81206a90a5fea62fde893c1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6176,
-          "sha256": "7f6aefdd6354b36d182013581fa091db3408e6c536fc94d29ec038d7c5afd8fb",
+          "bytes": 6032,
+          "sha256": "f741863684dd52dd2f80115ae0137adccd996d16bfa9895342bf0b727170161e",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "eunomia",
-    "materialSha256": "da52722e9d3518c5c1248d099f06bbd45614e3b231e22f29b42e53754bba40e8",
+    "materialSha256": "65307b018ae9ce13d1085872128e3e797f7877605e4295ebac6698f6ce235ea9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "4efff3ae04f61b67921204f0b2cf158bf9c411967c9bee7b8e5b8e1e7d21ba2d"
     }
   }
 }

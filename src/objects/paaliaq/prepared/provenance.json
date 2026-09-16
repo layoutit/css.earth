@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e895ef9f6a2e6b9cdcc181d6b05740dd311e8e4109d605c45ec7be568fcc53f"
+    "sha256": "29279158eca94259dbf83a02cb9c33e441e251283b671ab0db6bfc3c23ae901d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dddcb73eb01be7111807ecc37b8a911a5ad364e6bc517c8cc30268c2d66da153",
+      "sha256": "be4253424d7aec3e0612990b8daeef9bccf2f85b227a09b4d775d45177381f55",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,43 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "25 (+7/−4) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.05:1 · uniform-reflectivity model"
-            },
-            {
-              "id": "rotation",
-              "label": "Observed rotation period",
-              "value": "18.79 ± 0.09 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2000"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +289,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dddcb73eb01be7111807ecc37b8a911a5ad364e6bc517c8cc30268c2d66da153",
-      "bytes": 3070,
+      "sha256": "be4253424d7aec3e0612990b8daeef9bccf2f85b227a09b4d775d45177381f55",
+      "bytes": 2629,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6358,
-          "sha256": "9e9dac0b1af4b9cdac07010f538bafdd2a16308908735938baa8aba1c6ba2c0c",
+          "bytes": 6095,
+          "sha256": "7d4232c224b25a6aad2450976fcb3a2e28134bfe192e3b0f614d526864d0ed3f",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +410,7 @@
   },
   "lastPreparation": {
     "objectId": "paaliaq",
-    "materialSha256": "28d5e93eaaacababbe90a4e3142cb02bad6895630024ac9afab50a9c4a7a3640",
+    "materialSha256": "c72b556ba2f8c4d341a43139b9f88f0166c943c29599b4f830951f15c8f382b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

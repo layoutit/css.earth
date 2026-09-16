@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64d2bc1e1fc7099cb0b9dbaa76df996dce3886af5185b83f217aca713c0f4af5"
+    "sha256": "11a8fabda3cba28c08b06f561ddfa8ae4f08397a8c69ec483cc4f137ffecf23a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d79fceeb80882652216324c7d038e32e4fd79487589a6c931d0ce093e0ee255e",
+      "sha256": "e2c0d8dff6139a59b46ec7f97a82800689848527516269b1df5bbff0fa5eaf9b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "93.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.58189 hours"
+              "value": "8.58189 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/298",
+                "label": "DAMIT model 298",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d79fceeb80882652216324c7d038e32e4fd79487589a6c931d0ce093e0ee255e",
-      "bytes": 8293,
+      "sha256": "e2c0d8dff6139a59b46ec7f97a82800689848527516269b1df5bbff0fa5eaf9b",
+      "bytes": 8497,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6021,
-          "sha256": "378e556a5369046bbbc0708c31797f23cb9f511396e99ec183638902559744db",
+          "bytes": 6178,
+          "sha256": "f0bcc9e73d4e92d32aa109ff075188f5b1cc2a52e137964c54d6785c5fc0ad3a",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "palma",
-    "materialSha256": "67fb1d372329913c6fed2349c7516d102005af8fb6243172ef4fb3e726fe2f4f",
+    "materialSha256": "c9edd72a2870e8288a6515eb8b1cfdd07fd606144c9a907c93bbb065171b5e46",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

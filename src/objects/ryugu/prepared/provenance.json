@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ryugu",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4bd12631330765c0fc0c40680fcd03d14a3a9d6149168e382e0a20f83d371f58"
+    "sha256": "f61d56d7e3fd37488be9aec5561c7b2e1b8317f5a8353e3722165ed20a8f087b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -284,7 +284,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cbec3e54a529cd8eda7d6aa3448fdc6b094c05b334b0cfee242b2de3e086cdfc",
+      "sha256": "acc7451b48933693f18ab745becf2c060051bbae982e3be8d4e84f20f849e278",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -310,19 +310,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "448 m"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "1.19 AU"
+              "value": "1.19 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.30 years"
+              "value": "1.30 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -642,7 +653,7 @@
       "sha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "bytes": 12965947,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -695,7 +706,7 @@
       "sha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "bytes": 3150352,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -743,7 +754,7 @@
       "sha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "bytes": 9557231,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -805,7 +816,7 @@
       "sha256": "38901188a1aef23afef25e2938334564a03f2c9e2f08e3be3de9596855bc9453",
       "bytes": 134493995,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -864,7 +875,7 @@
       "sha256": "e8c7ca2229dbebd58d1b1d081ece321ac1a32f36db98665615173d7924edba25",
       "bytes": 25931356,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -923,7 +934,7 @@
       "sha256": "1494e3ce2d1846238bf9325b598f8bbdd27cea528d73ed8463afb7e3d447f8ca",
       "bytes": 25931356,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -948,10 +959,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cbec3e54a529cd8eda7d6aa3448fdc6b094c05b334b0cfee242b2de3e086cdfc",
-      "bytes": 11987,
+      "sha256": "acc7451b48933693f18ab745becf2c060051bbae982e3be8d4e84f20f849e278",
+      "bytes": 12577,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -973,7 +984,7 @@
       "sha256": "fa840f5eb14c5ba53888feb846b14ec3afb17136a7f744d01b4823cb6a012ca4",
       "bytes": 1303,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1005,7 +1016,7 @@
       "sha256": "2f8750d2111c299eede63799d6898f5169717978b1c66546aeb7cb2a7d71898b",
       "bytes": 35497,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1034,7 +1045,7 @@
       "sha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
       "bytes": 152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1061,7 +1072,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1086,7 +1097,7 @@
       "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
       "bytes": 1789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1139,13 +1150,13 @@
           "url": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
           "bytes": 3246,
           "sha256": "8d3fd455c4117bc51b2cc022229b7544f80d41b26d311db27752d52f2894d1e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "bytes": 999636,
           "sha256": "2effc8de14b5cc13dfe1a9900d2ed70fed4b9161de0b48e4794ff551b19738bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1197,13 +1208,13 @@
           "url": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
           "bytes": 6194,
           "sha256": "1438099ab967c8e2ae9687620752424bce56ff9b8f830bfa190ee2ee84c75247",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
           "bytes": 4173682,
           "sha256": "56aaf58de7e5c04b418695892e88cac9e5bac7662216502067b97613f3096cd6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1267,13 +1278,13 @@
           "url": "/scenes/ryugu/ryugu-close-up-thumbnail.webp",
           "bytes": 1914,
           "sha256": "477e8371d5e5a4efd096606f8e4230cb062bcdae4a00bd7d785a0189708bcab3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-close-up-surface@2x.webp",
           "bytes": 1697736,
           "sha256": "9cb9fe1f827c2bebbb9d7aa107703eb51952d6c1ce9ccb492c70e5992310f952",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1316,19 +1327,19 @@
           "url": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
           "bytes": 8348,
           "sha256": "b8e016ee261c5d3c576c84802d7d06eb4245d9c1e8c91a84de9df9dca1ca7676",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
           "bytes": 1295984,
           "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1367,19 +1378,19 @@
           "url": "/scenes/ryugu/ryugu-thermal-inertia-thumbnail.webp",
           "bytes": 8612,
           "sha256": "145375d4f777d49cc4cf87d6baff11dea2eaad35676e49fe5ec8730e20d3bb2f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-thermal-inertia-legend.webp",
           "bytes": 266,
           "sha256": "8aacc5d3e9a207839d3c0689fd98ad74502229e5f29ce47ef6f163210bb2842c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-thermal-inertia-surface@2x.webp",
           "bytes": 3326302,
           "sha256": "60eb713656125ab408815a48a277f771062d30fe16cf54507b0569ae0be2006f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1418,19 +1429,19 @@
           "url": "/scenes/ryugu/ryugu-spectral-slope-thumbnail.webp",
           "bytes": 6918,
           "sha256": "12a16bb29cf271a6eb30286a125514162c0ff58c8f8baca0fddb0ec675f27e91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-spectral-slope-legend.webp",
           "bytes": 190,
           "sha256": "9095128dd6be1407b5a1fca35279e0eeba2d36cc5449efa91c8d3a63cebc00be",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-spectral-slope-surface@2x.webp",
           "bytes": 3706304,
           "sha256": "bb80694074dcb4069d14f906ec14043e2344574f4b6175d8ab9bb22f5715968c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1461,8 +1472,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4915,
-          "sha256": "270ed6a95025167565482acfedef9d333cf766454ef26175f8db64e20ae7d998",
+          "bytes": 5367,
+          "sha256": "e90198cb4ce741270d33a0847af99e506dae85304838ae3a1f786a0857983397",
           "verification": "bytes-verified"
         }
       ],
@@ -1500,7 +1511,7 @@
           "url": "/scenes/ryugu/ryugu-features.json",
           "bytes": 19037,
           "sha256": "319496b54c4be250996b275606daf810d2f0368e034f3ea48a2db73249679c3a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1662,11 +1673,11 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "ca4e46d27b46a97d111cb122916c1220b1ad7e7a129ff253a64b4ddb6ec963f4",
+    "materialSha256": "7b35d0af92a5c78b0329f4b48a6566fea287301826cc5313307a1f02f576671c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "e9c11d13964edc5cf885ad3a8b0e0608842b7b5446c2799c857171c87bfb4914"
     }
   }
 }

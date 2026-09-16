@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0ae026cbca3b350189101bbce93be955dffc83db687b5ca25390128c46d147ab"
+    "sha256": "f71c0508ca1eb0a94f1c306b9643671b8d77b09a297295fe8d2856504c60dc0a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -213,25 +213,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
+      "sha256": "6c51123ee235f3cf9b6b66b93bcd7674f85a85ffa0780a2d9c1ce0ac7ad9d3c1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-8p",
         "displayName": "Tuttle",
         "panel": {
-          "facts": [
-            {
-              "id": "period",
-              "label": "Orbital period",
-              "value": "About 13.5 years"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "About 11.4 hours"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -526,8 +515,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
-      "bytes": 3364,
+      "sha256": "6c51123ee235f3cf9b6b66b93bcd7674f85a85ffa0780a2d9c1ce0ac7ad9d3c1",
+      "bytes": 3133,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -728,8 +717,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3266,
-          "sha256": "a106a84606174c20186ea334e30ddc3ea16329a63335630f4aa9412acd73540e",
+          "bytes": 3128,
+          "sha256": "9d4b0df81c3bddc9345bc9b8e9ce60160af052f068cd09ccc98b36e2da0c7135",
           "verification": "bytes-verified"
         }
       ],
@@ -775,7 +764,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-8p",
-    "materialSha256": "bfe8810a2aa9b8d2eaeccd9a31909a0f69ee7d0e0fffafbfa31a6d8f3a87b0f8",
+    "materialSha256": "c659d7990831f314a663848dd5589c3ab89a18b07bcb731590b44146bdac987a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

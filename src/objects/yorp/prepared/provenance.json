@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "yorp",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "127915cfa471feea13eedd6a469541feb41810964ff237dd7de3d01e8bc22ba0"
+    "sha256": "e9c4ee1c460dd82704820de081e486a9f5babb8ef85d0dde0b3f1b68a0bf04b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "72555350467c959f305de0e155afbe6db0aafda457813231e15565265753ee84",
+      "sha256": "6e489ff957f93812b41f07bdf628f8d5e316a4bdec3efacc19ecf220c3ad8493",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,11 +166,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "0.0564 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
               "value": "1.006 AU",
@@ -195,11 +190,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period (2001)",
-              "value": "12.17 minutes"
             }
           ],
           "moreFacts": []
@@ -346,7 +336,7 @@
       "sha256": "f9047ccbf39831b20d4571f17158f6960313d1b51c9d4ea429162ddb614a51e7",
       "bytes": 16131,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -371,10 +361,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "72555350467c959f305de0e155afbe6db0aafda457813231e15565265753ee84",
-      "bytes": 7623,
+      "sha256": "6e489ff957f93812b41f07bdf628f8d5e316a4bdec3efacc19ecf220c3ad8493",
+      "bytes": 7382,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -406,19 +396,19 @@
           "url": "/scenes/yorp/yorp-elevation-thumbnail.webp",
           "bytes": 6790,
           "sha256": "6eee5d1b476bebd6f1c5ca831c13a976c7e9e813bbce0201c8d673b0412a3de9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-surface@2x.webp",
           "bytes": 227432,
           "sha256": "c00a5cb83f222a51a4f5a0a94a9fc5f9ab1683ff0bef9b9bfe620b911c849ccf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -456,13 +446,13 @@
           "url": "/scenes/yorp/yorp-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "bytes": 58204,
           "sha256": "3deff6e52eea403097b5087111f737b88b4029cd3c29541e2a0378e5bad75339",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -493,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4417,
-          "sha256": "11bf2e14cb2d7ac1c3f4a2792a56359859cc6fa4aaf79eb5445a88e8e58722f4",
+          "bytes": 4264,
+          "sha256": "8c1e6d5929241aaa64df96b008dd73569fa90cb46e5364f296d067b32a838d38",
           "verification": "bytes-verified"
         }
       ],
@@ -557,11 +547,11 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "0b0f7604623b2a4de32994506a1f5003f99b4fad7c11d17876912d924e2f1d06",
+    "materialSha256": "841ab8af176b61dff2451f779776fd2c26583198b51f732179cb5c24aefdf2a4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "4d81c9f6c00a264f8ce58688924928f7621ae4ed86cda953cddad444c0345b75"
     }
   }
 }

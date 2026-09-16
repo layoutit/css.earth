@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "interamnia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "997dd36a4a4027e6840c6c57077c9d1986e60f03d77cbfe30a46894eb5d5ad1b"
+    "sha256": "795b7256ae59af8d4b9c556d4e3b520ce168ef8d257190d0198f1d9816d41551"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "54f26eccc4a3daba17c326dbaa0ff842c8ccf3af40d5aa2f971a396847360caf",
+      "sha256": "3c13996f56881d0169c75b246a416a8d3fd52198e6f44dd9f9128b529bff0ed6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "166 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.057 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "8.71234 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "4dade83b4091c1acf53071534aff13f0a09ef2bc526b16280ea58dbcf8fcfeb1",
       "bytes": 781819,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "54f26eccc4a3daba17c326dbaa0ff842c8ccf3af40d5aa2f971a396847360caf",
-      "bytes": 10183,
+      "sha256": "3c13996f56881d0169c75b246a416a8d3fd52198e6f44dd9f9128b529bff0ed6",
+      "bytes": 9952,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/interamnia/interamnia-elevation-thumbnail.webp",
           "bytes": 5778,
           "sha256": "52e6aafbf6cbe6863a11ad450d40e64a1d7af7925766bfac5d0528beda10185f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-elevation-surface@2x.webp",
           "bytes": 302206,
           "sha256": "7604c074538b038a8fe2250d590983b03920124aa779f43484902eda0c50ca02",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/interamnia/interamnia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-shape-surface@2x.webp",
           "bytes": 58216,
           "sha256": "cda6dca8825e43dbccbc323eaeed28a1c28a2af022e94178a7bf3b611615a4cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7844,
-          "sha256": "896ba9130c2ed535a0c737a2f70f5dde877d69df46d035119c0a4c9fe8ef1cfd",
+          "bytes": 7701,
+          "sha256": "6f67bb13665296e42673f9c78999e34df39316b051769c91845a700e4e798a5d",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "interamnia",
-    "materialSha256": "89fb01ea0199e8247dac7630ff2aa16b01c11ed3be519a19f922ded20256a2cf",
+    "materialSha256": "fb5078ec360568486decca7b3eacc2ec6ebd10b71a5023960f5639643f8a7786",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "2f2bdc538edfaefa21c162c7375270673067bded590ba701db0e2761e463c4b3"
     }
   }
 }

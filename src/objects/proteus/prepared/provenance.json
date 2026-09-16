@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "proteus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8594ef561338b501e404966d35444efb2d12be6ff836aa4c7e8c18bb4cbce1c5"
+    "sha256": "7baa60291412a52debf94e85340a078f34bb4440b43926a10094825d1c3a3bc7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -329,7 +329,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4226452f76d29f21545f8425f4b86927a46eccfa08f4cf1dec12d9c3af2b3db9",
+      "sha256": "afbf39f9404d6784dbf3cb68e3064232e43489479cef93f6be0820597a7f592a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -366,22 +366,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "26.94 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Neptune",
-              "value": "About 117,674 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1989"
+              "value": "26.94 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -530,7 +523,7 @@
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -584,7 +577,7 @@
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -631,7 +624,7 @@
       "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -685,7 +678,7 @@
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -732,7 +725,7 @@
       "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "bytes": 3337,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -786,7 +779,7 @@
       "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -833,7 +826,7 @@
       "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
       "bytes": 3311,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -887,7 +880,7 @@
       "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -934,7 +927,7 @@
       "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -988,7 +981,7 @@
       "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1035,7 +1028,7 @@
       "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "bytes": 3296,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1059,10 +1052,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4226452f76d29f21545f8425f4b86927a46eccfa08f4cf1dec12d9c3af2b3db9",
-      "bytes": 5600,
+      "sha256": "afbf39f9404d6784dbf3cb68e3064232e43489479cef93f6be0820597a7f592a",
+      "bytes": 5567,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1094,19 +1087,19 @@
           "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
           "bytes": 7376,
           "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
           "bytes": 376918,
           "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1148,13 +1141,13 @@
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
           "bytes": 2308,
           "sha256": "be0839dea4f0307484810e2c35e55fa305200b68165004fba74913f91f6d455a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
           "bytes": 374926,
           "sha256": "d09885ebc88d3c251c70e095352fbec59b3894bec1501ff835cfd5380e571a97",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1198,13 +1191,13 @@
           "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
           "bytes": 2998,
           "sha256": "215b8373ab113e90c21b1feafa903e3e2578898f33084f555d6c7b47aca73cbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
           "bytes": 172904,
           "sha256": "013d96f4e39db21cefbd47204beeff466160573d66228e0207fc06d1bc8843a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1235,8 +1228,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5497,
-          "sha256": "7e12ac7cd5c1ecd3369cedd27fe53061a11b4ae02e76a4545344dfd02a6bb097",
+          "bytes": 5505,
+          "sha256": "89bb0cce5af0fea64acb0fa442f0c89c9b69480a2cde1d5c00eac642166fec2c",
           "verification": "bytes-verified"
         }
       ],
@@ -1324,11 +1317,11 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "e9b5b833e9a06d212a93b17692d2e4b1fa5e55e2762b7b8a514a4383572ad4eb",
+    "materialSha256": "ae47adc8f9ee8673cbae7f6db442d57519ade01fe7c2749a76c71c5a65224ebb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "1e6238557ae73782403eb5dd3d6e8541c81cc1c3897f2aa21543ac5834f8ea40"
     }
   }
 }

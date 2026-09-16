@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis-9",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b2fa4700a8fb5ada5004b976b7e7be557289aae781bcf22f5edaee0885fd472"
+    "sha256": "d15cd1cc544f188230581f7504223a67b7e016822a4e3590baf59ef1e1dcd197"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "934b6dd0de0b5cb1d4db41ca636d0d076953a99a6ed8d50f43a6b7e6ec19f2df",
+      "sha256": "6f4a8fc094fad6f148e3ba29b4c0ce2e5b30621812d46f3607b215b1231fd82f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "86.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.387 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.079176 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "e53e042ecbcf006f31aa24746026265c2a99f43b034fd0156a7e6f0cad34e875",
       "bytes": 355579,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "934b6dd0de0b5cb1d4db41ca636d0d076953a99a6ed8d50f43a6b7e6ec19f2df",
-      "bytes": 8638,
+      "sha256": "6f4a8fc094fad6f148e3ba29b4c0ce2e5b30621812d46f3607b215b1231fd82f",
+      "bytes": 8405,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/metis-9/metis-9-elevation-thumbnail.webp",
           "bytes": 5514,
           "sha256": "1ff8995ddebaadff81ef88bc2886dc766877d4d459e96dcbfb76c3441c140a72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-surface@2x.webp",
           "bytes": 344396,
           "sha256": "772efcb054ff9aee4ff72bb1fef8f893f611ab056b614b1555c3d23d0460cd9c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/metis-9/metis-9-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
           "bytes": 64368,
           "sha256": "94badb4790afcb7ec3f04d29856261eecaa5ccc608b4ee6b5af8f031ec6e7dfc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6341,
-          "sha256": "c073072eb302e17cd0542bacd3eb73ff202740efd21871438d1c1fe797916577",
+          "bytes": 6196,
+          "sha256": "ef0dc5f8799ed3021e59278c2c8c1f0d688a4dcf7719a94a9d3de00228f12de4",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "20cfaf7d340eaae57fc458189a0c0b31d80b96d8584df564772710d01f87ace1",
+    "materialSha256": "4f619aa9ae6bf62bcd1f108f3488674d39da9fd005e9d6e6ec10fdd99bbefc13",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "91eb8a91257f4911c29fa1cd33f76545e187d8b637d2cf43da7632d66f25697d"
     }
   }
 }

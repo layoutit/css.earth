@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "80015fdca94f85f4cc2bc7352f4a9917e07c8a03c5091a58364d03296e48204a"
+    "sha256": "68c4d874243e2bfd606289f712712f3dabd9a82ab0368114259acc95906d6741"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,25 +134,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "318ebb37d12b278795729161e031147ecbcc0f83d119bb41d93ab2e90999b753",
+      "sha256": "d407171804fcf020dd10aa078b8415eece3642a5e89442b3e9de376fc6944b72",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-143p",
         "displayName": "Kowal–Mrkos",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Thermal radius",
-              "value": "≈4.8 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "17.20 hours"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -276,8 +265,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "318ebb37d12b278795729161e031147ecbcc0f83d119bb41d93ab2e90999b753",
-      "bytes": 2575,
+      "sha256": "d407171804fcf020dd10aa078b8415eece3642a5e89442b3e9de376fc6944b72",
+      "bytes": 2356,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,8 +337,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6553,
-          "sha256": "402abf1b4d8b2d934c2e4780ac680cc5a3fb58e30f4a266d1b2961ff19ba9629",
+          "bytes": 6427,
+          "sha256": "1ec0c0bb30fff8cd2bd8a6c128ab4c43a50ade7e5e665b264b43b3d2b6143cc7",
           "verification": "bytes-verified"
         }
       ],
@@ -362,7 +351,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-143p",
-    "materialSha256": "0bbb4ab8d7e4357e06b4f71e1255b4ec49170d5260c26f2a27b5e4e7415eec8c",
+    "materialSha256": "99a0cb6802793ef9fb43ba21f0e57ea99f774c462f71e7b36a94c22c84f162e0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

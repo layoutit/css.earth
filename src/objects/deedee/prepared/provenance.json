@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d58f48b6c6e81057110330dfa640e67a2b275e4e01cb3c463e9b5d0c1f430b8d"
+    "sha256": "ed0ec743d338e2907ed1b05d7466140c151677c30394cb6eaa50e359c27b7cb0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a8d161b10812303df2ea9c0d335167e07326b41f69cc3567f4c4e1b344e52564",
+      "sha256": "b4718607a3bf931ecb939757dcf6bd6ee3ca01a095b70e834423fff825004cc2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "deedee",
         "displayName": "DeeDee",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Thermal-size illustration"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "635 × 635 × 635 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Rotation period and pole unresolved"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Detached trans-Neptunian object"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -291,8 +264,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a8d161b10812303df2ea9c0d335167e07326b41f69cc3567f4c4e1b344e52564",
-      "bytes": 3736,
+      "sha256": "b4718607a3bf931ecb939757dcf6bd6ee3ca01a095b70e834423fff825004cc2",
+      "bytes": 2733,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -373,8 +346,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5936,
-          "sha256": "da3d84c0d33d7c782ce524f79b02d08bfa92d733cc7ca8f3e2ec50a01786359e",
+          "bytes": 5163,
+          "sha256": "0281d0c66f701b895870e9d9994b7939a307e532b31bb793dad27344f1e4f0dc",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +385,7 @@
   },
   "lastPreparation": {
     "objectId": "deedee",
-    "materialSha256": "a0d7f01591d2a96e2f7d990b0178e5ef59eb526c2381e7c74194767ecb5fa666",
+    "materialSha256": "948c7888226b45de0d427f1a1b4cbc48fda6ca57373443a32550b628abe2be1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

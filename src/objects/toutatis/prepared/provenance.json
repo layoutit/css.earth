@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toutatis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a640394de4cf4390b36fb6aba4cc5f4d214fd3e59a3ec8946d60755dc120551"
+    "sha256": "b225a9a27c7f3f29a5ef7213ccf52b78a247ac3512deb43951e6e8774b4943a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f55abdd3904e0695d3639ff6b38f724c89e2bfb10f2021966a88659a567c5cae",
+      "sha256": "99cc2929f5730fc55bae3408b7e39b2765c7cb9dfe700f0ce137d3a59ab34744",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -165,28 +165,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "1.224 km (model)"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.543 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "4.06 years"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Tumbling periods",
-              "value": "5.4 / 7.4 days"
-            }
-          ],
+          "facts": [],
           "moreFacts": [
             {
               "id": "geometric-albedo",
@@ -352,7 +331,7 @@
       "sha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "bytes": 2879779,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,10 +356,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f55abdd3904e0695d3639ff6b38f724c89e2bfb10f2021966a88659a567c5cae",
-      "bytes": 9176,
+      "sha256": "99cc2929f5730fc55bae3408b7e39b2765c7cb9dfe700f0ce137d3a59ab34744",
+      "bytes": 8701,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +391,19 @@
           "url": "/scenes/toutatis/toutatis-elevation-thumbnail.webp",
           "bytes": 5802,
           "sha256": "8172417040d331136b7f5c7905a8a592deb3556da5df383e7465917826da04b8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-surface@2x.webp",
           "bytes": 380870,
           "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +441,13 @@
           "url": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
           "bytes": 73254,
           "sha256": "33450a04b5a8baf229e8c381346fe1277f2787de22e9391558912da867a36d72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5900,
-          "sha256": "2c1e199ed4ed9fd4db892ec3e1b4f3926c73b68c197cf32540d03f02df880d35",
+          "bytes": 5606,
+          "sha256": "ca95e0d1867437f4d5ac9a28ae343724a62554154c2eef6417590884c8dde498",
           "verification": "bytes-verified"
         }
       ],
@@ -563,11 +542,11 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "5ae224eb2f06002b7eb77820bd05de177526e4e8aae3ba95e7cbeb5e1fccfbf5",
+    "materialSha256": "5d65440f8a3bf5bd39fccc452d8802e26e732b236acca049e3e4adda5a493cc9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "2e5d44491fd4446a54a66a361268c1d63f79f7a4b4c40058a46d2d8838a50283"
     }
   }
 }

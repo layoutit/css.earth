@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1efcf396166bed0deac7d590adb59fb65a347bc267ceee0b88554679e2ef617a"
+    "sha256": "bf12abe6a4cf9f66392e9de28470888ac7f10e181b45395b8616a139ff076596"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "464a87dfa84f318a963729b317453b1eeedba235ff5d04a5c577a0dc4bac203b",
+      "sha256": "98f597f47d2b9270f4375137abfe502fb61dc0ad6af292ba93b0714a42e8a562",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +111,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "About 21.4 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Modeled dimensions",
-              "value": "About 54 × 38 × 38 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 9.0 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 53,764 km"
-            },
-            {
-              "id": "mass",
-              "label": "Ring-derived mass",
-              "value": "(3.57 ± 0.32) × 10¹⁶ kg"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 · January 1986"
+              "value": "About 9.0 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -309,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "464a87dfa84f318a963729b317453b1eeedba235ff5d04a5c577a0dc4bac203b",
-      "bytes": 3120,
+      "sha256": "98f597f47d2b9270f4375137abfe502fb61dc0ad6af292ba93b0714a42e8a562",
+      "bytes": 2867,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -391,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5580,
-          "sha256": "3faaf82cd093fa00d67a5cbb6cd87ee2c88c601ce171342d5069501dcdfc92e4",
+          "bytes": 5456,
+          "sha256": "d536d8ebf3685a2195ccb4ea5c09ebde146579bc286d156d4eecf9543f5dbea4",
           "verification": "bytes-verified"
         }
       ],
@@ -430,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "ophelia",
-    "materialSha256": "6cdd92e70a62a152f97ea0a50f9461421e117a4d331ef0fa103bdbabadb542f0",
+    "materialSha256": "bb570f63b35112d77974f428c28ab3edec189ffdb89a9703a3136f25b3d8cc62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

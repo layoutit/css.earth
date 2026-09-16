@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ce1cf39b5abec97c6e6e7d4acd7cfed780f55b70af66544d45b9159f60aa8c9"
+    "sha256": "aa0bc706a7908a5acedbf5c5278bf85d1c8845da270df2a82d8f7286fdf9e48d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
+      "sha256": "11f68b255017659d1cfb61979aa9f8975688335b6e01f12795270b3e43a799a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "huya",
         "displayName": "Huya",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-constrained oblate model"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "436 × 436 × 375 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "6.725 hours; no qualified phase"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Plutino (3:2 resonance with Neptune)"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +258,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
-      "bytes": 3254,
+      "sha256": "11f68b255017659d1cfb61979aa9f8975688335b6e01f12795270b3e43a799a7",
+      "bytes": 2303,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +340,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3941,
-          "sha256": "001da3de9727719dd57c72b02856028773c394e81930471461c9f0f7b6c8a441",
+          "bytes": 3220,
+          "sha256": "896c81428fe2938ce0e744c4f5a8ee6abda883c144aac47ad9b27aeed0041d64",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +379,7 @@
   },
   "lastPreparation": {
     "objectId": "huya",
-    "materialSha256": "70e9cd59125c6b35b0a0dda4c384a6492a5e7539417bd094b932116ef935d13c",
+    "materialSha256": "d3b93442b080b18e90ee5fabd3908970423e83ca33b0fed19faa0275307195c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

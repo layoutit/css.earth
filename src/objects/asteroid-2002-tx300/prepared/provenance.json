@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c6f92791f6daefced28c1115faabdb2099ce566deb8a72c374386ff81b45ad0"
+    "sha256": "128e0c54fcb1ea469ab8e8b4c5530fd1252506455a762ee9b00cd8fba3c8880e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dc0521abd1afd70800f8f2218f052882061313d05123ce651e60a2454637cc03",
+      "sha256": "4f40a454b7a6c29c563a29d3360f4d0f2e97be8652c730ac59c85f911685ab6b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2002-tx300",
         "displayName": "2002 TX300",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Conditional occultation-shape illustration"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "363 × 363 × 289 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "About 8.15 hours; arbitrary phase"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Haumea-family trans-Neptunian object"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +258,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dc0521abd1afd70800f8f2218f052882061313d05123ce651e60a2454637cc03",
-      "bytes": 3331,
+      "sha256": "4f40a454b7a6c29c563a29d3360f4d0f2e97be8652c730ac59c85f911685ab6b",
+      "bytes": 2376,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +340,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7094,
-          "sha256": "f4871dbfc7dd28291eb44e63cf2a4c0366adc8daf0c7a661afe80a62b8aff8bf",
+          "bytes": 6369,
+          "sha256": "7c298b8c498113df7bebc9120282870255fc6ec46a887d6e220bd04efc963ed2",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +379,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tx300",
-    "materialSha256": "deddb59c902acee621e78d8c2124ddb8b630a16bed46503e823787c6f20fe968",
+    "materialSha256": "6dc92a39a61499a76297df947255d2b550dcd3e7cb5788265dc9ca2f93fe9e82",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

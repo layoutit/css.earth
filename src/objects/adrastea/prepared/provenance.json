@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4107d28281960f98367a48f59aff2db7dfb9556e81433a012ffa36f14a98e117"
+    "sha256": "0d931e8667b6a76c7b1c4b506dca8fae2dbf9a06c984bbb5b3d09d362ccd44fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ce8b6af07b0e8ee7d3d98a11ffe3a6b2a4e65a7ba9e85d5153be09b5c522b27b",
+      "sha256": "c417aca2afc971829c51522cc4ef996155411f6c78fe502ddfdad1baebaadc2c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -124,29 +124,30 @@
               }
             },
             {
-              "id": "dimensions",
-              "label": "Dimensions",
-              "value": "About 20 × 16 × 14 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "About 7.16 hours"
+              "value": "About 7.16 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Jupiter",
-              "value": "About 129,000 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Assumed synchronous; poorly constrained"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "David Jewitt and G. Edward Danielson · 1979"
+              "value": "About 129,000 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; a (km)"
+              }
             }
           ],
           "moreFacts": []
@@ -311,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ce8b6af07b0e8ee7d3d98a11ffe3a6b2a4e65a7ba9e85d5153be09b5c522b27b",
-      "bytes": 3391,
+      "sha256": "c417aca2afc971829c51522cc4ef996155411f6c78fe502ddfdad1baebaadc2c",
+      "bytes": 3703,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -393,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7186,
-          "sha256": "512178433c00a0e8ecc32fb63d14a29a5dbbcad61f762f92e396fed31abdb0a3",
+          "bytes": 7448,
+          "sha256": "ed82b300056c9f44721ee0b6b865bc14acb0384d32321ef07cb14e1f44a43bc7",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "adrastea",
-    "materialSha256": "2ab45c8b950950aafc6ce24261dfaea28c9e7c6493146c375430a8a792aa5f89",
+    "materialSha256": "1c652351e9442d26f00f300819fd1949138e0805219a764a0a5a89c28febfe24",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

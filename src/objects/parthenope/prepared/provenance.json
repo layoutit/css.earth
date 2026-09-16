@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "parthenope",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "613055b08e619d8e7ebe3613be0fe39def2277490ad37137896e01e2c744a805"
+    "sha256": "d001684df32ae11bac01e8eb1a61c0d2e844df324b1a6a46f3be3be30db80fca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "08cb8d1b88d79ba68f62d5660af9d4e9d360be45d981e7328dee97b6e294d578",
+      "sha256": "1f70a4aeacceafbb4eb8c253f2218f3c87831c36c22316edb1c213c94a89c75a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "74.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.452 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "13.72204 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "c394cac9367b968629aa7f008d28a414738a83f9c6442a301974fe929e78ddf3",
       "bytes": 272059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "08cb8d1b88d79ba68f62d5660af9d4e9d360be45d981e7328dee97b6e294d578",
-      "bytes": 10566,
+      "sha256": "1f70a4aeacceafbb4eb8c253f2218f3c87831c36c22316edb1c213c94a89c75a",
+      "bytes": 10333,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/parthenope/parthenope-elevation-thumbnail.webp",
           "bytes": 5878,
           "sha256": "dfa4433cee30e0c651fd6ec6fa81f31afec67a260ef4ef4cefc3767c8d784a8a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/parthenope/parthenope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/parthenope/parthenope-elevation-surface@2x.webp",
           "bytes": 335310,
           "sha256": "f1ef8ef58ad43ca63fab6f351e6e6b2a8ca8984f92dc32cfa159fd13812fe702",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/parthenope/parthenope-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
           "bytes": 62546,
           "sha256": "290e4435895224ed04053874468977b5816afe6af6e93dc9dc3776a44341d14c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8226,
-          "sha256": "720022d31de4909eb1e19f9e042d7143cd7b8db0be22a7007d1ef6d5a0d10eef",
+          "bytes": 8081,
+          "sha256": "91d23a08b0ef0fdec723fbcc36853fbc07e2f7ac93c78cbd95f98867fc87b21a",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "parthenope",
-    "materialSha256": "7321154aae66238a3b7d7d19c45adef5f8791479f50fc485b7675e604f6f34fd",
+    "materialSha256": "a9b5c546c1512dedc3664ba2301e83444487b9747ed47bef0ac72c8daffc5baf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "7bd962cfa860886919d89056a4a1a9541b4373ed956ba6bc51d983552e55a45d"
     }
   }
 }

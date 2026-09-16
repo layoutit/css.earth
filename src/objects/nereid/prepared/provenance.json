@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "05209164a381794afc877ea86227b798cc640cb6418a4c323602ac6b797ff150"
+    "sha256": "b4e37716b69833c5877ba19b9e86790f670c9722dcff13adce64a5dc930e3bb3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "255acedd67e9494e8ba99bf364126f19f0a466f8bd8e1dba7b6cf1fed50a2e55",
+      "sha256": "1e4e8e19620983d9d2c9da9008e038781f9f189a4631005ba83ef83f94f4c0fa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,36 +113,44 @@
             {
               "id": "radius",
               "label": "Mean radius estimate",
-              "value": "170 ± 25 km"
+              "value": "170 ± 25 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "JPL Planetary Satellite Physical Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/1; Mean Radius (km) value"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Neptune"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Approximate ellipsoid · long/short ≈ 1.3"
+              "value": "Neptune",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Gerard Kuiper · 1949"
+              "value": "Gerard Kuiper · 1949",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/2; discoverer(s); year discovered"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "11.594 ± 0.017 hours"
-            },
-            {
-              "id": "shape-axes",
-              "label": "Model semiaxes",
-              "value": "194 × 171 × 148 km · derived approximation"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +320,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "255acedd67e9494e8ba99bf364126f19f0a466f8bd8e1dba7b6cf1fed50a2e55",
-      "bytes": 2931,
+      "sha256": "1e4e8e19620983d9d2c9da9008e038781f9f189a4631005ba83ef83f94f4c0fa",
+      "bytes": 3628,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +402,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4883,
-          "sha256": "350558fb662984ce3d821e10bf306ebb2abd0e304a54dc85f4a71595720b3e14",
+          "bytes": 5444,
+          "sha256": "455db6d8d55670576654aebd847a66604c0475f4d2ad17bdc285e75b75564ccc",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "nereid",
-    "materialSha256": "636423f8064c7a7a0e0d35e372c75ff23f6aac94452408843a88cb62732073f9",
+    "materialSha256": "9351bbae4274c7103c0842dc751bb85cdecc2a0300eb549993844f08a448b88d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

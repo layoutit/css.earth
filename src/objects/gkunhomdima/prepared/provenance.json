@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f444d5783da310713b574118fc773b91a3ddb3dcb17d8a62f0278d4017cab9e7"
+    "sha256": "2e9ca94ad14e3fe2eceed9c5479dc139e88af89e150f029680fd4a5e918c4549"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "624d6d64f37ccda93a9de2202c50e538508f38a7858f8a48f9a2d17359a19f35",
+      "sha256": "fc1239fa7bf960b92d26486ff362d9a25c13030c4da42371f67f6dc0c36bae90",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "gkunhomdima",
         "displayName": "Gǃkúnǁʼhòmdímà",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published occultation model"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model extents",
-              "value": "658 × 658 × 588 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; display orientation is illustrative"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Trans-Neptunian object"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +258,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "624d6d64f37ccda93a9de2202c50e538508f38a7858f8a48f9a2d17359a19f35",
-      "bytes": 3076,
+      "sha256": "fc1239fa7bf960b92d26486ff362d9a25c13030c4da42371f67f6dc0c36bae90",
+      "bytes": 2277,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +340,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8311,
-          "sha256": "dad469bcccf08b79fe970b39f1e86dcd75af1fb10c0a969df5f7769efddaf687",
+          "bytes": 7742,
+          "sha256": "0c271399def2238861ff386663588b0458bee7ee20f412b583dd301f4ba758cf",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +379,7 @@
   },
   "lastPreparation": {
     "objectId": "gkunhomdima",
-    "materialSha256": "fc8aaaeb5b3219c1a235de595cad14e2e28d0497f9c1f0ecb4e0d5f7bf63880c",
+    "materialSha256": "9bb8cafca04dd91e48d797ea257f83227b891810181f46a0480092647d0d157c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

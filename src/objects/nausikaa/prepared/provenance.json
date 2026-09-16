@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e89ef70468962c5805a930216512a6de54f821d9d23e1a309abb5f7084f4dee4"
+    "sha256": "bbd537b33df6a809ab3423d8de1f22f7e34a90dd3fddef4cfd521cdfa4452a0e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2890d7b26ab3d3e7ebf7b25cd73fa401faf8a5da7b3fcbdccdc8119559916da1",
+      "sha256": "0d0c6ce01daf7b8ab82330911b2318ee1f01a9c36c66c007001b241fb23d5978",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +163,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "47 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +192,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "13.62523 hours"
+              "value": "13.62523 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1864",
+                "label": "DAMIT model 1864",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2890d7b26ab3d3e7ebf7b25cd73fa401faf8a5da7b3fcbdccdc8119559916da1",
-      "bytes": 10287,
+      "sha256": "0d0c6ce01daf7b8ab82330911b2318ee1f01a9c36c66c007001b241fb23d5978",
+      "bytes": 10495,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7978,
-          "sha256": "d16f6ef041d45e2564f228f7dd98cede6866542063f0d8fd785e2f47e947840a",
+          "bytes": 8139,
+          "sha256": "6e9ff14dd27c2145db7084368dce9b2488bef3f619b9e85de48d6003fef49c42",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "nausikaa",
-    "materialSha256": "c9e3e73740e5e6f915545e383345a860e9b357e148c9b79468b6ae432fe813e0",
+    "materialSha256": "124976042e4816a7b0a3618aa01daebd68eb6feeb4fd43ff2b22408d2bcbcaa6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

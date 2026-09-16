@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e74fae12a6b82d412ef51ede8319d7442fdeef1ab75d7c83a21b8990c5db1d0a"
+    "sha256": "770bf0d6e97b0c1063f41f02577e7d9511e802a82b10db9708364d8c47c00bc7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7b0056bbcd8020fead9d06082b061f91d3cc991b79b8df8df0809f196264c3c0",
+      "sha256": "1841999a9606260ad49c341aa5a909d49ef06047e28036788acb5208a6c5bfd5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,7 +205,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.8044 hours"
+              "value": "15.8044 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+                "label": "DAMIT model 6171",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -361,8 +369,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7b0056bbcd8020fead9d06082b061f91d3cc991b79b8df8df0809f196264c3c0",
-      "bytes": 11465,
+      "sha256": "1841999a9606260ad49c341aa5a909d49ef06047e28036788acb5208a6c5bfd5",
+      "bytes": 11790,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +491,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9066,
-          "sha256": "b4252ee3959bb488807bf932e505c74ead4f0edcf54f24613257618f7e56e0df",
+          "bytes": 9300,
+          "sha256": "3aead93e3d7d3c76434938516bd8371112f482056389ec22166a1c88f0ace11b",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "ab6444ba3b6134da4bb4d89a10cad12d44417cbc33082260db720340276101e8",
+    "materialSha256": "7bceb091bf06aa8b378a0a7c0ff9c94207b3a8b768d604cf3a8d9688b8861411",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

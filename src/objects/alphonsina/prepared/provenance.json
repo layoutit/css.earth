@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2c1ae73e984873e01a2b88452dcdc034622fa70ad113d17d0503841a97223b2d"
+    "sha256": "02c8fdb5a269c012c8daa729fd188cfc7be8eb472ba9dc6e7b64e0cdb4c9e719"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cfb4adf218a865286600e354c196b61d41825ded363b649cbf76d27dd6bedecf",
+      "sha256": "a154742cc80d47a6ef093cab3f09081229c378a12323881a37e65132294a1dae",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,7 +205,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "7.87754 hours"
+              "value": "7.87754 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/301",
+                "label": "DAMIT model 301",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -361,8 +369,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cfb4adf218a865286600e354c196b61d41825ded363b649cbf76d27dd6bedecf",
-      "bytes": 10312,
+      "sha256": "a154742cc80d47a6ef093cab3f09081229c378a12323881a37e65132294a1dae",
+      "bytes": 10635,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +491,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7888,
-          "sha256": "f5604bf442efc19c65e9edf66de833cd867d7b30af96db666dbc448e71bb882f",
+          "bytes": 8120,
+          "sha256": "be4f42d9752a39b9f35561e627fb6acf25bde2b3574615013071419ac3c2032a",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "b54add5dd1bd541c77c1da55c6ae42b7e881cbd47741ebec6c3f79b752d542ef",
+    "materialSha256": "c6d7c5a202f3c96418bcee5ae03fab9ce023c5537bc4169ba821e1829c45cbbe",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

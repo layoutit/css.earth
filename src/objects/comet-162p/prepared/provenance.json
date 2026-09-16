@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5cdf21b5d75e390035230b30fede99ca9c1d186532ff5f252c17d7db3f08eef"
+    "sha256": "ab50552d81792e82c7d468eeba6822772eef476bdb17d72c59a5aed1cfc12770"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,25 +134,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "108970d3425734829ebb22af0438319c76819c6ac2472736dbc24c552d6920ea",
+      "sha256": "0ed331dd718157e6f9b57899e0749ccf6f8707e6ff05b80c850289c9ead3017d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-162p",
         "displayName": "Siding Spring",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Thermal radius",
-              "value": "≈7.0 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "32.86 hours"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -276,8 +265,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "108970d3425734829ebb22af0438319c76819c6ac2472736dbc24c552d6920ea",
-      "bytes": 2595,
+      "sha256": "0ed331dd718157e6f9b57899e0749ccf6f8707e6ff05b80c850289c9ead3017d",
+      "bytes": 2376,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,8 +337,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8221,
-          "sha256": "edae750cc6f7c1052071382c90ab00fd2124369eaff5bd43da1626b980ae116a",
+          "bytes": 8095,
+          "sha256": "1d2133a2551770d759bbdc4fff73344a6c7a38d62a16b4374569413bb037c4a5",
           "verification": "bytes-verified"
         }
       ],
@@ -362,7 +351,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-162p",
-    "materialSha256": "7aeadc9a258683d04c758498ad9575a22902909b7d18d063e26769237725cc69",
+    "materialSha256": "6eab2bdf691393013c31e65883d37f82512dd26b1b6243c74232458510e6b499",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

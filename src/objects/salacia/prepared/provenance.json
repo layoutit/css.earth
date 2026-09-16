@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a0a7704fa776cf1fd456897655f0b50c7a3c46488ed3d429f148b35d438517e"
+    "sha256": "e332e4a45e10ec60957942f795314c6d3e7fd842d3bf04a504a709695cf1baa5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
+      "sha256": "8a0009de1abb152f4c131c8a43c3a1b1d13eef4f92c821fc514da7bb90757977",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "salacia",
         "displayName": "Salacia",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published size model; shape unresolved"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "838 × 838 × 838 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea."
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Hot classical trans-Neptunian object"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -297,8 +270,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
-      "bytes": 3528,
+      "sha256": "8a0009de1abb152f4c131c8a43c3a1b1d13eef4f92c821fc514da7bb90757977",
+      "bytes": 2662,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -379,8 +352,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7293,
-          "sha256": "a78656c0b4feb78047eaf1af6a740e786da4d8b6b32db2af70c418366d605dd5",
+          "bytes": 6657,
+          "sha256": "199fb88cdeb14c38236a52228c635fd4fb334af2e942dc72bad2557d69a7fb66",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +391,7 @@
   },
   "lastPreparation": {
     "objectId": "salacia",
-    "materialSha256": "89e3ce5d89c044d0577901db7240401ea6632fd3bb36826f0b496891ae34efb9",
+    "materialSha256": "b84bb7b742dae414651f8fa2c72c69eddb41a231d133802008c40853ba39c817",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

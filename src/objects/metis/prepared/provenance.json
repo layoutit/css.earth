@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5e491d140369f7aa968639835c419866a8c8f2854ff97468e3bd96ae0c3dd4b6"
+    "sha256": "7472297f7a4af5be3b4ca81861048aaa112619dd0742fb761206094782d46bde"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -226,7 +226,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4963e6053a5aaf1928b2cf3b19970d6e71b32b429fbcc59f3ea3d137aabee6cd",
+      "sha256": "7182567ada12d8318836d09c643a3d9a20556b8f72f5e57cf667859cdee3b66d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -263,7 +263,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "7.075 hours"
+              "value": "7.075 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/3; P (days) × 24"
+              }
             },
             {
               "id": "rotation-period",
@@ -277,16 +285,6 @@
                 "catalogueId": "nasa-metis",
                 "locator": "/references/2; rotation-period"
               }
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 127,980 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Dimensions",
-              "value": "60 × 40 × 34 km"
             },
             {
               "id": "discovery",
@@ -413,7 +411,7 @@
       "sha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
       "bytes": 857088,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -460,7 +458,7 @@
       "sha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
       "bytes": 5033,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -514,7 +512,7 @@
       "sha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -561,7 +559,7 @@
       "sha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -615,7 +613,7 @@
       "sha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -662,7 +660,7 @@
       "sha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -716,7 +714,7 @@
       "sha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
       "bytes": 810000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -763,7 +761,7 @@
       "sha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
       "bytes": 4835,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -817,7 +815,7 @@
       "sha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -864,7 +862,7 @@
       "sha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
       "bytes": 4728,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -905,7 +903,7 @@
       "sha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
       "bytes": 67525,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -922,10 +920,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4963e6053a5aaf1928b2cf3b19970d6e71b32b429fbcc59f3ea3d137aabee6cd",
-      "bytes": 4251,
+      "sha256": "7182567ada12d8318836d09c643a3d9a20556b8f72f5e57cf667859cdee3b66d",
+      "bytes": 4361,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -967,13 +965,13 @@
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
           "bytes": 1414,
           "sha256": "dcf8b7a04cb1c530804827acd1340a4faa0ed4f12d553968700659b23c4a2eb7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
           "bytes": 30766,
           "sha256": "f6077d939c90aa90f39ae2cb546ff1f2b311477010f65d753e12df2ca7978859",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1004,8 +1002,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5417,
-          "sha256": "7fc641da6030f570e08b0c2417c43c063e85165e6b4468816f50e90d9ff0ac9c",
+          "bytes": 5524,
+          "sha256": "36fd3a5a7191d21bf4040e609fcb1ae8e32dd8336dbcf791528cea693bf354be",
           "verification": "bytes-verified"
         }
       ],
@@ -1043,11 +1041,11 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "eddd977585f28a0446caf5922444ecdfc75121c351b292ab425cc06159149218",
+    "materialSha256": "9de934724fa89969922faacb7c416f3486c158821da2d0bfe5e083860ededc59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "647e1dad9cc0b0956b1eb32f867fce8fcbe8883482bbb76f1d7deea46820430c"
     }
   }
 }

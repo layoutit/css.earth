@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iris",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "029c0a2eef6082b2b108b910dc6eed89f12fee55d072df5ef740f67128e6dc2b"
+    "sha256": "e4e4568906be0d124d74d1c09fa92c927f674bb6b121607c81e7bdb5553c5788"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "43ead81a429923a3b419879faa264b81b9087003918772c58eb0c3d202d243b9",
+      "sha256": "788e4a43b2656dbc34807504560a1e48ebf122bb9f028e538998b4d32c569b81",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +162,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "99.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.386 AU (mean)",
@@ -191,11 +186,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7.138843 hours"
             }
           ],
           "moreFacts": []
@@ -336,7 +326,7 @@
       "sha256": "643b9de344348458d1c2b32e41cb9cec01d3b98033a8a821f2c09757ac3f0d04",
       "bytes": 1676539,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +354,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "43ead81a429923a3b419879faa264b81b9087003918772c58eb0c3d202d243b9",
-      "bytes": 6325,
+      "sha256": "788e4a43b2656dbc34807504560a1e48ebf122bb9f028e538998b4d32c569b81",
+      "bytes": 6092,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +389,19 @@
           "url": "/scenes/iris/iris-elevation-thumbnail.webp",
           "bytes": 5674,
           "sha256": "f4395ea2887217f8a8f9660977968ed70a63499629a73911381195d5e6343d12",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-elevation-surface@2x.webp",
           "bytes": 428656,
           "sha256": "63eb3113c06660f18733ca11a3a7dd21f3590c83f5d5f798d4fb9738f9e2b17b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +439,13 @@
           "url": "/scenes/iris/iris-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-shape-surface@2x.webp",
           "bytes": 67626,
           "sha256": "52f4a6f0405665cae0d2515b473df0fcac6bf23bc36e79a314d337256e869bfd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +476,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4069,
-          "sha256": "df523c799f86548649d399fd51a7d3c11706808af0471bf703f6689906e73dcf",
+          "bytes": 3924,
+          "sha256": "0cbd95adc506aba7784589ee66b7198070e8a8844d75814d3297b96c39013372",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "iris",
-    "materialSha256": "71f63b1d67ea514e54d7684b8926eec7fc650fc9427c29fc125fc859027e0091",
+    "materialSha256": "39f03f3c133c0ffb547dbddc6fc2b9c499c9db5cc667af28c436cf40262cd9b7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "1d66aca378d74dfea7600dd204bf6eae0cf06b84a8d55fcba4bae4446ea595ef"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c21811228c78ed26991a79d22fad5025c29b90c2a711188ebab9c76bed282c92"
+    "sha256": "2c55c81af08dde02d022b1e99e10b4ae3309043c9d9ba39f4bb23f6264ce2f20"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d22b0038c5d0d606ff9be46b9898fc586c7f679daed788a81e15616d5c3ecb8a",
+      "sha256": "155194d49d2802ddd639a6bd2c3c4addf09c5bc19de2c5111fce74a6c92eb887",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-outline illustration"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "543 × 543 × 460 km"
-            },
-            {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 56.1 hours suggested; no qualified phase"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Resonant trans-Neptunian object"
+              "value": "About 56.1 hours suggested; no qualified phase",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=84522",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d22b0038c5d0d606ff9be46b9898fc586c7f679daed788a81e15616d5c3ecb8a",
-      "bytes": 3294,
+      "sha256": "155194d49d2802ddd639a6bd2c3c4addf09c5bc19de2c5111fce74a6c92eb887",
+      "bytes": 2841,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7240,
-          "sha256": "a6955871bde60edb35cd3a40cea4eb7eb026edfaf5a500df34d6cfd0ceef7370",
+          "bytes": 6877,
+          "sha256": "541054af143307cd7189e598eeb0a0ff07fa37f11c347234e925c07701a5ab67",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tc302",
-    "materialSha256": "69577d6d73e5588d2498ec10d751dd1f68bee6f1bf753e967b7f2dd2fdae5899",
+    "materialSha256": "bc73bacb6337987441b94002e14ebc00fc3a7a7ed5bde7f37336fd79e9db2435",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

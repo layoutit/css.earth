@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff066fb756d73287b20d7906bd92a378db03f744a4ff6f8ade34cdbf00b77d8a"
+    "sha256": "8ab439af3602aa6f23d1ab8d6d6ddff0e2552c9a35b2ad59f3a694f1815864f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b20d9ac6826b7611c0e2a78d604ca95b338df9d0954ccd1135a43799baf4d9f",
+      "sha256": "6bfdfa9a0240a436995630753515ef73a82a2f52ccc01303d37da40e4436067c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "ixion",
         "displayName": "Ixion",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-outline illustration"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "727 × 727 × 668 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "No secure rotation period"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Plutino (3:2 resonance with Neptune)"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "The 2020–2023 global projected ellipse has semiaxes 363.42 (+3.53/−3.85) and 333.98 (+7.07/−4.96) km. This axisymmetric edge-on illustration assumes equatorial depth equal to the long projected diameter; the 726.84 × 726.84 × 667.96 km full axes are not a measured 3D shape. True flattening and depth remain unresolved."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +258,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6b20d9ac6826b7611c0e2a78d604ca95b338df9d0954ccd1135a43799baf4d9f",
-      "bytes": 3272,
+      "sha256": "6bfdfa9a0240a436995630753515ef73a82a2f52ccc01303d37da40e4436067c",
+      "bytes": 2332,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +340,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3670,
-          "sha256": "d428581579b73494322a096a0a1a104c648e9b4b5bc23bcf6c515f4a7e44499f",
+          "bytes": 2960,
+          "sha256": "9c339d6b59cb0162e333e18e02694d82c59cf5faae0ee4eb2d946e628bddfae6",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +379,7 @@
   },
   "lastPreparation": {
     "objectId": "ixion",
-    "materialSha256": "be0f29ee66e42f32e8bbcd751877dc00443899600910a623e3ec16a787f45cbf",
+    "materialSha256": "38bd8c48851a75cafa6f76b4f3b6b67ea8ec8cede583f98d276a5e164d49786e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

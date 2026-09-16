@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4fa82cfdebd31f9127bf2e7a1b86d1ce4f94c3852b65e9fc7c2019dd5da47cf8"
+    "sha256": "8105002ecbaee25891472d01efbbe24f31db1e8cc30c6858b9b5987fcaa9c9b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -156,7 +156,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c27516c21b2ffdd7a4e890ead1cb15b500bc684720e582b5810ffbd4aeaa8aa",
+      "sha256": "7abe6a90f8172bce3c881ea2bc673ae408d8a432411d90b474f87bfd16f22289",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -210,22 +210,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "16.69 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "16.69 days · synchronous"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 1,883,000 km"
-            },
-            {
-              "id": "atmosphere-composition",
-              "label": "Atmosphere",
-              "value": "Very thin carbon dioxide, oxygen and hydrogen exosphere"
+              "value": "16.69 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             }
           ],
           "moreFacts": [
@@ -649,8 +642,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8c27516c21b2ffdd7a4e890ead1cb15b500bc684720e582b5810ffbd4aeaa8aa",
-      "bytes": 11111,
+      "sha256": "7abe6a90f8172bce3c881ea2bc673ae408d8a432411d90b474f87bfd16f22289",
+      "bytes": 11032,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1388,8 +1381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6535,
-          "sha256": "57d39749eb2c588fc4e54ff78dc5dcd9942ff7ac3e8a5a4f4684ebc2cb80bc26",
+          "bytes": 6497,
+          "sha256": "80ef86f69798546a0cd460a27e2f5155f9b44c038c8229bd7084adf8950d1565",
           "verification": "bytes-verified"
         }
       ],
@@ -1513,7 +1506,7 @@
   },
   "lastPreparation": {
     "objectId": "callisto",
-    "materialSha256": "ebc12fdd2281d539bb20abe49c67e195eeef35d4fb0899302b1407eacd0f271a",
+    "materialSha256": "63c931ea112b2ef3097a9bf94c8d608dd58cfdc5b820b4cf41abccdbf88d13e5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

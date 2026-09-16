@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0b8158b144234a7185e7db0f5175c105cfbd32d04ef3ad6f683c2a6d58a87f5"
+    "sha256": "96ec83d52031f19957bf7a7235521c8072cd990b0969be998e6116ecea11f80c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aaeed0d22e8424818bb134c25ec63f7d34a27b5d51a765a5aa118e96c3f93d77",
+      "sha256": "5670572b77a1f990c9b3853e5a020a6da3efaf6751768d4ed2adeae6fe85ffcb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +111,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "About 46.8 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Modeled dimensions",
-              "value": "About 150 × 74 × 74 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 11.8 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 64,358 km"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Prolate spheroid; third axis assumed"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 · January 3, 1986"
+              "value": "About 11.8 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -309,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aaeed0d22e8424818bb134c25ec63f7d34a27b5d51a765a5aa118e96c3f93d77",
-      "bytes": 3076,
+      "sha256": "5670572b77a1f990c9b3853e5a020a6da3efaf6751768d4ed2adeae6fe85ffcb",
+      "bytes": 2807,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -391,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3880,
-          "sha256": "c9dc221501dce472060967c82f2b8a2d883aefb6d3779639c562335d61ae0d2e",
+          "bytes": 3740,
+          "sha256": "829e599f0bfd24f79a422f55f72f590005d5e2c07bad12d0a45d4eacb67a32cf",
           "verification": "bytes-verified"
         }
       ],
@@ -430,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "juliet",
-    "materialSha256": "0255a3b44aa0ed6b6a84620f45d028aa9f63c24b1a221055e8bc9303cf2fd4f1",
+    "materialSha256": "3c9898f72f7b0b56b81472dadb5f06f47a793ca304712db66560ef06aad510cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

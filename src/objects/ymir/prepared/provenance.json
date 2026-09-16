@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab578f903cc9b9af7600d2d84a7b2ec36620b7a9a7bc0f19e07237757990bdfb"
+    "sha256": "613aa9a6b3a53d633c7d7fc5ee78f5d081ebe7e698217d7b01a4cc2006308532"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
+      "sha256": "4d4b26fcbb55b96ec88b3f6daeef0bc0a3e57b3b13e12b7b8ba04a541d65f3fe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +112,20 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Mean diameter estimate",
-              "value": "19 (+5/−3) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Approximate triangular model"
-            },
-            {
-              "id": "rotation",
-              "label": "Sidereal rotation",
-              "value": "11.92220 hours"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Gladman, Kavelaars and colleagues · 2000"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -293,8 +280,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
-      "bytes": 2465,
+      "sha256": "4d4b26fcbb55b96ec88b3f6daeef0bc0a3e57b3b13e12b7b8ba04a541d65f3fe",
+      "bytes": 2314,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -375,8 +362,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2967,
-          "sha256": "7e7ae20280ffba53c5c9f880b3ff332bb9cb027d4402b638ad7ed87ed2265f14",
+          "bytes": 2906,
+          "sha256": "c2bea40e37057d5ec92f7a46bc6067c5c15c2f505a40dc53fbc4622cbb4ea080",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +401,7 @@
   },
   "lastPreparation": {
     "objectId": "ymir",
-    "materialSha256": "f8873ac817b9df75f6838ec99f6b98fdd8a3870877e6c92048d6df7d0d2fc47a",
+    "materialSha256": "5ab50e98a9854e088906b6383b5a31f98b03101a7535c1dfb9f115031112fc4d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

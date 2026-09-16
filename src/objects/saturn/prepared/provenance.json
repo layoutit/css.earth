@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8aef9521ce0e6c8bda7a7d093fb5077807743a2cfee9e6cfb01646af8bcc1e83"
+    "sha256": "dce62572031047ca41415be0e85d298d9c9788277baef557c1e5df1121563267"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -487,7 +487,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7d946ad0bc7e77a9076cf57cb7e82f63feb408f904c08c10d6ce4a128a8e52d3",
+      "sha256": "18a4dce9ffd85aa2e44ec6f8bcbe78acae62236ed51dee290f8237a64d442243",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -565,11 +565,6 @@
               }
             },
             {
-              "id": "axial-tilt",
-              "label": "Axial tilt",
-              "value": "26.73°"
-            },
-            {
               "id": "moon-count",
               "label": "Known moons",
               "value": "293 · Sep 2026",
@@ -581,24 +576,9 @@
                 "catalogueId": "nasa-saturn-moons",
                 "locator": "/references/2; moon-count"
               }
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "Present"
             }
           ],
           "moreFacts": [
-            {
-              "id": "ring-span",
-              "label": "Main ring span",
-              "value": "About 282,000 km"
-            },
-            {
-              "id": "ring-thickness",
-              "label": "Typical ring thickness",
-              "value": "About 10 m"
-            },
             {
               "id": "mass",
               "label": "Mass",
@@ -2209,8 +2189,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "7d946ad0bc7e77a9076cf57cb7e82f63feb408f904c08c10d6ce4a128a8e52d3",
-      "bytes": 17684,
+      "sha256": "18a4dce9ffd85aa2e44ec6f8bcbe78acae62236ed51dee290f8237a64d442243",
+      "bytes": 17218,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2580,8 +2560,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9904,
-          "sha256": "fc68403c577f9a315e4b6260311050ce20c1d3c9eec3bec9d351d0cca217fbd7",
+          "bytes": 9641,
+          "sha256": "831ed799cc76c0d6e820a7aa22df1d06c21d0e711a84dee5beb33417e53f072e",
           "verification": "bytes-verified"
         }
       ],
@@ -2791,7 +2771,7 @@
   },
   "lastPreparation": {
     "objectId": "saturn",
-    "materialSha256": "bcfe87bb2190e4d35ff52b83acf81c3509c891f02524d25ec0f770c5b5b39c40",
+    "materialSha256": "8b28cce94978368df6d819dc060d6aa1c72256f7e165b01d879a20b7e3cb5051",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

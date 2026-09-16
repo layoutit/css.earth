@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "463dfb7a5a19a64d0f8d27780339d3427f5c71a8ba90bb8b6497cb89bef5d9c1"
+    "sha256": "8fd3fd7c2297bdda8249a33b52b99b3ca8524a212699adec485761d0c87c79af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -534,7 +534,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c7d11d828a560459cbb67b8793de707375f4b62a5a287dbdeac4616738886b26",
+      "sha256": "cd31ba6a97a01a826fc34fcca433a9a20450f223802fa6e4a4a262c4f0904112",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -610,34 +610,9 @@
                 "catalogueId": "source-pluto-orbit-jpl-physical-values",
                 "locator": "/references/1; rotation-period"
               }
-            },
-            {
-              "id": "axial-tilt",
-              "label": "Axial tilt",
-              "value": "23.4°"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "1"
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "None"
             }
           ],
           "moreFacts": [
-            {
-              "id": "ocean-coverage",
-              "label": "Ocean coverage",
-              "value": "71%"
-            },
-            {
-              "id": "atmosphere-composition",
-              "label": "Atmosphere",
-              "value": "78% N₂, 21% O₂"
-            },
             {
               "id": "mass",
               "label": "Mass",
@@ -2803,8 +2778,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c7d11d828a560459cbb67b8793de707375f4b62a5a287dbdeac4616738886b26",
-      "bytes": 16867,
+      "sha256": "cd31ba6a97a01a826fc34fcca433a9a20450f223802fa6e4a4a262c4f0904112",
+      "bytes": 16197,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -4414,8 +4389,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8048,
-          "sha256": "31ebb41156b82b312534e294412911edc6faa5ff571b447c5dadcc0da45d4c41",
+          "bytes": 7745,
+          "sha256": "182a4075706eb44e2c157764926e1923e3faab4647743d017930dffaeb4b04fa",
           "verification": "bytes-verified"
         }
       ],
@@ -4672,7 +4647,7 @@
   },
   "lastPreparation": {
     "objectId": "earth",
-    "materialSha256": "168016d10b76dc4fefed174cc2ec5cfaf0b2652477a835201f4115bb3ed615f8",
+    "materialSha256": "dc6f3025c8050b57632e5a6b7235a153e2cfdeae5bc7ebe90b53b4ffcf9b8b2b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

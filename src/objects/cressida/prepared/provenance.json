@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0aca2e818b2dc33ab4aeba19f81678b52f37b71f0f32a5c61934c0246694bd5f"
+    "sha256": "9f8c91ed7854808590f9c6490a1fb5467267077744e81ccf8536fd6b5da9ff49"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,45 +102,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a6f5511ea4de500b8413964deadc8911d651051e8ba916f138b431a488af13f4",
+      "sha256": "59eea9ee8c07f765bfd34c33c23ec613553e5ace288a55409d3305b4df232f38",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "cressida",
         "displayName": "Cressida",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Projected radius",
-              "value": "41 ± 2 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "92 × 74 × 74 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 61,767 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Prolate model; third axis assumed"
-            },
-            {
-              "id": "mass",
-              "label": "Mass from ring dynamics",
-              "value": "(1.84 ± 0.21) × 10¹⁷ kg"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -303,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a6f5511ea4de500b8413964deadc8911d651051e8ba916f138b431a488af13f4",
-      "bytes": 2887,
+      "sha256": "59eea9ee8c07f765bfd34c33c23ec613553e5ace288a55409d3305b4df232f38",
+      "bytes": 2136,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -385,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6892,
-          "sha256": "9b1f881d91ecb7c618b99228e85f1e7c0eb54b4eaa3103da2dcc3771c15e218a",
+          "bytes": 6410,
+          "sha256": "7b1be87201c74ac58a0eab46a6f20ac19df0873113e72250417b1ddbfb0a4636",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "cressida",
-    "materialSha256": "966ec80aa72792dd0c63f8ec49aa10d35fcf429addea6e2841bfd653a7014378",
+    "materialSha256": "baa114ddda34b256f73f0fc97c7829eba9b7b7874fdc2e9624a383bf2f06e240",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "928f1860442715e0b5f4c129bc5c0a4690148bfafcd976bba23385539b2ecaa1"
+    "sha256": "552fca669bf33f38d44689dc042086966989d75a3f13513ceae3206d5cda0659"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6688084f9eca52a4b6278c5e5d9cf2859623745a1a35fe25e0044b904c93548c",
+      "sha256": "71f56a70b95b957890d586dd81973fce960b13201ebb3fe97d76a7ffdf74d6e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,11 +142,6 @@
         "displayName": "Tsuchinshan–ATLAS",
         "panel": {
           "facts": [
-            {
-              "id": "diameter",
-              "label": "Catalog diameter",
-              "value": "≈12 km"
-            },
             {
               "id": "perihelion",
               "label": "Closest to Sun",
@@ -280,8 +275,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6688084f9eca52a4b6278c5e5d9cf2859623745a1a35fe25e0044b904c93548c",
-      "bytes": 3518,
+      "sha256": "71f56a70b95b957890d586dd81973fce960b13201ebb3fe97d76a7ffdf74d6e7",
+      "bytes": 3410,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -352,8 +347,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9265,
-          "sha256": "52fa85b1290b8f9f5f514353a1144266882cef578c5eebcf7dc4fffdef774164",
+          "bytes": 9201,
+          "sha256": "e47db4e66a696a45e7d9259c370be9ccc68490bfc95c65f836ec709333be31fa",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +361,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2023-a3",
-    "materialSha256": "e38520585e36d24a44cc13fce440f064b9888e6777e3c6459d65f36c4d6d2a11",
+    "materialSha256": "45c08a08bd506fad0e85cd50072166b2be0aebd9c9c4db9b439dd1a87a09e3ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

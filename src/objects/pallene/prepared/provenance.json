@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pallene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a548acae8c45a957aec7962cdeb7cf57acd7ea90cfee1e49cc326efd147859e"
+    "sha256": "8837f98abc63c618022ab8da2faeb62d55f1aaf41b652bf0c8668f1faeac3732"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -137,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc031b93d0be5a5035e8c909262c7f1b865714d90144ad962edb6847dbd54f85",
+      "sha256": "822dd468a9cbe8ed546ddb30911d70514fe9aae2879e76f2e0ea21e375afdb39",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -146,29 +146,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "2.23 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Measured dimensions",
-              "value": "5.76 × 4.16 × 3.60 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 27.7 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Saturn",
-              "value": "About 212,000 km"
+              "value": "About 27.7 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Cassini imaging team · 2004"
+              "value": "Cassini imaging team · 2004",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/1; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -297,7 +298,7 @@
       "sha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -349,7 +350,7 @@
       "sha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,7 +395,7 @@
       "sha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -411,10 +412,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc031b93d0be5a5035e8c909262c7f1b865714d90144ad962edb6847dbd54f85",
-      "bytes": 3056,
+      "sha256": "822dd468a9cbe8ed546ddb30911d70514fe9aae2879e76f2e0ea21e375afdb39",
+      "bytes": 3439,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -448,13 +449,13 @@
           "url": "/scenes/pallene/pallene-normal-thumbnail.webp",
           "bytes": 1816,
           "sha256": "af697b55c121f343c8351ef32c64831bf485ff5f873416d2c40c38d07ba8a09c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
           "bytes": 64508,
           "sha256": "e1c2fd265ec28f13462a6277abcc8e0e59f20bb0cee18df5872c25de23f9c45d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -485,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5073,
-          "sha256": "1f479b77c0818a07d8e0721d2f8ee18783e64af697c2762cd66a2fc761e85f60",
+          "bytes": 5406,
+          "sha256": "e0d22cc411eca9e2d74cae8821d1a712511eeccc486b01d9d55f3e66876e1d40",
           "verification": "bytes-verified"
         }
       ],
@@ -524,11 +525,11 @@
   },
   "lastPreparation": {
     "objectId": "pallene",
-    "materialSha256": "7996e5f47531619a296a911e05ba02b53c6cfc454944ae71c53b60c1f9952e0d",
+    "materialSha256": "a619aaff5a758c36b64d7a8d535beb6fc75c3d4e72939122cc2e8617f7a92b6f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "ae1533d776a146b701836152e2ef681b934483f9c8d5a35dd61b11d5e0b2a402"
     }
   }
 }

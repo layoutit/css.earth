@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1994-cc",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1448c8565cc5c6adceb920ec422b00c342f877c80dda91f55e85954bf6f513a3"
+    "sha256": "bd6d7d3dd719a26b3f2815547e37be62726b71a7b4aa27ced0d8d62bc294ab9a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b98c307d2b5b52d8fe22b7f5ef8d7394cc205c1995020c022cbdcf00388c6374",
+      "sha256": "a48607b4ad3c913a8f13d91c8776bf4f0d6f2eaecc18556ea1f55dadfa2a5bf5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,11 +161,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "0.31 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -350,7 +345,7 @@
       "sha256": "8df685e9f555ba71a07ba4364af3ea59e485fcb5afa43fb54e5a12f645fca78b",
       "bytes": 120595,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -375,10 +370,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b98c307d2b5b52d8fe22b7f5ef8d7394cc205c1995020c022cbdcf00388c6374",
-      "bytes": 11762,
+      "sha256": "a48607b4ad3c913a8f13d91c8776bf4f0d6f2eaecc18556ea1f55dadfa2a5bf5",
+      "bytes": 11649,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +405,19 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
           "bytes": 7542,
           "sha256": "6f2021266b63661777f52557d74476ecdb9b854d2fd94b7899be440bef49d1ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-surface@2x.webp",
           "bytes": 450112,
           "sha256": "548e772fe603a1d90c1f68b81cdb235acd21db190cfeea17b42aefd8ed78af7c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +455,13 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
           "bytes": 61604,
           "sha256": "df57b97e63f755f519afec29d66c16201456b6933d06d1cf04fa95633ca8ac59",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -497,8 +492,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9244,
-          "sha256": "dea464ba4f439bc0627d74498c97420f1b444def16b885c15d844fdc08252fbd",
+          "bytes": 9175,
+          "sha256": "3e060348c54d26e1b8b3cd03ffdf7d915684fae9a643c5e9d3dd0dd99bac35f1",
           "verification": "bytes-verified"
         }
       ],
@@ -561,11 +556,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1994-cc",
-    "materialSha256": "32dffcfa55496e5259c4f1673f84adc6dbcf38bdcd2ec4ca176be82c67aa2319",
+    "materialSha256": "2083b9a827df5e5d999be154e429ae5e5b82844b62f41567f2ebedd30c383c57",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "b20d2617fceadea73139c3c7cecb8edd8a6d0f46be97cf5d02946d6aaf00c138"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81a03dae56bdc5dbe7fb4433b0bb8e4fc2ab6311c0275f893bdd4b0297b01e02"
+    "sha256": "52d1d4b278fabd91b95b70d55062bdb8a28cf66030764c6d1dec9cfad43af58b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7f1643191b0053bc92f97c3ab15d29df0e85c55464348ff9a31910912d11d938",
+      "sha256": "cb3aaf0efb0e43cf5da0f55feec8e1dba8d36847448719b58aa6619f8b8a86bd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,27 +114,15 @@
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Uranus"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full model dimensions",
-              "value": "46.3 × 40 × 40 km"
-            },
-            {
-              "id": "scale",
-              "label": "Size evidence",
-              "value": "42 (+20/−12) km · tentative thermal model"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation interpretation",
-              "value": "9.948 ± 0.019 h"
+              "value": "Uranus",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
           "moreFacts": []
@@ -321,8 +309,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7f1643191b0053bc92f97c3ab15d29df0e85c55464348ff9a31910912d11d938",
-      "bytes": 2754,
+      "sha256": "cb3aaf0efb0e43cf5da0f55feec8e1dba8d36847448719b58aa6619f8b8a86bd",
+      "bytes": 2608,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -403,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5856,
-          "sha256": "7b5a975206a528f3979d8696f585e92a44bf6cb2414a10176538e774f369b5b8",
+          "bytes": 5795,
+          "sha256": "12aca95c20a04ace0aaf3b59cd97e4cd0598ab55b3f31d0f75e706fe5faabde5",
           "verification": "bytes-verified"
         }
       ],
@@ -442,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "caliban",
-    "materialSha256": "e8ad80456244110a03def64af5f4629e3dcdf73fddf090a3f1a8f7f3662ecb8e",
+    "materialSha256": "dbffb71d0a21dac9b929925be29053551ed6069b21a0dff8b4a2ef58fb88ec2b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

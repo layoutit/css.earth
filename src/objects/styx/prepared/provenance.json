@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dab96fa45be73891db38e57bd2563532e8cca63d45e6846bbebb21e923fefd55"
+    "sha256": "51bc8bdb6458fafde9660866cca0552052b38147a4f809ec89c6f8fbc28c2e8a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "20fdfcfea33b351c9777ec9a1b6af641faf4511e07342e6d19f5465b611c4d06",
+      "sha256": "51fd77d1915fb611f637968285e6fc127b3dd98a8158072e68a4c7fafb4b2217",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +111,17 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "About 3.5 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Dimensions",
-              "value": "About 10.6 × 6.0 × 5.3 km"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 20.16 days"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from system center",
-              "value": "About 42,656 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 3.24 days"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Hubble Space Telescope · 2012"
+              "value": "About 20.16 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days)"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +286,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "20fdfcfea33b351c9777ec9a1b6af641faf4511e07342e6d19f5465b611c4d06",
-      "bytes": 3072,
+      "sha256": "51fd77d1915fb611f637968285e6fc127b3dd98a8158072e68a4c7fafb4b2217",
+      "bytes": 2810,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -385,8 +368,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3902,
-          "sha256": "a04a045f97e2624acb4d8c16d408992eea0fcaa22ba80d38566d0f92a64b5853",
+          "bytes": 3769,
+          "sha256": "e1b25de61c4676f0c413659b159441a9049198c4c18dd982c0e3bc76790dbd2c",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "styx",
-    "materialSha256": "3ceca03a3ce3b4030553e3fe73d727ae581b259b8a12130e830bcd9d1088fe6d",
+    "materialSha256": "f205076f3f047ec46f225928446616bb2d202dacbfa80b271848ff4eba7025f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

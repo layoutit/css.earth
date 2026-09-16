@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa038c4a0750052395e0d5ac35aa761c55e0af2be8678c9f7aaded15aee88bea"
+    "sha256": "ebe7a3bb379f19af3cc0f49c392656b8be6681402750ea15b7bb0d2ea853b9e8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
   },
   "recipes": [
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
+      "sha256": "040c1a7fcbfa2d11eb3073e602830969d104cc438137f74bbc6bfa4939ee5378",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,22 +176,41 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "316 solar radii"
+              "value": "316 solar radii",
+              "source": {
+                "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+                "label": "VLTI/PIONIER 2014-09 uniform-disc fit at the Gaia distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "162 parsecs"
+              "value": "162 parsecs",
+              "source": {
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
+                "label": "SIMBAD: Gaia DR3 parallax",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "simbad-pi1-gru",
+                "locator": "distanceParsecs; distanceSource"
+              }
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (1.65 µm)",
-              "value": "18.17 milliarcseconds"
-            },
-            {
-              "id": "rotation-axis",
-              "label": "Rotation axis",
-              "value": "not measured"
+              "value": "18.17 milliarcseconds",
+              "source": {
+                "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+                "label": "VLTI/PIONIER 2014-09 uniform-disc fit",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+                "locator": "angularDiameterMas; angularDiameterSource"
+              }
             }
           ],
           "moreFacts": []
@@ -454,8 +473,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
-      "bytes": 4233,
+      "sha256": "040c1a7fcbfa2d11eb3073e602830969d104cc438137f74bbc6bfa4939ee5378",
+      "bytes": 5283,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -617,8 +636,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4819,
-          "sha256": "5a84a8eaa365b30a3660542ee8bd0ad99df86c2231edfce47e375f0ceee63ba1",
+          "bytes": 5640,
+          "sha256": "c9fad7e3b108aa8c45bb731cc2e68786cbc3fee11652f8ba8874368fe74b6040",
           "verification": "bytes-verified"
         }
       ],
@@ -656,10 +675,10 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "b6b8febf185d7235ba90004077a7b8cb53e2a835c849e211467b44a0f56c3f37",
+    "materialSha256": "6f85822c54b92bf63d186689c5b4ed41189500512f2b515ab608bac4cf0feabf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
     }
   }

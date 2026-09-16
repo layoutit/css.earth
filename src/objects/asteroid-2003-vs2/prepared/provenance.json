@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3d32f132ceb82228d279483ab11d566a962c35cdbc0f1385f2dcf33ab355dd9d"
+    "sha256": "e6de0df04d4c43411f614623f0015a1f76b3c09b7c0ef0c1825552ce61eecc20"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
+      "sha256": "4daea6f401a89f8536290c40ae51f9d862ba66673d749c210772b40bf9a08bb6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2003-vs2",
         "displayName": "2003 VS2",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation and light-curve shape"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "678 × 470 × 452 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "7.41753 ±0.00001 hours; arbitrary phase"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Plutino (3:2 resonance with Neptune)"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -285,8 +258,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
-      "bytes": 3376,
+      "sha256": "4daea6f401a89f8536290c40ae51f9d862ba66673d749c210772b40bf9a08bb6",
+      "bytes": 2491,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -367,8 +340,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6286,
-          "sha256": "f9a7fef7674400f929a05ce07ce04a4f109d3b60a2e84d4b23e99b0ef55dabc5",
+          "bytes": 5631,
+          "sha256": "da702c3b51b880d824e3775e07c1a601354c8033f8b373e524b5bed01e4b5aff",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +379,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2003-vs2",
-    "materialSha256": "c9184adb679d5cf70e1c06fe6b20077528595f97022e1f3a329dc77a9a833840",
+    "materialSha256": "8ed33770a3237c97251732b05535ebcca87cfb3ab10c4e20ae42af1df12e7d40",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

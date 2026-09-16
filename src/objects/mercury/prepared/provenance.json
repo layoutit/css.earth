@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b768c892b49795e2e21e0232ce4208e9c02d04fe73ce86c626209328edc858c"
+    "sha256": "503edf19d7928a6e9e477bb5f7af516b3d42889a2d825be2338014938d9af9a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "a36b222b8cb726a7cad4cbd7a347e6c99177b829992fedb25c7b129c75228e11"
   },
   "recipes": [
@@ -184,7 +184,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "179b2721a30a44a057c845c12cb7fa51b4b40b6a662c535e98432d47dd16d5b2",
+      "sha256": "99e8064a9dcfb0c8470507948b8dbcdfb109f638a643270476c75ffd9c8ba2de",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -273,24 +273,9 @@
                 "catalogueId": "mercury-rotation-model-stark-2015",
                 "locator": "/references/2; axial-tilt"
               }
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "None"
-            },
-            {
-              "id": "ring-system",
-              "label": "Rings",
-              "value": "None"
             }
           ],
           "moreFacts": [
-            {
-              "id": "surface-temperature",
-              "label": "Surface temperature",
-              "value": "−180–430 °C"
-            },
             {
               "id": "mass",
               "label": "Mass",
@@ -992,8 +977,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "179b2721a30a44a057c845c12cb7fa51b4b40b6a662c535e98432d47dd16d5b2",
-      "bytes": 15805,
+      "sha256": "99e8064a9dcfb0c8470507948b8dbcdfb109f638a643270476c75ffd9c8ba2de",
+      "bytes": 15444,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1951,8 +1936,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9274,
-          "sha256": "d74d33b619907e91db6923d09c8436e7f4a63d9b4e6341cfef55dc5d5a490433",
+          "bytes": 9085,
+          "sha256": "69bd31922242f96cbd2cd48b6c95a6205d45f9df03a2c546df8d0a8801f1de14",
           "verification": "bytes-verified"
         }
       ],
@@ -2136,10 +2121,10 @@
   },
   "lastPreparation": {
     "objectId": "mercury",
-    "materialSha256": "f0078ac6a5608b457a5ecde6a9527010287a42f89cc4f828e4d6dfc49cf6cef4",
+    "materialSha256": "c1a42a4365798928b19ceaf9cef8346ac8c7d23f8ac40b87cc15bdd87883e80e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "a36b222b8cb726a7cad4cbd7a347e6c99177b829992fedb25c7b129c75228e11"
     }
   }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a663246a44f0e4473a76a9058f6e0b5a81c45e3b5c815127136189b2d2aa55e"
+    "sha256": "9a38dd1a5d2cdd087b74c57e5972ccd321cec93222d4ef39ba6510498b998eb8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
+      "sha256": "ece427b9586072a420b0b892c159f36e8476c8a505b9f5ccea27906c81561526",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +112,17 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full approximation dimensions",
-              "value": "254 × 110 × 90 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "9.1736 ± 0.0002 h"
-            },
-            {
               "id": "class",
               "label": "Population",
-              "value": "Centaur"
+              "value": "Centaur",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=54598",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -288,8 +281,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
-      "bytes": 3346,
+      "sha256": "ece427b9586072a420b0b892c159f36e8476c8a505b9f5ccea27906c81561526",
+      "bytes": 3319,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -370,8 +363,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4626,
-          "sha256": "05d36f0f1faa0eea733f8a1674cacf3570c1c1e634f733ce75c54882d6b2ff07",
+          "bytes": 4640,
+          "sha256": "feeb2e71f0ba934ac600cad5cf32289472e1b2c2c7deb6a66f7126eb65e62142",
           "verification": "bytes-verified"
         }
       ],
@@ -409,7 +402,7 @@
   },
   "lastPreparation": {
     "objectId": "bienor",
-    "materialSha256": "bd552c730addc674068b80363acf5b36a05b022f65832be20d9e67af156a6164",
+    "materialSha256": "16cd494de6c9641f3c23fbbbd7a0c4422bad8146e1ef6c9ab83319e92dfbeb6c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

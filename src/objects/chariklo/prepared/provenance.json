@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f184c61c60952ae1197734c60cbaf766e0511d07865a748a0a79d3a80d921dfd"
+    "sha256": "2fbc3942bdfc067544231540bf47fb86e5195f11537bc11eae6fe716d86045f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -126,7 +126,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
+      "sha256": "e424cb9ddd2262f59d709fa8f3689dcb181631e2092688f22ae7cd149691fbd7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -135,43 +135,33 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full approximation dimensions",
-              "value": "287.6 × 270.4 × 198.2 km"
-            },
-            {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "7.004 ± 0.036 h (photometric period)"
+              "value": "7.004 ± 0.036 h (photometric period)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10199",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Centaur"
+              "value": "Centaur",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10199",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "inner-ring",
-              "label": "C1R radius / width",
-              "value": "385.9 km / 7.04 km"
-            },
-            {
-              "id": "outer-ring",
-              "label": "C2R radius / width",
-              "value": "400.3 km / 1.009 km"
-            },
-            {
-              "id": "ring-epoch",
-              "label": "Ring measurement",
-              "value": "JWST, 18 October 2022, first contact"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -339,8 +329,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
-      "bytes": 4268,
+      "sha256": "e424cb9ddd2262f59d709fa8f3689dcb181631e2092688f22ae7cd149691fbd7",
+      "bytes": 4301,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -421,8 +411,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5814,
-          "sha256": "cd9a33c120239e793a83794fb8cf6a640034f0b980d5e083fd4a0cd4b6205356",
+          "bytes": 5890,
+          "sha256": "2bbef1621ec57ddb8cb27c1d63b684f52f84c6241cc4a729abc5c622a93bc940",
           "verification": "bytes-verified"
         }
       ],
@@ -460,7 +450,7 @@
   },
   "lastPreparation": {
     "objectId": "chariklo",
-    "materialSha256": "680e0236096b532bc07da841a5adde9a68116cc3158ec1387a1f71f37cef3e04",
+    "materialSha256": "90e1d351f7af8b223040eba76341a99d0ebdd913d31b2042a31a0b5b64a75a8e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

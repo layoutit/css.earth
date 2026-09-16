@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nereus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "151af01740f9e82e548c98ce490ac6c918e8bc06abb827cdaa49a768c1ff657a"
+    "sha256": "e27839defd2cddd5524ab92e8a8702221efdb7d5057e03554c3890aa3692f3d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f3192f37d8ecf90cee95fd1e5a7e877b1bc52d4d877c62038972eba04d9c426a",
+      "sha256": "4b4527e46774323516417e07591c4ee7fee43f1b5285c9b00afa64eed99abd77",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,11 +203,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "15.16 ± 0.04 hours"
             }
           ],
           "moreFacts": []
@@ -355,7 +350,7 @@
       "sha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
       "bytes": 67291,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f3192f37d8ecf90cee95fd1e5a7e877b1bc52d4d877c62038972eba04d9c426a",
-      "bytes": 9106,
+      "sha256": "4b4527e46774323516417e07591c4ee7fee43f1b5285c9b00afa64eed99abd77",
+      "bytes": 8981,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -415,19 +410,19 @@
           "url": "/scenes/nereus/nereus-elevation-thumbnail.webp",
           "bytes": 4902,
           "sha256": "e9050c106e32c677f2282ff3cc04fe059fb51642e44d75688ec8ce405a721838",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nereus/nereus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nereus/nereus-elevation-surface@2x.webp",
           "bytes": 285002,
           "sha256": "0db9bef8b0002b0ecb90a4d0b9b338dabe077cb4bd5edc3029452fa1f71c96e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -465,13 +460,13 @@
           "url": "/scenes/nereus/nereus-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nereus/nereus-shape-surface@2x.webp",
           "bytes": 63536,
           "sha256": "fb86c4072caba5e75d529989c4f76df64254bb02a777c48f03269bfe768a428e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -502,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6330,
-          "sha256": "c83cf53aa27e20962dfa1a82f936b26918166a92deb77db1e824024b98e75f5b",
+          "bytes": 6249,
+          "sha256": "e5258e990904e88f13f8d687904915c40cbb80c271e89d9609e0a2dd552df58f",
           "verification": "bytes-verified"
         }
       ],
@@ -566,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "50c84bbcbdd617a148643e6720de684b015bd111cd36573e45e9d8d6f938f442",
+    "materialSha256": "fa8fb1266d096d159338ee5155dfed5552380dc8e2c60a9f14fea4e02bb78fa2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "dd793ad88f300ea7bd73da4a3dfc98bf023974882e8a6c6fdb8294cde8b49d73"
     }
   }
 }

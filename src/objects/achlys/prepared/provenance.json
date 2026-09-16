@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd0c1728a7f1dcd8309770d726040b059574ca397be66767449fc43070c7eb4c"
+    "sha256": "0a3ec4d14cdd0d63e9285175054783b9c9bec3ef6a9aa4eefb91bf84e98f5864"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d242abfb201675c5ebffd0675a42b5ab4ff0018d418ad7b9df545cc0acb82259",
+      "sha256": "fc3fab1ae39fc1bcbec060b93a98c62cd7957e5253e533488b6bdf68c7300a10",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "achlys",
         "displayName": "Achlys",
         "panel": {
-          "facts": [
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published Jacobi ellipsoid"
-            },
-            {
-              "id": "dimensions",
-              "label": "Display model extents",
-              "value": "940 × 766 × 490 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "About 6.75 hours in the adopted shape interpretation; display phase is illustrative"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Trans-Neptunian object"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -297,8 +270,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d242abfb201675c5ebffd0675a42b5ab4ff0018d418ad7b9df545cc0acb82259",
-      "bytes": 3516,
+      "sha256": "fc3fab1ae39fc1bcbec060b93a98c62cd7957e5253e533488b6bdf68c7300a10",
+      "bytes": 2645,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -379,8 +352,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4763,
-          "sha256": "66fe39a266b6d40eb930b5e015e6c9b40a43675c25c8e8019fba572bcaabc72f",
+          "bytes": 4122,
+          "sha256": "ebc69c8eb3268e764edb0cc1b4bcc32c6f870ad5c35040dc5f982006f691dc94",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +391,7 @@
   },
   "lastPreparation": {
     "objectId": "achlys",
-    "materialSha256": "cfdc55b2fbaa9c3b36e3a2e98d55f24108d9a42ca7c55e980458ce45c7b5d2b2",
+    "materialSha256": "ec2c281d6f45daf138f2c90f9cbba3d3c19c75f57bb190e0067026bd3062fd60",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

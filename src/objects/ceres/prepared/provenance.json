@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f67bb27e82a707702d7989c7fba22d02314a327c8d049457b7d615acd33602a"
+    "sha256": "7b9e4ac604c64aee1cebbe688773e2ba1a5087826a024b4f35d5d82c8d32b183"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -176,7 +176,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "204f9a25aaf9dbb8453785dfe109355b20f2acf561dfa7598e912bbca1097816",
+      "sha256": "b878b2e452b0bc9780824a7da046fc14a58b66911a8377a1d97a72f3365c88a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,27 +204,54 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "469.7 km"
+              "value": "469.7 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.diameter (km) / 2"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.77 AU"
+              "value": "2.77 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "4.60 years"
+              "value": "4.60 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "About 9 hours"
-            },
-            {
-              "id": "moon-count",
-              "label": "Moons",
-              "value": "None"
+              "value": "About 9 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": [
@@ -658,8 +685,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "204f9a25aaf9dbb8453785dfe109355b20f2acf561dfa7598e912bbca1097816",
-      "bytes": 9446,
+      "sha256": "b878b2e452b0bc9780824a7da046fc14a58b66911a8377a1d97a72f3365c88a7",
+      "bytes": 10701,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1397,8 +1424,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5661,
-          "sha256": "83e3156a44d8954f3deaac22c8938493bb6021e0bc4afdb3cbc639b5f7f124b8",
+          "bytes": 6596,
+          "sha256": "ede6200d316c1dfeb09ba253e919d2a010832121f12b63d2bcfe9596fa30837b",
           "verification": "bytes-verified"
         }
       ],
@@ -1522,7 +1549,7 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "71d328e6e86df5aafb681fc7d0917dd42393020090a343c5f63ff239b64dedf0",
+    "materialSha256": "ab6e93df6616211685ad5455d650d9bdbe58f808c0311a85d39fd5a3ebc86e1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

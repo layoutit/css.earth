@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c3dfafcadf0c2e1de178e2c7407a17e9d127cca9aa797cffd7d0bcc38ea2606"
+    "sha256": "e2aec9f2c83ee9c059f48994607434e18a2c6e99925b4f5039eb93749e1e7d52"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,57 +93,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "38cf4cf81744913399fb6ae20c35c1e5d6afd461378b888d7c3d4f45c0baa507",
+      "sha256": "361a0cb0208bbfc83a2d5af72714fc35dee7d69119df6dfc98a4539a6e035103",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "sn263-gamma",
         "displayName": "2001 SN263 Gamma",
         "panel": {
-          "facts": [
-            {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "2001 SN263 Alpha"
-            },
-            {
-              "id": "diameter",
-              "label": "Estimated diameter",
-              "value": "0.43 ± 0.14 km"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Radar"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation period",
-              "value": "16.4 hours (assumed synchronous)"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "shape-epoch",
-              "label": "Observations",
-              "value": "January–March 2008"
-            },
-            {
-              "id": "shape-scale",
-              "label": "Model extents",
-              "value": "0.555 × 0.431 × 0.422 km"
-            },
-            {
-              "id": "phase",
-              "label": "Orientation",
-              "value": "Assumed pole · illustrative spin phase"
-            },
-            {
-              "id": "orbit-limit",
-              "label": "Position",
-              "value": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured."
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -284,8 +242,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "38cf4cf81744913399fb6ae20c35c1e5d6afd461378b888d7c3d4f45c0baa507",
-      "bytes": 3343,
+      "sha256": "361a0cb0208bbfc83a2d5af72714fc35dee7d69119df6dfc98a4539a6e035103",
+      "bytes": 2260,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -356,8 +314,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12262,
-          "sha256": "e1659d6d71f104f045f67cabfcec2f2ef2a75b3d2a006efe6d1514fb5903238e",
+          "bytes": 11541,
+          "sha256": "feebd2efe117e03f86f90fe699a0e2155a24385b3332980fbc1957ed09fc12fc",
           "verification": "bytes-verified"
         }
       ],
@@ -395,7 +353,7 @@
   },
   "lastPreparation": {
     "objectId": "sn263-gamma",
-    "materialSha256": "4f20046e008f759fc6c521a7ae01d0676d9c20556fd6316da06d81e2cf700986",
+    "materialSha256": "dcd3168d5121725fd9ae670d3e6dd6ca62b2e63d40fad666a893100231ceb899",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

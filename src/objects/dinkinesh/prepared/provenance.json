@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e58b825bd0855ccc7416bf6e126237df9faa472363a86f61de530e4cc0fc9d09"
+    "sha256": "4e228782dc2ccdf9314d05a9d1b3207e7011cc7c4f1875234c00a7afbc1302ca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -120,7 +120,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b50f6f599fa5d2d441025aa191a9682cc76705862f75a582a32a439c0fc7168f",
+      "sha256": "754b1d31c1402b5cf21e621125ec61a85a855fefc9a526855f21407ed4a8483a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -128,16 +128,6 @@
         "displayName": "Dinkinesh",
         "panel": {
           "facts": [
-            {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Sun"
-            },
-            {
-              "id": "size",
-              "label": "Size",
-              "value": "738 m equivalent diameter"
-            },
             {
               "id": "shape",
               "label": "Shape evidence",
@@ -431,8 +421,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b50f6f599fa5d2d441025aa191a9682cc76705862f75a582a32a439c0fc7168f",
-      "bytes": 4959,
+      "sha256": "754b1d31c1402b5cf21e621125ec61a85a855fefc9a526855f21407ed4a8483a",
+      "bytes": 4759,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -653,8 +643,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6403,
-          "sha256": "c9ce179440e3f05692e812a4155f89f359350170aefa6d1368663a91fd0e296e",
+          "bytes": 6291,
+          "sha256": "30871447ec45aa37f10bc42e2766ffc39f76078f71b6676f2539126c91afdf7a",
           "verification": "bytes-verified"
         }
       ],
@@ -753,7 +743,7 @@
   },
   "lastPreparation": {
     "objectId": "dinkinesh",
-    "materialSha256": "a5eec3f513bb6e0fdc90ff801f83a6c9afc2d65a9196dea31b04c7de5c5c5829",
+    "materialSha256": "e45ccedb3284117d8f2c083c34f28c3b354bd2216a9ab7d5269e2a2e75875008",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

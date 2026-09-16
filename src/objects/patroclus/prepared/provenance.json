@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d50474de615e10456424a6758a36a9199abba73d384074a45e5a36fc8a3c8f01"
+    "sha256": "7b88206a05ed5657332d0d4462190590f99cd9bbaa0363fe1dd3ec706719977b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8306e935bb51c0a50ed65f5af9ffb93b846a38ba656675973c1828499c27d196",
+      "sha256": "bab18689f28cc3aa75b34cb5128a2f3ddc7845cd5f1c0a974f4c2fd54bac7664",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +112,17 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full approximation dimensions",
-              "value": "127 × 117 × 98 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Mutual orbital period",
-              "value": "4.282753 ± 0.000023 d (mutual orbit)"
-            },
-            {
               "id": "class",
               "label": "Population",
-              "value": "Jupiter Trojan"
+              "value": "Jupiter Trojan",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=617",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -299,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8306e935bb51c0a50ed65f5af9ffb93b846a38ba656675973c1828499c27d196",
-      "bytes": 2966,
+      "sha256": "bab18689f28cc3aa75b34cb5128a2f3ddc7845cd5f1c0a974f4c2fd54bac7664",
+      "bytes": 2912,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -381,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6650,
-          "sha256": "64999471222153cffd99dee2a1ff4acb7ffc78096861d5efa374459f518e8142",
+          "bytes": 6637,
+          "sha256": "302417e33fca830222463f5a7e91ecde2b1fab680d301488d640be24739edf1e",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "patroclus",
-    "materialSha256": "2111413127bbb69352fba93ad677d6aab052bc119b651c644ed96018006abec6",
+    "materialSha256": "6c55bcaaea2d813b7d91ecb23ddfcfe1200f0e67ddc3b85f2da9a8fd5b6005cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

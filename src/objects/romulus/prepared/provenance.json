@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "299a87fb3d2a27d9850db4524f97c7bb54403f384b002017c482a386522d6d06"
+    "sha256": "eef7a269aa766619562f22b67c4bd10d4b781dd53d75d4afd569036b613b3189"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,42 +103,15 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
+      "sha256": "5ab68e37c55418111b2db220825a5d8c78ad08fa323b3b4c45dc22809d79d60e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "romulus",
         "displayName": "Romulus",
         "panel": {
-          "facts": [
-            {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Sylvia"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
-              "id": "dimensions",
-              "label": "Full model dimensions",
-              "value": "38 × 14.1 × 14.1 km"
-            },
-            {
-              "id": "scale",
-              "label": "Size evidence",
-              "value": "23.1 ± 0.7 km · projected area-equivalent diameter"
-            }
-          ],
-          "moreFacts": [
-            {
-              "id": "orbital-position",
-              "label": "Orbital position",
-              "value": "Orbit from published model · current phase approximate"
-            }
-          ]
+          "facts": [],
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -299,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
-      "bytes": 2809,
+      "sha256": "5ab68e37c55418111b2db220825a5d8c78ad08fa323b3b4c45dc22809d79d60e",
+      "bytes": 2158,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -381,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5173,
-          "sha256": "fb227c52c8e7e79b4b9f0a72160bfd87fc50b65fe31dcc69077f63864e252410",
+          "bytes": 4752,
+          "sha256": "4771667cd5b378b0ad33c2d5e167a3baa30babfa8f1bdb530c1b6fcfbf33dca5",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "romulus",
-    "materialSha256": "a8955e79479fc3b02cadc9962a423725600fc2af0d5994aea156f5b164b8705a",
+    "materialSha256": "5355d5a6c052926564fdad08f6b5fc775e33ed183d2a3fd531458b279c42a4ab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1625ed5ca69ac869fbaf2c3ec390d73134ee3021bb827c440bbd229d013d599c"
+    "sha256": "c8f75fafd2676d7e79dfcb09ba4a05166f49f2264089e9b7f67ab03daf5d61fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,40 +102,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "eeed993920352cc14f330f067823fdfa15d97fc533b9a008e230fe580647f9cd",
+      "sha256": "cd4a967321201c6ed38ca5f7a0484799aef5f1da52bd1ae996e9ee6328888a89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "bianca",
         "displayName": "Bianca",
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Projected radius",
-              "value": "27 ± 2 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "64 × 46 × 46 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 59,165 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Prolate model; third axis assumed"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -298,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "eeed993920352cc14f330f067823fdfa15d97fc533b9a008e230fe580647f9cd",
-      "bytes": 2738,
+      "sha256": "cd4a967321201c6ed38ca5f7a0484799aef5f1da52bd1ae996e9ee6328888a89",
+      "bytes": 2118,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -380,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5704,
-          "sha256": "6a0b28891e67609ada21da3ed3f8013c5e9377d91ca5229522a57a209479061d",
+          "bytes": 5309,
+          "sha256": "f99385c7cf0b85c25c0731201093dcedbf91bf3e34331da7e3a6ed0e6b72b49b",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "bianca",
-    "materialSha256": "952f645c384096f90aad959932fead87339043956e6593d8ba4bd92b53ef5a7b",
+    "materialSha256": "dd7e243274cc59e26fbf38098bcc294c2e1aa1075e01293fab8e654d107e7619",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

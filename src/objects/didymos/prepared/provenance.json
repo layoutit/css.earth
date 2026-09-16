@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "didymos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "068d8fe0f355fdf4d7b2b39e9bdac45f2f4608448f193b1e3d926a0070186a9e"
+    "sha256": "1201f2ae6c7e26a04895d893e8ad89bf51411e43e70510c72bbac490562211a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
+      "sha256": "7b00791b344e401f3b43bdaee9f634a5bcb05678e4bb47d2ef34c3bd840c1976",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -295,24 +295,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Reference radius",
-              "value": "365 m"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "1.643 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "2.11 years"
+              "value": "2.11 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "2.26 hours"
+              "value": "2.26 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -585,7 +591,7 @@
       "sha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "bytes": 3616200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -626,7 +632,7 @@
       "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "bytes": 1189440,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -660,7 +666,7 @@
       "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "bytes": 6724,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -700,7 +706,7 @@
       "sha256": "e3a24cd1589987b2454f95dbb7c557e1fe2eb2b0e9c04a378d6768091b69750e",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +744,7 @@
       "sha256": "4d4847a207f5e14975431949b8d500ade608c0bb0612bac54f1f3deed91cc5aa",
       "bytes": 40054,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -778,7 +784,7 @@
       "sha256": "3290224e1f16b41abe2999763a8416c781d41657c81b02b749571f953dfdd04f",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -816,7 +822,7 @@
       "sha256": "ab5b4d3eea17bd6ac8e0f03024cfbd5145b23545a2434c0577a207a07ff9e9bc",
       "bytes": 40053,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -841,10 +847,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
-      "bytes": 11404,
+      "sha256": "7b00791b344e401f3b43bdaee9f634a5bcb05678e4bb47d2ef34c3bd840c1976",
+      "bytes": 11865,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -866,7 +872,7 @@
       "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
       "bytes": 1310,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -892,7 +898,7 @@
       "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
       "bytes": 6693,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -921,7 +927,7 @@
       "sha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
       "bytes": 154,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -948,7 +954,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -980,19 +986,19 @@
           "url": "/scenes/didymos/didymos-elevation-thumbnail.webp",
           "bytes": 5004,
           "sha256": "cd4746448a1140e2b673d293d13883d930167f1cf1450c4329aca95fadabf2e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
           "bytes": 266414,
           "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1032,19 +1038,19 @@
           "url": "/scenes/didymos/didymos-albedo-thumbnail.webp",
           "bytes": 2558,
           "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
           "bytes": 220476,
           "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1082,13 +1088,13 @@
           "url": "/scenes/didymos/didymos-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
           "bytes": 57982,
           "sha256": "7ca6f6770b6039981566eddeab676bdd685b37206397a408906b2dd5f376ac0c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1130,13 +1136,13 @@
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
           "bytes": 1990,
           "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
           "bytes": 294862,
           "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1167,8 +1173,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5971,
-          "sha256": "cb3b41d7ae68e341bbac42197b6257efa03b1582d4a34ed73630f017691f1cb1",
+          "bytes": 6338,
+          "sha256": "2004161ddbe2ac4409709016551a9b522fc3919888f273de763aa100952a7a1b",
           "verification": "bytes-verified"
         }
       ],
@@ -1205,7 +1211,7 @@
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
           "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1317,11 +1323,11 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "4cda574b9aadafba28f784e250a19981f3d4bccaea521335173c639a77d600ce",
+    "materialSha256": "7a0908254fbcf9a17c498401d191e3a961238ffe59ac5ea3b1d6c3bca5cef3fb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "bb5dcd9ab3d371574a063727e19ad835ce8442adef93bb5b0282ae5a6b91d072"
     }
   }
 }
