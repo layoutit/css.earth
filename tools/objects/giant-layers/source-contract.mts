@@ -13,8 +13,10 @@ export async function assertAuthoredGiantSourceContract(id: string){
  for(const source of descriptor.recipe.sources){const bytes=await readFile(resolve(directory,source.path));assert.equal(createHash('sha256').update(bytes).digest('hex'),source.sha256,source.path);}
  async function inspect(path: string):Promise<void>{for(const entry of await readdir(path,{withFileTypes:true})){if(entry.isDirectory())await inspect(resolve(path,entry.name));else assert.doesNotMatch(entry.name,/\.(?:[cm]?js|tsx?|astro|css|sh)$/u,`Object owns no executable preparation/runtime/shell: ${path}/${entry.name}`);}}
  await inspect(directory);
- const acquisition=parse(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')),object({operations:array(object({kind:string,path:string}))}),'acquisition recipe');
+ // Only a download names a source path; a verify-request carries a URL and an expected path instead.
+ const acquisition=parse(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')),object({operations:array(object({kind:string}))}),'acquisition recipe');
+ const downloads=acquisition.operations.filter(operation=>operation.kind==='download').map(operation=>parse(operation,object({kind:string,path:string}),'download operation'));
  const downloadable=manifest.inputs.filter(input=>/\.(?:png|jpg|jpeg|tif|tiff|fits)$/u.test(input.path));
- for(const input of downloadable)assert.ok(acquisition.operations.some(operation=>operation.kind==='download'&&operation.path===input.path),`Missing ignored source restoration: ${input.path}`);
+ for(const input of downloadable)assert.ok(downloads.some(operation=>operation.path===input.path),`Missing ignored source restoration: ${input.path}`);
  return descriptor;
 }
