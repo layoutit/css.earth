@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12b1a01ed5caed19132b77798e43003c4a640033754449e599ffe4c32f30212f"
+    "sha256": "014c131646e134b0ab58f5ec158641f6adc74034890611ade8bb392d4d996872"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
-    "bindingsSha256": "7c8385e9cd07e2b6a7b10bd93c0c9bb1b9677e3301b8c58b94367111da5359ad"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "bae7f7c266d175f8676bf1fe9988d055a163cbe355b93d34bd05fd4012d37f5f"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "a4822e9efaeb1381ccc50544fb6e34ad425d063f07bdc851c3af3975ee8e787e",
+      "sha256": "4c2ac39813e385bfdbc4d0be3fc642790915bc29830c054787907be69003d4e2",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/eris/",
@@ -42,14 +42,16 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "eris-{id}{suffix}.webp",
             "thumbnail": "eris-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/disc-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for an unresolved surface."
+              "kind": "disc-integrated-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "illuminant": "reference/CIE_std_illum_D65.csv",
+              "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
             }
           }
         ],
@@ -99,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
+      "sha256": "75e3401d067ea3cd0e05abc9c7dcd8bb22c04ffacc4c9bc3f30056eb5a11ac33",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -175,21 +177,21 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
-              "thumbnail": "eris-lens-shape.webp",
-              "surface": "eris-shape.webp",
-              "poles": "eris-poles-shape.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+              "thumbnail": "eris-lens-color.webp",
+              "surface": "eris-color.webp",
+              "poles": "eris-poles-color.webp",
               "source": {
-                "id": "eris-observational-measurements",
+                "id": "eris-disc-color",
                 "path": "../manifest.json",
-                "url": "https://doi.org/10.1038/nature10550"
+                "url": "https://doi.org/10.1051/0004-6361:20066526"
               },
-              "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
+              "notes": "One measured mean colour and albedo for the whole disc. Display coordinates are arbitrary; no terrain, albedo pattern or colour variation is claimed."
             }
           ]
         },
@@ -244,25 +246,98 @@
   "sources": [
     {
       "kind": "source-input",
-      "path": "measurements.json",
-      "id": "eris-observational-measurements",
-      "origin": "https://doi.org/10.1038/nature10550",
-      "credit": "Sicardy et al. (2011); Bernstein et al. (2023)",
+      "id": "eris-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1051/0004-6361:20066526",
+      "credit": "Carraro et al. (2006), A&A 460, L39; albedo Sicardy et al. (2011), Nature 478, 493; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed nominal observational measurements with uncertainties",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Transcribed B-V, V-R and V-I (Carraro 2006 section 4), V geometric albedo (Sicardy 2011 abstract), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
+            "catalogueId": "carraro-2006-eris",
+            "role": "material",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/object"
+          },
+          {
             "catalogueId": "doi-10-1038-nature10550",
-            "role": "method",
-            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "role": "material",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/eris/source/photometry/disc-color.json#/effectiveWavelengths"
           }
         ]
       },
-      "sha256": "8b04d9ee8318ebecf3ea33cd59b7c35e18574e412dab8583807568da47d3b4b3",
-      "bytes": 1211,
+      "sha256": "b5e0a84064b6d2d3cf270b5109839a86c2bed2b2760a5cc65af19adc243c98f7",
+      "bytes": 2009,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eris-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eris-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
+      "bytes": 6820,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -281,8 +356,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
-      "bytes": 5172,
+      "sha256": "75e3401d067ea3cd0e05abc9c7dcd8bb22c04ffacc4c9bc3f30056eb5a11ac33",
+      "bytes": 5209,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -291,18 +366,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour."
+        "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -311,43 +386,45 @@
         "falseColor": false
       },
       "inputs": [
-        "eris-observational-measurements"
+        "eris-disc-color",
+        "eris-cie-1931-2deg-cmf",
+        "eris-cie-std-illuminant-d65"
       ],
       "outputs": [
         {
-          "url": "/scenes/eris/eris-shape.webp",
+          "url": "/scenes/eris/eris-color.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "6c636da3b1dff004bc7118ff587b80aea6d4655b404d9a4673b5662b251afbc6",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-shape@2x.webp",
+          "url": "/scenes/eris/eris-color@2x.webp",
           "bytes": 558,
-          "sha256": "29cb9b42eae9164dc2e5144eeee49eaa035b4970c376c0d04c190b7a8ee808ef",
+          "sha256": "5336afbbf0f4b49dc6bdde302deab9582e1b143869730f6387d4300fb8bb4aa0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-lens-shape.webp",
+          "url": "/scenes/eris/eris-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "3e7bec4ec1ea0c42194d2df906e9c5eac6f650c04bd4988479f7bd614191d785",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-poles-shape.webp",
+          "url": "/scenes/eris/eris-poles-color.webp",
           "bytes": 680,
-          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
+          "sha256": "236a10810d45acfb6fa7eacd82b6146dbe11d629c9a0516271bb774ab1b4084a",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-poles-shape@2x.webp",
+          "url": "/scenes/eris/eris-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "53a92a924945c6220b53c116ffdf18ec54c42b44d90e90f8eed9c3303f507668",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "eris-observational-measurements",
+          "sourceId": "eris-disc-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -798,8 +875,8 @@
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -808,16 +885,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 436,
+          "sha256": "0ee6b7e6f62c0ee4fc991dfe6c097491f9f51c5285743da7bf9846a36dc114b9",
           "verification": "bytes-verified"
         }
       ]
@@ -829,11 +906,11 @@
   },
   "lastPreparation": {
     "objectId": "eris",
-    "materialSha256": "7dcefe12d0ea61063090c49b025704b4280f7ffe624f59f8ad38dc4739baa4c9",
+    "materialSha256": "99eb5f1449bf0d30410f82f1d3099f5173dc0617ec236dfd60d824eed354111d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
-      "bindingsSha256": "7c8385e9cd07e2b6a7b10bd93c0c9bb1b9677e3301b8c58b94367111da5359ad"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "bae7f7c266d175f8676bf1fe9988d055a163cbe355b93d34bd05fd4012d37f5f"
     }
   }
 }

@@ -1,0 +1,45 @@
+{
+  "id": "carraro-2006-eris",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Carraro et al. (2006): Time series photometry of the dwarf planet Eris (2003 UB313)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20066526"
+    },
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0610619"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20066526",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0610619",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0610619",
+      "checkedOn": "2026-09-16",
+      "locator": "Section 4, weighted mean colours"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 460, L39",
+  "creators": [
+    "G. Carraro",
+    "M. Maris",
+    "D. Bertin",
+    "M. G. Parisi"
+  ],
+  "publicationDate": "2006"
+}
