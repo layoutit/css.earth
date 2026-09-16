@@ -3,10 +3,14 @@
  *
  * A spacecraft archive ships its geometry beside the pixels: a label, a SUM/INFO control file or a SPICE kernel set.
  * A ground-based archive ships pixels and instrument metadata, and leaves the body geometry to be computed from an
- * ephemeris and a published spin state. This module performs that computation and returns the same controlled-shape
+ * ephemeris and a published rotation model. This module performs that computation and returns the same controlled-shape
  * camera fields a control network states, so the existing camera route consumes both kinds of source unchanged.
  *
- * The rotation convention is the light-curve inversion convention of Durech, Sidorin and Kaasalainen (2010), equation 1:
+ * Two rotation models feed it. A light-curve inversion spin state, as the asteroid shape surveys distribute it, and an
+ * IAU pole model read from a text PCK, as the planets, their satellites and the spacecraft-visited small bodies are
+ * described. Both are reduced to one `BodyOrientation` and the camera assumes nothing else about them.
+ *
+ * The spin-state convention is the light-curve inversion convention of Durech, Sidorin and Kaasalainen (2010), equation 1:
  *
  *   r_ecliptic = Rz(longitude) . Ry(90 - latitude) . Rz(phase) . r_body
  *
@@ -16,6 +20,10 @@
  * constant offset separates it from the parameter file's zero phase.
  */
 import { requireFiniteNumber } from '../../source-values.mts';
+import type { Matrix3 } from '../../spice/ck.mts';
+import { pckAngles, pckRotation } from '../../spice/frames.mts';
+import { utcSecondsToEt, type LeapSeconds } from '../../spice/lsk.mts';
+import type { KernelPool } from '../../spice/text-kernel.mts';
 
 const DEGREE = Math.PI / 180;
 /** Light travel time for one astronomical unit, in seconds (IAU 2009). */
@@ -75,6 +83,52 @@ export function rotationPhaseDegrees(bodyEpochJd: number, spin: SpinState) {
 /** The epoch at the body for light received at observerEpochJd from rangeAu away. */
 export function bodyEpochJd(observerEpochJd: number, rangeAu: number) {
   return observerEpochJd - rangeAu * LIGHT_SECONDS_PER_AU / 86400;
+}
+
+/**
+ * How a body is oriented at a body epoch: the rotation carrying an equatorial J2000 direction into the body frame, and
+ * the angle the provider itself calls the rotation phase, retained for evidence. Every provider places +z on the
+ * positive spin pole with longitude increasing in the rotation direction; that is all the camera relies on.
+ */
+export interface BodyOrientation {
+  rotation(bodyEpochJd: number): Matrix3;
+  phaseDegrees(bodyEpochJd: number): number;
+}
+
+const rotateBy = (m: Matrix3, v: Vector): Vector => [dot(m[0], v), dot(m[1], v), dot(m[2], v)];
+
+/** The inversion spin state as a body orientation. */
+export function spinOrientation(spin: SpinState): BodyOrientation {
+  return {
+    rotation(bodyEpochJd) {
+      const phase = rotationPhaseDegrees(bodyEpochJd, spin);
+      const image = (v: Vector) => eclipticToBody(equatorialToEcliptic(v), spin, phase);
+      const x = image([1, 0, 0]), y = image([0, 1, 0]), z = image([0, 0, 1]);
+      return [[x[0], y[0], z[0]], [x[1], y[1], z[1]], [x[2], y[2], z[2]]];
+    },
+    phaseDegrees: bodyEpochJd => rotationPhaseDegrees(bodyEpochJd, spin),
+  };
+}
+
+/** Julian date of the ephemeris-time origin, 2000-01-01T12:00:00. */
+const J2000_JD = 2451545;
+
+/**
+ * The IAU pole model a text PCK states for a body (BODYnnn_POLE_RA, _POLE_DEC and _PM), as a body orientation.
+ *
+ * The model's argument is ephemeris time, so the leap-second kernel converts the camera's UTC Julian dates; for a body
+ * turning a thousand degrees a day the 69 seconds between the two scales are most of a degree of longitude. W is
+ * measured from the ascending node of the body equator on the ICRF equator, which differs from the inversion
+ * convention's zero phase by a pole-dependent constant: the two providers are compared through the camera they give,
+ * never through their angles.
+ */
+export function pckOrientation(pool: KernelPool, body: number, leapSeconds: LeapSeconds): BodyOrientation {
+  const et = (bodyEpochJd: number) => utcSecondsToEt(leapSeconds, (requireFiniteNumber(bodyEpochJd, 'body epoch') - J2000_JD) * 86400);
+  pckAngles(pool, body, 0); // A body the kernel does not describe is refused here, not at the first frame.
+  return {
+    rotation: bodyEpochJd => pckRotation(pool, body, et(bodyEpochJd)),
+    phaseDegrees: bodyEpochJd => wrap360(pckAngles(pool, body, et(bodyEpochJd)).w),
+  };
 }
 
 const direction = (rightAscensionDegrees: number, declinationDegrees: number): Vector => [
@@ -144,7 +198,8 @@ export interface ObserverCamera {
  * reflects the body through its own xz-plane, which no silhouette, disc size or phase-angle check can detect.
  * The north azimuth is the celestial position angle of the positive spin pole, negated for the same camera's axes.
  */
-export function observerCamera(sighting: ObserverSighting, spin: SpinState): ObserverCamera {
+export function observerCamera(sighting: ObserverSighting, orientation: BodyOrientation | SpinState): ObserverCamera {
+  const model = 'rotation' in orientation ? orientation : spinOrientation(orientation);
   const epoch = requireFiniteNumber(sighting.epochJd, 'sighting epoch');
   const rangeAu = requireFiniteNumber(sighting.rangeAu, 'sighting range');
   const pixelAngleMicroradians = requireFiniteNumber(sighting.pixelAngleMicroradians, 'pixel angle');
@@ -152,12 +207,13 @@ export function observerCamera(sighting: ObserverSighting, spin: SpinState): Obs
   if (sighting.center.length !== 2 || !sighting.center.every(Number.isFinite)) throw new TypeError('A sighting needs a finite image centre.');
 
   const bodyEpoch = bodyEpochJd(epoch, rangeAu);
-  const phaseDegrees = rotationPhaseDegrees(bodyEpoch, spin);
+  const phaseDegrees = model.phaseDegrees(bodyEpoch);
+  const matrix = model.rotation(bodyEpoch);
   const toTarget = unit(direction(sighting.targetRightAscensionDegrees, sighting.targetDeclinationDegrees));
   const toSun = unit(direction(sighting.sunRightAscensionDegrees, sighting.sunDeclinationDegrees));
 
-  const observerBody = eclipticToBody(equatorialToEcliptic([-toTarget[0], -toTarget[1], -toTarget[2]]), spin, phaseDegrees);
-  const sunBody = eclipticToBody(equatorialToEcliptic(toSun), spin, phaseDegrees);
+  const observerBody = rotateBy(matrix, [-toTarget[0], -toTarget[1], -toTarget[2]]);
+  const sunBody = rotateBy(matrix, toSun);
   // atan2(y, x) is the east longitude in this frame; the camera states west, so it is negated.
   const subPoint = (v: Vector) => ({ latitude: Math.asin(Math.max(-1, Math.min(1, v[2]))) / DEGREE, westLongitude: -Math.atan2(v[1], v[0]) / DEGREE });
   const observer = subPoint(observerBody), sun = subPoint(sunBody);
@@ -165,7 +221,8 @@ export function observerCamera(sighting: ObserverSighting, spin: SpinState): Obs
   // Sky axes at the target: east along increasing right ascension, north completing the pair against the line of sight.
   const skyEast = unit([-Math.sin(sighting.targetRightAscensionDegrees * DEGREE), Math.cos(sighting.targetRightAscensionDegrees * DEGREE), 0]);
   const skyNorth = cross(toTarget, skyEast);
-  const poleEquatorial = eclipticToEquatorial(unit(direction(spin.longitudeDegrees, spin.latitudeDegrees)));
+  // The body +z axis expressed in J2000 is the third row of the J2000-to-body rotation.
+  const poleEquatorial = unit([matrix[2][0], matrix[2][1], matrix[2][2]]);
   const northAzimuthDegrees = wrap360(-Math.atan2(dot(poleEquatorial, skyEast), dot(poleEquatorial, skyNorth)) / DEGREE);
 
   return {

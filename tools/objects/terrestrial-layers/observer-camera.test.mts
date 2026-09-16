@@ -1,7 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCamera, parseSpinState,
-  rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCamera, parseSpinState, pckOrientation,
+  spinOrientation, rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
+import { parseTextKernel, numbers } from '../../spice/text-kernel.mts';
+import { parseLeapSeconds, utcSecondsToEt } from '../../spice/lsk.mts';
 const DEGREE = Math.PI / 180;
 const direction = (longitude: number, latitude: number): Vector =>
   [Math.cos(latitude * DEGREE) * Math.cos(longitude * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(longitude * DEGREE), Math.sin(latitude * DEGREE)];
@@ -152,4 +156,74 @@ test('the ecliptic and equatorial frames round trip through the J2000 obliquity'
     const back = equatorialToEcliptic(eclipticToEquatorial(v));
     for (let i = 0; i < 3; i++) close(back[i], v[i], 1e-12, `round trip component ${i}`);
   }
+});
+
+/** The shared kernel bank's planetary constants and leap seconds, as the Cassini route pins them. */
+const KERNELS = resolve(import.meta.dirname, '../../../src/spice/cassini');
+const planetaryConstants = () => parseTextKernel(readFileSync(resolve(KERNELS, 'pck/pck00011.tpc'), 'utf8'), 'pck00011.tpc');
+const leapSeconds = () => parseLeapSeconds(parseTextKernel(readFileSync(resolve(KERNELS, 'lsk/naif0012.tls'), 'utf8'), 'naif0012.tls'));
+
+test('the camera evaluates an IAU pole model in ephemeris time, not in the UTC its frames are stamped in', () => {
+  // 2017-07-14: 37 leap seconds plus the 32.184 s TAI-TT offset, with the periodic TDB term under two milliseconds.
+  const utcSeconds = (2457948.709022 - 2451545) * 86400;
+  close(utcSecondsToEt(leapSeconds(), utcSeconds) - utcSeconds, 69.184, 0.002, 'ET minus UTC in 2017');
+  // Read as UTC by mistake, Kleopatra would be 1.3 degrees further round; the check above is what prevents that.
+  close(69.184 / 86400 * 360 / (5.38528201 / 24), 1.284, 0.01, 'the longitude that offset is worth for Kleopatra');
+});
+
+test('an IAU pole model gives the sub-observer point Horizons reports for the same elements', () => {
+  // JPL Horizons, fetched 2026-09-16: CENTER=500@399, 2018-06-20 00:00 UTC, QUANTITIES 1,14,15,20 in degrees.
+  // Column 14 is the apparent planetodetic sub-observer point, west-positive, with down-leg light time applied.
+  // Jupiter and Saturn keep the same elements in the IAU 2009 and 2015 reports, so pck00011 and Horizons describe one
+  // body; Jupiter also turns 23 degrees of System III during its 38 light minutes, which proves the body epoch.
+  // Mars and Ceres are NOT usable here: Horizons still evaluates their IAU 2009 poles, 1.5 and 7.7 degrees from the
+  // pck00011 (IAU 2015) poles, so the differences there measure the reports and not this code.
+  const pool = planetaryConstants(), lsk = leapSeconds(), epochJd = 2458289.5;
+  const cases = [
+    { body: 599, rightAscension: 221.62496, declination: -14.86092, rangeAu: 4.63038669189296, westLongitude: 306.960410, planetodeticLatitude: -3.626248 },
+    { body: 699, rightAscension: 276.65457, declination: -22.43295, rangeAu: 9.05764434555661, westLongitude: 28.093940, planetodeticLatitude: 30.859733 },
+  ];
+  for (const expected of cases) {
+    const camera = observerCamera({ epochJd, targetRightAscensionDegrees: expected.rightAscension, targetDeclinationDegrees: expected.declination,
+      sunRightAscensionDegrees: 0, sunDeclinationDegrees: 0, rangeAu: expected.rangeAu, pixelAngleMicroradians: 1, center: [0, 0] },
+      pckOrientation(pool, expected.body, lsk));
+    // Horizons states the latitude on the body's reference spheroid; the camera states it from the centre.
+    const [equatorial, , polar] = numbers(pool, `BODY${expected.body}_RADII`);
+    const planetodetic = Math.atan(Math.tan(camera.observerLatitude * DEGREE) / (polar / equatorial) ** 2) / DEGREE;
+    closeAngle(camera.observerWestLongitude, expected.westLongitude, 0.01, `body ${expected.body} sub-observer west longitude`);
+    close(planetodetic, expected.planetodeticLatitude, 0.001, `body ${expected.body} sub-observer planetodetic latitude`);
+  }
+});
+
+test('the inversion spin state and the IAU elements published for it orient the body the same way', () => {
+  // DAMIT model 101 (2 Pallas) as IAUspin.txt: pole 37, 2 and W = 15.6 + 1105.816672 d, an IAU pole model in the same
+  // words a PCK uses. Reading it through the PCK provider must give the camera the inversion spin state gives.
+  // DAMIT rounds the pole to whole degrees and W0 to a tenth, and its epoch is a UTC Julian date while the IAU model's
+  // argument is ephemeris time, 69 seconds or 0.9 degrees of Pallas; together they bound the residual near one degree.
+  // A mirrored body would differ by twice the longitude, tens of degrees, so this still decides handedness.
+  const spin = parseSpinState('35 -12 7.81323\n2433827.77154 0\n', 'longitude-first');
+  const damit = parseTextKernel('\\begindata\nBODY2000002_POLE_RA = ( 37 0 0 )\nBODY2000002_POLE_DEC = ( 2 0 0 )\nBODY2000002_PM = ( 15.6 1105.816672 0 )\n', 'IAUspin.txt');
+  const iau = pckOrientation(damit, 2000002, leapSeconds()), inversion = spinOrientation(spin);
+  for (const [rightAscension, declination] of [[302.04882, 0.89432], [30, 40], [200, -30]]) {
+    const sighting = { epochJd: 2457948.709022, targetRightAscensionDegrees: rightAscension, targetDeclinationDegrees: declination,
+      sunRightAscensionDegrees: 306.55, sunDeclinationDegrees: 8.6, rangeAu: 1.7, pixelAngleMicroradians: 1, center: [0, 0] as const };
+    const a = observerCamera(sighting, inversion), b = observerCamera(sighting, iau);
+    closeAngle(a.observerWestLongitude, b.observerWestLongitude, 1.5, `sub-observer west longitude toward ${rightAscension}, ${declination}`);
+    close(a.observerLatitude, b.observerLatitude, 0.5, `sub-observer latitude toward ${rightAscension}, ${declination}`);
+    closeAngle(a.sunWestLongitude, b.sunWestLongitude, 1.5, 'sub-solar west longitude');
+    closeAngle(a.northAzimuthDegrees, b.northAzimuthDegrees, 1, 'north azimuth');
+    // A mirrored provider would put the point at the negated longitude; none of these sightings sits near a meridian.
+    const mirrored = Math.abs((((-a.observerWestLongitude) - b.observerWestLongitude + 540) % 360) - 180);
+    assert.ok(mirrored > 20, `the providers agree in handedness: the mirror image is ${mirrored} degrees away`);
+  }
+  // The spin-state path is unchanged by the orientation seam: the direct transform and the matrix agree exactly.
+  const camera = observerCamera({ epochJd: 2457948.709022, targetRightAscensionDegrees: 302.04882, targetDeclinationDegrees: 0.89432,
+    sunRightAscensionDegrees: 306.55, sunDeclinationDegrees: 8.6, rangeAu: 1.7, pixelAngleMicroradians: 1, center: [0, 0] }, spin);
+  closeAngle(camera.observerWestLongitude, observerCamera({ epochJd: 2457948.709022, targetRightAscensionDegrees: 302.04882,
+    targetDeclinationDegrees: 0.89432, sunRightAscensionDegrees: 306.55, sunDeclinationDegrees: 8.6, rangeAu: 1.7, pixelAngleMicroradians: 1,
+    center: [0, 0] }, inversion).observerWestLongitude, 1e-9, 'spin state and its orientation agree');
+});
+
+test('a body the planetary constants kernel does not describe is refused before any frame is read', () => {
+  assert.throws(() => pckOrientation(planetaryConstants(), 2000216, leapSeconds()), /No PCK orientation for body 2000216/);
 });
