@@ -76,6 +76,6 @@ export const encounterFormat: SurfaceObservationFormat = {
     return { frames, exceeded, policy: { format: recipe.format,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'finest-resolution' ? 'finest-resolution' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: photometry.units ?? units }, photometry: photometry.report, limits } };
+      display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: photometry.units ?? units }, photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits } };
   },
 };

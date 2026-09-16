@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "puck",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7ff8d38144bf3398f246d4dcf03b797c75761887542cf180529c39f86a46eb8b"
+    "sha256": "e01bfe3bffb299b9f1baf52914bd9a3dfffeb1b0ac9297d7502404575c63efbd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -288,7 +288,7 @@
       "sha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -335,7 +335,7 @@
       "sha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
       "bytes": 3294,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -397,7 +397,7 @@
       "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
       "bytes": 2563,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -429,15 +429,15 @@
       "outputs": [
         {
           "url": "/scenes/puck/puck-normal-thumbnail.webp",
-          "bytes": 2464,
-          "sha256": "079ce2ca4b769905f89c0271bdb0fa5a4194fea7694520c87138d55bb2158285",
-          "verification": "asset-manifest-pin"
+          "bytes": 2390,
+          "sha256": "0a31170bba1c3a348c225e5fc613078710668e1067f73f3b4c553403ca8ad0a4",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
-          "bytes": 76150,
-          "sha256": "4ba643c5b5dac95deb0fcbfd65c40d21e9478013b890f1b0df0ab091e892e237",
-          "verification": "asset-manifest-pin"
+          "bytes": 72638,
+          "sha256": "d2437789949157ab71b93bc2fe9fb8053718418fadb16c2ef940aaa832a876ea",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -494,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5546,
-          "sha256": "571880ae1ec88362405ebbdcd1210e7b5dceaf83b4c72d63e09d433031a941cf",
+          "bytes": 5070,
+          "sha256": "804c7bead648612b427335a34542e7ad4173893f7fbae97cf46b1f0b2fcbe1f9",
           "verification": "bytes-verified"
         }
       ]
@@ -507,11 +507,11 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "8f8a232dea0cb93f651c519e74b1d2e26ee06ceb4e8c5b157d0568fb650136bf",
+    "materialSha256": "f7ae69f774bce5e4218ad746a96aef5740a3c650361ee0a59a43b3d2f6701d4c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "238a56552a437f58e441d42f5e37028073dea8ece11f98c358268e8c2fbedfd9"
     }
   }
 }

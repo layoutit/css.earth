@@ -1744,14 +1744,14 @@
       "outputs": [
         {
           "url": "/scenes/sylvia/sylvia-zimpol-thumbnail.webp",
-          "bytes": 1354,
-          "sha256": "26e2579d1a354fe1ebf69edebd3facffaa0a8b1e56c26a9494ee4fbe2e22dc8c",
+          "bytes": 1336,
+          "sha256": "5a07781da8f09d2092265e7dfa7d0751a2fc8c6c1215af12e2a68f44d7e9c6f9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 416016,
-          "sha256": "7f287fdf5250aef1a781f61d42c149ca5c1fe4c6279ca33b9c6fb0aecbeb2711",
+          "bytes": 360804,
+          "sha256": "26b85bcb445655c3cbbc5cd0f4fa2559454f4a27bffa9c80f8a09745f0c9af07",
           "verification": "bytes-verified"
         }
       ],
@@ -1834,8 +1834,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8588,
-          "sha256": "50458de8e0fb5cb3bf4daed54b2d43896341b26e25a75158e1b001b72f4933c6",
+          "bytes": 8530,
+          "sha256": "06f2659507a6d317b875f08d93834b7d883756082280595e3baab5112c9a9c38",
           "verification": "bytes-verified"
         }
       ]
@@ -1872,7 +1872,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "8e54db07489357d6175f1c227771c67b30321b0af0e4e987467f4fe84ae6e196",
+    "materialSha256": "0cae99680378e310dab76b8082cfc2bf2bfb4db18628f4b2945aaaeb5919735e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

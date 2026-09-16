@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "polydeuces",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb92701dd59dddc32387f18247b0a4f8e019f2f850e9fed2206f476bead68309"
+    "sha256": "58511d9a0190e10a7b976fba99a505f33abafe5118d8bfa85ac2ec50f757ccbd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -296,7 +296,7 @@
       "sha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -348,7 +348,7 @@
       "sha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
       "bytes": 3858,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -390,7 +390,7 @@
       "sha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -410,7 +410,7 @@
       "sha256": "05d1f8a6d1d065da6432a7181301663fcd396d56362e717c7ed88089855095f1",
       "bytes": 2992,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -442,15 +442,15 @@
       "outputs": [
         {
           "url": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
-          "bytes": 1894,
-          "sha256": "2e28d19ecd32824054c6bce9b053f96b9c7ab77d29856fc555ae483583ab747c",
-          "verification": "asset-manifest-pin"
+          "bytes": 1932,
+          "sha256": "f703c603e25aac9be5e25814f3ae88f6574b756615c0c445976899cae46fb8a4",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
-          "bytes": 66582,
-          "sha256": "52eb9cab48c7892a0077b321f8cb650fb1779e7ff1105c221d592802eb626460",
-          "verification": "asset-manifest-pin"
+          "bytes": 66408,
+          "sha256": "a2b55c39e41b026444c6d4b4201a262149527cd3d65e0e740f9e5ca91205a928",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -507,8 +507,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 3792,
-          "sha256": "78b3a149148e893269778d70379817dfb43671c978a22569cc70d2b9c250b6ec",
+          "bytes": 3850,
+          "sha256": "b3e1e6c930aca95ac4ef0b3c54e501650bdf8a4050e90467595503bff3d0fc00",
           "verification": "bytes-verified"
         }
       ]
@@ -520,11 +520,11 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "e14324fd70351bcc209b19ad0973dd29d51959a64897e1f6a16acf7e68b2d940",
+    "materialSha256": "3001c33904c71b1e649c92d7dc13598ea6a40377b208b5a1edb4ac0e4171066a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "425970219badb57278d339f0ef14c9f5af171b711a2b4e3c52f823a6293ed1db"
     }
   }
 }
