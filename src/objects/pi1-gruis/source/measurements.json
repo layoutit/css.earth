@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "pi1-gruis",
+  "angularDiameterMas": 18.17,
+  "angularDiameterSource": "Uniform-disc fit to the 909 squared visibilities of the pinned September 2014 VLTI/PIONIER H-band file (1.62-1.73 um), this package; a uniform disc fits these data poorly (reduced chi-squared 51), which is the granulation the image shows. Paladini et al. (2018, Nature 553, 310) adopt a similar diameter for the same data.",
+  "distanceParsecs": 161.65938025034984,
+  "distanceSource": "Gaia DR3 parallax 6.186 +/- 0.447 mas (Gaia Collaboration 2020, yCat I/350, via SIMBAD), RUWE 2.9; Hipparcos (van Leeuwen 2007) gives 6.13 +/- 0.76 mas, the 163 pc Paladini et al. (2018) use.",
+  "radiusKm": 219710723,
+  "radiusSource": "The fitted angular diameter at the Gaia distance: 18.17 mas at 161.7 pc is 219,710,723 km, 316 solar radii at 695700 km. Mayer et al. (2014, A&A 570, A113) list 370 solar radii from the bolometric luminosity.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "path": "shape/uniform-disc.tab",
+    "stepDegrees": 5,
+    "qualification": "A sphere at the fitted radius. The photosphere of an asymptotic giant branch star is not a solid surface and its limb is not sharp; the sphere is the reference surface the interferometric image is cast onto, not a measured shape."
+  }
+}

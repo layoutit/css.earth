@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pi1-gruis",
+  "entries": [
+    {
+      "id": "pionier-2014-09-for-image",
+      "subject": "VLTI/PIONIER September 2014 H-band visibilities, JMMC OiDB",
+      "status": "included",
+      "finding": "The image-ready calibrated file of Paladini et al. (2018) is public in the OiDB at calibration level 3 (data PI C. Paladini): 303 squared-visibility and 201 closure-phase rows in three H-band channels over the nights of 25, 26, 29 and 30 September 2014, longest projected baseline 82.3 m, no channel flagged. A uniform disc of 18.17 mas fits the squared visibilities at reduced chi-squared 51: the data demand structure on the disc.",
+      "evidence": [
+        "https://oidb.jmmc.fr/",
+        "https://doi.org/10.1038/nature25001"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "4245a2b162"
+        }
+      ]
+    },
+    {
+      "id": "squeeze-reconstruction",
+      "subject": "Image reconstruction with SQUEEZE versus the published image",
+      "status": "included",
+      "finding": "The public SQUEEZE code at the commit pinned for Betelgeuse, with the same prior and hyperparameter (maximum entropy, multiplier 10, uniform-disc start, 0.4 mas pixels), fits the file at reduced chi-squared 2.45 on squared visibilities and 1.06 on closure phases and shows a disc of a few large bright cells, the pattern the paper reports. The independent transform in reconstruction.test.mts agrees. The published image itself is not redistributed here.",
+      "evidence": [
+        "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+        "https://doi.org/10.1038/nature25001"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "4245a2b162"
+        }
+      ]
+    },
+    {
+      "id": "rotation-axis",
+      "subject": "Rotation axis, period and prime meridian",
+      "status": "unresolved",
+      "finding": "No publication measures the rotation axis or period of π¹ Gruis. The object uses the display-orientation record: the axis shown is celestial north in the plane of the sky and the display meridian faces the Earth at the scene epoch, both labelled as a convention in the lens notes and the README.",
+      "revisitWhen": "A measured position angle of the rotation axis, as ALMA gave for Betelgeuse, is published.",
+      "evidence": [
+        "https://doi.org/10.1038/nature25001"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "4245a2b162"
+        }
+      ]
+    },
+    {
+      "id": "radial-velocity",
+      "subject": "Catalogued radial velocity for the placement",
+      "status": "unresolved",
+      "finding": "SIMBAD lists no radial velocity and the Pulkovo, GCRV and Kharchenko compilations have no entry for HIP 110478. The star record assumes zero; over the 26 years since J2000 a 30 km/s error moves the scene position by one part in a million of the distance.",
+      "revisitWhen": "A catalogued heliocentric radial velocity with a bibcode is found.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "4245a2b162"
+        }
+      ]
+    }
+  ]
+}
