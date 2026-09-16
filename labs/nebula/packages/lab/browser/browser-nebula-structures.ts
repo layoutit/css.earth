@@ -1,3 +1,4 @@
+import { cameraOrientation, gestureCamera } from './browser-camera.ts';
 /** Historical Hubble baseline only; current ESO maps use browser-observation-structures. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -37,11 +38,12 @@ try {
   }
   await page.getByRole('button', { name: 'Volume', exact: true }).click();
   assert.equal(await mesh.evaluate(node => node.isConnected), true, 'Inspection must not destroy the retained scene.');
-  await page.locator('#camera-pose').selectOption('y-plus-60');
+  await gestureCamera(page, 'horizontal-positive-wide');
+  const retainedOrientation = await cameraOrientation(page);
   await page.getByRole('button', { name: 'Structure map', exact: true }).click();
   await page.locator('.emission-structure-map img').waitFor();
   await page.getByRole('button', { name: 'Volume', exact: true }).click();
-  assert.equal(await page.locator('#camera-pose').inputValue(), 'y-plus-60');
+  assert.equal(await cameraOrientation(page), retainedOrientation);
   await page.reload();
   await page.locator('.emission-structure-map img').waitFor();
   await page.locator('.emission-structure-map img').evaluate(async (node: HTMLImageElement) => node.decode());

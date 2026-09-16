@@ -1,3 +1,4 @@
+import { cameraOrientation, settleCamera, gestureCamera } from './browser-camera.ts';
 import { chooseLabObject } from './browser-object-picker.ts';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
@@ -23,7 +24,7 @@ const subjectsPath = process.argv[3] ?? 'labs/nebula/packages/lab/src/state/subj
 const outputRoot = process.argv[4] ?? '.local/nebula-lab/coherent';
 const screenshots = `${outputRoot}/screenshots`;
 const expected = ['tarantula-broad', 'tarantula-localized', 'tarantula-coherent', 'orion-broad', 'orion-localized', 'orion-coherent'];
-const poses = ['front', 'y-plus-30', 'y-plus-60', 'edge-y', 'x-plus-30', 'x-plus-60', 'edge-x'];
+const poses = ['reference', 'horizontal-positive-short', 'horizontal-positive-wide', 'horizontal-positive-long', 'vertical-positive-short', 'vertical-positive-wide', 'vertical-positive-long'];
 const subjects = JSON.parse(await readFile(subjectsPath, 'utf8')) as Subject[];
 await mkdir(screenshots, { recursive: true });
 assert.deepEqual(expected.filter(id => subjects.some(subject => subject.id === id)), expected, 'Expected coherent subjects are not ready.');
@@ -61,16 +62,16 @@ async function runtimeReceipt() {
 }
 async function poseScreenshot(subjectId: string, pose: string): Promise<PoseReceipt> {
   const before = await page.locator('#viewer').getAttribute('data-camera-revision');
-  await page.selectOption('#camera-pose', pose);
-  await page.waitForFunction(value => document.querySelector<HTMLSelectElement>('#camera-pose')?.value === value, pose);
-  if (pose !== 'front') await page.waitForFunction(value => document.querySelector<HTMLElement>('#viewer')?.dataset.cameraRevision !== value, before);
+  await gestureCamera(page, pose);
+  await settleCamera(page);
+  if (pose !== 'reference') await page.waitForFunction(value => document.querySelector<HTMLElement>('#viewer')?.dataset.cameraRevision !== value, before);
   const receipt = await runtimeReceipt();
   assert.deepEqual(receipt.forbiddenNodes, [], `${subjectId}/${pose}: forbidden scene node`);
   assert.deepEqual(receipt.forbiddenStyles, [], `${subjectId}/${pose}: forbidden runtime style`);
   assert.equal(receipt.bankOpacities.length, 3, `${subjectId}/${pose}: expected x/y/z banks`);
   assert.ok(receipt.bankOpacities.some(bank => bank.visibility === 'visible' && bank.opacity !== '0'), `${subjectId}/${pose}: no visible bank`);
   assert.ok(receipt.nodeCount > 0, `${subjectId}/${pose}: prepared scene has no retained leaves`);
-  if (pose !== 'front') assert.notEqual(await page.locator('#viewer').getAttribute('data-camera-revision'), before, `${subjectId}/${pose}: pose did not publish`);
+  if (pose !== 'reference') assert.notEqual(await page.locator('#viewer').getAttribute('data-camera-revision'), before, `${subjectId}/${pose}: pose did not publish`);
   const stable = await page.evaluate(() => {
     const retained = window.__coherentNodes;
     const current = [...document.querySelectorAll('#viewer .css-volume-mesh s')];
@@ -119,14 +120,14 @@ try {
   for (const group of byGroup.values()) {
     assert.equal(group.length, 3, `${group[0]}: expected three paired variants`);
     await page.goto(`${baseURL}/?subject=${encodeURIComponent(group[0])}&tab=reconstruction`, { waitUntil: 'domcontentloaded' }); await waitReady();
-    await page.selectOption('#camera-pose', 'y-plus-60');
+    await gestureCamera(page, 'horizontal-positive-wide');
     const box = await page.locator('#viewer').boundingBox(); assert.ok(box, `${group[0]}: viewer has no bounds`);
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); const before = await page.locator('#viewer').getAttribute('data-distance');
     await page.mouse.wheel(0, -500); await page.waitForFunction(value => document.querySelector<HTMLElement>('#viewer')?.dataset.distance !== value, before); await page.waitForTimeout(350);
-    const retained = { pose: await page.locator('#camera-pose').inputValue(), distance: await page.locator('#viewer').getAttribute('data-distance') };
+    const retained = { pose: await cameraOrientation(page), distance: await page.locator('#viewer').getAttribute('data-distance') };
     for (const id of group.slice(1)) {
       await chooseLabObject(page, id); await waitReady();
-      assert.equal(await page.locator('#camera-pose').inputValue(), retained.pose, `${id}: paired pose changed`);
+      assert.equal(await cameraOrientation(page), retained.pose, `${id}: paired pose changed`);
       assert.equal(await page.locator('#viewer').getAttribute('data-distance'), retained.distance, `${id}: paired distance changed`);
       report.paired.push({ from: group[0], to: id, ...retained });
     }
