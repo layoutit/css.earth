@@ -29,6 +29,16 @@ export function decodeCalibratedCamera(bytes: Buffer, encoding = 'calibrated'): 
     if(fits.bitpix!==-32||fits.width!==800||fits.height!==800||fits.scale!==1||fits.zero!==0||fits.nextOffset!==bytes.length)throw new Error('Unsupported calibrated SSI FITS layout.');
     return {data:fits.values,width:fits.width,height:fits.height,offset:fits.dataOffset,encoding,allowZero:true};
   }
+  // Deconvolved VLT/SPHERE/ZIMPOL intensity frames. The survey distributes one double-precision image HDU whose values
+  // are the deconvolution's own relative intensity: no BUNIT, no radiometric scale, no calibrated I/F to claim.
+  if(encoding==='fits-zimpol-intensity'){
+    const fits=readFitsPrimary(bytes);
+    if(fits.bitpix!==-64||fits.scale!==1||fits.zero!==0||fits.nextOffset!==bytes.length||
+        ![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported deconvolved ZIMPOL FITS layout.');
+    // Header literals keep their FITS quoting and fixed-width padding; compare the stated value, not the literal.
+    if(String(fits.header.INSTRUME??'').replace(/^'|'$/g,'').trim()!=='SPHERE')throw new Error('A deconvolved ZIMPOL frame states SPHERE as its instrument.');
+    return {data:fits.values,width:fits.width,height:fits.height,offset:fits.dataOffset,encoding,allowZero:true};
+  }
   const text = bytes.subarray(0,4096).toString('ascii');
   const field = (name: string) => text.match(new RegExp(`(?:^|\\s)${name}=(?:'([^']*)'|([^\\s]+))`))?.slice(1).find(v=>v!==undefined);
   const n = (name: string) => Number(field(name));
@@ -172,6 +182,7 @@ export async function loadShapeCameraImage(sourceDirectory: string, source: unkn
   if(frame.encoding==='fits-ssi-iof'){
     const q=frame.quality;
     if(!q)throw new Error('Calibrated SSI requires its archived detector-quality companions.');
+    if(!frame.labelPath)throw new Error('Calibrated SSI requires its archived PDS4 label.');
     const rawLabel=await readFile(resolve(sourceDirectory,q.rawLabelPath),'utf8'),label=await readFile(resolve(sourceDirectory,frame.labelPath),'utf8');
     const field=(name: string)=>pds3Keyword(rawLabel,name);
     if(field('TARGET_NAME')!==q.target||field('START_TIME')!==q.startTime||field('FILTER_NAME')!==q.filter||
@@ -187,7 +198,7 @@ export async function loadShapeCameraImage(sourceDirectory: string, source: unkn
   return image;
 }
 
-export const framePaths=(f: CameraFrame)=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
+export const framePaths=(f: CameraFrame)=>[f.path,...(f.labelPath?[f.labelPath]:[]),...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
 
 /** Measure every registered camera against its declared reference images. References are used in order: the first is the
  * camera seed, and each later one once a check has confirmed it. Every channel camera must be confirmed. */
