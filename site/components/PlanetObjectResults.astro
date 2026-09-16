@@ -2,11 +2,17 @@
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
 import PreparedObjectResult from './PreparedObjectResult.astro';
+import ContextNavigationMarker from './ContextNavigationMarker.astro';
+import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
+import { solarSystemFocus } from '../overview-selection.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
+import { overviewSourceDocumentation } from '../source-documentation.mts';
 import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mts";
 
 interface Props { activeObjectId?: string; formId?: string; }
 const { activeObjectId, formId } = Astro.props;
 const searchObjects = PLANET_SEARCH_OBJECTS;
+const systemRoute = solarSystemFocus(SCENE_OBJECTS)!.route;
 const defaultCategory = 'planet';
 const types = new Map(OBJECT_CATEGORIES);
 for (const object of searchObjects) if (!types.has(objectCategory(object.classification))) {
@@ -38,6 +44,14 @@ const groups = [...types].map(([type, label]) => ({ type, label,
   aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
   style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
   <ul class="planet-object-list">
+    {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
+      <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${systemRoute}?overview=${scope}`}
+        data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
+        data-source-label={overviewSourceDocumentation(scope, title.label).label}>
+        <span class="planet-lens-icon"><ContextNavigationMarker objectId={scope} /></span>
+        <span class="planet-object-name planet-lens-label">{title.label}</span>
+      </a>
+    </li>)}
     {rows.map(group => <li class="planet-object-chunk" role="presentation"
       hidden={!group.some(object => matchesObjectCategory(object.classification, defaultCategory))}
       style={`contain-intrinsic-block-size:${Math.max(0, group.filter(object => matchesObjectCategory(object.classification, defaultCategory)).length * 28 - 8)}px`}>
@@ -49,5 +63,6 @@ const groups = [...types].map(([type, label]) => ({ type, label,
       </ul>
     </li>)}
   </ul>
-  <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
+  <p class="planet-object-empty" aria-live="polite" hidden>No matching results</p>
+  <slot />
 </div>

@@ -96,13 +96,6 @@ export interface Setting {
   checked?: boolean;
 }
 
-export interface Resource {
-  label: string;
-  role: string;
-  description: string;
-  href: string;
-}
-
 export interface Props {
   navigation?: boolean;
   objectId: string;
@@ -114,8 +107,6 @@ export interface Props {
   moreFacts?: Fact[];
   galleries?: Gallery[];
   charts?: Chart[];
-  resources?: Resource[];
-  provenance?: ReturnType<typeof import("../src/platform/object-provenance.mts").validateObjectProvenance>;
   lenses?: {
     title: PreparedTitle;
     controls: Lens[];

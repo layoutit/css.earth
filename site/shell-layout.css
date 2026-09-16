@@ -84,13 +84,6 @@ body[data-object-shell] {
   padding-block-start: 16px;
 }
 
-/* Sources is its own card, outside the scrolling information content. */
-.planet-sidebar > .planet-sources-panel {
-  padding: 0;
-  margin-top: 4px;
-  border-radius: var(--explorer-card-radius);
-}
-
 /* A focused object's hierarchy belongs above its title, not below its datasets. */
 .planet-object-browser:has(> [data-prepared-focus-card]:not([hidden])) > [data-large-scale-overview] .planet-breadcrumbs {
   display: none;

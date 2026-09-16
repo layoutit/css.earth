@@ -22,6 +22,15 @@ export const FLIGHT_ARRIVAL_TOLERANCE = 1e-4;
 // every 50 ms. Short center selections are held back by the per-frame clearance cap and used to stop
 // dead at full speed; flights on schedule already slow more gently near their end.
 export const FLIGHT_ARRIVAL_EASE_RATE = 20;
+// Slow the visible approach before the target grows from a point into a body. Ratios are relative
+// to the final framing, so the same pacing works for kilometre-sized bodies and planets.
+export const FLIGHT_VISIBLE_APPROACH = Object.freeze({
+  startScale: 1 / 128,
+  fullScale: 1 / 64,
+  // Release the slower rate in the last one percent, avoiding an invisible loading tail.
+  settleScale: 0.99,
+  easeRate: 4,
+});
 // The traced reference response is one interval of travel per 100 delta units,
 // so a multiplier of 1 puts a device on that reference. A trackpad reports the
 // scroll distance a wheel notch stands for, in the same delta units, and needs

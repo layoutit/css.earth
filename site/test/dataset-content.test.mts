@@ -3,9 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { validateDatasetText } from '../dataset-content.mts';
-import { datasetCaption } from '../dataset-caption.mts';
 import { parsePreparedText } from '../object-text.mts';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
 
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
@@ -13,19 +11,17 @@ const read = async (path: string): Promise<unknown> => JSON.parse(await readFile
 test('every registered dataset has a specific published title, independent of category and source-link availability', async () => {
   for (const { id } of SCENE_OBJECTS) {
     const root = `../../src/objects/${id}/`;
-    const [rawControls, rawText, rawProvenance] = await Promise.all([
-      read(root + 'prepared/controls.json'), read(root + 'prepared/text.json'), read(root + 'prepared/provenance.json'),
+    const [rawControls, rawText] = await Promise.all([
+      read(root + 'prepared/controls.json'), read(root + 'prepared/text.json'),
     ]);
     const lenses = requireRecord(rawControls).lenses;
     if (lenses === null || lenses === undefined) continue;
-    const text = parsePreparedText(rawText, id), provenance = validateObjectProvenance(rawProvenance, id);
+    const text = parsePreparedText(rawText, id);
     const titles = new Set<string>();
     for (const control of requireArray(requireRecord(lenses).controls).map(value => requireRecord(value))) {
       const lensId = requireString(control.id);
       const lens = { id: lensId, label: requireString(control.label), ...text.datasets[lensId] };
       const { title } = validateDatasetText(lens);
-      assert.equal(datasetCaption(provenance, lens).title, title, `${id}/${lensId}: caption changed the title`);
-      assert.equal(datasetCaption(undefined, lens).title, title);
       assert.ok(!titles.has(title), `${id}/${lensId}: duplicate title within this object`);
       titles.add(title);
     }

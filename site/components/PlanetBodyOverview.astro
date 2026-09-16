@@ -4,17 +4,17 @@ interface Props { objectId: string; title: PlanetTitle; introduction?: string; f
 import '../body-overview.css';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
-import PlanetMoonList from './PlanetMoonList.astro';
+import PlanetSystemList from './PlanetSystemList.astro';
 import InformationTabs from './InformationTabs.astro';
 import PlanetFactsheet from './PlanetFactsheet.astro';
-import { prepareBodyMoons } from '../prepare-body-moons.mts';
+import { prepareBodyRelations } from '../prepare-body-moons.mts';
 import { prepareBodyOverview } from '../prepare-body-overview.mts';
 
 const { objectId, title, introduction, facts = [], moreFacts = [] } = Astro.props;
 const overview = await prepareBodyOverview(objectId);
-const moons = prepareBodyMoons(objectId);
+const relations = prepareBodyRelations(objectId);
 const tabs = [
-  { id: 'moons', label: 'Moons', count: moons.length },
+  ...(relations ? [{ id: 'moons', label: relations.label, ...(relations.parent ? {} : { count: relations.moons.length }) }] : []),
   { id: 'factsheet', label: 'Factsheet' },
   { id: 'spectrum', label: 'Spectrum' },
 ];
@@ -31,11 +31,11 @@ const tabs = [
   </Fragment>
 </PlanetCardHeader>
 <InformationTabs idPrefix={`${objectId}-overview`} group="overview" {tabs} />
-<div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
+{relations && <div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
   data-information-group="overview" data-information-panel="moons" id={`${objectId}-overview-moons-content`}
-  role="region" aria-label="Moons">
-  <PlanetMoonList {moons} />
-</div>
+  role="region" aria-label={relations.label}>
+  <PlanetSystemList {relations} />
+</div>}
 <div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
   data-information-group="overview" data-information-panel="factsheet" id={`${objectId}-overview-factsheet-content`}
   role="region" aria-label="Factsheet">
