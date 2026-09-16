@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-43",
+  "angularDiameterMas": 0.071,
+  "angularDiameterSource": "Not measured: computed here from the radius and distance, 2 x 462,640.5 km at 87.15 pc = 0.0710 mas. No interferometric diameter of WASP-43 is published; the disc is far below any interferometer's resolution.",
+  "distanceParsecs": 87.15356458079135,
+  "distanceSource": "Gaia EDR3 parallax 11.474 +/- 0.016 mas via SIMBAD (2020yCat.1350....0G): 1000/11.474 = 87.15 pc, no zero-point correction",
+  "radiusKm": 462640.5,
+  "radiusSource": "0.665 solar radii (462,640.5 km at 695,700 km per solar radius), the stellar radius Challener et al. (2024, ApJL 969, L32; arXiv:2406.10207, Table 1) assume for their WASP-43b eclipse map, matching Hammond et al. (2024). A model-dependent value, not an interferometric measurement.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray, because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
+  }
+}
