@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fitBackplaneSun, fittedCamera, turnedCamera } from './cameras.mts';
+import { fitBackplaneSun, fittedCamera, tiltedCamera, turnedCamera } from './cameras.mts';
 
 /** A 10 km sphere seen from 200 km along +x, lit from a direction 40 degrees off the line of sight: backplanes as an archive would state them. */
 function backplanes(sun: readonly number[], size = 128) {
@@ -54,4 +54,16 @@ test('a turned camera sees the body turned the other way and keeps the provider 
   assert.ok(Math.abs(Math.hypot(...turned.positionMeters) - Math.hypot(...camera.positionMeters)) < 1e-6);
   assert.equal((turned.report as { refinement: { by: string; turnDegrees: number } }).refinement.turnDegrees, 30);
   assert.equal(turned.kind, camera.kind);
+});
+
+test('a tilted camera rolls about its own line of sight: the body centre stays put and a point turns on the sky', () => {
+  const frame = backplanes([0.5, -0.7, 0.3]), camera = fittedCamera(frame), tilted = tiltedCamera(camera, 25, { tilt: 'silhouette' });
+  const centre = camera.project([0, 0, 0])!, still = tilted.project([0, 0, 0])!;
+  assert.ok(Math.hypot(centre[0] - still[0], centre[1] - still[1]) < 1e-6, 'the line of sight is the roll axis, so the body centre does not move');
+  const point = [0, 6000, 0], before = camera.project(point)!, after = tilted.project(point)!;
+  const angle = (p: readonly number[]) => Math.atan2(p[1] - centre[1], p[0] - centre[0]) * 180 / Math.PI;
+  const rolled = ((angle(after) - angle(before) + 540) % 360) - 180;
+  assert.ok(Math.abs(Math.abs(rolled) - 25) < 0.5, `a point off the axis turns by the tilt on the sky (${rolled.toFixed(2)}°)`);
+  assert.ok(Math.abs(Math.hypot(...tilted.sunDirection) - 1) < 1e-9 && tilted.positionMeters === camera.positionMeters);
+  assert.equal((tilted.report as { refinement: { tiltDegrees: number } }).refinement.tiltDegrees, 25);
 });

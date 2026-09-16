@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b89d52044f6cc280456388679c23a079741d9d0f799f9b7faff35d0ed3cd102d"
+    "sha256": "39d009f777a7f597f192635d6b86358e54fcd6785494296ee48b7430d9506110"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+    "bindingsSha256": "b55ee7af22483cecb0adbe456d910cc3232e773c7e1d2338edabebfa632eeacd"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "204d8c47a9fbf2f71ad56c19011cd35453e01e3839283051315b647d5ea426e5",
+      "sha256": "17375b53d10f72d013f064372417846a75f0950b4be9260759a44e99cb448fd6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -394,7 +394,8 @@
                 ]
               },
               "refinement": {
-                "by": "relief"
+                "by": "relief",
+                "tilt": "silhouette"
               }
             }
           ]
@@ -1653,14 +1654,14 @@
       "outputs": [
         {
           "url": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
-          "bytes": 1386,
-          "sha256": "9c783f78f6b3f7f22f8e0b512c1fc9910f0cdeffac8700f5e7790ac1e8fb23c4",
+          "bytes": 1378,
+          "sha256": "f9b2de617f90df01e12215ba2f306b5c79786ec984552f6ce81a3e1f4a682ed9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-zimpol-surface@2x.webp",
-          "bytes": 362386,
-          "sha256": "1d5f3709b589ec98d7056d210af39d6d6b4e124a1a0535e4f8081a7c2774c4ce",
+          "bytes": 358376,
+          "sha256": "ccc92bb36c8d41b2377524fe475a62074745c88408a76c83ed9b36ae24d69fb6",
           "verification": "bytes-verified"
         }
       ],
@@ -1743,8 +1744,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7828,
-          "sha256": "9fbce893f7102adc48473e740272cd9e9a8abd28c606ba85982a307d32c8cce4",
+          "bytes": 7686,
+          "sha256": "99752c551b3a769f91b76a734b52c4849e3b325a22ec6c445b3ea4e7129715a0",
           "verification": "bytes-verified"
         }
       ]
@@ -1781,11 +1782,11 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "62baf7e369a36ba9a8c748665442f9de2570f08a249239c4e5c9f83c5196dd9f",
+    "materialSha256": "4839f7b5f69d2537ff860f7b72b9672a3be9f43b1791f9cbcdb08bb88dda67d2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+      "bindingsSha256": "b55ee7af22483cecb0adbe456d910cc3232e773c7e1d2338edabebfa632eeacd"
     }
   }
 }
