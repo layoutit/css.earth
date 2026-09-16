@@ -131,7 +131,14 @@ retain placeholder pole coordinates or a pre-encounter rotation period. A
 trajectory correction does not also establish the shape's prime meridian or
 rotational phase. Keep these questions separate in the qualification evidence.
 Establish sample/line order, pixel origin, aspect ratio, flips and units, then
-inspect one native-pixel projection before fitting or baking. Follow the
+inspect one native-pixel projection before fitting or baking. Read the product
+with this repository's own readers: [`tools/fits.mts`](../../../tools/fits.mts)
+for FITS and [`tools/spice/`](../../../tools/spice) for kernels. Both are
+self-contained and run under plain Node, without installed packages or a
+prepared checkout, so an unbuilt worktree is not a reason to write a scratch
+decoder in another language. A scratch reader is untested, it can invert an
+axis or a sign without saying so, and it is not the owner that the preparation
+would use, so what it appears to establish has to be established again. Follow the
 [source investigation sequence](references/registered-photographic-mosaics.md#inspect-the-release-before-reconstructing-geometry)
 for conflicting or undocumented conventions. Record the selected companion and
 any remaining inference in the existing recipe and body README.
