@@ -45,13 +45,13 @@
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Makemake a measured uniform colour, which the shape-only convention does not supersede.",
       "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
-        "src/objects/makemake/source/photometry/disc-color.json",
-        "docs/shape-only-material.md"
+        "https://github.com/layoutit/css.earth/blob/537a58faf97607788e94a5cd89d0cfff1b934810/src/objects/makemake/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/537a58faf97607788e94a5cd89d0cfff1b934810/docs/shape-only-material.md"
       ],
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "849bfcd32a569f3a3372ef5bb8416e981936c079"
+          "commit": "537a58faf97607788e94a5cd89d0cfff1b934810"
         }
       ]
     },
@@ -67,7 +67,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "849bfcd32a569f3a3372ef5bb8416e981936c079"
+          "commit": "537a58faf97607788e94a5cd89d0cfff1b934810"
         }
       ]
     },
@@ -79,12 +79,12 @@
       "evidence": [
         "https://arxiv.org/abs/1904.03679",
         "https://doi.org/10.26093/cds/vizier.36250046",
-        "src/objects/makemake/source/photometry/disc-color.json"
+        "https://github.com/layoutit/css.earth/blob/537a58faf97607788e94a5cd89d0cfff1b934810/src/objects/makemake/source/photometry/disc-color.json"
       ],
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "849bfcd32a569f3a3372ef5bb8416e981936c079"
+          "commit": "537a58faf97607788e94a5cd89d0cfff1b934810"
         }
       ]
     },
@@ -100,7 +100,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "849bfcd32a569f3a3372ef5bb8416e981936c079"
+          "commit": "537a58faf97607788e94a5cd89d0cfff1b934810"
         }
       ]
     },
@@ -116,7 +116,7 @@
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "849bfcd32a569f3a3372ef5bb8416e981936c079"
+          "commit": "537a58faf97607788e94a5cd89d0cfff1b934810"
         }
       ]
     },
