@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phaedra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "7699eaf751f27ec91c6c992b1ffd10403828d44bb290b767c464f995c361a26e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "0189f9cdee487405f1451973d83da6b681b367c73ebff473c2369120739125c4"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "1805d5dbef19e6956892f348a8f2bfea20036c710c9641352aebd224cde62acd",
       "bytes": 80763,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "64487b821dcbade5c2b67fafc2e850b3b96e05cd63bd7ccadd5909df7ddced2b",
       "bytes": 10597,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/phaedra/phaedra-elevation-thumbnail.webp",
           "bytes": 5276,
           "sha256": "6cdfa39f51e5e51cdf26554d5ab48ee8f5a909e82e9f6c4a0e022c34c452c8ec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaedra/phaedra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaedra/phaedra-elevation-surface@2x.webp",
           "bytes": 275006,
           "sha256": "b899d3e493849cb33da0d7f8a1027564df42dc1092e23e16d571b7c9f431118d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/phaedra/phaedra-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaedra/phaedra-shape-surface@2x.webp",
           "bytes": 69472,
           "sha256": "9f848f86f617d35213e2bbd1addb48ff83a7a66128d7a8cce4ad924eeb91411b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "phaedra",
-    "materialSha256": "8f70ae15a30f5ba40ed8bd483960083c9a4bc60f3b9b213f7bcdba31916e9717",
+    "materialSha256": "b12c8a95a85c2eb583df1523dc42e9f3758061f02a7d7c4e8f3c61136e85e851",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "0189f9cdee487405f1451973d83da6b681b367c73ebff473c2369120739125c4"
     }
   }
 }

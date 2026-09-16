@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dejopeja",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "fd444b91dc813e6237d484209b3d50fac32e79f37c02b3badf70cd0a2e30a61a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "94af820770db7d7f2e81543200470f0a4e96c72fc7286206a2af7f024df45cb9"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "e455562c300f5594cb401f42d3237cb86e3e415ad7c03f54f2569637b435f9db",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "8f6599db2baf1627d3160e4bac3d79179a04f12ac18bd8f55ff860ad4781b90f",
       "bytes": 10877,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/dejopeja/dejopeja-elevation-thumbnail.webp",
           "bytes": 6000,
           "sha256": "a10c682203a1b786433e75469aa37bb80c87b9e9b0be0b4f6dee008ec63db739",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-elevation-surface@2x.webp",
           "bytes": 299024,
           "sha256": "887aca2c893315364f262fef08510b810adc5450372a2e844057228480346dfe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/dejopeja/dejopeja-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
           "bytes": 63836,
           "sha256": "0bee8f26c7a983b7fe202cb535a1a5982267f8903d561c7615233e7417584c04",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "dejopeja",
-    "materialSha256": "597cfd69f776d92651049da9d95ca38c6af9ca506a477f5fb47db7af3745fdcd",
+    "materialSha256": "16de262cadf6b304905f0cf63572539b695a0306349d16e55b07b092ef97e844",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "94af820770db7d7f2e81543200470f0a4e96c72fc7286206a2af7f024df45cb9"
     }
   }
 }

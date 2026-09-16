@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pomona",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "f1d437efb816ee3cf09005293c1d80cab7d74cc0dedc6b73b36123acae82366a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "bd0e6ef8b4964c172c65e8cddfcdff0655bdfafff6cba1fcc0527b774d601b1b"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "348c1281cc6d9a359f9dfa7efa783ca0500239edfa49473380627394b9fcfb4e",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "0ca199ccd966f5874e5af6e10209a5d3c278b4bf0a0373be98eaacdfcdaf3df4",
       "bytes": 9627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/pomona/pomona-elevation-thumbnail.webp",
           "bytes": 5308,
           "sha256": "7b746c447209c16ec23f9402d2017c5e71fb25838341c949707f13e73021af33",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pomona/pomona-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pomona/pomona-elevation-surface@2x.webp",
           "bytes": 265080,
           "sha256": "052f38a86269c398de091505de5d82099e2ce36ac76b29937f0411a519f8cdca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/pomona/pomona-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pomona/pomona-shape-surface@2x.webp",
           "bytes": 60096,
           "sha256": "b73b11fd1e29d588d94e7e0119cddb140a0b521bd4f4ed5cea61b106e55096ec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "pomona",
-    "materialSha256": "643c33006f006898d0b2b6d5cd2a8e3b554cc9cc20814eeb36a4687ad4bc0d55",
+    "materialSha256": "140bb04482f021918c7e0cbc2a3b56056fc6ff1295af579e53f25fc76cdc3b23",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "bd0e6ef8b4964c172c65e8cddfcdff0655bdfafff6cba1fcc0527b774d601b1b"
     }
   }
 }

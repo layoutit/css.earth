@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ganymed",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "bbcff33d2656fa2c5790b92171dbe842dbcc9cd70abbf17d33c23fe514830c14"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "a49268bb9740c86c66a683687a24503c466fcffbddc71e33bb74c127916853c9"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "e5bed02f38bf6f35af801ace96871400ffab07f18036f1f3f51a3e6e4de3858a",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "e684b8ecc0d77e6b973bf3fac6ddfd43a91a866f587ccedc64b3a4681f7fad2c",
       "bytes": 8558,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/ganymed/ganymed-elevation-thumbnail.webp",
           "bytes": 5016,
           "sha256": "04b110bd42dc4a92d9d749b0515d31b60208428495613dfb307c89ef91f82885",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-surface@2x.webp",
           "bytes": 257922,
           "sha256": "aab6eecfe8f72c41cff47c9179e2c8e5c9fec87d354e67bc4237f0334ff58924",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/ganymed/ganymed-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
           "bytes": 56212,
           "sha256": "49048ba37c396015851a924d7cdf618e185f5d24b62e1d3f76977fb9f9d8ca45",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "ganymed",
-    "materialSha256": "6afb23c8b9c64efddab551c5695c6b63b3e44732bbcf2fe14097161f60af2c83",
+    "materialSha256": "e892f79379518c62dc7404f6df6a2c191aa2302348d17d12087df89beb414052",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "a49268bb9740c86c66a683687a24503c466fcffbddc71e33bb74c127916853c9"
     }
   }
 }

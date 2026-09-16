@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "leda-38",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "42d6d1b869c325c392daadadb120e7e75b978ceae47cdaad57d85a8cd647e3d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "4b2955c98b25980e13d492fe2e33f069692df82030898bc24183cf2dce39430f"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "109763528dc5541c8d5ee603522994a0c754eb2f8220a8b3fcef950ccd5f9f4c",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "2bee95d2497d61633313abd2faf44440171964900c054106e52d1355294b5465",
       "bytes": 10633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/leda-38/leda-38-elevation-thumbnail.webp",
           "bytes": 5444,
           "sha256": "18014f83c021243f5eb676c90c1d147c55179b235b7dac04f47f1eff002e4199",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leda-38/leda-38-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leda-38/leda-38-elevation-surface@2x.webp",
           "bytes": 265514,
           "sha256": "71b1cec431e9a92b85d14acfe43be8a4ddc91ae417b0616c740a53a1964dfb96",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/leda-38/leda-38-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leda-38/leda-38-shape-surface@2x.webp",
           "bytes": 62602,
           "sha256": "e2ffb74533c1658274582cc2957250deb81f5044f45432eb329cc18cea223d62",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "leda-38",
-    "materialSha256": "47bd99b64e046e90503b1caebeaf3d1ebc31cedafc69392d8f3d414d40a8bbc3",
+    "materialSha256": "87caa1d07044b75949bd0cc9625393a6166e4947bcefd32318bd4e0bbffe6a33",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "4b2955c98b25980e13d492fe2e33f069692df82030898bc24183cf2dce39430f"
     }
   }
 }

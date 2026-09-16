@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "polyhymnia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "97e4818c1f208d03d5776808994a29c6c6760b1f9753622d1fc3067d37b3c69a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "04b653d0a1ad978339d25ac33c25c4a09be32ca031ef9b0a1c0a2977df0dfe1c"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "ad4eef6efbc7473338d3a427724875eec7f1bf08e61afddb552a0668c44d4ee9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9827,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/polyhymnia/polyhymnia-elevation-thumbnail.webp",
           "bytes": 5980,
           "sha256": "549e549507df7658120be54b529cc69ec2a1180c62197d8701462f854c1ef31d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-elevation-surface@2x.webp",
           "bytes": 312352,
           "sha256": "e0531372817e761b18a24b4830a8464c3ba1648aa6d3893fad4881252de2f66a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/polyhymnia/polyhymnia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-shape-surface@2x.webp",
           "bytes": 63400,
           "sha256": "8822a66cea6bf4223d37f5e756b43ff3adfc2a7c0629531037f5fb08a86985d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "polyhymnia",
-    "materialSha256": "e1669fe482bbcf3627d8e09381acda00b4e5dbebf34588a7218dc943576711df",
+    "materialSha256": "c0c4f26b689846358de9234dc20ccf67b5e4f3e48ed7cefaa9c4c9556385b268",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "04b653d0a1ad978339d25ac33c25c4a09be32ca031ef9b0a1c0a2977df0dfe1c"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aurora",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "b692c9cbdc3c583346a9e7f01a142c2359e64f73e5dfb2bb18d47b136ac94f55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "e6a8f026b919e8775269c3ab520e4ab411c5365a9dc74fbf0cdcc4947ecc176f"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "077f4ed954d70bbe9f8f6f6a9d5da5f1a31a4bdc8bf81b051900b6b25b4463de",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "7e3ba7f17fcd3f30ef16ab7a6ad0b4ea51ce6bdca3d51c721baeae1ad6bb246d",
       "bytes": 6813,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/aurora/aurora-elevation-thumbnail.webp",
           "bytes": 5638,
           "sha256": "1499b7a4ded9141020e2f689fcd48decc56a0b3766c7acc32169a140e4ed6b2b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aurora/aurora-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aurora/aurora-elevation-surface@2x.webp",
           "bytes": 293982,
           "sha256": "c451f6861aff845f42a25bca2588eb4161792e664c6a525c1a17909edbcb2d7f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/aurora/aurora-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aurora/aurora-shape-surface@2x.webp",
           "bytes": 59592,
           "sha256": "44e09757a3e5936c53ec737a438ce591e9d3ae1f0cb245351c8eb330f21f1a4c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "aurora",
-    "materialSha256": "6ea510c096b34e9e48257d0bff61fba5ba7eb68b0d1e2fdfb961e284edcaea1a",
+    "materialSha256": "822ced144394f828acb06bf59d4b6198b445b0a10b0e3065d021419e6c1c8ebb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "e6a8f026b919e8775269c3ab520e4ab411c5365a9dc74fbf0cdcc4947ecc176f"
     }
   }
 }

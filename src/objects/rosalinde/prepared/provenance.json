@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "rosalinde",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "5589c0de89ee0c8bd225e3231a14cd13d1f6681fe4d10d8da4ed25f527bc1aab"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "2b2b304fa346c24160b61e6f13237129ea3b18799ee1b47b25d192fe7ab0a3e9"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "b5ee9fab82357bf57d6dc810c5a2e0068f9bcd15ec20cc87c99de9da55b24425",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9924,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/rosalinde/rosalinde-elevation-thumbnail.webp",
           "bytes": 5272,
           "sha256": "84b1d46669817be75d08bcdcb3a83de3137965cb6796e44e0ebf365386394762",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rosalinde/rosalinde-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rosalinde/rosalinde-elevation-surface@2x.webp",
           "bytes": 284442,
           "sha256": "d7d6c432af83623673dc32dec2f48e525a61fc67d942cf3a56b44efdfb494932",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/rosalinde/rosalinde-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rosalinde/rosalinde-shape-surface@2x.webp",
           "bytes": 60160,
           "sha256": "049d44f9fbc4cda3135300b7b864ea10689bc26540ded56632a26007098d3f58",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "rosalinde",
-    "materialSha256": "f79cfaa90f83bca005ec9a34d7bf8f7d495234ab1b0cba5e075123f0344bf96d",
+    "materialSha256": "8cb4126b099125e1f36264ac9b2a972df2057968922c43299ab99cc4f9f38e13",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "2b2b304fa346c24160b61e6f13237129ea3b18799ee1b47b25d192fe7ab0a3e9"
     }
   }
 }

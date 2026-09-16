@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iphigenia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "e0157fa439cfb60de1a35357428d0f712691cfc85a988e99d579a92701d67da0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "178fa253493b8ada64a38df0fc4cd46935f57089f55687611fff5d145260013f"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "76e84bb363bc61fff99cee400395d53d29cbb4b11ef0012f4513dfbb689b06cd",
       "bytes": 42693,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "2c7b6eff3ac2b6143d1284f52dea49b9acd8eb8170c48615429a786aae0831b5",
       "bytes": 10796,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/iphigenia/iphigenia-elevation-thumbnail.webp",
           "bytes": 5402,
           "sha256": "2159229ab8a6072d1970b27a0dd801e099d6bb6833827a3ea41a3a68de1100cb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iphigenia/iphigenia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iphigenia/iphigenia-elevation-surface@2x.webp",
           "bytes": 292530,
           "sha256": "df491fa7a616ca43ceb888068a0ca15176f92d939227e32bf8bb4b59fb109ce4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/iphigenia/iphigenia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
           "bytes": 77504,
           "sha256": "3ee262d51350bf5038b4e641a11396461907171ce26537099de956d065edd3d2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "iphigenia",
-    "materialSha256": "b7dbbc2a28c5f9148e9b2235d90b95f7dcd1b65840eb44f60dad23e373ce15cd",
+    "materialSha256": "33439b6e0f78976a0049415aaff299617465adbcd2cb49514cc2867f1fc25a2b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "178fa253493b8ada64a38df0fc4cd46935f57089f55687611fff5d145260013f"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "melete",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "7922a5e18d8fcd6f6c76d203edeb3890ea16a47172e61f233fbd6d81b9e6ad79"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "8fa12d247f21d4e09cb59a012021565efd8a61a856997258cbe3cd4dbfceab8d"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "3b820de521b563cb1f003a04d8302a5c8c2f850124b7409285f2a3151e8a3e95",
       "bytes": 9104,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/melete/melete-elevation-thumbnail.webp",
           "bytes": 5302,
           "sha256": "8ca94fe8cd955ea2bc4bd8c0ff78ed6de68fc41a0c5fea0a2407d60cb9e82fee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melete/melete-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melete/melete-elevation-surface@2x.webp",
           "bytes": 280170,
           "sha256": "1e2b7148a48f2fc63a344455802a1da9a10c7801bf80fdd4d0404934ab5f4775",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/melete/melete-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/melete/melete-shape-surface@2x.webp",
           "bytes": 58548,
           "sha256": "6bdde97a32860c64d7c6d991cae6a8cf597594829e9c2f617777642c2c1f96bd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "melete",
-    "materialSha256": "46565bbe6e854552830795591888a25d7faacb496bd825d1f41d7eac723aa580",
+    "materialSha256": "18654501bee9009c847d42e8fa6191d144cebb149ea42e2a42130bba6989c3b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "8fa12d247f21d4e09cb59a012021565efd8a61a856997258cbe3cd4dbfceab8d"
     }
   }
 }

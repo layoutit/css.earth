@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hermione",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "c5ec3725f66f3bd4f63e2b11a817fef8ca9d2c6e8fcf3e2fe42ce5643d96d464"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "96bc4385e8c8d9d58c48571c5edd8119906b4d816d2f833c5df0d964568debfe"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "32071aa3e5dc9787edcf17b8f37bd65962df8357a75bcb76b2ea0cb2bbb74f7c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "88f68ea831e871adebd247487f09b489f6e631027ed858246c094e2a7b503b47",
       "bytes": 7727,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/hermione/hermione-elevation-thumbnail.webp",
           "bytes": 4860,
           "sha256": "3c05dfd2e4360c27dc8ac9d15eacfffd08ef6d8f1a1e78669bc32dc6fa7fb31e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hermione/hermione-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hermione/hermione-elevation-surface@2x.webp",
           "bytes": 265422,
           "sha256": "afa12b4dba9c9ed384ddd705ac4b26ccd14bb4fe59e8c4565f0903eb3ef33cc0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/hermione/hermione-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hermione/hermione-shape-surface@2x.webp",
           "bytes": 54328,
           "sha256": "1107a9eef548df9d98b4999428433a5f5eb2f0c3c5cf33827086820e521e0cd9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "hermione",
-    "materialSha256": "5f5b20647ddf66259f8c1cf905f8ec7bbb2ee4ea1abc3847706537218d3040df",
+    "materialSha256": "32f7589c132cc0d754ccb0a36430d2fdab8c5539dcc740dc772cc1c6bb88b275",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "96bc4385e8c8d9d58c48571c5edd8119906b4d816d2f833c5df0d964568debfe"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "silvretta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "3bb2722fd1d46354a1119e6f3896fe228b2851ac1e78fc6faa5842f7d0d205b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "acca08c0f27a2ba2c4b16e2399faf8c0d3e90a384b12d533d23b630bb5ce8d4b"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "f2abcec4e89d1fbe1b297e546e91239b04bb94ce621998061ddeee09acee3724",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9191,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/silvretta/silvretta-elevation-thumbnail.webp",
           "bytes": 5866,
           "sha256": "ee0030ec1dc19051e0f29a42e1026a78b5997efb1f9b7672fadda0bd1268904b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silvretta/silvretta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silvretta/silvretta-elevation-surface@2x.webp",
           "bytes": 308786,
           "sha256": "626a62c42d16c5742d26ef1defc0824d7d01736dc7b32e897f7f5c573977f448",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/silvretta/silvretta-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silvretta/silvretta-shape-surface@2x.webp",
           "bytes": 65958,
           "sha256": "3fc1e9517214d2b74cad3e32d7f44f669c2c63f549f842448ca006e3d41a7d33",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "silvretta",
-    "materialSha256": "1460b752bc02e09c23f3d29519525daf43c69fed21df5a37a4f2da3d2caced06",
+    "materialSha256": "dbdd60ce12bbd58a1c9b119f6f6edac1c0c1d6ceee28727e6f6c295976f860d7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "acca08c0f27a2ba2c4b16e2399faf8c0d3e90a384b12d533d23b630bb5ce8d4b"
     }
   }
 }

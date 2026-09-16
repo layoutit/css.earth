@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "3de79425a9e0e527bd61bfa7cc1fc235cfc85c6bccd0b95f9bb73ee640a424be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "8e045344c5ff27424d255a9bffbd794a215cc598ccc0aa3907c989423ac8ddfc"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "667be44f59441cbb117e91d5153cc6b6547810348ff58a7dc946a4d1dad4bf21",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "2cdabf28f17ab9cca64df73c4fe4a522c6b2cbded135dcd0f04236f4490e41c6",
       "bytes": 8778,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/thalia/thalia-elevation-thumbnail.webp",
           "bytes": 5532,
           "sha256": "b682f059065b682c92c24a5f3c997a9af7a9c04f424d91a086bc97f4720621d7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalia/thalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalia/thalia-elevation-surface@2x.webp",
           "bytes": 308384,
           "sha256": "60000e45d6de8bac50bb46d6c898ec9519e977fd5711dde1acbd0162a987baea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/thalia/thalia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalia/thalia-shape-surface@2x.webp",
           "bytes": 59264,
           "sha256": "763e037a5c0ec663304037916e4539f960748e9935c0ff4f85064344504a587b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "thalia",
-    "materialSha256": "fe30a8fb1359d933fa4553988678c2f5129a5ee5b6fae0e6631608490ddd984c",
+    "materialSha256": "b086ac6636401e4bf7dc2507b52786d3f1b030c88416abc24a4ee4933e91b629",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "8e045344c5ff27424d255a9bffbd794a215cc598ccc0aa3907c989423ac8ddfc"
     }
   }
 }

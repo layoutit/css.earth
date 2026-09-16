@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ilioneus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "19752028e379b9fffaa8aec65971e21e596adcbce2991346a9fab5ca5accc601"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "7dd520638103e3aa543a98fde88bb407abe3c47752fb804600093bcfb8c98af7"
   },
   "recipes": [
     {
@@ -350,7 +350,7 @@
       "sha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "c28327678edae8c5b6ec72882bdcb1e8de8c0e18cde6b43a86bd9678cab27bd5",
       "bytes": 9419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/ilioneus/ilioneus-elevation-thumbnail.webp",
           "bytes": 5726,
           "sha256": "29245acb2921dfe6de01e4b1933416e091c78ffc58544425b762c57b50e500a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-elevation-surface@2x.webp",
           "bytes": 303480,
           "sha256": "68af0936b174ea58aee62eae54a26620d23aef8882a5828a7d2a7bba2e7329f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +460,13 @@
           "url": "/scenes/ilioneus/ilioneus-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-shape-surface@2x.webp",
           "bytes": 66422,
           "sha256": "cca2a215a3d99f5446ab3d54369be1ad5d4c441297b2509d9d38008a442f68e4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -561,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "ilioneus",
-    "materialSha256": "8bcc1d6dcf44d8b866442bfc883aa4baafa570873fe20e58e4fdf37ca909768e",
+    "materialSha256": "5de1ce1453f48b9eaedd8b346aae4b35de62ce7dba60b00e9e2cf0e5c4340be5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "7dd520638103e3aa543a98fde88bb407abe3c47752fb804600093bcfb8c98af7"
     }
   }
 }

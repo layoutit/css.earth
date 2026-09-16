@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lomia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "5fe927ba99b6d16ffb8b4bfd8f52eb8d607d6c894c1fe1fb94af5acf10d89f3d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "a99c0100e05e524c5b182af0be35832c9cd371ed3f370942c8053ce71ac2ebc8"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "9269270e3faf2394d48a7f1711bb68c161039e38109c09c0e92e6e92140f3d85",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "a8f08d3fa852c9a4e32ce2f7901a12be665accdcefefe1512038138a3c2de0a3",
       "bytes": 8731,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/lomia/lomia-elevation-thumbnail.webp",
           "bytes": 5552,
           "sha256": "2d7b37073f1ff6c3e37e63d8bf1c2f3251fdd65ecfe689a2f799e87a0e300a56",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lomia/lomia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lomia/lomia-elevation-surface@2x.webp",
           "bytes": 305116,
           "sha256": "5b4b15985349260090fc3b150736942fe1be2311cd4fcd6951aa649926855105",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/lomia/lomia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lomia/lomia-shape-surface@2x.webp",
           "bytes": 63644,
           "sha256": "73799f174856ecd461da21376d6a0f29cbf844af886d85f063563ecd3d148b46",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "lomia",
-    "materialSha256": "a74c6efd202b38cdad16309c3e2c5388aaa830dd0fb3b751c754b2459397c38d",
+    "materialSha256": "de2161c120b23bae2f24a46df620c86dacf72b7bcdab0a8a6099472ae6f5f05e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "a99c0100e05e524c5b182af0be35832c9cd371ed3f370942c8053ce71ac2ebc8"
     }
   }
 }

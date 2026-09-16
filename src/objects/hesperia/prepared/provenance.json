@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hesperia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "92fe09ec3bc38d78f1cb41300b945624053315bd91d5695b2384ca8d885a34b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "f0e5f278231162af1cdbf821da7882171a899505b771c78afe7f865fcfc2741a"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "cbe8efe6448bf2e9ba29a52ca5f60b47f50d301f8f77c9610cf3d8ea63cf01c9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "e62c2fcaaec86c2801c31854a5e7c58c9823dcf26bc4c898f8a397dbf0c1cdde",
       "bytes": 10527,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/hesperia/hesperia-elevation-thumbnail.webp",
           "bytes": 5180,
           "sha256": "00b5eb466e24d6be28a5063b3b320662776349042419ee86553e51b77c8d51af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-surface@2x.webp",
           "bytes": 266458,
           "sha256": "dc34ee7339f19b12b8aaa2a5bae17c62f71f52d82c4c5d9675a23300d81a4e68",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/hesperia/hesperia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hesperia/hesperia-shape-surface@2x.webp",
           "bytes": 63436,
           "sha256": "fd5da3a3f342ab1f399017ed2c24d2584214e547a8915edae15721b04c6197c8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "hesperia",
-    "materialSha256": "5e11db018f37863d297f5aec5dc36768ccc0a4df9cce86f8aa14eafb79c6506f",
+    "materialSha256": "dadc8ba482cc4d9365c3a29ada48945981d7c228aeef541f6d0594000816b8af",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "f0e5f278231162af1cdbf821da7882171a899505b771c78afe7f865fcfc2741a"
     }
   }
 }

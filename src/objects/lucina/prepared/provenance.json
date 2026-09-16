@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lucina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1312e56d70633210b26d3fe545b603e234c07f4d0ff9a44fee2ef5e017ac6cd6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "d82201b654c026aa277adb1dafd62c60aae0dbf07576fe5c7225f5d038d21244"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "667acd4065c0ea2b9930418669bc923020620d6bb64268b432a4f60cd2daa19c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "24aee0c1095725b26584ee64ef8b69fdd8eaec3146b639555d5e8e6f931efc54",
       "bytes": 8743,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/lucina/lucina-elevation-thumbnail.webp",
           "bytes": 5834,
           "sha256": "a3222691b381851c60718a8045f1d89cdb1961df505fa8b7c2977fd2406d632d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucina/lucina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucina/lucina-elevation-surface@2x.webp",
           "bytes": 318976,
           "sha256": "a992b3fb173bc71b7a858b0080e967ad21f289db4c55f86b4dc72bbbf8cc3a1a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/lucina/lucina-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucina/lucina-shape-surface@2x.webp",
           "bytes": 59340,
           "sha256": "b395bb15bece66c96b4a24e30fa2417e4676eb9fec625c7864ab87df3be86cb2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "lucina",
-    "materialSha256": "49da164ede549ed07d874940bf391b7f0e439f013d5843956a373e6080a0186f",
+    "materialSha256": "104811a112b6cf83c5e08bc421eb78970142ce1995564b6306d5a924416ffb2e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "d82201b654c026aa277adb1dafd62c60aae0dbf07576fe5c7225f5d038d21244"
     }
   }
 }

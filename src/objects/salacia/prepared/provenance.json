@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "salacia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6b75273cde6e56936e4772eefeb77cde839e409c84db81cb778bd79c8de7c177"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "81d3369f63e54054a4d5d225a4664d539044d0f6083300114614db6e5c299c4a"
   },
   "recipes": [
     {
@@ -245,7 +245,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -280,7 +280,7 @@
       "sha256": "6d876936b4cf3d44aa70cb3f5e7ea4eda7cef728e7a060dd54fbb7db64376a4d",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -300,7 +300,7 @@
       "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
       "bytes": 3528,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -337,13 +337,13 @@
           "url": "/scenes/salacia/salacia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/salacia/salacia-model-surface@2x.webp",
           "bytes": 57054,
           "sha256": "9a3256be66c9df8da73034a3a61237ef576e0d5a1a3d2052d133165ce6a0c5f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -421,8 +421,8 @@
     "materialSha256": "89e3ce5d89c044d0577901db7240401ea6632fd3bb36826f0b496891ae34efb9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "81d3369f63e54054a4d5d225a4664d539044d0f6083300114614db6e5c299c4a"
     }
   }
 }
