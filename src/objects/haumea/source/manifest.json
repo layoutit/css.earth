@@ -24,13 +24,106 @@
           }
         ]
       }
+    },
+    {
+      "id": "haumea-disc-color",
+      "path": "photometry/disc-color.json",
+      "expectedBytes": 2084,
+      "expectedSha256": "9537eff943560b6d733cdf0aa7b4d675d75e45a7e1b833cd7e56619f4331debc",
+      "origin": "https://doi.org/10.1086/499575",
+      "credit": "Rabinowitz et al. 2006; Ortiz et al. 2017; Ramírez et al. 2012; SVO Filter Profile Service",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed rotation-corrected B-V, V-R, V-I (Rabinowitz 2006 Table 3 weighted average), V geometric albedo (Ortiz 2017 Methods), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rabinowitz-2006-haumea",
+            "role": "material",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "doi-10-1038-nature24051",
+            "role": "material",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/haumea/source/photometry/disc-color.json#/effectiveWavelengths"
+          }
+        ]
+      }
+    },
+    {
+      "id": "haumea-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "haumea-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "expectedBytes": 6820,
+      "expectedSha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3177,
-      "expectedSha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
+      "expectedBytes": 3460,
+      "expectedSha256": "a801c02ae8a0420e15d36d6cd3e517013cba69dadcbf229dbe33ec3c1be2b845",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -48,8 +141,8 @@
     },
     {
       "path": "preparation/shape-model.json",
-      "expectedBytes": 743,
-      "expectedSha256": "98d19da766dfd2431a1fb6b8c0a58b12db43e2c216cbf12a411d977ff6826b3a"
+      "expectedBytes": 1132,
+      "expectedSha256": "7d9213689053c50c553bf8bf65e8a231b5dd89185d086ff746f32318a8173cfd"
     },
     {
       "path": "presentation/title-mark.json",
@@ -64,7 +157,7 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 127,
-      "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666",
+      "expectedSha256": "e9daecf9471089082ec1a3463283ece2f3315d6c3c25b09f6eb51dcd38f9876e",
       "id": "haumea-shape-marker",
       "origin": "https://doi.org/10.1038/nature24051",
       "credit": "cssEarth schematic using Ortiz et al. (2017) semiaxis ratio",
@@ -76,6 +169,15 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 272,
       "expectedSha256": "10122d07da9668df1bea395c8b5f4db9e76e66c34451a92767c5989ff523c1a1"
+    },
+    {
+      "path": "reference/rendered-default-view.jpg",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /haumea/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-16 after preparation."
+      },
+      "expectedBytes": 95850,
+      "expectedSha256": "816be54f9c2fd31c66471ada80dec5922c15c6ea267b14d37c0b72e45fa61b29"
     }
   ],
   "generatedIntermediates": []

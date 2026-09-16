@@ -30,6 +30,13 @@ test('Makemake\'s published colours and albedo give a pale warm sRGB colour', ()
   assert.ok(color.linear[0] > color.linear[1] && color.linear[1] > color.linear[2]);
 });
 
+test('Haumea\'s rotation-corrected colours and occultation albedo give a light, nearly neutral gray', async () => {
+  const haumea = JSON.parse(await readFile(new URL('../../../src/objects/haumea/source/photometry/disc-color.json', import.meta.url), 'utf8'));
+  const color = discIntegratedColor(parseDiscColorRecord(haumea), colorMatching, illuminant);
+  assert.deepEqual(color.srgb, [188, 189, 191]);
+  assert.ok(color.linear[2] > color.linear[0], 'the slightly negative solar-relative B-V reads faintly blue');
+});
+
 test('records and tables fail closed', () => {
   assert.throws(() => parseDiscColorRecord({ ...makemake, schema: 'other' }), /cssearth-disc-integrated-color@1/);
   assert.throws(() => parseDiscColorRecord({ ...makemake, geometricAlbedo: { ...makemake.geometricAlbedo, band: 'R' } }), /V-band/);

@@ -39,16 +39,131 @@
     {
       "id": "neutral-gray-shape-lens",
       "subject": "Shared neutral gray for the unresolved surface",
-      "status": "included",
-      "finding": "Preparation fills the shared projective surface atlas with the neutral gray (#808080 sRGB) and samples no model texture; the README calls the gray a display convention and claims no terrain, texture or map.",
+      "status": "excluded",
+      "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published rotation-corrected colour indices and an occultation-based V geometric albedo now give Haumea a measured uniform colour (sRGB 188, 189, 191).",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L5",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L24"
+        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/src/objects/haumea/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/docs/shape-only-material.md"
       ],
       "checked": [
         {
           "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ],
+      "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc."
+    },
+    {
+      "id": "resolved-surface-imagery",
+      "subject": "Disc-resolved images of Haumea",
+      "status": "excluded",
+      "finding": "No usable resolved image exists. At about 50 AU the 2,322 km long axis spans about 0.06 arcsec, near the resolution limit of Hubble, JWST and Keck adaptive optics, which record Haumea and its moons as points; at about magnitude 17 it is too faint for VLT/SPHERE's visible-light correction. No spacecraft has visited. The angular size is computed from the Ortiz et al. (2017) axis and the distance, not taken from a paper.",
+      "revisitWhen": "A disc-resolved image or a flyby is published.",
+      "evidence": [
+        "https://doi.org/10.1038/nature24051"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ]
+    },
+    {
+      "id": "rabinowitz-2006-colours",
+      "subject": "Rabinowitz et al. (2006) rotation-corrected BVRI colours",
+      "status": "included",
+      "finding": "The weighted average of three nights (2005 January 25-27) after subtracting the rotational light curve, B-V 0.626 +/-0.025, V-R 0.343 +/-0.020, V-I 0.683 +/-0.020 (section 3.4, Table 3), gives the Color lens with the Ortiz et al. (2017) albedo through the disc-integrated-color method: linear sRGB 0.504, 0.511, 0.522, sRGB 188, 189, 191. Each colour uncertainty moves a channel by at most 2 of 255.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0509401",
+        "https://doi.org/10.1086/499575",
+        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/src/objects/haumea/source/photometry/disc-color.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ]
+    },
+    {
+      "id": "ortiz-2017-geometric-albedo",
+      "subject": "Ortiz et al. (2017) V geometric albedo of the main body",
+      "status": "included",
+      "finding": "p_V 0.51 +/-0.02 from the occultation projected area and the main body's absolute magnitude sets the brightness of the Color lens. Its uncertainty moves every sRGB channel by 3 of 255.",
+      "evidence": [
+        "https://arxiv.org/abs/2006.03113",
+        "https://doi.org/10.1038/nature24051",
+        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/src/objects/haumea/source/photometry/disc-color.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ]
+    },
+    {
+      "id": "mboss-colours",
+      "subject": "MBOSS mean colours (Hainaut et al. 2012)",
+      "status": "excluded",
+      "finding": "The MBOSS catalogue (J/A+A/546/A115) lists a three-epoch mean for Haumea of B-V 0.631 +/-0.025, V-R 0.370 +/-0.020, V-I 0.687 +/-0.020 from Jewitt et al. (2007, AJ 134, 2046), Rabinowitz et al. (2007, AJ 133, 26) and Trujillo et al. (2007, ApJ 655, 1172). Whether each epoch removes Haumea's rotational light curve is not verified; Rabinowitz et al. (2006) state that they subtract it, so their colours are used. Measured with the same method, the MBOSS values give sRGB 190, 189, 191.",
+      "revisitWhen": "A newer rotation-corrected colour set disagrees with Rabinowitz et al. (2006) beyond their uncertainties.",
+      "evidence": [
+        "https://doi.org/10.26093/cds/vizier.35460115"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ]
+    },
+    {
+      "id": "thermal-geometric-albedo",
+      "subject": "Thermal-model albedos from Herschel and Spitzer",
+      "status": "excluded",
+      "finding": "Ortiz et al. (2017) cite earlier thermal albedos of 0.7-0.75 and 0.804 (+0.062/-0.095) and explain why the occultation size replaces them. Measured with the same method, 0.804 would give sRGB 230, 232, 234.",
+      "revisitWhen": "A thermal model that includes Haumea's elongated shape and ring disagrees with the occultation albedo.",
+      "evidence": [
+        "https://arxiv.org/abs/2006.03113"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ]
+    },
+    {
+      "id": "dark-red-spot-colour-variation",
+      "subject": "The darker, redder region seen in Haumea's light curve",
+      "status": "unresolved",
+      "finding": "Lacerda (2010) models an asymmetry in the light curve as a region darker and redder than the mean surface. A uniform colour hides it. Its fitted size, latitude and contrast are not unique from the light curve and the display meridian is arbitrary, so it is not drawn.",
+      "revisitWhen": "A published surface map or rotationally resolved colour model fixes the region's extent and contrast in a body-fixed frame.",
+      "evidence": [
+        "https://arxiv.org/abs/0911.0009"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
+        }
+      ]
+    },
+    {
+      "id": "ring-and-satellite-albedo-correction",
+      "subject": "Ring and satellite light removed from the albedo",
+      "status": "unresolved",
+      "finding": "Ortiz et al. (2017) subtract 2.5% of the system brightness for the ring and about 11% for Hi'iaka and Namaka before computing p_V 0.51, and note the albedo would be smaller if those shares are larger. The published value is used unchanged.",
+      "revisitWhen": "A published albedo with separately measured ring and satellite contributions.",
+      "evidence": [
+        "https://arxiv.org/abs/2006.03113"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "92c07424a07153b5dd02aad3e804ce11c580ca05"
         }
       ]
     },
