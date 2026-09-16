@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "07d93910c110223841431592d7759ff21319f7dae3a519c142c37707c89987b9"
+    "sha256": "90b4353c29c6079d885d0c7288fdac2f7247411c633211b360a005885f6ebabc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1af376d339e61a1270976f0f6bbd9c5408fd62a7894b1bbf7a8afd3f18b16298",
+      "sha256": "f14cf1b68d564453aec52618a55a330ae4b3b359d330df6c9dbbfcfa0a791424",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "97.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.426 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.274467 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hebe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1af376d339e61a1270976f0f6bbd9c5408fd62a7894b1bbf7a8afd3f18b16298",
-      "bytes": 6968,
+      "sha256": "f14cf1b68d564453aec52618a55a330ae4b3b359d330df6c9dbbfcfa0a791424",
+      "bytes": 7220,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4800,
-          "sha256": "8b1157ffcf8cf57bb44684994186e2c10336792f8b51f691bb0e601606c6bfcd",
+          "bytes": 4964,
+          "sha256": "9499f703054dd6cbedc4d6530df7b661413639da5678cd69cc2de084c713a898",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "hebe",
-    "materialSha256": "bf4648db4c1f6345fba69ee8b19591f4a04c9dfadf6ceca5516439ede22a8c67",
+    "materialSha256": "a80dd5836dfb15ac60c4aa30d21419a5f255d7303dc0835927ddb20a33ce109a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

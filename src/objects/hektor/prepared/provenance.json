@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee94bd3be8646d9aeaaa95d5d616ec2af19bf82bf3d9a388ad6ed2d6ef656091"
+    "sha256": "355b95b093beb18301b79451edab533ea60203a333358a57db8e80c7200ab6e2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "389b75cf8eacef5dd039b019869322e999be35a0322dde82a55d5682a03093cd",
+      "sha256": "a11cf97fc909ca839aa43fe2ae68c4e8453fcdb8f719d770e03262e25504860b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "87.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.920509 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/232",
-                "label": "DAMIT model 232",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "6.920509 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hektor model 232, version 2016-06-27; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hektor.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "389b75cf8eacef5dd039b019869322e999be35a0322dde82a55d5682a03093cd",
-      "bytes": 7587,
+      "sha256": "a11cf97fc909ca839aa43fe2ae68c4e8453fcdb8f719d770e03262e25504860b",
+      "bytes": 7404,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5254,
-          "sha256": "c2fd1c2521d701831826bcfb08289528fe5bdfe55e60d7bbb10713d9e44b2e0b",
+          "bytes": 5118,
+          "sha256": "3c320ca4c4e2e94fb7bd50cacb21f357a23dd95a59bf0a7218611517a3396f49",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "hektor",
-    "materialSha256": "d9f645fdab094db5bed0172ae69b4e8f9054d9456f9c2056e5017823d2987232",
+    "materialSha256": "ce51465e568b7378ca9b3923f13d3b52431a55211cd4339a327c3fb0299a83c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

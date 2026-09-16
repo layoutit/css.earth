@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fab6424f5d2626f117a42cf38725cf003543fe6ef8c8abbf54699c1fd7e80c25"
+    "sha256": "78431072668b6aa1a561c41d3270ea85adac773b5f38ef17e227bb7af4c49b8b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ac4ba80364ea999f339128147d7f59f1312d3ae2364b83c7c05ad59781ad5139",
+      "sha256": "78b9ab6d051bd8062145bf0cdc00e5c7f2f06e7d94bf7049344beff60d7fd90c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -308,7 +308,7 @@
             "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1998-ml14.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -388,8 +388,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ac4ba80364ea999f339128147d7f59f1312d3ae2364b83c7c05ad59781ad5139",
-      "bytes": 11118,
+      "sha256": "78b9ab6d051bd8062145bf0cdc00e5c7f2f06e7d94bf7049344beff60d7fd90c",
+      "bytes": 11151,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -510,8 +510,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7802,
-          "sha256": "e966b6e9fcc533a92c91702406c3879424b7b97de868dde9f810a71400dd7106",
+          "bytes": 7835,
+          "sha256": "5c368d972aeed5441ffa97c92f5eb19f9e368306e0efacc0f82b0657c74ee773",
           "verification": "bytes-verified"
         }
       ],
@@ -574,7 +574,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-ml14",
-    "materialSha256": "b0100bf4ac601c496e7e65dcd5ca6989333f6471928f2ebd9b1392a3ccdc6fc4",
+    "materialSha256": "9dd07e3a0e7ecd7a70b2c27cc2c61d2f497bad6e1a1c16497e6445ead25cfa23",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

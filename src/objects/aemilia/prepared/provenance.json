@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1b8bbed0168d1e071cf642e3a4f9784f0e77a28c60b64db41360e02bf8ae2b94"
+    "sha256": "4bf97207b25532e4893d0a6591d6f8efe44b4bd8241592abadca33132a817da9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2350dab8077f822aaee3c5eeb34fcbeb1165c53b436a6804ca345123a24a48ff",
+      "sha256": "c443cd0a705868aa84ccd1798eae7a6939cfb88e0ae82ab9e7b36612704534bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -290,7 +290,7 @@
             "credit": "ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A610,A7; Bartczak and collaborators."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/aemilia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -372,8 +372,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2350dab8077f822aaee3c5eeb34fcbeb1165c53b436a6804ca345123a24a48ff",
-      "bytes": 9241,
+      "sha256": "c443cd0a705868aa84ccd1798eae7a6939cfb88e0ae82ab9e7b36612704534bf",
+      "bytes": 9263,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -494,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6630,
-          "sha256": "2da550e2a4e9389f3aac2736a2418b45c6665db9482987855ca857cf291cf2e1",
+          "bytes": 6652,
+          "sha256": "36e8d5a88ecced812cd0ce3b029df0417d4c1f81394d77ffe9044af8fbbb7c5e",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "aemilia",
-    "materialSha256": "b88d6432d9a1fffdd9ac0208f9c8f1a4c9b4264d636632df581cb420cdd7bae5",
+    "materialSha256": "0064aca70d3545b2c9181d582d12d0b6565e9392d7a0611942b6d5ebbb3581e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

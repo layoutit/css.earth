@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e46b2375505b243bf941f95528fd13aac5c75e8261cf324e862a6f8b02bceec6"
+    "sha256": "ac1ec75246caae95cc407181560ac2fd8f52e23033096ac6c6945aad3db998db"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -176,7 +176,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a3d4a1db03fefe05f27f188802e5c24a0d8f84936d797ca4fe2f887b725f6199",
+      "sha256": "c657496b84fa7cbb7f25e615dff88a4606ef34e0c072e51733d47f20b91faa68",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -215,17 +215,14 @@
               }
             },
             {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "1.458 AU"
+            },
+            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.76 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=433",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "1.76 years"
             },
             {
               "id": "rotation-period",
@@ -357,7 +354,7 @@
             "credit": "NASA/JHUAPL/NEAR; R. Gaskell; D. Golish and colleagues"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eros.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -612,8 +609,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a3d4a1db03fefe05f27f188802e5c24a0d8f84936d797ca4fe2f887b725f6199",
-      "bytes": 8511,
+      "sha256": "c657496b84fa7cbb7f25e615dff88a4606ef34e0c072e51733d47f20b91faa68",
+      "bytes": 8305,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -951,8 +948,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4668,
-          "sha256": "1d890d3c5ff607d18308f37e3bedaabfb01b118e2ec820591d46a8f23281eecf",
+          "bytes": 4391,
+          "sha256": "56b6a0450d7973eb31b7debfba5ff7a9090ed89706be3daee4f8da7f8dacc4b2",
           "verification": "bytes-verified"
         }
       ],
@@ -1077,7 +1074,7 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "63ca034c24cf387149f0e31f82ace64d2736b7b265423a29ed4756fd65aa90bc",
+    "materialSha256": "0bc4ee2e577912ce12fa324e6953a5f1226577f5cdb9f3f2a25a5a5f1aeb78b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

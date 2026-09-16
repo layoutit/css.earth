@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8c31848239f46e140ec7fafba25f50af06f415e165879cf77ff9133e96aee01e"
+    "sha256": "10ce6e2f4d1573d695b5151cc0c7416aa59411124e467ebfa7096d4ac5785437"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b39ac3dea1b02dd55ccc48d01b28cc69c1e5ef4db3ccebb79c034c949740627a",
+      "sha256": "b372cfbb9872ec8f9622c5bb425f3fc92b9550408e0db591d72cc6e4a9badbdf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "216.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.151 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "13.82559 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hygiea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b39ac3dea1b02dd55ccc48d01b28cc69c1e5ef4db3ccebb79c034c949740627a",
-      "bytes": 8276,
+      "sha256": "b372cfbb9872ec8f9622c5bb425f3fc92b9550408e0db591d72cc6e4a9badbdf",
+      "bytes": 8531,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6077,
-          "sha256": "9187a608dbd6ef9a9b2c8f6d9af8aac3bce9d6fc4c5d884056d8b86385235e96",
+          "bytes": 6244,
+          "sha256": "87ddf9f5f4b5fe4f273ab606add99b61d547a88c267812cc906b4c66e5f92b0d",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "hygiea",
-    "materialSha256": "ef10446cb216b70a9b72c7eb5e28b0164bde59f0547652d83635740e0f51d548",
+    "materialSha256": "696df7a9eab055459a5233ebb3d4d61901b4661799c286fc7087c0c53abdacf0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

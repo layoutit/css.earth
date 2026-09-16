@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9702f64a995bfe04e012f62aa60f29ebcaace661498d2b5bf532aac4aaa33f73"
+    "sha256": "b7d77ce7dfb7edab26995688c9af852450ffcdc6c0d0e48f2213073fdba3ff20"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "65fc915aa226e61372c3f4fd7e3a3d92decb6f4be1d78de268dbaffcf72211a2",
+      "sha256": "d21804db1ca8239a4b72ee838163f8b35d24721b11642234111bedb30633fa7f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "94.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "9.404937 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1814",
-                "label": "DAMIT model 1814",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "9.404937 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Herculina model 1814, version 2017-06-19; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/herculina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "65fc915aa226e61372c3f4fd7e3a3d92decb6f4be1d78de268dbaffcf72211a2",
-      "bytes": 9375,
+      "sha256": "d21804db1ca8239a4b72ee838163f8b35d24721b11642234111bedb30633fa7f",
+      "bytes": 9193,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7003,
-          "sha256": "5cbda3b055c5f078a4fcfde63d79b3e9c476af689b2e4ad86a9ddbd20a7018ef",
+          "bytes": 6868,
+          "sha256": "0a0b23876a6391e92a000277149d22fe3548ee7145c5af133bae28e2bc421b3d",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "herculina",
-    "materialSha256": "99a7118130c6f946e0ca7632b4b1d18d6dc04c3ddc78b076973702d2539db876",
+    "materialSha256": "45057529dd8a51801fbfa831cafc89a0d6461aa5b9ce25cce49c7e842f4a07ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

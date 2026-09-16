@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0a8043ad20123b19220b0ae6696a3a02d5f3f0a222678a7545d3f0f2eacabe85"
+    "sha256": "929a7d8d8a707bf4d4c1aaa35ca5dac3275173a69b032767361063ad57c82ef6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "90c60714a68dbc27e0451a37d5b5e4cad485c9f9788b1a5f69fb3e9599797f2f",
+      "sha256": "140ea28b6f2cfd3e21b315b1b567d218a10bc1c644917d853de657e44308d831",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "73 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.202 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "12.86667 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/flora.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "90c60714a68dbc27e0451a37d5b5e4cad485c9f9788b1a5f69fb3e9599797f2f",
-      "bytes": 6894,
+      "sha256": "140ea28b6f2cfd3e21b315b1b567d218a10bc1c644917d853de657e44308d831",
+      "bytes": 7145,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4713,
-          "sha256": "6b93db741674e8beffdff746ab80ea21ce13a58c5a2bd8aa99b1074fe2ea0261",
+          "bytes": 4876,
+          "sha256": "4f12a26ca89f7a4eed910a013b9ee5af40d5c977ced3b48bf044ff8ed207e31c",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "flora",
-    "materialSha256": "8bee317ba57da3746491f8307d731176f5e4032b43256ac6695d994dcc1b019d",
+    "materialSha256": "9401f6dd0c149f001cb5a6594d3b2e7a9435c007ad094adb7a328bb73ac52311",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -151,8 +151,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9278,
-      "expectedSha256": "e24cc1dad651a8d786cb3f22223e964c6178f550d0f95a80e84bc5c88507c46e",
+      "expectedBytes": 8920,
+      "expectedSha256": "6075f7da5b32e7b58dba1d1919b396c99af952599093eaed82e42e3f34d5a34d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -213,21 +213,6 @@
       "purpose": "Independent full-source scalar correspondence anchors and coverage checks.",
       "expectedBytes": 5838,
       "expectedSha256": "367269a04ce85ee859172b2deca2e044f5c8ce1dcaed86c2a1d0eb284a29d9bc"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 4211,
-      "expectedSha256": "736d27ae0647d77af6c74f0b5083c43474da6ba278a6d1cca21d75e515871c05",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Mithra: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

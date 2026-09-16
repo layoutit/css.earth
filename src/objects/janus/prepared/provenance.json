@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2be0f04ecf99ffe6a6a90caa3ac14a960fa0e3b644cf95d05ee268dfbb4251f4"
+    "sha256": "b1ed5e5e816767282e60de56f58b2eb70cde848d9008338dfc5c10c01eb23c29"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -393,7 +393,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6af73721a91d65d6f11ecc0bf17712421fd5d66b1710cc6602271656c2ed169d",
+      "sha256": "5bbb758b251c5556a9f73f5e987fc9c07c8736fa6e645d4922e8ee4bcd2e3317",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -430,28 +430,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 16.7 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "About 16.7 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 151,500 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 151,500 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Audouin Dollfus · 1966"
             }
           ],
           "moreFacts": [
@@ -571,7 +565,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/janus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1560,8 +1554,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6af73721a91d65d6f11ecc0bf17712421fd5d66b1710cc6602271656c2ed169d",
-      "bytes": 6059,
+      "sha256": "5bbb758b251c5556a9f73f5e987fc9c07c8736fa6e645d4922e8ee4bcd2e3317",
+      "bytes": 5614,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1656,14 +1650,14 @@
       "outputs": [
         {
           "url": "/scenes/janus/janus-normal-thumbnail.webp",
-          "bytes": 2080,
-          "sha256": "94e61e58a6a1e0ddefe697d74ff253788734efbe2630e86e214ac488e6746684",
+          "bytes": 1998,
+          "sha256": "2163a2bcc35d86eedbada417c49639737a0e210b56f9c5392e2e3a3dc266e887",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/janus/janus-normal-surface@2x.webp",
-          "bytes": 536500,
-          "sha256": "96d915a902fd490f9e5835d1c7514b54992467179dbed6b2072852aecedf4212",
+          "bytes": 469602,
+          "sha256": "c10137f9e50daaaafc4384f6df77d480a8bcfc39922bdb8ff2a2f93a4fb9657c",
           "verification": "bytes-verified"
         }
       ],
@@ -1712,8 +1706,8 @@
         },
         {
           "url": "/scenes/janus/janus-filter-color-surface@2x.webp",
-          "bytes": 321064,
-          "sha256": "5e1618de606dbe777ce8770fa068da899a2070708759a0caad9911f81fb83d8c",
+          "bytes": 341514,
+          "sha256": "299752793c9d1511eae1f3c01ee68c1e9af51bf8fef8c8efa23f509fbcfa47fb",
           "verification": "bytes-verified"
         }
       ],
@@ -1745,8 +1739,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5625,
-          "sha256": "68078143afe8cafd749910bbc7570347dba2c1ea2b6fd50d4596239d8167d0e5",
+          "bytes": 5274,
+          "sha256": "00ad197e00f650ad2d460ed0b96011d26bfd37f8260b7dd3ed730f7b254a4f5e",
           "verification": "bytes-verified"
         }
       ],
@@ -1771,8 +1765,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 21144,
-          "sha256": "85660f2f4f120e30cd083d560904d57e0dae3fd3a742126109078f31a0cb8216",
+          "bytes": 18898,
+          "sha256": "ed94ef5ae8895ada7964ddf61fac3b2b7c27f7db0fed06451f756458e2a73ee8",
           "verification": "bytes-verified"
         }
       ]
@@ -1834,7 +1828,7 @@
   },
   "lastPreparation": {
     "objectId": "janus",
-    "materialSha256": "e325b38fe967a49c54d4b2710db651638b485e62a10cf16947c638008e560316",
+    "materialSha256": "3536e81765429ed79a248902cb163e994cfc6121b893898ee908cb3083821195",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

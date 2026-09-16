@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d09562132da331142e9c5fd091c8de95624c9fe5d495954ad7048063312adee"
+    "sha256": "61284acc0143b7a50c26c01151a5ab7734efc681fd5184a714f35983de8555df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e5e39a28043091a8b88ca7159db86be7013658f3c18d120f2ff45c27a3d7b65d",
+      "sha256": "13c713a907d772a591a6dc55b6d2bf8278cd880b536979d655ffdebe5b1c47a9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1163, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/dresda.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e5e39a28043091a8b88ca7159db86be7013658f3c18d120f2ff45c27a3d7b65d",
-      "bytes": 9952,
+      "sha256": "13c713a907d772a591a6dc55b6d2bf8278cd880b536979d655ffdebe5b1c47a9",
+      "bytes": 9973,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7363,
-          "sha256": "22d714032156159489e9e52e7ea27e45e0f530f6132672fdbee894b1f3a4ccd0",
+          "bytes": 7384,
+          "sha256": "74ff58b0a81b49bd5e89eaaa884a674a82c97ed4172701e016bf5ce5e042e431",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "dresda",
-    "materialSha256": "9259ad62527380dc6ade9029521e0bfd6ec83836cdb9bb11a3fe273e41280b73",
+    "materialSha256": "0cba1fd5bd4aa949072974f43b41dad98100b306e8ac100ab3756f80f9619b83",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

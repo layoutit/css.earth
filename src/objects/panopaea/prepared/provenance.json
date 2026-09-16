@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "770bf0d6e97b0c1063f41f02577e7d9511e802a82b10db9708364d8c47c00bc7"
+    "sha256": "e9fdfec10f332a175ab656fb87e415476478cef084dc9dfe02bfb0e8494e5285"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1841999a9606260ad49c341aa5a909d49ef06047e28036788acb5208a6c5bfd5",
+      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,15 +205,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.8044 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
-                "label": "DAMIT model 6171",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "15.8044 hours"
             }
           ],
           "moreFacts": []
@@ -305,7 +297,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Panopaea model 6171, version 2023-10-03; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/panopaea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -369,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1841999a9606260ad49c341aa5a909d49ef06047e28036788acb5208a6c5bfd5",
-      "bytes": 11790,
+      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
+      "bytes": 11488,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -491,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9300,
-          "sha256": "3aead93e3d7d3c76434938516bd8371112f482056389ec22166a1c88f0ace11b",
+          "bytes": 9089,
+          "sha256": "0ff8afdbbb2e859c8495680c1e447ea127e079152ff40c7530583b251a3a2ef4",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "7bceb091bf06aa8b378a0a7c0ff9c94207b3a8b768d604cf3a8d9688b8861411",
+    "materialSha256": "4a42e65d5a9e8f1f98608e71c6d2a13d915b18a869ea8c2a698583acfae463e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

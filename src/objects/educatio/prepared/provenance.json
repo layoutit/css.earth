@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f725d9f1570f4e0f6dce85d3b9123fdf39b73d9b957b5fee725cc1c24b0c1e62"
+    "sha256": "4062d92d7586d58f24e1c42f8cedb982bfe482c0190f2aee7519834992f134fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "94faa178acf432365b051b56cca5d146142802b2e4cd846b0780926a42d58669",
+      "sha256": "5e45d4389d735cc8cd350dbcaaddb549b4e9521026e9b44f178f6a3548987d46",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Educatio model 9541; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/educatio.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "94faa178acf432365b051b56cca5d146142802b2e4cd846b0780926a42d58669",
+      "sha256": "5e45d4389d735cc8cd350dbcaaddb549b4e9521026e9b44f178f6a3548987d46",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10494,
+      "bytes": 10517,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7668,
-          "sha256": "baa7d790c76617379aa5a9f981ac450ddea97755b34f00ca1cd09c222a4a0470",
+          "bytes": 7691,
+          "sha256": "298e5588865cab4f084bfeffacab21fe2c08f49bd91f91086e758461bc14b6d5",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "educatio",
-    "materialSha256": "6389a0dfb7e4347ead0c0cf50b1f4325af799c336c99f6740411ba5da2dbf09f",
+    "materialSha256": "7276ff4782a00173390b3b4bdec205fc6cadeb199628f9129787b9ad0e8d83f6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

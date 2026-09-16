@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "46602f055df4b27563a6673ece8286e05e2df30682a64af9e13dabdb6a13818b"
+    "sha256": "8c7190c8ed5c85333f4a9e4600e9882227045f6a720ed50880531c6d498ac356"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -198,7 +198,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8ec68e5cf600e4b233ac3e016fa208c349d25fc987c6f7409cabf542df9277a8",
+      "sha256": "bb876106c486f2c2cd5146e4ecdb342a07f99e69bfd630be081c19d43b81551d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -252,41 +252,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "5.88 days · retrograde",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "5.88 days · retrograde"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.88 days (synchronous)"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 354,800 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 354,800 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Lassell · 1846",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "William Lassell · 1846"
             }
           ],
           "moreFacts": [
@@ -382,7 +363,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/triton.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -635,8 +616,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8ec68e5cf600e4b233ac3e016fa208c349d25fc987c6f7409cabf542df9277a8",
-      "bytes": 7901,
+      "sha256": "bb876106c486f2c2cd5146e4ecdb342a07f99e69bfd630be081c19d43b81551d",
+      "bytes": 6961,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1307,8 +1288,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5357,
-          "sha256": "cec2980cef4d60f3cd34d955cb07d70f68b454e296f4dc868edf1c4e14ac6a37",
+          "bytes": 4528,
+          "sha256": "66c6cdc261e9f271a7d44cbcd729c42797a8b08a5e0b6f83282377151beb791b",
           "verification": "bytes-verified"
         }
       ],
@@ -1407,7 +1388,7 @@
   },
   "lastPreparation": {
     "objectId": "triton",
-    "materialSha256": "adb3d6178516f89288fdac41d368feb5645aa9c37d3c10676b4b661e8e2c35a2",
+    "materialSha256": "4a51d4221eba9aa9d5e8848924143beec2005aa7e3a9c6bee8810e855384b988",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

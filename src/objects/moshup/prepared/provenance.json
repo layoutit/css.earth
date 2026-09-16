@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ce45d2dfc5134a6998f93810a12de4bb2ceabaabfe0d7f78764e75e9a8bbd61"
+    "sha256": "6c0bc82db94ba72b23a333b6e8fb99bc62d21e5c1f80f4a4405a6289fe70b44b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "57a7d25349d28ac5091cb8a27f460d60950a4573921a6f787c1c6d3abd0063e4",
+      "sha256": "5fd9164420df8e87c4d6db8a4d7caedb01622b7569760fd4c7310ed41c6b4100",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -303,7 +303,7 @@
             "credit": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/moshup.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -383,8 +383,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "57a7d25349d28ac5091cb8a27f460d60950a4573921a6f787c1c6d3abd0063e4",
-      "bytes": 9304,
+      "sha256": "5fd9164420df8e87c4d6db8a4d7caedb01622b7569760fd4c7310ed41c6b4100",
+      "bytes": 9325,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -505,8 +505,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6833,
-          "sha256": "e2d9e695c7f5946ad09012226d94ed68399a0842b315c844bf49c6d6868f0dd5",
+          "bytes": 6854,
+          "sha256": "a331833417ebc043eec7a7570be7c1a1a029b83a838e96d97f1587d21bd4bd6e",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "moshup",
-    "materialSha256": "0d0e04b16fe24c6d21598b3ea2877bb65023a9330cd14845c2b021a9f58c490c",
+    "materialSha256": "7607fbd0621d9f420b0c916be7ce97a079c4b8e32fff430e1c3fe1ef7554f1a1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

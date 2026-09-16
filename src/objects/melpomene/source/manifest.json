@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10081,
-      "expectedSha256": "9de4c2c8fdaa32a737ffcba8553aa984d32d96b7aed9e615c264716149d0bd3b",
+      "expectedBytes": 10339,
+      "expectedSha256": "fe6cee2df550987156ab6c5e79980735ad2e463cda5a844d628760794b04485c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,21 +200,6 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "115a63f0067997318d7bc0debd10e228df57c4dbae4d0f1a07cc4897e702437d"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5476,
-      "expectedSha256": "b8e5396cbf338aa5a6a12edc98a92ce58d6f09be726a95077bf5d07e1d6bdbd4",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Melpomene: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

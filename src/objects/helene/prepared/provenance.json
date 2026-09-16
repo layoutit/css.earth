@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d5298d0b7d6ca5e08d1f627d3c8b2d89cb22dfdee63bc0ec044696b04e2bc63"
+    "sha256": "5b97d910330054e12354e4829835b3dfd0a8ac49e753ae24e59a81968198efc9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -623,7 +623,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "63e3a3774cdc7d5b366222342d395974a55521836d13658bff560b3b9226c6f0",
+      "sha256": "f8e84bd921247951b616f30cdd059072389d8118856444284fca2dff2421cd7e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -660,41 +660,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "65.7 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "65.7 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 377,600 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 377,600 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Pierre Laques and Jean Lecacheux · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Pierre Laques and Jean Lecacheux · 1980"
             }
           ],
           "moreFacts": [
@@ -814,7 +795,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/helene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -3012,8 +2993,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "63e3a3774cdc7d5b366222342d395974a55521836d13658bff560b3b9226c6f0",
-      "bytes": 6753,
+      "sha256": "f8e84bd921247951b616f30cdd059072389d8118856444284fca2dff2421cd7e",
+      "bytes": 5810,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3121,14 +3102,14 @@
       "outputs": [
         {
           "url": "/scenes/helene/helene-normal-thumbnail.webp",
-          "bytes": 1956,
-          "sha256": "1c767b83348e9aa8839a0f2346ff2c4beb1f05604fad79966a00b3ee79270bf1",
+          "bytes": 1952,
+          "sha256": "cc26000122aa04e5141085c6daba389ddc6d848147a099e74850a7841808e6dc",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/helene/helene-normal-surface@2x.webp",
-          "bytes": 558168,
-          "sha256": "61e396cc63b6554942eda3dea247ac0c1d1c78847209e29c19813694d0dcd100",
+          "bytes": 499582,
+          "sha256": "6b9d26a4799f0129b47b3dfc21fcb1ab626ea5a20d02543d07ae364dfefc0cc8",
           "verification": "bytes-verified"
         }
       ],
@@ -3187,8 +3168,8 @@
         },
         {
           "url": "/scenes/helene/helene-false-color-surface@2x.webp",
-          "bytes": 414760,
-          "sha256": "59fb71e9df6fd3c2fbe7f57b2a15206c0d48db26bf853acebd55590590333ea4",
+          "bytes": 444080,
+          "sha256": "5b79a857c69d12c887d616014add68a3aaa7f98944df9155811ca86cedb1cf53",
           "verification": "bytes-verified"
         }
       ],
@@ -3220,8 +3201,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5861,
-          "sha256": "8179375747244bd749376ccc4912b65ffe64fc7a6921724d0d34ec147e07466d",
+          "bytes": 5147,
+          "sha256": "5d7ad6c2d37eccdeb5c7da29ab03702d23f10cceb84fbe9cdcde6f8a2bd86633",
           "verification": "bytes-verified"
         }
       ],
@@ -3246,8 +3227,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 19552,
-          "sha256": "91a8574f3da107371103e7d6968aa3975d42c3e61b936f97b939d6789dae86e1",
+          "bytes": 18054,
+          "sha256": "b95f4c18b830701528a29591f389e6d1b26c1ff1da52eb464814c732a734df2a",
           "verification": "bytes-verified"
         }
       ]
@@ -3309,7 +3290,7 @@
   },
   "lastPreparation": {
     "objectId": "helene",
-    "materialSha256": "47535c3ddf36421aa1cbb7700a83ddd17135d9564c7a04c308b09e36b3c6bf58",
+    "materialSha256": "c3fabd9f5d05d49cfa11676fc856a73cf1f5c781361d07cd79bb80eddb9393fa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

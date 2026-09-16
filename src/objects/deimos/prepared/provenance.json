@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f7256b71e899f7554d2401255853a14680b0c288e7cb752d42c77d01cc791c40"
+    "sha256": "e07992c078e791c1399c1a3d472fe4b2ec90a3658fa3fe9c9094765466b16228"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -231,7 +231,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "986227f6b39d9429766606d8b59506936111ef8334f8b93c48551da94deb4066",
+      "sha256": "65e73bc536959a970373b090a033abc18102e79bd431c8d97bdea223403d39e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -268,28 +268,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Mars",
-              "value": "30 hours 18 minutes",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "30 hours 18 minutes"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "30 hours 18 minutes (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Mars",
+              "value": "About 23,463 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Asaph Hall · 1877",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Asaph Hall · 1877"
             }
           ],
           "moreFacts": [
@@ -451,7 +445,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/deimos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -704,8 +698,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "986227f6b39d9429766606d8b59506936111ef8334f8b93c48551da94deb4066",
-      "bytes": 11378,
+      "sha256": "65e73bc536959a970373b090a033abc18102e79bd431c8d97bdea223403d39e1",
+      "bytes": 10929,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1043,8 +1037,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6264,
-          "sha256": "8672aa87d2eb6e1a0da0ce6e2f9f9b0e65e75ea6a99f62a8d20328a19e0aab09",
+          "bytes": 5792,
+          "sha256": "81322ef6b567ef4934be6ec769be0e08006f5f6e4bb4bbbbfb7120a371157606",
           "verification": "bytes-verified"
         }
       ],
@@ -1193,7 +1187,7 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "a718b2f89ad4c7363f4d7490bdd59e294e3366687445d895fff7846c178901e8",
+    "materialSha256": "bca58074d05d97550e5bfb5721d29d794a6f55fe94ec8476cc5dd9d8aa5be77c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

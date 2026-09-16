@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "072fc534649bc2cf013aead12d1fbd135cc064303c5da31b9dc9964ffc7bd305"
+    "sha256": "92457ffbc56fd86b3aa78388b0321c1726fa14b777b05dfee58aa11e809018f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7fd18d7a4ba7b6be15c9febb7320128d67cd387516fbe114d54a7ccd43993ab",
+      "sha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -203,28 +203,12 @@
             {
               "id": "precession-period",
               "label": "Precession period",
-              "value": "27.45 hours",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
-                "label": "Apophis · apophis research apophis 2018",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-apophis-apophis-research-apophis-2018",
-                "locator": "/precessionPeriodHours"
-              }
+              "value": "27.45 hours"
             },
             {
               "id": "rotation-period",
               "label": "Body rotation period",
-              "value": "265.7 hours",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
-                "label": "Apophis · apophis research apophis 2018",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-apophis-apophis-research-apophis-2018",
-                "locator": "/rotationPeriodHours"
-              }
+              "value": "265.7 hours"
             }
           ],
           "moreFacts": []
@@ -316,7 +300,7 @@
             "credit": "Brozović et al. (2018), Icarus 300, 115–128; Lawrence and Benner (2026), NASA PDS radar shape release V1.0, doi:10.26033/ydyq-5756"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/apophis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -380,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7fd18d7a4ba7b6be15c9febb7320128d67cd387516fbe114d54a7ccd43993ab",
-      "bytes": 10014,
+      "sha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
+      "bytes": 9248,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -502,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7338,
-          "sha256": "9c4b8732f6324b6ff0bdfcb4f4c209060a8c422cd90b401803a16656a0da01fc",
+          "bytes": 6754,
+          "sha256": "420fe3db2dc3344621d401630238a652e5bdb38bc0f674cdc699ddb2ce387787",
           "verification": "bytes-verified"
         }
       ],
@@ -566,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "apophis",
-    "materialSha256": "503840bda097b4d35f105e3b43f401b9f6b121c4b2194626d6a407d44fa7ea2a",
+    "materialSha256": "5b4f3af4314224a6f07fdb8f27b6f45516169034cfc45b860a9271aa4758002f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

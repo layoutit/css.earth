@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d3f9c14c3c4c6fd7299ce8929c3b85fb614ce5752483581d5d5f1b9c94d6d96"
+    "sha256": "53c27651bd138aeba55d441254556b112920927b8e5c54b4c01c36359c0ea800"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a09d810930ab0eda11aaf414c52dad299f0193942e60e722ea455a8c387bc68c",
+      "sha256": "55bc10422224acf3b8c96a989ba2ef17b4c82464cefbbbcacfad3d0d2bd16581",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "75 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.366 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.78484 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nemausa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a09d810930ab0eda11aaf414c52dad299f0193942e60e722ea455a8c387bc68c",
-      "bytes": 9810,
+      "sha256": "55bc10422224acf3b8c96a989ba2ef17b4c82464cefbbbcacfad3d0d2bd16581",
+      "bytes": 10062,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7602,
-          "sha256": "78fd9dbaf7a66723072810600cf7c786cd496c7bfd625514c04f60d5b2d60bfb",
+          "bytes": 7766,
+          "sha256": "b8add9905d141acaa3fa80a87bfc7480e263479d5685e17a17efe5f7905127e6",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "nemausa",
-    "materialSha256": "975e1fc7b4c126d92928631d555c2026f282c6fa031c324a4c639110ffa42ae5",
+    "materialSha256": "eecaf049f1216681e68d514786f1427381dfb4f2a824ddf61b8d11725ba236de",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

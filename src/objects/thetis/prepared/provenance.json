@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcd7a3fc293a564f3a03525b7d6d771efe9efba9c22264c59e464d40dadceae1"
+    "sha256": "56584cdb1d1e6de0ed121ef9a92eeba70ed6836c2c973d60819ea05612e7a562"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8b6198f350f0fbca92a818877cba494b2c3dba9710b74b0f7ff94134da8b717d",
+      "sha256": "d5f9867c0defc077d20a91a7b50ae325585f26d0be93c8a129cc41eb0f11661b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech et al. (2009), Ďurech et al. (2011); model 116, version 2011-03-28."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/thetis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8b6198f350f0fbca92a818877cba494b2c3dba9710b74b0f7ff94134da8b717d",
-      "bytes": 8379,
+      "sha256": "d5f9867c0defc077d20a91a7b50ae325585f26d0be93c8a129cc41eb0f11661b",
+      "bytes": 8400,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5791,
-          "sha256": "2291f12e833767a3e58b747a4c29f9bf65b732c7bcf13ff2a30735c7aeea4883",
+          "bytes": 5812,
+          "sha256": "6144682b35d6c0264cde3f83075a6073cd09941b50553e3bd1915c6812c69b9e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "thetis",
-    "materialSha256": "52c7b01fec5e9c8a40b667737e725a8e3630542b8a782d83677aa4e0d64e6753",
+    "materialSha256": "725ec0df500173cd0886e4eb110c74f3a6285cd41f4f1d165b8edabb4ff54243",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cde2b935e00c3ec5ca93b6a69f08736e4b196cafdba9684f64ee609a1ba4026c"
+    "sha256": "738f8e343d7aad83eef9bc7c304da9cefbd7b384136a3d6c86be07993837cdac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dff7b36cd72ec06fffd9c695e8a584fcd6bf0aae2edf4d10070e6286f8db7448",
+      "sha256": "f1ff322d358c962c0ff1a9945d7c58f2e44e8a3e97e2875fb5e9005e42eaf8f6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "135 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.642 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "6.082753 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eunomia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dff7b36cd72ec06fffd9c695e8a584fcd6bf0aae2edf4d10070e6286f8db7448",
-      "bytes": 8241,
+      "sha256": "f1ff322d358c962c0ff1a9945d7c58f2e44e8a3e97e2875fb5e9005e42eaf8f6",
+      "bytes": 8495,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6032,
-          "sha256": "f741863684dd52dd2f80115ae0137adccd996d16bfa9895342bf0b727170161e",
+          "bytes": 6198,
+          "sha256": "63fe957b524a9e2152de4e97dd362289781bc28aa645cec4304f8a71952124e9",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "eunomia",
-    "materialSha256": "65307b018ae9ce13d1085872128e3e797f7877605e4295ebac6698f6ce235ea9",
+    "materialSha256": "50711bcc806bd27b2f20650d2123e7ce8328dfb218d9748f10a5bc053c879532",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

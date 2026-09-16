@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a2ad74c726cbd5af5cf90ad1fb6ee05ebb91a2b90d82a3b9d0f1b77d80f40aa2"
+    "sha256": "bb3a1927d350d3d43415198fea5ad8416bddfb2c668078d035b7a3f73c83c412"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -120,7 +120,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7a81bb0fcd6fa3836f3f52e228d0281386594f5b63042d0981849ba24900ba87",
+      "sha256": "f0e8575fa97bfdb037498192d20d36ecd4de6fb69090b14a57f7781a9154f16d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -209,9 +209,29 @@
                 "catalogueId": "nasa-venus-factsheet",
                 "locator": "/references/2; axial-tilt"
               }
+            },
+            {
+              "id": "moon-count",
+              "label": "Moons",
+              "value": "None"
+            },
+            {
+              "id": "ring-system",
+              "label": "Rings",
+              "value": "None"
             }
           ],
           "moreFacts": [
+            {
+              "id": "surface-temperature",
+              "label": "Surface temperature",
+              "value": "467 °C"
+            },
+            {
+              "id": "surface-pressure",
+              "label": "Surface pressure",
+              "value": "93 × Earth"
+            },
             {
               "id": "mass",
               "label": "Mass",
@@ -497,8 +517,7 @@
         ],
         "provenance": {
           "editorial": {
-            "path": "../editorial/venus-facts.json",
-            "url": "https://science.nasa.gov/venus/facts/",
+            "url": "https://science.nasa.gov/venus/venus-facts/",
             "credit": "NASA Science"
           },
           "title": {
@@ -879,8 +898,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "7a81bb0fcd6fa3836f3f52e228d0281386594f5b63042d0981849ba24900ba87",
-      "bytes": 15852,
+      "sha256": "f0e8575fa97bfdb037498192d20d36ecd4de6fb69090b14a57f7781a9154f16d",
+      "bytes": 16293,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1373,8 +1392,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11336,
-          "sha256": "ab687d349982b8a4e4297444e53cb57e8dc03f03030c2544376e703fd31807bc",
+          "bytes": 11437,
+          "sha256": "622157cdd228ad49e7122ac9465726c3afac46cb0d718a9b636a17112d8a0854",
           "verification": "bytes-verified"
         }
       ],
@@ -1585,7 +1604,7 @@
   },
   "lastPreparation": {
     "objectId": "venus",
-    "materialSha256": "b51970cd978a1def72ba41981aa845540bc2397fe701c8b744c7e736da4334b2",
+    "materialSha256": "c3f19125a74deaf8ea67a182c70476eba5045a630684dc0213a80114cce5acba",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

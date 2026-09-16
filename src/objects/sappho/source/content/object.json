@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Sappho model 1832, version 2017-06-09; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/sappho.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

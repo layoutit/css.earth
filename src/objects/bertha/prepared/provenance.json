@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7151863d228495d758a7f1bb67ea793da5c59586f5ee6eebe19991a7f8e29c8"
+    "sha256": "dbbb2ddcfac54746c844c04f7e7752438c3b92d15d906a19a6e64b4114c15be2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d013176a1aad361ca4ff675855abc64e79919167955aec9adde8daa9661681f0",
+      "sha256": "9ca26195a8178f8adbd436be678e61fa9da9699907c49f3be9542f9e4ede0213",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Bertha model 939; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/bertha.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "d013176a1aad361ca4ff675855abc64e79919167955aec9adde8daa9661681f0",
+      "sha256": "9ca26195a8178f8adbd436be678e61fa9da9699907c49f3be9542f9e4ede0213",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9628,
+      "bytes": 9649,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6853,
-          "sha256": "855bd80b4256bddfb23047c0ae8cc08a2b19a61f13cb35b3429cb7a9e7f8cee5",
+          "bytes": 6874,
+          "sha256": "c742d36d32e7fefc4f1671b2cb35dece3c3c45e65ad561f8fb30487ac225e4a1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "bertha",
-    "materialSha256": "0bdf908c3eecf9282cc99a586c1e2379d1f60f200d6001c7c9ce13022a110726",
+    "materialSha256": "ae125594403c8569bb054050f6bfae5c29cc6c4527d75201ef586aec276e298b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6665f251389d3c0b2a159d9b0d66a71084e0d32589b2f1b63e93af4eba7a2fa5"
+    "sha256": "5227469c19b720f4cb7746f1ef9f37ed66d1f361f53cea43315107d416c2fcc1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -324,7 +324,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e57d1b380c0863c07b9336f9d416a0c520daa50390b457fc55a606c58a9393b",
+      "sha256": "f2d6770e839b64b516a60904a1a74b36cf85c7da4b789078a57acfd13e7dd291",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -361,28 +361,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 1.41 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "About 1.41 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 1.41 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Uranus",
+              "value": "About 129,900 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Gerard Kuiper · 1948",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Gerard Kuiper · 1948"
             }
           ],
           "moreFacts": [
@@ -640,7 +634,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/miranda.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -911,8 +905,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3e57d1b380c0863c07b9336f9d416a0c520daa50390b457fc55a606c58a9393b",
-      "bytes": 14758,
+      "sha256": "f2d6770e839b64b516a60904a1a74b36cf85c7da4b789078a57acfd13e7dd291",
+      "bytes": 14315,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1643,8 +1637,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7326,
-          "sha256": "92773511bc22e462ca15452d12bb61eadab8a1165c86f71934c911cc43bd7b69",
+          "bytes": 6859,
+          "sha256": "3d196559476ee7da01947ee8199805143a2d5ef73fb21377cec564130db3a2f4",
           "verification": "bytes-verified"
         }
       ],
@@ -1768,7 +1762,7 @@
   },
   "lastPreparation": {
     "objectId": "miranda",
-    "materialSha256": "307c74293dad461e615fb114540837f5e54959116b7d8f2ef14d604eed92b4cd",
+    "materialSha256": "f2d2ef7be61863e38a068328af814fb0b733c5405c28b1e0368ee7aee7ea624b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

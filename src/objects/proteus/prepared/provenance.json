@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7baa60291412a52debf94e85340a078f34bb4440b43926a10094825d1c3a3bc7"
+    "sha256": "0a3ee9a7ec1d510b52e8dc91c8eb1a10afdf94641d0ed7679e2e23c4febe88d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -329,7 +329,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "afbf39f9404d6784dbf3cb68e3064232e43489479cef93f6be0820597a7f592a",
+      "sha256": "2b68e878403ab96fc1eba5e6b0723800a8417a99d697507ea29998964af356c9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -366,15 +366,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "26.94 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "26.94 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Neptune",
+              "value": "About 117,674 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 2 imaging team · 1989"
             }
           ],
           "moreFacts": []
@@ -481,7 +488,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/proteus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1052,8 +1059,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "afbf39f9404d6784dbf3cb68e3064232e43489479cef93f6be0820597a7f592a",
-      "bytes": 5567,
+      "sha256": "2b68e878403ab96fc1eba5e6b0723800a8417a99d697507ea29998964af356c9",
+      "bytes": 5622,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1139,14 +1146,14 @@
       "outputs": [
         {
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
-          "bytes": 2308,
-          "sha256": "be0839dea4f0307484810e2c35e55fa305200b68165004fba74913f91f6d455a",
+          "bytes": 2164,
+          "sha256": "c6851794f4a90704b55698c35fd697222920c77efd2c0a7c93462d437a5f2604",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
-          "bytes": 374926,
-          "sha256": "d09885ebc88d3c251c70e095352fbec59b3894bec1501ff835cfd5380e571a97",
+          "bytes": 356514,
+          "sha256": "b1d8a2a613a0803a335da11783810470fe24ee258d40794e7abaae3fc3cba361",
           "verification": "bytes-verified"
         }
       ],
@@ -1195,8 +1202,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
-          "bytes": 172904,
-          "sha256": "013d96f4e39db21cefbd47204beeff466160573d66228e0207fc06d1bc8843a5",
+          "bytes": 180866,
+          "sha256": "6806c78f6493f125c074a60eae64c6ff46283f3299d934be662258b75baea9d0",
           "verification": "bytes-verified"
         }
       ],
@@ -1228,8 +1235,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5505,
-          "sha256": "89bb0cce5af0fea64acb0fa442f0c89c9b69480a2cde1d5c00eac642166fec2c",
+          "bytes": 5519,
+          "sha256": "2e39bdc1d57700484ec2004816533d97923b588bb255cf0d0bef8818a2412dee",
           "verification": "bytes-verified"
         }
       ],
@@ -1254,8 +1261,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 22414,
-          "sha256": "0c46236aa6741417f9f068699b205f94842393941becea324f3024b8671a5903",
+          "bytes": 21254,
+          "sha256": "ab516df419024abe962134b803dfbaed1d4d141ca7155b295e0f6cc75ac1bbde",
           "verification": "bytes-verified"
         }
       ]
@@ -1317,7 +1324,7 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "ae47adc8f9ee8673cbae7f6db442d57519ade01fe7c2749a76c71c5a65224ebb",
+    "materialSha256": "0c5d3ba8552eadc72d395831757ac64bd2c2bf6d6ceded6c7d19bfa8fe368c0b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5f2bbef83588611af1e162d6981e9f97943f9331092b494660170b3798aef82d"
+    "sha256": "8bf5542b577c6e9637728bdcf218cdfdefe548c2e94eee07d61a1f63d82307eb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1c53a5d81046a915b83db8e4f9bcaf13afea0924d3b9c2104c88602315880cb5",
+      "sha256": "4cea2011fc4ce8db9adddbe7a114a90a926a381e10a77862b1b8cb8a83b7b07f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "70 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.551 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "11.388336 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/julia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1c53a5d81046a915b83db8e4f9bcaf13afea0924d3b9c2104c88602315880cb5",
-      "bytes": 6751,
+      "sha256": "4cea2011fc4ce8db9adddbe7a114a90a926a381e10a77862b1b8cb8a83b7b07f",
+      "bytes": 7003,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4570,
-          "sha256": "85a4ab2de4527e749195f5172e109a4180abf4fcc8c635da4a7af287ed36117f",
+          "bytes": 4734,
+          "sha256": "8c9ef1d3017063d82a540aade069cb6f2834c413e3bc228f0530dac02b4a0297",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "julia",
-    "materialSha256": "1b3747591fc69a4fac88e4ab55dca5a7638de1a17ff4ee8df8a55bbdb1978e54",
+    "materialSha256": "58a4df4a73881c0a54a1476b2e93901a3d36a591667e557e6c06a17a1e7f1339",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "59791f41c21b0eea9a9c48a5347f236f6424684c973bd54bbe5e546300ae0b83"
+    "sha256": "811013aa3bde3f45eb4a2d8b7436c209be30fc1bd7c9e7aedc98620f7a24c487"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -364,7 +364,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "53ec4ce98ae4db3395d952cd617f2493184d87b417affbd537da3f994f557a74",
+      "sha256": "798912d0cf108e53291d601de7e43615edb1679b4b9f06c00333f2db9375eb89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -399,17 +399,19 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 14.4 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 137,670 km"
+            },
+            {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Richard Terrile / Voyager 1 team · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Richard Terrile / Voyager 1 team · 1980"
             }
           ],
           "moreFacts": [
@@ -529,7 +531,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/atlas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1392,8 +1394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "53ec4ce98ae4db3395d952cd617f2493184d87b417affbd537da3f994f557a74",
-      "bytes": 5540,
+      "sha256": "798912d0cf108e53291d601de7e43615edb1679b4b9f06c00333f2db9375eb89",
+      "bytes": 5440,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1485,14 +1487,14 @@
       "outputs": [
         {
           "url": "/scenes/atlas/atlas-normal-thumbnail.webp",
-          "bytes": 1400,
-          "sha256": "b2a94eb80f5c929a398b8a8d4aab41464ba9fe0b92a1d87a639fe6b473bb3942",
+          "bytes": 1468,
+          "sha256": "31feb870afea6d33e7351900efda3003aab84017c0a9bb9ae27a4a7c18e54967",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/atlas/atlas-normal-surface@2x.webp",
-          "bytes": 383506,
-          "sha256": "34fb2ca94b55f9cb18faedbd591931feec8cbc96ef233d02f235a6f995c3e185",
+          "bytes": 337480,
+          "sha256": "3094ee140ccaf866b1dd843199fe59a8cc3dbc8373467db4fcf6ee8afec72813",
           "verification": "bytes-verified"
         }
       ],
@@ -1541,8 +1543,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-filter-color-surface@2x.webp",
-          "bytes": 354946,
-          "sha256": "45fb83e9626ffd9745efe390258c77abec5dacd625b767097654289e12bf8733",
+          "bytes": 401438,
+          "sha256": "46e655d29a04f9a9721bb20d53f612401ee121fe2c58b70c247f45bf8f0bbdde",
           "verification": "bytes-verified"
         }
       ],
@@ -1574,8 +1576,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4875,
-          "sha256": "e18e6bab96dc5f352853657c1e1af6bdbecd058bf023beec84ad1d63f661d197",
+          "bytes": 4778,
+          "sha256": "db631ce2d966e7c0b03210e4984a2534f7c88e5e23dfd38763df7efc7e3d4935",
           "verification": "bytes-verified"
         }
       ],
@@ -1600,8 +1602,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 11176,
-          "sha256": "8867a7d200e627411e18dd1f227ee8cd278bb6f57cf876c4001b8c52ad040ea9",
+          "bytes": 10250,
+          "sha256": "2bf913d135ddd95cadc1898d6ed001b6e1e16e7448aa21a2036bfbd665185d8c",
           "verification": "bytes-verified"
         }
       ]
@@ -1663,7 +1665,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "a4f7b22a985a60cd642fa54b281efd7fc35e79c612b090aef91be68831b15a0d",
+    "materialSha256": "2c41ffda95e867c2ae14fd746613253fbab18aba7d15650210303408c896a75d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

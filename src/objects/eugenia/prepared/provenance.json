@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f921b6395b387192325783e89e676978272f1d50dd0031a2bffa3bd7512458d5"
+    "sha256": "468734d0a191c6fb58eb34218ac3a3b64aab926ee72e93e34b1fdfdcca00cc1f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7a08f80ed7e0288a6ff8974e181b3c224dd909d3ef4b85bc558f27308ac6ef5d",
+      "sha256": "d3c333d7f174cf9c724983a34ad04caadd426524de7776355301a2c9c5089c9c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "94 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.723 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.699151 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eugenia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7a08f80ed7e0288a6ff8974e181b3c224dd909d3ef4b85bc558f27308ac6ef5d",
-      "bytes": 8584,
+      "sha256": "d3c333d7f174cf9c724983a34ad04caadd426524de7776355301a2c9c5089c9c",
+      "bytes": 8837,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6375,
-          "sha256": "6efb30439a59251cfb0eaecde531d75bcc058f1631f071ee5012f6f9338d43b7",
+          "bytes": 6540,
+          "sha256": "00a9d5a6640b0831cd6935f4dbdc85b8672fdd039e3316ff4135306585c1ef19",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "eugenia",
-    "materialSha256": "16e14877f21356b0b75054e59dda943edfa074f81d2f4ed72ba611fc3592a8ca",
+    "materialSha256": "a54343249303a5e64e5f198ed45f084884bacd804b6e2dc38fa280fd26a88767",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

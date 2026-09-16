@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f1004c41e7dda7b8ff4042698b481e2e0f18179f30345e38615892e3ffaf11a"
+    "sha256": "78fe7cfa409f32dec6d20520c6c7cbd6aceb5890844bd4fd842a6f2348cfa834"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -395,14 +395,25 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
+      "sha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-19p",
         "displayName": "Borrelly",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "length",
+              "label": "Nucleus length",
+              "value": "About 8 km"
+            },
+            {
+              "id": "encounter",
+              "label": "Spacecraft",
+              "value": "Deep Space 1 · 2001"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -987,8 +998,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
-      "bytes": 7158,
+      "sha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
+      "bytes": 7383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1353,14 +1364,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
-          "bytes": 1082,
-          "sha256": "82d4fefa81fd9b00ddd95522b87f76e1c7ff3ab39c733e0dfd61843cd71d2388",
+          "bytes": 1078,
+          "sha256": "979dcd4f3b7185a5fd057b932a6a50dcf1fdbbe023ffbadd299bb31e3d0d1b10",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
-          "bytes": 144762,
-          "sha256": "152b158d9540d2f44e930fc87527683d545d2de9cf76f1bb30559c14d7f4ec8e",
+          "bytes": 140490,
+          "sha256": "23638569639b6c9781dba1d307046d54c457180c3759d3ff245998509940c37c",
           "verification": "bytes-verified"
         }
       ],
@@ -1392,8 +1403,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4593,
-          "sha256": "5736a8203f6aaeac7ed8bc6cb717c5787c6f08440a2597a7b09e8954e0d84172",
+          "bytes": 4725,
+          "sha256": "7aa340fa94f656903b2ab02eb8b52569acce7f20a8cce66f99d74d4ca6132e8e",
           "verification": "bytes-verified"
         }
       ],
@@ -1446,7 +1457,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-19p",
-    "materialSha256": "e865a0d2fed993159a7a73c3bf589cc14a5ed32214e13a34127357bc26858588",
+    "materialSha256": "98dbdb2c79ddf256199e0dc1154548f95271b4699e2a9bf0c1dccebeeeae660d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

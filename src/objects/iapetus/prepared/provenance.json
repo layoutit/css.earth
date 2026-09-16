@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8af5a26fe6d5c84f7f87cd4882473c70fc623544505748d7a82e54df9e08af9e"
+    "sha256": "025d64ce46e78bd9d6a8f695cd91b2ecd71d80f83f2796857b1bb3a8bf945492"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -219,7 +219,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db49270d3c3cb4b2b34a3e08fc7e735c52b48feb2b3cc72ed1744807e6fdcf19",
+      "sha256": "926612a2ffc16eb0b0f5ebeef0c4265267a5ee79ad929bd3990da3a46c017ab1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -273,28 +273,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 79 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "About 79 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 79 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 3,561,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1671",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Giovanni Cassini · 1671"
             }
           ],
           "moreFacts": [
@@ -467,7 +461,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/iapetus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -787,8 +781,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "db49270d3c3cb4b2b34a3e08fc7e735c52b48feb2b3cc72ed1744807e6fdcf19",
-      "bytes": 12860,
+      "sha256": "926612a2ffc16eb0b0f5ebeef0c4265267a5ee79ad929bd3990da3a46c017ab1",
+      "bytes": 12417,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1582,8 +1576,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7127,
-          "sha256": "33141781c659bc39b73e57d2de29d2dca3208ac85fd4b65aa21ea1a4e7f86575",
+          "bytes": 6660,
+          "sha256": "099189bbca590d1f04a06b4a9e889122fe68aaf84febe20fd010db06be17100b",
           "verification": "bytes-verified"
         }
       ],
@@ -1732,7 +1726,7 @@
   },
   "lastPreparation": {
     "objectId": "iapetus",
-    "materialSha256": "f900c7a35815ee6a900b14383532218225abc65f25f46d9bc56ba2f90cc87864",
+    "materialSha256": "38c7ee39023ca25ca633e8f8a6d8eba00321e539bcab0ca2620f9707f21b2db5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

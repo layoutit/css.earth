@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bbd537b33df6a809ab3423d8de1f22f7e34a90dd3fddef4cfd521cdfa4452a0e"
+    "sha256": "130f7bb22cc4486cfb2b59acff0cf509649106d22171c889d93672192b6f8ce9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0d0c6ce01daf7b8ab82330911b2318ee1f01a9c36c66c007001b241fb23d5978",
+      "sha256": "bf070885715b3dbe2ae86204e9af9688b325003ee0334e19fdab1d697db8be95",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "47 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "13.62523 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1864",
-                "label": "DAMIT model 1864",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "13.62523 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Nausikaa model 1864, version 2018-02-19; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nausikaa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0d0c6ce01daf7b8ab82330911b2318ee1f01a9c36c66c007001b241fb23d5978",
-      "bytes": 10495,
+      "sha256": "bf070885715b3dbe2ae86204e9af9688b325003ee0334e19fdab1d697db8be95",
+      "bytes": 10310,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8139,
-          "sha256": "6e9ff14dd27c2145db7084368dce9b2488bef3f619b9e85de48d6003fef49c42",
+          "bytes": 8001,
+          "sha256": "5410a6d81c4330c8ad18419921c31260120635c92d724847e7f5d2a1eac73755",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "nausikaa",
-    "materialSha256": "124976042e4816a7b0a3618aa01daebd68eb6feeb4fd43ff2b22408d2bcbcaa6",
+    "materialSha256": "852ca953a2199ae0b0602e2b567685b34fc582e3a1760738076190f4f1b5ed93",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

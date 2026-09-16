@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12979664248811ee038355166cfb4703ad10605b36c8f76fb34f4696b9ef7387"
+    "sha256": "2d4a5b4dd0a24979db4c65cfa69e9835960aa3184aec0f5c531756841d6dbb35"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5b6929ee334af67ffcd35a5eddff495176e6804955e3af660a49c9ef162ecb61",
+      "sha256": "249f9c47e06a53afd2e0a229800629bf86527c805e2c1243de8ee38af5b4952e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "105.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.441 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.443224 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/fortuna.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5b6929ee334af67ffcd35a5eddff495176e6804955e3af660a49c9ef162ecb61",
-      "bytes": 7864,
+      "sha256": "249f9c47e06a53afd2e0a229800629bf86527c805e2c1243de8ee38af5b4952e",
+      "bytes": 8120,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5652,
-          "sha256": "ecf9f7807f150169b2c182dbeed3d7e000d6d0216d348231a0812475794b3a81",
+          "bytes": 5820,
+          "sha256": "38def3ec4e6123d7489410ed46148ed5e55b6ef890dc86aa1f7d1c7d3c37e697",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "fortuna",
-    "materialSha256": "e5bd99461aa1beb62fe67dd0ea2e2bf116d095ddb2ffa9b3b77821ea8205d40e",
+    "materialSha256": "02ebb936c52cf826547df06af616139ce38a0975eeb5d3a62af6b4917e2a6ff2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

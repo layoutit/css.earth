@@ -1005,8 +1005,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9040,
-      "expectedSha256": "4a1cf7cbef92b86adb5a536c9289d0fb2796314d3d1b0086ad0b3209f3ca8fc1",
+      "expectedBytes": 8933,
+      "expectedSha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1089,21 +1089,6 @@
             "catalogueId": "sbmt-n2402987304-sum",
             "role": "reference",
             "evidence": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM"
-          }
-        ]
-      }
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 6352,
-      "expectedSha256": "f2ac66f140a6d41e02466b82a6d26f962b6af73a30f1e379374994b29e02769b",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Itokawa: physical parameters, orbit elements and discovery circumstances."
           }
         ]
       }

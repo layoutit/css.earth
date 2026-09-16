@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "48a909c55cfc7d924b14cf15eaa3869bc3b86ffd0ea193bd1e2ea289ccb5d0bc"
+    "sha256": "2961bf40be2b624eedfca65d8cbb51c8589fe8dd23555a019cb94de7bba2465d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c59447ff375385839e991b3a50343e2b018158939084bfdeaf1534fa19bf07d8",
+      "sha256": "f21095ece3721f990d352c405eac67506b5c01506294c4abce2407b4cde94b8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 5972, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/cyrene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c59447ff375385839e991b3a50343e2b018158939084bfdeaf1534fa19bf07d8",
-      "bytes": 9279,
+      "sha256": "f21095ece3721f990d352c405eac67506b5c01506294c4abce2407b4cde94b8a",
+      "bytes": 9300,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6690,
-          "sha256": "e0fb34b664c7b36122f28920f49c73f6546a869d151ac73b69e55a9210c5af92",
+          "bytes": 6711,
+          "sha256": "c206d0effbfc5de119b46fbdade61238045aa588833f60c39e0496e5c760d772",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "cyrene",
-    "materialSha256": "6af25f6d28410df03641237bd06144025f3f0e52f962dd7d84fb6ba3b4ba2236",
+    "materialSha256": "85e31edfff180bfca08a2525931ff490d196d3e3b6aca4e890bda172e259fd21",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

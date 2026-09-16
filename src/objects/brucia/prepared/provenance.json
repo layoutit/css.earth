@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e08d6456d58bafaf205b06f5046e1983734938df78b085b7786e0a9da30f7c63"
+    "sha256": "5b2eeb7ab0e36b22cf75cfce99ce3c55f14a1a35023891d483f58e54f7a7464c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cb757ebccb22da9bff19dcba27398d8a5a39c8328611846c4dca8220b619c696",
+      "sha256": "4aeeab1b0601d46dbbbe96ffb8ec84f05817d5bb3dc5e389e15f6ffa41a94f39",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Brucia model 10666; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/brucia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "cb757ebccb22da9bff19dcba27398d8a5a39c8328611846c4dca8220b619c696",
+      "sha256": "4aeeab1b0601d46dbbbe96ffb8ec84f05817d5bb3dc5e389e15f6ffa41a94f39",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9645,
+      "bytes": 9666,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6851,
-          "sha256": "3dcbe188d5b370ad34fce97f1c3753701d7e44a6ca14013c8c4bdcec008570ee",
+          "bytes": 6872,
+          "sha256": "4ab8a08a56ab1285a289d6fe59cb8bcb8164bb10472edfc0d1920f233811b6ff",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "brucia",
-    "materialSha256": "6b110eceec7d482aa6f1eac1cecada2e322d2fd2f3c4df0d3c0c03b32cd26e77",
+    "materialSha256": "57518700145f6a87527ac0bb571fa25bec8d53d23061296cf5978d27bf58ceee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

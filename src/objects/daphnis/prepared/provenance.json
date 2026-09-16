@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b80c1cc7cf86c489e9d6b8e372e6b5c4b956052b669ac17d23e12664866eec28"
+    "sha256": "7611dbf88d13c677c6589d08f58c82f39533adfb4d18a80572d3f31bc7f6bcb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -334,7 +334,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3b31297d62711131bd3ce9dfc9daaee0c03ef2e20e6eddb1f7cac12738315169",
+      "sha256": "62841d0d2ec141ef161afc525dd9794caa3b70fd5cfefe4812390e4ffb37fd1f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -342,6 +342,11 @@
         "displayName": "Daphnis",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "3.8 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "System solar semimajor axis",
@@ -358,28 +363,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "14.3 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/1; P (days) × 24"
-              }
+              "value": "14.3 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 136,505 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Cassini imaging team · 2005",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/2; discoverer(s); year discovered"
-              }
+              "value": "Cassini imaging team · 2005"
             }
           ],
           "moreFacts": []
@@ -485,7 +484,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/daphnis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1171,8 +1170,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3b31297d62711131bd3ce9dfc9daaee0c03ef2e20e6eddb1f7cac12738315169",
-      "bytes": 5275,
+      "sha256": "62841d0d2ec141ef161afc525dd9794caa3b70fd5cfefe4812390e4ffb37fd1f",
+      "bytes": 4922,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1260,14 +1259,14 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
-          "bytes": 1632,
-          "sha256": "ccb21269ba469c77071d78832bb8f113dd68f91ee45890b9b41637feb776ac38",
+          "bytes": 1534,
+          "sha256": "d6abec5daf5f5d5d33002bd254bb6e1acbe7557480eb65555cb23b841dccdb84",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 190648,
-          "sha256": "f8b64793a200f81a88d19658a0ae16c486c7087112280ea5aabd6c21511605cb",
+          "bytes": 184148,
+          "sha256": "b50f2dd87b3491689ef0f2f1933d90a5372e301f236fc04f7059e1fa22c816ec",
           "verification": "bytes-verified"
         }
       ],
@@ -1316,8 +1315,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "bytes": 170796,
-          "sha256": "b47fc0ddadaaed1a8a98304f98533aed374038ccf635ff5736e4fe33be0f5636",
+          "bytes": 179644,
+          "sha256": "9955e0ae98ca5a98ee01c49a19597dbb9b672dd9c37b63c562d98d7064573be4",
           "verification": "bytes-verified"
         }
       ],
@@ -1349,8 +1348,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6041,
-          "sha256": "8580c4d6265602581d52b089909b8359b6b8a9457d89545d4669bf0afcc476b0",
+          "bytes": 5738,
+          "sha256": "48639e1f69f8bf6f19f8bd01a32f71a7cb18f50f4a98a11729c27baa45b87eb2",
           "verification": "bytes-verified"
         }
       ],
@@ -1375,8 +1374,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 8094,
-          "sha256": "b93cfa770c931d17aff424e176e6094a3ac0d015ef554f2161d26b170086bf3a",
+          "bytes": 7772,
+          "sha256": "62ac6a9a5a979197eb803f296265a8c4c365f591d77528679620343e84451b75",
           "verification": "bytes-verified"
         }
       ]
@@ -1438,7 +1437,7 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "e7c4e040dd0899a4b1503c26063d223a99e392267f99c1a5e436262327d95af5",
+    "materialSha256": "80e7114fe3d7de44899c07e717384f1f1a4b2920ce3bbba8d9d3d8f45a18a1bf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

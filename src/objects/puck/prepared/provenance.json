@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee495c9faca8941fce8d65ab3d82a1c10943ce133f416e028e92b8cb2589ab5c"
+    "sha256": "e01bfe3bffb299b9f1baf52914bd9a3dfffeb1b0ac9297d7502404575c63efbd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "efd72f1336a3ebcf649089fa116c998fd8f954e1479f61f1ed8be452cfc312f6",
+      "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -154,28 +154,27 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "About 81 km",
-              "source": {
-                "url": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
-                "label": "Puck · reference sphere",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "source-puck-reference-sphere",
-                "locator": "/semiAxesKm/0"
-              }
+              "value": "About 81 km"
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 18.28 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/0; P (days) × 24"
-              }
+              "value": "About 18.28 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Uranus",
+              "value": "About 86,000 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation",
+              "value": "Synchronous model"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 2 imaging team · 1985"
             }
           ],
           "moreFacts": []
@@ -395,8 +394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "efd72f1336a3ebcf649089fa116c998fd8f954e1479f61f1ed8be452cfc312f6",
-      "bytes": 2889,
+      "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
+      "bytes": 2563,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -430,14 +429,14 @@
       "outputs": [
         {
           "url": "/scenes/puck/puck-normal-thumbnail.webp",
-          "bytes": 2464,
-          "sha256": "079ce2ca4b769905f89c0271bdb0fa5a4194fea7694520c87138d55bb2158285",
+          "bytes": 2390,
+          "sha256": "0a31170bba1c3a348c225e5fc613078710668e1067f73f3b4c553403ca8ad0a4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
-          "bytes": 76150,
-          "sha256": "4ba643c5b5dac95deb0fcbfd65c40d21e9478013b890f1b0df0ab091e892e237",
+          "bytes": 72638,
+          "sha256": "d2437789949157ab71b93bc2fe9fb8053718418fadb16c2ef940aaa832a876ea",
           "verification": "bytes-verified"
         }
       ],
@@ -469,8 +468,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3451,
-          "sha256": "baa720c264efe2c25ba4be4754b53fcb9763ec0f93edf72d75d0ab836e5194b0",
+          "bytes": 3175,
+          "sha256": "f0dddedf8b038f3c55b86e707d96ec241999b906c6ac1aee3f25ccf323719a96",
           "verification": "bytes-verified"
         }
       ],
@@ -495,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5546,
-          "sha256": "571880ae1ec88362405ebbdcd1210e7b5dceaf83b4c72d63e09d433031a941cf",
+          "bytes": 5070,
+          "sha256": "804c7bead648612b427335a34542e7ad4173893f7fbae97cf46b1f0b2fcbe1f9",
           "verification": "bytes-verified"
         }
       ]
@@ -508,7 +507,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "bbd9958d8c41b31de8e58dbf4445d8a719605a6c0b71b7392a397c0598875bf5",
+    "materialSha256": "f7ae69f774bce5e4218ad746a96aef5740a3c650361ee0a59a43b3d2f6701d4c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "52d4a763bcccb0f79d8bebf9ba87a9a2e78aa752a5307e6610c9ffde72020d3f"
+    "sha256": "d2308c15ba553e5a6473158b3d23a971fdfc91bfadac5ee71313a51cb224ce48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4ae237785af9a45a2a599779c216ad0f6456829914f76d4410f471cd7d8d8d0d",
+      "sha256": "781bcd8a270873ba1a5adc80c32ec078daf764cd091072b0dc2a8d93a2e1937c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -303,7 +303,7 @@
             "credit": "Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1950-da.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -383,8 +383,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4ae237785af9a45a2a599779c216ad0f6456829914f76d4410f471cd7d8d8d0d",
-      "bytes": 8990,
+      "sha256": "781bcd8a270873ba1a5adc80c32ec078daf764cd091072b0dc2a8d93a2e1937c",
+      "bytes": 9021,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -505,8 +505,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6382,
-          "sha256": "368bc1e208c73c374c5ef3d3223bb7e57bf7b3ec8ad84101e9a9e94b83b82592",
+          "bytes": 6413,
+          "sha256": "2837260a66999d45d45260adf6e0d5d0c9d9a62c5d9eaf830d8f2231cef0c822",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1950-da",
-    "materialSha256": "57e08163ff878d55be99698869eb902075e7ec8f16f9b45d7b1dcde4722ced1f",
+    "materialSha256": "cc92b9e4e4f95aefba36a16a2d5909140ebbea59101327b3cb562828d6ccd840",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

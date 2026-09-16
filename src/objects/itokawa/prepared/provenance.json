@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b79377330fac35ab8ddb7346e0e11eeca8bb4ce21cd5bbcfd6877fb935b9398"
+    "sha256": "b52f648f5e0d14fdfc1d443478839dc9c63b773dbda280cd4ae397504ebdf1b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -243,7 +243,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4a1cf7cbef92b86adb5a536c9289d0fb2796314d3d1b0086ad0b3209f3ca8fc1",
+      "sha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -269,17 +269,19 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "165 m"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "1.323 AU"
+            },
+            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.52 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=25143",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "1.52 years"
             },
             {
               "id": "rotation-period",
@@ -389,7 +391,7 @@
             "credit": "JAXA/ISAS/Hayabusa AMICA; R. Gaskell and colleagues"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/itokawa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1610,8 +1612,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4a1cf7cbef92b86adb5a536c9289d0fb2796314d3d1b0086ad0b3209f3ca8fc1",
-      "bytes": 9040,
+      "sha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
+      "bytes": 8933,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1824,14 +1826,14 @@
       "outputs": [
         {
           "url": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
-          "bytes": 1320,
-          "sha256": "8d23fbfbacd396c8cc75b31abb90e187e0fbc8ac33cc1e84b85e7207afedd491",
+          "bytes": 1296,
+          "sha256": "0ace49d9018eccd343b550f1209df97fd4833eca873eab474c600a520959845d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
-          "bytes": 2215602,
-          "sha256": "191b37d1edf01c64a8e7954b3a634d4649c85ba5981b86a4d293f7beb0fa6c97",
+          "bytes": 1756578,
+          "sha256": "d3603a4b8799fb4deb961d12d5f6370cd57d0db5499d642513e9fd1207c22dc7",
           "verification": "bytes-verified"
         }
       ],
@@ -1863,8 +1865,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6123,
-          "sha256": "9f1d47cb9d2d06554abdb7fc0256bd45d3d3822a4108b25b0b03d5170ebae251",
+          "bytes": 5901,
+          "sha256": "628f49d825dfb0dc5d35efb52794dd883ea1eeda905f38ffb72a6e8a4b98735a",
           "verification": "bytes-verified"
         }
       ],
@@ -1925,8 +1927,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/amica.webp",
-          "bytes": 55802,
-          "sha256": "0e0a605ea8135908a84244abf5918f07cb72edc691cfc237a0bbaa0d21dc62c5",
+          "bytes": 50708,
+          "sha256": "c13ec11a4cd794cc73ace7e86a4bb7a636544a0d9dbc38e260da7305ce401330",
           "verification": "bytes-verified"
         }
       ]
@@ -1963,7 +1965,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "96b898e4a364c322b87ae401f3f88cf9ff399eeb3eeaefbdc83491063ff68b3e",
+    "materialSha256": "e4c58f39d02edf4d1b31189abeb83bb3e94f1e9e8e6d62936d065bf881419bd7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3fa0ccebd3409d07fecb4552e5042fb688ee0f44edf512fbe2cb7f8eab3bd3a5"
+    "sha256": "58511d9a0190e10a7b976fba99a505f33abafe5118d8bfa85ac2ec50f757ccbd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -137,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d625786fed47ab20a77896e20b576eba1cc1617a4e0c8ba73ab86a10eddac9e1",
+      "sha256": "05d1f8a6d1d065da6432a7181301663fcd396d56362e717c7ed88089855095f1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -148,54 +148,32 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "1.53 ± 0.20 km",
-              "source": {
-                "url": "https://arxiv.org/abs/1912.09192",
-                "label": "Research publication · arXiv 1912.09192",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "arxiv-1912-09192",
-                "locator": "/referenceRadiusKm"
-              }
+              "value": "1.53 ± 0.20 km"
             },
             {
               "id": "dimensions",
               "label": "Measured dimensions",
-              "value": "3.5 × 3.1 × 2.62 km",
-              "source": {
-                "url": "https://arxiv.org/abs/1912.09192",
-                "label": "Research publication · arXiv 1912.09192",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "arxiv-1912-09192",
-                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
-              }
+              "value": "3.5 × 3.1 × 2.62 km"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Saturn",
+              "value": "About 377,400 km"
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 65.69 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/0; P (days) × 24"
-              }
+              "value": "About 65.69 hours"
             },
             {
               "id": "discovery",
               "label": "Discovery images",
-              "value": "Cassini imaging team · 2004",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/1; discoverer(s); year discovered"
-              }
+              "value": "Cassini imaging team · 2004"
+            },
+            {
+              "id": "shape",
+              "label": "Shape interpretation",
+              "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
             }
           ],
           "moreFacts": []
@@ -429,8 +407,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d625786fed47ab20a77896e20b576eba1cc1617a4e0c8ba73ab86a10eddac9e1",
-      "bytes": 4078,
+      "sha256": "05d1f8a6d1d065da6432a7181301663fcd396d56362e717c7ed88089855095f1",
+      "bytes": 2992,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -464,14 +442,14 @@
       "outputs": [
         {
           "url": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
-          "bytes": 1894,
-          "sha256": "2e28d19ecd32824054c6bce9b053f96b9c7ab77d29856fc555ae483583ab747c",
+          "bytes": 1932,
+          "sha256": "f703c603e25aac9be5e25814f3ae88f6574b756615c0c445976899cae46fb8a4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
-          "bytes": 66582,
-          "sha256": "52eb9cab48c7892a0077b321f8cb650fb1779e7ff1105c221d592802eb626460",
+          "bytes": 66408,
+          "sha256": "a2b55c39e41b026444c6d4b4201a262149527cd3d65e0e740f9e5ca91205a928",
           "verification": "bytes-verified"
         }
       ],
@@ -503,8 +481,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8090,
-          "sha256": "daebcfeb4801ba853f4495d632e220c0f6df21f29cdd50e11221d298a5079ac1",
+          "bytes": 7280,
+          "sha256": "a507a84ff8059a0e89b0101aba961a084c0e4a2471622c2188a8266a41a9b887",
           "verification": "bytes-verified"
         }
       ],
@@ -529,8 +507,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 3792,
-          "sha256": "78b3a149148e893269778d70379817dfb43671c978a22569cc70d2b9c250b6ec",
+          "bytes": 3850,
+          "sha256": "b3e1e6c930aca95ac4ef0b3c54e501650bdf8a4050e90467595503bff3d0fc00",
           "verification": "bytes-verified"
         }
       ]
@@ -542,7 +520,7 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "b0d46e2c35c0c8b59226d9d745b546bc9ce21fe0aa5ef982ab36081c13534c11",
+    "materialSha256": "3001c33904c71b1e649c92d7dc13598ea6a40377b208b5a1edb4ac0e4171066a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

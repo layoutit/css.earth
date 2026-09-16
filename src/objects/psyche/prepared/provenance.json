@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1acdc2914047586a647e1cc9c7b1b3840814ea7792d6adb79508f54cf42044f2"
+    "sha256": "11e80a15e5809a43fddaf815bd874efae785d18bc18e945bdff8072b623078f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -476,7 +476,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b4568d06a6020391623f4991fdac2c4a1108af6dce145a09f114c99479c9fd2",
+      "sha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -502,6 +502,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "111.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.926 AU (mean)",
@@ -526,6 +531,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "4.195948 hours"
             }
           ],
           "moreFacts": []
@@ -631,7 +641,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/psyche.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1594,8 +1604,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2b4568d06a6020391623f4991fdac2c4a1108af6dce145a09f114c99479c9fd2",
-      "bytes": 9189,
+      "sha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
+      "bytes": 9444,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1737,14 +1747,14 @@
       "outputs": [
         {
           "url": "/scenes/psyche/psyche-zimpol-thumbnail.webp",
-          "bytes": 1770,
-          "sha256": "f9ed25bd4b1847908eb115c1625851480e5232c1568ac2796fe9c0ad68026a2b",
+          "bytes": 1780,
+          "sha256": "7140a672f59e4c71a035de745a7810231941e2e80c64caa08868346b73b6db1a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
-          "bytes": 320966,
-          "sha256": "0984a97df24da63929ad662c81ff8035e36391cde4176f47fb6db211e50040bb",
+          "bytes": 309522,
+          "sha256": "12457892230a6fb99324d8d04703d06e2271e0c0ddf3eabc43ed031e9691268c",
           "verification": "bytes-verified"
         }
       ],
@@ -1776,8 +1786,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5886,
-          "sha256": "5c583b7d998c95c093092d754c8ece19573dc5bbe5870ad32b8dcc09cf24f70d",
+          "bytes": 6053,
+          "sha256": "c9b1c791ff2d05a93d54b530ba4529a723a67c56e8951098967a2e462ffb20e3",
           "verification": "bytes-verified"
         }
       ],
@@ -1827,8 +1837,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 5978,
-          "sha256": "27cfd2397be7cae0dca8fd62e510c4659cba4b053aee3db8fd457f1966c9f82d",
+          "bytes": 5864,
+          "sha256": "87824095b942370f17b98979caf7bba112858bdd9cd3ac73771af6ebc7b98ddd",
           "verification": "bytes-verified"
         }
       ]
@@ -1865,7 +1875,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "79c06d66828e2efcc065200635f76ea50d7d99b89d2bd1f6e63fa75c71c2deda",
+    "materialSha256": "ad9f87740518e1c615ec07d976315495c3a72e65ab938c63821abc3268c3f72b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

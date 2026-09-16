@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "89f873096a4ee4456df5b97c3d3d822d1e112660802b2ab11879735f82dc6d52"
+    "sha256": "b1070c48c3767b94e107c7ce0c68f81acb73e67d8f31dcde91c70196a731b0d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "11075c3669d5d08dac8efd1de3d5e90626bba973402d46b6d3421dcaf1775d64",
+      "sha256": "fb0db3ef09ea10200983fd75d35ef891778b0167ce5b500d6adef00a8a908efc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "102 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.555 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.390119 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/amphitrite.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "11075c3669d5d08dac8efd1de3d5e90626bba973402d46b6d3421dcaf1775d64",
-      "bytes": 8885,
+      "sha256": "fb0db3ef09ea10200983fd75d35ef891778b0167ce5b500d6adef00a8a908efc",
+      "bytes": 9142,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6634,
-          "sha256": "0f1551c1dccf3f9049db1969b8a9b6411ab4e1defe7ebc685102fabcbf3822a8",
+          "bytes": 6803,
+          "sha256": "b22087b401b17cfc7731cdd006e040bb942a357c86189a9a737541962cb25003",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "amphitrite",
-    "materialSha256": "4879259c560cbd288371c16d130f12dbdaca4d444926bd81fd58d0c6fc9bcec3",
+    "materialSha256": "3cd1bae78a09e7f5b9c25c8318526551ec243de01eaae05b1cd5406ca061e843",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

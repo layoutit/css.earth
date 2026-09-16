@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1fbd368f27350f24ca18db76ae5ddf05e5bd243ec67ebaacf00d012abf46544d"
+    "sha256": "36da9b53921de085661b99771426d2b28acaadfaf1470bf7e969ef0d6dd23bf0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "927dbe4dbd88b4e23b5495e456168f0bf3e5606002dca105dabb78df689d9d88",
+      "sha256": "33b07758a7feaa09c9261e2b1e0c26f9c8514ca29e9897e4deafdc795ba46b86",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Leukothea model 867; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/leukothea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "927dbe4dbd88b4e23b5495e456168f0bf3e5606002dca105dabb78df689d9d88",
+      "sha256": "33b07758a7feaa09c9261e2b1e0c26f9c8514ca29e9897e4deafdc795ba46b86",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10784,
+      "bytes": 10808,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7974,
-          "sha256": "28d29d4f7a64231d61cc3793b574705e609d1a3272e4432c02a69ad023e09c4d",
+          "bytes": 7998,
+          "sha256": "b9249d46106081ec28c6a31e052fe86f237a598ccd41f1c2471e1a58afe5c653",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "leukothea",
-    "materialSha256": "71585c83b9d464113dfab882a6a32d1c5b7cb5579eb1da14014e7dffd0f71284",
+    "materialSha256": "1098aaec79d7b3fdcfc640e592b8f2a5124374c3feca8d499ac056129cdac8cf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

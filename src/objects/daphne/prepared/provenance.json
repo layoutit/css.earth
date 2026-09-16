@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41d78092b0c9fbf07693d151a22852ffc615ea2b01b9f73782ba703dede025ef"
+    "sha256": "d34bd4b0deb8b64ef9278f5340e113b82dea0a2d6fe2b8a4d8d22bfdd4bff0b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c8552f3a29c75675e8bb2d79d797c035e63106c06b8c0b7de2c74293d313a34",
+      "sha256": "9a06571d0c6936b5314da46efb60db29f49d43786cdf1ee38f15b9914cf377ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "93.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.767 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.98798 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/daphne.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c8552f3a29c75675e8bb2d79d797c035e63106c06b8c0b7de2c74293d313a34",
-      "bytes": 8304,
+      "sha256": "9a06571d0c6936b5314da46efb60db29f49d43786cdf1ee38f15b9914cf377ea",
+      "bytes": 8557,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6106,
-          "sha256": "5eb5681ef959da96be310e48fe3e5e28de0bb210a443d9cd31be646b41f42231",
+          "bytes": 6271,
+          "sha256": "3a84320782d889916f063c672e79ccc7324b59d7d94291d91c05dc80ce04536b",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "daphne",
-    "materialSha256": "1976c55783ebeb640146678825ed3cc959ff1a6afb47023a0c29ac54a883c751",
+    "materialSha256": "c3857c5a8167b64931d1c9b611be757620ef2eba947f3e61490fe1c2fc3c9ab5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

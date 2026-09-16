@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c805eccbf484db58b7ee2007d41203f21d99a43ad5641caaa1f82a1123bb6061"
+    "sha256": "64ca14d67234f10f39fdb27e8ea4e8867d5130aa5155ea2bf17316b15afd0db8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5b5890279e8a2465bb80ce006814b807761dc2661e2cade8f98d0f4899dc4751",
+      "sha256": "07740447badf821138d1d2102a7ce1f3ed440c4423783dde9d51f6f158908b3a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "14.2 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "14.60796 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6218",
-                "label": "DAMIT model 6218",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "14.60796 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; 666 Desdemona model 6218, version 2022-10-18; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/desdemona-666.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5b5890279e8a2465bb80ce006814b807761dc2661e2cade8f98d0f4899dc4751",
-      "bytes": 14400,
+      "sha256": "07740447badf821138d1d2102a7ce1f3ed440c4423783dde9d51f6f158908b3a",
+      "bytes": 14222,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11977,
-          "sha256": "0a63f7f0b2094bfdf7ba804222416b5a1cd6988fe08d8e11e9aee913ae694059",
+          "bytes": 11846,
+          "sha256": "b1b22384b3c70714d3d586443a609e2b4ecc8d1007ab5f28749d8d5e94ee7877",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "desdemona-666",
-    "materialSha256": "85ae1ae38eb550a27f8b0399dc28c371710f5a6155c55e5efd96617adbb5303b",
+    "materialSha256": "e78fb114b14a849069e9c0232a84cc15b547306112466399e53a3796f6af5a1b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

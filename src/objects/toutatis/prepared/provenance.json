@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b225a9a27c7f3f29a5ef7213ccf52b78a247ac3512deb43951e6e8774b4943a1"
+    "sha256": "e20ca0c71b9071b5a1b05d09faa5fed57267998004eb29c75f2875ab208a88df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "99cc2929f5730fc55bae3408b7e39b2765c7cb9dfe700f0ce137d3a59ab34744",
+      "sha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -165,7 +165,28 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Equivalent radius",
+              "value": "1.224 km (model)"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.543 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.06 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Tumbling periods",
+              "value": "5.4 / 7.4 days"
+            }
+          ],
           "moreFacts": [
             {
               "id": "geometric-albedo",
@@ -276,7 +297,7 @@
             "credit": "R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/toutatis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +377,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "99cc2929f5730fc55bae3408b7e39b2765c7cb9dfe700f0ce137d3a59ab34744",
-      "bytes": 8701,
+      "sha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
+      "bytes": 9199,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5606,
-          "sha256": "ca95e0d1867437f4d5ac9a28ae343724a62554154c2eef6417590884c8dde498",
+          "bytes": 5923,
+          "sha256": "a3d68fd4a08c7b983cc2d31c9006aa094f3ad9a7907c9188237aa69ffc1c61dc",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +563,7 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "5d65440f8a3bf5bd39fccc452d8802e26e732b236acca049e3e4adda5a493cc9",
+    "materialSha256": "12a4a6d43f2e75ed7b19c3162d07bbe2d04aaee83c214a5b712e051ce320a246",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

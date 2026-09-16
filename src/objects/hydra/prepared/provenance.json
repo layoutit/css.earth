@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c92ce69a59b37f9f4fc4c639ba5ef8c02afef1a18e4a314090f3c443889693c2"
+    "sha256": "4cd6cf80a765d9de29f46299301ef9f5149a639cdc05b2fb77f6a7ba07618f81"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
+      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -152,28 +152,32 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "18.1 km (released shape model)",
-              "source": {
-                "url": "https://doi.org/10.6084/m9.figshare.12779975.v1",
-                "label": "Published archive · DOI 10.6084/m9.figshare.12779975.v1",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
-                "locator": "/referenceRadiusKm"
-              }
+              "value": "18.1 km (released shape model)"
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "52.0 × 36.5 × 29.3 km"
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 38.2 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/0; P (days)"
-              }
+              "value": "About 38.2 days"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from system barycenter",
+              "value": "About 64,738 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 10.3 hours (not synchronous)"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Hubble Space Telescope · 2005"
             }
           ],
           "moreFacts": []
@@ -442,8 +446,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
-      "bytes": 3989,
+      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
+      "bytes": 3800,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -531,14 +535,14 @@
       "outputs": [
         {
           "url": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
-          "bytes": 1806,
-          "sha256": "1fbbc6a8ad6ef48bf64d273cd5e9d91beeb0b5d610ea7547abb5c13fcfef6bf6",
+          "bytes": 1786,
+          "sha256": "a054a86592aff90fd3c50f068035e85221ccb4efed0ca29c13ca5a85a167a611",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
-          "bytes": 100400,
-          "sha256": "aeb9345b6492f3e4443433bb02e0dbe91eb8ac966bf5faa0de067b9119ad0e68",
+          "bytes": 98700,
+          "sha256": "724b1368c6ce4d4f2ffe6529f8b7e42aae55d99ba5f062096f1f5be8d2136cb6",
           "verification": "bytes-verified"
         }
       ],
@@ -570,8 +574,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4748,
-          "sha256": "a40e0bfb29fe163acd20ed5eb8bd6d8bd6e2dcae0c5af09582735b3feb9bbca9",
+          "bytes": 4565,
+          "sha256": "3f67f8b63d846af98ef2d8370ed49301e598b13fd07c5187bfa5c257fe76043f",
           "verification": "bytes-verified"
         }
       ],
@@ -621,8 +625,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 4968,
-          "sha256": "b7c6234912d7aae6624b7ecd6855571bac18903834ea7e3d4a1236c2aebbda09",
+          "bytes": 4668,
+          "sha256": "853fe1f64d02ee0345abc27bb733221806861d24d8824498fa4745512320cc90",
           "verification": "bytes-verified"
         }
       ]
@@ -634,7 +638,7 @@
   },
   "lastPreparation": {
     "objectId": "hydra",
-    "materialSha256": "12424fef3d2ca754d02ee0dbdd038b367cd61c7d959e9cd83fb1552b61498223",
+    "materialSha256": "2bd8b0ad5e454d40f63f400db80a8a91a9c9d0bcaef88d6f9804dab4193e9440",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "157a8c20ba74258717c7f75398814fa21b62bc7fb1a4b22217d05bca269adb8d"
+    "sha256": "5690b7d26976a05062494e55ac062c7c4d51bd1a943bfb0f04f665822274213c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -95,7 +95,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7911497871bac97bdca7d338097c4b91f60b2330a02020cb1ad04d6afa5df0e5",
+      "sha256": "6ce1adb91d75650294ea1a5b16074e6d1fa1df1a8454090be7cadb13f14b4087",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,17 +121,24 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "59.1 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.795 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.67 years"
+            },
+            {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "5.385 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=216",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "phys_par.rot_per (h)"
-              }
+              "value": "5.385 hours"
             }
           ],
           "moreFacts": []
@@ -197,7 +204,7 @@
             "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kleopatra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -273,8 +280,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7911497871bac97bdca7d338097c4b91f60b2330a02020cb1ad04d6afa5df0e5",
-      "bytes": 8315,
+      "sha256": "6ce1adb91d75650294ea1a5b16074e6d1fa1df1a8454090be7cadb13f14b4087",
+      "bytes": 8352,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -345,8 +352,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6748,
-          "sha256": "4f5b02b86fd6658a31f4a81f50c16a9d5fd0163600c297130da0bf4b0c82ce9a",
+          "bytes": 6744,
+          "sha256": "2f830ef7d48c636277bf2d9dca813d0f41437b800c0652a6162a23bfdc4330f2",
           "verification": "bytes-verified"
         }
       ],
@@ -384,7 +391,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "6372108e821f925dbfb2adb004c1107be07dbc71ed9bf848fad11cb23b82657e",
+    "materialSha256": "77084b7001f7b2c52814febf8e6e62dd296e32dbe3d98e3b1c2674f008e5ae7a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

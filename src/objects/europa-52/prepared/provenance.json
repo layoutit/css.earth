@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "af5cbe79d2a9c389d846cb386dd8fce9f827b01a05317607409cc1940d6099bf"
+    "sha256": "5524e108f2ab2d38276b88f39d1816cbb91afa23ccd2b05127f698296af2315f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4e7806980eddba09ee2e17aac87eba74beff4faa8ef1f09845ab69617393d2d5",
+      "sha256": "ff2138186023dce0af350583a0b83d6dfce567b139fc6a83b834c386517984c3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "159.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.095 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.629954 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/europa-52.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4e7806980eddba09ee2e17aac87eba74beff4faa8ef1f09845ab69617393d2d5",
-      "bytes": 9225,
+      "sha256": "ff2138186023dce0af350583a0b83d6dfce567b139fc6a83b834c386517984c3",
+      "bytes": 9483,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6989,
-          "sha256": "9596cfb37d25ee7293774bf6c1fd56be0c8f44411bfdb67be0857c85ed3d47b1",
+          "bytes": 7159,
+          "sha256": "5e5e17fa2fa7ad16f1884ee8ec7c6dc4c107a4f49d7161f7efb17f0716e783f7",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "europa-52",
-    "materialSha256": "927a08f7a841fc1a34b5cd186056fc6dfcb8a892c73b76e2e22bc97b0aae54cf",
+    "materialSha256": "57ccab752b4a8604fa45e3dc2765fe3527d6ce4b9008f8167d5c20c317d82390",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

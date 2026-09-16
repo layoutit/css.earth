@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c9955215fad9bfb642ab54be7dbf42a6f5200924f2a5a62f3d752b95e7501da"
+    "sha256": "98a34f3aed13f39e588f5bc282d6b0b6d549f8d3fad63587c9f8cde227ab946b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -161,7 +161,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5f0b8cc3fce51228512fa85126560ec42172664c229368c624da5d7a3b531a54",
+      "sha256": "ed5061be70199ccec6e6097f36a1884c2d7e657ce201f110690326f92057cff6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -196,30 +196,24 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "22 hours 36 minutes"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "22 hours 36 minutes (synchronous)"
+            },
+            {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 186,000 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 186,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Herschel · 1789",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "William Herschel · 1789"
             }
           ],
           "moreFacts": [
@@ -347,7 +341,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/mimas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -705,8 +699,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5f0b8cc3fce51228512fa85126560ec42172664c229368c624da5d7a3b531a54",
-      "bytes": 10482,
+      "sha256": "ed5061be70199ccec6e6097f36a1884c2d7e657ce201f110690326f92057cff6",
+      "bytes": 10034,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1001,8 +995,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6668,
-          "sha256": "c72680dc13795bb2239a40c6f0ee7222281232858731240cf14815792e288c34",
+          "bytes": 6196,
+          "sha256": "f07c3cb0f9759a93086f43dd55ab5aa7e94c597aef4872513c7ecdfce63d2ea9",
           "verification": "bytes-verified"
         }
       ],
@@ -1126,7 +1120,7 @@
   },
   "lastPreparation": {
     "objectId": "mimas",
-    "materialSha256": "b263a5390bdb86239de79fefae91216f292fc267e97331cb74893c209c58ecd0",
+    "materialSha256": "1c6c3a4b0b8fba098bb6a06ad193f2a646e243f771d8d23f0dd790c326911444",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

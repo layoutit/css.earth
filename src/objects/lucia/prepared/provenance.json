@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "60bac8a98e05e0932f447e68a976b93b7bd4062e2e61386573cfe6095294f3be"
+    "sha256": "d5a87351c045a12f3c6fb8524b2b28c45a0a415bf9429f59a7a118853a6cc9cd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6817b22c885267db11d01de51e0f357b67745013c56717d85eaafc774af92d8",
+      "sha256": "66363f12505a996beeb0f7bde47fb25180d7854e6e18b0f15dc9c2814baa9f51",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Lucia model 523; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lucia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "e6817b22c885267db11d01de51e0f357b67745013c56717d85eaafc774af92d8",
+      "sha256": "66363f12505a996beeb0f7bde47fb25180d7854e6e18b0f15dc9c2814baa9f51",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8757,
+      "bytes": 8777,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6000,
-          "sha256": "faba43eabd314c186c56d5727d86264f9afa20f290fc4b1a51e6e750da69ae61",
+          "bytes": 6020,
+          "sha256": "2d796c01fbd89fb53c9caf1cd10c6a32fdd56ee7334eef165eea7d7d5334e0e1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "lucia",
-    "materialSha256": "8e3b9754f9327c589fb9c760654246d1535035be75c02c988a2a05d88821ad61",
+    "materialSha256": "34ad4e3c80f28c5eb208b0484610a603bd5593f978157351ad4825c731e40f8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

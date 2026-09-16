@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d61cd04ce2d25acde250c0be12e60d8408a8adc0b86752d11c45457b4f6e7224"
+    "sha256": "73220b0fe77f790d86eb8579ddadbc22caa2f549d68a7f5bdf8aa58e49e46964"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5740b5c1094d20e2e53a4ea4ba9e48c5f8389ef3e6268a96751c66116c2e0913",
+      "sha256": "0703114cca2119e927d1d1836220ad8321d0b0e64cb77d5862a24e065f406702",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "99.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.127 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.224663 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/elektra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5740b5c1094d20e2e53a4ea4ba9e48c5f8389ef3e6268a96751c66116c2e0913",
-      "bytes": 7505,
+      "sha256": "0703114cca2119e927d1d1836220ad8321d0b0e64cb77d5862a24e065f406702",
+      "bytes": 7760,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5293,
-          "sha256": "662ec6904b9732d9f3763c831b6b644940bf5ee7591b0300bd0c11e65872b79b",
+          "bytes": 5460,
+          "sha256": "3f726c10ef9e097a07b6b6f408644f57a488a189eb0ee8971929aabe6309d4cc",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "9c9cb13540dc88eff82bd779b49eb425ba015be80f279b8cfc71b72f5e55a8a3",
+    "materialSha256": "c21d24515fa9dc2bb49b14eda2fe813d7c7876c40b3af43fe20943389216d2ed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

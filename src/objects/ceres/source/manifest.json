@@ -430,8 +430,8 @@
     {
       "id": "ceres-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10701,
-      "expectedSha256": "b878b2e452b0bc9780824a7da046fc14a58b66911a8377a1d97a72f3365c88a7",
+      "expectedBytes": 9466,
+      "expectedSha256": "9036c0ac18102201fb334d146b2c8bb7a9c52ee38df6973ed7462a4e0fdcc663",
       "origin": "Repository-authored Ceres object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -483,21 +483,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
-      }
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5124,
-      "expectedSha256": "8c5b59758d1b94f930dee3c03a2ae6e9cf096763a149c00410b16df9c7e4a4a3",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Ceres: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
       }
     }
   ]

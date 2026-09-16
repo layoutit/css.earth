@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcc0d8d7442a0361a6e2a0b0035e3724d6d65659a9db2f8cc0e23b416c9281a8"
+    "sha256": "44cf5fba258f7ec156af49218a9563be4c1bebdc363c27ade3c6286ae7cc53ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e122f631133af6de2fcb20b55da7300223ca1a6cb4a9ee56ceb6b7e2bca7dc81",
+      "sha256": "41297f1fd2323511bff86a704cb36a484e10723dc598133666307267f2548de1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1799, version 2017-06-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hertha.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e122f631133af6de2fcb20b55da7300223ca1a6cb4a9ee56ceb6b7e2bca7dc81",
-      "bytes": 8777,
+      "sha256": "41297f1fd2323511bff86a704cb36a484e10723dc598133666307267f2548de1",
+      "bytes": 8798,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6188,
-          "sha256": "9fc7f8702d4e626d89aa259092b1028f9fd01da1070ca59f8f5516eae95e7dea",
+          "bytes": 6209,
+          "sha256": "7284b51a9ab84f7728a43758e0c710174737895e55c858edf5b8f575554226d4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "hertha",
-    "materialSha256": "22232232c20cabaeae049b636b9a66c33d28e3c755547a28f6339345d6b5bf41",
+    "materialSha256": "f3038f3cdc6b5a2f74bff03232bd03fa78a29a51c3c740e563af2e8a9049efae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

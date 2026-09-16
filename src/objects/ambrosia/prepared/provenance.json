@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e769c3aed7bfc50d6f79001a062a8dd12499d831ece5e64973089929cddf7e30"
+    "sha256": "f3a6caaf844023c7bbef08eccf6552a231b9c9675c6fac6bdebfaf3b017baf7f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0fb08f5c3a1c2a185830354ca692b686893b588b0232644d412957ed93b2380c",
+      "sha256": "3ec9dfaed05bb97ea14eeac3cebeeb248c1b2063164b3fdba62f57cef578b9dd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 548, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ambrosia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0fb08f5c3a1c2a185830354ca692b686893b588b0232644d412957ed93b2380c",
-      "bytes": 10624,
+      "sha256": "3ec9dfaed05bb97ea14eeac3cebeeb248c1b2063164b3fdba62f57cef578b9dd",
+      "bytes": 10647,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8008,
-          "sha256": "4a07de83b8635ec7150b3382f5b7ee46796d9eb972f39f1ff4e426328305d7d0",
+          "bytes": 8031,
+          "sha256": "488302d3b2907c70670a37b39cd12f90e3c72056c81e6644b25f45183d65b211",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "ambrosia",
-    "materialSha256": "94c82891c78e9b1a7c9fb7bb229d4177a6e0dbfbd3ca197db57a012cfb048b38",
+    "materialSha256": "da9eac366787c9e6d8c86cb1ec0832433936aa0f7f8c3e97a65fd8e03af14596",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

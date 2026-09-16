@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "795b7256ae59af8d4b9c556d4e3b520ce168ef8d257190d0198f1d9816d41551"
+    "sha256": "4d3f2c7cd37e116f5515799a6484da18eacb2c89037cecfe40abd0dee7edfefc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3c13996f56881d0169c75b246a416a8d3fd52198e6f44dd9f9128b529bff0ed6",
+      "sha256": "8025eb9676f74cbecb746ee37ee715172dc6e1ce8523805410107690b6845ac0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "166 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.057 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "8.71234 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/interamnia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3c13996f56881d0169c75b246a416a8d3fd52198e6f44dd9f9128b529bff0ed6",
-      "bytes": 9952,
+      "sha256": "8025eb9676f74cbecb746ee37ee715172dc6e1ce8523805410107690b6845ac0",
+      "bytes": 10208,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7701,
-          "sha256": "6f67bb13665296e42673f9c78999e34df39316b051769c91845a700e4e798a5d",
+          "bytes": 7869,
+          "sha256": "63010a76cd6fe98a01e48de262416008f34d889a0f6ef31aeafe44e4bc3cd68a",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "interamnia",
-    "materialSha256": "fb5078ec360568486decca7b3eacc2ec6ebd10b71a5023960f5639643f8a7786",
+    "materialSha256": "2793b1b59a0523fe97dd06c9f9ac71bc98d08ee9116a2b24a837a1301692a7b2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

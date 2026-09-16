@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f938dd1177e8371f82c9499746a2ba7c35b57db65ff147e4fe8874b2c1547e3"
+    "sha256": "b266c3ef75668ec249e5094e05640f48e0d6a6135fd5013ac71c9aa6e2bc666f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb548e435440e62bcff36502d04ecdad235e37f9778d3b49f8d37ba5a40e09db",
+      "sha256": "b5ded703f35fb0b71658020ae207a794113e268691e7f6625d7fef96b426a58f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -307,7 +307,7 @@
             "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-2008-ev5.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -392,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bb548e435440e62bcff36502d04ecdad235e37f9778d3b49f8d37ba5a40e09db",
-      "bytes": 10770,
+      "sha256": "b5ded703f35fb0b71658020ae207a794113e268691e7f6625d7fef96b426a58f",
+      "bytes": 10802,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -514,8 +514,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7299,
-          "sha256": "f7a6437408a39e53970e4e1e6e013c6fdd53645ddaa7764b313eb90094b49158",
+          "bytes": 7331,
+          "sha256": "8b9b4a23d395c6d27ff13d50cac3629b0994c6dedf8f169c133935e58a4b7e12",
           "verification": "bytes-verified"
         }
       ],
@@ -578,7 +578,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2008-ev5",
-    "materialSha256": "4e74d3397bcbf135497099e0af8ebc46d01fc42d5fd7287ed1e997f72b0c4c3c",
+    "materialSha256": "824c3c50f6f6ba55e3c3eeebb6b6727515d93a0fba334dfc9a8049c0c29e2d56",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

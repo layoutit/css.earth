@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e27255ffbc5c5082a88c54ffc703854295a2c0ea482c80e3d64cd4626a542dc3"
+    "sha256": "d40f739dfb22b77341cf22cc420d532de039a786e4607abcb459a8a5cf052382"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f19f2ea7ddbc364fc1c0ed6ee1443987abe74378ee5ea84999c662bd4f67e441",
+      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -152,28 +152,32 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "18.3 km (released shape model)",
-              "source": {
-                "url": "https://doi.org/10.6084/m9.figshare.12779948.v1",
-                "label": "Published archive · DOI 10.6084/m9.figshare.12779948.v1",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "doi-10-6084-m9-figshare-12779948-v1",
-                "locator": "/referenceRadiusKm"
-              }
+              "value": "18.3 km (released shape model)"
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "48.4 × 33.8 × 31.4 km"
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 24.9 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/0; P (days)"
-              }
+              "value": "About 24.9 days"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from system barycenter",
+              "value": "About 48,694 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 43.9 hours (not synchronous)"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Hubble Space Telescope · 2005"
             }
           ],
           "moreFacts": []
@@ -442,8 +446,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f19f2ea7ddbc364fc1c0ed6ee1443987abe74378ee5ea84999c662bd4f67e441",
-      "bytes": 3959,
+      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
+      "bytes": 3770,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -531,14 +535,14 @@
       "outputs": [
         {
           "url": "/scenes/nix/nix-monochrome-thumbnail.webp",
-          "bytes": 1812,
-          "sha256": "430b14f48f3eb4077b78c226f8bdb49ef9e49fdfb7f766220f8dd607e8f8a199",
+          "bytes": 1766,
+          "sha256": "58a146b497c44eb57f69c4c0decb5e7599667fa1a7a24668f4dc137c07566423",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
-          "bytes": 144698,
-          "sha256": "7ffc31a3716573ce24cb2e9eea51283aaaed3eb10996979e85473b4d88d45874",
+          "bytes": 131312,
+          "sha256": "7e67c58b1ee00c5d94dbe4abc3dc79e29eec4f362f176a8ddca058c3f8b25dec",
           "verification": "bytes-verified"
         }
       ],
@@ -570,8 +574,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3227,
-          "sha256": "de893c538a563a33142bb0a138db01bbbe9c00240ea044d343826988b68349b4",
+          "bytes": 3044,
+          "sha256": "c7ec867c8ea70a98b8f0a5bc4c75dc665388b436af5116a831e5eb3af630b20e",
           "verification": "bytes-verified"
         }
       ],
@@ -621,8 +625,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 10078,
-          "sha256": "8aab96d3a981083ab7f96a098fbc64d1bf0d806ffbfe8c780ec38601103d7927",
+          "bytes": 7932,
+          "sha256": "30cf1e8ed2b0ba8ac104b951a160f04a4115ad657f51c778e28ae0ac1e3e71ea",
           "verification": "bytes-verified"
         }
       ]
@@ -634,7 +638,7 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "59c50464bb56766ee243857b43d41d384b81a24d3e995b6b63dc8d363b5ba213",
+    "materialSha256": "e9e9af6b6b19d5f0e6675c2b9f4d799f8b78ef74b75b5df9722a1710c6d4d8bf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

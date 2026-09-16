@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "66ec41c8a873cecfbad9953734723667b31332c681c96883376473ff6ec3de76"
+    "sha256": "662c746ac0f35e5cc412e573e98e17910cc710266197ec10d420585f29e710cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d945201856714afb0169ed7cc6c631e96c79b9b1f1d4397d62701692dd526384",
+      "sha256": "1203f1736f5f7eb073ce3e2772ccf10e99ec890e5fc24f5b0eb1c064b54e1e23",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Zachia model 5901; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/zachia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "d945201856714afb0169ed7cc6c631e96c79b9b1f1d4397d62701692dd526384",
+      "sha256": "1203f1736f5f7eb073ce3e2772ccf10e99ec890e5fc24f5b0eb1c064b54e1e23",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9990,
+      "bytes": 10011,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7190,
-          "sha256": "b3459e5a3b6f474c908a023bd49e476319b837c2ce9da096a9cb652dcec182cc",
+          "bytes": 7211,
+          "sha256": "3aca96a88876406d42696c0773a07acabd8de6220c07f0242914421e402163a1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "zachia",
-    "materialSha256": "f17d3d4f67cf61222e4984af5c324d0e333d9a70115d5a50e0dbd66fdc900d64",
+    "materialSha256": "5ceddc74254a4c7275db0170f068aa6a9c60d805a0edc6f1a8977f77aea39a86",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

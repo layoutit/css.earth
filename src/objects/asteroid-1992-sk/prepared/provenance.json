@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0717bbb6518e730b1b3901cb717e7b0870b3da8f3a381673ba2314bfb5a6ad9"
+    "sha256": "b90cea206e6824167ffff1efcc2ba6c5fac69bca1c5fd918679870da7e183411"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a109a8a32281b5c33fe0b3cba18dfbe894147bf8cfe853ee630932c51e8ffd94",
+      "sha256": "471d8be0b5b16d5d1609755af317a437b79b3378d8038bbd665337dfc16c5c7c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,15 +168,7 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.50 ± 0.10 km",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
-                "label": "Asteroid 1992 Sk · asteroid 1992 sk research sk",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
-                "locator": "/diameterKm"
-              }
+              "value": "0.50 ± 0.10 km"
             },
             {
               "id": "distance-from-sun",
@@ -207,15 +199,7 @@
             {
               "id": "rotation-period",
               "label": "Model rotation period",
-              "value": "7.3182 ± 0.0003 hours (model)",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
-                "label": "Asteroid 1992 Sk · asteroid 1992 sk research sk",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
-                "locator": "/periodHours"
-              }
+              "value": "7.3182 ± 0.0003 hours (model)"
             }
           ],
           "moreFacts": []
@@ -307,7 +291,7 @@
             "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1992-sk.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -381,8 +365,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a109a8a32281b5c33fe0b3cba18dfbe894147bf8cfe853ee630932c51e8ffd94",
-      "bytes": 10533,
+      "sha256": "471d8be0b5b16d5d1609755af317a437b79b3378d8038bbd665337dfc16c5c7c",
+      "bytes": 9745,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -503,8 +487,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7245,
-          "sha256": "d7171c507d7f319b247152c820b096e09faf856e10db3453c11f57035783b8a6",
+          "bytes": 6639,
+          "sha256": "af657328546fe9f2bdb118ea5627e368edb174d61588140224730fe1a78e1f58",
           "verification": "bytes-verified"
         }
       ],
@@ -567,7 +551,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1992-sk",
-    "materialSha256": "34e5f4ecddb044a9a7d63d7e0def5935fc9a9c0015d141da004de00151d9c33b",
+    "materialSha256": "bbe6d3bd21a06ad3727b7833296f81f8edb763504143051521d1b97415b621c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

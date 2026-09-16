@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8885,
-      "expectedSha256": "11075c3669d5d08dac8efd1de3d5e90626bba973402d46b6d3421dcaf1775d64",
+      "expectedBytes": 9142,
+      "expectedSha256": "fb0db3ef09ea10200983fd75d35ef891778b0167ce5b500d6adef00a8a908efc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,21 +200,6 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "854bf5c6f6c6ac999ffefa625901286d7f3d761be1abbdc8aacff1cb03215619"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 6177,
-      "expectedSha256": "f4b509cc188d87f90b8259e8ba8a087a40d3526fb3bf555ad210a0b464370f07",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Amphitrite: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

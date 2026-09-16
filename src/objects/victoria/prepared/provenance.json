@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe55e27a6b46b04d76006dbc805e598252423c060e3d784fd220ac7c59888e16"
+    "sha256": "407f0f5cfaaaa1595571fd3aa923b7612be1e392d79f53b002b7d146b85e2c44"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fce2f040142ba304d77f1f4acc0acbb42fb58f166cac2489415374717f4d8a52",
+      "sha256": "c87235dc774b50821e2d26cfd52067a042b8327a54ae362629cce758d2958327",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,6 +199,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "8.660345 hours"
             }
           ],
           "moreFacts": []
@@ -290,7 +295,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/victoria.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -367,8 +372,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fce2f040142ba304d77f1f4acc0acbb42fb58f166cac2489415374717f4d8a52",
-      "bytes": 8901,
+      "sha256": "c87235dc774b50821e2d26cfd52067a042b8327a54ae362629cce758d2958327",
+      "bytes": 9044,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -489,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6543,
-          "sha256": "9d0a2d666e5ceee67a9712781af104c03914ebb96145661094f2d772c3d6e644",
+          "bytes": 6642,
+          "sha256": "213fad187485318bf5db74d455d0243ba88220fa373e01008bd0c015d54b9630",
           "verification": "bytes-verified"
         }
       ],
@@ -553,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "victoria",
-    "materialSha256": "a9db011ab408720e05f6eae9df5430ec0f0d4f0e1a7bf3d9c1cc461d093da43f",
+    "materialSha256": "ccd7690335cbbf37b125ecd943aa265df14e0c9cfd85a64b6b42f7a0829cecde",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

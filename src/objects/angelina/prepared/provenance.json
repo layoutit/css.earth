@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3de884ec1bc0da3bf3087c0de3f35883dce7e6d6b371211f7f1edb6038d5c8af"
+    "sha256": "2742359668e63ce601e3e1f27e5deb4cdab31f4a75eabe1673284c5a7d51031f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4c087e258a6eb3dee5e1d94a50f98b2a4651a7cb50d0a68cc228047619ad2087",
+      "sha256": "0c058eeba15ee2987b1254212b691515454157f9370ddc8464f80b504a1d7b33",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "26 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.75033 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/289",
-                "label": "DAMIT model 289",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "8.75033 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Angelina model 289, version 2011-02-11; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/angelina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4c087e258a6eb3dee5e1d94a50f98b2a4651a7cb50d0a68cc228047619ad2087",
-      "bytes": 9361,
+      "sha256": "0c058eeba15ee2987b1254212b691515454157f9370ddc8464f80b504a1d7b33",
+      "bytes": 9178,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7006,
-          "sha256": "c770178eaf0fe420567d0eae0aa8cc29be20244d2616ccc2de044a346b2d7d77",
+          "bytes": 6870,
+          "sha256": "97bd5244ab6831932468e5e08701106f9c631bb178f69421eac33442106abce5",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "angelina",
-    "materialSha256": "bdf589e5bdcde59b7cff544aa138921f17d828453b321b338bf553bdcbcbb8f4",
+    "materialSha256": "2c75bc635c34a4afe2f7a1e3f87d82d8386ea1bb92d1056cdd366919e1b76ee4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

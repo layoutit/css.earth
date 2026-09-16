@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Thisbe model 5926, version 2021-11-12; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/thisbe.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

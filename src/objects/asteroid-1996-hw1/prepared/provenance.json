@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "631de7e7dbeb41e979299fa1c487042fa2db511e7317e35316af998a4cacdd29"
+    "sha256": "dcc2fdcae98220bc3786886c8b72ec29a37f69dbcb19f3d5ce7581409e3199b7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7e0dd4f3eadc59b702661d409974daa1e856c7f54df143d8c1b6093d082cf1d6",
+      "sha256": "153946d696e8266e77bb437c0656fc196ffcaf6ece665b50e3e0fb31242c50e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,15 +168,7 @@
             {
               "id": "radius",
               "label": "Model equivalent radius",
-              "value": "1.01 km",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
-                "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
-                "locator": "/diameterKm"
-              }
+              "value": "1.01 km"
             },
             {
               "id": "distance-from-sun",
@@ -207,15 +199,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.76243 ± 0.00004 hours",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
-                "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
-                "locator": "/periodHours"
-              }
+              "value": "8.76243 ± 0.00004 hours"
             }
           ],
           "moreFacts": []
@@ -307,7 +291,7 @@
             "credit": "Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1996-hw1.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -381,8 +365,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7e0dd4f3eadc59b702661d409974daa1e856c7f54df143d8c1b6093d082cf1d6",
-      "bytes": 10743,
+      "sha256": "153946d696e8266e77bb437c0656fc196ffcaf6ece665b50e3e0fb31242c50e1",
+      "bytes": 9952,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -503,8 +487,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7279,
-          "sha256": "98da2bf8a932a426d080134f72a2d1a3001b98308aff173ea486955683de2834",
+          "bytes": 6670,
+          "sha256": "aed54a02270eb4519e86e704325db6dbd697c517d2c1dc8ecba3cd74f6379976",
           "verification": "bytes-verified"
         }
       ],
@@ -567,7 +551,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1996-hw1",
-    "materialSha256": "d94b0317fa969f5678fa72500d7e84b2876bf536c646c92a48798807fa1a2d85",
+    "materialSha256": "57b5f6c30191f2e54b1f3dc05e1e4806ffd800c81ef1736790f78e49cfe1d81c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

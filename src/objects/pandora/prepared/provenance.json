@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcdc82f768090c91a38329642831a835d4f74ac1e508ccde5cd923c4777a903b"
+    "sha256": "1f03583f5068062325c29c2d3dbd4ece142420d17e5ea71665ef1e7bbeec4bb2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -453,7 +453,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f77f355ee72359141050a6084c0d96610a77f3ea55d93cd6de726fff8b945554",
+      "sha256": "82c6c8547d59ad9e2bc44257598ef332b292970e0a59395989e5e6340168c33a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -488,30 +488,24 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 15.1 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 141,700 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 141,700 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager 1 science team · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Voyager 1 science team · 1980"
             }
           ],
           "moreFacts": [
@@ -631,7 +625,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pandora.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -2024,8 +2018,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f77f355ee72359141050a6084c0d96610a77f3ea55d93cd6de726fff8b945554",
-      "bytes": 6117,
+      "sha256": "82c6c8547d59ad9e2bc44257598ef332b292970e0a59395989e5e6340168c33a",
+      "bytes": 5661,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2127,14 +2121,14 @@
       "outputs": [
         {
           "url": "/scenes/pandora/pandora-normal-thumbnail.webp",
-          "bytes": 1612,
-          "sha256": "200959bb89f4549238f9ec0dd39071808cf24325217aa1a41f7482e3ebb853b4",
+          "bytes": 1700,
+          "sha256": "6a7d52f49cf8392150417e44eea1cb22e843e18cb170390c91acd6d36c44fa27",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pandora/pandora-normal-surface@2x.webp",
-          "bytes": 426024,
-          "sha256": "534e83888c1238b7d07c665479ca75f12c57a51494820360a41617dfb841fa15",
+          "bytes": 389974,
+          "sha256": "4101db04fdc439033556f105f83297ac792bcbfcc7d4bbe24db938424785e0f5",
           "verification": "bytes-verified"
         }
       ],
@@ -2183,8 +2177,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-filter-color-surface@2x.webp",
-          "bytes": 297782,
-          "sha256": "a39cb6371a1991f21166ee6c9ebe1580480e1a0e57f4df45d5968eff50963934",
+          "bytes": 323900,
+          "sha256": "506a084fd8d1636826e0384aa2f5919288fbc080730298b2e955e51ee2c2a6af",
           "verification": "bytes-verified"
         }
       ],
@@ -2216,8 +2210,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7247,
-          "sha256": "2f48153c8ad0d38f0cec520676ac5b598e00406ddf8be72efbfb86dda712c4fb",
+          "bytes": 6885,
+          "sha256": "8d63fdace6ee55e2b70b5aeabc1aed180f5b30515c2b7e3047696aa7cea105b0",
           "verification": "bytes-verified"
         }
       ],
@@ -2242,8 +2236,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 17370,
-          "sha256": "6aa644fc89c44d45f41dcc95efc8ece50f17c75b7c504c6523364c4920b228e3",
+          "bytes": 16054,
+          "sha256": "027d3b4b27a179cb52af0c76c0bc7f86bd8c56eac8844c3efa20123c8c7503d8",
           "verification": "bytes-verified"
         }
       ]
@@ -2305,7 +2299,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "9f53d58f352dc1935169f3f827593e25c0662220f1f8dea60d7e3f7ef079fd84",
+    "materialSha256": "712889af2bafdc810cb7239661393854abd75653314672ab2e3bc12c50add111",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

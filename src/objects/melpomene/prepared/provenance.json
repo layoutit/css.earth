@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "93a73df6d7c518954bedf9bdf0ab178298990550d35858b06a7643a7a7d49211"
+    "sha256": "aeb6b787ace45726aa4cbb05e309323183509eb1ac49f3f6e4684c64f783b58f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9de4c2c8fdaa32a737ffcba8553aa984d32d96b7aed9e615c264716149d0bd3b",
+      "sha256": "fe6cee2df550987156ab6c5e79980735ad2e463cda5a844d628760794b04485c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "70.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.296 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "11.570306 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/melpomene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9de4c2c8fdaa32a737ffcba8553aa984d32d96b7aed9e615c264716149d0bd3b",
-      "bytes": 10081,
+      "sha256": "fe6cee2df550987156ab6c5e79980735ad2e463cda5a844d628760794b04485c",
+      "bytes": 10339,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7843,
-          "sha256": "855057de2647ca78d009496fe188c9bff7d8480eeb856325e1c3ca47e32d76b9",
+          "bytes": 8013,
+          "sha256": "3c53b0efdd07b5c3d6bec41c8a58efb759f9b1c9b747a09905c5df72ac886c0c",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "melpomene",
-    "materialSha256": "0e0c55d1cae6ff7b889d5c5bcc923be5e1c7c6102916585e429653b161487f73",
+    "materialSha256": "ad714218cc950057aa1e50ac39b3c0e46014fc2010e03c4d4ab0d595d9065828",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

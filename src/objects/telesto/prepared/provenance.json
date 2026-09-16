@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4150f4df270ab40810e0d80222e9d25a625da961c62f4eb7aedd041c4a9d6155"
+    "sha256": "78e341001b5848079c9db8b91713159db1a9b319be84ff7c2721184d15f980d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -383,7 +383,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a9905e5a4744bb9fdcf9dc3fa4ffaa1bfc2e8baf29048605c3488bb6c1cc6127",
+      "sha256": "7c1bab0ac0717d93a1d22f247db66234cd386070dc93f2ef6e40864a91398a2e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -391,6 +391,11 @@
         "displayName": "Telesto",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "12.35 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "System solar semimajor axis",
@@ -407,41 +412,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "45.3 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/1; P (days) × 24"
-              }
+              "value": "45.3 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 295,000 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/1; a (km)"
-              }
+              "value": "About 295,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Smith, Reitsema, Larson and Fountain · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/2; discoverer(s); year discovered"
-              }
+              "value": "Smith, Reitsema, Larson and Fountain · 1980"
             }
           ],
           "moreFacts": []
@@ -547,7 +533,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/telesto.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1533,8 +1519,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a9905e5a4744bb9fdcf9dc3fa4ffaa1bfc2e8baf29048605c3488bb6c1cc6127",
-      "bytes": 6141,
+      "sha256": "7c1bab0ac0717d93a1d22f247db66234cd386070dc93f2ef6e40864a91398a2e",
+      "bytes": 5300,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1628,14 +1614,14 @@
       "outputs": [
         {
           "url": "/scenes/telesto/telesto-normal-thumbnail.webp",
-          "bytes": 1728,
-          "sha256": "1f06f3c5f83975efb24cf728719d0579aa11b6787a1079eb48887dcfa8401895",
+          "bytes": 1694,
+          "sha256": "bd5dbe11a254991696370e8cb1878cffdec7cd820f43c4069459e8e1bd2507a3",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/telesto/telesto-normal-surface@2x.webp",
-          "bytes": 342086,
-          "sha256": "a2a9c91d3ef4c116ae8e3e9740b7c9d6d2a4943628bdcacb17ec196daca1c642",
+          "bytes": 330600,
+          "sha256": "951078ac68d5681952e6413248ab248be1fcbb8df24a1baa37df4bd6b083ac55",
           "verification": "bytes-verified"
         }
       ],
@@ -1684,8 +1670,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-false-color-surface@2x.webp",
-          "bytes": 272626,
-          "sha256": "dc551bbfbd746debe343e3a07b030ccbb2a585b95b2cadf3c67b42935b2fc5af",
+          "bytes": 289076,
+          "sha256": "1db19896a1530a02198d72b1a09b97da358bce46034d0fbb1809082c7e7b8c07",
           "verification": "bytes-verified"
         }
       ],
@@ -1717,8 +1703,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5785,
-          "sha256": "b7f075c775fa7570c795f65a0797274a7281bfa7f99933c2747b7a337603b169",
+          "bytes": 5129,
+          "sha256": "06e7a33602e2b362d8511c1a0820d3ffd5bf1ba43bc7a518f7d50a48fe08159f",
           "verification": "bytes-verified"
         }
       ],
@@ -1743,8 +1729,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 12332,
-          "sha256": "cbf0266da6a286689a43f3f0857772ad0ab64d88f56855bed2010330103b88e1",
+          "bytes": 12894,
+          "sha256": "7518e3dbdc8b0a2f3f324e758bd43a6cc54f3d1584f38166659e19e8405ecb35",
           "verification": "bytes-verified"
         }
       ]
@@ -1806,7 +1792,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "b10c8cb7e04bda3423926f52c62aba6805333e5da11329be8cd2f9258819fc19",
+    "materialSha256": "e403df383e816d0cf3a5f536c692b8698059bd0ac53dd54ae8bbf49e7455345e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

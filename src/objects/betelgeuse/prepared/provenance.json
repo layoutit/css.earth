@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e418a434a28e1227ee8ae48e7d0a0d8491ef140d3459c7815b8dbd3177c7cb7f"
+    "sha256": "614c69d6cd2baac2f7cf8f4245a04ccc367e93646f0c04e88f9f5a41c6f2c485"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8960cb98cc08bc7af4b8ba2864f39d80d8fe7f7f635430f901be58485da917de",
+      "sha256": "d36d90e198669154908790b29c3c15de7e90302fabf68be7d1d7847cbd11a8b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,41 +176,22 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "764 solar radii",
-              "source": {
-                "url": "https://arxiv.org/abs/2006.09837",
-                "label": "Joyce et al. (2020)",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "arxiv-2006-09837",
-                "locator": "radiusKm; radiusSource"
-              }
+              "value": "764 solar radii"
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "168 parsecs",
-              "source": {
-                "url": "https://arxiv.org/abs/2006.09837",
-                "label": "Joyce et al. (2020)",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "arxiv-2006-09837",
-                "locator": "distanceParsecs; distanceSource"
-              }
+              "value": "168 parsecs"
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (4 µm)",
-              "value": "42.45 milliarcseconds",
-              "source": {
-                "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
-                "label": "Uniform-disc fit to the February 2020 VLTI/MATISSE continuum data",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
-                "locator": "angularDiameterMas; angularDiameterSource"
-              }
+              "value": "42.45 milliarcseconds"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period (P / sin i)",
+              "value": "36 years"
             }
           ],
           "moreFacts": []
@@ -236,7 +217,7 @@
                 "kind": "scale",
                 "title": "Relative intensity at 4 µm",
                 "labels": [
-                  "0.37",
+                  "0.35",
                   "0.68",
                   "1.00"
                 ],
@@ -274,7 +255,7 @@
                     ]
                   ],
                   "labels": [
-                    "0.37",
+                    "0.35",
                     "0.68",
                     "1.00"
                   ]
@@ -325,7 +306,7 @@
             "credit": "J. Drevon, F. Millour, P. Cruzalèbes et al.; ESO/VLTI/MATISSE; JMMC OiDB"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/betelgeuse.json",
             "credit": "Joyce et al. (2020) radius and distance; SIMBAD astrometry; Kervella et al. (2018) rotation"
           }
         }
@@ -498,8 +479,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8960cb98cc08bc7af4b8ba2864f39d80d8fe7f7f635430f901be58485da917de",
-      "bytes": 5353,
+      "sha256": "d36d90e198669154908790b29c3c15de7e90302fabf68be7d1d7847cbd11a8b6",
+      "bytes": 4446,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -661,8 +642,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8474,
-          "sha256": "c7f456ca0e6192ce55627fceb1f89e5530e5ee989de82493a7541992ebd351ee",
+          "bytes": 7796,
+          "sha256": "80d163a5f963e92e25af7cf8327e740c1b3248b56fdd96187184a6805942f0b5",
           "verification": "bytes-verified"
         }
       ],
@@ -700,7 +681,7 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "024658fa0dbacd9b8f65a9e798127a4acdbf3b001bf3e5294009288dcc093a78",
+    "materialSha256": "51f1dbb5f9641024aa53d8bb97723a60701e3f3ec0cd8caff229aee4d6cdc765",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

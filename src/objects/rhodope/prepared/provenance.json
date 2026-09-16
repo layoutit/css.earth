@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9088e0659fd66d03aeb45d8dbb792c32bbb9a8d720bbffa23ec37bc587034613"
+    "sha256": "335da1a42f51a36e8f404b4e8aa3a8205da4410aac33b8048f98b2fe970a40ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e4bc4bf1a4c0f3306ce50d819fb05b56a3045a6bc4fe72b240910e7fb8f21613",
+      "sha256": "95ca44bd6da8f0d531819ee809b963d8f22f2e5402484c5cdce683692cf80a8b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 619, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/rhodope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e4bc4bf1a4c0f3306ce50d819fb05b56a3045a6bc4fe72b240910e7fb8f21613",
-      "bytes": 10179,
+      "sha256": "95ca44bd6da8f0d531819ee809b963d8f22f2e5402484c5cdce683692cf80a8b",
+      "bytes": 10201,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7577,
-          "sha256": "20a574104bf209854d6254fa0c2d28ae919c393327aad408a710a480da00f3ba",
+          "bytes": 7599,
+          "sha256": "581cace8c530450f577457477d62ec13d28fd65d631939cf823b6f9747d4a194",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "rhodope",
-    "materialSha256": "f0d7c96408b16a8c103c86d641cceac1ad0c1289211d27f0f78d309816403801",
+    "materialSha256": "0c70d28a710872323ed7e869b71e21322ddc7b1a5413fc6b89bb9fd53eb1f257",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

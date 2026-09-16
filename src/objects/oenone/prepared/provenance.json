@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5e826190905039494ec5590827b8aa02329bf33e40fbe24719e74fa4189e326e"
+    "sha256": "ac72986e53e9f1c379287bc766d0c29e49b8beff7cac05ac3e337fa2a96becf0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4d66a6ce42fe2539dbfa296329faf05c73ac16620440c791664c090084f5e370",
+      "sha256": "a97903f80129d9c11da93bf70659117921bdfc51c6eb9ca05014a4de6ca4c8da",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Choukroun et al. (2025); model 16312, version 2025-07-15."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/oenone.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4d66a6ce42fe2539dbfa296329faf05c73ac16620440c791664c090084f5e370",
-      "bytes": 9218,
+      "sha256": "a97903f80129d9c11da93bf70659117921bdfc51c6eb9ca05014a4de6ca4c8da",
+      "bytes": 9239,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6630,
-          "sha256": "78423bac601f259c487402f2364e55c94ffc169e3eae1b2e0f87b9277d4ffe28",
+          "bytes": 6651,
+          "sha256": "c72747267481ff92dd42470f8f6d4925518315d0a25f9f66d19b822e3026d862",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "oenone",
-    "materialSha256": "dfb5bf0f5f7a0d3dff31ae8c41cab381b1b981b186f0fe5ef7a7d8d0bb474fb4",
+    "materialSha256": "d2e09ef9e63eb2e52aeac1c6f63a9586bb13a9f8a2147437c9d8c9d55684ea01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0834ee8147c4947a91889c0e384444edefc1e5c45d0184a81f221b12b8f3d363"
+    "sha256": "4acdbe626bb1912078d9246d77f6de72c41aac00d60ae5fc2aeecae84b7876a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a6eada1a541463109fe7818245bf08268878e47b3a716ab09426d27c3ef53502",
+      "sha256": "73c35bcc0b117db4b9434f2ffe832057a4701a39113de585c75968fba4a1799f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 5987, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/siwa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a6eada1a541463109fe7818245bf08268878e47b3a716ab09426d27c3ef53502",
-      "bytes": 8777,
+      "sha256": "73c35bcc0b117db4b9434f2ffe832057a4701a39113de585c75968fba4a1799f",
+      "bytes": 8796,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6210,
-          "sha256": "6887bbbc81e2a32527e156012fa27a286082d93c62a661fd334d8ffd7d18207c",
+          "bytes": 6229,
+          "sha256": "3d4eb308bda990fe4443f653ac261dcfef756fc2bbefedc3187d4d678681cbc3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "siwa",
-    "materialSha256": "2ff8e2bd1eba37f6e6d4ff719bb2448d1d2b2c380f8d8e247fa4000de262a32c",
+    "materialSha256": "fa60c4c33e33c373218a13cf56d1b4a740aee014bf95ec4f3bca33a83fb15ada",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

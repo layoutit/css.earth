@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14aa685713918a18ca4d8e9a26e792273d6ed41d6d87205fa08746fa51bd22aa"
+    "sha256": "2a28a1056d640c01372c66dce8c7940ea29cabbe7a483fbb3b3cbd4d9d4698c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "085b5c59f7e39893d8e5a570f7fa3d247b4a8551a5e2cb96b5c6711ffc744fb9",
+      "sha256": "16de993be9b9a3c163be14efa8564a57d1ac7dc3c3cb77ba25088650820872b9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1825, version 2017-06-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ariadne.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "085b5c59f7e39893d8e5a570f7fa3d247b4a8551a5e2cb96b5c6711ffc744fb9",
-      "bytes": 9491,
+      "sha256": "16de993be9b9a3c163be14efa8564a57d1ac7dc3c3cb77ba25088650820872b9",
+      "bytes": 9513,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6893,
-          "sha256": "6c7620f63547e2065d34027af952fa4e1801773367e212e822c832c048fdf5c4",
+          "bytes": 6915,
+          "sha256": "68d2780e13b79bf19cc04a7c2f07d08d3be2f6b81f6078234a82533ad7ed4178",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "ariadne",
-    "materialSha256": "ec1569cd48071b4442c76058ef6a2c5ef633437cbcbd8e94eaadf4d42856fc1c",
+    "materialSha256": "f1fc2564ca00b01e6ce42806899ef15157e007bc0cbbf7adf824fe1393c1f8dc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fcfc146770ae7ff86317275a2f23e3880a36e7d802eb5f9bc1f9680beee3959b"
+    "sha256": "fd45909395f53eb707576ef58809936843f7879c1345a2ff7034e79f4d67f621"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a88af8039203965ab23759634c681a2e6d5b1631005c696a2dfa52d59d660b11",
+      "sha256": "286a83c0676c860755a5e8b261b87a0c5881bcd0529996e44b80846535207852",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "255.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.769 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.81321 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pallas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a88af8039203965ab23759634c681a2e6d5b1631005c696a2dfa52d59d660b11",
-      "bytes": 8059,
+      "sha256": "286a83c0676c860755a5e8b261b87a0c5881bcd0529996e44b80846535207852",
+      "bytes": 8313,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5860,
-          "sha256": "8559fbeebadeac2dc21930e663af5b07dc65c88d1882f810c87047b60e5ce2b5",
+          "bytes": 6026,
+          "sha256": "6caee13a8248b8dbf145c67daf9248363c781c17fd8904942356be6fa0283ad4",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "pallas",
-    "materialSha256": "45192edfaee4d35e4cef9791726f84ae97aecd9b6d1db5ec15792f80f963a6c5",
+    "materialSha256": "7aeb54d1bcf5e84776dacd52bcf67550920b200f70cfc4ad1888835c832e78dc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

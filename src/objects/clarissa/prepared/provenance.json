@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "638ebc51aafb1a765f118ac0fc81a0bde0027990b61866dbcf7f00484b49b944"
+    "sha256": "e3595996f5e3e530669df311db04829e72fc169b92ef8d94a716ad4688c2ce8b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ceaff9c0200014770e0918650a9d01914c267bc27907ad1e78cecb8c83eaf3e4",
+      "sha256": "7f811916cf972057412c1e020c44523e4003a3fe9194584cfaf53581ae54185e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2011), Hanuš (2011); model 296, version 2011-02-17."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/clarissa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ceaff9c0200014770e0918650a9d01914c267bc27907ad1e78cecb8c83eaf3e4",
-      "bytes": 10758,
+      "sha256": "7f811916cf972057412c1e020c44523e4003a3fe9194584cfaf53581ae54185e",
+      "bytes": 10781,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8144,
-          "sha256": "0bbd556052e7ec9d28264be05d9fdf70c1a6a78c7bc83d902d25decca099ce1d",
+          "bytes": 8167,
+          "sha256": "3ca1a6c6058fb9297200b5c6d07170ed9dc152d6d219a9883a836dfdbe13c94f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "clarissa",
-    "materialSha256": "d10fbd05629b698d1b1301abde272d019cc1fdb9921c08c7928f16716f12feca",
+    "materialSha256": "e206b112fc6a8b1cac17ae01a5880470457a8e61dc2509b9a4cdd7f240b921ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

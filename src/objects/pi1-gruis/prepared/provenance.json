@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "51ba5279a6a468768bda290f92b9ba43942b3c31f03e84146404256a0fac8feb"
+    "sha256": "93c6c737eff0ea97bd00fb19c9c1e838f271663e1f36762f02d1825af1733ca9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c462007dc9d38d395f4412ddd88d4b8514618cf53073b611ba322dc502bb03a7",
+      "sha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,41 +176,22 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "316 solar radii",
-              "source": {
-                "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
-                "label": "Fitted diameter at the Gaia distance",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
-                "locator": "radiusKm; radiusSource"
-              }
+              "value": "316 solar radii"
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "162 parsecs",
-              "source": {
-                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
-                "label": "SIMBAD: Gaia DR3 parallax",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "simbad-pi1-gru",
-                "locator": "distanceParsecs; distanceSource"
-              }
+              "value": "162 parsecs"
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (1.65 µm)",
-              "value": "18.17 milliarcseconds",
-              "source": {
-                "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
-                "label": "Uniform-disc fit to the September 2014 VLTI/PIONIER visibilities",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
-                "locator": "angularDiameterMas; angularDiameterSource"
-              }
+              "value": "18.17 milliarcseconds"
+            },
+            {
+              "id": "rotation-axis",
+              "label": "Rotation axis",
+              "value": "not measured"
             }
           ],
           "moreFacts": []
@@ -325,7 +306,7 @@
             "credit": "C. Paladini, F. Baron, A. Jorissen et al.; ESO/VLTI/PIONIER; JMMC OiDB; reconstruction by this repository with SQUEEZE"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pi1-gruis.json",
             "credit": "Fitted angular diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
@@ -473,8 +454,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c462007dc9d38d395f4412ddd88d4b8514618cf53073b611ba322dc502bb03a7",
-      "bytes": 5345,
+      "sha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
+      "bytes": 4254,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -636,8 +617,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5702,
-          "sha256": "d1fc92ffb4bceb9006b412a91ada2100ca5e8115e58dc751876a5f442516d5ed",
+          "bytes": 4840,
+          "sha256": "d973fbca3e83914b1d53e93aab19ff26bde8840c51f515e7ad47715496a67763",
           "verification": "bytes-verified"
         }
       ],
@@ -675,7 +656,7 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "acf185a0eb09e7f929f7634c48d2ecb9601b7c232c3974f62dd51fb95a19c754",
+    "materialSha256": "bba43569b2556a4d78b8335c5e16aebe7da7f830f5a36543777e3e12ade3655e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

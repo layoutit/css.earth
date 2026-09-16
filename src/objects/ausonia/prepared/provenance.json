@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b22692f34c151042047ee10c0dafa426addb1d9a3d5e21d5bf01235293fef1a6"
+    "sha256": "a86c0cd42f043d38acee082153d362841e8424b5526f30936fc50fdd7664f694"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "3927bf350e2f09787570686d16bccae14386256bd06a787bd8bdd25ebb837f98"
   },
   "recipes": [
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "52c5a82a380be7a04847c98dfd05fdc988295754a924fbc3ef5c80c132c345bc",
+      "sha256": "c4dbc38a74e4d1e3f6609451b8c3343fbc9e2fc764b67d7642b6fddc5fa82962",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Vernazza et al. (2021); model 5924, version 2021-11-12."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ausonia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "52c5a82a380be7a04847c98dfd05fdc988295754a924fbc3ef5c80c132c345bc",
-      "bytes": 9534,
+      "sha256": "c4dbc38a74e4d1e3f6609451b8c3343fbc9e2fc764b67d7642b6fddc5fa82962",
+      "bytes": 9556,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6931,
-          "sha256": "700593411596077b8eae3e21628c0ef51dc4245c24279ffce4b6464d61c79e7b",
+          "bytes": 6953,
+          "sha256": "59d2c1897330a9258e036d9809ef75905b3f909a6d4bb48195d6b345b71a0944",
           "verification": "bytes-verified"
         }
       ],
@@ -560,10 +560,10 @@
   },
   "lastPreparation": {
     "objectId": "ausonia",
-    "materialSha256": "afbc2fafad2743fab73bbf05e8f6fe271d043b0080cf0865e390c9089614d495",
+    "materialSha256": "343e9e8883a167fe06c556097ee50e0bfaacba48c423b6287e45ca65c7297ffb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "3927bf350e2f09787570686d16bccae14386256bd06a787bd8bdd25ebb837f98"
     }
   }

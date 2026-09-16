@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7855d3fae044a42ebf9c3c04b55b305e8104284356ee157cd5c62a95b76ad7d6"
+    "sha256": "4160d39fe8dad71247487def90ae39ef6e08e62afd1f42581eb1e263cb13551f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5b3a81c46a6f752c1e0842a78990cdb996b33c341c5d66e9f37e709fe17a0c49",
+      "sha256": "c1cfef491abe6457d7f2bf12a6dfdda293ea065d134c215ebb83fd681ec5bc85",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,6 +161,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "81.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -290,7 +295,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nemesis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -367,8 +372,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5b3a81c46a6f752c1e0842a78990cdb996b33c341c5d66e9f37e709fe17a0c49",
-      "bytes": 9449,
+      "sha256": "c1cfef491abe6457d7f2bf12a6dfdda293ea065d134c215ebb83fd681ec5bc85",
+      "bytes": 9584,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -489,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7102,
-          "sha256": "60dc34722c896f1fa9444198697213a7944139db45d22801312b6cb71bd4a8d2",
+          "bytes": 7193,
+          "sha256": "5b0146b65ff027b298272c9d2eb9fadca4ed1c81d99ac337ccde351f54043882",
           "verification": "bytes-verified"
         }
       ],
@@ -553,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "nemesis",
-    "materialSha256": "52e02539300696ce5f68056ef8feaa60e09b19e3b5d30b5b8580f2c943e2af23",
+    "materialSha256": "cf090c10c24b0e9246dbf49343f082fe01843d06d00bcebd98169ae95fba6b45",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

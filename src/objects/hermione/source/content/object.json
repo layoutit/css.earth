@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Hermione model 156, version 2017-09-21; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/hermione.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

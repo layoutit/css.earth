@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2fa148bf84a57e982cae97cdeb49a31c1466bc31f4e95938872c865119317d9b"
+    "sha256": "f25d93cc6585ece75d22b79f5dbd8deddaa3ef932c3530f670bb2a09c242c7d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -550,7 +550,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d5767820e97466c5c7673e2e63dd0088262c78f6831ef5a2bf75ccaf6e69230a",
+      "sha256": "7829ad211d2f36338f465492a1065473b6f5b29d2d796586e04bc4d289eb5b60",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -626,6 +626,16 @@
                 "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
                 "locator": "/references/2; rotation-period"
               }
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Jupiter",
+              "value": "About 671,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "Tenuous oxygen"
             }
           ],
           "moreFacts": [
@@ -1067,7 +1077,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/europa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -23017,8 +23027,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "d5767820e97466c5c7673e2e63dd0088262c78f6831ef5a2bf75ccaf6e69230a",
-      "bytes": 20331,
+      "sha256": "7829ad211d2f36338f465492a1065473b6f5b29d2d796586e04bc4d289eb5b60",
+      "bytes": 20612,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -24417,8 +24427,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6451,
-          "sha256": "757c6e4df80dc1e2189f26d03e8ea2a3eca4d657fad4e10be1d001d49d003b52",
+          "bytes": 6525,
+          "sha256": "b414367cd310cf0f536607beba63c7aa4538d94b32ad8dc98a3e52458eae6ab7",
           "verification": "bytes-verified"
         }
       ],
@@ -24667,7 +24677,7 @@
   },
   "lastPreparation": {
     "objectId": "europa",
-    "materialSha256": "5121d302a828683d03e441832df584ec84740137c85e9515b9325a7e294bb234",
+    "materialSha256": "68c608ff37f9fb41e4c934ad42a9654069664872d2f5dd34a26992372ad7d621",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "594d1cd300206b0902afcaf49e6863cb747b4b2fbd911cf37f825852f9d704ad"
+    "sha256": "9c30ee2c989fde2e630d31835624bdf70a321826894e360e141e0511edc6c5f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -460,7 +460,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d8b8851031de177b2a95fd6b63a47d0d567cdddc9036edebabe8d34e179ebbab",
+      "sha256": "00397c61e69ff869c90eca04b6d5aeb98e0e806075126de6ec2752579056d01b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -536,6 +536,16 @@
                 "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
                 "locator": "/references/2; rotation-period"
               }
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Jupiter",
+              "value": "About 422,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "Thin sulfur dioxide"
             }
           ],
           "moreFacts": [
@@ -868,7 +878,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/io.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1574,8 +1584,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "d8b8851031de177b2a95fd6b63a47d0d567cdddc9036edebabe8d34e179ebbab",
-      "bytes": 13955,
+      "sha256": "00397c61e69ff869c90eca04b6d5aeb98e0e806075126de6ec2752579056d01b",
+      "bytes": 14237,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2443,8 +2453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4227,
-          "sha256": "63d118c1a27c48366671dcf13e08e31644b9c8468deaecdc0edcb7c15bbf3f05",
+          "bytes": 4302,
+          "sha256": "947f10fc361e5798b6469520777e311b6ec75ab0a0b09cb980a6ff4fe80ada2d",
           "verification": "bytes-verified"
         }
       ],
@@ -2618,7 +2628,7 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "c850384c294f3fed3ef251d0771a50208d7e40ba3a70fde3b50363bc7050b793",
+    "materialSha256": "a2cc21c1e53e2cd0a36c32ec6455af17888d3fdb6fc8ac1acb0dd5f59110a8e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e1bf68e7e694793121fb58f9005cff6c50d3bb5bc89beeeda58d87dce5991155"
+    "sha256": "6088111f03e9e38f6f78fec93ec614ad59ac735b9950f5f9e52583f9ce8a344a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -200,7 +200,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1fbaf2d2fdbd5ad1593dccdd84cc4f1a4fdd5499ffc45e83a6b4c1d02cf5b939",
+      "sha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -239,17 +239,14 @@
               }
             },
             {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.363 AU"
+            },
+            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "3.64 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2867",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "3.64 years"
             },
             {
               "id": "rotation-period",
@@ -399,7 +396,7 @@
             "credit": "ESA/Rosetta/MPS for OSIRIS Team; Jorda, Gaskell and Kaasalainen; Phil Stooke/NASA PDS"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/steins.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -697,8 +694,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1fbaf2d2fdbd5ad1593dccdd84cc4f1a4fdd5499ffc45e83a6b4c1d02cf5b939",
-      "bytes": 10432,
+      "sha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
+      "bytes": 10227,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -947,14 +944,14 @@
       "outputs": [
         {
           "url": "/scenes/steins/steins-osiris-thumbnail.webp",
-          "bytes": 1672,
-          "sha256": "118b33b0b5ae52e2a5beaf35bfb7f08a74af35cbf1209132d304529b848bc208",
+          "bytes": 1662,
+          "sha256": "2845713b3b2bbfd64607b16a33a5f00a6f94d9a52f26d62f10b6a1d0090d49f1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-osiris-surface@2x.webp",
-          "bytes": 298938,
-          "sha256": "f288d6973feef9a9ec85fbca44a405f36ed203ba5e86505121d443dd84f56232",
+          "bytes": 284776,
+          "sha256": "ea0a346a4333fc7aa2e2d4dd9e5a59fbbf4d2bdd36bfa379eeb09c9f88149db6",
           "verification": "bytes-verified"
         }
       ],
@@ -986,8 +983,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6372,
-          "sha256": "f79b243961205bba8dbef5677cfbcce4fa2b77c1d568a3e3507006b1ae1b8a77",
+          "bytes": 6096,
+          "sha256": "79aedd4ecabe18d4799f39abe298c038e31759b4eee6cab0b5aa484145db0c10",
           "verification": "bytes-verified"
         }
       ],
@@ -1073,8 +1070,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 9876,
-          "sha256": "830dee0eac8f4e1585d1e771b58fc49f409df1384995639e81df3f35d926e655",
+          "bytes": 8932,
+          "sha256": "3b84c2285428e0313b46c071609c00eb3b34f88a6d73ec78d4da4e8b34f32a85",
           "verification": "bytes-verified"
         }
       ]
@@ -1111,7 +1108,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "8544a22e363b9e76bf65d3ca46b69d24258141ead813941236c462e497913d66",
+    "materialSha256": "7c70503a18264dbe2fe52c749e45606a9c6f44196f7d6cd03255d85cdc1fd40a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

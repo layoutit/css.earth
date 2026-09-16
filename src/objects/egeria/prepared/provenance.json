@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a73f934f7f1a4df0198469c4d176fa3ac8a281f64f3913f957a59ba7edf67ec4"
+    "sha256": "d8e90c7bb6150470fbe708abe9a34c0e5ce60de15bc740e0429039d4883cb1e2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7dcb61706852665efcef7f8e76c199a7c0548fd03cff95370f5444cbc76ee6aa",
+      "sha256": "98aa9eef25943783e1012b85ed54ab652d17758ee85828cdebee11ddec189114",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,6 +199,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.046664 hours"
             }
           ],
           "moreFacts": []
@@ -290,7 +295,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/egeria.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -367,8 +372,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7dcb61706852665efcef7f8e76c199a7c0548fd03cff95370f5444cbc76ee6aa",
-      "bytes": 8639,
+      "sha256": "98aa9eef25943783e1012b85ed54ab652d17758ee85828cdebee11ddec189114",
+      "bytes": 8780,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -489,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6308,
-          "sha256": "94b0ef63874c8a057b6cd50171af873cf9b83f6bf1d626898e8676964931112f",
+          "bytes": 6405,
+          "sha256": "0027b88d60367185b992da9fa221b5612a468d9825de7dc4d88e8ed8eb5295a2",
           "verification": "bytes-verified"
         }
       ],
@@ -553,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "egeria",
-    "materialSha256": "e36822ee4a51ff2ffa40179ae54e8197da20d3cb930eb9a6f3a5a7286a308ada",
+    "materialSha256": "c458ed22a0f255040c4cb005e0b4ee1cfe320966be30c7abc67e7a7746f8ba47",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

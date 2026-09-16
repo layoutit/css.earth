@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "338c49a1e79356516889195a1055236e46b99a08d52597c7f948ae60fffe2444"
+    "sha256": "d4fe0d3c1856d663f10d26c50fce3d0afc1dbdd1d3320a321e6c3b414d7e277a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82e410f093b22c95f6076d400b146603cd0cfd1adc7bed992479fbe2e9298587",
+      "sha256": "293b5dd37d4d2291360a0b17d808c714585aa156ba0ebc381cf6a322011f71fe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; 2001 QW16 model 15015; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-2001-qw16.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "82e410f093b22c95f6076d400b146603cd0cfd1adc7bed992479fbe2e9298587",
+      "sha256": "293b5dd37d4d2291360a0b17d808c714585aa156ba0ebc381cf6a322011f71fe",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10757,
+      "bytes": 10790,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7809,
-          "sha256": "104064fef84a5da88d8705234580d745357ae3fc339012eb5cb33c04d537f444",
+          "bytes": 7842,
+          "sha256": "66da307a53987ee0718b5644c6c67bb94120c684108a42bcbe13240d4112667b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-qw16",
-    "materialSha256": "63dd54fb00bc625293756526231ba2c96a4745de63e3ce9f014849d776e4135c",
+    "materialSha256": "a93c7f20ef1076b7358c78fd6d0e00c520a07526a754965691652778c2742e7a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8e5a4a90b673f65efd84b829bd33c0769792899e32752f81f8f220596f910831"
+    "sha256": "07bc6e9bc2cdca28bb629e52abc20a0a592d28ac804d9a6788cea10febe97522"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "98ac61cbae0db6f633627583818a228bf956b24becfef95322a9eb4f3d8e158d",
+      "sha256": "65d59226be052e357233f67327a0456c4849033bb9fe02c9d3cd5cba37f1ee62",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "127 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.671 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.209531 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/juno.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "98ac61cbae0db6f633627583818a228bf956b24becfef95322a9eb4f3d8e158d",
-      "bytes": 6370,
+      "sha256": "65d59226be052e357233f67327a0456c4849033bb9fe02c9d3cd5cba37f1ee62",
+      "bytes": 6621,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4203,
-          "sha256": "a2be1b2a5a5a2413265de189f61c18b9b27c8474975dcaca0db13568db7f5c50",
+          "bytes": 4366,
+          "sha256": "8ca51909df7a14f61a71cb9cf8093f1ce4e7bc13b713c6272fc1a87492cd268f",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "ed2085772c94d033bb1f78ea42c0737f3e1d5ddbf092e69da175579d114273a6",
+    "materialSha256": "7586120389783392f44c90373ea16433234f27dbbdc8b8d00d794d27b0fae76f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

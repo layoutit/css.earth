@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afca41a946be509eb34c9aff6fb4584a140c4247e84a645f9e1029adc7b822db"
+    "sha256": "b40539b4a7d2473ff025d44fbae940bfdfded4f25a184e5825e11930729af30f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "208bdf90da2a6b02369aa8651e655446cc2ef7941e9bf1f48dcbf8d9552b3bf3",
+      "sha256": "13b9bb0e21276197059106d2fdacb4a3096adacf9fd8a04c6e5dc56c98791b12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "130 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.843928 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1813",
-                "label": "DAMIT model 1813",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "4.843928 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Camilla model 1813, version 2017-06-14; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/camilla.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "208bdf90da2a6b02369aa8651e655446cc2ef7941e9bf1f48dcbf8d9552b3bf3",
-      "bytes": 9112,
+      "sha256": "13b9bb0e21276197059106d2fdacb4a3096adacf9fd8a04c6e5dc56c98791b12",
+      "bytes": 8927,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6765,
-          "sha256": "c6370db9b15e262076e7d154bc5eaa9da60a8a1770db5cde4c572ddcf7f7f730",
+          "bytes": 6627,
+          "sha256": "28601cb36282671d700423e4907b8708be4bfd8c5af5e9d059753088e857dacc",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "camilla",
-    "materialSha256": "95f80f9126744103e20b46c4286b49fbf11bdf6cf360e75f01f5353e1031f2c5",
+    "materialSha256": "6add0984dcf86a83f78814a6a62313bc0c7d732ef316e552c76cff4da0e6d0b2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

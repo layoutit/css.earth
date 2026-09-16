@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0aaba4e542f8e0e17f7958e1e8f4d67672cb2b97d3260446d34089580ca625c5"
+    "sha256": "e8e6534bc8ac06522e07769ae240dd2e252ffa631bfecf6901125f0cb2d21121"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -473,7 +473,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5f7fd43d8541fc1410eec7e99a8527337a19f22f599666604c773e8da5e0fbd8",
+      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -499,6 +499,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "137 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.493 AU (mean)",
@@ -523,6 +528,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.18364 hours"
             }
           ],
           "moreFacts": []
@@ -628,7 +638,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sylvia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1591,8 +1601,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5f7fd43d8541fc1410eec7e99a8527337a19f22f599666604c773e8da5e0fbd8",
-      "bytes": 8719,
+      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
+      "bytes": 8971,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1734,14 +1744,14 @@
       "outputs": [
         {
           "url": "/scenes/sylvia/sylvia-zimpol-thumbnail.webp",
-          "bytes": 1354,
-          "sha256": "26e2579d1a354fe1ebf69edebd3facffaa0a8b1e56c26a9494ee4fbe2e22dc8c",
+          "bytes": 1336,
+          "sha256": "5a07781da8f09d2092265e7dfa7d0751a2fc8c6c1215af12e2a68f44d7e9c6f9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 416016,
-          "sha256": "7f287fdf5250aef1a781f61d42c149ca5c1fe4c6279ca33b9c6fb0aecbeb2711",
+          "bytes": 360804,
+          "sha256": "26b85bcb445655c3cbbc5cd0f4fa2559454f4a27bffa9c80f8a09745f0c9af07",
           "verification": "bytes-verified"
         }
       ],
@@ -1773,8 +1783,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5416,
-          "sha256": "397df3016432d80285782d55dc1a9a8420149926fdda7ce4c2d9c2e882e10ac1",
+          "bytes": 5580,
+          "sha256": "cfd0ee75a49006be0f94494d000ff942a87d097a192c53d185ce7abfcc986fcb",
           "verification": "bytes-verified"
         }
       ],
@@ -1824,8 +1834,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8588,
-          "sha256": "50458de8e0fb5cb3bf4daed54b2d43896341b26e25a75158e1b001b72f4933c6",
+          "bytes": 8530,
+          "sha256": "06f2659507a6d317b875f08d93834b7d883756082280595e3baab5112c9a9c38",
           "verification": "bytes-verified"
         }
       ]
@@ -1862,7 +1872,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "0d94019e0c6ec0b4fcd6cf46caf4882f9ba57bbea7d0b14d163def45df5d17d6",
+    "materialSha256": "fb190e65667c5ed7da49e9b9555dc2ec868fe2787b327b28f848d803afc17d1b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

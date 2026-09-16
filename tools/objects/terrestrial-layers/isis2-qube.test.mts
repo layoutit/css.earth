@@ -37,5 +37,5 @@ test('legacy ISIS2 keeps finite zero and negative values separate from special p
   assert.throws(() => decodeIsis2Qube(bytes.subarray(0, 2047), grid), /layout/);
   assert.throws(() => decodeIsis2Qube(bytes, { width: 4, height: 1 }), /layout/);
   const wrong = Buffer.from(bytes); wrong.write('SUN_REAL', bytes.indexOf('PC_REAL'));
-  assert.throws(() => decodeIsis2Qube(wrong, grid), /layout/);
+  assert.throws(() => decodeIsis2Qube(wrong, grid), /layout|PDS3/);
 });

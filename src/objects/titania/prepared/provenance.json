@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8014c5bab44f1ac302c2ab36386fe895717f6820c6d2e9b5bce004fab752c11"
+    "sha256": "0869ecb5f792a786faf596ed4c7c48ba9df01f25ff22c26fc6f03dd41025d1f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -284,7 +284,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "93973a595153fae9eff3f6553fed2fd8d1beb49c0b171196a0952f46bbe64869",
+      "sha256": "54e9b6bd935a806552c29c91042b205dc942c2d3ff846ef6881160198b783709",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -321,28 +321,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 8.71 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "About 8.71 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 8.71 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Uranus",
+              "value": "About 436,300 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Herschel · 1787",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "William Herschel · 1787"
             }
           ],
           "moreFacts": [
@@ -560,7 +554,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/titania.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -831,8 +825,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "93973a595153fae9eff3f6553fed2fd8d1beb49c0b171196a0952f46bbe64869",
-      "bytes": 12626,
+      "sha256": "54e9b6bd935a806552c29c91042b205dc942c2d3ff846ef6881160198b783709",
+      "bytes": 12183,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1563,8 +1557,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6309,
-          "sha256": "bd6f3591484c6844a45432c70fcefc0d6efd09a11d8ac056b174e85028bb2b30",
+          "bytes": 5842,
+          "sha256": "ad739c1e3c7bdbd2d30a33e371b0669125f7b6b5e6335858ae9c9858cf9104f6",
           "verification": "bytes-verified"
         }
       ],
@@ -1688,7 +1682,7 @@
   },
   "lastPreparation": {
     "objectId": "titania",
-    "materialSha256": "994907990e3bea09d385051d78cf3108d3ec147b8f5a734cbf7e48ff33d77272",
+    "materialSha256": "d71107cf3b6dc871e4bbed74d2d9950c1a023ca288bea314a71acc6b28c5c4cc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

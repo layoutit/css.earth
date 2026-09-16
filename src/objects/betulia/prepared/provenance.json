@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8cf3876260f122ed95ca51b46fd538999100583bff40d82c40def0c88e46f46a"
+    "sha256": "4942dfd1917a21ab7b45a5b638cb7d78d0c70e213ebe1442e494da7add1033c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a88626c6f116c58e0579bab73a6cebb01bc7a7422737a6a1c7dda0c4d52f73bf",
+      "sha256": "492f365255b7c42612cf337bd7b40d625c4f87f7576258bb7c33ac901cb1aa5e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,15 +164,7 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "2.695 km",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
-                "label": "Betulia · betulia research betulia",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-betulia-betulia-research-betulia",
-                "locator": "/diameterKm"
-              }
+              "value": "2.695 km"
             },
             {
               "id": "distance-from-sun",
@@ -203,15 +195,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.13836 hours",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
-                "label": "Betulia · betulia research betulia",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-betulia-betulia-research-betulia",
-                "locator": "/periodHours"
-              }
+              "value": "6.13836 hours"
             }
           ],
           "moreFacts": []
@@ -303,7 +287,7 @@
             "credit": "Magri et al. (2007), Icarus 186, 152–177; Arecibo and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/betulia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -377,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a88626c6f116c58e0579bab73a6cebb01bc7a7422737a6a1c7dda0c4d52f73bf",
-      "bytes": 9200,
+      "sha256": "492f365255b7c42612cf337bd7b40d625c4f87f7576258bb7c33ac901cb1aa5e",
+      "bytes": 8453,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -499,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6713,
-          "sha256": "2646790785b064ed7bb8f1cb6f5cce01f989a8c9984fb821b0268d48e2e862a4",
+          "bytes": 6148,
+          "sha256": "ee235f283868745b879fc94b2867fa30988aec8bb81f32b7343e3568cc5de68a",
           "verification": "bytes-verified"
         }
       ],
@@ -563,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "betulia",
-    "materialSha256": "f80b43232ebda167004fbd9a88eb4e2ebf58f06c983dd834364a3e356719c76a",
+    "materialSha256": "70c3fd84f87e7299cedfe11c52c7a444e9c2d4b6d707c767a3049e20d15ae145",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

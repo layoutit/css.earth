@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe19ee30f35521e03f1d3c96cb94a85b24d93bae121ccad609321229b96388e2"
+    "sha256": "369909247dce0b9d66da9f487f25d561d3077896785ce1c0394f3bcc28291c38"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -205,7 +205,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4294fe32b5a1992809bbf454cbe987e75f06a83d139d0a834156b59e29e8544b",
+      "sha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -242,6 +242,21 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "Target physical data: RAD (km)"
               }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.435 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "3.80 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "8.168 hours"
             }
           ],
           "moreFacts": [
@@ -378,7 +393,7 @@
             "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lutetia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -704,8 +719,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4294fe32b5a1992809bbf454cbe987e75f06a83d139d0a834156b59e29e8544b",
-      "bytes": 9390,
+      "sha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
+      "bytes": 9764,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -938,14 +953,14 @@
       "outputs": [
         {
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
-          "bytes": 2374,
-          "sha256": "9ef32d7daafc5a94714755115788bbe5ba95bb18e84aaa378638f88343e1779f",
+          "bytes": 2384,
+          "sha256": "8f0b7841461c97a1c62a915265d55d8430185e7a1434fb0bc95f5e46d023208c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
-          "bytes": 839936,
-          "sha256": "9fdd8643ef0935915b8018f6eb9436da663259b5fa9c0d861841c45802fcb73f",
+          "bytes": 787590,
+          "sha256": "2f4e398e1c2e8ac5d570f6e73cb125bb11bbd5982c695fe815626820b2eaff0d",
           "verification": "bytes-verified"
         }
       ],
@@ -977,8 +992,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5567,
-          "sha256": "4f856dbf942cd153d10c836838f9f6af4ec66d1687f6f25667f9e5fc3dd964f2",
+          "bytes": 5691,
+          "sha256": "6010dfaff3237299714cf24cd22af7382fe550b8368cf406ef5cfdb2db61df51",
           "verification": "bytes-verified"
         }
       ],
@@ -1064,8 +1079,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 29842,
-          "sha256": "46b2cfd611ca94145dff80d8f7a9bf069715b58e170452b85c8b1ca4e5f03c47",
+          "bytes": 28248,
+          "sha256": "9998901149a90aefa058ec3553c3b64b9406fdd3d532f83b2da4c81d748098f2",
           "verification": "bytes-verified"
         }
       ]
@@ -1102,7 +1117,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "9541f3b8094cf0519cbffbb0e0970587ecc097ce545d7150f4d2347bfccbd81f",
+    "materialSha256": "553a1c82db11f42a1daca4edf6259bdf66310630b2c86030713f7876ccc16715",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "326594257d9392399e11660b1e5858e0fea438b6f9c3c68f02e1a261a91e1aa6"
+    "sha256": "c0fdbc9cf0368f127c766a5e6bc4fbd19ef51b389d12be32f1a7e47ae0dbd60f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1e32bf803dcac7d765c791d2aff34161c3182dbb7a3f13d542dd6b164a83912e",
+      "sha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "56 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "16.80059 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1816",
-                "label": "DAMIT model 1816",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "16.80059 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Astraea model 1816, version 2017-05-26; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/astraea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1e32bf803dcac7d765c791d2aff34161c3182dbb7a3f13d542dd6b164a83912e",
-      "bytes": 9694,
+      "sha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
+      "bytes": 9508,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7349,
-          "sha256": "7db9a4cbf2eb38227e3e58e4bfeb182e6b7580318be4967ffb99aec57fd5c408",
+          "bytes": 7210,
+          "sha256": "9cbc27dd2cd6b0e6efc5eb0651c5fa62b9d1758f19667d3477008364604f3cfd",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "astraea",
-    "materialSha256": "8979dd82cdbae1ade5afc25bf11d7397d144bec354e50dc4459a03e569b8b8a1",
+    "materialSha256": "b044c0f82d1a766775a4dba8629dd2a1e8f12db5f172263e11905b3a48deaac4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

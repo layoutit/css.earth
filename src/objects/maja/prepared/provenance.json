@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "acac64ffd32bfce67a2589960985d504215020436a24d675fe7eba47ff836990"
+    "sha256": "f7f7739e70bfdedd8513d1d153edb5632b60d0f07b92404c45172777eda833ec"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9327c3401f5f153694871e8605b5106b9f29dc1068a9b79673a203ce63fc4355",
+      "sha256": "9e8ccc3ff12a1fd2744d66e0e229d07c6f5769dce55fd5c38b968ed5c2f36c05",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Maja model 1233; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/maja.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "9327c3401f5f153694871e8605b5106b9f29dc1068a9b79673a203ce63fc4355",
+      "sha256": "9e8ccc3ff12a1fd2744d66e0e229d07c6f5769dce55fd5c38b968ed5c2f36c05",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9525,
+      "bytes": 9544,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6776,
-          "sha256": "3b50a42659778b209f0e243ca166e277d42c559d0d22c8e2c7406e09590fa5d7",
+          "bytes": 6795,
+          "sha256": "3a87a250e77de7213f8fa4f3bee5867cbfbae62fedcc4ab690d3d546b4dc6519",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "maja",
-    "materialSha256": "36acc630a97c5dd46c6199cd53fd833b87374c2469fd00685c0fa9d51cb1629f",
+    "materialSha256": "191aff500b317d6bdba4a26014092ac11bfc76d156d964e3e43e43b3be311b3f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

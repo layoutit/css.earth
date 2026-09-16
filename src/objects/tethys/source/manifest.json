@@ -1535,8 +1535,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16568,
-      "expectedSha256": "d0e5ffa264e8df0eec782ea6e1aeab090d33d82f6f35443717e7edb8046a5e21",
+      "expectedBytes": 15628,
+      "expectedSha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1551,8 +1551,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2336,
-      "expectedSha256": "b6350609c6f29713bf205f1868110019ada855a3ee4ba6b4efd695ee653e7c48"
+      "expectedBytes": 1086,
+      "expectedSha256": "fa3c920f3b9d68eabc74fb1c1f048021f7e79e3f705e7c1e47b698127e01698f"
     },
     {
       "path": "science/b2-intake/tethys_128_o.xml",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f16a4aea28154832b77dbe952cac7b1ba613388671ea580c9f34564ac725600f"
+    "sha256": "0dc47ca4d2a5cbe05f7ef640a5794b4873c95a712db6af3632f0c4e6aab7f1c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b60a115d61dde6f8e18fcd304f4416347f1170120a8ab6645a7a2dd66eddb7cd",
+      "sha256": "8e8d96aeb94b003c3f09bcae608e8e6e6da68cfa20c924c821a7ed607cf37992",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 6195, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/beatrix.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b60a115d61dde6f8e18fcd304f4416347f1170120a8ab6645a7a2dd66eddb7cd",
-      "bytes": 9698,
+      "sha256": "8e8d96aeb94b003c3f09bcae608e8e6e6da68cfa20c924c821a7ed607cf37992",
+      "bytes": 9720,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7096,
-          "sha256": "1ab63b8690f91204923a20e58376959de98683df791005b5bfac97ebc2308982",
+          "bytes": 7118,
+          "sha256": "3f1d3092016c1f735c6e184ec53c83d3045d8cd49ff82490d77cca15584e23f9",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "beatrix",
-    "materialSha256": "f3ef0a56534d4779a3c89031f3adf6b426cfeed48cdbbcb71c9d37f1eb180923",
+    "materialSha256": "c85fcc97a92bafcd5c6bea58b362df39d970cc5d009aac956a51d4ba87c10e6b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

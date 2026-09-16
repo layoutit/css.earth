@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ad6b06e23684ee161d5ef1b4c1da1947e6f38b6a973541f8680e9c9f6e73f6d6"
+    "sha256": "7ac20fe47005621de9321c41c1a577696f71a671da95f83e90f2747a6fcaf9ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f961c944702912abe1b5d59c29846d0cd99992ef011f079df09c2429985a94f",
+      "sha256": "54d65799cd39a785a78faacebbc8a709f9fcc62439f8f071efb59c2c342e64f2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -207,15 +207,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.16 ± 0.04 hours",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
-                "label": "Nereus · nereus research nereus",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-nereus-nereus-research-nereus",
-                "locator": "/periodHours"
-              }
+              "value": "15.16 ± 0.04 hours"
             }
           ],
           "moreFacts": []
@@ -308,7 +300,7 @@
             "credit": "Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nereus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -388,8 +380,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f961c944702912abe1b5d59c29846d0cd99992ef011f079df09c2429985a94f",
-      "bytes": 9486,
+      "sha256": "54d65799cd39a785a78faacebbc8a709f9fcc62439f8f071efb59c2c342e64f2",
+      "bytes": 9127,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -510,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6619,
-          "sha256": "503a6c88c78e1089ff9aecef3473bb71c2ad3290d78e615bf972ea92306c231a",
+          "bytes": 6351,
+          "sha256": "f06df10abd998bee5b4968283440520ca7c119c9e60e9bb2e5b2cd503a62be08",
           "verification": "bytes-verified"
         }
       ],
@@ -574,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "11c05d24bbae9f610aa4787acf14b7d3a3b53763e99a74605ef2863199b0bc17",
+    "materialSha256": "25a731ba8009c783c83557d655cde79db70a13d72b42c327e3ef7d9105af7bfd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

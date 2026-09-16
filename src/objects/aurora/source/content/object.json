@@ -151,7 +151,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Aurora model 1830, version 2017-06-13; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/aurora.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "06dec8423e4ea85cceb4c24847fcbfc6020f1197bb45f9fdcd70acb09c4205dd"
+    "sha256": "c008cfccfd512f3a6f5af116e9f721e8339e213126a562a43647018226a0d716"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dfd3d63e31adb956bbe6aeeaa42c57d1a0abb8ed45f5fac4a1308f9d0a8c1471",
+      "sha256": "c6a705ae89d9a9deb12029dc820641eb9b279ed5a9048fdf6026b3b00725f090",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ducrosa model 352; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ducrosa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "dfd3d63e31adb956bbe6aeeaa42c57d1a0abb8ed45f5fac4a1308f9d0a8c1471",
+      "sha256": "c6a705ae89d9a9deb12029dc820641eb9b279ed5a9048fdf6026b3b00725f090",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10409,
+      "bytes": 10431,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7665,
-          "sha256": "0c2c1fc3b24acf1f887a29c705ec653b0f73b904a9d60568e78d7c5f7cf3f514",
+          "bytes": 7687,
+          "sha256": "60519bd08b056607f20743062fb22a356f592cd656c9fd990bbfcbace0abbdc1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "ducrosa",
-    "materialSha256": "e0aa230a9d050973899e811b8b340959d8ba4beba51ef522c8708690b7c47944",
+    "materialSha256": "62362c9021df729ba7a6f2ce2a4042370b54a68cb3105a14ffc97332a99736c0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

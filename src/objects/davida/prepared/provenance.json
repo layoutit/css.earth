@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7bb5dc7ff966d5a4907c0f9265c70a1f473a18bad9557411d9da04a6b51ea5c"
+    "sha256": "b0bb645d9c9ad755c2e7b0f5d78228ffe30feec2a328954fd90778105252cd2c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ba6a4c319cd757b1a16f8454c36402be7a3ea3f7ccb985630dd26f2f14442147",
+      "sha256": "bc2b9f8bbe36b149d71bc70c5af55cfeaff8f6a5947ca8bdc8cb52779e585f3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "149 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.161 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.129365 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/davida.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ba6a4c319cd757b1a16f8454c36402be7a3ea3f7ccb985630dd26f2f14442147",
-      "bytes": 8374,
+      "sha256": "bc2b9f8bbe36b149d71bc70c5af55cfeaff8f6a5947ca8bdc8cb52779e585f3b",
+      "bytes": 8627,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6176,
-          "sha256": "2cf2b3585afcec3e7cb9a1a005b60713b4712c9838b720c94ebba148bb4388b2",
+          "bytes": 6341,
+          "sha256": "fe770151da6c396d2599f998fa49125d09f3777e23b624883e0c3a6b3953d47a",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "davida",
-    "materialSha256": "895a8b2f455b49957dcad04cb494a7323a65235eff27ec89a63a9033fbe9d946",
+    "materialSha256": "0600c54b97118b632e9655ea4b1204e45dc3b859e9d7f4ae47901b3f38f16e48",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

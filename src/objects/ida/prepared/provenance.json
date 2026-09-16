@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef80918b92beafe2fcaa05a23e18b5f9796409847ae16a0d1ff2287b2578c9a7"
+    "sha256": "dd08d97335a21116e1c29c52d6cbabae124bff6d86410671cd472262acc9df55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -246,7 +246,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d3087f8b422513b3a1a971525db82c62f8197fcb525875876df88f5323f842cf",
+      "sha256": "e1fa0fac61ba4d636cbdbe6b00852a40211192fce11948267a1dda3a353b8aaa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -283,6 +283,16 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "Target physical data: RAD (km)"
               }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.861 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.84 years"
             },
             {
               "id": "rotation-period",
@@ -428,7 +438,7 @@
             "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ida.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1151,8 +1161,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d3087f8b422513b3a1a971525db82c62f8197fcb525875876df88f5323f842cf",
-      "bytes": 8056,
+      "sha256": "e1fa0fac61ba4d636cbdbe6b00852a40211192fce11948267a1dda3a353b8aaa",
+      "bytes": 8309,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1413,14 +1423,14 @@
       "outputs": [
         {
           "url": "/scenes/ida/ida-calibrated-thumbnail.webp",
-          "bytes": 1156,
-          "sha256": "1782da3ff4f69b9b17d476a9604e40ea26c01b7160c01647b44d48987cff3232",
+          "bytes": 1154,
+          "sha256": "8d625746ab0bbc78ba6fe638a0d118125e56898b14484108d8d3af5691487eb8",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
-          "bytes": 293052,
-          "sha256": "13feb7808bfadb00b90dda82ac2fc71e927684e464409327a7a8a72c32509f21",
+          "bytes": 271808,
+          "sha256": "ca8c60f08d7f16417d0f632831925b9a5ab6adf1f185587694ccb59d92d68388",
           "verification": "bytes-verified"
         }
       ],
@@ -1452,8 +1462,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4366,
-          "sha256": "22d674c9174438bdaa7db3f40f8604c101cf5dd87a0f9dfd5c2b159a552a05cb",
+          "bytes": 4413,
+          "sha256": "c1488b0802d894c3d5478de4b729e2cdeb11af76fd806c4a50d5b5036aaf3a42",
           "verification": "bytes-verified"
         }
       ],
@@ -1539,8 +1549,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 8604,
-          "sha256": "239dbd855ea24039ffcd02cdcebd3bf09999ef686c4138a785db8051734c7210",
+          "bytes": 7476,
+          "sha256": "835719b981ec7171346e1d33b955ad0a04644ec27909e8bc8a2b03032057886a",
           "verification": "bytes-verified"
         }
       ]
@@ -1577,7 +1587,7 @@
   },
   "lastPreparation": {
     "objectId": "ida",
-    "materialSha256": "c7a3f24abad2e3cd80cb30b7da31cdcffb7734251e09dc43bbc934ff67547953",
+    "materialSha256": "c0cc262ea6fb27fcce1cc9128922851d803a97a058e13407862eaa7e0078b86c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

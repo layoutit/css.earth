@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "42f16360051761f7d5f5cdd375dfb194f7ffcf693c8ac844042f917a4b57f9cc"
+    "sha256": "caf737f7785ec72b11007fa6432be78c9de674daf7d0ddfec7d60a0635da319b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "900ad5c20070c290c13d3018efd031d6226390701cf94ab51ba140e49648be53",
+      "sha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,15 +164,7 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.31 km",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf",
-                "label": "Asteroid 1994 Cc · asteroid 1994 cc research cc1994",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-asteroid-1994-cc-asteroid-1994-cc-research-cc1994",
-                "locator": "/diameterKm"
-              }
+              "value": "0.31 km"
             },
             {
               "id": "distance-from-sun",
@@ -303,7 +295,7 @@
             "credit": "Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1994-cc.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -383,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "900ad5c20070c290c13d3018efd031d6226390701cf94ab51ba140e49648be53",
-      "bytes": 12176,
+      "sha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
+      "bytes": 11793,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -505,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9567,
-          "sha256": "5ccca8a0561faa76a0f3411026c6f67d7ea5f797ca6d79467cc4385f8c5d08d3",
+          "bytes": 9275,
+          "sha256": "5734202f7df41072bec869486ca970ed7179c7352125d2ecd4f13cc29f7cfc3a",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1994-cc",
-    "materialSha256": "853f81e6016edbf84e3d4be841a127bda20f3f635a0ea191f553b2f8f06fc767",
+    "materialSha256": "83772106006f5fbae194a6f5b6f4111f4fc20731b9b8981ac5f72d55d35dc0ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

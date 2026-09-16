@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2e2112d63a72eff1e096ffb0badfd78d3c8521279bfd6208ecff7619bdecd63f"
+    "sha256": "19ea910ae248aa7379e3dff2e1f73d66e89d01a443425b6e333349786ee7bc91"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -196,7 +196,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "50b0c4b46bc54d64f4e6f2534c90a6e1db10ec511f5e2efb743960786d658df6",
+      "sha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -224,15 +224,7 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "2.405 km",
-              "source": {
-                "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
-                "label": "Donaldjohanson · donaldjohanson research donaldjohanson 2026",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
-                "locator": "/diameterKm"
-              }
+              "value": "2.405 km"
             },
             {
               "id": "distance-from-sun",
@@ -263,28 +255,12 @@
             {
               "id": "rotation-period",
               "label": "Main lightcurve period",
-              "value": "252.6 ± 0.4 hours",
-              "source": {
-                "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
-                "label": "Donaldjohanson · donaldjohanson research donaldjohanson 2026",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
-                "locator": "/lightcurvePeriodsHours/0"
-              }
+              "value": "252.6 ± 0.4 hours"
             },
             {
               "id": "secondary-period",
               "label": "Second lightcurve period",
-              "value": "455.2 ± 0.9 hours",
-              "source": {
-                "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
-                "label": "Donaldjohanson · donaldjohanson research donaldjohanson 2026",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
-                "locator": "/lightcurvePeriodsHours/1"
-              }
+              "value": "455.2 ± 0.9 hours"
             }
           ],
           "moreFacts": []
@@ -396,7 +372,7 @@
             "credit": "DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/donaldjohanson.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -617,8 +593,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "50b0c4b46bc54d64f4e6f2534c90a6e1db10ec511f5e2efb743960786d658df6",
-      "bytes": 16566,
+      "sha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
+      "bytes": 15214,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -852,14 +828,14 @@
       "outputs": [
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
-          "bytes": 1376,
-          "sha256": "f0645a69bb7abc23377bfa641a5a0efa5a0746601ca08f4d161ff73bd1dd484b",
+          "bytes": 1372,
+          "sha256": "c51d55efa3313a6db01edcfd77de1febadba4c410a9ff4163c0ad967433ccf3e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 678120,
-          "sha256": "1bc7651e929605dfa7d596f48a393d2f7dd5ae43ace4442c640018ea2d1d963f",
+          "bytes": 558832,
+          "sha256": "cbc238d821084a06141816e7fd767cda56f293be51534bcdc0792f352ef3c02f",
           "verification": "bytes-verified"
         }
       ],
@@ -891,8 +867,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12357,
-          "sha256": "434c830914d6b93232bed91884bca924bc95952b2b3b54f3cfadfea37c3e5134",
+          "bytes": 11161,
+          "sha256": "dad4fa03d285d3cb6d5d9970265638c280ed7576a2e4b9764d3f0b18f61860b4",
           "verification": "bytes-verified"
         }
       ],
@@ -978,8 +954,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/llorri.webp",
-          "bytes": 21142,
-          "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012",
+          "bytes": 17578,
+          "sha256": "c9baa68a698bfc5863d87568a69b734cdab194152a1eaf0ee298ed0743fd674a",
           "verification": "bytes-verified"
         }
       ]
@@ -1016,7 +992,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "ff1f9ef72cf8d50581fc325b0974a7af67f5e944f04cae98d8c93e90012405f9",
+    "materialSha256": "c310168c3695577c49e6b772ba458356b3f4efc237051bf563c994af7c1b0e43",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

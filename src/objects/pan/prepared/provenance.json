@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64bed0a96bbdbd64ff31cc34bd930ededb4d409a9be02c09ede4bd9eecd4567c"
+    "sha256": "d4368faeb3e7359b371477864558f8e7f9d67603aa64d325edfa45d4d86003e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -415,7 +415,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "512072eed71906af0f3fedcf0fcf760e5fb052fa82a4caf631d9b652ead1da4a",
+      "sha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -452,28 +452,17 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 13.8 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "About 13.8 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 134,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Mark Showalter · 1990",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Mark Showalter · 1990"
             }
           ],
           "moreFacts": []
@@ -579,7 +568,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pan.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1730,8 +1719,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "512072eed71906af0f3fedcf0fcf760e5fb052fa82a4caf631d9b652ead1da4a",
-      "bytes": 5511,
+      "sha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
+      "bytes": 4923,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1829,14 +1818,14 @@
       "outputs": [
         {
           "url": "/scenes/pan/pan-normal-thumbnail.webp",
-          "bytes": 1614,
-          "sha256": "1efb373911ddf3fb6e8adeba25dca2c7949572c0f5c9ac5ff859bca8b3d884bf",
+          "bytes": 1530,
+          "sha256": "fea3d4603bbc0d1e44a3092cd4155b7413e391064e4cfee58ed7850b35c7bcf1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pan/pan-normal-surface@2x.webp",
-          "bytes": 414778,
-          "sha256": "b92a502fbd32de0216f03b14145c93d779e6187c44bdbf1c135e1e128cd929f9",
+          "bytes": 360506,
+          "sha256": "7479dc7c514d43b766a213c9de12a407d3aa050b2ea05109b4fc4d98d545586f",
           "verification": "bytes-verified"
         }
       ],
@@ -1885,8 +1874,8 @@
         },
         {
           "url": "/scenes/pan/pan-filter-color-surface@2x.webp",
-          "bytes": 383580,
-          "sha256": "71fd8cb9ad9c62849d9983e37f4a3935eb39bfc84d4faa6d5d6363d05e417131",
+          "bytes": 417148,
+          "sha256": "779aebc5e87336ec99b4cd71aacbd0cea2e00df62d7e0fdbdcd2a3ba52cf164c",
           "verification": "bytes-verified"
         }
       ],
@@ -1918,8 +1907,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4341,
-          "sha256": "5c8c7ddc83959191ec9ea3217c67eeb90f1aba909c5ff0b58e836b80e364448b",
+          "bytes": 3891,
+          "sha256": "841068124a7d06ea727a2d1907eeda9d546199ffff90432453db058083931e91",
           "verification": "bytes-verified"
         }
       ],
@@ -1944,8 +1933,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 13220,
-          "sha256": "18c12bc1b611f4db8c678eab9182c0351ce6bff5a70414b2fbe349b9ef3d09bf",
+          "bytes": 11748,
+          "sha256": "3da2e449d7f4a29a082d546537f9798d0788e8e977c81e86cf716ea51e354d07",
           "verification": "bytes-verified"
         }
       ]
@@ -2007,7 +1996,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "3d7505e9931316a114d5680558d756d0a6deb2833e8c658427c30a72eadcbe75",
+    "materialSha256": "f16ae2bfae7a7b31ea4f45ca53d3e137307de7412f2f243cb600536dfd9ee001",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

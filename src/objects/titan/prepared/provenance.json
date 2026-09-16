@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9d593fa38163fc9e276b8957db5406bbb481a1cacfaafc0b2f7e665200096d8"
+    "sha256": "cf3c5911b2c38dfb9e8f8df1e1c7da74284189868e73229303f9522fd915cb38"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -447,7 +447,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3591fe6f03973bf59d7814a78cccf4c2fc01c7057325be003364b4a4eb270193",
+      "sha256": "db41ebbbcecf990967174f765d977ce34fece396fba39f040977460ebe6203d3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -501,15 +501,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "15.95 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "15.95 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "15.95 days · synchronous"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 1,222,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "Dense nitrogen atmosphere with methane and organic haze"
             }
           ],
           "moreFacts": [
@@ -850,7 +857,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/titan.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1490,8 +1497,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3591fe6f03973bf59d7814a78cccf4c2fc01c7057325be003364b4a4eb270193",
-      "bytes": 14924,
+      "sha256": "db41ebbbcecf990967174f765d977ce34fece396fba39f040977460ebe6203d3",
+      "bytes": 15022,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2436,8 +2443,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5416,
-          "sha256": "567f0fabaff66a7254de3337afc2b129b8e6197006406696cec3770cc141f64b",
+          "bytes": 5354,
+          "sha256": "414948d3ddf0d659297c9e86735fbe0e1ab7a9ec214df9cdeaea3ab0de796cd9",
           "verification": "bytes-verified"
         }
       ],
@@ -2637,7 +2644,7 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "1d38fcccf3ee202d507c134ec423e4174c00d3e3f6d19b580e13b007137f57f1",
+    "materialSha256": "7223ead0be9980acf2aa7b48a86190b842be4fad03c27b526d7eaab7e7e8eae6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

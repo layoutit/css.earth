@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a29dbc74c9a97948285ba9de8e23ab60672f2f73f74701b794b3807174300aac"
+    "sha256": "cb8695db5dc61a8fd6988abb9b9b8f84102cb1c17852a309d06a09318f51e528"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f36e33800cbe082f1d0ffd211cb3202a6ed3bb5823a5f989a29be6f4be882292",
+      "sha256": "c7aaa20b61c5a1df05c2c0e250b10af7712732ef16eee3a6fe3ee504449d7fbe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; 1999 FR33 model 15145; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1999-fr33.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "f36e33800cbe082f1d0ffd211cb3202a6ed3bb5823a5f989a29be6f4be882292",
+      "sha256": "c7aaa20b61c5a1df05c2c0e250b10af7712732ef16eee3a6fe3ee504449d7fbe",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12053,
+      "bytes": 12086,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9101,
-          "sha256": "fc5b223c1ad23d1577e682428cdd9ece092f825e566ccc1b0576e50ee61167c7",
+          "bytes": 9134,
+          "sha256": "080d9e49034c29fa1388c6d7e2478b447e57573794aed305dfcdd03c43965e49",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1999-fr33",
-    "materialSha256": "cde0c18b5bd167f42845681fd0c0d5feafb91a348ec71d608db404886d926ce4",
+    "materialSha256": "4595dded90fc61bfffa94d925786faba1a3a331b9ba30e05a7947628f0bab87d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

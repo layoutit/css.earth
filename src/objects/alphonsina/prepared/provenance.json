@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "02c8fdb5a269c012c8daa729fd188cfc7be8eb472ba9dc6e7b64e0cdb4c9e719"
+    "sha256": "a36f39e68c5dddb11db7bf8bafec37cef95daed662a4866ceca716d59642fa2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a154742cc80d47a6ef093cab3f09081229c378a12323881a37e65132294a1dae",
+      "sha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,15 +205,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "7.87754 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/301",
-                "label": "DAMIT model 301",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "7.87754 hours"
             }
           ],
           "moreFacts": []
@@ -305,7 +297,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Alphonsina model 301, version 2011-02-18; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/alphonsina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -369,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a154742cc80d47a6ef093cab3f09081229c378a12323881a37e65132294a1dae",
-      "bytes": 10635,
+      "sha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
+      "bytes": 10337,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -491,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8120,
-          "sha256": "be4f42d9752a39b9f35561e627fb6acf25bde2b3574615013071419ac3c2032a",
+          "bytes": 7913,
+          "sha256": "b4b05791b2ea47dc55b7e22d83bb39de7f31a65c5a5c6fcaa3e3e321b297f629",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "c6d7c5a202f3c96418bcee5ae03fab9ce023c5537bc4169ba821e1829c45cbbe",
+    "materialSha256": "5a26a7efd23d31301282e2f9fccb9b5b4a838cb78a1bfa2fe8eaa9a1de6e1e62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

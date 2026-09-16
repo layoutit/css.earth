@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9560,
-      "expectedSha256": "fc81f5622937bc2ecb47e5e5f66e0106531a87eb3a91f33faf0dcb97a15b76fe",
+      "expectedBytes": 9375,
+      "expectedSha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,21 +164,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1800,
       "expectedSha256": "23a220145b8bd62c835116d3cd06d49a631e626c34a79d18d6a6312399659a44"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 4920,
-      "expectedSha256": "8dd1336f07b8429850ac4616e23e74e0e2dacec226fc8d08d815d3272204eef1",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Sappho: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

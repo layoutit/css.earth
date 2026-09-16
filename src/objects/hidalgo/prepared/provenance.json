@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f5ff6e05e2d6282bca23256eba14124fd1cf7b8b8836af6ecbe88657f3f42177"
+    "sha256": "338f656ca845f51874220f6ceb28277785b3a656ccec32b103bd7730e6066271"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c8046ea2be5cd141136c0aa8e8a134d812e4f057bb610e4eeddd016ee8a4c1c1",
+      "sha256": "fa403c88203684132a6f5c62ddb477913bd1518fd58ce68ce8ea655fd34bee56",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hidalgo model 1057; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hidalgo.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "c8046ea2be5cd141136c0aa8e8a134d812e4f057bb610e4eeddd016ee8a4c1c1",
+      "sha256": "fa403c88203684132a6f5c62ddb477913bd1518fd58ce68ce8ea655fd34bee56",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9882,
+      "bytes": 9904,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7099,
-          "sha256": "28b0fd59c4b92b738bb1ed88ce0995e00889981ce2c78be200b79f1cc3dc7cb1",
+          "bytes": 7121,
+          "sha256": "9c6b50b193b0160fcd582382b626cd0efaff9f2bf433aaa271515b24d00f4039",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "hidalgo",
-    "materialSha256": "30b2f2352cef56ba885f49c4daf685562802c7282050f5a863fae55de176ff46",
+    "materialSha256": "68929135068f7b7315977755b908805c0c232d9b89073db3a10357ac142b5e01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

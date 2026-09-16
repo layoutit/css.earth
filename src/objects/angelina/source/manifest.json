@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9361,
-      "expectedSha256": "4c087e258a6eb3dee5e1d94a50f98b2a4651a7cb50d0a68cc228047619ad2087",
+      "expectedBytes": 9178,
+      "expectedSha256": "0c058eeba15ee2987b1254212b691515454157f9370ddc8464f80b504a1d7b33",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,21 +164,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1801,
       "expectedSha256": "c4bcf5375b0ca948ff246ddd684065b8e97a8ce7de8dd6e894e506a36e3bf8fa"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5223,
-      "expectedSha256": "24b17018628bbcc57024c824d3ea29ab325a22acd913b417531ed1b89da66861",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Angelina: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

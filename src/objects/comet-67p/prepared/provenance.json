@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8ab27e942c6a12e1de13ab26717d4a5f378adc543246ee6a14deea5906cdcef"
+    "sha256": "27ed98f6560f556aee36177ec1ac72372434696f6a1dc0e17b0ca6a3db198446"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -777,14 +777,40 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
+      "sha256": "49d8109fe21cf07a3634f7b4403500ec0b81cf494f80c2fe870a80181fee396d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-67p",
         "displayName": "67P",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Equivalent diameter",
+              "value": "About 3.3 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation before perihelion",
+              "value": "12.4041 hours"
+            },
+            {
+              "id": "mission",
+              "label": "Explored by",
+              "value": "Rosetta · 2014–2016"
+            },
+            {
+              "id": "shape",
+              "label": "Nucleus model",
+              "value": "ESA/RMOC MTP019"
+            },
+            {
+              "id": "source-epoch",
+              "label": "Shape observations",
+              "value": "6 August 2014 – 25 August 2015"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -2903,8 +2929,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
-      "bytes": 17266,
+      "sha256": "49d8109fe21cf07a3634f7b4403500ec0b81cf494f80c2fe870a80181fee396d",
+      "bytes": 17878,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3449,14 +3475,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
-          "bytes": 1776,
-          "sha256": "eb5e3d05fa30a7c0af74d6c4692195455872ca0bca63a1a3574df22a6ed8f344",
+          "bytes": 1756,
+          "sha256": "a55f5249e78e7ac28676806dc1a2bff5f5424385b6e6c39b93d329fc33504edf",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
-          "bytes": 1696040,
-          "sha256": "949d26b8279f7a7011a7a2a86d771c9cd519d593fbfc41ea22254c33ec6d5f44",
+          "bytes": 1612998,
+          "sha256": "2e0292fda85e79bffd83da83a4bac9f947be9899bd1b8c015d4d67f861803db7",
           "verification": "bytes-verified"
         }
       ],
@@ -3488,8 +3514,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4390,
-          "sha256": "390eb5cecd010ff2bf653130401dbe7549c956bcc8d0ae69a747e25ca4456b61",
+          "bytes": 4777,
+          "sha256": "f8f629b49c7fe813a10bbd1397f88fa54d686590f959d4a47d5d48565eaa2e6d",
           "verification": "bytes-verified"
         }
       ],
@@ -3549,8 +3575,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 60610,
-          "sha256": "b26307e2cc285052061c7faca59925fc016024202cdb137dbd5e96632ae97326",
+          "bytes": 59316,
+          "sha256": "3036a8532d0a48c3e8ece799eea51e7dbd70a53ccc1818fccd9f5bf16ad1b438",
           "verification": "bytes-verified"
         }
       ]
@@ -3712,7 +3738,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "c98f206671ebf5b00bc3eb64c83c28337ba70a8d0a4cda78ea8ed19de36c6b4b",
+    "materialSha256": "ab0cc6eae27fb81d72d1068bb28b552abd7893a2c3f903def5083449bf51661b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

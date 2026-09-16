@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "317650d112163ee622c707959b15bd4fa7c30bf62fdacfebba1953b030b5bdcb"
+    "sha256": "c963747458fbe4839fc486303171490a0f8a6bdca70556aa39d9feadf92d8c1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc81f5622937bc2ecb47e5e5f66e0106531a87eb3a91f33faf0dcb97a15b76fe",
+      "sha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "30.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "14.03086 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832",
-                "label": "DAMIT model 1832",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "14.03086 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Sappho model 1832, version 2017-06-09; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sappho.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc81f5622937bc2ecb47e5e5f66e0106531a87eb3a91f33faf0dcb97a15b76fe",
-      "bytes": 9560,
+      "sha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
+      "bytes": 9375,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7227,
-          "sha256": "9afb2ea6ad5c90f7e942b787e293f7e008c6d3d366d310adfb0b5a0162c58f1e",
+          "bytes": 7089,
+          "sha256": "92e4a098e8616635925b738745ac0f01685092b43ec1d9bd8901eb5b8161cd76",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "sappho",
-    "materialSha256": "6c317f097ecfcfb98aa63802f1ce6fdd3e182bd73ce77527ef7d0dc2a850bfa4",
+    "materialSha256": "225796eb8c115f2aac7014459c750997147f7a3eba8c7000e0022758c6597ee9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

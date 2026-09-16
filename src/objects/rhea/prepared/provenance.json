@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c50fe966057a561b8ba910c346cea794154be44d0be0004d6d678dd6ceea173"
+    "sha256": "a98e9b52f5166c0ebe196884e95e8d97d5e8ee920eb859cc387a8ccdc9adbff8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a7de4a2d5d55a9e61bf8789447db3eb60a965289666a86ead34d3b4c29e12d51",
+      "sha256": "47a4fc5ba01ba0e3a045080ad6dda268e20412cd170a92e024770de0ad4f785b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -340,41 +340,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "4.5 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "4.5 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "4.5 days (synchronous)"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 527,200 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 527,200 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1672",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Giovanni Cassini · 1672"
             }
           ],
           "moreFacts": [
@@ -600,7 +581,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/rhea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1083,8 +1064,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a7de4a2d5d55a9e61bf8789447db3eb60a965289666a86ead34d3b4c29e12d51",
-      "bytes": 14804,
+      "sha256": "47a4fc5ba01ba0e3a045080ad6dda268e20412cd170a92e024770de0ad4f785b",
+      "bytes": 13861,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1590,8 +1571,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6474,
-          "sha256": "c30e02491cc73da7c292aee312e796b4cbf5d848185bbb8cf38392b4037236ce",
+          "bytes": 5641,
+          "sha256": "4351e95a027d04af6490fa33c0888bf2acd267796555f84974aeddb75c5fd122",
           "verification": "bytes-verified"
         }
       ],
@@ -1815,7 +1796,7 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "6df112fbc8dd7f90904c5461bf17e81130aa12a61976e5d66b5285221127e601",
+    "materialSha256": "46c8e8e7ae03698595526de68db85f820aa02ffc61d4578e50819fdb28d1bb19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

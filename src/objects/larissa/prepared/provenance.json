@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a6c778f3441822b0ec4d1be7593d5979e56fbbf2cb1b94793c29c180befc2adc"
+    "sha256": "fb926343754e9ebca7d8595dbc411bb0cf725707a16fe03ef1b1abfad8427e13"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -186,7 +186,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c905ff9ab657ba4e940d254d5f6e076137ff56a14d707de97133588c9b4163ee",
+      "sha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -223,28 +223,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "13.32 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "13.32 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 73,500 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 73,500 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Reitsema, Hubbard, Lebofsky and Tholen · 1981"
             }
           ],
           "moreFacts": []
@@ -336,7 +330,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/larissa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -483,8 +477,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c905ff9ab657ba4e940d254d5f6e076137ff56a14d707de97133588c9b4163ee",
-      "bytes": 5052,
+      "sha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
+      "bytes": 4632,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -568,14 +562,14 @@
       "outputs": [
         {
           "url": "/scenes/larissa/larissa-normal-thumbnail.webp",
-          "bytes": 2152,
-          "sha256": "3ff98cbfd1831a22f1c976f308ca59ec1d68b25c7b71938ef86e7c011a0a209c",
+          "bytes": 2084,
+          "sha256": "3a84bf89f0c8c589497dcd3fd85f2deb8740afddaf9c79d2a0f14ad7d1534a83",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-normal-surface@2x.webp",
-          "bytes": 108488,
-          "sha256": "5b20af29cb40d9465dddb0997ac8f771d851cc9f7f55c1a272fcd1bc243d36f2",
+          "bytes": 104952,
+          "sha256": "f5b4e96144d7b0b9a50e53d9e9d00f365454cf10eb287a9a67e9bd93589d9dde",
           "verification": "bytes-verified"
         }
       ],
@@ -607,8 +601,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6660,
-          "sha256": "773ec0c59b69b82c19d4a7cfc45696fb541ebdcf7593e863411184ad58c2d586",
+          "bytes": 6334,
+          "sha256": "085d14c9026f933947e3549883e9dacaafd9cd7948aca9a7a674d1312eeb4399",
           "verification": "bytes-verified"
         }
       ],
@@ -633,8 +627,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 8186,
-          "sha256": "dcc6c2cda4e3383e6f9395a2e8d991b77221b3376bf14749f078769253249f0f",
+          "bytes": 8054,
+          "sha256": "9f746a3edd5a61fe67923278518aeb87710cf876f735933df3d6acb53d1a3836",
           "verification": "bytes-verified"
         }
       ]
@@ -671,7 +665,7 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "393521cd51545eb949a7dc28ddaaf34f4f6ad84ad6124c5214f2a808c47d24c3",
+    "materialSha256": "0acb30a7678a1d169910fe701bc5323a1ef4e45e620633796ff9cc9afe263bae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6092,
-      "expectedSha256": "788e4a43b2656dbc34807504560a1e48ebf122bb9f028e538998b4d32c569b81",
+      "expectedBytes": 6344,
+      "expectedSha256": "b84d6c1d6f49da8b7c58b54e11864cc4a33c49cc9fd7163678763f7ba46d575a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,21 +200,6 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 44,
       "expectedSha256": "5cba81fef15e64a11b68d12e64e3ac66ed18932f1f20b57696179e3d4101ae2d"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 6093,
-      "expectedSha256": "dc0f7283861dc00f752cd37cf84eaffce4dddee205a5d85b1e6ec179de90aedd",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Iris: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

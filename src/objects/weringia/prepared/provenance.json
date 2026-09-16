@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09c77e33faf05adfdd040db68d53e1388eab317e7406f70cdd5b409ab7984389"
+    "sha256": "dcb168bf43cc768a2bf525d725b4439021654f84371593b08584ecae54c4319c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a99d52597b34105693e37f48be6a08d6af2e6da39d04630aa226e39c8b40ecb6",
+      "sha256": "c51b44b44e781c82bd763c7d4e27837603e326503b6438e55c9c98f61ad695ab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1074, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/weringia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a99d52597b34105693e37f48be6a08d6af2e6da39d04630aa226e39c8b40ecb6",
-      "bytes": 10490,
+      "sha256": "c51b44b44e781c82bd763c7d4e27837603e326503b6438e55c9c98f61ad695ab",
+      "bytes": 10513,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7876,
-          "sha256": "86cf01d4de0c76bc551209a03a5601dc9216942c60e23b09072fcffbaf8d1580",
+          "bytes": 7899,
+          "sha256": "e18eabc578e57e38a12b81e99b3af0de326ee67065ae4cc2a39217cb182a4f97",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "weringia",
-    "materialSha256": "2b210cb37574102e9bb17fb066f0b1cf70e9bcb92b0914771fdf4691d0084092",
+    "materialSha256": "3bbc2c1b0bc1391286890054674b09f1785155ba23765f9747e4acb5c7ff439f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

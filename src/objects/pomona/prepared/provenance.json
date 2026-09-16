@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "63de90473817919e1ffd161b37985c20f0a69e0d84fc712c6eab408a5ec7df94"
+    "sha256": "555bf8d6de8a20f9b233eb1c94db607c2540b5d094d791db8d749d3e0902e489"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0ca199ccd966f5874e5af6e10209a5d3c278b4bf0a0373be98eaacdfcdaf3df4",
+      "sha256": "0538ea1ae311195579d89c7f1b8b065a64855a0b740f40476f550ade8820601d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; DAMIT archive (no linked publication in this model record); model 16306, version 2024-10-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pomona.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0ca199ccd966f5874e5af6e10209a5d3c278b4bf0a0373be98eaacdfcdaf3df4",
-      "bytes": 9627,
+      "sha256": "0538ea1ae311195579d89c7f1b8b065a64855a0b740f40476f550ade8820601d",
+      "bytes": 9648,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7037,
-          "sha256": "99cd150a47c20b0cad5e39d293c6a1135d2e173074d468ef60a7236fe766104f",
+          "bytes": 7058,
+          "sha256": "3823720b9d986b54152a560627de65bdaedf9e156382bc07c413c0850396f59a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "pomona",
-    "materialSha256": "140bb04482f021918c7e0cbc2a3b56056fc6ff1295af579e53f25fc76cdc3b23",
+    "materialSha256": "52febd2da79d3c7b5c7e95931e963c85858a10a8c80bff69bc86140f02b36ea1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1327631f1fb3059f65984980363c44ebeffd64b33a1ff678a4399b9162d0b15e"
+    "sha256": "bf42c7fe38e0b295d55352cb7563b2c8212e1d9941d9c207088f7d797221f56b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ddc9583649298c8be0ef0c4ddf650e9f10901f0593eb5e6c63f077fde3a60b12",
+      "sha256": "66a3e1978988bb0fcabfd7b065903b8c3fff7a63b0ae66a80b2b1331e940ac07",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 490, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/taurinensis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ddc9583649298c8be0ef0c4ddf650e9f10901f0593eb5e6c63f077fde3a60b12",
-      "bytes": 11554,
+      "sha256": "66a3e1978988bb0fcabfd7b065903b8c3fff7a63b0ae66a80b2b1331e940ac07",
+      "bytes": 11580,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8675,
-          "sha256": "b4f16a3b78affeea00923d37bbb54515285a15cfaaf6641bed31eb824c58b6b5",
+          "bytes": 8701,
+          "sha256": "e0d4f9cbe847cd331ec627fa808280e9505d9993a7e4b2502c8fd513982b01bc",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "taurinensis",
-    "materialSha256": "148ec52b64cf05025553c7247f047f838be1176b73139f78ca325017c978a43e",
+    "materialSha256": "e8b623d2d9225919b119f2405ef8e58736e1599e7dc3d2ee7157e8d559ef70e5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

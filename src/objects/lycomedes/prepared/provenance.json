@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0d5ef4f277bfab5cdf91dff8d9a2cc8f34dd1463836a17761d965cd7e0cce9e"
+    "sha256": "b7ddd6105afb2b5cf7c233a29867c81a2ac3929e7a43cae9c8652138ca46bac7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1944a5b14db37a8360df13c59e63d219b1e04d8de314db91349c18a04a709edb",
+      "sha256": "8f490212a7f35d63d59f2ae6839831deb3110c140dacee91dc94c8aeb3c267a5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4284, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lycomedes.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1944a5b14db37a8360df13c59e63d219b1e04d8de314db91349c18a04a709edb",
-      "bytes": 11788,
+      "sha256": "8f490212a7f35d63d59f2ae6839831deb3110c140dacee91dc94c8aeb3c267a5",
+      "bytes": 11812,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8853,
-          "sha256": "fc8d76ba3ac2664d1a249054a80b88c4c7f0b70c40b674121653f5261fcda776",
+          "bytes": 8877,
+          "sha256": "ddfcc2eb0319ef2011ada8d09e85dcd0ad8cad41a3abb0367389495145c8fccc",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "lycomedes",
-    "materialSha256": "d257dc0a1a5919a247fbb0c4216f4777d4d2b8250c6bfb2f28b801ec507e7335",
+    "materialSha256": "e441d12e3c754bf3fdf0a8ef460d2189e7649a21d3093b54e89c9e474f8bae52",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

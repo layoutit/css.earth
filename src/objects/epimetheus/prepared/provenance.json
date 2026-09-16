@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7250d77909942c902dc1363259a95ab3cbcaa6e82d4747a89d83a50f7bd11d3c"
+    "sha256": "bf9b2bce3eed8b152a90b768c6593f20cffe8661c16254988a35e0e9b4c574f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -471,7 +471,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "603ccc5b42b53932a3ddbc355ea05a03190b7e1587a542ba5c7fb9fe35542884",
+      "sha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -508,28 +508,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 16.7 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "About 16.7 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 151,400 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 151,400 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Richard Walker · 1966; identified separately in 1978"
             }
           ],
           "moreFacts": [
@@ -649,7 +643,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/epimetheus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -2042,8 +2036,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "603ccc5b42b53932a3ddbc355ea05a03190b7e1587a542ba5c7fb9fe35542884",
-      "bytes": 6154,
+      "sha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
+      "bytes": 5744,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2140,14 +2134,14 @@
       "outputs": [
         {
           "url": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
-          "bytes": 2074,
-          "sha256": "5de28b5ea259601ebecaae20e7b06cbb32f4fad83c89cddf416743241858639f",
+          "bytes": 2078,
+          "sha256": "2de969c28bcdce2348e82cf965df5b98b3b5d525363221579aeea38bec2236da",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
-          "bytes": 939518,
-          "sha256": "1312facdef62c275daf018654f49a104092ff8ec07028a6b3a2ef3b918e583f5",
+          "bytes": 743552,
+          "sha256": "40f9cff45c9601cc15fac523d74547eeaf0d9f3dc86b4a836856d92c46a5b37a",
           "verification": "bytes-verified"
         }
       ],
@@ -2202,8 +2196,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
-          "bytes": 412128,
-          "sha256": "ab0f4670d652cbc519ce0d23b8fb9d6e2b2eb05439bac114be90355bf26da7ce",
+          "bytes": 462866,
+          "sha256": "fbfaa1e2b61c917cf8655edac2e0117b7aff4958a96a3f10dcbc6e447d584338",
           "verification": "bytes-verified"
         }
       ],
@@ -2235,8 +2229,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7797,
-          "sha256": "46afcc0f76324474869dc7121b143d456f05a19a3f3a6927b2aee84cc92c7f35",
+          "bytes": 7481,
+          "sha256": "eb48fca7e8c08cfd7f4783aa5570762ba95e76ad9163b83dd1f2c9c0a794f4b4",
           "verification": "bytes-verified"
         }
       ],
@@ -2261,8 +2255,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 37484,
-          "sha256": "1820d06f23262f8e574d940ad2f7706ea7f5f4f01afe8ee5990bec9fb5a1d998",
+          "bytes": 30470,
+          "sha256": "f6e022ad0465c90b65c809986bc4300e47a68921d7bedbf396f9d02e76ce0911",
           "verification": "bytes-verified"
         }
       ]
@@ -2324,7 +2318,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "2d5ef910960de8b782a391866fe78eca00f752965a83e6d5aaa01ece6557ae55",
+    "materialSha256": "68b9e7707d6c5904f1c27bc9fe44b8655eb7760dde74c6c1b36404ca408beed7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

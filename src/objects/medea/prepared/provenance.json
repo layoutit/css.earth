@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f55ea032da6925e1023b08e2d55ebacee8ffa1d7f40f87e803602786fab6f04"
+    "sha256": "aa8c13af2a3308f2576126bbbf11703f5ce9e73c7af1cd7d1827a49e4a33bad5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e72de98435993b61113f07c8228d05219dda80d7cbaea865f939a820401cd647",
+      "sha256": "ebc853c134b3fb0c9af1f0165781a6cc6430ec9b91eac7049830aa1b0bcc4730",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1091, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/medea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e72de98435993b61113f07c8228d05219dda80d7cbaea865f939a820401cd647",
-      "bytes": 9858,
+      "sha256": "ebc853c134b3fb0c9af1f0165781a6cc6430ec9b91eac7049830aa1b0bcc4730",
+      "bytes": 9878,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7280,
-          "sha256": "bd9b189802a839cd72138625dba5e2d7493ee80fc5d9789107a4fbf484f71496",
+          "bytes": 7300,
+          "sha256": "d5d1f9053ec63db3bdcafcaada4065987b5466ba32329d9bb6d4bc9321559f01",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "medea",
-    "materialSha256": "bfe23475a61a043ae257d2bfdc8075f622bc1f91af548672f33464fedc3702e8",
+    "materialSha256": "883a498dfaab56d4ceda22d44acc8baa768d902420741f5b135b635d49306c6a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

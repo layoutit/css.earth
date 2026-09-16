@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f61d56d7e3fd37488be9aec5561c7b2e1b8317f5a8353e3722165ed20a8f087b"
+    "sha256": "b5a43cf7acb6bc71b2262c02fa7ae43a7bc158e37d216bb8e174b73763b56905"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -284,7 +284,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "acc7451b48933693f18ab745becf2c060051bbae982e3be8d4e84f20f849e278",
+      "sha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -310,30 +310,19 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "448 m"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "1.19 AU",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.a (au)"
-              }
+              "value": "1.19 AU"
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.30 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "1.30 years"
             },
             {
               "id": "rotation-period",
@@ -538,7 +527,7 @@
             "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ryugu.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -959,8 +948,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "acc7451b48933693f18ab745becf2c060051bbae982e3be8d4e84f20f849e278",
-      "bytes": 12577,
+      "sha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
+      "bytes": 12007,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1472,8 +1461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5367,
-          "sha256": "e90198cb4ce741270d33a0847af99e506dae85304838ae3a1f786a0857983397",
+          "bytes": 4817,
+          "sha256": "6f0d75b66dff0e9a10ad53e8c5ed2aea28c5599b57345292503dc5e29998041b",
           "verification": "bytes-verified"
         }
       ],
@@ -1673,7 +1662,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "7b35d0af92a5c78b0329f4b48a6566fea287301826cc5313307a1f02f576671c",
+    "materialSha256": "215c33b37bad12b9f06f9704d8c9e52bd4fb08cd3e43bb5fde88caf6700b340b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

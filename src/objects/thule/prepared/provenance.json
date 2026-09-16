@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9134745ad9cb88f00069fc11e0462524fd92982ee6c52568e37c605f80f6e3e"
+    "sha256": "292570b4cf38f2d2d5bf1e1b49e72e7514c706a1f72e1043ae13a6aa78ed425d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "687fdaff24313c947926871ab4210d9e7cd45cc183ff8d4b9f12ae5eae890beb",
+      "sha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "58 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "23.8964 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16313",
-                "label": "DAMIT model 16313",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "23.8964 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Thule model 16313, version 2025-07-17; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/thule.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "687fdaff24313c947926871ab4210d9e7cd45cc183ff8d4b9f12ae5eae890beb",
-      "bytes": 6942,
+      "sha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
+      "bytes": 6752,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4623,
-          "sha256": "e4744a3076a2378eebeb810d74afa8b78df5f9e1b0d22952ab73538b352024de",
+          "bytes": 4480,
+          "sha256": "9d7efdc5b3c42fe4a758a080e196852e0150fed5a25d814b0e4070195f43c6d4",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "thule",
-    "materialSha256": "7efabe4778a0abefc46ad74ed5a398f193d97afe0e6603dfd56cccbb23e5d657",
+    "materialSha256": "39295ef853999d6add7e92afd26850a045b2bd70651266bd7674ff2b1480d719",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

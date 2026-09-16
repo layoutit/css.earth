@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3056cc4e662b081c508cc5c9d6c96975dbcc477a22207c9a0b08cf5fb04061a8"
+    "sha256": "9d5188271876d8dd218ef8d67ec2daebcbe21ac7afc666ce58e6185ecd8563f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -202,7 +202,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b861d7639a3acf861ef882ea7fd4789a33fe932a2d0283dbbaaf4b8b7468ec6e",
+      "sha256": "ab491d54b481f26f0ee3b18d170708e09abb0076f37b6e3f68edfd523fa48c2c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,17 +228,19 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "241 m"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "1.126 AU"
+            },
+            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.20 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=101955",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "1.20 years"
             },
             {
               "id": "rotation-period",
@@ -390,7 +392,7 @@
             "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/bennu.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -696,8 +698,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b861d7639a3acf861ef882ea7fd4789a33fe932a2d0283dbbaaf4b8b7468ec6e",
-      "bytes": 9695,
+      "sha256": "ab491d54b481f26f0ee3b18d170708e09abb0076f37b6e3f68edfd523fa48c2c",
+      "bytes": 9585,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -718,7 +720,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "c017ad68493fbe0daab1f8ad6820b2a1ecfb6b293cbde675702327e5df555c94",
+      "sha256": "8498d3fbaa7ffefbe3c86d25f798de80df044be4973313f2fa8091f6e4344352",
       "bytes": 1303,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -744,7 +746,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "baad704dc0b3e070b5781d68205e145339df3eabacf48ba33ad3aa019928c7fa",
+      "sha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f",
       "bytes": 95757,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1110,8 +1112,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5115,
-          "sha256": "2c449e53c46446cc1c6f4919eba459dcbeeaff7dfac9f6ceefad72aedaf95bda",
+          "bytes": 4890,
+          "sha256": "7f7886dd71c12a83256147bf7dbb007a92c3ad845e62b8615f275a421cca5541",
           "verification": "bytes-verified"
         }
       ],
@@ -1148,7 +1150,7 @@
         {
           "url": "/scenes/bennu/bennu-features.json",
           "bytes": 36758,
-          "sha256": "b87d254983f0c75e428d10d5fe7915a171b853578b0bd03db3b90b2c8cf0fdf1",
+          "sha256": "d74c2302cc89f16ace50a06374e2fab71d942e875f17b99c10228e2d75513277",
           "verification": "bytes-verified"
         }
       ],
@@ -1261,7 +1263,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "46775d13cb60cba29bff4af079ddaa81cbb9580ecf80b882af721c9317b698c4",
+    "materialSha256": "047c48b0bb853e3abbc8b3e3dc75f770ab86a73896c71084f5f352bd8b45d1a9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

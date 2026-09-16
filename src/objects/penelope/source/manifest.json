@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9564,
-      "expectedSha256": "f8475d6a06e944e9d6a7bd8888750e669e0cf7c3f94053268c404ac31edb4d95",
+      "expectedBytes": 9383,
+      "expectedSha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,21 +164,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1807,
       "expectedSha256": "e63b3d0004cc1923a28f499d77a8a8cfa3b4edc2d7d7f22965f940f41811d1bf"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 6062,
-      "expectedSha256": "9b4079987fbd06cbbc75f3979cf860c20ce20302a5051c3bb427b6470f7c5c0e",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Penelope: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

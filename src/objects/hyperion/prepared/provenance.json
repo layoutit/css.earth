@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e6506a5ad17fcbcf186da23443bc4fc739d4e61d2d91b9efcee2351ff8ae0efc"
+    "sha256": "0ffa9fe451934660bea14a20a1ced44174f0838b78517bb75770bc4d263e52d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -841,7 +841,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "259c5531d7c74b06489a721ec5aec551e1c1d42c1567cbad52e5b1ea280f09e8",
+      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -878,15 +878,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 21.3 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "About 21.3 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Chaotic tumbling"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 1.5 million km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "William Lassell and William and George Bond · 1848"
             }
           ],
           "moreFacts": [
@@ -1005,7 +1012,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hyperion.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -3771,8 +3778,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "259c5531d7c74b06489a721ec5aec551e1c1d42c1567cbad52e5b1ea280f09e8",
-      "bytes": 5799,
+      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
+      "bytes": 5875,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3980,14 +3987,14 @@
       "outputs": [
         {
           "url": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
-          "bytes": 2020,
-          "sha256": "a8480f6302da6f66fbd64634336b0dca1081c6b6277e1dd331e67873a8f182d6",
+          "bytes": 2050,
+          "sha256": "a5d39e67c4e26874436518e9bcae4af91ad0eeae600ecef853a9b207090b62f8",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "bytes": 1373634,
-          "sha256": "cf956a191334a80b721ee85352e524da5d49e7156c80bc1a2492a14457be7b7c",
+          "bytes": 1222302,
+          "sha256": "2516d46cd7f61cd9f969409f2d6f893dd7ea7a7f7ef6ccda059e7c0ce716afa2",
           "verification": "bytes-verified"
         }
       ],
@@ -4068,8 +4075,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "bytes": 829376,
-          "sha256": "999563e51776ec4293cff8a1f7bdb32f5615705e57dafdfa3eec7b6c7b3e2b12",
+          "bytes": 837090,
+          "sha256": "8910bac7d7aaf43b57cf1e6a7b55e2d9cf773ac93265df5b34cfd549dce5c0f7",
           "verification": "bytes-verified"
         }
       ],
@@ -4101,8 +4108,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6122,
-          "sha256": "d7f9f91ef8657d2329fa45d02a433daefa26a1c82cbbfb10581962ec1a9819f5",
+          "bytes": 6040,
+          "sha256": "cd016a52bcd5227e0754328f9944c4bb0e166328ed4d04025db31e52d1172c8a",
           "verification": "bytes-verified"
         }
       ],
@@ -4163,8 +4170,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 45380,
-          "sha256": "6aa5e8e0d30ad572a1fd0ced793c6a579dda335f918f2dc1035fb9218d06bca1",
+          "bytes": 39394,
+          "sha256": "894cf06394d5a4a3a58232f88834f53d816f3682bfa3a91e8a7d62ceb6c8b007",
           "verification": "bytes-verified"
         }
       ]
@@ -4226,7 +4233,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "4de57d684fd6fd894b641f884cc15bb65d5afaebb9abd2d9ce5982aa753d9e45",
+    "materialSha256": "c979b06a70e4b0a86f943ba7a0814a8439bf5b4541f15d9ced6d3071db05ae67",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcec8a7eda9ed823994e690209056d331c1ce9483c28a4e725ad10fad80ef9a2"
+    "sha256": "9db6fb6d75d9f6e6e6fbf8cf4ff026b779762f8cc328a2a71e53817d935c5c9b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -463,7 +463,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd2a979c451bf754c5e47f217f7a17993589b1d6ff32a2671360e02320d314ca",
+      "sha256": "63ec8fbed9eac5f45a4d89a588729ae70825bcac76b25cd4077d3f9723cb5101",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -498,30 +498,24 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 14.7 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 139,400 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 139,400 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager 1 science team · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Voyager 1 science team · 1980"
             }
           ],
           "moreFacts": [
@@ -641,7 +635,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/prometheus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -2034,8 +2028,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd2a979c451bf754c5e47f217f7a17993589b1d6ff32a2671360e02320d314ca",
-      "bytes": 6174,
+      "sha256": "63ec8fbed9eac5f45a4d89a588729ae70825bcac76b25cd4077d3f9723cb5101",
+      "bytes": 5721,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2131,14 +2125,14 @@
       "outputs": [
         {
           "url": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
-          "bytes": 1356,
-          "sha256": "33b42a19ba5053b00ca78a3e42d46cfc8500ed496a645624bb7e5b9831da100c",
+          "bytes": 1348,
+          "sha256": "867d301e7d7532d1525d7652ea7b79a94ee050e8621e59325063047773af7612",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
-          "bytes": 497492,
-          "sha256": "5e91a2ea2ad437677a20f8432a7e73345c5252774a204598b11ab1fb856f2cd9",
+          "bytes": 444856,
+          "sha256": "935563345de44cb129d5c186722dc3096976fca2610f664e58884d5f9e5818a7",
           "verification": "bytes-verified"
         }
       ],
@@ -2193,8 +2187,8 @@
         },
         {
           "url": "/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
-          "bytes": 409108,
-          "sha256": "2fa606c3f48d2704779b4a6b85a886df126c2cae6631a4957bd62e488bdaf22c",
+          "bytes": 486640,
+          "sha256": "b23151bdc0eb352e80e6012469e91906c0ca60594bd475fa03079aa1487beb29",
           "verification": "bytes-verified"
         }
       ],
@@ -2226,8 +2220,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8049,
-          "sha256": "1c9ba8ffd7ed8f4959cf3666bf0d313556ab17d61f6a97c2112d71c22b16dbf4",
+          "bytes": 7690,
+          "sha256": "6d494698d7c5b672f87789358b7ce35108e65c8441672864b66776283420d105",
           "verification": "bytes-verified"
         }
       ],
@@ -2252,8 +2246,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 16314,
-          "sha256": "5b35c474a77af4c067ecaac6832ee15cbe5abe5433b268157ec765334941fb85",
+          "bytes": 14470,
+          "sha256": "35c71c7e39ef19c6702baa1ccc776e2acbe962e744645f65678880dd726e56ad",
           "verification": "bytes-verified"
         }
       ]
@@ -2315,7 +2309,7 @@
   },
   "lastPreparation": {
     "objectId": "prometheus",
-    "materialSha256": "4e58e84929a454b82d0b31857e090e5024153819995b3d912f70a78cd3035668",
+    "materialSha256": "53c66522b1922b0e1bfbace6f0e028c20e4d1ca1c9fb5719ce0efdeaf610fb57",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

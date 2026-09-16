@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cb62b4d0976527a3140cf4ca8aed29d623431588c7551b788ce5c95239e345b8"
+    "sha256": "0a7c3e435c4f406ceff50f26c17ba124818f5214699f9881a9fa8c6ce42b95ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "00ddc916a59239889adf023f6e31bad7f1184b82bbb000575fb5d60725079500",
+      "sha256": "3326fc5790dc47c1c95618fbba86047f9da1681e45ba6de929bd71c4d2f6954e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -199,6 +199,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.529595 hours"
             }
           ],
           "moreFacts": []
@@ -290,7 +295,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/euphrosyne.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -367,8 +372,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "00ddc916a59239889adf023f6e31bad7f1184b82bbb000575fb5d60725079500",
-      "bytes": 10044,
+      "sha256": "3326fc5790dc47c1c95618fbba86047f9da1681e45ba6de929bd71c4d2f6954e",
+      "bytes": 10189,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -489,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7659,
-          "sha256": "a1e960ac699f530b696ca8e957c835471c56176222e4a8a3af0d66eed863a63c",
+          "bytes": 7760,
+          "sha256": "0c6dfaa47a8d25dcf14acc80a98650d5c9aa1c58cb3ce83b273ca3e6d87d45e2",
           "verification": "bytes-verified"
         }
       ],
@@ -553,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "euphrosyne",
-    "materialSha256": "72308b72b336fd4a021af4ccbd3ba870fd4f2bc1cd8d7d351dcb9fb8a2beba7c",
+    "materialSha256": "5c55f2a1dde88424245d09c8aa02e007753e543e3d2c41ab25803f17674cbe7d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6ca42eb91e83eadebad0c6b5f3eba803ce39fce1cdd9338438d8c5ff95c789f5"
+    "sha256": "9ee3f0318df7197e27323ec49ba2cd1fcf306347d9baea88671ae450370602ca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "37ac125b7be75b693c2206c7b84940f1294e9e056793a93caf51d0161d11f7e6",
+      "sha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,15 +164,7 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "0.542238 km",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
-                "label": "Castalia · castalia research castalia 1997",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-castalia-castalia-research-castalia-1997",
-                "locator": "/diameterKm"
-              }
+              "value": "0.542238 km"
             },
             {
               "id": "distance-from-sun",
@@ -203,15 +195,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.089 hours",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
-                "label": "Castalia · castalia research castalia 1997",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-castalia-castalia-research-castalia-1997",
-                "locator": "/periodHours"
-              }
+              "value": "4.089 hours"
             }
           ],
           "moreFacts": []
@@ -303,7 +287,7 @@
             "credit": "Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/castalia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -377,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "37ac125b7be75b693c2206c7b84940f1294e9e056793a93caf51d0161d11f7e6",
-      "bytes": 11079,
+      "sha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
+      "bytes": 10309,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -499,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8575,
-          "sha256": "aa4d0a2f8859fb399cef0367b66b22d5fbc65e02ddfc2d5de4d85db3a5159f58",
+          "bytes": 7987,
+          "sha256": "1cbeb30a893461116462cc162bdbade62be3ff31f43dd7be28f377e2988d10fb",
           "verification": "bytes-verified"
         }
       ],
@@ -563,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "castalia",
-    "materialSha256": "04d46800d48294676c3c60d3aaff14912887d52bda442bf924e99bb1ebb6f53d",
+    "materialSha256": "92266f4abe4abcab9c68d610bd5748cf6de388041a66312b0d96a198c3d0df13",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

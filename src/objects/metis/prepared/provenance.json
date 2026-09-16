@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7472297f7a4af5be3b4ca81861048aaa112619dd0742fb761206094782d46bde"
+    "sha256": "eeaec2cef7a93c5708b17b9b284d610b0d26bc9dd4eeeef9bcde00aaa94fdc2c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -226,7 +226,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7182567ada12d8318836d09c643a3d9a20556b8f72f5e57cf667859cdee3b66d",
+      "sha256": "a841375fece714d1ed75cd44900cdef60d135d85767287bb30b4aa6fced20992",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -263,15 +263,7 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "7.075 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/3; P (days) × 24"
-              }
+              "value": "7.075 hours"
             },
             {
               "id": "rotation-period",
@@ -285,6 +277,16 @@
                 "catalogueId": "nasa-metis",
                 "locator": "/references/2; rotation-period"
               }
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Jupiter",
+              "value": "About 127,980 km"
+            },
+            {
+              "id": "dimensions",
+              "label": "Dimensions",
+              "value": "60 × 40 × 34 km"
             },
             {
               "id": "discovery",
@@ -360,7 +362,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/metis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -920,8 +922,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7182567ada12d8318836d09c643a3d9a20556b8f72f5e57cf667859cdee3b66d",
-      "bytes": 4361,
+      "sha256": "a841375fece714d1ed75cd44900cdef60d135d85767287bb30b4aa6fced20992",
+      "bytes": 4271,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -963,14 +965,14 @@
       "outputs": [
         {
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
-          "bytes": 1414,
-          "sha256": "dcf8b7a04cb1c530804827acd1340a4faa0ed4f12d553968700659b23c4a2eb7",
+          "bytes": 1412,
+          "sha256": "dee7c785db2f9cf99da273ed1ee2c2c572a2103bbd7d6f438cc8cf016f4e8541",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 30766,
-          "sha256": "f6077d939c90aa90f39ae2cb546ff1f2b311477010f65d753e12df2ca7978859",
+          "bytes": 32556,
+          "sha256": "254d4abb6e2e029bb1e98f1b9c03ade012bc6064f6d61176e3e769563b1f780f",
           "verification": "bytes-verified"
         }
       ],
@@ -1002,8 +1004,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5524,
-          "sha256": "36fd3a5a7191d21bf4040e609fcb1ae8e32dd8336dbcf791528cea693bf354be",
+          "bytes": 5437,
+          "sha256": "e429b1ac101f5d264bd252f6a27dd6d603c8fb740b3fded03ceb8b8c7bf4da52",
           "verification": "bytes-verified"
         }
       ],
@@ -1028,8 +1030,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5628,
-          "sha256": "063f037bc0be3aecf108ba2a3b89618b27d14d6fa157c8af0010582bd79a1beb",
+          "bytes": 5980,
+          "sha256": "a95847a6d3571cda193a45491bd453b899dc3df1e99b83b6c75966721ca2e4dd",
           "verification": "bytes-verified"
         }
       ]
@@ -1041,7 +1043,7 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "9de934724fa89969922faacb7c416f3486c158821da2d0bfe5e083860ededc59",
+    "materialSha256": "7be9e9319594f630151b66ec83ebf0d42f9409e565f75a0fcbbd91faab925603",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

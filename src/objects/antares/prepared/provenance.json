@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6ef3e33d13854ffe947c5d7372bd91b5f400cb2f52117e33bfacd71029c7d68f"
+    "sha256": "690cbaea00b3e6f8fa2ad1665bf7334057e5b666ec6722535013ac808632e67c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -86,7 +86,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b82e382f68abd1b4823968a20c3f57a6683dd8bf0d7e5cbf570204c587bfcebc",
+      "sha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -97,41 +97,22 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "682 solar radii",
-              "source": {
-                "url": "https://arxiv.org/abs/1304.4800",
-                "label": "Ohnaka et al. (2013) diameter at the Hipparcos distance",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "arxiv-1304-4800",
-                "locator": "radiusKm; radiusSource"
-              }
+              "value": "682 solar radii"
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "170 parsecs",
-              "source": {
-                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Sco",
-                "label": "SIMBAD: Hipparcos parallax (van Leeuwen 2007)",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "simbad-alf-sco",
-                "locator": "distanceParsecs; distanceSource"
-              }
+              "value": "170 parsecs"
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (2.2 µm)",
-              "value": "37.38 milliarcseconds",
-              "source": {
-                "url": "https://arxiv.org/abs/1304.4800",
-                "label": "Ohnaka et al. (2013), VLTI/AMBER limb-darkened diameter",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "arxiv-1304-4800",
-                "locator": "angularDiameterMas; angularDiameterSource"
-              }
+              "value": "37.38 milliarcseconds"
+            },
+            {
+              "id": "rotation-axis",
+              "label": "Rotation axis",
+              "value": "not measured"
             }
           ],
           "moreFacts": []
@@ -191,7 +172,7 @@
             "credit": "K. Ohnaka, K.-H. Hofmann, D. Schertl et al. (2013); M. Montargès et al. (2017); ESO/VLTI/AMBER and PIONIER"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/antares.json",
             "credit": "Published angular diameter at the Hipparcos distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
@@ -238,8 +219,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b82e382f68abd1b4823968a20c3f57a6683dd8bf0d7e5cbf570204c587bfcebc",
-      "bytes": 3851,
+      "sha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
+      "bytes": 2948,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +335,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6260,
-          "sha256": "4348412f89d928c7205f46390afb338f86941e5e1fbaadd857b4bee2be1720a2",
+          "bytes": 5586,
+          "sha256": "7c28def2984c207cda742db5088ebd7acf38edcf79e8396d7124a39a3742c2ad",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +374,7 @@
   },
   "lastPreparation": {
     "objectId": "antares",
-    "materialSha256": "029c9323af54b52479af7eda9a5e0921b635299c3be116cfc8dc877c1a80593a",
+    "materialSha256": "c5fb5bf5f1ba73ed19d7ff3c498ca1de032555650778d4a0deb0456399a4cc42",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

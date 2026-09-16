@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f55d5f5b1a431dfd43d36b6ec3abdae21511dd2a859c80b59a6c8b7156194822"
+    "sha256": "cce83b1dd23f47df4eed3e33217251bd279baddd67b89a50f0c07160e091911a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8475d6a06e944e9d6a7bd8888750e669e0cf7c3f94053268c404ac31edb4d95",
+      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "42.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.747455 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/180",
-                "label": "DAMIT model 180",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "3.747455 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Penelope model 180, version 2007-02-27; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/penelope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f8475d6a06e944e9d6a7bd8888750e669e0cf7c3f94053268c404ac31edb4d95",
-      "bytes": 9564,
+      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
+      "bytes": 9383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7207,
-          "sha256": "5097b2b2f0d14ddfc135214890a0adf6825c94df1e34b9189d407c5ee467165e",
+          "bytes": 7073,
+          "sha256": "92409ac885ba46e27c4d243852b6d9d4e3bb2fc2b2503a04b00e572e8327207e",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "penelope",
-    "materialSha256": "971fd5225f17e068643e1f32e1a75f2c37054013579d7790db389352371e3b0d",
+    "materialSha256": "813e30c6dbbb6ddfbbb0837438190bf2abf17f4a07dae62fbdd7af08347b55b8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

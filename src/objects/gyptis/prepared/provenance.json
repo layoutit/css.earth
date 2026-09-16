@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da330737dda7e6c2e31368e560b14a95536191704357e721f18dcfb97aeae2b5"
+    "sha256": "13d1ad2cd7b696ab0ac42ad0a0a6e7e527a6bdaf5a5a046b960c1ca0e0baee2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "89b0bc917265b901c1288ae21e985c0dc3013e79cb90c430011beb0e3aca43af",
+      "sha256": "eda67348115a6b7efb01d11cfe996190e0e02f0e499246079c6b4c0b46500bbb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Gyptis model 5394; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/gyptis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "89b0bc917265b901c1288ae21e985c0dc3013e79cb90c430011beb0e3aca43af",
+      "sha256": "eda67348115a6b7efb01d11cfe996190e0e02f0e499246079c6b4c0b46500bbb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9394,
+      "bytes": 9415,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6598,
-          "sha256": "e2608c35681c1f0a216604663634c3ae3662800258083c562b0fa3cb4e8d1e82",
+          "bytes": 6619,
+          "sha256": "50bd4f1cffe7481538985be2284caba688dc7ae003c3f08b85469cd915ae65c4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "gyptis",
-    "materialSha256": "18eec0b63f9a2d76ff0cd348b1411af7a7fc8871b44e96b399e1be3bb1e74dd1",
+    "materialSha256": "e427432aeed735f8176127eea9a4143e24b551fdaa0e1879e3d7cc9c8a1cc354",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6e08bbc1881b23e276b32628ea7f3023335d4bf0bcffafa0e0a9b1c2f1047eb7"
+    "sha256": "8bf17f2b39d1c65ee89cb926c1bafb2ed7ad8c1b7b71199345ec23f88681a5b1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0facece7fc525f69d0a00a28bc2400d06f7c714214827e2ad12e110ef82ce73c",
+      "sha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,15 +168,7 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "1.284042 km",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
-                "label": "Geographos · geographos research geographos",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-geographos-geographos-research-geographos",
-                "locator": "/diameterKm"
-              }
+              "value": "1.284042 km"
             },
             {
               "id": "distance-from-sun",
@@ -207,15 +199,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "5.223327 hours (model)",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
-                "label": "Geographos · geographos research geographos",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-geographos-geographos-research-geographos",
-                "locator": "/periodHours"
-              }
+              "value": "5.223327 hours (model)"
             }
           ],
           "moreFacts": []
@@ -307,7 +291,7 @@
             "credit": "Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/geographos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -381,8 +365,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0facece7fc525f69d0a00a28bc2400d06f7c714214827e2ad12e110ef82ce73c",
-      "bytes": 13691,
+      "sha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
+      "bytes": 12927,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -503,8 +487,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10181,
-          "sha256": "050c80b629c14260b8fbce3b12789ea1037bf49acccc4ce4c095033452a153e9",
+          "bytes": 9599,
+          "sha256": "20cb9358a0d5084b7dc39694945197b1df210377bb052a6cbb2e68167dcdc112",
           "verification": "bytes-verified"
         }
       ],
@@ -567,7 +551,7 @@
   },
   "lastPreparation": {
     "objectId": "geographos",
-    "materialSha256": "aa69e2844b8260811bdbe483656fd8856d7dc7732095075ce7eeb5a589c0651a",
+    "materialSha256": "b57a586d691d424b177cc9f4ee79d8dc16624b54c57eaf37e280a4e9aef498ac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

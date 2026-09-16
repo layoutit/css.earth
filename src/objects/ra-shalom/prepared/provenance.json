@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7240f2a76b11400105958b151882f64f638cd48e14f825c40fd3cb5638c4a1c0"
+    "sha256": "8fff0d078ded534d84a45ddaeaaf2ad01447488caaf8ba65a81df3e5af0eac35"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f76ee54ebd5773a3fd8536fb09764463eff85f20d75f12d6c60f28e9ac4d8f93",
+      "sha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -207,15 +207,7 @@
             {
               "id": "rotation-period",
               "label": "Model rotation period",
-              "value": "19.793 ± 0.001 hours (model)",
-              "source": {
-                "url": "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf",
-                "label": "Ra Shalom · ra shalom research rashalom",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-ra-shalom-ra-shalom-research-rashalom",
-                "locator": "/periodHours"
-              }
+              "value": "19.793 ± 0.001 hours (model)"
             }
           ],
           "moreFacts": []
@@ -307,7 +299,7 @@
             "credit": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ra-shalom.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -381,8 +373,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f76ee54ebd5773a3fd8536fb09764463eff85f20d75f12d6c60f28e9ac4d8f93",
-      "bytes": 11758,
+      "sha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
+      "bytes": 11383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -503,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8605,
-          "sha256": "a2f3491139cb92f00c1ae127a1e5483b58c42c8d79e00f7c5ee3d3b39d63bf60",
+          "bytes": 8321,
+          "sha256": "2a5717051ab92a4669f21d3f6e3d9d24c1a71a519c79be9c72b9ecc756f8082e",
           "verification": "bytes-verified"
         }
       ],
@@ -567,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "863a2264da60110f0e020a78f812d1f82836316a6f4c60e29680bc9a55fca4aa",
+    "materialSha256": "6666e62d5dc05b2a6b6082ef2fa80ed12ca0de3cfc38b872eacce1a40699f6a8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

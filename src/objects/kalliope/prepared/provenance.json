@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a60bb8446631426d52a8105839306272575048a0f86b27ad5b2e13151f7524b"
+    "sha256": "a3b1d13b0d1c288d91cd3d0c085139ece4e504ba3988852d3e231ef8c979c779"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b1ac13641b8d42ec266daf6b56be689a65b6026ca499744a0722d95fca0a1be9",
+      "sha256": "df123c11d5f7e84b19a5574934ddcbd0974258eec3a817ce6e88622b7cb6b60e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "75 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.909 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "4.1482 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kalliope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b1ac13641b8d42ec266daf6b56be689a65b6026ca499744a0722d95fca0a1be9",
-      "bytes": 8406,
+      "sha256": "df123c11d5f7e84b19a5574934ddcbd0974258eec3a817ce6e88622b7cb6b60e",
+      "bytes": 8658,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6182,
-          "sha256": "3c9874cfe742005de2c7e8b4b6f696581d64f50ce77812a26234b3876c8d6ee5",
+          "bytes": 6346,
+          "sha256": "0cc161a884ff0c7a043109be21c57698c98e4c5d5e04cd9cd8af5c0ace0fea30",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "d04381a193f6dedf7a3ef74819535d002d1359ded606aa6d84a083444a78c43e",
+    "materialSha256": "c943d226aab1e81af6ba7bb3d681200c0cb382c39cfda266b859126335bbe152",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

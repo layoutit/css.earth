@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b716e2b87bb0e1e8d614d45bda92995ecd62e88419d4bc4fe12b9b8cec47c3c5"
+    "sha256": "89ee1a7498519f618600af715fa5059b949f8953fe9056132aaad423c2a2cad1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -261,7 +261,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8292fb47def1a04b8ce23a02b6dcf35a365df34222fcc6831717fe593fb59cb1",
+      "sha256": "e81d2e9f0032fe21cf4316a56ced13c49c900fc7dff914e8549f0a6ff5abf0ad",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -298,15 +298,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "32.9 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "32.9 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "32.9 hours · synchronous"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 238,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Gaseous envelope",
+              "value": "A tenuous plume of water vapor and other gases"
             }
           ],
           "moreFacts": [
@@ -502,7 +509,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/enceladus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -885,8 +892,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8292fb47def1a04b8ce23a02b6dcf35a365df34222fcc6831717fe593fb59cb1",
-      "bytes": 14590,
+      "sha256": "e81d2e9f0032fe21cf4316a56ced13c49c900fc7dff914e8549f0a6ff5abf0ad",
+      "bytes": 14681,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1281,8 +1288,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7979,
-          "sha256": "b58dcf8783276774b8e12385df05335c932e0dc1021237b3a484a18170a7bfcc",
+          "bytes": 7911,
+          "sha256": "a03c75d75bdf482c1afdfdb0bc890b05f3810f8eb7425a5027d42cf22ee4ad65",
           "verification": "bytes-verified"
         }
       ],
@@ -1456,7 +1463,7 @@
   },
   "lastPreparation": {
     "objectId": "enceladus",
-    "materialSha256": "8717e4351c8fc1df50fc810093a79539b4a3a8a0a3d9924f9ff033095eae7f78",
+    "materialSha256": "ab8f89c929a8f848cd03b4f781700a1ded2d3340227f3425f4762c92718764f1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

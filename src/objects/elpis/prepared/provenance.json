@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87eccdee510a83b66e543279dc6f84dec19f99034e3338d66813ee55849b1b24"
+    "sha256": "7961b22f236177895f23347180cca417bbf322848182cbd01949bf911f000176"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d9aae4fce6ca36db618d53504a596862ac414d1ff317c15a79b800e6eee39a4e",
+      "sha256": "1ae9e0ec9f79ad4a825724508a1980073e4c21686b8bb51f4ee87fbeb9466348",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 6156, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/elpis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d9aae4fce6ca36db618d53504a596862ac414d1ff317c15a79b800e6eee39a4e",
-      "bytes": 7968,
+      "sha256": "1ae9e0ec9f79ad4a825724508a1980073e4c21686b8bb51f4ee87fbeb9466348",
+      "bytes": 7988,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5390,
-          "sha256": "667224d8acf22688518f247047345a9be903abbc6e28c8703cfaf82e1dd69c63",
+          "bytes": 5410,
+          "sha256": "aed66903be57148996a0fa453a076821871f83e45a23179d9f5a2920baaa1bc1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "elpis",
-    "materialSha256": "6523bade060e8a70d2559005c81b4f982cdf8495ec47b3c4db6523f892972e37",
+    "materialSha256": "09f8cba5cefb386d2476ce87f12f91bf348ec06b9ae88ebc159f0c8d36603c46",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

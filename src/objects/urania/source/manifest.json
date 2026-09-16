@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8129,
-      "expectedSha256": "c9bb2dc3573787f3808f93186aff741a169fa695e892231ca137fb67c948ecb7",
+      "expectedBytes": 8381,
+      "expectedSha256": "b726780b893d4e1872f2c628e40ec981e20db13d70d2f5d4ee93a0ef273f5c58",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,21 +200,6 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "4771e7982379d20f022a41e269f31f7d47424cd60b342a979e539c41db5d14cc"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 5001,
-      "expectedSha256": "30383267d4f327b1218b288cb40140a205987b3565fcf4c2324504491cbca608",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Urania: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

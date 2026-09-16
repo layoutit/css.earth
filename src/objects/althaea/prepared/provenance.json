@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31e1c3e243ba461f57f65af891d9b32ef2d887f69fe6cf9dc65007e4c3e358ad"
+    "sha256": "327b899a0d76affd574d1b1b6e12ab7fa5627fc9cdf4b010f3bc8ed6195d7d3e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "23cf8c00320b63e2bc99ec9309a5a62051535ea72a1e13158d2335866b648718",
+      "sha256": "31a77d458796fcbc53adbd40534277270f5809e62c9ff17c8f4c73555bb4d015",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011); model 323, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/althaea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "23cf8c00320b63e2bc99ec9309a5a62051535ea72a1e13158d2335866b648718",
-      "bytes": 9822,
+      "sha256": "31a77d458796fcbc53adbd40534277270f5809e62c9ff17c8f4c73555bb4d015",
+      "bytes": 9844,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7217,
-          "sha256": "8df810f93a4ebc129c763c25c222289d2b109cfa67c58dc400de976ec8601bbe",
+          "bytes": 7239,
+          "sha256": "4dffd2db3f86d00ed881b1f04bb5e46b31d9449848f967cb4758a720f4ed0fa3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "althaea",
-    "materialSha256": "8248c80d318ec93a1c5b9a283ea7086c5d4d5be4c66529b89709f6151c2f502c",
+    "materialSha256": "dca8612c7cfb424a467aeedd275ce956c81dd78a33102acf7ff874f2fe0333fe",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

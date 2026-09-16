@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1efecd95efdc48f1cfbcf3f5af546bd113b6f4bd510becb523a7a35407dc949b"
+    "sha256": "f1cf0b4bcff8693fade9333db573f4390b8a24b9d5ccb86d3f5c687815b06420"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e4570df55cfde41f4e9005dcadc05a380bedd37f4e1a31f076125e98344ad3af",
+      "sha256": "78d3753d4b6fa1a036a3d9c22cb46e879e9248c0563e4d6a80c1ef3b6ab4774a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2023); model 16284, version 2023-10-03."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sapientia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e4570df55cfde41f4e9005dcadc05a380bedd37f4e1a31f076125e98344ad3af",
-      "bytes": 11501,
+      "sha256": "78d3753d4b6fa1a036a3d9c22cb46e879e9248c0563e4d6a80c1ef3b6ab4774a",
+      "bytes": 11525,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8873,
-          "sha256": "923ce8db5aa73c500e2dbdaa85e759768d6f091409cb4c79427d1b8f1e49ba71",
+          "bytes": 8897,
+          "sha256": "e5ebd79e1170615a9cc236d7a5b2c4489aed5d020a2b4525619ba40ef1421473",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "sapientia",
-    "materialSha256": "1661b8f3b7aebf59711122dd10b67be748ac5f941d73a04de4f4065aea80c4f9",
+    "materialSha256": "e51881bf90afaf05a4c23af29fb0e7a1ff154a0568df9be3c65b856851a12daf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

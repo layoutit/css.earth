@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d001684df32ae11bac01e8eb1a61c0d2e844df324b1a6a46f3be3be30db80fca"
+    "sha256": "f23110d17de9580992dbc44c51f526aaf7312ecf1a68e1402ca9d485ca696280"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1f70a4aeacceafbb4eb8c253f2218f3c87831c36c22316edb1c213c94a89c75a",
+      "sha256": "1a07853953bda7dd41026c3b2e761cc651f4750a06a6dbccfbc10d6813a92aba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "74.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.452 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "13.72204 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/parthenope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1f70a4aeacceafbb4eb8c253f2218f3c87831c36c22316edb1c213c94a89c75a",
-      "bytes": 10333,
+      "sha256": "1a07853953bda7dd41026c3b2e761cc651f4750a06a6dbccfbc10d6813a92aba",
+      "bytes": 10591,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8081,
-          "sha256": "91d23a08b0ef0fdec723fbcc36853fbc07e2f7ac93c78cbd95f98867fc87b21a",
+          "bytes": 8251,
+          "sha256": "35a738546a79e39d1dc3ef5c3e22c93918e57a717c20a122712277182cf6cb55",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "parthenope",
-    "materialSha256": "a9b5c546c1512dedc3664ba2301e83444487b9747ed47bef0ac72c8daffc5baf",
+    "materialSha256": "dc3e2fe1fc6ba5c9b5e4395325871736cc3a65546dae1b813356e0f356987085",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

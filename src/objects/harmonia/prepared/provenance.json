@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8d783246a7290bb3c4ac7870a12a30ec3251b7838825a85dab002fc7d5440c7"
+    "sha256": "2106d15899c488a8c801bb6364cf275c804a809151ee162853ba37aa13022b07"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4cabb643f0e422deeba816b0fecc751bda902df0852c1acb67af41f6c28a8eb9",
+      "sha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "55.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.908485 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1855",
-                "label": "DAMIT model 1855",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "8.908485 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Harmonia model 1855, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/harmonia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4cabb643f0e422deeba816b0fecc751bda902df0852c1acb67af41f6c28a8eb9",
-      "bytes": 9855,
+      "sha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
+      "bytes": 9672,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7498,
-          "sha256": "88d8c45e23c53f7eb659c6f0501110bfd66beb1f2ecf4aba284d4fd7944bf5f8",
+          "bytes": 7362,
+          "sha256": "a091b99d00f61fd583c7649df1e20d0b08f8ced08a3e32afdbccb59a003c0e3f",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "harmonia",
-    "materialSha256": "b00fcceb71227e5eec29821016c981e643bf78c891964194b9bebeb2962a00d5",
+    "materialSha256": "3efdcb7e504d7a40e8ccd812fbd1cee7ca2f11d7b5b8e7ee7a2035df1650667d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

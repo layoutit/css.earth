@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d6fccdb967331d26c6777f3b4ef6b3481754c6672a16277eebc7b24d9f7d5d7"
+    "sha256": "9e210db194ecfea68f82436df4ea2f5f4ee27193200af6c247002064b3684fa1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -512,7 +512,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0e5ffa264e8df0eec782ea6e1aeab090d33d82f6f35443717e7edb8046a5e21",
+      "sha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -566,41 +566,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "1.89 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "1.89 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "1.89 days (synchronous)"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 295,000 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 295,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1684",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Giovanni Cassini · 1684"
             }
           ],
           "moreFacts": [
@@ -862,7 +843,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/tethys.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1673,8 +1654,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0e5ffa264e8df0eec782ea6e1aeab090d33d82f6f35443717e7edb8046a5e21",
-      "bytes": 16568,
+      "sha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
+      "bytes": 15628,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2208,14 +2189,14 @@
       "outputs": [
         {
           "url": "/scenes/tethys/tethys-iss-thumbnail.webp",
-          "bytes": 2380,
-          "sha256": "70948d0747c46712b6173f2b8876b30e4296da4cdb9a083a0e1206bc4ece7489",
+          "bytes": 2324,
+          "sha256": "751494ac33d44b086ec3974c23b55f7ca17143e1d3c32a519603793cf4ab5d5c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
-          "bytes": 1224584,
-          "sha256": "8dca5b9a340a322c97176a04ec43c48bde781a14c74e92bdf2003f5b7c21c740",
+          "bytes": 1086580,
+          "sha256": "7889ac48405ad427737f5d829cf560256e4d2f592112f20166eb62905c9cdf89",
           "verification": "bytes-verified"
         }
       ],
@@ -2247,8 +2228,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6575,
-          "sha256": "95539de1d57789d3e22f3d329c64519bf7b2e8a86f049ae10c50456adbe92c48",
+          "bytes": 5746,
+          "sha256": "63e333413d1515aa002a8d7372721b9a3514cef1d8d699670178796eb1ac5557",
           "verification": "bytes-verified"
         }
       ],
@@ -2409,8 +2390,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/iss.webp",
-          "bytes": 20994,
-          "sha256": "0a197b3130c0cdcd7cc6e9ed9ab8c9efa561a456fbb62fce163a24eb82c0b6b2",
+          "bytes": 18898,
+          "sha256": "fad54660b16018ad02ffc7b8e14c5001962f05605ccd0a073df8e0670e034a9c",
           "verification": "bytes-verified"
         }
       ]
@@ -2497,7 +2478,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "790f408e8e1bc9a1bab641e153569dfef213ec5857e1891a567955a8eab62ed8",
+    "materialSha256": "b475813da8c17eeca5c3f9b10c76a5b97cb952ce61355dc199fa86eb5b6cc23f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf61714584f3bb31268ab684e904029abba0ed3f371ac666ffcd12e5403c7e14"
+    "sha256": "139bd822fb3f6862473ce904ca29d3a3304aec5db2b85eacd0951119bb4a96e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc88bb81563c90a3997f1c9d3ce22a717290fd3f8936db04f6dd96f5d07073e1",
+      "sha256": "12dad23346b126bfd170ba2ac90079f07c2b72002a91ed0fe9c8ae7cb7db7e1f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,6 +163,11 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "76.5 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -192,15 +197,7 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.02987 hours",
-              "source": {
-                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1842",
-                "label": "DAMIT model 1842",
-                "checked": "2026-09-16",
-                "path": "source/reference/damit-model.json",
-                "catalogueId": "damit-models",
-                "locator": "fields.Period (h)"
-              }
+              "value": "15.02987 hours"
             }
           ],
           "moreFacts": []
@@ -292,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Irene model 1842, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/irene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -356,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc88bb81563c90a3997f1c9d3ce22a717290fd3f8936db04f6dd96f5d07073e1",
-      "bytes": 7454,
+      "sha256": "12dad23346b126bfd170ba2ac90079f07c2b72002a91ed0fe9c8ae7cb7db7e1f",
+      "bytes": 7268,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -478,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5133,
-          "sha256": "b50d7efcb240f01c0565418034ed33d2a0ddadc828178b818d3bcdc5ece5ba54",
+          "bytes": 4994,
+          "sha256": "e3355037bcd15ac98d8ebab064d89d5e1eb712ce9310ce03ab8829ca0001647c",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "irene",
-    "materialSha256": "41f3e9575c6f0b65e5d8672c181741ad4061e50160dc557e1c130061972b321f",
+    "materialSha256": "e530efc723610ee008bcda0c9613c68675845c5fe639f62377c2f95eea806ed9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

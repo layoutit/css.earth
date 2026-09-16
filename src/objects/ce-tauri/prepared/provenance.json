@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3d03823ea37b14df6161fb722b24a71f32bf6d5c2922c54f503cc54af1c4fa66"
+    "sha256": "97cfb9db31dbb4e0a8f83699757e80757d64822d6c77bb93e1d53209cbb2647f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -255,7 +255,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f9e94d872361daf44eee369f5aeaaea07db69f3531eb53ad69cc8f23378996db",
+      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -266,41 +266,22 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "720 solar radii",
-              "source": {
-                "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
-                "label": "Montargès et al. (2018) diameter at the Gaia distance",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "source-ce-tauri-cds-dec-avg",
-                "locator": "radiusKm; radiusSource"
-              }
+              "value": "720 solar radii"
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "658 parsecs",
-              "source": {
-                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau",
-                "label": "SIMBAD: Gaia DR3 parallax",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "simbad-ce-tau",
-                "locator": "distanceParsecs; distanceSource"
-              }
+              "value": "658 parsecs"
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (1.62 µm)",
-              "value": "10.18 milliarcseconds",
-              "source": {
-                "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
-                "label": "Montargès et al. (2018), VLTI/PIONIER December 2016 limb-darkened diameter",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "source-ce-tauri-cds-dec-avg",
-                "locator": "angularDiameterMas; angularDiameterSource"
-              }
+              "value": "10.18 milliarcseconds"
+            },
+            {
+              "id": "rotation-axis",
+              "label": "Rotation axis",
+              "value": "not measured"
             }
           ],
           "moreFacts": []
@@ -479,7 +460,7 @@
             "credit": "M. Montargès, R. Norris, A. Chiavassa et al. (2018); ESO/VLTI/PIONIER; images from CDS J/A+A/614/A12"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ce-tauri.json",
             "credit": "Published limb-darkened diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
@@ -639,8 +620,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f9e94d872361daf44eee369f5aeaaea07db69f3531eb53ad69cc8f23378996db",
-      "bytes": 7499,
+      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
+      "bytes": 6510,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -935,8 +916,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5798,
-          "sha256": "10f4abd4fb401fc006816772c406b299d2d86ac385193b2326d59710b6124592",
+          "bytes": 5038,
+          "sha256": "13cb4e0019d60447e499b529c157201fca8a9fd457e8170b913df919cdcd2ac6",
           "verification": "bytes-verified"
         }
       ],
@@ -999,7 +980,7 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "bfea6afaac7ad88d255931dc4def2a3cf9acdfd1985427f67f46ca350b43dcdd",
+    "materialSha256": "1dd55363869a5c0e49fa3985493f32153fb17b1f90187ed43c31066717cdff66",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

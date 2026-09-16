@@ -1629,8 +1629,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14758,
-      "expectedSha256": "3e57d1b380c0863c07b9336f9d416a0c520daa50390b457fc55a606c58a9393b",
+      "expectedBytes": 14315,
+      "expectedSha256": "f2d6770e839b64b516a60904a1a74b36cf85c7da4b789078a57acfd13e7dd291",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1663,8 +1663,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2317,
-      "expectedSha256": "1e2ef8e8ef816eb4cfc7b6c50d9cba54740061ac74867252d8a9797f6c8b6d97"
+      "expectedBytes": 1076,
+      "expectedSha256": "743047fa1d0f2f78dc53450faf349ffaddfa004b8a683f7325c20888a6d970ea"
     },
     {
       "path": "preparation/geology-conversion.json",

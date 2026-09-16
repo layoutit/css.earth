@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1201f2ae6c7e26a04895d893e8ad89bf51411e43e70510c72bbac490562211a7"
+    "sha256": "4fcbeb87c940a4cad589fab68854e778b5ce3e9de13d44d5d237d839acb3543b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7b00791b344e401f3b43bdaee9f634a5bcb05678e4bb47d2ef34c3bd840c1976",
+      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -295,30 +295,24 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Reference radius",
+              "value": "365 m"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "1.643 AU"
+            },
+            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "2.11 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "2.11 years"
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "2.26 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "phys_par.rot_per (h)"
-              }
+              "value": "2.26 hours"
             }
           ],
           "moreFacts": []
@@ -475,7 +469,7 @@
             "credit": "NASA/JHUAPL/DART; ASI/LICIACube; Daly, Barnouin, Ernst, Nair, Espiritu and Waller"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/didymos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -847,8 +841,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7b00791b344e401f3b43bdaee9f634a5bcb05678e4bb47d2ef34c3bd840c1976",
-      "bytes": 11865,
+      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
+      "bytes": 11426,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1134,14 +1128,14 @@
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
-          "bytes": 1990,
-          "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1",
+          "bytes": 1986,
+          "sha256": "222e9dffe41e12a04d4bdb6f5af273a2e7f775e09f2e03be1eb31efb4d78434a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
-          "bytes": 294862,
-          "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44",
+          "bytes": 298822,
+          "sha256": "939082591625fa4a9fae9c45559da26f188d0b3fa7774edf7f82e8016d590885",
           "verification": "bytes-verified"
         }
       ],
@@ -1173,8 +1167,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6338,
-          "sha256": "2004161ddbe2ac4409709016551a9b522fc3919888f273de763aa100952a7a1b",
+          "bytes": 5876,
+          "sha256": "512b8743b5d307a67e9aafd2c20c300d39353470b4cb2bcf7f507441ddd2140e",
           "verification": "bytes-verified"
         }
       ],
@@ -1260,8 +1254,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 6342,
-          "sha256": "cff43fee6181bd3f429eced7c3fb96af13d0466b064e29e82b1fa8b4d478ff36",
+          "bytes": 6344,
+          "sha256": "a6e4109ae6a919a8c73941ffea2ec8694de73e979adfd625614de5c0518c19a3",
           "verification": "bytes-verified"
         }
       ]
@@ -1323,7 +1317,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "7a0908254fbcf9a17c498401d191e3a961238ffe59ac5ea3b1d6c3bca5cef3fb",
+    "materialSha256": "5b4a9544f33228821322cc3cfcc7db5cbbb502703ccf6f79926042dd37407b62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

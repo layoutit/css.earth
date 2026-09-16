@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a99ff42b3356b653cd769d964705244cfe83b8442ef9e4e52048d2f2cc11de2"
+    "sha256": "f0b0267c8abfadbc43a6871b6c81143266d093d88b6b41af9d1b9e876ee25fc0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b8863fcad72819e08d91499acea9465a8d19c23d4819badf46dea3174fb439c1",
+      "sha256": "3fad1762515234e25fa57246b5f1de20930ba81eb7649d9b50b7198830d7df12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Transvaalia model 3722; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/transvaalia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "b8863fcad72819e08d91499acea9465a8d19c23d4819badf46dea3174fb439c1",
+      "sha256": "3fad1762515234e25fa57246b5f1de20930ba81eb7649d9b50b7198830d7df12",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12619,
+      "bytes": 12645,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9754,
-          "sha256": "0cd16307673189961173c92d632b3f1dd6b47675227703e6eb93caa5a78ffd0a",
+          "bytes": 9780,
+          "sha256": "17899cebfd14da7368e0fb40c86450fb6b5d3a03a25bb60fa14f5641c70d89e0",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "transvaalia",
-    "materialSha256": "34348998fe2bf6f69de7758a2b653ca28c176b86b3b9ffade0dd4e305339ec13",
+    "materialSha256": "5736d12ec2efa0fb68063c86c62ab6e9a63d854e930c8f7a25c1ed0cb7b516e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

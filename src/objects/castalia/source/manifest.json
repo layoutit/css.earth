@@ -174,8 +174,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11079,
-      "expectedSha256": "37ac125b7be75b693c2206c7b84940f1294e9e056793a93caf51d0161d11f7e6",
+      "expectedBytes": 10309,
+      "expectedSha256": "d1e4dadc5888f47c7033963a6116d92ae9b33a86963b01caeced5e3c7fbdc371",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -235,21 +235,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1948,
       "expectedSha256": "83658c6a0e0ee32ee85abcc8549d7cf388cd9834fa69e48fe552247691f766dd"
-    },
-    {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 4139,
-      "expectedSha256": "03c4b1aac4eb35a6fd37899e2cc3c2b8c75a6bbe1a74b62532cc5acb87e67dcd",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-small-body-database",
-            "role": "reference",
-            "evidence": "JPL SBDB API response for Castalia: physical parameters, orbit elements and discovery circumstances."
-          }
-        ]
-      }
     }
   ]
 }

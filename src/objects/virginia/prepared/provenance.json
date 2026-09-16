@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19a292eb3ba93f1b2c3caa80010381deadc14c229a2367b62170e4aae73bc0e5"
+    "sha256": "8176cce73b6c319c85a04c9839b3c69443e33cec4112e516e9e4ea944cdfc131"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "11734f2169b34254d834c03235c354b8f779350632d5fd73b3ef9e037f75fb3b",
+      "sha256": "4b5666299827cac811c2500826af317f61da0e507c7eab7b89c6cde70904c66d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Virginia model 12738; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/virginia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "11734f2169b34254d834c03235c354b8f779350632d5fd73b3ef9e037f75fb3b",
+      "sha256": "4b5666299827cac811c2500826af317f61da0e507c7eab7b89c6cde70904c66d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9925,
+      "bytes": 9948,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7122,
-          "sha256": "1618c61ab13d3e3cd883bdde758d4534c16a32b4637de8ff5e4143607c3a1693",
+          "bytes": 7145,
+          "sha256": "837cd2676d6227b05d8de808b89211c31706d22ebfb9040071aeb3fe5c4f981e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "virginia",
-    "materialSha256": "268a8e57ae37fb3aed10623044667e02f91582e8a65196450030c216b0395db3",
+    "materialSha256": "f362c9da2a26d698974e8755e469b119c2e20d8afd97c78bf3f85144bf413ac9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c7fb67a1a9d8cf247c4c2163cf1f6890423dfcdf91862b0f9361a43e7763252e"
+    "sha256": "9bb517ae55d3bb9607483ab03ea76a157b2bcdaaaf0eb739be06a0f46b7ff0d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c87dc73f9d96e62091432676dd3efa6245e2b914e2d8e42b7f7a2453322e776",
+      "sha256": "fb3e4ff93f0c2546ac6e88afbb7a8e74962e1a60b18f25180876bece164443a5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1822, version 2017-06-09."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/io-85.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c87dc73f9d96e62091432676dd3efa6245e2b914e2d8e42b7f7a2453322e776",
-      "bytes": 8367,
+      "sha256": "fb3e4ff93f0c2546ac6e88afbb7a8e74962e1a60b18f25180876bece164443a5",
+      "bytes": 8387,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5790,
-          "sha256": "7c5cfb38d68c61c2f3b683779613b8e6f5cc13a1b2f6a18c2bb7a9ac6b66bce7",
+          "bytes": 5810,
+          "sha256": "5e098e1379e41230a5fd624c3ba6c614c1750df1b40d02d6521d84af34d321b0",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "io-85",
-    "materialSha256": "3af4bbab60c18b783aa314eb7cb0fc76463e01685be4f8f02a35a432b5d92aea",
+    "materialSha256": "c11e2bd3bd03109ab61881e18a58d462bec3aed163ee2bac5363bdfbb534914d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f9ab808e57a622b2e175175edc3502720dde41d08de5199a26df0838d75099c"
+    "sha256": "950d15f4ad036a7e193a785da55847ff1f56074a77042622f8bbdfd389848688"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -377,14 +377,30 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "eaa435d37a8e0bcfa09c53daef3afbf8eecedb48a238d9ec6a3a8b291332993d",
+      "sha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-9p",
         "displayName": "Tempel 1",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Equivalent diameter",
+              "value": "5.66 ± 0.20 km"
+            },
+            {
+              "id": "mission",
+              "label": "Explored by",
+              "value": "Deep Impact · Stardust-NExT"
+            },
+            {
+              "id": "source-epoch",
+              "label": "Shape observations",
+              "value": "2005 and 2011"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -5303,8 +5319,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "eaa435d37a8e0bcfa09c53daef3afbf8eecedb48a238d9ec6a3a8b291332993d",
-      "bytes": 9493,
+      "sha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
+      "bytes": 9856,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5813,14 +5829,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
-          "bytes": 2048,
-          "sha256": "61b9259ac92a0259b3938c48b81472877141c7a5932240a842fb01ca815251a9",
+          "bytes": 2058,
+          "sha256": "e127a80b35627be57375e928a3cdd14120baa26c3a9451e5e38831496b5f506d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 225984,
-          "sha256": "26bcdc297afec5e9a281765e98df70980ece01cf6d833c0db0679d1017a542da",
+          "bytes": 216926,
+          "sha256": "ce22099b4b2bce6ba56c53b8d596a8669d5a31347cfb5a2356bb4b5c9041ace5",
           "verification": "bytes-verified"
         }
       ],
@@ -5875,14 +5891,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
-          "bytes": 1764,
-          "sha256": "721ccafd63b12dfdd4ce870b6c8ceba73a81e82b0545c13f893a4527591e636a",
+          "bytes": 1804,
+          "sha256": "f78f4940261babd648e9b0339af3bd7c396ab0ec7ee59ca27018480e4cd7825f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-next-surface@2x.webp",
-          "bytes": 301446,
-          "sha256": "b1d65f9f3b15bcebce12f916dbfff30b7513157f7285c7e09e744b981c1dabcd",
+          "bytes": 285560,
+          "sha256": "9356088811031230c652e681be1a3e2c1b7cde1a31f20b8a46a09d9f1c66d618",
           "verification": "bytes-verified"
         }
       ],
@@ -5914,8 +5930,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4997,
-          "sha256": "b607cb7f8883b1c5aed770663d86c12cf4b9a798705d159b055f6b5a4eb9ca0d",
+          "bytes": 5223,
+          "sha256": "13c6373adabed30d7b86cf639a1a854d285675250bde904637295162f566e2b1",
           "verification": "bytes-verified"
         }
       ],
@@ -5998,8 +6014,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/deep-impact.webp",
-          "bytes": 12470,
-          "sha256": "88f2e4f87950744b10f1e377795f0973169488d74f4ac20921223d823310146f",
+          "bytes": 12178,
+          "sha256": "dc8fc4b769876b3825d2f56c7808048312011f43258468ae65cb9e13aedf9bce",
           "verification": "bytes-verified"
         }
       ]
@@ -6023,8 +6039,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/next.webp",
-          "bytes": 18834,
-          "sha256": "b9c3ac7a37838259ec17e5bbb9f5e5e6d180f697fc8da122d0fa20f62de022ce",
+          "bytes": 17852,
+          "sha256": "949aa1fc244d25eaa00d27e1134b67f443ea55027f78ba7c60e51740522b6a5f",
           "verification": "bytes-verified"
         }
       ]
@@ -6086,7 +6102,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "31090c7e8e18c9d51c644553cbf3b13352bef672cd97336b3cf707e758ce427c",
+    "materialSha256": "90d8d1f00814e635da0cf3952c76a43821a842d7bf5041388bb14e831d3df075",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

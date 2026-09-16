@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f0eafc61b6a65fac79a1b0f76966f2ae26943bc4b7cdb5d5bd7fd59cffae8f62"
+    "sha256": "98a76ac2ce3cec892b5acfcbb04719eaa4f07899141d127c3467540d94013661"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8997e1532bb4d45a39e5a186e4df927eb70dcd99f0b1090e92b4fcfd30d1837c",
+      "sha256": "3c91e6b04bd92e5682328acff1fcbad911215f0d3440cdfb0949f81e028dc5ee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,6 +162,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "82.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.801 AU (mean)",
@@ -186,6 +191,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "4.277185 hours"
             }
           ],
           "moreFacts": []
@@ -277,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eleonora.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -354,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8997e1532bb4d45a39e5a186e4df927eb70dcd99f0b1090e92b4fcfd30d1837c",
-      "bytes": 8645,
+      "sha256": "3c91e6b04bd92e5682328acff1fcbad911215f0d3440cdfb0949f81e028dc5ee",
+      "bytes": 8901,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -476,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6420,
-          "sha256": "0c92b6c76a9a58c36adfe4160d6a7989c90640546cca42a9130442c3c184d969",
+          "bytes": 6588,
+          "sha256": "fac241cda05cc1f3a5edf9bfcc5bc51039181a4920571c785c3cd7c27f0003ff",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "eleonora",
-    "materialSha256": "bafdae16786e189e9a74e589346fab332740ed5fb2dd50d99de801db3ee55a21",
+    "materialSha256": "82f97f08e9dc09d9ea70a122be36df5165018442da33e2a03e0205facedd7096",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

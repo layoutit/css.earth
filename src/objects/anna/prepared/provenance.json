@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da59c54c702d2fc35787284403d881a642de68aae249a5c9c2f0ffa52ff59f12"
+    "sha256": "4a0abdf0ba1e0d9c1dd10593ef09daf8faf4c8a1f13cd94b783255c257091f07"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f74d89c1abb837d2a86d3f6cad215ae5b11764404ccc0a6426f719087966621",
+      "sha256": "bb62455ab969b9949474df7daa630b36905797f11b501d3c27b5cedc94fdacbd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 686, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/anna.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f74d89c1abb837d2a86d3f6cad215ae5b11764404ccc0a6426f719087966621",
-      "bytes": 8098,
+      "sha256": "bb62455ab969b9949474df7daa630b36905797f11b501d3c27b5cedc94fdacbd",
+      "bytes": 8117,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5535,
-          "sha256": "e000bd6bb910d522c8a36230ec6142b7d069aeca4b7a1afe25c4acb35da0b260",
+          "bytes": 5554,
+          "sha256": "92d0124ec896ad7c406d155ba9d27702ddeb8a4a9159fdd5120057c2da9e7ea1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "anna",
-    "materialSha256": "bfcd185f450e2b1d884b854cc3dcf7042311dbbc397dae7646b505fd8ce5e295",
+    "materialSha256": "170b454bd2cee923ee92ca338f25757a099e6d9cf23be3fa935ad100247c2689",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

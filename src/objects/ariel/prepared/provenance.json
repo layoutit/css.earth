@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "951423b87de10ea73aea419bb564781ea41b62ebc9689412004585a3df172c05"
+    "sha256": "7c06f0134a4de0ae8f4efb620317805e4d38d39220e05f189247ba22024b003a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -189,7 +189,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4502a4caf5c8cfb6731bc9bb197d85410e530f7284aa4c35519e958dd416c3b0",
+      "sha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,28 +226,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 2.52 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "About 2.52 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 2.52 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Uranus",
+              "value": "About 190,900 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Lassell · 1851",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "William Lassell · 1851"
             }
           ],
           "moreFacts": [
@@ -374,7 +368,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ariel.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -612,8 +606,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "4502a4caf5c8cfb6731bc9bb197d85410e530f7284aa4c35519e958dd416c3b0",
-      "bytes": 7741,
+      "sha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
+      "bytes": 7296,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1282,8 +1276,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4516,
-          "sha256": "17878163e04ff098cc0b40e47067867f98eeb7f9a3aa4d10120f1c40f2a18243",
+          "bytes": 4047,
+          "sha256": "a469b8e35a29e34aadea97a0a04ffe16a1622066bd1f8c8ce6bda86f04ae6e91",
           "verification": "bytes-verified"
         }
       ],
@@ -1382,7 +1376,7 @@
   },
   "lastPreparation": {
     "objectId": "ariel",
-    "materialSha256": "4ef83da9083f53f305bc15fb0feb00184665f03d37c7214a717862ead5b13297",
+    "materialSha256": "a7a2b9d2ef484ea39f4541eebf6009f240431b31fe19f4eca6e54cafb51258fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
