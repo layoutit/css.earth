@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "pi1-gruis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "π¹ Gruis",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "pionier",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 219710723
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/pi1-gruis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8a270938466878e08ef4f3ed5422fb78502efffc636b598445d4bcf8b14f7310"
+      }
+    },
+    "catalog": {
+      "name": "π¹ Gruis",
+      "classification": "star",
+      "color": "#ffb070",
+      "distanceAu": 34652487.4,
+      "description": "Red giant in Grus, its granulation resolved by the VLT interferometer.",
+      "systemName": "Grus",
+      "order": 1001,
+      "context": {
+        "order": 998
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3160731219434089500,
+        -1428152176695002400,
+        -3585131692863360500
+      ],
+      "presentationToReference": [
+        0.6336314300345434,
+        -0.6549521823548193,
+        0.4117630990035887,
+        -0.2863015053230299,
+        0.2959396860158546,
+        0.9112909251663843,
+        -0.7187090224299031,
+        -0.6953109671718812,
+        0.0000028907314113332027
+      ],
+      "orbitUpReference": [
+        0.6549521823548193,
+        -0.2959396860158546,
+        0.6953109671718812
+      ],
+      "metersPerUnit": 708744267.7419355,
+      "bodyRadiusM": 219710723000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "f4e86fc131050880eb1fc1f0184201c9f2c99cf3197663980087d5c3b68f69d4"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "source-pi1-gruis-uniform-disc-sphere",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "π¹ Gruis · uniform disc sphere",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pi1-gruis/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Radius from the fitted angular diameter at the Gaia DR3 distance; sphere written by this repository",
+      "scope": "The uniform disc sphere input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Project-authored reference surface from a fitted radius.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
