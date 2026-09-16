@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd9ba2894c8b2873918a7a1a445c7e134d04ea83a241dca09eea34056e6607cb"
+    "sha256": "854dbe9bc5be2f54fc222b42ad2e76aeb2000508b50a4830711091b6ffd9d5dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "07c69722d525d92bb574643254090cff6d893aa803c147030511eb53c1c4ad6b",
+      "sha256": "ea40009a47b507fd77fc33cb062abdbacadacd7e9c5932030db9fbcc672ef8a0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -822,8 +822,8 @@
             "latitudeSegments": 24,
             "longitudeSegments": 40,
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "tileSize": 256,
+            "atlasColumns": 35,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1200,
@@ -3922,8 +3922,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-elevation-surface@2x.webp",
-          "bytes": 893420,
-          "sha256": "cc35d6a02b7c8fe555f3549e44a981c679e41af930d37cca00e31f9f7ea58051",
+          "bytes": 2324872,
+          "sha256": "5aef14bc1ff57c47faab5acd085ff9351222849bd4aac9233d991955f421a9b9",
           "verification": "bytes-verified"
         }
       ],
@@ -3988,8 +3988,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "bytes": 1222302,
-          "sha256": "2516d46cd7f61cd9f969409f2d6f893dd7ea7a7f7ef6ccda059e7c0ce716afa2",
+          "bytes": 3184772,
+          "sha256": "7b1834c3f1c801f209929a48c7b193705dc01680cfb3b9acd6e6e4f5bb22edce",
           "verification": "bytes-verified"
         }
       ],
@@ -4070,8 +4070,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "bytes": 837090,
-          "sha256": "8910bac7d7aaf43b57cf1e6a7b55e2d9cf773ac93265df5b34cfd549dce5c0f7",
+          "bytes": 2025332,
+          "sha256": "b1d729e890a99445dfac56450f5f03bf2df7e8e1b7720f7ace14c34bd359508f",
           "verification": "bytes-verified"
         }
       ],
@@ -4103,8 +4103,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6028,
-          "sha256": "2999ba761fdf1c72c0ca02a82d3dbfc9009ecdaafae66cac335a580b74592702",
+          "bytes": 6145,
+          "sha256": "17c7d76b43770992d0c0da235cb6751dda6e3ecfa6cbaab6f5326db71b6d56d3",
           "verification": "bytes-verified"
         }
       ],
@@ -4228,7 +4228,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "5f190b42b809d16e0a8782be31a8503e1965543efa153e86a342a3c3ee2cf692",
+    "materialSha256": "dfb0cb31fe7925f5ff0df13fdcd14881a2a7405c4730a4c39971638d20fe9f60",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
