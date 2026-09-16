@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "44c1b8849343e9089a8e27fa5b77a79e41e16b142f0ed01f643f3ef3c09bacc1"
+    "sha256": "304d3b2a39768ce81d649c97be66e2ca02f5bc9b5f4d0eaa07db2d0986a1873c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -496,7 +496,7 @@
           {
             "catalogueId": "source-ce-tauri-cds-nov-avg",
             "role": "material",
-            "evidence": "src/objects/ce-tauri/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/ce-tauri/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/0"
           }
         ]
       },
@@ -547,7 +547,7 @@
           {
             "catalogueId": "source-ce-tauri-uniform-disc-sphere",
             "role": "material",
-            "evidence": "src/objects/ce-tauri/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+            "evidence": "src/objects/ce-tauri/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/20"
           }
         ]
       },
@@ -586,7 +586,7 @@
           {
             "catalogueId": "source-ce-tauri-cds-dec-avg",
             "role": "material",
-            "evidence": "src/objects/ce-tauri/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/ce-tauri/source/manifest.json@601be8f893b7926a4e466ed3ec50824210640634#/inputs/1"
           }
         ]
       },
