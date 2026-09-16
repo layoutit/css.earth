@@ -225,8 +225,8 @@ function refreshStarRemoval() {
 }
 async function restoreAppliedOverlay(overlay: Overlay) {
   if (!viewer || overlay.removalResultId || restoringImages.has(overlay.id)) return;
-  const saved = readAppliedImage(overlay.id, overlay.sha256); if (!saved) return;
-  const attempt = `${overlay.id}:${saved.resultId}`, expectedViewer = viewer, expectedOverlay = overlay;
+  const saved = readAppliedImage(overlay.id, overlay.sha256);
+  const attempt = `${overlay.id}:${saved?.resultId ?? overlay.sha256}`, expectedViewer = viewer, expectedOverlay = overlay;
   if (restorationAttempts.has(attempt)) return;
   restorationAttempts.add(attempt);
   const controller = new AbortController(); restoringImages.set(overlay.id, controller); imageTone.setContext(null);
@@ -235,13 +235,15 @@ async function restoreAppliedOverlay(overlay: Overlay) {
     currentOverlays.includes(expectedOverlay) && currentTab === 0 && currentMode === 'density';
   try {
     const response = await fetch('/__nebula/star-removal/restore', { method: 'POST', signal: controller.signal,
-      headers: { 'content-type': 'application/json' }, body: JSON.stringify({ imageId: saved.imageId, resultId: saved.resultId, sourcePreviewSha256: saved.sourcePreviewSha256 }) });
-    const result = await response.json() as RestoredAppliedImage & { error?: string };
-    if (!response.ok) throw new Error(result.error ?? `Saved removal unavailable (HTTP ${response.status}).`);
-    verifyRestoredImage(saved, result); if (!current()) return;
+      headers: { 'content-type': 'application/json' }, body: JSON.stringify({ imageId: overlay.id, ...(saved ? { resultId: saved.resultId } : {}), sourcePreviewSha256: overlay.sha256 }) });
+    const result = await response.json() as (RestoredAppliedImage & { error?: string }) | null;
+    if (!response.ok) throw new Error(result?.error ?? `Saved removal unavailable (HTTP ${response.status}).`);
+    if (!result) { restorationMessages.delete(overlay.id); return; }
+    if (saved) verifyRestoredImage(saved, result); if (!current()) return;
     await viewer!.installRemovalLayers(overlay.id, result.sourcePreviewSha256, result.applied, current); if (!current()) return;
     await activateOverlay(overlay.id, false); if (!current()) return;
-    await viewer!.setOverlayLayer(overlay.id, saved.layer, current); if (!current()) return;
+    await viewer!.setOverlayLayer(overlay.id, saved?.layer ?? 'original', current); if (!current()) return;
+    writeAppliedImage(result, saved?.layer ?? 'original');
     element('viewer').dataset.removalResultId = result.applied.resultId; restorationMessages.delete(overlay.id);
   } catch (error) {
     if (current()) { restorationMessages.set(overlay.id, 'Saved removal unavailable · run Remove stars again.'); overlayStatusDetail = error instanceof Error ? error.message : String(error); }
@@ -282,7 +284,7 @@ function renderSelectedOverlay() {
   else placementControls = createOverlayPlacementControls(placementSpec, overlayOptions, options.controls);
   alignmentState = { images: currentOverlays.map(value => ({ id: value.id, label: value.label })), imageId: overlay.id,
     layer: viewer.getOverlayLayer(overlay.id), layers: ['original', ...(overlay.variants?.map(value => value.id) ?? [])],
-    enabled: prior?.enabled ?? false, opacity: Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100),
+    densityOverlayEnabled: viewer.getDensityOverlay(), enabled: prior?.enabled ?? false, opacity: Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100),
     removalStrength: currentRemovalStrength(overlay), registrationNote: overlay.registrationNote, credit: overlay.credit,
     sourcePageUrl: overlay.sourcePageUrl, layerNote, statusDetail: overlayStatusDetail, status: restorationMessages.get(overlay.id) ?? `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images` };
   publishShell();
@@ -325,7 +327,7 @@ async function refreshOverlayControls() {
     const stored = storedOverlayId(catalogue), enabled = viewer.getOverlayState().find(value => value.enabled)?.id;
     selectedOverlayId = overlays.some(overlay => overlay.id === stored) ? stored :
       overlays.some(overlay => overlay.id === enabled) ? enabled! : overlays[0]?.id ?? null;
-    if (selectedOverlayId) renderSelectedOverlay();
+    if (selectedOverlayId) await activateOverlay(selectedOverlayId);
   } catch (error) { if (request === overlayRequest) { if (alignmentState) { alignmentState = { ...alignmentState, status: error instanceof Error ? error.message : String(error) }; publishShell(); } else fail(error); } }
   setBusy(busy);
 }
@@ -508,6 +510,7 @@ function destroy() { if (!disposed) { disposed = true; window.removeEventListene
 return { destroy, selectView: (view: 'alignment' | 'reconstruction') => selectTab(view === 'alignment' ? 0 : 1), changeObject: changeSubject,
   selectEmissionInspection,
   chooseImage: changeOverlayChoice, chooseLayer: changeOverlayLayer, setRemovalStrength: changeRemovalStrength,
+  showDensityOverlay: (enabled: boolean) => { viewer?.setDensityOverlay(enabled); renderSelectedOverlay(); },
   showImage: changeOverlayVisibility, setImageOpacity: changeOverlayOpacity,
   showOriginal: (enabled: boolean) => run(() => viewer!.setOriginalOverlay(enabled)),
   setOriginalOpacity: (opacity: number) => run(() => viewer!.setOriginalOverlay(originalOverlayState?.enabled ?? false, opacity)),

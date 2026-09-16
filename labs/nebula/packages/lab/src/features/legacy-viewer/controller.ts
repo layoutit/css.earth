@@ -58,6 +58,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   const overlayLoading = new Map<string, Promise<void>>();
   const overlayLayers = new Map<string, ImageLayer>(), overlayLayerRequests = new Map<string, number>();
   const toneResources = createToneResourceController();
+  let densityOverlayEnabled = false;
   let axis: Axis = 'auto', component: Component = 'all', layer: number | null = null;
   let layerCount = 0, status = 'Loading prepared object', error: string | undefined;
   let disposed = false, loadVersion = 0;
@@ -83,6 +84,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     if (!mounted || !payload || disposed) return;
     mounted.publish(publication); starLayer?.publish(publication); originalOverlay?.publish(publication);
     inspectLayers();
+    if (currentMode === 'density' && !densityOverlayEnabled)
+      for (const bank of banks) for (const leaf of bank.leaves) for (const node of leaf.nodes) node.style.visibility = 'hidden';
+    host.dataset.densityOverlay = String(currentMode === 'density' && densityOverlayEnabled);
     const opacity = cloud ? cloudCompositeOpacity(banks.map(bank => ({ axis: bank.axis,
       opacity: Number(bank.root.style.opacity), visible: bank.root.style.visibility !== 'hidden' })), cloudBrightness) : 1;
     cloudSurface?.setOpacity(opacity); host.dataset.cloudOpacity = String(opacity);
@@ -353,7 +357,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     // Keep the current scene intact until every selected prepared texture has decoded.
     const replaceSubject = () => {
       if (overlayCatalogue && subject.density?.overlays) overlaySessions.set(subject.density.overlays, getOverlayState());
-      subject = next; view.measure(); axis = 'auto'; component = 'all'; layer = null;
+      subject = next; densityOverlayEnabled = !next.density?.overlays; view.measure(); axis = 'auto'; component = 'all'; layer = null;
       mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
       cloudSurface = null;
       starLayer?.destroy(); starLayer = null; starInfo = null;
@@ -450,6 +454,11 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   await setSubject(subject.id);
   return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, installRemovalLayers, setOverlayPlacement, getOverlayState,
     referenceView, fitCloud, setOriginalOverlay, applyToneResources, applyCloudDensityResources,
+    getDensityOverlay: () => densityOverlayEnabled,
+    setDensityOverlay(enabled: boolean) {
+      if (currentMode !== 'density') return;
+      densityOverlayEnabled = enabled; publish();
+    },
     getStars: () => starInfo,
     setStars(options: CloudStarOptions) {
       if (!starLayer) return;

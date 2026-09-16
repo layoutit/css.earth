@@ -2,7 +2,7 @@ import type { ImageLayer } from '../features/legacy-viewer/overlay-variants';
 
 export interface AlignmentState {
   images: { id: string; label: string }[]; imageId: string; layer: ImageLayer; layers: ImageLayer[];
-  enabled: boolean; opacity: number; removalStrength: number;
+  densityOverlayEnabled: boolean; enabled: boolean; opacity: number; removalStrength: number;
   registrationNote: string; credit: string; sourcePageUrl: string; status: string;
   layerNote: string; statusDetail: string;
 }
