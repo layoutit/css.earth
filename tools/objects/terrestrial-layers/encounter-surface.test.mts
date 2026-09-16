@@ -5,7 +5,7 @@ import {sampleFootprint} from '../surface-observations/footprint.mts';
 import {castSourceRays} from '../surface-observations/geometry.mts';
 import {validateEncounterImageReference} from '../surface-observations/formats/encounter.mts';
 import type {PixelGeometry} from '../surface-observations/contract.mts';
-import {validateEncounterRegistration} from './encounter-registration.mts';
+import {validateEncounterControls} from './encounter-controls.mts';
 import {encounterCamera} from './encounter-camera.mts';
 const sample=()=>{
  const accepted=new Uint8Array([1,1,1,1]),xyz=new Float64Array([0,0,0,1,0,0,0,1,0,1,1,0]),emissions=[0,10,20,30];
@@ -38,10 +38,10 @@ test('registration recomputes holdouts and cannot be approved by changing declar
  const camera={project:(p: readonly number[])=>[p[0],p[1],10],report:{nominalPixelScaleMeters:1}};
  const controls=Array.from({length:12},(_,i)=>({id:String(i),partition:i<6?'fit':'holdout',sourcePointMeters:[i,i%3,0],sourcePixel:[i,i%3]}));
  const r={method:'source-topography-feature-translation',sourceShapeSha256:'a'.repeat(64),controls,maximumRmsMeters:1,maximumResidualMeters:2,nominalPixelScaleMeters:1,limitations:'Image feature residuals; no absolute geodetic accuracy claim.'};
- assert.equal(required(validateEncounterRegistration(camera,r,r.sourceShapeSha256).holdout).rmsPixels,0);
+ assert.equal(required(validateEncounterControls(camera,r,r.sourceShapeSha256).holdout).rmsPixels,0);
  Object.assign(r,{holdout:{rmsPixels:0,maximumPixels:0}});r.controls[11].sourcePixel[0]+=20;
- assert.throws(()=>Reflect.apply(validateEncounterRegistration, undefined, [camera, r, r.sourceShapeSha256]),/budget/);
- assert.throws(()=>Reflect.apply(validateEncounterRegistration, undefined, [camera, r, 'b'.repeat(64)]),/source-bound/);
+ assert.throws(()=>Reflect.apply(validateEncounterControls, undefined, [camera, r, r.sourceShapeSha256]),/budget/);
+ assert.throws(()=>Reflect.apply(validateEncounterControls, undefined, [camera, r, 'b'.repeat(64)]),/source-bound/);
 });
 test('image overlap controls require the pinned earlier reference and visible source points',()=>{
  const sha='a'.repeat(64),reference={id:'reference',imageSha256:sha,controlSha256:sha,camera:{positionMeters:[0,0,10],project:(p: readonly number[])=>[p[0],p[1],10]},sample:()=>({})};

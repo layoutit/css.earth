@@ -65,7 +65,7 @@ compare before/after percentages only on a common, justified surface basis.
 
 Before reusing a matcher for another instrument or processing level, check its
 reference-camera assumption, signal units and thresholds, patch selection and
-acceptance limits. `camera-band-registration.mts` holds the reference camera
+acceptance limits. `band-alignment.mts` holds the reference camera
 fixed while correcting each target's detector center and roll. An error in that
 reference changes the inferred surface points; fitting a target does not qualify
 the reference or establish an absolute body frame. Keep such results exploratory
@@ -79,7 +79,7 @@ matches as evidence about the mesh. A search region is not a delivered coverage
 mask. Its fixed pixel-error limits are tool defaults, not a measured uncertainty
 for every instrument; do not weaken them merely to obtain an accepted result.
 
-The shared `camera-band-registration.mts` matcher accepts a bounded
+The shared `band-alignment.mts` matcher accepts a bounded
 `searchRadiusPixels` (1–64; default 9) when an independently justified pointing
 seed is farther away. This changes the search window only. Preserve its
 correlation, disjoint holdout and residual requirements; a larger search does
