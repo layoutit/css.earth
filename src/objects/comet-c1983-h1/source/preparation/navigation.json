@@ -8,13 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 10237,
-    "expectedSha256": "724ac9f804da40a0d8cc00c290be2360c4a02cb22b54f7b01281172a9e15f603",
+    "expectedBytes": 13365,
+    "expectedSha256": "190a041279b8f00d4b693144e49158114fc1d91c2d41a98b642b41d8645b9708",
     "origin": "https://doi.org/10.1023/a:1021590203207",
     "credit": "Campins and Fernández (2002), Earth, Moon and Planets 89, 117",
-    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
     "licenseEvidence": [],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"

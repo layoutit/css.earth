@@ -211,6 +211,8 @@ test('changing a binding or an output identity invalidates an existing preparati
   const context = await fixture(t), prepared = await prepareObjectProvenance(context);
   const recovered = await prepareObjectProvenance({ ...context, basis: 'recovered' });
   assert.equal(provenanceIdentity(prepared), provenanceIdentity(recovered));
+  assert.equal(provenanceIdentity({ ...prepared, generator: { ...prepared.generator, sha256: 'a'.repeat(64), bindingsSha256: 'b'.repeat(64) } }),
+    provenanceIdentity(prepared), 'a rule or compiler edit with the same material keeps the record');
   const output = requireValue(requireValue(recovered.products[0], 'recovered fixture product').outputs[0], 'recovered fixture output');
   assert.equal(Reflect.set(output, 'sha256', '0'.repeat(64)), true);
   assert.notEqual(provenanceIdentity(prepared), provenanceIdentity(recovered));
