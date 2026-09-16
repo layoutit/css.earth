@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2852a4db879aeb95fe4f567e45635f74cc2312cca44accf92479805911069813"
+    "sha256": "2d79dcba99c3c878a500abc197959a3f2852fc21642d0e92ee12fd429876a8b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
-    "bindingsSha256": "652c28ae26d03b0b758d83bc9a0597b8333a99a17c8a2f24c65f0ce5c3539442"
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "dd79d7c11708fedc49f1a7752a81336047efec1a200ca2f93620b3bbc93fe34a"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "5ef71ae8329a4d4a45935a07b5776f5fe23168cc59dde78d35c2aa5ab2f52be5",
+      "sha256": "43aafdfab4285db482e3399a1e0d4f5eae9cd1b540090e9f4a4faa25a67fd8df",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/makemake/",
@@ -42,14 +42,16 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "makemake-{id}{suffix}.webp",
             "thumbnail": "makemake-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/disc-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for an unresolved surface."
+              "kind": "disc-integrated-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "illuminant": "reference/CIE_std_illum_D65.csv",
+              "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
             }
           }
         ],
@@ -99,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
+      "sha256": "56e41b55b24162e27d1993101be920215a135bbf11be94543acf44a52481912e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -170,21 +172,21 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
-              "thumbnail": "makemake-lens-shape.webp",
-              "surface": "makemake-shape.webp",
-              "poles": "makemake-poles-shape.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+              "thumbnail": "makemake-lens-color.webp",
+              "surface": "makemake-color.webp",
+              "poles": "makemake-poles-color.webp",
               "source": {
-                "id": "nasa-makemake-size",
+                "id": "makemake-disc-color",
                 "path": "../manifest.json",
-                "url": "https://science.nasa.gov/dwarf-planets/makemake/"
+                "url": "https://doi.org/10.1051/0004-6361/201935274"
               },
-              "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
+              "notes": "One measured mean colour and albedo for the whole disc. Display coordinates are arbitrary; no terrain, albedo pattern or colour variation is claimed."
             }
           ]
         },
@@ -233,25 +235,93 @@
   "sources": [
     {
       "kind": "source-input",
-      "path": "measurements.json",
-      "id": "nasa-makemake-size",
-      "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
-      "credit": "NASA Science; projected size comparison Ortiz et al. (2012)",
+      "id": "makemake-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1051/0004-6361/201935274",
+      "credit": "Hromakina et al. (2019), A&A 625, A46; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed approximate radius and reported periods; spherical display approximation",
-      "redistribution": "Factual parameter transcription only; no article figures",
+      "acquisition": "Transcribed B-V, V-R, V-I and V geometric albedo (Hromakina 2019 sections 3.4 and 4), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-makemake-nasa-makemake-size",
+            "catalogueId": "hromakina-2019-makemake",
             "role": "material",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "src/objects/makemake/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/makemake/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/makemake/source/photometry/disc-color.json#/effectiveWavelengths"
           }
         ]
       },
-      "sha256": "664a8deafff78a4db0ccd77181ec563b0dc2d01c7f7ddd73a3d20a2786d11925",
-      "bytes": 585,
+      "sha256": "678b1a18faa3ff0e1440356ac08c6882fb4023ffd60139f6d7bbb83df5838cc2",
+      "bytes": 1728,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "makemake-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "makemake-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
+      "bytes": 6820,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -270,8 +340,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
-      "bytes": 8659,
+      "sha256": "56e41b55b24162e27d1993101be920215a135bbf11be94543acf44a52481912e",
+      "bytes": 8698,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -280,18 +350,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour."
+        "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -300,43 +370,45 @@
         "falseColor": false
       },
       "inputs": [
-        "nasa-makemake-size"
+        "makemake-disc-color",
+        "makemake-cie-1931-2deg-cmf",
+        "makemake-cie-std-illuminant-d65"
       ],
       "outputs": [
         {
-          "url": "/scenes/makemake/makemake-shape.webp",
+          "url": "/scenes/makemake/makemake-color.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "abcc28dc817c8051d048b9c854d2e5862ebae027fc11bac82c2b2cdc64ded68f",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-shape@2x.webp",
+          "url": "/scenes/makemake/makemake-color@2x.webp",
           "bytes": 558,
-          "sha256": "29cb9b42eae9164dc2e5144eeee49eaa035b4970c376c0d04c190b7a8ee808ef",
+          "sha256": "8c44ecf55aaa511765bc671e669e03a2a4db3aff311a8f8bd2862f8e60f1e545",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-lens-shape.webp",
+          "url": "/scenes/makemake/makemake-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "fe10fa4cfb63bdda07f53a7db7eda2fbd5c4e99f2450a3da2e8245ecb6656058",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-poles-shape.webp",
+          "url": "/scenes/makemake/makemake-poles-color.webp",
           "bytes": 680,
-          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
+          "sha256": "1c265bbca87175e6a43dd528851296540d40fad1078a2b9535b2187c601fd66e",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-poles-shape@2x.webp",
+          "url": "/scenes/makemake/makemake-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "2c1261c32d00977e9dbacb50650f81b6ec4d11b45e7823b7d157bcdf3f347aaf",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "nasa-makemake-size",
+          "sourceId": "makemake-disc-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -787,8 +859,8 @@
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -797,16 +869,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 438,
+          "sha256": "4b791e5893c590d7a5d92795aed08e9264a50569ed625f59b1c4069d9c3500f1",
           "verification": "bytes-verified"
         }
       ]
@@ -818,11 +890,11 @@
   },
   "lastPreparation": {
     "objectId": "makemake",
-    "materialSha256": "5fe09e3e023cd7ca0e642aec10fef8a01c79004e892cf4ea4a577ca8d8162879",
+    "materialSha256": "a39a077663daedc27ce38b8259bc3e4ea0374b1eca00f4438e3cda3924cf4bde",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
-      "bindingsSha256": "652c28ae26d03b0b758d83bc9a0597b8333a99a17c8a2f24c65f0ce5c3539442"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "dd79d7c11708fedc49f1a7752a81336047efec1a200ca2f93620b3bbc93fe34a"
     }
   }
 }

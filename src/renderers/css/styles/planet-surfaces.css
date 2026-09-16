@@ -1811,11 +1811,11 @@
 }
 
 .planet-stage[data-object-id="makemake"] .polycss-scene s:not(.makemake-polar) {
-  background-image: url("/scenes/makemake/makemake-shape@2x.webp") !important;
+  background-image: url("/scenes/makemake/makemake-color@2x.webp") !important;
 }
 
 .planet-stage[data-object-id="makemake"] .polycss-scene s.makemake-polar {
-  background-image: url("/scenes/makemake/makemake-poles-shape@2x.webp") !important;
+  background-image: url("/scenes/makemake/makemake-poles-color@2x.webp") !important;
 }
 
 
