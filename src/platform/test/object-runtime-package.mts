@@ -111,6 +111,8 @@ class FixtureDocument {
     failAtElement: number | null = null;
     private count = 0;
     querySelector: (selector: string) => FixtureElement | null = () => null;
+    // The runtime resolves form-linked settings inputs through the document; the fixture mounts none.
+    querySelectorAll: (selector: string) => FixtureElement[] = () => [];
     createElement = (tag: string): FixtureElement => { if (++this.count === this.failAtElement)
         throw new Error("injected native element failure"); return new FixtureElement(this, tag); };
     createDocumentFragment = (): FixtureElement => { const fragment = new FixtureElement(this); fragment.nodeType = 11; return fragment; };

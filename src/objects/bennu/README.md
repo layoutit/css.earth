@@ -23,7 +23,7 @@ An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equ
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-[Source test definitions](../../../tests/objects/unit/bennu/source.test.mts).
+[Source anchors](../../../tests/objects/unit/anchors/asteroid-calibration.json) checked by the shared [calibration runner](../../../tests/objects/unit/asteroid-calibration.test.mts).
 
 ## Known problems
 
