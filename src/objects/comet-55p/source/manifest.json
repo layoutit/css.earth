@@ -34,7 +34,7 @@
       "expectedSha256": "0ead3a956ded96eb325098bc95dc3f226f85acbe1516354cb6e8143886d1e133",
       "expectedBytes": 966,
       "origin": "https://doi.org/10.2307/j.ctv1v7zdq5.22",
-      "credit": "Lamy, Toth, Fern\u00e1ndez and Weaver (2004), Comets II, 223",
+      "credit": "Lamy, Toth, Fernández and Weaver (2004), Comets II, 223",
       "license": "Factual measurement transcribed from the cited publication; no text or figures reproduced",
       "acquisition": "authored record of the published effective nucleus radius and shape statement",
       "redistribution": "permitted; facts are cited, not copied",
@@ -54,7 +54,7 @@
       "expectedBytes": 13358,
       "expectedSha256": "0dae52539e5e51fc044d327446d28df8fd88ba0622a92240379e0a5b30209fc6",
       "origin": "https://doi.org/10.2307/j.ctv1v7zdq5.22",
-      "credit": "Lamy, Toth, Fern\u00e1ndez and Weaver (2004), Comets II, 223",
+      "credit": "Lamy, Toth, Fernández and Weaver (2004), Comets II, 223",
       "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
       "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
       "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
@@ -93,8 +93,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1466,
-      "expectedSha256": "2262255fe5ea7ae274dc273aa9b22dbd399955512922a4cdc6ca92a71f7930ec"
+      "expectedBytes": 1480,
+      "expectedSha256": "2311e033357b5f3018ea2cdde416eb81cb4b40b1a35025b5a57e3188b93db443"
     },
     {
       "path": "preparation/rotation.json",

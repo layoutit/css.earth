@@ -8,13 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 9981,
-    "expectedSha256": "89d6e2328b1fddd9f67ee8b0e6db061daaf7f6390ad7bed91c70f549494d83ed",
+    "expectedBytes": 13383,
+    "expectedSha256": "c27aa434ad5ec217df3500d43753a22bcf14e03e231ce9ecbd5c47ee0516ec65",
     "origin": "https://ui.adsabs.harvard.edu/abs/2017DPS....4940301F",
     "credit": "Farnham et al. (2017), DPS 49, 403.01",
-    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
     "licenseEvidence": [],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"

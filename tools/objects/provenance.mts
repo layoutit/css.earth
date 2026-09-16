@@ -201,7 +201,8 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     schema: OBJECT_PROVENANCE_SCHEMA, objectId: id, basis,
     manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
     generator: { path: 'tools/objects/provenance.mts', sha256: sha256(await readFile(new URL('./provenance.mts', import.meta.url))),
-      bindingsSha256: sha256(await readFile(new URL('./provenance-recipes.mts', import.meta.url))) },
+      // The bindings this body's products and gaps were derived from, not the whole rule module, so an unrelated rule edit leaves the record alone.
+      bindingsSha256: sha256(Buffer.from(JSON.stringify({ products: bindings, unresolved }))) },
     recipes: [...recipes.values()].filter(recipe => usedRecipes.has(recipe.id)),
     sources: [...sources.values()].filter(source => usedSources.has(source.id)), products,
     coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved },

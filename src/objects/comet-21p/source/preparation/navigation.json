@@ -8,13 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 9877,
-    "expectedSha256": "0ec2fbb507ebc4b1aa4c3d4c04504f0565c0c13b10fa5bb897747c3e844d7e3a",
+    "expectedBytes": 13412,
+    "expectedSha256": "0b1c51ec2eb60769dc43b6d8bd36ca9a60a878f7117a07b7238aa1f47fa5c620",
     "origin": "https://doi.org/10.1088/0004-6256/136/3/1127",
     "credit": "Pittichová et al. (2008), AJ 136, 1127",
-    "license": "Repository-authored shape record; independent cssEarth preparation code MIT",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
     "licenseEvidence": [],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"
