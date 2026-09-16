@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../node_modules/.pnpm/node_modules/@types"
+    ]
+  },
+  "include": [
+    "packages/**/*.test.ts",
+    "packages/**/*.test.mts",
+    "../../node_modules/vite/client.d.ts",
+    "../../tools/nebula/**/*.test.mts",
+    "../../tools/nebula/**/*.test.ts",
+    "../../tools/nebula/application-isolation*.ts",
+    "../../tools/nebula-provenance-source-closure.test.mts",
+    "../../tools/nebula-provenance-history.gate.mts"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**"
+  ]
+}
