@@ -1,0 +1,37 @@
+{
+  "id": "source-ce-tauri-cds-nov-err",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CE Tauri · cds nov err",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_err.fit",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ce-tauri/source/manifest.json",
+      "revision": "601be8f893b7926a4e466ed3ec50824210640634",
+      "sha256": "44c1b8849343e9089a8e27fa5b77a79e41e16b142f0ed01f643f3ef3c09bacc1",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Montargès, Norris, Chiavassa, Tessore, Lèbre and Baron (2018), A&A 614, A12; CDS J/A+A/614/A12",
+      "scope": "The cds nov err input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Published research data at the CDS; cite the paper and the catalogue.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
