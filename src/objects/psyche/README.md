@@ -25,6 +25,18 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 16 | 6 | 4.49° | 2.15° | 3.94° | its other 16 frames | 2 of 16 | — |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors, and their median offset from the stated camera, stated only over three or more decisive frames.
+<!-- registration-report:end -->
+
 ## Known problems
 
 Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 111.5 km reference sphere, with a -40 to 40 km legend. This includes global shape, not height above a gravitational equipotential.

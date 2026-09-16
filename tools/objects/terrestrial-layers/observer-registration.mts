@@ -1,15 +1,17 @@
 /**
- * Registration of an observer-computed camera against something that already knows the surface.
+ * Registration of a photograph's camera against something that already knows the surface.
  *
- * The observer camera derives a photograph's pointing from an ephemeris and a rotation model, and nothing in that
- * derivation looks at the pixels. Two measurements close the loop. The disc centre is read from the photograph's own
- * limb, by aligning the outline the mesh projects to the outline the frame shows. The rotation is then judged by
+ * A camera arrives from a label, a control network, a kernel set or an observer computation, and nothing in any of
+ * those looks at the pixels. Two measurements close the loop. The disc centre can be read from the photograph's own
+ * limb, by aligning the outline the mesh projects to the outline the frame shows. The rotation is judged by
  * predicting the frame from a surface reference through the mesh and correlating prediction with photograph while the
- * body is turned about its pole: a correct model peaks at zero, a mirrored one does not, and the peak's offset is the
+ * body is turned about its pole: a correct camera peaks at zero, a mirrored one does not, and the peak's offset is the
  * measured longitude error. The reference is a published map in the body frame where one exists, and otherwise the
  * body's other frames, which cannot know a constant phase error but do know the pole, the period and the handedness.
  *
- * Silhouettes are invariant under a longitude mirror; this comparison is not. That is why it exists.
+ * Silhouettes are invariant under a longitude mirror; this comparison is not. That is why it exists. Every camera
+ * kind enters through one small interface, a caster that can be turned about the body's pole, so the same
+ * measurement serves a computed observer camera and a spacecraft kernel camera alike.
  */
 import { requireFiniteNumber } from '../../source-values.mts';
 import { rotate } from '../../spice/frames.mts';
@@ -28,10 +30,42 @@ export type RayMesh = Pick<SourceMesh, 'intersect' | 'positions' | 'indices'>;
 export interface SurfaceReference { sample(eastLongitudeDegrees: number, latitudeDegrees: number): number | null }
 export type Sighting = Omit<ObserverSighting, 'center'>;
 
+/** A photograph as the registration reads it: samples in detector order, rows top-down, and which pixels the archive withholds. */
+export interface RegistrationImage { width: number; height: number; values: ArrayLike<number>; reject?(index: number): string | null }
+/** A camera image as the registration image it is. */
+export const registrationImage = (image: CameraImage | RegistrationImage): RegistrationImage => 'data' in image ? { width: image.width, height: image.height, values: image.data } : image;
+
+/** What a ray cast needs of a camera, in body-fixed metres, with the direction to the Sun in the same frame. */
+export interface Caster { positionMeters: readonly number[]; sunDirection: readonly number[]; ray(x: number, y: number): readonly number[]; project(point: readonly number[]): readonly number[] | null }
+/** A caster that can be turned about the body's pole: the operation every sweep below performs. */
+export interface TurnableCaster extends Caster { turned(degrees: number): TurnableCaster }
+
 /** The orientation with the body turned by a constant angle about its pole: the offset the sweep measures. */
 export function turnedOrientation(base: BodyOrientation, degrees: number): BodyOrientation {
   const turn = rotate(requireFiniteNumber(degrees, 'turn') * DEGREE, 3);
   return { rotation: jd => multiply(turn, base.rotation(jd)), phaseDegrees: jd => base.phaseDegrees(jd) + degrees };
+}
+
+/** The observer-computed camera as a caster; turning it turns the orientation it was computed from. */
+export function observerCaster(sighting: ObserverSighting, orientation: BodyOrientation): TurnableCaster {
+  const camera = controlledShapeCamera(observerCamera(sighting, orientation));
+  return { positionMeters: Array.from(camera.position), sunDirection: Array.from(camera.sun), ray: (x, y) => Array.from(camera.ray(x, y)), project: point => camera.project(point),
+    turned: degrees => observerCaster(sighting, turnedOrientation(orientation, degrees)) };
+}
+
+/**
+ * Any observation camera as a caster. Turning the body by an angle about its pole is the same sight as turning the
+ * camera the other way about the same axis, so the position, the Sun and every ray are rotated and the projection
+ * takes its points through the inverse turn. The camera itself is never touched.
+ */
+export function observationCaster(camera: { positionMeters: readonly number[]; sunDirection?: readonly number[]; ray(x: number, y: number): readonly number[]; project(point: readonly number[]): readonly number[] | null }, degrees = 0): TurnableCaster {
+  if (!camera.sunDirection) throw new Error('A caster needs the camera\'s Sun direction.');
+  const sun = camera.sunDirection;
+  const a = -degrees * DEGREE, c = Math.cos(a), s = Math.sin(a);
+  const turn = (v: readonly number[]) => [c * v[0] - s * v[1], s * v[0] + c * v[1], v[2]];
+  const back = (v: readonly number[]) => [c * v[0] + s * v[1], -s * v[0] + c * v[1], v[2]];
+  return { positionMeters: turn(camera.positionMeters), sunDirection: turn(sun), ray: (x, y) => turn(camera.ray(x, y)), project: point => camera.project(back(point)),
+    turned: more => observationCaster(camera, degrees + more) };
 }
 
 /**
@@ -55,8 +89,15 @@ export function radiusFieldMesh(sample: (eastLongitudeDegrees: number, latitudeD
   return createIndexedShape(vertices, indices, { metersPerUnit: 1, expectedVertices: vertices.length, expectedFaces: indices.length });
 }
 
+/** The peak sample of a photograph, over the pixels the archive keeps. */
+export function peakValue({ values, reject }: RegistrationImage) {
+  let peak = -Infinity;
+  for (let i = 0; i < values.length; i++) if (!reject?.(i) && values[i] > peak) peak = values[i];
+  return peak;
+}
+
 /** The outline radius in each angular bin about a centre, for the points a predicate admits. */
-function outline(width: number, height: number, admits: (x: number, y: number) => boolean, cx: number, cy: number, bins: number) {
+export function outline(width: number, height: number, admits: (x: number, y: number) => boolean, cx: number, cy: number, bins: number) {
   const radii = new Float64Array(bins);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (admits(x, y)) {
     const bin = ((Math.round(Math.atan2(y - cy, x - cx) / (2 * Math.PI) * bins) % bins) + bins) % bins, distance = Math.hypot(x - cx, y - cy);
@@ -75,17 +116,16 @@ export interface LimbCentre { center: [number, number]; iterations: number; move
  * price is the terminator side, which at phase angle α ends up to R(1 − cos α) inside the limb. For a main-belt body
  * seen from Earth α is under 25 degrees, and the bias is a fraction of a pixel on a deconvolved frame.
  */
-export function limbCentre(image: CameraImage, sighting: Sighting, orientation: BodyOrientation, positions: readonly (readonly number[])[],
+export function limbCentre(source: CameraImage | RegistrationImage, sighting: Sighting, orientation: BodyOrientation, positions: readonly (readonly number[])[],
     { edgeFraction = 0.25, bins = 72, iterations = 8 } = {}): LimbCentre {
-  const { width, height, data } = image;
-  let peak = -Infinity; for (const v of data) if (v > peak) peak = v;
+  const image = registrationImage(source), { width, height, values } = image;
+  const peak = peakValue(image);
   if (!(peak > 0)) throw new Error('The frame has no positive sample to place a limb on.');
-  const edge = peak * edgeFraction;
+  const edge = peak * edgeFraction, lit = (x: number, y: number) => !image.reject?.(y * width + x) && values[y * width + x] > edge;
   let cx = 0, cy = 0, count = 0;
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (data[y * width + x] > edge) { cx += x; cy += y; count++; }
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (lit(x, y)) { cx += x; cy += y; count++; }
   if (count < bins) throw new Error('The frame shows too little disc to place a limb on.');
   cx /= count; cy /= count;
-  const seen = (ox: number, oy: number) => outline(width, height, (x, y) => data[y * width + x] > edge, ox, oy, bins);
   let moved = 0, done = 0, limbBins = 0;
   for (let iteration = 0; iteration < iterations; iteration++) {
     const camera = controlledShapeCamera(observerCamera({ ...sighting, center: [cx, cy] }, orientation));
@@ -96,7 +136,7 @@ export function limbCentre(image: CameraImage, sighting: Sighting, orientation: 
       const bin = ((Math.round(Math.atan2(projected[1] - cy, projected[0] - cx) / (2 * Math.PI) * bins) % bins) + bins) % bins, distance = Math.hypot(projected[0] - cx, projected[1] - cy);
       if (distance > model[bin]) model[bin] = distance;
     }
-    const observed = seen(cx, cy);
+    const observed = outline(width, height, lit, cx, cy, bins);
     let scc = 0, scs = 0, sss = 0, rc = 0, rs = 0; limbBins = 0;
     for (let bin = 0; bin < bins; bin++) {
       if (!(model[bin] > 0) || !(observed[bin] > 0)) continue;
@@ -133,17 +173,16 @@ function faceNormal(mesh: RayMesh, faceId: number) {
 export type Shading = 'face' | 'radial';
 
 /** Cast the frame onto the mesh: the body-fixed point and the Lambert factor under every lit pixel, and the disc interior. */
-function cast(image: CameraImage, sighting: ObserverSighting, orientation: BodyOrientation, mesh: RayMesh, lowFraction: number, inset: number, shading: Shading): Cast {
-  const { width, height, data } = image, count = width * height;
-  const camera = controlledShapeCamera(observerCamera(sighting, orientation)), sun = camera.sun, eye = Array.from(camera.position);
-  let peak = -Infinity; for (const v of data) if (v > peak) peak = v;
-  const low = peak * lowFraction;
+function cast(image: RegistrationImage, caster: Caster, mesh: RayMesh, lowFraction: number, inset: number, shading: Shading): Cast {
+  const { width, height, values } = image, count = width * height;
+  const sun = caster.sunDirection, eye = Array.from(caster.positionMeters);
+  const low = peakValue(image) * lowFraction;
   const lit = new Uint8Array(count), longitude = new Float64Array(count), latitude = new Float64Array(count), lambert = new Float64Array(count);
   const normals = new Map<number, number[]>();
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const i = y * width + x;
-    if (!(data[i] > low)) continue;
-    const direction = Array.from(camera.ray(x, y)), hit = mesh.intersect(eye, direction);
+    if (!(values[i] > low) || image.reject?.(i)) continue;
+    const direction = Array.from(caster.ray(x, y)), hit = mesh.intersect(eye, direction);
     if (!hit) continue;
     const p = [0, 1, 2].map(k => eye[k] + direction[k] * hit.radius), r = Math.hypot(p[0], p[1], p[2]);
     let normal = shading === 'radial' ? [p[0] / r, p[1] / r, p[2] / r] : normals.get(hit.faceId);
@@ -183,11 +222,47 @@ function correlation(a: Float64Array, b: Float64Array, inner: readonly number[])
   return saa > 0 && sbb > 0 ? sab / Math.sqrt(saa * sbb) : 0;
 }
 
+/**
+ * The photograph and its caster reduced by a whole factor: each new pixel is the mean of a block, withheld if any of
+ * the block was withheld, and the caster reads rays at block centres. A large detector is judged at the scale a
+ * bounded number of rays allows; the registration is a measurement of degrees, not of pixels.
+ */
+export function reduced(image: RegistrationImage, caster: TurnableCaster, factor: number): { image: RegistrationImage; caster: TurnableCaster } {
+  if (!Number.isInteger(factor) || factor < 1) throw new TypeError('The reduction factor is a whole number.');
+  if (factor === 1) return { image, caster };
+  const width = Math.floor(image.width / factor), height = Math.floor(image.height / factor), values = new Float64Array(width * height), withheld = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    let sum = 0;
+    for (let dy = 0; dy < factor; dy++) for (let dx = 0; dx < factor; dx++) {
+      const j = (y * factor + dy) * image.width + x * factor + dx;
+      if (image.reject?.(j)) withheld[y * width + x] = 1;
+      sum += image.values[j];
+    }
+    values[y * width + x] = sum / (factor * factor);
+  }
+  const shrink = (base: TurnableCaster): TurnableCaster => ({
+    positionMeters: base.positionMeters, sunDirection: base.sunDirection,
+    ray: (x, y) => base.ray((x + 0.5) * factor - 0.5, (y + 0.5) * factor - 0.5),
+    project: point => { const p = base.project(point); return p ? [(p[0] + 0.5) / factor - 0.5, (p[1] + 0.5) / factor - 0.5, ...p.slice(2)] : null; },
+    turned: degrees => shrink(base.turned(degrees)) });
+  return { image: { width, height, values, reject: i => withheld[i] ? 'reduced-block-withheld' : null }, caster: shrink(caster) };
+}
+
+/** The reduction factor that brings a photograph's lit area under a ray budget. */
+export function reductionFor(image: RegistrationImage, lowFraction: number, maximumPixels: number) {
+  const low = peakValue(image) * lowFraction;
+  let lit = 0;
+  for (let i = 0; i < image.values.length; i++) if (image.values[i] > low && !image.reject?.(i)) lit++;
+  return Math.max(1, Math.ceil(Math.sqrt(lit / maximumPixels)));
+}
+
 export interface SweepPeak { offsetDegrees: number; correlation: number }
 export interface RegistrationResult {
-  /** Interior disc pixels compared. */
+  /** Interior disc pixels compared, at the reduction the ray budget imposed. */
   discPixels: number;
-  /** Correlation with the reference as the model stands. */
+  /** The reduction factor applied to the photograph before comparing; one means none. */
+  reduction: number;
+  /** Correlation with the reference as the camera stands. */
   atZero: number;
   /** The best turn about the pole, from a coarse sweep that samples the reference at shifted longitudes over fixed geometry. */
   coarse: SweepPeak;
@@ -196,8 +271,10 @@ export interface RegistrationResult {
   /** The best the reference can do with its longitudes reversed, and with its latitudes reversed: what a handedness error would score. */
   mirrorLongitude: SweepPeak;
   mirrorLatitude: SweepPeak;
-  /** The exact peak over the better mirror; below one, the frame cannot tell the model from its mirror. */
+  /** The exact peak over the better mirror; below one, the frame cannot tell the camera from its mirror. */
   mirrorMargin: number;
+  /** The exact peak less the better mirror: the same test as a difference, which a near-perfect match makes the fairer one. */
+  mirrorGap: number;
 }
 
 export interface SweepOptions {
@@ -213,24 +290,29 @@ export interface SweepOptions {
   exactHalfWidth?: number;
   /** How the prediction is lit; `face` unless the reference is itself a photograph. */
   shading?: Shading;
+  /** The most lit pixels a frame is judged at; a larger frame is reduced by a whole factor first. */
+  maximumPixels?: number;
 }
 
 /**
- * Judge the rotation model by turning the body under a photograph. The reference is sampled where the mesh puts each
- * lit pixel; the prediction is that value times the Lambert factor there; both images lose their smooth part before
+ * Judge the camera by turning the body under a photograph. The reference is sampled where the mesh puts each lit
+ * pixel; the prediction is that value times the Lambert factor there; both images lose their smooth part before
  * correlating over the disc interior. The coarse sweep shifts the reference longitudes over one ray cast; the exact
- * search recasts the rays with the model turned, so the shape's asymmetry is honoured near the peak.
+ * search recasts the rays with the body turned, so the shape's asymmetry is honoured near the peak.
  *
  * A turn about the pole and a shift of the disc centre move the markings alike near the disc centre, so the offset
- * this measures is only as certain as the stated centre: one pixel of centre is about one pixel's worth of longitude
- * at the disc centre. The limb centre is therefore measured first, and this reports the turn at that centre.
+ * this measures is only as certain as the camera's centre: one pixel of centre is about one pixel's worth of
+ * longitude at the disc centre.
  */
-export function registrationSweep(image: CameraImage, sighting: ObserverSighting, orientation: BodyOrientation, mesh: RayMesh, reference: SurfaceReference,
-    { lowFraction = 0.2, insetPixels = 5, highpassRadius = 6, coarseStep = 3, exactHalfWidth = 8, shading = 'face' }: SweepOptions = {}): RegistrationResult {
+export function registrationSweep(source: RegistrationImage | CameraImage, camera: TurnableCaster, mesh: RayMesh, reference: SurfaceReference,
+    { lowFraction = 0.2, insetPixels = 5, highpassRadius = 6, coarseStep = 3, exactHalfWidth = 8, shading = 'face', maximumPixels = 65_536 }: SweepOptions = {}): RegistrationResult {
   if (!(coarseStep > 0) || !Number.isInteger(360 / coarseStep)) throw new TypeError('The coarse step must divide 360 degrees.');
-  const frame = cast(image, sighting, orientation, mesh, lowFraction, insetPixels, shading);
+  const full = registrationImage(source);
+  const reduction = reductionFor(full, lowFraction, maximumPixels);
+  const { image, caster } = reduced(full, camera, reduction);
+  const frame = cast(image, caster, mesh, lowFraction, insetPixels, shading);
   if (frame.inner.length < 64) throw new Error('The frame shows too little disc interior to register.');
-  const observed = highpass(image.data, frame, highpassRadius);
+  const observed = highpass(image.values, frame, highpassRadius);
   // Pixels the reference says nothing about are left out of the comparison rather than predicted dark.
   const predictFrom = (longitude: Float64Array, latitude: Float64Array, lambert: Float64Array, offset: number, mirrorLongitude: boolean, mirrorLatitude: boolean) => {
     const raw = new Float64Array(observed.length), known = new Uint8Array(observed.length);
@@ -253,38 +335,44 @@ export function registrationSweep(image: CameraImage, sighting: ObserverSighting
   const coarse = sweep(false, false), mirrorLongitude = sweep(true, false), mirrorLatitude = sweep(false, true);
   const atZero = predictFrom(frame.longitude, frame.latitude, frame.lambert, 0, false, false);
   // Sampling the reference at a shifted longitude equals turning the body the other way; the exact search turns the body.
+  // The coarse sweep holds the geometry fixed, which an elongated body or a partly covered reference can mislead, so the
+  // exact search looks about the coarse peak and about zero and keeps the better: the question is whether the camera
+  // registers, and a gross error still shows as a coarse peak far from zero that the exact search confirms.
   let exact: SweepPeak = { offsetDegrees: -coarse.offsetDegrees, correlation: coarse.correlation };
   if (exactHalfWidth > 0) {
     const score = (turn: number) => {
-      const turned = cast(image, sighting, turnedOrientation(orientation, turn), mesh, lowFraction, insetPixels, shading);
+      const turned = cast(image, caster.turned(turn), mesh, lowFraction, insetPixels, shading);
       return predictFrom(turned.longitude, turned.latitude, turned.lambert, 0, false, false);
     };
     exact = { offsetDegrees: NaN, correlation: -2 };
-    const centre = -coarse.offsetDegrees;
-    for (let turn = centre - exactHalfWidth; turn <= centre + exactHalfWidth; turn += 1) { const r = score(turn); if (r > exact.correlation) exact = { offsetDegrees: turn, correlation: r }; }
+    const centres = Math.abs(coarse.offsetDegrees) > exactHalfWidth ? [-coarse.offsetDegrees, 0] : [-coarse.offsetDegrees];
+    for (const centre of centres) for (let turn = centre - exactHalfWidth; turn <= centre + exactHalfWidth; turn += 1) { const r = score(turn); if (r > exact.correlation) exact = { offsetDegrees: turn, correlation: r }; }
     const around = exact.offsetDegrees;
     for (let turn = around - 0.75; turn <= around + 0.75; turn += 0.25) { const r = score(turn); if (r > exact.correlation) exact = { offsetDegrees: turn, correlation: r }; }
   }
   const mirror = Math.max(mirrorLongitude.correlation, mirrorLatitude.correlation);
-  return { discPixels: frame.inner.length, atZero, coarse, exact, mirrorLongitude, mirrorLatitude, mirrorMargin: mirror > 0 ? exact.correlation / mirror : Infinity };
+  return { discPixels: frame.inner.length, reduction, atZero, coarse, exact, mirrorLongitude, mirrorLatitude, mirrorMargin: mirror > 0 ? exact.correlation / mirror : Infinity, mirrorGap: exact.correlation - mirror };
 }
 
-export interface ReferenceFrame { image: CameraImage; sighting: ObserverSighting; orientation: BodyOrientation }
+export interface ReferenceFrame { image: RegistrationImage | CameraImage; camera: Caster }
 
 /**
  * A surface reference from the body's own frames: each lit pixel's brightness, divided by the Lambert factor of the
- * face under it, averaged into longitude and latitude bins. Held against a frame it does not contain, it tests the pole,
- * the period and the handedness; a constant phase error moves every frame together and is invisible to it.
+ * face under it, averaged into longitude and latitude bins. Held against a frame it does not contain, it tests the
+ * pole, the period and the handedness; a constant phase error moves every frame together and is invisible to it.
  */
-export function framesReference(frames: readonly ReferenceFrame[], mesh: RayMesh, { binsPerDegree = 1, lowFraction = 0.2, minimumLambert = 0.2, fillPasses = 2 } = {}): SurfaceReference {
+export function framesReference(frames: readonly ReferenceFrame[], mesh: RayMesh, { binsPerDegree = 1, lowFraction = 0.2, minimumLambert = 0.2, fillPasses = 2, maximumPixels = 65_536 } = {}): SurfaceReference {
   const columns = Math.round(360 * binsPerDegree), rows = Math.round(180 * binsPerDegree);
   const sum = new Float64Array(columns * rows), count = new Uint32Array(columns * rows);
-  for (const { image, sighting, orientation } of frames) {
-    const frame = cast(image, sighting, orientation, mesh, lowFraction, 0, 'face');
+  for (const entry of frames) {
+    const full = registrationImage(entry.image);
+    const turnable: TurnableCaster = { ...entry.camera, turned: () => { throw new Error('A reference frame is never turned.'); } };
+    const { image, caster } = reduced(full, turnable, reductionFor(full, lowFraction, maximumPixels));
+    const frame = cast(image, caster, mesh, lowFraction, 0, 'face');
     for (let i = 0; i < frame.lit.length; i++) {
       if (!frame.lit[i] || frame.lambert[i] < minimumLambert) continue;
       const column = Math.floor((((frame.longitude[i] % 360) + 360) % 360) * binsPerDegree) % columns, row = Math.min(rows - 1, Math.floor((frame.latitude[i] + 90) * binsPerDegree));
-      sum[row * columns + column] += image.data[i] / frame.lambert[i]; count[row * columns + column]++;
+      sum[row * columns + column] += image.values[i] / frame.lambert[i]; count[row * columns + column]++;
     }
   }
   // A frame's pixels are sparser than the bins toward the limb and at any distance; bins no pixel reached take the
