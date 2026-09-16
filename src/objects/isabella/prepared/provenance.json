@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "isabella",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "73d242a3cb496bd159021deebdb193d80cc14e3df31c03fb7f8843ca68c02940"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "9595b8cc95295a667dd81003a8b61000ef9fcfdeb792d157812c767fabce4ec6"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "80fd70c2bfa59866664269efb052469476bfd35078b8842e6c21cbee4c9b1108",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "f9738770bf76328db07782a20bea076109f8aac48ffcd13ff7d8179fe184bebd",
       "bytes": 10357,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/isabella/isabella-elevation-thumbnail.webp",
           "bytes": 5318,
           "sha256": "2cd024ad0a4f6b0ecd11e555103e48a07101477a53f86f092ecf4bc48ab1c14c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/isabella/isabella-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/isabella/isabella-elevation-surface@2x.webp",
           "bytes": 283980,
           "sha256": "bc6a82562ace3fa71766d973268bbdc9e5869fe236e5010b1c66cd219d3d56a2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/isabella/isabella-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/isabella/isabella-shape-surface@2x.webp",
           "bytes": 70248,
           "sha256": "637280561e4739bc4e752d3d08be0f746419db05691e9ef7d7945bad0d65bb81",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "isabella",
-    "materialSha256": "ad58b0ac3b4b39d8e7b82966c48d686246eb60e9c4a28e298c068cb9b1533c0e",
+    "materialSha256": "fc0c673ce2bfc9bf11da60471ff809f4a7af8874dd0c3c1c2d862fbb86b340df",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "9595b8cc95295a667dd81003a8b61000ef9fcfdeb792d157812c767fabce4ec6"
     }
   }
 }

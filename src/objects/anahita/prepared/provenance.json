@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "anahita",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "cec2a567d25521248b787e76fcc4fed9463384f2b4d9ced52f8badd71fe43312"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "a93f0e9de16c7690f65032f734ce34e7ff17c1a8673ee98f08fc801668c4f1b9"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "8d486e3f083430418ce79d7578da3ebb901e03d365b1d37324e3b437c6f25065",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "259aef7e8ca0c3a6a5aa5ebaea67b6966bae532edd316b63ce9c19cc03f127b0",
       "bytes": 9694,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/anahita/anahita-elevation-thumbnail.webp",
           "bytes": 5676,
           "sha256": "d8c7186946fc607d45bbf170506cbab524b69c97ad2154404e15a0195c9e5f9e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anahita/anahita-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anahita/anahita-elevation-surface@2x.webp",
           "bytes": 300584,
           "sha256": "0f65b390b781af902aca7e2dc15f6d5869c22b95b0819deebb9c548a20f3a716",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/anahita/anahita-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anahita/anahita-shape-surface@2x.webp",
           "bytes": 68118,
           "sha256": "9efede928147e7f6fe8be3c1cd18eaa6c959f04b8299438179019d96e5367ab0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "anahita",
-    "materialSha256": "c6f25bd40ace8e34dbabcbbc2af7a8276fb0835bf6c788c122947956e39aa8dd",
+    "materialSha256": "16133bba662385fa253e15dd079f2e4b9705c3ce30a22ecc1caf423c7535c5b8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "a93f0e9de16c7690f65032f734ce34e7ff17c1a8673ee98f08fc801668c4f1b9"
     }
   }
 }

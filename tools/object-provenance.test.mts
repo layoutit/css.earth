@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { prepareObjectProvenance } from './objects/provenance.mts';
 import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mts';
-import { provenanceIdentity } from './prepare-provenance.mts';
+import { provenanceIdentity, reconcileObjectProvenance } from './prepare-provenance.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
@@ -345,4 +345,45 @@ test('Gaspra separates its photographic appearance from the source shape in the 
   assert.deepEqual(roles.get('gaspra-normal'), ['appearance']);
   assert.deepEqual(roles.get('gaspra-shape'), ['geometry']);
   assert.deepEqual(productInputRoles(document, 'preview:normal'), roles);
+});
+
+test('reconciliation verifies a changed body, keeps an unchanged record, and never writes a downgrade over a prepared record', async t => {
+  const context = await fixture(t), { objectDirectory, publicDirectory } = context;
+  const recipePath = resolve(context.source, 'preparation/raster.json'), manifestPath = resolve(context.source, 'manifest.json');
+  const first = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(first.outcome, 'verified'); assert.equal(first.document.basis, 'prepared');
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(first.document, null, 2) + '\n');
+  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained');
+  // An edited recipe changes the material; with every pinned byte on disk the new record is verified, not recovered.
+  const recipe = JSON.stringify({ ...await read(recipePath), edited: true }), manifest = await read(manifestPath);
+  await writeFile(recipePath, recipe);
+  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) });
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  const second = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(second.outcome, 'verified'); assert.equal(second.document.basis, 'prepared');
+  assert.notEqual(provenanceIdentity(second.document), provenanceIdentity(first.document));
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(second.document, null, 2) + '\n');
+  // A pinned input that is not on this checkout leaves the prepared record untouched and names the file.
+  await rm(resolve(context.source, 'observation.dat'));
+  await writeFile(recipePath, JSON.stringify({ ...JSON.parse(recipe), edited: 2 }));
+  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(await readFile(recipePath)), expectedBytes: (await readFile(recipePath)).length });
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  const third = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(third.outcome, 'unverifiable'); assert.equal(third.reason, 'missing source/observation.dat');
+  assert.deepEqual(third.document, second.document);
+  const forced = await reconcileObjectProvenance({ objectDirectory, publicDirectory, recover: true });
+  assert.equal(forced.outcome, 'recovered'); assert.equal(forced.document.basis, 'recovered');
+  // A recovered record is upgraded as soon as its bytes can be verified, which is the same check preparation makes.
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
+  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'recovered', 'still unverifiable');
+  await writeFile(resolve(context.source, 'observation.dat'), 'original observation bytes');
+  const upgraded = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(upgraded.outcome, 'verified'); assert.equal(upgraded.document.basis, 'prepared');
+  // Output bytes that differ from their pin are a local problem for a recovered record and a refusal for a prepared one.
+  await writeFile(resolve(publicDirectory, 'surface.webp'), 'a stale local copy');
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
+  const stale = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(stale.outcome, 'recovered'); assert.match(stale.reason ?? '', /^bytes differ at .*surface\.webp/u);
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(upgraded.document, null, 2) + '\n');
+  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained', 'an unchanged prepared record is not re-verified');
 });

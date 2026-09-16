@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kolga",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "53626d1460ba1f2dc2b658be7218275d648b6c2d853bc928fbead031bae08154"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "737d324b9d8e9b9ae3f43c7bfbdb90df7214cb56383b13df43eaf8783c21a83c"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "74994217a690be9e8736a7709f52c8e70c80a0f63c0d7160f73e7cd9924ec078",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "5317f3a5c5a8c221ebe2527dea87a18c06bfc493264f8e31e664416317aa7948",
       "bytes": 8959,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/kolga/kolga-elevation-thumbnail.webp",
           "bytes": 5796,
           "sha256": "4751895b49ffa927eeb7d4a5491899140b1d3651197993f4af6436a307bfca86",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kolga/kolga-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kolga/kolga-elevation-surface@2x.webp",
           "bytes": 297772,
           "sha256": "0410f5b9a31b4c6ccd2dd3f6a560b929dcb8c3b1e074e1348e73c3e384d97bf5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/kolga/kolga-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kolga/kolga-shape-surface@2x.webp",
           "bytes": 70258,
           "sha256": "882470b8d2bb7186bf1c14de66ea0173986cff2801d2ab12e3bf0c56f6df386b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "kolga",
-    "materialSha256": "f6efd1d7b9b83f81e52a5eee63c736fee2769c609eca965c6a7fac83235642bc",
+    "materialSha256": "5231174cac30259e720037dd46eb904adbf143490e674a79fd11cf00c47bdd07",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "737d324b9d8e9b9ae3f43c7bfbdb90df7214cb56383b13df43eaf8783c21a83c"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sibylla",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9d4b592ba4c6a47d36d4dea401a97006cb8d56c32b332cda311fc3ed496e9bf3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "ea955bdda1f5ad7e3e1c633bac160d310d49d5f54a475c05e9119218c25b572f"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "f156336a2048015bfabaf6dc2be0d5a06683cdce4662d02c7e71931b33bbbb79",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "38c76470c84dd20b3acf04d108bb46653e6c0253e4556f4fbf4fb8f9fe1d1048",
       "bytes": 9470,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/sibylla/sibylla-elevation-thumbnail.webp",
           "bytes": 5738,
           "sha256": "a72f647beb40e345a78f5551737f72e57e20974458ae2b65d3627b1f2e33c111",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sibylla/sibylla-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sibylla/sibylla-elevation-surface@2x.webp",
           "bytes": 262412,
           "sha256": "25509a081a81a5dc3431eaafb5dab3dc9cd5627633b74b60eaf7e38404d30a76",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/sibylla/sibylla-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
           "bytes": 60684,
           "sha256": "3b9ce3d9be26ccc9985f9d41897f0238b2b0c9a46db927dbdde10868e75706f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "sibylla",
-    "materialSha256": "c02de9954b5f009ad976db95e16ba2e45febf6cbbcf761b275d505dcc9587e6a",
+    "materialSha256": "7bdd58e7fde79dc80cdc1399ee0d986f01fae4f6ece0a632dda7b4c8577ba46a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "ea955bdda1f5ad7e3e1c633bac160d310d49d5f54a475c05e9119218c25b572f"
     }
   }
 }

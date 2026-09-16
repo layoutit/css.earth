@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mr-spock",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "c9d6389f2d2123ec2a0e04de2f3c67ec63212e7465f860bdebbda4d2fc85e1eb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "60ac43b739ccd72fa80705f46dd60b734e1fc5e539d8ac509ce3007cb581aed7"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "ff1b2b9b522e5f7acc86b42876904882375f591146b706775e37525eac39b065",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9534,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/mr-spock/mr-spock-elevation-thumbnail.webp",
           "bytes": 4944,
           "sha256": "dd8abe8369df7a069ed92fb4e821fa377fcdc44a384fe58070dade2db8939b4e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-surface@2x.webp",
           "bytes": 304118,
           "sha256": "9f0d439c778f9924e82ea3164e78077152dc5a4932fa1d51f30b9160c1ab71d5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/mr-spock/mr-spock-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
           "bytes": 73116,
           "sha256": "68e2e73f49f201ecd0e3f58204b49a9cc2ec38c47cbd50ad3897b0cda69d2b50",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "mr-spock",
-    "materialSha256": "224f86f3fccf63e22ba39cfbb5d799be60b1aab9200bb8bdd5771dd3a69a8f96",
+    "materialSha256": "dd47a104107a5eec50f15f1176ae74d98681a623e6c6a58c6dfad9bb409fb724",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "60ac43b739ccd72fa80705f46dd60b734e1fc5e539d8ac509ce3007cb581aed7"
     }
   }
 }

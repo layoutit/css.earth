@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gerda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "08fb53e41eb0e1553b4c20ee2650013edd01438b27883f56b4f30b8df22196a9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "391d268a7cad8fe80440c753b06407a692c2bd314164f788ef8aa0c7e8f30540"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "d0b4a2670b3b5be50f4ea2a72901937964545ef598a904c82ba6b06d2e4c37cc",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "1aa99d77b28741b2c0910943dcf3918a7870f4589874477ffbbb82b9c228872e",
       "bytes": 9493,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/gerda/gerda-elevation-thumbnail.webp",
           "bytes": 5422,
           "sha256": "17d61188526d40ef2dd7f7720b54dfd155057475e145e8aeded3d413cc570c13",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gerda/gerda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gerda/gerda-elevation-surface@2x.webp",
           "bytes": 268992,
           "sha256": "573fac41966f8c8fe3a28d9933136a25ddb8d3e2386c0b5883ba3c8010f1e996",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/gerda/gerda-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gerda/gerda-shape-surface@2x.webp",
           "bytes": 64604,
           "sha256": "e90f9811d2b703019a3df11e59041cc5b1723b01009785dd2766e01342d94749",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "gerda",
-    "materialSha256": "a827d625cd2e78fdff02cc13c632f15de16f3694cc20682d9f795129adfc7fec",
+    "materialSha256": "e06a22c566560a858bc5ed76b41c545f378f0f261e743bf2dd365a2d52b17db3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "391d268a7cad8fe80440c753b06407a692c2bd314164f788ef8aa0c7e8f30540"
     }
   }
 }

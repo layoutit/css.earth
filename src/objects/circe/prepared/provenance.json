@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "circe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9d64981e0e4744079e02e392748ad3bb4a4edceaa0ebf2dc6d920fbef205a981"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "bb2648ea913825ad27e4e66868118b4a620f0d33daa364c95ee3040c8a3ec65d"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "8f88f8efb84bd02178b61f335fd11196ed53786ddc60ec281bd834b9a3f1152f",
       "bytes": 72825,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "3fd4c9f2a06cadd055242af0ab3c5a8b2cbda08a1ec8f6174259de822f6b22ab",
       "bytes": 8616,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/circe/circe-elevation-thumbnail.webp",
           "bytes": 5560,
           "sha256": "a2e35597480b83131709a6bf06c2816c23583672180dac1a0994dfc30caaeca9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/circe/circe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/circe/circe-elevation-surface@2x.webp",
           "bytes": 284696,
           "sha256": "a997d649255baa3f935c76fa0ffecf86d07c8f0cb818f1eda7a2b6200d37e602",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/circe/circe-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/circe/circe-shape-surface@2x.webp",
           "bytes": 66286,
           "sha256": "06b3a58dd1540f8c91f24b430912bc0c3325c65a9caf1aa507ee3c237478470b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "circe",
-    "materialSha256": "4012937208363b41a29a2e8ceb5eab762316c91d826809c5d5661c0298ff36c8",
+    "materialSha256": "aa5ab574395171f6c85feb8d79f9966216b4d7ea6b316e325ae52ca4f3869e47",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "bb2648ea913825ad27e4e66868118b4a620f0d33daa364c95ee3040c8a3ec65d"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "camilla",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "f144edda4de1005674af1dab1fe56de592bf320139bfa9d46f92b42c7b6debba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "29bbd57e14ecac95fcfa0cb768b0d1fff34853c42b8d0910fa2317d7888e69ff"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "bd8661133eeacfe7aaab1e2a102c0bfe69c20def0219ac29e2fdff0ee278e544",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "573948d9d65c5fcf2a8ea636f28c5e3193847165a5786352dc646fd5af292f9e",
       "bytes": 7709,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/camilla/camilla-elevation-thumbnail.webp",
           "bytes": 4780,
           "sha256": "3b4ac0d8c34d4fdd3b2349d8ea4796e56149328f814f8c6604d533a2e0b4e084",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/camilla/camilla-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/camilla/camilla-elevation-surface@2x.webp",
           "bytes": 265780,
           "sha256": "14b59466ae873418d53aad54664b1bd09be6d0ede4fd15ad56f7e9627fb7f8f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/camilla/camilla-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/camilla/camilla-shape-surface@2x.webp",
           "bytes": 52650,
           "sha256": "8a00abb68fd22d80fc0694d70f0990b57a94e24cee89643620784cba08b0a7f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "camilla",
-    "materialSha256": "edd1703bd8195032ac808c5020497458a370039225b32840099f94462bef122c",
+    "materialSha256": "e4ccb82d87d1dafcdef50e225afc766f60d937811d3603c4410cc831417dd3b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "29bbd57e14ecac95fcfa0cb768b0d1fff34853c42b8d0910fa2317d7888e69ff"
     }
   }
 }

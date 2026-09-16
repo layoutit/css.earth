@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "diotima",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "444a71d93c63dcb04face07fd40d83e7b8cffdb6f5e9b6fdca2b43dca63010b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "e5a913d1e9451e879fcae11e00a3b16a5797ccd56286fd8499551aeb0c30373a"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "f4ebfdb042ea8edcb01566473054ce07149f4cc1e25e33d583b01e3f2fbfd6b3",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "d3eb5424cb2fca88ace15c9fc8434cc145a0d0198b145a54a65f5c483835b77c",
       "bytes": 7449,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/diotima/diotima-elevation-thumbnail.webp",
           "bytes": 5458,
           "sha256": "c96519047026987a7cd1368c6483b87f694e08a0381428ed6643097e19fced93",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/diotima/diotima-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/diotima/diotima-elevation-surface@2x.webp",
           "bytes": 301826,
           "sha256": "b5a76ab40f0a363aadd6dae789a0e34cffd29e4e3a34ae6d710d7277c3616581",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/diotima/diotima-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/diotima/diotima-shape-surface@2x.webp",
           "bytes": 57350,
           "sha256": "71bffc7149c3ffbb9dabbc0c22cc532583a79968dd954723689d6435250222cb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "diotima",
-    "materialSha256": "feec0b23a6d3278c038d1452d8d96d572d728f0fea94de92cfd554701ffc06b5",
+    "materialSha256": "6a7dbd95e8e30be561fb1f81fd6f7c03902ed3379015bec62f6809fb79cd909b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "e5a913d1e9451e879fcae11e00a3b16a5797ccd56286fd8499551aeb0c30373a"
     }
   }
 }

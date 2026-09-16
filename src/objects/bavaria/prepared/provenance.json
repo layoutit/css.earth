@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bavaria",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "8bfc85b732da8713ec45f53d750f4e57661e283067a25cc23b87b3fc74c78510"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "4471676982dc6012cb8f32c1fa03c4c74a0c475c3183a31d3187a76f300ace21"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "5ee16a0fbf9aee1a4f1dbe206cbb2c80dc0f125c7f430595b4b128676eb21584",
       "bytes": 81736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "d13b0588d20a7d31873237d87ab15d04ce129bdca51ea7e1ebb2d9d0d9c61da3",
       "bytes": 10425,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/bavaria/bavaria-elevation-thumbnail.webp",
           "bytes": 5974,
           "sha256": "acc7f940bb216efc897db82f6d6905018419058bba532b874774959c7c3435cc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bavaria/bavaria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bavaria/bavaria-elevation-surface@2x.webp",
           "bytes": 293678,
           "sha256": "39dad7250d6623fe77ace1536acd3c545b8c084f0c38411fac9ef6a1d747757c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/bavaria/bavaria-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
           "bytes": 61562,
           "sha256": "140c5129bcbada224ecd1a5c5838ae300023aedc5e1354e52f0ca97da9fd1e1d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "bavaria",
-    "materialSha256": "7777a87f2ed345a7c520dfccec207b0df93eac88ec3eb17c18ed980ae1f77384",
+    "materialSha256": "9584048459a7885fbd4177fc4eb940bb8b72b4c4111b1f0b7664a87ccd0a991b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "4471676982dc6012cb8f32c1fa03c4c74a0c475c3183a31d3187a76f300ace21"
     }
   }
 }

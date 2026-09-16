@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kemi",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1f7fa77a33552714cc348f84203217028966583b3f8eb671beaa505d2e0173de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "1b9c4574f1d42d2682715a55444eff251bd4a484b638a68a801d8dda080aa913"
   },
   "recipes": [
     {
@@ -350,7 +350,7 @@
       "sha256": "0be47f09f2798dd4aa3bc7288dac1168de6bfc905e516b02c081e7bb2b151490",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "5256e91f36bcd8ecf3eda60bf2c60117bd82451ccac186e30e171f9eb255b540",
       "bytes": 8070,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/kemi/kemi-elevation-thumbnail.webp",
           "bytes": 5310,
           "sha256": "15135138157747b4d6482ccc6d35e8266fb4afb42b101e2c3df157de45db41ae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kemi/kemi-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kemi/kemi-elevation-surface@2x.webp",
           "bytes": 280498,
           "sha256": "774330db09cb35f1e14041683d712824c36984c3df2af08a122cc59e5db41447",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +460,13 @@
           "url": "/scenes/kemi/kemi-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kemi/kemi-shape-surface@2x.webp",
           "bytes": 65494,
           "sha256": "b790c80f4a9ae37b36bfd38d9542c20360dbfa3a03a2bd1f1adf2784bdaaf0a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -561,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "kemi",
-    "materialSha256": "da8d75fad7145d945f5e201a77751d9c46d709cce981a44b8b01269bdc65fcb9",
+    "materialSha256": "bca5da3a61d359f0b2f19658a3223d342fa83e94ecb8f640aee74b4b2df36059",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "1b9c4574f1d42d2682715a55444eff251bd4a484b638a68a801d8dda080aa913"
     }
   }
 }

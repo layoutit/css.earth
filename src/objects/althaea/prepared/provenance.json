@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "althaea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9daa3b0c2116c374946cde82be53930ad16759ee8a331739ba492c3d119432eb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "98fdf0276a1d520d1ce2c2f54b5e6f6d16c086b05a150279bab6c535fc23d440"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "6d8297de717271593165d8e34c141a3d1565e851957dd91ddaea2ce0f15945c3",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "23cf8c00320b63e2bc99ec9309a5a62051535ea72a1e13158d2335866b648718",
       "bytes": 9822,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/althaea/althaea-elevation-thumbnail.webp",
           "bytes": 4480,
           "sha256": "baaa83871a974ac4f448af97a219ab5306ea3658f6183cda6a468a70b972f0bd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/althaea/althaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/althaea/althaea-elevation-surface@2x.webp",
           "bytes": 285670,
           "sha256": "09a961a8b898b4d521f7451071228e6e4eaaf30098b9706eb885c7c01ecdd7f6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/althaea/althaea-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/althaea/althaea-shape-surface@2x.webp",
           "bytes": 62156,
           "sha256": "a579f095cf12b6f328cae2bc3ef6c4134fa767a36d73ddd7851c1fe40c6c2527",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "althaea",
-    "materialSha256": "130412d26e4a8d9468212573c377f907afdd982e51aff5c5731337174fd458f0",
+    "materialSha256": "8248c80d318ec93a1c5b9a283ea7086c5d4d5be4c66529b89709f6151c2f502c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "98fdf0276a1d520d1ce2c2f54b5e6f6d16c086b05a150279bab6c535fc23d440"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "auravictrix",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "eca912bbaf9fdae943d13c235e673d456e8544173ed0d5ab81f5459634175266"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "d06fdfb493b3bc408e210fc9a31f83f80085daa7a0f806d8958409cb3e93918a"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "477d88385d0212d76042c2ce706f5ea0b0adafc70b55e44bb0c73291e1a2256f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9470,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/auravictrix/auravictrix-elevation-thumbnail.webp",
           "bytes": 5430,
           "sha256": "4f24b608cd9fba496e35352b2732d6b011b405e13ec37bdac3e515f8d40d73b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-surface@2x.webp",
           "bytes": 287974,
           "sha256": "838d9a268e09fda9cd5a2f370b5a5131836117fcac54481822faa7698f09ad73",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/auravictrix/auravictrix-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-shape-surface@2x.webp",
           "bytes": 59962,
           "sha256": "328d81beebb8dac5854b3ad3f0527abe4bc68f812a4cf749acfb90196799376c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "auravictrix",
-    "materialSha256": "0e5e05223ee5d4ee0af4b805dcd460c54a024a2615a086789d8ee4589e72ac58",
+    "materialSha256": "3c90a7fc6919fc98b7f7832e5a47ff26c371e9801ad531ca995be7a96c11de5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "d06fdfb493b3bc408e210fc9a31f83f80085daa7a0f806d8958409cb3e93918a"
     }
   }
 }

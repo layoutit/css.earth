@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "clementina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "5cff2fb31086275bdecb3dd37c2efed1099276f257a3814161b20795791aa519"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "e7a2f8b606efc4034194bf83370eef3e58b2684623d89abdcb9bfbad00d16757"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "15e30ddcead93addfefb8473a689b601d549eab3710abf227abce3b7761d2be4",
       "bytes": 44799,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "0d1066c11112da04ffc2692ddc7f50940c516c34f99dfcc5593c3c7a0c53a79b",
       "bytes": 11354,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/clementina/clementina-elevation-thumbnail.webp",
           "bytes": 5846,
           "sha256": "9ae3229f5e4f62e143af4dd6ad22344e1436d32cd5924d083626186606122ddf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/clementina/clementina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/clementina/clementina-elevation-surface@2x.webp",
           "bytes": 335526,
           "sha256": "d4ff784419c5e098dfdaeab8fb0a06c69900c155f2ef91d3b8b00f1788bca1c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/clementina/clementina-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/clementina/clementina-shape-surface@2x.webp",
           "bytes": 72728,
           "sha256": "f6497b8d0b2bc643e05b5f90b03d98dc8adcf71beab7768d5d88438acccb092b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "clementina",
-    "materialSha256": "24b269a3b88631abda4807bb0d4ad1a8d3248038b4508d8a9b5793233664c7cc",
+    "materialSha256": "6b02d42a2bdf8a323cd5090e517d44cfca2e63a0546d05d525b54d7cca3eef60",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "e7a2f8b606efc4034194bf83370eef3e58b2684623d89abdcb9bfbad00d16757"
     }
   }
 }

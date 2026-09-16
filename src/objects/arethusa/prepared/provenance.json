@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "arethusa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "aa8e105b5628fd30b80f9c9b6df72068e6ccbc78d7c39ae3d96f461bec2edc41"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "d63ab244a4b1a6510a2f45c7c957bf6c9b5a7bf6e1e84cc0aff248745b978260"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "d0e611cbfa92edf2dc21d0d4efae8ce2b4efb7460e63d038e63f61e115b11429",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "f5aa0a52e1e5d279ca95ce30fdedfba64bd5e2b7c9d380287b63758d88ab6cb4",
       "bytes": 10039,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/arethusa/arethusa-elevation-thumbnail.webp",
           "bytes": 5700,
           "sha256": "9c4fbba8f2995da7f0e7884a1a1a0f22a34091963c7bb4faa4e26679ca442537",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arethusa/arethusa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arethusa/arethusa-elevation-surface@2x.webp",
           "bytes": 287382,
           "sha256": "13b5a48f83035f72e6c3dc445aaa50e57f336d57da9f054820f29718f955cf02",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/arethusa/arethusa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arethusa/arethusa-shape-surface@2x.webp",
           "bytes": 65594,
           "sha256": "738046c6a6e26317a4b7d7fd6349b81e8303cb46cd5a8e2a7a3371e8f4524fe2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "arethusa",
-    "materialSha256": "ee404dd0fdd647a1c09ddf708d1150d2473ebff07a5837b088ebcc3719ec875b",
+    "materialSha256": "31b4532a850ef8daccdc0323a399fd62e93b5f2bd52f9147d1bdb4b228f2ced5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "d63ab244a4b1a6510a2f45c7c957bf6c9b5a7bf6e1e84cc0aff248745b978260"
     }
   }
 }

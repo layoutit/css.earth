@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2002-tx300",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "80b755cc707dd20b0f42c88c0add11cb7688ab823b55b1c3d1f94f91142e019b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "00f06840deae04ec1d6e8745c312ba4df767a114d335d156ce44675c33cecde1"
   },
   "recipes": [
     {
@@ -233,7 +233,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -268,7 +268,7 @@
       "sha256": "75730ca4af8be9d8f37bb4d3a53b9346c4bfeedb1ceea91f94f23c3ac9d3763a",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +288,7 @@
       "sha256": "dc0521abd1afd70800f8f2218f052882061313d05123ce651e60a2454637cc03",
       "bytes": 3331,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -325,13 +325,13 @@
           "url": "/scenes/asteroid-2002-tx300/asteroid-2002-tx300-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2002-tx300/asteroid-2002-tx300-model-surface@2x.webp",
           "bytes": 53844,
           "sha256": "be4e7d3b3add0b4a9012cee8567708ae8d3948087d13428e8c52697b46c1e1c3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -409,8 +409,8 @@
     "materialSha256": "deddb59c902acee621e78d8c2124ddb8b630a16bed46503e823787c6f20fe968",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "00f06840deae04ec1d6e8745c312ba4df767a114d335d156ce44675c33cecde1"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lydia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "369deb3ccb7ea87c8c99e5d45d922fead26c1ed1a52342ebcf205099c4f0b44a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "5f6ecec87a336a187c642129ca0ade61fcede12c374524a16e3d527011f24aef"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "ce4560318a58f130ddd60a01038a7fdb3bcc30554d3507ade899cda740975004",
       "bytes": 129283,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "627854aa65e4576e0d60f7963f0a2f7128034d809417f890a8dc9fa4d8fdf866",
       "bytes": 8424,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/lydia/lydia-elevation-thumbnail.webp",
           "bytes": 4916,
           "sha256": "0f3cc379838439fdc2f204369d51e6becd80ad38ece70a25ba6a3214c12d814e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lydia/lydia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lydia/lydia-elevation-surface@2x.webp",
           "bytes": 265110,
           "sha256": "e7c9c67bbd8c6d1e7fafe570936f7ed3610f66b4c9ef7ecb88bb3f9aeeddbb76",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/lydia/lydia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lydia/lydia-shape-surface@2x.webp",
           "bytes": 57872,
           "sha256": "961b51813c993492d01bff9b53749f156c1e59f622ccefad58fe836b5ccd4bea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "lydia",
-    "materialSha256": "3169709cef6c86b820eea4ce904a56ca67571527437a6a31cab193e69080806e",
+    "materialSha256": "95369e0abe7537018cb91200549285bc8b258fb6a208a5908144aa79cf575d09",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "5f6ecec87a336a187c642129ca0ade61fcede12c374524a16e3d527011f24aef"
     }
   }
 }

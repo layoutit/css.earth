@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "virtanen",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "5638eff45f6edbefb7ba1eb55b7af3e6da0df33be46ecf909d543c15070d93fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "13c5abec8a480ca59c378b7887bb4347153a6733a78099b9912ac196d0ddf932"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "1f1b9833f39a6e6c348f2023554a2defac86b47531a8c3a0ac64b4b0bf562983",
       "bytes": 81898,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8655,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/virtanen/virtanen-elevation-thumbnail.webp",
           "bytes": 5216,
           "sha256": "c336d1574d7d65e1c33d68f3747c50ecd2419eacab197beb646b63e0b861721e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virtanen/virtanen-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virtanen/virtanen-elevation-surface@2x.webp",
           "bytes": 281794,
           "sha256": "bab552d8584fcfd5bdf833f91ca8d6ac573025fa7eacc25532a8678a3fcd9b3f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/virtanen/virtanen-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
           "bytes": 62494,
           "sha256": "71444c7262dd0f4a73e5246bf187ffe35adf53f2f152896941c3f7641d4805b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "virtanen",
-    "materialSha256": "fd50bd43c987eae239a76671bc84c4e72d4c35f922839aac000892b04ec163ed",
+    "materialSha256": "92d88207c82370502393e4978770c1759a78e23ad1a1cfca055f4e470f666a5f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "13c5abec8a480ca59c378b7887bb4347153a6733a78099b9912ac196d0ddf932"
     }
   }
 }

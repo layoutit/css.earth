@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-137p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "367aa96ec13c82138159283caa3246274de1d0e035e4987f448ab4425a3d9a34"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "602e021f0b16db1ed17f908b11e5ea39264914bd54cd4d83e269dbc07bdcbb1b"
   },
   "recipes": [
     {
@@ -259,7 +259,7 @@
       "sha256": "e335339de48d829c44b82ea56f827499c9d83904fc3977d47933f5cae56dd9d3",
       "bytes": 1330,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -279,7 +279,7 @@
       "sha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
       "bytes": 2606,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -311,13 +311,13 @@
           "url": "/scenes/comet-137p/comet-137p-model-thumbnail.webp",
           "bytes": 904,
           "sha256": "9abc813ca537d37592c12f6a7fc07128d4cfcacc0b0517662ddd7c50311bcdb0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-137p/comet-137p-model-surface@2x.webp",
           "bytes": 40796,
           "sha256": "5e23f6cfff604d61f855b186067215362344e96d19303c1e5db41448f3c1b216",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -362,11 +362,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-137p",
-    "materialSha256": "43ecbda88d18b808f8e9e88f473e5adb1af84d24d8ff0072a6fb28f4686bc863",
+    "materialSha256": "85efd09f82b06a8c0846ac46e240dc36c3c29197b634f388e89a80a3bf5cda55",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "602e021f0b16db1ed17f908b11e5ea39264914bd54cd4d83e269dbc07bdcbb1b"
     }
   }
 }

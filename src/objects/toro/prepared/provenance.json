@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toro",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9439e5a25e0ff27b6923faffff85d7e0abad20587301435c10ed7e3dea44350d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "28535ebc8baf5cd253382050bfeddf530248b6aef6aac7ce0e097f8ca2be32bb"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "37dcd0f6ee31357b06abbd911720dcc46f36b7dd28bd1449a29a202c7dc8c373",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "b157c9a4b1d17a31a227f159f8ccca539046e0548c899441f34060a7daf7fbbe",
       "bytes": 7722,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/toro/toro-elevation-thumbnail.webp",
           "bytes": 5174,
           "sha256": "dcd948a40cde773d1926abfe06a4d02fb49e881e62c279e20bbd8caed7b110b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toro/toro-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toro/toro-elevation-surface@2x.webp",
           "bytes": 280902,
           "sha256": "f22d0f042e6f472a8d4fef607577448c3e4ec53806695bb6b56a902446c82d65",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/toro/toro-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toro/toro-shape-surface@2x.webp",
           "bytes": 61204,
           "sha256": "9c247baa9624104c7f8edf7df41cd3d0248b86adfc3872d4ef70d18e0bb6fd12",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "toro",
-    "materialSha256": "be632608b8d6276ef4d2dd2977e09d00977532c895be4372991c2ab117963fe1",
+    "materialSha256": "092772cf408772b32bc3a5eac4a32e26356b924f3069d2668b620221a0689d9c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "28535ebc8baf5cd253382050bfeddf530248b6aef6aac7ce0e097f8ca2be32bb"
     }
   }
 }
