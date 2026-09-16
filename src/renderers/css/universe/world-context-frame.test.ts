@@ -41,6 +41,10 @@ test('delta transport exactly reconstructs prepared projections across camera, h
     const wire = structuredClone(packet, { transfer: contextFrameTransfers(packet) });
     const resolved = receive.accept(wire);
     expect(resolved.frame).toEqual(full);
+    // Changed bodies are resolved by prepared index, not by list position: with only
+    // the locators publishing, the placed star's index is far beyond its position.
+    if (input.anchorOnly) expect(full.projectedBodies.some((body, position) => body.index !== position)).toBe(true);
+    for (const body of resolved.changed) expect(resolved.frame.projectedBodies.find(candidate => candidate.index === body.index)).toBe(body);
     // Receiver publication is the only owner of the next acknowledgement.
     expect(receive.committedId).toBe(id);
   }

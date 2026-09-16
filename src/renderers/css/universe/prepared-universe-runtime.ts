@@ -158,6 +158,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
+      // The baked sky cube holds the Sun's near stars. As the camera leaves the Sun's neighbourhood the 3D star field takes
+      // over those stars at their catalogue positions, and the cube, which would show them from the wrong place, fades out.
+      let starsHandoff = 0;
       const publishBackground = () => {
         const brightness = highContrastSky ? 1 : volumeBrightness;
         // The completed images contribute (1-t)*sky + t*b*volume. Factoring
@@ -172,7 +175,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
           publishedImageAlpha = imageAlpha;
         }
-        const skyAlpha = alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0;
+        const skyAlpha = (alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0) * (1 - starsHandoff);
         if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       };
       const destroy = () => {
@@ -287,6 +290,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             prefetchGalaxy(distanceM);
             additionalPoints.publish({world, viewport}, distanceM);
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
+            starsHandoff = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
             volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
             volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
             volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
@@ -343,7 +347,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
             focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
-            const scale = fade > 0 ? 'galactic' : distanceM > plan.stars.fadeStartDistanceM ? 'stellar' : Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis])) > selected.radiusM * 100 ? 'system' : 'object';
+            // Near the selected body its own scale wins, wherever that body sits: a placed star is an object at stellar distances.
+            const selectedDistanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]));
+            const scale = fade > 0 ? 'galactic' : selectedDistanceM <= selected.radiusM * 100 ? 'object' : distanceM > plan.stars.fadeStartDistanceM ? 'stellar' : 'system';
             if (scale !== publishedScale) { stage.dataset.contextScale = scale; publishedScale = scale; }
             });
           },

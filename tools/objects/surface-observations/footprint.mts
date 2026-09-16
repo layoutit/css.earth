@@ -77,8 +77,11 @@ export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
     withCamera: turned => cameraFrame({ ...options, camera: turned, geometry: castSourceRays(turned, mesh, image.width, image.height) }),
     sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
     visible: point => {
-      const delta = point.map((n, i) => n - eye[i]), distance = Math.hypot(...delta), hit = mesh.intersect(eye, delta.map(n => n / distance), distance + tolerance);
-      return !!hit && Math.abs(hit.radius - distance) <= tolerance;
+      const delta = point.map((n, i) => n - eye[i]), distance = Math.hypot(...delta);
+      // A double carries 53 bits: at a telescope's distance the metre tolerance sits below the last place of the range itself, so the
+      // test admits sixteen units in that place, twenty kilometres from 168 parsecs, still a hundred-millionth of a stellar radius.
+      const slack = Math.max(tolerance, distance * 2 ** -48), hit = mesh.intersect(eye, delta.map(n => n / distance), distance + slack);
+      return !!hit && Math.abs(hit.radius - distance) <= slack;
     },
     report: { id, startTime: image.startTime, filter: image.filter, camera: { kind: camera.kind, ...camera.report }, geometry: geometry.report, quality: image.report,
       pixels: { geometryPixels, acceptedPixels, acceptedLossyPixels, rejectedPixels }, footprint,
