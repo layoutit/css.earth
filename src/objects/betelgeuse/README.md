@@ -19,6 +19,7 @@ Betelgeuse is the first body here that is not in the Solar System and the first 
 - `tests/objects/unit/betelgeuse/source.test.mts` verifies every pin, that each input is downloaded or produced by a named tool, and that the sphere is the published radius on its grid.
 - `packages/astronomy/src/stars.test.ts` checks the placement: distance, direction, proper motion and radial velocity round-trip.
 - [`source/reference/reconstruction-comparison.png`](source/reference/reconstruction-comparison.png) places the published February 2020 image beside three SQUEEZE reconstructions of the pinned visibilities (entropy 10 and 1, total variation 1) convolved to the 4 mas beam; their peak-to-median contrast inside the disc is 1.30, 1.44 and 1.52.
+- [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/betelgeuse/` with the default camera: the photographed hemisphere faces the camera above the grid of the unobserved side.
 - Preparation accepted 2,032 of 2,313 pixels with geometry; the 281 rejected lie beyond 70 degrees of incidence at the limb. No lit shape falls on sky.
 
 ## Known problems
