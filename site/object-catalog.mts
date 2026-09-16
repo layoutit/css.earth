@@ -29,9 +29,10 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
   const catalog = input.properties.catalog;
   if (!record(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
-  const keys = ['name', 'systemName', 'classification', 'color', 'distanceAu', 'description', 'order', 'context', 'featured', 'illustrationLenses'];
+  const keys = ['name', 'systemName', 'classification', 'color', 'distanceAu', 'description', 'order', 'context', 'featured', 'illustrationLenses', 'orientationReference'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
       typeof color !== 'string' || typeof distanceAu !== 'number' || typeof description !== 'string') throw new TypeError(`Invalid catalogue metadata: ${input.id}.`);
+  if (catalog.orientationReference !== undefined && (!Number.isInteger(catalog.orientationReference) || Number(catalog.orientationReference) < 1)) throw new TypeError(`Invalid orientation reference: ${input.id}.`);
   if (catalog.featured !== undefined && typeof catalog.featured !== 'boolean' || catalog.illustrationLenses !== undefined &&
       (!Array.isArray(catalog.illustrationLenses) || !catalog.illustrationLenses.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)))) throw new TypeError(`Invalid discovery metadata: ${input.id}.`);
   let context: CatalogContext | undefined;

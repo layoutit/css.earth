@@ -1,4 +1,6 @@
-import {shape,array,text,number,optional} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {shape,array,text,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
+// A no-data witness records a null interval.
+const nullableText = (value: unknown): string | null => value === null ? null : text(value);
 import {parseMurReceipt} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';
 import {earthPreparationConfig as config} from './prepared-fixture.mts';
 import {required} from '../../../../tools/test-values.mts';
@@ -98,7 +100,7 @@ test('NASA full coverage, published bins, and independently decoded pixels survi
   assert.equal(sha256(bytes), receipt.mosaic.sha256);
   const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(info.width, 16384); assert.equal(info.height, 8192);
-  const witnesses = shape({records:array(shape({outputPixel:array(number),expectedMosaicRgb:array(number),name:text,intervalCelsius:optional(text)}))})(JSON.parse((await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json')).toString('utf8')));
+  const witnesses = shape({records:array(shape({outputPixel:array(number),expectedMosaicRgb:array(number),name:text,intervalCelsius:nullableText}))})(JSON.parse((await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json')).toString('utf8')));
   for (const witness of witnesses.records) {
     const [x, y] = witness.outputPixel, offset: number = (y * info.width + x) * 3;
     assert.deepEqual([...data.subarray(offset, offset + 3)], witness.expectedMosaicRgb, witness.name);
