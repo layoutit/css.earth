@@ -18,3 +18,5 @@ Field positions and stellar contracts retain west/north/away coordinates and the
 `pnpm --filter @cssearth/volume-core typecheck` checks the package with ECMAScript libraries only. Numerical tests live beside their package owners and use the public APIs. Node test libraries are excluded from the platform-neutral package typecheck and covered by the strict lab test batches.
 
 Sampled replay evaluates accepted spatial samples and finite atoms without rerunning image fitting. The sampled recipe validator accepts a source-path policy from its host; the research adapter retains its restricted model/cache paths. Cancellation uses a structural `throwIfAborted()` contract so the numerical owners require neither Node nor DOM globals.
+
+The public `package.json` export owns the `nebulaImplementation` inventory used by preparation fingerprints. Hosts resolve the package and hash its manifest plus matching implementation files under stable package-relative names; moving the package does not change its identity. Tests are excluded by the package configuration.

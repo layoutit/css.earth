@@ -1,3 +1,4 @@
+import { packageImplementationPins } from './package-identity.ts';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 import type { CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
@@ -24,7 +25,7 @@ const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeEr
 const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Expected finite nebula delivery value.'); return v; };
 // Prepared pixels and their contract must invalidate a previously installed handoff together.
 const implementationFiles = [
-  'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
+  'tools/nebula/application/package-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
   'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts',
   'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
@@ -97,13 +98,9 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   for (const input of [...(recipe.fieldStars ? [recipe.fieldStars] : []), ...(recipe.compactInputs ? [recipe.compactInputs] : [])]) await pinned(root,input);
   const owners = [...implementationFiles, ...(recipe.fieldStars ? ['tools/nebula/application/catalogue-field.ts',
     'src/renderers/css/navigation/world-camera-math.ts', 'src/renderers/css/stars/prepared-catalogue-points.ts'] : [])];
-  // The numerical package closure participates in new preparation identities, not historical source receipts.
-  for (const owner of ['volume-core','volume-bake']) {
-    const directory = `labs/nebula/packages/${owner}/src`;
-    for (const name of (await readdir(local(root,directory), {recursive:true})).sort())
-      if (name.endsWith('.ts') && !name.endsWith('.test.ts')) owners.push(`${directory}/${name}`);
-  }
-  const implementationSha256 = sha(json(await Promise.all(owners.map(async path => ({path,sha256:sha(await readFile(local(root,path)))})))));
+  // Package inventories define numerical owners without exposing their installation layout.
+  const packagePins = await packageImplementationPins(root, ['@cssearth/volume-core', '@cssearth/volume-bake']);
+  const implementationSha256 = sha(json([...await Promise.all(owners.map(async path => ({path,sha256:sha(await readFile(local(root,path)))}))), ...packagePins]));
   if (ifMissing && await installed(directory,sha(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
   const staging = resolve(directory,`.prepared-${process.pid}`); await mkdir(staging,{recursive:true});
   const lenses: PreparedVolumeLens[] = []; let sourceResult = recipe.acceptedLabResult;

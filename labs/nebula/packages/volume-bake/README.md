@@ -12,3 +12,5 @@ src/
 Dependencies: volume-core; explicit renderer and star-asset backends supplied by the host. Consume explicit package exports rather than another package’s source paths.
 
 Run `pnpm --filter @cssearth/volume-bake typecheck` from the repository root after installing dependencies. The lab command runner discovers tests beside package owners.
+
+The public `package.json` export owns the `nebulaImplementation` inventory used by preparation fingerprints. Hosts resolve the package and hash its manifest plus matching implementation files under stable package-relative names; moving the package does not change its identity. Tests are excluded by the package configuration.

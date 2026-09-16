@@ -44,12 +44,24 @@
     "./contracts/compiler-star-input": "./src/contracts/compiler-star-input.ts",
     "./fields/density-projection": "./src/fields/density-projection.ts",
     "./contracts/prepared-catalogue-stars": "./src/contracts/prepared-catalogue-stars.ts",
-    "./coordinates/observation-envelope": "./src/coordinates/observation-envelope.ts"
+    "./coordinates/observation-envelope": "./src/coordinates/observation-envelope.ts",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@cssearth/objects": "workspace:*"
+  },
+  "nebulaImplementation": {
+    "directories": [
+      "src"
+    ],
+    "extensions": [
+      ".ts"
+    ],
+    "excludedSuffixes": [
+      ".test.ts"
+    ]
   }
 }
