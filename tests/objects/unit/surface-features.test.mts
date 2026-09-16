@@ -81,7 +81,8 @@ for (const id of bodies) {
       // Spacecraft sites rank as 20 km features and Natural Earth names by population or scale rank; the Gazetteer names around them keep diameter order.
       const site = ["LS", "IM", "SS", "RT"].includes(feature.code);
       if (site) assert.equal(feature.diameterKm, 0, `${id}: ${feature.name} site is unsized`);
-      else if (id !== "earth") { assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`); previous = feature.diameterKm; }
+      // Unsized Gazetteer names (diameter 0) are searchOnly since the default label recipe and carry no rank.
+      else if (id !== "earth" && feature.diameterKm > 0) { assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`); previous = feature.diameterKm; }
       assert.ok(feature.minimumZoomShare >= 0 && feature.minimumZoomShare <= 1, `${id}: ${feature.name} discovery tier`);
       assert.ok(feature.searchNames.length > 0 && feature.origin.length >= 0, feature.name);
       // A caption note is a short Wikipedia lead summary pinned with its article; the pinned document is the only source.
