@@ -50,7 +50,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "c6bbb40ebbdde32670fdc7eea9c58952065edfc702d7d3e849a35183d326fe6a"
+          "sha256": "f2c4dee10709cdd5d454389a700332f5aa1b3a1686c3483927f3c1dc35b10c23"
         },
         {
           "id": "geometry",
@@ -70,12 +70,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e6270d94800e3d3b8e5838427ba766591867f92edb9b867c74862ef9cd9d21fb"
+          "sha256": "edf1888f6ac5613b6140789fcf304533fec6a153cd260d164b06af7c160e6ade"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "f71d20052a460f741f99349f7583881ae57f4b71eaa595b27ccb74752aae2e2a"
+          "sha256": "03cbfaf6a9b8209d7b39caa591b96971d8f339fd202f7a6b42d4ddbd7a72d96c"
         },
         {
           "id": "rotation",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6f1131f330112a6154455234d81edd810e803b159a9cb1b90347b4182e8d3efe"
+        "sha256": "7e5736e7debbf5ea227af354999e4d13a90c6fbcc581772fde505d5e5dd4dd37"
       }
     },
     "catalog": {
@@ -156,6 +156,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "bb0972f7ae058b43ba6965ac462bcb40b62b210c0d719083bbb372c936242805"
+    "sha256": "a8a0a647e1356315f6c11ef3a71de5d44412defa13ee28785aef414ad555a038"
   }
 }

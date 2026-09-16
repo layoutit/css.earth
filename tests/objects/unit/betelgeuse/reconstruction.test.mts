@@ -39,6 +39,24 @@ test('the pinned reconstruction fits the pinned visibilities and closure phases'
   assert.ok(discFit.reducedChi2Vis2 > 3 * fit.reducedChi2Vis2, `a uniform disc fits the visibilities worse: ${discFit.reducedChi2Vis2} against ${fit.reducedChi2Vis2}`);
 });
 
+test('the light outside the photospheric disc is required by the visibilities', async () => {
+  // The beam-convolved image keeps 80 percent of its flux inside the 42.45 mas disc. Zeroing everything outside it, or everything
+  // beyond a few beams of the limb, breaks the fit to the closure phases: the halo the off-limb plate shows is in the data.
+  const beam = readReconstruction(await readFile(BEAM_IMAGE)), data = readMergedContinuum(await readFile(VISIBILITIES));
+  const pixelMas = Math.abs(Number(beam.cards.find(([key]) => key === 'CDELT1')?.[1])), { width, height } = beam;
+  let sx = 0, sy = 0, sw = 0;
+  for (let i = 0; i < beam.values.length; i++) { const v = beam.values[i]!; if (v > 0) { sx += (i % width) * v; sy += Math.floor(i / width) * v; sw += v; } }
+  const cx = sx / sw, cy = sy / sw, discRadius = 42.45 / 2 / pixelMas;
+  const within = (limit: number) => { const values = Float64Array.from(beam.values, (v, i) => Math.hypot(i % width - cx, Math.floor(i / width) - cy) <= limit ? v : 0); const total = values.reduce((a, b) => a + b, 0); return { width, height, values: values.map(v => v / total), pixelMas, eastLeft: true }; };
+  const full = fitStatistics({ width, height, values: beam.values, pixelMas, eastLeft: true }, data.wavelengthMetres, data.vis2, data.t3);
+  const disc = fitStatistics(within(discRadius), data.wavelengthMetres, data.vis2, data.t3);
+  const fourBeams = fitStatistics(within(discRadius + 4 * BEAM_FWHM_MAS / pixelMas), data.wavelengthMetres, data.vis2, data.t3);
+  assert.ok(disc.reducedChi2T3 > 100 * full.reducedChi2T3, `without the off-limb light the closure phases do not fit: ${disc.reducedChi2T3} against ${full.reducedChi2T3}`);
+  assert.ok(fourBeams.reducedChi2T3 > 5 * full.reducedChi2T3, `light beyond four beams of the limb is still required: ${fourBeams.reducedChi2T3} against ${full.reducedChi2T3}`);
+  const outside = beam.values.reduce((sum, v, i) => Math.hypot(i % width - cx, Math.floor(i / width) - cy) > discRadius ? sum + v : sum, 0) / beam.values.reduce((a, b) => a + b, 0);
+  assert.ok(outside > 0.15 && outside < 0.25, `a fifth of the flux lies outside the disc: ${outside}`);
+});
+
 test('the displayed image is the raw reconstruction convolved to the beam, and keeps its flux and centre', async () => {
   const raw = readReconstruction(await readFile(IMAGE)), beam = readReconstruction(await readFile(BEAM_IMAGE));
   assert.equal(beam.width, raw.width); assert.equal(beam.height, raw.height);

@@ -107,12 +107,16 @@
             ]
           },
           "consumer": "sphere-photograph"
+        },
+        "offLimb": {
+          "rotationDegrees": -1.6,
+          "mirror": true
         }
       }
     }
   ],
   "emission": {
-    "offLimbSize": 768,
+    "offLimbSize": 1168,
     "limbSize": 512,
     "bodyDiameter": 496,
     "offLimbOutput": "betelgeuse-context-{id}{suffix}.webp",
@@ -121,15 +125,15 @@
       "schema": "cssbetelgeuse-prepared-emission@1",
       "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
       "offLimbContext": {
-        "logicalSize": 768,
-        "source": "none: an interferometric reconstruction images the photosphere only; the off-limb plate is transparent",
-        "composition": "transparent",
-        "rotation": "stationary; nothing is drawn",
+        "logicalSize": 1168,
+        "source": "the same beam-convolved reconstruction: its light outside the 42.45 mas disc, 20 percent of the flux, on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 100 mas field",
+        "composition": "sky-plane image registered to the disc (496 px = 42.45 mas), mirrored and turned to the scene's handedness so its north meets the rendered pole (measured 40.4 degrees from screen-right at the default camera, against the image's 42 degrees mirrored)",
+        "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
         "runtimeAlphaProcessing": false
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the reconstruction's limb darkening is in the surface itself",
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },
