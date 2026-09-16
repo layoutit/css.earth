@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "900daa9898f40e0956dc71ef807c71e8b0a768d4f28bd1b9bccf94f508d96f32"
+    "sha256": "c090da617c4458209dff024283819fef6102013e52cd7621f35c218e086528ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3405185325d65f7016133e2c66d801134407c1bb246593d6afea6a33b4949916",
+      "sha256": "6f9d55a2491c1d0c84087f02bb108ad905190f641ef92772b6cb93d12f61ac42",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -284,6 +284,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.21
@@ -390,6 +391,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -453,7 +455,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "35c91d35253fb732f720976c9a114664b94ccffe5cb90362dad4d480b6233370",
+      "sha256": "82c6c8547d59ad9e2bc44257598ef332b292970e0a59395989e5e6340168c33a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -488,30 +490,24 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 15.1 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 141,700 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 141,700 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Voyager 1 science team · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Voyager 1 science team · 1980"
             }
           ],
           "moreFacts": [
@@ -2024,8 +2020,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "35c91d35253fb732f720976c9a114664b94ccffe5cb90362dad4d480b6233370",
-      "bytes": 6139,
+      "sha256": "82c6c8547d59ad9e2bc44257598ef332b292970e0a59395989e5e6340168c33a",
+      "bytes": 5661,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2216,8 +2212,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7269,
-          "sha256": "9f4365a9058d0f45cdd10020aeaecbe49dec0ed9ea5dad7b61eb2fbceffa4b24",
+          "bytes": 6885,
+          "sha256": "8d63fdace6ee55e2b70b5aeabc1aed180f5b30515c2b7e3047696aa7cea105b0",
           "verification": "bytes-verified"
         }
       ],
@@ -2305,7 +2301,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "6e43a82ed1727ada3f73461a502695e348ff92032e01ebed0c62dacc28b38a9d",
+    "materialSha256": "84b464d80be2288802def8a8cb351e08c27365eb38957cd2ef5489042eab61fa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "07bfa6c3f8d148b47f015b583e0a152bdd766de10e9d006c5b3ab941586c88a4"
+    "sha256": "f9940b3335bc57481576d23c8201c00fd06b0911def0d81f667d722fb1d66a56"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c1bb5ef5102b1adee0a3234da672b49ecde38ab2124c02eeb991cbd0544c6ace",
+      "sha256": "07c69722d525d92bb574643254090cff6d893aa803c147030511eb53c1c4ad6b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -314,6 +314,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.339
@@ -634,7 +635,7 @@
                   }
                 }
               ],
-              "registration": {
+              "bandAlignment": {
                 "references": [
                   {
                     "id": "n1506388174",
@@ -775,6 +776,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.5
@@ -841,7 +843,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4d4b94687eda210fe24d408b410ca380e1c94e23edb5dc602fc521f107e7ffc2",
+      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -878,15 +880,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 21.3 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
-              }
+              "value": "About 21.3 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Chaotic tumbling"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 1.5 million km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "William Lassell and William and George Bond · 1848"
             }
           ],
           "moreFacts": [
@@ -3771,8 +3780,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4d4b94687eda210fe24d408b410ca380e1c94e23edb5dc602fc521f107e7ffc2",
-      "bytes": 5822,
+      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
+      "bytes": 5875,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -4101,8 +4110,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6028,
-          "sha256": "2999ba761fdf1c72c0ca02a82d3dbfc9009ecdaafae66cac335a580b74592702",
+          "bytes": 6040,
+          "sha256": "cd016a52bcd5227e0754328f9944c4bb0e166328ed4d04025db31e52d1172c8a",
           "verification": "bytes-verified"
         }
       ],
@@ -4226,7 +4235,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "5c2d50980e4f6424dfbc548858c9b6f07de2c86a16132f3ead3ad0a5e2056168",
+    "materialSha256": "0dec2b3f6cbdfd9cd34046ee36f269ce5f03372cd8010a02526514fd6f05e58a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

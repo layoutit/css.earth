@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "691205bd05cc02ad50dd91d659e54e8de24f70b5f76d3a9a9052aa41699a87c2"
+    "sha256": "5cf54f5d5c88e0a48394cc2f2253863f5a886a78b9e029a44d61011f446bc2db"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "420b59cea9eb4e2428547b83e9f4cfc93841a25ee8921d379cd0e16e9dd2fa80",
+      "sha256": "79e5c3eac0d779204387a888c7efd49b245cab6e60cf76ec51e22dd56a3e5945",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -195,6 +195,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.928
@@ -301,6 +302,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -364,7 +366,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b96c79a23fcc731c2cc03c7bf85d89ada91c855ed51854b9ec62923d7d95081e",
+      "sha256": "798912d0cf108e53291d601de7e43615edb1679b4b9f06c00333f2db9375eb89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -399,17 +401,19 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 14.4 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 137,670 km"
+            },
+            {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Richard Terrile / Voyager 1 team · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Richard Terrile / Voyager 1 team · 1980"
             }
           ],
           "moreFacts": [
@@ -1392,8 +1396,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b96c79a23fcc731c2cc03c7bf85d89ada91c855ed51854b9ec62923d7d95081e",
-      "bytes": 5560,
+      "sha256": "798912d0cf108e53291d601de7e43615edb1679b4b9f06c00333f2db9375eb89",
+      "bytes": 5440,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1574,8 +1578,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4895,
-          "sha256": "338b94dd3b40671da70c3a4047aafb61c94ec6c04d12c4b00750f806a2f33e68",
+          "bytes": 4778,
+          "sha256": "db631ce2d966e7c0b03210e4984a2534f7c88e5e23dfd38763df7efc7e3d4935",
           "verification": "bytes-verified"
         }
       ],
@@ -1663,7 +1667,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "310ad9373ca2b78e374ee28be97a21754cc3f1beb35d8042d647e59a3434499d",
+    "materialSha256": "4d3a66ad2b4078d8fa80153f14baa5c66332a419c6498e5ff5647cef2d2af905",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

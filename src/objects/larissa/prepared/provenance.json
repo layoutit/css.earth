@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ddef94992cd043fa0f37aebaafc21d4d4adf9431357215749bdcabe657efce6f"
+    "sha256": "08c36e9d67d6958c2f3c12c0a83a71aadb750938aff8ecbc66f29a6d77299d1a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fa7192074a4eeda465c3c325a7cff9335cafa200269eba42afd4ada26952682c",
+      "sha256": "08d92acd410be5336a16cf6b31c110b0abf930bab938103aeffc08e07c5844df",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -126,6 +126,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.0494
@@ -186,7 +187,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9d576df65e0b9e7e073710e2a6b43486b073697004f33f46be0d96b0d126b314",
+      "sha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -223,28 +224,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "13.32 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days) × 24"
-              }
+              "value": "13.32 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 73,500 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 73,500 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Reitsema, Hubbard, Lebofsky and Tholen · 1981"
             }
           ],
           "moreFacts": []
@@ -483,8 +478,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9d576df65e0b9e7e073710e2a6b43486b073697004f33f46be0d96b0d126b314",
-      "bytes": 5074,
+      "sha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
+      "bytes": 4632,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -607,8 +602,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6682,
-          "sha256": "eea7457de2008c482a4cd378dbc8c86dde505dc2e0a99f69150f08db6d0002ce",
+          "bytes": 6334,
+          "sha256": "085d14c9026f933947e3549883e9dacaafd9cd7948aca9a7a674d1312eeb4399",
           "verification": "bytes-verified"
         }
       ],
@@ -671,7 +666,7 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "1155b02d11ffc99484543b1a078b2ca37610895edc00ceb627ec20cb125349c9",
+    "materialSha256": "b7332f88e918717b8dfe5ee4f947bf733f1de2cd2d431d793c0a90f7d87f434b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

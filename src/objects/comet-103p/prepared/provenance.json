@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "07f9f0f0851434a5adcf124a49dd57be11aaae6aa2f2d5213232b1fbfa060b09"
+    "sha256": "f914a8b805139be9780f5e2fb7ea1e3808968afa7bdeb99c73105536d1fcace9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fc1208e91d43654605d45f1514276e47e5bd4bc132f58ca518072102675435e3",
+      "sha256": "9884b18f19889d09b2dbe75eb402e422078440d63b5c1963c2f4a29092e270d6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -192,10 +192,11 @@
                 "visibilityToleranceMeters": 0.5
               },
               "photometry": {
-                "model": "observed",
+                "model": "retained-observation",
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0.9,
                   99.3
@@ -291,14 +292,30 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "83bb2441ec22eda791f3be736c0ab35798bddcf8b4c6841bf67e78c320f078ea",
+      "sha256": "f5ef1ced48bfb6d55c7f3c02e2614380bbad4523704075d2ebf14e331672fedb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-103p",
         "displayName": "Hartley 2",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Equivalent diameter",
+              "value": "1.16 ± 0.036 km"
+            },
+            {
+              "id": "mission",
+              "label": "Explored by",
+              "value": "EPOXI"
+            },
+            {
+              "id": "source-epoch",
+              "label": "Shape observations",
+              "value": "4 November 2010"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -5546,8 +5563,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "83bb2441ec22eda791f3be736c0ab35798bddcf8b4c6841bf67e78c320f078ea",
-      "bytes": 8314,
+      "sha256": "f5ef1ced48bfb6d55c7f3c02e2614380bbad4523704075d2ebf14e331672fedb",
+      "bytes": 8657,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -6149,8 +6166,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5341,
-          "sha256": "aae9a11b8a294bba4f875343debf1e49d8e2c499c850f6b20d80aa47f5ae6940",
+          "bytes": 5547,
+          "sha256": "b9bdb74b3335681b21c250d3c45322417fa17bb4411c593d971330c64d7050d3",
           "verification": "bytes-verified"
         }
       ],
@@ -6296,7 +6313,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-103p",
-    "materialSha256": "42ba84b64f941146a9110535196c3843723180437deac46dff62edb2bd02f126",
+    "materialSha256": "db16221deb108bf53c8a2699d6f4819acd485929a65988e1cc7e6cb3da7fa531",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

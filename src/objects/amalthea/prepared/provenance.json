@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5587cd7d298a2963395f78be3a4186780e9735b675d9048096ba387e968fcc7b"
+    "sha256": "97a8d9e86d66414a017d845bb81c08fabc0b9f8affdc3abbcccb595b8af6387a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c3f463f54424bdf2966a0d73be040d5ee2a91272ccab8b9af1ca5194852f3fd8",
+      "sha256": "d2bbfd179bc2de99a4244abae90c53e1bc9550abb108ddda43d0466e9cb3fa30",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -192,6 +192,7 @@
                 "maximumGain": 2
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.133
@@ -252,7 +253,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
+      "sha256": "58a890c0bc287d9a424a24628d8ecb1f88dc00d8a4c687fea040a6910ddb88a1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,30 +288,24 @@
               }
             },
             {
+              "id": "orbital-period",
+              "label": "Orbit around Jupiter",
+              "value": "11.96 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
               "id": "distance-from-parent",
               "label": "Mean distance from Jupiter",
-              "value": "About 181,400 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; a (km)"
-              }
+              "value": "About 181,400 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Edward Emerson Barnard · 1892",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/3; discoverer(s); year discovered"
-              }
+              "value": "Edward Emerson Barnard · 1892"
             }
           ],
           "moreFacts": [
@@ -944,8 +939,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
-      "bytes": 5605,
+      "sha256": "58a890c0bc287d9a424a24628d8ecb1f88dc00d8a4c687fea040a6910ddb88a1",
+      "bytes": 5123,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1174,8 +1169,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7330,
-          "sha256": "8930344aafe762eca1ccb22ae855f9c9a8fbe1635a633928117f997fd53bf97e",
+          "bytes": 6942,
+          "sha256": "502df7ffea15952e974df83e6e3b8f6d06f44ad38369656feaf54b8ff68195fe",
           "verification": "bytes-verified"
         }
       ],
@@ -1274,7 +1269,7 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "f18c9e6951c5fd627103a0e60e6f7854fe68a0bb432a2f3838026988d8f19df3",
+    "materialSha256": "57d24fa38f207ff085ba4adef34e52ff45772ca262eee0f6206ce7a2966c68e9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

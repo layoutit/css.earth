@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8ab27e942c6a12e1de13ab26717d4a5f378adc543246ee6a14deea5906cdcef"
+    "sha256": "26bc5af971d50454d8c2b615c76349c5e1f82c3d8350daf12d4306e1da846b74"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ea88f627d5da27cb9ab547595e18f172dd4d88f68822658e9a6206d4ff4cbdb0",
+      "sha256": "04ffa6b62cf877657eb495decbd9274520530c37b4b55b0b56db4eb7c8e20495",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -681,6 +681,7 @@
                 }
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.9,
                   99.3
@@ -777,14 +778,40 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
+      "sha256": "49d8109fe21cf07a3634f7b4403500ec0b81cf494f80c2fe870a80181fee396d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-67p",
         "displayName": "67P",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Equivalent diameter",
+              "value": "About 3.3 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation before perihelion",
+              "value": "12.4041 hours"
+            },
+            {
+              "id": "mission",
+              "label": "Explored by",
+              "value": "Rosetta · 2014–2016"
+            },
+            {
+              "id": "shape",
+              "label": "Nucleus model",
+              "value": "ESA/RMOC MTP019"
+            },
+            {
+              "id": "source-epoch",
+              "label": "Shape observations",
+              "value": "6 August 2014 – 25 August 2015"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -2903,8 +2930,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
-      "bytes": 17266,
+      "sha256": "49d8109fe21cf07a3634f7b4403500ec0b81cf494f80c2fe870a80181fee396d",
+      "bytes": 17878,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3488,8 +3515,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4390,
-          "sha256": "390eb5cecd010ff2bf653130401dbe7549c956bcc8d0ae69a747e25ca4456b61",
+          "bytes": 4777,
+          "sha256": "f8f629b49c7fe813a10bbd1397f88fa54d686590f959d4a47d5d48565eaa2e6d",
           "verification": "bytes-verified"
         }
       ],
@@ -3712,7 +3739,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "fce6e78b8de192bf782f06a2a01ac83a3c70977074b62c43d331bf78a0495865",
+    "materialSha256": "24ac7470b19174ad4b55365f27923f9bc1e2c77ed20ad9e759ca5aae1693b913",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

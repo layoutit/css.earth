@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4c362c28e3d3b5d13fabafe4f055c494ac59b34eaca62304453f3cd3af7b1ffd"
+    "sha256": "8c6da3106b5f286efedecb6b54059c92e075353b56fc4bd7d76aa2d382d1a3cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a0a8e2a7c4eca6f3039f53ea4df4a152400618e32e9345ffc2142c211901e9e1",
+      "sha256": "25e5c82f4ded01b27033bb077502719acb2a96a6a7b0974fef508bfde4c3ac81",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -216,6 +216,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.2
@@ -320,6 +321,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.95
@@ -383,7 +385,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "04f552c768ea6e3d25c31f0d39118df6af13afb840383fce5e13d8561a71ff7e",
+      "sha256": "7c1bab0ac0717d93a1d22f247db66234cd386070dc93f2ef6e40864a91398a2e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -391,6 +393,11 @@
         "displayName": "Telesto",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "12.35 km"
+            },
             {
               "id": "distance-from-sun",
               "label": "System solar semimajor axis",
@@ -407,41 +414,22 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "45.3 hours",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/1; P (days) × 24"
-              }
+              "value": "45.3 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 295,000 km",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/1; a (km)"
-              }
+              "value": "About 295,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Smith, Reitsema, Larson and Fountain · 1980",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/2; discoverer(s); year discovered"
-              }
+              "value": "Smith, Reitsema, Larson and Fountain · 1980"
             }
           ],
           "moreFacts": []
@@ -1533,8 +1521,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "04f552c768ea6e3d25c31f0d39118df6af13afb840383fce5e13d8561a71ff7e",
-      "bytes": 6163,
+      "sha256": "7c1bab0ac0717d93a1d22f247db66234cd386070dc93f2ef6e40864a91398a2e",
+      "bytes": 5300,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1717,8 +1705,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5807,
-          "sha256": "13763dccf1d9c8818a3505e9264976b78c5c811a70baed43af12f3b5ad3fb4d9",
+          "bytes": 5129,
+          "sha256": "06e7a33602e2b362d8511c1a0820d3ffd5bf1ba43bc7a518f7d50a48fe08159f",
           "verification": "bytes-verified"
         }
       ],
@@ -1806,7 +1794,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "7f50a66bc93e7d25abde869ff3609fe0ab3fa8ab40b1f425d66492f384dc776f",
+    "materialSha256": "b6812e84a936aaa5607f3ef2012a3eedb3ff176dccda043e7d7cced6eb65e87a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

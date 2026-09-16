@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c92ce69a59b37f9f4fc4c639ba5ef8c02afef1a18e4a314090f3c443889693c2"
+    "sha256": "cf9542cfc0ff7349c502e9cca553b7bbd34c7f97669006f79f923da4af0fd7af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f352586342aa02bed513d7fd79c79b3c0f8dffff6722c3b7d868c3acb2a4399c",
+      "sha256": "545fb5b9f584a9579651d62403982b2e40a51e189629ddfe3e5f4ac6e9541687",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,6 +77,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.7,
                   100
@@ -141,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
+      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -152,28 +153,32 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "18.1 km (released shape model)",
-              "source": {
-                "url": "https://doi.org/10.6084/m9.figshare.12779975.v1",
-                "label": "Published archive · DOI 10.6084/m9.figshare.12779975.v1",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
-                "locator": "/referenceRadiusKm"
-              }
+              "value": "18.1 km (released shape model)"
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "52.0 × 36.5 × 29.3 km"
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 38.2 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/0; P (days)"
-              }
+              "value": "About 38.2 days"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from system barycenter",
+              "value": "About 64,738 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 10.3 hours (not synchronous)"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Hubble Space Telescope · 2005"
             }
           ],
           "moreFacts": []
@@ -442,8 +447,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
-      "bytes": 3989,
+      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
+      "bytes": 3800,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -570,8 +575,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4748,
-          "sha256": "a40e0bfb29fe163acd20ed5eb8bd6d8bd6e2dcae0c5af09582735b3feb9bbca9",
+          "bytes": 4565,
+          "sha256": "3f67f8b63d846af98ef2d8370ed49301e598b13fd07c5187bfa5c257fe76043f",
           "verification": "bytes-verified"
         }
       ],
@@ -634,7 +639,7 @@
   },
   "lastPreparation": {
     "objectId": "hydra",
-    "materialSha256": "c020fa553ce5c62b07c3d18615061f7492e1859c37f1f9317db1008db844b24a",
+    "materialSha256": "2fe6f8dce0eac2fadb3d9a3b7bf72cff36998be2c1fdf6d43d5d1c924999bb01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

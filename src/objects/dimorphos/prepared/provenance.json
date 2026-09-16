@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1caaf6039143fd2a7a0b78af255fc4061f8615919be1fd3391c61a98247ad378"
+    "sha256": "000fd57b105fd456271a135c6e6fd732211a39429498fb3370bc48d5bb6f3620"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b88f535ac8dc77b83760b0b67518fb7bb2b8c74d33ed32526e2c9d394ddb37d0",
+      "sha256": "f8bd8c0fc8685a933ffd43229d7d1b552f41a6a950b8a03fb0157c308cc1c287",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -135,6 +135,7 @@
                 "maximumGain": 3
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   5.3,
                   99.9
@@ -334,7 +335,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "814f23ba7a9323d477a14fd1fd4396115e26272796a2ca0764232273a6bc3866",
+      "sha256": "7d5791a07dd2cd1209ddfbb23344118f3c58d2f36cd87270c05a8d6882b130ab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -358,7 +359,28 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Shape reference radius",
+              "value": "75 m"
+            },
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Didymos"
+            },
+            {
+              "id": "dimensions",
+              "label": "Encounter shape",
+              "value": "178 × 169 × 115 m"
+            },
+            {
+              "id": "impact",
+              "label": "DART impact",
+              "value": "26 September 2022"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -1131,8 +1153,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "814f23ba7a9323d477a14fd1fd4396115e26272796a2ca0764232273a6bc3866",
-      "bytes": 13192,
+      "sha256": "7d5791a07dd2cd1209ddfbb23344118f3c58d2f36cd87270c05a8d6882b130ab",
+      "bytes": 13629,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1538,8 +1560,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6482,
-          "sha256": "62b190a1b9d45b7aaee55b15deb4839313ef16dba5110ec13366ca3faf2e56be",
+          "bytes": 6738,
+          "sha256": "75d6eea2a9242e062e7c30baefb6cabe81091f4851c965d9862aaccff75a8571",
           "verification": "bytes-verified"
         }
       ],
@@ -1714,7 +1736,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "aed71ab06fe4f4682423a6c884d3cb3d505f308884f100d2510825b06d9cecdd",
+    "materialSha256": "1e4f3ba006047df0c3f4ce992190b6b8088107ff0def28f6b60ab675c3ddd81a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d938db3403f6260878c8512a6b13e3258ca3b3c98a4d45586a623b210f49cdc"
+    "sha256": "33f17f95964dcd2ee750f290e8e4f5fc0ff9a4e27f31c066b25cfd7991dbb8b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bbf99beb80912d15ad375b72b557acf24bcfba9129040433b9e6e5f4316c8c5f",
+      "sha256": "9a9bb61fdadf33af8d3819cce78750137f494f88c7f327865a39dcbee2f67817",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -193,6 +193,7 @@
               },
               "maximumCoordinateErrorMeters": 0.000001,
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0,
                   100
@@ -395,14 +396,25 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
+      "sha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-19p",
         "displayName": "Borrelly",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "length",
+              "label": "Nucleus length",
+              "value": "About 8 km"
+            },
+            {
+              "id": "encounter",
+              "label": "Spacecraft",
+              "value": "Deep Space 1 · 2001"
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -987,8 +999,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
-      "bytes": 7158,
+      "sha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
+      "bytes": 7383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1392,8 +1404,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4593,
-          "sha256": "5736a8203f6aaeac7ed8bc6cb717c5787c6f08440a2597a7b09e8954e0d84172",
+          "bytes": 4725,
+          "sha256": "7aa340fa94f656903b2ab02eb8b52569acce7f20a8cce66f99d74d4ca6132e8e",
           "verification": "bytes-verified"
         }
       ],
@@ -1446,7 +1458,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-19p",
-    "materialSha256": "f778ae022d1625f01046239747e06d73c0acb1f9fac46d5f03562184ff905275",
+    "materialSha256": "40c91f95ed4bae7473764c04e2c50505ec04cb1f8bb589f039f763ef11c161f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

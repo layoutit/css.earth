@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf121b4da5660514a4f2714fa3d6203055ccf3dca74012a462f137e4ed139ba8"
+    "sha256": "dd04534ee0a4e560b0cfdf63ea845d0adf250690cfc20891a12b429e24f8dfb3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1a68bae9b470d0139cbbe16f3ea8c8ce9c294d60e156bbe1e82a1b0b366e91b7",
+      "sha256": "8e3cf804d5b437f75073a97d9ee588e4027efe96579ec005c03423e725f06d08",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -128,6 +128,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.4,
                   98.8
@@ -196,7 +197,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cc227d474e17c8a04a5b20067bdff5b35f848bab78e573dd37816d18d3a40f9b",
+      "sha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -224,15 +225,7 @@
             {
               "id": "radius",
               "label": "Model volume-equivalent radius",
-              "value": "2.405 km",
-              "source": {
-                "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
-                "label": "Donaldjohanson · donaldjohanson research donaldjohanson 2026",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
-                "locator": "/diameterKm"
-              }
+              "value": "2.405 km"
             },
             {
               "id": "distance-from-sun",
@@ -263,28 +256,12 @@
             {
               "id": "rotation-period",
               "label": "Main lightcurve period",
-              "value": "252.6 ± 0.4 hours",
-              "source": {
-                "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
-                "label": "Donaldjohanson · donaldjohanson research donaldjohanson 2026",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
-                "locator": "/lightcurvePeriodsHours/0"
-              }
+              "value": "252.6 ± 0.4 hours"
             },
             {
               "id": "secondary-period",
               "label": "Second lightcurve period",
-              "value": "455.2 ± 0.9 hours",
-              "source": {
-                "url": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
-                "label": "Donaldjohanson · donaldjohanson research donaldjohanson 2026",
-                "checked": "2026-09-16",
-                "path": "source/reference/model-properties.json",
-                "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
-                "locator": "/lightcurvePeriodsHours/1"
-              }
+              "value": "455.2 ± 0.9 hours"
             }
           ],
           "moreFacts": []
@@ -617,8 +594,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cc227d474e17c8a04a5b20067bdff5b35f848bab78e573dd37816d18d3a40f9b",
-      "bytes": 16595,
+      "sha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
+      "bytes": 15214,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -891,8 +868,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12269,
-          "sha256": "72bc7aea21212c7ac430f0ca81bb59f964bf6c4aa5f26e895f2634452583bf13",
+          "bytes": 11161,
+          "sha256": "dad4fa03d285d3cb6d5d9970265638c280ed7576a2e4b9764d3f0b18f61860b4",
           "verification": "bytes-verified"
         }
       ],
@@ -1016,7 +993,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "291c16f31ec3f237e3dbe73725d0b528a48f9f5a9f46ddc25993a51004ff6180",
+    "materialSha256": "221b81c345641f0cd445e85375702614a966aad6c11f88eda7ea730176d868fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cde6ad046637672d843466a1c7bdd6f34d733b7813c3397c058ac78d32bc2b38"
+    "sha256": "61233617846e2baf1559723ea10c854dab48233b63339235304318887b4d020d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "946ad3fd14e8966760d8be129150775304983f5ab60b94ca37e04490af1877eb",
+      "sha256": "c02d7b6395a6207cfd5b71026778ed89f3f4fe08c9ad316e11807b49b4ed9a05",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -179,6 +179,7 @@
                 "maximumGain": 1.5
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0.9,
                   98.8
@@ -243,7 +244,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a8586cf3a42b0499fde71d9264705fb48d57be34d55da6c69997407583d51ccd",
+      "sha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -269,17 +270,19 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "165 m"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "1.323 AU"
+            },
+            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.52 years",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=25143",
-                "label": "JPL Small-Body Database",
-                "checked": "2026-09-16",
-                "path": "source/reference/sbdb.json",
-                "catalogueId": "jpl-small-body-database",
-                "locator": "orbit.elements.per (d) / 365.25"
-              }
+              "value": "1.52 years"
             },
             {
               "id": "rotation-period",
@@ -1610,8 +1613,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a8586cf3a42b0499fde71d9264705fb48d57be34d55da6c69997407583d51ccd",
-      "bytes": 9062,
+      "sha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
+      "bytes": 8933,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1863,8 +1866,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6027,
-          "sha256": "d853fda2162ed524fd7aa1ef15097f677d461a3a5fb64e52689369159cfaa070",
+          "bytes": 5901,
+          "sha256": "628f49d825dfb0dc5d35efb52794dd883ea1eeda905f38ffb72a6e8a4b98735a",
           "verification": "bytes-verified"
         }
       ],
@@ -1963,7 +1966,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "475510a00ccb042f6a4c69c01790ab2e22066d0f5e465c00bf46c0a0d8bcffed",
+    "materialSha256": "a798212e45ad538b339ae092d569e768ec1e05eb9fd51d738874f72d3e43d2e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

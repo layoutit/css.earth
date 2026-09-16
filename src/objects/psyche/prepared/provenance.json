@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4c45c3dade688930ff1a9012893bc49826a7032931c3ff6c2106d9e91a33f792"
+    "sha256": "85e5b29144c364e3568594be73ee146dae469b6b0ec44842380480045ac18f8a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "924f6b18dc369c6ad90e4a1f6906fba139a2ff272663daee8ea72fabd526c87b",
+      "sha256": "37146cc2667cb783f89e9b480c52a9565c70e4127b00b2df933b8dcc56962df3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -388,6 +388,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1,
                   99.5
@@ -476,7 +477,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d38faa30c97eb715bc282459863d9e74ae13c0c27a13677e59d0bb13a900fdb5",
+      "sha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -502,6 +503,11 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "111.5 km"
+            },
+            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.926 AU (mean)",
@@ -526,6 +532,11 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "4.195948 hours"
             }
           ],
           "moreFacts": []
@@ -1594,8 +1605,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d38faa30c97eb715bc282459863d9e74ae13c0c27a13677e59d0bb13a900fdb5",
-      "bytes": 9210,
+      "sha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
+      "bytes": 9444,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1776,8 +1787,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5907,
-          "sha256": "42fba914c2451f8b7a51bdae00042cc4da89f867dd3c72de149a3bdce888db00",
+          "bytes": 6053,
+          "sha256": "c9b1c791ff2d05a93d54b530ba4529a723a67c56e8951098967a2e462ffb20e3",
           "verification": "bytes-verified"
         }
       ],
@@ -1865,7 +1876,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "74af738cc698530486009e2095faa6e9534fb55f44d9abf2113cb159b5b2677e",
+    "materialSha256": "81f1738ac270e1067cec0eb79c92acb610ce7955de77a9dcdefdced2265c55ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

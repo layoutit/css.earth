@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3435db0b433a3799c8fb0419ed3bf014a52245004e8d88cf21e4da19f976e471"
+    "sha256": "c8eaa2775c93f252721ba189f29fe9a41ae54804ad5387cf907cdcef4c910724"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "61f51bd0794b499f179c614371a5fd7c9ab8ab0b79a0bcbb3416d2ad56b082fa",
+      "sha256": "c38dddf26b7f4483757c6d9b8f3fb1027f688a405727f8859c13c893a5cccba2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,6 +82,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.505
@@ -142,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "eb20b44c4d608546cb7d932171c245ca6ad46f91fc3e5b88599cb0c432ffc33d",
+      "sha256": "71acbe8a29a37a79f2b33aa781c5fe576d8ee1aba1ae21a9864c33a77da5d21c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,54 +154,27 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "About 1.45 km",
-              "source": {
-                "url": "https://doi.org/10.1016/j.icarus.2013.07.022",
-                "label": "Research publication · DOI 10.1016/j.icarus.2013.07.022",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "doi-10-1016-j-icarus-2013-07-022",
-                "locator": "/referenceRadiusKm"
-              }
+              "value": "About 1.45 km"
             },
             {
               "id": "dimensions",
               "label": "Dimensions",
-              "value": "3.88 × 2.58 × 2.42 km",
-              "source": {
-                "url": "https://doi.org/10.1016/j.icarus.2013.07.022",
-                "label": "Research publication · DOI 10.1016/j.icarus.2013.07.022",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "doi-10-1016-j-icarus-2013-07-022",
-                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
-              }
+              "value": "3.88 × 2.58 × 2.42 km"
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 1.01 days",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/0; P (days)"
-              }
+              "value": "About 1.01 days"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Saturn",
+              "value": "About 194,000 km"
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Cassini imaging team · 2004",
-              "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-                "label": "JPL Planetary Satellite Discovery Circumstances",
-                "checked": "2026-09-16",
-                "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-discovery",
-                "locator": "/references/1; discoverer(s); year discovered"
-              }
+              "value": "Cassini imaging team · 2004"
             }
           ],
           "moreFacts": []
@@ -426,8 +400,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "eb20b44c4d608546cb7d932171c245ca6ad46f91fc3e5b88599cb0c432ffc33d",
-      "bytes": 4183,
+      "sha256": "71acbe8a29a37a79f2b33aa781c5fe576d8ee1aba1ae21a9864c33a77da5d21c",
+      "bytes": 2835,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -500,8 +474,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6473,
-          "sha256": "f8d55b33178b1d8a1fef6d161bffefa900f572a5136b6b613b8998cd04fa1f53",
+          "bytes": 5445,
+          "sha256": "114b05b4824f696ac88fe31946ec436564fd3c0a414635b161209f22eb9ae976",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +513,7 @@
   },
   "lastPreparation": {
     "objectId": "methone",
-    "materialSha256": "b3a912250b142f87e558557c04f30f790fa8eb6ca0b37ee960cbaf9c990b6d40",
+    "materialSha256": "d20b17775938ad5eac30d8311a8eaa9e632aca87e0fface78d36447795007074",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
