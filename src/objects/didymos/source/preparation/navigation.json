@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
-    "credit": "NASA/JHUAPL/DART; ASI/LICIACube; Daly, Barnouin, Ernst, Nair, Espiritu and Waller",
-    "license": "Public mission scientific data; retain the dataset citation and source notices.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 34962,
-    "expectedSha256": "c0cc7979b8ac1929d5d9d3980f52bdc18205702086f380569579c3036381bc1a",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "didymos-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

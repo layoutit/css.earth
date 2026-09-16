@@ -6,36 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 69474,
-    "expectedSha256": "137994fd40cdebb5510f2b21d1d084d6c36b836891edd982705493694cce869e",
-    "origin": "https://arxiv.org/abs/1911.04897",
-    "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
-    "license": "Published scientific parameters; cssEarth implementation MIT",
-    "licenseEvidence": [
-      "https://arxiv.org/abs/1911.04897",
-      "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
-    ],
-    "acquisition": "Reproduced by shared model preparation from the pinned parameters and neutral material.",
-    "redistribution": "Preserve attribution and inferred-model qualification.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "contact-model",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 90,
-      "latitudeDegrees": 15,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

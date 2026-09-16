@@ -1,0 +1,107 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ixion",
+  "entries": [
+    {
+      "id": "kilic-2026-global-limb-fit",
+      "subject": "Kilic et al. (2026) multi-chord occultation global limb fit",
+      "status": "included",
+      "finding": "The selected outline is the 2020-2023 global projected ellipse with semiaxes 363.42 (+3.53/-3.85) and 333.98 (+7.07/-4.96) km; the edge-on illustration assumes an equatorial depth equal to the long projected diameter, so the 726.84 x 726.84 x 667.96 km full axes are not a measured three-dimensional shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L33",
+        "https://arxiv.org/abs/2601.09639"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "thermal-size-illustrations",
+      "subject": "Older thermal-size-only size illustrations",
+      "status": "excluded",
+      "finding": "The README records that the 2026 combined multi-chord fit supersedes the older thermal-size-only illustrations, so they are not used for the displayed model.",
+      "revisitWhen": "A new thermal or radiometric analysis supersedes the 2026 combined occultation fit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L33"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "rotation-and-pole",
+      "subject": "Rotation period and inertial pole",
+      "status": "unresolved",
+      "finding": "The README records that the 12.4-hour period estimate is not secure in the 2026 analysis and that no measured pole or current rotational phase is installed; the display uses an illustrative ICRF pole with an arbitrary prime meridian.",
+      "revisitWhen": "A secure rotation period or a measured inertial pole for Ixion is published.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L34"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "true-flattening",
+      "subject": "True flattening and polar depth",
+      "status": "unresolved",
+      "finding": "The selected ellipse constrains only the projected limb, so the README states that true flattening and depth remain unresolved.",
+      "revisitWhen": "An occultation campaign or resolved imaging constrains the third axis.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L35"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "horizons-position",
+      "subject": "JPL Horizons elements and independent vectors",
+      "status": "included",
+      "finding": "Retained Horizons elements, cross-checked against independent vectors, give the heliocentric geometric position at the fixed 2026-09-03 epoch; the fixed-epoch two-body orbit does not simulate long-term perturbations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L28"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "unmapped-surface-grid",
+      "subject": "cssEarth missing-coverage grid as the surface",
+      "status": "included",
+      "finding": "No resolved global imagery or topographic mesh was supplied by the selected occultation study, so the manifest supplies the project-authored missing-coverage grid and the normal grid marks unmapped terrain with Shadows off by default.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L16",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/README.md#L35",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ixion/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

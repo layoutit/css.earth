@@ -442,8 +442,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11627,
-      "expectedSha256": "c69c3b149ca57fb05e0289ce76a4dc91d566d4ad1c8d769d0cc834d62bd8e9c1",
+      "expectedBytes": 11987,
+      "expectedSha256": "cbec3e54a529cd8eda7d6aa3448fdc6b094c05b334b0cfee242b2de3e086cdfc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -456,8 +456,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1349,
-      "expectedSha256": "e23619793ecaf2a309825a3e3ab086844806d4d9176a508b51f923438d744ee1"
+      "expectedBytes": 442,
+      "expectedSha256": "380067b57307611ef8b42a49b8c7c61a6f26364d194f80a31a738e7e886f5817"
     },
     {
       "path": "preparation/rotation.json",
@@ -630,7 +630,15 @@
             "evidence": "Native PDS label for hyb2_onc_20181003_MSC_l3dm_v06: planetocentric east-longitude I/F map."
           }
         ]
-      }
+      },
+      "purpose": "Native PDS4 label of the pinned ONC I/F mosaic: map projection, longitude convention and pixel layout.",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/03_HighResolution/hyb2_onc_20181003_MSC_l3dm_v06.lblx",
+      "credit": "ISAS/JAXA; Hayabusa2 ONC team",
+      "license": "ISAS Open Data Policy (compatible with CC BY 4.0)",
+      "acquisition": "Downloaded from the DARTS Hayabusa2 product archive beside the pinned mosaic; retained unmodified.",
+      "licenseEvidence": [
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+      ]
     }
   ]
 }

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/pdf/1706.06837",
-    "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "lightcurve-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 84021,
-    "expectedSha256": "4e63d4e7d0e4a0bd9fb8fe8225ef862f378d2934f2f6ea5e9e0612275f77be28"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

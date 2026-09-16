@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://observations.lam.fr/astero/3Dshape/324_Bamberga_mpcd.obj",
-    "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
-    "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 39839,
-    "expectedSha256": "f7fd858e1093a33185699eebcc6c23338660b267658a199a8485e33a0f3a2539",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "bamberga-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gkunhomdima",
+  "entries": [
+    {
+      "id": "proudfoot-2026-maclaurin-model",
+      "subject": "Proudfoot et al. (2026) occultation and satellite-orbit Maclaurin model",
+      "status": "included",
+      "finding": "The selected shape is the published smooth Maclaurin model with semiaxes 329, 329 and 294 km, combining an occultation silhouette with the satellite orbit; the source survey was checked on 2026-09-09.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L5",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L39",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/source/manifest.json",
+        "https://arxiv.org/abs/2605.28636"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "satellite-orbit-pole",
+      "subject": "J2000 pole prior from satellite-orbit alignment",
+      "status": "included",
+      "finding": "The display uses the published J2000 pole prior at right ascension 20.6 +/-1.5 degrees and declination 46.25 +/-0.32 degrees, taken from satellite-orbit alignment, with an arbitrary reference meridian.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L43",
+        "https://arxiv.org/abs/2605.28636"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "triaxial-alternative",
+      "subject": "Slightly triaxial fit permitted by the same observations",
+      "status": "unresolved",
+      "finding": "The README records that the adopted model assumes an equatorial satellite orbit and that the source also permits a slightly triaxial fit, so the satellite-orbit alignment and the competing triaxial interpretation remain unresolved.",
+      "revisitWhen": "An independent pole determination or a new occultation campaign decides between the Maclaurin and triaxial fits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L26",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L40",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L55"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "rotation-period-aliases",
+      "subject": "11.05-hour photometric period",
+      "status": "unresolved",
+      "finding": "The photometric period has aliases, so it is not installed as a qualified sidereal spin and no absolute surface attitude is claimed.",
+      "revisitWhen": "An alias-free rotation period or an absolute surface-attitude determination is published.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L28",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L44"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "unmapped-surface-grid",
+      "subject": "cssEarth missing-coverage grid as the surface",
+      "status": "included",
+      "finding": "No reconstructed surface texture is supplied and the smooth model resolves no terrain, so the manifest supplies the project-authored missing-coverage grid with Shadows off by default.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L8",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L30",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "surface-spectra-as-texture",
+      "subject": "Surface spectra and unresolved observations as surface textures",
+      "status": "excluded",
+      "finding": "The source survey records that surface spectra and unresolved observations are not reconstructed surface textures, so none is used for the displayed surface.",
+      "revisitWhen": "A resolved surface map or reconstructed texture for this body is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/gkunhomdima/README.md#L57"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

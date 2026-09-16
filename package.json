@@ -22,6 +22,7 @@
     "preview": "node tools/preview.mts",
     "prepare:planet-info": "node tools/prepare-planet-information.mts",
     "prepare:factsheets": "node tools/prepare-factsheets.mts",
+    "cite:facts": "node tools/cite-pinned-facts.mts",
     "prepare:text": "node tools/prepare-text.mts",
     "prepare:navigation": "node tools/prepare-navigation.mts",
     "prepare:sidebar-thumbnails": "node tools/prepare-sidebar-thumbnails.mts",

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-    "credit": "Karkoschka (2003) dimensions; cssEarth shape visualization",
-    "license": "Public PDS scientific data; retain mission and model attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "measured-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 40,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 56797,
-    "expectedSha256": "f612c59b04891514790af7d35ae79b3a48211adc17f78bded12907745ea43290"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -1,0 +1,398 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "saturn",
+  "entries": [
+    {
+      "id": "opal-cycle32-visible-map",
+      "subject": "Hubble OPAL Cycle 32 rotation-A global map of 2025-08-29",
+      "status": "included",
+      "finding": "The body map is the archive's 1,800 by 900 F395N/F502N/F631N composite, resampled with a Lanczos-3 kernel to the 2,880 by 1,440 grid and retained byte-identical under the package's observations directory, with the declared solar colour applied in linear light.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L92",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L293",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/source/manifest.json",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "opal-unobserved-rows",
+      "subject": "Unobserved rows in the OPAL visible map",
+      "status": "unresolved",
+      "finding": "The map never observed rows 0-35 north of 82.8 degrees, rows 431-444 behind the rings and rows 887-899 south of 87.4 degrees; the geometry recipe names those rows and preparation fills them by linear interpolation in latitude between the nearest observed rows, detecting nothing from pixel values, and the rotation-B map of the same year has the same gaps so it cannot fill them.",
+      "revisitWhen": "An OPAL or other global release observes those latitude rows.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L96",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L102"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "cassini-pia21611-north-pole",
+      "subject": "NASA Cassini PIA21611 north-polar projection",
+      "status": "included",
+      "finding": "The north cap replaces the unobserved OPAL pole with the 2017 natural-colour map selected from the pinned 2,048 by 1,024 JPEG, documented as a north-polar stereographic projection at about 25 km per pixel from ISS wide-angle red, green and blue observations; the north disc inversely maps each prepared sample into that declared projection and its outer six percent transitions smoothly to the OPAL map after matching three mean boundary channels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L101",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L131",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L307",
+        "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "uvis-alpha-virginis-occultation",
+      "subject": "Cassini UVIS HSP alpha Virginis occultation, 2006 day 285",
+      "status": "included",
+      "finding": "Ring opacity is the 1 km-bin normal optical depth profile: of 73,713 bins between 66,900 and 140,612 km, 60,886 carry a measured depth, 4,518 are clean bins below the detection floor and count as empty and 8,309 are flagged corrupted and interpolated from neighbours, each becoming a transmission byte of 255 times exp of minus the optical depth; the Encke and Keeler gaps, the Cassini division and the F ring now come from this occultation rather than the retired hand-authored clearings.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L105",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L115",
+        "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "radial-ring-colour",
+      "subject": "Radius-indexed ring colour dataset",
+      "status": "unresolved",
+      "finding": "No qualified radial colour dataset exists: the Cassini ISS natural-colour ring mosaics in the Photojournal are perspective views rather than radius-indexed strips, so the ring colour is uniform white under the declared solar tint.",
+      "revisitWhen": "A radius-indexed ring colour or reflectance profile is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L112"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "opal-uv-and-methane-lenses",
+      "subject": "Hubble OPAL F225W and FQ889N single-band maps",
+      "status": "included",
+      "finding": "The ultraviolet and methane lenses use the pinned 1,800 by 900 single-band maps, keeping rotation A intact rather than averaging temporally separated cloud detail with rotation B, filling only unmeasured polar and ring-occluded rows in the same longitude, applying a declared false-colour palette and a pansharpening pass clamped to 0.88-1.12 so the Hubble maps keep authority over broad spectral luminance; they are source-backed spectral interpretations, not pure single-band products or natural colour.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L25",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L152",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L171",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "hubble-ring-frames",
+      "subject": "Hubble WFC3 programme 17843 ring frames of 2025-08-29",
+      "status": "included",
+      "finding": "The broad ring response is cross-checked against ifcu37ccq in F225W, ifcu37cdq in F631N and ifcu37ceq in FQ889N, and the prepared lens textures modify broad ring-band colour and luminance while retaining the UVIS alpha profile, narrow gaps, ringlets and readability floors.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L187",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L195"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "d-g-e-ring-profiles",
+      "subject": "Replacement profiles for the D, G and E rings",
+      "status": "unresolved",
+      "finding": "Hubble does not resolve a complete replacement profile for the D, G and E rings in these frames, so those details remain qualified visible-light morphology.",
+      "revisitWhen": "A dataset resolves complete D, G and E ring profiles.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L192"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "thermal-illustration",
+      "subject": "Thermal view as an explicit illustration",
+      "status": "included",
+      "finding": "The thermal view is schematic, prepared from visible luminance, cloud-window contrast and authored latitude and longitude patterns; no Cassini detector samples or measured global thermal raster enter it, its colour is illustrative intensity rather than infrared brightness or temperature, and the visible label and legend state that distinction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L26",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L173"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "vims-pia17468",
+      "subject": "Cassini VIMS high-contrast infrared scan PIA17468",
+      "status": "excluded",
+      "finding": "The scan was considered as a physical reference but is a narrow observed swath in a particular viewing geometry, not a registered global thermal map suitable for this globe, so it remains a reference rather than a texture input.",
+      "revisitWhen": "A registered global infrared map suitable for this globe is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L180",
+        "https://science.nasa.gov/resource/high-contrast-infrared-scan-of-saturn-and-its-rings/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "global-cirs-temperature-map",
+      "subject": "Global CIRS temperature map",
+      "status": "unresolved",
+      "finding": "The existing sources do not qualify a global CIRS temperature map; the README records it as unresolved rather than claiming such a dataset does not exist.",
+      "revisitWhen": "A qualified global CIRS temperature map is located or released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L184"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mankovich-fuller-interior",
+      "subject": "Mankovich and Fuller (2021) diffuse-core result and Movshovitz density profiles",
+      "status": "included",
+      "finding": "The interior radial presentation follows the 2021 ring-seismology diffuse-core interpretation, which places the stable core-envelope transition out to about 60 percent of Saturn's radius, cross-checked against the CC0 Movshovitz density profiles, with composition and terminology checked against the NASA/JPL-Caltech interior cutaway illustration and no pixels from it redistributed; the visible radii and colours are declared presentation choices, not hard boundaries or measured colours.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L209",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L222",
+        "https://doi.org/10.1038/s41550-021-01448-3",
+        "https://doi.org/10.7291/D1P07G"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "interior-shared-schematic-bank",
+      "subject": "One schematic bank for the interior layers",
+      "status": "included",
+      "finding": "The structural section, metallic-hydrogen and diffuse-core textures share one schematic bank because none of the observation lenses measures below Saturn's atmosphere, and the declared false-colour responses of the other lenses do not recolour the unobserved deep layers.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L232"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "pds-ring-boundaries",
+      "subject": "NASA PDS Ring-Moon Systems Saturn ring statistics",
+      "status": "included",
+      "finding": "The published PDS boundaries constrain the Cassini and Roche divisions, the Encke and Keeler gaps and the F ring, whose 140,224 km core uses the PDS optical-depth range rather than a painted line; the prepared image extends through the F ring's 140,612 km outer boundary and keeps the documented D-ring ringlets at 67,580 and 71,710 km with their existing 105 km footprint.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L13",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L257",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L489",
+        "https://pds-rings.seti.org/saturn/saturn_rings_table.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "ring-readability-emphasis",
+      "subject": "Prepared opacity and extrema emphasis in the rings",
+      "status": "included",
+      "finding": "Across the C-ring interval from 74,500 to 91,975 km preparation remaps source alpha with 1-(1-alpha)^2.25 and a DPR-2 local-extrema pass gives salient one-pixel ringlets and gaps a two-CSS-pixel minimum footprint, applied to light and dark extrema alike; source radii, band widths, shadow sampling and ring-plane geometry are unchanged, and the README calls these prepared opacity emphases rather than physical optical-depth claims, with Keeler still source-limited.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L27",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L263",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L274"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "sat441-geometry-and-motion",
+      "subject": "IAU radii, SAT441 kernel and the prepared time scale",
+      "status": "included",
+      "finding": "The recipe states radii of 60,268, 60,268 and 54,364 km from NAIF pck00011.tpc with the ring plane bound to sat441.bsp, and motion uses NASA's ring-seismology interior rotation of 10 h 33 min 38 s mapped to 72 visual seconds for a 528.027778 acceleration shared by body and rings, with each ring group's circular period from SAT441's GM; the cloud-top period spread across latitude bands is an explicit presentation model, not a claim that NASA specifies a continuous wind law.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L41",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L49",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L58",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L65"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "solar-colour-multiplier",
+      "subject": "Prepared 5,772 K solar colour multiplier",
+      "status": "included",
+      "finding": "The #fff1ea multiplier is derived from a 5,772 K Planck distribution, taken from NASA's Sun fact sheet, through the CIE 1931 observer and linear sRGB/D65 normalized by its maximum channel and multiplied into the surface texels once during preparation; the README calls it a declared colorimetric display approximation, not flat white light or a full spectral renderer.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L331",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L336",
+        "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "openspace-lambert-material",
+      "subject": "Lambert illumination parameters adapted from the OpenSpace globe shader",
+      "status": "included",
+      "finding": "The separate material overlays use a Lambert model with 0.05 ambient intensity, Oren-Nayar roughness 0 and a smoothstep terminator, adapted from the MIT OpenSpace globe shader and stated in the geometry recipe, with the neutral albedo multiplier replaced by the prepared warm solar presentation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L326"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mutual-shadows",
+      "subject": "Prepared reciprocal ring and body shadows",
+      "status": "included",
+      "finding": "One prepared world-light vector drives both shadows: Saturn's shadow on the rings is cast with four subpixel rays per ring texel against the oblate ellipsoid and emitted as a separate alpha overlay with a 0.16 transmission floor, and the rings' shadow on Saturn samples the actual prepared radial ring alpha so source gaps and density bands survive; both are cross-checked against NASA photojournal references and form one prepared presentation state, not a date-specific simulation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L378",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L391",
+        "https://science.nasa.gov/photojournal/saturns-shadow-upon-the-rings/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "storm-snapshot",
+      "subject": "Retained three-storm weather snapshot",
+      "status": "included",
+      "finding": "The nine storm targets sample one checked 290 by 34 static snapshot prepared earlier from OpenSpace surface texels and three storm kernels, retained byte-identical with its hash and dimensions validated; it is explicitly an adapter-owned artistic presentation rather than scientific storm data and is absent from the observation lenses.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L353",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L363"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "psg-charts",
+      "subject": "NASA GSFC Planetary Spectrum Generator model of 2026-08-29",
+      "status": "included",
+      "finding": "The sidebar spectrum is a prepared 253-sample disk-reflectance model covering 0.35 to 1.0 micrometres at R=240 reporting I/F apparent albedo, and the temperature-pressure chart reads the checked 60-layer profile from the same expanded configuration over its full 10 bar to 2 nanobar range; both requests are recorded in the shared acquisition plan.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L15",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L420",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L434",
+        "https://psg.gsfc.nasa.gov/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "moon-catalogue",
+      "subject": "JPL satellite catalogue of 293 Saturn moons",
+      "status": "excluded",
+      "finding": "The retained catalogue records the moons listed by JPL on 2026-08-29 with mean elements for 291 records, S/2009 S1's published approximate ring-moonlet orbit and S/2009 S2's orbital radius extracted from MPEC 2026-M19 without committing the circular text; the moons have their own object packages and are not rendered as embedded bodies or a dot field in Saturn's recipe.",
+      "revisitWhen": "The shared runtime gains a contract for rendering a moon system inside a planet scene.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L448",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L460",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L479",
+        "https://ssd.jpl.nasa.gov/sats/elem/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "dated-test-run",
+      "subject": "Dated test or browser run for this record",
+      "status": "unresolved",
+      "finding": "The evidence section states that the record describes source cross-checks and retains a fixed-material comparison image but cites no dated test or browser run, and that the comparison image is not an input to the runtime view.",
+      "revisitWhen": "A dated test or browser run for this Saturn version is recorded in the package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/saturn/README.md#L19"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}
