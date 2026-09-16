@@ -30,7 +30,7 @@ const universeEntries = [
 async function discover(directory: string, suffix: string): Promise<string[]> {
   const files: string[] = [];
   for (const entry of await readdir(resolve(root, directory), { withFileTypes: true })) {
-    if (['.local', 'dist', 'node_modules', 'unit', 'browser', 'oracle'].includes(entry.name)) continue;
+    if (['.local', 'dist', 'node_modules', 'unit', 'oracle'].includes(entry.name)) continue;
     const path = `${directory}/${entry.name}`;
     if (entry.isDirectory()) files.push(...await discover(path, suffix));
     else if (entry.name.endsWith(suffix)) files.push(path);

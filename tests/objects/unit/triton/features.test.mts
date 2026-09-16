@@ -18,8 +18,8 @@ test("the prepared Triton nomenclature catalogue is pinned by the runtime plan a
   assert.equal(catalog.features.length, plan.catalog.count);
   assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
   assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
-  assert.equal(plan.catalog.count, 4, "the unchanged features recipe keeps the terrestrial-lane count");
-  assert.deepEqual(descriptor.skipped, {"diameter:AA":{"count":8,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:CB":{"count":10,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:MA":{"count":7,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:PM":{"count":3,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:DO":{"count":1,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:RE":{"count":3,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:SU":{"count":11,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:PU":{"count":2,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:PE":{"count":5,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:FO":{"count":3,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:PL":{"count":4,"reason":"Features without a published diameter cannot be ranked or outlined."},"diameter:CA":{"count":2,"reason":"Features without a published diameter cannot be ranked or outlined."}}, "the same Gazetteer rows are skipped (unchanged recipe)");
+  assert.equal(plan.catalog.count, 63, "the default-label recipe labels every Gazetteer name the earlier lane skipped");
+  assert.deepEqual(descriptor.skipped, {}, "the default-label recipe skips no Gazetteer row; unsized names are searchOnly");
 });
 
 test("the plan anchors labels to the single body mesh for every surface lens", () => {
@@ -29,5 +29,5 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   assert.deepEqual(plan.lensIds, ["normal","enhanced"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0, "labels are not zoom-gated since the default label policy");
 });

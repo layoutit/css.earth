@@ -29,5 +29,5 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   assert.deepEqual(plan.lensIds, ["normal","enhanced","infrared"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0, "labels are not zoom-gated since the default label policy");
 });

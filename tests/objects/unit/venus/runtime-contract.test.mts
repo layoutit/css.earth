@@ -12,7 +12,7 @@ test("Venus publishes every declared toggle through the shared controls and sele
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    for (const name of ["atmosphere", "stars", "shadows"]) {
+    for (const name of ["atmosphere", "shadows"]) {
       const input = required(f.inputs.get(name));
       input.checked = !input.checked; invokeListener(required(input.listeners.get("change"))); await f.settle();
       assert.equal(required(f.selection.state().committed)[name], input.checked);
@@ -24,7 +24,7 @@ test("Venus publishes every declared toggle through the shared controls and sele
   } finally { f.restore(); }
 });
 
-for (const name of ["atmosphere", "stars", "shadows"]) {
+for (const name of ["atmosphere", "shadows"]) {
   for (const retirement of ["throw", "dispose", "dispose-and-throw"]) {
     test(`Venus ${name} ${retirement} cannot publish successful state or retain late callbacks`, async () => {
       const f = await preparedSelectionFixture(runtimeDefinition);

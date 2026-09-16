@@ -11,6 +11,7 @@ import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../site/objects.mts";
 import { parseNavigationDistance } from '../site/navigation-distance.mts';
 import { definePreparedFocus } from '../site/prepared-focus-object.mts';
+import { parseObjectDiscovery } from '../site/object-discovery.mts';
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
@@ -199,10 +200,12 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   }
   const hasId = (node: Node | null | undefined) => values(node).some(value => typeof value === "string" && ids.has(value));
   walkRuntimeAst(ast, node => { if (node.type === "ImportDeclaration" ||
-      node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration") {
+      node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration" ||
+      // A dynamic import with a literal specifier is followed like a static one; only a computed specifier hides its owner.
+      node.type === "ImportExpression" && node.source.type === "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) {
     if (isRecord(node) && (node.importKind === 'type' || node.exportKind === 'type')) return;
-    const imported = requireString(node.source?.value);
-    const onServer = astroRoot ? frontmatterImports.has(node) : serverOnly;
+    const imported = requireString(node.type === "ImportExpression" ? (node.source.type === "Literal" ? node.source.value : undefined) : node.source?.value);
+    const onServer = node.type !== "ImportExpression" && (astroRoot ? frontmatterImports.has(node) : serverOnly);
     (onServer ? serverImports : clientImports).add(imported);
     if (!registryDescriptors.has(imported) && !(onServer && isBuiltin(imported))) imports.push(imported);
     for (const specifier of node.type === "ImportDeclaration" ? node.specifiers : []) {
@@ -212,7 +215,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
     }
   } });
   walkRuntimeAst(ast, node => {
-    if (node.type === "ImportExpression" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) note(node, "Dynamic runtime imports hide ownership from the static closure");
+    if (node.type === "ImportExpression" && node.source.type !== "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) note(node, "Computed dynamic imports hide ownership from the static closure");
     if ((node.type === "CallExpression" || node.type === "NewExpression") &&
         ["eval", "Function"].includes(nameOf(node.callee) || propertyName(node.callee))) note(node, "Runtime code construction hides ownership");
     if (shared) {
@@ -404,7 +407,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   if (pattern.properties.length !== 3 || !['order', 'context'].every((name, index) => {
     const field = pattern.properties[index];
     return field.type === 'Property' && !field.computed && field.kind === 'init' && nameOf(field.key) === name && field.value.type === 'Identifier';
-  }) || binding.optional || nameOf(binding.callee) !== entryNames[0] || ![2, 3].includes(binding.arguments.length) || nameOf(binding.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
+  }) || binding.optional || nameOf(binding.callee) !== entryNames[0] || ![2, 3, 4].includes(binding.arguments.length) || nameOf(binding.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
   const rest = kind(pattern.properties[2], 'RestElement');
   if (nameOf(kind(statements[1], 'ReturnStatement').argument) !== kind(rest.argument, 'Identifier').name) fail('catalogue mapper must return the declared object');
   const loader = kind(binding.arguments[1], 'ArrowFunctionExpression');
@@ -423,7 +426,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   const entryAst = parseRuntimeSource(await readSource(resolve(root, 'site/object-catalog.mts')), 'site/object-catalog.mts');
   const entry = entryAst.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'catalogEntry' ? [node.declaration] : []);
   const definitions = namedImport(entryAst, './object-schema.mts', 'defineObject');
-  if (entry.length !== 1 || definitions.length !== 1 || ![2, 3].includes(entry[0].params.length)) fail('catalogue helper must bind its own actual JSON descriptor');
+  if (entry.length !== 1 || definitions.length !== 1 || ![2, 3, 4].includes(entry[0].params.length)) fail('catalogue helper must bind its own actual JSON descriptor');
   const input = kind(entry[0].params[0], 'Identifier').name, loadScene = kind(entry[0].params[1], 'Identifier').name;
   const objectCalls: CallExpression[] = [];
   walkRuntimeAst(entry[0], node => {
@@ -758,9 +761,10 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     sharedVisits.set(path, serverOnly);
     sharedClosure.add(path);
     const file = relative(root, path);
-    if (file === 'site/prepared-object-distances.json' || file === 'site/prepared-focus-objects.json') {
+    if (file === 'site/prepared-object-distances.json' || file === 'site/prepared-focus-objects.json' || file === 'site/prepared-object-discovery.json') {
       const value: unknown = JSON.parse(await source(path));
       if (file.endsWith('distances.json')) Object.values(requireRecord(value)).forEach(parseNavigationDistance);
+      else if (file.endsWith('discovery.json')) Object.values(requireRecord(value)).forEach(parseObjectDiscovery);
       else requireArray(value).forEach(definePreparedFocus);
       return;
     }
@@ -799,6 +803,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         await sharedVisit(importedPath);
         continue;
       }
+      // A Vite asset reference (?url, ?raw, ?inline) delivers bytes, not runtime source, so it closes nothing.
+      if (/\?(?:url|raw|inline)$/.test(imported)) continue;
       try {
         const target = await resolveRuntimeSource(imported, path, { root, source, objectIds: objectPackageIds });
         if (!target) throw new Error(`Unclosed shared runtime import ${imported}`);
