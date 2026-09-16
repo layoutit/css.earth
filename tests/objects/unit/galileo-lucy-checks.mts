@@ -32,14 +32,16 @@ export function checkGalileoLucy(id: string) {
       assert(Math.abs(model.volumeEquivalentRadiusKm - .369) < 1e-12);
       assert.match(model.meaning, /Authored reconstruction/);
     }
-    const content = await read('content/object.json');
-    assert(content.lenses.controls.every((control:{detail:string}) => control.detail.length <= 7));
+    // Reader copy lives in text.json beside the package, outside the pinned source tree.
+    const text = await read('../text.json');
+    assert(Object.values(text.datasets as Record<string, {detail:string}>).every(dataset => dataset.detail.length <= 7));
   });
   if (id !== 'dinkinesh') test(`${id}: approximate placement around its parent is complete`, async () => {
     const world = JSON.parse((await readFile('src/objects/sun/prepared/world-context.json')).toString('utf8'));
     const context = world.bodies.find((body: { id: string; }) => body.id === id);
     assert.equal(context.placement, 'approximate');
     assert.equal(context.orbit.centerBodyId, id === 'dactyl' ? 'ida' : 'dinkinesh');
-    assert.match((await read('content/object.json')).panel.introduction, /Approximate orbital placement/);
+    // The reader summary of the shape dataset carries the placement caveat since the text pipeline.
+    assert.match((await read('../text.json')).datasets.shape.summary, /position is approximate/);
   });
 }
