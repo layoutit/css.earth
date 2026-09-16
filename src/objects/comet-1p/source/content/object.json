@@ -4,7 +4,21 @@
   "id": "comet-1p",
   "displayName": "Halley",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "mission",
+        "label": "Shape from",
+        "value": "Giotto and Vega",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+          "label": "Comet 1P · stooke halley",
+          "checked": "2026-09-16",
+          "path": "source/shape/1682q1halley.xml",
+          "catalogueId": "source-comet-1p-stooke-halley",
+          "locator": "Investigation_Area names: Giotto Mission; Vega Mission - Vega 1; Vega Mission - Vega 2"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

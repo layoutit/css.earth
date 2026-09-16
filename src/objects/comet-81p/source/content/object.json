@@ -4,7 +4,47 @@
   "id": "comet-81p",
   "displayName": "Wild 2",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "scale",
+        "label": "Fitted ellipsoid",
+        "value": "5.2 × 4.0 × 2.7 km",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+          "label": "Comet 81P · pds shape",
+          "checked": "2026-09-16",
+          "path": "source/shape/wild2_cart_full.lbl",
+          "catalogueId": "source-comet-81p-pds-shape",
+          "locator": "best-fitting triaxial ellipsoid radii (1.350 x 2.002 x 2.607 km) × 2"
+        }
+      },
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "Stardust",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+          "label": "Comet 81P · pds shape",
+          "checked": "2026-09-16",
+          "path": "source/shape/wild2_cart_full.lbl",
+          "catalogueId": "source-comet-81p-pds-shape",
+          "locator": "\"derived from the Stardust NavCam data\""
+        }
+      },
+      {
+        "id": "flyby",
+        "label": "Flyby",
+        "value": "2 January 2004",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.lbl",
+          "label": "Comet 81P · n2073we02 rr labelPath",
+          "checked": "2026-09-16",
+          "path": "source/photography/navcam/n2073we02_rr.lbl",
+          "catalogueId": "source-comet-81p-n2073we02-rr-labelpath",
+          "locator": "START_TIME = 2004-01-02T19:21:28.437"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

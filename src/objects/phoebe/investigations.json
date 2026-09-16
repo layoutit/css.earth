@@ -106,6 +106,39 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "cassini-iss-photograph",
+      "subject": "Cassini ISS narrow-angle photograph N1465662798_2 through SPICE kernel cameras",
+      "status": "included",
+      "finding": "One CISSCAL-calibrated clear-filter frame from the June 2004 approach, 0.466 km per pixel from 77,935 km at 86 degrees phase, cast through a kernel camera refined to the lit limb by 0.0095 degrees. The relief sweep against the shape places it at -0.75 degrees with peak correlation 0.76 and is decisive; the registration verdict needs three decisive frames, so this single-frame lens has none. Coverage is 14.6 percent of the surface, the sunlit half of one side.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/93fb1335199d780d2659d7f808faece1c1521127/src/objects/phoebe/README.md",
+        "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        }
+      ]
+    },
+    {
+      "id": "cassini-iss-approach-mosaic",
+      "subject": "Eight Cassini ISS approach frames, one per 45 degrees of longitude, as one mosaic",
+      "status": "unresolved",
+      "finding": "All eight frames (0.47 to 1.53 km per pixel, 85 to 92 degrees phase) pass limb refinement with 24 controls against the 2.5 pixel holdout budget once three frames that failed it were replaced (N1465668427 runs off the detector, N1465641880 left 3.76 px RMS, N1465662846 matched 59.5 percent of holdout points). The mosaic fails level matching: after Lommel-Seeliger normalization, consecutive approach frames differ by log ratios of -0.31 and -0.36 in their overlaps, and the fitted gains span 0.51 to 1.32 against a 1.5 budget. A disk function that does not hold at about 90 degrees phase is the likely cause; not verified.",
+      "revisitWhen": "A published Phoebe photometric model valid near 90 degrees phase normalizes the overlaps within the level-matching budget.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/93fb1335199d780d2659d7f808faece1c1521127/src/objects/phoebe/README.md",
+        "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465668427"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        }
+      ]
     }
   ]
 }
