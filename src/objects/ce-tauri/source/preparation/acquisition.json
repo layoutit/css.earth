@@ -1,0 +1,194 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/nov_avg.fit",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_avg.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/nov_err.fit",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_err.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/dec_avg.fit",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/dec_err.fit",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_err.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-14T04:16:39.727_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-14T04:16:39.727_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-14T04:41:12.399_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-14T04:41:12.399_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-22T04:56:47.075_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T04:56:47.075_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-22T05:04:10.459_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T05:04:10.459_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-22T05:22:36.318_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T05:22:36.318_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-22T05:42:53.491_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T05:42:53.491_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-22T06:14:10.421_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T06:14:10.421_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-11-22T06:42:19.844_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T06:42:19.844_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-19T03:10:21.862_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-19T03:10:21.862_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-22T03:48:23.776_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-22T03:48:23.776_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-22T04:10:33.991_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-22T04:10:33.991_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-23T03:43:22.035_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T03:43:22.035_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-23T04:06:16.023_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T04:06:16.023_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-23T04:43:55.020_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T04:43:55.020_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2016-12-23T05:07:22.365_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T05:07:22.365_oidataCalibrated.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/oifits/PIONI.2017-02-25T01:04:36.863_oidataCalibrated.fits",
+      "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2017-02-25T01:04:36.863_oidataCalibrated.fits"
+    }
+  ]
+}

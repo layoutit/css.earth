@@ -1,0 +1,29 @@
+{
+  "id": "antares",
+  "classification": "star",
+  "order": 902,
+  "physical": {
+    "name": "Antares",
+    "horizonsCode": null,
+    "meanRadiusKm": 474700204,
+    "gravitationalParameterKm3PerS2": 1990686600629.0906,
+    "parent": null
+  },
+  "physicalNotes": "Radius: the 37.38 mas limb-darkened diameter of Ohnaka et al. (2013, A&A 555, A24) at the Hipparcos distance of 169.8 pc; 682 solar radii at 695700 km per solar radius. GM from the 15 +/- 5 solar masses of Ohnaka et al. (2013), times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the star has no measured axis, so the presentation frame puts the display axis (celestial north at the star) up.",
+  "star": {
+    "rightAscensionDegrees": 247.3519154198264,
+    "declinationDegrees": -26.432002611950832,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 169.77928692699492,
+    "properMotionRaMasPerYear": -12.11,
+    "properMotionDecMasPerYear": -23.3,
+    "radialVelocityKmPerS": -3.5,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "SIMBAD basic record for * alf Sco (HD 148478, HIP 80763), ICRS J2000 position from the Hipparcos re-reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16",
+      "distance": "Hipparcos parallax 5.89 +/- 1.00 mas (van Leeuwen 2007) via SIMBAD: 170 pc. The star is too bright for a Gaia parallax.",
+      "properMotion": "van Leeuwen (2007) via SIMBAD: -12.11, -23.30 mas/yr",
+      "radialVelocity": "Gontcharov (2006, AstL 32, 759; bibcode 2006AstL...32..759G) via SIMBAD: -3.5 +/- 0.8 km/s"
+    }
+  }
+}

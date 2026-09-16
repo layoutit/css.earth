@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa038c4a0750052395e0d5ac35aa761c55e0af2be8678c9f7aaded15aee88bea"
+    "sha256": "77f91e17c649d17555f0c6d03ee40b7c0974b58978a47bc9f23adbcf1d9cf8e8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
   },
   "recipes": [
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
+      "sha256": "72194f69ea656ba4e5385bd56856553136b8b5bdb0cd92c7828bff8098c3f758",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -302,7 +302,7 @@
             "path": "../presentation/title-mark.json"
           },
           "editorial": {
-            "url": "https://doi.org/10.1093/mnrasl/slad138",
+            "url": "https://doi.org/10.1038/nature25001",
             "credit": "C. Paladini, F. Baron, A. Jorissen et al.; ESO/VLTI/PIONIER; JMMC OiDB; reconstruction by this repository with SQUEEZE"
           },
           "physical": {
@@ -454,8 +454,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9138dd172c3bcaafe22e9a934d2361d47248ef22dc5243fd0c036822dab4562e",
-      "bytes": 4233,
+      "sha256": "72194f69ea656ba4e5385bd56856553136b8b5bdb0cd92c7828bff8098c3f758",
+      "bytes": 4230,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -617,8 +617,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4819,
-          "sha256": "5a84a8eaa365b30a3660542ee8bd0ad99df86c2231edfce47e375f0ceee63ba1",
+          "bytes": 4816,
+          "sha256": "92f266aa48c2826f0a8b97585724a9ef502eb0fced7ea64f5c3211335dad651e",
           "verification": "bytes-verified"
         }
       ],
@@ -656,10 +656,10 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "b6b8febf185d7235ba90004077a7b8cb53e2a835c849e211467b44a0f56c3f37",
+    "materialSha256": "85338da6f8c4bcbb754d667fd801dc48a38234329d18ab1a1b0e7c1d5a2922e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
     }
   }
