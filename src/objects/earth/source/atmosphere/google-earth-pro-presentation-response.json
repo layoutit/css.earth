@@ -46,7 +46,7 @@
     "googleShaderBytesRedistributed": false
   },
   "cleanRoomTransfer": {
-    "bodySunIntensitySource": "openspace-body-atmosphere-model",
+    "bodySunIntensitySource": "body-atmosphere-model",
     "twilightWidthSource": "body-atmosphere-height-over-radius",
     "limbConcentrationSource": "body-rayleigh-air-mass",
     "mieContribution": 0.08,

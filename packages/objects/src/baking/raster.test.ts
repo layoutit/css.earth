@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
-import { completeEnhancedCoverage, lightingFrame, packLatitudeRaster, applySurfaceExposure, parseAtmosphereSource } from './index.js';
+import { completeEnhancedCoverage, lightingFrame, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.js';
 import type { LambertRasterConfig } from './index.js';
 const lighting: LambertRasterConfig = { minimumLightViewZ: -1, maximumLightViewZ: 1, frameCount: 256, shadowlessFloodLimbFloor: 0.35, ambientIntensity: 0.05, radiusScale: 0.505, terminator: [0, 0.1], maximumAlpha: 0.95 };
 describe('prepared raster operators', () => {
@@ -35,5 +35,5 @@ describe('prepared raster operators', () => {
         expect(Array.from(pixels)).toEqual([171, 192, 156, 77]);
         expect(() => applySurfaceExposure(pixels, [0, 1, 1])).toThrow();
     });
-    it('rejects malformed source atmosphere records', () => { expect(() => parseAtmosphereSource('Rayleigh = {}')).toThrow(); });
+    it('rejects malformed source atmosphere records', () => { expect(() => readAtmosphereModel({ schema: 'cssearth-atmosphere-model@1', rayleigh: {} })).toThrow(); });
 });

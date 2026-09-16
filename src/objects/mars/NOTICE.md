@@ -2,10 +2,8 @@
 
 This package combines prepared material derived from the following sources:
 
-- OpenSpace scene configuration (globe, atmosphere and kernel assets), MIT
-  licensed by the OpenSpace Team. The pinned license text is included as
-  `LICENSE.OPENSPACE-MIT`. The atmosphere material is derived from the pinned
-  `RenderableAtmosphere` parameters.
+- Atmosphere parameter values in `source/atmosphere/model.json`, adapted from
+  the OpenSpace Team's RenderableAtmosphere tuning (MIT) and cited there.
 - USGS Astrogeology and NASA/PDS Mars surface, MOLA, and THEMIS products.
   These United States government data products are credited in `README.md`
   and `source/manifest.json`.

@@ -11,22 +11,6 @@
     },
     {
       "kind": "download",
-      "path": "openspace/globe.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "openspace/kernels.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/kernels.asset",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
       "path": "surface/hubble-jupiter-global-map-2019.png",
       "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
       "groups": [

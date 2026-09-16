@@ -77,12 +77,12 @@
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "3°"
+        "value": "3\u00b0"
       },
       {
         "id": "moon-count",
         "label": "Known moons",
-        "value": "115 · Sep 2026",
+        "value": "115 \u00b7 Sep 2026",
         "source": {
           "url": "https://science.nasa.gov/jupiter/jupiter-moons/",
           "label": "NASA/JPL reference",
@@ -120,7 +120,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "1.898 × 10²⁷ kg",
+        "value": "1.898 \u00d7 10\u00b2\u2077 kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -133,7 +133,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "1.326 g/cm³",
+        "value": "1.326 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -146,7 +146,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "24.79 m/s²",
+        "value": "24.79 m/s\u00b2",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -378,12 +378,6 @@
       "role": "spectra",
       "description": "Atmosphere & spectrum",
       "href": "https://psg.gsfc.nasa.gov/"
-    },
-    {
-      "label": "OpenSpace",
-      "role": "scene",
-      "description": "Globe & scene",
-      "href": "https://github.com/OpenSpace/OpenSpace"
     }
   ],
   "provenance": {
