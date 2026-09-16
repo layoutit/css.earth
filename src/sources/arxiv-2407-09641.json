@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2407-09641",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2407.09641"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ad5e7a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2407.09641",
+      "label": "arXiv"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ad5e7a",
+      "label": "ApJ 971, 190 (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/polaris/text.json",
+      "revision": "eb33e07608764a51545abd27093d2abe838171ff",
+      "sha256": "4049aefdb7212bbd7ec4ebd87cec65189ae112f81ddfa6ed0d96664ead19429d",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "N. R. Evans, G. H. Schaefer, A. Gallenne et al.",
+      "scope": "citation",
+      "evidence": "src/objects/polaris/text.json#/introduction/sources/0"
+    }
+  ]
+}
