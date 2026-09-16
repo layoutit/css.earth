@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-43",
+  "displayName": "WASP-43",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.665 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2406-10207",
+          "url": "https://arxiv.org/abs/2406.10207",
+          "label": "Challener et al. (2024), Table 1 (assumed stellar radius)",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "87 parsecs",
+        "source": {
+          "catalogueId": "simbad-wasp-43",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43",
+          "label": "SIMBAD: Gaia EDR3 parallax",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "wasp-43-lens-shape.webp",
+        "surface": "wasp-43-surface-shape.webp",
+        "poles": "wasp-43-poles-shape.webp",
+        "source": {
+          "id": "wasp-43-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2406.10207"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere exists: at 87 parsecs the star's disc spans 0.07 milliarcseconds (see investigations.json). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Challener et al. (2024), ApJL 969, L32",
+      "href": "https://arxiv.org/abs/2406.10207"
+    },
+    {
+      "label": "SIMBAD",
+      "role": "facts",
+      "description": "WASP-43 basic data",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2406.10207",
+      "credit": "Challener et al. (2024), ApJL 969, L32"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-43.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}
