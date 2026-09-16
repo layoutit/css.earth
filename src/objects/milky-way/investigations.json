@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "milky-way",
+  "entries": [
+    {
+      "id": "openspace-milky-way-volume",
+      "subject": "OpenSpace Milky Way volume",
+      "status": "included",
+      "finding": "The galaxy is the lossless 1024 x 1024 x 128 RGBA density grid adapted by OpenSpace from a NAOJ simulation prepared by Jon Parker for AMNH's Dark Universe, declared MIT with the original notice preserved; the README states it is a scientific simulation adapted for visualization, not a measured map of our galaxy's exact shape, and the source already contains its bulge.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L45",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L55",
+        "https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "source-transfer-preserved",
+      "subject": "Channel transfer and optical coefficients from the source recipe",
+      "status": "included",
+      "finding": "RGB channels emit independently after squaring filtered UNORM values and alpha is dust decoded with exponent 1.4; the recipe preserves emission 250, absorption 200, extinction tint 0.3/0.54/0.85, cylindrical support and the source's channel transfer, converting the 8 kpc Galactic centre and authored Euler rotation into the shared Sun-centred ICRF frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L52",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L57"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "display-gain-calibration",
+      "subject": "CSS display gain after slab integration",
+      "status": "included",
+      "finding": "The display gain is calibrated to 16 after slab integration, three stops below the previous 128 baseline that was too bright with the OpenSpace emission model; these are renderer approximation choices kept separate from OpenSpace's authored emission and absorption coefficients.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L75",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L81"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "colour-grade-matrix",
+      "subject": "Offline display-RGB grading matrix toward the NASA palette",
+      "status": "included",
+      "finding": "A single offline matrix diag(1, 0.951277424, 0.709752511) grades every slab toward the original NASA interior palette from every viewing direction, following the exponential transfer and preserving emission and dust alpha; calibrated on paired patches within 15 degrees of the Galactic plane with held-out longitude blocks, it reduces held-out chromaticity error by 53.8 percent while retaining colour variation, and matches the palette rather than morphology or physical photometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L83",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L95"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "additive-hdr-raymarching",
+      "subject": "OpenSpace additive HDR raymarching and stochastic sampling",
+      "status": "excluded",
+      "finding": "Ordinary-alpha slices approximate RGB extinction and emitted energy, retain finite-slice and axis-handoff artefacts and do not reproduce OpenSpace's additive HDR raymarching, stochastic sampling or camera-dependent fade.",
+      "revisitWhen": "A prepared route reproduces additive HDR raymarching within the project's rendering rules.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L98"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "nasa-deep-star-maps-2020",
+      "subject": "NASA Deep Star Maps 2020 Milky Way-only celestial map",
+      "status": "included",
+      "finding": "The near-Solar-System sky uses the 8192 x 4096 linear RGB HALF source in ICRF/J2000, preserved bit for bit in two Zstd row chunks with its acquisition record, hashes and NASA/Gaia credits; the offline baker applies a fixed 4.5 exposure and the sRGB curve, matching NASA's preview mean RGB within 0.001 with RGB RMSE 0.01387 before a final 0.12 display gain, which the README calls a display fit rather than calibrated photometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L121",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L136",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L144",
+        "https://svs.gsfc.nasa.gov/4851/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "faint-grain-suppression",
+      "subject": "Smooth shadow factor over faint sky pixels",
+      "status": "included",
+      "finding": "A shared smooth shadow factor suppresses faint image grain, zero below transferred display luminance 0.04 and full above 0.12, intentionally removing faint background detail while retaining the separately baked catalogue stars; faint Gaia stars remain in the image, so it is not literally star-free.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L141",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L147"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "baked-neighbourhood-stars",
+      "subject": "Neighbourhood star field baked into the near cube faces",
+      "status": "included",
+      "finding": "The baker composites the sibling stellar-neighbourhood point field, pinned by descriptor digest at an authored 43.6 CSS pixels per degree, onto a copy of each face: about 17,500 sprites drawn with the same atlas tile, photometry table and source-over blend the browser uses, supersampled three times per axis; the NASA Milky Way-only image omits bright Hipparcos and Tycho stars, so the prepared bright stars are composited in.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L145",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L151",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L156"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "dom-star-parallax",
+      "subject": "Per-star DOM starfield and its parallax",
+      "status": "excluded",
+      "finding": "The runtime mounts only the baked faces: there is no 100 AU handoff to individual DOM stars, star-slot pool, catalogue-selection worker or per-star frame transport, so individual stellar parallax is no longer rendered and a star's disc is about three times softer than the browser's own sprite at device pixel ratio 2, which the README calls a deliberate visual difference.",
+      "revisitWhen": "The project decides that per-star parallax inside the neighbourhood is worth the runtime star transport again.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L158",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L172"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "shell-depth-approximation",
+      "subject": "Depth of the prepared sky shell",
+      "status": "unresolved",
+      "finding": "The 20 kpc half-extent shell depth is an authored visual approximation because NASA supplies angular radiance, not measured cloud depths; it aligns neither source's dust structure nor reproduces physical disocclusion, and it avoids copying cloud features across independent depth layers.",
+      "revisitWhen": "A source supplies measured cloud depths that can replace the authored shell.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L174",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/milky-way/README.md#L186"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,8 @@
 `/sun/` — Maps spanning Carrington Rotation 2311, 12 May–9 June 2026.
 They combine observations across one rotation, not one simultaneous view.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | View | Source | What it means |

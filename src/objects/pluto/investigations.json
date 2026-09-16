@@ -1,0 +1,296 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pluto",
+  "entries": [
+    {
+      "id": "mvic-colour-mosaic",
+      "subject": "NASA/JHUAPL/SwRI New Horizons Ralph/MVIC global colour mosaic",
+      "status": "included",
+      "finding": "The Color lens uses the three-filter global mosaic published 20 January 2017, north up with Sputnik Planitia near the centre; it is the published colour product, not calibrated true-colour reflectance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L179",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/source/manifest.json",
+        "https://science.nasa.gov/resource/pluto-global-color-map/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "usgs-lorri-mvic-monochrome",
+      "subject": "USGS LORRI/MVIC global mosaic, July 2017",
+      "status": "included",
+      "finding": "Monochrome uses the 24,888 by 12,444 equirectangular mosaic with positive-east 0-360 degree longitude, which reserves zero for gaps.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L8",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L183",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L206",
+        "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_mosaic_300m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "usgs-stereo-dem",
+      "subject": "USGS New Horizons stereo DEM at 300 m",
+      "status": "included",
+      "finding": "Elevation uses signed 16-bit metres above a 1,188.3 km sphere with -32,768 as no data, read through a TIFF reader that checks signedness, compression, strip bounds and no-data metadata; the authored blue/tan/red palette is linear at -8/0/+8 km and clips outside, and shading comes from the same signed DEM with no vertical exaggeration and no invented slope where a neighbour is missing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L173",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L186",
+        "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-baseline-least-squares",
+      "subject": "Drozdov and Emelyanov (2026) LEISA four-material Hapke fit, baseline least-squares solution",
+      "status": "included",
+      "finding": "The three ice lenses use params_ls.fits and its matching error file from the CC BY 4.0 Zenodo release, modelled surface fractions from five calibrated New Horizons LEISA scans of 14 July 2015 on a common 0-100 percent scale; extensions 1-3 hold methane-rich, nitrogen-rich and water-ice area fractions and no Hapke inversion, sharpening, detail injection or smoothing runs here.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L94",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L105",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L109",
+        "https://zenodo.org/records/18825240",
+        "https://doi.org/10.1016/j.icarus.2026.117031"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-chi-squared-fit",
+      "subject": "Chi-squared alternative fit in the same release",
+      "status": "excluded",
+      "finding": "The authors prefer the least-squares solution over the chi-squared fit, which creates a strong polar discontinuity, and alternative fits are not extra dataset rows.",
+      "revisitWhen": "The authors publish a preferred alternative solution or a revised release.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L100"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-other-parameters",
+      "subject": "Temperature, grain sizes and the tholin proxy",
+      "status": "excluded",
+      "finding": "Temperature is excluded because the paper identifies unphysical upper-bound solutions, and grain sizes and the tholin proxy lie outside this three-ice view.",
+      "revisitWhen": "A release resolves the unphysical temperature solutions or the view is extended beyond three ices.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L102"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-registration",
+      "subject": "Coordinate registration of the LEISA maps",
+      "status": "unresolved",
+      "finding": "The FITS headers omit WCS, so the nearly 2:1 array is mapped over the full sphere from section 2.4's 7 km equirectangular description and Figure 6's east-increasing, north-up orientation; the Sputnik feature, blank footprint and northern averages agree in that orientation, but this is regional map registration and the release provides no subpixel coordinate metadata.",
+      "revisitWhen": "The release or a successor publishes coordinate metadata for the LEISA maps.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L111",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L116"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-uncomputed-cells",
+      "subject": "Uncomputed LEISA cells and the error cutoff",
+      "status": "included",
+      "finding": "Uncomputed cells are finite rather than NaN and carry a complete initialization tuple, including an impossible negative solubility, repeated in the error file and matching Figure 6's blank footprint; the whole tuple is withheld in 335,273 cells, valid low fractions are kept, and a component error is required to be finite and between 0 and 100 percentage points as an explicit display choice rather than an author confidence threshold.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L120",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L133"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-decoding-oracle",
+      "subject": "Independent Astropy and NumPy decoding check",
+      "status": "included",
+      "finding": "The LEISA reader matches 192 independent Astropy 8.0.1 and NumPy 2.5.3 sample decisions and the accepted cell counts for all three maps, and the unchanged native maps give 69.31 percent methane-rich and 19.88 percent nitrogen-rich ice averaged over 60-90 degrees north against the paper's rounded 69 and 20 percent; these checks establish decoding, sampling and the declared mask, not the authors' spectral inversion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L16",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L24",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L146"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "leisa-model-uncertainty",
+      "subject": "Model and calibration uncertainty in the ice fractions",
+      "status": "unresolved",
+      "finding": "The fractions depend on assumed ice optical properties and the fitting method; the paper reports residual scan seams and sensitivity of Sputnik Planitia's nitrogen fraction to the assumed nitrogen absorption, formal errors do not include every model or calibration uncertainty, and the nominal 7 km cells with varying effective resolution cannot support close-up geological detail.",
+      "revisitWhen": "A revised fit or new observations reduce the model and calibration uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L54",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L60"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "coverage-gaps",
+      "subject": "Incomplete and uneven map coverage",
+      "status": "unresolved",
+      "finding": "Neither mosaic nor the DEM covers all of Pluto, so a neutral gray cartographic grid marks identified gaps, painted before packing and never interpolated; for the colour JPEG only exactly black pixels connected to the southern border are marked, so a dark boundary fringe can remain and nonzero dark pixels are preserved without inpainting.",
+      "revisitWhen": "A global product with complete Pluto coverage, or a validity mask for these maps, is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L66",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L201",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "iau-usgs-gazetteer-names",
+      "subject": "IAU/USGS Gazetteer of Planetary Nomenclature centre points",
+      "status": "included",
+      "finding": "Named features use the Pluto centre-point export, snapshot 2026-09-11 and public domain per its FGDC metadata; preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and folds repeated rows, and labels depend on their size on screen.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L62",
+        "https://planetarynames.wr.usgs.gov/Page/PLUTO/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "wikipedia-feature-notes",
+      "subject": "English Wikipedia lead summaries as caption notes",
+      "status": "included",
+      "finding": "21 labelled names carry a caption note from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L64"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "jpl-and-nasa-physical-facts",
+      "subject": "Pinned JPL physical parameters and NASA Pluto facts",
+      "status": "included",
+      "finding": "Physical facts come from the selected JPL row values and NASA's facts record, checked during preparation: radius 1,188.3 km, density 1.853 g/cm3, sidereal rotation -6.3872 days and orbital period 247.92065 years, with NASA's rounded 39 AU mean solar distance; the body record carries the NSSDC obliquity of 119.51 degrees while pole, prime meridian and Sun direction come from the IAU/WGCCRE rotation model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L75",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L192",
+        "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+        "https://science.nasa.gov/dwarf-planets/pluto/facts/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "haze-material",
+      "subject": "Atmospheric haze material",
+      "status": "excluded",
+      "finding": "Lighting is the Mercury-style Lambert bank with a Shadows toggle and no atmosphere material, so Pluto's real haze layers are not modelled and the sky orientation is contextual rather than a New Horizons camera solution.",
+      "revisitWhen": "A source-backed haze model suitable for prepared material is adopted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L77"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "moons-not-mounted",
+      "subject": "Charon and Pluto's other moons",
+      "status": "excluded",
+      "finding": "Pluto is a standalone dwarf planet in the shared object shell and the other moons are not mounted; the package is a source-backed presentation, not an epoch-specific ephemeris or a pixel-identical recreation of another renderer.",
+      "revisitWhen": "The shared runtime gains a contract for mounting a moon system with a body.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L153"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "dated-report",
+      "subject": "Dated report for this version",
+      "status": "unresolved",
+      "finding": "The retained notes point to unit and browser checks and mention separate capture reports, but identify no dated report here, and test definitions are not passing-run evidence.",
+      "revisitWhen": "A dated run for this Pluto version is recorded in the package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/pluto/README.md#L48"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

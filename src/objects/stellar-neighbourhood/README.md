@@ -1,5 +1,7 @@
 # Stellar neighbourhood
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ```text
 stellar-neighbourhood/
 ├── object.json                  Physical frame and source/prepared pins

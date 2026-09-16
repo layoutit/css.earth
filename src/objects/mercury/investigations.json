@@ -1,0 +1,241 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mercury",
+  "entries": [
+    {
+      "id": "usgs-mdis-bdr-monochrome",
+      "subject": "USGS MESSENGER MDIS Basemap BDR global mosaic",
+      "status": "included",
+      "finding": "The default Monochrome lens uses the USGS MDIS Map Projected Basemap RDR acquired as NASA Trek zoom-3 WMTS tiles; the product's own declaration identifies it as a one-band global reflectance map from NAC or WAC 750 nm images, and no display colour is added.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L57",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "usgs-mdis-enhanced-color",
+      "subject": "USGS MESSENGER MDIS 665 m enhanced-colour mosaic",
+      "status": "included",
+      "finding": "The Enhanced color lens stitches the official NASA Solar System Treks level-3 matrix of the 665 m enhanced-colour mosaic into a 4096 by 2048 snapshot without resampling; it is false colour built from a PC2/PC1/430-to-1000 nm ratio.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L8",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "enhanced-color-polar-completion",
+      "subject": "Modelled completion of the enhanced-colour polar no-data pixels",
+      "status": "unresolved",
+      "finding": "The USGS product carries neutral-black no-data near the poles, and preparation completes those pixels from latitude-coherent observed chroma and local BDR detail; the README states the filled poles are not direct observations.",
+      "revisitWhen": "An enhanced-colour mosaic with observed polar coverage is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L8",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "usgs-shaded-relief-topography",
+      "subject": "USGS MESSENGER global colour shaded relief (DEM v2 hillshade)",
+      "status": "included",
+      "finding": "The Topography lens uses the USGS global colour shaded-relief product as NASA Trek zoom-3 tiles with its published elevation legend; it is false colour, and the default 750 nm lens carries no legend.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L59",
+        "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "nasa-facts-interior",
+      "subject": "NASA Science Mercury facts for the interior cutaway",
+      "status": "included",
+      "finding": "The Interior view and the retained 3D cutaway use the NASA Science facts record retrieved 2026-08-30; the only radial boundary claimed is the 0.85-radius metallic core, mantle and crust stay one combined shell, and colours and fine texture are illustrative.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L61",
+        "https://science.nasa.gov/mercury/facts/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "outer-shell-thickness",
+      "subject": "Outer-shell thickness from the published radii",
+      "status": "unresolved",
+      "finding": "The rendered 366 km shell is the arithmetic difference between NASA's published 2,440 km planet radius and 2,074 km core radius, while the same source separately describes the shell as about 400 km.",
+      "revisitWhen": "NASA or another authority publishes radii and a shell thickness that agree.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L61",
+        "https://science.nasa.gov/mercury/facts/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mascs-global-spectrum",
+      "subject": "DLR/Zenodo MESSENGER MASCS one-degree spectral cube",
+      "status": "included",
+      "finding": "The Spectrum panel is a 326-point, 350-1000 nm global area-weighted mean prepared from M. D'Amore's MASCS cube; the committed snapshot records the 197,099,868-byte archive identity, the aggregation rule, parsed counts and an archive/record count discrepancy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L63",
+        "https://doi.org/10.5281/zenodo.7433033"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "iau-usgs-gazetteer-names",
+      "subject": "IAU/USGS Gazetteer of Planetary Nomenclature centre points",
+      "status": "included",
+      "finding": "Named features use the Mercury centre-point export, snapshot 2026-09-11, whose FGDC metadata declares public-domain use: 573 IAU-adopted names with centre, diameter, extent and name origin, labelled at the closest zoom only.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L70",
+        "https://planetarynames.wr.usgs.gov/Page/MERCURY/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "klimczak-tectonic-traces",
+      "subject": "Klimczak, Byrne and Crane global tectonic map, version 2",
+      "status": "included",
+      "finding": "Feature traces come from the CC BY 4.0 Combined_Tectonic_Map shapefile of 18,451 polylines; the up-to-six longest contractional or extensional structures inside each rupes, dorsum or fossae extent draw that feature's outline.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L13",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L69",
+        "https://data.mendeley.com/datasets/p43b9wttpj/2"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "feature-outline-geometry",
+      "subject": "Feature outlines as published boundaries",
+      "status": "unresolved",
+      "finding": "The README records that the drawn outlines are not published nomenclature boundaries: craters and faculae trace their published diameter as a circle and other classes trace the Gazetteer extent box or mapped tectonic traces.",
+      "revisitWhen": "A released dataset supplies mapped nomenclature boundaries for Mercury's features.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L46"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "landing-sites",
+      "subject": "Spacecraft landing, touchdown and impact sites",
+      "status": "included",
+      "finding": "One site is labelled beside the IAU names, each coordinate quoting the NASA NSSDCA, PDS, LROC, agency or paper page it was read from with the stated latitude kind and longitude convention.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L72"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "wikipedia-feature-notes",
+      "subject": "English Wikipedia lead summaries as caption notes",
+      "status": "included",
+      "finding": "486 labelled names carry a caption note taken from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L74"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "nasa-pia15162-marker",
+      "subject": "NASA/JHU APL/Carnegie MESSENGER global view PIA15162",
+      "status": "included",
+      "finding": "The navigation marker uses this published MESSENGER global view.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L60",
+        "https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "psg-atmosphere-structure",
+      "subject": "NASA GSFC Planetary Spectrum Generator atmosphere structure",
+      "status": "excluded",
+      "finding": "The pinned PSG configuration reports ATMOSPHERE-STRUCTURE as None, so the package deliberately publishes no temperature-pressure chart and describes the thin exosphere separately.",
+      "revisitWhen": "A source that supplies a usable exosphere structure for Mercury is pinned.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L64",
+        "https://psg.gsfc.nasa.gov/api.php"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}
