@@ -1,11 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseVolumeRecipe } from './config.js';
-import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, sha256 } from './source.js';
+import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.js';
-import { bakeSlab, channelDensity, slabStepSize, withinVolumeSupport } from './slices.js';
-import { encodeVolumeRaster } from './raster.js';
+import { bakeSlab, channelDensity, slabStepSize, withinVolumeSupport } from '@cssearth/volume-bake/slices/density';
+import { encodeVolumeRaster } from '@cssearth/volume-bake/slices/raster';
 import sharp from 'sharp';
 import './retirement.test.js';
 import { sunBarycentricAu, M_PER_AU } from '@cssearth/astronomy';

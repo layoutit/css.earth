@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/research/wenger/m2-9-original.jpg",
       "origin": "https://apod.nasa.gov/apod/ap040201.html",
       "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html",
-      "title": "Twin Jet Nebula \u00b7 accepted APOD edition",
+      "title": "Twin Jet Nebula · accepted APOD edition",
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "displayCredit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -42,7 +42,7 @@
       "path": "src/objects/m2-9/source/image-frame.json",
       "origin": "https://arxiv.org/html/2411.03825v1",
       "sourceUrl": "https://arxiv.org/html/2411.03825v1",
-      "title": "M2\u20139 angular frame and adopted distance",
+      "title": "M2–9 angular frame and adopted distance",
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
       "expectedSha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
@@ -107,7 +107,7 @@
           {
             "kind": "machine",
             "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite \u2014 Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
           }
         ]
       }
@@ -147,11 +147,41 @@
     {
       "id": "document-4",
       "path": "src/objects/m2-9/source/presentation.json",
-      "expectedSha256": "63db3fbc4c14b8663b2d43918b4b3d21ab83b090896bcb35767e25c60ca16c18",
-      "expectedBytes": 2520,
+      "expectedSha256": "b014dc164cd6e3b096397a4360d1c29110963d6bce844098d3532826f17b3114",
+      "expectedBytes": 2546,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "retained-evidence-5",
+      "path": "src/objects/m2-9/source/bake-inputs/references/00-experiment.json",
+      "expectedSha256": "e0e30629eb3e52409257b0bc8ee16143d14edfcd2aeaddc74704d6b898cdd68c",
+      "expectedBytes": 2015,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-6",
+      "path": "src/objects/m2-9/source/provenance-references.json",
+      "expectedSha256": "66fd4db16edddb5e7c3eafcc08c394c985ae6b7a2672db61f35e80fa25e0d921",
+      "expectedBytes": 400,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-7",
+      "path": "src/objects/m2-9/source/replay-references.json",
+      "expectedSha256": "270ea78f3350d13edd479eab4fa1de7a75d9e3bc3b13507ef0d3bcec6c719cb6",
+      "expectedBytes": 296,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
       }
     }
   ],

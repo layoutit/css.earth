@@ -40,7 +40,7 @@ pnpm build:packages
 python3 -m venv .local/open-star-removal/venv
 .local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
-node --experimental-strip-types labs/nebula/src/run.ts compile-nebula labs/nebula/models/helix/compiler.json
+node --experimental-strip-types labs/nebula/run.mts compile-nebula labs/nebula/models/helix/compiler.json
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 

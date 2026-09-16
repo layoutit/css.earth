@@ -1,8 +1,8 @@
 /** Retire only obsolete textures owned by the previous successful volume manifest. */
 import { readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { containedPath } from './source.js';
-import { record, text } from './config.js';
+import { containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { record, text } from '@cssearth/volume-core/contracts/volume-recipe';
 
 function texturePath(outputDirectory: string, value: unknown): string {
   const path = text(value, 'prepared texture path');

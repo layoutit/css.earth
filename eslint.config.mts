@@ -6,7 +6,7 @@ export const packageLineLimit = 600;
 export default [
   { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**'] },
   {
-    files: ['packages/**/*.{js,mjs,cjs,ts,tsx}'],
+    files: ['packages/**/*.{js,mjs,cjs,ts,tsx,mts}', 'labs/nebula/packages/**/*.{ts,tsx,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['error', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],

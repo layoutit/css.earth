@@ -1,0 +1,67 @@
+{
+  "name": "@cssearth/volume-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./contracts/cancellation": "./src/contracts/cancellation.ts",
+    "./contracts/compiler-bake": "./src/contracts/compiler-bake.ts",
+    "./contracts/compiler-controls": "./src/contracts/compiler-controls.ts",
+    "./contracts/emission": "./src/contracts/emission.ts",
+    "./contracts/joint-parameters": "./src/contracts/joint-parameters.ts",
+    "./contracts/observation-mapping": "./src/contracts/observation-mapping.ts",
+    "./contracts/observation-photo": "./src/contracts/observation-photo.ts",
+    "./contracts/sampled-emission-fit": "./src/contracts/sampled-emission-fit.ts",
+    "./contracts/sampled-recipe": "./src/contracts/sampled-recipe.ts",
+    "./contracts/volume-frame": "./src/contracts/volume-frame.ts",
+    "./contracts/volume-recipe": "./src/contracts/volume-recipe.ts",
+    "./contracts/volume-slices": "./src/contracts/volume-slices.ts",
+    "./coordinates/observation-mapping": "./src/coordinates/observation-mapping.ts",
+    "./coordinates/overlay-placement": "./src/coordinates/overlay-placement.ts",
+    "./coordinates/overlay-registration": "./src/coordinates/overlay-registration.ts",
+    "./coordinates/overlay-wcs": "./src/coordinates/overlay-wcs.ts",
+    "./fields/diffuse-atoms": "./src/fields/diffuse-atoms.ts",
+    "./fields/emission": "./src/fields/emission.ts",
+    "./fields/emission-window": "./src/fields/emission-window.ts",
+    "./fields/retained-emission": "./src/fields/retained-emission.ts",
+    "./fields/sampled": "./src/fields/sampled.ts",
+    "./materials/cloud-appearance": "./src/materials/cloud-appearance.ts",
+    "./materials/cloud-detail": "./src/materials/cloud-detail.ts",
+    "./materials/component-material": "./src/materials/component-material.ts",
+    "./materials/display-color": "./src/materials/display-color.ts",
+    "./materials/sampled": "./src/materials/sampled.ts",
+    "./materials/slab-material": "./src/materials/slab-material.ts",
+    "./sampling/registered-raster": "./src/sampling/registered-raster.ts",
+    "./coordinates/compiler-frame": "./src/coordinates/compiler-frame.ts",
+    "./contracts/joint-volume": "./src/contracts/joint-volume.ts",
+    "./contracts/shape-scene": "./src/contracts/shape-scene.ts",
+    "./fields/cloud-density": "./src/fields/cloud-density.ts",
+    "./fields/observation-prior": "./src/fields/observation-prior.ts",
+    "./contracts/authored-shapes": "./src/contracts/authored-shapes.ts",
+    "./fields/authored-shapes": "./src/fields/authored-shapes.ts",
+    "./coordinates/overlay-alignment": "./src/coordinates/overlay-alignment.ts",
+    "./materials/star-photometry": "./src/materials/star-photometry.ts",
+    "./contracts/compiler-star-input": "./src/contracts/compiler-star-input.ts",
+    "./fields/density-projection": "./src/fields/density-projection.ts",
+    "./contracts/prepared-catalogue-stars": "./src/contracts/prepared-catalogue-stars.ts",
+    "./coordinates/observation-envelope": "./src/coordinates/observation-envelope.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@cssearth/objects": "workspace:*"
+  },
+  "nebulaImplementation": {
+    "directories": [
+      "src"
+    ],
+    "extensions": [
+      ".ts"
+    ],
+    "excludedSuffixes": [
+      ".test.ts"
+    ]
+  }
+}

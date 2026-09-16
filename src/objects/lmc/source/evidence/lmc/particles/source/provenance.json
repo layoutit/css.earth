@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-particle-volume-provenance@1",
+  "source": {
+    "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "paper": "https://doi.org/10.1093/mnras/stag1287",
+    "license": "CC0-1.0",
+    "archiveSha256": "21562a5b32c27f39ee67215e9e2c3b1cd2fcfb4a115d2f2c8e0307fc8a51eb54",
+    "archiveBytes": 3547448578,
+    "entry": "run34681lsmcgabestModelA_HR.00440.gz",
+    "snapshotSha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+    "snapshotAgeGyr": 2.2,
+    "massUnitSolarMass": 232000,
+    "totalCount": 5005000,
+    "gasCount": 0,
+    "darkCount": 2920000,
+    "starCount": 2085000
+  },
+  "sourceFamily": {
+    "family": "stars",
+    "start": 240000,
+    "count": 1620000,
+    "endExclusive": 1860000,
+    "firstSourceByte": 115680032,
+    "sourceRecordBytes": 44
+  },
+  "density": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
+  "photo": {
+    "path": "labs/nebula/sources/lmc-smash-full.webp",
+    "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
+    "url": "https://noirlab.edu/public/images/noirlab2030a/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "license": "CC-BY-4.0",
+    "acquisition": {
+      "path": "labs/nebula/sources/lmc-smash-full.webp.json",
+      "sha256": "430264b503fa44d7d19f1a97c5323339f13789cbd1d5e115cd6ea94ec13d5bc5"
+    }
+  },
+  "display": {
+    "rotation": [
+      0.8290375725550416,
+      0,
+      0.5591929034707469,
+      -0.5591929034707469,
+      0,
+      0.8290375725550416,
+      0,
+      -1,
+      0
+    ],
+    "boundsKpc": {
+      "min": [
+        -6,
+        -6,
+        -5
+      ],
+      "max": [
+        6,
+        6,
+        5
+      ]
+    },
+    "alignment": {
+      "method": "Authored central-bar alignment in the XZ simulation projection; a rigid −34° rotation, with no scaling or coordinate warp.",
+      "photoScale": "Angular WCS extent at the reference 49.59 kpc distance, evaluated on the tangent plane.",
+      "displayScope": "Photographed central region. The finite core grid excludes outer simulation tidal tails; full imported particles are preserved.",
+      "registration": "Photo center is matched to the simulated central bar, not an astrometric identity between simulation and observed stars."
+    },
+    "color": "Photographic brightness and color distributed through the simulated conditional depth profile. Authored display emissivity, not measured gas, dust or stellar population synthesis.",
+    "dust": "No dust or extinction is encoded; alpha is stellar-density support.",
+    "massRetention": 0.786437037037037,
+    "brightness": "Photographic display brightness constrained along the reference projection; not calibrated photometry."
+  },
+  "extraction": {
+    "maxPixels": 2400,
+    "medianSize": 7
+  }
+}

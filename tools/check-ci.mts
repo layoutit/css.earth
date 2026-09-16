@@ -8,8 +8,10 @@ import {requireArray, requireRecord, requireString} from './source-values.mts';
 
 interface CiStep {name:string;run:string;env:Record<string,string>;}
 /** Execute the maintained job's commands, so local checks cannot drift from CI. */
-export function readCiSteps(source:string):CiStep[] {
- const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs),job=requireRecord(jobs.universe);
+export function readCiSteps(source:string,jobName='universe'):CiStep[] {
+ const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs);
+ if(!Object.hasOwn(jobs,jobName))throw new Error(`Unknown CI job: ${jobName}`);
+ const job=requireRecord(jobs[jobName]);
  const decodeEnvironment=(value:unknown)=>Object.fromEntries(Object.entries(value===undefined?{}:requireRecord(value))
    .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)]));
  const inherited={...decodeEnvironment(workflow.env),...decodeEnvironment(job.env)};
@@ -47,9 +49,11 @@ export async function runCiSteps(steps:readonly CiStep[],root:string,runnerTemp:
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const root=resolve(import.meta.dirname,'..'),args=process.argv.slice(2);
- if(args.length>1||(args.length===1&&args[0]!=='--list'))throw new Error('Usage: pnpm check:ci [--list]');
- const steps=readCiSteps(await readFile(resolve(root,'.github/workflows/universe.yml'),'utf8'));
- if(args[0]==='--list'){
+ if(args.some(arg=>arg!=='--list'&&!/^--job=[a-z][a-z0-9-]*$/.test(arg))||new Set(args.map(arg=>arg.split('=')[0])).size!==args.length)
+  throw new Error('Usage: pnpm check:ci [--job=universe|nebula] [--list]');
+ const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6)??'universe';
+ const steps=readCiSteps(await readFile(resolve(root,'.github/workflows/universe.yml'),'utf8'),jobName);
+ if(args.includes('--list')){
   console.log(steps.map((step,index)=>`${index+1}. ${step.name}\n${step.run.trim()}`).join('\n\n'));
  }else{
   // The workflow pins Node 22; the checkout's engines range is what contributors have.

@@ -1,6 +1,6 @@
 # Rebuild nebula assets and research results
 
-For the ordinary app bake, use the [compact-input installation](../../../docs/nebulae/README.md#reproduce-from-a-clean-checkout). It needs Node/pnpm and no original observations, simulation archives, NOX or Python. The sections below describe the optional full research replay; its native-artifact verifier intentionally expects research caches.
+For the ordinary app bake, use the [compact-input installation](../../../docs/nebulae/README.md#reproduce-from-a-clean-checkout). It enters through `tools/nebula/prepare.mts` and the private volume-bake package. It needs Node/pnpm and no original observations, simulation archives, NOX or Python. The sections below describe the optional full research replay; its native-artifact verifier intentionally expects research caches.
 
 Requires **Node 22, pnpm 10.33.0 and Python 3.9–3.12** with `venv`/`pip`, plus internet access and free disk space for the native images, Python environment and results. The pinned TensorFlow release needs a wheel for your OS/CPU. The [clean-install verification](clean-install-verification.md) records the platform actually tested; it is not a claim that every platform produces identical bytes.
 
@@ -11,7 +11,7 @@ From the repository root in a clean checkout, this complete setup prepares the p
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
+node --experimental-strip-types labs/nebula/run.mts prepare-processing-environment
 ```
 
 The environment command reads the canonical Python/package and NOX model pins from `models/lmc/bake.json`, creates or verifies `.local/open-star-removal/venv`, and downloads only a missing model. Success requires **`ENVIRONMENT_READY pinned Python packages and NOX model`** followed by **`NOX_MODEL_VERIFIED`** with its SHA-256. A ready environment is reused without reinstalling packages; an altered model fails while preserving its existing bytes. This command prepares no object images, density fields or baked assets.
@@ -79,7 +79,11 @@ This fixed-density command supplies the three LMC color comparisons. SMC supplie
 
 For the separate production environment assets (outside this nebula-only workflow), `pnpm prepare:environment-images` restores the M31/M33/SMC layers, Milky Way slices and sky faces, heliosphere atlas and stellar point atlas from their pinned sources. It only bakes missing banks and verifies every restored byte against the accepted resource manifests. Pass `--verify-replay` to independently rebake even a complete bank. These operations preserve the descriptors and saved rendering settings. App startup/build and universe CI restore these images automatically.
 
-`pnpm prepare:nebulae` runs the `--if-missing` check automatically before app development, builds and shell tests. The first run on a clean checkout needs the same Python environment/downloads as a full bake. Later starts only verify the accepted files. A changed file is an error, not permission to silently replace it.
+`pnpm prepare:nebulae` invokes the application-only entrypoint with `--if-missing`. It restores accepted compact inputs without Python, native observation downloads or the lab CLI. The full research verifier still requires native research caches. A changed pinned input is an error, not permission to silently replace it. Application startup and build behavior is documented in [the app guide](../../../docs/nebulae/README.md).
+
+## Code ownership and separate gates
+
+The research runner is `labs/nebula/run.mts`. Density stage orchestration lives in `packages/lab/src/server/workflows/density`; scientific operations use reconstruction, while deterministic replay uses volume-bake and volume-core. Runtime never performs scientific fitting or bakes textures. [Package validation](internal-packages.md) distinguishes the cache-independent CI job, artifact-dependent lab/browser checks and the explicit cold replay gate. A passing unit suite is not a clean-install or visual-acceptance result.
 
 ## Files and recovery
 

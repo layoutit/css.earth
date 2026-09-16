@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso0936a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
-      "title": "Lagoon Nebula \u00b7 ESO \u00b7 optical",
+      "title": "Lagoon Nebula · ESO · optical",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1101d/",
       "sourceUrl": "https://www.eso.org/public/images/eso1101d/",
-      "title": "Lagoon Nebula \u00b7 ESO VISTA \u00b7 infrared",
+      "title": "Lagoon Nebula · ESO VISTA · infrared",
       "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
       "origin": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
       "sourceUrl": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
-      "title": "Lagoon Nebula \u00b7 Spitzer \u00b7 mid-infrared",
+      "title": "Lagoon Nebula · Spitzer · mid-infrared",
       "credit": "NASA/JPL-Caltech",
       "displayCredit": "NASA/JPL-Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -106,12 +106,12 @@
     },
     {
       "id": "physical-evidence",
-      "path": "labs/nebula/models/m8/physical-evidence.json",
+      "path": "src/objects/m8/source/bake-inputs/references/03-physical-evidence.json",
       "origin": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
       "sourceUrl": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
       "title": "Lagoon Nebula physical evidence and authored limits",
       "credit": "Published structural studies; authored display assumptions",
-      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities.",
+      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
       "expectedSha256": "922b0da47092eb20e7dab3a669d33e1e5bc49efa71c0cc53a26ac56673f5abb1",
       "expectedBytes": 14198,
       "sourceBinding": {
@@ -120,17 +120,17 @@
           {
             "catalogueId": "arias-2006-hourglass",
             "role": "method",
-            "evidence": "labs/nebula/models/m8/physical-evidence.json#/sources/0"
+            "evidence": "src/objects/m8/source/bake-inputs/references/03-physical-evidence.json#/sources/0"
           },
           {
             "catalogueId": "tiwari-2018-pdr",
             "role": "method",
-            "evidence": "labs/nebula/models/m8/physical-evidence.json#/sources/5"
+            "evidence": "src/objects/m8/source/bake-inputs/references/03-physical-evidence.json#/sources/5"
           },
           {
             "catalogueId": "tiwari-2020-east",
             "role": "method",
-            "evidence": "labs/nebula/models/m8/physical-evidence.json#/sources/6"
+            "evidence": "src/objects/m8/source/bake-inputs/references/03-physical-evidence.json#/sources/6"
           }
         ]
       },
@@ -196,7 +196,7 @@
           {
             "kind": "machine",
             "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite \u2014 Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
           }
         ]
       }
@@ -226,8 +226,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m8/source/presentation.json",
-      "expectedSha256": "cc6fc1f1d25151d1d37b725735a70b9d9b71bdfdefe3b3d77626c6462fb5fd50",
-      "expectedBytes": 6852,
+      "expectedSha256": "294441887d619feef0cbe412e390fe62bd66bd3f88bbcf42c931258b6440294e",
+      "expectedBytes": 6982,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -241,6 +241,66 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "retained-evidence-5",
+      "path": "src/objects/m8/source/bake-inputs/references/01-compiler.json",
+      "expectedSha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524",
+      "expectedBytes": 1511,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-6",
+      "path": "src/objects/m8/source/bake-inputs/references/02-depth-model.json",
+      "expectedSha256": "56cd86345e893f8dfcb7e98e9686a096dd6634fa6b15459060c65e2cdd0c559b",
+      "expectedBytes": 3297,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-7",
+      "path": "src/objects/m8/source/bake-inputs/references/04-processing-observations.json",
+      "expectedSha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5",
+      "expectedBytes": 5501,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-8",
+      "path": "src/objects/m8/source/bake-inputs/references/05-processing-structures.json",
+      "expectedSha256": "e871e01e6636080dad59c1a97734d995f740f80eff3a9e37df7f48d1c8e74d6a",
+      "expectedBytes": 420,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-9",
+      "path": "src/objects/m8/source/provenance-references.json",
+      "expectedSha256": "feef55ff8d78336bbed6b5b469bdcefef1ac6b8f26bd0f086493f64a9eaf04e8",
+      "expectedBytes": 1748,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-10",
+      "path": "src/objects/m8/source/replay-references.json",
+      "expectedSha256": "1e2ed81a54c45bf6169080c0b0f2f35533a6018b76f21a0f5335f5a3ef4b101a",
+      "expectedBytes": 1254,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
       }
     }
   ],

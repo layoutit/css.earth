@@ -5,8 +5,8 @@ import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { resolve } from 'node:path';
 import { zstdCompressSync, zstdDecompressSync, constants } from 'node:zlib';
-import { sha256, verifiedBytes, containedPath } from '../volume/source.js';
-import { record } from '../volume/config.js';
+import { sha256, verifiedBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { record } from '@cssearth/volume-core/contracts/volume-recipe';
 import { decodeExrRgbHalf, halfToFloat, type LinearHalfImage } from './exr.js';
 import type { SkyRecipe } from './config.js';
 export async function loadSkySource(directory: string, recipe: SkyRecipe): Promise<LinearHalfImage> {
