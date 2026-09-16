@@ -123,7 +123,7 @@
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
-          "maximumGain": 1.5,
+          "maximumGain": 2,
           "maximumAngleDegrees": 60
         },
         "transfer": {

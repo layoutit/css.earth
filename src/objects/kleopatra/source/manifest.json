@@ -353,7 +353,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-observer",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/kleopatra/source/manifest.json@f34e674dc2c8bfe2183566a8dcdd3e1894d110e8#/inputs/9"
           }
         ]
       }
@@ -378,7 +378,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-heliocentric",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+            "evidence": "src/objects/kleopatra/source/manifest.json@f34e674dc2c8bfe2183566a8dcdd3e1894d110e8#/inputs/10"
           }
         ]
       }
@@ -438,8 +438,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7881,
-      "expectedSha256": "5f293d768c43050754bdad1b973abaac04a627d08f9ca5ae081a5c6dd1f956a6"
+      "expectedBytes": 7879,
+      "expectedSha256": "fee5eef8cd7e4b34f21dcdb5b0c8a5880097f75f18421a00740c8cdda1b037ec"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

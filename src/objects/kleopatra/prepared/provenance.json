@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "794c6b1ff369ad8cfa94894bfaf96b90cc066b5ec3c18242983c954697d21caf"
+    "sha256": "0b2b58895fe11d38e14377bd658a7b840849848f8a9b72cb0f06ead38acacf8a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0e7f6b39f6edfee9209e22497262848653e26015130b468944dd23a74199a066",
+      "sha256": "fee5eef8cd7e4b34f21dcdb5b0c8a5880097f75f18421a00740c8cdda1b037ec",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -48,92 +48,92 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "Five deconvolved VLT/SPHERE/ZIMPOL frames from the 2017 apparition, registered through cameras computed from the survey's own pole and period, JPL Horizons geometry and each frame's header. The 2018 apparition sees the opposite hemisphere but its frames sit about 17 times fainter than these after level matching, past the route's budget of 16, and several of its pairs share no samples with this set, so it is not combined here. Grayscale retains the photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "Five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame and the sky threshold is one stated fraction of its peak. The 2018 apparition sees the opposite hemisphere but sits about seventeen times fainter than this set after level matching, past the route's budget, so it is not combined here. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
               "frames": [
                 {
                   "id": "zimpol-20170714-050059",
                   "path": "observations/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
-                  "backgroundMaximum": 11.7461,
+                  "backgroundMaximum": 3.3827,
                   "observerLatitude": 25.2506,
-                  "observerWestLongitude": 49.7435,
+                  "observerWestLongitude": 310.2572,
                   "sunLatitude": 33.4753,
-                  "sunWestLongitude": 53.6081,
-                  "rangeKm": 258097765.6,
-                  "northAzimuthDegrees": 221.2029,
+                  "sunWestLongitude": 306.3926,
+                  "rangeKm": 258097738.2,
+                  "northAzimuthDegrees": 318.7971,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
                     127.967,
-                    127.235
+                    127.765
                   ]
                 },
                 {
                   "id": "zimpol-20170714-051326",
                   "path": "observations/d216Kleopatra_2017-07-14T05_13_26.665_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
-                  "backgroundMaximum": 0.2186,
+                  "backgroundMaximum": 3.4051,
                   "observerLatitude": 25.2518,
-                  "observerWestLongitude": 35.8669,
+                  "observerWestLongitude": 324.1327,
                   "sunLatitude": 33.4737,
-                  "sunWestLongitude": 39.7344,
-                  "rangeKm": 258090884.1,
-                  "northAzimuthDegrees": 221.2022,
+                  "sunWestLongitude": 320.2652,
+                  "rangeKm": 258090954.7,
+                  "northAzimuthDegrees": 318.7978,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
                     127.785,
-                    126.702
+                    128.298
                   ]
                 },
                 {
                   "id": "zimpol-20170722-042627",
                   "path": "observations/d216Kleopatra_2017-07-22T04_26_27.837_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
-                  "backgroundMaximum": 28.3449,
+                  "backgroundMaximum": 3.8796,
                   "observerLatitude": 26.4042,
-                  "observerWestLongitude": 211.539,
+                  "observerWestLongitude": 148.4616,
                   "sunLatitude": 31.9958,
-                  "sunWestLongitude": 217.9531,
-                  "rangeKm": 253029240.1,
-                  "northAzimuthDegrees": 220.5771,
+                  "sunWestLongitude": 142.0475,
+                  "rangeKm": 253029282.9,
+                  "northAzimuthDegrees": 319.4229,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
                     128.792,
-                    129.184
+                    125.816
                   ]
                 },
                 {
                   "id": "zimpol-20170727-041103",
                   "path": "observations/d216Kleopatra_2017-07-27T04_11_03.654_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
-                  "backgroundMaximum": 0.1213,
+                  "backgroundMaximum": 4.2834,
                   "observerLatitude": 27.2225,
-                  "observerWestLongitude": 125.8927,
+                  "observerWestLongitude": 234.107,
                   "sunLatitude": 31.0529,
-                  "sunWestLongitude": 133.8512,
-                  "rangeKm": 251072350.4,
-                  "northAzimuthDegrees": 220.1921,
+                  "sunWestLongitude": 226.1485,
+                  "rangeKm": 251072410.5,
+                  "northAzimuthDegrees": 319.8079,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
                     127.818,
-                    128.39
+                    126.61
                   ]
                 },
                 {
                   "id": "zimpol-20170810-051748",
                   "path": "observations/d216Kleopatra_2017-08-10T05_17_48.553_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
-                  "backgroundMaximum": 0,
+                  "backgroundMaximum": 2.9142,
                   "observerLatitude": 29.7037,
-                  "observerWestLongitude": 268.3525,
+                  "observerWestLongitude": 91.6489,
                   "sunLatitude": 28.3256,
-                  "sunWestLongitude": 280.2308,
-                  "rangeKm": 250527814.1,
-                  "northAzimuthDegrees": 219.2624,
+                  "sunWestLongitude": 79.7706,
+                  "rangeKm": 250527846.6,
+                  "northAzimuthDegrees": 320.7376,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
                     127.545,
-                    128.914
+                    126.086
                   ]
                 }
               ],
@@ -141,7 +141,7 @@
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
-                "maximumGain": 1.5,
+                "maximumGain": 2,
                 "maximumAngleDegrees": 60
               },
               "transfer": {
@@ -245,7 +245,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9a9346a1312fb8ba235472a16fbc02c2a48bf7eb3ada00950adb9410653259d6",
+      "sha256": "2e22d39da3326abfae9c765d96e1be2da694d53b63bda765c0a1783f4f0b7ec9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -322,7 +322,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "notes": "Seven deconvolved VLT/SPHERE/ZIMPOL frames from 2017 and 2018, cast onto the ADAM reconstruction through cameras computed from the survey's published pole and period, JPL Horizons observing geometry and each frame's own header. The survey's rotation parameters describe this ADAM frame, so the photograph rides it rather than the MPCD model the Shape view uses. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected.",
+              "notes": "Five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017, cast onto the ADAM reconstruction. The survey's rotation parameters describe that ADAM frame, so the photograph rides it rather than the MPCD model the Shape view uses. Pointing and orientation are computed from those parameters, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected.",
               "noData": true
             }
           ]
@@ -759,8 +759,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9a9346a1312fb8ba235472a16fbc02c2a48bf7eb3ada00950adb9410653259d6",
-      "bytes": 9394,
+      "sha256": "2e22d39da3326abfae9c765d96e1be2da694d53b63bda765c0a1783f4f0b7ec9",
+      "bytes": 9421,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -841,14 +841,14 @@
       "outputs": [
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-thumbnail.webp",
-          "bytes": 1024,
-          "sha256": "fe638f25816fb7c8c42ee63b3ad1ed72f86700335c086da5afcb3ace6d7ea62c",
+          "bytes": 1020,
+          "sha256": "c6b0e613d498df5ae8e8f50b0729f069f1f54bb4edccb499077cac59eb51445e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-surface@2x.webp",
-          "bytes": 584092,
-          "sha256": "fbe10e335ad7eebb17a2c6d14c6a2920a5f6010799ab11a48a79f8bbe6d3505d",
+          "bytes": 673370,
+          "sha256": "134c6d40fd5045d9ac240de0209359f18d9d919af0a4c433e1923bd06edd42e3",
           "verification": "bytes-verified"
         }
       ],
@@ -931,8 +931,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7514,
-          "sha256": "663e74b819063865c8ff52543a052581c5e7f1d135b7778ca5bd1262bd560d99",
+          "bytes": 7392,
+          "sha256": "c45037df415be9347c9825eed4c4675a1dfe899ddc44b7b9f1acb62fd96e8635",
           "verification": "bytes-verified"
         }
       ]
@@ -944,7 +944,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "b5bd83235d7482b0cec5b0753c29f6bbe0e7ca779daec645cdfea266243810c4",
+    "materialSha256": "463da337f04689bfde0329f1e4e9cdef931a772547f572380ee4dfff63ba7af0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
