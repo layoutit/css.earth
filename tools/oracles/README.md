@@ -17,6 +17,7 @@ are older standalone audits; the groups below are fixture oracles.
 | astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `fits/llorri.py` | `llorri-geo.oracle.test.mts` |
 | astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `fits/encounter.py` | `encounter-fits.oracle.test.mts` |
 | astropy | Shared FITS numeric decoding, scaling, missing values, cube planes, image extensions and CONTINUE long strings | `fits/core.py` | `tools/fits.oracle.test.mts` |
+| astropy | `observation/wise-atlas-mosaic.mts`: AllWISE atlas SIN tile pixels to the hips2fits-convention TAN grid, near the centre and at a 24° field corner | `fits/wise-atlas-projection.py` | `observation/wise-atlas-mosaic.oracle.test.mts` |
 | astropy | `color-transfer.mts` asinh band display: every byte of `make_lupton_rgb` (Lupton et al. 2004) for colour and one-band cases | `fits/lupton-asinh.py` | `tools/objects/color-transfer.oracle.test.mts` |
 | astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tools/fits-pallas.test.mts` |
 | astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tools/fits-products.test.mts` |

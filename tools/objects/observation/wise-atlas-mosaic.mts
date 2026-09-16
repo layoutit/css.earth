@@ -86,6 +86,17 @@ export function atlasToGridPixel(tile: { crpix: [number, number]; cdelt: [number
   };
 }
 
+/** ICRS direction -> one-based FITS pixel on the grid, or undefined behind its tangent plane. */
+export function skyToGridPixel(grid: ReturnType<typeof gridWcs>) {
+  const g = basis(...grid.referenceValueDeg), gx = grid.scaleDeg[0] * radians, gy = grid.scaleDeg[1] * radians;
+  return (raDeg: number, decDeg: number): [number, number] | undefined => {
+    const v = basis(raDeg, decDeg).centre, c = v[0] * g.centre[0] + v[1] * g.centre[1] + v[2] * g.centre[2];
+    if (c <= 0) return undefined;
+    return [(v[0] * g.east[0] + v[1] * g.east[1] + v[2] * g.east[2]) / c / gx + grid.referencePixel[0],
+      (v[0] * g.north[0] + v[1] * g.north[1] + v[2] * g.north[2]) / c / gy + grid.referencePixel[1]];
+  };
+}
+
 interface Binned { coaddId: string; x0: number; y0: number; width: number; height: number; sum: Float64Array; count: Uint32Array }
 
 /** One tile's pixel centres binned into the output grid (DOM rows, top first). */
