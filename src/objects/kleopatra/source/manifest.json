@@ -334,79 +334,51 @@
       }
     },
     {
-      "id": "kleopatra-sphere-20181210t064411253",
-      "path": "observations/d216Kleopatra_2018-12-10T06_44_11.253_zpl_science_imaging_cam1.fits",
-      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2018-12-10T06_44_11.253_zpl_science_imaging_cam1.fits",
-      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
-            "missionId": "eso-sphere-asteroid-survey",
-            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
-          }
-        ]
-      },
-      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
-      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "id": "kleopatra-horizons-sphere-observer",
+      "path": "reference/horizons-sphere-observer.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for target 216 and observer code 309, Paranal. The query and its epochs are stated in the body README.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
-        "sphere-registration-check"
+        "sphere-sighting-geometry"
       ],
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-12-10 06:44:11.253 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file. Retained as registration evidence from the second apparition, not as lens input: its level sits about 17 times below the 2017 set, past the route's matching budget.",
-      "expectedBytes": 593280,
-      "expectedSha256": "8b7398a6408bba8a954451de11969df683e4eb8b0fa00630badfa94112ac166f",
-      "width": 256,
-      "height": 256,
-      "lensId": "zimpol",
-      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
+      "expectedBytes": 9001,
+      "expectedSha256": "7679f0291d6476fa8dcd07d16867536cea8cc0d5102f1d5305e7b47cf51509a9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-kleopatra-kleopatra-sphere-20181210t064411253",
+            "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-observer",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/9"
+            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
           }
         ]
       }
     },
     {
-      "id": "kleopatra-sphere-20181219t065724735",
-      "path": "observations/d216Kleopatra_2018-12-19T06_57_24.735_zpl_science_imaging_cam1.fits",
-      "origin": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2018-12-19T06_57_24.735_zpl_science_imaging_cam1.fits",
-      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
-            "missionId": "eso-sphere-asteroid-survey",
-            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
-          }
-        ]
-      },
-      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
-      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "id": "kleopatra-horizons-sphere-heliocentric",
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for target 216 and observer code 309, Paranal. The query and its epochs are stated in the body README.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
-        "sphere-registration-check"
+        "sphere-sighting-geometry"
       ],
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-12-19 06:57:24.735 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file. Retained as registration evidence from the second apparition, not as lens input: its level sits about 17 times below the 2017 set, past the route's matching budget.",
-      "expectedBytes": 593280,
-      "expectedSha256": "046ea97718fd77c906637ee43d3101af4162d8225a321e79dc627799e5d655a2",
-      "width": 256,
-      "height": 256,
-      "lensId": "zimpol",
-      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "heliocentric state vectors at the same epochs, corrected for light time, giving the direction to the Sun",
+      "expectedBytes": 6078,
+      "expectedSha256": "d3e3318c4ea90f8a4c38df08b343301bfc4e573aeb40b0565a821e210885d056",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-kleopatra-kleopatra-sphere-20181219t065724735",
+            "catalogueId": "source-kleopatra-kleopatra-horizons-sphere-heliocentric",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/10"
+            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
           }
         ]
       }
@@ -442,8 +414,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9394,
-      "expectedSha256": "9a9346a1312fb8ba235472a16fbc02c2a48bf7eb3ada00950adb9410653259d6",
+      "expectedBytes": 9421,
+      "expectedSha256": "2e22d39da3326abfae9c765d96e1be2da694d53b63bda765c0a1783f4f0b7ec9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -451,8 +423,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4061,
-      "expectedSha256": "861f3f7f6a9c48f9e19bc920a1d8a3422606716240eb1316fab11627139b148b"
+      "expectedBytes": 3223,
+      "expectedSha256": "96049d5ccb682ab28e057ed56a135ec9547b11181b35d50450511a155c3ee84c"
     },
     {
       "path": "preparation/navigation.json",
@@ -466,8 +438,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7789,
-      "expectedSha256": "0e7f6b39f6edfee9209e22497262848653e26015130b468944dd23a74199a066"
+      "expectedBytes": 7881,
+      "expectedSha256": "5f293d768c43050754bdad1b973abaac04a627d08f9ca5ae081a5c6dd1f956a6"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

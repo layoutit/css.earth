@@ -138,9 +138,11 @@ export interface ObserverCamera {
 /**
  * The controlled-shape camera a telescope sighting implies.
  *
- * Body longitudes run west-positive in the controlled-shape camera, and the inversion frame's own longitude,
- * atan2(y, x), increases in the rotation direction; those two agree, so the body longitude is used unchanged.
- * The north azimuth is the sky direction of the positive spin pole expressed in that camera's image axes.
+ * The inversion frame is right-handed with +z on the spin pole, so atan2(y, x) increases in the rotation direction:
+ * that is an EAST longitude. The controlled-shape camera states west longitudes and builds its observer vector as
+ * east = -west, so the two are opposite and the body longitude is negated here. Writing it through unchanged
+ * reflects the body through its own xz-plane, which no silhouette, disc size or phase-angle check can detect.
+ * The north azimuth is the celestial position angle of the positive spin pole, negated for the same camera's axes.
  */
 export function observerCamera(sighting: ObserverSighting, spin: SpinState): ObserverCamera {
   const epoch = requireFiniteNumber(sighting.epochJd, 'sighting epoch');
@@ -156,20 +158,21 @@ export function observerCamera(sighting: ObserverSighting, spin: SpinState): Obs
 
   const observerBody = eclipticToBody(equatorialToEcliptic([-toTarget[0], -toTarget[1], -toTarget[2]]), spin, phaseDegrees);
   const sunBody = eclipticToBody(equatorialToEcliptic(toSun), spin, phaseDegrees);
-  const subPoint = (v: Vector) => ({ latitude: Math.asin(Math.max(-1, Math.min(1, v[2]))) / DEGREE, longitude: Math.atan2(v[1], v[0]) / DEGREE });
+  // atan2(y, x) is the east longitude in this frame; the camera states west, so it is negated.
+  const subPoint = (v: Vector) => ({ latitude: Math.asin(Math.max(-1, Math.min(1, v[2]))) / DEGREE, westLongitude: -Math.atan2(v[1], v[0]) / DEGREE });
   const observer = subPoint(observerBody), sun = subPoint(sunBody);
 
   // Sky axes at the target: east along increasing right ascension, north completing the pair against the line of sight.
   const skyEast = unit([-Math.sin(sighting.targetRightAscensionDegrees * DEGREE), Math.cos(sighting.targetRightAscensionDegrees * DEGREE), 0]);
   const skyNorth = cross(toTarget, skyEast);
   const poleEquatorial = eclipticToEquatorial(unit(direction(spin.longitudeDegrees, spin.latitudeDegrees)));
-  const northAzimuthDegrees = wrap360(Math.atan2(-dot(poleEquatorial, skyEast), -dot(poleEquatorial, skyNorth)) / DEGREE);
+  const northAzimuthDegrees = wrap360(-Math.atan2(dot(poleEquatorial, skyEast), dot(poleEquatorial, skyNorth)) / DEGREE);
 
   return {
     observerLatitude: observer.latitude,
-    observerWestLongitude: wrap360(observer.longitude),
+    observerWestLongitude: wrap360(observer.westLongitude),
     sunLatitude: sun.latitude,
-    sunWestLongitude: wrap360(sun.longitude),
+    sunWestLongitude: wrap360(sun.westLongitude),
     rangeKm: rangeAu * AU_KM,
     northAzimuthDegrees,
     pixelAngleMicroradians,

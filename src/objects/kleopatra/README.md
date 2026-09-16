@@ -8,7 +8,9 @@ The geometry is the original `216_Kleopatra_mpcd.obj` from the [LAM VLT/SPHERE a
 
 The photographic lens uses a second mesh from the same release, `216_Kleopatra_adam.obj`. The survey's published pole and period describe that ADAM frame rather than the separately re-optimised MPCD one, so the photograph is registered to the mesh its own rotation parameters belong to while Shape keeps MPCD. Measured over seven frames spanning both apparitions, projecting through ADAM reproduces the observed limb position angle to 3.3 degrees; the same parameters through MPCD give 6.8 degrees.
 
-**SPHERE photograph** casts five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017 onto that mesh. Nothing in the camera is fitted: the pole, period and phase epoch come from the release's own parameter record, the observing geometry from JPL Horizons for Paranal, and the plate scale, exposure time and filter from each frame's own header. The rotation convention is [Ďurech, Sidorin and Kaasalainen (2010)](https://doi.org/10.1051/0004-6361/200912693) equation 1. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so it is not measured albedo, color or composition.
+**SPHERE photograph** casts five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017 onto that mesh. The camera's pointing and orientation are derived, not fitted: the pole, period and phase epoch come from the release's own parameter record, the observing geometry from pinned JPL Horizons responses for Paranal, and the plate scale, exposure time and filter from each frame's own header. The rotation convention is [Ďurech, Sidorin and Kaasalainen (2010)](https://doi.org/10.1051/0004-6361/200912693) equation 1. Two quantities in each frame are measured from the photograph rather than derived: the disc centre, and the sky threshold, which is one stated fraction of that frame's own peak. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so it is not measured albedo, color or composition.
+
+The frames' own world-coordinate solution is used for one thing only, the plate scale, which its `CD` matrix states. Its reference pixel is 512,512 on a 256 by 256 array, inherited from an uncropped frame, so it locates nothing; the pointing comes from the ephemeris and the spin record instead.
 
 **Shape** applies the shared neutral-gray material to the released geometry. It conveys the two lobes, their neck, and the model's broad relief. It is not a photograph, measured albedo, natural color or a map of metal abundance. The source was reconstructed with multiresolution photoclinometry by deformation (MPCD), starting with an ADAM model constrained by lightcurves, adaptive-optics images, occultations and radar. The MPCD solution gives greater weight to high-resolution VLT/SPHERE images. These ground-based observations do not measure small-scale terrain.
 
@@ -18,7 +20,19 @@ A separate nearest-surface diagnostic compares 8,192 deterministic area-stratifi
 
 Matched source/result preparation previews from six directions retain the two lobes and neck. They share the existing CPU context renderer and a neutral material. They demonstrate mesh shape correspondence, not native browser parity or observation-pixel parity. Fine features become more angular at the 800-face budget.
 
-The photographic registration was measured rather than asserted. Predicted limb position angles were compared against the observed half-maximum contour on seven frames from 2017 and 2018, giving 3.3 degrees root mean square with no fitted parameter. Predicted disc sizes agree with the archived angular diameter to under two percent. Sub-solar points computed from heliocentric vectors reproduce the solar phase angle Horizons reports directly to 0.004 degrees on every frame. The rotation convention itself is checked against the producer's own numbers: DAMIT distributes model 101 both as an inversion record and as IAU elements, and converting the first reproduces the second's pole to under half a degree and its rotation rate to 1e-4 degrees per day.
+Every camera field in the recipe is recomputed from the pinned inputs and compared against it by
+[zimpol-camera.test.mts](../../../tests/objects/unit/kleopatra/zimpol-camera.test.mts), so the derivation runs in the
+test suite rather than being a claim about code the build never executes.
+
+Three checks back the geometry, and it is worth stating what each one cannot see. Sub-solar points derived from the
+pinned heliocentric vectors reproduce the solar phase angle Horizons reports directly, to better than 0.05 degrees on
+every frame; that proves the ephemeris handling and is invariant under a longitude mirror. The rotation convention is
+checked against the producer's own numbers, since DAMIT distributes model 101 both as an inversion record and as IAU
+elements, and converting the first reproduces the second's pole to under half a degree and its rate to 1e-4 degrees
+per day; that proves the pole and the rate, not the handedness. The handedness itself is asserted directly in
+[observer-camera.test.mts](../../../tools/objects/terrestrial-layers/observer-camera.test.mts), because an earlier
+revision of this lens shipped a body mirrored in longitude and every silhouette, disc-size and phase-angle check
+passed on it unchanged.
 
 [Source test definitions](../../../tests/objects/unit/kleopatra/source.test.mts).
 
