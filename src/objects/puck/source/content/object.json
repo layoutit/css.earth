@@ -8,27 +8,28 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "About 81 km"
+        "value": "About 81 km",
+        "source": {
+          "url": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+          "label": "Puck · reference sphere",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-puck-reference-sphere",
+          "locator": "/semiAxesKm/0"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Uranus",
-        "value": "About 18.28 hours"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 86,000 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation",
-        "value": "Synchronous model"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1985"
+        "value": "About 18.28 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days) × 24"
+        }
       }
     ],
     "moreFacts": []

@@ -10,6 +10,72 @@
       "values": {
         "distance-from-sun": "9.537 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "128",
+        "Saturn",
+        "Telesto",
+        "613",
+        "SAT441",
+        "Laplace",
+        "2000-01-01.5",
+        "295000.",
+        "0.001",
+        "66.2",
+        "360.0",
+        "1.2",
+        "242.1",
+        "1.887802",
+        "0.005",
+        "4.982",
+        "40.6",
+        "83.5",
+        "0.0",
+        "36"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XIII",
+        "Telesto",
+        "S/1980 S13",
+        "1980",
+        "B.A. Smith, H. Reitsema, S.M. Larson, J. Fountain",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

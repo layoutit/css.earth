@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8531,
-      "expectedSha256": "b372cfbb9872ec8f9622c5bb425f3fc92b9550408e0db591d72cc6e4a9badbdf",
+      "expectedBytes": 8297,
+      "expectedSha256": "0314f0012daf89e5fa90b1b2e6a8ab2c6e26ba40f5c04e667a0e6fda068afe45",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 27,
       "expectedSha256": "f9e9a6e1555cd700f8233b2ac996f0f8729c08ea4507c5a3c3e24b829b544d8f"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4549,
+      "expectedSha256": "6bd2619662482cd7aef964a1c8fd002207f63413a55ce8acd968597457bc7d8e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Hygiea: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

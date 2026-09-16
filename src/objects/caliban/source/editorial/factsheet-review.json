@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "caliban",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "429",
+        "Uranus",
+        "Caliban",
+        "716",
+        "URA117",
+        "ecliptic",
+        "2020-01-01.0",
+        "7167000.",
+        "0.200",
+        "349.7",
+        "241.2",
+        "141.4",
+        "174.9",
+        "580.",
+        "8795.",
+        "6483.",
+        "",
+        "",
+        "",
+        "43"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XVI",
+        "Caliban",
+        "S/1997 U1",
+        "1997",
+        "B.J. Gladman, P.D. Nicholson, J.A. Burns, J.J. Kavelaars",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

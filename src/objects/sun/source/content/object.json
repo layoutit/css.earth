@@ -23,16 +23,6 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Approximate radius",
-        "value": "700,000 km"
-      },
-      {
-        "id": "distance-from-earth",
-        "label": "Mean distance from Earth",
-        "value": "150 million km"
-      },
-      {
         "id": "rotation-period",
         "label": "Equatorial rotation",
         "value": "About 25 days",
@@ -44,34 +34,9 @@
           "catalogueId": "nasa-sun-facts",
           "locator": "/references/0; rotation-period"
         }
-      },
-      {
-        "id": "galactic-orbit",
-        "label": "Galactic orbit",
-        "value": "230 million years"
       }
     ],
     "moreFacts": [
-      {
-        "id": "age",
-        "label": "Age",
-        "value": "4.5 billion years"
-      },
-      {
-        "id": "solar-system-mass",
-        "label": "Share of system mass",
-        "value": "About 99.8%"
-      },
-      {
-        "id": "photosphere-temperature",
-        "label": "Photosphere temperature",
-        "value": "5,500 °C"
-      },
-      {
-        "id": "core-temperature",
-        "label": "Core temperature",
-        "value": "15 million °C"
-      },
       {
         "id": "activity-cycle",
         "label": "Activity cycle",

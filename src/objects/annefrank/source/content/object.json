@@ -6,24 +6,30 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate ellipsoid"
-      },
-      {
         "id": "dimensions",
         "label": "Full approximation dimensions",
-        "value": "6.6 × 5 × 3.4 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "Unresolved in this approximation"
+        "value": "6.6 × 5 × 3.4 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=5535",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.extent (km)"
+        }
       },
       {
         "id": "class",
         "label": "Population",
-        "value": "Main-belt asteroid"
+        "value": "Main-belt asteroid",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=5535",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "object.orbit_class.name"
+        }
       }
     ],
     "moreFacts": []

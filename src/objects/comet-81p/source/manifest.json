@@ -695,8 +695,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3745,
-      "expectedSha256": "978799852f7a293c01778d5e3ec46935415100053a03d81c13a0023677d2eac2",
+      "expectedBytes": 3422,
+      "expectedSha256": "9049513c8333fbfe9d3bb2d33857be5f03f744166fc31b1d791f89a2d284877e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -771,6 +771,21 @@
       "path": "reference/stereo-frame.json",
       "expectedBytes": 1159,
       "expectedSha256": "780fb4c8245cda9d8da709ebdd8489d9e27989f11dcf7b5c3ae9eb26768b90a6"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4180,
+      "expectedSha256": "4af0d405eee347c1135b6eeae450cb45e2f79c3a4d0e6f63c3b662fd58f4af5a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 81P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

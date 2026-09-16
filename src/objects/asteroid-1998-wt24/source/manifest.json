@@ -151,8 +151,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10244,
-      "expectedSha256": "fbbc96f5af122f3de08118b7b38f1849d1254e17c75cef949e19150c679bdb41",
+      "expectedBytes": 10663,
+      "expectedSha256": "511654d2094ad6758ee7c159a032e5115175965f1d3f76b183cda827c3b9c287",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -207,6 +207,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1823,
       "expectedSha256": "550eee3d381e1db1e1087ccd481902f480db7776366c399a47420c2354602795"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4550,
+      "expectedSha256": "7fbfe6eda8d6cf258b1e99fddb73e06d00b970e76e38cddfd150f9d7daa79378",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 1998 WT24: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

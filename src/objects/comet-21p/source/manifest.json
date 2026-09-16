@@ -79,8 +79,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3300,
-      "expectedSha256": "b0e5193d90c3a64cc1a43e412ea1194c9f015108ff0ce3d63aa2f1eade1da902",
+      "expectedBytes": 3637,
+      "expectedSha256": "2270a64c1b5d0635c144e133ed0a41a7d169bdb713a34d681a8e6201afc105d5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -130,6 +130,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 2726,
       "expectedSha256": "8d8910c7b09f06f715dcd6844c5c50e85362880523383a50e00d48c31927020a"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3408,
+      "expectedSha256": "d96a582d3bf49c876f2fc58496af931736373531ba2cb6ebd9127a41a89c36f9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 21P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

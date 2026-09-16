@@ -25,7 +25,15 @@
       {
         "id": "radius",
         "label": "Model equivalent radius",
-        "value": "1.01 km"
+        "value": "1.01 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+          "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+          "locator": "/diameterKm"
+        }
       },
       {
         "id": "distance-from-sun",
@@ -56,7 +64,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "8.76243 ± 0.00004 hours"
+        "value": "8.76243 ± 0.00004 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+          "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+          "locator": "/periodHours"
+        }
       }
     ],
     "moreFacts": []

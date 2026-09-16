@@ -25,44 +25,56 @@
       {
         "id": "radius",
         "label": "Approximate radius",
-        "value": "715 km"
+        "value": "715 km",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/approximateRadiusKm"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "About 22.5 hours"
+        "value": "About 22.5 hours",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/rotationPeriodHours"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "About 305 years"
-      },
-      {
-        "id": "moon-count",
-        "label": "Moons",
-        "value": "1 — nicknamed MK 2"
+        "value": "About 305 years",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/orbitalPeriodYears"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
-        "value": "45.8 AU"
-      },
-      {
-        "id": "surface",
-        "label": "Surface coverage",
-        "value": "Unresolved; no terrain map"
-      },
-      {
-        "id": "shape",
-        "label": "Display shape",
-        "value": "Spherical approximation"
-      },
-      {
-        "id": "appearance",
-        "label": "Surface representation",
-        "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
+        "value": "45.8 AU",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/meanDistanceAu"
+        }
       }
     ]
   },

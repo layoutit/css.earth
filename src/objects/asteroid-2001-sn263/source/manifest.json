@@ -104,8 +104,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3323,
-      "expectedSha256": "3b309dfab696b851c16eb4bce1eb156fed7851979be60f9f6c8d81206dd21f79",
+      "expectedBytes": 3356,
+      "expectedSha256": "5a810a3d2f825e8b40595b89724cdd28cf7d3bb23c6ff57f6815ae5c7d95af93",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -210,6 +210,21 @@
       "path": "validation/epoch-state.json",
       "expectedBytes": 3482,
       "expectedSha256": "c2916adf2a5cce3a484968e15cd04289147a98357d377815f9a8c5b23367f573"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2991,
+      "expectedSha256": "19bf5d26cb75f18f37bd3231e725005c3c526b463ed7be044e8c036b5222c4b5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 2001 SN263: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

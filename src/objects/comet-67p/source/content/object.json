@@ -4,33 +4,7 @@
   "id": "comet-67p",
   "displayName": "67P",
   "panel": {
-    "facts": [
-      {
-        "id": "diameter",
-        "label": "Equivalent diameter",
-        "value": "About 3.3 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation before perihelion",
-        "value": "12.4041 hours"
-      },
-      {
-        "id": "mission",
-        "label": "Explored by",
-        "value": "Rosetta · 2014–2016"
-      },
-      {
-        "id": "shape",
-        "label": "Nucleus model",
-        "value": "ESA/RMOC MTP019"
-      },
-      {
-        "id": "source-epoch",
-        "label": "Shape observations",
-        "value": "6 August 2014 – 25 August 2015"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

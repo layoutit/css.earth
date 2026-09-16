@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "9.537 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "137",
+        "Saturn",
+        "Pan",
+        "618",
+        "SAT415",
+        "Laplace",
+        "2000-01-01.5",
+        "133600.",
+        "0.000",
+        "0.0",
+        "146.6",
+        "0.0",
+        "0.0",
+        "0.575051",
+        "0.000",
+        "0.000",
+        "40.6",
+        "83.5",
+        "0.0",
+        "17"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XVIII",
+        "Pan",
+        "S/1981 S13",
+        "1990",
+        "M.R. Showalter",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

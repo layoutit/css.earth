@@ -303,8 +303,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5209,
-      "expectedSha256": "75e3401d067ea3cd0e05abc9c7dcd8bb22c04ffacc4c9bc3f30056eb5a11ac33",
+      "expectedBytes": 4943,
+      "expectedSha256": "94c13db8f5c921218f09e74d525c958f7ae7807be590bf86d88bf6f07182e7d7",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -337,6 +337,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /eris/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3198,
+      "expectedSha256": "ad1b526c155fb257e901f7863d7808085e64914e3e06ccff30e69453eb07e3e8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eris: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ],

@@ -6,31 +6,32 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published occultation model"
-      },
-      {
         "id": "dimensions",
         "label": "Model extents",
-        "value": "658 × 658 × 588 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Unresolved; display orientation is illustrative"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Trans-Neptunian object"
+        "value": "658 × 658 × 588 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2605.28636",
+          "label": "Research publication · arXiv 2605.28636",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2605-28636",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "uncertainty",
         "label": "Shape interpretation",
-        "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model."
+        "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model.",
+        "source": {
+          "url": "https://arxiv.org/abs/2605.28636",
+          "label": "Research publication · arXiv 2605.28636",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2605-28636",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ]
   },

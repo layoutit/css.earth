@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2606,
-      "expectedSha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
+      "expectedBytes": 3304,
+      "expectedSha256": "f7b84dc403ccaac777f79d8482057f90315ceb4a1486b212a3b315ef11a713d8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 1223,
       "expectedSha256": "c1c2ff6c28eb0caf817f0caf3b446c688012f58ca630a87568a81752a211d21d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3228,
+      "expectedSha256": "569612ef80d7a7bda50cdad000d50df0d4c5fd8e69bc468be8c17082961e06da",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 137P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

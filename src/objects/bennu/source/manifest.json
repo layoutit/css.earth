@@ -187,7 +187,7 @@
       "id": "usgs-gazetteer-bennu-nomenclature-center-pts",
       "path": "features/BENNU_nomenclature_center_pts.zip",
       "expectedBytes": 95757,
-      "expectedSha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f",
+      "expectedSha256": "baad704dc0b3e070b5781d68205e145339df3eabacf48ba33ad3aa019928c7fa",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -239,8 +239,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9585,
-      "expectedSha256": "ab491d54b481f26f0ee3b18d170708e09abb0076f37b6e3f68edfd523fa48c2c",
+      "expectedBytes": 9715,
+      "expectedSha256": "60b5b2bd9e21d832ca4f69b50a2b46e89defe254b6d59711871dfc4f7c2c43b9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -297,7 +297,7 @@
       "id": "bennu-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1303,
-      "expectedSha256": "8498d3fbaa7ffefbe3c86d25f798de80df044be4973313f2fa8091f6e4344352",
+      "expectedSha256": "c017ad68493fbe0daab1f8ad6820b2a1ecfb6b293cbde675702327e5df555c94",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -389,6 +389,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6137,
+      "expectedSha256": "5eba0434393c68aa1c0123740cdaf5413efc4a1608566bc326948eef85f6937b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Bennu: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

@@ -25,7 +25,15 @@
       {
         "id": "distance-from-earth",
         "label": "Mean distance from Earth",
-        "value": "384,400 km"
+        "value": "384,400 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+          "label": "source-moon-prepared-moon-facts",
+          "checked": "2026-09-16",
+          "path": "source/orbit/moon.json",
+          "catalogueId": "source-moon-prepared-moon-facts",
+          "locator": "/meanOrbitRadiusKm"
+        }
       },
       {
         "id": "radius",
@@ -43,12 +51,20 @@
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "27.322 days"
+        "value": "27.322 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/2; P (days)"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "27.32 days \u00b7 synchronous",
+        "value": "27.32 days · synchronous",
         "source": {
           "url": "https://science.nasa.gov/moon/facts/",
           "label": "NASA/JPL reference",
@@ -61,17 +77,33 @@
       {
         "id": "orbital-inclination",
         "label": "Inclination to ecliptic",
-        "value": "5.16\u00b0"
+        "value": "5.16°",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+          "label": "source-moon-prepared-moon-facts",
+          "checked": "2026-09-16",
+          "path": "source/orbit/moon.json",
+          "catalogueId": "source-moon-prepared-moon-facts",
+          "locator": "/inclinationDegrees"
+        }
       },
       {
         "id": "orbital-eccentricity",
         "label": "Orbital eccentricity",
-        "value": "0.0554"
+        "value": "0.0554",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+          "label": "source-moon-prepared-moon-facts",
+          "checked": "2026-09-16",
+          "path": "source/orbit/moon.json",
+          "catalogueId": "source-moon-prepared-moon-facts",
+          "locator": "/eccentricity"
+        }
       },
       {
         "id": "density",
         "label": "Mean density",
-        "value": "3.344 \u00b1 0.001 g/cm\u00b3",
+        "value": "3.344 ± 0.001 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -100,7 +132,7 @@
         },
         "falseColor": false,
         "qualification": "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere.",
-        "notes": "LROC WAC 643 nm photography, mapped from observations in 2009\u20132011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
+        "notes": "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
         "noData": true
       },
       {
@@ -117,9 +149,9 @@
           "kind": "scale",
           "title": "Midnight temperature",
           "labels": [
-            "\u226480",
+            "≤80",
             "110",
-            "\u2265140"
+            "≥140"
           ],
           "recipe": {
             "palette": [
@@ -160,17 +192,17 @@
               ]
             ],
             "labels": [
-              "\u226480",
+              "≤80",
               "110",
-              "\u2265140"
+              "≥140"
             ]
           },
           "meta": "K",
           "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.xml"
         },
         "falseColor": true,
-        "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009\u20132022. Colors span 80\u2013140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond \u00b170\u00b0. This combines many nights; it is not a current temperature map.",
-        "notes": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009\u20132022. Colors span 80\u2013140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond \u00b170\u00b0. This combines many nights; it is not a current temperature map.",
+        "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
+        "notes": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
         "noData": true
       },
       {
@@ -187,9 +219,9 @@
           "kind": "scale",
           "title": "Observed minus modeled temperature",
           "labels": [
-            "\u2264\u221210",
+            "≤−10",
             "0",
-            "\u226510"
+            "≥10"
           ],
           "recipe": {
             "palette": [
@@ -230,17 +262,17 @@
               ]
             ],
             "labels": [
-              "\u2264\u221210",
+              "≤−10",
               "0",
-              "\u226510"
+              "≥10"
             ]
           },
           "meta": "K difference",
           "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.xml"
         },
         "falseColor": true,
-        "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span \u221210 to +10 K. Observations cover 2009\u20132022 within \u00b170\u00b0; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
-        "notes": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span \u221210 to +10 K. Observations cover 2009\u20132022 within \u00b170\u00b0; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+        "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+        "notes": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
         "noData": true
       },
       {
@@ -299,8 +331,8 @@
           "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.xml"
         },
         "falseColor": true,
-        "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009\u20132022 at slope-adjusted midnight. Colors span 0\u20132%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond \u00b170\u00b0. This estimates rock area, not individual boulder counts.",
-        "notes": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009\u20132022 at slope-adjusted midnight. Colors span 0\u20132%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond \u00b170\u00b0. This estimates rock area, not individual boulder counts.",
+        "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
+        "notes": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
         "noData": true
       },
       {
@@ -317,7 +349,7 @@
           "kind": "scale",
           "title": "Elevation above reference sphere",
           "labels": [
-            "\u221212",
+            "−12",
             "0",
             "12"
           ],
@@ -350,7 +382,7 @@
               ]
             ],
             "labels": [
-              "\u221212",
+              "−12",
               "0",
               "12"
             ]
@@ -360,7 +392,7 @@
         },
         "falseColor": true,
         "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
-        "notes": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent \u221212 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
+        "notes": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
       },
       {
         "id": "crust",
@@ -727,9 +759,9 @@
           "kind": "scale",
           "title": "Christiansen-feature wavelength",
           "labels": [
-            "\u22648.0",
+            "≤8.0",
             "8.25",
-            "\u22658.5"
+            "≥8.5"
           ],
           "recipe": {
             "palette": [
@@ -760,17 +792,17 @@
               ]
             ],
             "labels": [
-              "\u22648.0",
+              "≤8.0",
               "8.25",
-              "\u22658.5"
+              "≥8.5"
             ]
           },
-          "meta": "\u00b5m",
+          "meta": "µm",
           "sourceUrl": "https://zenodo.org/records/4558194"
         },
         "falseColor": true,
-        "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within \u00b170\u00b0 latitude",
-        "notes": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0\u20138.5 \u00b5m; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50\u00b0 latitude. Gray grid marks missing observations and latitudes beyond \u00b170\u00b0.",
+        "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude",
+        "notes": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°.",
         "noData": true
       },
       {

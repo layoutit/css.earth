@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2966,
-      "expectedSha256": "8306e935bb51c0a50ed65f5af9ffb93b846a38ba656675973c1828499c27d196",
+      "expectedBytes": 3429,
+      "expectedSha256": "d9f9015298794aea4b0ae7a059b2143a720e17bfe3c67ca1e9aee7b1d7adcf0a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4979,
       "expectedSha256": "883ca3633b43f1b3da1af6a162fadc1b6d1558d8f8fe74fc81e316c5593571f6"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4339,
+      "expectedSha256": "8518e709c5c831792f113ac70f1d9d0ad8938e65cea238b32ca484aa2a200124",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Patroclus: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

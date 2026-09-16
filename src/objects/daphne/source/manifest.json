@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8557,
-      "expectedSha256": "9a06571d0c6936b5314da46efb60db29f49d43786cdf1ee38f15b9914cf377ea",
+      "expectedBytes": 8325,
+      "expectedSha256": "039cacb6e1217928eba44266f72da65cbeb16a88a8192ec0d61f593d4905a24a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 45,
       "expectedSha256": "30b6da64ad969d833985b06896194e3c6afcd52f79ff3ff27b53ee9a4c0f40c2"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5829,
+      "expectedSha256": "40ebee06136095cbf02e29e22e920230c7e0ef8301f45d3b758a6867395ae60d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Daphne: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

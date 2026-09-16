@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3303,
-      "expectedSha256": "bde0de4a9d5361b893f9dae485996880e9a094525eb09af785b42cec5b6ab509",
+      "expectedBytes": 4093,
+      "expectedSha256": "8b22c7760b34c473b49abc4325b9fbe0d6d6bbd7431383d1d3cbe6277885ae77",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -150,6 +150,21 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6646,
       "expectedSha256": "40b4c095e4d6bdd88dc54b752c9a33a621b1bc3795436ff3c5bff5f87925c385"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3245,
+      "expectedSha256": "81b7bd8e338d8e4ce67f6daf4a7a4581c30b232e3ff75ab25a54f2d37b02fe11",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Gonggong: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
