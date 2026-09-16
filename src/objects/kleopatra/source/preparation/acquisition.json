@@ -30,6 +30,102 @@
       ],
       "path": "reference/marchis-2021.pdf",
       "url": "https://arxiv.org/pdf/2108.07207"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/216_Kleopatra_adam.obj",
+      "url": "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_adam.obj",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-14T05_00_59.538_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2017-07-14T05_13_26.665_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-14T05_13_26.665_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2017-07-22T04_26_27.837_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-22T04_26_27.837_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2017-07-27T04_11_03.654_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-27T04_11_03.654_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2017-08-10T05_17_48.553_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-08-10T05_17_48.553_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2018-12-10T06_44_11.253_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2018-12-10T06_44_11.253_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d216Kleopatra_2018-12-19T06_57_24.735_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2018-12-19T06_57_24.735_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
     }
   ]
 }

@@ -26,6 +26,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "zimpol",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -46,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "ea05bacd392d1d101d935418fa628ec2745375b3a068dc3145789bcb6d12e88a"
+          "sha256": "726ef8b759875170f36471848185af2839552de2acfcfc6ac30af1866dd5e8a6"
         },
         {
           "id": "rotation",
@@ -56,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4"
+          "sha256": "9a9346a1312fb8ba235472a16fbc02c2a48bf7eb3ada00950adb9410653259d6"
         },
         {
           "id": "title",
@@ -71,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f87b27f0445eb707467cab48f3ae1ebbadf70e415ee53c97c686ac0920fdc51e"
+          "sha256": "861f3f7f6a9c48f9e19bc920a1d8a3422606716240eb1316fab11627139b148b"
         }
       ]
     },
