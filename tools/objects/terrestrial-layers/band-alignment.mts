@@ -6,22 +6,22 @@
  */
 import type {loadCameraShape} from './shape-camera-mosaic.mts';
 
-export interface RegistrationImage {data:ArrayLike<number>;width:number;height:number}
-export interface RegistrationCamera {position:readonly number[];sun:readonly number[];ray(x:number,y:number):ArrayLike<number>;project(point:readonly number[]):readonly number[]|null}
-export interface RegistrationFrame {id:string;center?:readonly number[];northAzimuthDegrees?:number}
-export interface RegistrationSource<F extends RegistrationFrame> {frame:F;image:RegistrationImage;sha256:string}
-type RegistrationMesh = Pick<Awaited<ReturnType<typeof loadCameraShape>>,'intersect'|'indices'|'positions'>;
+export interface AlignmentImage {data:ArrayLike<number>;width:number;height:number}
+export interface AlignmentCamera {position:readonly number[];sun:readonly number[];ray(x:number,y:number):ArrayLike<number>;project(point:readonly number[]):readonly number[]|null}
+export interface AlignmentFrame {id:string;center?:readonly number[];northAzimuthDegrees?:number}
+export interface AlignmentSource<F extends AlignmentFrame> {frame:F;image:AlignmentImage;sha256:string}
+type AlignmentMesh = Pick<Awaited<ReturnType<typeof loadCameraShape>>,'intersect'|'indices'|'positions'>;
 
-export const REGISTRATION_SETTINGS = {patchRadiusPixels:13,patchSampleStepPixels:2,searchRadiusPixels:9,detailBoxWidthsPixels:[5,31],maximumEmissionDegrees:65,
+export const BAND_ALIGNMENT_SETTINGS = {patchRadiusPixels:13,patchSampleStepPixels:2,searchRadiusPixels:9,detailBoxWidthsPixels:[5,31],maximumEmissionDegrees:65,
   maximumReferenceIncidenceDegrees:75,minimumValidSignal:.002,minimumDetailVariance:1e-6,minimumConvolutionMarginPixels:16,maximumSourceMeshVisibilityResidualMeters:1} as const;
-export const REGISTRATION_CRITERIA = {minimumCorrelation:.9,minimumSeparatedPeakMargin:.01,minimumPeakCurvature:.002,minimumFitControls:6,minimumHoldoutControls:6,
+export const BAND_ALIGNMENT_CRITERIA = {minimumCorrelation:.9,minimumSeparatedPeakMargin:.01,minimumPeakCurvature:.002,minimumFitControls:6,minimumHoldoutControls:6,
   maximumHoldoutRmsPixels:1,maximumHoldoutResidualPixels:2} as const;
-export const REGISTRATION_METHOD = 'Rigid detector translation and roll fitted to interior image features through the published source mesh; disjoint checkerboard patches held out. A 5-pixel minus31-pixel box-mean image isolates detail for correlation only; original I/F stays unchanged. Fixed source range, focal scale, body and solar directions.';
-const S = REGISTRATION_SETTINGS, C = REGISTRATION_CRITERIA;
+export const BAND_ALIGNMENT_METHOD = 'Rigid detector translation and roll fitted to interior image features through the published source mesh; disjoint checkerboard patches held out. A 5-pixel minus31-pixel box-mean image isolates detail for correlation only; original I/F stays unchanged. Fixed source range, focal scale, body and solar directions.';
+const S = BAND_ALIGNMENT_SETTINGS, C = BAND_ALIGNMENT_CRITERIA;
 
 /** A bilinear sample of a detail image. Correlation uses a 31-pixel convolution, so the complete detector support must be
  * retained, including the neighbouring sample used for interpolation, and the original signal must be valid. */
-function sample(image:RegistrationImage,a:ArrayLike<number>,x:number,y:number,validity?:ArrayLike<number>):number|null{
+function sample(image:AlignmentImage,a:ArrayLike<number>,x:number,y:number,validity?:ArrayLike<number>):number|null{
  const w=image.width,margin=S.minimumConvolutionMarginPixels;
  if(x<margin||y<margin||x>=w-margin||y>=image.height-margin)return null;
  const ix=Math.floor(x),iy=Math.floor(y),u=x-ix,v=y-iy,i=iy*w+ix;
@@ -29,14 +29,14 @@ function sample(image:RegistrationImage,a:ArrayLike<number>,x:number,y:number,va
  if(ns.some(n=>!Number.isFinite(n))||(validity?[validity[i],validity[i+1],validity[i+w],validity[i+w+1]]:ns).some(n=>!Number.isFinite(n)||n<S.minimumValidSignal))return null;
  return (ns[0]*(1-u)+ns[1]*u)*(1-v)+(ns[2]*(1-u)+ns[3]*u)*v;
 }
-function detail({data:values,width:w,height:h}:RegistrationImage){
+function detail({data:values,width:w,height:h}:AlignmentImage){
  const integral=new Float64Array((w+1)*(h+1));
  for(let y=0;y<h;y++){let row=0;for(let x=0;x<w;x++){row+=Number.isFinite(values[y*w+x])?values[y*w+x]:0;integral[(y+1)*(w+1)+x+1]=integral[y*(w+1)+x+1]+row;}}
  const mean=(x:number,y:number,r:number)=>{const x0=Math.max(0,x-r),y0=Math.max(0,y-r),x1=Math.min(w,x+r+1),y1=Math.min(h,y+r+1);return (integral[y1*(w+1)+x1]-integral[y0*(w+1)+x1]-integral[y1*(w+1)+x0]+integral[y0*(w+1)+x0])/((x1-x0)*(y1-y0));};
  return Float32Array.from(values,(_,i)=>mean(i%w,Math.floor(i/w),2)-mean(i%w,Math.floor(i/w),15));
 }
 /** The largest connected bright region locates a search window only. It never controls delivered coverage. */
-function box({data:values,width:w,height:h}:RegistrationImage){
+function box({data:values,width:w,height:h}:AlignmentImage){
  const seen=new Uint8Array(values.length),queue=new Int32Array(values.length);let biggest:number[]=[];
  for(let i=0;i<values.length;i++)if(!seen[i]&&values[i]>.02){
   let first=0,last=1;queue[0]=i;seen[i]=1;
@@ -52,8 +52,8 @@ function ncc(a:number[],b:number[]){const ma=a.reduce((s,n)=>s+n,0)/a.length,mb=
 interface Patch {pixel:number[];point:number[];normal:number[];points:number[][];values:number[];partition:'fit'|'holdout'}
 
 /** Register each target against the reference: fit its detector centre and roll, or with `checkOnly` measure the authored camera. */
-export function registerCameraBands<F extends RegistrationFrame>({mesh,camera,reference,targets,checkOnly,searchRadiusPixels=S.searchRadiusPixels}:{mesh:RegistrationMesh;camera:(frame:unknown)=>RegistrationCamera;
-  reference:RegistrationSource<F>;targets:readonly (RegistrationSource<F>&{filter:string})[];checkOnly:boolean;searchRadiusPixels?:number}){
+export function alignCameraBands<F extends AlignmentFrame>({mesh,camera,reference,targets,checkOnly,searchRadiusPixels=S.searchRadiusPixels}:{mesh:AlignmentMesh;camera:(frame:unknown)=>AlignmentCamera;
+  reference:AlignmentSource<F>;targets:readonly (AlignmentSource<F>&{filter:string})[];checkOnly:boolean;searchRadiusPixels?:number}){
  if(!Number.isInteger(searchRadiusPixels)||searchRadiusPixels<1||searchRadiusPixels>64)throw new Error('Feature registration search radius must be an integer from 1 to 64 pixels.');
  const ref=reference.image,referenceCamera=camera(reference.frame),referenceDetail=detail(ref);
  const bbox=box(ref),radius=S.patchRadiusPixels,step=Math.max(2*radius+2,Math.round(Math.sqrt((bbox.x1-bbox.x0)*(bbox.y1-bbox.y0)/180)));
