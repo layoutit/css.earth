@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 263.05313179526706,
+  "declinationDegrees": 71.40576339819279,
+  "displayMeridianDegrees": -90.0,
+  "phase": "arbitrary-display-phase",
+  "source": "No measured rotation axis or period: Montargès et al. (2018, A&A 614, A12; doi:10.1051/0004-6361/201731471) image the photosphere without resolving its rotation. The display axis is celestial north at the SIMBAD/Gaia position, placed in the plane of the sky (right ascension of the star plus 180 degrees, declination 90 degrees minus the star's), so the images are cast with their north up and the sub-Earth point on the equator.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of CE Tauri are unmeasured; the axis shown is where celestial north lies on the sky."
+}

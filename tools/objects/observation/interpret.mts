@@ -370,6 +370,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // The surface source names the authored record that states this, so the manifest still binds the lens.
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) { data[offset] = 128; data[offset + 1] = 128; data[offset + 2] = 128; data[offset + 3] = 255; }
+        // An emissive body (a star with no observation) still owes the presentation its off-limb and limb plates: both transparent.
+        if (recipe.emission) return { data, channels: 4, nearest: true, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
         return { data, channels: 4, nearest: true };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);

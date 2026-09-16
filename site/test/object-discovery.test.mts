@@ -85,6 +85,15 @@ test('default discovery admits photographed asteroids and hides illustrations ac
   for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'eris', 'haumea', 'makemake']) assert.equal(requireSceneObject(id).discovery.illustration, false, id);
 });
 
+test('a star with only its shape stays off the map, whatever the settings', () => {
+  for (const options of [defaults, { illustrations: true, asteroids: true, asteroidLabels: true, highlighted: 'star' }]) {
+    const scene = discoveryVisibility(SCENE_OBJECTS, options);
+    assert.equal(requireSceneObject('antares').discovery.imagery, false);
+    assert.ok(scene.hiddenBodies.includes('antares') && scene.hiddenLabels.includes('antares') && !scene.highlightedBodies.includes('antares'));
+    for (const id of ['sun', 'betelgeuse', 'pi1-gruis', 'ce-tauri']) assert.equal(scene.hiddenBodies.includes(id), false, id);
+  }
+});
+
 test('category browsing and asteroid settings cannot bypass Illustration models', () => {
   const browse = discoveryVisibility(SCENE_OBJECTS, { illustrations: false, asteroids: true, asteroidLabels: true, highlighted: 'asteroid' });
   assert.equal(browse.hiddenBodies.includes('annefrank'), true);

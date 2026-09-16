@@ -1,0 +1,37 @@
+{
+  "id": "source-ce-tauri-uniform-disc-sphere",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CE Tauri · uniform disc sphere",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201731471",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ce-tauri/source/manifest.json",
+      "revision": "601be8f893b7926a4e466ed3ec50824210640634",
+      "sha256": "44c1b8849343e9089a8e27fa5b77a79e41e16b142f0ed01f643f3ef3c09bacc1",
+      "locator": "/inputs/20"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Radius from the Montargès et al. (2018) limb-darkened diameter at the Gaia DR3 distance; sphere written by this repository",
+      "scope": "The uniform disc sphere input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Project-authored reference surface from a published diameter.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
