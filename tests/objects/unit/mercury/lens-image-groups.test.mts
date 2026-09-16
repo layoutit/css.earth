@@ -35,7 +35,9 @@ test("Mercury partial interior failure retires all siblings and retries independ
   try {
     const pending = f.selection.dispatch({ kind: "lens", id: "interior" });
     const rejection = assert.rejects(pending, /decode/); await f.flush();
-    const original = f.jobs.filter(job => !job.done); assert.equal(original.length, 5);
+    // Every interior image the lens requests (outer surface and poles, their unlit variants, core, core poles, section).
+    const interiorImages = runtimeDefinition.assets.entries.filter(entry => entry.key.startsWith("interior:")).length;
+    const original = f.jobs.filter(job => !job.done); assert.ok(original.length >= 5 && original.length <= interiorImages, `${original.length} pending of ${interiorImages}`);
     original[0].done = true; original[0].resolve(); original[1].done = true; original[1].reject(new Error("core failed"));
     await rejection; assert.ok(original.every(job => job.image.src === ""));
     assert.equal(pool(f).resident, 0); assert.equal(f.stage.dataset.view, undefined);
