@@ -1,8 +1,8 @@
 import { compileLeafBounds } from '../preparation/leaf-bounds.js';
 import { readFileSync } from 'node:fs';
 import { afterEach, expect, test, vi } from 'vitest';
-import { bakeSlab } from '../../../preparation/volume/slices.js';
-import type { VolumeRecipe } from '../../../preparation/volume/config.js';
+import { bakeSlab } from '@cssearth/volume-bake/slices/density';
+import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';
 
@@ -231,4 +231,31 @@ test.each(['leaf', 'frame'])('prepared %s bounds defer offscreen textures and re
   expect(meshes.flatMap(m => m.children)).toEqual(nodes);
   expect(document.count).toBe(count);
   expect(resolver).toHaveBeenCalledTimes(9);
+});
+
+test('material replacement survives first visibility of every deferred axis', () => {
+  const { runtime, meshes } = mount(payload(3));
+  runtime.publish(publication([0, 0, 1]));
+  const textures = ['x', 'y', 'z'].map(axis => `/colored/${axis}.png`);
+  runtime.setTextures(textures.flatMap(texture => [texture, texture, texture]));
+  expect(meshes[0]!.children.every(node => !node.style.backgroundImage)).toBe(true);
+  for (const direction of [[1, 0, 0], [0, 1, 0], [0, 0, 1]] as const) runtime.publish(publication(direction));
+  for (const [axis, mesh] of meshes.entries()) for (const node of mesh.children)
+    expect(node.style.backgroundImage).toBe(`url("${textures[axis]}")`);
+});
+
+test('tone callbacks update a hidden axis without revealing it before rotation', async () => {
+  const { createToneResourceController } = await import('@cssearth/volume-viewer/scene/tone-resources');
+  const originalImage = globalThis.Image;
+  globalThis.Image = class { src = ''; naturalWidth = 10; naturalHeight = 10; async decode() {} } as unknown as typeof Image;
+  try {
+    const { runtime, meshes } = mount(payload(3));
+    runtime.publish(publication([0, 0, 1]));
+    const tone = createToneResourceController({ isAllowedUrl: () => true });
+    tone.bind('x', 10, 10, meshes[0]!.children as unknown as HTMLElement[], url => runtime.setTexture(0, url));
+    await tone.apply([{ sourcePath: 'x', url: '/tone/x.png', width: 10, height: 10 }], ['x'], () => true);
+    expect(meshes[0]!.children.every(node => !node.style.backgroundImage)).toBe(true);
+    runtime.publish(publication([1, 0, 0]));
+    expect(meshes[0]!.children.slice(0, 3).map(node => node.style.backgroundImage)).toEqual(Array(3).fill('url("/tone/x.png")'));
+  } finally { globalThis.Image = originalImage; }
 });

@@ -92,7 +92,7 @@ test('a late metadata failure restores images, retirements, previews, JSON and d
     const spy = t.mock.method(fs, 'rename', async (...args: Parameters<typeof fs.rename>) => { writes++; return originalRename(...args); });
     syncBuiltinESMExports();
     try { await publishPreparedObject(successful.args); } finally { spy.mock.restore(); syncBuiltinESMExports(); }
-    assert.ok(writes >= 10);
+    assert.ok(writes >= 9);
     assert.deepEqual((await readdir(successful.args.publicDirectory)).sort(), ['one.webp', 'two.webp']);
     assert.deepEqual(await readdir(join(successful.args.outputDirectory, 'minimaps')), ['new.webp']);
     assert.equal(await readFile(join(successful.args.objectDirectory, 'object.json'), 'utf8'), '{"id":"fixture","version":"new"}');

@@ -8,7 +8,7 @@ import { readCatalog } from '@cssearth/catalog';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
 import sharp from 'sharp';
 import { parseStarsRecipe } from './config.js';
-import { sha256, verifiedBytes } from '../volume/source.js';
+import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../../renderers/css/stars/validation.js';
 import { POINT_FIELD_MAGNITUDE_BOUND } from '../../renderers/css/stars/point-field-bank.js';

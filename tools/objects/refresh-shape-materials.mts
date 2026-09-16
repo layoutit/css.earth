@@ -1,6 +1,6 @@
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readAuthoredSources } from './authored-sources.ts';
-import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -23,7 +23,7 @@ import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare-navig
 import { validateMarkerDescriptor, renderMarker } from '../../src/navigation/marker-recipe.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value) + '\n');
@@ -63,7 +63,7 @@ export async function refreshShapeMaterialDescriptions(id: string) {
     await pretty(contentPath, content);
     const bytes = await readFile(contentPath), manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
     for (const entry of records(manifest.documents)) if (entry.path === 'content/object.json') {
-      entry.expectedBytes = bytes.length; entry.expectedSha256 = hash(bytes);
+      entry.expectedBytes = bytes.length; entry.expectedSha256 = sha256(bytes);
     }
     await pretty(manifestPath, manifest);
   }
@@ -139,16 +139,16 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     surfaces.push(surface);
   }
   // No partial changes while an asset is being baked, and no writes into a shared inode.
-  for (const [name, bytes] of originals) if (hash(await readFile(resolve(outputDirectory, name))) !== hash(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
-  if (hash(await readFile(recipePath)) !== hash(recipeBytes)) throw new Error('Recipe changed during refresh.');
+  for (const [name, bytes] of originals) if (sha256(await readFile(resolve(outputDirectory, name))) !== sha256(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
+  if (sha256(await readFile(recipePath)) !== sha256(recipeBytes)) throw new Error('Recipe changed during refresh.');
   const inventory = requireRecord(JSON.parse(originals.get('runtime-assets.json')!.toString('utf8'))), assets = records(inventory.assets);
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
   for (const surface of surfaces) for (const key of ['map', 'surface', 'shadowSurface', 'thumbnail']) {
     const asset = requireRecord(surface[key]), filename = basename(requireString(asset.url));
     const bytes = await readFile(resolve(stage, filename));
-    if (hash(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`Invalid staged asset: ${filename}.`);
+    if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`Invalid staged asset: ${filename}.`);
     await replaceAsset(resolve(stage, filename), resolve(publicDirectory, filename));
-    if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: hash(bytes) });
+    if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
   }
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
   for (const name of ['surfaces.json', 'material.json']) {
@@ -157,8 +157,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     await save(resolve(outputDirectory, name), document);
   }
   const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
-  for (const path of [resolve(objectDirectory, 'runtime-assets.json'), resolve(outputDirectory, 'runtime-assets.json')])
-    await writeFile(path, JSON.stringify(nextInventory, null, 2) + '\n');
+  await writeFile(resolve(objectDirectory, 'runtime-assets.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   const lensIds = views.map(view => view.id);
   // Context images and tiny navigation icons use the same material and retained mesh.
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
@@ -174,7 +173,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     await mkdir(dirname(contextPath), { recursive: true });
     const stagedContext = resolve(stage, `context-${surface.id}.png`);
     await writeFile(stagedContext, png); await replaceAsset(stagedContext, contextPath);
-    entry.expectedBytes = png.length; entry.expectedSha256 = hash(png);
+    entry.expectedBytes = png.length; entry.expectedSha256 = sha256(png);
     if (requireRecord(navigation.source).path === entry.path) contextRecord = entry;
   }
   if (contextRecord) {
@@ -201,7 +200,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   await refreshShapeMaterialDescriptions(id);
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000,
-    retainedSceneSha256: hash(originals.get('scene.json')!), recipeSha256: hash(recipeBytes), material: SHAPE_MATERIAL,
+    retainedSceneSha256: sha256(originals.get('scene.json')!), recipeSha256: sha256(recipeBytes), material: SHAPE_MATERIAL,
     changedAssets: [...changed.values()], retainedAssets: assets.length - changed.size,
     geometryBasis: 'Existing prepared scene; original source mesh additionally verified for source-cast lighting.' };
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
@@ -234,9 +233,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       let receipt;
       try { receipt = await json(resolve('output/shape-material-refresh', id, 'refresh.json')); }
       catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
-      if (receipt && receipt.recipeSha256 === hash(await readFile(resolve('src/objects', id, 'source/preparation/terrestrial.json'))) &&
-          receipt.retainedSceneSha256 === hash(await readFile(resolve('src/objects', id, 'prepared/scene.json')))) {
-        for (const asset of records(receipt.changedAssets)) if (hash(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
+      if (receipt && receipt.recipeSha256 === sha256(await readFile(resolve('src/objects', id, 'source/preparation/terrestrial.json'))) &&
+          receipt.retainedSceneSha256 === sha256(await readFile(resolve('src/objects', id, 'prepared/scene.json')))) {
+        for (const asset of records(receipt.changedAssets)) if (sha256(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
           throw new Error(`Refreshed asset changed before resume: ${id}/${asset.filename}.`);
         continue;
       }

@@ -1,8 +1,8 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
 import { array, number, shape, text } from './source-records.mts';
 
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, n, i) => s + n * b[i], 0);
 const radians = (degrees: number) => degrees * Math.PI / 180;
 const direction = (latitude: number, longitudeWest: number) => {
@@ -57,7 +57,7 @@ const parseIdentity = shape({ met: number, filter: text, imageSha256: text, rawS
 export function decodeNearMsi(imageBytes: Buffer, rawBytes: Buffer, value: unknown) {
   const identity = parseIdentity(value), image = readFitsPrimary(imageBytes), raw = readFitsPrimary(rawBytes);
   const { header: h } = readFitsHeader(imageBytes), { header: r } = readFitsHeader(rawBytes);
-  if (digest(imageBytes) !== identity.imageSha256 || digest(rawBytes) !== identity.rawSha256 ||
+  if (sha256(imageBytes) !== identity.imageSha256 || sha256(rawBytes) !== identity.rawSha256 ||
     image.width !== 537 || image.height !== 244 || raw.width !== image.width || raw.height !== image.height ||
     image.bitpix !== -32 || raw.bitpix !== 16 || image.scale !== 1 || raw.scale !== 1 || image.zero !== 0 || raw.zero !== 32768 ||
     image.nextOffset !== imageBytes.length || raw.nextOffset !== rawBytes.length || h.BUNIT !== 'I/F' ||

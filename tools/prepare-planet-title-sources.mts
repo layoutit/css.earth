@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { sha256 } from '../src/platform/sha256.mts';
 import {requireRecord,requireString,hasErrorCode} from './source-values.mts';
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -11,7 +12,6 @@ import { SCENE_OBJECTS } from "../site/objects.mts";
 import { authoredObject } from "./authored-object.mts";
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mts";
-import { sha256 } from "../src/platform/prepared-title.mts";
 
 type PlanetTitleSource = ReturnType<typeof createPlanetTitleSource>;
 type TitleObject = {id: string; name: string};

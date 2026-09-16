@@ -1,3 +1,4 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import { recordPreparationEvidence } from '../preparation-evidence.mts';
 import {hasErrorCode} from '../source-values.mts';
@@ -16,7 +17,7 @@ import { relative, resolve } from 'node:path';
 import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { provenanceProducts } from './provenance-recipes.mts';
 
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const json = async (path: string) => record(JSON.parse(await readFile(path, 'utf8')));
 const optionalJson = async (path: string) => json(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
 const contained = (root: string, path: string) => {

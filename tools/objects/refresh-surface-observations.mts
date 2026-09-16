@@ -1,5 +1,5 @@
 /** Refresh existing observation lenses using the full preparer's raster and atlas owners. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, copyFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -16,7 +16,7 @@ import { prepareSurfaceMinimaps } from '../prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 import { repinObjectJson } from '../prepare-object-json.mts';
 
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value) + '\n');
@@ -31,9 +31,9 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
   for (const reference of references) {
     const path = requireString(reference.path);
-    if (hash(await readFile(resolve(objectDirectory, path))) !== reference.sha256) throw new Error(`Pin the source recipe before refreshing: ${path}.`);
+    if (sha256(await readFile(resolve(objectDirectory, path))) !== reference.sha256) throw new Error(`Pin the source recipe before refreshing: ${path}.`);
   }
-  if (references.find(reference => reference.id === 'terrestrial')?.sha256 !== hash(recipeBytes)) throw new Error('Pin the observation recipe before refreshing.');
+  if (references.find(reference => reference.id === 'terrestrial')?.sha256 !== sha256(recipeBytes)) throw new Error('Pin the observation recipe before refreshing.');
   const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8')));
   const terrain = requireRecord(config.geometry.radialTerrain);
   if (config.geometry.radialModels || config.geometry.radialTerrainAlternatives || terrain.sourceLighting)
@@ -71,13 +71,13 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
       if (url !== requireRecord(old[key]).url) throw new Error(`Refresh cannot change the ${key} resource name.`);
       const filename = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(stage, filename));
-      if (hash(bytes) !== value.sha256 || bytes.length !== value.bytes) throw new Error(`Invalid staged asset ${filename}.`);
-      if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: hash(bytes) });
+      if (sha256(bytes) !== value.sha256 || bytes.length !== value.bytes) throw new Error(`Invalid staged asset ${filename}.`);
+      if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
     }
   }
   // Confirm the package has not changed while preparing, before applying any replacements.
-  for (const [name, bytes] of originals) if (hash(await readFile(resolve(outputDirectory, name))) !== hash(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
-  if (hash(await readFile(recipePath)) !== hash(recipeBytes)) throw new Error('Recipe changed during refresh.');
+  for (const [name, bytes] of originals) if (sha256(await readFile(resolve(outputDirectory, name))) !== sha256(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
+  if (sha256(await readFile(recipePath)) !== sha256(recipeBytes)) throw new Error('Recipe changed during refresh.');
   for (const name of ['surfaces.json', 'material.json']) {
     const document = requireRecord(JSON.parse(originals.get(name)!.toString('utf8')));
     document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
@@ -90,13 +90,13 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   }
   for (const filename of await readdir(stage)) if (lensIds.some(id => filename === `${id}-source-index.json`)) await copyFile(resolve(stage, filename), resolve(outputDirectory, filename));
   const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
-  for (const path of [resolve(objectDirectory, 'runtime-assets.json'), resolve(outputDirectory, 'runtime-assets.json')]) await writeFile(path, JSON.stringify(nextInventory, null, 2) + '\n');
+  await writeFile(resolve(objectDirectory, 'runtime-assets.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
-  if (hash(await readFile(resolve(outputDirectory, 'scene.json'))) !== hash(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
+  if (sha256(await readFile(resolve(outputDirectory, 'scene.json'))) !== sha256(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
-    recipeSha256: hash(recipeBytes), retainedSceneSha256: hash(originals.get('scene.json')!), refreshedRuntimeAssets: [...changed.values()],
+    recipeSha256: sha256(recipeBytes), retainedSceneSha256: sha256(originals.get('scene.json')!), refreshedRuntimeAssets: [...changed.values()],
     retainedRuntimeAssetCount: assets.length - changed.size, provenanceBasis: 'recovered', observations: surfaces.map(surface => surface.observation) };
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ id, seconds: report.seconds, maxRssMiB: report.maxRssMiB, refreshedAssets: changed.size, retainedAssets: report.retainedRuntimeAssetCount }));
@@ -115,7 +115,7 @@ export async function refreshObservationControls(id: string, lensIds: readonly s
   const noData = new Map<string, boolean>();
   if (contentPath) {
     const bytes = await readFile(resolve(objectDirectory, requireString(contentPath.path)));
-    if (hash(bytes) !== contentPath.sha256) throw new Error('Source content changed from its descriptor pin.');
+    if (sha256(bytes) !== contentPath.sha256) throw new Error('Source content changed from its descriptor pin.');
     const content = requireRecord(JSON.parse(bytes.toString('utf8')));
     for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id))) noData.set(requireString(lens.id), lens.noData === true);
   }

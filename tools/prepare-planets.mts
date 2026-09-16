@@ -1,6 +1,7 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import assert from "node:assert/strict";
-import { createHash, randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { basename, resolve } from "node:path";
@@ -30,7 +31,7 @@ const sharedSteps = ["prepare-shell-titles.mts", "prepare-wordmark-rail.mts",
   "prepare-planet-title-sources.mts", "prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 const traceModule = new URL("./preparation-trace.mts", import.meta.url).href;
-const hash = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
 const require = createRequire(import.meta.url);
 
 // Installed packages are read from node_modules, which receipts do not fingerprint; the manifest and lockfile stand for them.
@@ -40,14 +41,14 @@ export async function sharedPreparationFiles(_root?: string) {
 
 export async function preparationEnvironment() {
   const dependencies: Record<string, string> = {};
-  for (const name of ["@layoutit/polycss", "sharp"]) dependencies[name] = hash(await readFile(require.resolve(name)));
+  for (const name of ["@layoutit/polycss", "sharp"]) dependencies[name] = sha256(await readFile(require.resolve(name)));
   for (const file of Object.keys(require.cache).filter(file => file.endsWith(".node") && file.includes("sharp")).sort()) {
-    dependencies[basename(file)] = hash(await readFile(file));
+    dependencies[basename(file)] = sha256(await readFile(file));
   }
   assert.equal(typeof cwebpPath, "string", "Pinned WebP encoder path is unavailable");
   return { node: process.version, platform: process.platform, arch: process.arch,
     sharp: sharp.versions, sharpConcurrency: sharp.concurrency(),
-    cwebpSha256: hash(await readFile(requireString(cwebpPath))), dependencies };
+    cwebpSha256: sha256(await readFile(requireString(cwebpPath))), dependencies };
 }
 
 /** The environment of a traced preparation: the trace directory, and the trace loaded into every Node process. */

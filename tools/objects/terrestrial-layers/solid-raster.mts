@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {RgbObservation} from './contracts.mts';
 import type {RadialState} from './solid-contract.mts';
@@ -20,7 +21,6 @@ import {requireRecord,requireString,requireFiniteNumber} from '../../source-valu
 import {parseDimensions} from './source-records.mts';
 export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
 export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -48,7 +48,7 @@ export function createRasterEmitter(publicDirectory:string, publicBase:string) {
     const { width, height } = await sharp(bytes).metadata();
     if (!width || !height) throw new Error(`Raster output has no dimensions: ${filename}`);
     return { url: `${publicBase}${filename}`, width, height, bytes: bytes.length,
-      sha256: createHash('sha256').update(bytes).digest('hex') };
+      sha256: sha256(bytes) };
   };
 }
 

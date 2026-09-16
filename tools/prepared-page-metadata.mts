@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { requireRecord } from './source-values.mts';
-import { createHash } from 'node:crypto';
 
 /** Emitted from the same finalized definition as the hash-addressed scene. */
 export function preparePageMetadata(id: string, sceneSha256: string, input: unknown) {
@@ -9,7 +9,7 @@ export function preparePageMetadata(id: string, sceneSha256: string, input: unkn
   }
   const text = JSON.stringify({ schema: 'cssearth-object-page@1', id, sceneSha256,
     assets: definition.assets, controls: definition.controls });
-  return { text, reference: { url: 'prepared/page.json', sha256: createHash('sha256').update(text).digest('hex') } };
+  return { text, reference: { url: 'prepared/page.json', sha256: sha256(text) } };
 }
 
 /** Scene-only changes do not change source citations. Reuse the source graph
@@ -18,7 +18,7 @@ export async function refreshSourceScenePins(before: ReadonlyMap<string, string>
   const { readFile } = await import('node:fs/promises');
   const { resolve } = await import('node:path');
   const { writePreparedSet } = await import('./write-prepared-set.mts');
-  const hash = (text: string) => createHash('sha256').update(text).digest('hex');
+
   const shape = (path: string, text: string) => {
     const value = requireRecord(JSON.parse(text));
     if (path.endsWith('/prepared/page.json')) return { ...value, sceneSha256: null };
@@ -27,14 +27,14 @@ export async function refreshSourceScenePins(before: ReadonlyMap<string, string>
       properties: { ...properties, page: { ...page, metadata: { ...requireRecord(page.metadata), sha256: null } } } };
   };
   const outputs = [];
-  for (const path of ['site/prepared-sources.json', 'site/prepared-machines.json']) {
+  for (const path of ['site/prepared-sources.json']) {
     const value = requireRecord(JSON.parse(await readFile(resolve(root, path), 'utf8'))), closure = { ...requireRecord(value.closure) };
     for (const [input, previous] of before) {
       if (!/^src\/objects\/[a-z0-9-]+\/(?:object|prepared\/page)\.json$/u.test(input)) throw new Error('Scene re-pin received a non-scene input.');
-      if (closure[input] !== hash(previous)) throw new Error(`Source graph input was already stale: ${input}`);
+      if (closure[input] !== sha256(previous)) throw new Error(`Source graph input was already stale: ${input}`);
       const current = await readFile(resolve(root, input), 'utf8');
       if (JSON.stringify(shape(input, previous)) !== JSON.stringify(shape(input, current))) throw new Error(`Source graph content changed: ${input}`);
-      closure[input] = hash(current);
+      closure[input] = sha256(current);
     }
     outputs.push({ path: resolve(root, path), text: JSON.stringify({ ...value, closure }, null, 2)+'\n' });
   }

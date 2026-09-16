@@ -1,5 +1,5 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { requireRecord, requireString } from '../source-values.mts';
 export interface Point { x:number; y:number; z:number; absoluteMagnitude:number|null; morphology:string }
 const numeric=(value:string|undefined)=>value?.trim() ? Number(value) : NaN;
@@ -22,7 +22,7 @@ export async function loadScientificCatalogue(radiusMpc:number, minimumDistanceM
     const source=requireRecord(input),id=requireString(source.id),path=requireString(source.path);
     if(!path.startsWith('.local/galaxy-field/sources/')||path.includes('..'))throw new TypeError('Invalid source path.');
     const bytes=await readFile(path);
-    if(bytes.length!==source.bytes||createHash('sha256').update(bytes).digest('hex')!==source.sha256)throw new Error(`Changed input: ${id}. Run acquisition and review its pins.`);
+    if(bytes.length!==source.bytes||sha256(bytes)!==source.sha256)throw new Error(`Changed input: ${id}. Run acquisition and review its pins.`);
     const [header,...lines]=bytes.toString('utf8').trimEnd().split('\n');
     const names=header!.trim().split('\t');
     const rows=lines.map(line=>{const values=line.split('\t').map(value=>value.trim().replace(/^"|"$/g,''));if(values.length!==names.length)throw new TypeError(`Invalid TSV row: ${id}`);return Object.fromEntries(names.map((name,i)=>[name,values[i]!]));});

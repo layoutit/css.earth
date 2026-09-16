@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from "node:assert/strict";
 import { readFile, rename, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -9,7 +10,7 @@ import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from "../../../src/
 import { normalizeCityAssetOrigin } from "../../../src/platform/prepared-map/city-asset-url.mts";
 import { readWorldCoverCatalog } from "./worldcover-catalog.mts";
 import { prepareWmtsCoverage } from "./wmts-coverage.mts";
-import { hashBytes, prepareTileNode, tileKey } from "./prepare-wmts-tree.mts";
+import { prepareTileNode, tileKey } from "./prepare-wmts-tree.mts";
 import { prepareWmtsTile, wmtsAddress } from "./wmts-page-geometry.mts";
 import { releaseFiles, verifyLocalPack } from "./wmts-release.mts";
 
@@ -65,7 +66,7 @@ export async function preparePinnedGlobalWmts({ sourceRoot, packDirectory, scene
   }
   const report = { schema: "cssearth-pinned-wmts-preparation@1", version: release.version, dataset: release.dataset,
     sourceHashes, packs: files.length, bytes: release.bytes, tiles: release.tiles, leaves: release.leaves,
-    packInventorySha256: hashBytes(JSON.stringify(files)), geometry: "verified-pinned-input-not-regenerated" };
+    packInventorySha256: sha256(JSON.stringify(files)), geometry: "verified-pinned-input-not-regenerated" };
   if (verifyOnly) return { report: { ...report, runtimeBinding: "not-written" }, plan: null };
 
   const roots = [], referencedRegions = new Set();
@@ -76,7 +77,7 @@ export async function preparePinnedGlobalWmts({ sourceRoot, packDirectory, scene
     // Bind these exact bytes again before decoding, including a replacement
     // between the complete pack verification and publication preparation.
     assert.equal(bytes.length, file.bytes, `Prepared coarse pack size changed: ${filename}`);
-    assert.equal(hashBytes(bytes), file.sha256, `Prepared coarse pack changed: ${filename}`);
+    assert.equal(sha256(bytes), file.sha256, `Prepared coarse pack changed: ${filename}`);
     const decoded = gunzipSync(bytes, { maxOutputLength: PREPARED_BLOCK_LIMITS.bytes });
     const decoder = createPreparedBlockDecoder(decoded);
     while (!decoder.step()) { /* Offline bounded decode. */ }
@@ -110,7 +111,7 @@ export async function preparePinnedGlobalWmts({ sourceRoot, packDirectory, scene
     const coverageParts = [...groups.values()].map(({ normal, lo, hi }) => ({ normal,
       corners: Array.from({ length: 8 }, (_, i) => [0, 1, 2].map(axis => (i >> axis & 1 ? hi : lo)[axis])) }));
     roots.push({ ...bounds, coverageParts, stub: true, directory: { encoding: PREPARED_BLOCK_ENCODING,
-      bytes: bytes.length, sha256: file.sha256, decodedBytes: decoded.length, decodedSha256: hashBytes(decoded),
+      bytes: bytes.length, sha256: file.sha256, decodedBytes: decoded.length, decodedSha256: sha256(decoded),
       url: `${assetPath}wmts-${release.version}/${filename}`, offset: 0 } });
   }
   assert.equal(referencedRegions.size, regions.length, "Pinned coarse indexes do not reach every region");

@@ -34,11 +34,6 @@ export function parsePreparedExploration(input: unknown, sources: SourceResolver
   const images = assets(value.images), emblems = assets(value.emblems);
   for (const entity of [...catalog.machines, ...catalog.missions]) if (entity.imageId && !Object.hasOwn(images, entity.imageId)) throw new TypeError('Unknown exploration image.');
   for (const mission of catalog.missions) if (mission.emblemId && !Object.hasOwn(emblems, mission.emblemId)) throw new TypeError('Unknown mission emblem.');
-  const closure = Object.freeze(Object.fromEntries(Object.entries(explorationRecord(value.closure)).map(([path, raw]) => {
-    const sha256 = explorationText(raw);
-    if (!/^[a-f0-9]{64}$/.test(sha256) || path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Invalid exploration closure pin.');
-    return [path, sha256];
-  })));
-  if (!Object.keys(closure).length) throw new TypeError('Exploration closure is empty.');
-  return Object.freeze({ sourceCatalogSha256: sourceDigest(value.sourceCatalogSha256), catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog), closure });
+  // The sources catalogue owns the input closure; this catalogue binds to it by the catalogue digest.
+  return Object.freeze({ sourceCatalogSha256: sourceDigest(value.sourceCatalogSha256), catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog) });
 }

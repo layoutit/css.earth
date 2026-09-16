@@ -1,6 +1,7 @@
 // The record format shared by the preparation trace (tools/preparation-trace.mts) and the preparation cache.
 // Keep this module free of project imports: the trace loads it before it starts recording, so anything it
 // imported would be missing from every record.
+import { sha256 } from '../src/platform/sha256.mts';
 import { createHash } from 'node:crypto';
 
 export const PREPARATION_TRACE_VARIABLE = 'CSSEARTH_PREPARATION_TRACE';
@@ -44,6 +45,6 @@ export function descriptorView(value: unknown, view: DescriptorView): unknown {
 
 export function descriptorDigest(text: string, view: DescriptorView): string {
   let value: unknown;
-  try { value = JSON.parse(text); } catch { return createHash('sha256').update(text).digest('hex'); }
+  try { value = JSON.parse(text); } catch { return sha256(text); }
   return createHash('sha256').update(JSON.stringify(descriptorView(value, view)) ?? '').digest('hex');
 }

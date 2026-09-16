@@ -39,3 +39,5 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 Saved VISTA brightness/gamma/saturation/detail/scale are 0.85/0.9/1.3/1/24; Horálek 1.3/1.3/2.5/1.95/96; WISE 1/1/1/0/24. These are authored appearance controls already in prepared pixels. Use the [shared baking guide](../../../labs/nebula/docs/baking.md) for restoration; no fresh cold-cache comparison is claimed here.
 
 </details>
+
+Application provenance reads the object-owned evidence and recipe copies recorded in [provenance references](source/provenance-references.json). Their original revisions and SHA-256 pins are preserved; nested research paths describe historical inputs and are not application file reads.

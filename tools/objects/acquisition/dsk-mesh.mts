@@ -1,10 +1,10 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {requireRecord} from '../../source-values.mts';
 import {shape,text,number} from '../terrestrial-layers/source-records.mts';
 const parseRecipe=shape({inputPath:text,inputSha256:text,member:text,spiceypyVersion:text,cspiceVersion:text,inputBytes:number,targetId:number,frameId:number,surfaceId:number,sourceVertices:number,sourceFaces:number,weldedVertices:number});
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
 import {resolve, isAbsolute, sep} from 'node:path';
 import {tmpdir} from 'node:os';
-import {createHash} from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
@@ -33,7 +33,7 @@ export async function prepareDskMesh({sourceRoot, recipe:recipeValue}:{sourceRoo
   const root = resolve(sourceRoot), path = resolve(root, recipe.inputPath);
   if (!path.startsWith(root + sep)) throw new TypeError('DSK source escapes source root.');
   const source = await readFile(path);
-  if (source.length !== recipe.inputBytes || createHash('sha256').update(source).digest('hex') !== recipe.inputSha256) {
+  if (source.length !== recipe.inputBytes || sha256(source) !== recipe.inputSha256) {
     throw new Error('Pinned DSK source bytes differ.');
   }
   const python = process.env.CSSEARTH_SPICE_PYTHON ?? 'python3';
@@ -51,7 +51,7 @@ export async function prepareDskMesh({sourceRoot, recipe:recipeValue}:{sourceRoo
       {maxBuffer: 1024 * 1024, timeout: 300000});
     const report = requireRecord(JSON.parse(stdout)), bytes = await readFile(destination);
     if (report.schema !== 'cssearth-dsk-mesh-conversion@1' || report.bytes !== bytes.length ||
-        report.sha256 !== createHash('sha256').update(bytes).digest('hex')) throw new Error('DSK conversion receipt differs.');
+        report.sha256 !== sha256(bytes)) throw new Error('DSK conversion receipt differs.');
     return bytes;
   } finally {await rm(directory, {recursive:true, force:true});}
 }

@@ -1,12 +1,12 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { gzipSync, gunzipSync } from 'node:zlib';
-import { createHash } from 'node:crypto';
 import catalogue from '../site/source/moon-catalogues.json' with { type: 'json' };
 import world from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { hasProperMoonName, prepareBodyMoons } from '../site/prepare-body-moons.mts';
 import { sourceArray, sourceObject, sourceText } from '../src/platform/source-catalog.mts';
 
-const digest = (input: string | Buffer) => createHash('sha256').update(input).digest('hex');
+
 const centerCodes: Readonly<Record<string, string>> = { jupiter: '599', saturn: '699', uranus: '799', neptune: '899' };
 const epoch = world.frame.epochJdTt;
 // The discovery/element table lists this new moon, but its code currently
@@ -87,7 +87,7 @@ if (import.meta.main) {
   });
   await writeFile('site/moon-labels.prepared.json', `${JSON.stringify({ schema: 'cssearth-moon-labels@1',
     referenceFrame: world.frame.referenceFrame, epochJdTt: epoch,
-    sourceSha256: digest(bytes), worldSha256: digest(await readFile('src/objects/sun/prepared/world-context.json')),
+    sourceSha256: sha256(bytes), worldSha256: sha256(await readFile('src/objects/sun/prepared/world-context.json')),
     qualification: 'Properly named catalogue moons only; provisional designations stay in the full sidebar catalogue. Horizons geometric ICRF vectors at the prepared world epoch, relative to each planet. No fabricated positions: moons without Horizons states remain in the sidebar only.', moons }, null, 2)}\n`);
   console.log(`${moons.filter(moon => moon.positionM).length} positioned labels; ${moons.filter(moon => !moon.positionM).length} without positions.`);
 }

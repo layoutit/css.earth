@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import test from 'node:test';
+import { gunzipSync } from 'node:zlib';
+import { readCompactCompiler } from './compact-compiler.ts';
+const input = async () => JSON.parse(gunzipSync(await readFile('src/objects/m42/source/bake-inputs.json.gz')).toString());
+test('compact compiler validates the accepted field, material correspondence and sampling', async () => {
+  const value = await input(), parsed = readCompactCompiler(value);
+  assert.equal(parsed.objectId, 'm42');
+  assert.equal(parsed.materials.length, 2);
+  assert.ok(parsed.field.components.length > 0);
+  assert.ok(parsed.expected.every(bank => bank.resources.length > 0));
+  const changedColor = structuredClone(value);
+  changedColor.materials[0].components[0].rgb[0] = NaN;
+  assert.throws(() => readCompactCompiler(changedColor), /component differs/);
+  const reordered = structuredClone(value);
+  reordered.materials[0].components.reverse();
+  assert.throws(() => readCompactCompiler(reordered), /component differs/);
+  const missing = structuredClone(value);
+  missing.materials.pop();
+  assert.throws(() => readCompactCompiler(missing), /materials differ/);
+  const identity = structuredClone(value);
+  identity.field.identity = '0'.repeat(64);
+  assert.throws(() => readCompactCompiler(identity), /identity differs/);
+  const shape = structuredClone(value);
+  shape.expected[0].resources[0].width = 0;
+  assert.throws(() => readCompactCompiler(shape), /resource/);
+});

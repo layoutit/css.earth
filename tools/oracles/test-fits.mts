@@ -19,7 +19,7 @@ const unit = ['tools/fits.test.mts', 'tools/fits.oracle.test.mts', 'tools/oracle
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tools/objects/terrestrial-layers/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);
-run(['labs/nebula/src/run.ts', 'test', 'getsf-fits', 'getsf', 'sampled-prior', 'ownership']);
+run(['labs/nebula/run.mts', 'test', 'getsf-fits', 'getsf', 'sampled-prior', 'ownership']);
 if (args.includes('--unit')) process.exit(0);
 
 const inputs = new Map<string, { path: string; sha256: string; bytes: number }>();

@@ -1,10 +1,10 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
 await ensureReportDirectory('output/distant-worlds', {recursive:true});
 // Uses the same Chrome CDP categories and 60-step vertical drag path as the
 // Saturn audit. This narrower workload excludes its wheel and moon controls.
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -46,7 +46,7 @@ try {
     if(response.request().resourceType()==='document')responseTasks.push(response.request().sizes().then(sizes=>{documents.push({url:response.url(),status:response.status(),...sizes});}).catch(error=>{loadFailures.push({url:response.url(),error:error instanceof Error ? error.message : String(error)});}));
     if (url.origin === new URL(origin).origin && (url.pathname.startsWith(`/objects/${id}/`) || url.pathname.endsWith('.js') ||
         url.pathname.startsWith(`/scenes/${id}/`) && /-(surface|shadow)@2x\.webp$/.test(url.pathname))) {
-      responseTasks.push(response.body().then(bytes => {loaded.push({ url: response.url(), bytes: bytes.length, sha256: hash(bytes) });}).catch(error=>{loadFailures.push({url:response.url(),error:error instanceof Error ? error.message : String(error)});}));
+      responseTasks.push(response.body().then(bytes => {loaded.push({ url: response.url(), bytes: bytes.length, sha256: sha256(bytes) });}).catch(error=>{loadFailures.push({url:response.url(),error:error instanceof Error ? error.message : String(error)});}));
     }
   });
   page.on('pageerror', error => errors.push(error.message));
@@ -65,7 +65,7 @@ try {
   await page.waitForLoadState('networkidle');
   await Promise.all(responseTasks);
   assert.deepEqual(loadFailures,[],'Every selected response body must be retained for provenance');
-  const expectedTransport=hash(await readFile(`src/objects/${id}/prepared/object.json`));
+  const expectedTransport=sha256(await readFile(`src/objects/${id}/prepared/object.json`));
   assert.ok(loaded.some(record=>record.sha256===expectedTransport),'Exact current prepared-object bytes were loaded');
   await page.waitForTimeout(1000);
   const initial = await page.evaluate(id => {
@@ -133,10 +133,10 @@ try {
   const compressed = gzipSync(text, { level: 9 });
   const pinPaths = ['prepared/object.json', 'prepared/runtime.json', 'runtime-assets.json', 'prepared/terrain.json'].map(path => `src/objects/${id}/${path}`);
   const prepared: Record<string, {bytes: number; sha256: string}> = {};
-  for (const path of pinPaths) { const bytes = await readFile(path); prepared[path] = { bytes: bytes.length, sha256: hash(bytes) }; }
+  for (const path of pinPaths) { const bytes = await readFile(path); prepared[path] = { bytes: bytes.length, sha256: sha256(bytes) }; }
   const report = { schema: 'cssearth-comet-drag-trace@1', capturedAt: new Date().toISOString(),
     codeRevision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
-    worktreeDiffSha256: hash(execFileSync('git', ['diff', 'HEAD', '--', 'tools', 'site', 'packages',
+    worktreeDiffSha256: sha256(execFileSync('git', ['diff', 'HEAD', '--', 'tools', 'site', 'packages',
       'src/platform', 'src/renderers', `src/objects/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
     build: process.env.CSSEARTH_AUDIT_BUILD ?? 'production', diagnosticsAvailable: initial.diagnosticsAvailable, route: page.url(), browser: browser.version(), headless: true,
     viewport, dpr, hardware: process.platform === 'darwin' ? execFileSync('sysctl', ['-n', 'hw.model', 'hw.memsize', 'machdep.cpu.brand_string'], { encoding: 'utf8' }).trim().split('\n') : process.arch,
@@ -149,7 +149,7 @@ try {
     drawDurations: Object.fromEntries(Object.entries(durations).map(([name, values]) => [name, stats(values)])),
     main: { tasks: selected(/^(?:ThreadControllerImpl::RunTask|RunTask)$/), script: selected(/^FunctionCall$/), style: selected(/^(?:UpdateLayoutTree|RecalculateStyles)$/), layout: selected(/^Layout$/), paint: selected(/^Paint$/), prePaint: selected(/^PrePaint$/), layerize: selected(/^Layerize$/) },
     pipeline: { sequences: sequences.size, droppedWithoutPresentation: [...sequences.values()].filter(s => s.has('STATE_DROPPED') && !s.has('STATE_PRESENTED_ALL') && !s.has('STATE_PRESENTED_PARTIAL')).length },
-    trace: { filename: 'chrome-trace.json.gz', bytes: compressed.length, sha256: hash(compressed) } };
+    trace: { filename: 'chrome-trace.json.gz', bytes: compressed.length, sha256: sha256(compressed) } };
   await writeFile(resolve(output, 'chrome-trace.json.gz'), compressed);
   await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ output, durationMs: report.durationMs, raf: report.rafIntervals, drawCadence: report.drawCadence, drawDurations: report.drawDurations, main: report.main, pipeline: report.pipeline, nodes: initial.nodes, retained: final.retainedIdentity, errors }, null, 2));
@@ -157,7 +157,7 @@ try {
   assert.deepEqual(report.interactionRequests, []); assert.deepEqual(final.atlasUrls, initial.atlasUrls);
   assert.notEqual(final.sceneTransform, initial.sceneTransform);
 } finally { await browser.close(); }
-function hash(bytes: string | Buffer) { return createHash('sha256').update(bytes).digest('hex'); }
+
 function stats(input: readonly number[]) {
   let values: number[];
   values = input.filter(Number.isFinite).sort((a,b) => a-b);

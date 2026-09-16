@@ -1,9 +1,10 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import * as fontkit from 'fontkit';
 import { createPlanetTitleSource } from './prepare-planet-title-sources.mts';
 import { PLANET_TITLE_RECIPE as recipe } from '../src/platform/planet-title-recipe.mts';
-import { createPreparedTitleLayout, sha256 } from '../src/platform/prepared-title.mts';
+import { createPreparedTitleLayout } from '../src/platform/prepared-title.mts';
 
 const fontPath = fileURLToPath(new URL(`../${recipe.checkedFontPath}`, import.meta.url));
 if (sha256(await readFile(fontPath)) !== recipe.sourceSha256) throw new Error('Shared card title font hash mismatch.');

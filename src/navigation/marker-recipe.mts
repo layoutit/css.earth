@@ -1,3 +1,4 @@
+import { sha256 } from '../platform/sha256.mts';
 import { isArray } from '../platform/is-array.mts';
 export interface MarkerSource { path: string; expectedBytes: number; expectedSha256: string; origin: string; credit: string; license: string; raster?: { kind: string }; width?: number; height?: number; }
 /** Fields an object's marker recipe may add to its source: decoding hints its manifest record does not carry. */
@@ -11,7 +12,6 @@ export type MarkerOperation =
   | { type: "missing-coverage"; kind: string; southConnected: boolean; northConnected?: boolean }
   | { type: "ellipse-mask"; cx: number; cy: number; rx: number; ry: number; shading?: { ambient: number; diffuse: number } };
 export interface MarkerDescriptor { presentation?: unknown; schema: string; planetId: string; owner: string; source: MarkerSource; operations: readonly MarkerOperation[]; context?: { pixels: number }; }
-import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { posix, win32 } from "node:path";
 
@@ -78,7 +78,7 @@ export async function validateMarkerSourceBytes(source: MarkerSource, sourcePath
   if (bytes.byteLength !== source.expectedBytes) {
     throw new Error(`Navigation marker source size drifted: ${source.path}.`);
   }
-  const actual = createHash("sha256").update(bytes).digest("hex");
+  const actual = sha256(bytes);
   if (actual !== source.expectedSha256) {
     throw new Error(`Navigation marker source hash drifted: ${source.path}.`);
   }

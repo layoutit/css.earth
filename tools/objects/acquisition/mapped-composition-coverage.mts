@@ -1,4 +1,4 @@
-import {createHash} from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {gunzipSync} from 'node:zlib';
@@ -22,7 +22,7 @@ const array=(value:unknown,length:number,label:string):unknown[]=>{
   if(!Array.isArray(value)||value.length!==length)throw new TypeError(`Expected ${label}.`);
   return value;
 };
-const sha256=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 async function documentAt(path:string,expectedHash:string):Promise<RecordValue>{
   const bytes=await readFile(path);
   if(sha256(bytes)!==expectedHash)throw new Error(`Pinned source hash changed: ${path}`);

@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {matchesPreparationGenerator} from '../../preparation-generator.mts';
 import type {SolidSurface,RadialState,RadialMaterialConfig,RadialMaterialSurface} from './solid-contract.mts';
@@ -41,7 +42,6 @@ import { loadContactEllipsoids } from './contact-ellipsoids.mts';
 import { loadImageDem } from './image-dem.mts';
 import { completeImageDem, reduceCompletedImageDem } from './image-dem-completion.mts';
 import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mts';
-import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
@@ -350,7 +350,7 @@ async function replaceReviewedImage(sourceDirectory: string, path: string, bytes
   const entries = requireArray(manifest.generatedIntermediates).map(value => requireRecord(value)).filter(entry => entry.path === path);
   if (entries.length !== 1) throw new TypeError(`Reviewed image ${path} needs exactly one manifest entry.`);
   await writeFile(resolve(sourceDirectory, path), bytes);
-  Object.assign(entries[0], { expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') });
+  Object.assign(entries[0], { expectedBytes: bytes.length, expectedSha256: sha256(bytes) });
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
 }
 
@@ -589,7 +589,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         source: surface.source, data: gzipSync(scalarSources, { level: 9 }).toString('base64') }) + '\n');
       const file = `${surface.id}-source-index.json`;
       await writeFile(resolve(outputDirectory, file), bytes);
-      requireRecord(surface.scalarMap).sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), width, height };
+      requireRecord(surface.scalarMap).sampleSources = { file, bytes: bytes.length, sha256: sha256(bytes), width, height };
       const nearest = scientific.format === 'facet-scalars' || scientific.displaySampling === 'nearest';
       const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: sampleScience ?? undefined, size: 96,
         longitudeDegrees: 30, latitudeDegrees: 30, ambient: 1, diffuse: 0,
@@ -606,7 +606,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         data: gzipSync(sampleSources, { level: 9 }).toString('base64') }) + '\n');
       const file = `${surface.id}-source-index.json`;
       await writeFile(resolve(outputDirectory, file), bytes);
-      requireRecord(surface.observation).sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
+      requireRecord(surface.observation).sampleSources = { file, bytes: bytes.length, sha256: sha256(bytes),
         width, height, includesAtlasBleed: true, codes };
     }
   }

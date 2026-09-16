@@ -17,13 +17,13 @@
     },
     {
       "id": "recipe-2",
-      "path": "labs/nebula/models/lmc/bake.json",
+      "path": "src/objects/lmc/source/evidence/lmc/bake.json",
       "sha256": "82e44aebd5dc80e3f44c5258c51040f778a6cfa1f0c105b4b23ef8dcba6154b8",
       "bytes": 4432
     },
     {
       "id": "recipe-3",
-      "path": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "path": "src/objects/lmc/source/bake-inputs/density/volume.json",
       "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
       "bytes": 1370
     },

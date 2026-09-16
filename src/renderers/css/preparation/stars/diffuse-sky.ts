@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import { mkdir,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { verifiedBytes,sha256 } from '../../../../preparation/volume/source.js';
+import { verifiedBytes,sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { PreparedCssPointFieldManifest as PreparedCssPointField,StarsRecipe } from '../../../../preparation/stars/types.js';
 /** A low-pass photographic residual; compact points are suppressed, not identified or subtracted. */
 export async function prepareDiffuseSky(sourceDirectory:string,outputDirectory:string,config:StarsRecipe['diffuseSky']) {

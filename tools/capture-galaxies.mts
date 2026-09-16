@@ -1,6 +1,6 @@
 /** Capture the installed LMC lenses at one saved world camera. No processing or user storage changes. */
+import { sha256 } from '../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -13,7 +13,7 @@ const directory = resolve(root, 'tests/galaxies');
 const base = process.argv[2] ?? 'http://127.0.0.1:4210';
 const view = 'QIZAIGJN0vGp_MBQYk3S8an8Q6NAziEHSnBBQsczQAAAAL-SHHY-Jtf4v8cBng4F6eS_uKhrxCWwLAABAAAAAAAAAAA';
 const ids = ['vista-infrared', 'horalek-widefield', 'wise-wide-infrared'];
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const relative = (path: string) => resolve(root, path);
 type Capture = { imageId: string; path: string; bytes: number; sha256: string; route: string; stars: number; sameCamera: boolean };
 const images: Capture[] = [];

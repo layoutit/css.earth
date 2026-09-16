@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -27,7 +27,6 @@ const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - 
 const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
 const unit = (a: readonly number[]) => a.map(n => n / Math.hypot(...a));
 const vector = (longitude: number, latitude: number) => [Math.cos(latitude*radians)*Math.cos(longitude*radians), Math.cos(latitude*radians)*Math.sin(longitude*radians), Math.sin(latitude*radians)];
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 export function polygonInteriorDistance(point: readonly number[], polygon: readonly (readonly number[])[]) {
   const [x, y] = point;
@@ -102,10 +101,10 @@ export async function prepareGiottoProjection(sourceDirectory: string) {
   for (const pin of registration.sourcePins) {
     const bytes = await readFile(resolve(sourceDirectory, pin.path));
     assert.equal(bytes.length, pin.bytes, pin.path);
-    assert.equal(digest(bytes), pin.sha256, pin.path);
+    assert.equal(sha256(bytes), pin.sha256, pin.path);
   }
   const shapeBytes = await readFile(resolve(sourceDirectory, 'shape/1682q1halley.tab'));
-  assert.equal(digest(shapeBytes), registration.mask.sourceShapeSha256);
+  assert.equal(sha256(shapeBytes), registration.mask.sourceShapeSha256);
   const mesh = parsePdsRadiusTable(shapeBytes.toString(), { stepDegrees:5, longitudeDirection:'east-positive', metersPerUnit:1000, expectedVertices:2522, expectedFaces:5040 });
   const { data, info } = await sharp(resolve(sourceDirectory, 'giotto/hmc_best.gif')).toColourspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject:true });
   assert.equal(info.channels, 3);
@@ -136,9 +135,9 @@ export async function prepareGiottoProjection(sourceDirectory: string) {
   const png = await sharp(rgb, { raw:{ width,height,channels:3 } }).png().toBuffer();
   const report = {
     schema:'cssearth-halley-giotto-projection-report@1', interpretation:'Approximate projection of the MPS Giotto composite; original lighting and dust contamination retained.',
-    registrationSha256:digest(registrationBytes), shapeSha256:digest(shapeBytes), sourcePins:registration.sourcePins,
-    map:{ width,height,bytes:png.length,sha256:digest(png),acceptedPixels:accepted,missingPixels:width*height-accepted,noData:0 },
-    validity:{ encoding:'one byte per equirectangular pixel; 1 observed, 0 missing',sha256:digest(validity),bytes:validity.length },
+    registrationSha256:sha256(registrationBytes), shapeSha256:sha256(shapeBytes), sourcePins:registration.sourcePins,
+    map:{ width,height,bytes:png.length,sha256:sha256(png),acceptedPixels:accepted,missingPixels:width*height-accepted,noData:0 },
+    validity:{ encoding:'one byte per equirectangular pixel; 1 observed, 0 missing',sha256:sha256(validity),bytes:validity.length },
     coverage:{ sampledSurfacePercent:observedArea/totalArea*100,sourceAreaSquareKm:totalArea/1e6,samplesPerTriangle:weights.length,triangles:mesh.faces },
     camera:registration.camera, maximumEmissionDegrees:registration.mask.maximumEmissionDegrees,
     maximumIncidenceDegrees:registration.mask.maximumIncidenceDegrees, cataloguePixelInset:registration.mask.cataloguePixelInset,

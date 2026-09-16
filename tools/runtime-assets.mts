@@ -29,11 +29,6 @@ export async function runtimeAssets(root: string, objectIds: readonly string[]):
     const base = resolve(root, `src/objects/${id}`);
     const bytes = await readFile(resolve(base, "runtime-assets.json"));
     const manifest = requireRuntimeAssetManifest(id, JSON.parse(bytes.toString("utf8")));
-    const mirror = await readFile(resolve(base, "prepared/runtime-assets.json")).catch((error: unknown) => {
-      if (error instanceof Error && "code" in error && error.code === "ENOENT") return undefined;
-      throw error;
-    });
-    if (mirror && !mirror.equals(bytes)) throw new Error(`Runtime asset inventory mirrors differ: ${id}`);
     // Missing paths may be restored, but existing symlinks must never redirect installation.
     for (const asset of manifest.assets) {
       const assetRoot = manifest.resourceRoot === "prepared" && asset.location !== "public" ? resolve(base, "prepared") : resolve(root, `public/scenes/${id}`);

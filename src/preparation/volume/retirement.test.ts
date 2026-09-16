@@ -7,7 +7,7 @@ import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
 import { zstdCompressSync } from 'node:zlib';
 import { encodeDensityKtx2 } from './acquisition.js';
-import { sha256 } from './source.js';
+import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
 
 test('successful format/count changes retire previous manifest-owned textures and preserve unrelated files', async () => {

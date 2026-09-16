@@ -1,6 +1,6 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve, basename } from 'node:path';
 import { chromium } from 'playwright';
 import { previewSite } from '../preview.mts';
@@ -25,12 +25,12 @@ const milestoneCamera = (name: string): unknown => {
   if (!milestone) throw new TypeError(`Baseline milestone ${name} is missing.`);
   return milestone.camera;
 };
-const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+
 const bundles = new Map<string, Buffer>();
 for (const [url, identity] of Object.entries(requireRecord(baseline.loadedFiles, 'Baseline loadedFiles'))) {
   if (!/\.(js|css)$/.test(url)) continue;
   const bytes = await readFile(resolve(base, 'served', '.' + url));
-  assert.equal(hash(bytes), requireRecord(identity, `Baseline identity ${url}`).sha256, `Exact baseline bytes missing: ${url}`);
+  assert.equal(sha256(bytes), requireRecord(identity, `Baseline identity ${url}`).sha256, `Exact baseline bytes missing: ${url}`);
   bundles.set(url, bytes);
 }
 const oldMain = [...bundles.keys()].find(url => /PlanetLayout.*\.js$/.test(url));

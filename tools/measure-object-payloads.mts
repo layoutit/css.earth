@@ -1,3 +1,4 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import type { Browser, Page, BrowserContextOptions, CDPSession, Response, Request } from 'playwright';
 import { requireArray, requireRecord } from './source-values.mts';
 interface PayloadObject {id: string; route: string;}
@@ -39,7 +40,6 @@ type ComparisonRow = PayloadCase & {baseline: SideMeasurement; candidate: SideMe
 const errorMessage = (error: unknown) => error instanceof Error ? error.message : String(error);
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { brotliCompressSync, constants, gzipSync } from "node:zlib";
@@ -47,7 +47,7 @@ import { SCENE_OBJECTS } from "../site/objects.mts";
 
 const CHROME_EXECUTABLE = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const VIEWPORT = Object.freeze({ width: 1280, height: 900 });
-const sha = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
 const compressionCache = new Map<string, Readonly<BodyMetrics>>();
 export const COMPRESSION_ESTIMATES = Object.freeze({
   evidence: "deterministic compression estimates of decoded response bodies; not measured wire transfer",
@@ -58,7 +58,7 @@ export function payloadCases(objects: readonly PayloadObject[] = SCENE_OBJECTS) 
   return objects.flatMap(object => [1, 2].map(dpr => ({ id: object.id, route: object.route, dpr })));
 }
 export function decodedBodyMetrics(body: Uint8Array) {
-  const hash = sha(body);
+  const hash = sha256(body);
   if (!compressionCache.has(hash)) compressionCache.set(hash, Object.freeze({
     sha256: hash, bodyBytes: body.byteLength,
     gzipEstimateBytes: gzipSync(body, { level: 9 }).byteLength,

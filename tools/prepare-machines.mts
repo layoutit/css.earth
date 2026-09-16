@@ -1,3 +1,4 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { spatialSourceCitations } from './spatial-source-citations.mts';
 import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
@@ -9,7 +10,6 @@ import { sourceInventory, metadataCitations, factsheetCitations } from './source
 import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
 import { sourcePath, sourceDigest } from '../src/platform/source-catalog.mts';
 import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -42,13 +42,13 @@ export const explorationCompilerClosure = [
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
 ] as const;
-const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
+
 interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
 export async function prepareMachines({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
-    const bytes = await readFile(resolve(root, path)); closure[path] = digest(bytes); return bytes;
+    const bytes = await readFile(resolve(root, path)); closure[path] = sha256(bytes); return bytes;
   };
   const json = async (path: string): Promise<unknown> => JSON.parse((await input(path)).toString('utf8'));
   for (const path of explorationCompilerClosure) await input(path);
@@ -83,7 +83,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     });
     for (const image of entries) {
       const bytes = await input(`public${image.src}`);
-      if (bytes.length !== image.bytes || digest(bytes) !== image.sha256) throw new Error(`Approved artwork identity changed: ${image.id}.`);
+      if (bytes.length !== image.bytes || sha256(bytes) !== image.sha256) throw new Error(`Approved artwork identity changed: ${image.id}.`);
       const metadata = await sharp(bytes).metadata();
       if (metadata.format !== (emblem ? 'png' : 'webp') || metadata.width !== image.width || metadata.height !== image.height || (emblem && !metadata.hasAlpha)) throw new Error(`Approved artwork format/dimensions changed: ${image.id}.`);
     }
@@ -93,7 +93,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   const emblems: readonly ExplorationImage[] = await artwork('site/source/machines/emblem-library.json', true);
   for (const agency of Object.values(agencies)) if (agency.src) {
     const bytes = await input(`public${agency.src}`);
-    if (digest(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
+    if (sha256(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
   }
   const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
@@ -109,7 +109,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const contentBytes = await input(`${base}/${contentPath}`);
     const contentPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
       .filter(entry => `source/${entry.path}` === contentPath);
-    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
+    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== sha256(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
     const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
     const objectDirectory = resolve(root, base);
     const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,
@@ -132,7 +132,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     });
     const path = `${base}/prepared/provenance.json`;
     let document = provenance.get(object.id);
-    if (document) closure[path] = digest(JSON.stringify(document, null, 2) + '\n');
+    if (document) closure[path] = sha256(JSON.stringify(document, null, 2) + '\n');
     else document = validateObjectProvenance(await json(path), object.id);
     if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Provenance for ${object.id} does not match its source manifest; run pnpm prepare:provenance, or prepare the body where its sources are.`);
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
@@ -151,8 +151,8 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
       // Generated lineage and presentation join the same atomic set as both graphs.
       const path = sourcePath(output.path.slice(resolve(root).length + 1));
       if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
-      if (path.startsWith(`${volume.base}/prepared/`)) closure[path] = digest(output.text);
-      else if (path === `${volume.base}/runtime-assets.json`) closure[path] = digest(output.text);
+      if (path.startsWith(`${volume.base}/prepared/`)) closure[path] = sha256(output.text);
+      else if (path === `${volume.base}/runtime-assets.json`) closure[path] = sha256(output.text);
       else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
@@ -161,7 +161,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
   const preparedSources = parsePreparedSources(sourcePayload);
   const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
-    sourceCatalogSha256:preparedSources.catalogSha256,graph: compileContributions(objects, catalog), closure };
+    sourceCatalogSha256:preparedSources.catalogSha256,graph: compileContributions(objects, catalog) };
   const prepared = parsePreparedExploration(payload,sources);
   const output = { path: resolve(root, 'site/prepared-machines.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};

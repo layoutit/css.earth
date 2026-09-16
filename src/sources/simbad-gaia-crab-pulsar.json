@@ -31,7 +31,7 @@
       "kind": "credit",
       "text": "CDS/SIMBAD; ESA/Gaia/DPAC",
       "scope": "Catalogued pulsar sky position; in-cloud depth is authored",
-      "evidence": "labs/nebula/models/m1/physical-evidence.json#pulsar-position"
+      "evidence": "https://github.com/layoutit/css.earth/blob/9d0a453d4c82637ebc54277f97281e0c8426e85b/labs/nebula/models/m1/physical-evidence.json#pulsar-position"
     }
   ]
 }

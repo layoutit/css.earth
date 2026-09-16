@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "m45",
+  "label": "Pleiades",
+  "observationRecipe": "labs/nebula/models/m45/processing-observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/m45-processing/observations.json",
+  "structureRecipe": "labs/nebula/models/m45/observation-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/m45-processing/structures/catalogue.json",
+  "defaultSourceId": "noirlab-optical",
+  "defaultControls": {
+    "detail": 1,
+    "faint": 0.35,
+    "depth": 1
+  },
+  "maximumStars": 450,
+  "interpretation": "Authored warped finite display-emission surface inspired by localized scattering/absorption topology. Multiple overlapping dust layers, grain scattering, illumination, extinction and true stellar distances are unsupported. No physical diagnostic or calibrated luminosity is fitted; all four lenses share geometry/alpha/stars.",
+  "depthRecipe": "labs/nebula/models/m45/depth-model.json",
+  "observedStars": {
+    "path": "labs/nebula/models/m45/stellar-catalogue.json",
+    "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7"
+  }
+}

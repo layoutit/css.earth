@@ -1,7 +1,7 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {requireRecord} from '../../source-values.mts';
 import type {SipCamera} from './contracts.mts';
 import {parseSipCamera,parseLlorriCamera} from './source-records.mts';
-import { createHash } from 'node:crypto';
 import { readFitsPrimary } from '../observation/fits.mts';
 import { project } from './osiris-geo.mts';
 
@@ -66,7 +66,7 @@ export function requireLlorriTarget(header: Record<string, unknown>, target: str
  * bit-mask FITS HDUs. Do not mistake DN/exposure for absolute radiance or I/F. */
 export function decodeLlorri(bytes: Buffer, value: unknown) {
   const camera=parseLlorriCamera(value);
-  if (createHash('sha256').update(bytes).digest('hex') !== camera.imageSha256) throw new Error('L\'LORRI camera is not bound to this observation.');
+  if (sha256(bytes) !== camera.imageSha256) throw new Error('L\'LORRI camera is not bound to this observation.');
   const image = readFitsPrimary(bytes), sigma = readFitsPrimary(bytes.subarray(image.nextOffset));
   const quality = readFitsPrimary(bytes.subarray(image.nextOffset + sigma.nextOffset)), h = requireRecord(image.header);
   if (image.bitpix !== -32 || sigma.bitpix !== -32 || quality.bitpix !== 16 || quality.zero !== 32768 ||

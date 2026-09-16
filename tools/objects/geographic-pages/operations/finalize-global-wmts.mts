@@ -1,8 +1,9 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parseGeographicScene, parseGlobalInputs, parseRegionReceipt } from '../source-records.mts';
 import { readFile,writeFile,stat } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 
-import { coverageLookup,prepareTreeSection,prepareTileNode,childrenOf,hashBytes,tileKey } from "../prepare-wmts-tree.mts";
+import { coverageLookup,prepareTreeSection,prepareTileNode,childrenOf,tileKey } from "../prepare-wmts-tree.mts";
 import { encodePreparedBlock } from "../encode-prepared-block.mts";
 import { prepareWmtsTile } from "../wmts-page-geometry.mts";
 import { PREPARED_BLOCK_ENCODING } from "../../../../src/platform/prepared-map/prepared-block-transport.mts";
@@ -14,13 +15,13 @@ export async function finalizeGlobalWmts(directory: string,{context,verify=true}
   if(!context)throw new TypeError('Finalization requires its selected object context.');
   const scene=await context.readPrepared('scene',parseGeographicScene);
   const inputs=parseGlobalInputs(JSON.parse(await readFile(`${directory}/inputs.json`,"utf8"))),{version,levels,dataset}=inputs;
-  for(const [path,expected]of Object.entries(inputs.hashes))if(hashBytes(await readFile(context.projectUrl(path)))!==expected)throw new Error(`Preparation input changed: ${path}`);
+  for(const [path,expected]of Object.entries(inputs.hashes))if(sha256(await readFile(context.projectUrl(path)))!==expected)throw new Error(`Preparation input changed: ${path}`);
   const hasTile=coverageLookup(levels),regions=[],stubs=new Map<string,TileStub>(),coarse=[],roots=[];
   for(const band of levels.find(l=>l.zoom===8)!.bands)for(let y=band.y0;y<band.y1;y++)for(const [a,b]of band.ranges)for(let x=a;x<b;x++){
     const name=`8-${x}-${y}`,saved=parseRegionReceipt(JSON.parse(await readFile(`${directory}/${name}.json`,"utf8")));
     if(saved.version!==version||saved.address.x!==x||saved.address.y!==y)throw new Error(`Invalid global region ${name}.`);
     const path=`${directory}/${name}.pack`;
-    if((await stat(path)).size!==saved.bytes||verify&&hashBytes(await readFile(path))!==saved.sha256)throw new Error(`Prepared pack changed: ${name}.`);
+    if((await stat(path)).size!==saved.bytes||verify&&sha256(await readFile(path))!==saved.sha256)throw new Error(`Prepared pack changed: ${name}.`);
     regions.push({filename:`${name}.pack`,bytes:saved.bytes,sha256:saved.sha256,tiles:saved.tiles,leaves:saved.leaves});stubs.set(saved.root.key,saved.root);
   }
   for(const band of levels[0].bands)for(let y=band.y0;y<band.y1;y++)for(const [a,b]of band.ranges)for(let x=a;x<b;x++){
@@ -36,7 +37,7 @@ export async function finalizeGlobalWmts(directory: string,{context,verify=true}
         }
       };visit(address);
       const decoded=encodePreparedBlock([{metadataOnly:true}],{envelope:{schema:"cssearth-city-index@1",dataset,nodes,external,metadataOnly:true}}),bytes=gzipSync(decoded,{level:6});
-      section={root:nodes[0],tiles:nodes.length,leaves:0,bytes,ref:{encoding:PREPARED_BLOCK_ENCODING,bytes:bytes.length,sha256:hashBytes(bytes),decodedBytes:decoded.length,decodedSha256:hashBytes(decoded)}};
+      section={root:nodes[0],tiles:nodes.length,leaves:0,bytes,ref:{encoding:PREPARED_BLOCK_ENCODING,bytes:bytes.length,sha256:sha256(bytes),decodedBytes:decoded.length,decodedSha256:sha256(decoded)}};
     }
     const filename=`5-${x}-${y}.pack`,ref={...section.ref,url:`${context.assetPath}wmts-${version}/${filename}`,offset:0};await writeFile(`${directory}/${filename}`,section.bytes);
     const groups=new Map<string,{normal:number[];lo:number[];hi:number[]}>();
@@ -46,7 +47,7 @@ export async function finalizeGlobalWmts(directory: string,{context,verify=true}
     }
     const coverageParts=[...groups.values()].map(({normal,lo,hi})=>({normal,corners:Array.from({length:8},(_,i)=>[0,1,2].map(a=>(i>>a&1?hi:lo)[a]))}));
     const {pages,children,...bounds}=section.root;roots.push({...bounds,coverageParts,stub:true,directory:ref});
-    coarse.push({filename,bytes:section.bytes.length,sha256:hashBytes(section.bytes),tiles:section.tiles,leaves:section.leaves});
+    coarse.push({filename,bytes:section.bytes.length,sha256:sha256(section.bytes),tiles:section.tiles,leaves:section.leaves});
   }
   const files=[...regions,...coarse],tiles=files.reduce((s,p)=>s+p.tiles,0),expectedTiles=levels.reduce((s,l)=>s+l.tileCount,0);
   if(tiles!==expectedTiles)throw new Error(`Global tile inventory mismatch: ${tiles} / ${expectedTiles}`);

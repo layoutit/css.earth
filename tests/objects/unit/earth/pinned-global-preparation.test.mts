@@ -12,7 +12,8 @@ import { preparePinnedGlobalWmts } from "../../../../tools/objects/geographic-pa
 import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mts";
 import { cityGeographicFrame } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
 import { readWorldCoverCatalog, WORLDCOVER_BUCKET, WORLDCOVER_PREFIX } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
-import { coverageLookup, hashBytes, prepareRegionPack, prepareTreeSection, tileKey } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mts";
+import { sha256 } from '../../../../src/platform/sha256.mts';
+import { coverageLookup, prepareRegionPack, prepareTreeSection, tileKey } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mts";
 import type { WmtsCoverage } from "../../../../tools/objects/geographic-pages/contracts.mts";
 
 const version = "1111111111111111", dataset = "esa-worldcover-rgbnir-2021-v200";
@@ -35,7 +36,7 @@ before(async () => {
   const add = (address: {zoom:number;x:number;y:number}, prepared: {bytes:Uint8Array;tiles:number;leaves:number}) => {
     const filename = `${address.zoom}-${address.x}-${address.y}.pack`;
     records.set(`.local/wmts-global/${version}/${filename}`, prepared.bytes);
-    files.push({ filename, bytes: prepared.bytes.length, sha256: hashBytes(prepared.bytes), tiles: prepared.tiles, leaves: prepared.leaves });
+    files.push({ filename, bytes: prepared.bytes.length, sha256: sha256(prepared.bytes), tiles: prepared.tiles, leaves: prepared.leaves });
   };
   for (const address of list(levels[3])) {
     const pack = prepareRegionPack(address, scene, hasTile, dataset, version, {assetPath:"/scenes/earth/"});
@@ -50,7 +51,7 @@ before(async () => {
   const decoded = Buffer.from(JSON.stringify({ schema: "cssearth-worldcover-inventory@1", dataset,
     bucket: WORLDCOVER_BUCKET, prefix: WORLDCOVER_PREFIX, entries: [entry] }));
   const encoded = gzipSync(decoded), catalogPin = { ...catalog.pin, tileCount: 1, sourceBytes: entry.sourceBytes,
-    expectedBytes: encoded.length, expectedDecodedBytes: decoded.length, expectedSha256: hashBytes(encoded) };
+    expectedBytes: encoded.length, expectedDecodedBytes: decoded.length, expectedSha256: sha256(encoded) };
   release.sourceSha256 = catalogPin.expectedSha256;
   records.set(sourcePath + "city/wmts-release.json", Buffer.from(JSON.stringify(release)));
   records.set(sourcePath + "city/catalog-pin.json", Buffer.from(JSON.stringify(catalogPin)));
@@ -59,7 +60,7 @@ before(async () => {
   records.set(sourcePath + "preparation/paged-ellipsoid.json", await readFile(new URL("../../../../src/objects/earth/source/preparation/paged-ellipsoid.json", import.meta.url)));
   const actual = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/manifest.json", import.meta.url))).toString('utf8')));
   const pinned = <T extends SourceEntry,>(values: readonly T[]) => values.filter(value => records.has(sourcePath + value.path)).map(value => ({ ...value,
-    expectedBytes: required(records.get(sourcePath + value.path)).length, expectedSha256: hashBytes(required(records.get(sourcePath + value.path))) }));
+    expectedBytes: required(records.get(sourcePath + value.path)).length, expectedSha256: sha256(required(records.get(sourcePath + value.path))) }));
   sourceManifest = { ...actual, inputs: pinned(actual.inputs), generatedIntermediates: [], documents: pinned(actual.documents) };
   records.set(sourcePath + "manifest.json", Buffer.from(JSON.stringify(sourceManifest)));
   records.set(outputPath, Buffer.from("previous runtime binding\n"));
@@ -75,7 +76,7 @@ async function fixture() {
 async function repin(root: string, value: unknown) {
   const bytes = Buffer.from(JSON.stringify(value)), manifest = structuredClone(sourceManifest);
   Object.assign(required(manifest.inputs.find(entry => entry.path === "city/wmts-release.json")),
-    { expectedBytes: bytes.length, expectedSha256: hashBytes(bytes) });
+    { expectedBytes: bytes.length, expectedSha256: sha256(bytes) });
   await writeFile(resolve(root, sourcePath, "city/wmts-release.json"), bytes);
   await writeFile(resolve(root, sourcePath, "manifest.json"), JSON.stringify(manifest));
 }

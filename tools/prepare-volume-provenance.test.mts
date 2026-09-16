@@ -110,7 +110,7 @@ test('source-lens binding and recipe pins fail closed when their properties are 
     { file: 'src/objects/helix/object.json', mutate(value) {
       sourceObject(value.prepared).sha256 = '0'.repeat(64);
     }, error: /Changed installed volume bank/ },
-    { file: 'labs/nebula/models/helix/joint-fit.json', mutate(value) { delete value.molecularSource; }, error: /Changed volume recipe/ },
+    { file: 'src/objects/helix/source/bake-inputs/references/04-joint-fit.json', mutate(value) { delete value.molecularSource; }, error: /Changed volume recipe/ },
   ];
   for (const mutation of mutations) await assert.rejects(prepareVolumeProvenance({ root, input: async path => {
     const bytes = await readFile(resolve(root, path));
@@ -138,9 +138,8 @@ test('image-layer deliveries retain authored documents and every layer in matchi
       const bank = sourceObject(JSON.parse(await readFile(resolve(root, entry.base, 'prepared/image-layers.json'), 'utf8')));
       assert.ok(Array.isArray(bank.resources));
       const rootInventory = entry.outputs.find(output => output.path === resolve(fixture, entry.base, 'runtime-assets.json'));
-      const stagingInventory = entry.outputs.find(output => output.path === resolve(fixture, entry.base, 'prepared/runtime-assets.json'));
-      assert.ok(rootInventory && stagingInventory);
-      assert.equal(rootInventory.text, stagingInventory.text);
+      assert.ok(rootInventory, 'the inventory is published once, at the body root');
+      assert.ok(!entry.outputs.some(output => output.path.endsWith('prepared/runtime-assets.json')));
       const inventory = sourceObject(JSON.parse(String(rootInventory.text)));
       assert.equal(inventory.resourceRoot, 'prepared');
       assert.ok(Array.isArray(inventory.assets));

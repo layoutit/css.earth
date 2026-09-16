@@ -1,8 +1,8 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import type {Channels} from 'sharp';
 import type {ObservedRgb, PolarDetails} from './polar-continuation.mts';
 import type {DetailImage} from './source-contract.mts';
 import {parseObservedPolarSource} from './source-contract.mts';
-import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -14,7 +14,6 @@ import {validateRelativePath} from '../material-composition/recipe.mts';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from './polar-continuation.mts';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from './scalar-coverage.mts';
 import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mts';
-const hash=(bytes: Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 
 export function parseObservedPolarRecipe(input: unknown) {
   const config=parseObservedPolarSource(input);
@@ -55,7 +54,7 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
   const add=async(filename: string,data: Buffer)=>{
     const info=await sharp(data).metadata();
     if (!info.width || !info.height) throw new Error(`Observed asset has no dimensions: ${filename}`);
-    const asset={filename,data,bytes:data.length,sha256:hash(data),width:info.width,height:info.height};assets.push(asset);
+    const asset={filename,data,bytes:data.length,sha256:sha256(data),width:info.width,height:info.height};assets.push(asset);
     if(write)await writeFile(resolve(publicDirectory,filename),data);
     return asset;
   };
@@ -105,7 +104,7 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     controls.push({id:lens.id,label:lens.label,shortLabel:lens.shortLabel,filter:lens.filter,wavelength:lens.wavelength,measurement:lens.measurement,
       thumbnailUrl:recipe.publicPrefix+lens.files.thumbnail,surfaceUrl:recipe.publicPrefix+lens.files.surface,surface2xUrl:recipe.publicPrefix+lens.files.surface2x,polesUrl:recipe.publicPrefix+lens.files.poles,poles2xUrl:recipe.publicPrefix+lens.files.poles2x,falseColor:true,qualification:lens.qualification,
       coveragePreparation:{model:polar.model,...measured,projectionEdgeLatitudeDegrees:polar.measuredProjectionEdgeLatitudeDegrees,bodyLatitudeBoundsDegrees:recipe.packing.latitudeBoundsDegrees,unmeasuredCoreRadius:('unmeasuredCoreRadius' in polar ? polar.unmeasuredCoreRadius : undefined),polarProjectionAngularSamples:('polarProjectionAngularSamples' in polar ? polar.polarProjectionAngularSamples : undefined),unmeasuredCoreHarmonicOrder:('unmeasuredCoreHarmonicOrder' in polar ? polar.unmeasuredCoreHarmonicOrder : undefined),detailedPoles:polar.detailedPoles,structuralAuthority:lens.structuralAuthority,structuralDetailMeasurement:false,spectralColorAuthority:lens.measurement,runtimeCoverageRepair:false},
-      sourceFile:lens.source,sourceSha256:hash(bytes),sourceRange:sourceRange.map(value=>Number(value.toPrecision(8))),assetSha256:{surface:surface.sha256,surface2x:surface2x.sha256,poles:poles.sha256,poles2x:poles2x.sha256,thumbnail:thumbnail.sha256}});
+      sourceFile:lens.source,sourceSha256:sha256(bytes),sourceRange:sourceRange.map(value=>Number(value.toPrecision(8))),assetSha256:{surface:surface.sha256,surface2x:surface2x.sha256,poles:poles.sha256,poles2x:poles2x.sha256,thumbnail:thumbnail.sha256}});
   }
   return {assets,maps,coverage,lenses:{...recipe.descriptor,controls}};
 }

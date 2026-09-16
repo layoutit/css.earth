@@ -1,3 +1,4 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { preparePageMetadata } from './prepared-page-metadata.mts';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from './object-runtime-contract.mts';
@@ -5,7 +6,6 @@ import {requireRecord,requireString,isRecord,hasErrorCode} from './source-values
 import type {CheckedObjectRuntimeDefinition} from './object-runtime-contract.mts';
 import type {RecompiledPresentation} from './prepared-depth-partitions.mts';
 type BindingOptions=Parameters<typeof preparePresentationBindings>[2];
-import { createHash } from 'node:crypto';
 import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -70,7 +70,7 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
   const payload = serializeObjectJson(descriptor, runtime);
   await writePreparedText(resolve(preparedDirectory, 'object.json'), payload);
-  const prepared = { format, url: 'prepared/object.json', sha256: createHash('sha256').update(payload).digest('hex') };
+  const prepared = { format, url: 'prepared/object.json', sha256: sha256(payload) };
   const page = preparePageMetadata(id, prepared.sha256, definition);
   await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
   // Validation may normalize key order. Retain the authored document's order
