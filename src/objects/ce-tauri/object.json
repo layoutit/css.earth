@@ -1,0 +1,156 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ce-tauri",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CE Tauri",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "pionier-2016-11",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "pionier-2016-12",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 500725430
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/ce-tauri-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "997f8b7c165de61e4ec4546938bd2c352fb0296120474b29709ca466f239185e"
+      }
+    },
+    "catalog": {
+      "name": "CE Tauri",
+      "classification": "star",
+      "color": "#ffa060",
+      "distanceAu": 34652487.4,
+      "description": "Red supergiant in Taurus, its granulation imaged by the VLT interferometer at two epochs.",
+      "systemName": "Taurus",
+      "order": 1003,
+      "context": {
+        "order": 1000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2326086637132250600,
+        19090815586350084000,
+        6470117832465198000
+      ],
+      "presentationToReference": [
+        0.11463528341218858,
+        0.038566239738296815,
+        -0.992658751510032,
+        0.9408424520290595,
+        0.3165231072282147,
+        0.12094876208768333,
+        0.3188639713999595,
+        -0.9478004894190782,
+        -3.9457306780659094e-8
+      ],
+      "orbitUpReference": [
+        -0.038566239738296815,
+        -0.3165231072282147,
+        0.9478004894190782
+      ],
+      "metersPerUnit": 1615243322.580645,
+      "bodyRadiusM": 500725430000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "2092d55eb7224f9eeefecfc7d1c3213271530adf5e56d48a4b6e582d26dd4583"
+  }
+}
