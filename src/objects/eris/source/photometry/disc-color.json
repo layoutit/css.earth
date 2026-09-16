@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "eris",
+  "object": {
+    "source": "Carraro et al. (2006), Time series photometry of the dwarf planet ERIS (2003 UB313), A&A 460, L39, doi:10.1051/0004-6361:20066526, arXiv:astro-ph/0610619",
+    "locator": "Section 4, Colors",
+    "system": "Johnson-Cousins BVRI",
+    "note": "Weighted mean colours from five nights, 30 November to 4 December 2005, Yale 1.0 m at CTIO. V-R was stable night to night. Dysnomia is unresolved and included.",
+    "indices": {
+      "B-V": {
+        "value": 0.823,
+        "uncertainty": 0.023
+      },
+      "V-R": {
+        "value": 0.391,
+        "uncertainty": 0.023
+      },
+      "V-I": {
+        "value": 0.777,
+        "uncertainty": 0.013
+      }
+    }
+  },
+  "geometricAlbedo": {
+    "source": "Sicardy et al. (2011), A Pluto-like radius and a high albedo for the dwarf planet Eris from an occultation, Nature 478, 493-496, doi:10.1038/nature10550",
+    "locator": "Abstract, visual geometric albedo from the 6 November 2010 occultation radius",
+    "band": "V",
+    "value": 0.96,
+    "uncertainty": {
+      "lower": 0.04,
+      "upper": 0.09
+    }
+  },
+  "sun": {
+    "source": "Ramírez et al. (2012), The UBV(RI)C colors of the Sun, ApJ 752, 5, doi:10.1088/0004-637X/752/1/5, arXiv:1204.0828",
+    "locator": "Abstract, model-independent line-depth-ratio solution",
+    "system": "Johnson-Cousins BVRI",
+    "indices": {
+      "B-V": {
+        "value": 0.653,
+        "uncertainty": 0.003
+      },
+      "V-R": {
+        "value": 0.356,
+        "uncertainty": 0.003
+      },
+      "V-I": {
+        "value": 0.701,
+        "uncertainty": 0.003
+      }
+    }
+  },
+  "effectiveWavelengths": {
+    "source": "SVO Filter Profile Service, Generic/Bessell.B, .V, .R and .I, WavelengthEff",
+    "url": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Generic/Bessell.V",
+    "checked": "2026-09-16",
+    "nanometres": {
+      "B": 438.1,
+      "V": 544.5,
+      "R": 641.1,
+      "I": 798.2
+    }
+  }
+}
