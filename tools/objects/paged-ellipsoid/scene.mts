@@ -840,7 +840,7 @@ function prepareMaterialBank({
   return Object.freeze({
     id,
     model: source
-      ? "prepared-openspace-atmosphere-with-google-directional-response-bank"
+      ? "prepared-model-atmosphere-with-google-directional-response-bank"
       : "prepared-fixed-world-view-bank-bounded-square-shards",
     source,
     ...(illumination && source ? { illumination, atmosphereProfile: atmosphereProfile(source) } : {}),

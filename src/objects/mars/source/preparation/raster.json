@@ -47,7 +47,7 @@
     }
   ],
   "atmosphere": {
-    "source": "openspace/atmosphere.asset",
+    "source": "atmosphere/model.json",
     "tileSize": 256,
     "logicalSize": 512,
     "frameCount": 32,

@@ -77,7 +77,7 @@
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "25°"
+        "value": "25\u00b0"
       },
       {
         "id": "moon-count",
@@ -94,7 +94,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "6.417 × 10²³ kg",
+        "value": "6.417 \u00d7 10\u00b2\u00b3 kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -107,7 +107,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "3.934 g/cm³",
+        "value": "3.934 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -120,7 +120,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "3.71 m/s²",
+        "value": "3.71 m/s\u00b2",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -326,7 +326,7 @@
     {
       "label": "OpenSpace",
       "role": "scene",
-      "description": "Atmosphere & scene",
+      "description": "Atmosphere parameter values (adapted, MIT)",
       "href": "https://github.com/OpenSpace/OpenSpace"
     },
     {

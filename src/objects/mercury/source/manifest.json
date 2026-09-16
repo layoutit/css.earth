@@ -25,16 +25,14 @@
     {
       "id": "usgs-messenger-bdr-global-z3",
       "path": "maps/mercury-bdr-global.png",
-      "expectedBytes": 9385021,
-      "expectedSha256": "4b72646d9405f85e0c158cc321088229d6c47deea09ffa6e1d24a81e3ba36f37",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
-      "credit": "USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
+      "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+      "credit": "NASA Solar System Treks; USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
       "licenseEvidence": [
         "maps/messenger_bdr_newyork.asset",
         "maps/messenger_bdr_newyork.wms"
       ],
-      "acquisition": "Stitch all 16 by 8 level-3 TMS tiles declared by the pinned OpenSpace WMS file, then resize the 5760 by 2880 equirectangular mosaic to 4096 by 2048 with Lanczos3.",
+      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "Committed scientific source snapshot with credit and product qualification.",
       "consumers": [
         "assets",
@@ -42,7 +40,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS monochrome mosaic",
-      "displayCredit": "USGS · NASA/MESSENGER",
+      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -55,7 +53,7 @@
             "kind": "machine",
             "machineId": "messenger",
             "missionId": "messenger",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}"
+            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
         ]
       },
@@ -68,7 +66,9 @@
             "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
-      }
+      },
+      "expectedSha256": "8ab641af485bca84daea03738e2b17d1734df0fa21b9c275258bccbcfe1516eb",
+      "expectedBytes": 8835828
     },
     {
       "id": "usgs-messenger-enhanced-global-z3",
@@ -89,7 +89,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS enhanced-color mosaic",
-      "displayCredit": "USGS · NASA/MESSENGER",
+      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -120,16 +120,14 @@
     {
       "id": "usgs-messenger-topography-z3",
       "path": "maps/mercury-topography-global.png",
-      "expectedBytes": 15262047,
-      "expectedSha256": "237521324ce260491eeb5d9215a2a3c72b1f018ae12450513bb82e78f5cffab9",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
-      "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
+      "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png",
+      "credit": "NASA Solar System Treks; USGS Astrogeology MESSENGER DEM v2 colour hillshade; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
       "licenseEvidence": [
         "maps/messenger_shade_newyork.asset",
         "maps/messenger_shade_newyork.wms"
       ],
-      "acquisition": "Stitch all 11 by 6 level-3 TMS tiles declared by the pinned OpenSpace WMS file, crop to its 3832 by 1916 data window, then resize to 4096 by 2048 with Lanczos3.",
+      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "Committed scientific source snapshot with credit and false-color qualification.",
       "consumers": [
         "assets",
@@ -137,7 +135,7 @@
         "scene"
       ],
       "title": "MESSENGER global shaded relief",
-      "displayCredit": "USGS · NASA/MESSENGER",
+      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -150,7 +148,7 @@
             "kind": "machine",
             "machineId": "messenger",
             "missionId": "messenger",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}"
+            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png"
           }
         ]
       },
@@ -163,7 +161,9 @@
             "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
-      }
+      },
+      "expectedSha256": "48e8ffa812b74a3ba4ba586e377ae4919f98514ace9aa2b318eb5c4a46b16587",
+      "expectedBytes": 10330521
     },
     {
       "id": "usgs-messenger-topography-legend",
@@ -188,226 +188,6 @@
             "catalogueId": "source-mercury-usgs-messenger-topography-legend",
             "role": "material",
             "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-globe",
-      "path": "maps/globe.asset",
-      "expectedBytes": 1599,
-      "expectedSha256": "f626829fab1b7f37676871f71d3f970a28db2b78c192b7eb6ab783d824a8325f",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted by MIT license.",
-      "consumers": [
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-globe",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-globe-lighting-excerpt",
-      "path": "renderer/texturetilemapping-lighting.glsl",
-      "expectedBytes": 1846,
-      "expectedSha256": "8cb235ec90ecf95be034f44a57d42f876677790dc7450e522703dd1a2f0163a0",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      "upstreamFullFileSha256": "c2388a626700e4b4c7c09894e8d15e402c7c53d67cb24c4d8a1cebbacf4745d4",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Exact Oren-Nayar and shaded-color function excerpts from the pinned OpenSpace renderer; the full upstream-file hash is recorded in the snapshot.",
-      "redistribution": "Permitted by MIT license.",
-      "consumers": [
-        "assets",
-        "scene"
-      ],
-      "title": "OpenSpace surface lighting",
-      "displayCredit": "OpenSpace Team",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-globe-lighting-excerpt",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-bdr-asset",
-      "path": "maps/messenger_bdr_newyork.asset",
-      "expectedBytes": 1663,
-      "expectedSha256": "acf90c1ecb1b8f14ac6e3da8b90d72ba6f86602d03d366d178bcc86822965b5b",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_bdr_newyork.asset",
-      "credit": "OpenSpace Team; USGS",
-      "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted with retained attribution.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-bdr-asset",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-bdr-wms",
-      "path": "maps/messenger_bdr_newyork.wms",
-      "expectedBytes": 762,
-      "expectedSha256": "0ca1a350e0eb8c8cfeb6f9dc5efa907f816e4901239d1fb9332d2ecba6fd1375",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_bdr_newyork.wms",
-      "credit": "OpenSpace Team; USGS",
-      "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted with retained attribution.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-bdr-wms",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-enhanced-asset",
-      "path": "maps/messenger_mosaic2_newyork.asset",
-      "expectedBytes": 821,
-      "expectedSha256": "8064a9137148ce2e8204ac9bf7304ecc98c0a5053c4faf86d66e847045310dbe",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.asset",
-      "credit": "OpenSpace Team; USGS",
-      "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted with retained attribution.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-enhanced-asset",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-enhanced-wms",
-      "path": "maps/messenger_mosaic2_newyork.wms",
-      "expectedBytes": 767,
-      "expectedSha256": "946b257bd729c9cb237bb330cf5b5f73d563011e24c8a95554a82f03db977c4d",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.wms",
-      "credit": "OpenSpace Team; USGS",
-      "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted with retained attribution.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-enhanced-wms",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-topography-asset",
-      "path": "maps/messenger_shade_newyork.asset",
-      "expectedBytes": 1002,
-      "expectedSha256": "942915779e6948eb5de171e6387992ebde315cdc1d94b84634de823fa944f81b",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_shade_newyork.asset",
-      "credit": "OpenSpace Team; USGS",
-      "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted with retained attribution.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-topography-asset",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mercury-topography-wms",
-      "path": "maps/messenger_shade_newyork.wms",
-      "expectedBytes": 762,
-      "expectedSha256": "28d000d3d632e25768c663240bc4d56e3e02cfcc33cac22d2fc6581067bef3fe",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_shade_newyork.wms",
-      "credit": "OpenSpace Team; USGS",
-      "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
-      "redistribution": "Permitted with retained attribution.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-mercury-topography-wms",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
         ]
       }
@@ -505,7 +285,7 @@
         "charts"
       ],
       "title": "MESSENGER MASCS spectral cube",
-      "displayCredit": "M. D’Amore · DLR · NASA/MESSENGER",
+      "displayCredit": "M. D\u2019Amore \u00b7 DLR \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://doi.org/10.5281/zenodo.7433033",
       "sourceBinding": {
         "kind": "catalogued",
@@ -599,8 +379,8 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "8b076bec4b5dd85fa5eb163fc94e3f0def678822c4c6853632e2af205491a7a1",
-      "expectedBytes": 15741,
+      "expectedSha256": "179b2721a30a44a057c845c12cb7fa51b4b40b6a662c535e98432d47dd16d5b2",
+      "expectedBytes": 15805,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -637,8 +417,8 @@
     {
       "id": "mercury-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "406b1cbd8ad99aa63d2ebec89933aaab69e03131c157e2f5f1633e949118f257",
-      "expectedBytes": 6307,
+      "expectedSha256": "25aa0f2790c8ce35056d29c0777a618b9ae1f9939958c92017723eaed612c631",
+      "expectedBytes": 4091,
       "origin": "Repository-authored Mercury acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -732,8 +512,8 @@
     {
       "id": "mercury-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "2dcc03a3423504532b6fa10e6658d3c7ff8d5fb7c92f94c114d396b32dc63a96",
-      "expectedBytes": 4812,
+      "expectedSha256": "9f71fcf74d14bc167bedc7c7834aefd89384e0929d9aaf6d4bbfdcbf4929660c",
+      "expectedBytes": 4796,
       "origin": "Repository-authored Mercury raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -775,7 +555,7 @@
       "expectedSha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -851,7 +631,7 @@
         "features"
       ],
       "title": "A Global Tectonic Map of Mercury (Klimczak, Byrne and Crane)",
-      "displayCredit": "Klimczak, Byrne and Crane · Mendeley Data",
+      "displayCredit": "Klimczak, Byrne and Crane \u00b7 Mendeley Data",
       "sourceUrl": "https://data.mendeley.com/datasets/p43b9wttpj/2",
       "sourceBinding": {
         "kind": "catalogued",

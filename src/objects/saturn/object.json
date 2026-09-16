@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3d51b9bbe86c6e072d4a4ea64c14ca9bb65827ad470714e2166231e76290e2da"
+    "sha256": "55d21a1b933f68a0710df08821f5d5be7406b51b95a48659522d28a9560dac6f"
   },
   "id": "saturn",
   "properties": {
@@ -26,12 +26,12 @@
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "592f1ef7ab8f4b6a8aaa745c5e74d0b6aa83f19eec7fd748d8ba456002ce86c1"
+          "sha256": "3bcf4c15e41de801e4f7e24c7b95c2373bdd6d049199c2175ab1205ada3f8329"
         },
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "e7dcc2a44ad1b40e1fd2af966049face20495580d77bbf7fee8d36a8b4d7025f"
+          "sha256": "edd3b833366908d428295aecf8af6274448c1ba1184e9eba26da6f1f583a0450"
         },
         {
           "id": "title",
@@ -41,12 +41,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3"
+          "sha256": "7d946ad0bc7e77a9076cf57cb7e82f63feb408f904c08c10d6ce4a128a8e52d3"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf"
+          "sha256": "9622e8017d068049476a935d1cb3d9eb6f0c780f0f7df1d7d21aefd52f106fdb"
         },
         {
           "id": "surface",
@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "bc22d665a1b8bb0baeafae4c9b90a0a7dd16390d20b2b8ac71b69e1dbfb200f5"
+          "sha256": "fe7cee525001f69a2e0ac782fd554995155ab5205238e73d649a23b6e5e83e37"
         },
         {
           "id": "satellite-catalog",
@@ -172,7 +172,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "866bd8338383ab52e24bace266282ba8f30a26e2522042bfc103f105a0dea07b"
+        "sha256": "28c032ee5d669bd10ec9b38e236b7f56af2ac7f9a786400d4e88bd01f0e40d25"
       }
     },
     "catalog": {

@@ -2,7 +2,7 @@
 
 Every terrestrial `shapeViews` lens uses the same neutral gray: **#808080 in
 sRGB**. This is a cssEarth display convention, not measured color, physical
-albedo, or a NASA/OpenSpace standard. The model supplies the shape; the material
+albedo, or any external standard. The model supplies the shape; the material
 adds no craters, mottling, grid lines, or other invented surface detail.
 
 Photographic, observed-color, and scientific lenses retain their own pixels.

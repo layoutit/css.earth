@@ -54,46 +54,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "openspace/globe.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/globe.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/atmosphere.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/atmosphere.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/clouds.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/radar.wms",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/magellan_mosaic_newyork.wms"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/dem.wms",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/heightlayers/magellan_newyork.wms"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "surface/venus-magellan-color-wms.png",
       "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_color&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
     },
