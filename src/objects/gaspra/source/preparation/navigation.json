@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
-    "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
-    "license": "NASA PDS public scientific data; retain attribution and source notices.",
-    "expectedBytes": 90870,
-    "expectedSha256": "2b8893d9517f0e2a419fa4b6f43cc52dd5ce29888b53479a993f7daca792ac95",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "gaspra-normal",
-        "gaspra-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 300,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

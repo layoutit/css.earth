@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://pds-rings.seti.org/voyager/iss/",
-    "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-    "license": "Public NASA mission data; retain credits.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "c2683716",
-        "reference-sphere"
-      ],
-      "size": 512,
-      "longitudeDegrees": 306.355,
-      "latitudeDegrees": -56.091,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 120686,
-    "expectedSha256": "ff3cd581759f775b743bfc85028df48b59084156ab9ba47be743747101e18e0a"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

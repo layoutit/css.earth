@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbn.psi.edu/pds/resource/stkshape.html",
-    "credit": "NASA/JPL; Philip Stooke; NASA PDS",
-    "license": "Public PDS scientific data; retain mission and model attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "c1138148",
-        "stooke-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 270,
-      "latitudeDegrees": -24,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 113352,
-    "expectedSha256": "ca398ffc9d4152c8924784d5283c4ecef757262bf77f0410315f249aa4fe10ef"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -6,32 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 10876,
-    "expectedSha256": "33870203d04699d932cb1d0d4fe0a2e5659c88d7a65277b58039758c0301e75e",
-    "origin": "https://doi.org/10.1111/j.1365-2966.2006.11121.x",
-    "credit": "Snodgrass, Lowry and Fitzsimmons (2006), MNRAS 373, 1590",
-    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
-    "licenseEvidence": [],
-    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
-    "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "celestia-mesh"
-      ],
-      "size": 512,
-      "longitudeDegrees": 70,
-      "latitudeDegrees": 20,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

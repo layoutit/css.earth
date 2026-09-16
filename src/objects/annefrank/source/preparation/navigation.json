@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1029/2003JE002108",
-    "credit": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "occultation-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 58321,
-    "expectedSha256": "e476ec0bbd4b19568c0bdb090ba81dbd087a044c0c0ba1679e35de0ee74df112"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

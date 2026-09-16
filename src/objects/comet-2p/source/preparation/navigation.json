@@ -6,35 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 7843,
-    "expectedSha256": "4351041f3b26d1e247554028d6246404171e45bee4af375e6918a6cb4dd50606",
-    "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
-    "credit": "Harmon & Nolan (2005); cssEarth approximation",
-    "license": "Published scientific parameters; cssEarth implementation MIT",
-    "licenseEvidence": [
-      "https://doi.org/10.1016/j.icarus.2005.01.012",
-      "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
-    ],
-    "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
-    "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "shape-parameters"
-      ],
-      "size": 512,
-      "longitudeDegrees": 70,
-      "latitudeDegrees": 20,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {
