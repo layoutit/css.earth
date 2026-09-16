@@ -2,6 +2,7 @@ import {parseFloatMapGrid,parseFloatMapLens} from './source-records.mts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {gunzipSync} from 'node:zlib';
+import {pds3Keyword} from '../pds-labels.mts';
 
 /** Formal PDS3 scalar maps: attached labels, PC_REAL, spherical unrotated
  * equirectangular projection. Keep missing pixels and the west/east convention. */
@@ -10,9 +11,9 @@ export function decodePdsFloatImage(input: Buffer, value: unknown) {
   const bytes = input[0] === 0x1f && input[1] === 0x8b ? gunzipSync(input) : input;
   const label = bytes.subarray(0,131072).toString('ascii');
   const field = (key: string) => {
-    const raw = label.match(new RegExp(`^\\s*${key.replaceAll('^','\\^')}\\s*=\\s*([^\\r\\n]+)`,'m'))?.[1];
+    const raw = pds3Keyword(label, key);
     if (raw === undefined) throw new Error(`Missing PDS float field: ${key}`);
-    return raw.trim().replaceAll('"','');
+    return raw;
   };
   const number = (key: string) => {
     const n=Number.parseFloat(field(key));

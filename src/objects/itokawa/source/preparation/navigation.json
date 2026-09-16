@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
-    "credit": "JAXA/ISAS/Hayabusa AMICA; R. Gaskell and colleagues",
-    "license": "Public mission scientific data; retain attribution and source notices.",
-    "expectedBytes": 188484,
-    "expectedSha256": "ce0b9e63e348a9d4a8f1c807b26a94e14df8a978bc1fd0c3f2ec3f41454b917c",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "itokawa-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 90,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "elevation"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

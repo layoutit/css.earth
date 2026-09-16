@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://observations.lam.fr/astero/3Dshape/15_Eunomia_mpcd.obj",
-    "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
-    "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 33376,
-    "expectedSha256": "232ad82fd650864045f834e031117cd752ee54633ee24292ee865b613f9de19a",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "eunomia-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

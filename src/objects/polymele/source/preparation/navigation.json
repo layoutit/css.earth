@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
-    "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "occultation-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 52094,
-    "expectedSha256": "c30960f6ea02300ffca025159880f2a7cb0d80be3774273a86a5616829c56004"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

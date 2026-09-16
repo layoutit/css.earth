@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 [Proudfoot et al. (2026), accepted PSJ](https://arxiv.org/abs/2605.28636) combines
 an occultation silhouette with the satellite orbit to constrain a smooth Maclaurin
 model: semiaxes 329, 329 and 294 km. Checked 2026-09-09. This distant dwarf-planet

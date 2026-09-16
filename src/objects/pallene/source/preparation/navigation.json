@@ -6,31 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-cassini-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
-    "credit": "NASA/JPL-Caltech/Space Science Institute; Thomas et al.; cssEarth preparation",
-    "license": "NASA/PDS data; MIT preparation",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "pallene-ellipsoid",
-        "cassini-n1496910582",
-        "cassini-n1496910582-label"
-      ],
-      "size": 512,
-      "longitudeDegrees": 105,
-      "latitudeDegrees": -7,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 71432,
-    "expectedSha256": "c3423e4caf9baa6da5d3e2da8886c38b437b2524693db4a01e00df64c443682e"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

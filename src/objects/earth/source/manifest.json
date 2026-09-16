@@ -1633,8 +1633,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 804,
-      "expectedSha256": "cd076c0f57ea34fc244b4cda0cb83d8c21c39488501d0aee7f8b5d91803593e2",
+      "expectedBytes": 493,
+      "expectedSha256": "dbf42f9718b5028e77fa31fb98649cd10ca8e2d6b5a10c2754efc4bfa505a1a1",
       "purpose": "Source-owned navigation marker recipe consumed by shared navigation preparation."
     },
     {

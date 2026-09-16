@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 The visible-detail globe is the 2025 Hubble OPAL Cycle 32 colour global map
 assembled by the OPAL team from WFC3/UVIS F467M, F547M, and F657N exposures.
 The OPAL readme declares that the TIFF is arbitrarily scaled and contrast

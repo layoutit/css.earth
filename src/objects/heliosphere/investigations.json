@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "heliosphere",
+  "entries": [
+    {
+      "id": "reisenfeld-2021-heliopause",
+      "subject": "Reisenfeld et al. (2021) three-dimensional IBEX map",
+      "status": "included",
+      "finding": "The geometry comes from Figure 8's heliopause surface and its Zirnstein-Heerikhuisen termination shock model, replacing the earlier illustrative shape; it is an IBEX-derived, model-dependent estimate from 2009-2019 observations, not a photograph or a fully measured closed boundary, and it carries its original AAS notice rather than a CC-BY or MIT licence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L24",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L29",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L66",
+        "https://doi.org/10.3847/1538-4365/abf658"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "publisher-grid-extraction",
+      "subject": "Published 13 by 7 grid against the original workbook",
+      "status": "included",
+      "finding": "Offline extraction retains the publisher grid: its 67 directly corresponding entries, including repeated poles and the longitude seam, agree with the original workbook within 1e-10 AU, and all retained coordinates are preserved exactly.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L31",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L35",
+        "https://doi.org/10.3847/1538-4365/abf658"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "high-latitude-interpolation",
+      "subject": "High-latitude entries supplied by the authors' interpolation",
+      "status": "unresolved",
+      "finding": "The remaining 24 grid entries are the authors' high-latitude interpolation and their plus or minus 85-degree polar macropixels are placed at plus or minus 90 degrees in the figure; extraction preserves those choices rather than resolving them.",
+      "revisitWhen": "A release supplies measured high-latitude heliopause distances instead of interpolated ones.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L33"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "category-3-tail-extent",
+      "subject": "Category 3 tail energetic-neutral-atom region",
+      "status": "unresolved",
+      "finding": "Category 3 traces the detectable tail ENA region, and the README states its reported extent does not establish the end of the heliopause, so the closed display geometry must not be read as a measured physical tail closure.",
+      "revisitWhen": "Observations establish the heliopause tail extent or its closure.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L38",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L41"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "category-4-values",
+      "subject": "Category 4 noisy, manually constrained distances",
+      "status": "unresolved",
+      "finding": "Category 4's noisy, manually constrained values remain as published, with the paper's approximate uncertainties retained for categories 1 and 2 at plus or minus 10 and 15 AU.",
+      "revisitWhen": "A revised IBEX analysis replaces the manually constrained values.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L37",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L42"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "display-tessellation",
+      "subject": "Offline display tessellation of the retained samples",
+      "status": "included",
+      "finding": "Preparation interpolates between the retained source samples, four segments per original triangle edge, to avoid magnifying giant facets: it adds no measurements, improves no source resolution and reduces no reported uncertainty, and a conservative plus or minus 383 AU bound contains both the source and the curved interpolation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L44",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L52"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "galaxio-rim-presentation",
+      "subject": "Galaxio renderer rim presentation",
+      "status": "included",
+      "finding": "The green rim, transparency, visibility distances and fixed 2,024-tile atlas are display choices preserved from the previous presentation and documented by the original Galaxio renderer and its MIT notice; they are not measurements from the paper.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L59",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L67"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "original-frame-alignment",
+      "subject": "Original right-handed IBEX frame",
+      "status": "included",
+      "finding": "The source frame has +Y toward ecliptic longitude 255 degrees and +Z toward the north J2000 ecliptic pole and explicitly applies Rx(J2000 obliquity) times Rz(165 degrees) to align with the shared Sun ICRF world, in astronomical units of 149,597,870,700 metres.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L54",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/heliosphere/README.md#L57"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
-    "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio",
-    "license": "Public mission scientific data; retain attribution and source notices.",
-    "expectedBytes": 178217,
-    "expectedSha256": "ddfcec4744a629031d893e93a3c2fa3514316a04cf824dca1fc78e82bce4043a",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "bennu-normal",
-        "bennu-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 0,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

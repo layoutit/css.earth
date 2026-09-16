@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1051/0004-6361/202450833",
-    "credit": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study.",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "occultation-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 44837,
-    "expectedSha256": "0933667dc6bb8f0ec514e88f5912f9869dd9e392ddd4a34308d8b9a5001e120a"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

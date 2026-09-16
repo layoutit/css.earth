@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 The surface is unresolved and is shown in the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour or albedo. The Dataset panel exposes it as “Shape”; no terrain, texture or map is claimed.
 
 The radius is 1,163 ± 6 km from the November 6, 2010 stellar occultation reported by [Sicardy et al. (2011)](https://doi.org/10.1038/nature10550). That event is consistent with a spherical body. The render sphere uses the nominal radius; it does not claim a resolved shape mesh.

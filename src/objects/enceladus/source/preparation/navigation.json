@@ -6,41 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "cassini-schenk-2024-normal",
-    "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
-    "expectedBytes": 518340175,
-    "expectedSha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
-    "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
-    "credit": "NASA/JPL-Caltech/Space Science Institute; Paul M. Schenk and William B. McKinnon (2024), LPI/USRA",
-    "license": "Public PDS archive; cite authors",
-    "licenseEvidence": [
-      "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-mosaic-100m-schenk"
-    ],
-    "acquisition": "Download the original USGS/PDS GeoTIFF and verify its pinned bytes.",
-    "redistribution": "Prepared derivatives retain the source authors and mission credits.",
-    "consumers": [
-      "surfaces",
-      "navigation"
-    ],
-    "lensId": "normal",
-    "label": "Monochrome",
-    "falseColor": false,
-    "width": 16098,
-    "height": 8049,
-    "projection": {
-      "type": "equirectangular",
-      "centerLongitude": 180,
-      "referenceRadiusMeters": 256200,
-      "longitudeDirection": "east-positive",
-      "latitudeType": "planetocentric",
-      "pixelResolutionMeters": 100,
-      "upperLeftMeters": [
-        -804900,
-        402500
-      ]
-    },
-    "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
-    "units": "Published display DN"
+    "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
   },
   "operations": [
     {

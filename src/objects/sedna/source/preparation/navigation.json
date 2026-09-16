@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/1204.0899",
-    "credit": "Pál et al. (2012), Herschel/PACS thermophysical analysis; Gaudi et al. (2005), rotational photometry.",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 91307,
-    "expectedSha256": "6dbd137c5599ba8635959ebca0b244d1af0352dbc48753c91f3d357025b061ed"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-source-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/2605.28636",
-    "credit": "Proudfoot et al. (2026), occult3d reanalysis of Souami et al. (2020) occultation chords",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "published-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 67449,
-    "expectedSha256": "27c7c5ddd3cc834d9b85b4c5841fb00a5c300a560ec52fcacdbdee5de9a617d9"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

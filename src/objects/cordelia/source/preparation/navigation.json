@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://arxiv.org/abs/2401.04634",
-    "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage grid",
-    "license": "MIT display representation from published scientific measurements; retain source citation.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "measured-ellipsoid",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 71777,
-    "expectedSha256": "f9997e969ed3a27e7d5e495d9de7129bf8859c4fa9f73e1eb5a3cbf00110506a"
+    "path": "presentation/context.png"
   },
   "operations": [
     {
