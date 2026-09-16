@@ -28,11 +28,14 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "Stardust NAVCAM observations exist, but this review found no reusable global raster registered to the selected display ellipsoid. The existing grid is authored missing-data display, not evidence of mapped coverage; disk-integrated spectra are not surface maps.",
-      "revisitWhen": "A released reusable observation or mapped product supplies its pixel geometry and registration to a source model that can be compared with the selected ellipsoid.",
+      "finding": "A full registration attempt was made and it failed; this replaces the earlier statement that no reusable raster was found. The camera itself is sound: across six frames spanning 30 seconds the archived geometry predicts the observed disc to a constant offset of 12.2 and 6.7 pixels with about 0.8 pixel of scatter, which is 0.048 degrees of pointing. Both image axes were confirmed against the photographs themselves. A Sun azimuth computed from the J2000 vector and the world coordinate solution matches the archive’s own azimuth to between 0.03 and 0.23 degrees, the observed lit side agrees with it, and the disc’s 39 pixels of motion between frames follows the prediction, so the stored images are not mirrored in either axis. The orientation of the published ellipsoid was then fitted jointly to eight encounter frames that span 95 degrees of viewing direction, using 403 limb points, one shared orientation and one shared pointing offset. It reached 3.597 pixels root mean square with an 8.555 pixel maximum, and per-frame mean residuals swung from plus 2.96 to minus 4.04 pixels. The solution was then frozen and applied to n0476, a frame at 39.2 degrees phase that was not used in the fit: 6.296 pixels root mean square and 8.339 pixels maximum, which is 1240 m on a body 33.5 pixels or 6.6 km long. Two causes are separated and neither is missing tooling. Half of a limb is dark at any phase, so a single frame offers at most 180 degrees of lit arc, and a free ellipse fitted to one such arc reaches 0.34 to 1.35 pixels while its semi-axes range from 1.50 by 1.00 km to 3.90 by 1.41 km across frames; one lit arc therefore does not determine the outline. Scattered light also extends about 25 pixels beyond the body against a background of 83.90 data numbers with 0.21 standard deviation, and it biases a simple edge inward by an amount that varies with brightness; Stryk and Stooke reconstructed and subtracted that fogging, and this attempt did not. The attempt is closed without a photographic surface. It does not show that registration is impossible, and it does not claim the published ellipsoid is wrong.",
+      "revisitWhen": "Producer-controlled image geometry, a published body orientation, or verified surface correspondences with measured precision would reopen this. Joint limb-and-orientation fitting to these raw frames has now been tried and failed a frozen fresh-frame check, so do not restart an equivalent fit to the same uncorrected limbs; modelling and subtracting the archive’s scattered light first, or using a producer product that already carries a frame, are the useful next steps.",
       "evidence": [
-        "https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=SDU-A-NAVCAM-2-EDR-ANNEFRANK-V3.0",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/README.md"
+        "https://pdssbn.astro.umd.edu/holdings/sdu-a-navcam-2-edr-annefrank-v3.0/dataset.shtml",
+        "https://pdssbn.astro.umd.edu/holdings/sdu-a-navcam-2-edr-annefrank-v3.0/data/encounter/2002/11_02/n0449ae02.lbl",
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/sdu-c-spice-6-v1.0/sdsp_1000/data/pck/sdu_annefrank_v01.tpc",
+        "https://www.hou.usra.edu/meetings/lpsc2016/pdf/1148.pdf",
+        "https://github.com/layoutit/css.earth/blob/60981e90cd1c1016670b90d582f982ec6e942c3c/src/objects/annefrank/README.md"
       ],
       "checked": [
         {
@@ -43,6 +46,10 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-15",
+          "commit": "60981e90cd1c1016670b90d582f982ec6e942c3c"
         }
       ]
     },
@@ -70,19 +77,44 @@
     },
     {
       "id": "stardust-navcam-edr-v3",
-      "subject": "Stardust NAVCAM raw images of Annefrank v3.0",
-      "status": "unresolved",
-      "finding": "The PDS catalogue identifies SDU-A-NAVCAM-2-EDR-ANNEFRANK-V3.0 as raw pre-encounter and encounter images. The catalogue page establishes product existence, but this ledger review did not retrieve labels, image bytes, reconstructed pointing, or a model-registration product. Raw availability therefore does not qualify a texture or a scientific surface view.",
-      "revisitWhen": "The native product labels and applicable SPICE/reconstructed geometry are inspected and can be matched to a released shape or supported registration route.",
+      "subject": "Stardust NAVCAM Annefrank raw images, version 3.0",
+      "status": "excluded",
+      "finding": "The archive was retrieved and inspected rather than only catalogued. The index lists 97 products, 25 approach and 72 encounter, covering 2002-11-02 04:26:01 to 04:53:01 UTC; each encounter frame is 1024 by 1024 at 8 bits, compressed onboard from 12 bits through a lookup table. The closest frame n0449ae02 was taken from 3078.78 km at 183.664 m per pixel and 59.98 degrees phase, and the body covers about 36 by 25 pixels with a peak of 180 data numbers over a background of 84. Each label and FITS header carries a complete camera: a gnomonic world coordinate solution at 59.66 microradians per pixel, the J2000 target vector, the Sun vector, the scan mirror angle and the NAVCAM frame name. One archive field contradicts itself: SUNTRGRX, SUNTRGRY and SUNTRGRZ are described as the target measured from the Sun but hold the same values as the spacecraft-to-Sun vector, so they give the direction from the target to the Sun; the header’s own Sun azimuth resolves the sign. The images are usable photographs and their camera is sound. They are not adopted because the body has no published orientation to place them on, which is recorded separately.",
+      "revisitWhen": "A published pole and prime meridian for Annefrank, or a producer-controlled map or shape model in a stated frame, makes it possible to place these photographs on a surface.",
       "evidence": [
-        "https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=SDU-A-NAVCAM-2-EDR-ANNEFRANK-V3.0",
-        "https://github.com/layoutit/css.earth/pull/192"
+        "https://pdssbn.astro.umd.edu/holdings/sdu-a-navcam-2-edr-annefrank-v3.0/dataset.shtml",
+        "https://pdssbn.astro.umd.edu/holdings/sdu-a-navcam-2-edr-annefrank-v3.0/index/index.tab",
+        "https://pdssbn.astro.umd.edu/holdings/sdu-a-navcam-2-edr-annefrank-v3.0/data/encounter/2002/11_02/n0449ae02.lbl",
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/sdu-c-spice-6-v1.0/sdsp_1000/aareadme.htm",
+        "https://github.com/layoutit/css.earth/blob/60981e90cd1c1016670b90d582f982ec6e942c3c/src/objects/annefrank/investigations.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-15",
+          "commit": "60981e90cd1c1016670b90d582f982ec6e942c3c"
+        }
+      ]
+    },
+    {
+      "id": "pck-orientation-absent",
+      "subject": "NAIF Annefrank planetary constants kernel: no pole, prime meridian or spin",
+      "status": "unresolved",
+      "finding": "The mission kernel sdu_annefrank_v01.tpc supplies BODY2005535_RADII as 3.3, 2.5 and 1.7 km and leaves BODY2005535_POLE_RA, BODY2005535_POLE_DEC and BODY2005535_PM empty. Its comments state that the rotation rate and spin axis direction could not be determined from the flyby because the images span too short a period, and that no rotation constants are therefore provided. There is consequently no body-fixed frame for Annefrank in the mission archive, so no archived route converts a camera into body-fixed longitude and latitude. This is a stated absence in the producer’s own kernel, not an unfinished search. The display pole and meridian in this package remain authored and arbitrary, as the README says.",
+      "revisitWhen": "A published spin axis and rotation period, or a producer product that defines a body-fixed frame for this asteroid, becomes available.",
+      "evidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/sdu-c-spice-6-v1.0/sdsp_1000/data/pck/sdu_annefrank_v01.tpc",
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/sdu-c-spice-6-v1.0/sdsp_1000/aareadme.htm",
+        "https://doi.org/10.1029/2003JE002108"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-15",
+          "commit": "60981e90cd1c1016670b90d582f982ec6e942c3c"
         }
       ]
     },
@@ -90,8 +122,8 @@
       "id": "stryk-stooke-2016-partial-map",
       "subject": "Stryk and Stooke (2016) partial Annefrank map",
       "status": "deferred",
-      "finding": "The LPSC abstract reports mirrored-image correction, scattered-light removal and frame stacking, and its Figure 4 shows a simple cylindrical partial map. The displayed figure uses tentative ellipsoid control; it does not publish labelled longitude bounds, native raster bytes, or clear reuse terms. It is a promising map route, but does not establish registration to this package’s ellipsoid.",
-      "revisitWhen": "The authors or an archive release the map raster and control/shape definition with terms that permit reuse and comparison with the selected model.",
+      "finding": "The full abstract was read rather than only its listing. It establishes four facts that matter here. The 72 images span 26 minutes, which was not long enough to detect rotation, and the lightcurve period is greater than 15 hours and perhaps 22 hours. The raw images are mirror-reversed by the camera’s scan mirror, and every previous publication of them shows that reversed orientation; the authors present the true orientation instead. Duxbury et al. supplied the geometric basis for their mapping, with the viewing direction running from along the major axis to within 10 degrees of the intermediate axis and from about 10 degrees north to the equator, over roughly 40 percent of the surface. Their control is explicitly tentative: they state that no high precision shape model is available and that accuracy is necessarily limited. The abstract still publishes no labelled longitude bounds, no reusable raster and no reuse terms, so it remains a promising route rather than a usable product.",
+      "revisitWhen": "The authors or an archive release the map raster with its control, frame and longitude bounds under terms that permit reuse, or the same control is published numerically so it can be compared with the selected ellipsoid.",
       "evidence": [
         "https://www.hou.usra.edu/meetings/lpsc2016/pdf/1148.pdf",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/README.md",
@@ -102,6 +134,10 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-15",
+          "commit": "60981e90cd1c1016670b90d582f982ec6e942c3c"
         }
       ]
     }
