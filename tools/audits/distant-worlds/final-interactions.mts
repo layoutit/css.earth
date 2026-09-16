@@ -1,8 +1,8 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
 await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mts';
 declare global { interface Window {  } }
@@ -30,7 +30,7 @@ try {
  const before=await p.screenshot({clip:{x:400,y:220,width:650,height:500}});
  await p.locator('input[name="shadows"]').evaluate(node=>{if(!(node instanceof HTMLElement))throw new Error('Shadows control is not an HTML element.');node.click();});await p.waitForTimeout(300);
  const after=await p.screenshot({clip:{x:400,y:220,width:650,height:500}});
- assert.notEqual(createHash('sha256').update(before).digest('hex'),createHash('sha256').update(after).digest('hex'));
+ assert.notEqual(sha256(before),sha256(after));
  await p.screenshot({path:`${out}/oumuamua-shadows-on.png`});
  await p.locator('input[name="orbit"]').evaluate(node=>{if(!(node instanceof HTMLElement))throw new Error('Orbit control is not an HTML element.');node.click();});await p.waitForTimeout(100);
  report.optInControls={shadows:true,bodyPixelsChanged:true,orbit:true};

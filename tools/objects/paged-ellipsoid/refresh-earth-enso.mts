@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes} from './refresh-source.mts';
 import {parseCoraltempRecipe} from './source-contract.mts';
 import { createHash } from 'node:crypto';
@@ -10,7 +11,7 @@ import { readCoraltempAnomaly, ensoContent, ensoText } from './sst-anomaly.mts';
 
 const base = 'https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/';
 const advisoryUrl = 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml';
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const json = (value: unknown) => Buffer.from(`${JSON.stringify(value, null, 2)}\n`);
 
 export function newestCoraltemp(listings: readonly string[], throughDate: string) {
@@ -78,7 +79,7 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     const newInputs = [ { id: 'noaa-coraltemp-anomaly', path: map.path, origin: url },
       { id: 'noaa-coraltemp-checksum', path: 'science/coraltemp-latest.nc.md5', origin: `${url}.md5` } ];
     for (const input of newInputs) {
-      const record = { ...input, expectedSha256: digest(requireUpdateBytes(updates, input.path)), expectedBytes: requireUpdateBytes(updates, input.path).length,
+      const record = { ...input, expectedSha256: sha256(requireUpdateBytes(updates, input.path)), expectedBytes: requireUpdateBytes(updates, input.path).length,
         credit: 'NOAA Coral Reef Watch and NOAA Climate Prediction Center', license: 'US government public domain',
         licenseEvidence: ['https://www.ncei.noaa.gov/archive'], acquisition: `Analysis checked ${today}; native netCDF and publisher checksum retained. The recipe records the separately dated NOAA advisory and its URL.`,
         redistribution: 'Retained NOAA data with attribution', consumers: ['enso'] };
@@ -87,7 +88,7 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     }
     for (const collection of ['inputs', 'documents', 'generatedIntermediates'] as const) for (const entry of manifest[collection]) {
       const changed = updates.get(entry.path);
-      if (changed) Object.assign(entry, { expectedSha256: digest(changed), expectedBytes: changed.length });
+      if (changed) Object.assign(entry, { expectedSha256: sha256(changed), expectedBytes: changed.length });
     }
     // Parse and verify the complete scientific input before changing any pins.
     await mkdir(resolve(source, 'science'), { recursive: true });
@@ -100,7 +101,7 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     const text = JSON.parse(await readFile(resolve(object, 'text.json'), 'utf8'));
     text.datasets.enso = ensoText(recipe);
     await writeFile(resolve(object, 'text.json'), json(text));
-    return { ...decoded.receipt, sourceSha256: digest(bytes), publisherMd5, checked: recipe.checked, advisory: recipe.advisory };
+    return { ...decoded.receipt, sourceSha256: sha256(bytes), publisherMd5, checked: recipe.checked, advisory: recipe.advisory };
   } finally { await rm(temp, { recursive: true, force: true }); }
 }
 

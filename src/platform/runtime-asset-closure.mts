@@ -1,7 +1,8 @@
+import { sha256 } from './sha256.mts';
 import { isArray } from './is-array.mts';
 export interface RuntimeAsset { filename: string; bytes: number; sha256: string; location?: 'public'; }
 export interface RuntimeAssetManifest { schema: string; resourceRoot?: 'prepared'; assets: readonly RuntimeAsset[]; }
-import { createHash, randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, stat, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -52,7 +53,7 @@ export async function prepareRuntimeAssetManifest({
     assets.push(Object.freeze({
       filename,
       bytes: bytes.byteLength,
-      sha256: createHash("sha256").update(bytes).digest("hex"),
+      sha256: sha256(bytes),
     }));
   }
   const manifest = Object.freeze({
@@ -93,11 +94,11 @@ export async function verifyRuntimeAssetClosure({ planetId, manifest, root, publ
   if (publicAssets.length && !publicRoot) throw new TypeError("Public runtime assets require an explicit publicRoot for verification.");
   const prepared = manifest.resourceRoot === "prepared";
   await assertDirectoryClosure(root, manifest.assets.filter(asset => asset.location !== "public").map(({ filename }) => filename), planetId, prepared,
-    prepared ? ["manifest.json", "runtime-assets.json"] : []);
+    prepared ? ["manifest.json"] : []);
   if (publicAssets.length) await assertDirectoryClosure(publicRoot!, publicAssets.map(({ filename }) => filename), planetId, true);
   for (const asset of manifest.assets) {
     const bytes = await readFile(resolve(asset.location === "public" ? publicRoot! : root, asset.filename));
-    const digest = createHash("sha256").update(bytes).digest("hex");
+    const digest = sha256(bytes);
     if (bytes.byteLength !== asset.bytes || digest !== asset.sha256) {
       throw new Error(`Planet ${planetId} runtime asset drifted: ${asset.filename}.`);
     }

@@ -1,7 +1,8 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parentPort, workerData } from "node:worker_threads";
 import { mkdir, readFile, writeFile, rename, statfs } from "node:fs/promises";
 
-import { coverageLookup, prepareRegionPack, hashBytes } from "../prepare-wmts-tree.mts";
+import { coverageLookup, prepareRegionPack} from "../prepare-wmts-tree.mts";
 import { parseGeographicScene, parseCoverage, parseRegionReceipt, shape, array, text, number } from '../source-records.mts';
 import { hasErrorCode } from '../../../source-values.mts';
 const {scene,assetPath,directory,levels,dataset,version,lastLevel,reserveBytes}=shape({scene:parseGeographicScene,assetPath:text,directory:text,levels:array(parseCoverage),dataset:text,version:text,lastLevel:number,reserveBytes:number})(workerData);
@@ -14,7 +15,7 @@ port.on("message",async (value: unknown)=>{ const address=shape({zoom:number,x:n
   try{
     try{
       const saved=parseRegionReceipt(JSON.parse(await readFile(manifest,"utf8"))),bytes=await readFile(path);
-      if(saved.version!==version||saved.sha256!==hashBytes(bytes))throw new Error("Prepared pack integrity mismatch.");
+      if(saved.version!==version||saved.sha256!==sha256(bytes))throw new Error("Prepared pack integrity mismatch.");
       port.postMessage({...saved,reused:true});return;
     }catch(error){if(!hasErrorCode(error,"ENOENT"))throw error;}
     const disk=await statfs(directory);if(disk.bavail*disk.bsize<reserveBytes)throw new Error("Preparation stopped at the free-disk reserve.");

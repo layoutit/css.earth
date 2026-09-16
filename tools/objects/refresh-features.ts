@@ -2,7 +2,7 @@
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
 // catalogue, the runtime plan, the content document, the runtime asset manifest, the prepared provenance and the
 // object descriptor. Usage: node tools/objects/dist/refresh-features.js <objectId> [...]
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,12 +28,10 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   const manifest = parseRuntimeManifest(JSON.parse(await readFile(manifestPath, 'utf8')), id);
   const catalogName = String(record(record(record(attached.definition, 'definition').features, 'features plan').catalog, 'catalog').url).split('/').at(-1)!;
   const bytes = await readFile(resolve(publicDirectory, catalogName));
-  const entry = { filename: catalogName, bytes: bytes.byteLength, sha256: createHash('sha256').update(bytes).digest('hex') };
+  const entry = { filename: catalogName, bytes: bytes.byteLength, sha256: sha256(bytes) };
   const assets = manifest.assets.some(asset => asset.filename === catalogName) ? manifest.assets.map(asset => asset.filename === catalogName ? entry : asset) : [...manifest.assets, entry].sort((a, b) => a.filename.localeCompare(b.filename));
   const manifestText = `${JSON.stringify({ ...manifest, assets }, null, 2)}\n`;
   await writeFile(manifestPath, manifestText);
-  // The prepared directory keeps the staged copy the provenance compiler reads first.
-  await writeFile(resolve(outputDirectory, 'runtime-assets.json'), manifestText);
   const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
   // Feature preparation verified its own inputs above. The unchanged surfaces are reused from
   // their delivery pins, not rebaked: record recovered lineage instead of claiming a fresh

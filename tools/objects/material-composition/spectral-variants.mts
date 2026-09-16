@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {parse} from './data-schema.mts';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.mts';
 import type {Channels, OutputInfo} from 'sharp';
@@ -5,7 +6,6 @@ type SpectralLens = SpectralRecipe['lenses'][number];
 type ColorPalette = readonly (readonly number[])[];
 interface RawImage {data: Buffer; info: {width: number; height: number; channels: Channels}}
 interface ScalarMap {width: number; height: number; values: Float32Array; coverage: Uint8Array}
-import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -202,20 +202,20 @@ async function prepareLens(plan: SpectralLens) {
       : []),
     sourceUrls: Object.freeze('sourceUrls' in plan ? plan.sourceUrls : []),
     assetSha256: Object.freeze({
-      surface: digest(assets[0]),
-      surface2x: digest(assets[1]),
-      poles: digest(assets[2]),
-      rings: digest(assets[3]),
-      rings2x: digest(assets[4]),
-      material: digest(assets[5]),
-      interiorMaterial: digest(assets[6]),
-      materialNoShadows: digest(assets[7]),
-      interiorMaterialNoShadows: digest(assets[8]),
-      materialRingless: digest(assets[9]),
-      interiorMaterialRingless: digest(assets[10]),
-      materialRinglessNoShadows: digest(assets[11]),
-      interiorMaterialRinglessNoShadows: digest(assets[12]),
-      thumbnail: digest(assets[13]),
+      surface: sha256(assets[0]),
+      surface2x: sha256(assets[1]),
+      poles: sha256(assets[2]),
+      rings: sha256(assets[3]),
+      rings2x: sha256(assets[4]),
+      material: sha256(assets[5]),
+      interiorMaterial: sha256(assets[6]),
+      materialNoShadows: sha256(assets[7]),
+      interiorMaterialNoShadows: sha256(assets[8]),
+      materialRingless: sha256(assets[9]),
+      interiorMaterialRingless: sha256(assets[10]),
+      materialRinglessNoShadows: sha256(assets[11]),
+      interiorMaterialRinglessNoShadows: sha256(assets[12]),
+      thumbnail: sha256(assets[13]),
     }),
   });
 }
@@ -518,9 +518,7 @@ function clamp01(value: number) {
   return Math.max(0, Math.min(1, value));
 }
 
-function digest(bytes: Uint8Array) {
-  return createHash("sha256").update(bytes).digest("hex");
-}
+
 
 return descriptor;
 }

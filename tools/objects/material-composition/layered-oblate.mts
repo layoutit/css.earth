@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {RingMotionPoint} from './radial-motion.mts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
@@ -1548,7 +1549,7 @@ async function writeVerifiedPreparedShard({
   return Object.freeze({
     assetUrl,
     assetBytes: asset.byteLength,
-    assetSha256: createHash("sha256").update(asset).digest("hex"),
+    assetSha256: sha256(asset),
     width: sourceBounds.width,
     height: sourceBounds.height,
     decodedRgbaBytes: sourceBounds.width * sourceBounds.height * 4,
@@ -1606,7 +1607,7 @@ async function writePreparedRuntimeAtlas({
   return Object.freeze({
     assetUrl,
     assetBytes: bytes.byteLength,
-    assetSha256: createHash("sha256").update(bytes).digest("hex"),
+    assetSha256: sha256(bytes),
     width,
     height,
     decodedRgbaBytes: width * height * 4,
@@ -1691,7 +1692,7 @@ async function prepareOrbitMaterialRuntimeShards({ variantId, path }: {variantId
     runtimeAtlas,
     defaultAsset,
     rows: Object.freeze(rows),
-    sourceDecodedSha256: createHash("sha256").update(data).digest("hex"),
+    sourceDecodedSha256: sha256(data),
     alphaExactDecodedCropVerification: true,
     selectiveVisibleRgbEncoding: q75AssetUrls.length > 0
       ? PREPARED_Q75_WEBP_ENCODING
@@ -1774,7 +1775,7 @@ async function prepareInteriorAtmosphereRuntimeShards({ assetUrl, path }: {asset
   });
   return Object.freeze({
     sourceAssetUrl: assetUrl,
-    sourceDecodedSha256: createHash("sha256").update(data).digest("hex"),
+    sourceDecodedSha256: sha256(data),
     exactVisibleDecodedCropVerification: true,
     runtimeAtlas,
     defaultAsset,
@@ -2142,9 +2143,9 @@ async function prepareNormalMaterialMasters() {
     approvedReferenceFixedMaterialRawSha256,
     approvedReferenceAsset: {
       byteLength: approvedFixedMaterialAsset.byteLength,
-      sha256: createHash("sha256").update(approvedFixedMaterialAsset).digest("hex"),
+      sha256: sha256(approvedFixedMaterialAsset),
     },
-    staticWeatherSourceSha256: createHash("sha256").update(staticWeatherAsset).digest("hex"),
+    staticWeatherSourceSha256: sha256(staticWeatherAsset),
     initialObjectView,
     defaultFixedMaterial: materialMetadata(defaultFixedMaterial),
     defaultInteriorMaterial: materialMetadata(defaultInteriorMaterial),
@@ -2230,7 +2231,7 @@ async function composePlanetTextures({
         return [atlas.id, Object.freeze({
           url: atlas.url,
           bytes: bytes.byteLength,
-          sha256: createHash("sha256").update(bytes).digest("hex"),
+          sha256: sha256(bytes),
         })] as const;
       },
     )),
@@ -2430,7 +2431,7 @@ async function composePlanetTextures({
         model: config.labels.label007,
         assetUrl: PLANET_POLAR_TEXTURE_URL,
         assetBytes: polarAsset.byteLength,
-        assetSha256: createHash("sha256").update(polarAsset).digest("hex"),
+        assetSha256: sha256(polarAsset),
         encoding: PREPARED_Q75_WEBP_ENCODING,
         alphaEncoding: "lossless",
         tileSize: PLANET_POLAR_TEXTURE_SIZE,
@@ -2486,7 +2487,7 @@ async function composePlanetTextures({
       sourceUrl: PLANET_SURFACE_TEXTURE_URL,
       assetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
       assetBytes: orbitMaterialAsset.byteLength,
-      assetSha256: createHash("sha256").update(orbitMaterialAsset).digest("hex"),
+      assetSha256: sha256(orbitMaterialAsset),
       frameCount: PLANET_ORBIT_MATERIAL_FRAME_COUNT,
       frameRate: 0,
       faceCount: 1,
@@ -2771,7 +2772,7 @@ async function composePlanetTextures({
         model: "prepared-source-texel-independent-fixed-center-curls",
         assetUrl: PLANET_WEATHER_TEXTURE_URL,
         assetBytes: weatherAsset.byteLength,
-        assetSha256: createHash("sha256").update(weatherAsset).digest("hex"),
+        assetSha256: sha256(weatherAsset),
         encoding: PREPARED_Q75_WEBP_ENCODING,
         alphaEncoding: "lossless",
         opacity: WEATHER_OPACITY,

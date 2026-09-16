@@ -1,6 +1,6 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import { readFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
 import { relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -147,7 +147,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     if (relative(directory, path).startsWith('../')) throw new TypeError('Authored source escapes its object package.');
     const record = records.find(entry => `source/${String(entry.path)}` === source.path);
     if (!record || typeof record.expectedSha256 !== 'string') throw new TypeError(`Authored source is not pinned by the manifest: ${source.path}.`);
-    if (createHash('sha256').update(await readText(path)).digest('hex') !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${source.path}.`);
+    if (sha256(await readText(path)) !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${source.path}.`);
   }
   const preparedDirectory = resolve(directory, 'prepared');
   const payloadPath = resolve(directory, reference.url);
@@ -155,7 +155,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
   }
   const payloadBytes = await readText(payloadPath);
-  if (createHash('sha256').update(payloadBytes).digest('hex') !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
+  if (sha256(payloadBytes) !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
   const payload = requireRecord(JSON.parse(payloadBytes), 'Prepared JSON payload');
   const runtimePath = resolve(preparedDirectory, 'runtime.json');
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
@@ -185,7 +185,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
       if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === 'cssearth-authored-object@1') {
         const prepared = await readAuthoredRuntime({ root, objectId: object.id, descriptor, readText });
-        const definition = prepared.runtime, sha256 = (value: string) => createHash('sha256').update(value).digest('hex');
+        const definition = prepared.runtime;
         requireObjectRuntimeDefinition(definition, { objectId: object.id });
         entries.push({ id: object.id, complete: true, evidence: 'validated-authored-json', observedOwners: null,
           source: { runtimeSha256: sha256(await readText(prepared.payloadPath)), authoredRuntimeSha256: sha256(await readText(prepared.runtimePath)) },
@@ -216,7 +216,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       const objectControls = requireObjectControls(await readControls(`${prefix}/site/control-content.mjs`));
       const plan = requirePreparedPresentation(planInput, { controls: objectControls });
       requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id, controls: objectControls });
-      const sha256 = (value: string) => createHash("sha256").update(value).digest("hex");
+
       entries.push({ id, complete: true, evidence: "validated-source-data", observedOwners: null,
         source: { definitionSha256: sha256(definitionSource), presentationSha256: sha256(presentationSource), controlsSha256: sha256(controlSource) },
         nodes: plan.tree.nodes.length, roots: plan.tree.nodes.filter(node => node.parent === -1).length,

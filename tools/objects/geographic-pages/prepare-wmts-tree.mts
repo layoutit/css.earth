@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { gzipSync } from "node:zlib";
 import { prepareWmtsTile } from "./wmts-page-geometry.mts";
 import { encodePreparedBlock, packWmtsRecords } from "./encode-prepared-block.mts";
@@ -6,7 +6,7 @@ import { PREPARED_BLOCK_ENCODING } from "../../../src/platform/prepared-map/prep
 
 import type { GeographicScene, TileAddress, TileNode, WmtsPage, TileStub, TreeSection, WmtsCoverage } from './contracts.mts';
 export const tileKey = ({zoom,x,y}: TileAddress) => `wmts-tile-${zoom}-${x}-${y}`;
-export const hashBytes = (bytes: string | Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
 export function coverageLookup(levels: readonly WmtsCoverage[]) {
   const rows=new Map(levels.map(level=>[level.zoom,Array.from({length:2**level.zoom},(): [number, number][] | null =>null)]));
   for(const level of levels)for(const band of level.bands)for(let y=band.y0;y<band.y1;y++)rows.get(level.zoom)![y]=band.ranges;
@@ -45,7 +45,7 @@ export function prepareTreeSection(address: TileAddress,lastLevel: number,scene:
   if(!records.length)throw new Error(`Empty prepared WMTS section ${tileKey(address)}.`);
   const decoded=encodePreparedBlock(packWmtsRecords(records),{envelope:{schema:"cssearth-city-index@1",dataset,nodes,external}});
   const bytes=gzipSync(decoded,{level:6});
-  return {bytes,root:nodes[0],tiles:nodes.length,leaves:records.length,ref:{encoding:PREPARED_BLOCK_ENCODING,bytes:bytes.length,sha256:hashBytes(bytes),decodedBytes:decoded.length,decodedSha256:hashBytes(decoded)}};
+  return {bytes,root:nodes[0],tiles:nodes.length,leaves:records.length,ref:{encoding:PREPARED_BLOCK_ENCODING,bytes:bytes.length,sha256:sha256(bytes),decodedBytes:decoded.length,decodedSha256:sha256(decoded)}};
 }
 
 export function prepareRegionPack(address: TileAddress,scene: GeographicScene,hasTile: (address: TileAddress) => boolean,dataset: string,version: string,{lastLevel=14,assetPath}: { lastLevel?: number; assetPath: string }) {
@@ -67,5 +67,5 @@ export function prepareRegionPack(address: TileAddress,scene: GeographicScene,ha
   }
   const root=append(prepareTreeSection(address,Math.min(10,lastLevel),scene,hasTile,child=>stubs.get(tileKey(child)),dataset));
   const bytes=Buffer.concat(parts);
-  return {bytes,root,tiles,leaves,sections:parts.length,sha256:hashBytes(bytes)};
+  return {bytes,root,tiles,leaves,sections:parts.length,sha256:sha256(bytes)};
 }

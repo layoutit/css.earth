@@ -1,5 +1,5 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { sourceObject } from '../../src/platform/source-catalog.mts';
-import { createHash } from 'node:crypto';
 import { readFieldRecipe } from './recipe.mts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import { fitClouds } from './cloud-fit.mts';
@@ -45,13 +45,13 @@ const size=recipe.texture.size, middle=(size-1)/2;
 const pixels=Buffer.alloc(size*size*4);
 for(let y=0;y<size;y++)for(let x=0;x<size;x++){const r=Math.hypot((x-middle)/middle,(y-middle)/middle);const a=r<1?Math.exp(-recipe.texture.falloff*r*r)*(1-r*r)**2:0;const i=(y*size+x)*4;pixels[i]=recipe.texture.rgb[0]!;pixels[i+1]=recipe.texture.rgb[1]!;pixels[i+2]=recipe.texture.rgb[2]!;pixels[i+3]=Math.round(a*255);}
 const cloudBytes=await sharp(pixels,{raw:{width:size,height:size,channels:4}}).webp({lossless:true}).toBuffer();
-const resource={path:'cloud.webp',sha256:createHash('sha256').update(cloudBytes).digest('hex'),bytes:cloudBytes.length};
+const resource={path:'cloud.webp',sha256:sha256(cloudBytes),bytes:cloudBytes.length};
 const prepared = JSON.stringify({ schema: 'cssearth-galaxy-points@1', frame: frame,
   appearance, resources:[resource], catalogueCount: catalogue.points.length, selection: 'Half spatially spread and half density-weighted deterministic sample; unknown luminosity uses authored count glyphs.', source: catalogue.lineage, clouds, cloudMeaning: 'Authored smoothed galaxy-count concentrations; not gas or measured matter density.', points });
 
 const recipeBytes=await readFile('src/objects/nearby-universe/source/preparation/field.json');
-const descriptor=JSON.stringify({schema:'cssearth-object@1',id:'nearby-universe',type:'galaxy-point-field',properties:{preparation:{source:'source/preparation/field.json',sha256:createHash('sha256').update(recipeBytes).digest('hex')}},prepared:{format:'cssearth-galaxy-points@1',url:'prepared/points.json',sha256:createHash('sha256').update(prepared).digest('hex')}},null,2)+'\n';
-const receipt=JSON.stringify({schema:'cssearth-galaxy-points@1',outputs:[{path:'points.json',sha256:createHash('sha256').update(prepared).digest('hex'),bytes:Buffer.byteLength(prepared)},resource]},null,2)+'\n';
+const descriptor=JSON.stringify({schema:'cssearth-object@1',id:'nearby-universe',type:'galaxy-point-field',properties:{preparation:{source:'source/preparation/field.json',sha256:sha256(recipeBytes)}},prepared:{format:'cssearth-galaxy-points@1',url:'prepared/points.json',sha256:sha256(prepared)}},null,2)+'\n';
+const receipt=JSON.stringify({schema:'cssearth-galaxy-points@1',outputs:[{path:'points.json',sha256:sha256(prepared),bytes:Buffer.byteLength(prepared)},resource]},null,2)+'\n';
 
 await writePreparedSet([
   {path:'src/objects/nearby-universe/prepared/points.json',text:prepared},

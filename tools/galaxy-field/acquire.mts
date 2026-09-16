@@ -1,5 +1,5 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { sourceArray, sourceObject, sourceText, sourceDigest, sourcePath } from '../../src/platform/source-catalog.mts';
 const pinned=sourceObject(JSON.parse(await readFile('src/objects/nearby-universe/source/catalogue.json','utf8')));
 if(pinned.schema!=='cssearth-galaxy-field-sources@1')throw new TypeError('Invalid field sources.');
@@ -8,7 +8,7 @@ await mkdir(directory,{recursive:true});
 await Promise.all(sourceArray(pinned.sources,sourceObject).map(async source=>{
   const id=sourceText(source.id),path=sourcePath(source.path),expectedHash=sourceDigest(source.sha256);
   if(path!==`${directory}/${id}.tsv`||!Number.isSafeInteger(source.bytes)||!Number.isSafeInteger(source.rows))throw new TypeError('Invalid source pin.');
-  const matches=(bytes:Buffer)=>bytes.length===source.bytes&&createHash('sha256').update(bytes).digest('hex')===expectedHash;
+  const matches=(bytes:Buffer)=>bytes.length===source.bytes&&sha256(bytes)===expectedHash;
   const cached=await readFile(path).catch(()=>null);
   if(cached&&matches(cached)){console.log(`${id}: verified cache`);return;}
   const url=new URL('https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync');

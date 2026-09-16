@@ -1,3 +1,4 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
@@ -26,7 +27,6 @@ export interface PreparationTraces {
 
 const EVIDENCE = new Set<string>(['bytes', 'absent', 'file', 'directory', 'names', 'tree', 'descriptor-registry', 'descriptor-recipe', 'descriptor-pins']);
 const isRecord = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !isArray(value);
-const digest = (value: string | Uint8Array) => createHash("sha256").update(value).digest("hex");
 
 function safePath(root: string, path: string) {
   assert.equal(typeof path, "string");
@@ -55,7 +55,7 @@ async function treeDigest(path: string): Promise<string> {
   for (const child of (await readdir(path, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
     lines.push(`${child.name}${child.isDirectory() ? '/' : ''} ${await treeDigest(join(path, child.name))}`);
   }
-  return digest(lines.join("\n"));
+  return sha256(lines.join("\n"));
 }
 
 /**
@@ -76,7 +76,7 @@ export async function observePreparationPath(root: string, path: string, evidenc
   if (evidence === 'names') {
     if (!entry.isDirectory()) return null;
     const names = (await readdir(canonical, { withFileTypes: true })).map(child => `${child.name}${child.isDirectory() ? '/' : ''}`).sort();
-    return { evidence, sha256: digest(names.join("\n")) };
+    return { evidence, sha256: sha256(names.join("\n")) };
   }
   if (evidence === 'tree') return { evidence, sha256: await treeDigest(canonical) };
   if (!entry.isFile()) return null;

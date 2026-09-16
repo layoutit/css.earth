@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
-import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import { dirname, relative, resolve } from 'node:path';
 import type { Node, FunctionDeclaration } from 'estree';
@@ -245,7 +245,7 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
     const record = records.find(entry => `source/${String(entry.path)}` === reference.path);
     if (!record) throw new TypeError(`Authored source is not pinned by the manifest: ${reference.path}.`);
     const bytes = await source(path);
-    if (createHash('sha256').update(bytes).digest('hex') !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
+    if (sha256(bytes) !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
   const preparation = resolve(directory, 'prepared');
@@ -273,7 +273,7 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
     throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
   }
   const bytes = await source(payloadPath);
-  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
+  if (sha256(bytes) !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
   const payload = requireRecord(JSON.parse(bytes));
   if (payload.schema !== 'cssearth-prepared-object@1' || payload.id !== objectId || payload.type !== descriptor.type || payload.format !== reference.format ||
     Object.keys(payload).some(key => !['schema', 'id', 'type', 'format', 'data'].includes(key))) throw new TypeError('Prepared JSON identity or format does not match its descriptor.');

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parseGeographicScene, parseCitySource } from '../source-records.mts';
 import {commandContext} from './context.mts';
 const context=commandContext();
 const PREPARED_SCENE=await context.readPrepared('scene',parseGeographicScene);
-import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
@@ -42,7 +42,7 @@ const pages: import('../contracts.mts').CityRuntimePage[] = [];
 const seeds = [];
 const roots = [];
 const provenance = [];
-const sha256 = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
 for (const region of source.regions.filter(({ id }) => !selected || id === selected)) {
   console.log(`Preparing real WorldCover pages: ${region.id}`);
     const preparedRoot=prepareCityPageGeometry(region.root,PREPARED_SCENE);

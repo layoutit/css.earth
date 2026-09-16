@@ -1,13 +1,11 @@
-import { createHash } from "node:crypto";
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, writeFile } from "node:fs/promises";
 import pixelmatch from "pixelmatch";
 import { PNG } from "pngjs";
 import sharp from "sharp";
 import type { VisibleSun } from "./analysis-types.mts";
 
-export function sha256(bytes: Buffer) {
-  return createHash("sha256").update(bytes).digest("hex");
-}
+
 
 export function comparePngBuffers(leftBytes: Buffer, rightBytes: Buffer, { pixelmatchThreshold = 0.1 }: { pixelmatchThreshold?: number } = {}) {
   const left = PNG.sync.read(leftBytes);

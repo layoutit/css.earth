@@ -1,13 +1,13 @@
 #!/usr/bin/env node
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { requireRecord, requireArray } from '../../../source-values.mts';
 
 function verify(bytes: Uint8Array, entry: unknown, label: string) {
   const pin = requireRecord(entry, `${label} source manifest pin`);
   if (bytes.length !== pin.expectedBytes ||
-      createHash('sha256').update(bytes).digest('hex') !== pin.expectedSha256) {
+      sha256(bytes) !== pin.expectedSha256) {
     throw new Error(`${label} differs from its source manifest pin.`);
   }
 }

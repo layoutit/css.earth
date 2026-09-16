@@ -1,3 +1,4 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readAuthoredSources } from './authored-sources.ts';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
@@ -8,7 +9,6 @@ import sharp from 'sharp';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { prepareObservedSurfaces, parseObservedSurfaceRecipe } from './giant-layers/observations.mts';
 
-const hash=(bytes: Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 
 async function verifySource(sourceDirectory: string, id: string, path: string, expectedBytes: number, expectedSha256: string): Promise<[string,string]> {
   const filename=resolve(sourceDirectory,path),details=await stat(filename),digest=createHash('sha256');
@@ -27,7 +27,7 @@ export async function refreshObservedPoles(id: string, lensIds: readonly string[
   const scenePath=`src/objects/${id}/prepared/scene.json`,sceneBytes=await readFile(scenePath);
   const [descriptorBytes,recipeBytes,manifestBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath)]);
   const authored=await readAuthoredSources(objectDirectory,JSON.parse(descriptorBytes.toString('utf8'))),descriptor=authored.descriptor,recipeSource=authored.sources.get('observations')?.reference;
-  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/observations.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Observed pole refresh requires the current manifest recipe pin.');
+  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/observations.json'||recipeSource.sha256!==sha256(recipeBytes))throw new Error('Observed pole refresh requires the current manifest recipe pin.');
   const config=parseObservedSurfaceRecipe(JSON.parse(recipeBytes.toString('utf8'))),lenses=config.lenses.filter(lens=>lensIds.includes(lens.id));
   if(lenses.length!==lensIds.length)throw new Error('Observed pole refresh requested an unknown lens.');
   const sourcePaths=new Set(lenses.flatMap(lens=>[lens.source,...(lens.calibration?[lens.calibration.source]:[])])),pins=config.sources.filter(source=>sourcePaths.has(source.path));
@@ -38,7 +38,7 @@ export async function refreshObservedPoles(id: string, lensIds: readonly string[
   const result=await prepareObservedSurfaces({sourceDirectory,publicDirectory:stage,config,lensIds,productKinds:['poles'],write:true});
   const assets=result.assets.map(asset=>({filename:asset.filename,url:`/scenes/${id}/${asset.filename}`,width:asset.width,height:asset.height,bytes:asset.bytes,sha256:asset.sha256}));
   if(assets.length!==lensIds.length||new Set(assets.map(asset=>asset.filename)).size!==assets.length)throw new Error('Observed pole refresh produced an unexpected asset set.');
-  const receipt={id,inputs:{[scenePath]:hash(sceneBytes),[`src/objects/${id}/source/preparation/observations.json`]:hash(recipeBytes),[`src/objects/${id}/source/manifest.json`]:hash(manifestBytes),...sourceInputs},assets};
+  const receipt={id,inputs:{[scenePath]:sha256(sceneBytes),[`src/objects/${id}/source/preparation/observations.json`]:sha256(recipeBytes),[`src/objects/${id}/source/manifest.json`]:sha256(manifestBytes),...sourceInputs},assets};
   await writeFile(resolve(stage,'receipt.json'),`${JSON.stringify(receipt,null,2)}\n`);
   return receipt;
 }

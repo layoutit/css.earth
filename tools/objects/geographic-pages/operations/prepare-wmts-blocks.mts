@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { gzipSync } from "node:zlib";
 import { encodePreparedBlock, packWmtsRecords } from "../encode-prepared-block.mts";
 import { PREPARED_BLOCK_ENCODING } from "../../../../src/platform/prepared-map/prepared-block-transport.mts";
@@ -16,7 +16,7 @@ export function prepareWmtsBlocks(pages: readonly WmtsPage[], dataset: string, {
     groups.get(key)!.push(page);
   }
   const roots = [], files = [];
-  const hash = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
   for (const [key, members] of [...groups].sort(([a], [b]) => a.localeCompare(b))) {
     members.sort((a, b) => a.y - b.y || a.sourceCrop.v0 - b.sourceCrop.v0 || a.x - b.x);
     const points = members.flatMap(page => page.corners);
@@ -25,9 +25,9 @@ export function prepareWmtsBlocks(pages: readonly WmtsPage[], dataset: string, {
     const corners = Array.from({ length: 8 }, (_, i) => [0, 1, 2].map(axis => (i >> axis & 1 ? hi : lo)[axis]));
     const root = { key, level: 0, corners, normal: members[0].normal, children: members.map(page => page.key) };
     const decoded = encodePreparedBlock(packWmtsRecords(members), { envelope: { schema: "cssearth-city-index@1", dataset, root } });
-    const bytes = gzipSync(decoded, { level: 9 }), sha256 = hash(bytes);
-    const ref = { encoding: PREPARED_BLOCK_ENCODING, url: `${assetPath}wmts-index-${sha256.slice(0, 16)}.bin.gz`,
-      bytes: bytes.length, sha256, decodedBytes: decoded.length, decodedSha256: hash(decoded) };
+    const bytes = gzipSync(decoded, { level: 9 }), digest = sha256(bytes);
+    const ref = { encoding: PREPARED_BLOCK_ENCODING, url: `${assetPath}wmts-index-${digest.slice(0, 16)}.bin.gz`,
+      bytes: bytes.length, sha256: digest, decodedBytes: decoded.length, decodedSha256: sha256(decoded) };
     roots.push({ key, level: 0, corners, normal: root.normal, stub: true, directory: ref });
     files.push({ ref, bytes });
   }

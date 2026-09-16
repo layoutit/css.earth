@@ -1,12 +1,12 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
-import { createHash } from 'node:crypto';
 import { hasErrorCode, requireString } from '../source-values.mts';
 import type { JsonRecord, TraceEvent, TraceSelection } from './trace-model.mts';
 import { arrayOf, errorMessage, isFiniteNumber, isInstantPhase, recordOf } from './trace-model.mts';
 import type { DomSnapshot } from './trace-invalidations.mts';
 
-const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+
 const detail = (e: TraceEvent): unknown => {
   const value = recordOf(e.args?.data)?.detail ?? e.args?.detail;
   if (typeof value !== 'string') return value;
@@ -79,7 +79,7 @@ export async function readCapture(input: string, events: readonly TraceEvent[], 
     try {
       const file = resolve(directory, name), bytes = await readFile(file);
       const value: unknown = JSON.parse(bytes.toString());
-      receipts.push({ file, bytes: bytes.length, sha256: hash(bytes) }); return value;
+      receipts.push({ file, bytes: bytes.length, sha256: sha256(bytes) }); return value;
     } catch (e) { if (hasErrorCode(e, 'ENOENT')) return null; throw Error(`Cannot read capture ${name}: ${errorMessage(e)}`); }
   }
   const report = recordOf(await read('report.json'));
@@ -119,7 +119,7 @@ export async function readCapture(input: string, events: readonly TraceEvent[], 
         const { type, phase, deltaY, packets, intervalMs, id, pass, wheelPackets, from, to, steps } = recordOf(value) ?? {};
         return { type, phase, deltaY, packets, intervalMs, id, pass, wheelPackets, from, to, steps };
       }) },
-    diagnosticOverrides: report.probeCss ? { cssSha256: hash(Buffer.from(requireString(report.probeCss, 'Capture probeCss'))) } : null,
+    diagnosticOverrides: report.probeCss ? { cssSha256: sha256(Buffer.from(requireString(report.probeCss, 'Capture probeCss'))) } : null,
     retained: report.retained ?? null, artifacts: receipts, video: null };
   const snapshots: DomSnapshot[] = [];
   if (matched && report.domSnapshot) for (const name of ['dom-before.json', 'dom-after.json']) {

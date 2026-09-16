@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -297,7 +297,6 @@ export function normalizeExtent(row: { minLon: number; maxLon: number; minLat: n
   if (!(maxLon - minLon <= 360) || row.maxLat < row.minLat) throw new TypeError('Gazetteer extent is inconsistent.');
   return { minLon, maxLon, minLat: row.minLat, maxLat: row.maxLat };
 }
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 export interface SurfaceFeaturePreparationContext {
   readonly objectId: string; readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string;

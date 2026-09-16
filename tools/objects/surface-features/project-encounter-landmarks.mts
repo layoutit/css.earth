@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -19,7 +19,7 @@ const text = (value: unknown, at: string): string => { if (typeof value !== 'str
 const finite = (value: unknown, at: string): number => { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`); return value; };
 const positive = (value: unknown, at: string): number => { const result = finite(value, at); if (!(result > 0)) throw new TypeError(`${at} must be positive.`); return result; };
 const pixel = (value: unknown, at: string): Pixel => { if (!Array.isArray(value) || value.length !== 2) throw new TypeError(`${at} must have two components.`); return [finite(value[0], `${at}[0]`), finite(value[1], `${at}[1]`)]; };
-const sha256 = (value: Uint8Array) => createHash('sha256').update(value).digest('hex');
+
 const safePath = (base: string, path: unknown, at: string) => {
   const candidate = text(path, at);
   if (candidate.startsWith('/') || candidate.includes('\\') || candidate.split('/').some(part => !part || part === '..')) throw new TypeError(`${at} must stay inside the object source tree.`);

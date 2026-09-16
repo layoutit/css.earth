@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
 export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
@@ -9,7 +10,6 @@ import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,l
 import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
 import {readFitsImage} from '../../fits.mts';
-import { createHash } from 'node:crypto';
 import { pds3Keyword } from '../pds-labels.mts';
 import { registerCameraBands, REGISTRATION_CRITERIA } from './camera-band-registration.mts';
 
@@ -230,7 +230,7 @@ export async function checkBandRegistration(sourceDirectory: string,channels: re
   const sources=new Map<string,Promise<{frame:CameraFrame;image:CameraImage;sha256:string}>>();
   const load=(frame:CameraFrame)=>{
     let pending=sources.get(frame.id);
-    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(bytes=>({frame,image:decodeCalibratedCamera(bytes),sha256:createHash('sha256').update(bytes).digest('hex')}));sources.set(frame.id,pending);}
+    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(bytes=>({frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)}));sources.set(frame.id,pending);}
     return pending;
   };
   const confirmed=new Set(registration.references.slice(0,1).map(frame=>frame.id)),checks=[];

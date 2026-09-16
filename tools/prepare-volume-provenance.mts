@@ -1,6 +1,6 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { parseProductInputEvidence } from '../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../src/platform/product-input-evidence.mts';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -16,7 +16,7 @@ import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts'] as const;
-const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+
 const integer = (value: unknown): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
   return value;
@@ -104,10 +104,10 @@ async function preparePreview(root: string, pin: Preview): Promise<{ bytes: Buff
     const response = await fetch(pin.url, { signal: AbortSignal.timeout(60000) });
     if (!response.ok) throw new Error(`Preview download failed: ${response.status} ${pin.url}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== pin.bytes || digest(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
+    if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
-  if (bytes.length !== pin.bytes || digest(bytes) !== pin.sha256) throw new Error(`Changed preview input: ${pin.path}`);
+  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed preview input: ${pin.path}`);
   let pipeline = sharp(bytes, { limitInputPixels: 50000000 });
   if (pin.crop) pipeline = pipeline.extract(pin.crop);
   const result = await pipeline.resize({ width: 768, height: 768, fit: 'inside', withoutEnlargement: true }).webp({ quality: 82 }).toBuffer({ resolveWithObject: true });
@@ -139,14 +139,14 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     // rasters/table downloads remain recovered pins, outside source closure.
     for (const source of sources) if (!source.path.startsWith('.local/')) {
       const bytes = await input(source.path);
-      if (digest(bytes) !== source.sha256 || bytes.length !== source.bytes) throw new Error(`Changed volume evidence: ${source.path}`);
+      if (sha256(bytes) !== source.sha256 || bytes.length !== source.bytes) throw new Error(`Changed volume evidence: ${source.path}`);
     }
     const prepared = sourceObject(descriptor.prepared);
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-lens-bank' && prepared.format === 'cssearth-volume-lenses@1') ||
       (descriptor.type === 'image-layer-bank' && prepared.format === 'cssearth-image-layer-bank@1' && record.lenses.length === 1 && record.defaultLens === 'optical'))) throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     const bankPath = `${base}/${sourcePath(prepared.url)}`, bankSha256 = sourceDigest(prepared.sha256);
     const installedBank = await readFile(resolve(root, bankPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-    if (installedBank !== null && digest(installedBank) !== bankSha256) throw new Error(`Changed installed volume bank: ${record.objectId}`);
+    if (installedBank !== null && sha256(installedBank) !== bankSha256) throw new Error(`Changed installed volume bank: ${record.objectId}`);
     // The descriptor owns the current bank identity. An ordinary rebake needs
     // no presentation edit. The source receipt only supplies size offline when
     // it still identifies precisely the descriptor's bank.
@@ -165,14 +165,14 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       for (const resource of resources) {
         const url = `${dirname(bankPath)}/${resource.path}`;
         const bytes = await readFile(resolve(root, url)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-        if (bytes !== null && (bytes.length !== resource.bytes || digest(bytes) !== resource.sha256)) throw new Error(`Changed image-layer resource: ${url}`);
+        if (bytes !== null && (bytes.length !== resource.bytes || sha256(bytes) !== resource.sha256)) throw new Error(`Changed image-layer resource: ${url}`);
         layerOutputs.push({ url, sha256: resource.sha256, bytes: resource.bytes, verification: 'manifest-pin' });
       }
     }
-    const recipes = [{ id: 'presentation', path: presentationPath, sha256: digest(ownedPresentationBytes), parameters: provenanceJson(json(ownedPresentationBytes)) }];
+    const recipes = [{ id: 'presentation', path: presentationPath, sha256: sha256(ownedPresentationBytes), parameters: provenanceJson(json(ownedPresentationBytes)) }];
     for (const recipe of record.recipes) {
       const bytes = await input(recipe.path);
-      if (digest(bytes) !== recipe.sha256 || bytes.length !== recipe.bytes) throw new Error(`Changed volume recipe: ${recipe.path}`);
+      if (sha256(bytes) !== recipe.sha256 || bytes.length !== recipe.bytes) throw new Error(`Changed volume recipe: ${recipe.path}`);
       recipes.push({ id: recipe.id, path: recipe.path, sha256: recipe.sha256, parameters: provenanceJson(json(bytes)) });
     }
     const outputs: { path: string; text: string | Uint8Array }[] = [];
@@ -182,7 +182,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       const own = bySource.get(lens.input);
       if (!own || own.lensId !== lens.id) throw new TypeError(`Unbound volume lens image: ${record.objectId}/${lens.id}`);
       const image = await preparePreview(root, lens.preview);
-      const previewUrl = `/scenes/${record.objectId}/datasets/${digest(image.bytes)}.webp`;
+      const previewUrl = `/scenes/${record.objectId}/datasets/${sha256(image.bytes)}.webp`;
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
       controls.push({ id: lens.id, label: lens.label, title: lens.title, thumbnailUrl: previewUrl,
         texture: { url: previewUrl, width: image.width, height: image.height, attribution: { label: own.displayCredit ?? own.credit, url: own.sourceUrl } },
@@ -193,11 +193,11 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
         inputEvidence: [{ sourceId: lens.input, role: 'appearance', evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...record.inputEvidence], parents: [], lensIds: [lens.id],
         observationAttribution: 'source-lineage', interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
         outputs: [...(bankBytes === undefined ? [] : [{ url: bankPath, sha256: bankSha256, bytes: bankBytes, verification: installedBank === null ? 'descriptor-pin' : 'bytes-verified' }]),
-          ...layerOutputs, { url: previewUrl, sha256: digest(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
+          ...layerOutputs, { url: previewUrl, sha256: sha256(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
     }
     const provenance = validateObjectProvenance({ schema: 'cssearth-object-provenance@3', objectId: record.objectId, basis: 'recovered',
-      manifest: { path: 'source/manifest.json', sha256: digest(manifestBytes) },
-      generator: { path: volumeProvenanceCompilerClosure[0], sha256: digest(generatorBytes), bindingsSha256: digest(stringify(sources.map(source => source.sourceBinding))) },
+      manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
+      generator: { path: volumeProvenanceCompilerClosure[0], sha256: sha256(generatorBytes), bindingsSha256: sha256(stringify(sources.map(source => source.sourceBinding))) },
       sources, recipes, products, coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved: [
         'Native source identities are recovered from checked-in pins; this metadata preparation does not rerun or scientifically validate the reconstruction.',
         ...(bankBytes === undefined ? ['The current volume bank is not installed and its byte count has no matching receipt; only the source-preview outputs are represented.'] : [])
@@ -211,16 +211,15 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
         ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })),
         ...outputs.filter(output => output.path.startsWith(resolve(root, prefix) + '/')).map(output => {
           const bytes = Buffer.from(output.text);
-          return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: digest(bytes) };
+          return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
         }),
         ...outputs.filter(output => output.path.startsWith(resolve(root, `public/scenes/${record.objectId}`) + '/')).map(output => {
           const bytes = Buffer.from(output.text);
-          return { filename: output.path.slice(resolve(root, `public/scenes/${record.objectId}`).length + 1), location: 'public', bytes: bytes.length, sha256: digest(bytes) };
+          return { filename: output.path.slice(resolve(root, `public/scenes/${record.objectId}`).length + 1), location: 'public', bytes: bytes.length, sha256: sha256(bytes) };
         }),
       ];
       const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets });
-      outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory },
-        { path: resolve(root, `${base}/prepared/runtime-assets.json`), text: inventory });
+      outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory });
     }
     results.push({ id: record.objectId, name: record.name, route: `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs });
   }

@@ -1,6 +1,6 @@
 /** Reuse the registered-image overlap method for native Lucy TAN-SIP cameras. */
+import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -20,7 +20,7 @@ const parseRecipe = shape({schema:text,shapeSha256:text,bodyId:number,target:opt
   frames:array(shape({image:text,label:text,referenceImage:text,referenceCamera:text,output:text,matching}))});
 const parseManifest = shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
 const parseGeometry = shape({geometry:shape({radialTerrain:shape({path:text,grid:parseMeshProfile})})});
-const digest = (bytes:Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const json = async(path:string):Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 
 /** Fixed camera intrinsics, attitude and full source mesh; only detector translation
@@ -30,19 +30,19 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
   const pinned=async(path:string) => {
     assert.ok(!path.startsWith('/')&&!path.split('/').includes('..'));
     const pin=manifest.inputs.find(p=>p.path===path); assert.ok(pin,`Missing pin: ${path}`);
-    const bytes=await readFile(resolve(source,path)); assert.equal(bytes.length,pin.expectedBytes,path); assert.equal(digest(bytes),pin.expectedSha256,path); return bytes;
+    const bytes=await readFile(resolve(source,path)); assert.equal(bytes.length,pin.expectedBytes,path); assert.equal(sha256(bytes),pin.expectedSha256,path); return bytes;
   };
   const recipePath='preparation/llorri-overlap.json',recipe=parseRecipe(JSON.parse((await pinned(recipePath)).toString('utf8')));
   assert.equal(recipe.schema,'cssearth-llorri-overlap@1');
   assert.ok(recipe.maximumRmsPixels>0&&recipe.maximumRmsPixels<=1&&recipe.maximumResidualPixels>=recipe.maximumRmsPixels&&recipe.maximumResidualPixels<=3);
   const geometry=parseGeometry(await json(resolve(source,'preparation/terrestrial.json'))).geometry.radialTerrain;
-  assert.equal(digest(await pinned(geometry.path)),recipe.shapeSha256);
+  assert.equal(sha256(await pinned(geometry.path)),recipe.shapeSha256);
   for(const path of recipe.kernels) await pinned(path);
   const kernels=await loadKernelSet(recipe.kernels.map(path=>resolve(source,path))),mesh=await loadObjShape(resolve(source,geometry.path),geometry.grid),reports=[];
   for(const entry of recipe.frames) {
     const refBytes=await pinned(entry.referenceImage),refClosure=parseGeoCameraClosure(JSON.parse((await pinned(entry.referenceCamera)).toString('utf8')));
     assert.equal(refClosure.meshSha256,recipe.shapeSha256);
-    for(const pin of refClosure.provenance) assert.equal(digest(await pinned(pin.path)),pin.sha256);
+    for(const pin of refClosure.provenance) assert.equal(sha256(await pinned(pin.path)),pin.sha256);
     const reference=decodeLlorri(refBytes,refClosure),refCamera=matrixCamera('archived-closure',refClosure,bindSipCamera(refClosure));
     const footprint={image:{width:1024,height:1024,values:reference.planes.IMAGE,startTime:reference.startTime,filter:reference.filter,reject:(i:number)=>reference.acceptPixel(i)?null:'quality',report:reference.qualityReport},
       camera:refCamera,geometry:castSourceRays(refCamera,mesh,1024,1024),photometry:{gain:()=>1,retainsIllumination:true}};
@@ -72,7 +72,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
     }));
     assert.ok(stats.holdout.rms<=recipe.maximumRmsPixels&&stats.holdout.maximum<=recipe.maximumResidualPixels,`Registration failed: ${entry.image} ${JSON.stringify(stats)}`);
     const paths=[...new Set([entry.image,entry.label,entry.referenceImage,entry.referenceCamera,geometry.path,...recipe.kernels,recipePath,...refClosure.provenance.map(p=>p.path)])];
-    const provenance=await Promise.all(paths.map(async path=>({path,sha256:digest(await pinned(path))})));
+    const provenance=await Promise.all(paths.map(async path=>({path,sha256:sha256(await pinned(path))})));
     const result={...seed,meshSha256:recipe.shapeSha256,provenance,checks:{status:'registered-image-overlap',
       pointing:'Original FITS WCS plus detector translation from registered-image overlap; disjoint fit and holdout grids.',
       imageRegistration:{method:'registered-image-feature-translation',referenceImage:entry.referenceImage,referenceCamera:entry.referenceCamera,
@@ -81,7 +81,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
     const bytes=Buffer.from(JSON.stringify(result,null,2)+'\n');
     if(write) {
       await writeFile(resolve(source,entry.output),bytes);
-      const pin=manifest.inputs.find(p=>p.path===entry.output);assert.ok(pin); pin.expectedBytes=bytes.length;pin.expectedSha256=digest(bytes);
+      const pin=manifest.inputs.find(p=>p.path===entry.output);assert.ok(pin); pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);
     } else assert.equal((await pinned(entry.output)).toString('utf8'),bytes.toString('utf8'),`Camera not reproducible: ${entry.output}`);
     reports.push({image:entry.image,offsetPixels:match.offsetPixels,stats});
   }

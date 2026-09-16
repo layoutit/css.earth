@@ -1,5 +1,5 @@
 /** Reproduce the published-pole diagnostic. This never writes a scene or a surface recipe. */
-import {createHash} from 'node:crypto';
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import {readFile, writeFile, mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -14,19 +14,19 @@ type Similarity = [number, number, number, number];
 const rad = Math.PI / 180, base = 'src/objects/dactyl/evidence/registration/';
 const paperPath = process.argv[2], output = resolve(process.argv[3] ?? 'output/dactyl-published-controls');
 if (!paperPath || process.argv.length > 4) throw new Error('Usage: node fit-dactyl-published-controls.mts /path/to/paper.pdf [output-directory]');
-const hash = (b: Buffer) => createHash('sha256').update(b).digest('hex');
+
 const numbers = (v: unknown) => requireArray(v).map(n => requireFiniteNumber(n));
 function pixel(v: unknown): Pixel {const n = numbers(v); if (n.length !== 2) throw new Error('Expected pixel pair.'); return [n[0], n[1]];}
 function integer(v: unknown) {const n = requireFiniteNumber(v); if (!Number.isSafeInteger(n) || n < 0) throw new Error('Expected nonnegative integer.'); return n;}
 function verify(b: Buffer, record: Record<string, unknown>) {
-  if (b.length !== integer(record.expectedBytes) || hash(b) !== requireString(record.expectedSha256)) throw new Error('Source bytes differ from the pinned input.');
+  if (b.length !== integer(record.expectedBytes) || sha256(b) !== requireString(record.expectedSha256)) throw new Error('Source bytes differ from the pinned input.');
 }
 const configBytes = await readFile(base + 'published-controls.json'), config = requireRecord(JSON.parse(configBytes.toString()));
 if (config.schema !== 'cssearth-dactyl-published-control-input@1' || config.objectId !== 'dactyl') throw new Error('Wrong control input.');
 const paper = requireRecord(config.paper), pdf = await readFile(paperPath);
 verify(pdf, paper);
 const inputBytes = await readFile(requireString(config.previousInputPath));
-if (hash(inputBytes) !== config.previousInputSha256) throw new Error('Changed earlier input record.');
+if (sha256(inputBytes) !== config.previousInputSha256) throw new Error('Changed earlier input record.');
 const previous = requireRecord(JSON.parse(inputBytes.toString())), inputs = new Map<string, Buffer>();
 for (const item of requireArray(previous.files)) {
   const p = requireRecord(item), path = requireString(p.path);
@@ -102,7 +102,7 @@ function ideal(p: Pixel): Pixel {
 const axes = numbers(requireRecord(JSON.parse(input('shape').toString())).semiaxesKm).map(x => x*1000);
 if (axes.length !== 3 || axes.some(x => x <= 0)) throw new Error('Invalid axes.');
 const limbBytes = await readFile(requireString(config.limbReportPath));
-if (hash(limbBytes) !== config.limbReportSha256) throw new Error('Changed limb samples.');
+if (sha256(limbBytes) !== config.limbReportSha256) throw new Error('Changed limb samples.');
 const cases = requireArray(requireRecord(JSON.parse(limbBytes.toString())).cases);
 const boundary = requireArray(requireRecord(cases[cases.length-1]).detectorPixels).map(pixel), limbIdeal = boundary.map(ideal);
 const featureRecords = requireRecord(previous.features);
@@ -154,7 +154,7 @@ for(const px of [-1,1])for(const py of [-1,1])for(const ax of [-1,1])for(const a
 }
 const alignmentPoleSpan=Math.max(...alignment.map(a=>a.poleDetectorPixel?Math.hypot(a.poleDetectorPixel[0]-pole[0],a.poleDetectorPixel[1]-pole[1]):0));
 const dependencies=['tools/objects/terrestrial-layers/shape-camera-mosaic.mts','tools/spice/text-kernel.mts','tools/source-values.mts'];
-const report={schema:'cssearth-dactyl-published-control-result@1',qualifiedSurface:false,date:config.date,inputSha256:hash(configBytes),generatorSha256:hash(await readFile(new URL(import.meta.url))),dependencies:await Promise.all(dependencies.map(async path=>({path,sha256:hash(await readFile(path))}))),paperSha256:hash(pdf),rangeKm,
+const report={schema:'cssearth-dactyl-published-control-result@1',qualifiedSurface:false,date:config.date,inputSha256:sha256(configBytes),generatorSha256:sha256(await readFile(new URL(import.meta.url))),dependencies:await Promise.all(dependencies.map(async path=>({path,sha256:sha256(await readFile(path))}))),paperSha256:sha256(pdf),rangeKm,
   alignment:{parameters:'paper pixels per native pixel, clockwise degrees, paper x/y at native anchor',baseline:baselineAlignment,plainPhoto:plainPhotoAlignment,checks:alignment,maximumPoleDisplacementNativePixels:alignmentPoleSpan},
   geometry:{poseOrder:'observer latitude, observer west longitude, north azimuth clockwise from image up, ideal center sample/line',axesMetres:axes,limbSamples:boundary.length,fits,
     interpretation:'The baseline uses unit residual weights. Divisors 1.42 and 2 are sensitivity cases, not loosened acceptance limits; 1.42 is approximately the paper limb RMS bound in native pixels, not a Gaussian sigma. Celmis is never in the objective or ranking, but was seen during earlier development and is not a fresh blind validation.',

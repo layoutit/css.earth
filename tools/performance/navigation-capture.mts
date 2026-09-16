@@ -1,5 +1,5 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { createGzip } from 'node:zlib';
 import { createWriteStream } from 'node:fs';
@@ -39,7 +39,7 @@ if (!label || !/^[a-z0-9-]+$/.test(label)) throw Error('Provide a unique capture
 const output = resolve(root, 'output/playwright/navigation-consistency', label);
 await mkdir(dirname(output), { recursive: true });
 await mkdir(output); if (videoEnabled) await mkdir(output + '/frames');
-const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+
 const git = (...args: string[]) => execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 64 * 1024 ** 2 });
 
 type Point = [number, number];
@@ -69,7 +69,7 @@ const report: CaptureReport = { sourceHead: git('rev-parse', 'HEAD').trim(), sou
   errors: [], milestones: [], inputs: [], requests: [], loadedFiles: {}, hostLoad: os.loadavg() };
 await writeFile(output + '/source.patch', git('diff', 'HEAD', '--binary'));
 await writeFile(output + '/capture.mts', await readFile(import.meta.filename));
-report.captureSha256 = hash(await readFile(import.meta.filename));
+report.captureSha256 = sha256(await readFile(import.meta.filename));
 const server = process.env.CSSEARTH_CAPTURE_ORIGIN ? { close: async () => {} } : await previewSite({ port: 4241 });
 let browser: Browser | undefined, page: Page | undefined, cdp: CDPSession | undefined, recording: unknown, tracing = false, trace = false;
 const frames: VideoFrame[] = [], writes: Promise<void>[] = [], urls = new Set<string>();
@@ -323,7 +323,7 @@ finally {
     const file = resolve(root, process.env.CSSEARTH_CAPTURE_DIST ?? 'dist', '.' + decodeURIComponent(u.pathname) + (u.pathname.endsWith('/') ? 'index.html' : ''));
     try {
       const bytes = await readFile(file);
-      report.loadedFiles[u.pathname] = { bytes: bytes.length, sha256: hash(bytes), modifiedAt: (await stat(file)).mtimeMs };
+      report.loadedFiles[u.pathname] = { bytes: bytes.length, sha256: sha256(bytes), modifiedAt: (await stat(file)).mtimeMs };
       if (/\.(?:js|css)$/.test(u.pathname)) {
         const saved = resolve(output, 'served', '.' + u.pathname);
         await mkdir(dirname(saved), { recursive: true }); await writeFile(saved, bytes);

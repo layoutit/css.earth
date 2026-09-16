@@ -1,6 +1,7 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import assert from "node:assert/strict";
-import { createHash, randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto';
 import { readFile, rename, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -9,7 +10,6 @@ import { SCENE_OBJECTS } from "../site/objects.mts";
 import { requireObjectControls } from "../site/scene-contract.mts";
 
 const projectRoot = resolve(import.meta.dirname, "..");
-const sha256 = (value: string | Uint8Array) => createHash("sha256").update(value).digest("hex");
 
 // JSON drops own undefined properties and changes -0. Emit only literal data
 // and preserve the recipes' existing frozen arrays and records as well.

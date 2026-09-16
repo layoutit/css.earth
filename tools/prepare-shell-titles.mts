@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
+import { sha256 } from '../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { sha256 } from "../src/platform/prepared-title.mts";
 import { SHELL_TITLE_SOURCES } from "../site/source/titles/manifest.mts";
 
 const SAFE_FILE = /^title-[a-z0-9-]+\.svg$/u;

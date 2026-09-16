@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {requireRecord,requireFiniteNumber,requireString} from '../../source-values.mts';
 // Reconcile reviewed marker tiles without decoding full-resolution body sources.
 // Historical reconstruction only. Current navigation uses prepare:navigation.
@@ -5,7 +6,6 @@ import {requireRecord,requireFiniteNumber,requireString} from '../../source-valu
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { loadMarkerDescriptors } from '../../prepare-navigation.mts';
 
@@ -15,7 +15,7 @@ await mkdir(outputRoot, {recursive: true});
 const refs = { main: 'a1471af189b25c1bed46683f06bc345025a7cf67', companions: 'ea88f6feab538342257bda3b8bd7383126474017' };
 const additions = new Set(['asteroid-2001-sn263', 'sn263-beta', 'sn263-gamma']);
 const original = (ref: string, path: string) => execFileSync('git', ['show', `${ref}:${path}`], { maxBuffer: 16 * 1024 * 1024 });
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 type Marker = Record<string, unknown> & {index: number; context?: {url: string}};
 const banks: Record<string, Record<string, Marker>> = {};
 function markerBank(value: unknown): Record<string, Marker> {
@@ -41,7 +41,7 @@ for (const [index, descriptor] of descriptors.entries()) {
   if (previous.context) {
     const path = 'public' + previous.context.url, bytes = original(refs[name], path);
     await writeFile(`${outputRoot}/${path.split('/').at(-1)}`, bytes);
-    report.contexts.push({ path, bytes: bytes.length, sha256: hash(bytes), ref: refs[name] });
+    report.contexts.push({ path, bytes: bytes.length, sha256: sha256(bytes), ref: refs[name] });
   }
 }
 sharp.concurrency(1);
@@ -53,7 +53,7 @@ for (const density of [1, 2]) {
     decoded[name] = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     assert.equal(decoded[name].info.width, tile * Object.keys(banks[name]).length);
     assert.equal(decoded[name].info.height, tile);
-    inputs[name] = { bytes: bytes.length, sha256: hash(bytes) };
+    inputs[name] = { bytes: bytes.length, sha256: sha256(bytes) };
   }
   const width = tile * descriptors.length, pixels = Buffer.alloc(width * tile * 4);
   for (const [index, { planetId }] of descriptors.entries()) {
@@ -71,7 +71,7 @@ for (const density of [1, 2]) {
     if (pixels[i + 3]) assert.deepEqual(check.subarray(i, i + 3), pixels.subarray(i, i + 3), 'visible RGB changed');
   }
   await writeFile(`${outputRoot}/${filename}`, output);
-  report.densities.push({ density, width, height: tile, inputs, output: { bytes: output.length, sha256: hash(output) }, changedVisiblePixels: 0 });
+  report.densities.push({ density, width, height: tile, inputs, output: { bytes: output.length, sha256: sha256(output) }, changedVisiblePixels: 0 });
 }
 await writeFile(`${outputRoot}/prepared-navigation-markers.mjs`, '// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(' + JSON.stringify(markers) + ');\n');
 await mkdir('output/companion-catalog', { recursive: true });

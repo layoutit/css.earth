@@ -180,7 +180,6 @@ test('both catalogues prepare deterministically from the same input closure befo
   assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
   for (const output of result.outputs) assert.deepEqual(typeof output.text === 'string' ? Buffer.from(output.text) : output.text,await readFile(output.path),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
-  assert.deepEqual(result.prepared.closure,result.preparedSources.closure);
   const bad=structuredClone(await read('site/prepared-sources.json'));sourceObject(bad).catalogSha256='0'.repeat(64);
   assert.throws(()=>parsePreparedSources(bad),/closure mismatch/);
   const mercury=await objectInput('mercury');
@@ -273,8 +272,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   const result = await prepareMachines({ root, sourceTransport: { fetch: fetchPaper } });
   assert.deepEqual(requests, ['https://mpbulletin.org/issues/MPB_41-2.pdf']);
   assert.deepEqual(await readFile(join(root, paper)), bytes);
-  assert.equal(result.prepared.closure[paper], createHash('sha256').update(bytes).digest('hex'));
-  assert.deepEqual(result.prepared.closure, result.preparedSources.closure);
+  assert.equal(result.preparedSources.closure[paper], createHash('sha256').update(bytes).digest('hex'));
   const offline = await prepareMachines({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
   assert.deepEqual(offline.outputs, result.outputs, 'warm and cold preparation have identical closures');
 });

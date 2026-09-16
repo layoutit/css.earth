@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -10,7 +10,6 @@ import { preparePhysicalWorldFrame, transform, transpose, type Matrix3, type Vec
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }
-const hash = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 
 /** Final preparation stage, shared by isolated authored builds and canonical JSON publication. */
 export async function prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot = resolve(objectDirectory, '../../..') }: WorldNavigationOptions) {

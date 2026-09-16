@@ -1,11 +1,10 @@
 /** Host-side hashing of package-owned implementation inventories, independent of installation layout. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { createRequire } from 'node:module';
 import { readFile, readdir, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 
 export interface PackageImplementationPin { path: string; sha256: string }
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 function strings(value: unknown): string[] {
   if (!Array.isArray(value) || !value.length || value.some(item => typeof item !== 'string' || !item))
@@ -42,8 +41,8 @@ export async function packageImplementationPins(root: string, names: readonly st
       }
       if (!found) throw new TypeError(`Empty implementation inventory: ${name}/${folder}`);
     }
-    pins.push({ path: `${name}/package.json`, sha256: hash(bytes) });
-    for (const path of [...files].sort()) pins.push({ path: `${name}/${path}`, sha256: hash(await readFile(localPath(directory, path))) });
+    pins.push({ path: `${name}/package.json`, sha256: sha256(bytes) });
+    for (const path of [...files].sort()) pins.push({ path: `${name}/${path}`, sha256: sha256(await readFile(localPath(directory, path))) });
   }
   return pins;
 }

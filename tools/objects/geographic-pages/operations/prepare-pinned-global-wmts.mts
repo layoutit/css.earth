@@ -1,7 +1,7 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parseGeographicScene, parsePreparationRecipe } from '../source-records.mts';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {createHash} from 'node:crypto';
 import {preparePinnedGlobalWmts as prepareHierarchy} from '../pinned-hierarchy.mts';
 import {createOperationContext,commandContext,projectDirectory} from './context.mts';
 
@@ -15,7 +15,7 @@ export async function preparePinnedGlobalWmts({objectId,projectRoot=projectDirec
   if(verifyOnly)return result;
   const jsonSource=JSON.stringify(result.plan)+'\n';
   if(writeOutput)await context.writePrepared('pages',result.plan);
-  return {...result,jsonSource,report:{...result.report,jsonSha256:createHash('sha256').update(jsonSource).digest('hex')}};
+  return {...result,jsonSource,report:{...result.report,jsonSha256:sha256(jsonSource)}};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
   const context=commandContext();if(context.args.some(arg=>arg!=='--verify-only'))throw new Error('Use --object=<id> [--verify-only].');

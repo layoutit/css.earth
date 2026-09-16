@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { normalizeDestinationQuery } from "../../../site/destination-search.mts";
@@ -19,7 +19,7 @@ const source=new URL(recipe.directory+'/',new URL('file://'+sourceDirectory+'/')
 const manifest = parsePlacesManifest(JSON.parse(await readFile(new URL("manifest.json", source), "utf8")));
 for (const entry of manifest.inputs) {
   const bytes = await readFile(new URL(entry.path, source));
-  if (bytes.length !== entry.bytes || createHash("sha256").update(bytes).digest("hex") !== entry.sha256) {
+  if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) {
     throw new Error(`GeoNames source snapshot drifted: ${entry.path}`);
   }
 }
@@ -52,7 +52,7 @@ const catalog = { schema: "cssearth-prepared-destinations@1", source: manifest.s
   snapshotDate: manifest.snapshotDate, qualification: manifest.qualification, places };
 const bytes = Buffer.from(JSON.stringify(catalog) + "\n");
 const descriptor = { url: `${config.publicBase}${config.namespace}-places.json`, bytes: bytes.length,
-  sha256: createHash("sha256").update(bytes).digest("hex"), count: places.length,
+  sha256: sha256(bytes), count: places.length,
   sourcePage: manifest.sourcePage, license: manifest.license, snapshotDate: manifest.snapshotDate };
 await mkdir(publicDirectory,{recursive:true});
 await writeFile(`${publicDirectory}/${config.namespace}-places.json`, bytes);

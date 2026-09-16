@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readFile,writeFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {resolve,relative} from 'node:path';
 import {gzipSync} from 'node:zlib';
 import {array,choice,number,shape,text,parseMeshProfile} from './source-records.mts';
@@ -18,7 +18,7 @@ const recipeParser=shape({schema:text,target:text,targetAliases:array(text),mesh
     maximumRmsPixels:number,maximumResidualPixels:number}),
   coverage:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,edgeMarginPixels:number}),
 });
-const hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex');
+
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,v,i)=>s+v*b[i],0);
 const unit=(a:number[])=>a.map(v=>v/Math.hypot(...a));
 const cross=(a:number[],b:number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
@@ -30,7 +30,7 @@ export async function prepareHriiFacets(sourceDirectory:string,recipePath:string
   const read=async(path:string,sha?:string)=>{
     const target=resolve(source,path),local=relative(source,target);
     if(!local||local.startsWith('..')||path.startsWith('/'))throw new Error('HRII input is outside its source package.');
-    const bytes=await readFile(target);if(sha&&hash(bytes)!==sha)throw new Error(`HRII source identity changed: ${path}`);return bytes;
+    const bytes=await readFile(target);if(sha&&sha256(bytes)!==sha)throw new Error(`HRII source identity changed: ${path}`);return bytes;
   };
   const recipeBytes=await read(recipePath),r=recipeParser(JSON.parse(recipeBytes.toString('utf8')));
   if(r.schema!=='cssearth-hrii-facet-preparation@1'||!r.frames.length||r.frames.some((f,i)=>!Number.isSafeInteger(f.number)||(i>0&&f.number<=r.frames[i-1].number)))throw new Error('Invalid HRII scan recipe.');
@@ -102,7 +102,7 @@ export async function prepareHriiFacets(sourceDirectory:string,recipePath:string
   const finite=Array.from(temperatures).filter(Number.isFinite),finiteSlope=Array.from(slopes).filter(Number.isFinite);
   if(!finite.length)throw new Error('HRII has no qualified source facets.');
   const csv=['X,Y,Z,Color temperature,Continuum slope,Scan frame,Detector row','km,km,km,K,%/100nm,1,1',...centers.map((point,i)=>[...point.map(x=>(x/1000).toFixed(9)),temperatures[i],slopes[i],frameNumbers[i],detectorRows[i]].join(','))].join('\n')+'\n';
-  return {bytes:gzipSync(Buffer.from(csv),{level:9}),report:{schema:'cssearth-hrii-facet-result@1',recipeSha256:hash(recipeBytes),sourceShapeSha256:r.mesh.sha256,
+  return {bytes:gzipSync(Buffer.from(csv),{level:9}),report:{schema:'cssearth-hrii-facet-result@1',recipeSha256:sha256(recipeBytes),sourceShapeSha256:r.mesh.sha256,
     inputFrames:r.frames.length,acceptedPixels,rejectedPixels:reject,sourceFacets:mesh.faces,acceptedFacets:finite.length,
     temperatureRangeKelvin:[Math.min(...finite),Math.max(...finite)],slopeRangePercentPer100Nm:[Math.min(...finiteSlope),Math.max(...finiteSlope)],
     spectralAnchors:[spectra[0],spectra[Math.floor(spectra.length/2)],spectra.at(-1)!],

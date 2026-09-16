@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { parseHTML } from 'linkedom';
 
 const documents = [
@@ -63,7 +63,7 @@ for (const system of systems) {
 }
 if (systems.length !== 9) throw new TypeError('Expected the eight planets and Pluto.');
 const snapshot = { schema: 'cssearth-moon-catalogues@1', retrievedAt: new Date().toISOString(),
-  sources: Object.fromEntries(inputs.map(source => [source.id, { url: source.url, sha256: createHash('sha256').update(source.bytes).digest('hex') }])),
+  sources: Object.fromEntries(inputs.map(source => [source.id, { url: source.url, sha256: sha256(source.bytes) }])),
   qualification: 'Confirmed names and counts from JPL; Earth is included from the mean-element table. Mercury and Venus have no moons. Mean elements describe approximate orbits, not precision ephemerides.',
   systems };
 await writeFile('site/source/moon-catalogues.json', `${JSON.stringify(snapshot, null, 2)}\n`);
