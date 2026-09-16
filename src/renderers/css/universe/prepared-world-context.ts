@@ -508,7 +508,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let destroyed = false;
   let selectedId = plan.focus.id;
   let selectedEntry = bodies[0]!;
-  const anchorOnly = [bodies[0]!];
+  // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
+  const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
   let systemRetired = false;
   let depthOrientation: readonly number[] | null = null;
   let depthSelection: string | null = null;
@@ -839,8 +840,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const transform = `translate(${Math.round((width / 2 + x) * 1000) / 1000}px, ${Math.round((height / 2 + y) * 1000) / 1000}px)`;
         if (flightCaption.style.transform !== transform) flightCaption.style.transform = transform;
       }
-      const candidates = delta && !policyChanged
-        ? Array.from(delta.changes.keys(), index => frame.projectedBodies[index]) : frame.projectedBodies;
+      const candidates = delta && !policyChanged ? delta.changed : frame.projectedBodies;
       const projectedBodies = candidates.map(projected => {
         const entry = bodies[projected.index];
         entry.labelShown = projected.labelShown;

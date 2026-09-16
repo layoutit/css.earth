@@ -1,6 +1,6 @@
 import {requireRecord,requireArray,hasErrorCode} from './source-values.mts';
 import {shape,text,number,array} from './objects/terrestrial-layers/source-records.mts';
-const parseSourceRef=shape({id:text,path:text,sha256:text});
+const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
 const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text})),documents:array(shape({path:text,expectedBytes:number,expectedSha256:text})),generatedIntermediates:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
 import assert from 'node:assert/strict';
@@ -22,12 +22,11 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
   const reference = descriptor.properties.recipe.sources.find(source => source.id === 'content');
   assert.ok(reference, `${descriptor.id}: missing authored content`);
   const bytes = await readFile(resolve(objectDirectory, reference.path));
-  assert.equal(hash(bytes), reference.sha256, `${descriptor.id}: content source pin differs`);
   const manifest = parseManifest(await read('source/manifest.json'));
   const entry = [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates]
     .find(source => `source/${source.path}` === reference.path);
   assert.ok(entry, `${descriptor.id}: content source missing from manifest`);
-  assert.equal(entry.expectedSha256, reference.sha256);
+  assert.equal(hash(bytes), entry.expectedSha256, `${descriptor.id}: content source pin differs`);
   assert.equal(entry.expectedBytes, bytes.length);
   const source = requireRecord(JSON.parse(bytes.toString('utf8')));
   const panel = requireRecord(source.panel);
@@ -52,7 +51,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
     try {
       const receipt = await read(path);
       await publish(path, { ...receipt,
-        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' ? { ...reference } : source;}) });
+        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' ? { id: reference.id, path: reference.path, sha256: entry.expectedSha256 } : source;}) });
     } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
   }
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };

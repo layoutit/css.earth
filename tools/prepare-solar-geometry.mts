@@ -52,6 +52,7 @@ const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
   SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
+  STAR_IDS, starStateKm,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   systemBarycentreHeliocentricAu,
@@ -62,8 +63,11 @@ const {
   BODIES: ASTRONOMY_BODY_DATA,
 } = await loadAstronomyPackage();
 
+// A star other than the Sun is placed by its catalogue astrometry; the Sun itself is the origin and has no entry.
+const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
 const BODIES = SCENE_OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar"].includes(body.classification)).map(body => {
+  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar"].includes(body.classification) ||
+  (body.classification === "star" && isPlacedStar(body.id))).map(body => {
   if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
   return body.id as BodyId;
 });
@@ -114,7 +118,7 @@ const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promi
   const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
   if (!ref) return [id, null];
   const { readAuthoredRotation } = await import('./objects/authored-rotation.mts');
-  return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path), sha256: requireString(ref.sha256) }, EPOCH_JD_TT)];
+  return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path) }, EPOCH_JD_TT)];
 })));
 const rotationAtEpoch = (id: BodyId): RotationElements => {
   const authored = authoredRotations.get(id);
@@ -146,9 +150,9 @@ const planetVelocity = (id: string) => systemBarycentreVelocityAuPerDay(planetKe
   .map((value, axis) => value + (id === "earth" ? epochStates.get("earth")!.velocityKmPerDay[axis] / ASTRONOMICAL_UNIT_KILOMETERS : 0));
 
 const entries = BODIES.map((body) => {
-  const parent = ASTRONOMY_BODY_DATA[body].parent;
-  if (parent === null) throw new TypeError(`Solar geometry requires an orbital parent for ${body}.`);
-  const isSatellite = parent !== "sun";
+  const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body);
+  if (parent === null && !star) throw new TypeError(`Solar geometry requires an orbital parent for ${body}.`);
+  const isSatellite = parent !== null && parent !== "sun";
   const epochState = isSatellite ? epochStates.get(body) : null;
   if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
   const moonPosition = isSatellite ? epochState?.positionKm ?? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
@@ -159,7 +163,7 @@ const entries = BODIES.map((body) => {
     ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
     : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
       (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
-  const parentPosition = isSatellite
+  const parentPosition = !isSatellite ? null : isSatellite
     ? primaryStates.has(parent)
       ? primaryStates.get(parent)!.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : isIncluded(DWARF_PLANET_IDS, parent)
@@ -175,11 +179,13 @@ const entries = BODIES.map((body) => {
     ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
     : isIncluded(SMALL_BODY_IDS, body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
     : isIncluded(COMET_IDS, body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
-  const heliocentricAu = isSatellite
+  // A placed star: its catalogue position carried by its space velocity, in the same heliocentric ICRF frame.
+  const starState = star ? starStateKm(body as Parameters<typeof starStateKm>[0], EPOCH_JD_TT) : null;
+  const heliocentricAu = starState ? starState.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
     ? parentPosition!.map((value, index) => value + moonPosition![index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? (primaryStates.get(body) ?? kepler).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : planetPosition(body);
-  const velocityAuPerDay = isSatellite
+  const velocityAuPerDay = starState ? starState.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
     ? moonVelocity!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : planetVelocity(body);
@@ -258,7 +264,9 @@ const entries = BODIES.map((body) => {
       component - actualPositionBodyFixed[index]
     ),
   );
-  if (positionReconstructionError > 1e-9) {
+  // The tolerance is absolute for Solar-System distances and relative beyond them: a placed star sits at ten million
+  // astronomical units, where double precision itself carries a few nanometres of an AU.
+  if (positionReconstructionError > 1e-9 * Math.max(1, orbitDistanceAu)) {
     throw new Error(
       `${body}: heliocentric orbit reconstruction from perihelion ` +
         `direction, orbit normal and true anomaly disagrees with the ` +
@@ -434,7 +442,7 @@ ${
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
     `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu === null ? 'none (unbound)' : aphelionAu.toPrecision(5) + ' AU'}\n` +
     `  ${sourceKey(body)}: Object.freeze({\n` +
-    (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body)!.parentHeliocentricState)},\n` : ""}`) +
+    (parent === "sun" || parent === null ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body)!.parentHeliocentricState)},\n` : ""}`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
     `    eccentricity: ${eccentricity},\n` +
     `    heliocentricDistanceAu: ${heliocentricDistanceAu},\n` +

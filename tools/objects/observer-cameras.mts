@@ -44,15 +44,10 @@ if (flag === '--write') {
     for (const [index, frame] of requireArray(target.frames).map(value => requireRecord(value)).entries()) Object.assign(frame, recipeFields(derived[index]));
     await writeFile(recipePath, JSON.stringify(document, null, 2) + '\n');
   }
-  // The manifest and the object's recipe descriptor both pin the recipe document; a written recipe is re-pinned in the
-  // same step so none of the three disagree.
+  // The manifest owns the recipe document's pin; a written recipe is re-pinned in the same step so the two never disagree.
   const bytes = await readFile(recipePath), digest = createHash('sha256').update(bytes).digest('hex');
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')));
   for (const entry of requireArray(manifest.documents).map(value => requireRecord(value))) if (entry.path === 'preparation/terrestrial.json') { entry.expectedBytes = bytes.length; entry.expectedSha256 = digest; }
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-  const objectPath = resolve(sourceDirectory, '../object.json'), object = requireRecord(JSON.parse(await readFile(objectPath, 'utf8')));
-  const sources = requireArray(requireRecord(requireRecord(object.properties).recipe).sources).map(value => requireRecord(value));
-  for (const entry of sources) if (entry.path === 'source/preparation/terrestrial.json') entry.sha256 = digest;
-  await writeFile(objectPath, JSON.stringify(object, null, 2) + '\n');
-  console.log(`${differences ? `Wrote ${frames.length} frame camera(s) to the recipe` : 'The recipe already states the derived fields'}; re-pinned it in the manifest and the object descriptor.`);
+  console.log(`${differences ? `Wrote ${frames.length} frame camera(s) to the recipe` : 'The recipe already states the derived fields'}; re-pinned it in the manifest.`);
 }

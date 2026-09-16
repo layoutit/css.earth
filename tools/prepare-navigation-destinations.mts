@@ -11,6 +11,8 @@ import { isRecord, hasErrorCode } from './source-values.mts';
 import { defineObjects } from '../site/object-schema.mts';
 
 const AU_M = 149597870700, PC_M = 3.085677581491367e16;
+/** One tenth of a parsec, about 20,000 AU: the far edge of the Oort cloud. */
+const PARSEC_THRESHOLD_M = PC_M / 10;
 export function prepareSceneDistance(descriptor: unknown) {
   const frame = isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.worldFrame : null;
   if (!isRecord(frame) || frame.referenceFrame !== 'sun-icrf' || typeof frame.epochJdTt !== 'number' ||
@@ -18,7 +20,9 @@ export function prepareSceneDistance(descriptor: unknown) {
     throw new TypeError('Navigation distance requires a prepared Sun-centred world frame.');
   }
   const meters = Math.hypot(...frame.originM);
-  return parseNavigationDistance({ meters, value: meters / AU_M, unit: 'AU', quantity: 'geometric', referencePoint: 'heliocentre', epochJdTt: frame.epochJdTt });
+  // A body beyond the Solar System is read in parsecs; astronomical units stop meaning anything past the Oort cloud.
+  const parsecs = meters >= PARSEC_THRESHOLD_M;
+  return parseNavigationDistance({ meters, value: meters / (parsecs ? PC_M : AU_M), unit: parsecs ? 'pc' : 'AU', quantity: 'geometric', referencePoint: 'heliocentre', epochJdTt: frame.epochJdTt });
 }
 
 export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: string) {

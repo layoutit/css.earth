@@ -8,13 +8,14 @@ import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { contextMarkerSprite } from "./marker-presentation.mts";
 
-import marsMarker from "../objects/mars/source/preparation/navigation.json" with { type: "json" };
-import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
+import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "../../tools/prepare-navigation.mts";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
   renderMarker,
 } from "./marker-recipe.mts";
+
+const marsMarker = validateMarkerDescriptor(await loadObjectMarkerDescriptor("mars", resolve(import.meta.dirname, "../..")));
 
 test("accepts every object-owned marker recipe", async () => {
   for (const descriptor of await loadMarkerDescriptors()) {

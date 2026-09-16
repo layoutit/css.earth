@@ -58,13 +58,17 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 826,
-      "expectedSha256": "449cf74e1345de447de78e42d74fb6626b9d72a5c0d14f95fcc91828018ea9b3"
+      "expectedBytes": 387,
+      "expectedSha256": "1b5c91ed4056ceeaa542c9c1d9b16835564052714db1239fa10b8cafe5c8cc6f"
     },
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 127,
-      "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666"
+      "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666",
+      "id": "haumea-shape-marker",
+      "origin": "https://doi.org/10.1038/nature24051",
+      "credit": "cssEarth schematic using Ortiz et al. (2017) semiaxis ratio",
+      "license": "MIT, cssEarth authored schematic; factual measurements attributed"
     },
     {
       "path": "editorial/factsheet-review.json",

@@ -50,33 +50,27 @@
       "sources": [
         {
           "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "a0f983762e10aac485e1d32968eb3bf6159c2007d65de7ceefc503b1eaaea8e4"
+          "path": "source/preparation/terrestrial.json"
         },
         {
           "id": "rotation",
-          "path": "source/preparation/rotation.json",
-          "sha256": "d6bb81f43887d1b68a3e0366a7835f66c90ae3771f6b5eda1f82f4e37e68dab5"
+          "path": "source/preparation/rotation.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "c2a19c4b88d40ce825758d9fc24060e8944ffbf57af96bb9697bcb4566d23705"
+          "path": "source/content/object.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "d0f9fc09dceee65c48f48f4d43a048cf7d8e128f472b15a27dab5c35c5526915"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "098bfdd647cfb30a887916a0d3faca82a3c82db0535aac5ab60a24dd7a39413b"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "97e5a72b69177cb6514e26f8f819981a2feb165cdcfb2d7302c199ecf465cc71"
+          "path": "source/preparation/acquisition.json"
         }
       ]
     },

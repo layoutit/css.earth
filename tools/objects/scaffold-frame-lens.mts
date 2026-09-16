@@ -202,11 +202,6 @@ const pin = async () => {
     if (entry) { entry.expectedBytes = bytes.length; entry.expectedSha256 = sha(bytes); } else documents.push({ path, expectedBytes: bytes.length, expectedSha256: sha(bytes) });
   }
   current.documents = documents; await write(manifestPath, current);
-  const object = await json(descriptorPath);
-  for (const entry of requireArray(requireRecord(requireRecord(object.properties).recipe).sources).map(value => requireRecord(value))) {
-    const bytes = await readFile(resolve(objectDirectory, requireString(entry.path))); entry.sha256 = sha(bytes);
-  }
-  await write(descriptorPath, object);
 };
 await write(manifestPath, manifest); await write(descriptorPath, descriptor); await pin();
 execFileSync(process.execPath, [resolve(ROOT, 'tools/author-source-records.mts'), objectId], { stdio: 'inherit' });

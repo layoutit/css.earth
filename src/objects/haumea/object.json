@@ -33,33 +33,27 @@
       "sources": [
         {
           "id": "shape-model",
-          "path": "source/preparation/shape-model.json",
-          "sha256": "98d19da766dfd2431a1fb6b8c0a58b12db43e2c216cbf12a411d977ff6826b3a"
+          "path": "source/preparation/shape-model.json"
         },
         {
           "id": "rotation",
-          "path": "source/preparation/rotation.json",
-          "sha256": "1a8dea075c8f33eddda26b738ebfaf449b48a538a75b2fcdf73e50b20762dd83"
+          "path": "source/preparation/rotation.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554"
+          "path": "source/content/object.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7"
+          "path": "source/preparation/acquisition.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "1f635c92818e5ff839af6a183994e5f1ea75c77031f1198ad29b00059190de5e"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "449cf74e1345de447de78e42d74fb6626b9d72a5c0d14f95fcc91828018ea9b3"
+          "path": "source/preparation/navigation.json"
         }
       ],
       "surfaces": [

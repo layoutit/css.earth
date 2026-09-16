@@ -125,11 +125,6 @@ export async function preparePlanets({ projectRoot = process.cwd(), force = fals
       assert.equal(result.exitCode, 0, `${script} failed`); assert.equal(result.signal, null);
     }
     const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });
-    // A run that replaced a reviewed image changed its manifest record; bring the navigation marker's copy along before rendering markers.
-    for (const id of report.rebuilt) {
-      if (!await authoredObject(id, root)) continue;
-      for (const change of await pinObjectDocuments(resolve(root, "src/objects", id))) console.log(JSON.stringify({ phase: "pinned", id, file: change.file, path: change.path }));
-    }
     const navigation = await runObjectCommand({ command: process.execPath,
       argumentsList: [resolve(root, "tools/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);

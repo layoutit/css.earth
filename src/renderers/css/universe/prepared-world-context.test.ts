@@ -547,9 +547,11 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     const frame = SCENE_OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);
     expectAlignedContextOrigin(body.positionM, frame.originM, `${body.id} context must match the selectable detail origin`);
-    expect(body.orbit?.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
-    expect(body.orbit?.activeChords).toEqual(body.orbit?.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
-    expect([...(body.orbit?.extentChords ?? [])].sort((a, b) => a - b)).toEqual(body.orbit?.activeChords);
+    // A placed star has no orbit in the Sun's context; every orbiting body's orbit facts are prepared.
+    if (!body.orbit) { expect(SCENE_OBJECTS.find(object => object.id === body.id)!.classification).toBe('star'); continue; }
+    expect(body.orbit.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
+    expect(body.orbit.activeChords).toEqual(body.orbit.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+    expect([...(body.orbit.extentChords ?? [])].sort((a, b) => a - b)).toEqual(body.orbit.activeChords);
   }
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
@@ -1721,7 +1723,8 @@ test('the Sun locator stays visible across galactic observer rotations while res
   const base = plan(1), distance = 3.085677581491367e19;
   const context = parsePreparedWorldContext({ ...base,
     focus: { ...base.focus, radiusM: 6.957e8 }, frame: { ...base.frame, bodyRadiusM: 6.957e8 },
-    bodies: [{ id: 'uranus', name: 'Uranus', positionM: [3e12, 0, 0], radiusM: 2.5e7, color: '#99bbcc' }],
+    // An orbiting occluder: an orbitless body would itself be a placed locator.
+    bodies: [{ id: 'uranus', name: 'Uranus', positionM: [3e12, 0, 0], radiusM: 2.5e7, color: '#99bbcc', orbit: orbit([3e12, 0, 0], 1) }],
     system: { fadeOutStartDistanceM: 1e14, hiddenDistanceM: 1e15 } });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, uranus: sprite } });

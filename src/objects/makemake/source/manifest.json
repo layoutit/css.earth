@@ -152,8 +152,8 @@
     {
       "id": "makemake-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 831,
-      "expectedSha256": "ceddfb717190b468d25b110136ae48551fb348c1cd7f7c3bd762dac22e1f67c7",
+      "expectedBytes": 389,
+      "expectedSha256": "9b977c96e2e15ac7126825f49d4c6a2bb60c2911aec24fce6861fb4bf4ea4f30",
       "origin": "Repository-authored Makemake navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -228,7 +228,11 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 137,
-      "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5"
+      "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5",
+      "id": "makemake-schematic-marker",
+      "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
+      "credit": "cssEarth schematic; warm color denotes the illustrative surface",
+      "license": "MIT, cssEarth authored schematic"
     }
   ],
   "generatedIntermediates": []

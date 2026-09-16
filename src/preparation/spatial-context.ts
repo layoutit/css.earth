@@ -70,7 +70,8 @@ export interface OrbitalState {
   readonly eccentricity: number;
   readonly trueAnomalyRadians: number;
 }
-export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail'; readonly classification?: string; }
+/** `none`: a body placed by its astrometry rather than an orbit, such as a star; it is listed with its position and radius only. */
+export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail' | 'none'; readonly classification?: string; }
 /** A source-backed coordinate origin with no rendered body, surface or marker. */
 export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
 export interface PreparedWorldContext {
@@ -84,7 +85,8 @@ export interface PreparedWorldContext {
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
     readonly placement?: 'approximate';
-    readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
+    /** Absent for a placed body, which has a position but no orbit to draw. */
+    readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
       readonly extentChords: readonly number[]; readonly lod: PreparedOrbitLod;
       /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
@@ -175,6 +177,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       if (ancestors.has(parentId) || !centerState(parentId)) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
       ancestors.add(parentId);
     }
+    if (fact.orbitStyle === 'none') return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM });
     const motion = unit(cross(state.normal, state.perihelionDirection));
     const path = state.eccentricity > 1 ? prepareHyperbolicPath({
       semiMajorAxisUnits: state.semiMajorAxisM, eccentricity: state.eccentricity, trueAnomalyRad: state.trueAnomalyRadians,

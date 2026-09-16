@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 185.4140957054,
+  "declinationDegrees": 41.5709435484,
+  "displayMeridianDegrees": -9.922607,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 315576,
+  "coordinateSystem": "+Z is the rotation pole placed in the plane of the sky at the ALMA position angle; +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude.",
+  "source": "Kervella et al. (2018, A&A 609, A67; arXiv:1711.07983): ALMA CO and SiO line emission give the north pole a position angle PA = 48.0 +/- 3.5 deg east of north and a rotation period P/sin i = 36 +/- 8 years. The inclination i is not measured there, so the pole is placed perpendicular to the line of sight (sin i = 1) from the SIMBAD J2000 position; 36 years is 315576 hours. Uitenbroek, Dupree & Gilliland (1998, AJ 116, 2501) instead argued from a Hubble bright spot that the pole points about 20 deg from the line of sight; that alternative is recorded, not adopted. The display meridian W is the sub-solar east longitude the IAU node convention would otherwise give (-9.923 degrees), so the hemisphere the photograph covers is the one shown lit; there is no measured prime meridian."
+}
