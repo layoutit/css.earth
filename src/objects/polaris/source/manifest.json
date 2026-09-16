@@ -4,8 +4,8 @@
     {
       "id": "polaris-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 1315,
+      "expectedSha256": "3fbd45b669bfac6993a32a9ea852200ee787efa8861001806da5ed7d1b729544",
       "origin": "https://arxiv.org/abs/2407.09641",
       "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "polaris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 1971,
+      "expectedSha256": "c2eb3388846336c3301c5950c686d766d0adc389b9874e6f69ba67471e616bb4",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "polaris-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 1684,
+      "expectedSha256": "034882a4c1c7da205964bf7632e504043a99c6a456b41b131dcdccdf7626694b",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +87,8 @@
     {
       "id": "polaris-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +105,8 @@
     {
       "id": "polaris-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 102,
+      "expectedSha256": "64aeef645d230a36d0a70c28c21182aba511d4f3144086dcfff9d4a54c7ee68d",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +123,8 @@
     {
       "id": "polaris-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 282,
+      "expectedSha256": "e6231e12b893523fc8dca5cfada1478b7a0991e1fadf97daf653a3ba0edde0fd",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -143,8 +143,8 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "origin": "https://arxiv.org/abs/2407.09641",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
       "license": "Project-authored display derivative.",
@@ -167,33 +167,46 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "expectedBytes": 2406,
+      "expectedSha256": "1a1d45686d8b6f140902632a43c5de41c356b5fd20445987a8a774b56a7f8dd2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "expectedBytes": 444,
+      "expectedSha256": "90db6d3380e90281ce998a81189d1bfa29385a912d362e31f15ddbcb7dd4a524"
     },
     {
       "path": "preparation/rotation.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "expectedBytes": 1090,
+      "expectedSha256": "bd0e38b100280a5b3590e338364fe8ac6e110b252679c063f64398c9f370c0d2"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 0,
-      "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "expectedBytes": 3820,
+      "expectedSha256": "e2eb2970b0b0cb5d43df5b22981e31ab7f65abccc05dd1fa631cc6bffa774cb1"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 70179,
+      "expectedSha256": "b08cee64dd9364b480958644329afa1c7b59c733bd4cff8e5851f6961e237b54",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /polaris/ with the default camera, Chrome via Playwright at 1200 by 800, taken 2026-09-16 after preparation."
+      }
     }
   ]
 }

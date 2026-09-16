@@ -224,7 +224,9 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
     generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', ...pin, origin: spec.paper, credit: `Sphere of the published radius; marker written by tools/objects/new-star.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
       recipe: { generator: 'tools/objects/new-star.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-star.mts', sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
-    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path, ...pin })) });
+    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path, ...pin,
+      // Provenance refuses a document without a binding; the content record is authored here.
+      ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
   put(`src/renderers/css/styles/${id}-surfaces.css`, starStylesheet(id, name, offLimbSize, 'Both plates are transparent: no observation is cast.'));
   return files;
 }
