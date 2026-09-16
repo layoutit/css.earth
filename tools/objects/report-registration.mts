@@ -16,6 +16,22 @@ export const REGISTRATION_BLOCK_END = '<!-- registration-report:end -->';
 const degrees = (value: unknown, digits = 2) => typeof value === 'number' && Number.isFinite(value) ? `${value.toFixed(digits)}°` : '—';
 const ratio = (value: unknown) => typeof value === 'number' && Number.isFinite(value) ? value.toFixed(2) : '—';
 
+/**
+ * Whether a lens registers: every measurement that reached a verdict (the outline over three or more scored frames, a
+ * reference or the relief over their decisive minimum) places it within three degrees, and at least one did.
+ */
+export function registrationVerdict(registration: Record<string, unknown>): 'registered' | 'conflict' | 'no verdict' {
+  const silhouette = requireRecord(registration.silhouette), measured: unknown[] = [];
+  if (Number(silhouette.scored) >= 3) measured.push(silhouette.systematicDegrees);
+  for (const report of [registration.reference, registration.relief]) {
+    if (report === undefined) continue;
+    const record = requireRecord(report), rule = requireRecord(record.rule);
+    if (Number(record.decisive) >= Number(rule.minimumFrames ?? 3)) measured.push(record.medianOffsetDegrees);
+  }
+  const offsets = measured.filter((value): value is number => typeof value === 'number' && Number.isFinite(value));
+  return !offsets.length ? 'no verdict' : offsets.every(value => Math.abs(value) <= 3) ? 'registered' : 'conflict';
+}
+
 /** The block for one object's prepared surfaces, or null when no lens carries a registration stage. */
 export function registrationBlock(surfaces: unknown): string | null {
   const lenses = requireArray(requireRecord(surfaces).surfaces).map(value => requireRecord(value));
@@ -37,17 +53,17 @@ export function registrationBlock(surfaces: unknown): string | null {
     const parts = [turn ? (turn.applied ? `turned ${degrees(turn.turnDegrees)} by ${String(turn.by)}` : reverted.turn ? `turn reverted: ${String(reverted.turn)}` : `turn declined: ${String(turn.reason)}`) : '',
       tilt ? (tilt.applied ? `tilted ${degrees(tilt.tiltDegrees)} by the silhouette` : reverted.tilt ? `tilt reverted: ${String(reverted.tilt)}` : `tilt declined: ${String(tilt.reason)}`) : ''].filter(Boolean);
     const refinedCell = !refinement ? '—' : parts.join('; ');
-    rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} | ${refinedCell} |`);
+    rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} | ${refinedCell} | ${registrationVerdict(registration)} |`);
   }
   if (!rows.length) return null;
   return [
     'Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.',
     '',
-    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined |',
-    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
+    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     ...rows,
     '',
-    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens.',
+    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.',
   ].join('\n');
 }
 

@@ -25,18 +25,6 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
-### Registration
-
-<!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
-
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 16 | 16 | 7.91° | 6.45° | 4.58° | its other 16 frames | 1 of 16 | — | 8 of 16, 1.00° | turn reverted: the relief median did not move toward zero (1° to 1°); tilt declined: the median residual -5.00° is within the frames' floor of 6.45° |
-
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens.
-<!-- registration-report:end -->
-
 ## Known problems
 
 Shape uses the shared neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 75 km reference sphere, with a -30 to 60 km legend. This includes global shape, not height above a gravitational equipotential.
