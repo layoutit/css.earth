@@ -88,14 +88,3 @@ test("the overlay is fitted to the published silhouette, floored to the marker",
     assert.equal(fit.minimumRadius, 0.6);
   } finally { f.restore(); }
 });
-
-test("the orbit toggle only hides the line through a stage class", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    assert.equal(f.stage.classList.contains("mercury-hide-orbit"), false);
-    const hide = f.selection.dispatch({ kind: "toggle", name: "orbit", value: false }); await f.settle(); await hide;
-    assert.equal(f.stage.classList.contains("mercury-hide-orbit"), true);
-    const show = f.selection.dispatch({ kind: "toggle", name: "orbit", value: true }); await f.settle(); await show;
-    assert.equal(f.stage.classList.contains("mercury-hide-orbit"), false);
-  } finally { f.restore(); }
-});

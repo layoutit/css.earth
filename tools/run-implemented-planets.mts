@@ -30,20 +30,26 @@ export async function discoverPlanetTests(
 ) {
   const directory = await authoredObject(id, projectRoot)
     ? resolve(projectRoot, 'tests/objects/unit', id) : planetTestDirectory(id, projectRoot);
-  let filenames;
+  const isTest = (filename: string) => /\.test\.m(?:j|t)s$/u.test(filename);
+  let filenames: string[] = [];
   try {
     filenames = await readDirectory(directory);
-  } catch (cause) {
-    throw new Error(`Implemented planet ${id} test directory is missing.`, { cause });
+  } catch {
+    // A body covered only by the shared contract runners keeps no directory of its own.
   }
-  const tests = filenames
-    .filter((filename) => /\.test\.m(?:j|t)s$/u.test(filename))
-    .sort()
-    .map((filename) => resolve(directory, filename));
+  const own = filenames.filter(isTest).sort().map((filename) => resolve(directory, filename));
+  // Shared contract runners register one test per table entry; CSSEARTH_TEST_OBJECTS limits them to this body.
+  const shared = sharedUnitTestDirectory(projectRoot);
+  const runners = (await readDirectory(shared)).filter(isTest).sort().map((filename) => resolve(shared, filename));
+  const tests = [...own, ...runners];
   if (tests.length === 0) {
     throw new Error(`Implemented planet ${id} has no tests.`);
   }
   return tests;
+}
+
+export function sharedUnitTestDirectory(projectRoot = process.cwd()) {
+  return resolve(projectRoot, 'tests/objects/unit');
 }
 
 export function planetAssembleScript(id: string, projectRoot = process.cwd()) {
@@ -252,7 +258,7 @@ async function main(mode = process.argv[2]) {
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverPlanetTests(id)]
       : [await resolvePlanetCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
-    await run(process.execPath, argumentsList);
+    await run(process.execPath, argumentsList, mode === "test" ? { ...process.env, CSSEARTH_TEST_OBJECTS: id } : undefined);
   }
 }
 
@@ -260,8 +266,8 @@ function planetOwnedScript(id: string, path: string, projectRoot: string) {
   return resolve(projectRoot, "src", "objects", id, ...path.split("/"));
 }
 
-function run(command: string, argumentsList: readonly string[]) {
-  return runObjectCommand({ command, argumentsList }).then(({ exitCode, signal }) => {
+function run(command: string, argumentsList: readonly string[], env?: NodeJS.ProcessEnv) {
+  return runObjectCommand({ command, argumentsList, env }).then(({ exitCode, signal }) => {
     if (exitCode !== 0 || signal !== null) throw new Error(
       `Implemented planet command failed with ${signal ?? `exit ${exitCode}`}.`,
     );

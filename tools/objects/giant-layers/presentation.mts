@@ -47,7 +47,10 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
   if(materialStyle.projection==='fixed-span'&&!geometryConfig.materialPlane)throw new TypeError('Fixed-span plane is missing.');
   const materialPlane=geometryConfig.materialPlane;
   const materialLeaf=materialStyle.projection==='fixed-span'&&materialPlane?prepareFixedSpanMaterialPlane(materialPlane,quantizedScenePitch(cameraPlan)):
-    rasterEllipsoidMaterial(materialConfig.raster,{size:materialConfig.lenses[0].fixed[0].size,state:materialConfig.fixedState,geometryOnly:true,textureUrl:url(prefix,materialConfig.lenses[0].fixed[0].filename)}).leaf;
+    // The plane carries the bank's presentation size: every address below is written for that
+    // many CSS pixels, so a plane sized from a raster product would sample the texture at the
+    // wrong scale.
+    rasterEllipsoidMaterial(materialConfig.raster,{size:bank.presentationSize,state:materialConfig.fixedState,geometryOnly:true,textureUrl:url(prefix,materialConfig.lenses[0].fixed[0].filename)}).leaf;
   if(!materialLeaf)throw new TypeError('Material plane geometry is missing.');
   const styleReads=geometry.bodyBands.flatMap(band=>band.leaves).map(leaf=>leaf.style);
   if(config.readPlaneCssom)styleReads.push(...Object.values(geometry.planes).map(leaf=>leaf.style),materialLeaf.style);

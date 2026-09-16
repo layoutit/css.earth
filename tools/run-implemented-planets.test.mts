@@ -23,13 +23,15 @@ const quiet = () => {};
 const hasPreparationReport = (error: AggregateError): error is AggregateError & { report: PreparationReport } =>
   'report' in error && typeof error.report === 'object' && error.report !== null;
 
-test("object discovery retains unit tests and uses the shared browser entry", async () => {
+test("object discovery retains unit tests, appends the shared contract runners and uses the shared browser entry", async () => {
+  const shared = resolve(root, 'tests/objects/unit');
+  const isTest = (filename: unknown): filename is string => typeof filename === 'string' && /\.test\.m(?:j|t)s$/u.test(filename);
+  const runners = (await readdir(shared)).filter(isTest).map(filename => resolve(shared, filename)).sort();
+  assert.ok(runners.length > 0, 'shared contract runners exist');
   for (const id of ids) {
     const directory = resolve(root, 'tests/objects/unit', id);
-    const expected = (await readdir(directory, { recursive: true }))
-      .filter((filename): filename is string => typeof filename === 'string' && /\.test\.m(?:j|t)s$/u.test(filename))
-      .map(filename => resolve(directory, filename)).sort();
-    assert.ok(expected.length > 0, `${id} must retain its tests`);
+    const own = await readdir(directory, { recursive: true }).then(names => names.filter(isTest).map(filename => resolve(directory, filename)).sort(), () => []);
+    const expected = [...own, ...runners];
     assert.deepEqual(await discoverPlanetTests(id, { projectRoot: root }), expected);
     assert.equal(await resolvePlanetCommand(id, 'browser', { projectRoot: root }),
       resolve(root, 'site/test/dom-cleanliness-browser.mts'));

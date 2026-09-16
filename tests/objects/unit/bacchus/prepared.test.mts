@@ -1,1 +1,0 @@
-import{test}from'node:test';import{assertAsteroidPackage}from'../asteroid-contract.mts';test('Bacchus retains Shape, Elevation and native raster triangles',()=>assertAsteroidPackage('bacchus',['shape','elevation'],315));

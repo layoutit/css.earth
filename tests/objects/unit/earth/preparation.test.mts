@@ -184,8 +184,9 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal("moon" in PREPARED_EARTH_SCENE, false);
   assert.equal(Object.keys(PREPARED_EARTH_SCENE.counts).some((key) =>
     /moon|orbitGuide/u.test(key)), false);
+  // 448 band leaves, two polar caps and the seam fills of f8e05b5c4e; no moon or orbit guide leaves.
   assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
-    453);
+    452);
   assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 516);
   assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
     PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
