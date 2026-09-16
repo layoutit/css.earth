@@ -1,14 +1,14 @@
 # Saturn source notice
 
-The Saturn surface and radial ring profile inputs are OpenSpace synchronized
-resources from the OpenSpace Team, pinned through OpenSpace commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516`. OpenSpace distributes these
-resources under the MIT License included in `LICENSE.OPENSPACE-MIT`.
+The Saturn visible surface is the Hubble OPAL Cycle 32 rotation-A global map
+(NASA, ESA, STScI and the OPAL team), a public STScI science archive product.
+The ring opacity profile is the Cassini UVIS alpha Virginis stellar
+occultation of 2006 day 285 (Colwell, Jerousek, Becker and Esposito, PDS
+CO-SR-UVIS-HSP-2/4-OCC-V3.0), from the PDS Ring-Moon Systems Node.
 
-The Dione, Enceladus, Iapetus, Mimas, Rhea, and Tethys maps are OpenSpace
-synchronized resources under that same pinned OpenSpace license and source
-commit. Titan's prepared surface uses the Cassini ISS global mosaic attributed
-by OpenSpace to USGS and NASA/PDS. Hyperion uses no surface image.
+The globe lighting parameters (ambient intensity, roughness and terminator
+smoothstep) are values adapted from the OpenSpace Team's globe shader
+defaults (MIT); they are stated in the geometry recipe and credited there.
 
 The ultraviolet and methane observation inputs are Hubble OPAL products from
 NASA, ESA, and the OPAL team. The thermal interpretation and atmospheric

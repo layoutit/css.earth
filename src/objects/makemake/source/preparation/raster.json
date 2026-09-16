@@ -24,22 +24,14 @@
   },
   "surfaces": [
     {
-      "id": "illustration",
+      "id": "shape",
       "output": "makemake-{id}{suffix}.webp",
       "thumbnail": "makemake-lens-{id}.webp",
-      "source": "nasa-makemake.glb",
+      "source": "measurements.json",
       "falseColor": false,
       "science": {
-        "kind": "glb-base-color",
-        "model": "nasa-makemake.glb",
-        "mesh": {
-          "latitudeSegments": 16,
-          "longitudeSegments": 32,
-          "width": 2048,
-          "height": 1024,
-          "poleSize": 256,
-          "seamOverlap": 0.025
-        }
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for an unresolved surface."
       }
     }
   ],

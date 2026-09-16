@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "21f55c7e6f62f31ef9a3a6511342ae6376e13768154f458fd3c82b8d59b8fd00"
+    "sha256": "e037038754a5be77e49c9b9295729baeedbbd34f8280677e62b6cebea60baf4d"
   },
   "id": "mars",
   "properties": {
@@ -58,58 +58,47 @@
       "sources": [
         {
           "id": "raster",
-          "path": "source/preparation/raster.json",
-          "sha256": "7a4423487c819fb73f49c38002be3f8176ed9bd4d2d38e60d0f4ac629aeb7de8"
+          "path": "source/preparation/raster.json"
         },
         {
           "id": "geometry",
-          "path": "source/preparation/geometry.json",
-          "sha256": "cbbf440243fde7d51c307464f79bda43d826728d8d0c1e1cff7cf371ad1a108f"
+          "path": "source/preparation/geometry.json"
         },
         {
           "id": "celestial",
-          "path": "source/preparation/celestial.json",
-          "sha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8"
+          "path": "source/preparation/celestial.json"
         },
         {
           "id": "presentation",
-          "path": "source/preparation/presentation.json",
-          "sha256": "0a33c89e6373f3596ec9ae1bee0c4f7fc63f6cd81deccacfe8685a9e588513c3"
+          "path": "source/preparation/presentation.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "cd4446b0424aaf55fada395ee123375dda44549517539b70af29e4e8dfd709c5"
+          "path": "source/content/object.json"
         },
         {
           "id": "solar-system",
-          "path": "source/presentation/solar-system.json",
-          "sha256": "d35d136c52c84f11d4492c00c7f62535903f1732713028288e70a01397687674"
+          "path": "source/presentation/solar-system.json"
         },
         {
           "id": "charts",
-          "path": "source/content/charts.json",
-          "sha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541"
+          "path": "source/content/charts.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "1ba809a2c4ba5abe4ceab7b2464cc174780c7db70eaa80be1166d83a399e8a6c"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "5eac3ab5a540468f42758a60ad836811b39394dd1cdda2c7b5e8c000f21dc20f"
+          "path": "source/preparation/acquisition.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "17ba60da96dbefa063058fcc0974a44b2393fa325a9411a4fcabf12fc31d90e3"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "features",
-          "path": "source/preparation/features.json",
-          "sha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1"
+          "path": "source/preparation/features.json"
         }
       ],
       "shape": {
@@ -163,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "178943c820bfe53c5d544817eeca44ac2ac5f71a7b709c5a49312f76d10d4e0f"
+        "sha256": "08a352296ce17a9a2af8a87efcf59b9ded099fc1a74886758868fd653fbc03bb"
       }
     },
     "catalog": {

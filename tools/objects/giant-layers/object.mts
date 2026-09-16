@@ -1,3 +1,4 @@
+import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from '../material-composition/data-schema.mts';
 import {bandedGeometryRecipe} from './geometry-contract.mts';
 import {normalizedPresentationRecipe} from './normalized-presentation-contract.mts';
@@ -55,12 +56,8 @@ export function prepareSharedCelestial(namespace:string) {
  * supplied preparation destinations, never implicitly canonical asset roots. */
 export async function prepareLayeredGiantObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:typeof prepareObjectContentAssets}) {
   if(typeof prepareContent!=='function')throw new TypeError('Shared content preparation capability is required.');
-  const root=await realpath(objectDirectory),sourceDirectory=resolve(root,'source'),raw=await readJson(resolve(root,'object.json')),descriptor=parseAuthoredObjectDescriptor(raw),sources=new Map<string,{reference:typeof descriptor.recipe.sources[number];path:string;value:unknown}>();
+  const root=await realpath(objectDirectory),sourceDirectory=resolve(root,'source'),raw=await readJson(resolve(root,'object.json')),{descriptor,sources}=await readAuthoredSources(root,raw);
   if(!write&&resolve(publicDirectory)===resolve(root,'../../../public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');
-  for(const reference of descriptor.recipe.sources){
-    const path=await realpath(resolve(root,reference.path)),offset=relative(root,path);if(offset==='..'||offset.startsWith(`..${sep}`)||offset.startsWith(sep))throw new Error('Authored source escapes object directory.');
-    const bytes=await readFile(path);if(hash(bytes)!==reference.sha256)throw new Error(`Authored source pin mismatch: ${reference.path}`);sources.set(reference.id,{reference,path,value:JSON.parse(bytes.toString('utf8'))});
-  }
   const requiredSource=(id:string)=>{const source=sources.get(id);if(!source)throw new Error(`Layered giant source ${id} is missing.`);return source;};
   const required=(id:string)=>requiredSource(id).value;
   const geometryConfig=parse(required('geometry'),bandedGeometryRecipe,'banded geometry');

@@ -110,6 +110,28 @@
           "pr": 192
         }
       ]
+    },
+    {
+      "id": "sphere-cross-frame-registration",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "status": "unresolved",
+      "finding": "Measured with the cross-frame registration test on 16 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 205 pixels (median); peak correlation 0.16 (median) against a mirror margin of 0.39; 0 of 16 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. The lens stands on the silhouette registration recorded in the entry above and on the route proven against the Dawn mosaic on Vesta; this test adds no independent check for this body. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 4.58° against relief 1.00°.",
+      "revisitWhen": "Registration measurements that agree within three degrees: a map, resolved markings, or a rotation record and mesh on which the outline and the relief place these frames together.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        },
+        {
+          "date": "2026-09-16",
+          "commit": "e0404e8fac9a5c87f5216124b931773de55a75a0"
+        }
+      ]
     }
   ]
 }

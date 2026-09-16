@@ -3,24 +3,6 @@
   "units": "kilometers",
   "sources": [
     {
-      "id": "openspace-saturn-ring-color",
-      "path": "color_original_single.png",
-      "expectedBytes": 2059,
-      "expectedSha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
-    },
-    {
-      "id": "openspace-saturn-ring-transparency",
-      "path": "trans_original_single.png",
-      "expectedBytes": 2303,
-      "expectedSha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
-    },
-    {
       "id": "ring-spectral-response",
       "path": "lenses/manifest.json",
       "expectedBytes": 2316,
@@ -28,6 +10,24 @@
       "origin": "Pinned Hubble program 17843 and Cassini VIMS/CIRS interpretation",
       "credit": "NASA, ESA, STScI, and NASA/JPL-Caltech",
       "license": "project-authored source specification with institutional credits"
+    },
+    {
+      "id": "cassini-uvis-alpvir-2006-285-occultation",
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "expectedBytes": 10591493,
+      "expectedSha256": "65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341",
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
+    },
+    {
+      "id": "cassini-uvis-alpvir-2006-285-occultation-label",
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "expectedBytes": 12013,
+      "expectedSha256": "64858a36470a3d52df1056bb07df5f5aa4396b78924fa07c9861c9a67500b49c",
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
     }
   ],
   "layers": [
@@ -49,7 +49,7 @@
         140612
       ],
       "sourceBounds": [
-        74500,
+        66900,
         140612
       ],
       "channelFactors": [
@@ -57,8 +57,6 @@
         0.8796223968878317,
         0.8227857543962834
       ],
-      "colorSource": "color_original_single.png",
-      "transparencySource": "trans_original_single.png",
       "interior": {
         "centers": [
           67580,
@@ -73,60 +71,7 @@
           151
         ]
       },
-      "operations": [
-        {
-          "kind": "alpha-cap",
-          "bounds": [
-            117500,
-            122050
-          ],
-          "maximum": 46
-        },
-        {
-          "kind": "clear",
-          "bounds": [
-            133423,
-            133745
-          ]
-        },
-        {
-          "kind": "clear",
-          "bounds": [
-            136487,
-            136522
-          ]
-        },
-        {
-          "kind": "clear",
-          "bounds": [
-            136770,
-            139826
-          ],
-          "inclusive": [
-            true,
-            false
-          ]
-        },
-        {
-          "kind": "edge-core",
-          "bounds": [
-            139826,
-            140612
-          ],
-          "center": 140224,
-          "sigma": 70,
-          "baseDepth": 0.01,
-          "peakDepth": 0.19
-        },
-        {
-          "kind": "alpha-gain",
-          "bounds": [
-            74500,
-            91975
-          ],
-          "gain": 2.25
-        }
-      ],
+      "operations": [],
       "readability": {
         "minimumPixels": {
           "1": 4,
@@ -503,6 +448,19 @@
           },
           "qualification": "Cassini VIMS/CIRS-informed thermal false color over visible morphology; not a direct temperature retrieval."
         }
+      ],
+      "opticalDepthProfile": {
+        "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+        "radiusColumn": 1,
+        "opticalDepthColumn": 5,
+        "flagColumn": 12,
+        "corruptedFlag": 64,
+        "missingValue": -1
+      },
+      "color": [
+        255,
+        255,
+        255
       ]
     }
   ]

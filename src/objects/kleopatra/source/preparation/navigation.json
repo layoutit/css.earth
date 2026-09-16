@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_mpcd.obj",
-    "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-    "license": "Public scientific model from the source-author release accompanying CC-BY-4.0 research; retain credit and citations.",
-    "consumers": [
-      "navigation"
-    ],
-    "expectedBytes": 25203,
-    "expectedSha256": "218e079d8afefaa88441e1bb1ae4751c031a39c2b652bd27c17017de24d434c8",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "kleopatra-shape"
-      ],
-      "size": 512,
-      "longitudeDegrees": 90,
-      "latitudeDegrees": 35,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

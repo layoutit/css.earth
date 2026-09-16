@@ -88,20 +88,6 @@
           "image": "/scenes/kalliope/kalliope-elevation-legend.webp"
         },
         "notes": "Source shape · radial height"
-      },
-      {
-        "id": "zimpol",
-        "label": "SPHERE photograph",
-        "thumbnail": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
-        "surface": "kalliope-zimpol-surface@2x.webp",
-        "poles": "kalliope-zimpol-surface@2x.webp",
-        "source": {
-          "id": "kalliope-sphere-20180315080346",
-          "path": "../manifest.json"
-        },
-        "falseColor": false,
-        "noData": true,
-        "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-03-15 to 2018-05-05, cast onto the same MPCD mesh the Shape view uses. Pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame. This disc spans about 30 pixels and is seen close to pole-on, so the registration is confirmed to the frames' own measurement floor rather than more tightly. Grayscale is photographed illumination and matched relative frame brightness, not measured albedo or colour. The grid marks unphotographed, grazing or rejected surface."
       }
     ]
   },

@@ -57,6 +57,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
       const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
       const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
+      // A surface-observation lens consumes its whole pinned group (frames, cameras, companions) and its reference shape.
+      const surfaceObservation = maybeRecord(plan.science)?.kind === 'surface-observation' ? record(plan.science) : null;
+      if (surfaceObservation) used.push(...group(text(record(surfaceObservation.lens).consumer)), text(record(surfaceObservation.shape).path));
       const controlledDetail=maybeRecord(maybeRecord(plan.science)?.detailMosaic);
       if(controlledDetail?.format==='controlled-geotiff')used.push(...group(text(controlledDetail.consumer)));
       const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
@@ -73,7 +76,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
           ...(controlledDetail ? { controlledPhotographicDetail: controlledDetail, originalIllumination:true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
-          ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },
+          ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}),
+          ...(surfaceObservation ? { surfaceObservation: { format: record(surfaceObservation.lens).format, shape: surfaceObservation.shape, transfer: record(surfaceObservation.lens).transfer,
+            photometry: record(surfaceObservation.lens).photometry, display: record(surfaceObservation.lens).display, originalIllumination: true } } : {}) },
       });
     });
     if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
@@ -139,9 +144,10 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       'Prepare the declared registered surface lens and affine atmospheric presentation.'));
   } else if (recipe('shape-model')) {
     const plan = record(recipe('shape-model'));
-    for (const lens of controls) add(lens.id, 'shape-model', '', [text(plan.surfaceModel)],
-      'Extract the source model base color and project it onto the authored shape.', {
-        observationAttribution: 'none', interpretation: { kind: 'illustrative-model', resolvedSurfaceObservation: false },
+    // The shape source is the measurement record the manifest binds to this recipe.
+    for (const lens of controls) add(lens.id, 'shape-model', '', group('shape-model'),
+      'Fill the authored shape with the shared neutral gray display convention; no surface texture.', {
+        observationAttribution: 'none', interpretation: { kind: 'neutral-shape', resolvedSurfaceObservation: false },
       });
   } else if (recipe('observations')?.lenses) {
     namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`, paths(plan),

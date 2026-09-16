@@ -20,6 +20,18 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 - The focused object tests independently check signed DN/I/F samples in all three bands and exercise the real three-camera intersection, including complete loss of coverage when one band is absent.
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `normal` | 2 | 0 | — | — | — | its other 2 frames | 0 of 2 | — | 1 of 2 | — | no verdict |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+<!-- registration-report:end -->
+
 ## Known problems
 
 - The close frame provides about 1.14 km per geometrically corrected pixel; the other hemisphere is about 6.81 km/pixel. The close image has strong dark-current background and low signal-to-noise; grain and differing resolution are source limitations.

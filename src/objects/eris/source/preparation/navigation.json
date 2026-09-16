@@ -6,16 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "eris-shape-marker",
-    "path": "presentation/navigation-marker.svg",
-    "origin": "https://doi.org/10.1038/nature10550",
-    "credit": "cssEarth schematic sphere using Sicardy et al. (2011) shape result; color is illustrative",
-    "license": "MIT, cssEarth authored schematic; factual measurements attributed",
-    "licenseEvidence": [
-      "https://doi.org/10.1038/nature10550"
-    ],
-    "expectedBytes": 114,
-    "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2"
+    "path": "presentation/navigation-marker.svg"
   },
   "operations": [
     {

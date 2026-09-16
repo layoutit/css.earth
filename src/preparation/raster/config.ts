@@ -124,6 +124,8 @@ export interface RasterRecipe {
     };
     thumbnail: {
         size: number;
+        /** Longitude at the centre of the square thumbnail crop (default 180: the map centre); the crop wraps across the map edge. */
+        centerLongitudeDegrees?: number;
         crop?: {
             left: number;
             top: number;

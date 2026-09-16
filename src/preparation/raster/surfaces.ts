@@ -145,8 +145,15 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 await raster(polar, config.polarTile * density * 2, config.polarTile * density).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, config.polesOutput, density, surface.id));
             }
             if (config.resample === 'density-before-pack' && density === 2) {
-                const cropSize = Math.round(height / 2);
-                await raster(pixels, width, height).extract({ left: Math.round((width - cropSize) / 2), top: Math.round((height - cropSize) / 2), width: cropSize, height: cropSize }).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha().webp(nearest ? { lossless: true, effort: 6 } : { quality: config.thumbnail.quality, effort: 6 }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+                const cropSize = Math.round(height / 2), top = Math.round((height - cropSize) / 2);
+                // The crop is centred on the declared longitude (column x is longitude x / width * 360) and wraps across the map edge.
+                const centre = config.thumbnail.centerLongitudeDegrees === undefined ? width / 2 : ((config.thumbnail.centerLongitudeDegrees / 360) * width % width + width) % width;
+                const left = Math.round(centre - cropSize / 2), crop = new Uint8Array(cropSize * cropSize * 4);
+                for (let y = 0; y < cropSize; y++) for (let x = 0; x < cropSize; x++) {
+                    const sourceX = ((left + x) % width + width) % width, offset = ((top + y) * width + sourceX) * 4;
+                    crop.set(pixels.subarray(offset, offset + 4), (y * cropSize + x) * 4);
+                }
+                await raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha().webp(nearest ? { lossless: true, effort: 6 } : { quality: config.thumbnail.quality, effort: 6 }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
             }
         }
         if (config.thumbnail.crop)

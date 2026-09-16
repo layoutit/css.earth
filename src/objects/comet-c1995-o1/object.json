@@ -22,38 +22,32 @@
       "sources": [
         {
           "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "58f7750e55b01aad2f0f8335ad134df18c04b72e2c22f3ca5b5158dc5fbbe816"
+          "path": "source/preparation/terrestrial.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "e6a1b860cd94523e731bb2834fe3d0659f7bd6b091fd250b96611c1d68bb6563"
+          "path": "source/content/object.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "07afd13cbdaa7b5e69cd6ea89ff9c5f7a3a280fcdb80c68d0765b519596b0817"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "d22f36a169dffe1d52b88513cdc183e5d861b813868c3aaa6c16c246ff15d83b"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+          "path": "source/preparation/acquisition.json"
         },
         {
           "id": "rotation",
-          "path": "source/preparation/rotation.json",
-          "sha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+          "path": "source/preparation/rotation.json"
         }
       ],
       "shape": {
         "kind": "radial-terrain",
-        "radiusKm": 22.123561411961255
+        "radiusKm": 37
       },
       "surfaces": [
         {
@@ -83,7 +77,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6eea19d3de375139a75e4d55860867ecc264549013f022dda78dd5a4973acc55"
+        "sha256": "70b77360df33c9600d4191a907a2c59b9f233770499646ddde160261211affd7"
       }
     },
     "worldFrame": {
@@ -110,8 +104,8 @@
         -0.3977771559319137,
         0.9174820620691818
       ],
-      "metersPerUnit": 96.1893974433098,
-      "bodyRadiusM": 22123.561411961255
+      "metersPerUnit": 160.8695652173913,
+      "bodyRadiusM": 37000
     },
     "catalog": {
       "illustrationLenses": [
@@ -132,6 +126,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5231d38afdd37b7dfb3a7609b04fcdc06d4a1bc1ef6dc079c783c030a09cf8e3"
+    "sha256": "7cb992f8995490169d8c7b1e96a75044049a5dd7ee6691dce0f9eb4c9ca42996"
   }
 }

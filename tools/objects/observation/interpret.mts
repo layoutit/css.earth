@@ -1,7 +1,7 @@
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
 // keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-colour
-// preparers, and the shape-model lane keeps `prepareGlbSurface`. Every branch returns finished
+// preparers. Every branch returns finished
 // RGB(A) pixels at the requested density plus the `nearest` flag the packer needs.
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -11,7 +11,12 @@ import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-syn
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '../material-composition/data-schema.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
+import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
+import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
+import { readReconstruction } from '../interferometry/beam-convolve.mts';
+import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation } from '../terrestrial-layers/solid-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';
 import { validateGeologyProfile } from '../terrestrial-layers/categorical-geology.mts';
@@ -22,7 +27,6 @@ import { loadControlledObservationGeometry, matchObservedColorLevels } from '../
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry } from '../terrestrial-layers/solid-source.mts';
 import { shape, text } from '../terrestrial-layers/source-records.mts';
-import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
@@ -60,6 +64,48 @@ export function selectSurfaceDependencies(recipe: InterpreterRecipe, ids: readon
 }
 type Surface = Parameters<ObservationInterpretation>[0];
 interface Rgb { rgb: Uint8Array; missing: Uint8Array; report?: Record<string, unknown>; }
+interface SurfaceObservationScience {
+  shape: { path: string; format: string; grid: Record<string, unknown>; radiusKm: number; rows: number; columns: number; flatFaceErrorMeters: number };
+  lens: Record<string, unknown> & { frames: readonly unknown[] };
+  /** The frame's light outside the silhouette becomes the emission off-limb plate, rotated so image-up meets its screen direction at the default camera. */
+  offLimb?: { rotationDegrees: number; mirror: boolean };
+}
+/** `science.shape` is the reference sphere table and its sampling; `science.lens` is one surface-observation lens without its id. */
+function parseSurfaceObservationScience(value: Record<string, unknown>): SurfaceObservationScience {
+  const unknown = Object.keys(value).filter(key => !['kind', 'shape', 'lens', 'offLimb'].includes(key));
+  if (unknown.length) throw new TypeError(`A surface-observation science block declares only shape, lens and offLimb, not ${unknown.join(', ')}.`);
+  const shape = requireRecord(value.shape, 'surface-observation shape'), lens = requireRecord(value.lens, 'surface-observation lens');
+  const parsed = { path: requireString(shape.path), format: requireString(shape.format), grid: requireRecord(shape.grid, 'shape grid'), radiusKm: requireFiniteNumber(shape.radiusKm),
+    rows: requireFiniteNumber(shape.rows), columns: requireFiniteNumber(shape.columns), flatFaceErrorMeters: requireFiniteNumber(shape.flatFaceErrorMeters) };
+  if (parsed.format !== 'pds-radius-table' || !Number.isInteger(parsed.rows) || !Number.isInteger(parsed.columns) || parsed.rows < 4 || parsed.columns < 4 || !(parsed.radiusKm > 0)) {
+    throw new TypeError('A surface-observation shape is a radius table sampled on an integer latitude and longitude grid.');
+  }
+  // Flat faces sit inside the sphere by the sagitta of their diagonal; the declared error must cover it.
+  const sagitta = parsed.radiusKm * 1000 * (1 - Math.cos(Math.hypot(180 / parsed.rows, 360 / parsed.columns) / 2 * Math.PI / 180));
+  if (!(parsed.flatFaceErrorMeters >= sagitta)) throw new TypeError(`A surface-observation shape must declare at least its flat-face error of ${sagitta.toExponential(3)} m.`);
+  if (lens.id !== undefined || !Array.isArray(lens.frames)) throw new TypeError('A surface-observation lens takes its id from the surface and lists its frames.');
+  const offLimb = value.offLimb === undefined ? undefined : { rotationDegrees: requireFiniteNumber(requireRecord(value.offLimb, 'surface-observation offLimb').rotationDegrees), mirror: requireRecord(value.offLimb).mirror === true };
+  if (offLimb && Object.keys(requireRecord(value.offLimb)).some(key => !['rotationDegrees', 'mirror'].includes(key))) throw new TypeError('A surface-observation offLimb block declares only rotationDegrees and mirror.');
+  return { shape: parsed, lens: lens as SurfaceObservationScience['lens'], ...(offLimb ? { offLimb } : {}) };
+}
+/** Lay the east-positive preview on the band-projected sphere the way a planet atlas is laid: east longitude grows with the
+ * mesh column, and body longitude 0 sits a quarter turn along the mesh (mesh +x), where the runtime places the sub-observer
+ * meridian of an observed-pole record (measured through the leaf under the sub-Earth point, 2026-09-16). Column x shows
+ * longitude (x + 1/2) * 360 / width - 90. */
+function rendererLongitudes({ rgb, missing }: { rgb: Buffer; missing: Uint8Array }, width: number, height: number) {
+  const outRgb = Buffer.alloc(rgb.length), outMissing = new Uint8Array(missing.length);
+  for (let x = 0; x < width; x++) {
+    const source = ((x - width / 4) % width + width) % width;
+    for (let y = 0; y < height; y++) {
+      const from = y * width + source, to = y * width + x;
+      outRgb.set(rgb.subarray(from * 3, from * 3 + 3), to * 3); outMissing[to] = missing[from]!;
+    }
+  }
+  return { rgb: outRgb, missing: outMissing };
+}
+const transparentPlates = (offLimb: number, limb: number) => ({
+  offLimb: { data: new Uint8Array(offLimb * offLimb * 4), size: offLimb, lossless: true }, limb: { data: new Uint8Array(limb * limb * 4), size: limb, lossless: true } });
+
 const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height: number, nearest: boolean): InterpretedSurface =>
   ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing) : rgb, channels: 3, nearest });
 
@@ -97,7 +143,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     if (sourceVerification === 'complete') await source.verify();
     else for (const surface of recipe.surfaces) {
       const kind = surface.science?.kind ?? 'static-observation';
-      if (sourceVerification === 'photographs' && (!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind)) ||
+      if (sourceVerification === 'photographs' && (!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color', 'surface-observation'].includes(String(kind)) ||
           surface.science?.scientific || surface.science?.elevation || surface.science?.synoptic))
         throw new TypeError('A photographic refresh cannot reprepare scientific, modeled or emissive views.');
       // Solar maps use multiple time samples and emission plates; keep their full-package check.
@@ -122,6 +168,27 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
   const observations = new Map<string, Promise<Rgb>>();
   const science = new Map<string, ReturnType<typeof loadScienceSurface>>();
   const nativePhotographs = new Map<string, Promise<NativePhotograph>>();
+  const surfaceObservations = new Map<string, Promise<SurfaceObservation>>();
+  /** A photograph lens cast onto its reference sphere by the shared surface-observation route (the same validators, footprints,
+   * photometry and report as the triangle-atlas lane), delivered as the equirectangular map the band-projected sphere consumes. */
+  const surfaceObservation = (surface: Surface, plan: SurfaceObservationScience, height: number): Promise<SurfaceObservation> => {
+    let pending = surfaceObservations.get(surface.id);
+    if (!pending) {
+      pending = (async () => {
+        const source = await manifest;
+        await source.validatePath(plan.shape.path);
+        const grid = requireTerrainMesh(await loadPdsRadiusTable(resolve(sourceDirectory, plan.shape.path), plan.shape.grid));
+        // One display unit is the sphere radius; the source mesh is sampled at the table's own step, never simplified.
+        const scale = 1 / (plan.shape.radiusKm * 1000);
+        const faces = sampleRadialTriangles(grid.sample, plan.shape.rows, plan.shape.columns, scale).map(face => ({ ...face, vertexNormals: [face.normal, face.normal, face.normal] }));
+        const radialTerrain = { path: plan.shape.path, format: plan.shape.format, simplification: { method: 'source-mesh', maximumErrorMeters: plan.shape.flatFaceErrorMeters } };
+        return loadSurfaceObservation({ sourceDirectory, source, recipe: { id: surface.id, ...plan.lens }, radial: { grid, faces },
+          config: { geometry: { radius: 1, radiusKm: plan.shape.radiusKm, radialTerrain }, raster: { height } } });
+      })();
+      surfaceObservations.set(surface.id, pending);
+    }
+    return pending;
+  };
 
   /** Terrestrial observation at one density; the monochrome base is filled from the same-density base decode. */
   const observation = (surface: Surface, width: number, height: number): Promise<Rgb> => {
@@ -267,11 +334,43 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           ...('photometry' in color ? {photometry:color.photometry} : {}),...(levels?{levelMatching:levels}:{}),
           monochromeBase:plan.monochromeBase,monochromeMeaning:'Existing display brightness and missing-color fallback; no inferred surface color.'}};
       }
-      case 'glb-base-color': {
-        const model = requireString(surface.science.model);
-        if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
-        const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
-        return { data: pixels, channels: 4, nearest: false };
+      case 'surface-observation': {
+        const plan = parseSurfaceObservationScience(surface.science);
+        if (!plan.lens.frames.some(frame => requireRecord(frame).path === surface.source)) throw new TypeError(`${objectId}/${surface.id}: the surface source must be one of the lens frames.`);
+        const observation = await surfaceObservation(surface, plan, height);
+        const { rgb, missing } = rendererLongitudes(observation.preview(width, height), width, height);
+        if (!recipe.emission) return { ...rgb3(rgb, missing, width, height, false), report: observation.report };
+        const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
+        if (!plan.offLimb) return { ...rgb3(rgb, missing, width, height, false), report: observation.report, plates };
+        // The off-limb plate is the same frame's light beyond the silhouette, on the lens's stretch and palette; the sphere hides its disc.
+        if (plan.lens.frames.length !== 1) throw new TypeError(`${objectId}/${surface.id}: an off-limb plate needs a single-frame lens.`);
+        const frame = requireRecord(plan.lens.frames[0]);
+        if (frame.encoding !== 'fits-oi-reconstruction') throw new TypeError(`${objectId}/${surface.id}: the off-limb plate reads fits-oi-reconstruction frames only.`);
+        const image = readReconstruction(await readFile(resolve(sourceDirectory, requireString(frame.path))));
+        // FITS rows run south to north; the camera route and the frame's centre use top-down rows.
+        const topDown = new Float64Array(image.values.length);
+        for (let row = 0; row < image.height; row++) topDown.set(image.values.subarray((image.height - 1 - row) * image.width, (image.height - row) * image.width), row * image.width);
+        const center = requireRecord(frame).center as readonly [number, number];
+        const discRadiusPx = plan.shape.radiusKm / requireFiniteNumber(frame.rangeKm) / (requireFiniteNumber(frame.pixelAngleMicroradians) * 1e-6);
+        const displayRange = requireRecord(observation.report.display), palette = requireRecord(plan.lens.display).palette;
+        if (!Array.isArray(palette)) throw new TypeError(`${objectId}/${surface.id}: the off-limb plate needs the lens palette.`);
+        const plateSize = recipe.emission.offLimbSize * density;
+        const offLimb = offLimbPlate({ width: image.width, height: image.height, values: topDown, center: [requireFiniteNumber(center[0]), requireFiniteNumber(center[1])], discRadiusPx,
+          backgroundMaximum: requireFiniteNumber(frame.backgroundMaximum) },
+          { low: requireFiniteNumber(displayRange.low), high: requireFiniteNumber(displayRange.high), palette: palette.map(value => requireString(value)), rotationDegrees: plan.offLimb.rotationDegrees, mirror: plan.offLimb.mirror },
+          plateSize, recipe.emission.bodyDiameter * density);
+        let outside = 0, total = 0;
+        for (let i = 0; i < topDown.length; i++) { const v = topDown[i]!; total += v; if (Math.hypot(i % image.width - center[0], Math.floor(i / image.width) - center[1]) > discRadiusPx) outside += v; }
+        return { ...rgb3(rgb, missing, width, height, false), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
+          report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees: plan.offLimb.rotationDegrees, mirror: plan.offLimb.mirror, fluxFractionOutsideDisc: outside / total,
+            meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
+      }
+      case 'neutral-shape': {
+        // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.
+        // The surface source names the authored record that states this, so the manifest still binds the lens.
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) { data[offset] = 128; data[offset + 1] = 128; data[offset + 2] = 128; data[offset + 3] = 255; }
+        return { data, channels: 4, nearest: true };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }

@@ -9,7 +9,8 @@ import sharp from "sharp";
 import { hasErrorCode, requireString } from './source-values.mts';
 import type { PreparationOptions, PreparationEvent } from './run-implemented-planets.mts';
 type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
-  | {phase: 'receipt-refused'; id: string; reason: string};
+  | {phase: 'receipt-refused'; id: string; reason: string}
+  | {phase: 'pinned'; id: string; file: string; path: string};
 export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEvent' | 'argumentsList'> {
   force?: boolean; schedule?: typeof runPreparationObjects;
   environment?: () => Promise<Record<string, unknown>>;
@@ -22,6 +23,8 @@ import { SCENE_OBJECTS } from "../site/objects.mts";
 import { defaultPreparationConcurrency, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mts";
 import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
+import { authoredObject } from './authored-object.mts';
+import { pinObjectDocuments } from './pin-object-documents.mts';
 
 const sharedSteps = ["prepare-shell-titles.mts", "prepare-wordmark-rail.mts",
   "prepare-planet-title-sources.mts", "prepare-scientific-charts.mts"];
@@ -69,6 +72,14 @@ export async function runCachedPreparationObjects({ projectRoot = process.cwd(),
   const root = resolve(projectRoot), shared = await sharedFiles(root), toolchain = await environment();
   const pending: string[] = [], cached: string[] = [];
   for (const id of objectIds) {
+    // Authored pins are refreshed before the receipt check and outside the traced run, which must not edit its own recipe.
+    if (await authoredObject(id, root)) {
+      const changes = await pinObjectDocuments(resolve(root, "src/objects", id)).catch((error: unknown) => {
+        if (hasErrorCode(error, "ENOENT")) return [];
+        throw error;
+      });
+      for (const change of changes) onEvent({ phase: "pinned", id, file: change.file, path: change.path });
+    }
     const receipt = !force && await readPreparationReceipt({ root, path: `${cacheRoot}/${id}.json` });
     if (receipt && JSON.stringify(receipt.metadata?.toolchain) === JSON.stringify(toolchain)) {
       cached.push(id);

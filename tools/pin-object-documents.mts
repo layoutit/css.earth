@@ -1,46 +1,63 @@
 /**
- * Refresh the byte and SHA-256 pins that bind an object's authored documents:
- * the source manifest's `documents` entries and the descriptor's
- * `recipe.sources`. Preparation refuses an edited recipe, content file or
- * acquisition plan until both agree with the bytes on disk, so run this after
- * editing them and before preparing. `--check` reports stale pins without writing.
+ * Refresh the byte and SHA-256 pins that bind an object's authored files: the
+ * source manifest's `documents` and its `local` inputs that no acquisition step
+ * downloads. The descriptor and the navigation marker reference sources by
+ * path only. Catalogued and downloaded
+ * inputs are never repinned; they stay verified against their upstream bytes.
+ * Preparation in write mode runs this first. `--check` reports stale pins without writing.
  */
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord, requireString } from './source-values.mts';
+import { hasErrorCode, isRecord, requireArray, requireRecord, requireString } from './source-values.mts';
+import { MARKER_SOURCE_HINTS } from '../src/navigation/marker-recipe.mts';
 
-export interface DocumentPinChange { file: 'source/manifest.json' | 'object.json'; path: string; expectedBytes: number; expectedSha256: string; previousSha256: string }
+export interface DocumentPinChange { file: 'source/manifest.json' | 'source/preparation/navigation.json'; path: string; expectedBytes: number; expectedSha256: string; previousSha256: string }
 
-async function identity(path: string) {
-  const bytes = await readFile(path);
-  return { expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') };
+const identityOf = (bytes: Uint8Array) => ({ expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') });
+const optionalBytes = (path: string) => readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+
+/** Paths an acquisition plan restores; those are downloads, not authored files. */
+async function acquiredPaths(objectDirectory: string) {
+  const plan = await readFile(resolve(objectDirectory, 'source/preparation/acquisition.json'), 'utf8')
+    .then(text => requireRecord(JSON.parse(text), 'acquisition plan'))
+    .catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+  return new Set(requireArray(plan?.operations ?? [], 'acquisition operations')
+    .flatMap(operation => isRecord(operation) && typeof operation.path === 'string' ? [operation.path] : []));
 }
 
-/** Recompute both pin sets for one object directory; returns what changed. */
+/** Recompute the authored pins in one object's manifest; returns what changed. */
 export async function pinObjectDocuments(objectDirectory: string, { write = true } = {}): Promise<DocumentPinChange[]> {
-  const manifestPath = resolve(objectDirectory, 'source/manifest.json'), descriptorPath = resolve(objectDirectory, 'object.json');
+  const manifestPath = resolve(objectDirectory, 'source/manifest.json');
   const manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')), 'source manifest');
-  const descriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')), 'object descriptor');
-  const changes: DocumentPinChange[] = [];
-  for (const value of requireArray(manifest.documents, 'manifest documents')) {
-    const entry = requireRecord(value, 'manifest document'), path = requireString(entry.path, 'document path');
-    const actual = await identity(resolve(objectDirectory, 'source', path));
+  const acquired = await acquiredPaths(objectDirectory), changes: DocumentPinChange[] = [];
+  const entries = (key: string) => requireArray(manifest[key] ?? [], `manifest ${key}`).map(value => requireRecord(value, `manifest ${key} entry`));
+  // Bytes this run writes; check mode pins them without touching disk.
+  const pending = new Map<string, Buffer>();
+  // A marker recipe names its source by path; a copy of the manifest record left by older tooling is dropped.
+  const navigationPath = resolve(objectDirectory, 'source/preparation/navigation.json'), navigationText = await optionalBytes(navigationPath);
+  if (navigationText) {
+    const navigation = requireRecord(JSON.parse(navigationText.toString('utf8')), 'navigation marker'), source = requireRecord(navigation.source, 'navigation marker source');
+    const kept = ['path', ...MARKER_SOURCE_HINTS];
+    if (Object.keys(source).some(key => !kept.includes(key))) {
+      const bytes = Buffer.from(JSON.stringify({ ...navigation, source: Object.fromEntries(kept.filter(key => key in source).map(key => [key, source[key]])) }, null, 2) + '\n');
+      pending.set(navigationPath, bytes);
+      changes.push({ file: 'source/preparation/navigation.json', path: requireString(source.path, 'marker source path'), ...identityOf(bytes), previousSha256: String(source.expectedSha256 ?? '') });
+    }
+  }
+  const authored = [...entries('inputs').filter(entry => isRecord(entry.sourceBinding) && entry.sourceBinding.kind === 'local' && !acquired.has(requireString(entry.path, 'input path'))), ...entries('documents')];
+  for (const entry of authored) {
+    const path = requireString(entry.path, 'document path'), at = resolve(objectDirectory, 'source', path), bytes = pending.get(at) ?? await optionalBytes(at);
+    if (!bytes) continue;
+    const actual = identityOf(bytes);
     if (entry.expectedBytes === actual.expectedBytes && entry.expectedSha256 === actual.expectedSha256) continue;
     changes.push({ file: 'source/manifest.json', path, ...actual, previousSha256: String(entry.expectedSha256) });
-    entry.expectedBytes = actual.expectedBytes; entry.expectedSha256 = actual.expectedSha256;
+    Object.assign(entry, actual);
   }
-  const recipe = requireRecord(requireRecord(descriptor.properties, 'descriptor properties').recipe, 'descriptor recipe');
-  for (const value of requireArray(recipe.sources, 'descriptor recipe sources')) {
-    const source = requireRecord(value, 'descriptor source'), path = requireString(source.path, 'descriptor source path');
-    const actual = await identity(resolve(objectDirectory, path));
-    if (source.sha256 === actual.expectedSha256) continue;
-    changes.push({ file: 'object.json', path, ...actual, previousSha256: String(source.sha256) });
-    source.sha256 = actual.expectedSha256;
-  }
-  if (write && changes.some(change => change.file === 'source/manifest.json')) await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-  if (write && changes.some(change => change.file === 'object.json')) await writeFile(descriptorPath, JSON.stringify(descriptor, null, 2) + '\n');
+  if (!write) return changes;
+  for (const [path, bytes] of pending) await writeFile(path, bytes);
+  if (changes.some(change => change.file === 'source/manifest.json')) await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   return changes;
 }
 

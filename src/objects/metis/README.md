@@ -14,6 +14,18 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - Original imagery is pinned in [source/manifest.json](source/manifest.json) and restored through [source/preparation/acquisition.json](source/preparation/acquisition.json).
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `normal` | 5 | 1 | 20.00° | — | — | its other 5 frames | 0 of 5 | — | 0 of 5 | — | no verdict |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+<!-- registration-report:end -->
+
 ## Known problems
 
 - The finest sampling is 2.97 km/pixel, only about 14 pixels across the projected illuminated body; complementary views are 5.78–8.74 km/pixel. It describes measured overall dimensions, not Metis's detailed irregular outline. No Elevation lens is exposed because the ellipsoid contains no resolved terrain measurements.

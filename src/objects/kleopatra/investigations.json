@@ -68,8 +68,9 @@
     {
       "id": "recorded-survey-5",
       "subject": "LAM reduced/deconvolved SPHERE images and CDS J/A+A/653/A57",
-      "status": "included",
-      "finding": "Reopened and adopted. Five deconvolved frames from the 2017 apparition are now the SPHERE photograph lens. The camera is computed, not fitted: pole, period and phase epoch come from the release’s own parameter record, observing geometry from JPL Horizons for Paranal, and plate scale, exposure time and filter from each frame’s own header. The rotation convention is Ďurech, Sidorin and Kaasalainen (2010) equation 1. Every camera field in the recipe is recomputed from the pinned parameter record, the pinned Horizons responses and each frame's own header, and compared against the recipe by a committed test, so the derivation runs rather than being asserted. An earlier revision of this lens shipped the body mirrored in longitude: atan2(y, x) in the inversion frame is an east longitude and was written into the camera's west longitude, and the north azimuth was the pole position angle turned by half a circle. The two errors cancelled in the silhouette, so the limb, disc-size and phase-angle checks all passed on the mirrored body. The handedness is now asserted directly against the transform. The paper’s caution that inferred albedo features near the limb may originate in deconvolution artefacts still stands, which is why the lens states photographed illumination and matched relative brightness rather than albedo.",
+      "status": "unresolved",
+      "finding": "Reopened and adopted. Five deconvolved frames from the 2017 apparition are now the SPHERE photograph lens. The camera is computed, not fitted: pole, period and phase epoch come from the release’s own parameter record, observing geometry from JPL Horizons for Paranal, and plate scale, exposure time and filter from each frame’s own header. The rotation convention is Ďurech, Sidorin and Kaasalainen (2010) equation 1. Every camera field in the recipe is recomputed from the pinned parameter record, the pinned Horizons responses and each frame's own header, and compared against the recipe by a committed test, so the derivation runs rather than being asserted. An earlier revision of this lens shipped the body mirrored in longitude: atan2(y, x) in the inversion frame is an east longitude and was written into the camera's west longitude, and the north azimuth was the pole position angle turned by half a circle. The two errors cancelled in the silhouette, so the limb, disc-size and phase-angle checks all passed on the mirrored body. The handedness is now asserted directly against the transform. The paper’s caution that inferred albedo features near the limb may originate in deconvolution artefacts still stands, which is why the lens states photographed illumination and matched relative brightness rather than albedo. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 3.63° against relief 0.00°.",
+      "revisitWhen": "Registration measurements that agree within three degrees: a map, resolved markings, or a rotation record and mesh on which the outline and the relief place these frames together.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/",
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/653/A57",
@@ -93,6 +94,10 @@
         {
           "date": "2026-09-15",
           "commit": "a24cb2cf2e2eda7873d820879392438e65e0dd14"
+        },
+        {
+          "date": "2026-09-16",
+          "commit": "e0404e8fac9a5c87f5216124b931773de55a75a0"
         }
       ]
     },
@@ -137,8 +142,9 @@
     {
       "id": "photograph-rides-the-adam-mesh",
       "subject": "Which reconstruction the rotation parameters describe",
-      "status": "included",
-      "finding": "The release ships two meshes for this body and one parameter record, and the record describes the ADAM reconstruction rather than the MPCD one that Marchis et al. re-optimised. Measured over seven frames and two apparitions, projecting through the ADAM mesh reproduces the observed limb position angle to 3.3 degrees; the identical parameters through MPCD give 6.8 degrees, and substituting the paper’s printed MPCD pole does not recover it. The photographic lens therefore rides the ADAM mesh while the shape view keeps MPCD, which is the shape-per-dataset pairing the celestial skill requires. Lutetia is a warning for anyone extending this: its MPCD mesh is turned 180 degrees from its ADAM mesh, so one parameter record cannot serve both.",
+      "status": "unresolved",
+      "finding": "The release ships two meshes for this body and one parameter record, and the record describes the ADAM reconstruction rather than the MPCD one that Marchis et al. re-optimised. Measured over seven frames and two apparitions, projecting through the ADAM mesh reproduces the observed limb position angle to 3.3 degrees; the identical parameters through MPCD give 6.8 degrees, and substituting the paper’s printed MPCD pole does not recover it. The photographic lens therefore rides the ADAM mesh while the shape view keeps MPCD, which is the shape-per-dataset pairing the celestial skill requires. Lutetia is a warning for anyone extending this: its MPCD mesh is turned 180 degrees from its ADAM mesh, so one parameter record cannot serve both. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 3.63° against relief 0.00°.",
+      "revisitWhen": "Registration measurements that agree within three degrees: a map, resolved markings, or a rotation record and mesh on which the outline and the relief place these frames together.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/",
         "https://arxiv.org/pdf/2108.07207",
@@ -148,6 +154,10 @@
         {
           "date": "2026-09-15",
           "commit": "eb964b61fe518ae973c05d1214894490dc07808b"
+        },
+        {
+          "date": "2026-09-16",
+          "commit": "e0404e8fac9a5c87f5216124b931773de55a75a0"
         }
       ]
     },
@@ -166,6 +176,28 @@
         {
           "date": "2026-09-15",
           "commit": "eb964b61fe518ae973c05d1214894490dc07808b"
+        }
+      ]
+    },
+    {
+      "id": "sphere-cross-frame-registration",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "status": "unresolved",
+      "finding": "The survey holds 55 deconvolved ZIMPOL frames (camera 1) for this body; the cross-frame registration test could not be run on them in this pass. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 3.63° against relief 0.00°.",
+      "revisitWhen": "Registration measurements that agree within three degrees: a map, resolved markings, or a rotation record and mesh on which the outline and the relief place these frames together.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        },
+        {
+          "date": "2026-09-16",
+          "commit": "e0404e8fac9a5c87f5216124b931773de55a75a0"
         }
       ]
     }

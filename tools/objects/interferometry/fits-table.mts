@@ -1,0 +1,144 @@
+/** FITS headers and binary tables (OIFITS) read with the standard's own byte layout: 2880-byte blocks, 80-character cards,
+ * big-endian columns whose TFORM states a repeat count and a type. No heap (variable-length) columns are read. */
+export interface FitsHdu { readonly header: Readonly<Record<string, string | number | boolean>>; readonly dataOffset: number; readonly dataBytes: number; readonly extname: string }
+export interface TableColumn { readonly name: string; readonly repeat: number; readonly type: 'D' | 'E' | 'I' | 'J' | 'L' | 'A'; readonly offset: number; readonly bytes: number }
+export interface BinaryTable { readonly hdu: FitsHdu; readonly columns: readonly TableColumn[]; readonly rows: number; readonly rowBytes: number }
+
+const BLOCK = 2880, CARD = 80;
+const TYPE_BYTES = { D: 8, E: 4, I: 2, J: 4, L: 1, A: 1 } as const;
+
+function parseCardValue(text: string): string | number | boolean {
+  const trimmed = text.trim();
+  if (trimmed.startsWith("'")) { const end = trimmed.lastIndexOf("'"); return trimmed.slice(1, end).replace(/''/g, "'").trimEnd(); }
+  if (trimmed === 'T') return true;
+  if (trimmed === 'F') return false;
+  const number = Number(trimmed.replace(/D/i, 'E'));
+  if (!Number.isFinite(number)) throw new Error(`Unreadable FITS card value: ${text}`);
+  return number;
+}
+
+/** Every HDU in the file: header keywords and the data segment bounds. */
+export function readFitsHdus(bytes: Buffer): FitsHdu[] {
+  const hdus: FitsHdu[] = [];
+  let offset = 0;
+  while (offset + BLOCK <= bytes.length) {
+    const header: Record<string, string | number | boolean> = {};
+    let end = -1, cursor = offset;
+    while (end < 0) {
+      if (cursor + BLOCK > bytes.length) throw new Error('FITS header runs past the file.');
+      for (let i = 0; i < BLOCK; i += CARD) {
+        const card = bytes.toString('latin1', cursor + i, cursor + i + CARD), key = card.slice(0, 8).trim();
+        if (key === 'END') { end = cursor + i; break; }
+        if (!key || key === 'COMMENT' || key === 'HISTORY' || card[8] !== '=') continue;
+        const body = card.slice(10);
+        let valueText = body;
+        if (body.startsWith("'")) {
+          // A quoted value ends at the first quote not doubled; a doubled quote is an escaped quote inside it.
+          let closing = body.indexOf("'", 1);
+          while (closing >= 0 && body[closing + 1] === "'") closing = body.indexOf("'", closing + 2);
+          valueText = body.slice(0, closing + 1);
+        } else if (body.includes('/')) valueText = body.slice(0, body.indexOf('/'));
+        header[key] = parseCardValue(valueText);
+      }
+      cursor += BLOCK;
+    }
+    const naxis = Number(header.NAXIS ?? 0);
+    let dataBytes = 0;
+    if (naxis > 0) {
+      dataBytes = Math.abs(Number(header.BITPIX)) / 8;
+      for (let axis = 1; axis <= naxis; axis++) dataBytes *= Number(header[`NAXIS${axis}`]);
+      dataBytes = dataBytes * Number(header.GCOUNT ?? 1) + Number(header.PCOUNT ?? 0) * Math.abs(Number(header.BITPIX)) / 8;
+    }
+    const extname = typeof header.EXTNAME === 'string' ? header.EXTNAME : hdus.length === 0 ? 'PRIMARY' : '';
+    hdus.push({ header, dataOffset: cursor, dataBytes, extname });
+    offset = cursor + Math.ceil(dataBytes / BLOCK) * BLOCK;
+  }
+  return hdus;
+}
+
+export function binaryTable(hdu: FitsHdu): BinaryTable {
+  if (hdu.header.XTENSION !== 'BINTABLE') throw new Error(`${hdu.extname} is not a binary table.`);
+  const fields = Number(hdu.header.TFIELDS), rowBytes = Number(hdu.header.NAXIS1), rows = Number(hdu.header.NAXIS2);
+  const columns: TableColumn[] = [];
+  let offset = 0;
+  for (let index = 1; index <= fields; index++) {
+    const form = String(hdu.header[`TFORM${index}`]).trim(), match = /^(\d*)([DEIJLA])$/.exec(form);
+    if (!match) throw new Error(`Unsupported FITS column form ${form} in ${hdu.extname}.`);
+    const repeat = match[1] ? Number(match[1]) : 1, type = match[2] as TableColumn['type'], bytes = repeat * TYPE_BYTES[type];
+    columns.push({ name: String(hdu.header[`TTYPE${index}`]).trim(), repeat, type, offset, bytes });
+    offset += bytes;
+  }
+  if (offset !== rowBytes) throw new Error(`FITS row width ${rowBytes} differs from its columns (${offset}) in ${hdu.extname}.`);
+  return { hdu, columns, rows, rowBytes };
+}
+
+export function tableColumn(table: BinaryTable, name: string): TableColumn {
+  const column = table.columns.find(column => column.name === name);
+  if (!column) throw new Error(`Column ${name} is absent from ${table.hdu.extname}.`);
+  return column;
+}
+
+/** Numeric cells of one row: a repeat-count array of numbers (logicals as 0/1). */
+export function numbers(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn): number[] {
+  const base = table.hdu.dataOffset + row * table.rowBytes + column.offset, out = new Array<number>(column.repeat);
+  for (let i = 0; i < column.repeat; i++) {
+    const at = base + i * TYPE_BYTES[column.type];
+    out[i] = column.type === 'D' ? bytes.readDoubleBE(at) : column.type === 'E' ? bytes.readFloatBE(at) : column.type === 'I' ? bytes.readInt16BE(at)
+      : column.type === 'J' ? bytes.readInt32BE(at) : column.type === 'L' ? (bytes[at] === 0x54 ? 1 : 0) : bytes[at]!;
+  }
+  return out;
+}
+export function text(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn): string {
+  const base = table.hdu.dataOffset + row * table.rowBytes + column.offset;
+  return bytes.toString('latin1', base, base + column.bytes).replace(/\0.*$/s, '').trim();
+}
+export function findTable(bytes: Buffer, name: string): BinaryTable {
+  const hdu = readFitsHdus(bytes).find(hdu => hdu.extname === name);
+  if (!hdu) throw new Error(`FITS extension ${name} is absent.`);
+  return binaryTable(hdu);
+}
+
+// ---- writing ----------------------------------------------------------------------------------------------------------
+type Card = readonly [string, string | number | boolean, string?];
+function card([key, value, comment]: Card): string {
+  const formatted = typeof value === 'string' ? `'${value.replace(/'/g, "''").padEnd(8)}'` : typeof value === 'boolean' ? (value ? 'T' : 'F').padStart(20)
+    : Number.isInteger(value) ? String(value).padStart(20) : value.toExponential(12).toUpperCase().padStart(20);
+  const line = `${key.padEnd(8)}= ${formatted}${comment ? ` / ${comment}` : ''}`;
+  return line.slice(0, CARD).padEnd(CARD);
+}
+export function headerBlock(cards: readonly Card[]): Buffer {
+  const textCards = [...cards.map(card), 'END'.padEnd(CARD)].join('');
+  return Buffer.from(textCards.padEnd(Math.ceil(textCards.length / BLOCK) * BLOCK), 'latin1');
+}
+export function padBlock(data: Buffer): Buffer {
+  const padded = Buffer.alloc(Math.ceil(data.length / BLOCK) * BLOCK);
+  data.copy(padded);
+  return padded;
+}
+export interface WriteColumn { readonly name: string; readonly form: string }
+/** A binary-table HDU. Strings are padded with spaces; logicals are written as T/F bytes. */
+export function binaryTableHdu(extname: string, columns: readonly WriteColumn[], rows: readonly (readonly (number | boolean | string | readonly number[] | readonly boolean[])[])[], extra: readonly Card[]): Buffer {
+  const specs = columns.map(({ name, form }) => { const match = /^(\d*)([DEIJLA])$/.exec(form); if (!match) throw new Error(`Unsupported form ${form}`); return { name, repeat: match[1] ? Number(match[1]) : 1, type: match[2] as TableColumn['type'] }; });
+  const rowBytes = specs.reduce((sum, spec) => sum + spec.repeat * TYPE_BYTES[spec.type], 0), data = Buffer.alloc(rowBytes * rows.length);
+  rows.forEach((row, r) => {
+    let at = r * rowBytes;
+    specs.forEach((spec, c) => {
+      const value = row[c];
+      if (spec.type === 'A') { data.write(String(value).padEnd(spec.repeat).slice(0, spec.repeat), at, 'latin1'); at += spec.repeat; return; }
+      const values = Array.isArray(value) ? value : [value];
+      if (values.length !== spec.repeat) throw new Error(`Column ${spec.name} expects ${spec.repeat} values.`);
+      for (const cell of values) {
+        if (spec.type === 'D') data.writeDoubleBE(Number(cell), at); else if (spec.type === 'E') data.writeFloatBE(Number(cell), at);
+        else if (spec.type === 'I') data.writeInt16BE(Number(cell), at); else if (spec.type === 'J') data.writeInt32BE(Number(cell), at);
+        else data[at] = cell ? 0x54 : 0x46;
+        at += TYPE_BYTES[spec.type];
+      }
+    });
+  });
+  const cards: Card[] = [['XTENSION', 'BINTABLE', 'binary table extension'], ['BITPIX', 8], ['NAXIS', 2], ['NAXIS1', rowBytes], ['NAXIS2', rows.length], ['PCOUNT', 0], ['GCOUNT', 1], ['TFIELDS', columns.length],
+    ...specs.flatMap((spec, i): Card[] => [[`TTYPE${i + 1}`, spec.name], [`TFORM${i + 1}`, `${spec.repeat}${spec.type}`]]), ['EXTNAME', extname], ...extra];
+  return Buffer.concat([headerBlock(cards), padBlock(data)]);
+}
+export function primaryHdu(extra: readonly Card[] = []): Buffer {
+  return headerBlock([['SIMPLE', true, 'conforms to FITS standard'], ['BITPIX', 8], ['NAXIS', 0], ['EXTEND', true], ...extra]);
+}

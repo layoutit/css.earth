@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3d51b9bbe86c6e072d4a4ea64c14ca9bb65827ad470714e2166231e76290e2da"
+    "sha256": "7e3a25ff3e1d572f433bc1a9a6f50f00f529a451a25ed069f4bfb2cf369e60e5"
   },
   "id": "saturn",
   "properties": {
@@ -25,63 +25,51 @@
       "sources": [
         {
           "id": "rings",
-          "path": "source/preparation/rings.json",
-          "sha256": "592f1ef7ab8f4b6a8aaa745c5e74d0b6aa83f19eec7fd748d8ba456002ce86c1"
+          "path": "source/preparation/rings.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "e7dcc2a44ad1b40e1fd2af966049face20495580d77bbf7fee8d36a8b4d7025f"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "9f9d9b32564f69f63cb364879b5ad818210809388aca6fb07e373d9e876b6ce1"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3"
+          "path": "source/content/object.json"
         },
         {
           "id": "geometry",
-          "path": "source/preparation/geometry.json",
-          "sha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf"
+          "path": "source/preparation/geometry.json"
         },
         {
           "id": "surface",
-          "path": "source/preparation/surface.json",
-          "sha256": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8"
+          "path": "source/preparation/surface.json"
         },
         {
           "id": "materials",
-          "path": "source/preparation/materials.json",
-          "sha256": "11cfcfad7f2e168dff9f759037ebba57d216519de7a4703244ae611720145544"
+          "path": "source/preparation/materials.json"
         },
         {
           "id": "radial-motion",
-          "path": "source/preparation/radial-motion.json",
-          "sha256": "cc0c35fab54fba274693e1cd87762c56ed98763010daa21e3b17d62d992a51df"
+          "path": "source/preparation/radial-motion.json"
         },
         {
           "id": "presentation",
-          "path": "source/preparation/presentation.json",
-          "sha256": "9128adac51d287dfa945137573140a5242446106861fa9d68780b4210da3d5bc"
+          "path": "source/preparation/presentation.json"
         },
         {
           "id": "charts",
-          "path": "source/content/charts.json",
-          "sha256": "fa4ee604146d97d8101e83626a115294eb11eeaecbd603d5f92b39cf96823562"
+          "path": "source/content/charts.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "bc22d665a1b8bb0baeafae4c9b90a0a7dd16390d20b2b8ac71b69e1dbfb200f5"
+          "path": "source/preparation/acquisition.json"
         },
         {
           "id": "satellite-catalog",
-          "path": "source/preparation/satellite-catalog.json",
-          "sha256": "a8130fcdc23be3ab84e2d2e824d138287370ec374528ba9757a53c6de14b8ba1"
+          "path": "source/preparation/satellite-catalog.json"
         }
       ],
       "shape": {
@@ -172,7 +160,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "866bd8338383ab52e24bace266282ba8f30a26e2522042bfc103f105a0dea07b"
+        "sha256": "67e403dd3ff38eeafd5a7dfd5398ae303225565c82e27402d6f2d1612c939d25"
       }
     },
     "catalog": {

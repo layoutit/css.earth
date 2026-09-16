@@ -8,6 +8,7 @@ import {resolve} from 'node:path';
 import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mts';
 import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
+import {readFitsImage} from '../../fits.mts';
 import { createHash } from 'node:crypto';
 import { pds3Keyword } from '../pds-labels.mts';
 import { registerCameraBands, REGISTRATION_CRITERIA } from './camera-band-registration.mts';
@@ -40,6 +41,18 @@ export function decodeCalibratedCamera(bytes: Buffer, encoding = 'calibrated'): 
     // FITS stores row 0 at the bottom; every other camera this route reads stores it at the top, and the ray caster
     // indexes rows directly. Reversing here puts one handedness downstream instead of two, so a frame's stated
     // camera centre is a top-down row like every other frame's.
+    const {width,height}=fits, data=new Float64Array(width*height);
+    for(let y=0;y<height;y++)data.set(fits.values.subarray((height-1-y)*width,(height-y)*width),y*width);
+    return {data,width,height,offset:fits.dataOffset,encoding,allowZero:true};
+  }
+  // An image reconstructed from optical-interferometric visibilities (SQUEEZE output): one double-precision plane whose values
+  // are the reconstruction's own normalised intensity. Its header states the pixel scale and that the first axis is right
+  // ascension decreasing with column, so east is on the left as the ray caster assumes for every frame on this route.
+  if(encoding==='fits-oi-reconstruction'){
+    const fits=readFitsImage(bytes);
+    if(fits.bitpix!==-64||fits.planes!==1||![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported reconstructed-image FITS layout.');
+    const literal=(key:string)=>String(fits.header[key]??'').replace(/^'|'$/g,'').trim();
+    if(literal('CTYPE1')!=='RA'||literal('CTYPE2')!=='DEC'||!(Number(fits.header.CDELT1)<0)||!(Number(fits.header.CDELT2)>0))throw new Error('A reconstructed image states RA decreasing along columns and Dec increasing along rows.');
     const {width,height}=fits, data=new Float64Array(width*height);
     for(let y=0;y<height;y++)data.set(fits.values.subarray((height-1-y)*width,(height-y)*width),y*width);
     return {data,width,height,offset:fits.dataOffset,encoding,allowZero:true};

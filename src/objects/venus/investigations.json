@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "venus",
+  "entries": [
+    {
+      "id": "cloud-imagery",
+      "subject": "Source-backed global ultraviolet cloud map to replace the illustrative cloud texture",
+      "status": "unresolved",
+      "finding": "The default cloud lens is still the OpenSpace project's Venus cloud texture, an illustrative map with unresolved camera, wavelength and colour processing. No archive publishes a source-backed multi-orbit global cylindrical UV cloud map: JAXA DARTS ships Akatsuki UVI Level-3 products (vco_uvi_l3, DOI 10.17597/isas.darts/vco-00016, CC BY 4.0) only as per-image 0.125-degree longitude-latitude grids in NetCDF-4, each covering the sunlit disc of one exposure, and ESA's VMC mosaic is a northern-hemisphere press strip. A replacement therefore needs a preparation step that composites several 365 nm L3b grids across one four-day cloud rotation, normalised for incidence, which this repository does not have.",
+      "revisitWhen": "An Akatsuki UVI L3b compositing route (NetCDF-4 reader, per-pixel incidence and emission selection across one cloud rotation, stated epoch) or a published global UV cloud mosaic with grid metadata and a permissive licence would reopen the cloud lens.",
+      "evidence": [
+        "https://darts.isas.jaxa.jp/planet/project/akatsuki/uvi.html.en",
+        "https://doi.org/10.17597/isas.darts/vco-00016",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7012/data/l3b/netcdf/r0276/uvi_20240324_120445_365_l3b_v21.nc",
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        }
+      ]
+    }
+  ]
+}

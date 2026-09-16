@@ -22,25 +22,25 @@
     "titleKey": "lenses",
     "defaultLens": "model",
     "labels": {
-      "model": "Illustrative nucleus"
+      "model": "Shape approximation"
     },
     "controls": [
       {
         "id": "model",
-        "label": "Illustrative nucleus",
+        "label": "Shape approximation",
         "thumbnail": "/scenes/comet-29p/comet-29p-model-thumbnail.webp",
         "surface": "comet-29p-model-surface@2x.webp",
         "poles": "comet-29p-model-poles@2x.webp",
         "source": {
-          "id": "celestia-mesh",
+          "id": "shape-parameters",
           "path": "../manifest.json",
-          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          "url": "https://doi.org/10.3847/PSJ/abfe6f"
         },
         "facts": [
           {
-            "id": "diameter",
-            "label": "Catalog diameter",
-            "value": "≈60 km"
+            "id": "radius",
+            "label": "Effective nucleus radius",
+            "value": "32.3 km ± 3.1"
           },
           {
             "id": "perihelion",
@@ -48,7 +48,7 @@
             "value": "5.8 AU"
           }
         ],
-        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and neutral gray marks missing surface imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "notes": "An ellipsoid at the published effective nucleus radius (Schambeau et al. (2021), PSJ 2, 126). A thermal sphere; no axis ratio is published. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
         "noData": true
       }
     ]
@@ -67,10 +67,10 @@
   "charts": [],
   "resources": [
     {
-      "label": "Celestia",
-      "role": "surface",
-      "description": "Catalog entry and estimated scale",
-      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+      "label": "Nucleus size",
+      "role": "shape",
+      "description": "Schambeau et al. (2021), PSJ 2, 126",
+      "href": "https://doi.org/10.3847/PSJ/abfe6f"
     },
     {
       "label": "JPL Horizons",
@@ -95,7 +95,7 @@
     },
     "physical": {
       "path": "../shape/model.json",
-      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+      "credit": "Schambeau et al. (2021), PSJ 2, 126"
     }
   }
 }

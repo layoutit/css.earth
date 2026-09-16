@@ -29,31 +29,21 @@
       }
     },
     {
-      "id": "celestia-mesh",
-      "path": "shape/model.obj",
-      "expectedBytes": 439338,
-      "expectedSha256": "37ac98a4b2c9f29eef7b1b1c43e219551fd0329a10809c5c9fc9a6691615ad8f",
-      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
-      "license": "GPL-2.0-or-later",
-      "licenseEvidence": [
-        "reference/celestia.ssc",
-        "reference/GPL-2.0-or-later.txt"
-      ],
-      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
-      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "id": "shape-parameters",
+      "path": "shape/model.json",
+      "expectedSha256": "d76d4ea9f701f2ec797f68c17550128d3f1027f37cfb79f0882170e04f581a4e",
+      "expectedBytes": 1022,
+      "origin": "https://doi.org/10.3847/1538-3881/ab0f42",
+      "credit": "Eisner et al. (2019), AJ 157, 186",
+      "license": "Factual measurement transcribed from the cited publication; no text or figures reproduced",
+      "acquisition": "authored record of the published effective nucleus radius and shape statement",
+      "redistribution": "permitted; facts are cited, not copied",
       "consumers": [
         "shape"
       ],
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "celestia-comet-catalog-1993a082",
-            "role": "method",
-            "evidence": "src/planets/comet-96p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
+        "kind": "local",
+        "reason": "Repository-authored ellipsoid parameters transcribing a published nucleus size; the citation is stated inside the record."
       }
     }
   ],
@@ -61,16 +51,12 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 9947,
-      "expectedSha256": "7f43703390808ff1b093d34bdd97fe4599999944632f9a11e9118227b183d540",
-      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
-      "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
-      "licenseEvidence": [
-        "reference/celestia.ssc",
-        "reference/GPL-2.0-or-later.txt"
-      ],
-      "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+      "expectedBytes": 9841,
+      "expectedSha256": "c39eadbef71789bc8d6ac7631ffc37190b79c25e526a2c8aafcf136dc9712425",
+      "origin": "https://doi.org/10.3847/1538-3881/ab0f42",
+      "credit": "Eisner et al. (2019), AJ 157, 186",
+      "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
+      "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
       "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
       "consumers": [
         "navigation"
@@ -79,7 +65,7 @@
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "celestia-mesh"
+          "shape-parameters"
         ],
         "size": 512,
         "longitudeDegrees": 70,
@@ -93,8 +79,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2940,
-      "expectedSha256": "df3ed0040b98bbababc07a50810aab747ea6428f0f9f0d8eaa23b3475cb95de3",
+      "expectedBytes": 2827,
+      "expectedSha256": "51a8ed6ca5effe20843057e8dcb703ad88cae417684683025e93895343d49f81",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -107,8 +93,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1645,
-      "expectedSha256": "8104430766c9a3b3cc561edb8045ad54216382632bc98595542c7e05462dc55b"
+      "expectedBytes": 1457,
+      "expectedSha256": "99954fa7a6d04ce4e2f0f81ee073e9d0e43420463bbe7b08edbff42d8837549d"
     },
     {
       "path": "preparation/rotation.json",
@@ -117,8 +103,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2811,
-      "expectedSha256": "ba1a1bb3af290ed2c74876c87ecfffd7bc896ae8f1223257e8ffcb563a04cd57"
+      "expectedBytes": 2805,
+      "expectedSha256": "89d23f913105429dc9c5d249b370d6d40281853dc5446cf06b323565d205d30b"
     },
     {
       "path": "presentation/minimap.json",
@@ -129,16 +115,6 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4581,
       "expectedSha256": "e01a59621a30017ac56806f7ac4e86b7ee38db670d9559259e1bf3e4a379a9b6"
-    },
-    {
-      "path": "reference/celestia.ssc",
-      "expectedBytes": 2887,
-      "expectedSha256": "625c5b7957b7881fc6ecc476245533bbea4119feefe4e60c3c2eb1d55daf2ebe"
-    },
-    {
-      "path": "reference/GPL-2.0-or-later.txt",
-      "expectedBytes": 17337,
-      "expectedSha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -152,18 +128,8 @@
     },
     {
       "path": "reference/source-record.json",
-      "expectedBytes": 5570,
-      "expectedSha256": "597bb12f5aba7143086141788bd069aaeb45cab726874f644f8e6fe2f618c12d"
-    },
-    {
-      "path": "shape/asteroid.cms",
-      "expectedBytes": 273,
-      "expectedSha256": "5616a5cb3471013ce423195be29c7bda31d292e0f16d95240472ccaaa4ea5361"
-    },
-    {
-      "path": "shape/model.json",
-      "expectedBytes": 1634,
-      "expectedSha256": "87b9f6765680b78e2f5f0089e1c4cf9d4d2352fe8a5bf9922e751a702073b7c2"
+      "expectedBytes": 2764,
+      "expectedSha256": "fe66f5c1058fee88aa99a3783e7c8cc55193e9a8c1c11f506d26a3905055b9fb"
     }
   ]
 }

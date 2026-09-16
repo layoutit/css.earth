@@ -6,7 +6,7 @@ Venus shows a cloud map, Magellan radar and elevation displays, modeled atmosphe
 
 | View or quantity | Source |
 | --- | --- |
-| Clouds and atmosphere parameters | OpenSpace inputs described below |
+| Clouds and atmosphere parameters | Pinned cloud texture and the authored atmosphere record described below |
 | Radar and elevation | [USGS Magellan radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) and [colorized topography](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m) |
 | Surface photographs | [PDS Venera collection](https://pds-geosciences.wustl.edu/missions/venera/) |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
@@ -38,7 +38,7 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 - The Venera photographs include archive assembly and tonal processing. PDS distributes this material outside its formally archived collection.
 - The camera and background sky do not represent an observer at a stated epoch.
 
-[Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
 <details>
 <summary>Planet facts, clouds and atmosphere display</summary>
@@ -53,9 +53,8 @@ year, 243-Earth-day retrograde rotation, approximately 3-degree tilt, 467 °C
 surface temperature, 93-Earth-atmosphere surface pressure, and absence of moons
 and rings.
 
-The retained body uses the active 6,051.9 km spherical radius in OpenSpace's
-pinned Venus `globe.asset`. The nearby 6,051.8 km polar value is commented out
-in that source and is therefore not treated as active renderer input. The body
+The retained body uses the 6,051.9 km spherical radius stated in
+`source/atmosphere/model.json`. The body
 is represented by 448 prepared
 projective texture leaves and two prepared polar leaves. The latitude rows,
 polar projections, atlas addressing, source color, seam ownership, and DPR 1/2
@@ -92,16 +91,16 @@ does not copy Saturn's ring-and-moon-specific prepared matrix transport.
 
 ## Cloud view
 
-The default visible cloud deck is OpenSpace's synchronized Venus cloud texture
-and configuration, pinned to OpenSpace commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516`. The checked source JPEG is resized
+The default visible cloud deck is the Venus cloud texture pinned from the
+OpenSpace project at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516`; it is
+an illustrative texture, and no source-backed global ultraviolet cloud mosaic
+has been qualified to replace it (see the investigation ledger). The checked source JPEG is resized
 without a color transform, projected into supersampled orthographic polar
 tiles, and oriented for the retained projective latitude grid at preparation
 time. Each reversed latitude strip has source-derived guard rows so projective
 leaf interpolation cannot sample a non-adjacent strip. Polar texels use wrapped
 bilinear sampling, exact spherical latitude projection, center averaging, and
-antialiased coverage. The source and pinned OpenSpace configuration are listed
-with exact hashes in `source/manifest.json`.
+antialiased coverage. The source is listed with its exact hash in `source/manifest.json`.
 
 The fixed Venus material is a 32-frame prepared camera-pitch bank. Every frame
 contains the light, terminator, and atmospheric response in one retained alpha
@@ -113,8 +112,9 @@ or raster math. The final view-aligned shadowless flood frame uses a prepared
 sunward exposure release. This keeps the flood-lit cloud deck below clipping
 without changing directional-shadow behavior.
 
-The atmosphere preparation parses the checked OpenSpace values instead of
-duplicating them: 6,051.9 km radius, 70 km height, 11.47 sun intensity,
+The atmosphere preparation reads the authored record
+`source/atmosphere/model.json`, whose values are adapted from the OpenSpace
+RenderableAtmosphere tuning and cited there: 6,051.9 km radius, 70 km height, 11.47 sun intensity,
 ground reflectance and radiance, the three Rayleigh wavelengths and scattering
 coefficients, 15.9 km Rayleigh scale height, the Mie scattering and extinction
 coefficients, 5.42 km Mie scale height, and 0.85 phase value. The exterior limb

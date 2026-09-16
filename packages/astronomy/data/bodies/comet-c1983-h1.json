@@ -6,11 +6,11 @@
   "physical": {
     "name": "C/1983 H1 IRAS–Araki–Alcock",
     "horizonsCode": "DES=C/1983 H1;CAP;",
-    "meanRadiusKm": 3.3922794165007253,
+    "meanRadiusKm": 4.6,
     "gravitationalParameterKm3PerS2": 0,
     "parent": "sun"
   },
-  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "physicalNotes": "Effective nucleus radius, Campins and Fernández (2002), Earth, Moon and Planets 89, 117 (https://doi.org/10.1023/a:1021590203207), used as the volume-equivalent radius of the displayed ellipsoid.",
   "comet": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1983+H1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

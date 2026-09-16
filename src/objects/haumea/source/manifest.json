@@ -24,37 +24,13 @@
           }
         ]
       }
-    },
-    {
-      "id": "nasa-vtad-haumea-model",
-      "path": "nasa-haumea.glb",
-      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb",
-      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
-      "acquisition": "Original downloadable GLB from NASA Science",
-      "redistribution": "NASA media; not photographed terrain or a measured normal map",
-      "consumers": [
-        "shape-model"
-      ],
-      "expectedBytes": 11335060,
-      "expectedSha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-haumea-nasa-vtad-haumea-model",
-            "role": "material",
-            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3344,
-      "expectedSha256": "2b70d6ebe1aec17f19c744009f62f4598d3460391419c90e5776f93518242e4f",
+      "expectedBytes": 3177,
+      "expectedSha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -62,8 +38,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 290,
-      "expectedSha256": "670fb018d42bfb523f2631528c61b31ff92fc1792a93e048349620ac204f1725"
+      "expectedBytes": 66,
+      "expectedSha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7"
     },
     {
       "path": "preparation/rotation.json",
@@ -72,8 +48,8 @@
     },
     {
       "path": "preparation/shape-model.json",
-      "expectedBytes": 780,
-      "expectedSha256": "82d56ed1afcc66144635a06f2a20b4f1753ca8d1d7425c014c4b3048c97830e2"
+      "expectedBytes": 743,
+      "expectedSha256": "98d19da766dfd2431a1fb6b8c0a58b12db43e2c216cbf12a411d977ff6826b3a"
     },
     {
       "path": "presentation/title-mark.json",
@@ -82,13 +58,17 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 826,
-      "expectedSha256": "449cf74e1345de447de78e42d74fb6626b9d72a5c0d14f95fcc91828018ea9b3"
+      "expectedBytes": 387,
+      "expectedSha256": "1b5c91ed4056ceeaa542c9c1d9b16835564052714db1239fa10b8cafe5c8cc6f"
     },
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 127,
-      "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666"
+      "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666",
+      "id": "haumea-shape-marker",
+      "origin": "https://doi.org/10.1038/nature24051",
+      "credit": "cssEarth schematic using Ortiz et al. (2017) semiaxis ratio",
+      "license": "MIT, cssEarth authored schematic; factual measurements attributed"
     },
     {
       "path": "editorial/factsheet-review.json",

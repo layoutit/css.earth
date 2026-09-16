@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
+import { type AuthoredObjectDescriptor } from '@cssearth/objects';
+import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { parseGeometryProfile, prepareGeometryScene, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '../../src/renderers/css/preparation/presentation/index.js';
@@ -13,19 +14,13 @@ import { prepareRuntimeManifest } from './operations.js';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
 
-export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean; }
-export interface VerifiedSource { readonly reference: SourceReference; readonly path: string; readonly value: unknown; }
+export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
+  /** Write mode: regenerated reviewed images replace their source copies and pins instead of failing. */
+  readonly replaceReviewedImages?: boolean; }
 export interface AuthoredPreparationResult { readonly descriptor: AuthoredObjectDescriptor; readonly sources: ReadonlyMap<string, VerifiedSource>; readonly raster?: unknown; readonly celestial?: unknown; readonly scene?: unknown; readonly definition?: unknown; }
 type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
-function contained(root: string, path: string): string { const resolved = resolve(root, path), offset = relative(root, resolved); if (offset === '..' || offset.startsWith(`..${String.fromCharCode(47)}`) || offset.startsWith(`..${String.fromCharCode(92)}`)) throw new TypeError(`Source ${path} escapes its object directory.`); return resolved; }
-export async function verifiedSource(root: string, reference: SourceReference): Promise<VerifiedSource> {
-  const path = contained(root, reference.path), bytes = await readFile(path);
-  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Source ${reference.path} does not match its descriptor digest.`);
-  try { return Object.freeze({ reference, path, value: JSON.parse(bytes.toString('utf8')) as unknown }); }
-  catch { throw new TypeError(`Source ${reference.path} must be JSON configuration.`); }
-}
 function source(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource | undefined { return sources.get(id); }
 function required(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource { const value = source(sources, id); if (!value) throw new TypeError(`Authored recipe requires ${id}.`); return value; }
 function sourceRecord(value: unknown, at: string): Record<string, unknown> { return record(value, at); }
@@ -55,8 +50,8 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 }
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
-export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
-  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write });
+export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages });
   if (write || !result.definition) return result;
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mts')).href);
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
@@ -67,7 +62,7 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   return Object.freeze({ ...result, definition: prepared.definition, scene });
 }
 
-async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
     const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
@@ -76,11 +71,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
     try {
       const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
-      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData });
+      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
-        descriptorPath: resolve(stage, 'object.json') });
+        descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
       const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
       await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
       const { publishPreparedObject } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
@@ -90,9 +85,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     } finally { await rm(stage, { recursive: true, force: true }); }
   }
   const descriptorPath = resolve(objectDirectory, 'object.json');
-  const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);
-  const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));
-  const sources = new Map(entries.map(entry => [entry.reference.id, entry]));
+  // Every recipe source is verified against the source manifest, the one owner of input pins.
+  const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   // Nomenclature labels ride the generic sphere lane; other lanes declare no mesh anchor frame yet.
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   await mkdir(outputDirectory, { recursive: true });
@@ -138,7 +132,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
     const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mts')).href) as typeof import('./terrestrial-layers/index.mts');
     const terrestrialPrepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
-      config: terrestrial, prepareContent: prepareObjectContentAssets });
+      config: terrestrial, prepareContent: prepareObjectContentAssets, replaceReviewedImages });
     const terrestrialAttached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: terrestrialPrepared.definition as unknown as Record<string, unknown> });
     if (terrestrialAttached.features) {
       await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialAttached.definition)}\n`);
@@ -171,6 +165,16 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;
   }
   const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig, assets: raster as unknown as GeometrySceneAssets, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
+  // A photograph lens states the body point its frame looks at; the default camera must look there too (default-view.mts).
+  for (const surface of rasterConfig.surfaces) {
+    const science = surface.science;
+    if (!science || science.kind !== 'surface-observation') continue;
+    const frames = record(science.lens, 'surface-observation lens').frames;
+    const frame = Array.isArray(frames) && frames.length === 1 ? record(frames[0], 'lens frame') : null;
+    if (!frame || typeof frame.observerWestLongitude !== 'number' || typeof frame.observerLatitude !== 'number') continue;
+    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view.mts')).href) as typeof import('./default-view.mts');
+    assertDefaultViewFacesLens(descriptor.id, scene.camera as never, scene.worldFrame as never, { longitudeDegrees: -frame.observerWestLongitude, latitudeDegrees: frame.observerLatitude });
+  }
   const contentReference = required(sources, 'content');
   const content = await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: relative(sourceDirectory, contentReference.path) } });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
@@ -199,6 +203,11 @@ const direct = process.argv[1] !== undefined && import.meta.url === pathToFileUR
 if (direct) {
   if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || (flag !== undefined && flag !== '--write')) throw new TypeError('Usage: prepare-authored <object-id> [--write].');
   const root = process.cwd(), write = flag === '--write';
+  // A traced run's pins were refreshed by its runner; rewriting recipe pins mid-run would change its own inputs.
+  if (write && !process.env.CSSEARTH_PREPARATION_TRACE) {
+    const { pinObjectDocuments } = await import(pathToFileURL(resolve(root, 'tools/pin-object-documents.mts')).href) as typeof import('../pin-object-documents.mts');
+    for (const change of await pinObjectDocuments(resolve(root, 'src/objects', id))) console.log(`pinned ${change.file} ${change.path} (${change.expectedBytes} bytes)`);
+  }
   const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write });
   console.log(JSON.stringify({ id: result.descriptor.id, runtime: result.definition !== undefined }));
 }

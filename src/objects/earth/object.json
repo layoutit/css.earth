@@ -26,48 +26,39 @@
       "sources": [
         {
           "id": "paged-ellipsoid",
-          "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653"
+          "path": "source/preparation/paged-ellipsoid.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "501afff1d4429dd6e8023b37e6210ea3ee5726d4d91a532bca13d47b22e345cf"
+          "path": "source/content/object.json"
         },
         {
           "id": "lens-bindings",
-          "path": "source/content/lens-bindings.json",
-          "sha256": "56897b899d614f9a36c5eb834123eb7188b374ea008774d0cf80c8cad8dd1f0a"
+          "path": "source/content/lens-bindings.json"
         },
         {
           "id": "charts",
-          "path": "source/content/charts.json",
-          "sha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa"
+          "path": "source/content/charts.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "editorial",
-          "path": "source/editorial/earth.json",
-          "sha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"
+          "path": "source/editorial/earth.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "75dd96814ad2ce98dd13c709eb4394b1c9c68cfb2f860bbe5947b438311eb6d6"
+          "path": "source/preparation/acquisition.json"
         },
         {
           "id": "mantle-tomography",
-          "path": "source/interior/tomography.json",
-          "sha256": "b0b06aae3a042ca407a554fe0d6b0e6433bab0c3195d8bec1531171eb3175288"
+          "path": "source/interior/tomography.json"
         },
         {
           "id": "features",
-          "path": "source/preparation/features.json",
-          "sha256": "974a205becd3450725bc510b670ebe621d5c7cd939be1330a88bd40af5c9f3d1"
+          "path": "source/preparation/features.json"
         }
       ],
       "shape": {

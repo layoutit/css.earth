@@ -183,13 +183,12 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  if(mode==='assemble')return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(manifestPath,'utf8')) as unknown,id),productionRoot:resolve(root,'dist/scenes',id)});
  throw new TypeError(`Unknown object operation: ${mode}.`);
 }
-/** Default acquisition restores missing pins only; changed existing bytes fail verification. */
+/** Default acquisition restores missing pins only. Existing bytes are verified afterwards, so a stale pin never blocks a download. */
 export async function restoreMissingSources({sourceRoot,manifest,plan,missing,transport}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;missing:string[];transport?:AcquisitionTransport}) {
  const wanted=new Set(missing);
  const operations=plan.operations.filter(step=>'path' in step&&wanted.has(step.path));
  const covered=new Set(operations.map(step=>'path' in step?step.path:''));
  if([...wanted].some(path=>!covered.has(path)))throw new Error(`No authored acquisition restores: ${[...wanted].filter(path=>!covered.has(path)).join(', ')}.`);
- for(const entry of [...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents])if(!wanted.has(entry.path))await assertSourceFile(entry,containedPath(sourceRoot,entry.path));
  if(!operations.length)return {operationCount:0};
  return executeAcquisition({sourceRoot,manifest,plan:{...plan,operations:operations.map(step=>({...step,groups:['restore-missing']}))},group:'restore-missing',transport});
 }

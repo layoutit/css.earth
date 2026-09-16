@@ -26,30 +26,6 @@
       }
     },
     {
-      "id": "nasa-vtad-makemake-model",
-      "path": "nasa-makemake.glb",
-      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb",
-      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
-      "acquisition": "Original downloadable GLB from NASA Science",
-      "redistribution": "NASA media; not photographed terrain or a measured normal map",
-      "consumers": [
-        "shape-model"
-      ],
-      "expectedBytes": 4441844,
-      "expectedSha256": "e7d5fa27f50afae10f0e7290cdf7a14ca856c0b9e99b2db02f25b75441fbdbef",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-makemake-nasa-vtad-makemake-model",
-            "role": "material",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "makemake-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 5764,
@@ -100,8 +76,8 @@
     {
       "id": "makemake-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2424,
-      "expectedSha256": "bf0191a3d8efd4c827f1f8a5e726edaaf8396e85eb2f69023f26b143e897aa72",
+      "expectedBytes": 2265,
+      "expectedSha256": "5ef71ae8329a4d4a45935a07b5776f5fe23168cc59dde78d35c2aa5ab2f52be5",
       "origin": "Repository-authored Makemake raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -119,8 +95,8 @@
     {
       "id": "makemake-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1617,
-      "expectedSha256": "2938b799d0fbd3654c8a92f2a8146dd8f44c71b5446c5c444dbc1482d07c990b",
+      "expectedBytes": 1603,
+      "expectedSha256": "dc42ee69f3a78bd091f47ee24ec220b24a3c23d2268460da7c70d0fa649cf666",
       "origin": "Repository-authored Makemake geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -176,8 +152,8 @@
     {
       "id": "makemake-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 831,
-      "expectedSha256": "ceddfb717190b468d25b110136ae48551fb348c1cd7f7c3bd762dac22e1f67c7",
+      "expectedBytes": 389,
+      "expectedSha256": "9b977c96e2e15ac7126825f49d4c6a2bb60c2911aec24fce6861fb4bf4ea4f30",
       "origin": "Repository-authored Makemake navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -194,8 +170,8 @@
     {
       "id": "makemake-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 294,
-      "expectedSha256": "2c63113739abbfb89e513b065c3f25fca9a31a79471b0f74922764fa69f93f2e",
+      "expectedBytes": 66,
+      "expectedSha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7",
       "origin": "Repository-authored Makemake acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -231,8 +207,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 8832,
-      "expectedSha256": "8dbbaef295ffaf86432844216ed2fa46ef55af90e6cdcc554e1f1032d9c40b4c",
+      "expectedBytes": 8659,
+      "expectedSha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -252,7 +228,11 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 137,
-      "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5"
+      "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5",
+      "id": "makemake-schematic-marker",
+      "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
+      "credit": "cssEarth schematic; warm color denotes the illustrative surface",
+      "license": "MIT, cssEarth authored schematic"
     }
   ],
   "generatedIntermediates": []

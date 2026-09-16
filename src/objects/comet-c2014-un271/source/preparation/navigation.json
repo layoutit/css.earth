@@ -8,16 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 12624,
-    "expectedSha256": "0f7d81e71437ed0b087445e0312e05366539cec9257834aeabfa760fd3286984",
-    "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-    "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
-    "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
-    "licenseEvidence": [
-      "reference/celestia.ssc",
-      "reference/GPL-2.0-or-later.txt"
-    ],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "expectedBytes": 13236,
+    "expectedSha256": "cef29089ca7d761981778f44ebd022c2bc693bb04ee152b3f7d8d643724949b8",
+    "origin": "https://doi.org/10.1051/0004-6361/202243090",
+    "credit": "Lellouch et al. (2022), A&A 659, L1",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
+    "licenseEvidence": [],
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"

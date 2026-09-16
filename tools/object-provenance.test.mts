@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { prepareObjectProvenance } from './objects/provenance.mts';
 import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mts';
-import { provenanceIdentity } from './prepare-provenance.mts';
+import { provenanceIdentity, reconcileObjectProvenance } from './prepare-provenance.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
@@ -45,9 +45,9 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
     writeFile(resolve(publicDirectory, 'surface.webp'), output),
     writeFile(resolve(source, 'preparation/raster.json'), recipe),
-    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [], generatedIntermediates: [] })),
+    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
-      { id: 'raster', path: 'source/preparation/raster.json', sha256: hash(recipe) },
+      { id: 'raster', path: 'source/preparation/raster.json' },
     ] } } })),
     writeFile(resolve(root, 'runtime-assets.json'), JSON.stringify({ assets: [{ filename: 'surface.webp', sha256: hash(output), bytes: output.length }] })),
     writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface.webp' }] })),
@@ -71,10 +71,10 @@ test('controlled photographic inserts bind every consumed photograph alongside t
     profile: { displayRange: [0, 2], filter: 'CLEAR' },levelMatching:{boundaryPixels:4}} };
   const bytes = JSON.stringify(recipe);
   await writeFile(recipePath, bytes);
-  const descriptorPath = resolve(context.objectDirectory, 'object.json'), descriptor = await read(descriptorPath);
-  const sources = requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources);
-  requireRecord(sources[0]).sha256 = hash(bytes);
-  await writeFile(descriptorPath, JSON.stringify(descriptor));
+  // The manifest owns the recipe pin; the descriptor only names the recipe.
+  const manifestPath = resolve(context.source, 'manifest.json'), manifest = await read(manifestPath);
+  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(bytes), expectedBytes: Buffer.byteLength(bytes) });
+  await writeFile(manifestPath, JSON.stringify(manifest));
   const document = await prepareObjectProvenance(context);
   assert.deepEqual(productSourceIds(document, 'surface').sort(), ['observation', 'unused']);
   assert.ok(document.sources.every(source => source.verification === 'bytes-verified'));
@@ -114,7 +114,7 @@ test('composition lineage follows the pinned conversion recipe to the native arc
     selections: [{id: 'surface', kind: 'posterior', field: 'ice', statistic: 'median'}]});
   await writeFile(resolve(context.source, 'conversion.json'), recipe);
   const manifest = await read(manifestPath);
-  manifest.documents = [{id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
+  manifest.documents = [...requireArray(manifest.documents), {id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
     sourceBinding: {kind: 'local', reason: 'Authored conversion fixture'}, consumers: ['surfaces']}];
   await writeFile(manifestPath, JSON.stringify(manifest));
   await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations: [
@@ -145,7 +145,7 @@ test('document storage does not assign project authorship to an archive input', 
   const observation = requireEntry(requireValue(inputs[0], 'fixture observation'), 'fixture observation');
   manifest.inputs = inputs.slice(1);
   delete observation.id; delete observation.credit; delete observation.acquisition;
-  manifest.documents = [observation];
+  manifest.documents = [observation, ...requireArray(manifest.documents)];
   await writeFile(path, JSON.stringify(manifest));
   await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({ operations: [
     { kind: 'download', path: requireString(observation.path, 'fixture observation path'), url: requireString(observation.origin, 'fixture observation origin') },
@@ -173,10 +173,11 @@ test('authored records and generated intermediates retain their declared ownersh
   manifest.inputs = inputs.slice(1);
   delete observation.credit; delete observation.acquisition;
   observation.kind = 'authored-document';
-  manifest.documents = [observation];
+  const recipeDocuments = requireArray(manifest.documents);
+  manifest.documents = [observation, ...recipeDocuments];
   await writeFile(path, JSON.stringify(manifest));
   assert.equal((await prepareObjectProvenance(context)).sources[0].credit, 'cssEarth contributors');
-  manifest.documents = []; manifest.generatedIntermediates = [observation];
+  manifest.documents = recipeDocuments; manifest.generatedIntermediates = [observation];
   delete observation.kind;
   Object.assign(observation, { generator: 'fixture converter', credit: 'Fixture archive; conversion by fixture author' });
   await writeFile(path, JSON.stringify(manifest));
@@ -211,6 +212,8 @@ test('changing a binding or an output identity invalidates an existing preparati
   const context = await fixture(t), prepared = await prepareObjectProvenance(context);
   const recovered = await prepareObjectProvenance({ ...context, basis: 'recovered' });
   assert.equal(provenanceIdentity(prepared), provenanceIdentity(recovered));
+  assert.equal(provenanceIdentity({ ...prepared, generator: { ...prepared.generator, sha256: 'a'.repeat(64), bindingsSha256: 'b'.repeat(64) } }),
+    provenanceIdentity(prepared), 'a rule or compiler edit with the same material keeps the record');
   const output = requireValue(requireValue(recovered.products[0], 'recovered fixture product').outputs[0], 'recovered fixture output');
   assert.equal(Reflect.set(output, 'sha256', '0'.repeat(64)), true);
   assert.notEqual(provenanceIdentity(prepared), provenanceIdentity(recovered));
@@ -238,9 +241,9 @@ test('Saturn binds its actual base material and all contributing recipe identiti
     publicDirectory: resolve('public/scenes/saturn'), basis: 'recovered', write: false });
   for (const id of ['normal', 'ultraviolet', 'methane', 'thermal', 'cross-section']) {
     const sources = productSourceIds(document, id);
-    assert.ok(sources.includes('openspace-saturn-surface'), id);
+    assert.ok(sources.includes('hubble-opal-saturn-2025a-visible'), id);
     assert.ok(sources.includes('cassini-pia21611-polar-map'), id);
-    assert.ok(sources.includes('openspace-saturn-ring-color'), id);
+    assert.ok(sources.includes('cassini-uvis-alpvir-2006-285-occultation'), id);
     assert.ok(requireValue(document.products.find(product => product.id === id), `Saturn ${id} product`).recipeDependencies.includes('geometry'), id);
   }
   assert.ok(document.recipes.some(recipe => recipe.id === 'rings'));
@@ -342,4 +345,45 @@ test('Gaspra separates its photographic appearance from the source shape in the 
   assert.deepEqual(roles.get('gaspra-normal'), ['appearance']);
   assert.deepEqual(roles.get('gaspra-shape'), ['geometry']);
   assert.deepEqual(productInputRoles(document, 'preview:normal'), roles);
+});
+
+test('reconciliation verifies a changed body, keeps an unchanged record, and never writes a downgrade over a prepared record', async t => {
+  const context = await fixture(t), { objectDirectory, publicDirectory } = context;
+  const recipePath = resolve(context.source, 'preparation/raster.json'), manifestPath = resolve(context.source, 'manifest.json');
+  const first = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(first.outcome, 'verified'); assert.equal(first.document.basis, 'prepared');
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(first.document, null, 2) + '\n');
+  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained');
+  // An edited recipe changes the material; with every pinned byte on disk the new record is verified, not recovered.
+  const recipe = JSON.stringify({ ...await read(recipePath), edited: true }), manifest = await read(manifestPath);
+  await writeFile(recipePath, recipe);
+  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) });
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  const second = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(second.outcome, 'verified'); assert.equal(second.document.basis, 'prepared');
+  assert.notEqual(provenanceIdentity(second.document), provenanceIdentity(first.document));
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(second.document, null, 2) + '\n');
+  // A pinned input that is not on this checkout leaves the prepared record untouched and names the file.
+  await rm(resolve(context.source, 'observation.dat'));
+  await writeFile(recipePath, JSON.stringify({ ...JSON.parse(recipe), edited: 2 }));
+  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(await readFile(recipePath)), expectedBytes: (await readFile(recipePath)).length });
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  const third = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(third.outcome, 'unverifiable'); assert.equal(third.reason, 'missing source/observation.dat');
+  assert.deepEqual(third.document, second.document);
+  const forced = await reconcileObjectProvenance({ objectDirectory, publicDirectory, recover: true });
+  assert.equal(forced.outcome, 'recovered'); assert.equal(forced.document.basis, 'recovered');
+  // A recovered record is upgraded as soon as its bytes can be verified, which is the same check preparation makes.
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
+  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'recovered', 'still unverifiable');
+  await writeFile(resolve(context.source, 'observation.dat'), 'original observation bytes');
+  const upgraded = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(upgraded.outcome, 'verified'); assert.equal(upgraded.document.basis, 'prepared');
+  // Output bytes that differ from their pin are a local problem for a recovered record and a refusal for a prepared one.
+  await writeFile(resolve(publicDirectory, 'surface.webp'), 'a stale local copy');
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
+  const stale = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
+  assert.equal(stale.outcome, 'recovered'); assert.match(stale.reason ?? '', /^bytes differ at .*surface\.webp/u);
+  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(upgraded.document, null, 2) + '\n');
+  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained', 'an unchanged prepared record is not re-verified');
 });

@@ -77,7 +77,7 @@
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "0.034°",
+        "value": "0.034\u00b0",
         "source": {
           "url": "https://pgda.gsfc.nasa.gov/products/105",
           "label": "NASA/JPL reference",
@@ -102,12 +102,12 @@
       {
         "id": "surface-temperature",
         "label": "Surface temperature",
-        "value": "−180–430 °C"
+        "value": "\u2212180\u2013430 \u00b0C"
       },
       {
         "id": "mass",
         "label": "Mass",
-        "value": "3.301 × 10²³ kg",
+        "value": "3.301 \u00d7 10\u00b2\u00b3 kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -120,7 +120,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "5.429 g/cm³",
+        "value": "5.429 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -133,7 +133,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "3.70 m/s²",
+        "value": "3.70 m/s\u00b2",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -235,8 +235,8 @@
           "width": 304,
           "height": 14,
           "labels": [
-            "−5,020",
-            "−450",
+            "\u22125,020",
+            "\u2212450",
             "4,140"
           ],
           "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
@@ -364,7 +364,7 @@
     {
       "label": "OpenSpace",
       "role": "scene",
-      "description": "Globe & lighting",
+      "description": "Lighting model parameters (adapted, MIT)",
       "href": "https://github.com/OpenSpace/OpenSpace"
     }
   ],

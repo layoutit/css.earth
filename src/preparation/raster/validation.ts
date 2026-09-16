@@ -45,6 +45,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         text(metadata.sourcePositionVariable, 'sourcePositionVariable');
     const thumbnail = record(recipe.thumbnail, 'thumbnail');
     fields(thumbnail, ['size', 'quality'], 'thumbnail', true);
+    if (thumbnail.centerLongitudeDegrees !== undefined && !(typeof thumbnail.centerLongitudeDegrees === 'number' && Number.isFinite(thumbnail.centerLongitudeDegrees))) throw new TypeError('thumbnail.centerLongitudeDegrees must be a finite number.');
     if (thumbnail.crop !== undefined) {
         const crop = record(thumbnail.crop, 'thumbnail.crop');
         fields(crop, ['left', 'top', 'width', 'height'], 'thumbnail.crop');
