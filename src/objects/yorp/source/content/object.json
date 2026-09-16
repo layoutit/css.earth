@@ -23,11 +23,6 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Volume-equivalent radius",
-        "value": "0.0564 km"
-      },
-      {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
         "value": "1.006 AU",
@@ -52,11 +47,6 @@
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period (2001)",
-        "value": "12.17 minutes"
       }
     ],
     "moreFacts": []

@@ -6,43 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "diameter",
-        "label": "Diameter estimate",
-        "value": "5 (+1.5/−0.75) km"
-      },
-      {
         "id": "parent",
         "label": "Orbits",
-        "value": "Saturn"
-      },
-      {
-        "id": "shape",
-        "label": "Minimum equatorial ratio",
-        "value": "1.04:1 · uniform-reflectivity model"
-      },
-      {
-        "id": "rotation",
-        "label": "Tentative rotation period",
-        "value": "6.9 ± 0.1 h · tentative"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "2006"
+        "value": "Saturn",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; Planet"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "scale-assumption",
-        "label": "Size assumption",
-        "value": "Geometric albedo 0.06; brightness-based estimate"
-      },
-      {
-        "id": "orientation-limit",
-        "label": "Orientation",
-        "value": "Unknown physical pole and phase; illustrative display"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

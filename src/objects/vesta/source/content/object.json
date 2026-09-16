@@ -38,12 +38,15 @@
       {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
-        "value": "2.36 AU"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "3.63 years"
+        "value": "2.36 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=4",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "orbit.elements.a (au)"
+        }
       },
       {
         "id": "rotation-period",

@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3528,
-      "expectedSha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
+      "expectedBytes": 2662,
+      "expectedSha256": "8a0009de1abb152f4c131c8a43c3a1b1d13eef4f92c821fc514da7bb90757977",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -145,6 +145,21 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6646,
       "expectedSha256": "5cd83487c6ebb5740836d51c42a33cbc11eda8c7dab66d667ce73a9af1a2b270"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3076,
+      "expectedSha256": "eb56bfa172b7f1efa3a9e7a6ba118d01c59e6dbd2715e0a53e075e7fe3fe8c57",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Salacia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

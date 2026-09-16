@@ -1339,8 +1339,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 17878,
-      "expectedSha256": "49d8109fe21cf07a3634f7b4403500ec0b81cf494f80c2fe870a80181fee396d",
+      "expectedBytes": 17266,
+      "expectedSha256": "d140eab84b2f55a3bea8108d32d79e3421b9bb78933c91abc3f6393ef79ac546",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1567,6 +1567,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4473,
+      "expectedSha256": "bfd38f6f4dff45e66fdbdd7bd874ae93d37d0330d43e1a67840273cff4f8abe0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 67P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

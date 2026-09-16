@@ -6,43 +6,33 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate ellipsoid"
-      },
-      {
-        "id": "dimensions",
-        "label": "Full approximation dimensions",
-        "value": "287.6 × 270.4 × 198.2 km"
-      },
-      {
         "id": "rotation",
         "label": "Rotation period",
-        "value": "7.004 ± 0.036 h (photometric period)"
+        "value": "7.004 ± 0.036 h (photometric period)",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10199",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.rot_per (h)"
+        }
       },
       {
         "id": "class",
         "label": "Population",
-        "value": "Centaur"
+        "value": "Centaur",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10199",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "object.orbit_class.name"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "inner-ring",
-        "label": "C1R radius / width",
-        "value": "385.9 km / 7.04 km"
-      },
-      {
-        "id": "outer-ring",
-        "label": "C2R radius / width",
-        "value": "400.3 km / 1.009 km"
-      },
-      {
-        "id": "ring-epoch",
-        "label": "Ring measurement",
-        "value": "JWST, 18 October 2022, first contact"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

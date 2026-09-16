@@ -506,8 +506,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15738,
-      "expectedSha256": "e4fcaf672048840b9db6daa439ea9a2f6b9c94033fa5af2b330d6a7b077b0cb9",
+      "expectedBytes": 16698,
+      "expectedSha256": "fa4df9465b4dfc13fe18100728d2d44a3d24be435849ac33bb2aa6b57a7c7418",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1011,8 +1011,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1075,
-      "expectedSha256": "d34e04cdba4f08a59f9d8f5ea2b8a7c2c628d7c31075226f09d3d8eab6a2f6bd"
+      "expectedBytes": 2311,
+      "expectedSha256": "8fda28f4ba68737deaea9ea966020d3359f8fecf4face49ca9176befe5efd060"
     },
     {
       "path": "observations/nh_charon_color_mosaic.lblx",

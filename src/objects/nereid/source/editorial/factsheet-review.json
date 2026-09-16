@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "nereid",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "447",
+        "Neptune",
+        "Nereid",
+        "802",
+        "NEP105",
+        "ecliptic",
+        "2020-01-01.0",
+        "5513900.",
+        "0.751",
+        "296.8",
+        "318.5",
+        "5.1",
+        "319.5",
+        "360.133039",
+        "7990.433",
+        "9426.334",
+        "",
+        "",
+        "",
+        "44"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Neptune",
+        "Nereid",
+        "802",
+        "0.00000 0.00000 NEP101",
+        "170.00 25.00 1",
+        "n/a n/a n/a"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "II",
+        "Nereid",
+        "",
+        "1949",
+        "G.P. Kuiper",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

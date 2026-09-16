@@ -25,22 +25,41 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "6.1 km"
+        "value": "6.1 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.diameter (km) / 2"
+        }
       },
       {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
-        "value": "2.210 AU"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "3.28 years"
+        "value": "2.210 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "orbit.elements.a (au)"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "7.04 hours"
+        "value": "7.04 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.rot_per (h)"
+        }
       }
     ],
     "moreFacts": [

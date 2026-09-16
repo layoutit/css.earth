@@ -2027,8 +2027,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 20591,
-      "expectedSha256": "d387a30b1a49bfba547b8c82b704dc91d89d89781bb5f37b4aef39631a88e148",
+      "expectedBytes": 20331,
+      "expectedSha256": "d5767820e97466c5c7673e2e63dd0088262c78f6831ef5a2bf75ccaf6e69230a",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -20593,8 +20593,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1418,
-      "expectedSha256": "d1cd1a95dc286994f9541c09b8d5eaf611650126bcbbcc944d8489cd9734346c"
+      "expectedBytes": 2664,
+      "expectedSha256": "4965f62821ebc7bbb397a3a2c417bd282e54a1e4380f02f961824a289aec6d00"
     },
     {
       "id": "usgs-europa-yelland-ridges-yelland-ridges-tif",

@@ -510,8 +510,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4597,
-      "expectedSha256": "3dd0722187d576b4f366c0210b12b747866d0f93293889cb0ee0938877142732",
+      "expectedBytes": 4558,
+      "expectedSha256": "39557229d386b3bdc72ce89c378208c584e2a669c6ac5cdb0531b353905ac583",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -581,8 +581,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1083,
-      "expectedSha256": "06cd7dae5c0e2b480dae147ce75f56fe1a62000c8a4bacffbff41aa356d3c7df"
+      "expectedBytes": 2349,
+      "expectedSha256": "a898ee9aaa7cc68f62569be7114663d48c09159473d1ff1675a0e995233c9c87"
     },
     {
       "id": "thebe-surface-feature-notes",

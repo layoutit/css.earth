@@ -8,32 +8,15 @@
       {
         "id": "radius",
         "label": "Reference radius",
-        "value": "40 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Dimensions",
-        "value": "About 108 × 100 × 52 km"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbit around Neptune",
-        "value": "About 7.48 hours"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Mean distance from Neptune",
-        "value": "About 50,074 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "Synchronous reference model"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · August 1989"
+        "value": "40 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "JPL Planetary Satellite Physical Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-physical-parameters",
+          "locator": "/references/1; Mean Radius (km) value"
+        }
       }
     ],
     "moreFacts": []

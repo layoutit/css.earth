@@ -21,28 +21,7 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Equivalent radius",
-        "value": "1.224 km (model)"
-      },
-      {
-        "id": "distance-from-sun",
-        "label": "Solar semimajor axis",
-        "value": "2.543 AU"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "4.06 years"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Tumbling periods",
-        "value": "5.4 / 7.4 days"
-      }
-    ],
+    "facts": [],
     "moreFacts": [
       {
         "id": "geometric-albedo",

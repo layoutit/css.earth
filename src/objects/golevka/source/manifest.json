@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9729,
-      "expectedSha256": "03fdf1165bc9f4449d77e9119a6a9a9c5bf44b7fe2fb6c7d68d464334c372d15",
+      "expectedBytes": 9611,
+      "expectedSha256": "8b202db247bdf585cd2a74b1851d26faf7cdf8973cb5c3ff102fe43cc43b10f8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -195,6 +195,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1999,
       "expectedSha256": "e7cb5dcfac768d3b68073aeddf61b1920057c0a625d6e65eeb40f38718efd5d9"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4467,
+      "expectedSha256": "315d9ddc7f43b570635b8dec7d9612b99357ea5bdf78eff8c16c52dbbc8f5ce4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Golevka: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

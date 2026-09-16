@@ -8,27 +8,15 @@
       {
         "id": "parent",
         "label": "Orbits",
-        "value": "Uranus"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate model"
-      },
-      {
-        "id": "dimensions",
-        "label": "Full model dimensions",
-        "value": "169 × 151 × 151 km"
-      },
-      {
-        "id": "scale",
-        "label": "Size evidence",
-        "value": "157 (+23/−15) km · thermophysical model"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation interpretation",
-        "value": "6.9162 ± 0.0013 h"
+        "value": "Uranus",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; Planet"
+        }
       }
     ],
     "moreFacts": []

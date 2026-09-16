@@ -4,33 +4,7 @@
   "id": "desdemona",
   "displayName": "Desdemona",
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Projected radius",
-        "value": "35 ± 4 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "90 × 54 × 54 km"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 62,659 km"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1986"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Prolate model; third axis assumed"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

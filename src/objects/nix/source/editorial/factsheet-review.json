@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "nix",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "457",
+        "Pluto",
+        "Nix",
+        "902",
+        "PLU060",
+        "equatorial",
+        "2000-01-01.5",
+        "49300.",
+        "0.015",
+        "31.4",
+        "338.2",
+        "0.0",
+        "0.0",
+        "24.85",
+        "-",
+        "-",
+        "",
+        "",
+        "",
+        "6"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Pluto",
+        "Nix",
+        "902",
+        "0.0015 0.0005 PLU060",
+        "18.0 1.0 3",
+        "0.88 0.31 *"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "II",
+        "Nix",
+        "S/2005 P2",
+        "2005",
+        "H.A. Weaver, S.A. Stern, M.J. Mutchler, A.J. Steffl, M.W. Buie, W.J. Merline, J.R. Spencer, E.F. Young, L.A. Young",
+        "IAUC 8625"
+      ]
+    }
+  ]
+}

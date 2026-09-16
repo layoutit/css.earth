@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2648,
-      "expectedSha256": "b37df8c5089e1162ba16a59e7d8d7719b04e13e300709f68169d2a6f1f7342ef",
+      "expectedBytes": 2610,
+      "expectedSha256": "bc16339b3c623931d92a6f6055eb29f8564235a637c57e6059aec3f91f87198b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 5237,
       "expectedSha256": "15e565b0cd1cd81993c2a7afb45d8e95f18d5be0aad2131febb381f0d2d97bcb"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3547,
+      "expectedSha256": "68ad0d4b0624e746197cdc187fbed799611d0f2f1d73e1fc30b83ad2af47c609",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eurybates: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

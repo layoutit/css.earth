@@ -6,34 +6,17 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Projected radius",
-        "value": "70 ± 4 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "156 × 126 × 126 km"
-      },
-      {
         "id": "orbital-period",
         "label": "Orbit around Uranus",
-        "value": "About 12.32 hours"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 66,100 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation",
-        "value": "Synchronous model"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1986"
+        "value": "About 12.32 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days) × 24"
+        }
       }
     ],
     "moreFacts": []

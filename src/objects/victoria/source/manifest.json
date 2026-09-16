@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9021,
-      "expectedSha256": "61f0b0a1d5e103cc0066771d2566a986a1433b864877c801ec5abfb8c39a7c1e",
+      "expectedBytes": 8901,
+      "expectedSha256": "fce2f040142ba304d77f1f4acc0acbb42fb58f166cac2489415374717f4d8a52",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -195,6 +195,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1701,
       "expectedSha256": "6c746e042a0616f3e56fa72b08da1f4de0cda163b0e54e657b1e5a635c589765"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5492,
+      "expectedSha256": "a7c4a77f22479d6394516e4827e11934b241b596b8ad6d13d4e64c7d0a57f89b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Victoria: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

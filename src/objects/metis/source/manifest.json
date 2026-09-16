@@ -576,8 +576,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 4251,
-      "expectedSha256": "4963e6053a5aaf1928b2cf3b19970d6e71b32b429fbcc59f3ea3d137aabee6cd",
+      "expectedBytes": 4361,
+      "expectedSha256": "7182567ada12d8318836d09c643a3d9a20556b8f72f5e57cf667859cdee3b66d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -587,8 +587,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1344,
-      "expectedSha256": "0b7f4e079db56533249b538c063438ab8814736f58723fcad7cb97334add672b"
+      "expectedBytes": 2608,
+      "expectedSha256": "1a4f3e607f27c5ecba5abb623b0d7a4fc76b5d75abf0d00afa78b11af3891cbd"
     }
   ]
 }

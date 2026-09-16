@@ -4,35 +4,8 @@
   "id": "asteroid-2003-vs2",
   "displayName": "2003 VS2",
   "panel": {
-    "facts": [
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Occultation and light-curve shape"
-      },
-      {
-        "id": "dimensions",
-        "label": "Display model extents",
-        "value": "678 × 470 × 452 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "7.41753 ±0.00001 hours; arbitrary phase"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Plutino (3:2 resonance with Neptune)"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain."
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

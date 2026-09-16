@@ -23,11 +23,6 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Volume-equivalent radius",
-        "value": "94 km"
-      },
-      {
         "id": "distance-from-sun",
         "label": "Distance from Sun",
         "value": "2.723 AU (mean)",
@@ -52,11 +47,6 @@
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "5.699151 hours"
       }
     ],
     "moreFacts": []

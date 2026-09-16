@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11465,
-      "expectedSha256": "7b0056bbcd8020fead9d06082b061f91d3cc991b79b8df8df0809f196264c3c0",
+      "expectedBytes": 11790,
+      "expectedSha256": "1841999a9606260ad49c341aa5a909d49ef06047e28036788acb5208a6c5bfd5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1822,
       "expectedSha256": "50c936f14e5108b7d3c0e2e1ca8c54795a76e1158f5e9a3b36e3e3d42fc48599"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4860,
+      "expectedSha256": "5dd9c00fc69fceed6a78ece6e4df6aa76303248fb2a442436be7804087d00d8b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Panopaea: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

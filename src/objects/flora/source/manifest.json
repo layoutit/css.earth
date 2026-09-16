@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7125,
-      "expectedSha256": "91d977927469e5ccd49c2596f7c19b897511f27c1df0c12e711d56a9b96837b6",
+      "expectedBytes": 6894,
+      "expectedSha256": "90c60714a68dbc27e0451a37d5b5e4cad485c9f9788b1a5f69fb3e9599797f2f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -195,6 +195,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1712,
       "expectedSha256": "a7c4de644ed4c171111301febc2ca9d7531a3d4398274d181d2f65e21e154d25"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4897,
+      "expectedSha256": "573eb5bce5b83e040f010692df083bb7287235ebdf28df4f29191c7608738ed6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Flora: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

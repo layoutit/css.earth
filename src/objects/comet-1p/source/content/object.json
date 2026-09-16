@@ -4,23 +4,7 @@
   "id": "comet-1p",
   "displayName": "Halley",
   "panel": {
-    "facts": [
-      {
-        "id": "giotto-approach",
-        "label": "Giotto closest approach",
-        "value": "596 km"
-      },
-      {
-        "id": "vega-approach",
-        "label": "Vega 2 closest approach",
-        "value": "8,032 km"
-      },
-      {
-        "id": "uncertainty",
-        "label": "Shape uncertainty",
-        "value": "About 0.5–1 km"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

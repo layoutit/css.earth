@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2465,
-      "expectedSha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
+      "expectedBytes": 2314,
+      "expectedSha256": "4d4b26fcbb55b96ec88b3f6daeef0bc0a3e57b3b13e12b7b8ba04a541d65f3fe",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 1922,
       "expectedSha256": "9483bd05883177e5978a1e4e00fd1baac19edf2573622cf86a5b2fcf9c6a6fd9"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1462,
+      "expectedSha256": "71428046c75625fcfe7bc88f00aa047ac16bd798f50bf83c571a29db66864b98",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

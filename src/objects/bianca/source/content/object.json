@@ -4,33 +4,7 @@
   "id": "bianca",
   "displayName": "Bianca",
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Projected radius",
-        "value": "27 ± 2 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "64 × 46 × 46 km"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 59,165 km"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1986"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Prolate model; third axis assumed"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

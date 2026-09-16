@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 14194,
-      "expectedSha256": "280a0dc28331151e17d7fa89c968f41c86c052238afcb1785e6021b432bb0fde",
+      "expectedBytes": 14400,
+      "expectedSha256": "5b5890279e8a2465bb80ce006814b807761dc2661e2cade8f98d0f4899dc4751",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1814,
       "expectedSha256": "164a09ae24b441ddaa256f26aea1d9306fbacfc31488170defa1d879c848677e"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3734,
+      "expectedSha256": "4ac684d95b0f03b4816dd342aecec0bdf65224c904f6393f90c666f522412fbf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 666 Desdemona: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

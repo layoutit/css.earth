@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3294,
-      "expectedSha256": "d22b0038c5d0d606ff9be46b9898fc586c7f679daed788a81e15616d5c3ecb8a",
+      "expectedBytes": 2841,
+      "expectedSha256": "155194d49d2802ddd639a6bd2c3c4addf09c5bc19de2c5111fce74a6c92eb887",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -155,6 +155,21 @@
       "path": "reference/tc302-ortiz-2020.pdf",
       "expectedBytes": 1638671,
       "expectedSha256": "484354879d338114c09e1a2cd7911e2f71ecc2a37578754f48d36066d251c1ee"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2788,
+      "expectedSha256": "8c218cde61596116dfdaf37cfac12e64d665074801c99e639375d4179b014af2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 2002 TC302: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -4,50 +4,8 @@
   "id": "sn263-beta",
   "displayName": "2001 SN263 Beta",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "2001 SN263 Alpha"
-      },
-      {
-        "id": "diameter",
-        "label": "Estimated diameter",
-        "value": "0.77 ± 0.12 km"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Radar"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "13.43 hours"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "shape-epoch",
-        "label": "Observations",
-        "value": "January–March 2008"
-      },
-      {
-        "id": "shape-scale",
-        "label": "Model extents",
-        "value": "0.766 × 1.038 × 0.656 km"
-      },
-      {
-        "id": "phase",
-        "label": "Orientation",
-        "value": "Assumed pole · illustrative spin phase"
-      },
-      {
-        "id": "orbit-limit",
-        "label": "Position",
-        "value": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured."
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

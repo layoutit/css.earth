@@ -148,8 +148,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2835,
-      "expectedSha256": "71acbe8a29a37a79f2b33aa781c5fe576d8ee1aba1ae21a9864c33a77da5d21c",
+      "expectedBytes": 3215,
+      "expectedSha256": "0f532ac273ecc8310fbe179663a1a9f7a026aa4e2d658acf3326e57db661d969",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -219,6 +219,15 @@
       "path": "survey/source-camera.json",
       "expectedBytes": 3256,
       "expectedSha256": "bfd9c8f5c2436813c3487e4c148e4be1618b18a8866b34d294d30e260a011cd8"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1404,
+      "expectedSha256": "0d9075d609b5369bbf562baa05d5104ea45c115c746912b9df5978494a6201ce",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

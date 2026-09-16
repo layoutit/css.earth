@@ -23,11 +23,6 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Model volume-equivalent radius",
-        "value": "2.405 km"
-      },
-      {
         "id": "distance-from-sun",
         "label": "Distance from Sun",
         "value": "2.384 AU (mean)",
@@ -52,16 +47,6 @@
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
-      },
-      {
-        "id": "rotation-period",
-        "label": "Main lightcurve period",
-        "value": "252.6 ± 0.4 hours"
-      },
-      {
-        "id": "secondary-period",
-        "label": "Second lightcurve period",
-        "value": "455.2 ± 0.9 hours"
       }
     ],
     "moreFacts": []

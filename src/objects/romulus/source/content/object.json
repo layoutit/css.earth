@@ -4,35 +4,8 @@
   "id": "romulus",
   "displayName": "Romulus",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Sylvia"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate model"
-      },
-      {
-        "id": "dimensions",
-        "label": "Full model dimensions",
-        "value": "38 × 14.1 × 14.1 km"
-      },
-      {
-        "id": "scale",
-        "label": "Size evidence",
-        "value": "23.1 ± 0.7 km · projected area-equivalent diameter"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "orbital-position",
-        "label": "Orbital position",
-        "value": "Orbit from published model · current phase approximate"
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

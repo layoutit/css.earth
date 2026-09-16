@@ -21,50 +21,8 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Approximate radius",
-        "value": "715 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "About 22.5 hours"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "About 305 years"
-      },
-      {
-        "id": "moon-count",
-        "label": "Moons",
-        "value": "1 \u2014 nicknamed MK 2"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "distance-from-sun",
-        "label": "Solar semimajor axis",
-        "value": "45.8 AU"
-      },
-      {
-        "id": "surface",
-        "label": "Surface coverage",
-        "value": "Unresolved; no terrain map"
-      },
-      {
-        "id": "shape",
-        "label": "Display shape",
-        "value": "Spherical approximation"
-      },
-      {
-        "id": "appearance",
-        "label": "Surface representation",
-        "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

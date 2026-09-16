@@ -380,8 +380,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3770,
-      "expectedSha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
+      "expectedBytes": 3458,
+      "expectedSha256": "87f5ecc9cd8ab254194fdb2c9d6f4e7038d1c57613df04cd1954c56ca6ed48d0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -456,6 +456,15 @@
       "path": "survey/mvic-color.lbl",
       "expectedBytes": 36480,
       "expectedSha256": "7c90e4e3c860f0da415ad4b66574fc98b61dbcf365cde4ef0ecb42487ac31ac3"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1840,
+      "expectedSha256": "c3f3beb81baf8f40707ca58a939bd27abaf0e158b6c5aec7aab1e24ec543d6aa",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

@@ -79,8 +79,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3440,
-      "expectedSha256": "f9af1eced8a89d58d491e4b0f6fb8845a85fe9398cc0554435c6dd47e11658d7",
+      "expectedBytes": 3331,
+      "expectedSha256": "82992c48e2f99c178427fa5031177af057d48db16d6c3814b71b9664cf0273e8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -130,6 +130,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 2613,
       "expectedSha256": "76e98e2e29843a2f263d6d8c58b0e4d1905b9dd80a5e0b942cf45be6b9efd045"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 1988,
+      "expectedSha256": "4abb0952de7e042ba4b6f30a9ffd6cb2ddeeb709c924f1bb081d8ee6b58864ae",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for C/1956 R1: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

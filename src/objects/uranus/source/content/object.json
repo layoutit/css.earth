@@ -75,11 +75,6 @@
         }
       },
       {
-        "id": "axial-tilt",
-        "label": "Axial tilt",
-        "value": "97.77°"
-      },
-      {
         "id": "moon-count",
         "label": "Known moons",
         "value": "29 · Sep 2026",
@@ -91,24 +86,9 @@
           "catalogueId": "nasa-uranus-moons",
           "locator": "/references/2; moon-count"
         }
-      },
-      {
-        "id": "ring-system",
-        "label": "Rings",
-        "value": "Present"
       }
     ],
     "moreFacts": [
-      {
-        "id": "minimum-temperature",
-        "label": "Minimum temperature",
-        "value": "49 K"
-      },
-      {
-        "id": "wind-speed",
-        "label": "Cloud-top winds",
-        "value": "Up to 900 km/h"
-      },
       {
         "id": "mass",
         "label": "Mass",

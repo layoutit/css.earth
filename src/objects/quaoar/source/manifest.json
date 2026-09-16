@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3568,
-      "expectedSha256": "f005bcb7d3c410dc400f3651482e89ba7588e30930299536b7c93fe8bb5b13b2",
+      "expectedBytes": 2839,
+      "expectedSha256": "918fa28d605789a89bb48968b404e8febb603554e7d84f5759689f01043cf1d7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -145,6 +145,21 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6645,
       "expectedSha256": "33270acb14ba6bfc481aeea35b006884af53c552b7bdfd8af02d9050c2afcdc5"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3175,
+      "expectedSha256": "99744a603cac81634345b9137bcfc50aff064f568520ef86a4eb8e45845c2f4c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Quaoar: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -23,11 +23,6 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Volume-equivalent radius",
-        "value": "1.73 km"
-      },
-      {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
         "value": "2.233 AU",

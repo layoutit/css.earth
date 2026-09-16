@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8635,
-      "expectedSha256": "7cca695e6192b1268a34fb43f9567298aaa5ecee9543776299699f5e8cc3b2a4",
+      "expectedBytes": 8406,
+      "expectedSha256": "b1ac13641b8d42ec266daf6b56be689a65b6026ca499744a0722d95fca0a1be9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 39,
       "expectedSha256": "99799bfa593387016c9551e79997c1003a3326ffef00abe0e2b8e606933efcf7"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 7981,
+      "expectedSha256": "c5eaff4a2e9d69b358c0d2d2ffaf2e80e8537b732c7b5a42f97dadbd38274c50",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Kalliope: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

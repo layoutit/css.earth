@@ -333,8 +333,8 @@
     {
       "id": "oberon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7491,
-      "expectedSha256": "b30c92fe753897a52032ae24f5f2ba0603506358b4d4dc128e26b12aaaef0bc2",
+      "expectedBytes": 7955,
+      "expectedSha256": "1b7b61a01bb0ee3bc02de604beebb59657a98ddd8fc2ec15c3f078423467bd9f",
       "origin": "Repository-authored Oberon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -366,8 +366,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1076,
-      "expectedSha256": "2a61c4a81da8aeaaa4774dd9707b6b3505183452ad55344f7b974196c2d50c2f"
+      "expectedBytes": 2322,
+      "expectedSha256": "dfae092f2fba44d6af417da77f59f69a735c5f5f7f862963c47f67417bddaa78"
     },
     {
       "id": "oberon-surface-feature-notes",

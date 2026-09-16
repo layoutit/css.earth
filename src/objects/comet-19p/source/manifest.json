@@ -439,8 +439,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7383,
-      "expectedSha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
+      "expectedBytes": 7158,
+      "expectedSha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -525,6 +525,21 @@
       "path": "reference/usgsdem.lbl",
       "expectedBytes": 10640,
       "expectedSha256": "ca91ad8342a3de5b90139a4c8896cb0706ceae3e36faffd5f9b3a1ff2b0d81fd"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3953,
+      "expectedSha256": "b8ff56a5e4769be9b1f9ae130c23e3dbf8e72a0ba03ef24e4819e5559098f2fb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 19P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

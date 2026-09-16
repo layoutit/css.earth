@@ -860,8 +860,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5346,
-      "expectedSha256": "811c793678744183026263d0dfb396414ee00ab167b32a16f1606b73e7b669f8",
+      "expectedBytes": 6210,
+      "expectedSha256": "58b5335e18d18339fdc777fd9ed19cdb1ec34889504af3e99d550da1fb56c322",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -916,8 +916,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 495,
-      "expectedSha256": "5e914b9b6912f84d9cc66268cefcc0d789570068ddb20b33a31f8bd142b8381f"
+      "expectedBytes": 1791,
+      "expectedSha256": "4e8361b4d5e4d9a2def5131a99b52bd2e95e2c2e650c0b8aec62a9ea0e9e1b1d"
     }
   ]
 }

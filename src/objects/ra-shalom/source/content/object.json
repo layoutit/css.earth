@@ -60,11 +60,6 @@
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
-      },
-      {
-        "id": "rotation-period",
-        "label": "Model rotation period",
-        "value": "19.793 ± 0.001 hours (model)"
       }
     ],
     "moreFacts": []

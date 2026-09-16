@@ -29,8 +29,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3177,
-      "expectedSha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
+      "expectedBytes": 2604,
+      "expectedSha256": "0b3bc1dfabc161854e59e74249221e80eac33b8206cf90e136cb08ec3f4a27e1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -76,6 +76,21 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 272,
       "expectedSha256": "10122d07da9668df1bea395c8b5f4db9e76e66c34451a92767c5989ff523c1a1"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4594,
+      "expectedSha256": "811890fe816dd7f4974caf416e112b764ce27b8b5a0668075b4c85ff2ea58d51",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Haumea: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []

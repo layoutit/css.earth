@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3331,
-      "expectedSha256": "dc0521abd1afd70800f8f2218f052882061313d05123ce651e60a2454637cc03",
+      "expectedBytes": 2376,
+      "expectedSha256": "4f40a454b7a6c29c563a29d3360f4d0f2e97be8652c730ac59c85f911685ab6b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -150,6 +150,21 @@
       "path": "reference/tx300-vilenius-2018.pdf",
       "expectedBytes": 535526,
       "expectedSha256": "294601d107c3dcb9bbe8d8f193e63d2ae12eed4ae4349590a7c35099a8c3a130"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3023,
+      "expectedSha256": "a6e9e8ffacae26e357ad2e608dacb2ca7a2c9ce44a1b23440f488aa2f6261dd5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 2002 TX300: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

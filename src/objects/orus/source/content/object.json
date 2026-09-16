@@ -6,24 +6,17 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate ellipsoid"
-      },
-      {
-        "id": "dimensions",
-        "label": "Full approximation dimensions",
-        "value": "70.7 × 63 × 51.4 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "13.486190 ± 0.000017 h"
-      },
-      {
         "id": "class",
         "label": "Population",
-        "value": "Jupiter Trojan"
+        "value": "Jupiter Trojan",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=21900",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "object.orbit_class.name"
+        }
       }
     ],
     "moreFacts": []

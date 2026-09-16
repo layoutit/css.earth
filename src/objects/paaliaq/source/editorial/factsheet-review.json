@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "paaliaq",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "143",
+        "Saturn",
+        "Paaliaq",
+        "620",
+        "SAT456",
+        "ecliptic",
+        "2000-01-01.5",
+        "14997700.",
+        "0.378",
+        "237.6",
+        "318.2",
+        "48.5",
+        "353.2",
+        "685.7153",
+        "846.2",
+        "704.4",
+        "",
+        "",
+        "",
+        "48"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XX",
+        "Paaliaq",
+        "S/2000 S2",
+        "2000",
+        "B. Gladman, J. Kavelaars, J.-M. Petit, H. Scholl, M. Holman, B.G. Marsden, P. Nicholson, J.A. Burns",
+        "IAUC 7512"
+      ]
+    }
+  ]
+}

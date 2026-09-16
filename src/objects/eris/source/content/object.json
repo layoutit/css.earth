@@ -21,55 +21,8 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [
-      {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "2,326 ± 12 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "About 15.8 days"
-      },
-      {
-        "id": "moon-count",
-        "label": "Moons",
-        "value": "1 — Dysnomia"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbital period",
-        "value": "About 557 years"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "shape",
-        "label": "Shape",
-        "value": "Consistent with a sphere from a stellar occultation"
-      },
-      {
-        "id": "surface",
-        "label": "Surface coverage",
-        "value": "Unresolved; no terrain map"
-      },
-      {
-        "id": "appearance",
-        "label": "Surface representation",
-        "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
-      },
-      {
-        "id": "orientation",
-        "label": "Orientation",
-        "value": "Arbitrary display pole and meridian"
-      },
-      {
-        "id": "ring-system",
-        "label": "Rings",
-        "value": "None known"
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

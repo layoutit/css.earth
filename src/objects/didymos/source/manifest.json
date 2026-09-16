@@ -290,8 +290,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11404,
-      "expectedSha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
+      "expectedBytes": 11865,
+      "expectedSha256": "7b00791b344e401f3b43bdaee9f634a5bcb05678e4bb47d2ef34c3bd840c1976",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -447,6 +447,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4392,
+      "expectedSha256": "0c51358e3e439fc00a0bedc094eff5f28113d4529080025c3bbf4e3df651753c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Didymos: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]
