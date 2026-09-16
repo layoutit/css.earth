@@ -6,29 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1038/s41586-024-07378-0",
-    "credit": "Levison et al. (2024), Lucy science team",
-    "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "shape-model"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "shape"
-    },
-    "expectedBytes": 30006,
-    "expectedSha256": "81a6448ca06233b431705d24cfbe3900eb535d4f61218a0eff902566d37045d5"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

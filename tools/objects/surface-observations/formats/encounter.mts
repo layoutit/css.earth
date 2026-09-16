@@ -8,13 +8,13 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from '../../terrestrial-layers/encounter-fits.mts';
 import { encounterCamera } from '../../terrestrial-layers/encounter-camera.mts';
-import { validateEncounterRegistration } from '../../terrestrial-layers/encounter-registration.mts';
+import { validateEncounterControls } from '../../terrestrial-layers/encounter-controls.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
-import { observedPhotometry, publishedPhotometry } from '../photometry.mts';
+import { retainedPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 const CONTEXT = 'encounter photography recipe';
 
@@ -30,7 +30,7 @@ export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown)
     { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, samplesPerTriangle: 'optional' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (recipe.format !== 'encounter-fits' || !('referenceDegrees' in recipe.photometry ? validPublishedPhotometryShape(recipe.photometry, recipe.transfer.maximumEmissionDegrees)
-      : recipe.photometry.model === 'observed' && recipe.photometry.maximumGain === 1)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
+      : recipe.photometry.model === 'retained-observation' && recipe.photometry.maximumGain === 1)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
 }
 
 interface EncounterReference { id: string; imageSha256: string; controlSha256: string; camera: Pick<ObservationCamera, 'project' | 'positionMeters'>; sample(point: readonly number[]): { reason?: string } }
@@ -54,14 +54,14 @@ export const encounterFormat: SurfaceObservationFormat = {
   paths: value => parseEncounterLens(value).frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
   async load(value, { sourceDirectory, source, radial, config }) {
     const recipe = parseEncounterLens(value), shape = await source.validatePath(config.geometry.radialTerrain.path);
-    const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(sourceDirectory, source.manifest, recipe.photometry) : observedPhotometry(recipe.photometry);
+    const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(sourceDirectory, source.manifest, recipe.photometry) : retainedPhotometry(recipe.photometry);
     const frames: ObservationFrame[] = [], references = new Map<string, EncounterReference>();
     let units = '';
     for (const f of recipe.frames) {
       const controlBytes = await readFile(resolve(sourceDirectory, f.controlPath)), imageBytes = await readFile(resolve(sourceDirectory, f.path));
       const control = parseEncounterSourceControl(JSON.parse(controlBytes.toString('utf8')));
       const decoded = decodeEncounterFits(imageBytes, control.observation), encounter = encounterCamera(decoded.header, control.camera);
-      const registration = validateEncounterRegistration(encounter, control.registration, shape.expectedSha256);
+      const registration = validateEncounterControls(encounter, control.registration, shape.expectedSha256);
       // The registration's source-scale pixel size ranks finest-resolution selection.
       const camera: ObservationCamera = { kind: 'control-network', project: encounter.project, ray: encounter.ray, positionMeters: encounter.positionMeters, positionKm: encounter.positionKm,
         sunDirection: encounter.sunDirection, pinhole: true, nominalPixelScaleMeters: registration.nominalPixelScaleMeters, report: encounter.report };
@@ -76,6 +76,6 @@ export const encounterFormat: SurfaceObservationFormat = {
     return { frames, exceeded, policy: { format: recipe.format,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'finest-resolution' ? 'finest-resolution' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: photometry.units ?? units }, photometry: photometry.report, limits } };
+      display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: photometry.units ?? units, ...displayBasis(recipe.display) }, photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits } };
   },
 };

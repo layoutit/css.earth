@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { parseReflectanceCamera, type NumericRaster } from './source-records.mts';
-import { field, imageBlock, acceptOsirisQuality } from './osiris-geo.mts';
+import { field, acceptOsirisQuality } from './osiris-geo.mts';
 
 /** Level-4 resampled reflectance keeps its quality and sigma arrays in the
  * same original PDS file. Pixel origin includes any archived CCD subframe. */
@@ -17,14 +17,14 @@ export function decodeOsirisReflectance(bytes: Buffer, cameraSource: unknown, al
       sha256(bytes) !== camera.imageSha256) throw new Error('OSIRIS camera is not bound to this exact observation.');
   const data: Record<string, NumericRaster> = {}, ranges: number[][] = []; const count = camera.width * camera.height;
   for (const name of ['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE']) {
-    const block = imageBlock(label, name), quality = name === 'QUALITY_MAP_IMAGE', stride = quality ? 1 : 4;
+    const block = (key: string) => field(label, key, [name]), quality = name === 'QUALITY_MAP_IMAGE', stride = quality ? 1 : 4;
     const offset = (Number(field(label, '^' + name)) - 1) * 512, end = offset + count * stride;
-    if (Number(field(block, 'LINE_SAMPLES')) !== camera.width || Number(field(block, 'LINES')) !== camera.height ||
-        Number(field(block, 'BANDS')) !== 1 || Number(field(block, 'SAMPLE_BITS')) !== stride * 8 ||
-        Number(field(block, 'FIRST_LINE')) !== camera.firstLine || Number(field(block, 'FIRST_LINE_SAMPLE')) !== camera.firstSample ||
-        field(block, 'SAMPLE_TYPE') !== (quality ? 'LSB_UNSIGNED_INTEGER' : 'PC_REAL') ||
-        (!quality && field(block, 'UNIT') !== '1') || field(block, 'SAMPLE_DISPLAY_DIRECTION') !== (field(label, 'INSTRUMENT_ID') === 'OSIWAC' ? 'RIGHT' : 'LEFT') ||
-        field(block, 'LINE_DISPLAY_DIRECTION') !== 'DOWN' || !Number.isInteger(offset) || offset < label.length || end > bytes.length ||
+    if (Number(block('LINE_SAMPLES')) !== camera.width || Number(block('LINES')) !== camera.height ||
+        Number(block('BANDS')) !== 1 || Number(block('SAMPLE_BITS')) !== stride * 8 ||
+        Number(block('FIRST_LINE')) !== camera.firstLine || Number(block('FIRST_LINE_SAMPLE')) !== camera.firstSample ||
+        block('SAMPLE_TYPE') !== (quality ? 'LSB_UNSIGNED_INTEGER' : 'PC_REAL') ||
+        (!quality && block('UNIT') !== '1') || block('SAMPLE_DISPLAY_DIRECTION') !== (field(label, 'INSTRUMENT_ID') === 'OSIWAC' ? 'RIGHT' : 'LEFT') ||
+        block('LINE_DISPLAY_DIRECTION') !== 'DOWN' || !Number.isInteger(offset) || offset < label.length || end > bytes.length ||
         ranges.some(([a,b]) => offset < b && end > a)) throw new Error('Unsupported OSIRIS reflectance plane.');
     ranges.push([offset, end]);
     data[name] = quality ? Uint8Array.from(bytes.subarray(offset, end)) : new Float32Array(count);

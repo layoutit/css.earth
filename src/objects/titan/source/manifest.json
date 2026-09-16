@@ -1918,8 +1918,8 @@
     {
       "id": "titan-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 2545,
-      "expectedSha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8",
+      "expectedBytes": 563,
+      "expectedSha256": "0e2feebe85a872d967b66b1fafdcbe70c8c9c4c71047f7791ecc1473f1d1c19b",
       "origin": "Repository-authored Titan navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1955,8 +1955,8 @@
     {
       "id": "titan-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15002,
-      "expectedSha256": "c41e2cf1f1571a27ee9cf0de22ff2b54e65d91f3c3ac49f94660c30ed3030af7",
+      "expectedBytes": 15022,
+      "expectedSha256": "db41ebbbcecf990967174f765d977ce34fece396fba39f040977460ebe6203d3",
       "origin": "Repository-authored Titan object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

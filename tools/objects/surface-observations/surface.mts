@@ -5,7 +5,7 @@ import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contrac
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import { fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
 import { qualifiedFace } from './geometry.mts';
-import { bandColorByte, bandColorEvidence, interpolatePalette } from '../color-transfer.mts';
+import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '../color-transfer.mts';
 
 export const SURFACE_OBSERVATION_REPORT = 'cssearth-surface-observation-report@1';
 const PREVIEW_POLICY = 'The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.';
@@ -20,9 +20,12 @@ export interface SurfaceObservation {
   samplePoint(point: readonly number[]): SurfaceColorSample;
   preview(width: number, height: number): { rgb: Buffer; missing: Uint8Array };
   report: SurfaceObservationReport;
+  /** The photograph already carries its acquisition lighting; the atlas must not light it again. */
+  retainsIllumination: boolean;
 }
 
 export function createSurfaceObservation({ frames, policy, radial, config, entries }: { frames: readonly ObservationFrame[]; policy: SurfacePolicy; radial: RadialSurface; config: SurfaceConfig; entries: readonly SourceInput[] }): SurfaceObservation {
+  if (policy.display.basis === 'source' && !entries.some(entry => entry.id === policy.display.sourceId)) throw new Error(`A source-based display names ${policy.display.sourceId}, which the lens does not consume.`);
   if (!frames.length || (policy.selection === 'single') !== (frames.length === 1)) throw new Error('A surface observation selects among its frames only when it has several.');
   const mesh = radial.grid, metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const missing = (point: readonly number[], reason: string): Missing => ({ reason, color: missingCoverageColor(Math.atan2(point[1], point[0]) * 180 / Math.PI,
@@ -48,6 +51,18 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     : policy.selection === 'recipe-order' ? values.findIndex(value => value.reason === undefined)
     : policy.selection === 'finest-resolution' ? values.reduce((best, value, i) => value.reason === undefined && (best < 0 || scale(i) < scale(best)) ? i : best, -1)
     : selectObservation(values);
+  // A selection that ranks frames in a fixed order can stop at the first accepted frame: it is the frame choose() picks from all of them
+  // (finest-resolution keeps the lowest index among equal scales). Only lowest-emission and single frames sample every frame.
+  const rank = policy.selection === 'recipe-order' ? frames.map((_, i) => i)
+    : policy.selection === 'finest-resolution' && frames.every((_, i) => Number.isFinite(scale(i))) ? frames.map((_, i) => i).sort((a, b) => scale(a) - scale(b) || a - b) : null;
+  const sampleFirst = (displayPoint: readonly number[], order: readonly number[]) => {
+    const point = displayPoint.map(n => n * metersPerUnit), hit = mesh.closestPoint(point);
+    if (hit && qualifiedFace(mesh, hit.faceId)) for (const i of order) {
+      const frame = frames[i], sample = frame.sample(hit.point);
+      if (sample.reason === undefined && frame.visible(hit.point)) return { point, index: i, value: { ...sample, distanceMeters: hit.distanceMeters } as Missing | Accepted };
+    }
+    return { point, index: -1, value: undefined };
+  };
   // Estimated faces complete an open source surface that no photograph observed, so their sample points stay withheld.
   const points = sampleTrianglePoints(radial.faces, policy.samplesPerTriangle);
   const samples = points.map((point, i) => radial.faces[Math.floor(i / policy.samplesPerTriangle)].estimated
@@ -56,7 +71,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   const levels = frames.length === 1 || !policy.levelMatching ? { gains: [1], pairs: [] }
     : fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), policy.levelMatching);
   let low: number, high: number;
-  if (policy.display.range === 'authored') ({ low, high } = policy.display);
+  if (policy.display.range === 'stated-range') ({ low, high } = policy.display);
   else {
     const values: number[] = [];
     for (const atPoint of samples) {
@@ -70,17 +85,23 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     if (!(high > low)) throw new Error('Surface observation has no qualified radiance range.');
   }
   const samplePoint = (displayPoint: readonly number[]): SurfaceColorSample => {
-    const { point, values } = sampleAll(displayPoint), index = choose(values), first = values[0];
-    if (index < 0) return frames.length === 1 && first.reason !== undefined ? first : missing(point, 'no-qualified-observation');
-    const value = values[index];
+    let point: readonly number[], index: number, value: Missing | Accepted | undefined;
+    if (rank) ({ point, index, value } = sampleFirst(displayPoint, rank));
+    else {
+      const all = sampleAll(displayPoint), first = all.values[0];
+      ({ point } = all); index = choose(all.values); value = all.values[index];
+      if (index < 0 && frames.length === 1 && first.reason !== undefined) return first;
+    }
+    if (index < 0 || value === undefined) return missing(point, 'no-qualified-observation');
     if (value.reason !== undefined) return value;
-    const gain = levels.gains[index], radiance = value.radiance * gain, level = (v: number) => Math.round(Math.max(0, Math.min(1, (v - low) / (high - low))) * 255), gray = level(radiance);
-    const colorDisplay = policy.display.range === 'authored' ? policy.display.colorDisplay : undefined;
+    // The stretch is linear in the observed quantity; grey is sRGB-encoded like the colour bands, and a palette indexes the linear fraction.
+    const gain = levels.gains[index], radiance = value.radiance * gain, fraction = Math.max(0, Math.min(1, (radiance - low) / (high - low)));
+    const colorDisplay = policy.display.range === 'stated-range' ? policy.display.colorDisplay : undefined;
     if (Boolean(value.color) !== Boolean(colorDisplay)) throw new Error('Floating color samples require their source-bound band display policy.');
     // The shared footprint and level matching retain floats; encode the selected bands once here.
     const palette = policy.display.palette;
     return { ...value, color: value.color && colorDisplay ? value.color.map(channel => bandColorByte(channel * gain,colorDisplay))
-      : palette ? interpolatePalette(palette, gray / 255) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
+      : palette ? interpolatePalette(palette, fraction) : Array(3).fill(Math.round(255 * linearToSrgb(fraction))), radiance, frameId: frames[index].id, frameIndex: index };
   };
   const sourceSquareMeters: Record<string, number> = {};
   const areaCoverage = { method: 'Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed', samplesPerTriangle: policy.samplesPerTriangle,
@@ -102,10 +123,11 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     camera: { kind: frames[0].cameraKind, positionKm: frames[0].positionKm },
     frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection,
     levelMatching: frames.length > 1 ? { ...policy.levelMatching, ...levels, sampledPoints: points.length } : null,
-    display: { range: display.range, ...(display.range === 'authored' ? {} : { percentiles: display.percentiles }), low, high, units: display.units, ...(display.palette ? { palette: display.palette } : {}),
-      ...(display.range === 'authored' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
+    display: { range: display.range, ...(display.range === 'stated-range' ? {} : { percentiles: display.percentiles }), low, high, units: display.units, ...(display.palette ? { palette: display.palette } : {}),
+      basis: display.basis, ...(display.sourceId === undefined ? {} : { sourceId: display.sourceId }),
+      ...(display.range === 'stated-range' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
     areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })), previewPolicy: PREVIEW_POLICY,
-    ...(policy.registration ? { registration: policy.registration } : {}), ...(policy.limitations ? { limitations: policy.limitations } : {}) };
+    ...(policy.bandAlignment ? { bandAlignment: policy.bandAlignment } : {}), ...(policy.registration ? { registration: policy.registration } : {}), ...(policy.limitations ? { limitations: policy.limitations } : {}) };
   const preview = (width: number, height: number) => {
     const rgb = Buffer.alloc(width * height * 3), missingPixels = new Uint8Array(width * height);
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
@@ -117,5 +139,5 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     }
     return { rgb, missing: missingPixels };
   };
-  return { samplePoint, preview, report };
+  return { samplePoint, preview, report, retainsIllumination: policy.retainsIllumination };
 }

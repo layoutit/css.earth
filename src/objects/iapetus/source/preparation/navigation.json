@@ -6,34 +6,7 @@
     "size": 5
   },
   "source": {
-    "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
-    "license": "NASA/JPL imagery with attribution",
-    "licenseEvidence": [
-      "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-    ],
-    "acquisition": "Download the pinned original through the shared acquisition recipe.",
-    "redistribution": "Retain mission and source-author credits.",
-    "id": "cassini-iss-2014-iapetus-color",
-    "path": "observations/PIA18436.jpg",
-    "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
-    "catalog": "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/",
-    "consumers": [
-      "navigation"
-    ],
-    "lensId": "enhanced",
-    "label": "Enhanced color",
-    "falseColor": true,
-    "width": 11741,
-    "height": 5871,
-    "projection": {
-      "type": "equirectangular",
-      "centerLongitude": 180,
-      "longitudeDirection": "east-positive",
-      "latitudeType": "planetocentric"
-    },
-    "coverage": "Published global rectangular mosaic without a separate validity mask. Preserve every supplied pixel: the dark leading hemisphere is real surface albedo. Coarse polar coverage, patch seams and residual photographed shading remain.",
-    "expectedBytes": 4989080,
-    "expectedSha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b"
+    "path": "observations/PIA18436.jpg"
   },
   "operations": [
     {

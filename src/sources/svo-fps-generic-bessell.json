@@ -1,0 +1,24 @@
+{
+  "id": "svo-fps-generic-bessell",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "SVO Filter Profile Service: Generic Bessell B, V, R and I filters",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "http://svo2.cab.inta-csic.es/theory/fps/index.php?mode=browse&gname=Generic&gname2=Bessell",
+      "label": "SVO Filter Profile Service"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Generic/Bessell.V",
+      "checkedOn": "2026-09-16",
+      "locator": "WavelengthEff for Generic/Bessell.B, .V, .R and .I"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Spanish Virtual Observatory, CAB (CSIC-INTA)"
+}

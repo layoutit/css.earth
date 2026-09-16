@@ -3,6 +3,8 @@
 Saturn combines Hubble OPAL and Cassini visible imagery, Hubble spectral maps,
 a Cassini UVIS ring opacity profile, schematic thermal and interior views, and modeled atmosphere charts.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | View or quantity | Source |

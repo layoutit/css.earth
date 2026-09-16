@@ -358,8 +358,8 @@
     {
       "id": "ariel-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 3289,
-      "expectedSha256": "a65c5d6f64bb8b39e6d1d8bf7cca259a85c8be5328c8768049fbcb0bed4cc637",
+      "expectedBytes": 1342,
+      "expectedSha256": "545815996d662d758fa3c42e005a0c7608e9c8fb23f909ee1c1b4a00fe8f868f",
       "origin": "Repository-authored Ariel navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -395,8 +395,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7276,
-      "expectedSha256": "6354cab8aa87ccfb791c00b3274f596804815450ae221bf708eb7fac4d5eba03",
+      "expectedBytes": 7296,
+      "expectedSha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

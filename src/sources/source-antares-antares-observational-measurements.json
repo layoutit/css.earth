@@ -1,0 +1,37 @@
+{
+  "id": "source-antares-antares-observational-measurements",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Antares · antares observational measurements",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1304.4800",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/antares/source/manifest.json",
+      "revision": "601be8f893b7926a4e466ed3ec50824210640634",
+      "sha256": "a365bcf45a97a713fef159c79ba75a12aa1d5f21c8eb6c8e5beffd530344ba83",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ohnaka et al. (2013), A&A 555, A24; van Leeuwen (2007), A&A 474, 653",
+      "scope": "The antares observational measurements input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "cie-1931-2deg-cmf",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CIE (2019): Colour-matching functions of CIE 1931 standard colorimetric observer",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.25039/CIE.DS.xvudnb9b"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.25039/CIE.DS.xvudnb9b",
+      "label": "CIE dataset"
+    },
+    {
+      "role": "original",
+      "url": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "label": "CSV file"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "label": "CC BY-SA 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json",
+      "checkedOn": "2026-09-16",
+      "locator": "identifier, titles, rightsList, checksums sha256"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0 International",
+      "scope": "Dataset file",
+      "evidence": "CIE dataset metadata rightsList"
+    }
+  ],
+  "publisher": "International Commission on Illumination (CIE), Vienna",
+  "creators": [
+    "International Commission on Illumination (CIE)"
+  ],
+  "publicationDate": "2019"
+}

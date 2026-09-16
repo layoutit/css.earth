@@ -42,13 +42,12 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
   const { frames, policy, exceeded } = await format.load(recipe, context);
   // A limit looser than the frames' measured footprint and the mesh error allow would admit pixels across a limb or a neck.
   if (exceeded.length) throw new Error(`Surface observation ${String(requireRecord(recipe).id)} states ${exceeded.join(' and ')} beyond what its frames support: ${JSON.stringify(requireRecord(policy.limits).derived)}.`);
-  // Every camera route is measured the same way after it loads; a format's own registration, such as filter bands, is kept beside it.
+  // Every camera route is measured the same way after it loads.
   const lens = requireRecord(recipe);
   let measured = frames, stage = await registrationStage(frames, lens, context), refinement: Record<string, unknown> | undefined;
-  // A format's own refinement, such as the kernel route's limb refinement, states a `method` and is the format's business;
-  // a refinement that names a reference `by` is the stage's, and may turn every camera of the lens by that reference's
-  // decisive median, once, when no other reference disagrees. The turned lens is measured again.
-  if (lens.refinement !== undefined && requireRecord(lens.refinement).method === undefined) {
+  // A refinement names a reference and may turn every camera of the lens by that reference's decisive median, once, when no other
+  // reference disagrees; the turned lens is measured again. A route's own limb fit is `limbRefinement`, which the format applies.
+  if (lens.refinement !== undefined) {
     const wanted = parseRefinement(lens.refinement);
     if (!stage) throw new Error('A refinement needs frames that carry cameras.');
     // The turn about the pole comes from the named sweep, the tilt about the line of sight from the silhouette; both are
@@ -83,6 +82,6 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
       if (turnBy || tiltBy) { measured = corrected(turnBy, tiltBy); stage = attempt; }
     }
   }
-  const registration = policy.registration || stage ? { ...(policy.registration ? { bands: policy.registration } : {}), ...(stage ?? {}), ...(refinement ? { refinement } : {}) } : undefined;
+  const registration = stage ? { ...stage, ...(refinement ? { refinement } : {}) } : undefined;
   return createSurfaceObservation({ frames: measured, policy: { ...policy, registration }, radial, config, entries });
 }

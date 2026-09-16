@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
-    "credit": "Berthier et al. Sylvia physical/dynamical properties",
-    "license": "Authored display of scientific model; source attribution retained.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "occultation-approximation",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 55,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 45821,
-    "expectedSha256": "85feab9c5db07b89f7d097d76d748f4621dfd6bea3866bd7697e60a01b8c22d5"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

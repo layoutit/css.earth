@@ -512,8 +512,8 @@
     {
       "id": "callisto-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1943,
-      "expectedSha256": "07bc4bcf33c4aeea29bdc791545be5e52f852884848b2eea2c78671d275d99b8",
+      "expectedBytes": 406,
+      "expectedSha256": "cf2c1a274138b65ea3e25eefd93f15e9fd5afda2e42a095ab24d3ffe510b1b2f",
       "origin": "Repository-authored Callisto navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -549,8 +549,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 11111,
-      "expectedSha256": "8c27516c21b2ffdd7a4e890ead1cb15b500bc684720e582b5810ffbd4aeaa8aa",
+      "expectedBytes": 11134,
+      "expectedSha256": "4102e74b658b89d32f3be5ef538d7e219557caa2e3106cf27a1cebcc4f517b06",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

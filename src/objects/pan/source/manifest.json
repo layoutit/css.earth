@@ -984,15 +984,15 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 91376,
-      "expectedSha256": "e2051400cbc36c026e481ed6bb8787f60fb8016bc93afb4d912b909f3cc92240"
+      "expectedBytes": 82181,
+      "expectedSha256": "4ac166a33ef2cddfe00fdff8153f8e50a6381bc9f8713cf84ce4bb1c531720a4"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4905,
-      "expectedSha256": "67164c0b177a4e1e35b5b400a80c66d3f569e728517c1036bd99cb76d8f773c1",
+      "expectedBytes": 4923,
+      "expectedSha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1010,8 +1010,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1486,
-      "expectedSha256": "bb6ce77270feca27460cfd6770a883ee9c5f66b25df70ab6e40a2eaac06a53b9"
+      "expectedBytes": 440,
+      "expectedSha256": "75f821f43cd4c9f52e7afdaeb233bf5d97a09153bdbe7a8522175e0f5e9e581b"
     },
     {
       "path": "preparation/rotation.json",
@@ -1020,8 +1020,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 12277,
-      "expectedSha256": "b2957a57843dfbb0e055df499917b385d766c9d829e8771faa0fa0bba1552a1d"
+      "expectedBytes": 12339,
+      "expectedSha256": "3a3988cef43e0c54cab86db4ffa723a79172fca7cd105c773ccc964543468222"
     },
     {
       "path": "presentation/minimap.json",

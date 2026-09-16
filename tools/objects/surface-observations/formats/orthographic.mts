@@ -2,7 +2,7 @@
 import type { ObservationFrame, SurfaceObservationFormat } from '../contract.mts';
 import { array, decodeProfile, dimensions, number, shape, text, parseSurfaceGeometry } from '../../terrestrial-layers/source-records.mts';
 import { requireArray, requireRecord } from '../../../source-values.mts';
-import { OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, validateEnvelope } from '../recipe.mts';
+import { OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, validateEnvelope } from '../recipe.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeIsis2Qube } from '../../terrestrial-layers/isis2-qube.mts';
@@ -72,8 +72,8 @@ export const orthographicFormat: SurfaceObservationFormat = {
         registration: { coordinatePixels, maximumCoordinateErrorMeters, completeSourcePostBijection: true,
           method: 'Every XYZ pixel identifies one released terrain post; every terrain post is accounted for.' } } };
     return { frames: [frame], exceeded: [], policy: { format: recipe.format,
-      selection: 'single', samplesPerTriangle: 8, display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.' },
-      photometry: { model: 'retained-observation', maximumGain: 1 },
+      selection: 'single', samplesPerTriangle: 8, display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.', ...displayBasis(recipe.display) },
+      photometry: { model: 'retained-observation', maximumGain: 1 }, retainsIllumination: true,
       limits: { maximumCoordinateErrorMeters: recipe.maximumCoordinateErrorMeters },
       limitations: 'Orthophoto from the rescued mission website, independently registered to the reviewed DEM. Radiometric calibration is not requalified.' } };
   },

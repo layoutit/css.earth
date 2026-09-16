@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
-import { isRecord } from './source-values.mts';
+import { hasErrorCode, isRecord } from './source-values.mts';
 import type { ObjectDiscovery } from '../site/object-discovery.mts';
 import { parseArrivalView } from '../site/arrival-view.mts';
 import { preparedDefaultViewRotation } from '../src/renderers/css/dist/navigation.js';
@@ -37,7 +37,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
       for (const entry of entries) {
         if (!isRecord(entry) || typeof entry.id !== 'string') throw new TypeError('Invalid observation lens.');
         if (isRecord(entry.metadata) && entry.metadata.modeled === true ||
-            isRecord(entry.science) && entry.science.kind === 'neutral-shape' || key === 'surfaces' && policy.illustrationLenses.includes(entry.id)) continue;
+            isRecord(entry.science) && ['neutral-shape', 'disc-integrated-color'].includes(String(entry.science.kind)) || key === 'surfaces' && policy.illustrationLenses.includes(entry.id)) continue;
         if (exposed.has(entry.id)) {
           observed.add(entry.id);
           if (key === 'observations' || key === 'surfaceObservations') photographed.add(entry.id);
@@ -68,7 +68,12 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     if (!path.startsWith(resolve(objectDirectory) + sep)) throw new TypeError('Discovery recipe escaped its package.');
     inputs.push(JSON.parse(await readFile(path, 'utf8')));
   }
-  const controls: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/controls.json'), 'utf8'));
+  // A new package has no prepared lenses until its first preparation: it is discoverable as shape only, not an error.
+  const preparedJson = async (name: string): Promise<unknown> => {
+    try { return JSON.parse(await readFile(resolve(objectDirectory, 'prepared', name), 'utf8')); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
+  };
+  const controls: unknown = await preparedJson('controls.json') ?? { lenses: { controls: [] } };
   // Only photographic packages need their prepared camera. No geometry or image
   // analysis runs in the browser or during a selection.
   const photographic = inputs.some(input => {
@@ -76,6 +81,6 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const raster = isRecord(input.raster) ? input.raster : input;
     return ['observations', 'surfaceObservations'].some(key => Array.isArray(raster[key]) && raster[key].length > 0);
   });
-  const runtime: unknown = photographic ? JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')) : null;
+  const runtime: unknown = photographic ? await preparedJson('runtime.json') : null;
   return deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, isRecord(runtime) ? runtime.camera : undefined);
 }

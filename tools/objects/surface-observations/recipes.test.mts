@@ -46,7 +46,7 @@ test('NEAR MSI requires raw detector companions and bounded camera refinement wi
   for (const alter of [
     (lens: unknown) => { delete fixtureRecord(lens, 'frames', 0).originalPath; },
     (lens: unknown) => { delete fixtureRecord(lens, 'frames', 0).cameraPath; },
-    (lens: unknown) => { delete fixtureRecord(lens).refinement; },
+    (lens: unknown) => { delete fixtureRecord(lens).limbRefinement; },
     (lens: unknown) => { fixtureRecord(lens).allowLossy = true; },
     (lens: unknown) => { fixtureRecord(lens, 'photometry').model = 'lommel-seeliger'; },
   ]) {

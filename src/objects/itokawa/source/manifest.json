@@ -364,7 +364,7 @@
       "expectedSha256": "f26f0ede45114bcaaead6c875b6f8992bd0c52498affc647efe14ab059db38a1",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1005,8 +1005,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8551,
-      "expectedSha256": "0caa04610ef4d5f015c555565dd8de6efdad673578b95fe4ebf25e4fbec8b60a",
+      "expectedBytes": 8933,
+      "expectedSha256": "badccfda14687324d6b5ec8a24716242cddf82905b8a1271c7c82b32f50b34c6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1019,8 +1019,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1294,
-      "expectedSha256": "7bdf7f773b02c471be5f06cd2c0dc246489fcf1319a155cba28d0e52a73e98d5"
+      "expectedBytes": 444,
+      "expectedSha256": "76406008b817cb8a8230572fd5a76ddead13afb0c9c6f265bc585d5d01137953"
     },
     {
       "path": "preparation/rotation.json",
@@ -1029,8 +1029,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7438,
-      "expectedSha256": "946ad3fd14e8966760d8be129150775304983f5ab60b94ca37e04490af1877eb"
+      "expectedBytes": 7469,
+      "expectedSha256": "c02d7b6395a6207cfd5b71026778ed89f3f4fe08c9ad316e11807b49b4ed9a05"
     },
     {
       "path": "presentation/title-mark.json",

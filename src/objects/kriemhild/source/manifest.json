@@ -95,8 +95,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9664,
-      "expectedSha256": "7adf76b05805380331064b219f131c055a870fb8fd4106338f21c2a0950792b2",
+      "expectedBytes": 9688,
+      "expectedSha256": "727748f16db53b25abcb86b6f51448077c157084c84f28708d18e159ed50dd89",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -109,8 +109,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1255,
-      "expectedSha256": "79901dfdf4fbc4fa3c0e59753c36d150aec8c9a0fd951df83cb48e6b5e475d43"
+      "expectedBytes": 446,
+      "expectedSha256": "e322d833f7a145d05d1ff9af44ac75ccf2b49f5cd8f919ffe8bc3f193bd5522e"
     },
     {
       "path": "preparation/rotation.json",

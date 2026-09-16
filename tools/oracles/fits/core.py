@@ -22,6 +22,7 @@ for name, dtype, raw in [
     ('float64', 'float64', [-1e100, 0, 2.5e-100, np.nan]),
     ('cube', 'float32', list(range(12))),
     ('eso-hierarchy', 'float64', [1, -2, 0, 7.5]),
+    ('long-string', 'float32', [3.5, -0.25, np.nan, 0]),
 ]:
     data = np.array(raw, dtype=dtype).reshape((3, 2, 2) if name == 'cube' else (2, 2))
     hdu = fits.PrimaryHDU(data)
@@ -32,6 +33,9 @@ for name, dtype, raw in [
         hdu.header['HIERARCH ESO OBS AIRM'] = 2.0
         hdu.header['HIERARCH ESO INS NAME'] = "O'Brien / field"
         hdu.header['HIERARCH ESO DET ACTIVE'] = True
+    if name == 'long-string':
+        # Astropy writes values longer than one card with the CONTINUE convention.
+        hdu.header['CPYRIGHT'] = "IPAC/NASA - http://wise2.ipac.caltech.edu/docs/release/allwise/expsup/sec1_6b.html & O'Brien / field"
     if name == 'scaled-blank':
         hdu.header['BSCALE'] = 2
         hdu.header['BZERO'] = -2
@@ -44,6 +48,8 @@ for name, dtype, raw in [
         cases[name] = {'path': str(path.relative_to(ROOT)), 'dimensions': list(reversed(hdus[0].data.shape)),
                        'values': [float(v) if np.isfinite(v) else None for v in values],
                        'units': hdus[0].header['BUNIT'], 'observer': hdus[0].header['OBSERVER']}
+        if name == 'long-string':
+            cases[name]['longString'] = hdus[0].header['CPYRIGHT']
         if name == 'eso-hierarchy':
             cases[name]['hierarchy'] = {card.keyword: card.value for card in hdus[0].header.cards if card.keyword.startswith('ESO ')}
 

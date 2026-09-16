@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "antares",
+  "entries": [
+    {
+      "id": "pionier-2014",
+      "subject": "VLTI/PIONIER April-May 2014 H-band visibilities, JMMC OiDB (Montargès et al. 2017)",
+      "status": "excluded",
+      "finding": "The OiDB holds 23 calibration-level-2 files from the nights of 23 and 29 April and 4 and 7 May 2014 on three configurations (longest projected baseline 139 m): 1470 squared-visibility and 763 closure-phase channel rows, the JMMC pipeline's automated product. The paper never imaged them; its best models reach reduced chi-squared 25 to 44 and it reports that the star differs between the three spectral channels. SQUEEZE at the pinned commit on the merged set, started from a 37.38 mas disc, stalls at reduced chi-squared 30 with the Betelgeuse recipe and 15.5 with 10,000 elements over 8,000 iterations, never reaching burn-in; the compact-array night alone (1080 rows, five hours, one configuration) stays at 18.7; only the 7 May night (318 rows) converges, at 2.2, to a disc without resolved features. A uniform disc fits the merged set at reduced chi-squared 50,000. No image from these files is cast.",
+      "revisitWhen": "A reconstruction from these or later interferometric data that converges near reduced chi-squared 1 and resolves more than a uniform disc.",
+      "evidence": [
+        "https://oidb.jmmc.fr/",
+        "https://arxiv.org/abs/1705.07829"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    },
+    {
+      "id": "amber-images",
+      "subject": "VLTI/AMBER aperture-synthesis images in the CO lines and the K-band continuum (Ohnaka et al. 2013, 2017)",
+      "status": "excluded",
+      "finding": "The CDS deposit for Ohnaka et al. (2013), J/A+A/555/A24, holds two animated GIF movies, not image data; the 2017 Nature paper has no deposit found at the CDS. The AMBER observations in the OiDB are calibration level 0 (raw). Without a published image file or calibrated visibilities, nothing is cast.",
+      "revisitWhen": "The authors deposit the continuum image as FITS, or calibrated AMBER OIFITS of the 2009, 2010 or 2014 runs appear in the OiDB.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/555/A24",
+        "https://arxiv.org/abs/1304.4800",
+        "https://arxiv.org/abs/1708.06372"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    },
+    {
+      "id": "rotation-axis",
+      "subject": "Rotation axis, period and prime meridian",
+      "status": "unresolved",
+      "finding": "No publication measures the rotation axis or period of Antares; Ohnaka et al. (2017) map atmospheric velocities without one. The object uses the display-orientation record: the axis shown is celestial north in the plane of the sky and the display meridian faces the Earth at the scene epoch, both labelled as a convention.",
+      "revisitWhen": "A measured position angle of the rotation axis is published.",
+      "evidence": [
+        "https://arxiv.org/abs/1708.06372"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    },
+    {
+      "id": "distance",
+      "subject": "Distance",
+      "status": "included",
+      "finding": "Hipparcos 5.89 +/- 1.00 mas (van Leeuwen 2007), 170 pc, is adopted; the star is too bright for Gaia. The 17 percent parallax uncertainty moves the physical radius by the same fraction and nothing else in the scene.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Sco"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+Reconstruction of observations/pi1-gruis-pionier-2014-09-squeeze.fits
+
+Code:     SQUEEZE 3.0, https://github.com/fabienbaron/squeeze, commit 4d34e877606f16be73e7689fcb517d0b72d9d455 (2026-07-18), GPL-3.0.
+Build:    git clone https://github.com/fabienbaron/squeeze && cd squeeze && git checkout 4d34e877606f16be73e7689fcb517d0b72d9d455 && git submodule update --init --recursive && mkdir build && cd build && cmake .. && make
+          (macOS 15, Apple clang 17, cmake 4; cfitsio and OIFITSlib are bundled with the source.)
+Input:    observations/PI_GRU_forImage.fits as published in the JMMC OiDB by C. Paladini (calibration level 3), read as is:
+          909 squared visibilities and 603 closure phases over six H-band channels (three per instrument setting, 1.624 to
+          1.730 um), four nights of September 2014, no channel flagged. No merge or error floor was applied; the file is the one its authors imaged from.
+Start:    a uniform disc of 18.17 mas on a 128 x 128 grid of 0.4 mas pixels (the uniform-disc fit of this package's source test).
+Command:  squeeze PI_GRU_forImage.fits -s 0.4 -w 128 -not3amp -i uniform-disc-128.fits -en 10 -e 3000 -n 3000 -d 500 -chains 1 -threads 1 -quiet -o pi1-gruis-pionier-2014-09-squeeze.fits
+          Maximum-entropy regularisation with multiplier 10, 3000 flux elements, 3000 iterations, the posterior mean over
+          the final 500 realisations: the recipe retained for Betelgeuse, unchanged. SQUEEZE seeds its random generator with
+          a fixed default, so the same inputs, build and thread count reproduce the same image; the output is the file's
+          primary HDU, 128 x 128 x 1 double precision, CDELT1 = -0.4 mas (east left), CDELT2 = +0.4 mas (north up).
+Result:   reduced chi-squared 2.45 on squared visibilities and 1.06 on closure phases, printed by the run (1.89 combined).
+          Recomputed independently by tests/objects/unit/pi1-gruis/reconstruction.test.mts from the pinned image and
+          visibilities, without SQUEEZE.

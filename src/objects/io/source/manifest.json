@@ -1058,8 +1058,8 @@
     {
       "id": "io-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1640,
-      "expectedSha256": "592ef3e1de50621e805707176f0ac5ecf73f0d73962cfa09d81a2fe3beebdd52",
+      "expectedBytes": 394,
+      "expectedSha256": "8b9e9ce983f62002c6e82370fe5e93af51a0fb7dc0f57f81dd6f30504ff72658",
       "origin": "Repository-authored Io navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14220,
-      "expectedSha256": "6c2cf6fb9ef6514971297271fd03e69aef9502a41bd08c38750231ef3c42f6db",
+      "expectedBytes": 14237,
+      "expectedSha256": "00397c61e69ff869c90eca04b6d5aeb98e0e806075126de6ec2752579056d01b",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

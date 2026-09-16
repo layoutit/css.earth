@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "antares",
+  "angularDiameterMas": 37.38,
+  "angularDiameterSource": "Ohnaka et al. (2013, A&A 555, A24; arXiv:1304.4800): limb-darkened disc diameter 37.38 +/- 0.06 mas from VLTI/AMBER K-band continuum data of 2009 (37.31 +/- 0.09 mas in 2010). Montargès et al. (2017, A&A 605, A108) find the H-band diameter depends on position angle and channel (37.6-38.2 mas). The uniform-disc fit of this package to the public 2014 PIONIER files is 32.2 mas at reduced chi-squared 50,000: those data are far from any disc.",
+  "distanceParsecs": 169.77928692699493,
+  "distanceSource": "Hipparcos parallax 5.89 +/- 1.00 mas (van Leeuwen 2007, A&A 474, 653) via SIMBAD: 170 pc; the star is too bright for Gaia.",
+  "radiusKm": 474700204,
+  "radiusSource": "The Ohnaka et al. (2013) diameter at the Hipparcos distance: 37.38 mas at 169.8 pc is 474,700,204 km, 682 solar radii at 695700 km. Ohnaka et al. (2013) give 680 solar radii; the parallax uncertainty alone is 17 percent.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, shown in the shared neutral gray because no image of the photosphere is cast here (see investigations.json). The photosphere of a red supergiant is not a solid surface and its limb is not sharp."
+  }
+}

@@ -469,8 +469,8 @@
     {
       "id": "charon-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 2274,
-      "expectedSha256": "d92a8c44e5085a010315acf1c365d5b793a0c02e346fbcbb175e048d55dcc24d",
+      "expectedBytes": 797,
+      "expectedSha256": "aa710920bd90621e7ebdd55e253904e9d3a1586898c1105eab0ae9ada033894f",
       "origin": "Repository-authored Charon navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -506,8 +506,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15738,
-      "expectedSha256": "e4fcaf672048840b9db6daa439ea9a2f6b9c94033fa5af2b330d6a7b077b0cb9",
+      "expectedBytes": 15759,
+      "expectedSha256": "f8219e86cf8924d36b3b7e5a7b7e747b240356bde0d1e16af4bcdc18d056f102",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -991,7 +991,16 @@
     {
       "path": "observations/dataset.cat",
       "expectedBytes": 35600,
-      "expectedSha256": "b2a0a6f7e0eea428d82de3a5ca8e91722510275634e540ea05ed31cc724f3d60"
+      "expectedSha256": "b2a0a6f7e0eea428d82de3a5ca8e91722510275634e540ea05ed31cc724f3d60",
+      "purpose": "PDS3 data set catalog for the New Horizons Pluto-system composition maps: archive identity, producer and citation text.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/",
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "observations/nh-plutosystem-composition-overview.pdf"
+      ]
     },
     {
       "path": "presentation/minimap.json",
@@ -1020,20 +1029,36 @@
             "evidence": "src/planets/charon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
-      }
+      },
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "observations/nh-plutosystem-composition-overview.pdf"
+      ]
     },
     {
       "path": "observations/nh-plutosystem-composition-overview.pdf",
       "purpose": "Archive processing, coverage, photometry and calibration-uncertainty references.",
       "expectedBytes": 206962,
       "expectedSha256": "daad58c129eb22945026cbe2960046b62de27ea57ea12f336ae06dfb8c3c22c1",
-      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf"
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf",
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "observations/nh-plutosystem-composition-overview.pdf"
+      ]
     },
     {
       "path": "observations/nh-charon-color-download.json",
       "purpose": "Actual full binary download HTTP headers and SHA256 receipt.",
       "expectedBytes": 631,
-      "expectedSha256": "fc8d000377636f8d1f224eabeb4fbbc907464929f63b55348b112dc4ab716e51"
+      "expectedSha256": "fc8d000377636f8d1f224eabeb4fbbc907464929f63b55348b112dc4ab716e51",
+      "credit": "cssEarth",
+      "acquisition": "Recorded by the project when the colour mosaic was downloaded: the HTTP response headers and the SHA-256 of the received bytes."
     },
     {
       "path": "validation/color-source-inspection.json",

@@ -6,34 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "origin": "https://pds-rings.seti.org/galileo/",
-    "credit": "NASA/JPL; NASA PDS",
-    "license": "Public PDS scientific data; retain mission and model attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "c0532890500",
-        "c0420681401",
-        "c0420685801",
-        "c0394682801",
-        "c0401751800",
-        "pck-ellipsoid"
-      ],
-      "size": 256,
-      "longitudeDegrees": 202,
-      "latitudeDegrees": 0,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 22483,
-    "expectedSha256": "34dae451cf04ea394693f3caad77e529c0adae6e2bf24cee0d6f8a0baf0b50f8"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

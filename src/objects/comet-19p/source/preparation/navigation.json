@@ -6,39 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 61739,
-    "expectedSha256": "dfd488df8488052545e8dc47d0d2cf8a9f1f7faf32ce8dbfd845dbdab09020f7",
-    "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub",
-    "credit": "NASA/JPL/MICAS; USGS; cssEarth preparation",
-    "license": "Source-credited prepared visualization",
-    "licenseEvidence": [
-      "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
-      "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt"
-    ],
-    "acquisition": "Reproduced by shared preparation from the reviewed DEM and registered mission orthophoto.",
-    "redistribution": "Preserve source attribution and image calibration qualification.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "usgs-dem",
-        "micas-orthophoto",
-        "micas-x",
-        "micas-y",
-        "micas-z"
-      ],
-      "size": 512,
-      "longitudeDegrees": -90,
-      "latitudeDegrees": 80,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "micas"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {

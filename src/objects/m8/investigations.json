@@ -40,7 +40,25 @@
       "id": "lens-spitzer-mid-infrared",
       "subject": "spitzer-mid-infrared shipped image lens",
       "status": "included",
-      "finding": "IRAC 3.6/4.5/5.8/8 plus MIPS 24 micrometre false color, 1757 by 1417 pixels over 35.73 by 28.81 arcmin. AstroPix supplies the matching WCS; different beams and the narrow footprint remain explicit, with a 240 arcsec source-edge fade.",
+      "finding": "Calibrated IRAC 8.0/4.5/3.6 micrometre maps from CDS hips2fits, composed on the 1757 by 1417 pixel, 35.73 by 28.81 arcmin TAN grid with one measured background and range per band and one asinh display. Registered against ESO optical with 214 matched stars and 0.118 px held-out RMS. MIPS 24 micrometres is left out because its HiPS has no data over the Hourglass core; hue shows band-relative brightness, not physical ratios.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/3266cb74526f7b3a3cec54599f4e5687524a9ea8/src/objects/m8/source/sky-bands/spitzer-irac.json",
+        "https://github.com/layoutit/css.earth/blob/3266cb74526f7b3a3cec54599f4e5687524a9ea8/labs/nebula/models/m8/processing-observations.json",
+        "https://github.com/layoutit/css.earth/blob/3266cb74526f7b3a3cec54599f4e5687524a9ea8/src/objects/m8/evidence/spitzer-fits/preview-comparison.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "3266cb74526f7b3a3cec54599f4e5687524a9ea8"
+        }
+      ]
+    },
+    {
+      "id": "spitzer-sig11-012-publisher-image",
+      "subject": "Spitzer sig11-012 publisher TIFF as the mid-infrared lens",
+      "status": "excluded",
+      "finding": "Replaced by the calibrated IRAC composite. Its earlier use: IRAC 3.6/4.5/5.8/8 plus MIPS 24 micrometre false color, 1757 by 1417 pixels over 35.73 by 28.81 arcmin. AstroPix supplies the matching WCS; different beams and the narrow footprint remain explicit, with a 240 arcsec source-edge fade.",
+      "revisitWhen": "A calibrated MIPS 24 micrometre map with coverage over the Hourglass core, or evidence that the IRAC composite misplaces or loses structure the publisher image shows.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m8/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m8/compiler.json",

@@ -1,13 +1,14 @@
 import {parseGeoImageEntry,parsePdsRgbPolicy,text} from './source-records.mts';
 import { spawn } from 'node:child_process';
 import { prepareProjectedByteObservation } from './observed-image.mts';
+import { pds3Keyword } from '../pds-labels.mts';
 
 /** Decode an attached PDS3 RGB image without treating its three BSQ planes as gray.
  * ZIP extraction streams into one RGB buffer; projection and masking remain shared.
  */
 export function parsePdsRgbLabel(label: string, sourceEntry: unknown, value: unknown) {
   const entry=parseGeoImageEntry(sourceEntry),policy=parsePdsRgbPolicy(value);
-  const field = (key: string) => label.match(new RegExp(`^\\s*${key.replaceAll('^', '\\^')}\\s*=\\s*([^\\r\\n]+)`, 'm'))?.[1].trim().replaceAll('"', '');
+  const field = (key: string) => pds3Keyword(label, key);
   const num = (key: string) => Number.parseFloat(field(key)??"NaN");
   const width = num('LINE_SAMPLES'), height = num('LINES');
   const recordBytes = num('RECORD_BYTES'), pointer = num('^IMAGE');

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-belinda-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1006/icar.2001.6596",
-    "credit": "Karkoschka (2001) shape measurements; cssEarth grid and portrait",
-    "license": "Factual measurements; MIT presentation",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "karkoschka-belinda-prolate",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 90,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 56017,
-    "expectedSha256": "109ef5065850ea19284480d11186bdc20d9e19c6d07cea7e5223adcc0f780a92"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

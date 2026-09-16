@@ -40,7 +40,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "4.30 hours"
+        "value": "4.30 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-physical.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "Target physical data: ROTPER (h)"
+        }
       }
     ],
     "moreFacts": [
@@ -179,7 +187,7 @@
       "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio"
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/bennu.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://www.lpi.usra.edu/meetings/lpsc2013/pdf/1598.pdf",
-    "credit": "NASA/JPL/SSI; Thomas et al. measured ellipsoid",
-    "license": "Public NASA mission data; retain attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "measured-shape",
-        "n1716192103_1"
-      ],
-      "size": 512,
-      "longitudeDegrees": 270,
-      "latitudeDegrees": -10,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "normal"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 78463,
-    "expectedSha256": "c6e92dea177c8ab82833086ba09c30bc6c8bb2dedf85e8b767aea725b37386ce"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

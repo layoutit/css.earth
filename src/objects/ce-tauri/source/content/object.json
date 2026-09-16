@@ -1,0 +1,209 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ce-tauri",
+  "displayName": "CE Tauri",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "720 solar radii"
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "658 parsecs"
+      },
+      {
+        "id": "angular-diameter",
+        "label": "Angular diameter (1.62 µm)",
+        "value": "10.18 milliarcseconds"
+      },
+      {
+        "id": "rotation-axis",
+        "label": "Rotation axis",
+        "value": "not measured"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "pionier-2016-12",
+    "controls": [
+      {
+        "id": "pionier-2016-11",
+        "label": "PIONIER image, November 2016",
+        "thumbnail": "ce-tauri-lens-pionier-2016-11.webp",
+        "surface": "ce-tauri-surface-pionier-2016-11.webp",
+        "poles": "ce-tauri-poles-pionier-2016-11.webp",
+        "source": {
+          "id": "cds-nov-avg",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "notes": "The SQUEEZE reconstruction its authors published for November 2016 (Montargès et al. 2018, CDS J/A+A/614/A12), 32 pixels of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter. Shown as published, finer than the 1.8 milliarcsecond beam of the longest baseline: the features are the authors' reconstruction, with a convective contrast they measure at 5 to 6 percent. The star has no measured rotation axis: the axis shown is celestial north, a display convention. The far hemisphere is unobserved and carries the no-data grid.",
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative intensity in the H band",
+          "labels": [
+            "0.41",
+            "0.71",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.41",
+              "0.71",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+          "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
+        }
+      },
+      {
+        "id": "pionier-2016-12",
+        "label": "PIONIER image, December 2016",
+        "thumbnail": "ce-tauri-lens-pionier-2016-12.webp",
+        "surface": "ce-tauri-surface-pionier-2016-12.webp",
+        "poles": "ce-tauri-poles-pionier-2016-12.webp",
+        "source": {
+          "id": "cds-dec-avg",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "notes": "The SQUEEZE reconstruction its authors published for December 2016 (Montargès et al. 2018, CDS J/A+A/614/A12), 32 pixels of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter. Shown as published, finer than the 1.8 milliarcsecond beam of the longest baseline: the features are the authors' reconstruction, with a convective contrast they measure at 5 to 6 percent. The star has no measured rotation axis: the axis shown is celestial north, a display convention. The far hemisphere is unobserved and carries the no-data grid.",
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative intensity in the H band",
+          "labels": [
+            "0.40",
+            "0.70",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.40",
+              "0.70",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+          "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "The convective photosphere of the red supergiant CE Tauri, I: VLTI/PIONIER H-band interferometric imaging (A&A, 2018)",
+      "href": "https://doi.org/10.1051/0004-6361/201731471"
+    },
+    {
+      "label": "Images",
+      "role": "terrain",
+      "description": "The published reconstructed images and stellar parameters, CDS J/A+A/614/A12",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/614/A12"
+    },
+    {
+      "label": "Visibilities",
+      "role": "terrain",
+      "description": "Calibrated PIONIER OIFITS, November 2016 to February 2017, JMMC OiDB",
+      "href": "https://oidb.jmmc.fr/"
+    },
+    {
+      "label": "Placement",
+      "role": "facts",
+      "description": "SIMBAD record for 119 Tau: Gaia DR3 position, parallax and proper motion",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/201731471",
+      "credit": "M. Montargès, R. Norris, A. Chiavassa et al. (2018); ESO/VLTI/PIONIER; images from CDS J/A+A/614/A12"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ce-tauri.json",
+      "credit": "Published limb-darkened diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

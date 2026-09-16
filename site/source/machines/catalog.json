@@ -5550,6 +5550,154 @@
           }
         ]
       }
+    },
+    {
+      "id": "eso-vlti-pionier-pi1-gruis",
+      "name": {
+        "value": "VLTI/PIONIER imaging of π¹ Gruis",
+        "citations": [
+          {
+            "catalogueId": "eso-release-eso1741",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLTI/PIONIER",
+        "citations": [
+          {
+            "catalogueId": "eso-release-eso1741",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "description": {
+        "value": "VLTI/PIONIER H-band imaging of the giant star π¹ Gruis over four nights in September 2014, the first resolved granulation on a star other than the Sun.",
+        "citations": [
+          {
+            "catalogueId": "eso-release-eso1741",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "eso-release-eso1741",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlti",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "eso-release-eso1741",
+              "checkedOn": "2026-09-16"
+            }
+          ]
+        }
+      ],
+      "ended": {
+        "value": "2014",
+        "citations": [
+          {
+            "catalogueId": "eso-release-eso1741",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-16"
+        },
+        "citations": [
+          {
+            "catalogueId": "eso-release-eso1741",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-vlti-pionier-ce-tauri",
+      "name": {
+        "value": "ESO programme 298.D-5005",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLTI/PIONIER",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "description": {
+        "value": "VLTI/PIONIER H-band imaging of the red supergiant CE Tauri at two epochs, November and December 2016.",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlti",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "arxiv-1802-06086",
+              "checkedOn": "2026-09-16"
+            }
+          ]
+        }
+      ],
+      "ended": {
+        "value": "2017",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-16"
+        },
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      }
     }
   ]
 }

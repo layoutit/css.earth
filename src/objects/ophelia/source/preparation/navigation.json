@@ -6,30 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-ellipsoid-context",
-    "path": "presentation/context.png",
-    "origin": "https://doi.org/10.1006/icar.2001.6596",
-    "credit": "Karkoschka (2001) prolate dimensions; cssEarth shape visualization",
-    "license": "MIT representation of scientific dimensions; retain attribution.",
-    "consumers": [
-      "navigation"
-    ],
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "measured-shape",
-        "model-surface"
-      ],
-      "size": 512,
-      "longitudeDegrees": 40,
-      "latitudeDegrees": 20,
-      "ambient": 0.45,
-      "diffuse": 0.55,
-      "lensId": "model"
-    },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 67255,
-    "expectedSha256": "d147f44341b120d5a2f3d8fd840ca3567291324947a648bfbad5e5acd242bc04"
+    "path": "presentation/context.png"
   },
   "operations": [
     {

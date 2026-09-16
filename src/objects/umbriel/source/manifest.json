@@ -296,8 +296,8 @@
     {
       "id": "umbriel-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 3312,
-      "expectedSha256": "1fedc013f020141b602256b242bc2376a3a745d590ff313d7dccaf59415a045a",
+      "expectedBytes": 1342,
+      "expectedSha256": "ed2977192714f637bb152a365cb3d521a38464a1acf95d17e43946818987e631",
       "origin": "Repository-authored Umbriel navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -333,8 +333,8 @@
     {
       "id": "umbriel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7257,
-      "expectedSha256": "3c804e51ba01a36e34d1d93490ddcae497ee3ee1d2844e2bfe79cb65ce0cb714",
+      "expectedBytes": 7279,
+      "expectedSha256": "c958f6fa1205f46ee4e32c2c357493160f6d753cf051c8e8be9db3d4e1050dae",
       "origin": "Repository-authored Umbriel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

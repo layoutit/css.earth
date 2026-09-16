@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pi1-gruis",
+  "displayName": "π¹ Gruis",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "316 solar radii"
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "162 parsecs"
+      },
+      {
+        "id": "angular-diameter",
+        "label": "Angular diameter (1.65 µm)",
+        "value": "18.17 milliarcseconds"
+      },
+      {
+        "id": "rotation-axis",
+        "label": "Rotation axis",
+        "value": "not measured"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "pionier",
+    "controls": [
+      {
+        "id": "pionier",
+        "label": "PIONIER reconstruction",
+        "thumbnail": "pi1-gruis-lens-pionier.webp",
+        "surface": "pi1-gruis-surface-pionier.webp",
+        "poles": "pi1-gruis-poles-pionier.webp",
+        "source": {
+          "id": "pi1-gruis-pionier-2014-09",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from the public VLTI/PIONIER visibilities and closure phases of four nights in September 2014, in the H band (1.62-1.73 micrometres), convolved to the 2.1 milliarcsecond interferometric beam and cast onto a sphere of the fitted radius, so nothing finer than the beam is shown. The star has no measured rotation axis: the axis shown is celestial north, a display convention. The far hemisphere is unobserved and carries the no-data grid.",
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative intensity at 1.65 µm",
+          "labels": [
+            "0.45",
+            "0.72",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.45",
+              "0.72",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+          "sourceUrl": "https://doi.org/10.1038/nature25001"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Large granulation cells on the surface of the giant star π¹ Gruis (Nature, 2018)",
+      "href": "https://doi.org/10.1038/nature25001"
+    },
+    {
+      "label": "Visibilities",
+      "role": "terrain",
+      "description": "Calibrated PIONIER OIFITS, September 2014, JMMC OiDB",
+      "href": "https://oidb.jmmc.fr/"
+    },
+    {
+      "label": "Reconstruction code",
+      "role": "facts",
+      "description": "SQUEEZE (F. Baron), the code that made the image",
+      "href": "https://github.com/fabienbaron/squeeze"
+    },
+    {
+      "label": "Placement",
+      "role": "facts",
+      "description": "SIMBAD record for pi1 Gru: Gaia DR3 position, parallax and proper motion",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1038/nature25001",
+      "credit": "C. Paladini, F. Baron, A. Jorissen et al.; ESO/VLTI/PIONIER; JMMC OiDB; reconstruction by this repository with SQUEEZE"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/pi1-gruis.json",
+      "credit": "Fitted angular diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

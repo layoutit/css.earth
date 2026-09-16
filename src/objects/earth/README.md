@@ -3,6 +3,8 @@
 `/earth/` — Archival imagery and scientific maps. Layers have different dates;
 clouds are not live weather. Dataset selection is manual at every zoom.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Sources
 
 | View | Source | What it means |

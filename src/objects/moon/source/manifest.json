@@ -599,7 +599,7 @@
       "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -675,7 +675,7 @@
       "path": "presentation/solar-system.json",
       "expectedSha256": "6b9c5784ce3388d37a5dd987817701fc28559f779b877768856fcc5b1177d3bb",
       "expectedBytes": 270,
-      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40\u00b0) carried over from the retired static-surface geometry",
+      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source recipe authored from the retired static camera plan and the shared Mercury/Venus/Mars marker layout",
@@ -770,8 +770,8 @@
     {
       "id": "moon-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "b1254ab4d5825c07bfd6998b1eb0828dc86d4c8b080b318a555cc18fe9cfa8d7",
-      "expectedBytes": 664,
+      "expectedSha256": "1c3491c330f0167fa43ad314197bbc18b3d8743099854b5b24068fced9440b76",
+      "expectedBytes": 404,
       "origin": "Repository-authored Moon navigation asset recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

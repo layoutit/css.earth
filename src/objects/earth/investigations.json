@@ -1,0 +1,446 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "earth",
+  "entries": [
+    {
+      "id": "blue-marble-july-surface",
+      "subject": "NASA Blue Marble Next Generation, July 2004",
+      "status": "included",
+      "finding": "Visible colour uses the pinned 21,600 by 10,800 cloud-free July JPEG, bilinearly sampled at each page or polar footprint with a display-only midtone lift of round(255*(v/255)^(1/1.25)) that leaves black and white endpoints unchanged; the README calls this a presentation adjustment, not radiometric calibration or recovered albedo.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L84",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L91",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "blue-marble-clouds",
+      "subject": "NASA Visible Earth Blue Marble cloud TIFF",
+      "status": "included",
+      "finding": "Cloud coverage adds the checked 8,192 by 4,096 archival cloud TIFF over the adjusted July surface with the existing alpha recipe, sampled independently at the same geographic coordinate; the layers have different dates, so they are neither simultaneous observations nor live weather.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L3",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L85",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L111"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "december-and-cloud-free-alternatives",
+      "subject": "December Blue Marble mosaics",
+      "status": "excluded",
+      "finding": "The cloud-free comparison considered December with clouds, cloud-free December and cloud-free July, and July was selected for clearer northern land; December remains an archival comparison input.",
+      "revisitWhen": "A comparison shows another Blue Marble mosaic gives clearer global land than the selected July map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L84",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L122"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "daily-viirs-imagery",
+      "subject": "Recent daily VIIRS imagery",
+      "status": "unresolved",
+      "finding": "Recent daily VIIRS imagery remains an unqualified candidate because of polar gaps and daily mosaic incompleteness.",
+      "revisitWhen": "A daily or composite VIIRS product provides gap-free global coverage suitable for the surface lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L124"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "sentinel-2-mosaics",
+      "subject": "Sentinel-2 global mosaics",
+      "status": "excluded",
+      "finding": "Sentinel-2 mosaics were surveyed but not qualified for complete global coverage and account-free acquisition.",
+      "revisitWhen": "A Sentinel-2 mosaic offers complete global coverage that can be acquired without an account.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L125"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "gebco-2026",
+      "subject": "GEBCO_2026 gridded bathymetry and topography",
+      "status": "included",
+      "finding": "Elevation samples the primary land-and-ice-surface version as signed metres relative to mean sea level, through 20 pinned DAP2 latitude blocks giving 8,640 by 4,320 values at 2.5 arc-minute spacing with both coordinate arrays validated and blocks rejected on truncation, wrong coordinates, overlaps or gaps; it is a sampled overview of a terrain model that integrates measured and estimated depths, not a full-resolution DEM, and the publisher notes local coastal datum exceptions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L133",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L141",
+        "https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "etopo-2022",
+      "subject": "NOAA ETOPO 2022",
+      "status": "excluded",
+      "finding": "GEBCO_2026 was selected for the global numeric model and ETOPO 2022 remains an older alternative.",
+      "revisitWhen": "ETOPO or another global model supersedes GEBCO_2026 for this use.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L161"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "blue-marble-relief-base",
+      "subject": "Previous Blue Marble base plus relief as the elevation view",
+      "status": "excluded",
+      "finding": "The previous Blue Marble base with relief shading is excluded because its land colours do not encode elevation.",
+      "revisitWhen": "A colour base is adopted whose values encode elevation directly.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L162"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "viirs-night-lights-2025",
+      "subject": "NASA VJ146A4.002 NOAA-20 VIIRS annual radiance, 2025",
+      "status": "included",
+      "finding": "Night lights use the numerical radiance band of the processed annual product through Jurij Stare's public mirror, one Float32 band of 86,400 by 33,600 cells in EPSG:4326 with -999.9 as missing and zero as valid thresholded background; preparation averages radiance over display cells weighted by spherical area, marks a cell missing below half-area coverage and applies an authored warm logarithmic transfer with 0.25 softening and saturation at 100 nW/cm2/sr as display parameters rather than calibration factors.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L171",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L185",
+        "https://doi.org/10.5067/VIIRS/VJ146A4.002"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "night-light-quality-bands",
+      "subject": "Quality and observation-count bands for the night lights",
+      "status": "unresolved",
+      "finding": "The mirror contains no observation-count or quality bands, so no further quality selection is possible and aurora and transient lighting remain in the source, especially at high latitudes; coverage also stops at 75 degrees north and 65 degrees south and missing coverage is gray.",
+      "revisitWhen": "A release supplies quality or observation-count bands, or gap-free polar coverage, for the annual radiance product.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L71",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L196"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "night-light-alternative-sources",
+      "subject": "Other 2025 night-light sources",
+      "status": "excluded",
+      "finding": "The source survey of 2026-09-09 found that direct NASA 2025 annual granules require Earthdata authentication, NASA GIBS annual display mosaics still offer only 2012 and 2016, the EOG VNL v2.2 download directory returns HTTP 401, and OpenGeoHub's public 2024 derivative is older and rescales the numeric values; the selected mosaic retains original float radiance units with verifiable grid metadata and explicit attribution.",
+      "revisitWhen": "An account-free numerical annual mosaic of equal or later date becomes available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L201"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mur-enso-imagery",
+      "subject": "NASA GIBS MUR v4.1 sea-surface temperature anomaly image, 7 September 2026",
+      "status": "included",
+      "finding": "The ENSO view uses the 1 km GIBS imagery grid of 40,960 by 20,480 pixels, 3,200 tiles whose URL, bytes, hash and response date are pinned and which must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA colour table supplying 0.1 degree bins and saturation below -3 and at +3 degrees; RGB is not inverted into continuous measurements, transparent land, ice and unavailable observations stay gray, and the map and its dated NOAA advisory are not live feeds.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L15",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L73",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L212",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L225",
+        "https://doi.org/10.5067/GHGMR-4FJ04"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "coraltemp-comparison",
+      "subject": "Earlier CoralTemp comparison",
+      "status": "excluded",
+      "finding": "The earlier CoralTemp comparison used a different 1991-2020 baseline and display range, so it is not a resolution-only comparison with the selected MUR imagery.",
+      "revisitWhen": "A sea-surface anomaly product on a comparable baseline and display range is compared.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L232"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "authored-atmosphere-record",
+      "subject": "Authored atmosphere parameter record",
+      "status": "included",
+      "finding": "The visible atmosphere's numerical authority is the authored record adapted from OpenSpace RenderableAtmosphere tuning and Bruneton and Neyret (2008), cited in the file: 6,377 km planet radius, 70 km atmosphere height, 680/550/440 nm Rayleigh coefficients with an 8 km scale height, and Mie coefficients, scale height and anisotropy, which produce the static view bank and its outer-radius ratio.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L13",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L240"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "google-earth-pro-presentation",
+      "subject": "Google Earth Pro presentation operator",
+      "status": "included",
+      "finding": "Google Earth Pro supplies only the presentation operator over those Earth facts, a captured Sun-direction uniform, 0.2 camera exposure, exponential tone mapping and luminance-driven opacity, with the checked response file recording shader hashes and test results; no Google pixels or shader bytes are redistributed, and its blue Mars result is deliberately not treated as a body-colour authority.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L247",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L254"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "psg-charts",
+      "subject": "NASA GSFC Planetary Spectrum Generator configuration and radiance response",
+      "status": "included",
+      "finding": "The charts use the expanded 2026-08-30 configuration with a declared 0.35-1.0 micrometre R=120 I/F block: acquisition removes exactly the leading MERRA retrieval warning, which would otherwise make a radiance request return an empty body, and normalizes only the synthesis-clock and execution-time comments so the pinned response restores deterministically, leaving the numerical output unchanged.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L261",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L270"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "glad-m35-tomography",
+      "subject": "GLAD-M35 r0.1 (2024) seismic model",
+      "status": "included",
+      "finding": "Mantle tomography samples the published NetCDF's vsv field, 289 depths from 10 to 2,890 km, 181 latitudes and 361 longitudes, through a checked 520,307-byte subset that pins the original volume's URL and hash; the colour quantity is 100*(Vsv/horizontalMeanVsv(depth)-1) with area-weighted means, the display reference is not the inversion's STW105, Vsv must not be relabelled as isotropic shear speed, the r0.1 release flattens the 410/660 km boundary topography, and the 1 degree and 10 km sample spacing does not imply features of that size are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L290",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L303",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L320",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L333",
+        "https://doi.org/10.1093/gji/ggae270"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "semucb-wm1",
+      "subject": "SEMUCB-WM1 whole-mantle shear-velocity model",
+      "status": "excluded",
+      "finding": "SEMUCB-WM1 was considered and remains a useful independent comparison, but this view uses one identified model rather than blending incompatible inversions; no claim is made that GLAD-M35 is the newest model.",
+      "revisitWhen": "A comparison or a newer release justifies changing the selected mantle model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L308",
+        "https://ds.iris.edu/ds/products/emc-semucb-wm1/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "schematic-interior-layers",
+      "subject": "NASA Science schematic interior layers",
+      "status": "included",
+      "finding": "The interior record supplies schematic layer geometry based on NASA Science: geometry stays schematic including its uniform 30 km crust, only mantle material receives data colours, source depths outside 10-2,890 km are gray with no extrapolation into the core, and crust, outer core and inner core remain illustrative.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L289",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L341"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "natural-earth-names",
+      "subject": "Natural Earth 1:10m vectors for named features",
+      "status": "included",
+      "finding": "Earth has no IAU nomenclature, so names come from public-domain Natural Earth vectors pinned in the package, and the 2026-09-15 run prepared 5,467 names including 258 countries and 3,000 populated places, with the features recipe limiting default labels to oceans, continents, countries, capitals, cities, landmarks and eight named highlights.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L65",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L67",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L69"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "worldcover-paging",
+      "subject": "ESA WorldCover geographic paging and city imagery",
+      "status": "excluded",
+      "finding": "The current object definition declares neither paging nor destinations, so shared preparation omits the geographic pages, noise overlay and city catalogue; the pinned publisher listing of 19,359 objects spans 60 degrees south to 83 degrees north, describes source footprints rather than a validity guarantee, leaves Antarctica and the far north uncovered, and the provider's terms do not establish unlimited free production traffic.",
+      "revisitWhen": "The project decides to re-enable geographic paging with an imagery source whose coverage and terms support it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L17",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L378",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L388",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L392"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "geonames-city-catalogue",
+      "subject": "GeoNames cities15000 snapshot",
+      "status": "excluded",
+      "finding": "The retained CC BY 4.0 snapshot of 34,135 populated places, acquired 4 September 2026, covers cities above 15,000 people or capitals rather than every settlement, and its search and camera catalogue are retired with the geographic feature; the old city-search notes cite ignored screenshots without a retrievable run report.",
+      "revisitWhen": "City search is re-enabled with the geographic feature.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L431",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L452"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "buenos-aires-noise",
+      "subject": "Buenos Aires APrA 2025 daytime noise estimates",
+      "status": "excluded",
+      "finding": "The retired noise lens used the CC BY 2.5 Argentina annual estimated noise map, not live sensor readings; its pinned GeoJSON and rasterized 30-95 dBA tiles remain for provenance while the lens is off.",
+      "revisitWhen": "A noise lens is re-enabled, or a global noise dataset is adopted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L414",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L421"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "close-zoom-missing-tiles",
+      "subject": "Missing tiles at 4x zoom",
+      "status": "unresolved",
+      "finding": "Wheel input reaching 4x zoom kept the clear surface on 512-pixel pages and showed missing tiles over Asia in a local Chromium run on 12 September 2026; the same camera and unchanged renderer reproduced it with both the previous and the new pinned assets, waiting for readiness and rebuilding the renderer did not resolve it, and the cause is not established.",
+      "revisitWhen": "The cause of the missing close-zoom tiles is found, or the behaviour stops reproducing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L57"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "moon-relationship-facts",
+      "subject": "Selected JPL Moon physical and mean-element values",
+      "status": "included",
+      "finding": "Earth keeps only the checked relationship facts used by its information panel, radius 1,737.4 km, density 3.344 g/cm3, mean distance 384,400 km, inclination 5.16 degrees, period 27.322 days and Earth GM 398,600.436 km3/s2, with source URLs and hashes recorded; the Moon is a separate package and the Earth scene prepares or mounts no Moon representation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L459",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L464"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "soft-limb-overlay",
+      "subject": "White limb overlay with Shadows off",
+      "status": "included",
+      "finding": "With Shadows off, Earth uses a white limb overlay at one quarter of the original shading alpha, which brightens the edge without modifying the source imagery and leaves the directional Shadows bank and atmosphere unchanged; the 10 September 2026 check matched the selected 25 percent preview exactly in Chrome at DPR 1 and 2 across the surface, cloud, elevation, night-light and ENSO views.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L25",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/earth/README.md#L117"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

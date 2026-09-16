@@ -6,32 +6,7 @@
     "size": 5
   },
   "source": {
-    "id": "prepared-radial-context",
-    "path": "presentation/context.png",
-    "expectedBytes": 12676,
-    "expectedSha256": "76a00e30ee6d51cadf3e6802ef96f528fde972073cf55cce7ae43af1b9a1f671",
-    "origin": "https://ui.adsabs.harvard.edu/abs/1999A%26A...341..912B",
-    "credit": "Boehnhardt et al. (1999), A&A 341, 912",
-    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
-    "licenseEvidence": [],
-    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
-    "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
-    "consumers": [
-      "navigation"
-    ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "inputs": [
-        "celestia-mesh"
-      ],
-      "size": 512,
-      "longitudeDegrees": 70,
-      "latitudeDegrees": 20,
-      "ambient": 1,
-      "diffuse": 0,
-      "lensId": "model"
-    }
+    "path": "presentation/context.png"
   },
   "operations": [
     {
