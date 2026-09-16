@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-provenance-references@1",
+  "references": [
+    {
+      "originalPath": "labs/nebula/models/lmc/particles/source/provenance.json",
+      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
+      "path": "src/objects/lmc/source/evidence/lmc/particles/source/provenance.json",
+      "sha256": "024cbd58275980986b15b6204e4fa9257d1e367271f88b918d4e61c7d4c4a7a8",
+      "bytes": 2969
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/stars/source/catalogue.json",
+      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
+      "path": "src/objects/lmc/source/evidence/lmc/stars/source/catalogue.json",
+      "sha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8",
+      "bytes": 2527
+    },
+    {
+      "originalPath": "labs/nebula/models/image-candidates.json",
+      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
+      "path": "src/objects/lmc/source/evidence/image-candidates.json",
+      "sha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583",
+      "bytes": 9320
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/bake.json",
+      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
+      "path": "src/objects/lmc/source/evidence/lmc/bake.json",
+      "sha256": "82e44aebd5dc80e3f44c5258c51040f778a6cfa1f0c105b4b23ef8dcba6154b8",
+      "bytes": 4432
+    },
+    {
+      "originalPath": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
+      "path": "src/objects/lmc/source/bake-inputs/density/volume.json",
+      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
+      "bytes": 1370
+    }
+  ]
+}

@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile, realpath } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUrl } from '../src/platform/source-catalog.mts';
@@ -62,7 +62,7 @@ export async function verifyFactsheetSources(panel: unknown, {
     assert.ok(offset && offset !== '..' && !offset.startsWith('../'), 'Fact evidence escapes the body source directory.');
     const bytes = await read(citation.path);
     assert.equal(bytes.length, entry.expectedBytes, `${fact.id}: fact evidence byte count differs`);
-    assert.equal(createHash('sha256').update(bytes).digest('hex'), sourceDigest(entry.expectedSha256), `${fact.id}: fact evidence pin differs`);
+    assert.equal(sha256(bytes), sourceDigest(entry.expectedSha256), `${fact.id}: fact evidence pin differs`);
     checked.add(citation.path);
   }
   return parsed;

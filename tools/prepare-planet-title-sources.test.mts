@@ -9,7 +9,8 @@ import * as fontkit from "fontkit";
 import { SCENE_OBJECTS } from "../site/objects.mts";
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mts";
-import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mts";
+import { sha256 } from "../src/platform/sha256.mts";
+import { createPreparedTitleLayout } from "../src/platform/prepared-title.mts";
 import { createPlanetTitleSource, preparePlanetTitleSources } from
   "./prepare-planet-title-sources.mts";
 import type { PathLike } from "node:fs";

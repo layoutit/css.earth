@@ -1,7 +1,8 @@
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { PNG } from "pngjs";
-import { sha256, comparePngBuffers, writeAbsoluteDiff, writeTriptych, opaqueBlackPng, setRgb, insideSunNeighborhood } from "./image-pixels.mts";
+import { sha256 } from '../../../src/platform/sha256.mts';
+import { comparePngBuffers, writeAbsoluteDiff, writeTriptych, opaqueBlackPng, setRgb, insideSunNeighborhood } from "./image-pixels.mts";
 import { shadowShapeMask } from "./scene-illumination.mts";
 import type { Dimensions, Analysis, Silhouette, Sun, VisibleSun, IndependentCapture } from "./analysis-types.mts";
 

@@ -57,9 +57,8 @@ Every file under `source/` needs a manifest entry. Body packages contain data,
 not private executables. Shared astronomy, artwork and sky sources keep their
 existing records.
 
-Where present, `prepared/runtime-assets.json` is the staging inventory copy read
-by provenance; installation reads the inventory at the body root. Preparation writes
-both and they must agree. Do not maintain them independently.
+The inventory lives once, at the body root. Preparation stages a copy while it
+runs and provenance reads that staged copy; nothing keeps a second copy in `prepared/`.
 
 ### Body README
 

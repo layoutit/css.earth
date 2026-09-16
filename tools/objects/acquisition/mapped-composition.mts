@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -67,7 +67,6 @@ function grid(value: unknown): Grid {
     });
   });
 }
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Preserve the author's angular nodes. The repeated 180-E column is a periodic
  * boundary sample, not interpolation or additional coverage. North stays up;

@@ -30,7 +30,6 @@ test('explicit context setup uses prepared paths and hash URLs without changing 
   await mkdir(resolve(base, 'prepared/levels'), { recursive: true });
   const serialized = JSON.stringify(manifest) + '\n';
   await writeFile(resolve(base, 'runtime-assets.json'), serialized);
-  await writeFile(resolve(base, 'prepared/runtime-assets.json'), serialized);
   await writeFile(resolve(base, 'prepared/levels/catalogue.json'), bytes);
   assert.deepEqual(setupObjectIds(['--object=context-fixture'], root), ['context-fixture']);
   assert(!setupObjectIds([], root).includes('context-fixture'));
@@ -45,9 +44,6 @@ test('explicit context setup uses prepared paths and hash URLs without changing 
     return new Response(bytes);
   } }), { installed: 1, reused: 0 });
   assert.deepEqual(await installRuntimeAssets([asset!], { fetcher: async () => { throw new Error('Expected prepared file reuse'); } }), { installed: 0, reused: 1 });
-  await writeFile(resolve(base, 'prepared/runtime-assets.json'), serialized + ' ');
-  await assert.rejects(runtimeAssets(root, ['context-fixture']), /mirrors differ/);
-  await rm(resolve(base, 'prepared/runtime-assets.json'));
   await verifyRuntimeAssetClosure({ planetId: 'context-fixture', manifest: { ...manifest, resourceRoot: 'prepared' }, root: resolve(base, 'prepared') });
   await rm(resolve(base, 'prepared/levels'), { recursive: true });
   await symlink(resolve(root), resolve(base, 'prepared/levels'));
@@ -61,7 +57,7 @@ test('prepared resources install public dataset previews under their declared pu
   const base = resolve(root, 'src/objects/context-fixture');
   await mkdir(resolve(base, 'prepared'), { recursive: true });
   const mixed = { ...manifest, assets: [...manifest.assets, { filename: 'datasets/preview.webp', location: 'public', bytes: bytes.length, sha256 }] };
-  for (const path of ['runtime-assets.json', 'prepared/runtime-assets.json']) await writeFile(resolve(base, path), JSON.stringify(mixed));
+  await writeFile(resolve(base, 'runtime-assets.json'), JSON.stringify(mixed));
   const assets = await runtimeAssets(root, ['context-fixture']);
   assert.equal(assets[1]!.file, resolve(root, 'public/scenes/context-fixture/datasets/preview.webp'));
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => new Response(bytes) }), { installed: 2, reused: 0 });
@@ -70,7 +66,6 @@ test('prepared resources install public dataset previews under their declared pu
   await writeFile(resolve(preparedRoot, 'manifest.json'), 'preparation receipt');
   await assert.rejects(assembleRuntimeAssetClosure({ planetId: 'context-fixture', manifestPath: resolve(base, 'runtime-assets.json'), productionRoot: preparedRoot }), /cannot be assembled/);
   assert.equal(await readFile(resolve(preparedRoot, 'manifest.json'), 'utf8'), 'preparation receipt');
-  assert.equal(await readFile(resolve(preparedRoot, 'runtime-assets.json'), 'utf8'), JSON.stringify(mixed));
   await assert.rejects(verifyRuntimeAssetClosure({ planetId: 'context-fixture', manifest: typedManifest, root: preparedRoot }), /explicit publicRoot/);
   assert.equal(await verifyRuntimeAssetClosure({ planetId: 'context-fixture', manifest: typedManifest, root: preparedRoot, publicRoot }), true);
   await writeFile(resolve(publicRoot, 'datasets/preview.webp'), 'drifted public preview');

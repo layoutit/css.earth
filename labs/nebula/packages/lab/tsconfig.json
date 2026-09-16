@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../../../node_modules/.pnpm/node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "browser/**/*.ts",
+    "../../../../node_modules/vite/client.d.ts"
+  ]
+}

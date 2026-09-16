@@ -11,13 +11,13 @@ import sys
 import urllib.request
 
 package = Path(__file__).resolve().parent
-root = next(p for p in package.parents if (p / 'labs/nebula/src/alignment/validate-image-registration.py').is_file())
+root = next(p for p in package.parents if (p / 'labs/nebula/models/lmc/candidates/source/wise-registration/validate-image-registration.pinned.py').is_file())
 os.chdir(root)
 # Translate file locations after source organization, never scientific parameters or pinned bytes.
 def relocated(value):
     if isinstance(value, str):
         return value.replace('labs/nebula/src/validate-image-registration.py',
-                             'labs/nebula/src/alignment/validate-image-registration.py').replace(
+                             'labs/nebula/models/lmc/candidates/source/wise-registration/validate-image-registration.pinned.py').replace(
                              'labs/nebula/models/lmc-candidates/', 'labs/nebula/models/lmc/candidates/')
     if isinstance(value, list):
         return [relocated(item) for item in value]

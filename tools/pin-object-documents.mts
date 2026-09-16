@@ -6,7 +6,7 @@
  * inputs are never repinned; they stay verified against their upstream bytes.
  * Preparation in write mode runs this first. `--check` reports stale pins without writing.
  */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -15,7 +15,7 @@ import { MARKER_SOURCE_HINTS } from '../src/navigation/marker-recipe.mts';
 
 export interface DocumentPinChange { file: 'source/manifest.json' | 'source/preparation/navigation.json'; path: string; expectedBytes: number; expectedSha256: string; previousSha256: string }
 
-const identityOf = (bytes: Uint8Array) => ({ expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') });
+const identityOf = (bytes: Uint8Array) => ({ expectedBytes: bytes.length, expectedSha256: sha256(bytes) });
 const optionalBytes = (path: string) => readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
 
 /** Paths an acquisition plan restores; those are downloads, not authored files. */

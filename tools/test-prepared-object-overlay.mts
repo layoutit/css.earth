@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord } from './source-values.mts';
@@ -13,7 +13,7 @@ export async function preparedObjectOverlay(id: string, mutate: (runtime: Record
   const changed = mutate(runtime);
   payload.data = runtime;
   const bytes = JSON.stringify(payload);
-  requireRecord(descriptor.prepared).sha256 = createHash('sha256').update(bytes).digest('hex');
+  requireRecord(descriptor.prepared).sha256 = sha256(bytes);
   const overlays = new Map([[descriptorPath, JSON.stringify(descriptor)], [runtimePath, JSON.stringify(runtime)], [payloadPath, bytes]]);
   return { changed, runtime, readText: (path: string) => overlays.get(path) ?? readFile(path, 'utf8') };
 }

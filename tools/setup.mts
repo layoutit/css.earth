@@ -1,6 +1,6 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import type { RuntimeAssetLocation } from './runtime-assets.mts';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number;}
-import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -23,7 +23,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
         try { existing = await readFile(asset.file); }
         catch (error) { if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error; }
         if (existing?.length === asset.bytes &&
-            createHash("sha256").update(existing).digest("hex") === asset.sha256) {
+            sha256(existing) === asset.sha256) {
           reused++;
         } else {
           const response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });

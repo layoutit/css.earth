@@ -33,8 +33,8 @@ pinned Python packages and NOX model, without processing other objects.
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
-node --experimental-strip-types labs/nebula/src/run.ts compile-candidates labs/nebula/models/messier/processing-candidates.json
+node --experimental-strip-types labs/nebula/run.mts prepare-processing-environment
+node --experimental-strip-types labs/nebula/run.mts compile-candidates labs/nebula/models/messier/processing-candidates.json
 pnpm lab:nebula
 ```
 

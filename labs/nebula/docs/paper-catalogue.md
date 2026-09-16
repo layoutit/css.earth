@@ -17,8 +17,8 @@ Run from the repository root:
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-node --experimental-strip-types labs/nebula/src/run.ts acquire-messier-presentation
-node --experimental-strip-types labs/nebula/src/run.ts acquire-messier-papers
+node --experimental-strip-types labs/nebula/run.mts acquire-messier-presentation
+node --experimental-strip-types labs/nebula/run.mts acquire-messier-papers
 pnpm lab:nebula
 ```
 

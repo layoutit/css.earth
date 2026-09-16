@@ -8,7 +8,7 @@ Two ESO lenses color a coherent, authored ionization-front hypothesis; **optical
 | --- | --- |
 | [ESO optical, eso1723a](https://www.eso.org/public/images/eso1723a/) | i/Hα/r/G display; 4000 × 3106 pixels, 59.95′ × 46.56′. |
 | [ESO VISTA, eso1006a](https://www.eso.org/public/images/eso1006a/) | K/J/Z near-IR display; 3252 × 4000 pixels, 71.84′ × 88.35′. |
-| [Local physical evidence](../../../labs/nebula/models/m42/physical-evidence.json) | Wen–O’Dell, Henney and later Orion interpretations guide central topology; wide-field curvature and thickness are authored. |
+| [Local physical evidence](source/bake-inputs/references/05-physical-evidence.json) | Wen–O’Dell, Henney and later Orion interpretations guide central topology; wide-field curvature and thickness are authored. |
 
 Both publisher TIFFs retain their full footprints. Their RGB values are stretched display samples, not common flux units; resolution and coverage differ. The adopted distance is **414 ± 7 pc**, from [Menten et al. (2007), abstract](https://arxiv.org/abs/0709.0485).
 
@@ -38,3 +38,5 @@ The [physical ledger](https://github.com/layoutit/css.earth/blob/5569fa211db4479
 ## Compact delivery inputs
 
 The source-owned compact input pin in [delivery.json](source/delivery.json) retains the accepted pre-slice model, material and integration data. Ordinary preparation regenerates the runtime WebP Q80/A80 XYZ atlases and distant impostors without native observation downloads, star extraction or model fitting. Runtime images remain generated and ignored. The [shared bake guide](../../../docs/nebulae/README.md#compact-inputs-and-research-replay) distinguishes this replay from optional full research processing. Source observations and the model limitations above still apply.
+
+Application provenance reads the object-owned evidence and recipe copies recorded in [provenance references](source/provenance-references.json). Their original revisions and SHA-256 pins are preserved; nested research paths describe historical inputs and are not application file reads.

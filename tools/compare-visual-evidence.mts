@@ -1,7 +1,7 @@
 /** Compare retained, equally framed captures without resizing, alignment or masks.
  * node tools/compare-visual-evidence.mts reference.png result.png diff.png report.json
  * The report measures visible change, not image quality or scientific accuracy. */
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { createRequire } from 'node:module';
@@ -17,9 +17,9 @@ if (new Set([reference, result, diff, reportPath].map(path => resolve(path))).si
 }
 sharp.cache(false);
 sharp.concurrency(1);
-const hash = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
+
 const pin = (path: string, bytes: Uint8Array) => ({
-  path: relative(dirname(resolve(reportPath)), resolve(path)), bytes: bytes.length, sha256: hash(bytes),
+  path: relative(dirname(resolve(reportPath)), resolve(path)), bytes: bytes.length, sha256: sha256(bytes),
 });
 const decode = async (path: string) => {
   const bytes = await readFile(path);

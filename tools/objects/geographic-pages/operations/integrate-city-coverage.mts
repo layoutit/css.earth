@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import type { AssetReference } from '../contracts.mts';
 import { hasErrorCode, requireRecord } from '../../../source-values.mts';
 import { parseCitySource, parseRuntimePages, shape, text, array, optional, parseGeographicScene } from '../source-records.mts';
@@ -6,7 +7,6 @@ import {commandContext} from './context.mts';
 const context=commandContext();
 const PREPARED_SCENE=await context.readPrepared('scene',parseGeographicScene);
 const PREPARED_PAGES=await context.readPrepared('pages',parseRuntimePages);
-import { createHash } from "node:crypto";
 import { readFile, readdir, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
@@ -33,7 +33,7 @@ for (const file of (await readdir(directory)).sort()) {
   if (!planned) throw new Error(`Unexpected face receipt ${file}`);
   faces.push(validateGlobalCityFaceReceipt(receipt,planned,source,pin.expectedSha256));
 }
-const sha256=(bytes: Uint8Array)=>createHash("sha256").update(bytes).digest("hex");
+
 const cache=resolve(root,`.local/${context.objectId}-city-coverage-check`);
 await mkdir(cache,{recursive:true});
 let downloads=0;

@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {transform} from 'esbuild';
 import {shape,text,number} from '../terrestrial-layers/source-records.mts';
 import {requireRecord} from '../../source-values.mts';
@@ -6,7 +7,6 @@ import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {parsePinnedIntakeFile} from '../comet-1p/inspect-giotto.mts';
 const parseTrial=shape({limitations:(value:unknown)=>value,frame:(value:unknown)=>Object.assign({},parsePinnedIntakeFile(value),shape({startTime:text,filter:text,credit:text,licenseSource:text})(value)),
   shape:shape({path:text,sha256:text}),transfer:shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,maximumEmissionDegrees:number,visibilityToleranceMeters:number})});
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -22,7 +22,7 @@ import { closestTrianglePoint } from '../terrestrial-layers/obj-shape.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 
 const root = resolve(import.meta.dirname, '../../..');
-const sha256 = (bytes:string|Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const sub = (a:readonly number[], b:readonly number[]) => a.map((n, i) => n - b[i]);
 const dot = (a:readonly number[], b:readonly number[]) => a.reduce((s, n, i) => s + n * b[i], 0);
 const escape = (value:unknown) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');

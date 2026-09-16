@@ -1,0 +1,351 @@
+{
+  "schema": "cssearth-nebula-physical-evidence@1",
+  "subjectId": "m8",
+  "asOf": "2026-09-13",
+  "status": "Paper-qualified topology with authored executable depth; no physical fit acceptance",
+  "sources": [
+    {
+      "id": "arias-2006-hourglass",
+      "url": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "locator": "Sections 3.1, 3.7–3.8; Figures 9–15",
+      "access": "Full author PDF downloaded; local morphology, extinction and slit sections read.",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0506552v2",
+      "fullTextSha256": "fd44717272460be85de65d4391da3aff4bc92f15b5826c7abc6a954378d4ed9a",
+      "fullTextBytes": 690760,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "barba-2007-geysers",
+      "url": "https://doi.org/10.1051/0004-6361:20066081",
+      "locator": "Sections 2–3; Table 1",
+      "access": "Full author PDF downloaded; observations and HH morphology read.",
+      "fullTextUrl": "https://arxiv.org/pdf/0706.2378v1",
+      "fullTextSha256": "6e80e17cb595fbe27a17e42dbf052f76be80c8f913a600f71236f3c8f90f5483",
+      "fullTextBytes": 191830,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "wright-2019-kinematics",
+      "url": "https://doi.org/10.1093/mnras/stz870",
+      "locator": "Sections 4–6; Table 3",
+      "access": "Full author PDF downloaded; stellar velocities, sample limits and conclusions read.",
+      "fullTextUrl": "https://arxiv.org/pdf/1903.12176v1",
+      "fullTextSha256": "5e632aee5684cb1c4ba65d5c09b3bceca4e032b0f47e94ba7f4a4202e45e05f7",
+      "fullTextBytes": 1808250,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "kahle-2024-clumps",
+      "url": "https://doi.org/10.1051/0004-6361/202349009",
+      "locator": "Sections 2, 5.1, 6.2; Tables 2, A.1, C.1",
+      "access": "Full author PDF downloaded; 37 velocity pointings and actual coordinate-correction footnote read.",
+      "fullTextUrl": "https://arxiv.org/pdf/2404.07920v2",
+      "fullTextSha256": "9a921af219875840e660349bcd4603f2a874d70661e2b2bc33e1172d79961b6f",
+      "fullTextBytes": 26638936,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "singh-2026-lvm",
+      "url": "https://doi.org/10.3847/1538-4357/ae563a",
+      "locator": "Sections III, V.4, VI.1–3; Figures 8–13",
+      "access": "Full text observations, reduction and diagnostic-map sections read; numerical LVM arrays not qualified.",
+      "fullTextUrl": "https://arxiv.org/pdf/2603.22382v1",
+      "fullTextSha256": "e220dc9b798c7e74e07cea13b765d77508302b8ba6181165ce7b2f088098abbf",
+      "fullTextBytes": 97055135,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "tiwari-2018-pdr",
+      "url": "https://doi.org/10.1051/0004-6361/201732437",
+      "locator": "Sections 2, 3.2, 5.1; Figures 14–15",
+      "access": "Full text observations and local geometric interpretation read; no numerical cube imported.",
+      "fullTextUrl": "https://arxiv.org/pdf/1803.10164v1",
+      "fullTextSha256": "2789a2bf61c2bbea6e7187268f1ce3c94e876c3e9b126e0a8bc6642a9e8dddd6",
+      "fullTextBytes": 5137832,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "tiwari-2020-east",
+      "url": "https://doi.org/10.1051/0004-6361/202038886",
+      "locator": "Sections 2, 5.2–3, 6; Figures 6, 10",
+      "access": "Full text read for local footprint, IF interpretation and inferred speed; numerical cube not imported.",
+      "fullTextUrl": "https://arxiv.org/pdf/2010.09365v1",
+      "fullTextSha256": "49a624c9d472bbf73dfe76c5e4d5744fc0d696a392d42939313eeae874f49109",
+      "fullTextBytes": 3340263,
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "aligned-images",
+      "url": "https://www.eso.org/public/images/eso0936a/",
+      "manifest": "processing-observations.json",
+      "access": "Pinned native RGB with held-out relative star registration and completed native NOX."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "observer-frame",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "model coordinate convention",
+      "value": {
+        "x": "west",
+        "y": "north",
+        "z": "away from Earth",
+        "origin": [
+          270.76531645904527,
+          -24.30622861770443
+        ]
+      },
+      "unit": "directions and ICRS degrees",
+      "scope": "129 arcminute square registered frame",
+      "limitations": "The frame is not the physical boundary; zero depth is arbitrary."
+    },
+    {
+      "id": "full-footprints",
+      "classification": "observed",
+      "sourceIds": [
+        "aligned-images"
+      ],
+      "quantity": "native image footprints",
+      "value": {
+        "eso-optical": [
+          93.4928042112,
+          62.6101887672
+        ],
+        "eso-vista": [
+          71.80800500989025,
+          39.537044088580906
+        ],
+        "spitzer-mid-infrared": [
+          35.726,
+          28.813
+        ]
+      },
+      "unit": "arcmin",
+      "scope": "Full native rasters; each source retains its separate valid footprint",
+      "limitations": "RGB units are relative display codes, with different bands, PSFs, epochs and stretches. All three remain Earth-side views."
+    },
+    {
+      "id": "her36-anchor",
+      "classification": "observed",
+      "sourceIds": [
+        "tiwari-2018-pdr"
+      ],
+      "quantity": "Her36 sky coordinate",
+      "value": [
+        270.91791666666666,
+        -24.378611111111113
+      ],
+      "unit": "deg",
+      "scope": "J2000 as quoted in Section 1",
+      "limitations": "Rounded paper coordinate; no propagated proper motion or absolute catalogue calibration."
+    },
+    {
+      "id": "local-background-front",
+      "classification": "published-model",
+      "sourceIds": [
+        "tiwari-2018-pdr"
+      ],
+      "quantity": "PDR orientation and ordering",
+      "value": "Face-on molecular material behind Her36/9Sgr; distinct foreground veil advances toward Earth and west.",
+      "unit": "topology",
+      "scope": "Approximately 1.3 by 1.3 pc around Her36, at the paper distance 1250 pc",
+      "limitations": "Figure15 is a schematic, not an array of depths. The foreground veil and background cloud are distinct; no global shell or thickness is measured."
+    },
+    {
+      "id": "local-velocity-components",
+      "classification": "observed",
+      "sourceIds": [
+        "tiwari-2018-pdr"
+      ],
+      "quantity": "spectral components",
+      "value": {
+        "foreground": [
+          2,
+          7
+        ],
+        "molecularReference": 9,
+        "redshiftedBackground": [
+          11,
+          13
+        ]
+      },
+      "unit": "km/s LSR",
+      "scope": "Local [CII]/CO channel maps around Her36, Sections3.2 and5.1",
+      "limitations": "Ranges summarize different tracers/components, not per-pixel velocities with errors. No velocity-to-depth conversion or inferred expansion age is used."
+    },
+    {
+      "id": "hourglass-extinction",
+      "classification": "published-model",
+      "sourceIds": [
+        "arias-2006-hourglass"
+      ],
+      "quantity": "foreground dust interpretation",
+      "value": "Patchy obscuring screen; optically dark regions can have weak Balmer ratios because deeper emission is hidden.",
+      "unit": "topology",
+      "scope": "Central Hourglass; Section3.7",
+      "limitations": "Positive emission cannot model absorption, hidden luminosity or dust density. Local optical diagnostics probe only the visible skin."
+    },
+    {
+      "id": "hh-outflows",
+      "classification": "observed",
+      "sourceIds": [
+        "barba-2007-geysers"
+      ],
+      "quantity": "projected shock structures",
+      "value": "Five additional HH candidates from continuum-subtracted Halpha/[SII] morphology.",
+      "unit": "morphology",
+      "scope": "WFI field and local Table1 positions",
+      "limitations": "Authors defer spectroscopic confirmation for some features; unmeasured inclinations and material speeds remain unknown. Their knots are smaller than this wide-field bake."
+    },
+    {
+      "id": "cluster-expansion",
+      "classification": "observed",
+      "sourceIds": [
+        "wright-2019-kinematics"
+      ],
+      "quantity": "stellar expansion pattern",
+      "value": "Expansion preferentially in declination; no matching global RA expansion pattern.",
+      "unit": "stellar kinematics",
+      "scope": "GES/Gaia DR2 selected young stellar members",
+      "limitations": "These are stars, not gas velocities. No spherical gas motion law or membership assignment to image-detected lights follows."
+    },
+    {
+      "id": "molecular-clump-velocities",
+      "classification": "observed",
+      "sourceIds": [
+        "kahle-2024-clumps"
+      ],
+      "quantity": "37 clump velocity samples",
+      "value": {
+        "table": "physical-sources.json#clumpVelocities",
+        "frame": "LSR as stated; dynamical/kinematic realization unspecified",
+        "tracers": "C18O/C17O 2-1, or 1-0 at three corrected IRAM positions",
+        "errors": null
+      },
+      "unit": "km/s",
+      "scope": "37 discrete on-off beams; paired telescope coordinates differ for WC3, SE8 and SC5",
+      "limitations": "Two strongest components retained; absent secondary component is null. Table2 omits velocity errors. Sparse pointings are not a mapped 3D cloud or a valid full-field velocity scaffold."
+    },
+    {
+      "id": "molecular-ridges",
+      "classification": "published-model",
+      "sourceIds": [
+        "kahle-2024-clumps"
+      ],
+      "quantity": "connected substructures",
+      "value": "WC, EC, SE and SC clump groups have distinct velocity patterns; EC double components may be separate dense layers.",
+      "unit": "topology",
+      "scope": "Clump-sampled molecular complex; Section6.2",
+      "limitations": "Interaction between overlapping EC components is unresolved without mapping. Connectivity in projection cannot decide their depth order."
+    },
+    {
+      "id": "dust-tracer-coverage",
+      "classification": "observed",
+      "sourceIds": [
+        "kahle-2024-clumps"
+      ],
+      "quantity": "continuum coverage and resolution",
+      "value": {
+        "apexBeamArcsec": [
+          22.3,
+          29.3
+        ],
+        "iramBeamArcsec": [
+          21.1,
+          35
+        ],
+        "akariBeamArcsec": [
+          63.4,
+          77.8,
+          88.3
+        ]
+      },
+      "unit": "arcsec FWHM",
+      "scope": "Pointings and survey photometry in Sections2.1–2.4",
+      "limitations": "Hi-GAL incomplete; AKARI cannot resolve smaller clumps; Spitzer 24micron can contain unrelated foreground emission and saturation. Native spectral arrays are not imported."
+    },
+    {
+      "id": "m8-east-front",
+      "classification": "published-model",
+      "sourceIds": [
+        "tiwari-2020-east"
+      ],
+      "quantity": "M8E ionization-front interpretation",
+      "value": {
+        "anchorDegrees": [
+          271.22208333333333,
+          -24.445083333333333
+        ],
+        "projectedRegionPc": 1,
+        "minimumSpeedKms": 0.26
+      },
+      "unit": "mixed named units",
+      "scope": "Approximately 1pc M8E-IR region; Sections2 and5.3",
+      "limitations": "The speed derives from assumed constant propagation and YSO age separation, not direct motion. Foreground/back ordering and inclination remain unknown; no speed sets model depth."
+    },
+    {
+      "id": "lvm-line-diagnostics",
+      "classification": "observed",
+      "sourceIds": [
+        "singh-2026-lvm"
+      ],
+      "quantity": "spatial line diagnostics",
+      "value": {
+        "coverageSquareDegrees": 1.1,
+        "fibreDiameterArcsec": 35.3,
+        "pitchArcsec": 37,
+        "reddeningMeanMag": 1.43,
+        "reddeningSpatialStandardDeviationMag": 0.45
+      },
+      "unit": "mixed named units",
+      "scope": "LVM 10-tile survey; 2023-08-22 to2023-10-19 plus2024-07-02; paper SectionsIII andVI.1",
+      "limitations": "Balmer extinction depends on adopted law; physical line maps need IVAR, MASK, fibre positions and line-specific S/N. Figure set is plotted evidence, not numerical FITS or depth; spatial scatter is not error on mean."
+    },
+    {
+      "id": "single-front-trial",
+      "classification": "authored",
+      "sourceIds": [
+        "tiwari-2018-pdr",
+        "tiwari-2020-east"
+      ],
+      "quantity": "supported approximation",
+      "value": "One coherent irregular finite emitting layer; local Her36 orientation guided by PDR interpretation; M8E gets a bounded local deformation.",
+      "unit": "method",
+      "scope": "Full covered image field; literature guidance remains local",
+      "limitations": "One surface cannot implement the separate veil, overlapping molecular layers, true cavities, scattering or general swept filaments. Emission follows registered projected evidence; depth never follows RGB brightness."
+    },
+    {
+      "id": "authored-parameters",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "all executable depth coefficients",
+      "value": "All depth offsets, gradients, curvatures, blending strengths, thicknesses and support windows are authored in depth-model.json.",
+      "unit": "arcsec, dimensionless slope, 1/arcsec",
+      "scope": "Full model and both local windows",
+      "limitations": "No measured physical size or uncertainty is invented; windows bound literature-guided topology, not measured cloud edges. 1250pc is retained only for converting the local paper footprint; no global distance scale is fit."
+    }
+  ],
+  "methods": [
+    {
+      "id": "coherent-irregular-front",
+      "inputRequirements": [
+        "pinned registered full-native starless sources",
+        "source-backed local topology",
+        "explicit unmeasured coefficients",
+        "separate full footprints"
+      ],
+      "evidenceIds": [
+        "local-background-front",
+        "hourglass-extinction",
+        "m8-east-front",
+        "single-front-trial",
+        "authored-parameters"
+      ],
+      "limitations": [
+        "Separate foreground absorption and overlapping components are unsupported.",
+        "No velocity, gas-density, extinction or luminosity observable is numerically fitted."
+      ]
+    }
+  ]
+}

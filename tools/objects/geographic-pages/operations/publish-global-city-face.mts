@@ -1,10 +1,10 @@
 #!/usr/bin/env node
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import type { CityRuntimePage, CorePage, PreparedCityPage } from '../contracts.mts';
 import { parseCitySource, parseGeographicScene } from '../source-records.mts';
 import {commandContext} from './context.mts';
 const context=commandContext();
 const PREPARED_SCENE=await context.readPrepared('scene',parseGeographicScene);
-import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
@@ -107,14 +107,14 @@ async function publishPage(page: PreparedCityPage, pixels: Uint8Array) {
   const width = page.width * density, height = page.height * density;
   const bytes = await sharp(pixels, { raw: { width: page.width, height: page.height, channels: 4 } })
     .resize(width, height).flip().webp({ quality: 88, effort: 4 }).toBuffer();
-  const sha256 = createHash("sha256").update(bytes).digest("hex");
-  const filename = `city-${source.dataset}-${page.key}-${sha256.slice(0, 16)}.webp`;
+  const digest = sha256(bytes);
+  const filename = `city-${source.dataset}-${page.key}-${digest.slice(0, 16)}.webp`;
   await writeFile(resolve(staging, filename), bytes);
   const { geographicMatrix, geographicProjection, ...runtimePage } = page;
   pages.push({ ...runtimePage, width, height,
     maximumCssSpan: source.presentation.targetCssPixels * density,
     url: preparedCityAssetUrl(source.delivery.assetOrigin, source.delivery.keyPrefix, filename),
-    sha256, bytes: bytes.length });
+    sha256: digest, bytes: bytes.length });
 }
 
 function compactProvenance(value: Awaited<ReturnType<typeof readWorldCoverRegion>>["provenance"]) {

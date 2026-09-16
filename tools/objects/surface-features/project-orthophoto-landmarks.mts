@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -8,8 +8,7 @@ import { fitImageControls } from './image-controls.mts';
 type Pixel = readonly [number, number];
 type Vec = readonly [number, number, number];
 type Obj = Record<string, unknown>;
-const root = process.cwd(),
-  sha256 = (v: Uint8Array) => createHash('sha256').update(v).digest('hex');
+const root = process.cwd();
 const obj = (v: unknown, a: string): Obj => {
   if (v === null || typeof v !== 'object' || Array.isArray(v)) throw new TypeError(`${a} must be an object.`);
   return v as Obj;

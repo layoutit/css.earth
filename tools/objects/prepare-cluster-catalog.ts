@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { parsePreparedClusterCatalog } from '@cssearth/catalog';
 import { parseMcxcRows, prepareClusterCatalog } from '../../src/preparation/cluster-catalog/prepare.js';
 import type { ClusterRecipe } from '../../src/preparation/cluster-catalog/prepare.js';
-import { verifiedBytes, sha256 } from '../../src/preparation/volume/source.js';
+import { verifiedBytes, sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
 
 export async function prepareClusterCatalogObject(directory: string) {
   const objectDirectory = resolve(directory), sourceDirectory = resolve(objectDirectory, 'source');

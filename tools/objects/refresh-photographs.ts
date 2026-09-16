@@ -50,7 +50,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   for (const filename of replacements.keys()) await copyFile(resolve(stage, filename), resolve(publicDirectory, filename));
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
   const inventory = JSON.stringify({ ...manifest, assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) }, null, 2) + '\n';
-  await writeFile(manifestPath, inventory); await writeFile(resolve(outputDirectory, 'runtime-assets.json'), inventory);
+  await writeFile(manifestPath, inventory);
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare-surface-minimaps.mts')).href) as typeof import('../prepare-surface-minimaps.mts');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshSurfaceContent(id, lensIds);

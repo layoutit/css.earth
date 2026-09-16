@@ -129,31 +129,31 @@
     },
     {
       "id": "recipe-3",
-      "path": "labs/nebula/models/m8/compiler.json",
+      "path": "src/objects/m8/source/bake-inputs/references/01-compiler.json",
       "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524",
       "bytes": 1511
     },
     {
       "id": "recipe-4",
-      "path": "labs/nebula/models/m8/depth-model.json",
+      "path": "src/objects/m8/source/bake-inputs/references/02-depth-model.json",
       "sha256": "56cd86345e893f8dfcb7e98e9686a096dd6634fa6b15459060c65e2cdd0c559b",
       "bytes": 3297
     },
     {
       "id": "recipe-5",
-      "path": "labs/nebula/models/m8/physical-evidence.json",
+      "path": "src/objects/m8/source/bake-inputs/references/03-physical-evidence.json",
       "sha256": "922b0da47092eb20e7dab3a669d33e1e5bc49efa71c0cc53a26ac56673f5abb1",
       "bytes": 14198
     },
     {
       "id": "recipe-6",
-      "path": "labs/nebula/models/m8/processing-observations.json",
+      "path": "src/objects/m8/source/bake-inputs/references/04-processing-observations.json",
       "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5",
       "bytes": 5501
     },
     {
       "id": "recipe-7",
-      "path": "labs/nebula/models/m8/processing-structures.json",
+      "path": "src/objects/m8/source/bake-inputs/references/05-processing-structures.json",
       "sha256": "e871e01e6636080dad59c1a97734d995f740f80eff3a9e37df7f48d1c8e74d6a",
       "bytes": 420
     }

@@ -1,5 +1,5 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { isArray } from '../../../../src/platform/is-array.mts';
-import { createHash } from "node:crypto";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fromCustomClient } from "geotiff";
@@ -14,7 +14,6 @@ interface RegionOptions { offline?: boolean; verifyOnly?: boolean; maximumReceiv
 interface AbsentSource { catalogSha256: string; tiles: string[]; pixels: number }
 interface SourceProof extends WorldCoverSource { window: number[]; extractedSha256: string; width: number; height: number; nodataPixels: number; sourceMetadata: Record<string, unknown>; absentSource?: AbsentSource }
 const parseRangeMetadata=shape({sha256:text,etag:text,contentRange:text});
-const sha256 = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
 
 // Preparation only. Pin the publisher's object ETag and hash cached range bytes;
 // an S3 multipart ETag is an object validator, not a whole-file SHA256.

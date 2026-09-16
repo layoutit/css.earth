@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
@@ -44,8 +44,8 @@ export async function publishPreparedCityAssets({ source: value, cors, assetUrls
       throw new Error(`Prepared city asset cannot be published: ${file}`);
     }
     const bytes = await readFile(file);
-    const sha256 = createHash("sha256").update(bytes).digest("hex");
-    if (!sha256.startsWith(match[1])) throw new Error(`Prepared city hash mismatch: ${filename}`);
+    const digest = sha256(bytes);
+    if (!digest.startsWith(match[1])) throw new Error(`Prepared city hash mismatch: ${filename}`);
     assets.push({ url, filename, file, key: `${keyPrefix}/${filename}`, bytes: info.size,
       type: match[2] === "webp" ? "image/webp" : "application/json" });
   }

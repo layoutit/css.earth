@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, stat, realpath } from 'node:fs/promises';
 import { resolve, basename, dirname, relative, isAbsolute } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 import { SourceMapConsumer } from 'source-map-js';
 import type { RawSourceMap } from 'source-map-js';
 import sharp from 'sharp';
@@ -23,7 +23,7 @@ import { chartIdleGaps, averageFrames, validateSeries, renderAverageChart } from
 import { buildDiagnosis, renderReport } from './trace-report.mts';
 
 const ms = (value: number) => Math.round(value * 1000) / 1000;
-const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+
 const eventsOf = <E extends TraceEvent>(events: readonly E[], name: string) => events.filter(e => e.name === name);
 
 // Nested trace slices are overlapping descriptions of the same work. Report
@@ -241,14 +241,14 @@ export async function inspectBuild(brief: LocationSources & { readonly sourceUrl
       if (!withinRoot(await realpath(file))) throw Error('Source symlink leaves supplied build');
       const bytes = await readFile(file), text = bytes.toString(), lines = text.split('\n');
       const expected = recordOf(expectedSources)?.[pathname], manifest = recordOf(expected) ?? {};
-      const verification = expected ? (manifest.sha256 === hash(bytes) && manifest.bytes === bytes.length ? 'matches capture manifest' : 'MISMATCH with capture manifest') : 'provided build; capture bytes unverified';
-      if (verification.startsWith('MISMATCH')) { output.push({ url, file, bytes: bytes.length, sha256: hash(bytes), expected, verification }); continue; }
+      const verification = expected ? (manifest.sha256 === sha256(bytes) && manifest.bytes === bytes.length ? 'matches capture manifest' : 'MISMATCH with capture manifest') : 'provided build; capture bytes unverified';
+      if (verification.startsWith('MISMATCH')) { output.push({ url, file, bytes: bytes.length, sha256: sha256(bytes), expected, verification }); continue; }
       let consumer: SourceMapConsumer | undefined, sourceMap: SourceMapStatus;
       try {
         if (!withinRoot(await realpath(file + '.map'))) throw Error('Source map symlink leaves supplied build');
         const mapBytes = await readFile(file + '.map');
         consumer = readSourceMap(mapBytes.toString());
-        sourceMap = { file: file + '.map', sha256: hash(mapBytes), status: expected ? 'provided-build-map; JS matches capture manifest, map supplied separately' : 'provided-build-map; traced bytes not independently verified' };
+        sourceMap = { file: file + '.map', sha256: sha256(mapBytes), status: expected ? 'provided-build-map; JS matches capture manifest, map supplied separately' : 'provided-build-map; traced bytes not independently verified' };
       } catch (error) { sourceMap = { status: 'unavailable', reason: errorCode(error) ?? errorMessage(error) }; }
       for (const c of callSites.filter(c => c.url === url)) {
         const line = c.lineNumber, column = c.columnNumber;
@@ -256,11 +256,11 @@ export async function inspectBuild(brief: LocationSources & { readonly sourceUrl
         const original = consumer.originalPositionFor({ line, column: column - 1 });
         if (!original.source) continue;
         const content = consumer.sourceContentFor(original.source, true);
-        const located: OriginalLocation = { ...original, column: original.column + 1, sourceContentSha256: content == null ? null : hash(content),
+        const located: OriginalLocation = { ...original, column: original.column + 1, sourceContentSha256: content == null ? null : sha256(content),
           excerpt: content?.split('\n').slice(Math.max(0, original.line - 3), original.line + 2).join('\n') ?? null };
         c.original = located;
       }
-      output.push({ url, file, bytes: bytes.length, sha256: hash(bytes), verification, sourceMap,
+      output.push({ url, file, bytes: bytes.length, sha256: sha256(bytes), verification, sourceMap,
         calls: [...new Map(callSites.filter(c => c.url === url).map(c => [JSON.stringify([c.lineNumber, c.columnNumber]), c])).values()].map(c => ({
           functionName: c.functionName, line: c.lineNumber, column: c.columnNumber,
           original: c.original ?? null,
@@ -302,7 +302,7 @@ export async function main(argv: readonly string[]): Promise<{ output: string; b
   for (const file of options.compare) {
     const bytes = await readFile(file), baseline: unknown = JSON.parse(bytes.toString());
     const series = validateSeries(recordOf(baseline)?.averageSeries);
-    baselines.push({ file, sha256: hash(bytes), brief: baseline, series });
+    baselines.push({ file, sha256: sha256(bytes), brief: baseline, series });
   }
   const root = fileURLToPath(new URL('../../', import.meta.url));
   const sleuthPath = resolve(options.framesleuth ?? process.env.CSSEARTH_FRAMESLEUTH ?? resolve(root, '../cssGraphics/scripts/frame-sleuth.mjs'));
@@ -330,11 +330,11 @@ export async function main(argv: readonly string[]): Promise<{ output: string; b
     frame.recorder = capture.stateAt(withInvalidations.window.startTs + frame.startMs * 1000);
   withInvalidations.sourceUrls = [...new Set(allLocations(withInvalidations).map(l => l.url).filter(Boolean))];
   const modules: Record<string, string> = {};
-  const withProcessor = Object.assign(withInvalidations, { processor: { module: sleuthPath, sha256: hash(await readFile(sleuthPath)), wrapperSha256: hash(await readFile(import.meta.filename)),
-    loaderSha256: hash(await readFile(new URL('./load-trace.mts', import.meta.url))),
-    evidenceModuleSha256: hash(await readFile(new URL('./trace-evidence.mts', import.meta.url))), modules } });
+  const withProcessor = Object.assign(withInvalidations, { processor: { module: sleuthPath, sha256: sha256(await readFile(sleuthPath)), wrapperSha256: sha256(await readFile(import.meta.filename)),
+    loaderSha256: sha256(await readFile(new URL('./load-trace.mts', import.meta.url))),
+    evidenceModuleSha256: sha256(await readFile(new URL('./trace-evidence.mts', import.meta.url))), modules } });
   for (const name of ['trace-costs', 'trace-capture', 'trace-invalidations', 'trace-chart', 'trace-report'])
-    modules[name] = hash(await readFile(new URL(`./${name}.mts`, import.meta.url)));
+    modules[name] = sha256(await readFile(new URL(`./${name}.mts`, import.meta.url)));
   const withSources = Object.assign(withProcessor, { buildSources: await inspectBuild(withProcessor, options.build ?? capture.servedDirectory, capture.expectedSources) });
   for (const source of withSources.buildSources.filter(s => s.verification?.startsWith('MISMATCH')))
     withSources.evidenceGaps.push(`Source bytes mismatch capture: ${source.url}. Source-map attribution withheld.`);

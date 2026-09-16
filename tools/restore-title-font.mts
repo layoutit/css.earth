@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -23,7 +23,7 @@ export async function restoreTitleFont({
     bytes = await fetchBytes(recipe.sourceUrl);
     missing = true;
   }
-  if (createHash('sha256').update(bytes).digest('hex') !== recipe.sourceSha256) {
+  if (sha256(bytes) !== recipe.sourceSha256) {
     throw new Error('The shared title font does not match its pinned SHA-256.');
   }
   if (missing) {

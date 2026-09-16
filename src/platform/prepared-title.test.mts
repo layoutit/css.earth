@@ -1,12 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import {
-  createPreparedTitle,
-  PLANET_TITLE_STANDARD,
-  serializePreparedTitleModule,
-  sha256,
-} from "./prepared-title.mts";
+import { sha256 } from "./sha256.mts";
+import { createPreparedTitle, PLANET_TITLE_STANDARD, serializePreparedTitleModule } from "./prepared-title.mts";
 
 const source = Object.freeze({
   label: "Planet",

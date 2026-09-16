@@ -30,9 +30,24 @@ importers:
       '@cssearth/engine':
         specifier: workspace:*
         version: link:packages/engine
+      '@cssearth/nebula-lab':
+        specifier: workspace:*
+        version: link:labs/nebula/packages/lab
+      '@cssearth/nebula-reconstruction':
+        specifier: workspace:*
+        version: link:labs/nebula/packages/reconstruction
       '@cssearth/objects':
         specifier: workspace:*
         version: link:packages/objects
+      '@cssearth/volume-bake':
+        specifier: workspace:*
+        version: link:labs/nebula/packages/volume-bake
+      '@cssearth/volume-core':
+        specifier: workspace:*
+        version: link:labs/nebula/packages/volume-core
+      '@cssearth/volume-viewer':
+        specifier: workspace:*
+        version: link:labs/nebula/packages/volume-viewer
       '@types/fontkit':
         specifier: 2.0.9
         version: 2.0.9
@@ -117,6 +132,82 @@ importers:
       yaml:
         specifier: ^2.9.0
         version: 2.9.0
+
+  labs/nebula/packages/lab:
+    dependencies:
+      '@cssearth/engine':
+        specifier: workspace:*
+        version: link:../../../../packages/engine
+      '@cssearth/nebula-reconstruction':
+        specifier: workspace:*
+        version: link:../reconstruction
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../../../../packages/objects
+      '@cssearth/volume-bake':
+        specifier: workspace:*
+        version: link:../volume-bake
+      '@cssearth/volume-core':
+        specifier: workspace:*
+        version: link:../volume-core
+      '@cssearth/volume-viewer':
+        specifier: workspace:*
+        version: link:../volume-viewer
+      '@layoutit/polycss':
+        specifier: 0.2.11
+        version: 0.2.11
+      esbuild:
+        specifier: 0.27.7
+        version: 0.27.7
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+      vite:
+        specifier: 7.3.1
+        version: 7.3.1(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(yaml@2.9.0)
+    devDependencies:
+      playwright:
+        specifier: 1.60.0
+        version: 1.60.0
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
+
+  labs/nebula/packages/reconstruction:
+    dependencies:
+      '@cssearth/volume-core':
+        specifier: workspace:*
+        version: link:../volume-core
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
+
+  labs/nebula/packages/volume-bake:
+    dependencies:
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../../../../packages/objects
+      '@cssearth/volume-core':
+        specifier: workspace:*
+        version: link:../volume-core
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
+
+  labs/nebula/packages/volume-core:
+    dependencies:
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../../../../packages/objects
+
+  labs/nebula/packages/volume-viewer:
+    dependencies:
+      '@cssearth/volume-core':
+        specifier: workspace:*
+        version: link:../volume-core
 
   packages/astronomy:
     devDependencies:

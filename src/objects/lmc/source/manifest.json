@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
       "origin": "https://www.eso.org/public/images/eso1914a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1914a/",
-      "title": "Large Magellanic Cloud \u00b7 ESO eso1914a",
+      "title": "Large Magellanic Cloud · ESO eso1914a",
       "credit": "ESO/VMC Survey",
       "displayCredit": "ESO/VMC Survey",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -41,9 +41,9 @@
       "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
       "origin": "https://noirlab.edu/public/images/iotw2547a/",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/",
-      "title": "Large Magellanic Cloud \u00b7 NOIRLab iotw2547a",
-      "credit": "NOIRLab/NSF/AURA/P. Hor\u00e1lek (Institute of Physics in Opava)",
-      "displayCredit": "NOIRLab/NSF/AURA/P. Hor\u00e1lek (Institute of Physics in Opava)",
+      "title": "Large Magellanic Cloud · NOIRLab iotw2547a",
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "displayCredit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
       "expectedSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
       "expectedBytes": 8507407,
@@ -64,9 +64,9 @@
         "attributions": [
           {
             "kind": "unresolved",
-            "label": "Petr Hor\u00e1lek",
+            "label": "Petr Horálek",
             "evidence": "https://noirlab.edu/public/images/iotw2547a/",
-            "reason": "The photograph credits Petr Hor\u00e1lek but does not identify the individual camera."
+            "reason": "The photograph credits Petr Horálek but does not identify the individual camera."
           }
         ]
       }
@@ -76,7 +76,7 @@
       "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
       "origin": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
       "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
-      "title": "Large Magellanic Cloud \u00b7 AllWISE color mosaic",
+      "title": "Large Magellanic Cloud · AllWISE color mosaic",
       "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "displayCredit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -107,12 +107,12 @@
     },
     {
       "id": "density-prior",
-      "path": "labs/nebula/models/lmc/particles/source/provenance.json",
+      "path": "src/objects/lmc/source/evidence/lmc/particles/source/provenance.json",
       "origin": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "sourceUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "title": "LMC simulated stellar-density prior",
       "credit": "Garver, Nidever, Debattista & Deg",
-      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
       "expectedSha256": "024cbd58275980986b15b6204e4fa9257d1e367271f88b918d4e61c7d4c4a7a8",
       "expectedBytes": 2969,
       "sourceBinding": {
@@ -121,12 +121,12 @@
           {
             "catalogueId": "garver-magellanic-simulation",
             "role": "method",
-            "evidence": "labs/nebula/models/lmc/particles/source/provenance.json: source archive and snapshot pins; stellar-particle density"
+            "evidence": "src/objects/lmc/source/evidence/lmc/particles/source/provenance.json: source archive and snapshot pins; stellar-particle density"
           },
           {
             "catalogueId": "garver-magellanic-model",
             "role": "method",
-            "evidence": "labs/nebula/models/lmc/particles/source/provenance.json: /source/paper"
+            "evidence": "src/objects/lmc/source/evidence/lmc/particles/source/provenance.json: /source/paper"
           }
         ]
       },
@@ -134,12 +134,12 @@
     },
     {
       "id": "catalogue-stars",
-      "path": "labs/nebula/models/lmc/stars/source/catalogue.json",
+      "path": "src/objects/lmc/source/evidence/lmc/stars/source/catalogue.json",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
       "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
       "title": "LMC observed catalogue astrometry and photometry",
       "credit": "Bonanos et al. (2009); CDS/VizieR",
-      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
       "expectedSha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8",
       "expectedBytes": 2527,
       "sourceBinding": {
@@ -148,7 +148,7 @@
           {
             "catalogueId": "bonanos-2009-lmc",
             "role": "material",
-            "evidence": "labs/nebula/models/lmc/stars/source/catalogue.json: files: ReadMe, table1.dat, table3.dat, refs.dat; measured positions and photometry, conditional modeled depths"
+            "evidence": "src/objects/lmc/source/evidence/lmc/stars/source/catalogue.json: files: ReadMe, table1.dat, table3.dat, refs.dat; measured positions and photometry, conditional modeled depths"
           }
         ]
       },
@@ -158,7 +158,7 @@
           {
             "kind": "machine",
             "machineId": "swope-1m",
-            "evidence": "https://arxiv.org/abs/0905.1328 \u2014 section 2.3.2: table 3 UBVI columns are MCPS; https://arxiv.org/abs/astro-ph/0407006 section 2: Swope 1 m and Great Circle Camera. Preparation consumes B and V, not OGLE or infrared photometry."
+            "evidence": "https://arxiv.org/abs/0905.1328 — section 2.3.2: table 3 UBVI columns are MCPS; https://arxiv.org/abs/astro-ph/0407006 section 2: Swope 1 m and Great Circle Camera. Preparation consumes B and V, not OGLE or infrared photometry."
           },
           {
             "kind": "machine",
@@ -168,7 +168,7 @@
           {
             "kind": "unresolved",
             "label": "Bonanos literature astrometry and spectral classifications",
-            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1\u20132.3; labs/nebula/models/lmc/stars/source/refs.dat",
+            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1–2.3; labs/nebula/models/lmc/stars/source/refs.dat",
             "reason": "Positions and classifications combine literature records; an individual observing telescope has not been established for every retained catalogue row. The Swope and Curtis Schmidt attributions apply to the consumed MCPS B/V photometry."
           }
         ]
@@ -176,12 +176,12 @@
     },
     {
       "id": "sky-registration",
-      "path": "labs/nebula/models/image-candidates.json",
+      "path": "src/objects/lmc/source/evidence/image-candidates.json",
       "origin": "https://noirlab.edu/public/images/noirlab2030a/",
       "sourceUrl": "https://noirlab.edu/public/images/noirlab2030a/",
       "title": "LMC shared source registration",
       "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
-      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
       "expectedSha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583",
       "expectedBytes": 9320,
       "sourceBinding": {
@@ -190,7 +190,7 @@
           {
             "catalogueId": "noirlab-noirlab2030a",
             "role": "method",
-            "evidence": "labs/nebula/models/image-candidates.json: targets/0/images/*/wcsSource: SMASH astrometric anchor; distinct from authored simulation placement"
+            "evidence": "src/objects/lmc/source/evidence/image-candidates.json: targets/0/images/*/wcsSource: SMASH astrometric anchor; distinct from authored simulation placement"
           }
         ]
       },
@@ -351,8 +351,8 @@
     {
       "id": "document-16",
       "path": "src/objects/lmc/source/presentation.json",
-      "expectedSha256": "59e3cc91324213850dbbb60280b01ec7d08ac8cc0a5642a92f394bede97afe5e",
-      "expectedBytes": 6033,
+      "expectedSha256": "59c2317082844919db10788c179c5061606fbd413d43866b3811d281ae01c7f3",
+      "expectedBytes": 6046,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -401,7 +401,7 @@
           {
             "kind": "machine",
             "machineId": "blanco-4m",
-            "evidence": "https://noirlab.edu/public/images/noirlab2030a/ \u2014 publisher-curated mirror https://www.astropix.org/image/noirlab/noirlab2030a identifies Blanco-4m/DECam in g, r, i and z; this historical image is retained as a source document."
+            "evidence": "https://noirlab.edu/public/images/noirlab2030a/ — publisher-curated mirror https://www.astropix.org/image/noirlab/noirlab2030a identifies Blanco-4m/DECam in g, r, i and z; this historical image is retained as a source document."
           }
         ]
       }
@@ -414,6 +414,36 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Pinned accepted slice resource identities and leaf mapping for deterministic Q80/A80 atlas delivery; no geometry or scientific model changes."
+      }
+    },
+    {
+      "id": "retained-evidence-21",
+      "path": "src/objects/lmc/source/evidence/lmc/bake.json",
+      "expectedSha256": "82e44aebd5dc80e3f44c5258c51040f778a6cfa1f0c105b4b23ef8dcba6154b8",
+      "expectedBytes": 4432,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-22",
+      "path": "src/objects/lmc/source/provenance-references.json",
+      "expectedSha256": "8fb27c541e19dc0bfd0cf7f6584d22cdd72d69628cd538cb39bb8937170bf58f",
+      "expectedBytes": 1702,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "retained-evidence-23",
+      "path": "src/objects/lmc/source/compact-delivery.json",
+      "expectedSha256": "cc7fb6291a22d44dcbfaf59101b6eb11fa51981e64da2189e6a9ccbd0dfd03b4",
+      "expectedBytes": 794,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
       }
     }
   ],

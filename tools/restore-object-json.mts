@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import {requireRecord} from './source-values.mts';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -26,7 +26,7 @@ export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id),
     }
     const runtime: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/runtime.json'), 'utf8'));
     const payload = serializeObjectJson(descriptor, runtime);
-    if (createHash('sha256').update(payload).digest('hex') !== reference.sha256) {
+    if (sha256(payload) !== reference.sha256) {
       throw new Error(`${id}: checked-in runtime does not reproduce its prepared JSON pin.`);
     }
     if (await writePreparedText(resolve(directory, reference.url), payload)) written++;

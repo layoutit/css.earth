@@ -1,8 +1,8 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import type { RotationElements } from "@cssearth/astronomy";
 import { requireRecord, requireFiniteNumber } from "../source-values.mts";
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { createHash } from 'node:crypto';
 
 async function manifestPin(directory: string, path: string) {
   const { createSourceManifest } = await import('../../src/platform/source-manifest.mts');
@@ -20,8 +20,8 @@ export async function readAuthoredRotation(directory: string, reference: { path:
   if (relative(directory, path).startsWith('..')) throw new TypeError('Rotation source escapes the object.');
   const bytes = await readFile(path);
   // A recipe reference carries no pin of its own; the source manifest owns it.
-  const sha256 = reference.sha256 ?? (await manifestPin(directory, reference.path)).sha256;
-  if (createHash('sha256').update(bytes).digest('hex') !== sha256) throw new TypeError('Rotation source pin differs.');
+  const pin = reference.sha256 ?? (await manifestPin(directory, reference.path)).sha256;
+  if (sha256(bytes) !== pin) throw new TypeError('Rotation source pin differs.');
   const source = requireRecord(JSON.parse(bytes.toString("utf8")), "Rotation source");
   if (source.schema === 'cssearth-measured-rotation@1') {
     const rightAscensionDegrees = requireFiniteNumber(source.rightAscensionDegrees), declinationDegrees = requireFiniteNumber(source.declinationDegrees), primeMeridianDegrees = requireFiniteNumber(source.primeMeridianDegrees), spinDegreesPerDay = requireFiniteNumber(source.spinDegreesPerDay), referenceEpochJdTt = requireFiniteNumber(source.referenceEpochJdTt);

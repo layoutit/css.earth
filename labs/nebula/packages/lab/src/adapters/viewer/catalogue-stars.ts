@@ -1,0 +1,28 @@
+/** Retained catalogue points: runtime projects prepared XYZ only, never source astrometry. */
+import { presentPhysicalPoseInVolume } from '@cssearth/engine';
+import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
+import { transposeWorldRotation, worldRotationFromQuaternion } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
+import type { WorldCameraPose, WorldCameraViewport } from '../../../../../../../src/renderers/css/navigation/world-camera';
+import { mountCatalogueStars } from '@cssearth/volume-viewer/scene/catalogue-stars';
+
+import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
+export { parsePreparedLmcStars, type PreparedLmcStars, type PreparedLmcStar } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
+
+export function mountPreparedLmcStars({ host, payload, before = null }: {
+  host: HTMLElement; payload: PreparedLmcStars; before?: Node | null;
+}) {
+  parsePreparedLmcStars(payload, payload.frame);
+  return mountCatalogueStars({ host, payload, before, className: 'prepared-lmc-stars',
+    projection({ world, viewport }: { world: WorldCameraPose; viewport: WorldCameraViewport }, host) {
+    if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt)
+      throw new TypeError('Prepared stars and camera must share a frame and epoch.');
+    const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
+    const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw));
+    const [ox, oy] = viewport.principalOffsetPixels, focal = viewport.focalPixels;
+    if (!(focal > 0) || ![focal, ox, oy].every(Number.isFinite)) throw new TypeError('Invalid star camera viewport.');
+    const halfWidth = (viewport.widthPixels ?? host.clientWidth) / 2, halfHeight = (viewport.heightPixels ?? host.clientHeight) / 2;
+      return { halfWidth, halfHeight,
+        project: (position: readonly [number, number, number]) => projectPreparedPoint(position, local.positionUnits, rotation, focal, ox, oy) };
+    },
+  });
+}

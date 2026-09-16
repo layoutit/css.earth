@@ -1,3 +1,4 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import type { SourceBinding } from '../../src/platform/source-catalog.mts';
 import { fileURLToPath } from 'node:url';
@@ -15,7 +16,7 @@ export interface SourceEntry { path:string;expectedBytes:number;expectedSha256:s
 export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:SourceEntry[];documents:SourceEntry[]; }
 export interface RuntimeAsset { filename:string;bytes:number;sha256:string; }
 export interface RuntimeManifest { schema:string;assets:RuntimeAsset[]; }
-const sha256=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 const nonempty=(value:unknown):value is string=>typeof value==='string'&&value.length>0;
 export function containedPath(root:string,path:string):string {

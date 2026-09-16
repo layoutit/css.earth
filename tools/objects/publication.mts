@@ -1,11 +1,11 @@
+import { sha256 } from '../../src/platform/sha256.mts';
 import type { RuntimeManifest } from './operations.ts';
 import { readFile, readdir } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../source-values.mts';
 import { writePreparedSet, type PreparedOutput } from '../write-prepared-set.mts';
 
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);
 
 /** Validate consumer JSON before publication; private preparation folders stay staged. */
@@ -31,7 +31,7 @@ export async function preparedAssetWrites({ id, stage, destination, previous, ma
     if (!safe(asset.filename) || names.has(asset.filename)) throw new TypeError('Unsafe or duplicate prepared publication asset.');
     names.add(asset.filename);
     const bytes = await readFile(resolve(stage, asset.filename));
-    if (bytes.length !== asset.bytes || digest(bytes) !== asset.sha256) throw new Error(`Prepared publication asset drifted: ${asset.filename}`);
+    if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Prepared publication asset drifted: ${asset.filename}`);
   }
   const known = new Set(previous?.assets?.map(asset => asset.filename) ?? []);
   const entries = await readdir(destination, { withFileTypes: true }).catch(error => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
@@ -64,7 +64,8 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
   const oldMinimaps = minimapPaths(await optionalJson(resolve(outputDirectory, 'minimaps.json')));
   writes.push(...minimaps.map(path => ({ path: resolve(outputDirectory, path), source: resolve(data, path) })),
     ...oldMinimaps.filter(path => !minimaps.includes(path)).map(path => ({ path: resolve(outputDirectory, path), remove: true as const })),
-    ...outputs.map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
+    // The staged inventory is published once, at the body root; prepared/ never carries a copy.
+    ...outputs.filter(entry => entry.filename !== 'runtime-assets.json').map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
     { path: resolve(objectDirectory, 'runtime-assets.json'), source: resolve(data, 'runtime-assets.json') },
     { path: resolve(objectDirectory, 'object.json'), source: resolve(stage, 'object.json') });
   JSON.parse(await readFile(resolve(stage, 'object.json'), 'utf8'));

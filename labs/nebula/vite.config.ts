@@ -1,15 +1,15 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
-import { tonePreparationPlugin } from './src/viewer/tone-preparation';
-import { cloudDensityPreparationPlugin } from './src/density/cloud-density-preparation';
-import { starRemovalPlugin } from './src/star-removal/star-removal-preparation';
-import { reconstructionPlugin } from './src/reconstruction/reconstruction-preparation';
-import { shapeCloudPlugin } from './src/reconstruction/shape-cloud/server';
-import { geometryDetectionPlugin } from './src/reconstruction/geometry/server';
-import { evidenceFusionPlugin } from './src/reconstruction/evidence-fusion/server';
-import { kinematicsPlugin } from './src/reconstruction/kinematics/server';
-import { compilerPlugin } from './src/reconstruction/compiler/server';
-import { jointFitPlugin } from './src/reconstruction/joint-fit/server';
+import { tonePreparationPlugin } from './packages/lab/src/server/services/tone.ts';
+import { cloudDensityPreparationPlugin } from './packages/lab/src/server/services/density-material.ts';
+import { starRemovalPlugin } from './packages/lab/src/server/services/star-removal.ts';
+import { reconstructionPlugin } from './packages/lab/src/server/services/density-reconstruction.ts';
+import { shapeCloudPlugin } from './packages/lab/src/server/routes/shape-cloud.ts';
+import { geometryDetectionPlugin } from './packages/lab/src/server/routes/geometry.ts';
+import { evidenceFusionPlugin } from './packages/lab/src/server/routes/evidence-fusion.ts';
+import { kinematicsPlugin } from './packages/lab/src/server/routes/kinematics.ts';
+import { compilerPlugin } from './packages/lab/src/server/routes/compiler.ts';
+import { jointFitPlugin } from './packages/lab/src/server/routes/joint-fit.ts';
 
 const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url));
 
