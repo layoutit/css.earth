@@ -60,6 +60,9 @@ test('model textures, shape-derived elevation and featured overrides cannot prom
   // A neutral-gray shape surface is measured geometry with no imagery: "Shape only", never an illustration.
   const shape = [{ surfaces: [{ id: 'shape', science: { kind: 'neutral-shape' } }] }];
   assert.deepEqual(deriveObjectDiscovery({}, controls('shape'), shape), { featured: false, imagery: false, illustration: false });
+  // A whole-disc measured colour is photometry of an unresolved body, not surface imagery.
+  const color = [{ surfaces: [{ id: 'color', science: { kind: 'disc-integrated-color' } }] }];
+  assert.deepEqual(deriveObjectDiscovery({}, controls('color'), color), { featured: false, imagery: false, illustration: false });
 });
 
 test('partial photographic coverage still counts; source and lens counts do not', () => {
@@ -90,8 +93,10 @@ test('default discovery admits photographed asteroids and hides illustrations ac
 test('a star with only its shape stays off the map, whatever the settings', () => {
   for (const options of [defaults, { illustrations: true, asteroids: true, asteroidLabels: true, highlighted: 'star' }]) {
     const scene = discoveryVisibility(SCENE_OBJECTS, options);
-    assert.equal(requireSceneObject('antares').discovery.imagery, false);
-    assert.ok(scene.hiddenBodies.includes('antares') && scene.hiddenLabels.includes('antares') && !scene.highlightedBodies.includes('antares'));
+    for (const id of ['antares', 'polaris']) {
+      assert.equal(requireSceneObject(id).discovery.imagery, false, id);
+      assert.ok(scene.hiddenBodies.includes(id) && scene.hiddenLabels.includes(id) && !scene.highlightedBodies.includes(id), id);
+    }
     for (const id of ['sun', 'betelgeuse', 'pi1-gruis', 'ce-tauri']) assert.equal(scene.hiddenBodies.includes(id), false, id);
   }
 });

@@ -26,6 +26,97 @@
       }
     },
     {
+      "id": "makemake-disc-color",
+      "path": "photometry/disc-color.json",
+      "expectedBytes": 1728,
+      "expectedSha256": "678b1a18faa3ff0e1440356ac08c6882fb4023ffd60139f6d7bbb83df5838cc2",
+      "origin": "https://doi.org/10.1051/0004-6361/201935274",
+      "credit": "Hromakina et al. (2019), A&A 625, A46; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed B-V, V-R, V-I and V geometric albedo (Hromakina 2019 sections 3.4 and 4), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hromakina-2019-makemake",
+            "role": "material",
+            "evidence": "src/objects/makemake/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/makemake/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/makemake/source/photometry/disc-color.json#/effectiveWavelengths"
+          }
+        ]
+      }
+    },
+    {
+      "id": "makemake-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "makemake-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "expectedBytes": 6820,
+      "expectedSha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
       "id": "makemake-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 5764,
@@ -76,8 +167,8 @@
     {
       "id": "makemake-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2265,
-      "expectedSha256": "5ef71ae8329a4d4a45935a07b5776f5fe23168cc59dde78d35c2aa5ab2f52be5",
+      "expectedBytes": 2458,
+      "expectedSha256": "43aafdfab4285db482e3399a1e0d4f5eae9cd1b540090e9f4a4faa25a67fd8df",
       "origin": "Repository-authored Makemake raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -96,7 +187,7 @@
       "id": "makemake-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1603,
-      "expectedSha256": "dc42ee69f3a78bd091f47ee24ec220b24a3c23d2268460da7c70d0fa649cf666",
+      "expectedSha256": "a9bfe4f00fe5325b8c8cb77d46e7ad3a0a6d861019676d80270a7732425cb2a8",
       "origin": "Repository-authored Makemake geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -207,8 +298,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 9464,
-      "expectedSha256": "680fc522a3ad17e220c2b6137d63b35133adcf2d454b57bed5cc47fb8c40ae3d",
+      "expectedBytes": 8698,
+      "expectedSha256": "56e41b55b24162e27d1993101be920215a135bbf11be94543acf44a52481912e",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -228,11 +319,20 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 137,
-      "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5",
+      "expectedSha256": "64bbd76cef2b4f01d7574331cbdc90827ca3413632107eae7b0023bb23877f04",
       "id": "makemake-schematic-marker",
       "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
-      "credit": "cssEarth schematic; warm color denotes the illustrative surface",
+      "credit": "cssEarth schematic; fill is the measured whole-disc colour",
       "license": "MIT, cssEarth authored schematic"
+    },
+    {
+      "expectedBytes": 304417,
+      "expectedSha256": "b294ca41fa5cf460d0e1dc3b6013a84757c66c106893bacc1c8e4aeb583da471",
+      "path": "reference/rendered-default-view.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /makemake/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
     },
     {
       "path": "reference/sbdb.json",

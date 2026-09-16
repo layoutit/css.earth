@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "makemake",
+  "object": {
+    "source": "Hromakina et al. (2019), Long-term photometric monitoring of the dwarf planet (136472) Makemake, A&A 625, A46, doi:10.1051/0004-6361/201935274, arXiv:1904.03679",
+    "locator": "Section 3.4, Magnitude phase dependence and colour indices",
+    "system": "Johnson-Cousins BVRI",
+    "note": "Mean colours from near-simultaneous multi-filter data; no colour variation was detected within the uncertainties.",
+    "indices": {
+      "B-V": { "value": 0.91, "uncertainty": 0.03 },
+      "V-R": { "value": 0.41, "uncertainty": 0.02 },
+      "V-I": { "value": 0.65, "uncertainty": 0.03 }
+    }
+  },
+  "geometricAlbedo": {
+    "source": "Hromakina et al. (2019), A&A 625, A46, arXiv:1904.03679",
+    "locator": "Section 4, revised albedo from H_V and the occultation equivalent diameter of Ortiz et al. (2012)",
+    "band": "V",
+    "value": 0.82,
+    "uncertainty": 0.02
+  },
+  "sun": {
+    "source": "Ramírez et al. (2012), The UBV(RI)C colors of the Sun, ApJ 752, 5, doi:10.1088/0004-637X/752/1/5, arXiv:1204.0828",
+    "locator": "Abstract, model-independent line-depth-ratio solution",
+    "system": "Johnson-Cousins BVRI",
+    "indices": {
+      "B-V": { "value": 0.653, "uncertainty": 0.003 },
+      "V-R": { "value": 0.356, "uncertainty": 0.003 },
+      "V-I": { "value": 0.701, "uncertainty": 0.003 }
+    }
+  },
+  "effectiveWavelengths": {
+    "source": "SVO Filter Profile Service, Generic/Bessell.B, .V, .R and .I, WavelengthEff",
+    "url": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Generic/Bessell.V",
+    "checked": "2026-09-16",
+    "nanometres": { "B": 438.1, "V": 544.5, "R": 641.1, "I": 798.2 }
+  }
+}

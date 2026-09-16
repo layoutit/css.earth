@@ -23,6 +23,10 @@ test('a scaffold derives every number from the astronomy record and writes names
   assert.equal(descriptor.properties.recipe.shape.radiusKm, record.physical.meanRadiusKm);
   assert.equal(json('source/preparation/geometry.json').surface.color, spec.color);
   assert.equal(json('source/content/object.json').provenance.editorial.url, spec.paper);
+  const manifest = json('source/manifest.json');
+  assert.equal(manifest.documents.find((document: { path: string }) => document.path === 'content/object.json').sourceBinding.kind, 'local', 'provenance needs the content record bound');
+  // Content provenance paths resolve from the content record's folder, as the shipped stars write them.
+  assert.equal(json('source/content/object.json').provenance.physical.path, JSON.parse(await readFile(resolve(root, 'src/objects/antares/source/content/object.json'), 'utf8')).provenance.physical.path);
 });
 
 test('prose the scaffold cannot know is marked, and the package it writes matches a shipped shape-only star', async () => {

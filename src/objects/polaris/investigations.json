@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "polaris",
+  "entries": [
+    {
+      "id": "mircx-2021-04-image",
+      "subject": "CHARA/MIRC-X merged April 2021 H-band visibilities, JMMC OiDB (Evans et al. 2024)",
+      "status": "excluded",
+      "finding": "The OiDB holds the authors' merged, V0-corrected file for the nights of 2, 3 and 4 April 2021 at calibration level 3 (data PI G. Schaefer): 3198 squared-visibility and 1928 closure-phase channel rows over 32 or 33 channels per setting (R about 210, 1.50-1.73 um), stations S2, E1, E2, W1 and W2, longest projected baseline 304.7 m, 61 closure-phase channels flagged; it also carries 50,524 complex visibilities the authors did not image, which SQUEEZE must be told to ignore (-novis). A limb-darkened disc with u = 0.12 fits the squared visibilities at 3.155 mas, 3.138 mas after the paper's MIRC-X scale factor, and reduced chi-squared 1.69, but not the closure phases (18.9). The beam is 0.55 mas, so the disc is about six beams across. SQUEEZE at the pinned commit with the recipe used for π¹ Gruis and Betelgeuse (maximum entropy 10, 3000 elements, 0.1 mas pixels, 64 pixels, disc start) converges at reduced chi-squared 1.76 on squared visibilities and 2.28 on closure phases. The same recipe on a spotless disc simulated on the file's own sampling and errors (tools/objects/interferometry/spotless-disc.mts, seed 1) draws the same dark spots east and west of centre: spot contrast 4.11 percent on the real image and 3.93 percent on the spotless one, correlation 0.58, ratio 1.05, where π¹ Gruis gives 5.22 and Betelgeuse 2.90 with the same test. The difference between the two images is a gentle brightening to the north, in the direction of the bright spot the paper reports, too weak to cast as a surface. No image is cast.",
+      "revisitWhen": "A denser (u, v) coverage of Polaris is published as calibrated OIFITS, or the authors deposit their SURFING or ROTIR surface maps as data.",
+      "evidence": [
+        "https://oidb.jmmc.fr/",
+        "https://arxiv.org/abs/2407.09641",
+        "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "849bfcd32a"
+        }
+      ]
+    },
+    {
+      "id": "companion-ab",
+      "subject": "Whether the close companion Polaris Ab causes the closure phases",
+      "status": "excluded",
+      "finding": "Evans et al. (2024, Table 3) place Ab at 84.4 mas, position angle 315.8 degrees and flux ratio 0.0011 in April 2021. On the file's own sampling, with each channel's bandwidth, adding that point source to the 3.16 mas disc makes the closure-phase fit worse, reduced chi-squared 18.9 for the disc alone against 19.0 or 19.8 with the companion on either side. The asymmetry is on the star, as the paper found; the companion is not the reason the image fails.",
+      "evidence": [
+        "https://arxiv.org/abs/2407.09641"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "849bfcd32a"
+        }
+      ]
+    },
+    {
+      "id": "published-surface-maps",
+      "subject": "The published SURFING and ROTIR surface maps",
+      "status": "excluded",
+      "finding": "The paper shows surface maps of the merged April 2021 data made with SURFING and ROTIR and states that some of their spots may be artefacts of the (u, v) coverage. No FITS deposit of those maps is found: SIMBAD's references about Polaris link no VizieR catalogue with images (tools/objects/star-candidates.mts). Figures are not cast.",
+      "revisitWhen": "The maps are deposited as data.",
+      "evidence": [
+        "https://arxiv.org/abs/2407.09641",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+UMi"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "849bfcd32a"
+        }
+      ]
+    },
+    {
+      "id": "rotation-axis",
+      "subject": "Rotation axis, period and prime meridian",
+      "status": "unresolved",
+      "finding": "No publication measures the rotation axis of Polaris. Lee et al. (2008) find a radial-velocity period of about 120 days and attribute it to rotation; Evans et al. (2024) note that surface spots would support that reading. A period without an axis does not orient the sphere. The object uses the display-orientation record: the axis shown is celestial north in the plane of the sky and the display meridian faces the Earth at the scene epoch, both labelled as a convention.",
+      "revisitWhen": "A position angle and inclination of the rotation axis are published.",
+      "evidence": [
+        "https://arxiv.org/abs/2407.09641"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "849bfcd32a"
+        }
+      ]
+    },
+    {
+      "id": "distance",
+      "subject": "Distance",
+      "status": "included",
+      "finding": "Polaris Aa is too bright for a reliable Gaia parallax. The 136.90 +/- 0.34 pc Evans et al. (2024) adopt is the Gaia DR3 parallax of the wide companion Polaris B (7.2869 +/- 0.0178 mas) with the Lindegren zero-point offset; Hipparcos gives 7.54 mas, 133 pc. The radius follows the distance.",
+      "evidence": [
+        "https://arxiv.org/abs/2407.09641",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+UMi+B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "849bfcd32a"
+        }
+      ]
+    }
+  ]
+}
