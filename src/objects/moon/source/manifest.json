@@ -105,30 +105,6 @@
       }
     },
     {
-      "id": "openspace-moon-globe-config",
-      "path": "openspace/moon-globe.asset",
-      "expectedSha256": "a3353ce4708cbf5095482b52cac7f69db3f9cec828f7f8fd36bdd4019e2bd119",
-      "expectedBytes": 1700,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/moon/globe.asset",
-      "credit": "OpenSpace Project",
-      "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
-      "acquisition": "checked configuration at pinned OpenSpace commit",
-      "redistribution": "permitted with OpenSpace MIT notice Retained as scene-configuration provenance; no generic-lane preparation step reads it.",
-      "consumers": [
-        "provenance"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-moon-openspace-moon-globe-config",
-            "role": "method",
-            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      }
-    },
-    {
       "id": "moon-title-mark",
       "path": "presentation/title-mark.json",
       "expectedSha256": "7e207c0a32f4a879c1767d2c2634505bb8b1639e937d7b4d7382165f1ae06101",
@@ -623,7 +599,7 @@
       "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -699,7 +675,7 @@
       "path": "presentation/solar-system.json",
       "expectedSha256": "6b9c5784ce3388d37a5dd987817701fc28559f779b877768856fcc5b1177d3bb",
       "expectedBytes": 270,
-      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
+      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40\u00b0) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source recipe authored from the retired static camera plan and the shared Mercury/Venus/Mars marker layout",
@@ -718,8 +694,8 @@
     {
       "id": "moon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "9cd67764f11339404a5ef9bed8683efb738eda3ccb63f4b8a74817168e461b5a",
-      "expectedBytes": 17834,
+      "expectedSha256": "b5a08af420176145843fd336e8aa68fabe38723ee66a8a3b00c864089d75eb3f",
+      "expectedBytes": 18112,
       "origin": "Repository-authored Moon raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -831,8 +807,8 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "expectedSha256": "4c7daaacb0f6ac8088f8e23ff48a162bd7a9095c74da9f89552d6dd0a697a629",
-      "expectedBytes": 34253,
+      "expectedSha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
+      "expectedBytes": 34459,
       "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

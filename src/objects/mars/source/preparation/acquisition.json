@@ -6,30 +6,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "openspace/globe.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/globe.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/atmosphere.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/kernels.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/kernels.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "surface/mars-viking-mdim21-color-1km.jpg",
       "url": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
     },
@@ -39,33 +15,24 @@
         "refresh"
       ],
       "path": "lenses/mola-pseudocolor-z3.png",
-      "url": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/${y}/${x}",
-      "tileSize": 360,
+      "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+      "tileSize": 256,
       "columns": 16,
       "rows": 8,
-      "dataWidth": 5760,
-      "dataHeight": 2880,
+      "dataWidth": 4096,
+      "dataHeight": 2048,
       "width": 4096,
       "height": 2048,
-      "forceRgb": false,
-      "concurrency": 1
+      "forceRgb": true,
+      "concurrency": 6
     },
     {
-      "kind": "tile-mosaic",
+      "kind": "download",
       "groups": [
         "refresh"
       ],
       "path": "lenses/themis-ir-day-z3.png",
-      "url": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/${y}/${x}",
-      "tileSize": 256,
-      "columns": 14,
-      "rows": 7,
-      "dataWidth": 3584,
-      "dataHeight": 1792,
-      "width": 4096,
-      "height": 2048,
-      "forceRgb": false,
-      "concurrency": 1
+      "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
     },
     {
       "kind": "request-download",

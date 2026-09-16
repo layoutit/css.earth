@@ -173,84 +173,6 @@
       }
     },
     {
-      "id": "openspace-neptune-globe",
-      "path": "openspace/globe.asset",
-      "expectedSha256": "aa4048418cdeaa302dc3f5d1b93aa92cf2fdd7afa937cd236e0e685da1a71235",
-      "origin": "OpenSpace commit 56e29b54b8592084ff1fef47c2e08de0b22ce516 Neptune globe asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/LICENSE.md"
-      ],
-      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
-      "redistribution": "permitted with OpenSpace MIT notice",
-      "consumers": [
-        "scene"
-      ],
-      "expectedBytes": 1191,
-      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "openspace-neptune-globe",
-            "role": "method",
-            "evidence": "OpenSpace configuration at the recorded commit; exact file bytes and MIT notice remain with the local input."
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-neptune-kernels",
-      "path": "openspace/kernels095.asset",
-      "expectedSha256": "8c92db90267882ed8f3b961d17409445a7a6be66fc9cc158da25d9a266205fd6",
-      "origin": "OpenSpace commit 56e29b54b8592084ff1fef47c2e08de0b22ce516 Neptune SPICE asset",
-      "credit": "OpenSpace Team and NASA NAIF",
-      "license": "MIT asset definition; linked NASA NAIF kernels are not redistributed",
-      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
-      "redistribution": "checked asset definition only",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 1147,
-      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "openspace-neptune-kernels",
-            "role": "method",
-            "evidence": "OpenSpace configuration at the recorded commit; exact file bytes and MIT notice remain with the local input."
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-neptune-major-moons",
-      "path": "openspace/major_moons.asset",
-      "expectedSha256": "e36980014a8bddfeb473437d83426fa882304dd53346ee1ec87f1a29d20768fb",
-      "origin": "OpenSpace commit 56e29b54b8592084ff1fef47c2e08de0b22ce516 Neptune major moons asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
-      "redistribution": "permitted with OpenSpace MIT notice",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 2756,
-      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "openspace-neptune-major-moons",
-            "role": "method",
-            "evidence": "OpenSpace configuration at the recorded commit; exact file bytes and MIT notice remain with the local input."
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-science-neptune-editorial",
       "path": "editorial/neptune.json",
       "expectedSha256": "62608eec61497708dde0317c43bcbad173bf8044e516997ddf33cc80c304858e",
@@ -365,8 +287,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14949,
-      "expectedSha256": "f736731bb293f719cdabfa65974fc3c720895869c6836de7f6efa11245bf26c7",
+      "expectedBytes": 14831,
+      "expectedSha256": "7a288f97390b9dcfddb898797a4b940a187d37736a1100f3d134db82c40224c2",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -533,7 +455,7 @@
             "catalogueId": "arxiv-1808-01973",
             "role": "method",
             "evidence": "Phase-equation coefficients transcribed from Mallama and Hilton. The local record states the angle limits and terms held fixed.",
-            "locator": "Equations 2–17; body-specific phase equation"
+            "locator": "Equations 2\u201317; body-specific phase equation"
           }
         ]
       }

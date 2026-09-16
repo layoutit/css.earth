@@ -20,7 +20,6 @@
   government data.
 - Satellite parameters and elements: NASA Jet Propulsion Laboratory Solar System Dynamics.
 - Atmosphere and reflectance model: NASA GSFC Planetary Spectrum Generator.
-- Scene and kernel declarations: OpenSpace Team, MIT License; see `LICENSE.OPENSPACE-MIT`.
 - Navigation marker and published full-disc silhouette reference: NASA, ESA,
   STScI, and Amy Simon.
 - Jupiter visible-map Minnaert coefficients: Amy A. Simon, Michael H. Wong,

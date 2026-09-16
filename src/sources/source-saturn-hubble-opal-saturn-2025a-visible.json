@@ -1,0 +1,37 @@
+{
+  "id": "source-saturn-hubble-opal-saturn-2025a-visible",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Saturn · hubble opal saturn 2025a visible",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/saturn/source/manifest.json",
+      "revision": "8cb9d570b83be66550f1169de8cc443b9ed71ef4",
+      "sha256": "d71a0004deaccac2034d0bd27d5584bc2ad59cd05049899b272340bc24a48758",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, STScI, and the OPAL team",
+      "scope": "The hubble opal saturn 2025a visible input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "STScI public science archive data",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

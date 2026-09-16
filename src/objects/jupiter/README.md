@@ -80,9 +80,8 @@ boundary band. No absent Hubble pixel is presented as an observation, and no
 polar geometry, projection, color transfer, or raster work occurs in the
 browser.
 
-OpenSpace's Jupiter globe and kernel assets at commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516` bind the equatorial and polar
-radii (71,492 and 66,854 km) and the JUP365 scene closure. The prepared scene
+The prepared scene binds the IAU equatorial and polar radii (71,492 and
+66,854 km) and the JUP365 ephemeris closure. The prepared scene
 uses 3.13 degrees of axial tilt and NASA's 9.9-hour rotation period. The
 36-second CSS rotation is an explicitly accelerated presentation timescale.
 The adapter declares a 1,280 by 720 prepared reference viewport for its
@@ -217,12 +216,12 @@ The pinned PSG configuration retains its exact `4.360399` degree observation
 phase and observation light direction as source metadata. That near-opposition
 geometry is not used as the free-orbit presentation light because it collapses
 the visible terminator into an unreadable limb. Presentation instead copies the
-accepted Saturn-quality OpenSpace default scene-graph Sun direction
-`[0.883835, -0.385595, 0.264864]` into Jupiter's object-owned preparation. The
-direction is bound to OpenSpace commit `56e29b54` and is not derived from a
-screenshot.
+accepted Saturn presentation Sun direction `[0.883835, -0.385595, 0.264864]`
+into Jupiter's object-owned preparation. The direction is an authored
+presentation choice, originally OpenSpace's default scene-graph light, and is
+not derived from a screenshot.
 
-The prepared photometric overlay retains OpenSpace's neutral-light `0.05`
+The prepared photometric overlay retains the neutral-light `0.05`
 ambient floor and `smoothstep(0, 0.1, N dot L)` terminator. Every channel is
 computed in linear light, re-encoded through sRGB, and represented as a single
 source-over color plus alpha. The accepted material bank contains 181 half-degree frames at 512 pixels,
@@ -275,6 +274,5 @@ their preparation recipes are adapter-owned.
 - NASA/JPL Galileo PIA00701 main ring and halo: <https://pds-rings.seti.org/jupiter/galileo/PIA00701.html>
 - NASA/JPL Galileo PIA01623 gossamer structure: <https://pds-rings.seti.org/jupiter/galileo/PIA01623.html>
 - NASA PSG: <https://psg.gsfc.nasa.gov/>
-- OpenSpace: <https://github.com/OpenSpace/OpenSpace>
 
 </details>

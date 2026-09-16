@@ -77,82 +77,21 @@
       }
     },
     {
-      "id": "openspace-mars-globe",
-      "path": "openspace/globe.asset",
-      "expectedSha256": "63193fe00325bed70f3f3ed55dc016d3dcc21b5795ae05f00e57b66813dada92",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/globe.asset"
-      ],
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT source snapshot",
+      "id": "mars-atmosphere-model",
+      "path": "atmosphere/model.json",
+      "expectedSha256": "e92febb5f3bb206f53066419a0ab586a017a2dc57a8a9488be126f2485186420",
+      "expectedBytes": 1446,
+      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team\u2019s RenderableAtmosphere tuning (MIT)",
+      "license": "Repository-authored record; adapted values credited inside the file",
+      "acquisition": "authored in the repository",
+      "redistribution": "permitted with the credit stated in the record",
       "consumers": [
         "scene"
       ],
-      "expectedBytes": 1753,
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-mars-globe",
-            "role": "method",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mars-atmosphere",
-      "path": "openspace/atmosphere.asset",
-      "expectedSha256": "0850b8906314a8d72072b60ae3a3e0f0eb37525292955d911767310d2ed97ac5",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
-      ],
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT source snapshot",
-      "consumers": [
-        "scene",
-        "materials"
-      ],
-      "expectedBytes": 2044,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-mars-atmosphere",
-            "role": "method",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-mars-kernels",
-      "path": "openspace/kernels.asset",
-      "expectedSha256": "0aa4b3b9efdb9feadd547a112fb0c222eecb641bdaad6a1326224e457a28ffbe",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/kernels.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "Retained as scene-configuration provenance for the pinned OpenSpace Mars scene; no preparation step reads it.",
-      "consumers": [
-        "provenance"
-      ],
-      "expectedBytes": 600,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-mars-kernels",
-            "role": "method",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
-          }
-        ]
+        "kind": "local",
+        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
       }
     },
     {
@@ -194,18 +133,16 @@
     {
       "id": "usgs-mola-pseudocolor",
       "path": "lenses/mola-pseudocolor-z3.png",
-      "expectedSha256": "16b9b65eebe6512bf625fdb82b87a51d92e9a6e74c5d98ebbac3c66251bcac7c",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
-      "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
+      "origin": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+      "credit": "NASA Solar System Treks; USGS Astrogeology; NASA Mars Global Surveyor MOLA",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
+      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
         "assets",
         "lenses",
         "scene"
       ],
-      "expectedBytes": 18438219,
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
@@ -214,7 +151,7 @@
             "kind": "machine",
             "machineId": "mars-global-surveyor",
             "missionId": "mars-global-surveyor",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
+            "evidence": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
         ]
       },
@@ -227,23 +164,23 @@
             "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
           }
         ]
-      }
+      },
+      "expectedSha256": "bf5fd7f33a34262e36c8437f2b7f3acb5ac100d0efd016a4315a65bec55f2142",
+      "expectedBytes": 16209831
     },
     {
       "id": "usgs-themis-ir-day",
       "path": "lenses/themis-ir-day-z3.png",
-      "expectedSha256": "374bf7e567c53449cd1b7f8072f9ab64cf7c9863e29dc9a7db1bf8c1e2b3127c",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
-      "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
+      "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+      "credit": "USGS Astrogeology WMS; Arizona State University; NASA Mars Odyssey THEMIS (Edwards et al. 2011)",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
+      "acquisition": "USGS Astrogeology WMS GetMap of the global THEMIS day-IR mosaic at 4096 by 2048",
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
         "assets",
         "lenses",
         "scene"
       ],
-      "expectedBytes": 8031340,
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
@@ -252,7 +189,7 @@
             "kind": "machine",
             "machineId": "odyssey",
             "missionId": "odyssey",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
           }
         ]
       },
@@ -265,7 +202,9 @@
             "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
           }
         ]
-      }
+      },
+      "expectedSha256": "1e9123a696231c456ab210be3d847b880599c7485abfe46af68cf1e7dfe5c61c",
+      "expectedBytes": 9711562
     },
     {
       "id": "nasa-psg-mars-configuration",
@@ -319,8 +258,8 @@
     {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "expectedSha256": "cd4446b0424aaf55fada395ee123375dda44549517539b70af29e4e8dfd709c5",
-      "expectedBytes": 13958,
+      "expectedSha256": "6fd63aac032545b77aefa9005667483f465b3e6c5363b6fb023054d942d8007a",
+      "expectedBytes": 14006,
       "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -357,8 +296,8 @@
     {
       "id": "mars-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "5eac3ab5a540468f42758a60ad836811b39394dd1cdda2c7b5e8c000f21dc20f",
-      "expectedBytes": 4100,
+      "expectedSha256": "ccdb3d78359f882dee9759873ae33b19b3064898527f1c125cd3f36c0ff7dd83",
+      "expectedBytes": 3231,
       "origin": "Repository-authored Mars acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -452,8 +391,8 @@
     {
       "id": "mars-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "7a4423487c819fb73f49c38002be3f8176ed9bd4d2d38e60d0f4ac629aeb7de8",
-      "expectedBytes": 1899,
+      "expectedSha256": "b5efcf2c366c56a0f948b39ec10535813fb9a6fe6114a65e5ddf94b660687358",
+      "expectedBytes": 1894,
       "origin": "Repository-authored Mars raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -475,7 +414,7 @@
       "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],

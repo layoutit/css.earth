@@ -107,9 +107,7 @@
     "metadata": {
       "schema": "cssmercury-prepared-lighting@3",
       "storageModel": "prepared-full-resolution-density-row-shards",
-      "model": "prepared-full-phase-openspace-lambert-cubic-sky-sun-no-atmosphere",
-      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      "rendererSourceSnapshot": "source/renderer/texturetilemapping-lighting.glsl",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
       "worldLightDirection": [
         -0.6119166247245715,
         0.41228475010189525,
@@ -132,7 +130,8 @@
       "baseLightAzimuthDegrees": 0,
       "defaultLightViewZ": 0.8030144929060974,
       "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-      "runtimeRasterization": false
+      "runtimeRasterization": false,
+      "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; formulation adapted from the OpenSpace globe shader (MIT) and documented in the body README"
     }
   },
   "interior": {

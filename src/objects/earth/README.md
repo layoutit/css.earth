@@ -10,7 +10,7 @@ clouds are not live weather. Dataset selection is manual at every zoom.
 | Surface and clouds | NASA Blue Marble, July 2004 surface plus archival cloud TIFF | Brightness is adjusted for display. Surface and clouds are separate observations. |
 | Elevation | [GEBCO_2026](https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa) | Sampled modeled height relative to sea level. Relief shading is exaggerated; globe geometry is unchanged. |
 | Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
-| Atmosphere and charts | OpenSpace atmosphere parameters; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
+| Atmosphere and charts | Authored atmosphere parameter record; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
 | ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04), 7 September 2026, via GIBS | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
 
@@ -85,8 +85,8 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
 - Clouds: NASA Visible Earth, Blue Marble Clouds. The checked 8,192 × 4,096 TIFF is `source/blue-marble-clouds.tif`.
 - Navigation marker: NASA image-library Earth globe `GSFC_20171208_Archive_e001016`, checked as `source/earth-navigation.jpg`.
 
-The OpenSpace Earth asset configuration at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` is
-checked beside the image sources. It records the upstream parameters used in preparation.
+The atmosphere parameters used in preparation are stated in `source/atmosphere/model.json`,
+with the sources each value is adapted from.
 
 The July mosaic uses a display-only midtone lift: each sampled RGB code value becomes
 `round(255 * (value / 255) ** (1 / 1.25))`. Black and white endpoints are unchanged.
@@ -237,8 +237,9 @@ record the qualified snapshot. The earlier CoralTemp comparison used a different
 <details>
 <summary>Atmosphere parameters and normalized PSG responses</summary>
 
-`source/openspace/earth-atmosphere.asset` is also the numerical authority for the visible
-atmosphere. Preparation parses its 6,377 km planet radius, 70 km atmosphere height, 680/550/440
+`source/atmosphere/model.json` is the numerical authority for the visible atmosphere: an
+authored record whose values are adapted from the OpenSpace RenderableAtmosphere tuning and
+Bruneton and Neyret (2008), cited in the file. Preparation reads its 6,377 km planet radius, 70 km atmosphere height, 680/550/440
 nm Rayleigh scattering coefficients, 8 km Rayleigh scale height, and Mie coefficients, scale
 height, and anisotropy. Those values produce the static view bank and its exact outer-radius
 ratio.
@@ -246,7 +247,7 @@ ratio.
 Google Earth Pro supplies only the presentation operator layered over those Earth facts: a
 captured Sun-direction uniform, 0.2 camera exposure, exponential tone mapping, and
 luminance-driven opacity. Earth irradiance, twilight width, limb concentration, colour, and
-density remain body-specific and are derived from the OpenSpace atmosphere values. The checked
+density remain body-specific and are derived from the atmosphere record. The checked
 `source/atmosphere/google-earth-pro-presentation-response.json` records the shader hashes and
 results from tests that render the atmosphere separately.
 

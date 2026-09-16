@@ -356,58 +356,28 @@
       }
     },
     {
-      "id": "openspace-earth-globe-config",
-      "path": "openspace/earth-globe.asset",
-      "expectedSha256": "e73d5452846f54e26d3e6477977bef5c76aac3c0091a592ce14527d39ff39fa4",
-      "expectedBytes": 1588,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/globe.asset",
-      "credit": "OpenSpace Project",
-      "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
-      "acquisition": "checked configuration at pinned OpenSpace commit",
-      "redistribution": "permitted with OpenSpace MIT notice",
+      "id": "earth-atmosphere-model",
+      "path": "atmosphere/model.json",
+      "expectedSha256": "84a50abbc0dcb1b68f8b396c99ceac4dbb7946bf6c8dac4e6e22e6f91de34825",
+      "expectedBytes": 1741,
+      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team\u2019s RenderableAtmosphere tuning (MIT)",
+      "license": "Repository-authored record; adapted values credited inside the file",
+      "acquisition": "authored in the repository",
+      "redistribution": "permitted with the credit stated in the record",
       "consumers": [
-        "source-verification"
+        "scene"
       ],
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-openspace-earth-globe-config",
-            "role": "method",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-earth-atmosphere-config",
-      "path": "openspace/earth-atmosphere.asset",
-      "expectedSha256": "9473aa3177363c097fa24eedb205da08ad926266828bde0b1aac7d57faee840a",
-      "expectedBytes": 2437,
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/atmosphere.asset",
-      "credit": "OpenSpace Project",
-      "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
-      "acquisition": "checked configuration at pinned OpenSpace commit",
-      "redistribution": "permitted with OpenSpace MIT notice",
-      "consumers": [
-        "atmosphere"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-openspace-earth-atmosphere-config",
-            "role": "method",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
-          }
-        ]
+        "kind": "local",
+        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
       }
     },
     {
       "id": "google-earth-pro-atmosphere-presentation-response",
       "path": "atmosphere/google-earth-pro-presentation-response.json",
-      "expectedSha256": "258603b886b0079cde14c23585e22b52f7752b26ec6e3248a3e6b8f93f059673",
-      "expectedBytes": 2071,
+      "expectedSha256": "32a3ae4b6a55041d034f475c49b6bc7f915f783357e0047a9596a33ff18fc77c",
+      "expectedBytes": 2061,
       "origin": "Google Earth Pro 7.3.7.1327 linked shader and headless isolated-layer captures recorded locally on 2026-09-02",
       "credit": "Google Earth Pro presentation reference; measurements recorded by this project",
       "license": "Repository-authored factual measurements; no Google pixels or shader bytes redistributed",
@@ -1629,13 +1599,13 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 14036,
-      "expectedSha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653"
+      "expectedBytes": 14040,
+      "expectedSha256": "61aa5b4efe04275698330b0d6c3c37eff127f456050d9ea5fcbfe7a8a8cab240"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16696,
-      "expectedSha256": "501afff1d4429dd6e8023b37e6210ea3ee5726d4d91a532bca13d47b22e345cf",
+      "expectedBytes": 16867,
+      "expectedSha256": "c7d11d828a560459cbb67b8793de707375f4b62a5a287dbdeac4616738886b26",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1669,8 +1639,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 31799,
-      "expectedSha256": "75dd96814ad2ce98dd13c709eb4394b1c9c68cfb2f860bbe5947b438311eb6d6",
+      "expectedBytes": 31082,
+      "expectedSha256": "8a48e63a66cbb78df843495463ed604f4c9224e0a4d1add1a49bda360eeb4612",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {

@@ -16,10 +16,8 @@ near-infrared lens uses F845M. Their checked FITS and TIFF products, plus the
 OPAL readme, are in `source/opal/`. Preparation converts them to fixed runtime
 rasters; the browser does not parse FITS, TIFF, or the calibration reference.
 
-The OpenSpace Neptune asset files are pinned to commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516`. They establish the 24,764 km
-equatorial and 24,314 km polar radii and identify the authoritative SPICE
-kernel lineage. JPL Solar System Dynamics discovery, mean-elements, and
+The prepared scene uses the 24,764 km equatorial and 24,314 km polar radii
+(IAU 2015 report values). JPL Solar System Dynamics discovery, mean-elements, and
 physical-parameter tables supply the prepared 16-moon catalog. The PDS Rings
 Node Neptune table supplies the prepared ring radii and widths.
 
