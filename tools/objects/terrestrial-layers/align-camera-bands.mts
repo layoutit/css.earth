@@ -6,10 +6,10 @@ import {dirname,resolve} from 'node:path';
 import {requireRecord,requireString} from '../../source-values.mts';
 import {array,parseCameraFrame,shape,text} from './source-records.mts';
 import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from './shape-camera-mosaic.mts';
-import {registerCameraBands,REGISTRATION_CRITERIA,REGISTRATION_METHOD,REGISTRATION_SETTINGS} from './camera-band-registration.mts';
+import {alignCameraBands,BAND_ALIGNMENT_CRITERIA,BAND_ALIGNMENT_METHOD,BAND_ALIGNMENT_SETTINGS} from './band-alignment.mts';
 
 const jobPath=process.argv[2],outputPath=process.argv[3];
-if(!jobPath||!outputPath)throw new Error('Usage: register-camera-bands.mts JOB.json REPORT.json [--check-only]');
+if(!jobPath||!outputPath)throw new Error('Usage: align-camera-bands.mts JOB.json REPORT.json [--check-only]');
 const checkOnly=process.argv.includes('--check-only');
 const recipeText=await readFile(jobPath,'utf8'),job=requireRecord(JSON.parse(recipeText));
 const body=requireString(job.body),root=resolve(dirname(jobPath),requireString(job.sourceRoot));
@@ -19,11 +19,11 @@ const mesh=await loadCameraShape(root,profile);
 const source=async(frame:ReturnType<typeof parseCameraFrame>)=>{const bytes=await readFile(`${root}/${frame.path}`);return {frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)};};
 const reference=await source(parseCameraFrame(job.referenceFrame));
 const targets=[];for(const channel of color.channels)targets.push({filter:channel.filter,...await source(channel.frames[0])});
-const result=registerCameraBands({mesh,camera:controlledShapeCamera,reference,targets,checkOnly});
+const result=alignCameraBands({mesh,camera:controlledShapeCamera,reference,targets,checkOnly});
 for(const report of result.reports){const corrected=report.correctedCamera;if(corrected)console.log(body,report.filter,'center',corrected.center,'north azimuth',corrected.northAzimuthDegrees,'fit',report.fit,'holdout',report.holdout);}
-const {patchRadiusPixels,patchSampleStepPixels,...settings}=REGISTRATION_SETTINGS;
+const {patchRadiusPixels,patchSampleStepPixels,...settings}=BAND_ALIGNMENT_SETTINGS;
 await writeFile(outputPath,JSON.stringify({body,mode:checkOnly?'fixed-camera-validation':'feature-fit',recipeSha256:sha256(recipeText),referenceCamera:reference.frame,
- implementationSha256:sha256(await readFile(new URL('./camera-band-registration.mts',import.meta.url))),
+ implementationSha256:sha256(await readFile(new URL('./band-alignment.mts',import.meta.url))),
  mesh:{path:profile.path,sha256:sha256(await readFile(resolve(root,requireString(profile.path))))},
  settings:{patchRadiusPixels,patchSampleStepPixels,patchGridStepPixels:result.patchGridStepPixels,...settings},
- method:REGISTRATION_METHOD,criteria:REGISTRATION_CRITERIA,reports:result.reports},null,2)+'\n');
+ method:BAND_ALIGNMENT_METHOD,criteria:BAND_ALIGNMENT_CRITERIA,reports:result.reports},null,2)+'\n');

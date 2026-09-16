@@ -175,6 +175,7 @@
         },
         "maximumCoordinateErrorMeters": 1e-06,
         "display": {
+          "basis": "authored",
           "percentiles": [
             0,
             100

@@ -17,7 +17,7 @@ import { readFitsHdu } from '../../../../tools/fits.mts';
 import { decodeCalibratedCamera } from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 import { pckOrientation, type BodyOrientation } from '../../../../tools/objects/terrestrial-layers/observer-camera.mts';
 import { horizonsRows, zimpolExposure } from '../../../../tools/objects/terrestrial-layers/observer-cameras.mts';
-import { limbCentre, observerCaster, radiusFieldMesh, registrationSweep, type SurfaceReference } from '../../../../tools/objects/terrestrial-layers/observer-registration.mts';
+import { limbCentre, observerCaster, radiusFieldMesh, registrationSweep, type SurfaceReference } from '../../../../tools/objects/terrestrial-layers/registration-sweeps.mts';
 import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/pds-scalar-grid.mts';
 import { loadNativePhotograph } from '../../../../tools/objects/terrestrial-layers/native-photograph-source.mts';
 import { parseTextKernel } from '../../../../tools/spice/text-kernel.mts';

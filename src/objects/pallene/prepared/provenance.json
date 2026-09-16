@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b4c270c75aec17912be51c0d112a28e5b9ca1472504e752ed781efaa0405009b"
+    "sha256": "75e40b62ee5edfce533303a1789c067af3e6685c0ebaf0db5e510611e7b88f0a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "02dd890353f99dfd72064cb89664cc6657a17f24ecb361a62674903651957396",
+      "sha256": "b3a9fb55282799075efd2f03402faa80022095903d2119309f4fde8051165539",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,6 +77,7 @@
                 "maximumGain": 2
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.492
@@ -524,7 +525,7 @@
   },
   "lastPreparation": {
     "objectId": "pallene",
-    "materialSha256": "d3382fedbea7ce11852e1cda15f76395f98ced10e8000245041a3427967e8890",
+    "materialSha256": "01245341d7e3f3e4cfa3706f34b8b2d22fef300dc6dbd5a679cb7b792f6ac633",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

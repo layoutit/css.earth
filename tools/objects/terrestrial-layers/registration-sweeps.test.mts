@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { rotate } from '../../spice/frames.mts';
 import { controlledShapeCamera, type CameraImage } from './shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from './observer-camera.mts';
-import { framesReference, limbCentre, observationCaster, observerCaster, prepareFrame, radiusFieldMesh, registrationSweep, turnedOrientation, type SurfaceReference } from './observer-registration.mts';
+import { framesReference, limbCentre, observationCaster, observerCaster, prepareFrame, radiusFieldMesh, registrationSweep, turnedOrientation, type SurfaceReference } from './registration-sweeps.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;
 

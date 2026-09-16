@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "84af7eb469a52a92b3a27345aa51ddb7f45976a0c325ce4c897f4f6b16d5f8f6"
+    "sha256": "2908611ea7b15129ce5cb0a6fcf75d2dc1ef5234eb3bcbefaecbec9e7fe7214f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5c44931db0f5c1e9627ab5d9a519b4903ad17e9adae3caed4fc31111028ce7ab",
+      "sha256": "e95b14e1aaf27b458dbbba32902bcde3302ec0858e53833a5e8a0a75e59c4e45",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -114,7 +114,7 @@
                 }
               ],
               "filter": "0",
-              "refinement": {
+              "limbRefinement": {
                 "method": "mesh-limb",
                 "maximumCorrectionDegrees": 0.5,
                 "maximumResidualPixels": 2,
@@ -142,6 +142,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0,
                   99
@@ -1293,7 +1294,7 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "e2cbe555b8157db968a1c5577c45fe0d41c0fe572174bd05267a857a699aae96",
+    "materialSha256": "ba55dc0c8fe0634ba29f7c3f76be227ff51df1e3a33815362758dc92a5dea506",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

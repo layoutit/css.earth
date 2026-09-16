@@ -11,7 +11,7 @@ import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
 import {readFitsImage} from '../../fits.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { registerCameraBands, REGISTRATION_CRITERIA } from './camera-band-registration.mts';
+import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
 
 const rad = Math.PI / 180;
 const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
@@ -220,8 +220,8 @@ export const framePaths=(f: CameraFrame)=>[f.path,...(f.labelPath?[f.labelPath]:
 
 /** Measure every registered camera against its declared reference images. References are used in order: the first is the
  * camera seed, and each later one once a check has confirmed it. Every channel camera must be confirmed. */
-export async function checkBandRegistration(sourceDirectory: string,channels: readonly {filter:string;frames:readonly CameraFrame[]}[],
-  registration: {references:readonly CameraFrame[];checks:readonly {reference:string;targets:readonly string[]}[]},mesh: Parameters<typeof registerCameraBands>[0]['mesh']){
+export async function checkBandAlignment(sourceDirectory: string,channels: readonly {filter:string;frames:readonly CameraFrame[]}[],
+  registration: {references:readonly CameraFrame[];checks:readonly {reference:string;targets:readonly string[]}[]},mesh: Parameters<typeof alignCameraBands>[0]['mesh']){
   const frames=new Map<string,{frame:CameraFrame;filter:string}>();
   for(const entry of [...registration.references.map(frame=>({frame,filter:'reference'})),...channels.flatMap(channel=>channel.frames.map(frame=>({frame,filter:channel.filter})))]){
     if(frames.has(entry.frame.id))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
@@ -243,7 +243,7 @@ export async function checkBandRegistration(sourceDirectory: string,channels: re
       if(!entry||id===reference.id)throw new Error(`Unknown registration target: ${id}`);
       targets.push({filter:entry.filter,...await load(entry.frame)});
     }
-    const {reports}=registerCameraBands({mesh,camera:controlledShapeCamera,reference:await load(reference),targets,checkOnly:true});
+    const {reports}=alignCameraBands({mesh,camera:controlledShapeCamera,reference:await load(reference),targets,checkOnly:true});
     for(const report of reports){
       if(!('holdout' in report)||!report.accepted)throw new Error(`Camera ${report.id} is not confirmed by reference ${reference.id}: ${'holdout' in report?JSON.stringify(report.holdout):report.reason}.`);
       confirmed.add(report.id);
@@ -252,5 +252,5 @@ export async function checkBandRegistration(sourceDirectory: string,channels: re
   }
   const unconfirmed=channels.flatMap(channel=>channel.frames).filter(frame=>!confirmed.has(frame.id));
   if(unconfirmed.length)throw new Error(`Filter cameras lack a registration check: ${unconfirmed.map(frame=>frame.id).join(', ')}.`);
-  return {method:'The authored cameras are measured against their reference images; preparation refits nothing.',criteria:REGISTRATION_CRITERIA,checks};
+  return {method:'The authored cameras are measured against their reference images; preparation refits nothing.',criteria:BAND_ALIGNMENT_CRITERIA,checks};
 }

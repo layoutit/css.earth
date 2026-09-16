@@ -70,7 +70,7 @@ fits on screen; facing and overlap still control display.
 
 Thomas’s [model documentation](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf) explicitly says ordinary geometry for other images does not share this model’s body frame. Its Table 1 supplies controlled clear images, rather than a filtered-image solution. The published camera for `N1506388174` anchors the first pointing. Initial range, observer/Sun directions and roll interpolate the bracketing controlled clear-image records for each pointing. These are search seeds only: the accepted cameras add detector translation and roll measured from spatially distributed interior features through the full source mesh.
 
-The shared preparation tool [register-camera-bands.mts](../../../tools/objects/terrestrial-layers/register-camera-bands.mts) uses a 27-pixel patch and a 5-minus-31-pixel detail filter for correspondence only. Original I/F values are never sharpened or replaced. Every patch retains the full convolution footprint inside the detector; all projected samples must be visible on the original mesh. A checkerboard grid separates fitting and held-out coordinates. Correlation, peak separation and curvature reject ambiguous matches before fitting; no residual pruning is applied.
+The shared preparation tool [align-camera-bands.mts](../../../tools/objects/terrestrial-layers/align-camera-bands.mts) uses a 27-pixel patch and a 5-minus-31-pixel detail filter for correspondence only. Original I/F values are never sharpened or replaced. Every patch retains the full convolution footprint inside the detector; all projected samples must be visible on the original mesh. A checkerboard grid separates fitting and held-out coordinates. Correlation, peak separation and curvature reject ambiguous matches before fitting; no residual pruning is applied.
 
 Acceptance requires at least six fit and six held-out patches, held-out RMS at most one source pixel and maximum residual at most two. A second published clear image, `N1506388518`, validates the frozen color cameras without contributing to their fit. Its own published pointing is used for the primary second-image result below.
 
@@ -94,13 +94,13 @@ The additional pointings use separately registered clear cameras. The existing c
 
 The published table repeats `N1506389543` with two detector centres. The selected NAC observation uses the first row, (−56.50, −8.10); its [separate clear-frame fit](source/validation/filter-color-1506389543-clear.json) checks the measured features before the filtered-camera fit. The 8840 and 9178 pointings needed approximate −8 and −16-pixel detector-y offsets to centre the search. Those are unqualified search seeds, recorded in their jobs, followed by the same feature fit and holdout criteria.
 
-Preparation measures every delivered camera again. The recipe's `registration` block names each reference camera once and lists the checks in chain order from the catalog seed `N1506388174`; preparation stops when a held-out budget is exceeded. Measured again this way, the `N1506389543` clear camera exceeds the budget against `N1506388174` (8 held-out patches, 1.105 px RMS, 2.484 px maximum; its fit report passed at 0.997 and 1.963), and the IR1 fit against it reaches 2.194 px. Preparation therefore confirms that pointing's three filter cameras directly against `N1506388174` (7–8 held-out patches, 0.73–0.81 px RMS, at most 1.28 px) rather than through that clear camera. The seed and validation jobs that fitted the cameras are retained under `source/preparation/filter-color-*.json` and `clear-camera-registration.json`. Restore the body’s source inputs, then run, for example:
+Preparation measures every delivered camera again. The recipe's `bandAlignment` block names each reference camera once and lists the checks in chain order from the catalog seed `N1506388174`; preparation stops when a held-out budget is exceeded. Measured again this way, the `N1506389543` clear camera exceeds the budget against `N1506388174` (8 held-out patches, 1.105 px RMS, 2.484 px maximum; its fit report passed at 0.997 and 1.963), and the IR1 fit against it reaches 2.194 px. Preparation therefore confirms that pointing's three filter cameras directly against `N1506388174` (7–8 held-out patches, 0.73–0.81 px RMS, at most 1.28 px) rather than through that clear camera. The seed and validation jobs that fitted the cameras are retained under `source/preparation/filter-color-*.json` and `clear-camera-registration.json`. Restore the body’s source inputs, then run, for example:
 
 ```sh
-node tools/objects/terrestrial-layers/register-camera-bands.mts \
+node tools/objects/terrestrial-layers/align-camera-bands.mts \
   src/objects/hyperion/source/preparation/filter-color-registration.json \
   output/hyperion-color-fit.json
-node tools/objects/terrestrial-layers/register-camera-bands.mts \
+node tools/objects/terrestrial-layers/align-camera-bands.mts \
   src/objects/hyperion/source/preparation/filter-color-validation.json \
   output/hyperion-color-validation.json --check-only
 ```

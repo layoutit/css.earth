@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {registerCameraBands} from './camera-band-registration.mts';
+import {alignCameraBands} from './band-alignment.mts';
 import {requireRecord,requireArray,requireFiniteNumber} from '../../source-values.mts';
 
 test('a wider pointing search recovers an independently shifted image under the same holdout limits',()=>{
@@ -16,10 +16,10 @@ test('a wider pointing search recovers an independently shifted image under the 
  const reference={frame:{id:'reference',center:[size/2,size/2],northAzimuthDegrees:0},image:make(0,0,1),sha256:'reference'},
   targets=[{filter:'test',frame:{id:'shifted',center:[size/2,size/2],northAzimuthDegrees:0},image:make(dx,dy,1.7),sha256:'shifted'}];
  const job={mesh,camera,reference,targets,checkOnly:false};
- const narrow=registerCameraBands(job);assert.equal(narrow.searchRadiusPixels,9);assert.equal(narrow.reports[0].accepted,false);
- const wide=registerCameraBands({...job,searchRadiusPixels:24}),r=wide.reports[0];
+ const narrow=alignCameraBands(job);assert.equal(narrow.searchRadiusPixels,9);assert.equal(narrow.reports[0].accepted,false);
+ const wide=alignCameraBands({...job,searchRadiusPixels:24}),r=wide.reports[0];
  assert.equal(wide.searchRadiusPixels,24);assert.equal(r.accepted,true,JSON.stringify({fit:r.fit,holdout:r.holdout,reason:r.reason}));assert.ok(r.correctedCamera&&r.holdout);
  assert.ok(Math.abs(r.correctedCamera.center[0]-size/2-dx)<.1);assert.ok(Math.abs(r.correctedCamera.center[1]-size/2-dy)<.1);
  assert.ok(r.holdout.count>=6&&r.holdout.rmsPixels<.1);
- assert.throws(()=>registerCameraBands({...job,searchRadiusPixels:65}),/search radius/);
+ assert.throws(()=>alignCameraBands({...job,searchRadiusPixels:65}),/search radius/);
 });

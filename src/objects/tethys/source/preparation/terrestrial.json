@@ -404,7 +404,7 @@
             }
           }
         },
-        "refinement": {
+        "limbRefinement": {
           "method": "mesh-limb",
           "maximumCorrectionDegrees": 0.2,
           "maximumResidualPixels": 2.5,
@@ -427,6 +427,7 @@
           "maximumGain": 3
         },
         "display": {
+          "basis": "authored",
           "percentiles": [
             1.2,
             99.4

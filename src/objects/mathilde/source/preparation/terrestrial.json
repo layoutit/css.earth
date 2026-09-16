@@ -96,7 +96,7 @@
           }
         ],
         "filter": "0",
-        "refinement": {
+        "limbRefinement": {
           "method": "mesh-limb",
           "maximumCorrectionDegrees": 0.5,
           "maximumResidualPixels": 2,
@@ -124,6 +124,7 @@
           "maximumGain": 1
         },
         "display": {
+          "basis": "authored",
           "percentiles": [
             0,
             99

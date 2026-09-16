@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8e6534bc8ac06522e07769ae240dd2e252ffa631bfecf6901125f0cb2d21121"
+    "sha256": "65fb59aeb13abbc66fc25ec4dd771a9df05f1294ed9ccfcb7f0d60c78cdf56a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c5294eb0e5c6bd3a5b1b8556f0354f91062383a3fa4a490e9d4fcb20588218d6",
+      "sha256": "dbb44c095c7041ddd725283b8c89d4e287538cf5abab786092de66278888be7c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -388,6 +388,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1,
                   99.5
@@ -1872,7 +1873,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "fb190e65667c5ed7da49e9b9555dc2ec868fe2787b327b28f848d803afc17d1b",
+    "materialSha256": "406f275f7f5cb2f620003621b1d67bf73bd2289a11f286f8c33a9bb3ca2ee122",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

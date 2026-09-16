@@ -14,7 +14,7 @@
  */
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { loadNativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
-import { framesReference, observationCaster, outline, peakValue, prepareFrame, registrationSweep, reliefSweep, type PreparedFrame, type RegistrationImage, type RegistrationResult, type ReliefResult, type SurfaceReference } from '../terrestrial-layers/observer-registration.mts';
+import { framesReference, observationCaster, outline, peakValue, prepareFrame, registrationSweep, reliefSweep, type PreparedFrame, type RegistrationImage, type RegistrationResult, type ReliefResult, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';
 import type { FrameDetector, LoadContext, ObservationFrame } from './contract.mts';
 
 export const REGISTRATION_STAGE = 'cssearth-registration-stage@1';
