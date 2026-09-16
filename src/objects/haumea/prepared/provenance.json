@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "994b47d23cc93df1e358a4c2e5de631c04c4df55433d1e87a25a118d0ec47f64"
+    "sha256": "9245a914aeb3f25aaea1e41e1fc67cb2c53909310fb05cea90f3a25219bf0bb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
   },
   "recipes": [
     {
       "id": "shape-model",
       "path": "source/preparation/shape-model.json",
-      "sha256": "82d56ed1afcc66144635a06f2a20b4f1753ca8d1d7425c014c4b3048c97830e2",
+      "sha256": "98d19da766dfd2431a1fb6b8c0a58b12db43e2c216cbf12a411d977ff6826b3a",
       "parameters": {
         "schema": "cssearth-shape-model@1",
         "displayName": "Haumea",
@@ -41,14 +41,13 @@
           "initialScenePitchDegrees": 40,
           "defaultControlYawDegrees": -50,
           "maximumHeightShare": 0.4
-        },
-        "surfaceModel": "nasa-haumea.glb"
+        }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b70d6ebe1aec17f19c744009f62f4598d3460391419c90e5776f93518242e4f",
+      "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -99,7 +98,7 @@
             {
               "id": "appearance",
               "label": "Surface representation",
-              "value": "NASA VTAD illustration; terrain details are not observations"
+              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
             },
             {
               "id": "orbital-period",
@@ -118,21 +117,21 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "illustration",
+          "defaultLens": "shape",
           "controls": [
             {
-              "id": "illustration",
-              "label": "Illustrative model",
-              "qualification": "Illustration; not an observed surface map.",
-              "thumbnail": "illustration-thumbnail.webp",
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
+              "thumbnail": "shape-thumbnail.webp",
               "surface": "surface.webp",
               "poles": "poles.webp",
               "source": {
-                "id": "nasa-vtad-haumea-model",
+                "id": "ortiz-2017-shape",
                 "path": "../manifest.json",
-                "url": "https://science.nasa.gov/resource/haumea-3d-model/"
+                "url": "https://doi.org/10.1038/nature24051"
               },
-              "notes": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+              "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
             }
           ]
         },
@@ -147,12 +146,6 @@
             "role": "facts",
             "description": "Haumea overview",
             "href": "https://science.nasa.gov/dwarf-planets/haumea/"
-          },
-          {
-            "label": "NASA VTAD",
-            "role": "illustration",
-            "description": "Haumea model and illustrative surface texture",
-            "href": "https://science.nasa.gov/resource/haumea-3d-model/"
           },
           {
             "label": "Ortiz et al.",
@@ -180,35 +173,28 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "nasa-vtad-haumea-model",
-      "path": "nasa-haumea.glb",
-      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb",
-      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
-      "acquisition": "Original downloadable GLB from NASA Science",
-      "redistribution": "NASA media; not photographed terrain or a measured normal map",
+      "path": "measurements.json",
+      "id": "ortiz-2017-shape",
+      "origin": "https://doi.org/10.1038/nature24051",
+      "credit": "Ortiz et al. 2017",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed nominal model measurements",
+      "redistribution": "Factual parameter transcription only; no article figures",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-haumea-nasa-vtad-haumea-model",
-            "role": "material",
-            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "catalogueId": "doi-10-1038-nature24051",
+            "role": "method",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       },
-      "sha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
-      "bytes": 11335060,
+      "sha256": "8fdbabb8a5f880c3872ae30c31b9f0b95f475e63bc69516c1ef0a2eaf294f452",
+      "bytes": 574,
       "dependencies": [],
       "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "nasa-haumea.glb",
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb"
-      },
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -224,8 +210,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2b70d6ebe1aec17f19c744009f62f4598d3460391419c90e5776f93518242e4f",
-      "bytes": 3344,
+      "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
+      "bytes": 3177,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -234,46 +220,46 @@
   ],
   "products": [
     {
-      "id": "illustration",
-      "label": "Illustrative model",
+      "id": "shape",
+      "label": "Shape",
       "recipe": "shape-model",
       "selector": "",
       "observationAttribution": "none",
       "parents": [],
-      "process": "Extract the source model base color and project it onto the authored shape.",
+      "process": "Fill the authored shape with the shared neutral gray display convention; no surface texture.",
       "limitations": [
-        "Illustration; not an observed surface map."
+        "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour."
       ],
       "lensIds": [
-        "illustration"
+        "shape"
       ],
       "recipeDependencies": [
         "shape-model"
       ],
       "interpretation": {
-        "kind": "illustrative-model",
+        "kind": "neutral-shape",
         "resolvedSurfaceObservation": false
       },
       "inputs": [
-        "nasa-vtad-haumea-model"
+        "ortiz-2017-shape"
       ],
       "outputs": [
         {
-          "url": "/scenes/haumea/illustration-thumbnail.webp",
-          "bytes": 2420,
-          "sha256": "c9f82de3c313e4610d82aed7e14cbf363a92491624902a5ca5662a35baa4c9ab",
+          "url": "/scenes/haumea/shape-thumbnail.webp",
+          "bytes": 44,
+          "sha256": "ac7e37e2b580ee1a0f876029c8e1fb7b51469486245d88810be250f1154a2de8",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/surface.webp",
-          "bytes": 3525294,
-          "sha256": "c69a552407aa144d2c47741928cfac6bfdc798a25503c29941d2639b96f60742",
+          "bytes": 342,
+          "sha256": "287791a6be87fb06232978a0e21f8e018d4fa340b775cc28bd1f6e8cf187654e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/poles.webp",
-          "bytes": 75844,
-          "sha256": "ceb4de7e2d997b2b0cda4ef9fc932e5bd8edd1cc0052dd85c3fc716c3ec9d8b1",
+          "bytes": 680,
+          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
           "verification": "bytes-verified"
         }
       ],
@@ -298,16 +284,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6194,
-          "sha256": "43b57e29f2176173831916f143d8807b5b62d5de24342c8bae967da4d5e502b9",
+          "bytes": 6057,
+          "sha256": "fda132544b25bad6ebfc52754d7809e2444b0db023766cd822f00376f76c7a43",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:illustration",
-      "label": "Illustrative model preview",
+      "id": "preview:shape",
+      "label": "Shape preview",
       "recipe": "shape-model",
       "selector": "",
       "recipeDependencies": [
@@ -316,16 +302,16 @@
       "observationAttribution": "none",
       "inputs": [],
       "parents": [
-        "illustration"
+        "shape"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/illustration.webp",
-          "bytes": 48410,
-          "sha256": "b036d6681f490495d995f9c39b68d8f343f93bc525e8fa8aabb70bfef9ecc64b",
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]
@@ -337,11 +323,11 @@
   },
   "lastPreparation": {
     "objectId": "haumea",
-    "materialSha256": "8200486719c5bb9f6b6acd9938c876c7b15df4ed4a4a6a12494f0ce6cdd3450e",
+    "materialSha256": "ad87afde0bc2bfce4257d99a0080976c07455932b93494627c25c0e5b0ee4162",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

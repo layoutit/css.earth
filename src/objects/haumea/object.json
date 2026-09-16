@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3aba6147b1f0332f4ef900f5a138bd3cd876a631ae14574eda3437e479c1bf99"
+    "sha256": "afd67786dc175719e25002b05474b7e92cb1b0d36f967abec8d3e05b07fd7dac"
   },
   "properties": {
     "preparation": {
@@ -34,7 +34,7 @@
         {
           "id": "shape-model",
           "path": "source/preparation/shape-model.json",
-          "sha256": "82d56ed1afcc66144635a06f2a20b4f1753ca8d1d7425c014c4b3048c97830e2"
+          "sha256": "98d19da766dfd2431a1fb6b8c0a58b12db43e2c216cbf12a411d977ff6826b3a"
         },
         {
           "id": "rotation",
@@ -44,12 +44,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2b70d6ebe1aec17f19c744009f62f4598d3460391419c90e5776f93518242e4f"
+          "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "670fb018d42bfb523f2631528c61b31ff92fc1792a93e048349620ac204f1725"
+          "sha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7"
         },
         {
           "id": "title",
@@ -69,7 +69,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "illustration",
+              "id": "shape",
               "source": "content",
               "material": "lighting"
             }
@@ -120,13 +120,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ee4e13a31ad74ffeb2f1ea5a5de78cdfaf30bc11ab11f70821470ddc0ae77640"
+        "sha256": "cb5db038ba6750fbe17cdc15a3fea5a2bca502971ad2a597e97d26703e2215ca"
       }
     },
     "catalog": {
-      "illustrationLenses": [
-        "illustration"
-      ],
+      "illustrationLenses": [],
       "name": "Haumea",
       "classification": "dwarf-planet",
       "color": "#cccccc",

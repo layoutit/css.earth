@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "55d21a1b933f68a0710df08821f5d5be7406b51b95a48659522d28a9560dac6f"
+    "sha256": "7e3a25ff3e1d572f433bc1a9a6f50f00f529a451a25ed069f4bfb2cf369e60e5"
   },
   "id": "saturn",
   "properties": {
@@ -36,7 +36,7 @@
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "9f9d9b32564f69f63cb364879b5ad818210809388aca6fb07e373d9e876b6ce1"
+          "sha256": "761393dcdd5266bcd89448fb9599cb8119a6cb8021922026fe607af76d1f7ba9"
         },
         {
           "id": "content",
@@ -172,7 +172,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "28c032ee5d669bd10ec9b38e236b7f56af2ac7f9a786400d4e88bd01f0e40d25"
+        "sha256": "67e403dd3ff38eeafd5a7dfd5398ae303225565c82e27402d6f2d1612c939d25"
       }
     },
     "catalog": {

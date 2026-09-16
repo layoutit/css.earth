@@ -6,11 +6,11 @@ export const browserProfile = createObjectBrowserProfile({
   id: "makemake", controls: objectControls,
   audit: Object.freeze({
     preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/makemake/makemake-illustration.webp", two: "/scenes/makemake/makemake-illustration@2x.webp" }),
-      Object.freeze({ one: "/scenes/makemake/makemake-poles-illustration.webp", two: "/scenes/makemake/makemake-poles-illustration@2x.webp" }),
+      Object.freeze({ one: "/scenes/makemake/makemake-shape.webp", two: "/scenes/makemake/makemake-shape@2x.webp" }),
+      Object.freeze({ one: "/scenes/makemake/makemake-poles-shape.webp", two: "/scenes/makemake/makemake-poles-shape@2x.webp" }),
       ]),
     retained: Object.freeze({
-      lensIds: Object.freeze(["illustration"]),
+      lensIds: Object.freeze(["shape"]),
       allowedMountSelectors: Object.freeze([]),
     }),
   }),

@@ -1,7 +1,7 @@
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
 // keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-colour
-// preparers, and the shape-model lane keeps `prepareGlbSurface`. Every branch returns finished
+// preparers. Every branch returns finished
 // RGB(A) pixels at the requested density plus the `nearest` flag the packer needs.
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -22,7 +22,6 @@ import { loadControlledObservationGeometry, matchObservedColorLevels } from '../
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry } from '../terrestrial-layers/solid-source.mts';
 import { shape, text } from '../terrestrial-layers/source-records.mts';
-import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
@@ -267,11 +266,12 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           ...('photometry' in color ? {photometry:color.photometry} : {}),...(levels?{levelMatching:levels}:{}),
           monochromeBase:plan.monochromeBase,monochromeMeaning:'Existing display brightness and missing-color fallback; no inferred surface color.'}};
       }
-      case 'glb-base-color': {
-        const model = requireString(surface.science.model);
-        if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
-        const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
-        return { data: pixels, channels: 4, nearest: false };
+      case 'neutral-shape': {
+        // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.
+        // The surface source names the authored record that states this, so the manifest still binds the lens.
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) { data[offset] = 128; data[offset + 1] = 128; data[offset + 2] = 128; data[offset + 3] = 255; }
+        return { data, channels: 4, nearest: true };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }
