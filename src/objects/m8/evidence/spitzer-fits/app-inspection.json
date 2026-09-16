@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-app-inspection@1",
+  "object": "m8",
+  "date": "2026-09-16",
+  "revision": "c04b106435cc604faf0f6d7dcef8b6e6f6c0f830",
+  "dirtyFiles": "Uncommitted: regenerated ignored site outputs and prepare:sources provenance rewrites only; M8 source and prepared bank as committed.",
+  "bank": {
+    "path": "src/objects/m8/prepared/lenses.json",
+    "sha256": "df3a34efce8fc44f7f2a70ad375c4d5f5b2ce622dd8ddb304bf369eb8290ac1a",
+    "descriptorSha256": "df3a34efce8fc44f7f2a70ad375c4d5f5b2ce622dd8ddb304bf369eb8290ac1a",
+    "sourceResult": "37a8918fb195c57ecee4b6cbc47b62e465092adb324416e449e1d439d34a4b9c"
+  },
+  "browser": "Chromium 148.0.7778.96 (Playwright, headless)",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "method": "Each lens opened at /sun/?focus=m8&focusLens=<lens>, 20 s settle, then the default front view and two 260 px horizontal drags (oblique, side). The contact sheet crops the central 620 by 430 px of each 1440 by 1000 capture.",
+  "captures": [
+    {
+      "lens": "eso-optical",
+      "view": "front",
+      "url": "/sun/?focus=m8&focusLens=eso-optical&v=QMbC_E_Yv8F99ENgjupprQulQ0aUr12dsyZBQsczQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA"
+    },
+    {
+      "lens": "eso-optical",
+      "view": "oblique",
+      "url": "/sun/?focus=m8&focusLens=eso-optical&v=QMZDRWvU_SbPcUNgjupprQulQzsiNQBvLiFBQsczQAAAAAAAAAAAAAAAP9m494TzUx4AAAAAAAAAAAABAAAAAAAAAAA"
+    },
+    {
+      "lens": "eso-optical",
+      "view": "side",
+      "url": "/sun/?focus=m8&focusLens=eso-optical&v=QEZDTeLUmni1m0NgjupprQulwzHoFMhdVs1BQsczQAAAAAAAAAAAAAAAAAAAAAAAAAA_5aloDSgovQABAAAAAAAAAAA"
+    },
+    {
+      "lens": "eso-vista",
+      "view": "front",
+      "url": "/sun/?focus=m8&focusLens=eso-vista&v=QMbC_E_Yv8F99ENgjupprQulQ0aUr12dsyZBQsczQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA"
+    },
+    {
+      "lens": "eso-vista",
+      "view": "oblique",
+      "url": "/sun/?focus=m8&focusLens=eso-vista&v=QMZDRWvU_SbPcUNgjupprQulQzsiNQBvLiFBQsczQAAAAAAAAAAAAAAAP9m494TzUx4AAAAAAAAAAAABAAAAAAAAAAA"
+    },
+    {
+      "lens": "eso-vista",
+      "view": "side",
+      "url": "/sun/?focus=m8&focusLens=eso-vista&v=QEZDTeLUmni1m0NgjupprQulwzHoFMhdVs1BQsczQAAAAAAAAAAAAAAAAAAAAAAAAAA_5aloDSgovQABAAAAAAAAAAA"
+    },
+    {
+      "lens": "spitzer-mid-infrared",
+      "view": "front",
+      "url": "/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMbC_E_Yv8F99ENgjupprQulQ0aUr12dsyZBQsczQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA"
+    },
+    {
+      "lens": "spitzer-mid-infrared",
+      "view": "oblique",
+      "url": "/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMZDRWvU_SbPcUNgjupprQulQzsiNQBvLiFBQsczQAAAAAAAAAAAAAAAP9m494TzUx4AAAAAAAAAAAABAAAAAAAAAAA"
+    },
+    {
+      "lens": "spitzer-mid-infrared",
+      "view": "side",
+      "url": "/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QEZDTeLUmni1m0NgjupprQulwzHoFMhdVs1BQsczQAAAAAAAAAAAAAAAAAAAAAAAAAA_5aloDSgovQABAAAAAAAAAAA"
+    }
+  ],
+  "pageErrors": [],
+  "observed": "All three lenses render on the same cloud geometry and stay centred on the Lagoon Nebula label while orbiting. The Spitzer lens is red where the IRAC footprint covers the cloud and neutral elsewhere; ESO optical and VISTA extend further.",
+  "limits": "Two 260 px drags turn the view but do not reach a true 90 degree side view. No comparison against the previous bank was rendered: it is not installed in this worktree. Visual acceptance is for the reviewers."
+}
