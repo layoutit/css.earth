@@ -38,3 +38,30 @@ export function fitStatistics(image: ImagePlane, wavelength: number, vis2: reado
   }
   return { reducedChi2Vis2: chi2Vis2 / vis2.length, reducedChi2T3: chi2T3 / t3.length, vis2Rows: vis2.length, t3Rows: t3.length };
 }
+
+export interface DifferentialPhaseRow { readonly u: number; readonly v: number; readonly phaseOrder: number; readonly channels: readonly { readonly wavelengthMetres: number; readonly phaseDegrees: number; readonly phaseErrorDegrees: number }[] }
+
+/** Chi-squared of an image against differential phases. Each baseline row's residuals (measured minus model, wrapped) are
+ * fitted by a polynomial in wavenumber of the row's own order, the terms a differential phase has already removed, and only
+ * what that fit leaves counts. A grey image's phase is linear in wavenumber on a baseline, so an order-1 differential phase
+ * holds nothing about it: a shifted or mirrored grey image leaves the statistic unchanged. Returns the sum and the degrees of
+ * freedom, so rows combine across files. */
+export function differentialPhaseChi2(image: ImagePlane, rows: readonly DifferentialPhaseRow[]) {
+  let chi2 = 0, freedom = 0;
+  for (const row of rows) {
+    const terms = row.phaseOrder + 1;
+    if (row.channels.length <= terms) continue;
+    const x: number[] = [], y: number[] = [], w: number[] = [];
+    for (const channel of row.channels) {
+      const [re, im] = visibility(image, row.u, row.v, channel.wavelengthMetres);
+      x.push(1e-6 / channel.wavelengthMetres); y.push(((channel.phaseDegrees - Math.atan2(im, re) * 180 / Math.PI) % 360 + 540) % 360 - 180); w.push(1 / channel.phaseErrorDegrees ** 2);
+    }
+    // Weighted least squares for y = c0 + c1 x + ... via the normal equations, solved by Gaussian elimination.
+    const normal = Array.from({ length: terms }, () => new Array<number>(terms + 1).fill(0));
+    for (let i = 0; i < x.length; i++) for (let a = 0; a < terms; a++) { for (let b = 0; b < terms; b++) normal[a]![b]! += w[i]! * x[i]! ** (a + b); normal[a]![terms]! += w[i]! * y[i]! * x[i]! ** a; }
+    for (let a = 0; a < terms; a++) { const pivot = normal[a]![a]!; for (let b = a; b <= terms; b++) normal[a]![b]! /= pivot; for (let c = 0; c < terms; c++) if (c !== a) { const f = normal[c]![a]!; for (let b = a; b <= terms; b++) normal[c]![b]! -= f * normal[a]![b]!; } }
+    for (let i = 0; i < x.length; i++) { let fit = 0; for (let a = 0; a < terms; a++) fit += normal[a]![terms]! * x[i]! ** a; chi2 += w[i]! * (y[i]! - fit) ** 2; }
+    freedom += x.length - terms;
+  }
+  return { chi2, freedom, reducedChi2: freedom ? chi2 / freedom : Number.NaN };
+}
