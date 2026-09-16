@@ -1,48 +1,14 @@
 {
-  "schema": "cssearth-celestia-mesh@1",
-  "source": "asteroid.cms",
-  "catalogRadiusKm": 1.3,
-  "sourceCodeCommit": "e9997cc011a57fdcc507f4ef5352bfd03cb17a6b",
-  "nativeSeed": 20260909,
-  "nativeExport": {
-    "source": "asteroid.cms",
-    "nativeArguments": [
-      "1",
-      "0.6",
-      "0.7",
-      "15",
-      "12",
-      "60",
-      "0.3",
-      "1",
-      "50",
-      "100",
-      "20260909"
-    ],
-    "nativeSha256": "c26c10e07e16df61e26ed89e926ff3faeccf0ae67c1ec97e37f0a07d8cd97717",
-    "objSha256": "dad540c2a0e97da1bb5c4c5c8ed9f536990f296304c84f922c8e000ebac2aa7c",
-    "nativeVertices": 5050,
-    "vertices": 4802,
-    "faces": 9600,
-    "omittedDegenerate": 200,
-    "normalization": {
-      "center": [
-        0.005257665179669857,
-        0.0034754869993776083,
-        0.006411999464035034
-      ],
-      "scale": 0.9741952419281006,
-      "method": "Celestia Model::normalize bounding-box maximum extent"
-    },
-    "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
-    "maximumWeldError": 1.2014061212539673e-7,
-    "volume": 1.6799252810656218,
-    "volumeEquivalentRadius": 0.7374520470653751,
-    "repeatNativeExportIdentical": true
-  },
-  "scaling": "Celestia bounding-box normalization, then Catalog Radius * 1000 metres. This preserves maximum full extent = 2 * Catalog Radius.",
-  "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
-  "volumeEquivalentRadiusKm": 0.9586876611849877,
-  "illustrative": true,
-  "qualification": "The actual Celestia CMS mesh is reused. It is a shared illustrative shape, not a measured nucleus reconstruction. Grid surface; fixed illustrative attitude."
+  "schema": "cssearth-ellipsoid-parameters@1",
+  "source": "https://ui.adsabs.harvard.edu/abs/1999A%26A...341..912B",
+  "sourceSection": "nucleus size",
+  "axisDefinition": "Volume-equivalent ellipsoid; the axes are the stated ratios with Z as the spin axis. With unit ratios this is a sphere.",
+  "axisRatioAB": 1.1,
+  "axisRatioBC": 1,
+  "effectiveRadiusKm": 1.5,
+  "measurement": "Photometry of the nucleus assuming a 0.04 albedo",
+  "scaleConvention": "effective-radius-as-volume-equivalent",
+  "scaleQualification": "The published effective nucleus radius is used as a volume-equivalent display radius. This is an explicit scale convention, not a measured volume or set of physical axis lengths.",
+  "subdivisions": 4,
+  "qualification": "Smooth parameter-based approximation of an unresolved nucleus. The nucleus is elongated, with a body axis ratio of 0.9 or less; the minimum elongation is displayed. No local shape features, concavities, surface textures, coma or tail are claimed."
 }

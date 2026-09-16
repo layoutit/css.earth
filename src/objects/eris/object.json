@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2eff8c7dd8f60fffdd5a23bfdbf867aac73ee45ec5b68153ac288a38b691f32c"
+    "sha256": "7f7bf6a1e63975d1059f379f4312796424debf5c15aa7262552d5ffb0dcd1142"
   },
   "properties": {
     "preparation": {
@@ -36,12 +36,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "57411f2b8be902225031f476a1bfe4bb95fe27ea67451752a0c080ece4f6da05"
+          "sha256": "a4822e9efaeb1381ccc50544fb6e34ad425d063f07bdc851c3af3975ee8e787e"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "8c335ad763cd1d081aa6204dcb4f3eb4db10fbbdbe9f658a4ee3aeecd7a4d21e"
+          "sha256": "c4578c70eb6cee41cc8f269e966fb083c79003469e531f630e301e8619ce625b"
         },
         {
           "id": "celestial",
@@ -56,7 +56,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e34ff65901163435b3dfc5445d20480ddbfaa5d71f54385a15d0a9f2c32c8930"
+          "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371"
         },
         {
           "id": "solar-system",
@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d39ca3e764b19adcccc1b5a3dc31c902542cb972ac957c0239a1df5bd2e63d30"
+          "sha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7"
         },
         {
           "id": "rotation",
@@ -91,7 +91,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "illustration",
+              "id": "shape",
               "source": "content",
               "material": "lighting"
             }
@@ -139,13 +139,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c3339b693291fa1db8f5ac6b1c2608a3079ccc25bb24dd4f8989a98fc0f29a4f"
+        "sha256": "bc1dc315ce4c97cd6a281172869506edca1650b2342bcadcf60eb97105df82fe"
       }
     },
     "catalog": {
-      "illustrationLenses": [
-        "illustration"
-      ],
+      "illustrationLenses": [],
       "name": "Eris",
       "classification": "dwarf-planet",
       "color": "#ddd6cf",

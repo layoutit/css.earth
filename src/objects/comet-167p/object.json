@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "ae22f061af82fed9edbf0b071c64ec3edd7639b1659e960c3d1cbab0af4c5183"
+          "sha256": "97aa7a1adfda6d1101a2d6da738a13127b7065f025c11c0938387bb20a1329d3"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ae1c016c3521037e8b365c4320692a0d2ca66541c5b8046561643d7e5d28f412"
+          "sha256": "340078a46e7bad7984dcedb2cb667f0f88f86c1152e3861926795ca9094eeb6d"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "14babc8322575c3cd2859c7de3fcc503dbffcc602ea7bfa202f43b07d4223229"
+          "sha256": "c7cc74d2119008f2e41d6a46028e888dfb68356eceaedaae037ff9f4ab04e78b"
         },
         {
           "id": "acquisition",
@@ -53,7 +53,7 @@
       ],
       "shape": {
         "kind": "radial-terrain",
-        "radiusKm": 24.398600977157937
+        "radiusKm": 33.1
       },
       "surfaces": [
         {
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e10453edd127156ac918c81f276e5a0c883a3f85aad94fead764b20e0f4e7a3a"
+        "sha256": "0c03d01d91396252184ab46389798d6eb2f39cfae377a7de199ad9a4221affba"
       }
     },
     "worldFrame": {
@@ -110,8 +110,8 @@
         -0.3977771559319137,
         0.9174820620691818
       ],
-      "metersPerUnit": 106.08087381373016,
-      "bodyRadiusM": 24398.600977157937
+      "metersPerUnit": 143.91304347826087,
+      "bodyRadiusM": 33100
     },
     "catalog": {
       "illustrationLenses": [
@@ -132,6 +132,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "b9c358c5cb5880124182f32241be9ce797f9a6fa9319b2d3ebd08d31b66d0928"
+    "sha256": "753161ded5660aea2d563fbc1443f6aa708d4e7d620775fd823dba5ec6bef673"
   }
 }
