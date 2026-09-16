@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "879f06210ac0279725b314cdf538de34a082473f4c534eb13e6f009a9b2663a5"
+    "sha256": "8ec21cdd909970bf014409b3923e51118d2122f464baedb5e10b491249bfe1d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "656c5d2552ec3b0242c1dc30d04966b30c9191b863c73b138a3b995cb4ed718f",
+      "sha256": "a5441c79076853b785bae92c855c877b6d35cebef18a62cfe9a3df761ae5f1c6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4215, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/diomedes.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "656c5d2552ec3b0242c1dc30d04966b30c9191b863c73b138a3b995cb4ed718f",
-      "bytes": 10938,
+      "sha256": "a5441c79076853b785bae92c855c877b6d35cebef18a62cfe9a3df761ae5f1c6",
+      "bytes": 10961,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8149,
-          "sha256": "522681f5de3041fe3a5a0cb3ec3bfaf968f64ef12a0d9e6e90d4e30a6f58597f",
+          "bytes": 8172,
+          "sha256": "46d436d0c486c0bf185e7d71b66c53b9542a023c36eb8320b06befa92d800f89",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "diomedes",
-    "materialSha256": "8cd321f82b640348652501ad11a41742b44116887554b7ac7f2853b8aa14b1ac",
+    "materialSha256": "db1e14a13796564f8d16475dd5b8a0542d76bb01647d1f53192914bdfef0cbfa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

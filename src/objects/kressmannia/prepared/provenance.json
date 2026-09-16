@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "95bb69ebdb5d3005ada6a49053df651472411153799eee9547a6468d77d1861b"
+    "sha256": "576ff77679b8f847a0237641f06316d90bc548d37c7fe5c134bdf517761e2222"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "423deb7d601ab2fa99b12ae1ef6ac8253154711c00967a4dcf4627996346b554",
+      "sha256": "51fb821fdb6a27a131a9dbab0c1ccd66feddad062fa6d10aac61435ee2e58ffa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Kressmannia model 382; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kressmannia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "423deb7d601ab2fa99b12ae1ef6ac8253154711c00967a4dcf4627996346b554",
+      "sha256": "51fb821fdb6a27a131a9dbab0c1ccd66feddad062fa6d10aac61435ee2e58ffa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12838,
+      "bytes": 12864,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9991,
-          "sha256": "5312ad183830a79d45e6453eada5098e6674335b4dee561d57b4ae1388a53751",
+          "bytes": 10017,
+          "sha256": "aa27c89bcde9a9b135cc0f13721a5c075f02b9b13b88f9a6d2326bffaac4bb0e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "kressmannia",
-    "materialSha256": "472df751752f183615e61656b72bef31ef47f70b58bace978ac1e3b520c6e7bb",
+    "materialSha256": "3d7c7b24b4143b0d87bd674af3e92be92436f90085f7d958c7fc87bc13505a79",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

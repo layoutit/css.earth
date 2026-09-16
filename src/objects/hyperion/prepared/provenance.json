@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55024e5714bed82e081c9ee612d988bf43f2e9e3f72a16b3d88b6d05bc43a31e"
+    "sha256": "0ffa9fe451934660bea14a20a1ced44174f0838b78517bb75770bc4d263e52d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -841,7 +841,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "14728aced498df43b3b270b016f29c488bd1080a0efa72b23423660a403cb093",
+      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -1012,7 +1012,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hyperion.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -3778,8 +3778,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "14728aced498df43b3b270b016f29c488bd1080a0efa72b23423660a403cb093",
-      "bytes": 5852,
+      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
+      "bytes": 5875,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -4108,8 +4108,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6134,
-          "sha256": "54e0e70cc33135bdc7cd4a3cf57ad42cb051abe3bd4d2788887ccefd030c87f6",
+          "bytes": 6040,
+          "sha256": "cd016a52bcd5227e0754328f9944c4bb0e166328ed4d04025db31e52d1172c8a",
           "verification": "bytes-verified"
         }
       ],
@@ -4233,7 +4233,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "860b61322a3ba0565705213d7cdd9e8e13c5a4b6b2434db6539d551d880d7b69",
+    "materialSha256": "c979b06a70e4b0a86f943ba7a0814a8439bf5b4541f15d9ced6d3071db05ae67",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

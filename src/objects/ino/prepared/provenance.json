@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f6fb7e8a7d7d0a518e4385d04cfe2e4133d79ea8fa2a90f9606cbf09025f38c5"
+    "sha256": "3e420bf32a27f8ac8b098774c85d69c7f3ac2d8a823a74b7bea926ca8175d70e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "80153a8a75c778690e7577fc63a206c654ea16bd3f1628e3321e76f8767dfd9c",
+      "sha256": "91fecf868bc6958b14c89b69bded9f7ae0265bdb6dadd12645aaa2e3aa6b8a05",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Vernazza et al. (2021); model 5913, version 2021-11-12."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ino.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "80153a8a75c778690e7577fc63a206c654ea16bd3f1628e3321e76f8767dfd9c",
-      "bytes": 6948,
+      "sha256": "91fecf868bc6958b14c89b69bded9f7ae0265bdb6dadd12645aaa2e3aa6b8a05",
+      "bytes": 6966,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4402,
-          "sha256": "1b0a8bc0d9a11cd7667f82aae254dd14de9b43038748df9faf3543cbded95389",
+          "bytes": 4420,
+          "sha256": "6138fe8d7588da66b00964bc2f9dd47d8074455b9ab051f98c8630278905af25",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "ino",
-    "materialSha256": "e5fed224c431854cb0c2f2d678e432f5c26957245855aff54a84fa480ff7b3d5",
+    "materialSha256": "6a0632a7d66b9b2b0e1df400b2d8877c08ec2088bd2e7eb248873fda63b2f893",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e1d955abf02de631cd4662fff782bc90ca8e2de25148eb5f8ecc71eb47d86172"
+    "sha256": "78136c1e59fb829d033087975e3bcb62efe783b75e098d32a0d6615b532a3ed9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c3f4dbdff1763e5adc766108490259d47ac5922d35fe34771888791938697d8e",
+      "sha256": "3430566749365f0fee0dc4104b0f5b9fc06098764e54f29f2d67901637ff98a3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1841, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/isis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c3f4dbdff1763e5adc766108490259d47ac5922d35fe34771888791938697d8e",
-      "bytes": 7677,
+      "sha256": "3430566749365f0fee0dc4104b0f5b9fc06098764e54f29f2d67901637ff98a3",
+      "bytes": 7696,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5118,
-          "sha256": "ade52e8ce4e3b36526526f84741cbfe7c09dd6c304a1c0d7fd416869df851b17",
+          "bytes": 5137,
+          "sha256": "766b51f153e04ad021569c9640d6118a983e18e5b41c0bed77e8f7097e3a7c53",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "isis",
-    "materialSha256": "24ee5709ae777c5b7257701d27c055e5d3e3c75fe4aca79e05e4d3c0a52faef1",
+    "materialSha256": "6de37dc8b51bedf1c5b84d02bc2d0297d5f26f675eff69359582e905b3e7f3f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

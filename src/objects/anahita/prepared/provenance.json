@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3d3c448372e2662c6841e8781fc36909ae94d4a5c5929c8530d2f45e8b2fa8de"
+    "sha256": "e6975352a7d8aae0b191f9ede255a7a3d6889a41624c4ffe2f0d6a180887d291"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "259aef7e8ca0c3a6a5aa5ebaea67b6966bae532edd316b63ce9c19cc03f127b0",
+      "sha256": "22c6c9a7248453d4ded80c837b406a3fa8b621a23a10659bd9306f67860bedc4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1183, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/anahita.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "259aef7e8ca0c3a6a5aa5ebaea67b6966bae532edd316b63ce9c19cc03f127b0",
-      "bytes": 9694,
+      "sha256": "22c6c9a7248453d4ded80c837b406a3fa8b621a23a10659bd9306f67860bedc4",
+      "bytes": 9716,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7090,
-          "sha256": "753b076bfa9aea5b5972966cc9fbe78fcc7f263f4a9a19c05a944357f4fa973e",
+          "bytes": 7112,
+          "sha256": "18a0dd9ec5e78651e9ddf0ab445729e6095c3d9f8b934d1e70b9e0ae2e9570d0",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "anahita",
-    "materialSha256": "16133bba662385fa253e15dd079f2e4b9705c3ce30a22ecc1caf423c7535c5b8",
+    "materialSha256": "00ac40d26a838fb2e571bdb2be5065c478cfc41dafbe78923cbcf4ed3120f511",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b5cc428073fdf3fe507d3fec89596c2bec1d41c226c8aabeaab20b1548a72cff"
+    "sha256": "f87c594114464dc8f46096c5e08d3b51021a9a1d9b5804f774b4e275155fb864"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e452e4541640da1c50ce0d99d29397ff9907a974f8847d1c40336e377bab83b9",
+      "sha256": "03e47bdac4a43211fef0ead908e49d38fb3f6e932a100bfb7e6a2e09a4fa5ad1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 5799, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/semele.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e452e4541640da1c50ce0d99d29397ff9907a974f8847d1c40336e377bab83b9",
-      "bytes": 9754,
+      "sha256": "03e47bdac4a43211fef0ead908e49d38fb3f6e932a100bfb7e6a2e09a4fa5ad1",
+      "bytes": 9775,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7163,
-          "sha256": "00c62f8677814c99dd7955d524c07cfe9698204f12512123780ef1b7f3e8c318",
+          "bytes": 7184,
+          "sha256": "e22b16bd1fa1e93be89d0379263f65b7425efb629eeabe0d68d7a5ec37b88ed3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "semele",
-    "materialSha256": "58e8993b66b72a63f4cc6068a746cd39fb99c02cb436e22404f2b33ee0e7070e",
+    "materialSha256": "fd73925fba63dfc43d0ecee4cd676362a77b7e081cccea1612437d1711808d2e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

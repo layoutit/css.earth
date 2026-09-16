@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Ganymed model 1849, version 2017-09-21; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/ganymed.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

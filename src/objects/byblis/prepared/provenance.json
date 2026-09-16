@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b0c72916b45f3155c70773e0b3cc27dba245a0a363fd5516d0a40dcbf95279dd"
+    "sha256": "35a45647b1ced5caefc253bfa65cdf0b2b2960a9435becf2db2ad06eec5fea1c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2f1b176de214c18305140d02fc52490719a00e6c1e7f84d02ef7260d42702112",
+      "sha256": "28e1d1299cceabe261f7a1efba2f5fa06fb94d516526fa2b5ccbbe2243932622",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 506, version 2013-02-26."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/byblis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f1b176de214c18305140d02fc52490719a00e6c1e7f84d02ef7260d42702112",
-      "bytes": 8780,
+      "sha256": "28e1d1299cceabe261f7a1efba2f5fa06fb94d516526fa2b5ccbbe2243932622",
+      "bytes": 8801,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6189,
-          "sha256": "a1f6b24a599bc0d15018d99a277e8ffcd643be7ac7a0c2dff8aa5d5f81dc29c7",
+          "bytes": 6210,
+          "sha256": "0bda61fe815c730d562f34184be3102cc9b50653c451d530752da18c8aa3ace4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "byblis",
-    "materialSha256": "56150200c6e1a10591101f51c5c7d3fe80127ede8c2986d1cadea60d54b1fc34",
+    "materialSha256": "a534797e26267294540e7f48178056bb71bdafa5dd989075ca0e12d3a571052d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

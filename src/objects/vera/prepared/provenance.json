@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6312325447bfb74d14eb3a4707a4b7ebe4b25725b9ed9e1e4560ffef40975666"
+    "sha256": "ca327a95c6e7f6a5403e896f0e2f5f7794a7af3126bffcddaa88b5e9fd8ea542"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0c20b17f753595d87d4e77c0f6dc28f5e821c9b1aa08b9f3312fd4e5a6715708",
+      "sha256": "45a60857593ef52afee9b005c8513863df3a4e04318e9998744161f102326029",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1212, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/vera.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0c20b17f753595d87d4e77c0f6dc28f5e821c9b1aa08b9f3312fd4e5a6715708",
-      "bytes": 8340,
+      "sha256": "45a60857593ef52afee9b005c8513863df3a4e04318e9998744161f102326029",
+      "bytes": 8359,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5774,
-          "sha256": "cd5ae2805b792eb34fc9a22758ca6cb8ea010088e6ba95b26bb85a16892b3275",
+          "bytes": 5793,
+          "sha256": "7ae6fa94b900260b31359f9688228b1f02690aba0e6f37ca020d0774a9e28d5a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "vera",
-    "materialSha256": "9f0af99df5e12aecf7d068109cf80f87035c5af7fff961ff19d1efd23c4d45df",
+    "materialSha256": "a344ac617e117f196b2b8c0e414a624a7cc9bb270010d2a866995bb74cbc43f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

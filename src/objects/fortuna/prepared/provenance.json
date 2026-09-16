@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "fortuna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3cb6a66d7aacfa3d047f041baeb9c4dfa331135f802e36a2d3d15da891781620"
+    "sha256": "2d4a5b4dd0a24979db4c65cfa69e9835960aa3184aec0f5c531756841d6dbb35"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "87d6ef42f259ea474d3fb2ff5802ef9913aed404d3cfd6480af2b6bad2a4bdd6",
+      "sha256": "249f9c47e06a53afd2e0a229800629bf86527c805e2c1243de8ee38af5b4952e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/fortuna.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "2524c91828685a8f8e6d12a96e84187c2b7b68da1723c3055265f561380af726",
       "bytes": 557179,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "87d6ef42f259ea474d3fb2ff5802ef9913aed404d3cfd6480af2b6bad2a4bdd6",
-      "bytes": 8098,
+      "sha256": "249f9c47e06a53afd2e0a229800629bf86527c805e2c1243de8ee38af5b4952e",
+      "bytes": 8120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/fortuna/fortuna-elevation-thumbnail.webp",
           "bytes": 5534,
           "sha256": "b42567210f3f8d4763c5269cb6935011c774a6c69b033c88a418a4e1d94f7abf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-surface@2x.webp",
           "bytes": 309980,
           "sha256": "c17f9a6d7eaec220af5155d593ddd531068d2d07b86466b74f7f2fa9e46cdd70",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/fortuna/fortuna-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
           "bytes": 59498,
           "sha256": "24751ab7eeb290616b10083886d7b40d59e6d42dd7890d8b86a0ed8c1214c4eb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5798,
-          "sha256": "d56a24e7702d4626d170080ab24efc5c56fbf40eea98d807b8eea8c405f04ce0",
+          "bytes": 5820,
+          "sha256": "38def3ec4e6123d7489410ed46148ed5e55b6ef890dc86aa1f7d1c7d3c37e697",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "fortuna",
-    "materialSha256": "f1344a9b3f8b72253386e58777ed2640ce241fbd2259d766876fc39b3357da91",
+    "materialSha256": "02ebb936c52cf826547df06af616139ce38a0975eeb5d3a62af6b4917e2a6ff2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "328e98241c892cc02af4e85cc3de6500eb3ac6881b0335ce46e80d15cdb45bf8"
     }
   }
 }

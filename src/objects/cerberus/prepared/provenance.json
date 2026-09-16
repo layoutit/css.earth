@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "541b54aae21c1bd1b13e975b484888d31b8d403f04ae844130f33ac9dc9d54cd"
+    "sha256": "0baed2248e72ebd9598a66b5e65ed97d201ee7890ba7374ff78c6f4441eb8040"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c35e22a76355bfc395f2631e4cbe4ba272eaee17ae56cc78d26c076befa6117f",
+      "sha256": "005a245a47ddd4a7c70bd8773aa1527eeb431e023fd7031e313b9f2cd42f3d84",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2012), Hanuš et al. (2015); model 456, version 2016-04-22."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/cerberus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c35e22a76355bfc395f2631e4cbe4ba272eaee17ae56cc78d26c076befa6117f",
-      "bytes": 10632,
+      "sha256": "005a245a47ddd4a7c70bd8773aa1527eeb431e023fd7031e313b9f2cd42f3d84",
+      "bytes": 10655,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7840,
-          "sha256": "4c21b0a711eab989f9a1845553326e5c9da86e3a2674edb9797a8c7a320d5306",
+          "bytes": 7863,
+          "sha256": "cb25902dc7d7be40fa0e023fb0d87a949cadeab95fbeb7e0fc23b90bfb443520",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "cerberus",
-    "materialSha256": "51f09594c9abbc60261f467f0a44b574d9a22855bb70ca18122ac51ea0a1ef19",
+    "materialSha256": "128d2b100c4f71d062f7da058ceee7cd495da19a23a58fc4d5ba24090f9d1098",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

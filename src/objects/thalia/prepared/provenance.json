@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fca22ab8435131ea6eb5da383de661d294d07c30a5a7e394d95e6a40cafc5051"
+    "sha256": "a0ea3cad8a8967a250e456cba3b7e52d57781d0265309157bb3fad870afd641d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2cdabf28f17ab9cca64df73c4fe4a522c6b2cbded135dcd0f04236f4490e41c6",
+      "sha256": "f5c765b2481376d009c0f5c87aab1ced4875d447c5dbcf4d3d6f839dca9cf6ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1858, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/thalia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2cdabf28f17ab9cca64df73c4fe4a522c6b2cbded135dcd0f04236f4490e41c6",
-      "bytes": 8778,
+      "sha256": "f5c765b2481376d009c0f5c87aab1ced4875d447c5dbcf4d3d6f839dca9cf6ea",
+      "bytes": 8799,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6192,
-          "sha256": "d539d474c2a6eac2dbdcb6d2c7ca903cf884a419375be2da6b057eff675bd6a4",
+          "bytes": 6213,
+          "sha256": "722d100d2ad371e78b4b411a9118ec946df666cb85f23d4e8dc8178d000c60eb",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "thalia",
-    "materialSha256": "b086ac6636401e4bf7dc2507b52786d3f1b030c88416abc24a4ee4933e91b629",
+    "materialSha256": "ad4e9cf00294d6cf6f71c6cedef8db78ba73e353ad1cd6aced4e978e304d5e55",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

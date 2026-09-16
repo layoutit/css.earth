@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "674886319fbff5dc3b4db73e4ea1853ba793eb311e3b1e4d8c5cc19679c75988"
+    "sha256": "14052b1705878e46236039e3101a42e4be1b30b175fe6da2cfc28716d3c89b0f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "74d39353d1f360d13f858cd035eccb5b84eb413557743c73281cf60b89ad4690",
+      "sha256": "39efad0145ba69d18bad256497eab47b1a9aad20da1057a020f29726349edcfd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1810, version 2017-06-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/antigone.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "74d39353d1f360d13f858cd035eccb5b84eb413557743c73281cf60b89ad4690",
-      "bytes": 9755,
+      "sha256": "39efad0145ba69d18bad256497eab47b1a9aad20da1057a020f29726349edcfd",
+      "bytes": 9778,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7144,
-          "sha256": "aae1be1eeceef95a81efabebb690069c09f82593dbe81117a61a86b19bd651e8",
+          "bytes": 7167,
+          "sha256": "d0b591252eb196da3fcb2c524e32512b2b79e75a21245dcad429e5bdd5a7f8a6",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "antigone",
-    "materialSha256": "896524c60c48168b9453baf0b576d463f6924687a25b9376cb1be39bd4cd996d",
+    "materialSha256": "43063bd53f4548f7d16fe29098cfde79dbaa0e2c4ba75b47ac5b25bc0077ccdf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "776e297b5f6733a8fd66bba667f8eca97b74017f854dd1e3e66adbb3cd0be9ed"
+    "sha256": "1a719c966c6e15b133bf5c200963dc7f3a501b36f393339c7505dd1482274639"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cf5cff5469e754fd6a86d6b91be8ed188d0382d4774fd7cbc8991ed33fc9e304",
+      "sha256": "a20527e4ba3ddc97ecef09c333ea1ef52f03d8eb01ba17e3111b09d9358dd25f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Thisbe model 5926, version 2021-11-12; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/thisbe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cf5cff5469e754fd6a86d6b91be8ed188d0382d4774fd7cbc8991ed33fc9e304",
-      "bytes": 7953,
+      "sha256": "a20527e4ba3ddc97ecef09c333ea1ef52f03d8eb01ba17e3111b09d9358dd25f",
+      "bytes": 7974,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5668,
-          "sha256": "18a7b848ec27e02ad4555ab5bed98dfc9d1a0665b7dbe75dbaebfcad1d23a81c",
+          "bytes": 5689,
+          "sha256": "1df93e06470fdf30698ef64d665b0925f9029936213fa2517585539a24b94125",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "thisbe",
-    "materialSha256": "2a6265a34c79872cde5fd3f0f804779af21d6d3ece9aaae509b8dc8da50d5667",
+    "materialSha256": "cfba5d68c1fb46746ffa0b8ebdd216e1ccac3fa2f6e8854e128a0704a6161b5f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6710e891edc135b10b4bad791ee9e50330ce0759ad7f5d10edb1db92d061b783"
+    "sha256": "36644ead9778811e7afe8a7e5f70c19130b59166e32908e7e6215fddf2a8af94"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "663c334c27a51331b58af61f363669a1e55a0931b4120851cef7488a7cccfe2e",
+      "sha256": "0334cb1f3fbaee177c168f4bbc291f80d9def05020278ca652d0fcdcb462752b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4695, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/baucis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "663c334c27a51331b58af61f363669a1e55a0931b4120851cef7488a7cccfe2e",
-      "bytes": 9832,
+      "sha256": "0334cb1f3fbaee177c168f4bbc291f80d9def05020278ca652d0fcdcb462752b",
+      "bytes": 9853,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7239,
-          "sha256": "992e18b353d7fc00fb85ddb2af0cbbb68ac46ab36baa845c74439e3b500f869f",
+          "bytes": 7260,
+          "sha256": "4c199bd37e55810510a684c42894a45f6331e1ae5c9f2c4292ab163a20987ac3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "baucis",
-    "materialSha256": "2fbf8aa690fecf033e4ee268ecdeb5fcfd5ca3c24a30546e43d0b6b87e7f2a4d",
+    "materialSha256": "142d969d7fe4c090763092ac5694bca59850abb961881bd98f9024588ec23d99",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

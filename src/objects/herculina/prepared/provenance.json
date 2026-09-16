@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e0141b3348e1cb2c47ec9bf1ce2c1d75c92794ac9c7e7becc1eaf0cfe85335fc"
+    "sha256": "b7d77ce7dfb7edab26995688c9af852450ffcdc6c0d0e48f2213073fdba3ff20"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "673ae1d8db40515d8743d877bd1f5d792f93e347c9b6a1b5a1822eac7e4aafe6",
+      "sha256": "d21804db1ca8239a4b72ee838163f8b35d24721b11642234111bedb30633fa7f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Herculina model 1814, version 2017-06-19; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/herculina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "673ae1d8db40515d8743d877bd1f5d792f93e347c9b6a1b5a1822eac7e4aafe6",
-      "bytes": 9169,
+      "sha256": "d21804db1ca8239a4b72ee838163f8b35d24721b11642234111bedb30633fa7f",
+      "bytes": 9193,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6844,
-          "sha256": "e71aca5ed3a8244da7fd8e7a7363ac83a8f38cb60a491e04d593d585bad98758",
+          "bytes": 6868,
+          "sha256": "0a0b23876a6391e92a000277149d22fe3548ee7145c5af133bae28e2bc421b3d",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "herculina",
-    "materialSha256": "f8ce0144a8b8c39ab45b823b71bc79b0bffa2d7a1f283987807eba48cda8f96f",
+    "materialSha256": "45057529dd8a51801fbfa831cafc89a0d6461aa5b9ce25cce49c7e842f4a07ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

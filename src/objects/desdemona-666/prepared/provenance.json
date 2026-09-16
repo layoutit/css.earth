@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14bbce533f56aa294d93235d665e3c3b4400d7bbcc80ba3c03cdb63d1dc3732f"
+    "sha256": "64ca14d67234f10f39fdb27e8ea4e8867d5130aa5155ea2bf17316b15afd0db8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "280a0dc28331151e17d7fa89c968f41c86c052238afcb1785e6021b432bb0fde",
+      "sha256": "07740447badf821138d1d2102a7ce1f3ed440c4423783dde9d51f6f158908b3a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; 666 Desdemona model 6218, version 2022-10-18; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/desdemona-666.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "280a0dc28331151e17d7fa89c968f41c86c052238afcb1785e6021b432bb0fde",
-      "bytes": 14194,
+      "sha256": "07740447badf821138d1d2102a7ce1f3ed440c4423783dde9d51f6f158908b3a",
+      "bytes": 14222,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11818,
-          "sha256": "d3512e83a2ef9a0c64f1280713683acc4e312e066cd6f9d1aabf26358a949b8d",
+          "bytes": 11846,
+          "sha256": "b1b22384b3c70714d3d586443a609e2b4ecc8d1007ab5f28749d8d5e94ee7877",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "desdemona-666",
-    "materialSha256": "c7bcb4fc21b191c58974fd041cf25637f9d65f1ae263a526ff17ae8819cd780d",
+    "materialSha256": "e78fb114b14a849069e9c0232a84cc15b547306112466399e53a3796f6af5a1b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

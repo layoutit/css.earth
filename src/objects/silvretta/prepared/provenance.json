@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e7a23c79006d2c2a07a67fb273a12ba8784b2806e4e0faf30d5a89930d361705"
+    "sha256": "28705a5d5e10bea89532524e1e0d5d1c008cc0a43d0c32575c5d74ac3dd58623"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a8021bef5588bcec25a8055fff92c8143017b124610eddb137277a7aac6931d8",
+      "sha256": "facc9d71d9adc2aec0bfef7259cce123115ed0a3125dff9c65008366f56aa359",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Silvretta model 513; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/silvretta.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a8021bef5588bcec25a8055fff92c8143017b124610eddb137277a7aac6931d8",
+      "sha256": "facc9d71d9adc2aec0bfef7259cce123115ed0a3125dff9c65008366f56aa359",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10389,
+      "bytes": 10413,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7531,
-          "sha256": "7c74f9d20338183bc52a3d191c6c62d16738ac1d6fcd36da02b6a286b14bae68",
+          "bytes": 7555,
+          "sha256": "315562f42142745ca7f1b645b5dafdaf10f1e814a00cb8154d9db2b895bdc660",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "silvretta",
-    "materialSha256": "5ea48e730974093395f9677d69644049ee7e089280634e89d6c5dab4647a12db",
+    "materialSha256": "e067438d2a94dd529c78cc784bdddb8087b5f68216f28dc3d18eb620ed9f6a61",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

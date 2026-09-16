@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9364bcf07c281dcf34e270b0785e27df4d7cf4910e54ba7b35091f4f0b909b51"
+    "sha256": "c64689f55210a34082d398237af0f9eff188a803f71ff670f30e3dfb17f717ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "29c110a6290f253f1c4e2f05ffded36ad6efd30b05f786946a756ba0f7bf1535",
+      "sha256": "10b18efc162deac83f4eb675f5435c271f43ba4ebc64fb464157002bcb76d6b2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Susi model 5856; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/susi.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "29c110a6290f253f1c4e2f05ffded36ad6efd30b05f786946a756ba0f7bf1535",
+      "sha256": "10b18efc162deac83f4eb675f5435c271f43ba4ebc64fb464157002bcb76d6b2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8325,
+      "bytes": 8344,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5551,
-          "sha256": "9ae841db3e2460ba13533a9745596f0a5fe8f60294ca16885f3d17411e543055",
+          "bytes": 5570,
+          "sha256": "2bca9622ecc3c9374b89b9ca303715d6b6132b93176e4cd9bde53767ed13087d",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "susi",
-    "materialSha256": "d3e9b3632b7788890dc9d2b0e2d7384e199a238e2d0899cd00955bb7458a0963",
+    "materialSha256": "95e7a2dc3dcd4a3b22a769b8f08259aa8fbc696c0bcd40aa3dde8aedb1777d2d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

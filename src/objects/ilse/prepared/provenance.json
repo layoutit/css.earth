@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "08bb3ea5d60a32180cab1fa8d77c42fcc047e8d4a92d04dc3d462bf570340ed9"
+    "sha256": "004d11aeb4256e3608b63a58cb87cf90655f1d1bbcd5690cdd13e435cb2b6232"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1241d3c43006fd8ec0353581c9e7a33d80241225d43552c745ebc288c5676c1a",
+      "sha256": "f2606ec80f31a8478229a8ab0c72930acd5a38c795f4d01834550729eaf04774",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 864, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ilse.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1241d3c43006fd8ec0353581c9e7a33d80241225d43552c745ebc288c5676c1a",
-      "bytes": 7623,
+      "sha256": "f2606ec80f31a8478229a8ab0c72930acd5a38c795f4d01834550729eaf04774",
+      "bytes": 7642,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5059,
-          "sha256": "3665f3df8579b06d513bafb37aeb690c66ddb9b3fda6841651bdd15dfdd54a71",
+          "bytes": 5078,
+          "sha256": "23bb440bbd3e014ecec28e04c526a6abf3412a83ce781ada668153aab76f259f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "ilse",
-    "materialSha256": "638892aeeb21a90bd2e412d75a67f003edab69341161df647b39f4869a25078b",
+    "materialSha256": "da00a63e14028edd13cf41719e97ca556a82b14117dd6e9b88d6992a3379c9bd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d3cd5b350573e1935d6f3f2703dca5f03beb931b5297f33f6c3efcabe992e22"
+    "sha256": "59b4d60153274ee186497a68ffe02728b8ab9e28dca79cf8142464f9b3016c54"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c28327678edae8c5b6ec72882bdcb1e8de8c0e18cde6b43a86bd9678cab27bd5",
+      "sha256": "be2cd46f0e11fb894d64be27f29e4984c450d53f11916a4e112259759656f880",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4172, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ilioneus.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c28327678edae8c5b6ec72882bdcb1e8de8c0e18cde6b43a86bd9678cab27bd5",
-      "bytes": 9419,
+      "sha256": "be2cd46f0e11fb894d64be27f29e4984c450d53f11916a4e112259759656f880",
+      "bytes": 9442,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6544,
-          "sha256": "4a0d0db5617993ebf27b19aeb269b47421938eff6c32d34f98711b6fbf475c3a",
+          "bytes": 6567,
+          "sha256": "abbba6262b9c36edd81043a1e52eb46ee99f48a2293555de46a57a6e9e1e70eb",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "ilioneus",
-    "materialSha256": "5de1ce1453f48b9eaedd8b346aae4b35de62ce7dba60b00e9e2cf0e5c4340be5",
+    "materialSha256": "6b9c8985bd32b12b70a141e057b5ac4451b34c56e20d8611c9bb536f7af5c122",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

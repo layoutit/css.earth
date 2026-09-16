@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5794bcb51f5be7f40f21349d8b3c3e3134529651061e07a15554ce4cd88e771d"
+    "sha256": "82dd762d275f7b5ee2957d433dd49d8bb76c5912cd099d36d6d04e054ffe84cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6f38f56aeb418cd437436ef9123a3cde95839c94e70fccda69a571e505ddee9b",
+      "sha256": "d038f1f309d2afba20f531ff07756a2b7cd7fcfe8cf8bae903386e1f803b2dfb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Schaber model 10836; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/schaber.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "6f38f56aeb418cd437436ef9123a3cde95839c94e70fccda69a571e505ddee9b",
+      "sha256": "d038f1f309d2afba20f531ff07756a2b7cd7fcfe8cf8bae903386e1f803b2dfb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11028,
+      "bytes": 11050,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8211,
-          "sha256": "30fe5ac22b8d0b0d1509468920958ee2b83d2941ea185a1c71f724cf369489ca",
+          "bytes": 8233,
+          "sha256": "fcbf1a3b054da8d4db9d16c4b539d219aa699891738c4df801ab916ab65c050d",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "schaber",
-    "materialSha256": "8918b08369668a23f94639190d0289950d487c1ab4110287a2ed76923088e0c6",
+    "materialSha256": "20745a442d5d6265aed947936b72d424b0d8e0b6a59f1799acc066242c2dfc82",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

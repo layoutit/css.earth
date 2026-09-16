@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ganymede",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1e81d715c2eb4eeb54b7564198e5e15a57f05bbdcddadae930a027fe4d9362a1"
+    "sha256": "ae8d0ec486ceba4d6839eab25296c76b4d094f314209762c3f4bfd2a96731ab2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -511,7 +511,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1bab75446052063802b893fcac8c50822c9601e3b2f7352ce3c4d72da579ba41",
+      "sha256": "2c69f0fd87e359510a76b34924af243702eb1bfdfccfc1e8cfa0668d067164f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -1026,7 +1026,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ganymede.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1160,7 +1160,7 @@
       "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "bytes": 136844537,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1237,7 +1237,7 @@
       "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "bytes": 199204541,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1292,7 +1292,7 @@
       "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
       "bytes": 2282348,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1322,7 +1322,7 @@
       "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
       "bytes": 387036,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1352,7 +1352,7 @@
       "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "bytes": 167,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1412,7 +1412,7 @@
       "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
       "bytes": 10416,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1472,7 +1472,7 @@
       "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
       "bytes": 10400,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1532,7 +1532,7 @@
       "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
       "bytes": 10304,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1552,7 +1552,7 @@
       "sha256": "3484816c073e6addb01bb505b779bc3fb1034e3152318d1756bbfe36054d6afd",
       "bytes": 880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1581,7 +1581,7 @@
       "sha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4",
       "bytes": 8845543,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1623,7 +1623,7 @@
         "source-document:composition/model-recipe.json",
         "ganymede-composition-fit-SPHERE"
       ],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "mapped-composition",
         "groups": [
@@ -1666,7 +1666,7 @@
         "source-document:composition/model-recipe.json",
         "ganymede-composition-fit-SPHERE"
       ],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "mapped-composition",
         "groups": [
@@ -1691,10 +1691,10 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "1bab75446052063802b893fcac8c50822c9601e3b2f7352ce3c4d72da579ba41",
-      "bytes": 21391,
+      "sha256": "2c69f0fd87e359510a76b34924af243702eb1bfdfccfc1e8cfa0668d067164f5",
+      "bytes": 21414,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1714,7 +1714,7 @@
       "sha256": "aa68afb9c4bf6afd5099ffabc503b92228a890bef38c59646986e4d430cbaac6",
       "bytes": 1015,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1746,7 +1746,7 @@
       "sha256": "75e6f837380cab4635d939ba9205f7832f85e10772878140197a67c2d082f561",
       "bytes": 550727,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1773,7 +1773,7 @@
       "sha256": "1b91f014b73e4bdccb005166cccafe56179fd32de486ae7795d120b021d3868d",
       "bytes": 155,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1800,7 +1800,7 @@
       "sha256": "a03c02bec7d24eaaf480dfd0e31a78a0e244afbd99b4eb68e175e9d31f9285a8",
       "bytes": 29441,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1833,31 +1833,31 @@
           "url": "/scenes/ganymede/ganymede-normal.webp",
           "bytes": 2241374,
           "sha256": "6939be3eb3ea37770e63951340c0633b0f39a69dda57944bf71447aca086f027",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal@2x.webp",
           "bytes": 6281330,
           "sha256": "3454fa5d0089ce1df67be0b35b33d3a24124f6861ce039c7fe32839fb93801da",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lens-normal.webp",
           "bytes": 782,
           "sha256": "934d592258538d6fcf71309c3b7640d482402bd89af5b5fbcefa8cc6495ef8c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-normal.webp",
           "bytes": 52862,
           "sha256": "b7c65c4c97bd310ad2a2cafbe670354e99aae68b4ad88e3bc08ee92e9eec7899",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-normal@2x.webp",
           "bytes": 173310,
           "sha256": "ebb3994a1ddbfa0fd5432bb1443f4dc0ce83ba15ab27267beae294cbe41691f3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1896,31 +1896,31 @@
           "url": "/scenes/ganymede/ganymede-enhanced.webp",
           "bytes": 2414108,
           "sha256": "c0780d2be275443a22a4f4b028bcf0651c367ba9d8bcf1c3f13cc98f7a8e61af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced@2x.webp",
           "bytes": 7128736,
           "sha256": "1310bc4ba61cdad4ca40f37630644457b2ce6a4c52128d8e958b88159ac15ee3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lens-enhanced.webp",
           "bytes": 962,
           "sha256": "ddba6d84c5c2ce3daab48e0ad5eb247a3eddb5c4cfcd7f321e59c71ff6815202",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-enhanced.webp",
           "bytes": 68058,
           "sha256": "8debccc71d193f6ba5790a9cb1db154a9c5133eb279c4f91580ac041159af851",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-enhanced@2x.webp",
           "bytes": 226008,
           "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1960,31 +1960,31 @@
           "url": "/scenes/ganymede/ganymede-geology.webp",
           "bytes": 251458,
           "sha256": "0740d52db76600c511cd1845c435ab9bbfbd0f3ff773b519cb655e81015ae905",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology@2x.webp",
           "bytes": 519220,
           "sha256": "84ec33a5e16159597629e5340f6a84505d76578d9bd5d429dfafd0fa02a49280",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lens-geology.webp",
           "bytes": 1388,
           "sha256": "592f356e5beeb0f3c92530e2ba2ae1888b43e6bf1bae867a5b52ddd704a3d8f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-geology.webp",
           "bytes": 5430,
           "sha256": "1d3840d4b6e68f8c7c8d8d2114e5a2b029935695f891b396a2b5561e7fa9d869",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-geology@2x.webp",
           "bytes": 11260,
           "sha256": "d0a72f2188303c037b1db6b635e8e33bfdfd3741d06fa612b3e8c550f2faedba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2024,31 +2024,31 @@
           "url": "/scenes/ganymede/ganymede-oxygen-signature.webp",
           "bytes": 69048,
           "sha256": "d9f9f557b8e6ee5bde65fd22fd3f906becc78dab8e35efe49ad057f91a4a325f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature@2x.webp",
           "bytes": 116896,
           "sha256": "66516e12e956363972ea58e1e354629cf6f98312fae7e98cd5ab95dcfbd30c3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lens-oxygen-signature.webp",
           "bytes": 2250,
           "sha256": "ba63dd160b278e0687775c7978ea785e225d27dbe94c500de39cbdd63136a6c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-oxygen-signature.webp",
           "bytes": 3816,
           "sha256": "939f4ec27c1376b25bf7a574cc0986d130ff0bee9fbd6d3df5d56d794e9bb814",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-oxygen-signature@2x.webp",
           "bytes": 8594,
           "sha256": "af6bfeaf75029d023ff3477dfd4787a7dc65c98bc97d6c20a1d8e8b6dcafc545",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2086,31 +2086,31 @@
           "url": "/scenes/ganymede/ganymede-ice-fraction.webp",
           "bytes": 67808,
           "sha256": "c15b604e2d23d41a5a10282431f2484811c20c562036d7fcb47a62e9b266c040",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-ice-fraction@2x.webp",
           "bytes": 86476,
           "sha256": "45f9abceb97d0a2ad760b44c38b7ddb69dbe1f6834ee7abbc1d4f731ba2a1f76",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lens-ice-fraction.webp",
           "bytes": 3868,
           "sha256": "d236ee987c20f37d0325b8db9b8d9f768a4e1c1301531f31c7046480a822a81f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-ice-fraction.webp",
           "bytes": 3934,
           "sha256": "0bb77552130b1d225271f45f807fc5e8759b2cdd7d9ee37ddbe0e84f7b066130",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-ice-fraction@2x.webp",
           "bytes": 9526,
           "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2148,31 +2148,31 @@
           "url": "/scenes/ganymede/ganymede-dark-material.webp",
           "bytes": 71842,
           "sha256": "d9b7c3c493189a7766be7066efc9e55c01abb71b2ff95faa4d773304069909bc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-dark-material@2x.webp",
           "bytes": 89810,
           "sha256": "e8d441e26b173f0f4583edfa4f27376089ccf6c2bb4c6171cd6e3364b3b09114",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lens-dark-material.webp",
           "bytes": 4194,
           "sha256": "6ac505cb56fe32b6338799621ff6c9f7570166add5b7f6d7b29de03cdf6aa23c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-dark-material.webp",
           "bytes": 3934,
           "sha256": "0bb77552130b1d225271f45f807fc5e8759b2cdd7d9ee37ddbe0e84f7b066130",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-poles-dark-material@2x.webp",
           "bytes": 9526,
           "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2206,397 +2206,397 @@
           "url": "/scenes/ganymede/ganymede-lighting-1x-billboard.webp",
           "bytes": 40826,
           "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-00.webp",
           "bytes": 14922,
           "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-01.webp",
           "bytes": 27532,
           "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-02.webp",
           "bytes": 34558,
           "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-03.webp",
           "bytes": 40648,
           "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-04.webp",
           "bytes": 45092,
           "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-05.webp",
           "bytes": 49044,
           "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-06.webp",
           "bytes": 52968,
           "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-07.webp",
           "bytes": 56198,
           "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-08.webp",
           "bytes": 59392,
           "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-09.webp",
           "bytes": 61906,
           "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-10.webp",
           "bytes": 62672,
           "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-11.webp",
           "bytes": 61062,
           "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-12.webp",
           "bytes": 59454,
           "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-13.webp",
           "bytes": 52762,
           "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-14.webp",
           "bytes": 42196,
           "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-15.webp",
           "bytes": 23242,
           "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-16.webp",
           "bytes": 28714,
           "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-17.webp",
           "bytes": 52870,
           "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-18.webp",
           "bytes": 65644,
           "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-19.webp",
           "bytes": 76630,
           "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-20.webp",
           "bytes": 85368,
           "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-21.webp",
           "bytes": 93744,
           "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-22.webp",
           "bytes": 99970,
           "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-23.webp",
           "bytes": 107422,
           "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-24.webp",
           "bytes": 112788,
           "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-25.webp",
           "bytes": 122328,
           "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-26.webp",
           "bytes": 130124,
           "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-27.webp",
           "bytes": 137048,
           "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-28.webp",
           "bytes": 148122,
           "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-29.webp",
           "bytes": 157328,
           "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-30.webp",
           "bytes": 167218,
           "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-1x-row-31.webp",
           "bytes": 182238,
           "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-billboard.webp",
           "bytes": 115740,
           "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-00.webp",
           "bytes": 37672,
           "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-01.webp",
           "bytes": 70898,
           "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-02.webp",
           "bytes": 92030,
           "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-03.webp",
           "bytes": 106840,
           "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-04.webp",
           "bytes": 120584,
           "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-05.webp",
           "bytes": 132094,
           "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-06.webp",
           "bytes": 143228,
           "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-07.webp",
           "bytes": 153142,
           "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-08.webp",
           "bytes": 163984,
           "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-09.webp",
           "bytes": 172632,
           "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-10.webp",
           "bytes": 177128,
           "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-11.webp",
           "bytes": 179144,
           "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-12.webp",
           "bytes": 173518,
           "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-13.webp",
           "bytes": 161150,
           "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-14.webp",
           "bytes": 132038,
           "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-15.webp",
           "bytes": 69930,
           "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-16.webp",
           "bytes": 74522,
           "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-17.webp",
           "bytes": 143520,
           "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-18.webp",
           "bytes": 185628,
           "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-19.webp",
           "bytes": 218252,
           "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-20.webp",
           "bytes": 245184,
           "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-21.webp",
           "bytes": 269836,
           "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-22.webp",
           "bytes": 291326,
           "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-23.webp",
           "bytes": 312110,
           "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-24.webp",
           "bytes": 333302,
           "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-25.webp",
           "bytes": 355976,
           "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-26.webp",
           "bytes": 377782,
           "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-27.webp",
           "bytes": 403282,
           "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-28.webp",
           "bytes": 429004,
           "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-29.webp",
           "bytes": 456570,
           "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-30.webp",
           "bytes": 481914,
           "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-row-31.webp",
           "bytes": 526556,
           "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -2620,8 +2620,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8431,
-          "sha256": "d9ca57659da470374e647733ec624766bcaa51ebb5f8c85bd55bd7a4c01601d9",
+          "bytes": 8335,
+          "sha256": "45b3568af54c1fd2d7e1e8765f9c459d31399900d244d29e0780a118ee7fc7c5",
           "verification": "bytes-verified"
         }
       ],
@@ -2658,7 +2658,7 @@
           "url": "/scenes/ganymede/ganymede-features.json",
           "bytes": 510496,
           "sha256": "2022770c78d7021df71ba3c7a8ea3324714ed481da7292c78feab0b149e87ed6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2820,11 +2820,11 @@
   },
   "lastPreparation": {
     "objectId": "ganymede",
-    "materialSha256": "37968a40aac5c078ee48f8235284b74b8327206a3363ba43a55bf6e8f0ea8e04",
+    "materialSha256": "533c4d227b67efead118bae9b642caa7162b197b2ed8785e90375a7657333980",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "7b5491c35254be6e8bd8fc07557c43fd15e1560977c3cc658bacf625db5d3eb3"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "068d8fe0f355fdf4d7b2b39e9bdac45f2f4608448f193b1e3d926a0070186a9e"
+    "sha256": "4fcbeb87c940a4cad589fab68854e778b5ce3e9de13d44d5d237d839acb3543b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
+      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -469,7 +469,7 @@
             "credit": "NASA/JHUAPL/DART; ASI/LICIACube; Daly, Barnouin, Ernst, Nair, Espiritu and Waller"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/didymos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -841,8 +841,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "082f2608a8cbf2123ea2e3658bf4f0e15e05713d3323adfb916a38edfe25870d",
-      "bytes": 11404,
+      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
+      "bytes": 11426,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1167,8 +1167,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5971,
-          "sha256": "cb3b41d7ae68e341bbac42197b6257efa03b1582d4a34ed73630f017691f1cb1",
+          "bytes": 5876,
+          "sha256": "512b8743b5d307a67e9aafd2c20c300d39353470b4cb2bcf7f507441ddd2140e",
           "verification": "bytes-verified"
         }
       ],
@@ -1317,7 +1317,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "a41f824fe0550118ef3c0b35a6268284c1bac8837637c54e85f5b9426db78b0e",
+    "materialSha256": "5b4a9544f33228821322cc3cfcc7db5cbbb502703ccf6f79926042dd37407b62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

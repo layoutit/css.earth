@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bfa31b3feb17dce138a0da50f0fd58eb885f211e6b9b54e6fc9412da47f4838d"
+    "sha256": "982f5a552e18a80d82f73ec37f98fa1f43ef2c38af2ab29246e3037cd4067f52"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b3b82b0c53d60bc07250528c32adbdb7ef62fd42587336a7422e2d1af397b15",
+      "sha256": "aa8369531da651661ef2fe00f3274bc1eacb3ede306ae046b555b1a8928a0cce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Auravictrix model 1654; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/auravictrix.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "2b3b82b0c53d60bc07250528c32adbdb7ef62fd42587336a7422e2d1af397b15",
+      "sha256": "aa8369531da651661ef2fe00f3274bc1eacb3ede306ae046b555b1a8928a0cce",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10666,
+      "bytes": 10692,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7817,
-          "sha256": "1aa07b1635ffdab15995bd40b22b89631cab616830d8ad50d4c5b97ee7e81720",
+          "bytes": 7843,
+          "sha256": "67d7eb39905faef1b60f364e920908d1615d9e0b781bb777361cf6ad622bf734",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "auravictrix",
-    "materialSha256": "c1a49f71ad955dc95806e32e30d2a2676fafcce6b46a8085668655b86a67d8ee",
+    "materialSha256": "e0a6e838fa2cf1427fcb92b93fa3ec303c56d060311be610d5c232c0d3cc59a1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

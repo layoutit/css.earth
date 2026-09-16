@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f02d6c2a8e9e3bcc45bec72b52ef76e5802575c9abf7839cd87e2217adfe0267"
+    "sha256": "b77137f8b18758c2655c210c13376dd7275632cadee8506d510adf6d91060f41"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "24aee0c1095725b26584ee64ef8b69fdd8eaec3146b639555d5e8e6f931efc54",
+      "sha256": "b0a37611563428c7ddd319dd10ce277a386ef7519c581a231d2cfdd0ef3478dc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1837, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lucina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "24aee0c1095725b26584ee64ef8b69fdd8eaec3146b639555d5e8e6f931efc54",
-      "bytes": 8743,
+      "sha256": "b0a37611563428c7ddd319dd10ce277a386ef7519c581a231d2cfdd0ef3478dc",
+      "bytes": 8764,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6158,
-          "sha256": "2ac46fb6c6a084bccb265143b54f38a3127daeca41b40ed62eb7d03b9bb2d8ba",
+          "bytes": 6179,
+          "sha256": "cb4134c8d2aed323671cb3c4ee47ecaa1933833f32e5b395eb2ecf7cb53cb863",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "lucina",
-    "materialSha256": "104811a112b6cf83c5e08bc421eb78970142ce1995564b6306d5a924416ffb2e",
+    "materialSha256": "58faf965f1ad4e39e3bf4602cc498450d3ae4dcec13905e09ad6d693e28ac36b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

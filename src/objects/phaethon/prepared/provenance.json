@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "918a66d9807f191033b03beb23e63db296fd26fb637f81fe4f8a7bd25645f25d"
+    "sha256": "3fc64cbd97446c50063513d0d67c0de1518dfc41720307a832ecd4225f4ee3a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "87d71136ee17007b72814228c2751d74971931ab1c3cf58a4851f9042607c2d2",
+      "sha256": "7841a175b612274b2ae55d269f44638c0d4e8c1b02901d022600862cc6904c13",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Phaethon model 4394, version 2019-12-03; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/phaethon.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "87d71136ee17007b72814228c2751d74971931ab1c3cf58a4851f9042607c2d2",
-      "bytes": 9299,
+      "sha256": "7841a175b612274b2ae55d269f44638c0d4e8c1b02901d022600862cc6904c13",
+      "bytes": 9322,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6984,
-          "sha256": "9d129a34f8b76f4f5ae3d0c63efd7b92f6ec493ce32b6af74106add964a53e7a",
+          "bytes": 7007,
+          "sha256": "9c0c7635a598d8f8bafe46eacdee8d9c7dbf3dfbbfb3e98c9527c1d2cb22c3c6",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "phaethon",
-    "materialSha256": "19a4f06aee4bdaa528a0a27b9abaef80dbce6bc27e199f66f27d75bbadc16620",
+    "materialSha256": "53ec20b259b38110962854c2c9e3f62930669f207c8c2a28a1ae16fbaf8c5b40",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

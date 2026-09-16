@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8c89a57038b644fb1097e0448cc063c2a0a9515620c1aa91e81d0fafbada85d"
+    "sha256": "c4ce9f3cb20baeb520b3ddf6a625989c0a0a750ac87d7783e36e36a48f884614"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "855a6bbbb846851c099bf6b18db1dfd2b2e2df9ac593ed4540ad9227832a9289",
+      "sha256": "f4a69732b9ed41c976f86b385330eb4150fe6c6e15a575c9c150564fe04841e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Cybele model 1843, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/cybele.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "855a6bbbb846851c099bf6b18db1dfd2b2e2df9ac593ed4540ad9227832a9289",
-      "bytes": 8374,
+      "sha256": "f4a69732b9ed41c976f86b385330eb4150fe6c6e15a575c9c150564fe04841e1",
+      "bytes": 8395,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6086,
-          "sha256": "92a618cceac557f55ffd1c6c0ec992d5ef9b2e2473ccd0ef17b3b1777509582d",
+          "bytes": 6107,
+          "sha256": "2f373fc423db953975cea151a02768fe1ff9f412e9379705c487896d47649518",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "cybele",
-    "materialSha256": "d0fbbcbf1e752056dbaf9f889699a0adeb3d2f42e2d26381080497753decf4cf",
+    "materialSha256": "7d412711e68eb00195746cc90d9affbb32100801020209f7c9055026e4fb565b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

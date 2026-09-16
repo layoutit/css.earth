@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0f67fd85d62b450c57e7b65d2fc0609a045d27d29ed3e3b3f86a649e3d6a1185"
+    "sha256": "3430a38d4bca1605544b4ac70b05cb98fd983973e8f108e59d2336ea18c05ed0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c517bb051a0531909e5f164f55d59532494730726b0f4e0c3c024f8223b9932b",
+      "sha256": "54eb77240512e75417c9e772176b8747c271a81db116ad972610003157f0143e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 5958, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/velleda.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c517bb051a0531909e5f164f55d59532494730726b0f4e0c3c024f8223b9932b",
-      "bytes": 9502,
+      "sha256": "54eb77240512e75417c9e772176b8747c271a81db116ad972610003157f0143e",
+      "bytes": 9524,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6899,
-          "sha256": "16eaaf177bfc661d107fd29b28f4ac537c8d813f72bad8b1c95be5be8531c499",
+          "bytes": 6921,
+          "sha256": "322d64d3a31d9faf5cd97e942cca9087507ab5255202ab5a19ea6e77fe1c34f8",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "velleda",
-    "materialSha256": "683f6fa75a079ea767794536042586365436778fe38dd5de3ad64e9dbd941ce0",
+    "materialSha256": "6e30a6aea44942d399d356c90871579c18c51abeabfe9466a3a481cafb78b410",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

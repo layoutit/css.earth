@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6014576df731807b16cab8e10a9ebff6e58ba79b33e10734375877859e4e9688"
+    "sha256": "bf2105e12ed4ebc82a488375d797e309787c56da6924a2b32e8b25711abeef9e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "917decc3d69c1b654b8268777052b219e7bfd0c3736c62781d25fc8c2a6c4106",
+      "sha256": "ffbb5eb77567e7f1a58b11a2bb2991d49d4193e2e40d1309a36c2eefc7090370",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Virtanen model 1175; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/virtanen.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "917decc3d69c1b654b8268777052b219e7bfd0c3736c62781d25fc8c2a6c4106",
+      "sha256": "ffbb5eb77567e7f1a58b11a2bb2991d49d4193e2e40d1309a36c2eefc7090370",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9853,
+      "bytes": 9876,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7044,
-          "sha256": "af6ae68b7f07cba2072c37a0f02b6e6cd5981e140b3fefb5e212fc9f0d2492b2",
+          "bytes": 7067,
+          "sha256": "9f6666d36fdd9e0a1d363df7eaa8aa0a687aa36f6aeed290427a3182a9f67c2e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "virtanen",
-    "materialSha256": "d2d90de4017a3b92423f1a711f99b6230b0cb40da27b3c8578c28245781abba9",
+    "materialSha256": "03702c013522e90e1c010d54682f2eca77a336751182cafd1f83d2a87c17911c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

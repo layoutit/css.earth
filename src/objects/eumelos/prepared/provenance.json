@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff227a43b0cc64d8d085d2a04bb771cd03ecd384912acdfd0a1d714fd7f3d12a"
+    "sha256": "eaacffb4cfd9a2a46bd9532a906a0aef4997fb83dd2b749aa13190988b89a353"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "766a6cee0d647fc68c773ed33f1cd51cd642ed76de96b3c02386e0b8d8c4fe9f",
+      "sha256": "b539eaf76ec315a6666fa6c2f47ce354354a7824ad467344f718b08fc00dae8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3920, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eumelos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "766a6cee0d647fc68c773ed33f1cd51cd642ed76de96b3c02386e0b8d8c4fe9f",
-      "bytes": 9605,
+      "sha256": "b539eaf76ec315a6666fa6c2f47ce354354a7824ad467344f718b08fc00dae8a",
+      "bytes": 9627,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6694,
-          "sha256": "d25477aac947608ba770154d67672c11644aa006336dc939a2ce3e1d0e9c34ab",
+          "bytes": 6716,
+          "sha256": "0cb68aef2adbd2529b95664b056aadf418b1e06817ca94722855dfc0dfda2d61",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "eumelos",
-    "materialSha256": "a0c7ec73425b6ab94c42581f3b401519527bc8d9f50fd33a849e7cdaa047e03f",
+    "materialSha256": "16f21a90d6713d0d7d71895920fc7d9bd61c75f157e7e986541e6f7beeb2115d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "geographos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b759e2c8dc390eee11d7b3db8fdd780585ff749c9683428d7cd920365e7d2e5f"
+    "sha256": "8bf17f2b39d1c65ee89cb926c1bafb2ed7ad8c1b7b71199345ec23f88681a5b1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a324883ef7ad6b612e6575c145bc8f88d0ea50278d112a12b44e56c4e4f36818",
+      "sha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -291,7 +291,7 @@
             "credit": "Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/geographos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -340,7 +340,7 @@
       "sha256": "fea2d6afa17abbcf0f5db3f85223bf6bd9f295a177c98f62389feb7fdbcb28d5",
       "bytes": 148206,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -365,10 +365,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a324883ef7ad6b612e6575c145bc8f88d0ea50278d112a12b44e56c4e4f36818",
-      "bytes": 12902,
+      "sha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
+      "bytes": 12927,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/geographos/geographos-elevation-thumbnail.webp",
           "bytes": 5538,
           "sha256": "fa8528b828074b1bfa80cba6409a9144df58890eb897b9f4856471cce76e73f6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/geographos/geographos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/geographos/geographos-elevation-surface@2x.webp",
           "bytes": 347490,
           "sha256": "87c324b72c0d83e32ae94262d399a94265307c7c3e48f92f152862247535d547",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -450,13 +450,13 @@
           "url": "/scenes/geographos/geographos-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/geographos/geographos-shape-surface@2x.webp",
           "bytes": 67132,
           "sha256": "01e45a635579ddbae028972379788c3867a9687513fec17a7ccafc2542f3ad6d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -487,8 +487,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9574,
-          "sha256": "53a3760f04b48863cd0ec56c7fc9c2af96091b4d026629f084add1e1ae925770",
+          "bytes": 9599,
+          "sha256": "20cb9358a0d5084b7dc39694945197b1df210377bb052a6cbb2e68167dcdc112",
           "verification": "bytes-verified"
         }
       ],
@@ -551,11 +551,11 @@
   },
   "lastPreparation": {
     "objectId": "geographos",
-    "materialSha256": "897dfd31bf41315f281a62c74274600bc612e3bdd9711655446afcb51cc504ae",
+    "materialSha256": "b57a586d691d424b177cc9f4ee79d8dc16624b54c57eaf37e280a4e9aef498ac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "85a87691c517a0afad6cf7f8de087d7b54ddd09f9950af7d1ed164e35d95567d"
     }
   }
 }

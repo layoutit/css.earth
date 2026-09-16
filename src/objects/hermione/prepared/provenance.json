@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "63cf6fcda2ec767c1fccbdf3e9f62c361f0b572a39c5fd722b477d5fbbce53dd"
+    "sha256": "6f4c583608d9b05bf92efd2485d28349bcaeda29c20795e5f889568c6e8cdcaf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d56719d13b14183784028822ebfcff86e985973b36542fcb7d56275ff9cf71ec",
+      "sha256": "1dffbfdc9679c59fd37c4fe251530287ae4bc5d159534f316e7316dc2fbcd918",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hermione model 156, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hermione.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d56719d13b14183784028822ebfcff86e985973b36542fcb7d56275ff9cf71ec",
-      "bytes": 8923,
+      "sha256": "1dffbfdc9679c59fd37c4fe251530287ae4bc5d159534f316e7316dc2fbcd918",
+      "bytes": 8946,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6614,
-          "sha256": "aeb8cdc9fa0bef3e9e4b3ee9991a0f1caeb8059223f63d1ca5797bcebbb82145",
+          "bytes": 6637,
+          "sha256": "88934f336c28815f228970ea205f4da4964488c533db505126bd44e60e99b81b",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "hermione",
-    "materialSha256": "d256fad58cbb7657bdc6b5c7c45712972f89d676dc3bb74a63c1e29ad0dd37a1",
+    "materialSha256": "d1886b28fe4b5200dd0e8fef235f6f3aaa1d3888a2b08ab4ab2a5409855dc46a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

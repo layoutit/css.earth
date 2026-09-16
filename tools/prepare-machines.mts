@@ -134,7 +134,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     let document = provenance.get(object.id);
     if (document) closure[path] = sha256(JSON.stringify(document, null, 2) + '\n');
     else document = validateObjectProvenance(await json(path), object.id);
-    if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Provenance for ${object.id} does not match its source manifest; run pnpm prepare:provenance, or prepare the body where its sources are.`);
+    if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Provenance for ${object.id} does not match its source manifest; run node tools/prepare-provenance.mts ${object.id}, or prepare the body where its sources are.`);
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
   }

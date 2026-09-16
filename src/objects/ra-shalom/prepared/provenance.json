@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ra-shalom",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fce94ea4809cec8396f97c9ef175342715a0396386bd1c564de321b84daade22"
+    "sha256": "8fff0d078ded534d84a45ddaeaaf2ad01447488caaf8ba65a81df3e5af0eac35"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "57bec32a3d9c084ec840c8ced36de03427d569678b50f02c98f365c1a23e3480",
+      "sha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -299,7 +299,7 @@
             "credit": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ra-shalom.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -348,7 +348,7 @@
       "sha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d",
       "bytes": 67284,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -373,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "57bec32a3d9c084ec840c8ced36de03427d569678b50f02c98f365c1a23e3480",
-      "bytes": 11359,
+      "sha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
+      "bytes": 11383,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -408,19 +408,19 @@
           "url": "/scenes/ra-shalom/ra-shalom-elevation-thumbnail.webp",
           "bytes": 6754,
           "sha256": "99e9adc1988d01ff26ec4ae2737d4f862c0e1f8a9de2a294af7e06b0718bb162",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-elevation-surface@2x.webp",
           "bytes": 413586,
           "sha256": "b780582b6d2ebf3fcebb86e5e978115e8c16af47f6f00c40370e50cefb03586b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -458,13 +458,13 @@
           "url": "/scenes/ra-shalom/ra-shalom-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
           "bytes": 64402,
           "sha256": "f533696027baa057fc5d3bfbc2e10a7702fd41dc71cb3765357960415e9f3ffa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -495,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8297,
-          "sha256": "d97c3e3f12146af8c874d8f5be5f05e5a87f45fcb2e1b692207769c718052945",
+          "bytes": 8321,
+          "sha256": "2a5717051ab92a4669f21d3f6e3d9d24c1a71a519c79be9c72b9ecc756f8082e",
           "verification": "bytes-verified"
         }
       ],
@@ -559,11 +559,11 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "40a1f53e26ae29caeff29aee1cc2f3da931904e65576b6cc230facdab75184be",
+    "materialSha256": "6666e62d5dc05b2a6b6082ef2fa80ed12ca0de3cfc38b872eacce1a40699f6a8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "33971b664c4694252f6bd51b48d785b19859d6e09bc265c925413e8dae575775"
     }
   }
 }

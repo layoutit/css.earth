@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31f0f1f62d024032d3e883a5c99fee386476ddd82d1956928cfb79b51dd601c5"
+    "sha256": "60d38caae55577a53f2be12abae98efa04a1418088b23bc59f3eeda0470d5f2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d631f9faf0a6e7d2c26de4bd97b387da93fcd29630c219ef09731329d040d57b",
+      "sha256": "b2f60218ba273d2b7333b658b73f7e4ffc0b218163331af7a5de3f94aac8033c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Veritas model 833; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/veritas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "d631f9faf0a6e7d2c26de4bd97b387da93fcd29630c219ef09731329d040d57b",
+      "sha256": "b2f60218ba273d2b7333b658b73f7e4ffc0b218163331af7a5de3f94aac8033c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9742,
+      "bytes": 9764,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6945,
-          "sha256": "7ab5bbd2cae4bb74c138ea4f442853fd8e8e0397dbf939282406f6094f359bc0",
+          "bytes": 6967,
+          "sha256": "ac79029413dfc0865fb5fe4ee9f1ab6d1d498728300fb93388595e84e623e4ef",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "veritas",
-    "materialSha256": "03f2a6fdbf3b3c4d67fca13bc1ce749a1fb58bab84c47cf504a77a00cd6a6104",
+    "materialSha256": "1c6b48fd42dbc66d148944d2f243b2d4f44d8e4368f4e23b7b30f6f727bb66e2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

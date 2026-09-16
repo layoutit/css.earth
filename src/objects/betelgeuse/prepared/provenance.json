@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a933351c6c3a3db2066a92a9357b0855a2ad3b5bfd35342a2250c1c5cd551ad"
+    "sha256": "614c69d6cd2baac2f7cf8f4245a04ccc367e93646f0c04e88f9f5a41c6f2c485"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "589b94286ec097b5027f9ece6afb13ee0d0969915639c7c8d02722e19dfc6d90"
   },
   "recipes": [
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "edf1888f6ac5613b6140789fcf304533fec6a153cd260d164b06af7c160e6ade",
+      "sha256": "d36d90e198669154908790b29c3c15de7e90302fabf68be7d1d7847cbd11a8b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -217,7 +217,7 @@
                 "kind": "scale",
                 "title": "Relative intensity at 4 µm",
                 "labels": [
-                  "0.37",
+                  "0.35",
                   "0.68",
                   "1.00"
                 ],
@@ -255,7 +255,7 @@
                     ]
                   ],
                   "labels": [
-                    "0.37",
+                    "0.35",
                     "0.68",
                     "1.00"
                   ]
@@ -306,7 +306,7 @@
             "credit": "J. Drevon, F. Millour, P. Cruzalèbes et al.; ESO/VLTI/MATISSE; JMMC OiDB"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/betelgeuse.json",
             "credit": "Joyce et al. (2020) radius and distance; SIMBAD astrometry; Kervella et al. (2018) rotation"
           }
         }
@@ -479,8 +479,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "edf1888f6ac5613b6140789fcf304533fec6a153cd260d164b06af7c160e6ade",
-      "bytes": 4421,
+      "sha256": "d36d90e198669154908790b29c3c15de7e90302fabf68be7d1d7847cbd11a8b6",
+      "bytes": 4446,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -642,8 +642,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7771,
-          "sha256": "77e83e45a0beb8e5eea59f98541df19926c8b9a842adaa1321dfc87fb9730b52",
+          "bytes": 7796,
+          "sha256": "80d163a5f963e92e25af7cf8327e740c1b3248b56fdd96187184a6805942f0b5",
           "verification": "bytes-verified"
         }
       ],
@@ -681,10 +681,10 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "76fc1acc15b77d23038912e6c172082cf008283122d917fb069f1c029f8b4832",
+    "materialSha256": "51f1dbb5f9641024aa53d8bb97723a60701e3f3ec0cd8caff229aee4d6cdc765",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "589b94286ec097b5027f9ece6afb13ee0d0969915639c7c8d02722e19dfc6d90"
     }
   }

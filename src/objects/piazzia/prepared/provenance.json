@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8e2018e45db7836e75dc5e47bb66b9fe08f5db37d95ce2e1d461c55ad86d61eb"
+    "sha256": "31d22789426d9c7456a441d6f1ad9e84d3446d62849623043009dbdb2ae701b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8bec9cc55fcc07b9488b2b192bdf02e0b45f984c6147feea1233d31f2ee11e4",
+      "sha256": "8af72288473b971db9cd4c466ac1e7df06de784b799a79b02bb5fe51f79efc71",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Piazzia model 3529; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/piazzia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "f8bec9cc55fcc07b9488b2b192bdf02e0b45f984c6147feea1233d31f2ee11e4",
+      "sha256": "8af72288473b971db9cd4c466ac1e7df06de784b799a79b02bb5fe51f79efc71",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9364,
+      "bytes": 9386,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6564,
-          "sha256": "fd1a4642b696c63054e139fb82dcdb2e158de3976d54203194a2e61656882cd4",
+          "bytes": 6586,
+          "sha256": "9051aa117888b7348ef93f948363520e3efdb94f985c16d87c826433282205b4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "piazzia",
-    "materialSha256": "4b43f7a51be2b5cf9c4b507730df053a78c73a40aa9e025a50b4be9b025905dd",
+    "materialSha256": "936f6d00cdc2b5638341d7523db3b95dd5455196dd849b09cc7d8e53e0e730ec",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

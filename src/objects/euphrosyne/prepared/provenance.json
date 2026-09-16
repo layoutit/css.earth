@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "euphrosyne",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b949e16eb96d8d19a05be5344921321fcd7a70b8c2c11be01cabf0fd508ec5db"
+    "sha256": "0a7c3e435c4f406ceff50f26c17ba124818f5214699f9881a9fa8c6ce42b95ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9691a2b1c76d699a02f358776c510944fa1d28f1881beec6359b724d5df66737",
+      "sha256": "3326fc5790dc47c1c95618fbba86047f9da1681e45ba6de929bd71c4d2f6954e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -295,7 +295,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/euphrosyne.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -344,7 +344,7 @@
       "sha256": "7c99a8af18219166e1b4046dbbb879d83f289d8288e98b41d226c566f3a6a0d3",
       "bytes": 384379,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -372,10 +372,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9691a2b1c76d699a02f358776c510944fa1d28f1881beec6359b724d5df66737",
-      "bytes": 10164,
+      "sha256": "3326fc5790dc47c1c95618fbba86047f9da1681e45ba6de929bd71c4d2f6954e",
+      "bytes": 10189,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -407,19 +407,19 @@
           "url": "/scenes/euphrosyne/euphrosyne-elevation-thumbnail.webp",
           "bytes": 5366,
           "sha256": "03889a0a928e0dc5064ac5b101dc22e0fd10f877f3376c3ef3d7efc974b79ce8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-surface@2x.webp",
           "bytes": 290612,
           "sha256": "998f072bbbe74e71652b68969a4af0d9ad68e7780cdeffc1c01f9c2eda52be1f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -457,13 +457,13 @@
           "url": "/scenes/euphrosyne/euphrosyne-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
           "bytes": 59172,
           "sha256": "ee46f2316e1b681161eac4537727e775ac1840956a57304bec96619e069a5aff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -494,8 +494,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7735,
-          "sha256": "a932dbf65c18f6f5792f3b758a86b8b48c97a8f072dc9962e18d7318f96e7d1e",
+          "bytes": 7760,
+          "sha256": "0c6dfaa47a8d25dcf14acc80a98650d5c9aa1c58cb3ce83b273ca3e6d87d45e2",
           "verification": "bytes-verified"
         }
       ],
@@ -558,11 +558,11 @@
   },
   "lastPreparation": {
     "objectId": "euphrosyne",
-    "materialSha256": "a7996defa8476040d5dd33d204648254500a6607e96666dbccdfaade69efc9ab",
+    "materialSha256": "5c55f2a1dde88424245d09c8aa02e007753e543e3d2c41ab25803f17674cbe7d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "f50f6053da334809a0e16d2ffa3bfe3dcb4bfdc74018bb301a1ef41820e2ce16"
     }
   }
 }

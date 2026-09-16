@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Nausikaa model 1864, version 2018-02-19; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/nausikaa.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

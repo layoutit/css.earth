@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f68e3bf0626c382b8e03e65385a4edb904d3adf232d205dd1aa72cfabec87f5"
+    "sha256": "84da2c2756b6dab3839151605575f154e05c542e7aeddb655f85950c89bcb705"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0eee31b63a9f7b995bf801a75e4f6f8eeb460f8ba8fecabe53ebae3124539af3",
+      "sha256": "b47499f5b686f9a050ed207ecb67fff80ba018cb9af27f9c04e377a1225791f3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Schorria model 5955; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/schorria.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "0eee31b63a9f7b995bf801a75e4f6f8eeb460f8ba8fecabe53ebae3124539af3",
+      "sha256": "b47499f5b686f9a050ed207ecb67fff80ba018cb9af27f9c04e377a1225791f3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10642,
+      "bytes": 10665,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7821,
-          "sha256": "cf413f3d328030680c527380692deac9649d062c081924fc9ee6c143721c4bc8",
+          "bytes": 7844,
+          "sha256": "e0325c34c1ea8a2a71accf90c6b23e3d4a18a6cba9047ec0af0d34ea8f917ceb",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "schorria",
-    "materialSha256": "e01a26de91ef596489eb4db5f7e21482c6988977f3ffb94466487bfee5f4977b",
+    "materialSha256": "99bda87e026e66c3ed4b828020a7f8020420b1e526fb6abf8d6c2cbe47cea15a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

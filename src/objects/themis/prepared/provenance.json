@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "themis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e56c67d16ea0576e26e4660d7bb67a0a163179be123641d1425fa847a07ee588"
+    "sha256": "7e33934171051e194d613f25932eff361f3ef757d9ec4d9d1570b7ae6626e9a8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "efedb0d09af7a702c7391ec1180861c525e83a3e9521e18b53751cb5057fe704",
+      "sha256": "e8617a9b54b67c69e6621cd9652465c1076784b001b3fdffff4d42f740944668",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/themis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "6a3b36dbee88acca8365d8b4baada532ec83ebedfd3c5ed2842ec4dd36889853",
       "bytes": 357499,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "efedb0d09af7a702c7391ec1180861c525e83a3e9521e18b53751cb5057fe704",
-      "bytes": 7790,
+      "sha256": "e8617a9b54b67c69e6621cd9652465c1076784b001b3fdffff4d42f740944668",
+      "bytes": 7811,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/themis/themis-elevation-thumbnail.webp",
           "bytes": 5416,
           "sha256": "85eacdae20394251b0b4db10204cf792ad54b5d2a719d367295a06dee737e323",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-elevation-surface@2x.webp",
           "bytes": 298092,
           "sha256": "61a95e73aba1ce3b87df1457144f53e3f6d05b5c6f92426ce4b0f8539ae422e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/themis/themis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-shape-surface@2x.webp",
           "bytes": 57748,
           "sha256": "8d7579ee388593edfd05643d4435e23c6e2defb6fa6f9d456de21431bc633008",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5505,
-          "sha256": "649741e02812066a22eb418a3046c0734ac69a130a9a676178434c18e65657d5",
+          "bytes": 5526,
+          "sha256": "665c59c265f96b636eb6461111f4986da0bdbd60d15fe91147ebf155d1c5348a",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "themis",
-    "materialSha256": "3c9ae236f4960c7db20d65dedfd2978f37ca1ceeccb0d5968ab6ef418d99e12c",
+    "materialSha256": "f44b08003a8075db7290ad357f3c7c8fa5abca4d6c12b47d3a9db661c0cae683",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "4072468f104a28af2a7655e99d15878816f3bc0ee077a2baa7223df1486c0855"
     }
   }
 }

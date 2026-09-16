@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd4e015de6a61901af8c2ad1f1b7f2df4a395c87a656f7bb6f2f5977edc94a29"
+    "sha256": "a3b1d13b0d1c288d91cd3d0c085139ece4e504ba3988852d3e231ef8c979c779"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7cca695e6192b1268a34fb43f9567298aaa5ecee9543776299699f5e8cc3b2a4",
+      "sha256": "df123c11d5f7e84b19a5574934ddcbd0974258eec3a817ce6e88622b7cb6b60e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kalliope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -364,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7cca695e6192b1268a34fb43f9567298aaa5ecee9543776299699f5e8cc3b2a4",
-      "bytes": 8635,
+      "sha256": "df123c11d5f7e84b19a5574934ddcbd0974258eec3a817ce6e88622b7cb6b60e",
+      "bytes": 8658,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6323,
-          "sha256": "9eb173c0ba6ad184f04a8b0ccff3dec2da078dabdb9d13fce6071e964c764c3c",
+          "bytes": 6346,
+          "sha256": "0cc161a884ff0c7a043109be21c57698c98e4c5d5e04cd9cd8af5c0ace0fea30",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "65f5298dfa08a14c2e987b588278bb9d564d3ed30f0d1911900dd3e4ce4593b8",
+    "materialSha256": "c943d226aab1e81af6ba7bb3d681200c0cb382c39cfda266b859126335bbe152",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

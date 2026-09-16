@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "074a89b390ee97a59dc254c8e452b1393e75850a88d4e958834f381d58100560"
+    "sha256": "1d0bf5e8b13aa9b3ee9f453ad73b8adb053f20e0ef12c2654eb721cb613a92fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "108dde79629c96dba0073c3fa72a7d26570a889eb73f93351c4b3d42533137b5",
+      "sha256": "35f5b1289260bf86e4a3173e8017691f8d1ed98267046cb2e1287caa41364564",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 823, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/atalante.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "108dde79629c96dba0073c3fa72a7d26570a889eb73f93351c4b3d42533137b5",
-      "bytes": 10137,
+      "sha256": "35f5b1289260bf86e4a3173e8017691f8d1ed98267046cb2e1287caa41364564",
+      "bytes": 10160,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7524,
-          "sha256": "8322bdae6389eb76fd9a964b86b9a02674158a5bd5469fecf51c083c2df91baa",
+          "bytes": 7547,
+          "sha256": "165e2f5e57d379f4eade504c6243399130bc8ea7c59eec9deaa6d859810c2b1c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "atalante",
-    "materialSha256": "146f8c550708ab55c1584e7ff79a350011627e7488885e8c545a5950bc257b5f",
+    "materialSha256": "dc1fd37a3eea24a956cedfd1054bc9c8c5d29544852ae09905398ea90bc2cb1b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea5ca0afd0341ba9e5d647e42c07c43dbad4ebf8a4b577634fbe8f1baf882b5a"
+    "sha256": "6288187b5a938dedba55497874ebffa53437b98bb64b25fb6cdb741d1e43ec16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "516ae26cd3b603ec821fd9b30270678623819897d99d338d7795b0206d2461c5",
+      "sha256": "1bf2aa070f205340770bc9bdd034e5ce3b28971359eede1bc24d74a2c84530b2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Juewa model 5985; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/juewa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "516ae26cd3b603ec821fd9b30270678623819897d99d338d7795b0206d2461c5",
+      "sha256": "1bf2aa070f205340770bc9bdd034e5ce3b28971359eede1bc24d74a2c84530b2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9226,
+      "bytes": 9246,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6444,
-          "sha256": "9868fb694d5b7b7ea4b9b9892c1113eaf8ae71baa2a35ae30fea556829345f1d",
+          "bytes": 6464,
+          "sha256": "ff1989966ea442600e99f3085ab51dff4dbd69f93a7727476fcd1dcd48824b51",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "juewa",
-    "materialSha256": "5848ae7048c7474f36b320a3927a87943fb15e406a926e400e50fe5a5b0e969d",
+    "materialSha256": "423a9f46a2e22b46714149a238f6885300e33095333accae8b7a168ebddf328d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

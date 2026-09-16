@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Thule model 16313, version 2025-07-17; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/thule.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

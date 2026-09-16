@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6a5fb1b4445a9408affd37589a0da70f238ebefd28b11d863eecdf8f40a5c64c"
+    "sha256": "1a64a12b2edd80ba3bf06e0923698627479f87da4ffc8593115a775f28058502"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82347ad985b3ccc2fe09421d6dd672ed8daac8fe8414e17ab4c9fe7a0564d180",
+      "sha256": "1522ae8061a917357a38c3a33a9c351c7acd6dcad021373a9795f7fa829b1f64",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Diotima model 1836, version 2017-07-11; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/diotima.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82347ad985b3ccc2fe09421d6dd672ed8daac8fe8414e17ab4c9fe7a0564d180",
-      "bytes": 8645,
+      "sha256": "1522ae8061a917357a38c3a33a9c351c7acd6dcad021373a9795f7fa829b1f64",
+      "bytes": 8667,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6345,
-          "sha256": "565391299529b19a5e93c570d9c7d5ea0f393e40c1405b1af583c5b5cec17f95",
+          "bytes": 6367,
+          "sha256": "2f9219e148f78778f671ecbac73daf8a33a5eee31fddbb35ee1af62a2a67e4bd",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "diotima",
-    "materialSha256": "50195d1a059a961bfda0a771fb2d106c229765a319fe9f52ff67cdd8e25979e5",
+    "materialSha256": "4077fdc209e2a1e278e51984e3e04671c3913620f6059ed08dd01d18980b1e16",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
