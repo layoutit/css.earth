@@ -14,8 +14,10 @@ import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, 
 import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
+import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
 
-export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts'] as const;
+export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts',
+  'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'tools/fits.mts'] as const;
 
 const integer = (value: unknown): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
@@ -36,10 +38,17 @@ function pin(raw: unknown): Pin {
   const value = sourceObject(raw, ['path', 'sha256', 'bytes']);
   return { path: sourcePath(value.path), sha256: sourceDigest(value.sha256), bytes: integer(value.bytes) };
 }
-interface Preview extends Pin { url: string; crop?: { left: number; top: number; width: number; height: number }; }
+/** A preview is either a publisher image downloaded by URL or composed from a pinned sky band recipe. */
+interface Preview extends Pin { url?: string; skyBands?: { path: string; sha256: string }; crop?: { left: number; top: number; width: number; height: number }; }
 function preview(raw: unknown): Preview {
-  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'crop']);
-  const result: Preview = { ...pin({ path: value.path, sha256: value.sha256, bytes: value.bytes }), url: sourceUrl(value.url) };
+  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'skyBands', 'crop']);
+  const result: Preview = pin({ path: value.path, sha256: value.sha256, bytes: value.bytes });
+  if ((value.url === undefined) === (value.skyBands === undefined)) throw new TypeError('A preview names either a URL or a sky band recipe.');
+  if (value.url !== undefined) result.url = sourceUrl(value.url);
+  else {
+    const bands = sourceObject(value.skyBands, ['path', 'sha256']);
+    result.skyBands = { path: sourcePath(bands.path), sha256: sourceDigest(bands.sha256) };
+  }
   if (value.crop !== undefined) {
     const crop = sourceObject(value.crop, ['left', 'top', 'width', 'height']);
     const offset = (raw: unknown) => { if (typeof raw !== 'number' || !Number.isSafeInteger(raw) || raw < 0) throw new TypeError('Invalid crop offset.'); return raw; };
@@ -97,11 +106,22 @@ interface Options {
   input?: (path: string) => Promise<Buffer>;
 }
 
-async function preparePreview(root: string, pin: Preview): Promise<{ bytes: Buffer; width: number; height: number }> {
+export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>): Promise<{ bytes: Buffer; width: number; height: number }> {
   const path = resolve(root, pin.path);
+  if (pin.skyBands) {
+    // The recipe is source closure whether or not its composite is already cached.
+    await verifySkyBandRecipe(pin.skyBands, input);
+    const name = pin.path.split('/').at(-1);
+    if (name !== skyBandCompositeFile(name?.split('.')[0] ?? '', pin.sha256)) throw new TypeError(`A sky band preview is cached under its own hash: ${pin.path}`);
+  }
   let bytes = await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-  if (bytes === null) {
-    const response = await fetch(pin.url, { signal: AbortSignal.timeout(60000) });
+  if (bytes === null && pin.skyBands) {
+    // The survey bands download into the shared cache; only the pinned recipe and tile lists are source closure.
+    bytes = (await composeSkyBandPng(pin.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
+    if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed sky band preview: ${pin.skyBands.path}`);
+    await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
+  } else if (bytes === null) {
+    const response = await fetch(pin.url!, { signal: AbortSignal.timeout(60000) });
     if (!response.ok) throw new Error(`Preview download failed: ${response.status} ${pin.url}`);
     bytes = Buffer.from(await response.arrayBuffer());
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
@@ -181,7 +201,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     for (const [index, lens] of record.lenses.entries()) {
       const own = bySource.get(lens.input);
       if (!own || own.lensId !== lens.id) throw new TypeError(`Unbound volume lens image: ${record.objectId}/${lens.id}`);
-      const image = await preparePreview(root, lens.preview);
+      const image = await preparePreview(root, lens.preview, input);
       const previewUrl = `/scenes/${record.objectId}/datasets/${sha256(image.bytes)}.webp`;
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
       controls.push({ id: lens.id, label: lens.label, title: lens.title, thumbnailUrl: previewUrl,

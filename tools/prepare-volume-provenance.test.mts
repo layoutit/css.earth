@@ -172,3 +172,35 @@ test('image-layer deliveries retain authored documents and every layer in matchi
     await rm(fixture, { recursive: true, force: true });
   }
 });
+
+test('sky band previews verify their recipe with a warm or cold cache and ignore a retired publisher file', async () => {
+  const { mkdtemp, mkdir, rm, writeFile } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { preparePreview } = await import('./prepare-volume-provenance.mts');
+  const { sha256 } = await import('../src/platform/sha256.mts');
+  const temporary = await mkdtemp(resolve(tmpdir(), 'sky-preview-'));
+  try {
+    const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid: { width: 16, height: 16, fovDeg: 0.01, centerIcrsDegrees: [270.9, -24.4] },
+      bands: [{ band: 'IRAC4', sha256: 'a'.repeat(64), bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
+    const composite = await sharp({ create: { width: 16, height: 16, channels: 3, background: '#400' } }).png().toBuffer();
+    const directory = '.local/nebula-lab/observations/m8-processed/sources', recipePath = 'src/objects/m8/source/sky-bands/spitzer-irac.json';
+    await mkdir(resolve(temporary, directory), { recursive: true });
+    // An existing checkout still holds the publisher TIFF under the source's earlier name.
+    await writeFile(resolve(temporary, directory, 'spitzer-mid-infrared.tif'), Buffer.from('retired publisher bytes'));
+    const warm = { path: `${directory}/spitzer-mid-infrared.${sha256(composite)}.png`, sha256: sha256(composite), bytes: composite.length,
+      skyBands: { path: recipePath, sha256: sha256(recipe) } };
+    await writeFile(resolve(temporary, warm.path), composite);
+    const files = new Map([[recipePath, recipe]]);
+    const input = async (path: string) => { const bytes = files.get(path); if (!bytes) throw new Error(`Missing recipe ${path}`); return bytes; };
+    assert.equal((await preparePreview(temporary, warm, input)).width, 16);
+    const cold = { ...warm, path: `${directory}/spitzer-mid-infrared.${'f'.repeat(64)}.png`, sha256: 'f'.repeat(64) };
+    for (const pin of [warm, cold]) {
+      files.delete(recipePath);
+      await assert.rejects(preparePreview(temporary, pin, input), /Missing recipe/);
+      files.set(recipePath, Buffer.from(`${recipe.toString()} `));
+      await assert.rejects(preparePreview(temporary, pin, input), /Changed sky band recipe/);
+      files.set(recipePath, recipe);
+    }
+    await assert.rejects(preparePreview(temporary, { ...warm, path: `${directory}/spitzer-mid-infrared.tif` }, input), /cached under its own hash/);
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});

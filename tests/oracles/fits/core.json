@@ -44,6 +44,11 @@
    "bytes": 5760
   },
   {
+   "path": "tests/fixtures/fits/long-string.fits",
+   "sha256": "13f193d32dd5693335a158dd4308deb09726eea5d9ce9d81d1eb72ede45845a7",
+   "bytes": 5760
+  },
+  {
    "path": "tests/fixtures/fits/extensions.fits",
    "sha256": "54c22932c64b874701747f7a09a0e6f6d52e1c947e478658af344fc101c46746",
    "bytes": 8640
@@ -168,6 +173,22 @@
     "ESO INS NAME": "O'Brien / field",
     "ESO DET ACTIVE": true
    }
+  },
+  "long-string": {
+   "path": "tests/fixtures/fits/long-string.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    3.5,
+    -0.25,
+    null,
+    0.0
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field",
+   "longString": "IPAC/NASA - http://wise2.ipac.caltech.edu/docs/release/allwise/expsup/sec1_6b.html & O'Brien / field"
   },
   "extensions": {
    "path": "tests/fixtures/fits/extensions.fits",
