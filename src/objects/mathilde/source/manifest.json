@@ -567,8 +567,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10557,
-      "expectedSha256": "10e192b36427399d0bf735fd2ff542aeefb03bb5c1903af0988f521ddf9c111a",
+      "expectedBytes": 10188,
+      "expectedSha256": "b48c55f753bde7a69af5277d3ab8b49aa124bf0fb0b14da592e51a551673fb95",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -675,6 +675,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4097,
+      "expectedSha256": "74c4b7ee2321d8a0b70dcef7c2d0e779fb77529667764a08189da97d64bc75ba",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Mathilde: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

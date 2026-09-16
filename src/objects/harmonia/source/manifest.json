@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9672,
-      "expectedSha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
+      "expectedBytes": 9878,
+      "expectedSha256": "637508f38cd5ee831b555f60993bd888a7f1895311809e38f95c1c72d6063c5f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1787,
       "expectedSha256": "6e0f44da928da75a27c79057bb0e935b4787922c12107499d9224bfee8d0e08c"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5434,
+      "expectedSha256": "134babc19fd9dd52ed818c282c36189cd0f9325fa7c16e6e3fb11e703235ff0a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Harmonia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

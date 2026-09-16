@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10208,
-      "expectedSha256": "8025eb9676f74cbecb746ee37ee715172dc6e1ce8523805410107690b6845ac0",
+      "expectedBytes": 9977,
+      "expectedSha256": "749863f01029e11ed883add0628beae80abd37f1b11389c70dbbd53fa9d558c5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 39,
       "expectedSha256": "28df8541743f65c07f79b989ad690dbd0f21de0cb75e04aeb6aff2d772c55366"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5786,
+      "expectedSha256": "847e7f14d1eee62d4eb50420db1cf5369e226d44a7fb7c21b39131b1ddf8351e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Interamnia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

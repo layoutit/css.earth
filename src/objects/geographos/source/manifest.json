@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12927,
-      "expectedSha256": "025c1aa5a59c77a4716e89a7cdb15af2835fd71b54d745c8b180f930de4a7e5f",
+      "expectedBytes": 13716,
+      "expectedSha256": "8b423651c4ad9b05d14a8976a2fef8bb1b0a34bc9d0a460cdd97244a0f30cd27",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -206,6 +206,21 @@
       "purpose": "Bounded source alternatives and scientific limitations.",
       "expectedBytes": 2172,
       "expectedSha256": "a14ebd61f6ba673a05281915322fb3cf328541bedea51fe28ef95d39ed5a9497"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6614,
+      "expectedSha256": "d80cc40fb62b3a18d6d9b12ea242942bb4d3ccd2188d14b07639e06dd3f1fee2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Geographos: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

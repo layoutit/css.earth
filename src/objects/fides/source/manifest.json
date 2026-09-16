@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7636,
-      "expectedSha256": "72ae9d4ccfa86bed8a9cb043c277392080c9409d1fecd2dcd8f707fe37466e2f",
+      "expectedBytes": 7842,
+      "expectedSha256": "08243dcfc4d3758324950bb10870cdfcf70ffe4aa5f20f6c51500bd162aa1f81",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1806,
       "expectedSha256": "8fd1d61edc91015365ef53e7e2a908f0e6e7f618e5d51b6b4f3a5b80041f7b52"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5073,
+      "expectedSha256": "95cf75ff79e53fccc7c175cd6851bfe99392973f6e158ccedb1220660421915a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Fides: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }
