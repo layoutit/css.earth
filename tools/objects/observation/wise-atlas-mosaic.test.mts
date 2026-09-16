@@ -51,3 +51,14 @@ test('atlas identity, zero point, projection and pins are checked', () => {
   assert.throws(() => parseTilePins({ ...pins, band: 'W5' }), /Unsupported/);
   assert.equal(wiseAtlasUrl('0544p242_ac51', 'W4'), 'https://irsa.ipac.caltech.edu/ibe/data/wise/allwise/p3am_cdd/05/0544/0544p242_ac51/0544p242_ac51-w4-int-3.fits.gz');
 });
+
+test('tiles in overlap groups that share no chain of overlaps are refused, not solved group by group', () => {
+  // MOLTRONX's PR #250 case: two internally overlapping pairs at disjoint positions keep independent levels.
+  const flat = (coaddId: string, x0: number, value: number) =>
+    ({ coaddId, x0, y0: 0, width: 20, height: 10, sum: new Float64Array(200).fill(value), count: new Uint32Array(200).fill(1) });
+  const tiles = [flat('0000p000_ac51', 0, 100), flat('0001p000_ac51', 0, 110), flat('0002p000_ac51', 100, 1000), flat('0003p000_ac51', 100, 1020)];
+  assert.throws(() => matchTileBackgrounds(tiles, 20), /disconnected overlap groups: 0002p000_ac51, 0003p000_ac51/);
+  const joined = [...tiles, flat('0004p000_ac51', 10, 105), { ...flat('0005p000_ac51', 90, 1010), width: 30, sum: new Float64Array(300).fill(1010), count: new Uint32Array(300).fill(1) }];
+  joined[4] = { ...joined[4]!, width: 95, sum: new Float64Array(950).fill(105), count: new Uint32Array(950).fill(1) };
+  assert.equal(matchTileBackgrounds(joined, 20).offsets.length, 6);
+});
