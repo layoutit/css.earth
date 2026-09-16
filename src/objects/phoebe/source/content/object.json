@@ -66,6 +66,7 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Relative albedo",
+      "iss": "ISS photograph",
       "elevation": "Radial height",
       "maplet-resolution": "Maplet resolution",
       "image-count": "Image count",
@@ -99,6 +100,38 @@
           "image": "/scenes/phoebe/phoebe-normal-legend.webp"
         },
         "notes": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
+      },
+      {
+        "id": "iss",
+        "label": "ISS photograph",
+        "thumbnail": "/scenes/phoebe/phoebe-iss-thumbnail.webp",
+        "surface": "phoebe-iss-surface@2x.webp",
+        "poles": "phoebe-iss-poles@2x.webp",
+        "source": {
+          "id": "n1465662798",
+          "path": "../manifest.json",
+          "url": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798"
+        },
+        "falseColor": false,
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "11 June 2004, 16:09 UTC"
+          },
+          {
+            "id": "footprint",
+            "label": "Pixel footprint",
+            "value": "0.47 km from 78,000 km"
+          },
+          {
+            "id": "filter",
+            "label": "Camera filter",
+            "value": "CL1 and CL2 · clear"
+          }
+        ],
+        "notes": "One Cassini narrow-angle photograph from the June 2004 approach, projected onto the shape model through a camera derived from Cassini SPICE kernels and refined to the limb. Only the sunlit half of the disc is used, so grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
+        "noData": true
       },
       {
         "id": "elevation",
