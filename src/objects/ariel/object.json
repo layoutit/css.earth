@@ -27,53 +27,43 @@
       "sources": [
         {
           "id": "raster",
-          "path": "source/preparation/raster.json",
-          "sha256": "7a953c407170a5deb2652171dee904c25bec3ed01f9d2c605124a876d239c950"
+          "path": "source/preparation/raster.json"
         },
         {
           "id": "geometry",
-          "path": "source/preparation/geometry.json",
-          "sha256": "e8b7de64b3c3ee0a9f09d32baf4d1547ec06c10fee36a1f8eebe4924c0fab54f"
+          "path": "source/preparation/geometry.json"
         },
         {
           "id": "celestial",
-          "path": "source/preparation/celestial.json",
-          "sha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8"
+          "path": "source/preparation/celestial.json"
         },
         {
           "id": "presentation",
-          "path": "source/preparation/presentation.json",
-          "sha256": "1ee353b0d92170be9865cd4437945232eec6ab57178b5063eed3e1c557152022"
+          "path": "source/preparation/presentation.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "6354cab8aa87ccfb791c00b3274f596804815450ae221bf708eb7fac4d5eba03"
+          "path": "source/content/object.json"
         },
         {
           "id": "solar-system",
-          "path": "source/presentation/solar-system.json",
-          "sha256": "524b1d8aea536ad63cb8a73eb2c778d754768e43a27c1a406607387c35a6b78d"
+          "path": "source/presentation/solar-system.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "c8f43a2c956afbda402deda755d32ac438e74e4e9578bec827a2d6887d35e8ee"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "a65c5d6f64bb8b39e6d1d8bf7cca259a85c8be5328c8768049fbcb0bed4cc637"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "7b0795b4488c591469dc7f50d95cfb284f06d50995a5233175d6f1aa803bff9d"
+          "path": "source/preparation/acquisition.json"
         },
         {
           "id": "features",
-          "path": "source/preparation/features.json",
-          "sha256": "a1a54cf072c5a9c9c29ebadfd71732cbb44c288827bd5a79300c98703e4600a8"
+          "path": "source/preparation/features.json"
         }
       ],
       "shape": {

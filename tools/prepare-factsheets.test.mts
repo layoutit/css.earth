@@ -21,7 +21,7 @@ test('fact-only preparation preserves other content and rejects source drift bef
   const source = JSON.stringify({ provenance, panel: { introduction: 'Body description', facts: [{ id: 'radius', label: 'Mean radius', value: '10 km', source: { catalogueId: 'published-model', url: 'http://archive.example/model/1', label: 'Published archive', checked: '2026-09-09' } }] }, lenses: { controls: [{ id: 'normal', label: 'Observed', description: 'Measured area with explicit gaps', summary: 'Measured terrain with gaps.', title: 'Instrument mosaic' }] } });
   const digest = createHash('sha256').update(source).digest('hex');
   const put = (path: string, value: unknown) => writeFile(resolve(root, path), JSON.stringify(value));
-  await put('object.json', { id: 'body', properties: { recipe: { sources: [{ id: 'content', path: 'source/content.json', sha256: digest }] } } });
+  await put('object.json', { id: 'body', properties: { recipe: { sources: [{ id: 'content', path: 'source/content.json' }] } } });
   await writeFile(resolve(root, 'source/content.json'), source);
   await put('source/manifest.json', { inputs: [{ path: 'content.json', expectedBytes: Buffer.byteLength(source), expectedSha256: digest }], documents: [], generatedIntermediates: [] });
   const untouched = { objectId: 'body', introduction: 'Body description', title: { label: 'Body' }, charts: [{ id: 'accepted-chart' }], resources: [{ href: 'https://example.org/accepted' }] };

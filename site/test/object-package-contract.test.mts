@@ -27,7 +27,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
-  const body = authoredObjectFixture(object.id, { path: "source/local-data.bin", sha256: hash });
+  const body = authoredObjectFixture(object.id, { path: "source/local-data.bin" });
   const fixture = { ...body, properties: { ...body.properties, page: { stylesheets: ["src/body.css"] } } };
   await writeFile(resolve(paths.root, "object.json"), JSON.stringify(fixture));
   for (const path of ["src/body.css", "site/planet-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }

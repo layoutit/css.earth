@@ -22,28 +22,23 @@
       "sources": [
         {
           "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "44da45ff5297dd94c21546612d8e394487f475be0a421a38bc674b725593f101"
+          "path": "source/preparation/terrestrial.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "4226452f76d29f21545f8425f4b86927a46eccfa08f4cf1dec12d9c3af2b3db9"
+          "path": "source/content/object.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "2250fdbf3fb69cc02158364b864a01a80e113d5842acd2a1697948010cb3df6c"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "729a338c8d39e9fdc4eec4cc5d2ad7f4e3da4668c4e892e0b68e6ac338117b17"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "6db3d84b19a89d677baa8736a95eabe87b3160ceb622acd76921994408a3fda9"
+          "path": "source/preparation/acquisition.json"
         }
       ],
       "shape": {

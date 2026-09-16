@@ -1,5 +1,6 @@
 // Reprepare selected photographs and their small previews, preserving the existing scene,
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
+import { readAuthoredSources } from './authored-sources.js';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -17,13 +18,8 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
     throw new TypeError('Choose an object and distinct photographic lens IDs.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
-  const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
-  const sources = new Map<string, unknown>();
-  for (const reference of descriptor.recipe.sources) {
-    const bytes = await readFile(resolve(objectDirectory, reference.path));
-    if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new Error(`Recipe pin differs: ${reference.path}`);
-    sources.set(reference.id, JSON.parse(bytes.toString('utf8')));
-  }
+  const authored = await readAuthoredSources(objectDirectory);
+  const sources = new Map([...authored.sources].map(([id, entry]) => [id, entry.value]));
   const config = parseRasterRecipe(sources.get('raster'));
   if (config.resample !== 'density-before-pack' || config.polesCombined || config.emission)
     throw new TypeError('Photographic refresh needs separately packed non-emissive raster surfaces.');
@@ -68,11 +64,8 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
     throw new TypeError('Choose an object and distinct surface lens IDs.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
-  const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
-  const content = descriptor.recipe.sources.find(source => source.id === 'content');
+  const content = (await readAuthoredSources(objectDirectory)).sources.get('content')?.reference;
   if (!content?.path.startsWith('source/')) throw new TypeError('Photographic refresh needs authored content.');
-  const contentBytes = await readFile(resolve(objectDirectory, content.path));
-  if (createHash('sha256').update(contentBytes).digest('hex') !== content.sha256) throw new Error(`Recipe pin differs: ${content.path}`);
   const previousLenses = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'lenses.json'), 'utf8')));
   const previousContent = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')));
   await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: content.path.slice(7) } });
