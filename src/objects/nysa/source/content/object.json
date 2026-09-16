@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Nysa model 16324, version 2026-07-28; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/nysa.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

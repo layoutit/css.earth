@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Astraea model 1816, version 2017-05-26; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/astraea.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

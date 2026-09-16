@@ -4,6 +4,8 @@ Borrelly compares two reconstructions of the Deep Space 1 encounter terrain and 
 
 ## Sources
 
+The panel's editorial credit is NASA's 19P/Borrelly overview: <https://science.nasa.gov/solar-system/comets/19p-borrelly/>.
+
 | View or quantity | Source |
 | --- | --- |
 | USGS and DLR terrain | [Reviewed PDS DEM release](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/), September 2001 encounter |

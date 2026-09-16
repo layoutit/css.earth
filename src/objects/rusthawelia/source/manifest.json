@@ -95,8 +95,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12362,
-      "expectedSha256": "fd69cf50af0809a58f55e7d22a7b7da6f94f7a23d451d5184df466d970af26bf",
+      "expectedBytes": 12388,
+      "expectedSha256": "9d79bd97e7a6a66b2e9fae06120fdff43ccefe8ff62d1db07da57326577df975",
       "sha256": "0521854babea86954a3dfa5f548649793d28d889c66a92fe88a8694933b6c1a4",
       "sourceBinding": {
         "kind": "local",

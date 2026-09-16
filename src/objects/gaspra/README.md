@@ -2,6 +2,8 @@
 
 ## Sources
 
+The panel's editorial credit is NASA's Galileo mission page: <https://science.nasa.gov/mission/galileo/>.
+
 | View or property | Source and interpretation |
 | --- | --- |
 | SSI reflectance | Galileo clear-filter [107318326](source/observations/107318326rcal_clr.xml) and [107318313](source/observations/107318313rcal_clr.xml), 29 October 1991, about 54 m/pixel. I/F normalized to 50° incidence and phase with a published Hapke model; fixed display stretch, no fitted gain. |
