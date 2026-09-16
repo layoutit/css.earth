@@ -1,6 +1,7 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parseScalarGridProfile} from './source-records.mts';
 import { spawn } from 'node:child_process';
+import { pds3Keyword } from '../pds-labels.mts';
 
 /** Stream a pinned PDS3 scalar image from a ZIP, retaining a bounded sampling grid.
  * Pixel coordinates use PDS's projection offsets (zero-based after subtracting
@@ -65,7 +66,7 @@ export async function loadPdsScalarGrid(path: string, value: unknown, { width = 
 
 export function parsePdsScalarLabel(label: string, value: unknown) {
   const profile=parseScalarGridProfile(value);
-  const field = (key: string) => label.match(new RegExp(`^\\s*${key.replaceAll('^', '\\^')}\\s*=\\s*([^\\r\\n]+)`, 'm'))?.[1].trim().replaceAll('"', '');
+  const field = (key: string) => pds3Keyword(label, key);
   const num = (key: string) => Number.parseFloat(field(key) ?? "NaN");
   const data = { width: num('LINE_SAMPLES'), height: num('LINES'), ppd: num('MAP_RESOLUTION'),
     centerLongitude: num('CENTER_LONGITUDE'), sampleOffset: num('SAMPLE_PROJECTION_OFFSET'), lineOffset: num('LINE_PROJECTION_OFFSET'),

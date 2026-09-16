@@ -53,17 +53,22 @@ export function registrationBlock(surfaces: unknown): string | null {
     const parts = [turn ? (turn.applied ? `turned ${degrees(turn.turnDegrees)} by ${String(turn.by)}` : reverted.turn ? `turn reverted: ${String(reverted.turn)}` : `turn declined: ${String(turn.reason)}`) : '',
       tilt ? (tilt.applied ? `tilted ${degrees(tilt.tiltDegrees)} by the silhouette` : reverted.tilt ? `tilt reverted: ${String(reverted.tilt)}` : `tilt declined: ${String(tilt.reason)}`) : ''].filter(Boolean);
     const refinedCell = !refinement ? '—' : parts.join('; ');
-    rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} | ${refinedCell} | ${registrationVerdict(registration)} |`);
+    // Seams: the largest level mismatch an accepted overlap still shows after the fit, and how many frame groups no overlap joins.
+    const levels = observation?.levelMatching === undefined || observation.levelMatching === null ? undefined : requireRecord(observation.levelMatching);
+    const residuals = levels ? requireArray(levels.pairs).map(value => requireRecord(value).residualLogRatio).filter((value): value is number => typeof value === 'number') : [];
+    const groups = levels?.groups === undefined ? 1 : requireArray(levels.groups).length;
+    const seamCell = !levels ? '—' : `${residuals.length ? `×${Math.exp(Math.max(...residuals.map(Math.abs))).toFixed(2)}` : 'no overlap'}${groups > 1 ? `, ${groups} unjoined groups` : ''}`;
+    rows.push(`| \`${id}\` | ${frames} | ${scored} | ${degrees(silhouette.rmsDegrees)} | ${degrees(silhouette.noiseFloorDegrees)} | ${degrees(silhouette.systematicDegrees)} | ${referenceKind} | ${String(reference.decisive)} of ${requireArray(reference.frames).length} | ${enough ? degrees(reference.medianOffsetDegrees) : '—'} | ${reliefCell} | ${refinedCell} | ${seamCell} | ${registrationVerdict(registration)} |`);
   }
   if (!rows.length) return null;
   return [
     'Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.',
     '',
-    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |',
-    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
+    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     ...rows,
     '',
-    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.',
+    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.',
   ].join('\n');
 }
 

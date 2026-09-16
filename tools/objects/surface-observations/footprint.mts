@@ -17,13 +17,14 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
   const [x, y] = projected, { width, height } = image;
   if (!Number.isFinite(x + y) || x < 0 || y < 0 || x >= width - 1 || y >= height - 1) return { reason: 'outside-detector' };
   const ix = Math.floor(x), iy = Math.floor(y), tx = x - ix, ty = y - iy;
-  const ids = [iy * width + ix, iy * width + ix + 1, (iy + 1) * width + ix, (iy + 1) * width + ix + 1];
-  const weights = [(1 - tx) * (1 - ty), tx * (1 - ty), (1 - tx) * ty, tx * ty], emissionLimit = maximumEmissionDegrees * Math.PI / 180;
-  const surfaced = ids.filter(i => geometry.reject(i) === null);
-  const limit = typeof maximumSeparationMeters === 'number' ? maximumSeparationMeters : surfaced.length ? maximumSeparationMeters(surfaced) : NaN;
-  const used: { index: number; weight: number; gain: number }[] = [];
-  let weight = 0, separationMeters = 0, failure: { reason: string; weight: number; separationMeters?: number } | undefined;
-  ids.forEach((index, k) => {
+  // Four contributors in bilinear order, walked with scalars: this runs for every texel of every frame, so it allocates only what it returns.
+  const i0 = iy * width + ix, ids = [i0, i0 + 1, i0 + width, i0 + width + 1];
+  const w0 = (1 - tx) * (1 - ty), w1 = tx * (1 - ty), w2 = (1 - tx) * ty, w3 = tx * ty, emissionLimit = maximumEmissionDegrees * Math.PI / 180;
+  const limit = typeof maximumSeparationMeters === 'number' ? maximumSeparationMeters : separationLimit(maximumSeparationMeters, ids, geometry);
+  const usedIndex = [0, 0, 0, 0], usedWeight = [0, 0, 0, 0], usedGain = [0, 0, 0, 0];
+  let used = 0, weight = 0, separationMeters = 0, failureReason: string | undefined, failureWeight = 0, failureSeparation: number | undefined;
+  for (let k = 0; k < 4; k++) {
+    const index = ids[k], contributorWeight = k === 0 ? w0 : k === 1 ? w1 : k === 2 ? w2 : w3;
     let reason = geometry.reject(index) ?? image.reject(index), separation: number | undefined, gain: number | null = null;
     if (reason === null) { const emission = geometry.emission(index); if (!Number.isFinite(emission) || emission < 0 || emission > emissionLimit) reason = 'grazing'; }
     // A contributor on another surface, across a neck or a limb, is left out rather than mixed in.
@@ -31,15 +32,28 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
     // A normalizing model cannot recover surface the Sun does not reach, so a shadowed contributor is left out rather than brightened.
     if (reason === null && !photometry.retainsIllumination && geometry.shadowed?.(index)) reason = 'shadowed';
     if (reason === null) { gain = photometry.gain(geometry.incidence(index), geometry.emission(index), geometry.phase(index)); if (gain === null) reason = 'photometry'; }
-    if (reason === null && gain !== null) { used.push({ index, weight: weights[k], gain }); weight += weights[k]; separationMeters = Math.max(separationMeters, separation ?? 0); }
-    else if (reason !== null && (!failure || weights[k] > failure.weight)) failure = { reason, weight: weights[k], ...(separation === undefined ? {} : { separationMeters: separation }) };
-  });
-  if (weight < .5) return failure ? { reason: failure.reason, ...(failure.separationMeters === undefined ? {} : { separationMeters: failure.separationMeters }) } : { reason: 'no-geometry' };
-  const interpolate = (value: (index: number) => number) => used.reduce((sum, contributor) => sum + value(contributor.index) * contributor.gain * contributor.weight, 0) / weight;
-  return { radiance: interpolate(i => image.values[i]) * (image.radianceFactor?.factor ?? 1), separationMeters,
-    ...(image.colorValues ? { color: image.colorValues.map(plane => interpolate(i => plane[i])) } : {}),
-    gain: Math.max(...used.map(contributor => contributor.gain)), maximumEmissionDegrees: Math.max(...used.map(contributor => geometry.emission(contributor.index))) * 180 / Math.PI,
-    maximumIncidenceDegrees: Math.max(...used.map(contributor => geometry.incidence(contributor.index))) * 180 / Math.PI };
+    if (reason === null && gain !== null) {
+      usedIndex[used] = index; usedWeight[used] = contributorWeight; usedGain[used] = gain; used++;
+      weight += contributorWeight; separationMeters = Math.max(separationMeters, separation ?? 0);
+    } else if (reason !== null && (failureReason === undefined || contributorWeight > failureWeight)) {
+      failureReason = reason; failureWeight = contributorWeight; failureSeparation = separation;
+    }
+  }
+  if (weight < .5) return failureReason !== undefined ? { reason: failureReason, ...(failureSeparation === undefined ? {} : { separationMeters: failureSeparation }) } : { reason: 'no-geometry' };
+  const interpolate = (values: ArrayLike<number>) => { let sum = 0; for (let u = 0; u < used; u++) sum = sum + values[usedIndex[u]] * usedGain[u] * usedWeight[u]; return sum / weight; };
+  let gain = -Infinity, emission = -Infinity, incidence = -Infinity;
+  for (let u = 0; u < used; u++) {
+    gain = Math.max(gain, usedGain[u]); emission = Math.max(emission, geometry.emission(usedIndex[u])); incidence = Math.max(incidence, geometry.incidence(usedIndex[u]));
+  }
+  return { radiance: interpolate(image.values) * (image.radianceFactor?.factor ?? 1), separationMeters,
+    ...(image.colorValues ? { color: image.colorValues.map(plane => interpolate(plane)) } : {}),
+    gain, maximumEmissionDegrees: emission * 180 / Math.PI, maximumIncidenceDegrees: incidence * 180 / Math.PI };
+}
+
+/** A footprint-scaled separation limit over the contributors that have a surface point, or NaN when none has. */
+function separationLimit(limit: (ids: readonly number[]) => number, ids: readonly number[], geometry: PixelGeometry) {
+  const surfaced = ids.filter(i => geometry.reject(i) === null);
+  return surfaced.length ? limit(surfaced) : NaN;
 }
 
 export interface CameraFrameOptions {

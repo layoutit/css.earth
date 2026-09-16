@@ -73,7 +73,7 @@ export const orthographicFormat: SurfaceObservationFormat = {
           method: 'Every XYZ pixel identifies one released terrain post; every terrain post is accounted for.' } } };
     return { frames: [frame], exceeded: [], policy: { format: recipe.format,
       selection: 'single', samplesPerTriangle: 8, display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.' },
-      photometry: { model: 'retained-observation', maximumGain: 1 },
+      photometry: { model: 'retained-observation', maximumGain: 1 }, retainsIllumination: true,
       limits: { maximumCoordinateErrorMeters: recipe.maximumCoordinateErrorMeters },
       limitations: 'Orthophoto from the rescued mission website, independently registered to the reviewed DEM. Radiometric calibration is not requalified.' } };
   },
