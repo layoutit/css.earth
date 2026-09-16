@@ -6,6 +6,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
+import sharp from 'sharp';
 import { readFitsImage } from '../../fits.mts';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
@@ -211,4 +212,15 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
     evidence: { schema: 'cssearth-sky-band-composite-evidence@1', grid: recipe.grid, wcs: gridWcs(recipe.grid),
       backgroundPercentile: recipe.backgroundPercentile, peakPercentile: recipe.peakPercentile, bands, display: asinhBandEvidence(recipe.display),
       limits: 'The survey products have no absolute zero level, so each band loses one measured background. Dividing each band by its own range means hue does not show physical band ratios. Missing pixels are black. Rows are reversed once from FITS order into top-down raster order.' } };
+}
+
+/** The pinned recipe's composite as a deterministic lossless RGB8 PNG: the lab working raster and the app preview source. */
+export async function composeSkyBandPng(recipePin: { readonly path: string; readonly sha256: string }, io: SkyBandIo) {
+  const recipeBytes = await io.input(recipePin.path);
+  if (sha256(recipeBytes) !== recipePin.sha256) throw new Error(`Changed sky band recipe: ${recipePin.path}`);
+  const composed = await composeSkyBands(parseSkyBandComposite(JSON.parse(recipeBytes.toString('utf8'))), io);
+  const bytes = await sharp(composed.rgb, { raw: { width: composed.width, height: composed.height, channels: 3 } })
+    .png({ compressionLevel: 9, adaptiveFiltering: false }).toBuffer();
+  return { bytes, sha256: sha256(bytes), width: composed.width, height: composed.height, wcs: composed.wcs, missingPixels: composed.missingPixels,
+    evidence: { ...composed.evidence, recipe: recipePin, output: { sha256: sha256(bytes), bytes: bytes.length, format: 'png', channels: 3, bitDepth: 8 } } };
 }

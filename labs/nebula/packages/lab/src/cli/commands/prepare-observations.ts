@@ -11,6 +11,7 @@ import { transferRegistration, type RegistrationEvidence } from '../../server/wo
 import { nativePreserved } from '../../server/workflows/emission-inference/native-preserved.ts';
 import { loadMatchedStarCatalogue, calibratedInitialTransform } from '../../server/workflows/observations/matched-star-catalogue.ts';
 import { loadNativeSeparationCache, nativeSeparationCacheDirectory } from '../../server/workflows/observations/native-separation-cache.ts';
+import { composeSkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 
 const [recipePath, mode, extra] = process.argv.slice(2);
 if (!recipePath || extra || (mode && mode !== '--alignment-only')) throw new TypeError('Usage: prepare-observations <recipe.json> [--alignment-only]');
@@ -28,10 +29,19 @@ for (const source of recipe.images) {
   try { bytes = await readFile(path); }
   catch (error) {
     if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
-    console.log(`OBSERVATION_DOWNLOAD ${source.id}`);
-    const response = await fetch(source.url);
-    if (!response.ok) throw new Error(`Source download failed: ${response.status}`);
-    bytes = Buffer.from(await response.arrayBuffer());
+    if (source.skyBands) {
+      console.log(`OBSERVATION_COMPOSE ${source.id}`);
+      if (!source.wcs) throw new Error(`${source.id}: a sky band source needs its grid WCS.`);
+      const composed = await composeSkyBandSource({ ...source, wcs: source.wcs, skyBands: source.skyBands });
+      bytes = composed.bytes;
+      if (composed.sha256 !== source.sha256) throw new Error(`${source.id}: composed sky band raster ${composed.sha256} differs from its pin.`);
+      await json(resolve(directory, 'sources', `${source.id}.sky-bands.json`), composed.evidence);
+    } else {
+      console.log(`OBSERVATION_DOWNLOAD ${source.id}`);
+      const response = await fetch(source.url);
+      if (!response.ok) throw new Error(`Source download failed: ${response.status}`);
+      bytes = Buffer.from(await response.arrayBuffer());
+    }
     if (sha(bytes) !== source.sha256) throw new Error(`${source.id}: native source pin differs.`);
     await writeFile(path, bytes);
   }
