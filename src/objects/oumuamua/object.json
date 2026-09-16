@@ -114,7 +114,9 @@
       "bodyRadiusM": 31.1813426009723
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "ʻOumuamua",
       "classification": "interstellar",
       "color": "#aaaaaa",

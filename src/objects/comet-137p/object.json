@@ -114,7 +114,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Shoemaker–Levy 2",
       "classification": "comet",
       "color": "#b8b6b2",

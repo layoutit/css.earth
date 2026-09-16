@@ -143,7 +143,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["illustration"],
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "Eris",
       "classification": "dwarf-planet",
       "color": "#ddd6cf",

@@ -63,6 +63,319 @@
         "label": "Shape",
         "consumer": "shape"
       }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "zimpol",
+        "format": "controlled-shape-camera",
+        "consumer": "sphere-photograph",
+        "metadata": {
+          "label": "SPHERE photograph",
+          "falseColor": false,
+          "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame and the sky threshold is one stated fraction of its peak. Predicted limb position angles match the observed contour to 3.28 degrees over the 15 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+        },
+        "frames": [
+          {
+            "id": "zimpol-20181015-080502",
+            "path": "observations/d87Sylvia_2018-10-15T08_05_02.058_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 13.7895,
+            "observerLatitude": -18.0954,
+            "observerWestLongitude": 326.6981,
+            "sunLatitude": -17.6764,
+            "sunWestLongitude": 338.2464,
+            "rangeKm": 379706254.6,
+            "northAzimuthDegrees": 4.2776,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              139.235,
+              146.06
+            ]
+          },
+          {
+            "id": "zimpol-20181015-080938",
+            "path": "observations/d87Sylvia_2018-10-15T08_09_38.633_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 11.9516,
+            "observerLatitude": -18.0954,
+            "observerWestLongitude": 332.0342,
+            "sunLatitude": -17.6766,
+            "sunWestLongitude": 343.5817,
+            "rangeKm": 379702351.5,
+            "northAzimuthDegrees": 4.2775,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              140.559,
+              143.9
+            ]
+          },
+          {
+            "id": "zimpol-20181015-081415",
+            "path": "observations/d87Sylvia_2018-10-15T08_14_15.365_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 14.8338,
+            "observerLatitude": -18.0954,
+            "observerWestLongitude": 337.3734,
+            "sunLatitude": -17.6768,
+            "sunWestLongitude": 348.92,
+            "rangeKm": 379698448.7,
+            "northAzimuthDegrees": 4.2775,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              138.331,
+              143.758
+            ]
+          },
+          {
+            "id": "zimpol-20181015-081850",
+            "path": "observations/d87Sylvia_2018-10-15T08_18_50.183_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 12.1311,
+            "observerLatitude": -18.0954,
+            "observerWestLongitude": 342.6757,
+            "sunLatitude": -17.677,
+            "sunWestLongitude": 354.2214,
+            "rangeKm": 379694575.3,
+            "northAzimuthDegrees": 4.2775,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              138.54,
+              144.499
+            ]
+          },
+          {
+            "id": "zimpol-20181015-082325",
+            "path": "observations/d87Sylvia_2018-10-15T08_23_25.776_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 9.4486,
+            "observerLatitude": -18.0955,
+            "observerWestLongitude": 347.9929,
+            "sunLatitude": -17.6772,
+            "sunWestLongitude": 359.5377,
+            "rangeKm": 379690693.6,
+            "northAzimuthDegrees": 4.2775,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              140.3,
+              145.412
+            ]
+          },
+          {
+            "id": "zimpol-20181015-084222",
+            "path": "observations/d87Sylvia_2018-10-15T08_42_22.726_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 8.713,
+            "observerLatitude": -18.0955,
+            "observerWestLongitude": 9.9288,
+            "sunLatitude": -17.678,
+            "sunWestLongitude": 21.4701,
+            "rangeKm": 379674705.3,
+            "northAzimuthDegrees": 4.2774,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              140.082,
+              144.807
+            ]
+          },
+          {
+            "id": "zimpol-20181015-084657",
+            "path": "observations/d87Sylvia_2018-10-15T08_46_57.301_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 9.613,
+            "observerLatitude": -18.0955,
+            "observerWestLongitude": 15.2264,
+            "sunLatitude": -17.6781,
+            "sunWestLongitude": 26.7668,
+            "rangeKm": 379670850.3,
+            "northAzimuthDegrees": 4.2774,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              139.829,
+              142.909
+            ]
+          },
+          {
+            "id": "zimpol-20181015-085131",
+            "path": "observations/d87Sylvia_2018-10-15T08_51_31.293_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 8.4414,
+            "observerLatitude": -18.0956,
+            "observerWestLongitude": 20.5127,
+            "sunLatitude": -17.6783,
+            "sunWestLongitude": 32.0523,
+            "rangeKm": 379667005.9,
+            "northAzimuthDegrees": 4.2774,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              139.315,
+              144.561
+            ]
+          },
+          {
+            "id": "zimpol-20181015-085604",
+            "path": "observations/d87Sylvia_2018-10-15T08_56_04.986_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 6.7834,
+            "observerLatitude": -18.0956,
+            "observerWestLongitude": 25.7932,
+            "sunLatitude": -17.6785,
+            "sunWestLongitude": 37.332,
+            "rangeKm": 379663167.9,
+            "northAzimuthDegrees": 4.2773,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              139.827,
+              143.161
+            ]
+          },
+          {
+            "id": "zimpol-20181015-090040",
+            "path": "observations/d87Sylvia_2018-10-15T09_00_40.475_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 8.0371,
+            "observerLatitude": -18.0956,
+            "observerWestLongitude": 31.1084,
+            "sunLatitude": -17.6787,
+            "sunWestLongitude": 42.6463,
+            "rangeKm": 379659307.1,
+            "northAzimuthDegrees": 4.2773,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              139.334,
+              142.797
+            ]
+          },
+          {
+            "id": "zimpol-20181019-042615",
+            "path": "observations/d87Sylvia_2018-10-19T04_26_15.977_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 19.9926,
+            "observerLatitude": -18.1156,
+            "observerWestLongitude": 261.3426,
+            "sunLatitude": -17.9049,
+            "sunWestLongitude": 271.8344,
+            "rangeKm": 375220980.2,
+            "northAzimuthDegrees": 4.252,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              150.608,
+              150.037
+            ]
+          },
+          {
+            "id": "zimpol-20181019-043052",
+            "path": "observations/d87Sylvia_2018-10-19T04_30_52.192_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 18.9831,
+            "observerLatitude": -18.1156,
+            "observerWestLongitude": 266.6718,
+            "sunLatitude": -17.905,
+            "sunWestLongitude": 277.1627,
+            "rangeKm": 375217391.4,
+            "northAzimuthDegrees": 4.252,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              149.546,
+              150.943
+            ]
+          },
+          {
+            "id": "zimpol-20181019-043529",
+            "path": "observations/d87Sylvia_2018-10-19T04_35_29.592_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 12.1705,
+            "observerLatitude": -18.1157,
+            "observerWestLongitude": 272.0239,
+            "sunLatitude": -17.9052,
+            "sunWestLongitude": 282.5139,
+            "rangeKm": 375213789.4,
+            "northAzimuthDegrees": 4.252,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              150.284,
+              151.145
+            ]
+          },
+          {
+            "id": "zimpol-20181019-044004",
+            "path": "observations/d87Sylvia_2018-10-19T04_40_04.509_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 12.3459,
+            "observerLatitude": -18.1157,
+            "observerWestLongitude": 277.3281,
+            "sunLatitude": -17.9054,
+            "sunWestLongitude": 287.8171,
+            "rangeKm": 375210221.9,
+            "northAzimuthDegrees": 4.252,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              149.801,
+              149.132
+            ]
+          },
+          {
+            "id": "zimpol-20181019-044438",
+            "path": "observations/d87Sylvia_2018-10-19T04_44_38.868_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 11.9842,
+            "observerLatitude": -18.1157,
+            "observerWestLongitude": 282.6215,
+            "sunLatitude": -17.9056,
+            "sunWestLongitude": 293.1096,
+            "rangeKm": 375206663.8,
+            "northAzimuthDegrees": 4.2519,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              151.167,
+              150.7
+            ]
+          },
+          {
+            "id": "zimpol-20181112-055728",
+            "path": "observations/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "backgroundMaximum": 13.7685,
+            "observerLatitude": -18.255,
+            "observerWestLongitude": 54.8382,
+            "sunLatitude": -19.28,
+            "sunWestLongitude": 57.3604,
+            "rangeKm": 359821428.4,
+            "northAzimuthDegrees": 4.0026,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              119,
+              137.485
+            ]
+          }
+        ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumGain": 4,
+          "maximumAngleDegrees": 60
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 70,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99.5
+          ]
+        }
+      }
     ]
   },
   "lighting": {
@@ -105,7 +418,31 @@
         "maximumErrorMeters": 2500,
         "regularize": true
       }
-    }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "lensId": "zimpol",
+        "path": "shape/87_Sylvia_adam.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 578,
+          "expectedFaces": 1152
+        },
+        "latitudeSegments": 90,
+        "longitudeSegments": 180,
+        "faceBudget": 800,
+        "tileSize": 128,
+        "atlasColumns": 16,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 800,
+          "maximumErrorMeters": 3200,
+          "regularize": true
+        }
+      }
+    ]
   },
   "celestial": {
     "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
