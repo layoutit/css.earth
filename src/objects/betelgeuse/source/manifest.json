@@ -35,7 +35,7 @@
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/0"
           }
         ]
       }
@@ -74,7 +74,7 @@
           {
             "catalogueId": "source-betelgeuse-uniform-disc-sphere",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/1"
           }
         ]
       }
@@ -109,7 +109,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-in-in-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/2"
           }
         ]
       }
@@ -144,7 +144,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-in-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/3"
           }
         ]
       }
@@ -179,7 +179,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-in-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/4"
           }
         ]
       }
@@ -214,7 +214,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/5"
           }
         ]
       }
@@ -249,7 +249,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-out-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/6"
           }
         ]
       }
@@ -284,7 +284,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/7"
           }
         ]
       }
@@ -319,7 +319,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-in-in-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/8"
           }
         ]
       }
@@ -354,7 +354,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-in-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/9"
           }
         ]
       }
@@ -389,7 +389,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-in-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/10"
           }
         ]
       }
@@ -424,7 +424,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-out-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/11"
           }
         ]
       }
@@ -459,7 +459,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-out-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/12"
           }
         ]
       }
@@ -494,7 +494,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-in-in-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/13"
           }
         ]
       }
@@ -529,7 +529,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-in-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/14"
           }
         ]
       }
@@ -564,7 +564,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-in-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/15"
           }
         ]
       }
@@ -599,7 +599,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-out-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/16"
           }
         ]
       }
@@ -634,7 +634,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-out-out-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/17"
           }
         ]
       }
@@ -669,7 +669,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-out-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/18"
           }
         ]
       }
@@ -704,7 +704,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-in-in-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/19"
           }
         ]
       }
@@ -739,7 +739,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-in-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/20"
           }
         ]
       }
@@ -774,7 +774,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-in-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/21"
           }
         ]
       }
@@ -809,7 +809,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-out-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/22"
           }
         ]
       }
@@ -844,7 +844,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-out-out-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/23"
           }
         ]
       }
@@ -879,7 +879,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-out-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/24"
           }
         ]
       }
@@ -914,7 +914,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-in-in-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/25"
           }
         ]
       }
@@ -949,7 +949,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-in-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/26"
           }
         ]
       }
@@ -984,7 +984,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-in-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/26"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/27"
           }
         ]
       }
@@ -1019,7 +1019,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-out-in-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/28"
           }
         ]
       }
@@ -1054,7 +1054,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-out-out-chop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/29"
           }
         ]
       }
@@ -1089,7 +1089,7 @@
           {
             "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-out-out-nochop",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/29"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/30"
           }
         ]
       }
@@ -1116,7 +1116,7 @@
           {
             "catalogueId": "source-betelgeuse-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/30"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/31"
           }
         ]
       }
@@ -1275,6 +1275,15 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "The exact reconstruction build and command."
+      }
+    },
+    {
+      "path": "reference/reconstruction-comparison.png",
+      "expectedBytes": 171021,
+      "expectedSha256": "80733d086c39ebf2c2e6eac67530f81a00ab161da32fccbfb47b1d965feaea6a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence figure: the published February 2020 image beside three SQUEEZE reconstructions of the pinned visibilities (entropy 10, entropy 1, total variation 1), all convolved to the 4 mas beam."
       }
     }
   ]

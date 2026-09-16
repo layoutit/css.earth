@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2aa4804f9cebe18c5a777dc7aa372117cdd439f11b72468103365215997b1c44"
+    "sha256": "8e79c6eb428032d66cf01944dc2b66a8dca9203583ec57e0746d160d47875a96"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -281,7 +281,7 @@
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/0"
           }
         ]
       },
@@ -392,7 +392,7 @@
           {
             "catalogueId": "source-betelgeuse-uniform-disc-sphere",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/1"
           }
         ]
       },
