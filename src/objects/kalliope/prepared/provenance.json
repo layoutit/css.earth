@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db8b81e96fc472d57036e6c1381222fc5c9d48f491dd175537534275f3a85bc5"
+    "sha256": "b89d52044f6cc280456388679c23a079741d9d0f799f9b7faff35d0ed3cd102d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "238d32aef6f588bd159f21416fb737761a5bfb1c6ec8a829a48888557b99ea47",
+      "sha256": "204d8c47a9fbf2f71ad56c19011cd35453e01e3839283051315b647d5ea426e5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -392,6 +392,9 @@
                   1,
                   99.5
                 ]
+              },
+              "refinement": {
+                "by": "relief"
               }
             }
           ]
@@ -1650,14 +1653,14 @@
       "outputs": [
         {
           "url": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
-          "bytes": 1378,
-          "sha256": "f9b2de617f90df01e12215ba2f306b5c79786ec984552f6ce81a3e1f4a682ed9",
+          "bytes": 1386,
+          "sha256": "9c783f78f6b3f7f22f8e0b512c1fc9910f0cdeffac8700f5e7790ac1e8fb23c4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-zimpol-surface@2x.webp",
-          "bytes": 358376,
-          "sha256": "ccc92bb36c8d41b2377524fe475a62074745c88408a76c83ed9b36ae24d69fb6",
+          "bytes": 362386,
+          "sha256": "1d5f3709b589ec98d7056d210af39d6d6b4e124a1a0535e4f8081a7c2774c4ce",
           "verification": "bytes-verified"
         }
       ],
@@ -1740,8 +1743,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7686,
-          "sha256": "99752c551b3a769f91b76a734b52c4849e3b325a22ec6c445b3ea4e7129715a0",
+          "bytes": 7828,
+          "sha256": "9fbce893f7102adc48473e740272cd9e9a8abd28c606ba85982a307d32c8cce4",
           "verification": "bytes-verified"
         }
       ]
@@ -1778,7 +1781,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "9bdefc72363a80150e86156da3882fd6c4607afa98fa2d4a0aa2e7186213d51d",
+    "materialSha256": "62baf7e369a36ba9a8c748665442f9de2570f08a249239c4e5c9f83c5196dd9f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",

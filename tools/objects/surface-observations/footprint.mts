@@ -1,4 +1,5 @@
 /** The footprint stage: sample a photograph at a surface point, and build a camera route's frame around it. */
+import { castSourceRays } from './geometry.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import type { FootprintSample, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, TransferLimits } from './contract.mts';
 import { pixelAngle } from './cameras.mts';
@@ -43,12 +44,13 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
 
 export interface CameraFrameOptions {
   id: string; image: ObservationImage; camera: ObservationCamera; geometry: PixelGeometry; photometry: ObservationPhotometry;
-  limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect' | 'positions' | 'indices'>;
+  limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect' | 'positions' | 'indices' | 'faceProvenance' | 'constraintFlags'>;
   report?: Record<string, unknown>;
 }
 
 /** Assemble a camera route's frame: count its pixels, measure its footprint and bind sampling and visibility to its limits. */
-export function cameraFrame({ id, image, camera, geometry, photometry, limits, mesh, report = {} }: CameraFrameOptions): ObservationFrame {
+export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
+  const { id, image, camera, geometry, photometry, limits, mesh, report = {} } = options;
   const angle = pixelAngle(camera, image.width, image.height);
   const nadir: number[] = [], rejectedPixels: Record<string, number> = {};
   let geometryPixels = 0, acceptedPixels = 0, acceptedLossyPixels = 0;
@@ -72,6 +74,7 @@ export function cameraFrame({ id, image, camera, geometry, photometry, limits, m
   const eye = camera.positionMeters, tolerance = limits.visibilityToleranceMeters;
   return { id, startTime: image.startTime, filter: image.filter, positionKm: camera.positionKm, cameraKind: camera.kind, geometrySource: geometry.source,
     nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint, detector: { image, camera, mesh },
+    withCamera: turned => cameraFrame({ ...options, camera: turned, geometry: castSourceRays(turned, mesh, image.width, image.height) }),
     sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
     visible: point => {
       const delta = point.map((n, i) => n - eye[i]), distance = Math.hypot(...delta), hit = mesh.intersect(eye, delta.map(n => n / distance), distance + tolerance);

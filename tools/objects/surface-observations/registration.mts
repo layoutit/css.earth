@@ -104,9 +104,9 @@ function longestAxis(points: readonly (readonly number[])[], cx: number, cy: num
 }
 
 /** The solar phase angle at the camera: between the direction to the Sun and the direction to the camera, from the body. */
-function phaseOf(camera: { positionMeters: readonly number[]; sunDirection?: readonly number[] }) {
+function phaseOf(camera: { positionMeters: readonly number[]; sunDirection: readonly number[] }) {
   const sun = camera.sunDirection, p = camera.positionMeters, r = Math.hypot(p[0], p[1], p[2]);
-  if (!sun || !(r > 0)) return undefined;
+  if (!(r > 0)) return undefined;
   return Math.acos(Math.max(-1, Math.min(1, (p[0] * sun[0] + p[1] * sun[1] + p[2] * sun[2]) / r))) * 180 / Math.PI;
 }
 
@@ -186,8 +186,6 @@ function prepareAll(frames: readonly ObservationFrame[], rows: { id: string; ski
   const out: Prepared[] = [];
   for (const frame of frames) {
     if (!frame.detector) continue;
-    // A camera without a Sun direction cannot light a prediction; its frame is reported as such and stands in for no other.
-    if (!frame.detector.camera.sunDirection) { rows.push({ id: frame.id, skipped: 'camera states no Sun direction' }); continue; }
     try { out.push({ frame: frame as ObservationFrame & { detector: FrameDetector }, prepared: prepareFrame(asImage(frame.detector), observationCaster(frame.detector.camera), frame.detector.mesh), seconds: epochSeconds(frame.startTime) }); }
     catch (error) { rows.push({ id: frame.id, skipped: (error as Error).message }); }
   }
@@ -215,7 +213,7 @@ export async function referenceRegistration(frames: readonly ObservationFrame[],
     for (const entry of carried) judge(entry, reference, 'radial');
     return finish({ kind: 'observation', observation: observationId, shading: 'radial', rule: DECISIVE });
   }
-  if (carried.length < 2) return finish({ kind: 'none', reason: carried.length ? 'one frame and no reference observation' : 'no frame carries a camera with a Sun direction', shading: 'face', rule: DECISIVE });
+  if (carried.length < 2) return finish({ kind: 'none', reason: carried.length ? 'one frame and no reference observation' : 'no frame carries a camera', shading: 'face', rule: DECISIVE });
   const hour = 3600;
   for (const entry of carried) {
     // Frames more than an hour away see a turned body; if none exist the rest stand in and can only judge handedness.
@@ -253,4 +251,31 @@ export async function registrationStage(frames: readonly ObservationFrame[], rec
   const referenceReport = await referenceRegistration(frames, context, reference, prepared), reliefReport = reliefRegistration(frames, prepared);
   referenceReport.frames.unshift(...skipped); reliefReport.frames.unshift(...skipped);
   return { stage: REGISTRATION_STAGE, silhouette: silhouetteRegistration(frames), reference: referenceReport, relief: reliefReport };
+}
+
+/** Which reference a lens lets turn its cameras, and how far the other decisive references may disagree before it declines. */
+export interface RefinementRecipe { by: 'relief' | 'frames' | 'map'; agreementDegrees: number }
+export function parseRefinement(value: unknown): RefinementRecipe {
+  const record = requireRecord(value), by = record.by, agreement = record.agreementDegrees ?? 3;
+  if (by !== 'relief' && by !== 'frames' && by !== 'map') throw new TypeError('A refinement is by relief, frames or map.');
+  if (typeof agreement !== 'number' || !(agreement > 0) || agreement > 30) throw new TypeError('A refinement states the agreement it asks of the other references, in degrees, under thirty.');
+  if (Object.keys(record).some(key => key !== 'by' && key !== 'agreementDegrees')) throw new TypeError('A refinement names only its reference and its agreement.');
+  return { by, agreementDegrees: agreement };
+}
+
+export interface RefinementDecision { by: RefinementRecipe['by']; applied: boolean; turnDegrees: number | null; reason: string; medians: Record<string, number | null> }
+
+/**
+ * Whether the named reference may turn the lens: it must be decisive over the rule's count of frames, and every other
+ * reference that is decisive must put its median within the stated agreement. A conflict is reported, not resolved.
+ */
+export function refinementDecision(stage: RegistrationStageReport, recipe: RefinementRecipe): RefinementDecision {
+  const medians: Record<string, number | null> = { relief: stage.relief.medianOffsetDegrees, [stage.reference.kind === 'observation' ? 'map' : 'frames']: stage.reference.medianOffsetDegrees };
+  const named = medians[recipe.by];
+  if (named === undefined || named === null) return { by: recipe.by, applied: false, turnDegrees: null, reason: `the ${recipe.by} reference is not decisive over ${DECISIVE.minimumFrames} frames`, medians };
+  for (const [name, median] of Object.entries(medians)) {
+    if (name === recipe.by || median === null) continue;
+    if (Math.abs(median - named) > recipe.agreementDegrees) return { by: recipe.by, applied: false, turnDegrees: null, reason: `the ${name} reference puts the turn at ${median}°, more than ${recipe.agreementDegrees}° from the ${recipe.by} reference's ${named}°`, medians };
+  }
+  return { by: recipe.by, applied: true, turnDegrees: named, reason: 'decisive and unopposed', medians };
 }

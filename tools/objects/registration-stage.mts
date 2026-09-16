@@ -9,7 +9,6 @@
  *   node tools/objects/registration-stage.mts --all --write         the same for every body with a camera lens
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
@@ -27,11 +26,15 @@ if (selector === '--all') {
   // Every body with a camera lens, one after another; a rule change in the stage is re-measured across the set this way.
   const bodies = readdirSync(resolve(ROOT, 'src/objects')).filter(id => existsSync(resolve(ROOT, 'src/objects', id, 'source/preparation/terrestrial.json')) && existsSync(resolve(ROOT, 'src/objects', id, 'prepared/surfaces.json')))
     .filter(id => { const recipe = JSON.parse(readFileSync(resolve(ROOT, 'src/objects', id, 'source/preparation/terrestrial.json'), 'utf8')) as { raster?: { surfaceObservations?: unknown[] } }; return (recipe.raster?.surfaceObservations?.length ?? 0) > 0; });
-  const failures: string[] = [];
-  for (const id of bodies) {
-    try { process.stdout.write(execFileSync(process.execPath, [process.argv[1], id, ...(flag ? [flag] : [])], { encoding: 'utf8' })); }
-    catch (error) { failures.push(id); console.error(`${id}: ${String((error as { stderr?: string }).stderr ?? error).split('\n').find(line => /Error/.test(line)) ?? 'failed'}`); }
-  }
+  // Bodies are independent, so a few run at once; each is its own process with its own memory.
+  const { execFile } = await import('node:child_process'), workers = Math.max(1, Math.min(4, (await import('node:os')).availableParallelism() - 1));
+  const failures: string[] = [], queue = [...bodies];
+  const run = (id: string) => new Promise<void>(done => execFile(process.execPath, [process.argv[1], id, ...(flag ? [flag] : [])], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }, (error, stdout, stderr) => {
+    process.stdout.write(stdout);
+    if (error) { failures.push(id); console.error(`${id}: ${String(stderr).split('\n').find(line => /Error/.test(line)) ?? 'failed'}`); }
+    done();
+  }));
+  await Promise.all(Array.from({ length: workers }, async () => { for (let id = queue.shift(); id !== undefined; id = queue.shift()) await run(id); }));
   console.log(`${bodies.length - failures.length} of ${bodies.length} bodies measured${failures.length ? `; failed: ${failures.join(', ')}` : ''}.`);
   process.exit(failures.length ? 1 : 0);
 }
