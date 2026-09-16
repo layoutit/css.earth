@@ -112,6 +112,8 @@ export interface PlannedBodyOutput {
 interface ProjectedBody<Entry> {
   entry: Entry; x: number; y: number; depth: number; diameter: number; markerOpacity: number; circle: boolean; visible: boolean;
   annotationVisible: boolean; hovered: boolean; inFrame: boolean; priority: number; lineWidth: number; orbitVisibility: number;
+  /** The body reaches this camera's naming policy, whether or not a caption slot was free for it. */
+  nameable: boolean;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
 }
 export function createWorldContextPlanner(plan: PreparedWorldContext, annotationPriorities: Readonly<Record<string, number>> = {}) {
@@ -212,7 +214,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
           const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false,
-            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0,
+            visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false,
             lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] } });
           stub.projected.entry = entry;
           projectedBodies.push(stub.projected as ProjectedBody<Entry>);
@@ -287,7 +289,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
         const priority = (isAnchor ? 1000 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
-          annotationVisible: false, hovered: false, inFrame: false, priority: 0, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
+          annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
         projected.inFrame = inFrame; projected.priority = priority; projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
@@ -313,9 +315,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         // The destination stays named through the whole flight, across its preview fade.
         const alpha = flightDestination ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
-        if (entry.labelSuppressed || !annotationVisible || size.width === 0 ||
+        // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
+        // or out of context here, and the body is not one this camera names at all.
+        projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
-            (!targeted && (entry.labelHidden || !resolvedDisc && (!inContext || unrelatedMinor)))) continue;
+            (!targeted && (entry.labelHidden || !resolvedDisc && (!inContext || unrelatedMinor))));
+        if (!projected.nameable) continue;
         const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
@@ -349,9 +354,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const projected of projectedBodies) {
         const { entry, x, y } = projected;
         if (!entry.orbit) continue;
-        // The selected body's close-up path remains useful when its detail fills
-        // the viewport and has no annotation. Every context path follows admission.
-        if (!entry.labelShown && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
+        // A path belongs to a body this camera names: one too faint, suppressed or out of context
+        // here draws no unidentified ring beside the named ones. Losing a caption slot to a
+        // neighbour or a panel is not that judgement, and neither is leaving the frame, so a
+        // contested or off-screen name keeps the ring the camera crosses instead of blinking it
+        // out while the view turns.
+        if (!projected.nameable && projected.inFrame && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;
