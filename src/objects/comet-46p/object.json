@@ -114,7 +114,9 @@
       "bodyRadiusM": 442.47122823922507
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Wirtanen",
       "classification": "comet",
       "color": "#b8b6b2",
