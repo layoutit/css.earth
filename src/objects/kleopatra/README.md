@@ -6,6 +6,10 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 The geometry is the original `216_Kleopatra_mpcd.obj` from the [LAM VLT/SPHERE asteroid survey release](https://observations.lam.fr/astero/3Dshape/). Cite Marchis, Jorda, Vernazza et al., [(216) Kleopatra, a low density critically rotating M-type asteroid](https://doi.org/10.1051/0004-6361/202140874), A&A 653 A57 (2021), and Vernazza et al., [VLT/SPHERE imaging survey: final results and synthesis](https://doi.org/10.1051/0004-6361/202141781), A&A 654 A56 (2021). Original inputs and authored preparation data are pinned in `source/manifest.json`.
 
+The photographic lens uses a second mesh from the same release, `216_Kleopatra_adam.obj`. The survey's published pole and period describe that ADAM frame rather than the separately re-optimised MPCD one, so the photograph is registered to the mesh its own rotation parameters belong to while Shape keeps MPCD. Measured over seven frames spanning both apparitions, projecting through ADAM reproduces the observed limb position angle to 3.3 degrees; the same parameters through MPCD give 6.8 degrees.
+
+**SPHERE photograph** casts five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017 onto that mesh. Nothing in the camera is fitted: the pole, period and phase epoch come from the release's own parameter record, the observing geometry from JPL Horizons for Paranal, and the plate scale, exposure time and filter from each frame's own header. The rotation convention is [Ďurech, Sidorin and Kaasalainen (2010)](https://doi.org/10.1051/0004-6361/200912693) equation 1. Grayscale is photographed illumination and matched relative frame brightness; the deconvolution carries no radiometric calibration, so it is not measured albedo, color or composition.
+
 **Shape** applies the shared neutral-gray material to the released geometry. It conveys the two lobes, their neck, and the model's broad relief. It is not a photograph, measured albedo, natural color or a map of metal abundance. The source was reconstructed with multiresolution photoclinometry by deformation (MPCD), starting with an ADAM model constrained by lightcurves, adaptive-optics images, occultations and radar. The MPCD solution gives greater weight to high-resolution VLT/SPHERE images. These ground-based observations do not measure small-scale terrain.
 
 ## Evidence
@@ -13,6 +17,8 @@ The geometry is the original `216_Kleopatra_mpcd.obj` from the [LAM VLT/SPHERE a
 A separate nearest-surface diagnostic compares 8,192 deterministic area-stratified samples on each mesh against the other mesh's triangles using exact point-to-triangle distances with AABB pruning. Source-to-result mean/p95/p99/maximum sampled distances are **231.562/662.354/926.825/1272.402 m**; result-to-source values are **233.714/660.592/934.525/1307.387 m**. This accounts for concavity without projecting both surfaces onto one radial map. It is still sampled evidence, not an exhaustive Hausdorff bound.
 
 Matched source/result preparation previews from six directions retain the two lobes and neck. They share the existing CPU context renderer and a neutral material. They demonstrate mesh shape correspondence, not native browser parity or observation-pixel parity. Fine features become more angular at the 800-face budget.
+
+The photographic registration was measured rather than asserted. Predicted limb position angles were compared against the observed half-maximum contour on seven frames from 2017 and 2018, giving 3.3 degrees root mean square with no fitted parameter. Predicted disc sizes agree with the archived angular diameter to under two percent. Sub-solar points computed from heliocentric vectors reproduce the solar phase angle Horizons reports directly to 0.004 degrees on every frame. The rotation convention itself is checked against the producer's own numbers: DAMIT distributes model 101 both as an inversion record and as IAU elements, and converting the first reproduces the second's pole to under half a degree and its rotation rate to 1e-4 degrees per day.
 
 [Source test definitions](../../../tests/objects/unit/kleopatra/source.test.mts).
 
@@ -22,7 +28,9 @@ Shadows defaults off. Existing preparation bakes diffuse directional lighting, a
 
 **Elevation is deferred.** The full mesh includes nonradial concavity near the neck and lobes. A body-centered radius map gives only the nearest intersection and can assign the wrong radius to farther surfaces along the same ray. In the original 3,168-face source, 31 face centroids lie on a farther surface than the first radial intersection; the largest discrepancy is 27.5 km. Two of 8,192 equal-area test directions also have multiple source intersections. These diagnostics use the original mesh and demonstrate the radial representation's limitation, not simplification error. No radial replacement of geometry or misleading radial-height lens is published.
 
-No unannotated, registered global optical, geological or compositional map was established in this bounded survey. The available SPHERE FITS data remain useful future observation candidates; their availability is not mistaken for a qualified surface texture.
+**The photograph covers one hemisphere and one apparition.** The 2018 apparition views the opposite hemisphere, but its frames sit about seventeen times fainter than the 2017 set after level matching, past this route's budget of sixteen, and several of its pairs share no samples with that set. Those two frames are pinned as registration evidence rather than combined into the lens. No registered global optical, geological or compositional map is established here.
+
+The deconvolved products carry an inherited world-coordinate solution that does not describe them: their reference pixel is 512,512 on a 256 by 256 array, and no keyword records the deconvolution. The camera therefore comes from the ephemeris and the spin state, not from that solution.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

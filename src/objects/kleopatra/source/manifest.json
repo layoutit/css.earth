@@ -133,7 +133,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-adam-shape",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/3"
           }
         ]
       }
@@ -172,7 +172,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20170714t050059538",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/4"
           }
         ]
       }
@@ -211,7 +211,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20170714t051326665",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/5"
           }
         ]
       }
@@ -250,7 +250,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20170722t042627837",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/6"
           }
         ]
       }
@@ -289,7 +289,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20170727t041103654",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/7"
           }
         ]
       }
@@ -328,7 +328,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20170810t051748553",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/8"
           }
         ]
       }
@@ -352,9 +352,9 @@
       "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
-        "sphere-photograph"
+        "sphere-registration-check"
       ],
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-12-10 06:44:11.253 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-12-10 06:44:11.253 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file. Retained as registration evidence from the second apparition, not as lens input: its level sits about 17 times below the 2017 set, past the route's matching budget.",
       "expectedBytes": 593280,
       "expectedSha256": "8b7398a6408bba8a954451de11969df683e4eb8b0fa00630badfa94112ac166f",
       "width": 256,
@@ -367,7 +367,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20181210t064411253",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/9"
           }
         ]
       }
@@ -391,9 +391,9 @@
       "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
-        "sphere-photograph"
+        "sphere-registration-check"
       ],
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-12-19 06:57:24.735 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-12-19 06:57:24.735 UT. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file. Retained as registration evidence from the second apparition, not as lens input: its level sits about 17 times below the 2017 set, past the route's matching budget.",
       "expectedBytes": 593280,
       "expectedSha256": "046ea97718fd77c906637ee43d3101af4162d8225a321e79dc627799e5d655a2",
       "width": 256,
@@ -406,7 +406,7 @@
           {
             "catalogueId": "source-kleopatra-kleopatra-sphere-20181219t065724735",
             "role": "material",
-            "evidence": "src/objects/kleopatra/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+            "evidence": "src/objects/kleopatra/source/manifest.json@eb964b61fe518ae973c05d1214894490dc07808b#/inputs/10"
           }
         ]
       }
@@ -442,8 +442,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8328,
-      "expectedSha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4",
+      "expectedBytes": 9394,
+      "expectedSha256": "9a9346a1312fb8ba235472a16fbc02c2a48bf7eb3ada00950adb9410653259d6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -451,8 +451,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 823,
-      "expectedSha256": "f87b27f0445eb707467cab48f3ae1ebbadf70e415ee53c97c686ac0920fdc51e"
+      "expectedBytes": 4061,
+      "expectedSha256": "861f3f7f6a9c48f9e19bc920a1d8a3422606716240eb1316fab11627139b148b"
     },
     {
       "path": "preparation/navigation.json",
@@ -466,8 +466,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 1935,
-      "expectedSha256": "ea05bacd392d1d101d935418fa628ec2745375b3a068dc3145789bcb6d12e88a"
+      "expectedBytes": 7789,
+      "expectedSha256": "0e7f6b39f6edfee9209e22497262848653e26015130b468944dd23a74199a066"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

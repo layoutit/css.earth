@@ -30,7 +30,7 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "Seven deconvolved VLT/SPHERE/ZIMPOL frames from the 2017 and 2018 apparitions, registered through cameras computed from the survey's own pole and period, JPL Horizons geometry and each frame's header. The two apparitions view opposite hemispheres. Grayscale retains the photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "Five deconvolved VLT/SPHERE/ZIMPOL frames from the 2017 apparition, registered through cameras computed from the survey's own pole and period, JPL Horizons geometry and each frame's header. The 2018 apparition sees the opposite hemisphere but its frames sit about 17 times fainter than these after level matching, past the route's budget of 16, and several of its pairs share no samples with this set, so it is not combined here. Grayscale retains the photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
         },
         "frames": [
           {
@@ -117,47 +117,13 @@
               127.545,
               128.914
             ]
-          },
-          {
-            "id": "zimpol-20181210-064411",
-            "path": "observations/d216Kleopatra_2018-12-10T06_44_11.253_zpl_science_imaging_cam1.fits",
-            "encoding": "fits-zimpol-intensity",
-            "backgroundMaximum": 552.8327,
-            "observerLatitude": -33.0988,
-            "observerWestLongitude": 221.3268,
-            "sunLatitude": -48.0119,
-            "sunWestLongitude": 213.8742,
-            "rangeKm": 230892644.8,
-            "northAzimuthDegrees": 140.6901,
-            "pixelAngleMicroradians": 0.017599,
-            "center": [
-              120.78,
-              122.947
-            ]
-          },
-          {
-            "id": "zimpol-20181219-065724",
-            "path": "observations/d216Kleopatra_2018-12-19T06_57_24.735_zpl_science_imaging_cam1.fits",
-            "encoding": "fits-zimpol-intensity",
-            "backgroundMaximum": 572.508,
-            "observerLatitude": -33.4416,
-            "observerWestLongitude": 164.9729,
-            "sunLatitude": -46.1707,
-            "sunWestLongitude": 162.0154,
-            "rangeKm": 225808112.4,
-            "northAzimuthDegrees": 141.6984,
-            "pixelAngleMicroradians": 0.017599,
-            "center": [
-              121.979,
-              125.142
-            ]
           }
         ],
         "selection": "finest-resolution",
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
-          "maximumGain": 16,
+          "maximumGain": 1.5,
           "maximumAngleDegrees": 60
         },
         "transfer": {
