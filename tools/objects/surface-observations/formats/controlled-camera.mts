@@ -12,6 +12,7 @@ import { checkBandRegistration, controlledShapeCamera, framePaths, insetCoverage
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { pds3Keyword, pds3Values } from '../../pds-labels.mts';
+import { readFitsPrimary } from '../../observation/fits.mts';
 import { pds3LabelHasReflectance } from './pds3-reflectance.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
@@ -43,8 +44,13 @@ type CameraFrameRecipe = CameraLens['frames'][number];
 const cameraPaths = (frames: readonly CameraFrameRecipe[]) => [...new Set(frames.flatMap(framePaths))];
 const colorPaths = (recipe: ColorLens) => cameraPaths([...recipe.frames.flatMap(set => BANDS.map(band => set[band])), ...(recipe.registration?.references ?? [])]);
 
+/** Encodings whose archive ships no detached label: the frame's own header states its identity. */
+const SELF_DESCRIBING = ['fits-zimpol-intensity'];
+
 function checkFrame(frame: unknown, context: string) {
-  checkKeys(frame, ['id', 'path', 'labelPath'], FRAME_OPTIONAL, context);
+  const record0 = requireRecord(frame), selfDescribing = SELF_DESCRIBING.includes(String(record0.encoding));
+  checkKeys(frame, selfDescribing ? ['id', 'path'] : ['id', 'path', 'labelPath'], FRAME_OPTIONAL, context);
+  if (selfDescribing && record0.labelPath !== undefined) throw new TypeError(`Invalid source-bound ${context}: this encoding states its identity in the frame's own header, so it names no label.`);
   const record = requireRecord(frame), catalog = record.cameraCatalog !== undefined;
   // A frame states its whole controlled camera, or names the catalog that states it; never a mix.
   if (CAMERA_FIELDS.some(key => (record[key] === undefined) !== catalog)) throw new TypeError(`Invalid source-bound ${context}: state every controlled camera field or name a camera catalog.`);
@@ -115,6 +121,13 @@ function controlNetworkCamera(frame: Awaited<ReturnType<typeof resolveCatalogCam
 
 /** The photograph's start time and filter from its native label. SSI companions state and check both. */
 async function frameIdentity(sourceDirectory: string, frame: CameraFrameRecipe) {
+  if (!frame.labelPath) {
+    // A deconvolved ZIMPOL frame has no detached label of any kind. Its own header states the exposure and the filter.
+    const { header } = readFitsPrimary(await readFile(resolve(sourceDirectory, frame.path)));
+    const startTime = header['DATE-OBS'], filter = header['ESO INS3 OPTI5 NAME'];
+    if (!startTime || !filter) throw new Error(`Controlled camera frame ${frame.id} lacks a start time or filter in its header.`);
+    return { label: '', startTime, filter };
+  }
   const label = await readFile(resolve(sourceDirectory, frame.labelPath), 'latin1');
   if (frame.quality) return { label, startTime: frame.quality.startTime, filter: frame.quality.filter };
   const startTime = pds3Keyword(label, 'START_TIME') ?? pds3Keyword(label, 'IMAGE_TIME'), filters = pds3Values(label, 'FILTER_NAME');
@@ -207,7 +220,9 @@ export const controlledCameraFormat: SurfaceObservationFormat = {
   async load(value, context) {
     const recipe = parseControlledCameraLens(value), photometry = await lensPhotometry(recipe.photometry, context), frames: ObservationFrame[] = [];
     for (const frame of recipe.frames) frames.push((await loadControlledFrame(frame, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context)).frame);
-    const quantity = recipe.frames.some(frame => frame.encoding === 'vicar-byte-dn') ? 'detector brightness, DN / 255' : 'I/F';
+    const quantity = recipe.frames.some(frame => frame.encoding === 'vicar-byte-dn') ? 'detector brightness, DN / 255'
+      : recipe.frames.some(frame => frame.encoding === 'fits-zimpol-intensity') ? 'deconvolved intensity'
+      : 'I/F';
     const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear grayscale display`;
     return lensPolicy(recipe, frames, photometry, context, units);
   },
