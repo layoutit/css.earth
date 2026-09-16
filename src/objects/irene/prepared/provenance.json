@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "irene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "693c3a20ee9f67463e43291f3aafbe873541b68f5ce4ba778287c0597213e174"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "5454ae90a5e5e8fe4f7b6ee4479d7ae3eefb279f5a86826d2bf61d134767f2cf"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "edc70e0c7e153dc6f5197a709bcc5a4aa396ce1a9a9f9a26da75b657a236ec21",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "43de9f25f828ef8d907e69bdea01dd541cec38e3daf95a1e0a8baff0c990e61e",
       "bytes": 6054,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/irene/irene-elevation-thumbnail.webp",
           "bytes": 5744,
           "sha256": "5ff363a38230a621331a76463eca8bfe3ddb33aac80baa6260a65a1a6b543326",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/irene/irene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/irene/irene-elevation-surface@2x.webp",
           "bytes": 310018,
           "sha256": "f52ed7365e38f5e2b0327fed9ddd5e341b9f83497e8cf68e2e93b4f01112acfd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/irene/irene-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/irene/irene-shape-surface@2x.webp",
           "bytes": 52722,
           "sha256": "405603fff88c7830b7cac1f0fe5d48345045997a95e7d3c4d0fed6006ad864bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "irene",
-    "materialSha256": "7a6da61da208ce38aa4e2da687121bc62681b99ec3ac31a007328a7e1d014c86",
+    "materialSha256": "2c50fc01cfc23a48af55b9ec87c2c777f5b58d58be3bb1e34fc099f98d19ff28",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "5454ae90a5e5e8fe4f7b6ee4479d7ae3eefb279f5a86826d2bf61d134767f2cf"
     }
   }
 }

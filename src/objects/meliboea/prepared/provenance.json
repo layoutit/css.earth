@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "meliboea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "2ad28d71988570ed0c7fb7f9ff161b200967297c108d4471fbad4f47b3ee04bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "bf1bccf0fd1aaaeb10c485b423fc15ca323a9e5a439403a54f6b838e6d047815"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "a692afa2b908756462c3ecacb063c11f0c5ebed62afcab6936510f7b92421240",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "1bcc5e8c14fb2f28bc2f542109593898bc7b38e9972c244af9abaf0b03c3a285",
       "bytes": 10937,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/meliboea/meliboea-elevation-thumbnail.webp",
           "bytes": 5220,
           "sha256": "d527964a3cd901325ca1f7bde85a3870480507877af13072ebe158d9a3762ca8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/meliboea/meliboea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/meliboea/meliboea-elevation-surface@2x.webp",
           "bytes": 269920,
           "sha256": "a8ea7e1cdff9b37f0086c8843cf83824e7b2098609d0fc37551578329d49cae9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/meliboea/meliboea-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
           "bytes": 63300,
           "sha256": "cbc29ec25bdeb8c52d4aa77d177f5f525770a9ff74617bfb65125b2335a216a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "meliboea",
-    "materialSha256": "2b79028758e2c03e22fa7ac33683042b91878526c1907efb188e9abf1ede3103",
+    "materialSha256": "673d906339408a7adea4e27009860b1899ba5f5e772e05ca75960fa4a6f5bcb4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "bf1bccf0fd1aaaeb10c485b423fc15ca323a9e5a439403a54f6b838e6d047815"
     }
   }
 }

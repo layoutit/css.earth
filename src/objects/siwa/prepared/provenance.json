@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "siwa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "b2d4fdc98415c86251eb34f278a3bb6280d1d5104b23f4e36aa45608c9950e96"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "fb3a70252a4b7da3aefc63140d30a33cab3b4e56dc0ac6229ec01c0e4ebec8d8"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "a6cf15b20cd4bcfb839a14044d91774e83056e3457b568b0c3659da8d0607b67",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "a6eada1a541463109fe7818245bf08268878e47b3a716ab09426d27c3ef53502",
       "bytes": 8777,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/siwa/siwa-elevation-thumbnail.webp",
           "bytes": 5476,
           "sha256": "ae8bdb55331b82272345bcbcf0c5bedeee1ab8df4a98593f5135d2591e22b7bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/siwa/siwa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/siwa/siwa-elevation-surface@2x.webp",
           "bytes": 278062,
           "sha256": "2734ee3049b6af435196e238dc3df87a1a3b3a7118fe5ae2cff4ce3f54ebf892",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/siwa/siwa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/siwa/siwa-shape-surface@2x.webp",
           "bytes": 63422,
           "sha256": "e2d01535cc94bfad289bb8dbcdd2332cd042a7b4a7f31b7d0ce6a57b153526fa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "siwa",
-    "materialSha256": "b5635381d28ea264b3809e9115ad5ece928faa71060d15d24b77ee9a1bd581f8",
+    "materialSha256": "2ff8e2bd1eba37f6e6d4ff719bb2448d1d2b2c380f8d8e247fa4000de262a32c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "fb3a70252a4b7da3aefc63140d30a33cab3b4e56dc0ac6229ec01c0e4ebec8d8"
     }
   }
 }

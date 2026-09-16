@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hektor",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "a074869f44fa9b988a2f710dac27d3da7313d56467a309d62b632ac361f94205"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "4a7ef1291dda1c3ed9698833479d74737c602ecceb3808e03f21c94e171ccf68"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "7246356c688dc0fab0e78353e900d7593dea83c90776a3e1d55b37a9d060e5b5",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "6253fef1c64d3c4f177035d536ea52a20f4eb5aeaa72dc34869a649b82fe325e",
       "bytes": 6187,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/hektor/hektor-elevation-thumbnail.webp",
           "bytes": 5184,
           "sha256": "6b10fc521717930329adefa0f39b94cd324b55d179240d48b4b284338a853113",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hektor/hektor-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hektor/hektor-elevation-surface@2x.webp",
           "bytes": 331524,
           "sha256": "ccc3a891996658e40b3252faf046d27168de1a7cd26daed24afbc5dc788249c1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/hektor/hektor-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hektor/hektor-shape-surface@2x.webp",
           "bytes": 64024,
           "sha256": "4c10eedb74f3f623353818a9eb79fff4304834e1563d73f5b4816b0868d1b5df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "hektor",
-    "materialSha256": "5bc4363d668b5d373b84b3ce352e7b27cbfd8295ca96a87582529f95de2dc4ec",
+    "materialSha256": "9ddfe6a3d35f50d746e52d7b0ec376f82a5478909a5a6b84393ee5ee3f3f4a36",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "4a7ef1291dda1c3ed9698833479d74737c602ecceb3808e03f21c94e171ccf68"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bertha",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1d8b3bf808c685efd81e7df1c2006de2e27f5b6aaa7ab9d86685d77ed2b204d8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "eaac3db818199052ff469ca213383366f987c934bd1e8634890addf4f125d94d"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "6abfad40c2918c98a2918bcf4257174cb58c7a75871bb00f9f4cdf382241a32f",
       "bytes": 81736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8432,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/bertha/bertha-elevation-thumbnail.webp",
           "bytes": 5856,
           "sha256": "fd632cfbded318d3842f087634caf35a0847fb640ffc8016d16a89cb9aa08ca3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bertha/bertha-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bertha/bertha-elevation-surface@2x.webp",
           "bytes": 314000,
           "sha256": "b690e831c8b28017bc5a88e5acff8136033741dba5f5784216960a38d2144835",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/bertha/bertha-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bertha/bertha-shape-surface@2x.webp",
           "bytes": 66418,
           "sha256": "eb3dfb9134b1a57d98907f383bb5473fe9f5bbbe1cbdd9830339301f6c40543c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "bertha",
-    "materialSha256": "0186ec03c227b62f4620767d4c69f68609e348fba523f7f198f662ef44bfecd5",
+    "materialSha256": "dc0bacf763d6752b4c09c27b3192e37d55e629a89840cdb5bbb98c9404759a59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "eaac3db818199052ff469ca213383366f987c934bd1e8634890addf4f125d94d"
     }
   }
 }

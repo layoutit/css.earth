@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tantalus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "2f607fac44c681c00e58536aadc665f48657b3ea98f2a6b0bbac8f54f6cbe2f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "29eba44ec5680bdbee3283db5f925059cfe2749db22a4562ef2df7573eed02da"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "deeba7099d07c93d2da587bec6974398634beb3ab21b95ab0a51f56aa4463d59",
       "bytes": 80926,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "c4f6e20bf3fd8cb98672a55a5ac0c816cf92abeb0ae72924f7acc9c9187026e9",
       "bytes": 10123,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/tantalus/tantalus-elevation-thumbnail.webp",
           "bytes": 7408,
           "sha256": "dbf540dbac4efa2a7080cd05d94b805b939fcf32ce758848387796080a6e417b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tantalus/tantalus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tantalus/tantalus-elevation-surface@2x.webp",
           "bytes": 400654,
           "sha256": "2a43cd13d855da14b2be6cafe94a09aede6dace73bd7e1c29609c81bd0008256",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/tantalus/tantalus-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tantalus/tantalus-shape-surface@2x.webp",
           "bytes": 63710,
           "sha256": "ac0ea20ba6dd2da3b196132b3701273d42c9c612d2df0a2a3f5707a0df3d3f35",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "tantalus",
-    "materialSha256": "61106a1097e7dda731bcb471945cabf9340d2a93148bc12bb3fc25ad8c7e5051",
+    "materialSha256": "e7e078d9c0ec859f1ea01ad13d43a94841ae1cb08bfa67fee0d8260037937511",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "29eba44ec5680bdbee3283db5f925059cfe2749db22a4562ef2df7573eed02da"
     }
   }
 }

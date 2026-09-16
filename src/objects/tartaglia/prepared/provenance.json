@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tartaglia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9b16c99520ee86d13c5f4cf61273b5e00d2646d09ddd616b3d488cc6a6af7fc3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "23b013698bb9a8d6d433e8bbf06d86a7cc99634fc55c8bfe232818222259a299"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "ee1a402a083d8aa2ce1aad16d6efd9ad71641e82cf788c45c0b0c9b8fb171514",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 10276,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/tartaglia/tartaglia-elevation-thumbnail.webp",
           "bytes": 4644,
           "sha256": "e916232ed7221057ba0cdce0889899795cf01f209a53cff2ebc7cbedbfd03b6f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-surface@2x.webp",
           "bytes": 264724,
           "sha256": "2f678b53c4481c2c1c997391c8784c745af493da58d84259a6fd6442b7c8981e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/tartaglia/tartaglia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
           "bytes": 63182,
           "sha256": "caa98fc71a3a30406e403ff3597cb1e9435160bf342f45e906a61b88cd105ab4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "tartaglia",
-    "materialSha256": "0af220e444c11db1e92aa9557eef6d4f3ec3a144d3f25caff5550b4fd429b3c9",
+    "materialSha256": "e95b2d84a657651d65df3613b67c90cb31ba52f4751865cf253cb0f0d1723f16",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "23b013698bb9a8d6d433e8bbf06d86a7cc99634fc55c8bfe232818222259a299"
     }
   }
 }

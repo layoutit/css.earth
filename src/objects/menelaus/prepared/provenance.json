@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "menelaus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1f8c0612fc240bccaf34dda00b823183b1d56d8cc5f226e30a9491b361785a01"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "9d2c2dc75c763f1d27fea25bbc8a0b34daa140e71b497dda9625bfbda406f063"
   },
   "recipes": [
     {
@@ -350,7 +350,7 @@
       "sha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "60b2c055635816a86448b1c60dfa5d4272687d79b29f50b9972b8527881db47e",
       "bytes": 11099,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/menelaus/menelaus-elevation-thumbnail.webp",
           "bytes": 4688,
           "sha256": "02aa7c63fe588bf751d6cd7aec666c5a9c1cf765f77848b0e0f0d1bb117731df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-surface@2x.webp",
           "bytes": 258420,
           "sha256": "d7643837e56267dfbd453439e34ccb3ce79670e6825ddc2cdbf6454819341cef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +460,13 @@
           "url": "/scenes/menelaus/menelaus-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
           "bytes": 70302,
           "sha256": "e51ff634d7c83863ea7bf99dd832c6aedfbbcc4cc938cf0e51a9fc1757f6b39e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -561,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "menelaus",
-    "materialSha256": "350b791f16de71d41d57f99aebc7772de2957da40cabf7cd62621da498561312",
+    "materialSha256": "d6a097212ab8431ecaee818a5838bde26a7f89ddd1c2b818dc939c708e6b2cca",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "9d2c2dc75c763f1d27fea25bbc8a0b34daa140e71b497dda9625bfbda406f063"
     }
   }
 }

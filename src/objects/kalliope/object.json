@@ -31,11 +31,6 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "zimpol",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -55,33 +50,27 @@
       "sources": [
         {
           "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "29bc4690bee8b7e7a0b9649613119cd8ef712b091060534757f8d487e374f757"
+          "path": "source/preparation/terrestrial.json"
         },
         {
           "id": "rotation",
-          "path": "source/preparation/rotation.json",
-          "sha256": "9b5d582d7e2eba07c1b893706b43c2515b4cd43fc4a85fe3a9e73d68a62efe0d"
+          "path": "source/preparation/rotation.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "222eb1ba7d12c68aecc8360e07b97fe177a649638f61070a82c43db9639fc572"
+          "path": "source/content/object.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "48855c6cf420115012883d2c0bab3a1e44c0091bb68a85af8e83914590dced01"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "272aa68329d14e8f46401c4f71177ab52551f50a941b98e5798ef7845e511977"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "524ea35cc9e4e4e9be0a6617308910462b7b4866851cffc3887fb614c731a07f"
+          "path": "source/preparation/acquisition.json"
         }
       ]
     },
@@ -118,7 +107,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a3f01a155639d352dcbe0c866abf464c035446a7091cecf480a04341ea09c8a7"
+        "sha256": "3f34d6eb35e006584ebda9a265d5d16c575fcab7aafc724bf85714138f372bb7"
       }
     },
     "catalog": {
@@ -139,6 +128,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a4d95b88fe0fbcafa6d45f45ab73b20564b0bf25adb9abba37908557519e65b8"
+    "sha256": "2d4f6fef2f17f80c1faa91332e07b8deeba0b97eef6d57f196826f9773c05a06"
   }
 }

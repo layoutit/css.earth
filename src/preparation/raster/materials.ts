@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseAtmosphereSource, deriveAtmosphereMaterial, prepareMaterialFrame } from '@cssearth/objects';
+import { readAtmosphereModel, deriveAtmosphereMaterial, prepareMaterialFrame } from '@cssearth/objects';
 import type { RasterRecipe, AtmosphereRecipe } from './config.js';
 import { raster, assetPath } from './io.js';
 export async function prepareAtmosphere(config: RasterRecipe, recipe: AtmosphereRecipe, sourceDirectory: string, publicDirectory: string) {
-    const source = parseAtmosphereSource(await readFile(resolve(sourceDirectory, recipe.source), 'utf8'));
+    const source = readAtmosphereModel(JSON.parse(await readFile(resolve(sourceDirectory, recipe.source), 'utf8')));
     const model = deriveAtmosphereMaterial(source);
     for (const density of config.densities) {
         const tileSize = recipe.tileSize * density, width = tileSize * recipe.columns, height = tileSize * recipe.rows;

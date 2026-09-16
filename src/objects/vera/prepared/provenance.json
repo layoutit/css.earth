@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vera",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "55f1022589dc245ad6a17d473e5da6b7e484d87ee611588ccc1e901f46994ecf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "423757332a11e448689c188dd3a03c4f395faf8bf05dd89804b4c7b0a51cd3b2"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "2d0eb67cc470d629766b5c5f396820808162acbb1bd994548ffc9b38329268dc",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "0c20b17f753595d87d4e77c0f6dc28f5e821c9b1aa08b9f3312fd4e5a6715708",
       "bytes": 8340,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/vera/vera-elevation-thumbnail.webp",
           "bytes": 5076,
           "sha256": "bd2aa2c6b146358eb246c0a3325a110baf717acd19ae33edb1698a6177f2d49c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vera/vera-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vera/vera-elevation-surface@2x.webp",
           "bytes": 258794,
           "sha256": "5972637dbf7cb6d7d07b099acead481c22b4efd93301bd136289f827f769aac3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/vera/vera-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vera/vera-shape-surface@2x.webp",
           "bytes": 63592,
           "sha256": "9c57fb55df3c59d27529da56d40e278effcd75f31c4830f41ede3ee615a9178a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "vera",
-    "materialSha256": "2f89a8a37e7d4e474b7c26f3f502a2cbaa7cd2190cf1f1ee2da33512c22062cd",
+    "materialSha256": "9f0af99df5e12aecf7d068109cf80f87035c5af7fff961ff19d1efd23c4d45df",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "423757332a11e448689c188dd3a03c4f395faf8bf05dd89804b4c7b0a51cd3b2"
     }
   }
 }

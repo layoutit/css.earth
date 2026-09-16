@@ -2,7 +2,8 @@ import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
 
 export type ShapeKind = 'sphere' | 'ellipsoid' | 'radial-terrain';
-export interface SourceReference { readonly id: string; readonly path: string; readonly sha256: string; }
+/** A recipe input by id and package path. Its bytes are pinned once, in the source manifest, never here. */
+export interface SourceReference { readonly id: string; readonly path: string; }
 export interface ShapeRecipe { readonly kind: ShapeKind; readonly radiusKm: number; readonly polarRadiusKm?: number; readonly secondaryRadiusKm?: number; }
 export interface MaterialRecipe { readonly id: string; readonly source: string; readonly model: 'lit' | 'unlit' | 'emissive'; readonly frameBank?: string; }
 export interface FrameBankRecipe { readonly id: string; readonly source: string; readonly frames: number; readonly rows: number; readonly residentRows: number; }
@@ -87,9 +88,8 @@ function layer(value: unknown, sources: ReadonlySet<string>, materials: Readonly
 function sources(value: unknown): readonly SourceReference[] {
   if (!Array.isArray(value) || !value.length) throw new TypeError('recipe.sources must be a nonempty array.');
   const output = value.map((item, index) => {
-    const input = record(item, `recipe.sources[${index}]`); keys(input, ['id', 'path', 'sha256'], `recipe.sources[${index}]`);
-    if (typeof input.sha256 !== 'string' || !digest.test(input.sha256)) throw new TypeError(`recipe.sources[${index}].sha256 must be a SHA-256 digest.`);
-    return freeze({ id: id(input.id, `recipe.sources[${index}].id`), path: sourcePath(input.path, `recipe.sources[${index}].path`), sha256: input.sha256 });
+    const input = record(item, `recipe.sources[${index}]`); keys(input, ['id', 'path'], `recipe.sources[${index}]`);
+    return freeze({ id: id(input.id, `recipe.sources[${index}].id`), path: sourcePath(input.path, `recipe.sources[${index}].path`) });
   });
   unique(output.map(item => item.id), 'recipe.sources');
   return freeze(output);

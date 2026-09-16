@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ambrosia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "35695abdcf8f818d1d92616765073ae89b4dfa11d5c5f90353f84518e8f13377"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "508aa0228a043b6c173987f261f36107919d57eb70902ef9cb7c5047bfa1c5cc"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "f448756b26da376283009caf5049d40dc1054ed2370c003ee80fe2cf831ecf49",
       "bytes": 81088,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "0fb08f5c3a1c2a185830354ca692b686893b588b0232644d412957ed93b2380c",
       "bytes": 10624,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/ambrosia/ambrosia-elevation-thumbnail.webp",
           "bytes": 4370,
           "sha256": "b3d544ee11390b9075a9a65dc7617805665287a4b6c94ddf85b697dde38cd4b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-surface@2x.webp",
           "bytes": 254676,
           "sha256": "a08f34cdf29cd5b28c6f4ddb5602a2538fa8ea08d093ac409ff6e2a17fd6a8f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/ambrosia/ambrosia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-shape-surface@2x.webp",
           "bytes": 65062,
           "sha256": "d05e60f6dae699e791b7044aae05c497f7ab4ea24ac2843a505df2fd8815c664",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "ambrosia",
-    "materialSha256": "1d06db3dbff076bc9ddba103bb406014130bc2075b2160d3bdb4472af4bf83bf",
+    "materialSha256": "94c82891c78e9b1a7c9fb7bb229d4177a6e0dbfbd3ca197db57a012cfb048b38",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "508aa0228a043b6c173987f261f36107919d57eb70902ef9cb7c5047bfa1c5cc"
     }
   }
 }

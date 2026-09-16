@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aegina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "0b4830931376a7c0b127cdd631e5fe459dd79b34407b8613924513467e0935d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "585754cb1e2d90bb106c2db27b7e531ba640b90efff8a5405e89958e0d9ab429"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "8f40507e4c1c4fcf4858c89d9490e22ed2cbbea81363305f993f8f5a9cf7a5de",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "31d49fbcf7e82a2fea4954fa0d52bdf895ff84f0e8602301cdabae5a6f1ea0d5",
       "bytes": 9645,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/aegina/aegina-elevation-thumbnail.webp",
           "bytes": 5552,
           "sha256": "e87b7afcb6ea08329a503b55c64f53dfadae00e29a46fd97b23fde3cf3aab7fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aegina/aegina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aegina/aegina-elevation-surface@2x.webp",
           "bytes": 282216,
           "sha256": "dead23a76c0c19cc894aabd2f53c4be4f2ef64f4af5c54efacee2b197fcea5d3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/aegina/aegina-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aegina/aegina-shape-surface@2x.webp",
           "bytes": 68096,
           "sha256": "acaa12d473d685debdb4994cde8f670465c36a3e725323c61d84ca8782349b18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "aegina",
-    "materialSha256": "55bbd5dcb8fbc316548d503f4fc78c51fd750a674afb45526e4917b261ecbf39",
+    "materialSha256": "013dfc3c170258c21f1dcba68fbed963435059d5b9b941047dbf619df5762b1c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "585754cb1e2d90bb106c2db27b7e531ba640b90efff8a5405e89958e0d9ab429"
     }
   }
 }

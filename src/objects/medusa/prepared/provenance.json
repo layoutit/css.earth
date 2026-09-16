@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "medusa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "db1d660ea50dced89750c5a80d995a7bdc3d07b471ca61584fa6e7b781c8d233"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "cd479adabac0979ad447d3f4ba0e480f69caa945ae4d5ddf4a604461916e7c2b"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "ac8826e64a7f1eb168ab78c9ed24005a668817f2f32137eecf417ce94a9ee6c0",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "25a889c1229b5252caf274b0a085d13e933f38cbb74de25d4f7786ead433c809",
       "bytes": 10320,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/medusa/medusa-elevation-thumbnail.webp",
           "bytes": 4326,
           "sha256": "d1a4e753ed02ff3de47f2fc879e7c225d23021309d662ca0b6ece563f33ad7df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medusa/medusa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medusa/medusa-elevation-surface@2x.webp",
           "bytes": 268304,
           "sha256": "179fff3d9221f86e87148a253021a9334195b85e4c347d381adc5563a7e3e673",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/medusa/medusa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medusa/medusa-shape-surface@2x.webp",
           "bytes": 62824,
           "sha256": "c27dd34dd9e40c32fae790d10f3242011023961d223c4bb7d75dc52802d68134",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "medusa",
-    "materialSha256": "5f87399cf238fb8379112d4d05fcc9f2317163e2384c4335ea2cdbf2a7784aff",
+    "materialSha256": "18e80ceb4012ec914cc8d04c0ad3776cbd81218fedb4e7bd96adba79c0c7e378",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "cd479adabac0979ad447d3f4ba0e480f69caa945ae4d5ddf4a604461916e7c2b"
     }
   }
 }

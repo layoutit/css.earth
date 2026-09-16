@@ -29,7 +29,7 @@ test('approximate placement survives preparation without changing the orbit geom
   const prepared = prepareWorldContext(source, facts, states);
   const original = prepareWorldContext({ ...source, bodies: [{ id: body.id, name: body.name, color: body.color }] }, facts, states);
   assert.equal(prepared.bodies[0]!.placement, 'approximate');
-  assert.deepEqual(prepared.bodies[0]!.orbit, original.bodies[0]!.orbit);
+  assert.deepEqual(prepared.bodies[0]!.orbit!, original.bodies[0]!.orbit!);
   assert.throws(() => parseWorldContextSource({ ...raw, bodies: [{ ...body, placement: 'exact-ish' }] }), /placement/);
 });
 
@@ -95,13 +95,13 @@ test('Sun context source derives its physical scale from the prepared visible ra
 test('prepared ellipses start at their same-epoch ephemeris position', async () => {
   const source = parseWorldContextSource(await readSource() as unknown);
   const body = source.bodies[0]!;
-  const result = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
+  const result = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments: 16 } },
     { [body.id]: { radiusM: 1 } }, {
       [body.id]: { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
     });
-  assert.deepEqual(result.bodies[0]!.positionM, result.bodies[0]!.orbit.verticesM[0]);
-  assert.equal(result.bodies[0]!.orbit.verticesM.length, 16);
-  assert.equal(result.bodies[0]!.orbit.trail.length, 16);
+  assert.deepEqual(result.bodies[0]!.positionM, result.bodies[0]!.orbit!.verticesM[0]);
+  assert.equal(result.bodies[0]!.orbit!.verticesM.length, 16);
+  assert.equal(result.bodies[0]!.orbit!.trail.length, 16);
   assert.deepEqual(result.focus.positionM, [0, 0, 0]);
 });
 
@@ -113,9 +113,9 @@ test('a hyperbolic world trajectory retains its epoch marker on a finite open co
   const state: OrbitalState = { positionM: [distance * Math.cos(trueAnomalyRadians), distance * Math.sin(trueAnomalyRadians), 0],
     centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
     semiMajorAxisM: -M_PER_AU, eccentricity, trueAnomalyRadians };
-  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
+  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments: 16 } },
     { [body.id]: { radiusM: 100, orbitStyle: 'closed' } }, { [body.id]: state });
-  const orbit = prepared.bodies[0]!.orbit;
+  const orbit = prepared.bodies[0]!.orbit!;
   assert.equal(orbit.closed, false, 'a bound-orbit styling preference cannot close a hyperbola');
   assert.equal(orbit.displayExtentAu, 600, 'the radius cap is a display window, not an apoapsis');
   assert.equal(orbit.trailModel, 'finite-open-trajectory-constant-weight');
@@ -124,7 +124,7 @@ test('a hyperbolic world trajectory retains its epoch marker on a finite open co
   assert.equal(orbit.trail.length, orbit.verticesM.length - 1);
   assert(orbit.trail.every(weight => weight === 1));
   assert.deepEqual(orbit.activeChords, Array.from({ length: orbit.verticesM.length - 1 }, (_, index) => index));
-  assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+  assert.deepEqual([...orbit!.extentChords].sort((a, b) => a - b), orbit.activeChords);
   assert(orbit.verticesM[0]![1] < 0 && orbit.verticesM.at(-1)![1] > 0, 'both unbound branches remain in chronological order');
   for (const vertex of orbit.verticesM) {
     const radius = Math.hypot(...vertex);
@@ -161,9 +161,9 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     satellite: { positionM: [1007, 0, 0], centerBodyId: 'parent', centerPositionM: [1000, 0, 0],
       normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
   };
-  const config = { ...source, bodies, orbit: { ...source.orbit, segments: 16 } };
+  const config = { ...source, bodies, orbit: { ...source.orbit!, segments: 16 } };
   const facts = { parent: { radiusM: 2 }, satellite: { radiusM: 1 } };
-  const orbit = prepareWorldContext(config, facts, states).bodies[1]!.orbit;
+  const orbit = prepareWorldContext(config, facts, states).bodies[1]!.orbit!;
   const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
   const view = prepareWorldContext(config, facts, states, {}, policy).bodies[0]!.systemView!;
   assert.deepEqual(view.memberIds, ['satellite']);
@@ -198,7 +198,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   assert.deepEqual(orbit.verticesM[0], [1007, 0, 0]);
   assert(orbit.bounds.radiusM > 0);
   assert.deepEqual(orbit.activeChords, orbit.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
-  assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+  assert.deepEqual([...orbit!.extentChords].sort((a, b) => a - b), orbit.activeChords);
   assert(Object.isFrozen(orbit.extentChords));
   for (const index of orbit.activeChords) for (const vertex of [orbit.verticesM[index]!, orbit.verticesM[(index + 1) % orbit.verticesM.length]!]) {
     assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM,
@@ -220,7 +220,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   const centers = { parent: { positionM: states.parent!.positionM, centerBodyId: source.focus.id } };
   const hiddenParent = prepareWorldContext(visible, { satellite: facts.satellite }, visibleStates, centers);
   assert.deepEqual(hiddenParent.bodies.map(body => body.id), ['satellite']);
-  assert.deepEqual(hiddenParent.bodies[0]!.orbit, orbit);
+  assert.deepEqual(hiddenParent.bodies[0]!.orbit!, orbit);
   assert.deepEqual(hiddenParent.orbitCenters, centers);
   assert.throws(() => prepareWorldContext(visible, facts, visibleStates), /parent/);
   assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
@@ -245,7 +245,7 @@ test('classification views share the root candidate angles and enclose their mem
     satellite: { positionM: [1007, 0, 0], centerBodyId: 'parent', centerPositionM: [1000, 0, 0],
       normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
   };
-  const config = { ...source, bodies, orbit: { ...source.orbit, segments: 16 } };
+  const config = { ...source, bodies, orbit: { ...source.orbit!, segments: 16 } };
   const facts = { parent: { radiusM: 2, classification: 'planet' }, satellite: { radiusM: 1, classification: 'satellite' } };
   const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
   const context = prepareWorldContext(config, facts, states, {}, policy);
@@ -271,10 +271,10 @@ test('extent traversal covers each active chord once for sparse trails and uneve
   const state: OrbitalState = { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
     normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 };
   for (const segments of [8, 9, 16, 127, 128]) for (const orbitStyle of ['closed', 'trail'] as const) {
-    const context = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments } },
+    const context = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments } },
       { [body.id]: { radiusM: 1, orbitStyle } }, { [body.id]: state });
-    const orbit = context.bodies[0]!.orbit;
-    assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+    const orbit = context.bodies[0]!.orbit!;
+    assert.deepEqual([...orbit!.extentChords].sort((a, b) => a - b), orbit.activeChords);
     assert.equal(new Set(orbit.extentChords).size, orbit.activeChords.length);
     assert(orbit.extentChords.every(index => orbit.trail[index]! > 0));
     assert(Object.isFrozen(orbit.extentChords));

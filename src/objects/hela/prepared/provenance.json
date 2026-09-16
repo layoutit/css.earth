@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hela",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "73b71f1bb86c9c102d72b53c4be45bad43cc9eb16db3dbf17536049cbe5c71f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "55c299fcf36534a48dc4b3f98c12a50dd7e768feb35cf54cda1cc3dc930640d8"
   },
   "recipes": [
     {
@@ -350,7 +350,7 @@
       "sha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
       "bytes": 128392,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "ceb5899019f2b70ef5ca5d94c9c525d87120bbcd109e436739c899b5fc97c996",
       "bytes": 8150,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/hela/hela-elevation-thumbnail.webp",
           "bytes": 4614,
           "sha256": "de54c42dd7605979ca7ee3aff1049f45660abc5ee94b309fde636f1f1a24e1db",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hela/hela-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hela/hela-elevation-surface@2x.webp",
           "bytes": 290106,
           "sha256": "5eafab36e9370b715d37e2fd86e37e60494a4ca0243dfbc71597538c39ba544c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +460,13 @@
           "url": "/scenes/hela/hela-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hela/hela-shape-surface@2x.webp",
           "bytes": 60722,
           "sha256": "d4f42f3759acc5006497233b01a0f2f220c9565d8db935af4e9ca78768a37f18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -561,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "hela",
-    "materialSha256": "a0773d0a334491b3fd1f63a933f0aed95621df34fdd96f80185127803a3781ad",
+    "materialSha256": "efd4828a7941e48a6cb534b1b52d9f6336aaaa9a1cc2fd5e921520aff5785c1d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "55c299fcf36534a48dc4b3f98c12a50dd7e768feb35cf54cda1cc3dc930640d8"
     }
   }
 }

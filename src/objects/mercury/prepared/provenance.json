@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8962131a3233c6840f977aba61f5de6f8795f4136d568629e4522051c6ab4f8e"
+    "sha256": "7b768c892b49795e2e21e0232ce4208e9c02d04fe73ce86c626209328edc858c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "a36b222b8cb726a7cad4cbd7a347e6c99177b829992fedb25c7b129c75228e11"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "2dcc03a3423504532b6fa10e6658d3c7ff8d5fb7c92f94c114d396b32dc63a96",
+      "sha256": "9f71fcf74d14bc167bedc7c7834aefd89384e0929d9aaf6d4bbfdcbf4929660c",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "sourceWidth": 4096,
@@ -125,9 +125,7 @@
           "metadata": {
             "schema": "cssmercury-prepared-lighting@3",
             "storageModel": "prepared-full-resolution-density-row-shards",
-            "model": "prepared-full-phase-openspace-lambert-cubic-sky-sun-no-atmosphere",
-            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-            "rendererSourceSnapshot": "source/renderer/texturetilemapping-lighting.glsl",
+            "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
             "worldLightDirection": [
               -0.6119166247245715,
               0.41228475010189525,
@@ -150,7 +148,8 @@
             "baseLightAzimuthDegrees": 0,
             "defaultLightViewZ": 0.8030144929060974,
             "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-            "runtimeRasterization": false
+            "runtimeRasterization": false,
+            "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; formulation adapted from the OpenSpace globe shader (MIT) and documented in the body README"
           }
         },
         "interior": {
@@ -185,7 +184,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8b076bec4b5dd85fa5eb163fc94e3f0def678822c4c6853632e2af205491a7a1",
+      "sha256": "179b2721a30a44a057c845c12cb7fa51b4b40b6a662c535e98432d47dd16d5b2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -552,7 +551,7 @@
           {
             "label": "OpenSpace",
             "role": "scene",
-            "description": "Globe & lighting",
+            "description": "Lighting model parameters (adapted, MIT)",
             "href": "https://github.com/OpenSpace/OpenSpace"
           }
         ],
@@ -764,14 +763,14 @@
       "kind": "source-input",
       "id": "usgs-messenger-bdr-global-z3",
       "path": "maps/mercury-bdr-global.png",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
-      "credit": "USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
+      "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+      "credit": "NASA Solar System Treks; USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
       "licenseEvidence": [
         "maps/messenger_bdr_newyork.asset",
         "maps/messenger_bdr_newyork.wms"
       ],
-      "acquisition": "Stitch all 16 by 8 level-3 TMS tiles declared by the pinned OpenSpace WMS file, then resize the 5760 by 2880 equirectangular mosaic to 4096 by 2048 with Lanczos3.",
+      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "Committed scientific source snapshot with credit and product qualification.",
       "title": "MESSENGER MDIS monochrome mosaic",
       "displayCredit": "USGS · NASA/MESSENGER",
@@ -786,7 +785,7 @@
           {
             "kind": "machine",
             "machineId": "messenger",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
+            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
             "missionId": "messenger"
           }
         ]
@@ -801,8 +800,8 @@
           }
         ]
       },
-      "sha256": "4b72646d9405f85e0c158cc321088229d6c47deea09ffa6e1d24a81e3ba36f37",
-      "bytes": 9385021,
+      "sha256": "8ab641af485bca84daea03738e2b17d1734df0fa21b9c275258bccbcfe1516eb",
+      "bytes": 8835828,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -811,16 +810,16 @@
           "refresh"
         ],
         "path": "maps/mercury-bdr-global.png",
-        "url": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
-        "tileSize": 360,
+        "url": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+        "tileSize": 256,
         "columns": 16,
         "rows": 8,
-        "dataWidth": 5760,
-        "dataHeight": 2880,
+        "dataWidth": 4096,
+        "dataHeight": 2048,
         "width": 4096,
         "height": 2048,
-        "forceRgb": false,
-        "concurrency": 10
+        "forceRgb": true,
+        "concurrency": 6
       },
       "verificationOperations": []
     },
@@ -891,14 +890,14 @@
       "kind": "source-input",
       "id": "usgs-messenger-topography-z3",
       "path": "maps/mercury-topography-global.png",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
-      "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
+      "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png",
+      "credit": "NASA Solar System Treks; USGS Astrogeology MESSENGER DEM v2 colour hillshade; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
       "licenseEvidence": [
         "maps/messenger_shade_newyork.asset",
         "maps/messenger_shade_newyork.wms"
       ],
-      "acquisition": "Stitch all 11 by 6 level-3 TMS tiles declared by the pinned OpenSpace WMS file, crop to its 3832 by 1916 data window, then resize to 4096 by 2048 with Lanczos3.",
+      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "Committed scientific source snapshot with credit and false-color qualification.",
       "title": "MESSENGER global shaded relief",
       "displayCredit": "USGS · NASA/MESSENGER",
@@ -913,7 +912,7 @@
           {
             "kind": "machine",
             "machineId": "messenger",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
+            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png",
             "missionId": "messenger"
           }
         ]
@@ -928,8 +927,8 @@
           }
         ]
       },
-      "sha256": "237521324ce260491eeb5d9215a2a3c72b1f018ae12450513bb82e78f5cffab9",
-      "bytes": 15262047,
+      "sha256": "48e8ffa812b74a3ba4ba586e377ae4919f98514ace9aa2b318eb5c4a46b16587",
+      "bytes": 10330521,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -938,16 +937,16 @@
           "refresh"
         ],
         "path": "maps/mercury-topography-global.png",
-        "url": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
-        "tileSize": 360,
-        "columns": 11,
-        "rows": 6,
-        "dataWidth": 3832,
-        "dataHeight": 1916,
+        "url": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png",
+        "tileSize": 256,
+        "columns": 16,
+        "rows": 8,
+        "dataWidth": 4096,
+        "dataHeight": 2048,
         "width": 4096,
         "height": 2048,
-        "forceRgb": false,
-        "concurrency": 10
+        "forceRgb": true,
+        "concurrency": 6
       },
       "verificationOperations": []
     },
@@ -981,38 +980,6 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "openspace-globe-lighting-excerpt",
-      "path": "renderer/texturetilemapping-lighting.glsl",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      "upstreamFullFileSha256": "c2388a626700e4b4c7c09894e8d15e402c7c53d67cb24c4d8a1cebbacf4745d4",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "../LICENSE.OPENSPACE-MIT"
-      ],
-      "acquisition": "Exact Oren-Nayar and shaded-color function excerpts from the pinned OpenSpace renderer; the full upstream-file hash is recorded in the snapshot.",
-      "redistribution": "Permitted by MIT license.",
-      "title": "OpenSpace surface lighting",
-      "displayCredit": "OpenSpace Team",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-openspace-globe-lighting-excerpt",
-            "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
-          }
-        ]
-      },
-      "sha256": "8cb235ec90ecf95be034f44a57d42f876677790dc7450e522703dd1a2f0163a0",
-      "bytes": 1846,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
       "kind": "authored-content",
       "id": "mercury-object-content",
       "path": "content/object.json",
@@ -1025,8 +992,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8b076bec4b5dd85fa5eb163fc94e3f0def678822c4c6853632e2af205491a7a1",
-      "bytes": 15741,
+      "sha256": "179b2721a30a44a057c845c12cb7fa51b4b40b6a662c535e98432d47dd16d5b2",
+      "bytes": 15805,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1280,20 +1247,20 @@
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-surface-normal.jpg",
-          "bytes": 977125,
-          "sha256": "0a55b6a9bcf2c454c072223e2a8913ad7ca550638b5a49ea39d61025aa7ac50e",
+          "bytes": 991987,
+          "sha256": "461fc361a88d95b73bf5dec86ebe7d55ba0057bea9c0c24f995f4988e2b672bf",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-surface-normal@2x.jpg",
-          "bytes": 4041840,
-          "sha256": "0b459a7576c464d771a3742be2c4fdf91802d062c8cffb14816c41049b577942",
+          "bytes": 4257932,
+          "sha256": "5f1dfa427fe1c541a62a6262e5c46851eee3e559e5e534a1ec54e7b7bb6354f7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-lens-normal.webp",
-          "bytes": 280,
-          "sha256": "12cd76ff9ec246fe2039d0138668942404536eb851159c7a40f565b9098c6d4a",
+          "bytes": 276,
+          "sha256": "2e249be8091e1b8cab225263803863b6f9a6950ab1b11e66931b3f3c8a885547",
           "verification": "bytes-verified"
         }
       ],
@@ -1345,20 +1312,20 @@
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-surface-enhanced.jpg",
-          "bytes": 1382509,
-          "sha256": "fc8e52e9595baa04b4dba605c6a24d0029ea4fc01607de04e7cc86004c6bd93f",
+          "bytes": 1379643,
+          "sha256": "206ac9060839f4cece98ff2a79ada21ba8dd828d37e0c56dc36c1930f78b8738",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-surface-enhanced@2x.jpg",
-          "bytes": 5273708,
-          "sha256": "c12d266c18b09285fa29c400f9921a702a7fcefd5f609080bd3c40552c52ceca",
+          "bytes": 5266173,
+          "sha256": "03804cecc9859bb03937c70d919a0157bb06d3dcd933a6493958e83dbf779ea3",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-lens-enhanced.webp",
-          "bytes": 590,
-          "sha256": "e96069879e0ce65af82bccf4a4a36e8f283df2769d57a4eade454907673a75e1",
+          "bytes": 594,
+          "sha256": "a1ae43154d5fc56adb6b694c4cb3decf00eb31819d0a7a3ebc0abd4d1c83f231",
           "verification": "bytes-verified"
         }
       ],
@@ -1395,20 +1362,20 @@
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-surface-topography.jpg",
-          "bytes": 1227245,
-          "sha256": "728d4dbccfe6b1a78421c1e9346e888c47e07788d94f53628e724b71fc482325",
+          "bytes": 1004526,
+          "sha256": "6bdb61523303e236caa5d423a36b328ec663ad9c955e11641eaad394f871e6ce",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-surface-topography@2x.jpg",
-          "bytes": 3804655,
-          "sha256": "0e3f45a7b1e82261293081876896749ea230d7bbf639148d91c74ced21854ef7",
+          "bytes": 2993956,
+          "sha256": "bed71a89a90519863d4a031139a0b32826c6ae24a63290c46118cead4636aa81",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-lens-topography.webp",
-          "bytes": 590,
-          "sha256": "3baf9e8f93dd652fd70182d63be3cd2a9be578d8c8cea78f21eb7773f023fa06",
+          "bytes": 594,
+          "sha256": "5ab4dbb58478f79d7e150e990bd016233954c094bd5930125cd1177b56d6c772",
           "verification": "bytes-verified"
         }
       ],
@@ -1442,14 +1409,14 @@
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-poles.webp",
-          "bytes": 157910,
-          "sha256": "f2b43c6166dd8bf8fae9098d7dc29f369520e7b7bf64a39df180347eeb6b73b2",
+          "bytes": 148864,
+          "sha256": "2a29fda2b4f1a75e180df7bf1f1c67c5a7f8789207ee97ffa69a878e7754b947",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-poles@2x.webp",
-          "bytes": 526156,
-          "sha256": "d35dc6bb79d15d54f4eeae8a80c4df57ec3fe1fe0bb1a787c296ad0ae55bffa3",
+          "bytes": 497292,
+          "sha256": "01405b9c0f75b66ee83be15de391bb186bd3d589919bc275d15f1a7c884ae265",
           "verification": "bytes-verified"
         }
       ],
@@ -1481,14 +1448,14 @@
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-interior-outer.webp",
-          "bytes": 706126,
-          "sha256": "89711dca4dc3a88ee2fb790025b1d77fc46f685898ffa18ea81cdc24fb5ef399",
+          "bytes": 714076,
+          "sha256": "3640d1f0c599ba7fa3b5563f6b03e026093369abdcd6b93540d14ff73c63174d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-interior-outer-poles.webp",
-          "bytes": 36768,
-          "sha256": "71565ebf60a186ea54c16875afcddb43d3c2694d1533465eed2f584aead192e2",
+          "bytes": 36960,
+          "sha256": "2718c85222e5b00c6b5adf163b5cd95de803ea6726755b2b808356f7fd3b25ce",
           "verification": "bytes-verified"
         },
         {
@@ -1511,14 +1478,14 @@
         },
         {
           "url": "/scenes/mercury/mercury-interior-outer@2x.webp",
-          "bytes": 2817906,
-          "sha256": "70049c6e9776a7fd97d7a8a38eeb110f29f4a1532ebf137cfefd842612094fd6",
+          "bytes": 2927744,
+          "sha256": "84f23efa24ebfa307ef8004362d3015b3d00921f4beb98936cb48b256341523f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mercury/mercury-interior-outer-poles@2x.webp",
-          "bytes": 133936,
-          "sha256": "3bd2d7af6a7e9db4a774418e14298ab8058a8223d2e6ca8a68c386d60aeb5a89",
+          "bytes": 135208,
+          "sha256": "1d7bc8e12cc76cc1a8497c5ba1ad5dd2bc6d0aec42a8872019e41984f0b4860f",
           "verification": "bytes-verified"
         },
         {
@@ -1564,9 +1531,7 @@
       "interpretation": {
         "kind": "rendering-model"
       },
-      "inputs": [
-        "openspace-globe-lighting-excerpt"
-      ],
+      "inputs": [],
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-lighting-1x-billboard.webp",
@@ -1965,7 +1930,7 @@
           "verification": "bytes-verified"
         }
       ],
-      "inputBasis": "bound-inputs"
+      "inputBasis": "authored-recipe"
     },
     {
       "id": "content",
@@ -1986,8 +1951,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9250,
-          "sha256": "51a55553124c30d1509fab7fad3b625d7f6699150b069d5fef3ea9556e13ded5",
+          "bytes": 9274,
+          "sha256": "d74d33b619907e91db6923d09c8436e7f4a63d9b4e6341cfef55dc5d5a490433",
           "verification": "bytes-verified"
         }
       ],
@@ -2108,8 +2073,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 52518,
-          "sha256": "894a8f7208c8224ba96ec9a29b9c288df5695e2e64edcd2f566f8abee03d3b68",
+          "bytes": 52590,
+          "sha256": "c4fc4f711c33701b3a96c643ec2525349f341f4f3e5018c57ad52d246fa6ca72",
           "verification": "bytes-verified"
         }
       ]
@@ -2158,8 +2123,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/topography.webp",
-          "bytes": 96434,
-          "sha256": "1f425beabfaecbddf20b85b33d3d148177c97662a94f2be0b0ccc1b20513215b",
+          "bytes": 89838,
+          "sha256": "c596e5e35c362733c2847583f51a6658960f49a6c461d1871a6b7e845fa9a531",
           "verification": "bytes-verified"
         }
       ]
@@ -2171,11 +2136,11 @@
   },
   "lastPreparation": {
     "objectId": "mercury",
-    "materialSha256": "d89a0bee0bae057651a2c994fabec875a86784d6a77ef0043d68fc944854075d",
+    "materialSha256": "f0078ac6a5608b457a5ecde6a9527010287a42f89cc4f828e4d6dfc49cf6cef4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "a36b222b8cb726a7cad4cbd7a347e6c99177b829992fedb25c7b129c75228e11"
     }
   }
 }

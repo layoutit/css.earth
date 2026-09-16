@@ -8,6 +8,7 @@
  * shared: the bilinear footprint, the closest source point, visibility, selection, level matching,
  * the display range, area coverage, the preview and the report.
  */
+import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import type { RadialSurface, SourceAccess, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { BandColorDisplay } from '../color-transfer.mts';
@@ -36,7 +37,8 @@ export interface ObservationCamera {
   project(point: readonly number[]): readonly number[] | null;
   ray(x: number, y: number): readonly number[];
   positionMeters: readonly number[]; positionKm: readonly number[];
-  sunDirection?: readonly number[];
+  /** Unit direction to the Sun in the body frame. Every camera states one: from its label, its kernels, its ephemeris, or the archive's own phase plane. */
+  sunDirection: readonly number[];
   /** Whether detector bounds may be taken from projected mesh vertices; false for cameras with lens distortion. */
   pinhole: boolean;
   /** The pixel scale the camera's source states at the target, used to rank finest-resolution selection. */
@@ -91,8 +93,15 @@ export interface ObservationFrame {
   visible(point: readonly number[]): boolean;
   /** Measured footprint: nadir-equivalent ground size of one pixel, from the camera's pixel angle and each pixel's range. */
   footprint: FrameFootprint;
+  /** The photograph, its camera and the mesh it was cast on, kept for the registration stage; absent for a frame without a camera. */
+  detector?: FrameDetector;
+  /** The same frame under another camera, its rays cast again on the source mesh; absent for a frame without a camera. */
+  withCamera?(camera: ObservationCamera): ObservationFrame;
   report: Record<string, unknown>;
 }
+
+/** What the registration stage measures a frame with: the pixels as decoded, the camera as the route stated it, the mesh the rays were cast on. */
+export interface FrameDetector { image: ObservationImage; camera: ObservationCamera; mesh: Pick<SourceMesh, 'intersect' | 'positions' | 'indices'> }
 
 export interface FrameFootprint { pixelAngleMicroradians: number; nadirMedianMeters: number; nadirMinimumMeters: number; sampledPixels: number }
 
@@ -102,7 +111,8 @@ export interface SurfacePolicy {
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
-  display: { range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
+  /** An authored palette replaces the linear grey of a monochrome lens; the display levels are unchanged. */
+  display: ({ range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay }) & { palette?: readonly string[] };
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;

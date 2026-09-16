@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sylvia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0369fe422b52573639cde8157a9b46c9ea7d55986c25d8cd89e47b5d5bd0319e"
+    "sha256": "23e63584bb8917ec184f099ca24cd77cbafc8f840733bdb391b90388ca445e78"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dae7fe1a06500eaf4a48b718146b701ef0ed9e4009c6da6d3cba65eba96863b1",
+      "sha256": "c5294eb0e5c6bd3a5b1b8556f0354f91062383a3fa4a490e9d4fcb20588218d6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,7 +90,7 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame and the sky threshold is one stated fraction of its peak. Predicted limb position angles match the observed contour to 3.28 degrees over the 15 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the mesh the survey's rotation record describes. The camera's pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Predicted limb position angles match the observed contour to 3.28 degrees over the 15 of 16 frames whose projection is out of round enough to define one. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
               "frames": [
                 {
@@ -99,15 +99,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 13.7895,
                   "observerLatitude": -18.0954,
-                  "observerWestLongitude": 326.6981,
+                  "observerWestLongitude": 329.2651,
                   "sunLatitude": -17.6764,
-                  "sunWestLongitude": 338.2464,
+                  "sunWestLongitude": 340.8134,
                   "rangeKm": 379706254.6,
                   "northAzimuthDegrees": 4.2776,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    139.235,
-                    146.06
+                    140.105,
+                    145.666
                   ]
                 },
                 {
@@ -116,15 +116,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 11.9516,
                   "observerLatitude": -18.0954,
-                  "observerWestLongitude": 332.0342,
+                  "observerWestLongitude": 334.6013,
                   "sunLatitude": -17.6766,
-                  "sunWestLongitude": 343.5817,
+                  "sunWestLongitude": 346.1487,
                   "rangeKm": 379702351.5,
                   "northAzimuthDegrees": 4.2775,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    140.559,
-                    143.9
+                    141.25,
+                    143.602
                   ]
                 },
                 {
@@ -133,15 +133,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 14.8338,
                   "observerLatitude": -18.0954,
-                  "observerWestLongitude": 337.3734,
+                  "observerWestLongitude": 339.9404,
                   "sunLatitude": -17.6768,
-                  "sunWestLongitude": 348.92,
+                  "sunWestLongitude": 351.487,
                   "rangeKm": 379698448.7,
                   "northAzimuthDegrees": 4.2775,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    138.331,
-                    143.758
+                    138.987,
+                    143.348
                   ]
                 },
                 {
@@ -150,15 +150,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 12.1311,
                   "observerLatitude": -18.0954,
-                  "observerWestLongitude": 342.6757,
+                  "observerWestLongitude": 345.2427,
                   "sunLatitude": -17.677,
-                  "sunWestLongitude": 354.2214,
+                  "sunWestLongitude": 356.7884,
                   "rangeKm": 379694575.3,
                   "northAzimuthDegrees": 4.2775,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    138.54,
-                    144.499
+                    139.813,
+                    143.87
                   ]
                 },
                 {
@@ -167,15 +167,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 9.4486,
                   "observerLatitude": -18.0955,
-                  "observerWestLongitude": 347.9929,
+                  "observerWestLongitude": 350.5599,
                   "sunLatitude": -17.6772,
-                  "sunWestLongitude": 359.5377,
+                  "sunWestLongitude": 2.1048,
                   "rangeKm": 379690693.6,
                   "northAzimuthDegrees": 4.2775,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    140.3,
-                    145.412
+                    141.98,
+                    144.634
                   ]
                 },
                 {
@@ -184,15 +184,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 8.713,
                   "observerLatitude": -18.0955,
-                  "observerWestLongitude": 9.9288,
+                  "observerWestLongitude": 12.4958,
                   "sunLatitude": -17.678,
-                  "sunWestLongitude": 21.4701,
+                  "sunWestLongitude": 24.0371,
                   "rangeKm": 379674705.3,
                   "northAzimuthDegrees": 4.2774,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    140.082,
-                    144.807
+                    141.274,
+                    144.4
                   ]
                 },
                 {
@@ -201,15 +201,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 9.613,
                   "observerLatitude": -18.0955,
-                  "observerWestLongitude": 15.2264,
+                  "observerWestLongitude": 17.7934,
                   "sunLatitude": -17.6781,
-                  "sunWestLongitude": 26.7668,
+                  "sunWestLongitude": 29.3338,
                   "rangeKm": 379670850.3,
                   "northAzimuthDegrees": 4.2774,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    139.829,
-                    142.909
+                    140.472,
+                    142.348
                   ]
                 },
                 {
@@ -218,15 +218,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 8.4414,
                   "observerLatitude": -18.0956,
-                  "observerWestLongitude": 20.5127,
+                  "observerWestLongitude": 23.0797,
                   "sunLatitude": -17.6783,
-                  "sunWestLongitude": 32.0523,
+                  "sunWestLongitude": 34.6193,
                   "rangeKm": 379667005.9,
                   "northAzimuthDegrees": 4.2774,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    139.315,
-                    144.561
+                    140.161,
+                    143.828
                   ]
                 },
                 {
@@ -235,15 +235,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 6.7834,
                   "observerLatitude": -18.0956,
-                  "observerWestLongitude": 25.7932,
+                  "observerWestLongitude": 28.3602,
                   "sunLatitude": -17.6785,
-                  "sunWestLongitude": 37.332,
+                  "sunWestLongitude": 39.899,
                   "rangeKm": 379663167.9,
                   "northAzimuthDegrees": 4.2773,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    139.827,
-                    143.161
+                    140.393,
+                    142.182
                   ]
                 },
                 {
@@ -252,15 +252,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 8.0371,
                   "observerLatitude": -18.0956,
-                  "observerWestLongitude": 31.1084,
+                  "observerWestLongitude": 33.6754,
                   "sunLatitude": -17.6787,
-                  "sunWestLongitude": 42.6463,
+                  "sunWestLongitude": 45.2133,
                   "rangeKm": 379659307.1,
                   "northAzimuthDegrees": 4.2773,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    139.334,
-                    142.797
+                    140.61,
+                    142.011
                   ]
                 },
                 {
@@ -269,15 +269,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 19.9926,
                   "observerLatitude": -18.1156,
-                  "observerWestLongitude": 261.3426,
+                  "observerWestLongitude": 263.9096,
                   "sunLatitude": -17.9049,
-                  "sunWestLongitude": 271.8344,
+                  "sunWestLongitude": 274.4014,
                   "rangeKm": 375220980.2,
                   "northAzimuthDegrees": 4.252,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    150.608,
-                    150.037
+                    151.543,
+                    149.996
                   ]
                 },
                 {
@@ -286,15 +286,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 18.9831,
                   "observerLatitude": -18.1156,
-                  "observerWestLongitude": 266.6718,
+                  "observerWestLongitude": 269.2388,
                   "sunLatitude": -17.905,
-                  "sunWestLongitude": 277.1627,
+                  "sunWestLongitude": 279.7297,
                   "rangeKm": 375217391.4,
                   "northAzimuthDegrees": 4.252,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    149.546,
-                    150.943
+                    150.819,
+                    150.782
                   ]
                 },
                 {
@@ -303,15 +303,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 12.1705,
                   "observerLatitude": -18.1157,
-                  "observerWestLongitude": 272.0239,
+                  "observerWestLongitude": 274.5909,
                   "sunLatitude": -17.9052,
-                  "sunWestLongitude": 282.5139,
+                  "sunWestLongitude": 285.0809,
                   "rangeKm": 375213789.4,
                   "northAzimuthDegrees": 4.252,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    150.284,
-                    151.145
+                    153.366,
+                    150.063
                   ]
                 },
                 {
@@ -320,15 +320,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 12.3459,
                   "observerLatitude": -18.1157,
-                  "observerWestLongitude": 277.3281,
+                  "observerWestLongitude": 279.8951,
                   "sunLatitude": -17.9054,
-                  "sunWestLongitude": 287.8171,
+                  "sunWestLongitude": 290.3841,
                   "rangeKm": 375210221.9,
                   "northAzimuthDegrees": 4.252,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    149.801,
-                    149.132
+                    152.133,
+                    148.632
                   ]
                 },
                 {
@@ -337,15 +337,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 11.9842,
                   "observerLatitude": -18.1157,
-                  "observerWestLongitude": 282.6215,
+                  "observerWestLongitude": 285.1885,
                   "sunLatitude": -17.9056,
-                  "sunWestLongitude": 293.1096,
+                  "sunWestLongitude": 295.6767,
                   "rangeKm": 375206663.8,
                   "northAzimuthDegrees": 4.2519,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    151.167,
-                    150.7
+                    153.496,
+                    150.23
                   ]
                 },
                 {
@@ -354,15 +354,15 @@
                   "encoding": "fits-zimpol-intensity",
                   "backgroundMaximum": 13.7685,
                   "observerLatitude": -18.255,
-                  "observerWestLongitude": 54.8382,
+                  "observerWestLongitude": 57.4053,
                   "sunLatitude": -19.28,
-                  "sunWestLongitude": 57.3604,
+                  "sunWestLongitude": 59.9274,
                   "rangeKm": 359821428.4,
                   "northAzimuthDegrees": 4.0026,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    119,
-                    137.485
+                    119.945,
+                    136.45
                   ]
                 }
               ],
@@ -473,7 +473,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c5e6bec972cf0be4a015e0a07d2de64a51f65f71d82afa840dfb39a9e0ece3a5",
+      "sha256": "5531fe1d15bdd1c29b3953b22379011cc184f3b8ce9dd837ae222b1ab9c3ee03",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -577,7 +577,7 @@
               },
               "falseColor": false,
               "noData": true,
-              "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the ADAM reconstruction from the same survey. The survey's rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-10-15 to 2018-11-12, cast onto the ADAM reconstruction from the same survey. The survey's rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -671,7 +671,7 @@
       "sha256": "4fe61233cee4cd479cfb38977c47c5e13236fa394b22bd03277a8ec267dcd7a6",
       "bytes": 347899,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -723,7 +723,7 @@
       "sha256": "1bf17c065df2fb0d2ad91e7461cbcdff709e4adb9765a042fdfb989a5d5530df",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -775,7 +775,7 @@
       "sha256": "65846f82ea44283e10e5b3fa9530c755b8da566085057b9647df43ea1de10708",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -827,7 +827,7 @@
       "sha256": "a2df36107f37e82686c6a8e8535fd21526a362e51adc8a47b8e4ed9804ce45c6",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -879,7 +879,7 @@
       "sha256": "d670313ed3b5cfecd30831478525d6df3016a3d1aaef51dc46189586b4b435ab",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -931,7 +931,7 @@
       "sha256": "84d01758dedae68e9e1304ff746f86fc8065486721d48f8c6df361e6db687973",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -983,7 +983,7 @@
       "sha256": "870eb34576b8df2f000b41d28db42204d5b443090b13186212a5712bec31c510",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1035,7 +1035,7 @@
       "sha256": "5f60ddb8426613c427617f93df2ad36bb6075eb09634d246e02186b87b085eb4",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1087,7 +1087,7 @@
       "sha256": "48b2027a2166f74369a23489579d1f0b197e8a805171632886d208b35fcbfb93",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1139,7 +1139,7 @@
       "sha256": "36248003f62ce39ff17f9852fc314b74a5f7f4e5557db68c961386fce6779414",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1191,7 +1191,7 @@
       "sha256": "0dca070d292486370740657fd19c32baa5785cd267c956599286d553c6ce73a7",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1243,7 +1243,7 @@
       "sha256": "f51040a8aa0e2692a5cbe074615dc59f8870f02671c5789aebbd4f4be3947046",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1295,7 +1295,7 @@
       "sha256": "7498c2af408b6c57c59eb3cb7a3ef8ec0fff8de9c5097d93c829af9c666af291",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1347,7 +1347,7 @@
       "sha256": "2eb3f18cb3a6c17cee9a51ece59d6a9b1bd30bd20d537b0c3a299303ad777085",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1399,7 +1399,7 @@
       "sha256": "e2b050ef928a7ac1482481e27f9ad2bf26e92bcb213eecf75e2d26a1cb3064a4",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1451,7 +1451,7 @@
       "sha256": "3f3772a5329c3e9d364bd59920f5b1fc5ef6b31fb85682cb338a630b223032de",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1503,7 +1503,7 @@
       "sha256": "28e4a763c6a82135d1a8ddc583350f0f2dd486754f195261bef1be3ce0437dd3",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1557,7 +1557,7 @@
       "sha256": "cbc1fbd3770af5d0ef8562fda35475cf7a08ff216c859474843d0fa0dd9f772a",
       "bytes": 31599,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1585,10 +1585,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c5e6bec972cf0be4a015e0a07d2de64a51f65f71d82afa840dfb39a9e0ece3a5",
-      "bytes": 7715,
+      "sha256": "5531fe1d15bdd1c29b3953b22379011cc184f3b8ce9dd837ae222b1ab9c3ee03",
+      "bytes": 7756,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1620,19 +1620,19 @@
           "url": "/scenes/sylvia/sylvia-elevation-thumbnail.webp",
           "bytes": 4888,
           "sha256": "a5a5a30c014603f5b6fd7a414792deac0cefa2a05c5800e44c1c69ee9c098741",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-surface@2x.webp",
           "bytes": 291540,
           "sha256": "b618699e4c7cd8d2184193ff1180ed42701e70b7d9d9cd5d47d540945bbbe2e4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1670,13 +1670,13 @@
           "url": "/scenes/sylvia/sylvia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
           "bytes": 57726,
           "sha256": "59de7434f40b45568c1a495d99bf2e54fcabdd66971924a981f5cec695316c34",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1728,15 +1728,15 @@
       "outputs": [
         {
           "url": "/scenes/sylvia/sylvia-zimpol-thumbnail.webp",
-          "bytes": 1340,
-          "sha256": "53d13e2020f3880cd9056d87ac61a295ca309384daa62f82b7de125934dd66a3",
-          "verification": "bytes-verified"
+          "bytes": 1354,
+          "sha256": "26e2579d1a354fe1ebf69edebd3facffaa0a8b1e56c26a9494ee4fbe2e22dc8c",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 438668,
-          "sha256": "76d32e9b7640ca985aa14fa7850a44cc0abf52080eb028c8caa9bb3d583641e9",
-          "verification": "bytes-verified"
+          "bytes": 416016,
+          "sha256": "7f287fdf5250aef1a781f61d42c149ca5c1fe4c6279ca33b9c6fb0aecbeb2711",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1818,8 +1818,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8056,
-          "sha256": "a465db28e40ebdfc7a9b59f40f7993136cde8ef66ce2a2cb9c43278ea1494b2c",
+          "bytes": 8588,
+          "sha256": "50458de8e0fb5cb3bf4daed54b2d43896341b26e25a75158e1b001b72f4933c6",
           "verification": "bytes-verified"
         }
       ]
@@ -1856,11 +1856,11 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "1d7e21e5b94da14cd7374fffa357ae6b9b26b3a276a2dbb4b7e21cc4260caace",
+    "materialSha256": "788040706838184ae544fe56f563725fe8d2aab4afe9a1c43a4c062f1c96b451",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

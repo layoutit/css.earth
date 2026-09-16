@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "desdemona-666",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "88156d08222e119c10c11a4e289b6fda4de63cf6b011081e618d00bc04428682"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "c2c4b5cba5e6737afd2df806068e95149fd275e313073263e25c17e43d78dc10"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "991cb9699f0cfeacb5f8304d276bd87c6fa9b28d6bdc5322f17b5286618131b0",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "898788f56841d78e0866a06286a4e7d9393dace0e391f21d9082302b5134de4e",
       "bytes": 12998,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/desdemona-666/desdemona-666-elevation-thumbnail.webp",
           "bytes": 5012,
           "sha256": "009a7848f6b530a3ef43d1214d0c75f875c5d1dbe81027b8a3bc8a7b0a7bac72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-elevation-surface@2x.webp",
           "bytes": 308728,
           "sha256": "2933c6e977cde9ff043d4cc34a6d7b9d16cc15c9b3d94e1385ff65587ef5b2e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/desdemona-666/desdemona-666-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-shape-surface@2x.webp",
           "bytes": 66078,
           "sha256": "1106a586430c8a7786bad3a1b6185c1ba498ff644dedcc5c5082979dc4cbbc53",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "desdemona-666",
-    "materialSha256": "f0eae4f162c65df517b2c05a0ab9e0c07123127d595d5faef729d7f1c179d8dd",
+    "materialSha256": "9e92afae69b4ba584659f4aad39782d22234644cdc1ba657c087a079a5e26c9e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "c2c4b5cba5e6737afd2df806068e95149fd275e313073263e25c17e43d78dc10"
     }
   }
 }

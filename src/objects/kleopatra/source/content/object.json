@@ -62,20 +62,6 @@
         "falseColor": false,
         "notes": "The shared neutral gray marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
-      },
-      {
-        "id": "zimpol",
-        "label": "SPHERE photograph",
-        "thumbnail": "/scenes/kleopatra/kleopatra-zimpol-thumbnail.webp",
-        "surface": "kleopatra-zimpol-surface@2x.webp",
-        "poles": "kleopatra-zimpol-surface@2x.webp",
-        "source": {
-          "id": "kleopatra-sphere-20170714t050059538",
-          "path": "../manifest.json"
-        },
-        "falseColor": false,
-        "notes": "Five deconvolved VLT/SPHERE/ZIMPOL frames from July and August 2017, cast onto the ADAM reconstruction. The survey's rotation parameters describe that ADAM frame, so the photograph rides it rather than the MPCD model the Shape view uses. Pointing and orientation are computed from those parameters, JPL Horizons geometry and each frame's header; the disc centre is measured in each frame. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected.",
-        "noData": true
       }
     ]
   },

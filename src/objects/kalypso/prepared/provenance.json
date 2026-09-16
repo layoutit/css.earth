@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kalypso",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "15284c89424ec32eff07f0cce32d7d0a073ef41b86581a2e6ea9e9e6219942fa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "b1327a4de10f7be5019f21645586e094212e412e405e0cea705232658ff6af2a"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "c93cad2380849e859383f912f5f1ef6042c6be167151571b7dc9a27f261165b6",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "0492df4d544c3830b6892241b68c7618a74cdd1bb1e9f816f6f52fd1e64ca1c9",
       "bytes": 9890,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/kalypso/kalypso-elevation-thumbnail.webp",
           "bytes": 5176,
           "sha256": "4c823cdb5cd3810ec70df53de5354b28a25fb898812acd70095749ea41f761bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-surface@2x.webp",
           "bytes": 273968,
           "sha256": "94fb70083ed307f5b4537447dd1abb44aab056d4df8e470d45c3207a99d96937",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/kalypso/kalypso-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalypso/kalypso-shape-surface@2x.webp",
           "bytes": 63762,
           "sha256": "2889f93ca566283a98092325cce0b992ec32db8769cc729e858622f3f2dbabc1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "kalypso",
-    "materialSha256": "7b41aa6c26fee3ae7755a51a14ea424260fdfcfb8a4baf560f72173264975d92",
+    "materialSha256": "966d4774b85d6bfc5229c6cb4460b8f692cc4dc78b62939fb53300bd5a2b566b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "b1327a4de10f7be5019f21645586e094212e412e405e0cea705232658ff6af2a"
     }
   }
 }

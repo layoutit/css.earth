@@ -22,25 +22,25 @@
     "titleKey": "lenses",
     "defaultLens": "model",
     "labels": {
-      "model": "Illustrative nucleus"
+      "model": "Shape approximation"
     },
     "controls": [
       {
         "id": "model",
-        "label": "Illustrative nucleus",
+        "label": "Shape approximation",
         "thumbnail": "/scenes/comet-c1973-e1/comet-c1973-e1-model-thumbnail.webp",
         "surface": "comet-c1973-e1-model-surface@2x.webp",
         "poles": "comet-c1973-e1-model-poles@2x.webp",
         "source": {
-          "id": "celestia-mesh",
+          "id": "shape-parameters",
           "path": "../manifest.json",
-          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          "url": "https://doi.org/10.1038/248737a0"
         },
         "facts": [
           {
-            "id": "diameter",
-            "label": "Catalog diameter",
-            "value": "≈4.2 km"
+            "id": "radius",
+            "label": "Effective nucleus radius",
+            "value": "6.25 km"
           },
           {
             "id": "perihelion",
@@ -48,7 +48,7 @@
             "value": "0.159 AU"
           }
         ],
-        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and neutral gray marks missing surface imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "notes": "An ellipsoid at the published effective nucleus radius (Rieke and Lee (1974), Nature 248, 737). Unresolved; the midpoint of the published diameter range is displayed as a sphere. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
         "noData": true
       }
     ]
@@ -67,10 +67,10 @@
   "charts": [],
   "resources": [
     {
-      "label": "Celestia",
-      "role": "surface",
-      "description": "Catalog entry and estimated scale",
-      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+      "label": "Nucleus size",
+      "role": "shape",
+      "description": "Rieke and Lee (1974), Nature 248, 737",
+      "href": "https://doi.org/10.1038/248737a0"
     },
     {
       "label": "JPL Horizons",
@@ -95,7 +95,7 @@
     },
     "physical": {
       "path": "../shape/model.json",
-      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+      "credit": "Rieke and Lee (1974), Nature 248, 737"
     }
   }
 }

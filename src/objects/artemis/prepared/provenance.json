@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "artemis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6b1eaf128fecbe18e88134592485bd33e695ebfa33462849425320ed363bf4cc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "432b65c7c12bb9c08fa34953ebb956fe1619894918fb5bbb2e332b1a33ee2bf5"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "94fc92d360a1f3a2717868f1d57a9198a413398e84683329b60707f2f5a10b9b",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "b448e77e03b0d79c4f6678aa70fdf7b738096bf0b5ff51e8244f017b33e82bb2",
       "bytes": 9269,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/artemis/artemis-elevation-thumbnail.webp",
           "bytes": 5074,
           "sha256": "e3d6524e636bf5c3430d0969cffe8bfcac188424e553d712f40a50fdcc6e86bb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/artemis/artemis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/artemis/artemis-elevation-surface@2x.webp",
           "bytes": 279928,
           "sha256": "8f8e06a6a31672e1b60028f9e9f4fde8d4191c4c26e34a7bb983043cecaea99f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/artemis/artemis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/artemis/artemis-shape-surface@2x.webp",
           "bytes": 62406,
           "sha256": "47a10669e13706593e4392212505c38ebb609d308c49685fec68807ca2a336d1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "artemis",
-    "materialSha256": "c5f058e6ba60270818696aabb003413a7324e61fe118c8ef5266ee1311aa1721",
+    "materialSha256": "56c9c1b00a5b397ee5ae1e4bdcf01c18cd43afa4975e4f70a625c0574a98685f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "432b65c7c12bb9c08fa34953ebb956fe1619894918fb5bbb2e332b1a33ee2bf5"
     }
   }
 }

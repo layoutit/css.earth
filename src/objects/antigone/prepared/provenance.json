@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "antigone",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6a93767a59ee2c5ac7f3c7a6d9c32bb7749b605d4caf65f6c65b5d6521a7c922"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "411e3bb94a7161e00288a990b7f045892ca3f70243da1146cbc5b8d2f50331bc"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "e011dbcecac18acc61b6cb82327ee948983b348ccc3b7c20b2c4ba11078318cf",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "74d39353d1f360d13f858cd035eccb5b84eb413557743c73281cf60b89ad4690",
       "bytes": 9755,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/antigone/antigone-elevation-thumbnail.webp",
           "bytes": 4942,
           "sha256": "f87b61644c988dea03ebc7cda2321c0982ae05365d2ba532aa53e926f57f39a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/antigone/antigone-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/antigone/antigone-elevation-surface@2x.webp",
           "bytes": 257418,
           "sha256": "cd7dd6e5120f9ccdfe91e896124b353d53b10ff729dba1847dd484fe064ee344",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/antigone/antigone-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/antigone/antigone-shape-surface@2x.webp",
           "bytes": 57044,
           "sha256": "9a99ff71d7eb1fc7a96f71d8c47bd0970294f158f103da1fe4068cfbb8024cf5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "antigone",
-    "materialSha256": "26faa81a3877ae64b4592354052c68ccf304dd87c0ffbc6985310827486b81cc",
+    "materialSha256": "896524c60c48168b9453baf0b576d463f6924687a25b9376cb1be39bd4cd996d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "411e3bb94a7161e00288a990b7f045892ca3f70243da1146cbc5b8d2f50331bc"
     }
   }
 }

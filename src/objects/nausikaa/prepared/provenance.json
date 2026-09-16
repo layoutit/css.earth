@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nausikaa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "21733517ebbbe76394dfcce4b8af0547f144b1b9e0ab839b635bf8b996084ae9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "dc4e8c7750d69b918a1eb5ba7ebeb0bfc8ae9336cf7a0a73a51d69e6b01af6ef"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "34377681fbc2782fc5422725c431edb1028f94d4cf4b7e210a74cd115a886aa3",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "427837fd359753dcff128c6dd8b033de97a26005e071f704d500faef0fb8f409",
       "bytes": 9091,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/nausikaa/nausikaa-elevation-thumbnail.webp",
           "bytes": 5256,
           "sha256": "60bcfc108238703aac63e6480c4076c0912426c214a16f491c260ded43f74620",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nausikaa/nausikaa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nausikaa/nausikaa-elevation-surface@2x.webp",
           "bytes": 346782,
           "sha256": "97755ce01e118fd7c266fde65282f5a333e7b214933737e1345618f05a610664",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/nausikaa/nausikaa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nausikaa/nausikaa-shape-surface@2x.webp",
           "bytes": 64862,
           "sha256": "5375f0ed83d68608355e26a7144aa3f9fbf164d12023ce97eda157445cbc98c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "nausikaa",
-    "materialSha256": "8c2bd10c447580970bfb7fac88bdf6593433468542e3e177c4f9417bc01b5b8b",
+    "materialSha256": "55cc9aca52655901fa8f83a7f9bb8f8dff7079a2ed5d4ee457f39e6e403539a2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "dc4e8c7750d69b918a1eb5ba7ebeb0bfc8ae9336cf7a0a73a51d69e6b01af6ef"
     }
   }
 }

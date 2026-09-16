@@ -37,6 +37,18 @@ The [camera record](source/observations/llorri-camera.json) retains the pointing
 
 - **Reader oracle, 2026-09-12:** `tools/oracles/fits/llorri.py` reads the pinned product with astropy. `tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts` requires DN per second and the quality decisions to match the three HDUs, the bound SIP coefficients to equal the header's, and the TAN-SIP distortion to agree with `astropy.wcs` within 10⁻⁹ px at 65 pixels, with the inverse returning each pixel.
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `llorri` | 2 | 0 | — | — | — | its other 2 frames | 1 of 2 | — | 2 of 2 | — | no verdict |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+<!-- registration-report:end -->
+
 ## Known problems
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Donaldjohanson (retrieved 2026-09-12, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. Names the Gazetteer has not positioned (centre 0°, 0° with an empty extent) are not placed and are tallied in the prepared descriptor.

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "philagoria",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6a0bc4a950be35f0b26cf20352a2561cde2d48936e3e62ef9e62460c315b8b65"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "45a9fa30361327817fc29b08e10991fa694412bb9784516c11d992fab16b92cb"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "d00a5edc3e2c3ccfd5fc8ec04d264eb5fc651bf5b4015258f7878aa48f1bae1d",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "adc37fb6aa1d8ffe2cf596f8b7ad8df8538cdac6472a0496422d043dc1408a60",
       "bytes": 11435,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/philagoria/philagoria-elevation-thumbnail.webp",
           "bytes": 4978,
           "sha256": "f01cf6bda46f75dd532a4802360a036afc5a61ea6d0d0cf5119dfc433518d611",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-surface@2x.webp",
           "bytes": 293490,
           "sha256": "3aebafa0e8e35b6e7b37caa186fe4caec7768ce00027bb41b7642fcbe2c66e43",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/philagoria/philagoria-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
           "bytes": 65510,
           "sha256": "e6510af5613694f5aaa744862fcae96defc09499687139cbd64a9b1bdca848f4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "philagoria",
-    "materialSha256": "6f0916d800716713cde8dd3aa37292b15da16166f937fd171ce1e05d92696dc7",
+    "materialSha256": "f3b336e35dfe57897e59d23b53b0a03314548eecbf18f47b6781b381f864f886",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "45a9fa30361327817fc29b08e10991fa694412bb9784516c11d992fab16b92cb"
     }
   }
 }

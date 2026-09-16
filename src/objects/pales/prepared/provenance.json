@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pales",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "6f08bcaae5c0b7fd54d64b9e38b3d18f232f44a96350c1799b72f8218ff3b137"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "c26f1e94a3fb970e54ad33277126dd6727605e77b0c2fcc263ecb758c998f6f7"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "eb435f1eed2b7bdab2a018e10e761e55375947842b4627375cab9e9380a55e78",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "9bfb842d10ff75c56086bf695388f477f51804e32224787514fd8c666739d97e",
       "bytes": 9011,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/pales/pales-elevation-thumbnail.webp",
           "bytes": 5278,
           "sha256": "f7fee2eabf7210e4e694ce7c82195279e6e0727708fc277b6120c85d0e9804ec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pales/pales-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pales/pales-elevation-surface@2x.webp",
           "bytes": 267258,
           "sha256": "667dfe2a06ca9f5ea4bd10c88ef1ba67e4e310234ab4aa3d7806ea087a0ccd1a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/pales/pales-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pales/pales-shape-surface@2x.webp",
           "bytes": 60440,
           "sha256": "b5f5bb269bc435f680aa01efc20c7c5c17c71e2f90497d3419cd11f60d8f3e8e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "pales",
-    "materialSha256": "6fcb2beb9012116826f24ac7853b663bbd721104d92585c48d35a9e4a47e99cb",
+    "materialSha256": "f6a1b8f21781ad3b123a9e99f02c7195c30165be75921f3a1d3bd43aec678836",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "c26f1e94a3fb970e54ad33277126dd6727605e77b0c2fcc263ecb758c998f6f7"
     }
   }
 }

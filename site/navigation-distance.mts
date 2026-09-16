@@ -20,7 +20,8 @@ export function parseNavigationDistance(input: unknown): NavigationDistance {
       (input.unit !== 'AU' && input.unit !== 'pc') || (input.quantity !== 'geometric' && input.quantity !== 'catalogue' && input.quantity !== 'comoving') ||
       (input.referencePoint !== 'heliocentre' && input.referencePoint !== 'observer') ||
       !(input.epochJdTt === null || typeof input.epochJdTt === 'number' && Number.isFinite(input.epochJdTt)) ||
-      (input.quantity === 'geometric' ? input.referencePoint !== 'heliocentre' || input.epochJdTt === null || input.unit !== 'AU'
+      // A geometric distance is heliocentric at its epoch, in AU inside the Solar System and in parsecs for a placed star.
+      (input.quantity === 'geometric' ? input.referencePoint !== 'heliocentre' || input.epochJdTt === null || (input.unit === 'pc' ? input.meters < 3.085677581491367e15 : input.unit !== 'AU')
         : input.referencePoint !== 'observer' || input.epochJdTt !== null || input.unit !== 'pc')) {
     throw new TypeError('Invalid prepared navigation distance.');
   }
@@ -36,7 +37,7 @@ export function parseNavigationDistance(input: unknown): NavigationDistance {
 
 export function distanceDescription(distance: NavigationDistance): string {
   if (distance.subject) return `Distance to ${distance.subject.name}, adopted for this scene. ${distance.subject.reason}`;
-  return distance.quantity === 'geometric' ? `Distance from the Sun at JD ${distance.epochJdTt} TT`
+  return distance.quantity === 'geometric' ? `Distance from the Sun at JD ${distance.epochJdTt} TT${distance.unit === 'pc' ? ', from the catalogue parallax carried by proper motion' : ''}`
     : distance.quantity === 'comoving' ? 'Observer distance: redshift-derived comoving distance'
       : 'Observer distance adopted from the catalogue; measurement epoch is source-specific';
 }

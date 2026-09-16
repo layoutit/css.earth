@@ -82,7 +82,8 @@ registry, generic adapter, shared shell and active object scene; navigation uses
 the shared world camera.
 
 Navigation marker appearance comes from each authored package's
-`source/preparation/navigation.json`. `tools/prepare-navigation.mts` generates
+`source/preparation/navigation.json`, which names its source image by path;
+the pins and attribution are the source manifest's record. `tools/prepare-navigation.mts` generates
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
 images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
@@ -186,9 +187,13 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
 | Published camera controls for a shape model, or the Galileo SSI image catalog | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame pins with the control network's camera fields or a `cameraCatalog`, photometry, transfer limits, level matching | None yet; preparation refuses a frame whose camera puts more than a quarter of its lit shape on sky |
-| Ground-based telescope frames with no archived geometry | `controlled-shape-camera` with `fits-zimpol-intensity` | Kleopatra `zimpol`: deconvolved VLT/SPHERE/ZIMPOL frames | Frame pins with cameras computed by `observer-camera.mts` from a rotation model, Horizons geometry and each frame's header; the mesh the rotation model describes, as a `radialTerrainAlternatives` entry. The model is the release's spin record (`spinOrientation`) or, for a body a text PCK describes, its IAU pole model (`pckOrientation` over the shared `pck00011.tpc` and a leap-second kernel) | `observer-camera.test.mts`: the spin record against the IAU elements DAMIT publishes for the same model, the PCK model against Horizons sub-observer points for Jupiter and Saturn, and the two providers against each other for Pallas |
+| A camera lens whose named reference may turn or tilt it | `refinement` on the lens recipe, applied in `surface-observations/index.mts` through `cameras.mts` `turnedCamera` and `tiltedCamera`, kept only if re-measurement improves what it came from | Psyche `zimpol`: a 5° tilt kept | The stage measures, the named reference's decisive median turns every camera once when no other decisive reference disagrees, and the turned lens is measured again; every backplane camera now carries a Sun fitted from the archive's phase plane | `cameras.test.mts` (Sun fit to 0.01°, refused when no single Sun explains the plane, turned camera), `registration.test.mts` (agreement rule), `tests/objects/unit/itokawa/amica.test.mts` (fitted Sun against the SUM file's SZ) |
+| Registration of any camera route against the surface | registration stage in `surface-observations/registration.mts` | every camera lens; Tethys `iss` names its `normal` map as the reference | Silhouette residual with its noise floor and the reference sweep (map or the lens's other frames) reported under `registration` in the lens report and written into the body README by `tools/objects/report-registration.mts`; `tools/objects/registration-stage.mts` re-measures a body without re-preparing it | `registration.test.mts` (synthetic elongated body: right and wrong pole, partial disc, frames as reference), `report-registration.test.mts` (README block equals the prepared report) |
+| Ground-based telescope frames with no archived geometry | `controlled-shape-camera` with `fits-zimpol-intensity` | Sylvia `zimpol`: deconvolved VLT/SPHERE/ZIMPOL frames | Frame pins with cameras computed by `observer-camera.mts` from a rotation model, Horizons geometry and each frame's header, all named in `source/preparation/observer-cameras.json` and written into the recipe by `tools/objects/observer-cameras.mts` (exposure-midpoint epoch, limb-fitted centre); the mesh the rotation model describes, as a `radialTerrainAlternatives` entry. The model is the release's spin record (`spinOrientation`) or, for a body a text PCK describes, its IAU pole model (`pckOrientation` over the shared `pck00011.tpc` and a leap-second kernel) | `observer-camera.test.mts`: the spin record against the IAU elements DAMIT publishes for the same model, the PCK model against Horizons sub-observer points for Jupiter and Saturn, and the two providers against each other for Pallas; `observer-cameras.test.mts`: every recipe states what its pinned inputs derive; `tests/objects/unit/vesta/sphere-registration.test.mts`: the route against the Dawn mosaic through `observer-registration.mts` (peak +0.5° over 30 frames, mirrors beaten, the IAU prime meridian 210° away) |
 | Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | `bands` naming the three filters, and `frames` as band sets naming each set's red, green and blue photographs. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
 | ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
+| Optical-interferometric visibilities with no image at all | `controlled-shape-camera` with `fits-oi-reconstruction`, on the planet route through the raster science kind `surface-observation` (`science.shape` names the reference sphere table, `science.lens` the lens) | Betelgeuse `matisse`: public VLT/MATISSE OIFITS merged by `tools/objects/interferometry/matisse-continuum.mts` and reconstructed with the public SQUEEZE code at a pinned commit | The merged OIFITS, the reconstructed image and the SQUEEZE build and command as pinned inputs; a `reconstruction` block on the frame naming the visibilities' epoch, band and file; the computed camera | `tests/objects/unit/betelgeuse/reconstruction.test.mts` recomputes the fit of the image to the visibilities with `tools/objects/interferometry/image-fit.mts` |
+| The default camera of a photograph lens on the planet route | `tools/objects/default-view.mts` (`assertDefaultViewFacesLens`, run by `prepare-authored` for every `surface-observation` lens) | Betelgeuse `default-view.test.mts` | The runtime's scene matrix and `worldCameraFromPresentation` give the sub-camera point and the screen angle of any direction without a browser | Preparation refuses a default view more than 25 degrees from the lens's sub-observer point; the test pins the browser-measured angles |
 
 For `controlled-shape-color`, each band set is one observing triplet. A point is
 colored only where all three of its bands qualify, and band sets compete for a
@@ -208,6 +213,19 @@ Routes with Sun geometry accept a published photometric model record (see
 lists which bodies have one. Kernels that serve several bodies of one mission
 live in a kernel bank under `src/spice/<mission>/`: add, restore and verify them
 with `node tools/spice/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
+
+A star other than the Sun is a placed body. `packages/astronomy` carries its
+catalogue astrometry (`star` record: ICRS position and epoch, distance, proper
+motion, radial velocity, each with its source), `tools/prepare-solar-geometry.mts`
+places it by that state instead of an orbit, the Sun's world context lists it
+with a position and no trajectory (`orbitStyle: none`), navigation reads its
+distance in parsecs, and the overview rule that opens the Solar System when the
+camera leaves it anchors on the star itself. The reference surface is a sphere at
+the published radius written as a radius table, as Annefrank's ellipsoid is. The
+Sun direction from such a body is the direction to Earth within a thousandth of a
+degree, so incidence equals emission and `retained-observation` photometry keeps
+the reconstructed intensity. The baked sky cube is the Sun's; beyond the star
+band the runtime hands the sky to the 3D star field, so the cube fades out there.
 
 ## Registered photographic mosaics
 

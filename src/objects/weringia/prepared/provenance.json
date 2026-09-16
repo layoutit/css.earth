@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "weringia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "e71f6fa9956e843893cdc843671db2840c0f9db045ccea13a745230483e0f8b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "8f9c9a474dda5663c1f961dc6745c1eb81f30ba99a0f4b0a3d4d017b41f9290b"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "b5ea3c7a8dacc9eb8d62f5ea85376eeeec1d1d521461ea669a201a5f7d97646b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "a99d52597b34105693e37f48be6a08d6af2e6da39d04630aa226e39c8b40ecb6",
       "bytes": 10490,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/weringia/weringia-elevation-thumbnail.webp",
           "bytes": 5368,
           "sha256": "6fb84fd2d684afec85bce485eb6582573c9aef77ac584d75c7c31106b95ae05a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/weringia/weringia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/weringia/weringia-elevation-surface@2x.webp",
           "bytes": 506902,
           "sha256": "c487ff0d3c5199316ffcf133ad1cc51ff534e6bf66f71b3eb30cbeefae130308",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/weringia/weringia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/weringia/weringia-shape-surface@2x.webp",
           "bytes": 73516,
           "sha256": "27004ba241ea372899fe657562a5e6cabfd0cdd6b29c77f20dd65921906cd1c3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "weringia",
-    "materialSha256": "8f0f2e1726f311ea6406f1923a64302fdc2c38aceba34530cad24db3c8b9e3e2",
+    "materialSha256": "2b210cb37574102e9bb17fb066f0b1cf70e9bcb92b0914771fdf4691d0084092",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "8f9c9a474dda5663c1f961dc6745c1eb81f30ba99a0f4b0a3d4d017b41f9290b"
     }
   }
 }

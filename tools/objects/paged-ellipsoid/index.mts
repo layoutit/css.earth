@@ -1,3 +1,4 @@
+import { readAuthoredSources } from '../authored-sources.ts';
 import {requireObjectControls} from '../../../site/scene-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
@@ -38,14 +39,7 @@ const write = (directory: string, name: string, value: unknown) => writeFile(res
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
 export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
-  const descriptor = parseAuthoredObjectDescriptor(await json(resolve(objectDirectory, 'object.json'))), sources = new Map<string, {reference: AuthoredObjectDescriptor['recipe']['sources'][number]; path: string; value: unknown}>();
-  for (const reference of descriptor.recipe.sources) {
-    const path = resolve(objectDirectory, reference.path), offset = relative(objectDirectory, path);
-    if (offset.startsWith('..')) throw new TypeError('Source escapes its object directory.');
-    const bytes = await readFile(path);
-    if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Source digest differs: ${reference.path}`);
-    sources.set(reference.id, { reference, path, value: JSON.parse(bytes.toString('utf8')) });
-  }
+  const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };
   const config = parsePagedProfile(required('paged-ellipsoid')), bindingSource = parsePagedLensBindings(required('lens-bindings'));
   if (!isPagedEllipsoidRecipe(config) || config.namespace !== descriptor.id || config.publicBase !== `/scenes/${descriptor.id}/`) throw new TypeError('Paged ellipsoid identity differs.');
@@ -105,6 +99,6 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(paging ? { noise, places: catalog, pages: city, 'page-preparation': report } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
-  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources, lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: Boolean(paging) } });
+  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: Boolean(paging) } });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content };
 }

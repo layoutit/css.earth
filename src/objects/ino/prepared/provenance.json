@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ino",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "ba66836ec7fa996f670b5bbb0341a2bc10576836548a1b436bf506d73c91853d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "a7750062af97ed4d6ee0f4f2cffaed486657b112def69ec819e3dbf68bd20302"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "b6b64c30f487bfb7f146122cf99b49143693e622f2f182bcf5d80b44adc73564",
       "bytes": 142972,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "80153a8a75c778690e7577fc63a206c654ea16bd3f1628e3321e76f8767dfd9c",
       "bytes": 6948,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/ino/ino-elevation-thumbnail.webp",
           "bytes": 5112,
           "sha256": "fc624357e9c747d5abbc3e5afab5b688f54044879672c4ed491f9420bad56b6c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ino/ino-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ino/ino-elevation-surface@2x.webp",
           "bytes": 286420,
           "sha256": "fe6c52e2c51bfb9230066e83d16d2a4d63deafd5f6dabd4db92d62101612d43f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/ino/ino-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ino/ino-shape-surface@2x.webp",
           "bytes": 61274,
           "sha256": "7669946b6fbc6dbc44e51dc2fc9f33e22723b076e0f1a2420cb48cf50b9f53e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "ino",
-    "materialSha256": "516e922327c3372b163f26517e793538fc38993bfd3387bc7116404c099b1a08",
+    "materialSha256": "e5fed224c431854cb0c2f2d678e432f5c26957245855aff54a84fa480ff7b3d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "a7750062af97ed4d6ee0f4f2cffaed486657b112def69ec819e3dbf68bd20302"
     }
   }
 }

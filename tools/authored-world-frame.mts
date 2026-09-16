@@ -25,8 +25,17 @@ export async function requireAuthoredWorldFrame({ descriptor: descriptorInput, s
   const frame = requireRecord(properties.worldFrame, 'Authored physical frame');
   const recipe = requireRecord(properties.recipe, 'Authored recipe');
   const sources = requireArray(recipe.sources, 'Authored recipe sources').map(value => requireRecord(value, 'Authored source'));
+  const manifestPath = resolve(directory, 'source/manifest.json'), manifest = requireRecord(JSON.parse(await readText(manifestPath)), 'Source manifest');
+  closure?.add(manifestPath);
+  const records = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => requireArray(manifest[key] ?? [], key).map(value => requireRecord(value, key)));
+  // The receipt lists each source with the manifest pin it had; the manifest is the only owner of those pins.
+  const pinned = sources.map(source => {
+    const path = requireString(source.path, 'Authored source path'), record = records.find(entry => `source/${String(entry.path)}` === path);
+    if (!record) throw new TypeError(`Authored physical frame source ${path} is not declared in the manifest.`);
+    return { id: source.id, path, sha256: record.expectedSha256 };
+  });
   if (receipt.schema !== 'cssearth-world-navigation-preparation@1' || receipt.id !== descriptor.id ||
-    !isDeepStrictEqual(receipt.sources, recipe.sources) || !isDeepStrictEqual(receipt.frame, frame)) fail('receipt differs from its authored source pins or descriptor');
+    !isDeepStrictEqual(receipt.sources, pinned) || !isDeepStrictEqual(receipt.frame, frame)) fail('receipt differs from its manifest source pins or descriptor');
   if (scene.worldFrame !== undefined && !isDeepStrictEqual(scene.worldFrame, frame)) fail('differs from the source scene frame');
   if (typeof frame.epochJdTt !== 'number' || !Number.isFinite(frame.epochJdTt) || ![frame.bodyRadiusM, frame.metersPerUnit].every(value => typeof value === 'number' && Number.isFinite(value) && value > 0)) fail('has invalid physical units');
   const context = sources.find(source => source.id === 'world-context');

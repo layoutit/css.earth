@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "athamantis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "5beeeb1c1d51e86d47e82fd54814ffd2cb01f0ab4de0cdb9c08c7749d4d690b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "00a4dc6983b4ff7b97531b7041a6b7e4ec48246eca63fd89f0e788a312eeeaca"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "ca781392c88cb7da8f861e4f7a98da4c5d7677394a5bc8a3e79d6c7e766707d3",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "0581286a2a4af84ada168995075a1d6a9803c97d9a87ee3232c0a718202e8e32",
       "bytes": 11337,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/athamantis/athamantis-elevation-thumbnail.webp",
           "bytes": 5720,
           "sha256": "3d753b63d441851ecc0ede6bf4d3964b74b6b3c9a4c92aa16e14c53fa2ae5b0c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-surface@2x.webp",
           "bytes": 272194,
           "sha256": "60499a517d83c4e683d33a1c12af308fed3e8af01cfa86d53e825a71ce68fbbc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/athamantis/athamantis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-shape-surface@2x.webp",
           "bytes": 62266,
           "sha256": "65ac2380ff020ec3bd2f6746bc669e95d7e2be71d19167b95be45c6b7d736af2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "athamantis",
-    "materialSha256": "54aba1afb7a0b9b4197b2bce470631238ec6f9df9928ed32adb28564dad94a95",
+    "materialSha256": "2bc993c7c9b673fbcd8047778c6dd8f682956bef57259d7bf5da4e1cab933fb6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "00a4dc6983b4ff7b97531b7041a6b7e4ec48246eca63fd89f0e788a312eeeaca"
     }
   }
 }

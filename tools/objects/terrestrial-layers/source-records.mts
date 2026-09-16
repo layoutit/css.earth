@@ -130,6 +130,7 @@ export const parsePdsRgbPolicy = shape({member:optional(text),targetName:text,ce
 export function parseEllipsoidParameters(value: unknown) {
  const source = requireRecord(value);
  if (source.scaleConvention === 'published-semiaxes') return shape({schema:text,scaleConvention:choice('published-semiaxes'),semiaxesKm:array(number),subdivisions:number})(value);
+ if (source.scaleConvention === 'effective-radius-as-volume-equivalent') return shape({schema:text,scaleConvention:choice('effective-radius-as-volume-equivalent'),axisRatioAB:number,axisRatioBC:number,effectiveRadiusKm:number,subdivisions:number})(value);
  return shape({schema:text,scaleConvention:choice('thermal-radius-as-volume-equivalent'),axisRatioAB:number,axisRatioBC:number,thermalRadiusKm:number,subdivisions:number})(value);
 }
 export const parseContactModel = shape({schema:text,origin:text,lobes:array(shape({semiaxesKm:array(number)})),fluxScale:number,subdivisions:number});
@@ -155,7 +156,9 @@ const partialControlledCameraFields = {observerLatitude:optional(number),observe
 export const cameraFrameFields = {id:text,path:text,labelPath:optional(text),encoding:optional(text),allowFiniteSigned:optional(boolean),backgroundMaximum:optional(number),
   coverageInsetPixels:optional(number),backgroundOffset:optional(number),...partialControlledCameraFields,
   cameraCatalog:optional(shape({path:text,labelPath:text,instrumentPath:text,longitudeDirection:text,pixelOrigin:text,imageNumber:number})),
-  quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text}))};
+  quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text})),
+  // An image reconstructed from interferometric visibilities: the epoch and band of those visibilities, and the merged file they were read from.
+  reconstruction:optional(shape({startTime:text,filter:text,visibilitiesPath:text}))};
 export const parseCameraFrame = shape(cameraFrameFields);
 export const parseCameraShape = shape({format:text,path:text,grid:requireRecord});
 

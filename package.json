@@ -91,6 +91,7 @@
     "prepare:machine-renders": "node tools/prepare-machine-renders.mts",
     "prepare:sources": "node tools/prepare-provenance.mts",
     "pin:documents": "node tools/pin-object-documents.mts",
+    "check:environment": "node tools/check-environment.mts",
     "author:sources": "node tools/author-source-records.mts",
     "predev": "pnpm build:packages && pnpm build:renderer && pnpm prepare:catalog && pnpm build:preparation && pnpm prepare:object-json && pnpm prepare:environment-images && pnpm prepare:minimap && pnpm prepare:galaxy-field",
     "prebuild": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:object-json && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:minimap && pnpm prepare:galaxy-field",

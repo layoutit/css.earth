@@ -8,16 +8,13 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 9956,
-    "expectedSha256": "4d8586a6fbd793cb6a0449cf77ae8cbce6e9b228ff25b1cb6f8af0379f6534ae",
-    "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-    "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
-    "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
-    "licenseEvidence": [
-      "reference/celestia.ssc",
-      "reference/GPL-2.0-or-later.txt"
-    ],
-    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "expectedBytes": 13498,
+    "expectedSha256": "d26146047eb777d6996da9117cde302edb67358b98b857783aed57ef269b2708",
+    "origin": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=153P&phys-par=true",
+    "credit": "Repository assumption; no published nucleus size",
+    "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
+    "licenseEvidence": [],
+    "acquisition": "Reproduced from the ellipsoid shape record with the shared missing-imagery grid.",
     "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
     "consumers": [
       "navigation"

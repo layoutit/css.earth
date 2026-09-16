@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "palma",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "3c7ff525789d197ee33084b39d47f24cbc20519fa720a0d27565aac19eb1956d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "eb70c978c0cc883420c185661af748a653c8c9145d49ef42de5746b57f221c0c"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "0e369845b907bd11ffce66d5b0274e28e8bae80549fb00f59df59f39293f8f13",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "d0d9a4220baf1efbd0891a71e3574d9a6ad1c639fda6d8f3709261089a364050",
       "bytes": 7097,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/palma/palma-elevation-thumbnail.webp",
           "bytes": 5960,
           "sha256": "98d5d1ccaaa34324821df51d467656b0759f731495f928669baeacde1130925f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/palma/palma-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/palma/palma-elevation-surface@2x.webp",
           "bytes": 372782,
           "sha256": "b2683e0cbab798be9516ec549a0b06a7be4d655b99bd10d159d9d53f7002c964",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/palma/palma-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/palma/palma-shape-surface@2x.webp",
           "bytes": 65790,
           "sha256": "91348bf83486ca2060104dc4a4a2d56d40db508f555979747e383bea7dd62d79",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "palma",
-    "materialSha256": "dd83d654b0ae65d21d742ef5996ba378864e312f20039ef18702afb473fed0f6",
+    "materialSha256": "d60eba0716a93cf50f7cd24c353691e829abce7e66685ef88dc137a405757e14",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "eb70c978c0cc883420c185661af748a653c8c9145d49ef42de5746b57f221c0c"
     }
   }
 }

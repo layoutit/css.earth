@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "achilles",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "d28d487192edb5dd343e0ce04812259584ff4a7cb68d079df0d0855bf3859687"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "80608c8f5245f31b8d992b1892486daa647d6c40b3c0b95cdf8dcdb4a5a15980"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "38db827d7d93b048832ba643e1644e072e5fb5a681e122f3085e9735600220ca",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8028,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/achilles/achilles-elevation-thumbnail.webp",
           "bytes": 5822,
           "sha256": "070b72c7de7e5cd657f3047a3cf4681656573b6b95ad246f2650ec0b58356ce2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/achilles/achilles-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/achilles/achilles-elevation-surface@2x.webp",
           "bytes": 312368,
           "sha256": "15d8926ee5c3324a0b108dc9c1295f2d39fa547aa8189440cba998a7288cba7a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/achilles/achilles-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/achilles/achilles-shape-surface@2x.webp",
           "bytes": 68484,
           "sha256": "6c0fd2d0e2b55d78c77069fef1240627631a7575294d4af9271eb699d29a5b47",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "achilles",
-    "materialSha256": "35a9a85541d9b52374b6a070e859e940767383af32326cdddf5b4bae9ccfc9b5",
+    "materialSha256": "7918effc7201b72c6b7565de875ec660a276024b375677e3c77113e42090e329",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "80608c8f5245f31b8d992b1892486daa647d6c40b3c0b95cdf8dcdb4a5a15980"
     }
   }
 }

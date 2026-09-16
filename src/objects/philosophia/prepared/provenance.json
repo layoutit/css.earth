@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "philosophia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "b2345ce2bfc74a51d9fd65b96d6cbf326478455aefd6b963868056b97877580c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "e1ee2f1d0007daef0b68039de14b1f002bf5ada5fe5ebccf2dc1a807468023dc"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "e21f6191a0e78785b81cf603e3e0f86281aca58b705fc1cadfebb5a043afef6f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "3b9d4f1bec312c33fa4465d9b3ae7714f045844268f12b9055a1e6e9ba05671f",
       "bytes": 11383,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/philosophia/philosophia-elevation-thumbnail.webp",
           "bytes": 5364,
           "sha256": "fbe96ce78e3d340bde803f92602a3f3b0642e815d7bea79a9c30531d59bc4a3e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philosophia/philosophia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philosophia/philosophia-elevation-surface@2x.webp",
           "bytes": 258184,
           "sha256": "827e280d842b75c1c6c6d3396c3cd35efc59876c4adfce8ed41b81130e02ad08",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/philosophia/philosophia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philosophia/philosophia-shape-surface@2x.webp",
           "bytes": 62960,
           "sha256": "3e6198ecec3de7ac7c5000b2446dda9684ab03dcaf09eaf2703201c110562382",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "philosophia",
-    "materialSha256": "cff3d04577bcbe8dcd142f3e7b0665aec452de475143c6b049153e9a90deb666",
+    "materialSha256": "620152eba263c23b9d29f2d5364333c9b167247391c473f022074e252e61b5b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "e1ee2f1d0007daef0b68039de14b1f002bf5ada5fe5ebccf2dc1a807468023dc"
     }
   }
 }

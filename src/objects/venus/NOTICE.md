@@ -1,9 +1,11 @@
 # Venus source notice
 
-The Venus cloud texture and OpenSpace configuration files are pinned from the
-OpenSpace project at commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516`. They are redistributed under the
-OpenSpace MIT License included in `LICENSE.OPENSPACE-MIT`.
+The Venus cloud texture is pinned from the OpenSpace project at commit
+`56e29b54b8592084ff1fef47c2e08de0b22ce516` under the OpenSpace MIT License
+included in `LICENSE.OPENSPACE-MIT`; no source-backed global ultraviolet cloud
+mosaic has been qualified yet (the investigation ledger records the Akatsuki
+route). The atmosphere parameter values are adapted from the OpenSpace
+RenderableAtmosphere tuning and stated in `source/atmosphere/model.json`.
 
 The Magellan synthetic-color C3-MDIR mosaic and colorized topographic C3-MDIR
 mosaic are credited to the USGS Astrogeology Science Center and NASA. They are

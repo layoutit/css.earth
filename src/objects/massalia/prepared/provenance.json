@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "massalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "677f13d0ff678a1240a894164188ed5201fd9ab9f8a19240401d5bb1e253bd4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "89db5ac809b185217701f6b08ab49ff644d64340f64b487bf77294fde8b52061"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045",
       "bytes": 293943,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 10861,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/massalia/massalia-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "8b843e9ebde6827c4c1099a530b663c53b78602695de3e755ad34521b140f9c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/massalia/massalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/massalia/massalia-elevation-surface@2x.webp",
           "bytes": 281756,
           "sha256": "5f6235c1429610ef6c15cb22eddee8b3fed8b0210af86ef34e914ba28a24015f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/massalia/massalia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/massalia/massalia-shape-surface@2x.webp",
           "bytes": 60356,
           "sha256": "e4615ac17de636eb928a0f3ae93a62f6f3572a9a96a609f9782d51021ac10aa5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "massalia",
-    "materialSha256": "239ca29b15d313d1d60b97a9dff0ac85471c574557f2bc35e564c4e4af725313",
+    "materialSha256": "1e2a5cc309cda7a68a8f6708e94f60e83839ff8d52fe62c6d2cad350e1895d77",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "89db5ac809b185217701f6b08ab49ff644d64340f64b487bf77294fde8b52061"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dinkinesh",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "742932046e2d13dcd739e17cf3d483e507f23f51f61804df00dafe469db97245"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "36a7db4df0ae8dab1ec2870e0762a636a0aa3cda58a95f350e1a3f96f0a094e8"
   },
   "recipes": [
     {
@@ -342,7 +342,7 @@
       "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
       "bytes": 237239,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
       "bytes": 1476,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -414,7 +414,7 @@
       "sha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "bytes": 8490675,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -434,7 +434,7 @@
       "sha256": "b50f6f599fa5d2d441025aa191a9682cc76705862f75a582a32a439c0fc7168f",
       "bytes": 4959,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -456,7 +456,7 @@
       "sha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
       "bytes": 1319,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -482,7 +482,7 @@
       "sha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
       "bytes": 14569,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -511,7 +511,7 @@
       "sha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
       "bytes": 156,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -538,7 +538,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -571,13 +571,13 @@
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
           "bytes": 46276,
           "sha256": "6e82dc482d752931f9cca7e2d8dc2de46a4d09f83f7b6ceb95bbcbe4469c45ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -616,13 +616,13 @@
           "url": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
           "bytes": 40424,
           "sha256": "a80cfdf3fe449ef06fe6d5aa7328d997845c058e51ded2cc1b68a23ec7e657aa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -691,7 +691,7 @@
           "url": "/scenes/dinkinesh/dinkinesh-features.json",
           "bytes": 3841,
           "sha256": "5d760d17fb3cddb25203c267c8f3204cb0ae4afab999d2a618ccd08e84a3febe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -753,11 +753,11 @@
   },
   "lastPreparation": {
     "objectId": "dinkinesh",
-    "materialSha256": "dba30aa3ec8a7705ebf76b9240504d10c5f9f98894625b6630ef968d07861dc5",
+    "materialSha256": "a5eec3f513bb6e0fdc90ff801f83a6c9afc2d65a9196dea31b04c7de5c5c5829",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "36a7db4df0ae8dab1ec2870e0762a636a0aa3cda58a95f350e1a3f96f0a094e8"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lyyli",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "8fa0a45b002279f5b7d5e9a8028ec206058276bfb99226da3082b80380428452"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "bc8b8a2347804a1e32105d57596a996fa11614a0d67b0711670491f87f889f98"
   },
   "recipes": [
     {
@@ -350,7 +350,7 @@
       "sha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
       "bytes": 46257,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "1ad56a26f231b0935d1dacd230af013270f700391957c19fd3184679932e3ddb",
       "bytes": 7474,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/lyyli/lyyli-elevation-thumbnail.webp",
           "bytes": 5400,
           "sha256": "6f2fcfdd675910943c2ba37fe41d7dae99936ec6c68cb72896e1d6ae6edf449d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lyyli/lyyli-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lyyli/lyyli-elevation-surface@2x.webp",
           "bytes": 287796,
           "sha256": "358acc767c98405b4ca9cc7552c4d5aae50bc28956845ac84934e4f3d7d5bbdc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +460,13 @@
           "url": "/scenes/lyyli/lyyli-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lyyli/lyyli-shape-surface@2x.webp",
           "bytes": 66732,
           "sha256": "ed68770577f6a9002c0520254a75f9be88dbce9028445a0c4cc82ace5176dd2c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -561,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "lyyli",
-    "materialSha256": "680acf6f23bb94e17bb19e90b03df5cdbb86d3d6deaa07307d9e5ceeb1f11d98",
+    "materialSha256": "caaced381f0a7c0b7c64b31d5212ffa6b6ab69781067ad863a6e925b7364ec68",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "bc8b8a2347804a1e32105d57596a996fa11614a0d67b0711670491f87f889f98"
     }
   }
 }

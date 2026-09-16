@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "athor",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "76c9e901f0f09913ba58f5d41ded1bb784438fa11e0204c08b92dd1b09a6db2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "c8ce4981517e65383d2e9243f30691d6e4060dadc4fb9f8dc4ba6553b2d2506d"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "bb13c3b5a03f3f095adfface5145e8780cf80bc7e1ad0d48172c367cb669c4fd",
       "bytes": 81574,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "7e60376709e76eda6b03ab96eff3cf1ff1f4c8bc628e788b0e9f4f14855f4fdd",
       "bytes": 7907,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/athor/athor-elevation-thumbnail.webp",
           "bytes": 5614,
           "sha256": "e1b883774838a1644e0f29cb2cc299dda32a5d32f5ef8b73af6246eb82056b4b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athor/athor-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athor/athor-elevation-surface@2x.webp",
           "bytes": 294112,
           "sha256": "639845003fcc2236ad485801764b3da447fdf0bbd58a0a7721f23c157169df23",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/athor/athor-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athor/athor-shape-surface@2x.webp",
           "bytes": 68290,
           "sha256": "ea79b0ddefb4a9216f77522d592a5d57264bdffa32f33bb11c67d7d30648bdd4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "athor",
-    "materialSha256": "f8ba1ed81ea477f663274ba13ca64c049de4334092f05d370d02c7c39a36b200",
+    "materialSha256": "c9feb7288aa95333bd46dfa004871ad1bb807d371c8e34f9980d042b7724c053",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "c8ce4981517e65383d2e9243f30691d6e4060dadc4fb9f8dc4ba6553b2d2506d"
     }
   }
 }

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1c55ab2a8fd2612f00740b03e6d0040f276ea9ef4cf534306a2f9c64c15d979f"
+    "sha256": "0ec1d47460de3770b98a9b2186ad05e1c40f225952d4d870ccb9233a2fc072d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "9fbda124feb4858f5f1cd8a4808af43a7bbaba9470643fb69c166808c16d206f"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068",
+      "sha256": "6b8204b248fbc9b100f1b83067673e5cddc3ba5841662c3cd8c398251a262f01",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -396,12 +396,6 @@
             "role": "spectra",
             "description": "Atmosphere & spectrum",
             "href": "https://psg.gsfc.nasa.gov/"
-          },
-          {
-            "label": "OpenSpace",
-            "role": "scene",
-            "description": "Globe & scene",
-            "href": "https://github.com/OpenSpace/OpenSpace"
           }
         ],
         "provenance": {
@@ -1218,8 +1212,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068",
-      "bytes": 15410,
+      "sha256": "6b8204b248fbc9b100f1b83067673e5cddc3ba5841662c3cd8c398251a262f01",
+      "bytes": 15280,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1522,8 +1516,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10189,
-          "sha256": "2fc1fcd00bc2aeed3d507ff32d44891e02536731019858d29a42276a4d0ff163",
+          "bytes": 10074,
+          "sha256": "b5f3aaaf0f7a8458b60113503fdba59846a5b30316d5a96e04084b667db2c7ce",
           "verification": "bytes-verified"
         }
       ],
@@ -1697,11 +1691,11 @@
   },
   "lastPreparation": {
     "objectId": "jupiter",
-    "materialSha256": "83d59dfa59260666edaf80d401ff7d32a3fee66b7619cc18f573ea157d532319",
+    "materialSha256": "c53add57e84c7181db7e553b157b894432c9f6ca260d71f7d2a36d341231e91b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "9fbda124feb4858f5f1cd8a4808af43a7bbaba9470643fb69c166808c16d206f"
     }
   }
 }

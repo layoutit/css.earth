@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "selinur",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "73defe907c57858deb7bfb8aeef6516ff64c59595a81ff3b085028f850551ec6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "65ef088cf3911c7f5459f7a51921db5b8314549fab08ce62272d35f9d6f29fa5"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "0f6e095aa7d97f1e68e0bf67a68cd9c54c1700c09055ee92f60e743f9117e531",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 7934,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/selinur/selinur-elevation-thumbnail.webp",
           "bytes": 6412,
           "sha256": "98b81564d138ac2e802cdc2acfab26bc1e44bd7c0040ce80dfaa22d02d6123b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/selinur/selinur-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/selinur/selinur-elevation-surface@2x.webp",
           "bytes": 315656,
           "sha256": "d77517926c448a023ce08eb63fd5f11d672c02083cc4ecbe2f8b53f919fda244",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/selinur/selinur-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/selinur/selinur-shape-surface@2x.webp",
           "bytes": 65056,
           "sha256": "b80bc9d99ee05d203d31fb2711773ca996de54abe61d03daa9bd3929d095f937",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "selinur",
-    "materialSha256": "aeb2da61667a5a3d5222641b33bc1c892250a87c982dcc19eeaf4c6856fb97f6",
+    "materialSha256": "dd4aaec73b9d05d94cd5d3f35a477c097dc54ca1422a858be6db18018d76b6c1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "65ef088cf3911c7f5459f7a51921db5b8314549fab08ce62272d35f9d6f29fa5"
     }
   }
 }

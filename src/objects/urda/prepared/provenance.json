@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "urda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "8cdc5eb56db5675584519fd75ef1131d89e283768ce872e7ec0a8146c12a1740"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "23f30f2d092a5cfa6c40ae36f0c968fb84d4aa1a941a67265ab82cc0bb80a03e"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "3dec127404347426e9b9f9cdcf8449c1c078b91e7e2f14f0d7fed7a4b6320dc4",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "ffbbf9fb07b6ff57f7f6d8728bcc543e9f9d822c0727d9415386351675fe22a0",
       "bytes": 8336,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/urda/urda-elevation-thumbnail.webp",
           "bytes": 6156,
           "sha256": "86447fd18e8ff1dfcc175e572f2364461bda3ed81d37ece0faad98abc80354e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urda/urda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urda/urda-elevation-surface@2x.webp",
           "bytes": 309340,
           "sha256": "52377fa0a2ea3df5c45f2562961c689895044780a08f0b8ae4663db4b159a01d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/urda/urda-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urda/urda-shape-surface@2x.webp",
           "bytes": 64968,
           "sha256": "03349dee262156a4cd0cc296569d40c600b847f98cef025480bb38b345785485",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "urda",
-    "materialSha256": "586ed91d6ed0981d9b72bcb6b87c00f04270d5942ac4e6b680369c51d45c358c",
+    "materialSha256": "1078ddc6e9d8961908a84978cfaa53ec9d839fd6c1486ff40843f0bd9a94f462",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "23f30f2d092a5cfa6c40ae36f0c968fb84d4aa1a941a67265ab82cc0bb80a03e"
     }
   }
 }

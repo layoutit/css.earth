@@ -26,30 +26,6 @@
       }
     },
     {
-      "path": "nasa-eris.glb",
-      "expectedBytes": 4398964,
-      "expectedSha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
-      "id": "nasa-vtad-eris-model",
-      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb",
-      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
-      "acquisition": "Original GLB downloaded from NASA Science",
-      "redistribution": "NASA media; illustrative terrain, not spacecraft mapping",
-      "consumers": [
-        "shape-model"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-eris-nasa-vtad-eris-model",
-            "role": "material",
-            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "eris-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 1941,
@@ -100,8 +76,8 @@
     {
       "id": "eris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2376,
-      "expectedSha256": "57411f2b8be902225031f476a1bfe4bb95fe27ea67451752a0c080ece4f6da05",
+      "expectedBytes": 2225,
+      "expectedSha256": "a4822e9efaeb1381ccc50544fb6e34ad425d063f07bdc851c3af3975ee8e787e",
       "origin": "Repository-authored Eris raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -119,8 +95,8 @@
     {
       "id": "eris-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1589,
-      "expectedSha256": "8c335ad763cd1d081aa6204dcb4f3eb4db10fbbdbe9f658a4ee3aeecd7a4d21e",
+      "expectedBytes": 1575,
+      "expectedSha256": "c4578c70eb6cee41cc8f269e966fb083c79003469e531f630e301e8619ce625b",
       "origin": "Repository-authored Eris geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -176,8 +152,8 @@
     {
       "id": "eris-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 852,
-      "expectedSha256": "ec4926b5bc3275601ec90f907e6cd0fb77b873c9f99bc9c8fd2bef198525b7ea",
+      "expectedBytes": 385,
+      "expectedSha256": "c8b108f78dceef2dbbb14fa662992d83b45cdce2cd64f081e717e9d8312ccd91",
       "origin": "Repository-authored Eris navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -194,8 +170,8 @@
     {
       "id": "eris-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 286,
-      "expectedSha256": "d39ca3e764b19adcccc1b5a3dc31c902542cb972ac957c0239a1df5bd2e63d30",
+      "expectedBytes": 66,
+      "expectedSha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7",
       "origin": "Repository-authored Eris acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -231,8 +207,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5328,
-      "expectedSha256": "e34ff65901163435b3dfc5445d20480ddbfaa5d71f54385a15d0a9f2c32c8930",
+      "expectedBytes": 5172,
+      "expectedSha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -252,7 +228,11 @@
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 114,
-      "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2"
+      "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2",
+      "id": "eris-shape-marker",
+      "origin": "https://doi.org/10.1038/nature10550",
+      "credit": "cssEarth schematic sphere using Sicardy et al. (2011) shape result; color is illustrative",
+      "license": "MIT, cssEarth authored schematic; factual measurements attributed"
     }
   ],
   "generatedIntermediates": []

@@ -3295,6 +3295,65 @@
           }
         ]
       }
+    },
+    {
+      "id": "vlti",
+      "name": {
+        "value": "VLT Interferometer",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "VLTI",
+          "citations": [
+            {
+              "catalogueId": "arxiv-2401-12404",
+              "checkedOn": "2026-09-16"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "ESO's Very Large Telescope Interferometer at Paranal, combining the light of four 1.8-m auxiliary telescopes on baselines up to 140 m; MATISSE is its L, M and N band instrument.",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      }
     }
   ],
   "missions": [
@@ -5417,6 +5476,80 @@
         }
       ],
       "imageId": "vlt-ut3"
+    },
+    {
+      "id": "eso-vlti-matisse-betelgeuse",
+      "name": {
+        "value": "ESO programme 0104.D-0300",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLTI/MATISSE",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "description": {
+        "value": "VLTI/MATISSE imaging of Betelgeuse across the Great Dimming, December 2018 to December 2020.",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlti",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "arxiv-2401-12404",
+              "checkedOn": "2026-09-16"
+            }
+          ]
+        }
+      ],
+      "ended": {
+        "value": "2020",
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-16"
+        },
+        "citations": [
+          {
+            "catalogueId": "arxiv-2401-12404",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      }
     }
   ]
 }

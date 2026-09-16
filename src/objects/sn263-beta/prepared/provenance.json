@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sn263-beta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "112370505250319e584b69323f7df645633b2797b13822d4b3c82dfe6c874d2a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "e46c20ae96defd52c58feece1d938e3051fe3e2a276e1fae91f210990ffc3322"
   },
   "recipes": [
     {
@@ -259,7 +259,7 @@
       "sha256": "f4b13bd627d65f085a70855a706f3bd6afc4704aa4973356b6d96da80f549feb",
       "bytes": 144480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -287,7 +287,7 @@
       "sha256": "8a790f0246a706bd59d60a42cfd80b869bbfef37b189ecd9fe7c93b9e762cd70",
       "bytes": 3314,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -319,13 +319,13 @@
           "url": "/scenes/sn263-beta/sn263-beta-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sn263-beta/sn263-beta-shape-surface@2x.webp",
           "bytes": 29720,
           "sha256": "a56952eaece059fa2e6c3740163b48df740d5bf71945954501ca3c1aac611bce",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -395,11 +395,11 @@
   },
   "lastPreparation": {
     "objectId": "sn263-beta",
-    "materialSha256": "65dae95aab6bf80f4a3e82b240edf952f386fbd6404224becce4b65664775484",
+    "materialSha256": "dc5a9ee8e5b86b52f6715edcb894c0aeb0cb2ef332936870ae93441c9d365398",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "e46c20ae96defd52c58feece1d938e3051fe3e2a276e1fae91f210990ffc3322"
     }
   }
 }

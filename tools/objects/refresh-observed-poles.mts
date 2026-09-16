@@ -1,3 +1,4 @@
+import { readAuthoredSources } from './authored-sources.ts';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
@@ -25,8 +26,8 @@ export async function refreshObservedPoles(id: string, lensIds: readonly string[
   const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),recipePath=resolve(sourceDirectory,'preparation/observations.json'),manifestPath=resolve(sourceDirectory,'manifest.json');
   const scenePath=`src/objects/${id}/prepared/scene.json`,sceneBytes=await readFile(scenePath);
   const [descriptorBytes,recipeBytes,manifestBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath)]);
-  const descriptor=parseAuthoredObjectDescriptor(JSON.parse(descriptorBytes.toString('utf8'))),recipeSource=descriptor.recipe.sources.find(source=>source.id==='observations');
-  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/observations.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Observed pole refresh requires the current descriptor recipe pin.');
+  const authored=await readAuthoredSources(objectDirectory,JSON.parse(descriptorBytes.toString('utf8'))),descriptor=authored.descriptor,recipeSource=authored.sources.get('observations')?.reference;
+  if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/observations.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Observed pole refresh requires the current manifest recipe pin.');
   const config=parseObservedSurfaceRecipe(JSON.parse(recipeBytes.toString('utf8'))),lenses=config.lenses.filter(lens=>lensIds.includes(lens.id));
   if(lenses.length!==lensIds.length)throw new Error('Observed pole refresh requested an unknown lens.');
   const sourcePaths=new Set(lenses.flatMap(lens=>[lens.source,...(lens.calibration?[lens.calibration.source]:[])])),pins=config.sources.filter(source=>sourcePaths.has(source.path));

@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-in-nochop",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse · matisse 2020 02 08t000149 a0b2d0c1 out in nochop",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/source/manifest.json",
+      "revision": "c4bf87a07d4159a8ef06278b02f567c5782215a6",
+      "sha256": "2aa4804f9cebe18c5a777dc7aa372117cdd439f11b72468103365215997b1c44",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "scope": "The matisse 2020 02 08t000149 a0b2d0c1 out in nochop input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

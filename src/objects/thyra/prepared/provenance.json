@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thyra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "b744e9758c474ec82b1dfa5704862a69937dc33eba2244a198d219f9683d2450"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "1e5c3f456c253005129ee31b60132e86724766d8bdf51fb65cc6fab4c4a580bd"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "d3e017daf4e6a4b91d1854af583a2e128397c945dc62d2c384b8420bf8094a2f",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "7f187c19eda9c1643a091dc22d97374d22f79a5ae5a6f7bbff49304bf847bdf5",
       "bytes": 8180,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/thyra/thyra-elevation-thumbnail.webp",
           "bytes": 5310,
           "sha256": "ec55cabe72eff16017447ae253c036490ca046a24c62a491041ea41c9f3e815a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thyra/thyra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thyra/thyra-elevation-surface@2x.webp",
           "bytes": 259376,
           "sha256": "7d130bcf7796c588869aa26430bb1aa505de11ed076b59d416525abcb209b8e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/thyra/thyra-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thyra/thyra-shape-surface@2x.webp",
           "bytes": 63162,
           "sha256": "a716b8d77d336642355303c48e6115536c8fbe1a791e68733154eb2f747db2fb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "thyra",
-    "materialSha256": "9e982b0108071cf82cd78a656859783b6cc372419e836bc680225d97087844b4",
+    "materialSha256": "9569d32e098291c943cd0ca7f9e17621bfa115d43d33fd6c95cb3d58b91787b3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "1e5c3f456c253005129ee31b60132e86724766d8bdf51fb65cc6fab4c4a580bd"
     }
   }
 }

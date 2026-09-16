@@ -17,13 +17,13 @@ export function parseAuthoringManifest(value:unknown) {
     generatedIntermediates:manifest.generatedIntermediates.map(entry=>Object.assign({},requireRecord(entry),entry))};
 }
 export const parseAuthoringDescriptor=shape({prepared:shape({sha256:text}),properties:shape({page:optional(requireRecord),worldFrame:optional(value=>value),
-  preparation:optional(shape({state:optional(text)})),recipe:shape({shape:shape({radiusKm:number}),sources:array(shape({path:text,sha256:text}))})})});
+  preparation:optional(shape({state:optional(text)})),recipe:shape({shape:shape({radiusKm:number}),sources:array(shape({path:text}))})})});
 const fact=shape({id:text,label:text,value:text});
 const resource=shape({label:text,role:text,description:text,href:text});
 export const parseAuthoringContent=shape({panel:shape({facts:array(fact),moreFacts:array(fact)}),
   lenses:shape({controls:array(shape({id:text,label:text,source:shape({url:text})}))}),
   settings:shape({controls:array(shape({name:text,checked:optional(boolean)}))}),resources:array(resource),provenance:requireRecord});
-export const parseAuthoringNavigation=shape({source:value=>Object.assign({},requireRecord(value),shape({path:text,expectedBytes:number,expectedSha256:text})(value))});
+export const parseAuthoringNavigation=shape({source:value=>Object.assign({},requireRecord(value),shape({path:text})(value))});
 export function parseAuthoringSolid(value:unknown) {
   const config=parseSolidPreparationSource(value),terrain=config.geometry.radialTerrain;
   if(!terrain?.simplification)throw new TypeError('Approximation template requires its existing radial simplification.');

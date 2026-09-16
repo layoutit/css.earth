@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "alexandra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "263c76875b8f846b876a196ae17996f787aa6bdfbbb801408e2066186f70c239"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "1a87b5961a330ad00c4a4e6323debfaad2e0aec67c647f9bed8ada2555692efb"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "aac6326c6087972265e999ec6778be6f932abf27a7643fc745dc055b3b79c643",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "355b12e3f418728359c0241da45d5cfcaea580df760e1a64898623a2ffbfa9b6",
       "bytes": 10839,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/alexandra/alexandra-elevation-thumbnail.webp",
           "bytes": 5280,
           "sha256": "173ebf74af272bbd1098dfa1221f3c064dfae8645b028fb070fd43c78307c06c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alexandra/alexandra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alexandra/alexandra-elevation-surface@2x.webp",
           "bytes": 271268,
           "sha256": "1cb64ee0c1d12f7345dd379b8f88e9e815bf36bc5341d6689fa34a588c888abc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/alexandra/alexandra-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alexandra/alexandra-shape-surface@2x.webp",
           "bytes": 57754,
           "sha256": "d5b00f4af057db04c6c8e649b31dd76dee3a3778655a35ed69a6f5954e6fde02",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "alexandra",
-    "materialSha256": "61d4cadbb0e0fe6a578cdfbdfb6978c959941676e8cbee1c74e3a13fa4716331",
+    "materialSha256": "52583706caf66a1d46b3c206295a3219c757e96908fb155c54d01e02019d9d5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "1a87b5961a330ad00c4a4e6323debfaad2e0aec67c647f9bed8ada2555692efb"
     }
   }
 }

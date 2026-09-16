@@ -26,6 +26,15 @@ export function bandColorDisplay(bands: readonly string[], inputQuantity: BandCo
 
 /** A normalized linear display channel -> sRGB code value. Clamp only at the
  * final display boundary, after interpolation, photometry and mosaic blending. */
+/** Interpolate an authored hex palette at a fraction; endpoints clamp. */
+export function interpolatePalette(colors: readonly string[], fraction: number): number[] {
+  const t = Math.max(0, Math.min(1, fraction)) * (colors.length - 1);
+  const i = Math.min(colors.length - 2, Math.floor(t)), remainder = t - i;
+  const rgb = (hex: string) => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
+  const a = rgb(colors[i]), b = rgb(colors[i + 1]);
+  return a.map((v, c) => Math.round(v + (b[c] - v) * remainder));
+}
+
 export function linearToSrgb(value: number): number {
   if (!Number.isFinite(value)) throw new TypeError('A display channel must be finite.');
   const bounded = Math.max(0, Math.min(1, value));

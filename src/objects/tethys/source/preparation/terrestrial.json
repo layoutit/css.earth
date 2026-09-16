@@ -436,6 +436,9 @@
           "label": "ISS photograph",
           "falseColor": false,
           "coverage": "One Cassini ISS narrow-angle photograph from 190,000 km on 11 April 2015, projected through a camera derived from Cassini SPICE kernels and refined to the shape model's limb. Unphotographed or shadowed surface retains the grid."
+        },
+        "reference": {
+          "observation": "normal"
         }
       }
     ]

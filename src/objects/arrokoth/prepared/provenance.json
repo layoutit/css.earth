@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "arrokoth",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "5cb91bc71e9bc6c0cb03d423c8dd8b3f0bad005bd4660d1563c9e80c8d40cbdb"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -405,7 +405,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -440,7 +440,7 @@
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -484,7 +484,7 @@
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -521,7 +521,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -555,7 +555,7 @@
       "sha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
       "bytes": 10532160,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -583,7 +583,7 @@
       "sha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
       "bytes": 3104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -609,7 +609,7 @@
       "sha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -643,7 +643,7 @@
       "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5",
       "bytes": 18710,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -671,7 +671,7 @@
       "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
       "bytes": 5767,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -691,7 +691,7 @@
       "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
       "bytes": 6118,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -728,13 +728,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -779,19 +779,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -831,13 +831,13 @@
           "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
           "bytes": 1386,
           "sha256": "d052723fc643287d472bb5ec0dcbd29558471d9131cc7122b45ae53d2ef70c4f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
           "bytes": 908086,
           "sha256": "ce0dca27dbf24653f3a33e64ed1aad2b25a03ed1149b2a80ca8131cc6c0e3a59",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -878,13 +878,13 @@
           "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
           "bytes": 2038,
           "sha256": "03f778e5b96988e4240e80e7bb181649ff9d989909d2d9903c193e33c547c7e5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
           "bytes": 237202,
           "sha256": "7ab316c1be6db0bae750bb6ae543397a3b033e19cf601fdc142cc45048338767",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1033,7 +1033,7 @@
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

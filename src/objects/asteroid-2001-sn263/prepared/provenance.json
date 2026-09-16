@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2001-sn263",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "cdc434adfa21064ed874ac1917ffea56b0d035889fcaa0efc2d392c4750dae58"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "b5c8873b1a6b49e20b0e03ea57b896651f64f1f60628b4c2c97add4a5e881536"
   },
   "recipes": [
     {
@@ -259,7 +259,7 @@
       "sha256": "887f25fdfb961dd2a4baf8848bfae9aad19192976db3c1df3da7465123e021f2",
       "bytes": 144480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -287,7 +287,7 @@
       "sha256": "3b309dfab696b851c16eb4bce1eb156fed7851979be60f9f6c8d81206dd21f79",
       "bytes": 3323,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -319,13 +319,13 @@
           "url": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-surface@2x.webp",
           "bytes": 30258,
           "sha256": "8a86b69e9704bf035f30c41641e418f457157f79b2d16f54215f0b00a98548f3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -395,11 +395,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-sn263",
-    "materialSha256": "7dc8a798c5bd604ac7b7e897c5276d1f1849fc4d9fa5a07a19cc5f75c841acb7",
+    "materialSha256": "de31dab8b14fe70faea06f04b84d217ce6a6fa71cbb0b4c276e2b72655b916f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "b5c8873b1a6b49e20b0e03ea57b896651f64f1f60628b4c2c97add4a5e881536"
     }
   }
 }

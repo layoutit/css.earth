@@ -38,3 +38,13 @@ test('published semiaxes retain absolute lengths without a thermal-radius rescal
   for(const patch of [{semiaxesKm:[1,2,3]},{semiaxesKm:[1,1,0]},{semiaxesKm:[1,1]},{semiaxesKm:[Infinity,1,1]},{thermalRadiusKm:4},{axisRatioAB:2}])assert.throws(()=>ellipsoidParameterMesh({...model,...patch}));
   assert.throws(()=>ellipsoidParameterMesh({schema:model.schema,scaleConvention:'thermal-radius-as-volume-equivalent',axisRatioAB:1,axisRatioBC:1,thermalRadiusKm:1,semiaxesKm:[1,1,1],subdivisions:4}));
 });
+
+test('an effective radius scales the axis ratios as a volume-equivalent sphere, like the thermal convention', () => {
+  const thermal = ellipsoidParameterMesh({ schema: 'cssearth-ellipsoid-parameters@1', scaleConvention: 'thermal-radius-as-volume-equivalent', axisRatioAB: 1.2, axisRatioBC: 1.1, thermalRadiusKm: 2, subdivisions: 2 });
+  const effective = ellipsoidParameterMesh({ schema: 'cssearth-ellipsoid-parameters@1', scaleConvention: 'effective-radius-as-volume-equivalent', axisRatioAB: 1.2, axisRatioBC: 1.1, effectiveRadiusKm: 2, subdivisions: 2 });
+  assert.deepEqual(effective.axesMeters, thermal.axesMeters);
+  const sphere = ellipsoidParameterMesh({ schema: 'cssearth-ellipsoid-parameters@1', scaleConvention: 'effective-radius-as-volume-equivalent', axisRatioAB: 1, axisRatioBC: 1, effectiveRadiusKm: 0.6, subdivisions: 4 });
+  assert.deepEqual(sphere.axesMeters, [600, 600, 600]);
+  assert.equal(sphere.positions.length, 1026); assert.equal(sphere.indices.length, 2048);
+  assert.throws(() => ellipsoidParameterMesh({ schema: 'cssearth-ellipsoid-parameters@1', scaleConvention: 'effective-radius-as-volume-equivalent', axisRatioAB: 1, axisRatioBC: 1, effectiveRadiusKm: 0, subdivisions: 4 }));
+});

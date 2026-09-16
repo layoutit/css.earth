@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "feronia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "bc0aa17e506916cb0968b3bb60295e9fae115d52125defc4e9b5b5493d557c56"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "d20545497faae11f249998d0cff2b7e0c4e27c78988f2d8687231551b42c81da"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "d8096c0152a3739961254f1d3b305b3c6da0ad42d80ce7fc073cb63702a40bcc",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "7a74d19988cf26edfd7d08c7d1dad173517cd758d3467ebc32d9cf776f83e5e7",
       "bytes": 9326,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/feronia/feronia-elevation-thumbnail.webp",
           "bytes": 5498,
           "sha256": "83fd877781ab4430f6af49ba84459d9a5d165b4766728e215af544b68c2669da",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/feronia/feronia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/feronia/feronia-elevation-surface@2x.webp",
           "bytes": 273386,
           "sha256": "4eb153a4bef0ccada24e181361deff4a0767e05b9841757ee5154de130dd36a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/feronia/feronia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/feronia/feronia-shape-surface@2x.webp",
           "bytes": 58924,
           "sha256": "78881f0a0e7055b18c2ce37f7d8028165eb88a76cf79f8f4464d36055ac84495",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "feronia",
-    "materialSha256": "abfa354e1f4adde6b05c26348f200b1f3906af4fab8c458187fefc0b5b5231c0",
+    "materialSha256": "cb6a442d407deadef9d5b2f720faa7b93b2d8f09f91b45db98df914275581062",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "d20545497faae11f249998d0cff2b7e0c4e27c78988f2d8687231551b42c81da"
     }
   }
 }

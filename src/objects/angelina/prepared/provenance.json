@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "angelina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "b89769601a2e2f9839d64e319f638ad40778560bf8e7f791d12d47d6555d21bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "ebc4fa552d25c7744d16de0b5ca5a19036abaa88d5fbde476c6eb2c6c7c17f8c"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "407c69944a62497de88e485c514c9eb71ec90fb57d63e3dbd32fbad8953f7b47",
       "bytes": 81250,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "a3a788f87d43198ad5a68dcd2173b7fce27d91cc7f556359c3168b2405d8e6a3",
       "bytes": 7961,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/angelina/angelina-elevation-thumbnail.webp",
           "bytes": 5700,
           "sha256": "cb664453eae801d9e1931433d92655de64636a9bcae6f6c632b1caa22f285919",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/angelina/angelina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/angelina/angelina-elevation-surface@2x.webp",
           "bytes": 341138,
           "sha256": "522efb6dd3408c2b42e16958f87570fa45daa878579c1121e95e36d3a8537ac2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/angelina/angelina-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/angelina/angelina-shape-surface@2x.webp",
           "bytes": 63054,
           "sha256": "2325de9e31af741d9b53b6b2aea00bac0b28c098b54193e7aac0c2bd7ae6b3df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "angelina",
-    "materialSha256": "cecdc5df8d64aafb511d76da4e4877e2e7edd010d1f23559a0a5e5c69d58bb55",
+    "materialSha256": "a0fd0e7872e20ff5b3a57ce474b1b94167b85a6d3245c29a2b101177640abe1d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "ebc4fa552d25c7744d16de0b5ca5a19036abaa88d5fbde476c6eb2c6c7c17f8c"
     }
   }
 }

@@ -1,0 +1,1398 @@
+{
+  "schema": "cssbetelgeuse-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "betelgeuse-matisse-2020-02-continuum",
+      "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "The image is reconstructed from the 29 calibrated MATISSE files pinned below; see reference/squeeze-command.txt for the build and command."
+          }
+        ]
+      },
+      "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
+      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in reference/../observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits convolved with a 4 mas Gaussian beam; `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "Posterior-mean maximum-entropy image convolved to the 4 milliarcsecond beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 8 and 19 February 2020. The interferometric beam is 4 milliarcseconds. Reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases.",
+      "expectedBytes": 135360,
+      "expectedSha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
+      "width": 128,
+      "height": 128,
+      "lensId": "matisse",
+      "label": "MATISSE reconstruction",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@e1a9f82c8707f01cb4db28ded79928ddda80ccf5#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "uniform-disc-sphere",
+      "path": "shape/uniform-disc.tab",
+      "origin": "https://arxiv.org/abs/2006.09837",
+      "credit": "Radius from Joyce et al. (2020); sphere written by this repository",
+      "license": "Project-authored reference surface from a published radius.",
+      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts from measurements.json (radius 531514800 km, 5 degree steps); `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain"
+      ],
+      "projection": {
+        "kind": "body-fixed-radius-table",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 531514800000
+      },
+      "coverage": "A sphere of the published radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of a red supergiant has no sharp limb.",
+      "expectedBytes": 65105,
+      "expectedSha256": "943a0a8e6d43c6fffe522995a13e6dfaefc4ad1b246a0dd7ac1fd6cc81bbad58",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "inputs": [
+          "measurements"
+        ],
+        "stepDegrees": 5
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-uniform-disc-sphere",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t000149-a0b2d0c1-in-in-chop",
+      "path": "observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_IN_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "de0734453b63208d0220f44853918de8067ae99c4e20d91aa8b4ed6d5a69fbcf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-in-in-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t000149-a0b2d0c1-in-in-nochop",
+      "path": "observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "1b98a0a0826d2cffbe60ded2f2fc60909fea10399d13981f845cc576909cad89",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-in-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t000149-a0b2d0c1-in-out-nochop",
+      "path": "observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "293f95c11fb984c3ed1e5715e8f476de23af8283264453f139d7b6df3cdf44c0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-in-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t000149-a0b2d0c1-out-in-nochop",
+      "path": "observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "65f58af2ba7bc3023ff4d315ad0794974a72c3800a3fcc1b9c65b67ad8ed1a44",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t000149-a0b2d0c1-out-out-chop",
+      "path": "observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_OUT_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "00587ff48d7595e9da9bd1ed5d64e29a96c68feae5a4c84cfbd9c6d329c445fc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-out-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t000149-a0b2d0c1-out-out-nochop",
+      "path": "observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "1f8c324078486c7a450438a6c9c7be133ece9b6815e00b26615731eeb605912e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t000149-a0b2d0c1-out-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t005019-a0b2d0c1-in-in-chop",
+      "path": "observations/oifits/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_IN_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "3a7a7745856cf57cf47de5dad02b866034afeda2bb77c125804dc25dac01a4bd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-in-in-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t005019-a0b2d0c1-in-in-nochop",
+      "path": "observations/oifits/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "0bba7a0902f2a971a8c29a9368836b6ab63567594807f7ec445b5bf54c3548cd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-in-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t005019-a0b2d0c1-in-out-nochop",
+      "path": "observations/oifits/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "14e84b26042166e28fde38449920862730c238e5ea23a4bc66f57f931131bffb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-in-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t005019-a0b2d0c1-out-in-nochop",
+      "path": "observations/oifits/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "855a2df3b756437f78696ad8f4a88b184ff9cc1e1b09a53e0654627ae8e09471",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-out-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t005019-a0b2d0c1-out-out-nochop",
+      "path": "observations/oifits/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T005019_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "0fa1cb87f42e1517e2d2ea9f1f8a92e400be68f4900bd2f13645b761ed24741a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t005019-a0b2d0c1-out-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t013808-a0b2d0c1-in-in-chop",
+      "path": "observations/oifits/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_IN_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "8262be402727a537a8d8bcdb3a58b0ad87b7c40fec683d650bed68ba65b65874",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-in-in-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t013808-a0b2d0c1-in-in-nochop",
+      "path": "observations/oifits/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "1cb0968954646aa88f228dd03fd886cfd7d713b71ec144acde121befe84d69f2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-in-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t013808-a0b2d0c1-in-out-nochop",
+      "path": "observations/oifits/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter IN_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "6503ac32c433bb93139ca881b9846dedc6eda7669b79f6120a6f612cf15a443c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-in-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t013808-a0b2d0c1-out-in-nochop",
+      "path": "observations/oifits/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "6887f46553d49b468b70b2185dd8f0e2c7221ffc0951a62079f1e95f2850104a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-out-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t013808-a0b2d0c1-out-out-chop",
+      "path": "observations/oifits/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_OUT_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "14450aa2b5c9b605b7312ec2477536a7f0e36fa469e5ee86ae606e20c877b063",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-out-out-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-08t013808-a0b2d0c1-out-out-nochop",
+      "path": "observations/oifits/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-08T013808_alfOri_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-08, stations A0B2D0C1, beam commuter OUT_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "338b7f00ba8cd05caab590ad39321314a4e62b5fe2c9641596b215804373d6d8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-08t013808-a0b2d0c1-out-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t004522-k0g2d0j3-in-in-chop",
+      "path": "observations/oifits/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter IN_IN_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "4d3d5276953fc090c0c4061f73808663fde793f43d59215b2376009186c1307f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-in-in-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t004522-k0g2d0j3-in-in-nochop",
+      "path": "observations/oifits/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter IN_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "67b322b5d12f593821e72066798143f035f4879a54149dc4f39fbf29c8bcec4a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-in-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t004522-k0g2d0j3-in-out-nochop",
+      "path": "observations/oifits/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter IN_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "adfee12915f1ad07d5d3cf38edf5cb86a306e8b329d5ce77c89d204dc2c7a9f1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-in-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t004522-k0g2d0j3-out-in-nochop",
+      "path": "observations/oifits/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter OUT_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "2f163f6fcac20c9c3cd02c025434ffdba5c7173508ba51c8a1797d3370e60ac2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-out-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t004522-k0g2d0j3-out-out-chop",
+      "path": "observations/oifits/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter OUT_OUT_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "eaed297daddf92466a9ed8992d32bb56c38a9d5f071614aa3c4bf64661eb9f75",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-out-out-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t004522-k0g2d0j3-out-out-nochop",
+      "path": "observations/oifits/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter OUT_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "ae20e8d1ea7836003d6671522c596b3dc1209c7b61d5c007cce19e70ca7fb722",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t004522-k0g2d0j3-out-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t013715-k0g2d0j3-in-in-chop",
+      "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter IN_IN_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "d4a156f30a8eede61ae8f6cf3e96a7560118189b9bc10cbfbd79e5c0ea1e7cad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-in-in-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t013715-k0g2d0j3-in-in-nochop",
+      "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_IN_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter IN_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "f87310738dd3063e6cc44128b302201aaaf719389dcbcd676f9184506f1a11c1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-in-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/26"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t013715-k0g2d0j3-in-out-nochop",
+      "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter IN_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "02a49dd026a2aa4d24f3f74523efbaeeea883198d94f418ee73cbaa2fed7573f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-in-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t013715-k0g2d0j3-out-in-nochop",
+      "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_IN_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter OUT_IN_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_IN_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "1ce7aeb8e68784eea3ce6fa7ed6976d4733630e8633dd0d2595b2436efd2a857",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-out-in-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/28"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t013715-k0g2d0j3-out-out-chop",
+      "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter OUT_OUT_Chop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_Chop.",
+      "expectedBytes": 2986560,
+      "expectedSha256": "eac561111e2edc6560d74316437d513b7f25a907bb9a21e43fda754ded7cb977",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-out-out-chop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/29"
+          }
+        ]
+      }
+    },
+    {
+      "id": "matisse-2020-02-19t013715-k0g2d0j3-out-out-nochop",
+      "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlti",
+            "missionId": "eso-vlti-matisse-betelgeuse",
+            "evidence": "Calibrated MATISSE OIFITS, night 2020-02-19, stations K0G2D0J3, beam commuter OUT_OUT_noChop."
+          }
+        ]
+      },
+      "license": "Public calibrated data (OiDB calibration level 3, released 2023-03-01); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the JMMC OiDB.",
+      "redistribution": "Not redistributed; only the reconstruction and its test are derived.",
+      "consumers": [
+        "continuum-visibilities"
+      ],
+      "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_noChop.",
+      "expectedBytes": 959040,
+      "expectedSha256": "fff05115aae9d9009b5ae69221319c9df07510fa522c2f574f326a396da3eb0f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-matisse-2020-02-19t013715-k0g2d0j3-out-out-nochop",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/31"
+          }
+        ]
+      }
+    },
+    {
+      "id": "betelgeuse-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 6248,
+      "expectedSha256": "f2c4dee10709cdd5d454389a700332f5aa1b3a1686c3483927f3c1dc35b10c23",
+      "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "betelgeuse-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1834,
+      "expectedSha256": "c014648178cbc136c5965b832f67925fa278c9b74756d342fb407614a6c270d5",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "betelgeuse-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "betelgeuse-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 105,
+      "expectedSha256": "8aa13c75fa69035e0b2e5ba0de9b42b65ac02abac2f4d9a6ca89c692a083d874",
+      "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "betelgeuse-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 289,
+      "expectedSha256": "03cbfaf6a9b8209d7b39caa591b96971d8f339fd202f7a6b42d4ddbd7a72d96c",
+      "origin": "Repository-authored scene recipe: Joyce et al. (2020) radius 531,514,800 km, camera plan (defaultZoom 1.25, initial pitch 10, yaw 180 so the photographed hemisphere faces the camera)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "continuum-visibilities-merged",
+      "path": "observations/betelgeuse-matisse-2020-02-continuum.oifits",
+      "origin": "https://oidb.jmmc.fr/",
+      "credit": "ESO/VLTI/MATISSE, programme 0104.D-0300 (PI: F. Millour) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "license": "Derived from public calibrated data.",
+      "consumers": [
+        "reconstruction-input",
+        "reconstruction-check"
+      ],
+      "expectedBytes": 135360,
+      "expectedSha256": "e4f41d2aba17736ff1fca5e819d60eaf3d38a8e784f6fc2998d587b0c682bcbd",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "inputs": [
+          "matisse-2020-02-08t000149-a0b2d0c1-in-in-chop",
+          "matisse-2020-02-08t000149-a0b2d0c1-in-in-nochop",
+          "matisse-2020-02-08t000149-a0b2d0c1-in-out-nochop",
+          "matisse-2020-02-08t000149-a0b2d0c1-out-in-nochop",
+          "matisse-2020-02-08t000149-a0b2d0c1-out-out-chop",
+          "matisse-2020-02-08t000149-a0b2d0c1-out-out-nochop",
+          "matisse-2020-02-08t005019-a0b2d0c1-in-in-chop",
+          "matisse-2020-02-08t005019-a0b2d0c1-in-in-nochop",
+          "matisse-2020-02-08t005019-a0b2d0c1-in-out-nochop",
+          "matisse-2020-02-08t005019-a0b2d0c1-out-in-nochop",
+          "matisse-2020-02-08t005019-a0b2d0c1-out-out-nochop",
+          "matisse-2020-02-08t013808-a0b2d0c1-in-in-chop",
+          "matisse-2020-02-08t013808-a0b2d0c1-in-in-nochop",
+          "matisse-2020-02-08t013808-a0b2d0c1-in-out-nochop",
+          "matisse-2020-02-08t013808-a0b2d0c1-out-in-nochop",
+          "matisse-2020-02-08t013808-a0b2d0c1-out-out-chop",
+          "matisse-2020-02-08t013808-a0b2d0c1-out-out-nochop",
+          "matisse-2020-02-19t004522-k0g2d0j3-in-in-chop",
+          "matisse-2020-02-19t004522-k0g2d0j3-in-in-nochop",
+          "matisse-2020-02-19t004522-k0g2d0j3-in-out-nochop",
+          "matisse-2020-02-19t004522-k0g2d0j3-out-in-nochop",
+          "matisse-2020-02-19t004522-k0g2d0j3-out-out-chop",
+          "matisse-2020-02-19t004522-k0g2d0j3-out-out-nochop",
+          "matisse-2020-02-19t013715-k0g2d0j3-in-in-chop",
+          "matisse-2020-02-19t013715-k0g2d0j3-in-in-nochop",
+          "matisse-2020-02-19t013715-k0g2d0j3-in-out-nochop",
+          "matisse-2020-02-19t013715-k0g2d0j3-out-in-nochop",
+          "matisse-2020-02-19t013715-k0g2d0j3-out-out-chop",
+          "matisse-2020-02-19t013715-k0g2d0j3-out-out-nochop"
+        ],
+        "nights": [
+          "2020-02-08",
+          "2020-02-19"
+        ],
+        "windowsMicrometres": [
+          [
+            3.942,
+            3.974
+          ],
+          [
+            3.992,
+            3.998
+          ]
+        ]
+      },
+      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Produced in this repository from the pinned inputs by the named generator."
+      }
+    },
+    {
+      "id": "reconstruction-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://oidb.jmmc.fr/",
+      "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
+      "license": "Public calibrated interferometric data; the reconstruction and this marker are attributed display derivatives.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 131002,
+      "expectedSha256": "a46a8b17d4bf4e766206f90d9178213cb5be9bdc39ce152a645c62481296502f",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "inputs": [
+          "betelgeuse-matisse-2020-02-continuum"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the lens's palette and percentile stretch."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4421,
+      "expectedSha256": "edf1888f6ac5613b6140789fcf304533fec6a153cd260d164b06af7c160e6ade",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1061,
+      "expectedSha256": "af14c5432a249e338bbbc7ec37101db8fc1578aabcb45cca9bb460deafb32080",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Adopted angular diameter, distance and radius with their sources."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 12958,
+      "expectedSha256": "1cab8465f78a07103120dd480f8af2ec7336a428f63da2ead0ae342d6ebc256b"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 447,
+      "expectedSha256": "7e27347fe41c619cdb9a815b6840436d9a5bbdb422c6fb6369a09f192f3d1bdc"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1253,
+      "expectedSha256": "6f88fa21b4c86ac52686089f763185752e87035386999aceff99a6b9cbe352a4"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 6362,
+      "expectedSha256": "0ff55e886df1994f9b979602f87ed3a0018213eabe3ca7d652150a7d618eb342"
+    },
+    {
+      "path": "reference/squeeze-command.txt",
+      "expectedBytes": 1875,
+      "expectedSha256": "5a878a0041232e07801206384e1505424774912fc3f25f11d43f14a680630439",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The exact reconstruction build and command."
+      }
+    },
+    {
+      "path": "reference/reconstruction-comparison.png",
+      "expectedBytes": 171021,
+      "expectedSha256": "80733d086c39ebf2c2e6eac67530f81a00ab161da32fccbfb47b1d965feaea6a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence figure: the published February 2020 image beside three SQUEEZE reconstructions of the pinned visibilities (entropy 10, entropy 1, total variation 1), all convolved to the 4 mas beam."
+      }
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 1138575,
+      "expectedSha256": "c2e63094ece46c91ec19db42c216f9b40159f38f1a022f816d5233f528a211bd",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /betelgeuse/ with the default camera, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after preparation."
+      }
+    },
+    {
+      "path": "reference/stellar-locators.png",
+      "expectedBytes": 285580,
+      "expectedSha256": "179fa2b048a95d87c4fae2c0ee4b85e15823eab0d04e0cc28389b5951dc15d3a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /sun/ with the world camera 300 pc above the Sun-Betelgeuse midpoint, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after the locator change."
+      }
+    },
+    {
+      "path": "observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
+      "expectedBytes": 141120,
+      "expectedSha256": "372ed3278212fc3a51788e2c695b58d35108d91e3fcda80213b8d440af581dd6",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels, the input to the beam convolution and the image the reconstruction test fits to the visibilities; not displayed."
+      }
+    }
+  ]
+}

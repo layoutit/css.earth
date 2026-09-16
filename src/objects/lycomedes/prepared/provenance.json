@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lycomedes",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "2995f5979515d25186aa08383b337d05fb2d7f7241b2fc9ff210e5721a20aa8e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "b499cfe7f2d811b7461c10233d49e4cd2c4e1650f0b1f1aeec69e4f549306aaa"
   },
   "recipes": [
     {
@@ -350,7 +350,7 @@
       "sha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "1944a5b14db37a8360df13c59e63d219b1e04d8de314db91349c18a04a709edb",
       "bytes": 11788,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/lycomedes/lycomedes-elevation-thumbnail.webp",
           "bytes": 6046,
           "sha256": "2c056ef24b92a5b6b7d5ef1bdb4eed2c26fb86777c729938df73e083fcb9f0fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-surface@2x.webp",
           "bytes": 299856,
           "sha256": "19eb34d02aad84949069c338d22269823970eb9efa31f39f8b6ef1e958bdaa14",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -460,13 +460,13 @@
           "url": "/scenes/lycomedes/lycomedes-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
           "bytes": 66156,
           "sha256": "199125c4a290ddd0f29ea62092035191dccbf5a6daeec36a6d6b84b955972563",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -561,11 +561,11 @@
   },
   "lastPreparation": {
     "objectId": "lycomedes",
-    "materialSha256": "00c4939f8bda7f9376d7100e8f644b7d9ff948619d6ce01dd4440618511db33d",
+    "materialSha256": "d257dc0a1a5919a247fbb0c4216f4777d4d2b8250c6bfb2f28b801ec507e7335",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "b499cfe7f2d811b7461c10233d49e4cd2c4e1650f0b1f1aeec69e4f549306aaa"
     }
   }
 }

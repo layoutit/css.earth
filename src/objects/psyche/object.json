@@ -50,33 +50,27 @@
       "sources": [
         {
           "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "af20244e8c018f1cf410504cff7918b62f61989506fc93a296a2d4baf6334d9e"
+          "path": "source/preparation/terrestrial.json"
         },
         {
           "id": "rotation",
-          "path": "source/preparation/rotation.json",
-          "sha256": "7200223f51c797d67b4be5851a1843de2ce70c1c535d7f9c0f17c5294b6c155f"
+          "path": "source/preparation/rotation.json"
         },
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "2b290472370a69d9c12abb54590eb106a19a138ce50c14cf65881cea050c93e2"
+          "path": "source/content/object.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "7d61b2b943ecfdb66e70586e3556f0f983277b97129972d67cb4bcb8f151275a"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "629d13a543f79bf7c36b0e34682efc99f0c802c67bac4ac617fd376bc364d76a"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "4928895ac38c47c544c28e7863426886a01fc04f0275ca5269af1f28ed98be62"
+          "path": "source/preparation/acquisition.json"
         }
       ]
     },
@@ -113,7 +107,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "39cad39b5bbd32d8d8c54ac15547ea52b9023f6f6f33b83db870d3b879bbfb21"
+        "sha256": "a8a008a1d56a13ddd8fbf5994eaa769c25dd5a0d754d46f322ec1b59522e27b9"
       }
     },
     "catalog": {
@@ -134,6 +128,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "83d16092faefc60124c92f4b83cf8e5653cfe84be797dc93a6c9fb3218967579"
+    "sha256": "415b5924d15deec3d078d36e5147fea022088617739aaef34ee3b6c152e82eab"
   }
 }

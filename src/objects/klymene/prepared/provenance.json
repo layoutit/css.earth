@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "klymene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "eb8c1ccebbc2c32e528275e8077e5671b92cf8191893a8dac0d7c14eff95dab5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "0e20d54927ea75d3ba12dc7b0316620dd6e8190356eea94a267e608882c56bc7"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "f1d26036f42cd12a1a45edb1d953d4b064b85c83474b898368bfde1a6b5ac7cc",
       "bytes": 80439,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "c2a19c4b88d40ce825758d9fc24060e8944ffbf57af96bb9697bcb4566d23705",
       "bytes": 9288,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/klymene/klymene-elevation-thumbnail.webp",
           "bytes": 5118,
           "sha256": "c51fd9b51eefccbfa80447471c0243b5af612d0b1f4192f134b55a77fa4748e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klymene/klymene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klymene/klymene-elevation-surface@2x.webp",
           "bytes": 311888,
           "sha256": "65cc043cb01939801b5a15f4040654fd78d54003456d78acf663ec0945d8739c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/klymene/klymene-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klymene/klymene-shape-surface@2x.webp",
           "bytes": 71508,
           "sha256": "42ee02a20900ae82d767983942baf31c2f6205ec7ab67c08c812132d680e3026",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "klymene",
-    "materialSha256": "57c61a8def725b8c91f56eed3993a36c7e2075ca6ee70fb4ef354d8ea71f9869",
+    "materialSha256": "8ff578ded5c95170d021447fb0aaee01db41929265434f8861e6ce0ed9a9f64b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "0e20d54927ea75d3ba12dc7b0316620dd6e8190356eea94a267e608882c56bc7"
     }
   }
 }

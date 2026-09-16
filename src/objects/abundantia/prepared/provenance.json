@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "abundantia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "25430765d824aa84f545ebc7d7e788d5f73c0a2b846c7bd05d2ddf002119be8a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "c4f8e86dc3c01b4d6f74e772f235643dcde11391f0bca634ebc0d8022a1390a3"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "30c56d5b9f294437dfb49eec0cc71c4ff68980845df2ef72f0ccfed1bac61478",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "ac2575e4d7a27b5592ae3d42889ccdc6f42d93264b136cfc82172db62cac9d49",
       "bytes": 11560,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/abundantia/abundantia-elevation-thumbnail.webp",
           "bytes": 5760,
           "sha256": "bec8fe13fc0d200cadc850de957b448ce40b69c21ddd6d0be445e3a6ceae34f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/abundantia/abundantia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/abundantia/abundantia-elevation-surface@2x.webp",
           "bytes": 295554,
           "sha256": "fb0e7a091ef9f43755c7e70837407ff2b23393853bcd19f7abf002d61e188666",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/abundantia/abundantia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
           "bytes": 64280,
           "sha256": "78f82b65d0c14146d9b60f860644ff24feb2ae18902807773d048286fc309112",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "abundantia",
-    "materialSha256": "18db3ee456396435f3c593a42f33e52601093e1d8768856d9d879c3f58fd0f19",
+    "materialSha256": "c59ac234836f4487b41505f7cd54ab8f1c3c9da2b9bd262efe28085e2c0cbb37",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "c4f8e86dc3c01b4d6f74e772f235643dcde11391f0bca634ebc0d8022a1390a3"
     }
   }
 }

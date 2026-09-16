@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "harmonia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "2c93d4aabac9691046207e8dc490ae005df042f9b9369c12ecf2448e1112aad2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "c1113aab6fb0edb0e1bdb55b15cd81a0392c9a68e3e60ef5964e60c7d7755e13"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "4e44cc89be4e6dcae8998f3558b6730e03238d8a7e45f9c94516f88d26c58d5d",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "f4c79e0a63b160205f758befd52f42aea3cb956551d634af98380a8c76006032",
       "bytes": 8455,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/harmonia/harmonia-elevation-thumbnail.webp",
           "bytes": 5178,
           "sha256": "10bf12a711ae8bc91e122351f3ed706a0d63f7273df27e4ccde507739755e12a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/harmonia/harmonia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/harmonia/harmonia-elevation-surface@2x.webp",
           "bytes": 295506,
           "sha256": "57a4fe6d0eb39b01e4dd34e58f83db44923a25c8947beb137e2aef3e8231bb08",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/harmonia/harmonia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/harmonia/harmonia-shape-surface@2x.webp",
           "bytes": 57460,
           "sha256": "593227be79891a9fcd6f9de7565a2ac868e80aeabe21d30f567210f9192eee05",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "harmonia",
-    "materialSha256": "9f51409f7208f779279940c9a355a937c44b72299e3a0562fbb8cf0c0cf75604",
+    "materialSha256": "1090419d10d58ef13307babbc033ec657ed9344198e2512a8aa36ca9c550aa49",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "c1113aab6fb0edb0e1bdb55b15cd81a0392c9a68e3e60ef5964e60c7d7755e13"
     }
   }
 }

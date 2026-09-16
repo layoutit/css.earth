@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from './radial-contract.mts';
 /** Preparation-only radial fields. Body identities and interpretation live in JSON. */
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
@@ -227,4 +228,63 @@ export function rasterProjectedStripShadow(data: Uint8Array,size: number,config:
     output.set(config.color,offset);output[offset+3]=Math.max(0,Math.min(config.maximumAlpha,Math.round(alpha*edge*config.maximumAlpha)));
   }
   return output;
+}
+
+/** Linear interpolation across runs of NaN; a run touching an end repeats its one finite neighbour. */
+function fillGaps(values: Float64Array) {
+  let start = -1;
+  for (let i = 0; i <= values.length; i += 1) {
+    const gap = i < values.length && Number.isNaN(values[i]);
+    if (gap && start < 0) start = i;
+    if (!gap && start >= 0) {
+      const before = start > 0 ? values[start - 1] : Number.NaN, after = i < values.length ? values[i] : Number.NaN;
+      if (Number.isNaN(before) && Number.isNaN(after)) throw new TypeError('An optical depth profile needs at least one measured bin.');
+      for (let j = start; j < i; j += 1) {
+        const t = Number.isNaN(before) ? 1 : Number.isNaN(after) ? 0 : (j - start + 1) / (i - start + 1);
+        values[j] = Number.isNaN(before) ? after : Number.isNaN(after) ? before : before + (after - before) * t;
+      }
+      start = -1;
+    }
+  }
+}
+
+/**
+ * The colour and transparency rows an observed radial layer samples. Two forms exist: a pair of one-row RGB images, or a
+ * PDS occultation table with a uniform colour. In the table form each 1 km bin's normal optical depth becomes a
+ * transmission byte, 255·exp(−τ); a bin whose depth is the table's missing value and whose flag is clean is below the
+ * instrument's detection floor and counts as empty, a bin flagged corrupted is interpolated from its neighbours.
+ */
+export async function loadObservedProfile(layer: ObservedRadialLayer, inputs: ReadonlyMap<string, Buffer>): Promise<RadialProfile> {
+  if (layer.opticalDepthProfile === undefined) {
+    if (layer.colorSource === undefined || layer.transparencySource === undefined) throw new TypeError('An observed radial layer names two rows or an optical depth profile.');
+    const [color, transparency] = await Promise.all([layer.colorSource, layer.transparencySource].map(path =>
+      sharp(inputs.get(path)).removeAlpha().raw().toBuffer({ resolveWithObject: true })));
+    if (color.info.height !== 1 || transparency.info.height !== 1 || color.info.width !== transparency.info.width ||
+        color.info.channels !== 3 || transparency.info.channels !== 3) throw new TypeError('Observed profiles must be matching RGB rows.');
+    return { color: color.data, transparency: transparency.data, width: color.info.width };
+  }
+  const profile = layer.opticalDepthProfile, bytes = inputs.get(profile.path);
+  if (!bytes || !layer.color) throw new TypeError('An optical depth profile needs its table and a uniform colour.');
+  const [inner, outer] = layer.sourceBounds, width = Math.round(outer - inner) + 1;
+  const depth = new Float64Array(width).fill(Number.NaN);
+  let measured = 0;
+  for (const line of bytes.toString('latin1').split(/\r?\n/)) {
+    if (!line.trim()) continue;
+    const columns = line.split(',');
+    const radius = Number(columns[profile.radiusColumn - 1]), tau = Number(columns[profile.opticalDepthColumn - 1]), flag = Number(columns[profile.flagColumn - 1]);
+    if (![radius, tau, flag].every(Number.isFinite)) throw new TypeError(`Optical depth profile row is not numeric: ${line.slice(0, 60)}`);
+    const index = Math.round(radius - inner);
+    if (index < 0 || index >= width) continue;
+    if ((flag & profile.corruptedFlag) !== 0) continue;
+    depth[index] = tau === profile.missingValue ? 0 : Math.max(0, tau);
+    measured += 1;
+  }
+  if (measured < width / 2) throw new TypeError(`Optical depth profile covers ${measured} of ${width} bins.`);
+  fillGaps(depth);
+  const color = new Uint8Array(width * 3), transparency = new Uint8Array(width * 3);
+  for (let i = 0; i < width; i += 1) {
+    const transmission = Math.round(255 * Math.exp(-depth[i]));
+    for (let channel = 0; channel < 3; channel += 1) { color[i * 3 + channel] = layer.color[channel]; transparency[i * 3 + channel] = transmission; }
+  }
+  return { color, transparency, width };
 }

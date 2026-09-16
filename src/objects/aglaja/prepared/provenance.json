@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aglaja",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "c8c3151f50bd012896650ee02e7698f7ad94859e374028ea9b6866b171cac07a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "f44b442da34a3d00da940db009a00124fd31740ac88bea026a969eb11034236e"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "5d85d9ffc8185618d1fb1a32c0b452dc7d5f1efcfc0008f25dd00f2a54d738e5",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "86db756514b61c0181959a45a08622ea7d2041ff8acf7b07a130214a171d5838",
       "bytes": 9835,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/aglaja/aglaja-elevation-thumbnail.webp",
           "bytes": 5576,
           "sha256": "3717c78930ad243f9d829c6514b53bac820e8966808875e0826ae459a8e037cd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-surface@2x.webp",
           "bytes": 286484,
           "sha256": "38808bbe1795abda451c5818bc80c22fc9de1c18fb1c97f71b144efc79b342f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/aglaja/aglaja-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-shape-surface@2x.webp",
           "bytes": 69024,
           "sha256": "fc489d241b456af4d1be3082c4db0f9380a324b14e468adae41594ab32ec0cd1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "aglaja",
-    "materialSha256": "c4a00e60ce20fc4f0776cc9f6e97d770fb20be1d72fde4b2d3c0c9c32c4bbd5d",
+    "materialSha256": "1fbc0dc9bb59a2eac2252d987881ca87eb348d5e5fa71c264c38a1cd73ebb2fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "f44b442da34a3d00da940db009a00124fd31740ac88bea026a969eb11034236e"
     }
   }
 }

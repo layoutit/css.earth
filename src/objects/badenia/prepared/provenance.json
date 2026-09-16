@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "badenia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "bddae1c4e68f95f975e04d9997f2a590277d65bef19c3dfd367225edfb947937"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "babf417649094d38448d00beeb1ca885d40e14b55526670c548cc2882b46f44e"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "d980d1f15c81c92866789a3a2728cbcfdf57908045eaed0022b5dc22e01ebfef",
       "bytes": 46257,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9820,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/badenia/badenia-elevation-thumbnail.webp",
           "bytes": 5562,
           "sha256": "ad0271856daf93aa7a3c18e578154c0ca500c2d22d1bf766844e5c62c6e815a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/badenia/badenia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/badenia/badenia-elevation-surface@2x.webp",
           "bytes": 330942,
           "sha256": "39bf039ffe7f342c304d7eaee17807f42ffc79c7f6fa390d6dd3ca1c5b03899e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/badenia/badenia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/badenia/badenia-shape-surface@2x.webp",
           "bytes": 71124,
           "sha256": "35ed8f8e8e5fa29268736991276d8a7436ae4a798e9cacec976430680ab2d0c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "badenia",
-    "materialSha256": "9c7a90a0d59a440b058048e9227a91175e95ec295740ecc230164ea7cbf55d85",
+    "materialSha256": "a1d406bf4df14049f8427f8517d3887b33fd19f3856ff6d5ff2411449a55ba0a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "babf417649094d38448d00beeb1ca885d40e14b55526670c548cc2882b46f44e"
     }
   }
 }

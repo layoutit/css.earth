@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4098b86fdc7e4cb569208d202231dee129c8334ea900934fc0e155c0596fd193"
+    "sha256": "b27c648db1886fc7a64c79e8a3edbdf7cf58fdb5e5d34f1985e59a05bca0917f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "9635557a76ba0fa9876275d6a8b6595db8716997916fb63892fe459de0190c27"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653",
+      "sha256": "61aa5b4efe04275698330b0d6c3c37eff127f456050d9ea5fcbfe7a8a8cab240",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -109,8 +109,8 @@
           }
         },
         "atmosphere": {
-          "sourcePath": "openspace/earth-atmosphere.asset",
-          "sourceId": "openspace-earth-atmosphere-config",
+          "sourcePath": "atmosphere/model.json",
+          "sourceId": "earth-atmosphere-model",
           "responsePath": "atmosphere/google-earth-pro-presentation-response.json",
           "maximumOpacityKey": "earthMaximumOpacity"
         },
@@ -534,7 +534,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "501afff1d4429dd6e8023b37e6210ea3ee5726d4d91a532bca13d47b22e345cf",
+      "sha256": "c7d11d828a560459cbb67b8793de707375f4b62a5a287dbdeac4616738886b26",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -953,7 +953,7 @@
           {
             "label": "OpenSpace",
             "role": "scene",
-            "description": "Globe & atmosphere",
+            "description": "Atmosphere parameter values (adapted, MIT)",
             "href": "https://github.com/OpenSpace/OpenSpace"
           },
           {
@@ -2803,8 +2803,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "501afff1d4429dd6e8023b37e6210ea3ee5726d4d91a532bca13d47b22e345cf",
-      "bytes": 16696,
+      "sha256": "c7d11d828a560459cbb67b8793de707375f4b62a5a287dbdeac4616738886b26",
+      "bytes": 16867,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -4414,8 +4414,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8024,
-          "sha256": "407da3f27650b345e075a97b43bab0626ebe14f9deba3f549c34f20d5a0cd3d7",
+          "bytes": 8048,
+          "sha256": "31ebb41156b82b312534e294412911edc6faa5ff571b447c5dadcc0da45d4c41",
           "verification": "bytes-verified"
         }
       ],
@@ -4672,11 +4672,11 @@
   },
   "lastPreparation": {
     "objectId": "earth",
-    "materialSha256": "6bf93e48cc77df22e9f8e927bc02462fa33fd5885afd402cf44eaedfd92191c7",
+    "materialSha256": "168016d10b76dc4fefed174cc2ec5cfaf0b2652477a835201f4115bb3ed615f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "9635557a76ba0fa9876275d6a8b6595db8716997916fb63892fe459de0190c27"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "juewa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "37a170664a6e4e1c243609a26e68ccbe5be8574f99cd538bb9966cbc21d7c274"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "34f19d9880f5dbadc9b4fbfc9d0579de9ba898e1d05a14f3f7e309a68cb0cb68"
   },
   "recipes": [
     {
@@ -333,7 +333,7 @@
       "sha256": "299db30077ce9e5c022971c38780e16113ad0716ce7de0ce6ffd9288a55acb0c",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -361,7 +361,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8030,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -393,19 +393,19 @@
           "url": "/scenes/juewa/juewa-elevation-thumbnail.webp",
           "bytes": 6604,
           "sha256": "3fc6aa7ce6eb7ea5275ace2b81fb4523c71772dbfd3fba1e09467a584d89009a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juewa/juewa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juewa/juewa-elevation-surface@2x.webp",
           "bytes": 336066,
           "sha256": "e6a5d1c0ffa2f60ab67dcd702f59ad4230d0dc4f7e0188c2fc4a7bfc7430e465",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -443,13 +443,13 @@
           "url": "/scenes/juewa/juewa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juewa/juewa-shape-surface@2x.webp",
           "bytes": 63556,
           "sha256": "7737375be6197368da841c24555ac6f4407b91188dc67ceda4a617ca646bb13b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -544,11 +544,11 @@
   },
   "lastPreparation": {
     "objectId": "juewa",
-    "materialSha256": "260a12f5c1ac0ff737f2f21a43e58f5b4f6be7c0c6094c1e929cd0df3182ce78",
+    "materialSha256": "e6dae8369c89588012a43887591e8b077c87a9a317555f613e9e24f768abd762",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "34f19d9880f5dbadc9b4fbfc9d0579de9ba898e1d05a14f3f7e309a68cb0cb68"
     }
   }
 }

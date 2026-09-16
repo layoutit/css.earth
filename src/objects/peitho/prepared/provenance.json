@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "peitho",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "86febc65605cf0f2dbf58d4409ece9461269046790035d48d7cd1390758ac14f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "605f28e4e9c3268d6017499831f6ffef1461a2dadc0077c84877aa320445a2f1"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d",
       "bytes": 81655,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "198781cdce29282c0e0dec37dc9e61c6e335f9965ff4d486db4efac115d35f37",
       "bytes": 8742,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/peitho/peitho-elevation-thumbnail.webp",
           "bytes": 5262,
           "sha256": "b0634bdb4f9b9ed1b7682fc0b0cf54cdd6e327d8829153698a99ec965dcb2191",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/peitho/peitho-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/peitho/peitho-elevation-surface@2x.webp",
           "bytes": 298438,
           "sha256": "c63c404798888c6a058f3eb04de12bf1f123959d764e2caf9d023ba55fa35b13",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/peitho/peitho-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/peitho/peitho-shape-surface@2x.webp",
           "bytes": 62770,
           "sha256": "1678aa2aaf484673b20d57bd28aa2ca0fbeb2b92dae57203a5e98cd290669737",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "peitho",
-    "materialSha256": "73babd03019010363f9b586b773396d772e20f4c8de0da5a06b17ff5fc758fdb",
+    "materialSha256": "4238ea07d25014c02baa8307535f0f36e722c2fb0b6e97d136674adcfb572aef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "605f28e4e9c3268d6017499831f6ffef1461a2dadc0077c84877aa320445a2f1"
     }
   }
 }

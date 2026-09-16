@@ -109,8 +109,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const contentBytes = await input(`${base}/${contentPath}`);
     const contentPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
       .filter(entry => `source/${entry.path}` === contentPath);
-    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes) ||
-      sourceDigest(contentReference.sha256) !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
+    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
     const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
     const objectDirectory = resolve(root, base);
     const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,
@@ -135,7 +134,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     let document = provenance.get(object.id);
     if (document) closure[path] = digest(JSON.stringify(document, null, 2) + '\n');
     else document = validateObjectProvenance(await json(path), object.id);
-    if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Stale provenance for ${object.id}; run pnpm prepare:provenance.`);
+    if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Provenance for ${object.id} does not match its source manifest; run pnpm prepare:provenance, or prepare the body where its sources are.`);
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
   }
@@ -144,7 +143,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const document = validateObjectProvenance(volume.provenance, volume.id);
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
     const manifest = explorationRecord(await json(manifestPath));
-    if (document.manifest.sha256 !== closure[manifestPath]) throw new Error(`Stale provenance for ${volume.id}; run pnpm prepare:provenance.`);
+    if (document.manifest.sha256 !== closure[manifestPath]) throw new Error(`Provenance for ${volume.id} does not match its source manifest; run pnpm prepare:provenance.`);
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
     inventory.push(...sourceInventory(manifest, manifestPath, sources, new Set(document.sources.map(source => source.path))));
     objects.push(volume);

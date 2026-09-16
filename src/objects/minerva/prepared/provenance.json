@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "minerva",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "3a8d51cecedceb322aecd037df6c06506447a1f84254685f7f527ecf31e89fbe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "98ce654f27185ba832be4d7e4360a18ca4e9a9d2b9d2faea67bf6286865f4475"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "e8db727155bfaf5ccc6d996a603ed712b472a2585f75fc3c5ea9472039bbe434",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "b814a5e1fd4c12d368d65ae08fb71fcdf5501fcab482661b0478e4bd253ba330",
       "bytes": 9528,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/minerva/minerva-elevation-thumbnail.webp",
           "bytes": 5104,
           "sha256": "9169705bdae1724e5840d064448bd820a176b4686c8ce53cc104751de28ae4cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/minerva/minerva-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/minerva/minerva-elevation-surface@2x.webp",
           "bytes": 298088,
           "sha256": "270c371107baa4783f0cd492e458ed919e4acb464fcb77d7d7ec08af1d3469ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/minerva/minerva-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/minerva/minerva-shape-surface@2x.webp",
           "bytes": 59164,
           "sha256": "a421ea4a52b5dac227955790aaddaa70e3bd026683dd520bd646ce863c44e19d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "minerva",
-    "materialSha256": "eab3eac2f43666f4cd455d6398ca2cad5ed3de8c741b926f04a3e75231d01851",
+    "materialSha256": "4f59e7be2899fa0f55b03b6545b4de8a811c6ebfd37f5d45b57def1b0bc3c36e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "98ce654f27185ba832be4d7e4360a18ca4e9a9d2b9d2faea67bf6286865f4475"
     }
   }
 }

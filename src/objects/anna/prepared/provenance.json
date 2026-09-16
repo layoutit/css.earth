@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "anna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "771a4f62acf4d5ca9944fb5686e3cba1a3751f7e90798e9df79280ed7e3bb157"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "07159e594c7cdaa94a01e6fcad379a9a4353e6648713a327ef3dd736ca2cc430"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "afffd52ce5fa7564a907f0a7aa6b0dd4c63842ac4dfb0ab6182b57e9968335be",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "3f74d89c1abb837d2a86d3f6cad215ae5b11764404ccc0a6426f719087966621",
       "bytes": 8098,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/anna/anna-elevation-thumbnail.webp",
           "bytes": 5074,
           "sha256": "d2304d3210c199a9583feec7c8a82e274bd507171e481417e5ad35f6ba7451e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anna/anna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anna/anna-elevation-surface@2x.webp",
           "bytes": 271150,
           "sha256": "77b2ae316f9152760900ecd93f77449104e1ddc929b4cd4c1738f98aad8eab87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/anna/anna-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anna/anna-shape-surface@2x.webp",
           "bytes": 67938,
           "sha256": "46475b1503f1777b27045c3c1741dbbab89821384e9a7aa80b3d954418381558",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "anna",
-    "materialSha256": "71fd687598354a48c57dc2859fca00bbe0b115dde08c6f3ffbc3d32dd6d77b52",
+    "materialSha256": "bfcd185f450e2b1d884b854cc3dcf7042311dbbc397dae7646b505fd8ce5e295",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "07159e594c7cdaa94a01e6fcad379a9a4353e6648713a327ef3dd736ca2cc430"
     }
   }
 }

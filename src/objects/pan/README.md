@@ -41,6 +41,18 @@ Geometry is simplified from the source connectivity with the shared meshoptimize
 
 </details>
 
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `normal` | 8 | 1 | 7.00° | — | — | its other 8 frames | 0 of 8 | — | 5 of 8, -1.25° | — | registered |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+<!-- registration-report:end -->
+
 ## Known problems
 
 **New coverage:** the older photographs are visibly coarser than the 2017 close-up and retain brightness seams near the ridge. Overlap matching requires a maximum fitted factor of 2.40; the authored budget is 2.5. The linear monochrome display starts at zero and ends at 0.967, the measured 99.5th-percentile level rounded to three decimals. These are display choices, not an absolute albedo calibration.

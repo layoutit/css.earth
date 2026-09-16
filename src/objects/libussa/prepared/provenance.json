@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "libussa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "d99363ccc79131dd6403a8bdc864fcab005024f52601a18e3c253d1d0f0e11e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "3692802648ec69f77cc7edf2138d8953b4b2474b9a924272c658a93e6b765642"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "90c6c85577e5615ac761ae75898680215bdae93bdb749b5aa4905a095fdca08c",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "91c616d772317706ecd31601a7cdd48343ac34df61b77b1be1924ae7c8b05468",
       "bytes": 9954,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/libussa/libussa-elevation-thumbnail.webp",
           "bytes": 4510,
           "sha256": "49dbb39f70c32b543899ebb29d1e189d6225b6ec6f317dc172347eaa362d0b18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/libussa/libussa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/libussa/libussa-elevation-surface@2x.webp",
           "bytes": 254120,
           "sha256": "a60f257cc2d895cb8efe3ee330583672d684f747facd6aa1fb38dc4f66469a55",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/libussa/libussa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/libussa/libussa-shape-surface@2x.webp",
           "bytes": 71222,
           "sha256": "14b58ed825a61c34816ea5ac44fbdaee52ec3ab5266a29f9d44e1cedda390fb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "libussa",
-    "materialSha256": "5aec4198720c27f31134cf289ccd235be21ab00aee082b8d2268e83089899403",
+    "materialSha256": "0b3cc107d8e7e64901af6a5f2b05ea3b5290b5625908d3569ecbd3b8ac59888c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "3692802648ec69f77cc7edf2138d8953b4b2474b9a924272c658a93e6b765642"
     }
   }
 }

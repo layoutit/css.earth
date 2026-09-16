@@ -81,7 +81,10 @@ test('complete context frames cross a structured-clone boundary without mutating
 test('retired and incompatible frame requests respect prepared identity and measured optics', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.anchorOnly = true;
-  expect(calculate(input).projectedBodies.map(body => body.index)).toEqual([0]);
+  // The anchor and every placed orbitless body (Betelgeuse) remain as galactic locators.
+  const locators = [plan.focus, ...plan.bodies].flatMap((body, index) => index === 0 || !('orbit' in body && body.orbit) ? [index] : []);
+  expect(locators.length).toBeGreaterThan(1);
+  expect(calculate(input).projectedBodies.map(body => body.index)).toEqual(locators);
   expect(() => calculate({ ...input, selectedId: 'missing' })).toThrow('unavailable');
   expect(() => calculate({ ...input, bodies: [] })).toThrow('matching frame');
   expect(() => calculate({ ...input, viewport: { ...input.viewport, widthPixels: undefined } })).toThrow('measured viewport');
@@ -374,4 +377,20 @@ test.each(['saturn', 'jupiter', 'uranus'])('%s retains projected orbit paths pas
   }
   input.bodies[index]!.orbitHidden = true;
   expect(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility).toBe(0);
+});
+
+test('a placed orbitless body keeps its marker beyond the system fade, like the anchor', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const star = plan.bodies.findIndex(body => !body.orbit) + 1;
+  expect(star).toBeGreaterThan(0);
+  // 300 pc above the Sun-Betelgeuse midpoint, looking down -z: both locators are in frame and the
+  // system fade has run its course (opacity 0), so only locators publish.
+  const placedM = plan.bodies[star - 1]!.positionM;
+  input.anchorOnly = true; input.world.pose.positionM = [placedM[0] / 2, placedM[1] / 2, placedM[2] / 2 + 300 * 3.085677581491367e16];
+  const packet = calculate(input);
+  const anchor = packet.projectedBodies.find(body => body.index === 0)!, placed = packet.projectedBodies.find(body => body.index === star)!;
+  expect(placed.markerOpacity).toBe(1);
+  expect(placed.lineWidth).toBe(anchor.lineWidth);
+  expect(placed.indicatorShown).toBe(true);
+  expect(placed.labelShown).toBe(true);
 });

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hersilia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "9a03101f4eb7e1f347be96876813d172baee5acb311f0ac1a01506879e4608fd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "eb42a5ed78a119d06365b09e85037d6830f802dca62e64e0572e8862be56676d"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "8e2c5f76b6378e942e105825b60568612becb8902a67d2c7c4dfc34d92b31b2f",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "2266e381a62a798c3fdba1655b3d7c68a6fd43a5eed5f675b8137ff09c09c902",
       "bytes": 9515,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/hersilia/hersilia-elevation-thumbnail.webp",
           "bytes": 5608,
           "sha256": "c902259a675829b40098723e593f847013445d2e17e0ec38f1358130c033e092",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-surface@2x.webp",
           "bytes": 265880,
           "sha256": "3f5e4821382fab8b91d74611c06c286cc0c0d102c678bb93b7eb867c96d53a04",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/hersilia/hersilia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hersilia/hersilia-shape-surface@2x.webp",
           "bytes": 67078,
           "sha256": "069f0e67a86e370e1e3e34e30e5d2cb8e8bd059966d54edba086c7e03f32dea8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "hersilia",
-    "materialSha256": "71d08658fdc731bccfae419a288493aae160f516eb04c176db18a5f26de16035",
+    "materialSha256": "ee8ee976da977cd48881f901b82d559f6aafb4ec33eaa4ae4dc37b0c04cc21be",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "eb42a5ed78a119d06365b09e85037d6830f802dca62e64e0572e8862be56676d"
     }
   }
 }

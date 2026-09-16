@@ -6,11 +6,11 @@
   "physical": {
     "name": "46P Wirtanen",
     "horizonsCode": "DES=46P;CAP;",
-    "meanRadiusKm": 0.4424712282392251,
+    "meanRadiusKm": 0.6,
     "gravitationalParameterKm3PerS2": 0,
     "parent": "sun"
   },
-  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "physicalNotes": "Effective nucleus radius, Boehnhardt et al. (2002), A&A 387, 1107 (https://doi.org/10.1051/0004-6361:20020494), used as the volume-equivalent radius of the displayed ellipsoid.",
   "comet": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D46P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

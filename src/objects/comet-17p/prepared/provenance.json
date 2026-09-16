@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-17p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7359fb29b48e8604dbb9056dc02bcb1c7b3ffd8c2ecae2db2063b4ee14e2454e"
+    "sha256": "2aeb0e0113f4acd1ba5d4c2197d55246f506919931aac57e92218c1074f7a565"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+    "bindingsSha256": "3db0b0147ee2a37a93735671ac50f650d52506389cfcef8ce629034a86672830"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0b28f759b2e9b6cf59c6b23ce5be7606ab2052c355cc998e3f093a1d48fd65fd",
+      "sha256": "b844f2ea3db9ce88b5a3524a2cbbed76882c4bebd791c78eb9158e5a9a31b5d0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -38,7 +38,7 @@
             {
               "id": "model",
               "consumer": "shape",
-              "label": "Illustrative nucleus"
+              "label": "Shape approximation"
             }
           ]
         },
@@ -55,7 +55,7 @@
         },
         "geometry": {
           "radius": 230,
-          "radiusKm": 1.2610430004817914,
+          "radiusKm": 1.62,
           "camera": {
             "initialScenePitchDegrees": 20,
             "defaultControlYawDegrees": 0,
@@ -64,12 +64,12 @@
           "mapUrl": "/scenes/comet-17p/comet-17p-model-surface@2x.webp",
           "polesUrl": "/scenes/comet-17p/comet-17p-model-poles@2x.webp",
           "radialTerrain": {
-            "path": "shape/model.obj",
-            "format": "wavefront-obj",
+            "path": "shape/model.json",
+            "format": "ellipsoid-parameters",
             "grid": {
               "metersPerUnit": 1,
-              "expectedVertices": 4802,
-              "expectedFaces": 9600
+              "expectedVertices": 1026,
+              "expectedFaces": 2048
             },
             "faceBudget": 800,
             "tileSize": 64,
@@ -77,7 +77,7 @@
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
-              "maximumErrorMeters": 85.5
+              "maximumErrorMeters": 65
             },
             "primitive": "u",
             "sourceLighting": {
@@ -123,8 +123,8 @@
           }
         },
         "celestial": {
-          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
-          "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is an arbitrary display orientation.",
+          "qualification": "JPL position at the shared epoch. The nucleus is an ellipsoid at the published effective radius; the attitude is arbitrary and no photographic surface is claimed."
         },
         "presentation": {
           "defaultLens": "model"
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "64d76a1a8a9beadb9ffaa921d9a6b423b357d02dfd2cf5f32a896a5590add1a7",
+      "sha256": "db4835643765a687fd9c430cc2843b447d0b8b2aab9040913788829a7ebab09b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,25 +159,25 @@
           "titleKey": "lenses",
           "defaultLens": "model",
           "labels": {
-            "model": "Illustrative nucleus"
+            "model": "Shape approximation"
           },
           "controls": [
             {
               "id": "model",
-              "label": "Illustrative nucleus",
+              "label": "Shape approximation",
               "thumbnail": "/scenes/comet-17p/comet-17p-model-thumbnail.webp",
               "surface": "comet-17p-model-surface@2x.webp",
               "poles": "comet-17p-model-poles@2x.webp",
               "source": {
-                "id": "celestia-mesh",
+                "id": "shape-parameters",
                 "path": "../manifest.json",
-                "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+                "url": "https://doi.org/10.1111/j.1365-2966.2006.11121.x"
               },
               "facts": [
                 {
-                  "id": "diameter",
-                  "label": "Catalog diameter",
-                  "value": "≈3.4 km"
+                  "id": "radius",
+                  "label": "Effective nucleus radius",
+                  "value": "1.62 km ± 0.01"
                 },
                 {
                   "id": "perihelion",
@@ -185,7 +185,7 @@
                   "value": "2.09 AU"
                 }
               ],
-              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and neutral gray marks missing surface imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+              "notes": "An ellipsoid at the published effective nucleus radius (Snodgrass, Lowry and Fitzsimmons (2006), MNRAS 373, 1590). Lightcurves give an axis ratio of at least 1.3, used here as the displayed elongation, with a period between 7.2 and 12.8 hours. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
               "noData": true
             }
           ]
@@ -204,10 +204,10 @@
         "charts": [],
         "resources": [
           {
-            "label": "Celestia",
-            "role": "surface",
-            "description": "Catalog entry and estimated scale",
-            "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+            "label": "Nucleus size",
+            "role": "shape",
+            "description": "Snodgrass, Lowry and Fitzsimmons (2006), MNRAS 373, 1590",
+            "href": "https://doi.org/10.1111/j.1365-2966.2006.11121.x"
           },
           {
             "label": "JPL Horizons",
@@ -232,7 +232,7 @@
           },
           "physical": {
             "path": "../shape/model.json",
-            "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+            "credit": "Snodgrass, Lowry and Fitzsimmons (2006), MNRAS 373, 1590"
           }
         }
       }
@@ -241,31 +241,21 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "celestia-mesh",
-      "path": "shape/model.obj",
-      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
-      "license": "GPL-2.0-or-later",
-      "licenseEvidence": [
-        "reference/celestia.ssc",
-        "reference/GPL-2.0-or-later.txt"
-      ],
-      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
-      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "id": "shape-parameters",
+      "path": "shape/model.json",
+      "origin": "https://doi.org/10.1111/j.1365-2966.2006.11121.x",
+      "credit": "Snodgrass, Lowry and Fitzsimmons (2006), MNRAS 373, 1590",
+      "license": "Factual measurement transcribed from the cited publication; no text or figures reproduced",
+      "acquisition": "authored record of the published effective nucleus radius and shape statement",
+      "redistribution": "permitted; facts are cited, not copied",
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "celestia-comet-catalog-1993a082",
-            "role": "method",
-            "evidence": "src/planets/comet-17p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
+        "kind": "local",
+        "reason": "Repository-authored ellipsoid parameters transcribing a published nucleus size; the citation is stated inside the record."
       },
-      "sha256": "d413403a4ed05d140f934b908e7d411cd056c5a36c3bfb8d4a1bedd05100ec6f",
-      "bytes": 436660,
+      "sha256": "346d6cc0f3ee9f0b26f41c4f138bc2dca6874bc5d52fba53256fbe583acd866a",
+      "bytes": 1097,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -282,10 +272,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "64d76a1a8a9beadb9ffaa921d9a6b423b357d02dfd2cf5f32a896a5590add1a7",
-      "bytes": 2904,
+      "sha256": "db4835643765a687fd9c430cc2843b447d0b8b2aab9040913788829a7ebab09b",
+      "bytes": 2899,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -293,7 +283,7 @@
   "products": [
     {
       "id": "model",
-      "label": "Illustrative nucleus",
+      "label": "Shape approximation",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
       "observationAttribution": "source-lineage",
@@ -310,25 +300,25 @@
         "kind": "shapeViews"
       },
       "inputs": [
-        "celestia-mesh"
+        "shape-parameters"
       ],
       "outputs": [
         {
           "url": "/scenes/comet-17p/comet-17p-model-thumbnail.webp",
-          "bytes": 838,
-          "sha256": "dee8370a2f04da3095c1b13ad031538702990064f244edaa075999bd7acff7c2",
-          "verification": "asset-manifest-pin"
+          "bytes": 852,
+          "sha256": "2f3626f7ae0e969012605b3334c4359df06874ed3b6e5501c50fc3427de263ec",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-17p/comet-17p-model-surface@2x.webp",
-          "bytes": 43220,
-          "sha256": "cfb34edc9f5154820238374feddc00cc6c8fbd360f20780f497c07675975f368",
-          "verification": "asset-manifest-pin"
+          "bytes": 41146,
+          "sha256": "24ba27da78286fb74de16eb2eff8898126dd12ad09771b199b2f95ef09ab6fdc",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "celestia-mesh",
+          "sourceId": "shape-parameters",
           "role": "geometry",
           "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
@@ -354,8 +344,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4502,
-          "sha256": "5088126f875a615a812223887093b98acc239f63db4cab2bd8fcee8aa7247629",
+          "bytes": 4436,
+          "sha256": "2d03a2e449e06d50a13338330afb46ba27158e58ab14fc1c9fcf5827dba281e7",
           "verification": "bytes-verified"
         }
       ],
@@ -368,11 +358,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-17p",
-    "materialSha256": "81f851289014b4de87007f9c2ad689cd8ee8a9907ad86647823516d69262601e",
+    "materialSha256": "1101ff71e9da4b97b493c1b0dce76b2ec78827324783c44587521ce96f7798c1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+      "bindingsSha256": "3db0b0147ee2a37a93735671ac50f650d52506389cfcef8ce629034a86672830"
     }
   }
 }

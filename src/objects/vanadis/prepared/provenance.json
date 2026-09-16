@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vanadis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "deffd218c851cc6907157d25b3011b011f484f21cacff443658a96050634cdf5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "3a815dc160c52dc53018e20cf14ed1d4da89d021df3c7edaef7331193e397832"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "616f9e9caf14dd14bfb662642e787d1d22478f53727d8f3eef207287cdfd109b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "072a1380fb0568866396a474ebd96ebf44a73b27d65d094c1ddbad8568262462",
       "bytes": 10335,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/vanadis/vanadis-elevation-thumbnail.webp",
           "bytes": 5362,
           "sha256": "df39766986d82405c6f2e53f2b4357e92b4e3e30688dd0b4847f2fd5b560b374",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-surface@2x.webp",
           "bytes": 269418,
           "sha256": "fdbc97a77d3e49e022667d597f9e422f9d3364a8562d1135953955a18a1e17ef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/vanadis/vanadis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vanadis/vanadis-shape-surface@2x.webp",
           "bytes": 64784,
           "sha256": "1182ed81640b98058a7ed035ab82f236ff3eca4d6bfa8f2ffd1495141c2c22f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "vanadis",
-    "materialSha256": "0dc33a8079eaae14b64837ea178e553a18ec8d651270859a3ee66366ff9b9c29",
+    "materialSha256": "f7e83896b352f0918b059ed36f9e4c1483150913e9905752a3bb30e2ad010cdb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "3a815dc160c52dc53018e20cf14ed1d4da89d021df3c7edaef7331193e397832"
     }
   }
 }

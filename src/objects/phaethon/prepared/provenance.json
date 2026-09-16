@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phaethon",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "efefaa5c0bb3c5ca8198d6a5a96250c0aa3db563971c1917871d4d7ba7aa3edb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "d25f824c14330323270bef6db103af7a148d122b13c3b4084f0428c164b5f3ba"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
       "sha256": "c800be46f47775bd0d1d777265503c2dd20db422a3a41b5c29aa5ae179ffb948",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -340,7 +340,7 @@
       "sha256": "ef7e8a7e61ebdf873e63f74606af4aa19a28ef6fc244255b082a92534708a2c0",
       "bytes": 8101,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -372,19 +372,19 @@
           "url": "/scenes/phaethon/phaethon-elevation-thumbnail.webp",
           "bytes": 5726,
           "sha256": "35fc592cf7808f7b8f8c43fe8733c2dbd5bdb67b1541664e691fa3d4585352a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-surface@2x.webp",
           "bytes": 339952,
           "sha256": "caf2915fb199a34eb703be5b07da18c9b3aa453c278ea414574ce9e38fe4dd94",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -422,13 +422,13 @@
           "url": "/scenes/phaethon/phaethon-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
           "bytes": 62148,
           "sha256": "7d87e1e2ab72fc60212801b966273f18899873aa5f618189dd468e90e0e83a05",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -523,11 +523,11 @@
   },
   "lastPreparation": {
     "objectId": "phaethon",
-    "materialSha256": "9fca3e146becaeef3a0592d7ffad3a1035f2f71258336352fb3ce9486bdbe863",
+    "materialSha256": "8a033a6bc20dd576aa2d2f8c8f295c6578d7cd2957545763942b231f2b24364f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "d25f824c14330323270bef6db103af7a148d122b13c3b4084f0428c164b5f3ba"
     }
   }
 }

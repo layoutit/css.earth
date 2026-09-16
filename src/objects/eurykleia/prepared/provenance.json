@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eurykleia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "d390e3ac59d47ddfe044c808b75fe2ebc4844f50b2b7f3fee98d48ac3f74d185"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "79c9222638495e4fbcc02dda5be6e548bf6c8c7cb3dcdeebf791983c8089c929"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "f357504dd44ea1e679c796b0878da27943b23109fd4c576ae8e8673abaee1eb9",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "75e91923b6eb567632ee6a97a2100a7312649bb2ff7c47ba164bb30156fb1013",
       "bytes": 9478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/eurykleia/eurykleia-elevation-thumbnail.webp",
           "bytes": 6424,
           "sha256": "b262b464ad1923c7bd8c6921c5024a3c4636bdcc4490b98cb781e3a5454ccc0f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurykleia/eurykleia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurykleia/eurykleia-elevation-surface@2x.webp",
           "bytes": 310614,
           "sha256": "8e459d5df6f3e182397320b2b0cd3ad586d1f7377e5cf86b94d3fc8a59136434",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/eurykleia/eurykleia-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurykleia/eurykleia-shape-surface@2x.webp",
           "bytes": 62788,
           "sha256": "5e00f45154f94ed94149986db361f36651fc48c102c3a38b3da358853f3a272d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "eurykleia",
-    "materialSha256": "ae17d537a28049af77ad25f7772724ca9fc40cbf02633f3bd9b378843d43af98",
+    "materialSha256": "575a98a87d394a25ed5bf9360cfab77b78b497c32ca04f5a4b248ebbb0a38af4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "79c9222638495e4fbcc02dda5be6e548bf6c8c7cb3dcdeebf791983c8089c929"
     }
   }
 }

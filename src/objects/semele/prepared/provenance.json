@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "semele",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1878698c34fc7137458a299b170daa54b07825da10e4d58cae3206b2a30809d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "8c917c8ccc0192e5c16ae5b0e493069ccfaedc8849866ebefe182521c5d2f185"
   },
   "recipes": [
     {
@@ -349,7 +349,7 @@
       "sha256": "1f263e11028e2a01358e54a68391c8cc9ccd70f4d4e7eae4fbcf09489d26c765",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "e452e4541640da1c50ce0d99d29397ff9907a974f8847d1c40336e377bab83b9",
       "bytes": 9754,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +409,19 @@
           "url": "/scenes/semele/semele-elevation-thumbnail.webp",
           "bytes": 5498,
           "sha256": "e98219f97a25eb2abcfaa3aa7907eaed0c995123e950fe2cac0fe4117265fa18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/semele/semele-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/semele/semele-elevation-surface@2x.webp",
           "bytes": 287280,
           "sha256": "51a2a4b2b37f084e63d2eba6979dd12fe4b14403dd260c7b2cba2abe6d449058",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -459,13 +459,13 @@
           "url": "/scenes/semele/semele-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/semele/semele-shape-surface@2x.webp",
           "bytes": 68690,
           "sha256": "128f70e8122125d4b647442c87e0a266f1ad7942b77e250ff5174b28712c7b68",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -560,11 +560,11 @@
   },
   "lastPreparation": {
     "objectId": "semele",
-    "materialSha256": "7bd37bff4d2f3d84d705ca1068136e2de6f1d198fc0e09549311e91e0f887f60",
+    "materialSha256": "58e8993b66b72a63f4cc6068a746cd39fb99c02cb436e22404f2b33ee0e7070e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "8c917c8ccc0192e5c16ae5b0e493069ccfaedc8849866ebefe182521c5d2f185"
     }
   }
 }
