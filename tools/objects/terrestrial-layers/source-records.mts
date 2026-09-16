@@ -152,7 +152,7 @@ export const controlledCameraFields = {observerLatitude:number,observerWestLongi
 export const parseControlledCamera = shape(controlledCameraFields);
 const partialControlledCameraFields = {observerLatitude:optional(number),observerWestLongitude:optional(number),sunLatitude:optional(number),sunWestLongitude:optional(number),
   rangeKm:optional(number),northAzimuthDegrees:optional(number),pixelAngleMicroradians:optional(number),center:optional(array(number))};
-export const cameraFrameFields = {id:text,path:text,labelPath:text,encoding:optional(text),allowFiniteSigned:optional(boolean),backgroundMaximum:optional(number),
+export const cameraFrameFields = {id:text,path:text,labelPath:optional(text),encoding:optional(text),allowFiniteSigned:optional(boolean),backgroundMaximum:optional(number),
   coverageInsetPixels:optional(number),backgroundOffset:optional(number),...partialControlledCameraFields,
   cameraCatalog:optional(shape({path:text,labelPath:text,instrumentPath:text,longitudeDirection:text,pixelOrigin:text,imageNumber:number})),
   quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text}))};
