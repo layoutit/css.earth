@@ -45,7 +45,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "11.594 ± 0.017 hours",
+        "source": {
+          "url": "https://doi.org/10.1093/mnras/stw081",
+          "label": "Research publication · DOI 10.1093/mnras/stw081",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1093-mnras-stw081",
+          "locator": "/rotationPeriodHours"
+        }
+      },
+      {
+        "id": "shape-axes",
+        "label": "Model semiaxes",
+        "value": "194 × 171 × 148 km · derived approximation",
+        "source": {
+          "url": "https://doi.org/10.1093/mnras/stw081",
+          "label": "Research publication · DOI 10.1093/mnras/stw081",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1093-mnras-stw081",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

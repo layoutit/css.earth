@@ -4,7 +4,21 @@
   "id": "oumuamua",
   "displayName": "ʻOumuamua",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "115 × 111 × 19 m",
+        "source": {
+          "url": "https://doi.org/10.1093/mnras/stz2378",
+          "label": "Research publication · DOI 10.1093/mnras/stz2378",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1093-mnras-stz2378",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

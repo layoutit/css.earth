@@ -21,7 +21,34 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Diameter",
+        "value": "2,326 ± 12 km",
+        "source": {
+          "url": "https://doi.org/10.1038/nature10550",
+          "label": "Research publication · DOI 10.1038/nature10550",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature10550",
+          "locator": "/radiusKm"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 15.8 days",
+        "source": {
+          "url": "https://doi.org/10.1038/nature10550",
+          "label": "Research publication · DOI 10.1038/nature10550",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature10550",
+          "locator": "/rotationPeriodDays"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

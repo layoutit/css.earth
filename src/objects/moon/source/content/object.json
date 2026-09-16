@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "distance-from-earth",
+        "label": "Mean distance from Earth",
+        "value": "384,400 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+          "label": "source-moon-prepared-moon-facts",
+          "checked": "2026-09-16",
+          "path": "source/orbit/moon.json",
+          "catalogueId": "source-moon-prepared-moon-facts",
+          "locator": "/meanOrbitRadiusKm"
+        }
+      },
+      {
         "id": "radius",
         "label": "Mean radius",
         "value": "1,737.4 km",
@@ -59,6 +72,32 @@
           "path": "source/editorial/factsheet-review.json",
           "catalogueId": "nasa-moon-facts",
           "locator": "/references/1; rotation-period"
+        }
+      },
+      {
+        "id": "orbital-inclination",
+        "label": "Inclination to ecliptic",
+        "value": "5.16°",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+          "label": "source-moon-prepared-moon-facts",
+          "checked": "2026-09-16",
+          "path": "source/orbit/moon.json",
+          "catalogueId": "source-moon-prepared-moon-facts",
+          "locator": "/inclinationDegrees"
+        }
+      },
+      {
+        "id": "orbital-eccentricity",
+        "label": "Orbital eccentricity",
+        "value": "0.0554",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+          "label": "source-moon-prepared-moon-facts",
+          "checked": "2026-09-16",
+          "path": "source/orbit/moon.json",
+          "catalogueId": "source-moon-prepared-moon-facts",
+          "locator": "/eccentricity"
         }
       },
       {

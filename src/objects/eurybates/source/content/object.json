@@ -6,6 +6,32 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "77.5 × 71.3 × 61.8 km",
+        "source": {
+          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+          "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-psj-acaf79",
+          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "8.7027283 ± 0.0000029 h",
+        "source": {
+          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+          "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-psj-acaf79",
+          "locator": "/spin/periodHours"
+        }
+      },
+      {
         "id": "class",
         "label": "Population",
         "value": "Jupiter Trojan",

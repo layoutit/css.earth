@@ -4,8 +4,36 @@
   "id": "sn263-gamma",
   "displayName": "2001 SN263 Gamma",
   "panel": {
-    "facts": [],
-    "moreFacts": []
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Estimated diameter",
+        "value": "0.43 ± 0.14 km",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+          "label": "Sn263 Gamma · radar shape",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-sn263-gamma-radar-shape",
+          "locator": "/extentsKm/1"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "shape-scale",
+        "label": "Model extents",
+        "value": "0.555 × 0.431 × 0.422 km",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+          "label": "Sn263 Gamma · radar shape",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-sn263-gamma-radar-shape",
+          "locator": "/extentsKm/0; /extentsKm/1; /extentsKm/2"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

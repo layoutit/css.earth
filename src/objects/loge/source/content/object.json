@@ -17,6 +17,19 @@
           "catalogueId": "jpl-satellite-mean-elements",
           "locator": "/references/0; Planet"
         }
+      },
+      {
+        "id": "rotation",
+        "label": "Tentative rotation period",
+        "value": "6.9 ± 0.1 h · tentative",
+        "source": {
+          "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+          "label": "Denk et al. (2018) · Irregular moons",
+          "checked": "2026-09-16",
+          "path": "source/survey/research.json",
+          "catalogueId": "denk-2018-irregular-moons",
+          "locator": "/rotation/hours"
+        }
       }
     ],
     "moreFacts": []

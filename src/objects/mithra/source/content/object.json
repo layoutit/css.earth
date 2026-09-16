@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "0.845 ± 0.025 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf",
+          "label": "Mithra · mithra research mithra",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-mithra-mithra-research-mithra",
+          "locator": "/diameterKm"
+        }
+      },
+      {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
         "value": "2.205 AU",

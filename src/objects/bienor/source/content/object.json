@@ -6,6 +6,32 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "254 × 110 × 90 km",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202450833",
+          "label": "Research publication · DOI 10.1051/0004-6361/202450833",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202450833",
+          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "9.1736 ± 0.0002 h",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202450833",
+          "label": "Research publication · DOI 10.1051/0004-6361/202450833",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202450833",
+          "locator": "/spin/periodHours"
+        }
+      },
+      {
         "id": "class",
         "label": "Population",
         "value": "Centaur",

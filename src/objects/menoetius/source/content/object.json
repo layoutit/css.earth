@@ -4,7 +4,47 @@
   "id": "menoetius",
   "displayName": "Menoetius",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Full model dimensions",
+        "value": "117 × 108 × 90 km",
+        "source": {
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-menoetius-model-surface",
+          "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+        }
+      },
+      {
+        "id": "scale",
+        "label": "Size evidence",
+        "value": "117 × 108 × 90 km · inferred full axes",
+        "source": {
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-menoetius-model-surface",
+          "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Mutual orbital period",
+        "value": "4.282753 ± 2.3e-05 d",
+        "source": {
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-menoetius-model-surface",
+          "locator": "/spin/periodDays"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

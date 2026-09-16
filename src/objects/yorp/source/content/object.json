@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "0.0564 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
+          "label": "Yorp · yorp research yorp",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-yorp-yorp-research-yorp",
+          "locator": "/diameterKm"
+        }
+      },
+      {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
         "value": "1.006 AU",

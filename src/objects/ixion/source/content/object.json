@@ -4,7 +4,21 @@
   "id": "ixion",
   "displayName": "Ixion",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "727 × 727 × 668 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2601.09639",
+          "label": "Research publication · arXiv 2601.09639",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2601-09639",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

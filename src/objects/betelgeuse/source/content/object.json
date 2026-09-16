@@ -4,7 +4,47 @@
   "id": "betelgeuse",
   "displayName": "Betelgeuse",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "764 solar radii",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.09837",
+          "label": "Joyce et al. (2020)",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2006-09837",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "168 parsecs",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.09837",
+          "label": "Joyce et al. (2020)",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2006-09837",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "angular-diameter",
+        "label": "Angular diameter (4 µm)",
+        "value": "42.45 milliarcseconds",
+        "source": {
+          "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+          "label": "Uniform-disc fit to the February 2020 VLTI/MATISSE continuum data",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
+          "locator": "angularDiameterMas; angularDiameterSource"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

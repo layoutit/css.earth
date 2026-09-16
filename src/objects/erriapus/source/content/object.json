@@ -6,6 +6,19 @@
   "panel": {
     "facts": [
       {
+        "id": "diameter",
+        "label": "Diameter estimate",
+        "value": "10 (+3/−2) km",
+        "source": {
+          "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+          "label": "Denk et al. (2018) · Irregular moons",
+          "checked": "2026-09-16",
+          "path": "source/survey/research.json",
+          "catalogueId": "denk-2018-irregular-moons",
+          "locator": "/scale/adoptedReferenceRadiusKm"
+        }
+      },
+      {
         "id": "parent",
         "label": "Orbits",
         "value": "Saturn",
@@ -16,6 +29,19 @@
           "path": "source/editorial/factsheet-review.json",
           "catalogueId": "jpl-satellite-mean-elements",
           "locator": "/references/0; Planet"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Observed rotation period",
+        "value": "28.15 ± 0.25 h",
+        "source": {
+          "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+          "label": "Denk et al. (2018) · Irregular moons",
+          "checked": "2026-09-16",
+          "path": "source/survey/research.json",
+          "catalogueId": "denk-2018-irregular-moons",
+          "locator": "/rotation/hours"
         }
       }
     ],

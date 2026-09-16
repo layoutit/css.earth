@@ -4,7 +4,34 @@
   "id": "desdemona",
   "displayName": "Desdemona",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Projected radius",
+        "value": "35 ± 4 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2401.04634",
+          "label": "Research publication · arXiv 2401.04634",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2401-04634",
+          "locator": "/projectedRadiusKm/value"
+        }
+      },
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "90 × 54 × 54 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2401.04634",
+          "label": "Research publication · arXiv 2401.04634",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2401-04634",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

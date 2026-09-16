@@ -6,6 +6,32 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "2.23 km",
+        "source": {
+          "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+          "label": "NAIF generic planetary constants kernel · pck00011.tpc",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "naif-pck00011",
+          "locator": "/referenceRadiusKm"
+        }
+      },
+      {
+        "id": "dimensions",
+        "label": "Measured dimensions",
+        "value": "5.76 × 4.16 × 3.60 km",
+        "source": {
+          "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+          "label": "NAIF generic planetary constants kernel · pck00011.tpc",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "naif-pck00011",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+        }
+      },
+      {
         "id": "orbital-period",
         "label": "Orbit around Saturn",
         "value": "About 27.7 hours",
