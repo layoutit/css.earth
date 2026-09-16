@@ -168,6 +168,54 @@
           }
         ]
       }
+    },
+    {
+      "id": "cassini-04161-04164ra-bc",
+      "path": "ck/04161_04164ra.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/04161_04164ra.bc",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 4147200,
+      "expectedSha256": "d8d927704dcc5a48353c065d0206cb8e7ce269c6f14b702f5d1a87334daf192c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-041014r-scpse-01066-04199-bsp",
+      "path": "spk/041014R_SCPSE_01066_04199.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/spk/041014R_SCPSE_01066_04199.bsp",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 38462464,
+      "expectedSha256": "cb430f458fb10950524a52e62dc4b65293247a5a1d6cc5057e72f3f0ea6e5098",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

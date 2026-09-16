@@ -641,6 +641,84 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "n1465662798",
+      "path": "observations/N1465662798_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "456243a0a80a1b4b9786cca0555acc4833ae43ccf4a9e65250fa16835edaeb37",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "width": 1024,
+      "height": 1024,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-n1465662798",
+            "role": "material",
+            "evidence": "src/objects/phoebe/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n1465662798-label",
+      "path": "observations/N1465662798_2_CALIB.LBL",
+      "expectedBytes": 3777,
+      "expectedSha256": "02da84d06ff45f1aa539a05cb62a482a1adbce49bb4b3a0fd5f99b0243c60f47",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-n1465662798-label",
+            "role": "material",
+            "evidence": "src/objects/phoebe/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -677,8 +755,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10970,
-      "expectedSha256": "47a44a0949cc9493a1ce2a1c9761761f7e3ad30491ba331fdd977cca617cd7f1",
+      "expectedBytes": 12309,
+      "expectedSha256": "7fe6b1619f2eeec9632fae36e71b7c2e12ef352bdb51e7173fa81851540d648d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -696,8 +774,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2976,
-      "expectedSha256": "a021bae43f6380815b14480670d601dd6a6c6764d1eedab264fec02ebd653404"
+      "expectedBytes": 3360,
+      "expectedSha256": "d69e6e388e1bade53d7fbb9c60120473e0898c44ff5eec7ba1306f53485a932c"
     },
     {
       "path": "preparation/navigation.json",
@@ -711,8 +789,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 11406,
-      "expectedSha256": "9b44475d33c5649d885865585519f6195fdec0a1f63076167fd39beb5e160b3d"
+      "expectedBytes": 15256,
+      "expectedSha256": "caa71862f51b6dcbee9686d8ccda260ff28c3630a18ce7f38e466bc9accc4e2f"
     },
     {
       "path": "presentation/minimap.json",
