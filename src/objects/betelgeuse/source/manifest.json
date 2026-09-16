@@ -3,7 +3,7 @@
   "inputs": [
     {
       "id": "betelgeuse-matisse-2020-02-continuum",
-      "path": "observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
+      "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
@@ -17,14 +17,14 @@
         ]
       },
       "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
-      "acquisition": "Produced by the command in reference/squeeze-command.txt from observations/betelgeuse-matisse-2020-02-continuum.oifits; committed because no archive serves it.",
+      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in reference/../observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits convolved with a 4 mas Gaussian beam; `--check` recomputes it.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "sphere-photograph"
       ],
-      "coverage": "Posterior-mean maximum-entropy image, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 8 and 19 February 2020. The interferometric beam is 4 milliarcseconds. Reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases.",
-      "expectedBytes": 141120,
-      "expectedSha256": "372ed3278212fc3a51788e2c695b58d35108d91e3fcda80213b8d440af581dd6",
+      "coverage": "Posterior-mean maximum-entropy image convolved to the 4 milliarcsecond beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 8 and 19 February 2020. The interferometric beam is 4 milliarcseconds. Reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases.",
+      "expectedBytes": 135360,
+      "expectedSha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
       "width": 128,
       "height": 128,
       "lensId": "matisse",
@@ -35,7 +35,7 @@
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
             "role": "material",
-            "evidence": "src/objects/betelgeuse/source/manifest.json@c4bf87a07d4159a8ef06278b02f567c5782215a6#/inputs/0"
+            "evidence": "src/objects/betelgeuse/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
           }
         ]
       }
@@ -1198,8 +1198,8 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 193217,
-      "expectedSha256": "ca19bb00b6aefa2743fd243a5520f6e829452af0f1b643109feaf64e7d34dca5",
+      "expectedBytes": 113695,
+      "expectedSha256": "3e4400240f03e6f3734acdcdb5c18641b4aa628bdde57f9d06722421546e672f",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -1222,8 +1222,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3262,
-      "expectedSha256": "4cebee6d27727851ad4a93b108edce6d0d5f80db05fb75df71cb9bdd51abc657",
+      "expectedBytes": 3251,
+      "expectedSha256": "97d670b2b303fc9f8e86554d2988edb92ee93a4cfeb01dac5761a2eba8da6402",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -1246,7 +1246,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1316,
-      "expectedSha256": "62057538f3236dcea47ac319c04fb0676a604dd76dca56f933286ca7b3e51d61"
+      "expectedSha256": "e80570ce45657186195fe8229bbc41ce199f6dc1adb30b82331a88b6d7cb8551"
     },
     {
       "path": "preparation/rotation.json",
@@ -1255,8 +1255,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4887,
-      "expectedSha256": "6cdfb6e874a3aa56b5ffdd19de0cd2f0ef59434a3c14d6602b5677c4e8161123"
+      "expectedBytes": 4950,
+      "expectedSha256": "82f4936bfcd9b859491ac657654a5a67090fb5681d0fafdaef2a6c08684e1954"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1288,11 +1288,20 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 278374,
-      "expectedSha256": "4e8419ae9b38713945cb394ef43b6c04905beb70c36ac7cecf7f1c74c804b3d6",
+      "expectedBytes": 238448,
+      "expectedSha256": "e42cde6e38260b54e462192266b58ca0a5680d0c7cfafb3b7d98b06151f5f9e5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /betelgeuse/ with the default camera, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after preparation."
+      }
+    },
+    {
+      "path": "observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
+      "expectedBytes": 141120,
+      "expectedSha256": "372ed3278212fc3a51788e2c695b58d35108d91e3fcda80213b8d440af581dd6",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels, the input to the beam convolution and the image the reconstruction test fits to the visibilities; not displayed."
       }
     }
   ]

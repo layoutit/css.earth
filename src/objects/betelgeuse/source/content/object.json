@@ -43,7 +43,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, cast onto a sphere of the published radius. The interferometric beam is 4 milliarcseconds, so structure finer than five pixels belongs to the regulariser. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. Grayscale is reconstructed relative intensity in one infrared band: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. Grayscale is reconstructed relative intensity in one infrared band: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
         "noData": true
       }
     ]

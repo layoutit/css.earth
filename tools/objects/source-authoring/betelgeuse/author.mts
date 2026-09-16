@@ -9,6 +9,7 @@ import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '../../interferometry/matisse-continuum.mts';
+import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
 import { requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
@@ -24,6 +25,11 @@ export const CONTINUUM_RECIPE: ContinuumRecipe = Object.freeze({
 });
 export const CONTINUUM_NIGHTS = Object.freeze(['2020-02-08', '2020-02-19']);
 export const MERGED_PATH = 'observations/betelgeuse-matisse-2020-02-continuum.oifits';
+/** SQUEEZE's posterior mean at 0.78 mas pixels, and the same image convolved to the 4 mas beam of the February 2020 baselines
+ * (Drevon et al. 2024), which is what the lens casts: structure below the beam is the regulariser's, not the star's. */
+export const RAW_IMAGE_PATH = 'observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits';
+export const BEAM_IMAGE_PATH = 'observations/betelgeuse-matisse-2020-02-continuum-4mas.fits';
+export const BEAM_FWHM_MAS = 4;
 export const SPHERE_PATH = 'shape/uniform-disc.tab';
 
 /** A latitude/longitude/radius table of one radius: the reference sphere, in the released-table format the mesh loader reads. */
@@ -45,7 +51,11 @@ export async function authorBetelgeuse({ check = false } = {}) {
   const files = (await readdir(oifitsDirectory)).filter(name => name.endsWith('.fits') && CONTINUUM_NIGHTS.some(night => name.startsWith(night))).sort().map(name => resolve(oifitsDirectory, name));
   if (files.length !== 29) throw new Error(`Expected the 29 pinned February 2020 MATISSE files, found ${files.length}.`);
   const merged = await mergeContinuum(files, CONTINUUM_RECIPE), oifits = mergedOifits(merged, CONTINUUM_RECIPE);
-  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [MERGED_PATH, oifits]];
+  const raw = readReconstruction(await readFile(resolve(root, RAW_IMAGE_PATH)));
+  const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
+  if (!(pixelMas > 0)) throw new Error('The reconstruction states no pixel scale.');
+  const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
+  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [MERGED_PATH, oifits], [BEAM_IMAGE_PATH, beam]];
   for (const [path, bytes] of outputs) {
     const target = resolve(root, path);
     if (check) {
@@ -57,5 +67,5 @@ export async function authorBetelgeuse({ check = false } = {}) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const result = await authorBetelgeuse({ check: process.argv.includes('--check') });
-  console.log(`Betelgeuse: ${result.files} MATISSE files, ${result.rawVis2} raw V2 and ${result.rawT3} raw T3 channels -> ${result.vis2} V2 and ${result.t3} T3 rows; sphere table written.`);
+  console.log(`Betelgeuse: ${result.files} MATISSE files, ${result.rawVis2} raw V2 and ${result.rawT3} raw T3 channels -> ${result.vis2} V2 and ${result.t3} T3 rows; sphere table and beam-convolved image written.`);
 }

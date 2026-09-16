@@ -11,10 +11,12 @@ import { resolve } from 'node:path';
 import { readFitsImage } from '../../../../tools/fits.mts';
 import { readMergedContinuum } from '../../../../tools/objects/interferometry/matisse-continuum.mts';
 import { fitStatistics, visibility } from '../../../../tools/objects/interferometry/image-fit.mts';
-import { authorBetelgeuse } from '../../../../tools/objects/source-authoring/betelgeuse/author.mts';
+import { authorBetelgeuse, BEAM_FWHM_MAS } from '../../../../tools/objects/source-authoring/betelgeuse/author.mts';
+import { convolveGaussian, readReconstruction } from '../../../../tools/objects/interferometry/beam-convolve.mts';
 
 const SOURCE = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
 const IMAGE = resolve(SOURCE, 'observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits');
+const BEAM_IMAGE = resolve(SOURCE, 'observations/betelgeuse-matisse-2020-02-continuum-4mas.fits');
 const VISIBILITIES = resolve(SOURCE, 'observations/betelgeuse-matisse-2020-02-continuum.oifits');
 
 test('the pinned reconstruction fits the pinned visibilities and closure phases', async () => {
@@ -35,6 +37,22 @@ test('the pinned reconstruction fits the pinned visibilities and closure phases'
   const disc = { ...image, values: Float64Array.from({ length: 128 * 128 }, (_, i) => Math.hypot(i % 128 - 63.5, Math.floor(i / 128) - 63.5) * 0.78 <= 42.45 / 2 ? 1 : 0) };
   const discFit = fitStatistics(disc, data.wavelengthMetres, data.vis2, data.t3);
   assert.ok(discFit.reducedChi2Vis2 > 3 * fit.reducedChi2Vis2, `a uniform disc fits the visibilities worse: ${discFit.reducedChi2Vis2} against ${fit.reducedChi2Vis2}`);
+});
+
+test('the displayed image is the raw reconstruction convolved to the beam, and keeps its flux and centre', async () => {
+  const raw = readReconstruction(await readFile(IMAGE)), beam = readReconstruction(await readFile(BEAM_IMAGE));
+  assert.equal(beam.width, raw.width); assert.equal(beam.height, raw.height);
+  const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
+  const expected = convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas);
+  let maximum = 0, rawFlux = 0, beamFlux = 0;
+  for (let i = 0; i < expected.length; i++) { maximum = Math.max(maximum, Math.abs(expected[i]! - beam.values[i]!)); rawFlux += raw.values[i]!; beamFlux += beam.values[i]!; }
+  assert.ok(maximum < 1e-15, `the pinned beam image is the convolution of the pinned raw image (max difference ${maximum})`);
+  assert.ok(Math.abs(beamFlux - rawFlux) < 1e-4 * rawFlux, 'convolution keeps the flux to the edge truncation');
+  // The beam removes the regulariser's grain: the peak over the median inside the disc drops, and the fit to the visibilities is still close.
+  const wavelength = readMergedContinuum(await readFile(VISIBILITIES));
+  const image = { width: beam.width, height: beam.height, values: beam.values, pixelMas, eastLeft: true };
+  const fit = fitStatistics(image, wavelength.wavelengthMetres, wavelength.vis2, wavelength.t3);
+  assert.ok(fit.reducedChi2Vis2 < 2 && fit.reducedChi2T3 < 2.5, `the beam-convolved image still fits: ${fit.reducedChi2Vis2}, ${fit.reducedChi2T3}`);
 });
 
 test('the merged visibilities are the pinned MATISSE files averaged by the authoring tool', { skip: !(await access(resolve(SOURCE, 'observations/oifits')).then(() => true, () => false)) && 'MATISSE files not acquired' }, async () => {
