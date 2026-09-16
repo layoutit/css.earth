@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "puck",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1d109599dc68fb035b7050e689bdf0395496e1a5dbfdaff842418afe8e4425ab"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -288,7 +288,7 @@
       "sha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -335,7 +335,7 @@
       "sha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
       "bytes": 3294,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -397,7 +397,7 @@
       "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
       "bytes": 2563,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -431,13 +431,13 @@
           "url": "/scenes/puck/puck-normal-thumbnail.webp",
           "bytes": 2464,
           "sha256": "079ce2ca4b769905f89c0271bdb0fa5a4194fea7694520c87138d55bb2158285",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
           "bytes": 76150,
           "sha256": "4ba643c5b5dac95deb0fcbfd65c40d21e9478013b890f1b0df0ab091e892e237",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

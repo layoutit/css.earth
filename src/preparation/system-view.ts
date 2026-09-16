@@ -24,10 +24,11 @@ export function prepareSystemView(parent: Pick<PreparedWorldContext['focus'], 'i
   bodies: PreparedWorldContext['bodies'], states: Readonly<Record<string, OrbitalState>>,
   policy: SystemViewPolicy): PreparedSystemView | undefined {
   validatePolicy(policy);
-  const members = orderMembers(bodies.filter(body => body.orbit.centerBodyId === parent.id), states);
+  // A placed body carries no orbit and belongs to no system view.
+  const members = orderMembers(bodies.filter(body => body.orbit?.centerBodyId === parent.id), states);
   if (!members.length) return undefined;
   const main = members.filter(member => member.radiusM >= members[0]!.radiusM * policy.minimumRadiusShare);
-  return bakeView(parent, candidateFrames(parent, main, states, policy), main, member => member.orbit.verticesM);
+  return bakeView(parent, candidateFrames(parent, main, states, policy), main, member => member.orbit!.verticesM);
 }
 
 /** Frame a group by its members' prepared positions, from the plane bodies' candidate angles.

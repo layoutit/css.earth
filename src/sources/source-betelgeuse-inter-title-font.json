@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-inter-title-font",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse · inter title font",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/source/manifest.json",
+      "revision": "c4bf87a07d4159a8ef06278b02f567c5782215a6",
+      "sha256": "2aa4804f9cebe18c5a777dc7aa372117cdd439f11b72468103365215997b1c44",
+      "locator": "/inputs/31"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Inter Project Authors / Rasmus Andersson",
+      "scope": "The inter title font input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "SIL Open Font License 1.1",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

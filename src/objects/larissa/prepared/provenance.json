@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "larissa",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "51036e917fa4eaf137a90bfa03d858ae4543bb2ecb5c689c38b2e8e58a13cdc6"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -372,7 +372,7 @@
       "sha256": "c22e8f6968eeab0519c238851542780f9a94b15ee1c7bbe6067fe1ce774deaeb",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -416,7 +416,7 @@
       "sha256": "c39ac58bbc5c4fe39c43adea9807a614b1510b63c886b0a3d90c7b4f75c9f26e",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -453,7 +453,7 @@
       "sha256": "681845179a0c761d7b427d44095978c94b872d83e18de95e657a4e23dc8045ef",
       "bytes": 3285,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -480,7 +480,7 @@
       "sha256": "357196eddef9f5675d4a90c8bad5818df2aa8d4b35ea4e7ccb46eee94f909b80",
       "bytes": 4610,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -512,19 +512,19 @@
           "url": "/scenes/larissa/larissa-elevation-thumbnail.webp",
           "bytes": 5462,
           "sha256": "2370cb2b2eab1b5341bbfa27e1b38e34e0909163e93c0635844e673aadc7e42d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/larissa/larissa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/larissa/larissa-elevation-surface@2x.webp",
           "bytes": 157004,
           "sha256": "1bd870e8c77fa3a06102eff4bf3f17a190b1895e805c2b6abaea494330fced01",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -564,13 +564,13 @@
           "url": "/scenes/larissa/larissa-normal-thumbnail.webp",
           "bytes": 2152,
           "sha256": "3ff98cbfd1831a22f1c976f308ca59ec1d68b25c7b71938ef86e7c011a0a209c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/larissa/larissa-normal-surface@2x.webp",
           "bytes": 108488,
           "sha256": "5b20af29cb40d9465dddb0997ac8f771d851cc9f7f55c1a272fcd1bc243d36f2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

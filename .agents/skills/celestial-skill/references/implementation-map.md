@@ -191,6 +191,7 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | Ground-based telescope frames with no archived geometry | `controlled-shape-camera` with `fits-zimpol-intensity` | Kleopatra `zimpol`: deconvolved VLT/SPHERE/ZIMPOL frames | Frame pins with cameras computed by `observer-camera.mts` from a rotation model, Horizons geometry and each frame's header, all named in `source/preparation/observer-cameras.json` and written into the recipe by `tools/objects/observer-cameras.mts` (exposure-midpoint epoch, limb-fitted centre); the mesh the rotation model describes, as a `radialTerrainAlternatives` entry. The model is the release's spin record (`spinOrientation`) or, for a body a text PCK describes, its IAU pole model (`pckOrientation` over the shared `pck00011.tpc` and a leap-second kernel) | `observer-camera.test.mts`: the spin record against the IAU elements DAMIT publishes for the same model, the PCK model against Horizons sub-observer points for Jupiter and Saturn, and the two providers against each other for Pallas; `observer-cameras.test.mts`: every recipe states what its pinned inputs derive; `tests/objects/unit/vesta/sphere-registration.test.mts`: the route against the Dawn mosaic through `observer-registration.mts` (peak +0.5° over 30 frames, mirrors beaten, the IAU prime meridian 210° away) |
 | Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | `bands` naming the three filters, and `frames` as band sets naming each set's red, green and blue photographs. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
 | ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
+| Optical-interferometric visibilities with no image at all | `controlled-shape-camera` with `fits-oi-reconstruction`, on the planet route through the raster science kind `surface-observation` (`science.shape` names the reference sphere table, `science.lens` the lens) | Betelgeuse `matisse`: public VLT/MATISSE OIFITS merged by `tools/objects/interferometry/matisse-continuum.mts` and reconstructed with the public SQUEEZE code at a pinned commit | The merged OIFITS, the reconstructed image and the SQUEEZE build and command as pinned inputs; a `reconstruction` block on the frame naming the visibilities' epoch, band and file; the computed camera | `tests/objects/unit/betelgeuse/reconstruction.test.mts` recomputes the fit of the image to the visibilities with `tools/objects/interferometry/image-fit.mts` |
 
 For `controlled-shape-color`, each band set is one observing triplet. A point is
 colored only where all three of its bands qualify, and band sets compete for a
@@ -210,6 +211,19 @@ Routes with Sun geometry accept a published photometric model record (see
 lists which bodies have one. Kernels that serve several bodies of one mission
 live in a kernel bank under `src/spice/<mission>/`: add, restore and verify them
 with `node tools/spice/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
+
+A star other than the Sun is a placed body. `packages/astronomy` carries its
+catalogue astrometry (`star` record: ICRS position and epoch, distance, proper
+motion, radial velocity, each with its source), `tools/prepare-solar-geometry.mts`
+places it by that state instead of an orbit, the Sun's world context lists it
+with a position and no trajectory (`orbitStyle: none`), navigation reads its
+distance in parsecs, and the overview rule that opens the Solar System when the
+camera leaves it anchors on the star itself. The reference surface is a sphere at
+the published radius written as a radius table, as Annefrank's ellipsoid is. The
+Sun direction from such a body is the direction to Earth within a thousandth of a
+degree, so incidence equals emission and `retained-observation` photometry keeps
+the reconstructed intensity. The baked sky cube is the Sun's; beyond the star
+band the runtime hands the sky to the 3D star field, so the cube fades out there.
 
 ## Registered photographic mosaics
 

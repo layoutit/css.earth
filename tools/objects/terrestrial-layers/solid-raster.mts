@@ -1,7 +1,7 @@
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {RgbObservation} from './contracts.mts';
 import type {RadialState} from './solid-contract.mts';
-import { encodeBandColor } from '../color-transfer.mts';
+import { encodeBandColor, interpolatePalette } from '../color-transfer.mts';
 import {parseSolidRasterConfig,parseSurfaceSource} from './solid-source.mts';
 import {requireTerrainMesh} from './radial-terrain.mts';
 import {shape,text,number} from './source-records.mts';
@@ -199,7 +199,11 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     observationRadial.observationSurfaces ??= new Map();
     observationRadial.observationSurfaces.set(recipe.id, observation);
     const { rgb, missing } = observation.preview(width, height);
-    const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, observation: observation.report });
+    // A palette lens is false colour: its legend strip is emitted beside the surface, like a scientific lens.
+    const display = requireRecord(recipe).display, palette = display === undefined ? undefined : requireRecord(display).palette as readonly string[] | undefined;
+    const legend = palette ? await emit(`${config.namespace}-${recipe.id}-legend.webp`, sharp(Buffer.concat(Array.from({ length: 256 }, (_, x) => Buffer.from(interpolatePalette(palette, x / 255)))),
+      { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: 'lanczos3' })) : null;
+    const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, ...(legend ? { falseColor: true, legend } : {}), observation: observation.report });
     const eye = observation.report.camera.positionKm;
     const snapshot = await renderRadialSnapshot({ faces: observationRadial.faces, sampleSurface: observation.samplePoint, size: 96,
       longitudeDegrees: Math.atan2(eye[1], eye[0]) * 180 / Math.PI,

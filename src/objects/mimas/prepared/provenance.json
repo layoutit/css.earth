@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mimas",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "74b665816e1a3238d5d4029df85a64adc48c6c76e35a1cb9e7c2f646cc6db950"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -482,7 +482,7 @@
       "sha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b",
       "bytes": 6959979,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -535,7 +535,7 @@
       "sha256": "e8191c356f899817536ef1d71dbddedc21077bd6bc44f1883264df2929a540ca",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -606,7 +606,7 @@
       "sha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f",
       "bytes": 1848860,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -672,7 +672,7 @@
       "sha256": "cb2368b033cde32ae6cda6831d248299929518cbcf747bc832e671cc5751fc2c",
       "bytes": 9881891,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -702,7 +702,7 @@
       "sha256": "b655a7719bac1d343a99439cb79d56ebc4230fb41b644eb10370af938ec5e493",
       "bytes": 10014,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -722,7 +722,7 @@
       "sha256": "65137b88ab2c9016e6ad318e0b95d1f2639b1bb17d0c3586a8694902b62f6631",
       "bytes": 1000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -748,7 +748,7 @@
       "sha256": "5fc3398feafe7379934e6a6b3b145450f96088981cf4a150bb1cadf072036836",
       "bytes": 147178,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -775,7 +775,7 @@
       "sha256": "9597bd1485f74cf558df8674b3f221bc9939775a5be3b8ce042e69ce34814b2c",
       "bytes": 152,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -802,7 +802,7 @@
       "sha256": "28297a1c7b8eff50e9860d2894ba2c820b8facbaa623dbd7e031e688ead480c5",
       "bytes": 1391,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -843,13 +843,13 @@
           "url": "/scenes/mimas/mimas-normal-thumbnail.webp",
           "bytes": 3512,
           "sha256": "5a2389f1edc4b94f766810fee2b2bfa95a546ad0e8f05d91b98adf86d603b981",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
           "bytes": 6635886,
           "sha256": "c2e727a8729b5c1580bc63811cf1a05facbcf583a70759aededbb7ac3e08f311",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -901,13 +901,13 @@
           "url": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
           "bytes": 6952,
           "sha256": "8dd35129a7c0920bf379219fa69c54e4f5c46ecea83609576dc46b7866fc7391",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
           "bytes": 8189424,
           "sha256": "ffdee2030ac3cce437040c56bccd6b634ce287b6612770addfb4fdb2bebcf3f8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -952,19 +952,19 @@
           "url": "/scenes/mimas/mimas-elevation-thumbnail.webp",
           "bytes": 7984,
           "sha256": "1f562fc11bd7a38e18555734c15bb7d7abda51c8dae1491c2a6894ff418084a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
           "bytes": 2419150,
           "sha256": "cd244dd80eb2a96e0d2c2714d7eff15a492306598eb5aa21ff88b5c9bc7763f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1033,7 +1033,7 @@
           "url": "/scenes/mimas/mimas-features.json",
           "bytes": 82491,
           "sha256": "c2327d0e677e08589cd35e3900b14be8ad75e458e742dc08cbba2e893c6ef582",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

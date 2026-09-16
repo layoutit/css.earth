@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "psyche",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "09d8f13910080b13cd2975ecbcd5be88872ba804fc620c82180ece0a282512d8"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -671,7 +671,7 @@
       "sha256": "e49a5d2d92974c283f9ee36bea08568265af80d9f700c20e11cd0b371d23067b",
       "bytes": 388219,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -723,7 +723,7 @@
       "sha256": "24664a5d6a319c27593594bce297fcb485379d8225ff58ab90e5fd9a5db14179",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -775,7 +775,7 @@
       "sha256": "37c478722c6b3952c66a42dd9c6db0c370108d678a50d5a18d3afc61071a3d87",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -827,7 +827,7 @@
       "sha256": "9c93de9e3da97a08a15dd38f5f3ba0678ae76a7e42690ef4c457b2efdb1b4769",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -879,7 +879,7 @@
       "sha256": "bebce67a18ce66255181988972638c9d1e066420f898dbd331593f40fd9ad916",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -931,7 +931,7 @@
       "sha256": "8b87aa56865b462212469dd9a77f7b4e8bba09a5ab33bea6b06c5ec375b89329",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -983,7 +983,7 @@
       "sha256": "a203a165619cf038437f6422c95e07904068155d679f197ba7bb5c247cff260d",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1035,7 +1035,7 @@
       "sha256": "49ed3ed162e19a0f61c4924c180eaf8d3b6eecfb3520e701b6e8f0b52a2b8b53",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1087,7 +1087,7 @@
       "sha256": "5d87c8c87c61898fafa0dd2181f1c8b87ef2228838f5120603c428850263aa06",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1139,7 +1139,7 @@
       "sha256": "c923276df9a207c7ebb65239f66cf95f82b5bb71aec1a4584b2ac2904c48f924",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1191,7 +1191,7 @@
       "sha256": "09cd4507c9f7cee387736d124bad1d5312793ef346b40f42a52e1162220c32eb",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1243,7 +1243,7 @@
       "sha256": "1fccacba188db5d618a71c7c318702ecc9be186fd613d15d3499285c5f6a2f29",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1295,7 +1295,7 @@
       "sha256": "8005e05dea3c9da368abf303cffbefb632d99d7f28ceafaa2187720f23cddbb3",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1347,7 +1347,7 @@
       "sha256": "136915d9965469337f9c9db4500459c5c7620dc44c2ca2edd82fceb04c864846",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1399,7 +1399,7 @@
       "sha256": "b03587a35b1d831faeacfbe4684aa8b6ba77783bcc3e452542c41da05e3e9b68",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1451,7 +1451,7 @@
       "sha256": "3297019f4203132134b074ff4b5de4de8291a87b7af02adaf99a2e5f7aa739c1",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1503,7 +1503,7 @@
       "sha256": "0703082fb4e34260d7169db51b58edbd6dfcec4dea5540533d00d44ba4a4ffb9",
       "bytes": 593280,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1557,7 +1557,7 @@
       "sha256": "98ce7aebaebe9eb475dac2e6f38e53f3440f6ef00bffc6cf15f7c3dcfbee0fef",
       "bytes": 45397,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1588,7 +1588,7 @@
       "sha256": "7e72cfa7fa8bc77d73becc86398de1db1f8bafef0cdf8a029419567f9f1c7bcc",
       "bytes": 8229,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1620,19 +1620,19 @@
           "url": "/scenes/psyche/psyche-elevation-thumbnail.webp",
           "bytes": 4964,
           "sha256": "c0adb2532a873e8a227aeccfb1e2643ca2f5829f91c9294455e18644aeefa996",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/psyche/psyche-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/psyche/psyche-elevation-surface@2x.webp",
           "bytes": 306596,
           "sha256": "d8a54e06f75763547a0a44b656b6977596609cd0f8b5c3495289566f7bdeb378",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1670,13 +1670,13 @@
           "url": "/scenes/psyche/psyche-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/psyche/psyche-shape-surface@2x.webp",
           "bytes": 58408,
           "sha256": "8a271f6aa42e9c817aa35e8234d2e204ecc0246addf6a287dc154d4d6d0ac3fc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1730,13 +1730,13 @@
           "url": "/scenes/psyche/psyche-zimpol-thumbnail.webp",
           "bytes": 1782,
           "sha256": "dc4609aa017d763e07308563fa8b5fc4f9f2e0763a5632e2d1f2592ff22810ee",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
           "bytes": 327214,
           "sha256": "7488f69efdedbf099df7ef079e7f64e549d783279bcfd3d7425238258542c47d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

@@ -67,7 +67,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const radiusM = await preparedRadius(body.id, positionM, source.frame.referenceFrame,
       source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? (data ? data.meanRadiusKm * M_PER_KM : undefined);
     if (radiusM === undefined) throw new TypeError(`World context lacks a physical radius for ${body.id}.`);
-    facts[body.id] = { radiusM, orbitStyle: planetIds.has(body.id) ? 'closed' : 'trail', classification: classifications.get(body.id) };
+    // A star other than the focus is placed, not orbiting: the context carries its position and radius and draws no trajectory.
+    const classification = classifications.get(body.id);
+    facts[body.id] = { radiusM, orbitStyle: classification === 'star' ? 'none' : planetIds.has(body.id) ? 'closed' : 'trail', classification };
   }
   const orbitCenters: Record<string, WorldContextOrbitCenter> = {};
   for (const body of source.bodies) {

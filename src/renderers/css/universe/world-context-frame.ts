@@ -179,7 +179,10 @@ export function createWorldContextFrameReceiver() {
       }
       const { id, baseId, members: _members, updates, ...header } = packet;
       committedId = id;
-      return { frame: { ...header, projectedBodies } as PlannedWorldContext, changes, orbits };
+      // Changed bodies are keyed by prepared body index, which is not their position
+      // in the projected list once only the locators publish.
+      const changed = Array.from(changes.keys(), index => bodies.get(index)!);
+      return { frame: { ...header, projectedBodies } as PlannedWorldContext, changes, changed, orbits };
     },
   };
 }

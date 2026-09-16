@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mathilde",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "65d5fa350f03f89fd599b31e39b9cafa61160d0b205ff39f1260a9745215f4fc"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -517,7 +517,7 @@
       "sha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
       "bytes": 330486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -574,7 +574,7 @@
       "sha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -632,7 +632,7 @@
       "sha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
       "bytes": 236192,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -679,7 +679,7 @@
       "sha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
       "bytes": 535680,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -716,7 +716,7 @@
       "sha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c",
       "bytes": 273600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -747,7 +747,7 @@
       "sha256": "cd88709012e3f654e43d82aa16e04f278e66126bb5e4705d64bb579426b2a975",
       "bytes": 2983,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -783,7 +783,7 @@
       "sha256": "73850540b752c7e59a8762bad073f2fb62a75e03fdfb2adfeab1d2b724ce104a",
       "bytes": 535680,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -820,7 +820,7 @@
       "sha256": "0b1ef1367efa7ba625ecac05370171c02e90fa384c584735f5b096f1307dfd96",
       "bytes": 273600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -851,7 +851,7 @@
       "sha256": "0ab47e641783a78a25c11e8d4c5630d4aeae2adfecbd0ef0f88fc20f644d9a86",
       "bytes": 2973,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -871,7 +871,7 @@
       "sha256": "90946b384216cf4018964acb8de9b7ddb8940a39bc8be6116cd90955eaf1c0b3",
       "bytes": 10176,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -891,7 +891,7 @@
       "sha256": "708bbfc4219549d9db2276503c78fc69e9e74a1bd0347fca41f6d6b8294bf7be",
       "bytes": 1014,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -917,7 +917,7 @@
       "sha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2",
       "bytes": 97468,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -944,7 +944,7 @@
       "sha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
       "bytes": 155,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -971,7 +971,7 @@
       "sha256": "629eac8dad7dee858c26675c39fbbcab4841af2ca6a7f166c804400fce516a7d",
       "bytes": 2440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1017,13 +1017,13 @@
           "url": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
           "bytes": 3222,
           "sha256": "70fdcc159376b4f0d82ffe49e0436ca7553c913d9aa285f32dc12df825cf7bf7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
           "bytes": 717042,
           "sha256": "2188b2e86e1b3ca0b4e8c5044aa01eb45e5fc1e9cafc99eb31dc2cca5aed181f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1067,19 +1067,19 @@
           "url": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
           "bytes": 6858,
           "sha256": "933f66de7271aead1403e2bbefd7be5fb7202c2d629bfe5739727778bcdf4160",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
           "bytes": 517788,
           "sha256": "5e4bf08d0e4630afc04f3e88f23f370d3ccc53c9fdb4bfcb4874b15ba7719332",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1123,13 +1123,13 @@
           "url": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
           "bytes": 1972,
           "sha256": "58ac43c4ead4099f2cbca14de4112023b5bc40307afcfc6f3458c2695dad1d0b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
           "bytes": 320526,
           "sha256": "b3573ebb20bfee429b15defe06447e40ff51e7bba276d93ad226e98e9dd9ed85",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1198,7 +1198,7 @@
           "url": "/scenes/mathilde/mathilde-features.json",
           "bytes": 16823,
           "sha256": "b9cdc077f2008a2a44f5dc977138380aea69d6c5bfdb3eac400501bd89d68aaa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
