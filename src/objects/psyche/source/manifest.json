@@ -1213,6 +1213,15 @@
           }
         ]
       }
+    },
+    {
+      "path": "reference/rendered-thermal-inertia.jpg",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /psyche/ with the default camera and the Thermal inertia lens selected, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-16 after preparation."
+      },
+      "expectedBytes": 131719,
+      "expectedSha256": "79673919d53ce8508a818a6d5d454910f00f9de8f62ab2905c3f969ad485aa57"
     }
   ]
 }
