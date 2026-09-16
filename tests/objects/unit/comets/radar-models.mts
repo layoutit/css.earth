@@ -1,3 +1,4 @@
+import {SHAPE_MATERIAL} from '../../../../tools/objects/terrestrial-layers/shape-material.mts';
 import {preparedModelTerrain, modelConfig, modelSurfaces, modelSettings} from './model-fixture.mts';
 import {requireObjectRotationReference} from '../radial-fixture.mts';
 import assert from 'node:assert/strict';
@@ -32,9 +33,9 @@ export function testRadarApproximation(id:string,semiaxesMeters:readonly number[
   assert.ok([...edges.values()].every(e=>e.incidents===2&&e.winding===0));assert.equal(vertices.size-edges.size+800,2);
   assert.ok(Math.max(...errors)<100,'Sampled analytic-surface distance is below 100 m; this is not a source uncertainty.');
  });
- test(`${id}: no-imagery grid covers the whole nucleus without default directional shading`,async()=>{
+ test(`${id}: shape material covers the whole nucleus without default directional shading`,async()=>{
   const root=resolve('src/objects',id),config=modelConfig(await read(`${root}/source/preparation/terrestrial.json`)),surfaces=modelSurfaces(await read(`${root}/prepared/surfaces.json`)),controls=modelSettings(await read(`${root}/source/content/object.json`));
-  assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.match(s.appearance,/no-imagery grid/);assert.equal(s.layout.faceCount,800);assert.equal(s.layout.tileSize,64);
+  assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.equal(s.appearance,SHAPE_MATERIAL.appearance);assert.equal(s.layout.faceCount,800);assert.equal(s.layout.tileSize,64);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true);
   assert.deepEqual(config.raster.observations,[]);const shadows=controls.settings.controls.find(c=>c.name==='shadows');assert.ok(shadows);assert.equal(shadows.checked,false);
  });
