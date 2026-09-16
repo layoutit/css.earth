@@ -114,7 +114,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Annefrank",
       "classification": "asteroid",
       "color": "#aaaaaa",

@@ -114,7 +114,9 @@
       "bodyRadiusM": 317500
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "DeeDee (2014 UZ224)",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

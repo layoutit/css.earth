@@ -114,7 +114,9 @@
       "bodyRadiusM": 1548.649298837288
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Hyakutake",
       "classification": "comet",
       "color": "#b8b6b2",

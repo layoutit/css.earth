@@ -114,7 +114,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Polymele",
       "classification": "asteroid",
       "color": "#a0a0a0",
