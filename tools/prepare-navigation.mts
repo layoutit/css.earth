@@ -30,6 +30,7 @@ import {
   NAVIGATION_SUPERNOVA_SOURCE,
 } from "../src/navigation/marker-descriptors.mts";
 import {
+  MARKER_SOURCE_HINTS,
   renderMarker,
   readMarkerImage,
   validateMarkerDescriptor,
@@ -534,10 +535,25 @@ export async function prepareSunIndicator({
   await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-heptagon.png"));
 }
 
+/**
+ * An object's marker recipe with its source record taken from the source manifest, which owns the pins and
+ * attribution. Older recipes still carry a copy of that record; it is ignored here and removed by write mode.
+ */
+export async function loadObjectMarkerDescriptor(planetId: string, projectRoot: string): Promise<Record<string, unknown>> {
+  const directory = resolve(projectRoot, 'src/objects', planetId);
+  const navigation = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/preparation/navigation.json'), 'utf8')), 'navigation marker');
+  const source = requireRecord(navigation.source, 'navigation marker source'), path = source.path;
+  if (typeof path !== 'string') throw new TypeError(`Navigation marker source path is missing: ${planetId}.`);
+  const manifest = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/manifest.json'), 'utf8')), 'source manifest');
+  const record = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => Array.isArray(manifest[key]) ? manifest[key] as unknown[] : [])
+    .map(value => requireRecord(value, 'source record')).find(entry => entry.path === path);
+  if (!record) throw new TypeError(`Navigation marker source is not in the source manifest: ${planetId}/${path}.`);
+  const hints = Object.fromEntries(MARKER_SOURCE_HINTS.filter(hint => hint in source).map(hint => [hint, source[hint]]));
+  return { ...navigation, source: { ...record, ...hints } };
+}
+
 async function loadObjectDescriptor(planetId: string, projectRoot: string): Promise<unknown> {
-  if (await authoredObject(planetId, projectRoot)) {
-    return JSON.parse(await readFile(resolve(projectRoot, 'src/objects', planetId, 'source/preparation/navigation.json'), 'utf8'));
-  }
+  if (await authoredObject(planetId, projectRoot)) return loadObjectMarkerDescriptor(planetId, projectRoot);
   const modulePath = resolve(
     projectRoot,
     "src/objects",

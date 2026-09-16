@@ -51,11 +51,9 @@ for (const b of bodies) {
     const context=await renderRadialSnapshot({...recipe,faces:radial.faces,map});
     await write(resolve(src,'presentation/context.png'),context);
     const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');
-    const navigationSource=requireRecord(navigation.source);
-    navigation.planetId=b.id;
-    Object.assign(navigationSource,{id:'prepared-source-context',origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:hash(context),recipe});
-    await write(resolve(src,'preparation/navigation.json'),navigation);
-    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{...navigationSource,path:requireString(navigationSource.path)})];
+    const navigationPath=requireString(requireRecord(navigation.source).path);
+    await write(resolve(src,'preparation/navigation.json'),{...navigation,planetId:b.id,source:{path:navigationPath}});
+    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{id:'prepared-source-context',path:navigationPath,origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:hash(context),recipe})];
     console.log(JSON.stringify({id:b.id,sourceFaces:requireTerrainMesh(radial.grid).indices.length,faces:radial.faces.length,contextBytes:context.length}));
   }
   const declared=new Set([...records(manifest.inputs),...records(manifest.generatedIntermediates)].map(e=>requireString(e.path)));

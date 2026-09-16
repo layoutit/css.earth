@@ -11,11 +11,11 @@ const hash = (letter: string) => letter.repeat(64);
 const recipe = () => ({
   schema: 'cssearth-authored-object@1',
   sources: [
-    { id: 'raster', path: 'source/preparation/raster.json', sha256: hash('a') },
-    { id: 'material', path: 'source/preparation/material.json', sha256: hash('b') },
-    { id: 'frames', path: 'source/preparation/frames.json', sha256: hash('c') },
-    { id: 'layers', path: 'source/preparation/layers.json', sha256: hash('d') },
-    { id: 'world', path: 'source/presentation/world.json', sha256: hash('e') },
+    { id: 'raster', path: 'source/preparation/raster.json' },
+    { id: 'material', path: 'source/preparation/material.json' },
+    { id: 'frames', path: 'source/preparation/frames.json' },
+    { id: 'layers', path: 'source/preparation/layers.json' },
+    { id: 'world', path: 'source/presentation/world.json' },
   ],
   shape: { kind: 'ellipsoid', radiusKm: 6051.8, polarRadiusKm: 6051.8 },
   frameBanks: [{ id: 'lighting', source: 'frames', frames: 128, rows: 32, residentRows: 3 }],

@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 import {parsePagedProfile, parsePagedLensBindings} from './profile-source.mts';
 import {parseInteriorSource, parseAtmosphereResponse} from './source-contract.mts';
-import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, readRefreshDescriptor} from './refresh-source.mts';
+import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest} from './refresh-source.mts';
 const sourceRoot = new URL('../../../src/objects/earth/source/', import.meta.url);
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, sourceRoot), 'utf8'));
 
@@ -37,7 +37,7 @@ test('focused lens transitions require complete numeric addresses', async () => 
 
 test('source refresh readers retain bytes as mutable private copies without running acquisition', async () => {
   for (const [path, parse] of [['preparation/paged-ellipsoid.json', readMapConfiguration], ['content/object.json', readRefreshContent],
-    ['content/lens-bindings.json', readRefreshBindings], ['manifest.json', readRefreshManifest], ['../object.json', readRefreshDescriptor]] as const) {
+    ['content/lens-bindings.json', readRefreshBindings], ['manifest.json', readRefreshManifest]] as const) {
     const original = await read(path), before = JSON.stringify(original);
     const value = await parse(new URL(path, sourceRoot).pathname);
     assert.equal(JSON.stringify(value), before, path);

@@ -8,24 +8,16 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
+import { readAuthoredSources } from './authored-sources.js';
 import { parseRuntimeManifest } from './operations.js';
 
-/** Verify one authored source pin (path and SHA-256) and read its JSON value, as the preparation lanes do. */
-async function verifiedSource(root: string, reference: { readonly id: string; readonly path: string; readonly sha256: string }) {
-  const path = resolve(root, reference.path), bytes = await readFile(path);
-  const digest = createHash('sha256').update(bytes).digest('hex');
-  if (digest !== reference.sha256) throw new TypeError(`Source ${reference.path} does not match its descriptor digest.`);
-  return { reference, path, value: JSON.parse(bytes.toString('utf8')) as unknown };
-}
 const record = (value: unknown, label: string): Record<string, unknown> => { if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new TypeError(`${label} must be an object.`); return value as Record<string, unknown>; };
 
 export async function refreshObjectFeatures(id: string): Promise<{ count: number | null }> {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object id.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
-  const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as unknown);
+  const { descriptor, sources } = await readAuthoredSources(objectDirectory);
   if (!descriptor.recipe.features) return { count: null };
-  const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));
-  const sources = new Map(entries.map(entry => [entry.reference.id, entry]));
   const definition = record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'prepared runtime');
   const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition });
   if (!attached.features) throw new TypeError(`${id} declares features but attached none.`);

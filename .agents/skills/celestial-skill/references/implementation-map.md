@@ -82,7 +82,8 @@ registry, generic adapter, shared shell and active object scene; navigation uses
 the shared world camera.
 
 Navigation marker appearance comes from each authored package's
-`source/preparation/navigation.json`. `tools/prepare-navigation.mts` generates
+`source/preparation/navigation.json`, which names its source image by path;
+the pins and attribution are the source manifest's record. `tools/prepare-navigation.mts` generates
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
 images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the

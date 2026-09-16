@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "haumea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9245a914aeb3f25aaea1e41e1fc67cb2c53909310fb05cea90f3a25219bf0bb9"
+    "sha256": "d37e62a98f25e496b0e3c3997da0d15e71b826b7c63f1e0aa6e10032e8f43514"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
+    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "bindingsSha256": "72abddfb5817027e13741b86dddeb0a04253e1a8c8a48523b1f767a7f2072cc5"
   },
   "recipes": [
     {
@@ -193,7 +193,7 @@
       "sha256": "8fdbabb8a5f880c3872ae30c31b9f0b95f475e63bc69516c1ef0a2eaf294f452",
       "bytes": 574,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -213,7 +213,7 @@
       "sha256": "ae7c13e8a7094843107b6c26be9bb1a7f04b8ff24aec5ff22948bf79c8664554",
       "bytes": 3177,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -248,19 +248,19 @@
           "url": "/scenes/haumea/shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "ac7e37e2b580ee1a0f876029c8e1fb7b51469486245d88810be250f1154a2de8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/surface.webp",
           "bytes": 342,
           "sha256": "287791a6be87fb06232978a0e21f8e018d4fa340b775cc28bd1f6e8cf187654e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/poles.webp",
           "bytes": 680,
           "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -326,8 +326,8 @@
     "materialSha256": "ad87afde0bc2bfce4257d99a0080976c07455932b93494627c25c0e5b0ee4162",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "bindingsSha256": "72abddfb5817027e13741b86dddeb0a04253e1a8c8a48523b1f767a7f2072cc5"
     }
   }
 }

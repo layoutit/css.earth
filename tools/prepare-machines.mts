@@ -109,8 +109,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const contentBytes = await input(`${base}/${contentPath}`);
     const contentPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
       .filter(entry => `source/${entry.path}` === contentPath);
-    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes) ||
-      sourceDigest(contentReference.sha256) !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
+    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
     const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
     const objectDirectory = resolve(root, base);
     const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,

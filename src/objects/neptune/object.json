@@ -65,58 +65,47 @@
       "sources": [
         {
           "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "7a288f97390b9dcfddb898797a4b940a187d37736a1100f3d134db82c40224c2"
+          "path": "source/content/object.json"
         },
         {
           "id": "rings",
-          "path": "source/preparation/rings.json",
-          "sha256": "177e3fdc36690fe70646f7b68a8375a8a5ac391402b07fbc11f4f4306a72f464"
+          "path": "source/preparation/rings.json"
         },
         {
           "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "9fdd021f202113bf1d6a2eca6a05bf52653a2f11a13edb1b04e5ad3b8783647c"
+          "path": "source/preparation/navigation.json"
         },
         {
           "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "266002458603e019c52d3d3fdd998a59b36c5f6ad619a1320a233c8bfb748e68"
+          "path": "source/presentation/title-mark.json"
         },
         {
           "id": "observations",
-          "path": "source/preparation/observations.json",
-          "sha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798"
+          "path": "source/preparation/observations.json"
         },
         {
           "id": "materials",
-          "path": "source/preparation/materials.json",
-          "sha256": "472ee4ef2aa39ab2e02bb1c71e6fdce97fd3bf34dcf3ef20159c1f8a9501e33c"
+          "path": "source/preparation/materials.json"
         },
         {
           "id": "geometry",
-          "path": "source/preparation/geometry.json",
-          "sha256": "19eb613445e8d64c7f745b29667d43e268ce85116b4891951dae88e881a3e2c1"
+          "path": "source/preparation/geometry.json"
         },
         {
           "id": "presentation",
-          "path": "source/preparation/presentation.json",
-          "sha256": "8aa3f35d817d25b0755f8d917ab380fa747706751e8c3d4962b0e5398887f1f8"
+          "path": "source/preparation/presentation.json"
         },
         {
           "id": "charts",
-          "path": "source/content/charts.json",
-          "sha256": "b924bf227bdced8c394dd79184f903627f2e8ed1293b10cc8b69a0a05dabe42e"
+          "path": "source/content/charts.json"
         },
         {
           "id": "photometry",
-          "path": "source/photometry/phase.json",
-          "sha256": "aa2c0a3e4b1d6f7958d930ecc7e4b9bcb2de8797473f35d52399b5039ce3b060"
+          "path": "source/photometry/phase.json"
         },
         {
           "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "b675fa7f8133bce1cdc5b724db7c8398b9528a397a5803e16c80deff156ebc5a"
+          "path": "source/preparation/acquisition.json"
         }
       ],
       "shape": {
