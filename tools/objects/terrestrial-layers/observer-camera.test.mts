@@ -26,9 +26,17 @@ test('a spin parameter record is read in the column order the caller establishes
   assert.equal(pallas.longitudeDegrees, 35);
 });
 
+test('a pole stated just past the pole is folded, not refused', () => {
+  // 130 Elektra's release states -92.2669, which is 2.27 degrees beyond the south pole rather than a bad number.
+  // Refusing it loses the record; reading it literally puts the pole 156 degrees wrong.
+  const elektra = parseSpinState('67.7259 -92.2669 5.22466350\n2444914.8 0\n', 'longitude-first');
+  close(elektra.latitudeDegrees, -87.7331, 1e-9, 'folded pole latitude');
+  close(elektra.longitudeDegrees, 247.7259, 1e-9, 'folded pole longitude');
+});
+
 test('a spin parameter record is rejected when it cannot mean what the caller claims', () => {
-  // 130 Elektra's release reads -92.2669 in its second column, which is not a latitude: the order must be the other one.
-  assert.throws(() => parseSpinState('67.7259 -92.2669 5.22466350\n2444914.8 0\n', 'longitude-first'), /latitude/);
+  // A value far outside the range is not an unnormalised pole; it means the column order is wrong.
+  assert.throws(() => parseSpinState('67.7259 -130.5 5.22466350\n2444914.8 0\n', 'longitude-first'), /latitude/);
   assert.throws(() => parseSpinState('20.1825 73.0895 5.38528201\n', 'latitude-first'), /two non-empty lines/);
   assert.throws(() => parseSpinState('20.1825 73.0895\n2444502.76914 0\n', 'latitude-first'), /three values then two/);
   assert.throws(() => parseSpinState('20.1825 73.0895 0\n2444502.76914 0\n', 'latitude-first'), /period/);

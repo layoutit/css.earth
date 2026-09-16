@@ -143,7 +143,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["illustration"],
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "Makemake",
       "classification": "dwarf-planet",
       "color": "#bfa48b",

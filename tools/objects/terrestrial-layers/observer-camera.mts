@@ -96,8 +96,16 @@ export function parseSpinState(text: string, order: 'latitude-first' | 'longitud
   const [a, b, periodHours] = first.map((value, index) => requireFiniteNumber(value, `spin parameter ${index + 1}`));
   const epochJd = requireFiniteNumber(second[0], 'spin phase epoch');
   const phaseDegrees = requireFiniteNumber(second[1], 'spin phase');
-  const latitudeDegrees = order === 'latitude-first' ? a : b;
-  const longitudeDegrees = order === 'latitude-first' ? b : a;
+  let latitudeDegrees = order === 'latitude-first' ? a : b;
+  let longitudeDegrees = order === 'latitude-first' ? b : a;
+  // Some records state a pole a little past the pole rather than normalising it: 130 Elektra's is -92.2669, which is
+  // 2.27 degrees beyond the south pole. That is the same direction as (latitude -87.7331, longitude + 180), and
+  // reading it as an error loses the record. A value far outside the range is not an unnormalised pole, though;
+  // it means the caller has the column order wrong, and that stays an error.
+  if (Math.abs(latitudeDegrees) > 90 && Math.abs(latitudeDegrees) <= 95) {
+    latitudeDegrees = Math.sign(latitudeDegrees) * 180 - latitudeDegrees;
+    longitudeDegrees += 180;
+  }
   if (!(Math.abs(latitudeDegrees) <= 90)) throw new TypeError(`Spin pole latitude ${latitudeDegrees} is out of range for a ${order} record.`);
   if (!(periodHours > 0) || !(periodHours < 24 * 365)) throw new TypeError('Spin period is out of range.');
   if (!(epochJd > 2_000_000) || !(epochJd < 3_000_000)) throw new TypeError('Spin phase epoch is not a Julian date.');
