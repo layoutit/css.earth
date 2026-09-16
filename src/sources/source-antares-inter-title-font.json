@@ -1,0 +1,37 @@
+{
+  "id": "source-antares-inter-title-font",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Antares · inter title font",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/antares/source/manifest.json",
+      "revision": "601be8f893b7926a4e466ed3ec50824210640634",
+      "sha256": "a365bcf45a97a713fef159c79ba75a12aa1d5f21c8eb6c8e5beffd530344ba83",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Inter Project Authors / Rasmus Andersson",
+      "scope": "The inter title font input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "SIL Open Font License 1.1",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
