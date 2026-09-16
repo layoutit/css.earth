@@ -14,7 +14,7 @@ import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, 
 import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
-import { composeSkyBandPng } from './objects/observation/sky-band-composite.mts';
+import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts',
   'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'tools/fits.mts'] as const;
@@ -106,8 +106,14 @@ interface Options {
   input?: (path: string) => Promise<Buffer>;
 }
 
-async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>): Promise<{ bytes: Buffer; width: number; height: number }> {
+export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>): Promise<{ bytes: Buffer; width: number; height: number }> {
   const path = resolve(root, pin.path);
+  if (pin.skyBands) {
+    // The recipe is source closure whether or not its composite is already cached.
+    await verifySkyBandRecipe(pin.skyBands, input);
+    const name = pin.path.split('/').at(-1);
+    if (name !== skyBandCompositeFile(name?.split('.')[0] ?? '', pin.sha256)) throw new TypeError(`A sky band preview is cached under its own hash: ${pin.path}`);
+  }
   let bytes = await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (bytes === null && pin.skyBands) {
     // The survey bands download into the shared cache; only the pinned recipe and tile lists are source closure.

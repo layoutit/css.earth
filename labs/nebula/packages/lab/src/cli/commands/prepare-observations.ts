@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { readObservationRecipe, scienceObservationSources } from '../../features/observations/recipe.ts';
+import { readObservationRecipe, scienceObservationSources, observationSourceFile } from '../../features/observations/recipe.ts';
 import { detectStars, publisherTransform, publisherRegistration, matchStars, verifyRegistration, applyAffine, invertAffine } from '@cssearth/nebula-reconstruction/registration/stellar';
 import { nativeStarless } from '../../server/workflows/emission-inference/native-source.ts';
 import { detectCompactStars, matchCompactStars } from '@cssearth/nebula-reconstruction/registration/compact';
@@ -12,6 +12,7 @@ import { nativePreserved } from '../../server/workflows/emission-inference/nativ
 import { loadMatchedStarCatalogue, calibratedInitialTransform } from '../../server/workflows/observations/matched-star-catalogue.ts';
 import { loadNativeSeparationCache, nativeSeparationCacheDirectory } from '../../server/workflows/observations/native-separation-cache.ts';
 import { composeSkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
+import { verifySkyBandRecipe } from '../../adapters/sources/sky-bands.ts';
 
 const [recipePath, mode, extra] = process.argv.slice(2);
 if (!recipePath || extra || (mode && mode !== '--alignment-only')) throw new TypeError('Usage: prepare-observations <recipe.json> [--alignment-only]');
@@ -24,7 +25,8 @@ await mkdir(resolve(directory, 'sources'), { recursive: true });
 const sources: Array<{ source: typeof recipe.images[number]; bytes: Buffer; stars: Awaited<ReturnType<typeof detectStars>>;
   initial: ReturnType<typeof publisherTransform>; publisherInitial: ReturnType<typeof publisherTransform> }> = [];
 for (const source of recipe.images) {
-  const path = resolve(directory, 'sources', `${source.id}.tif`);
+  const path = resolve(directory, 'sources', observationSourceFile(source));
+  if (source.skyBands) await verifySkyBandRecipe(source.skyBands, file => readFile(resolve(process.cwd(), file)));
   let bytes: Buffer;
   try { bytes = await readFile(path); }
   catch (error) {
@@ -174,7 +176,7 @@ for (const source of scienceObservationSources(recipe)) {
   await mkdir(output, { recursive: true });
   const original = await preview(output, 'original', row.bytes);
   const layers: { original: Layer; diffuse?: Layer; stars?: Layer } = { original };
-  images.push({ id: source.id, label: source.label, source: { ...source, path: relative(process.cwd(), resolve(directory, 'sources', `${source.id}.tif`)) },
+  images.push({ id: source.id, label: source.label, source: { ...source, path: relative(process.cwd(), resolve(directory, 'sources', observationSourceFile(source))) },
     layers, imageToFrame: row.imageToFrame, publisherImageToFrame: row.publisherInitial, registration: row.registration });
   if (row.registration.status !== 'publisher' && await addSeparation(images.at(-1)!, row, false)) console.log(`NEBULA_OBSERVATION_REUSED ${source.id}`);
 }

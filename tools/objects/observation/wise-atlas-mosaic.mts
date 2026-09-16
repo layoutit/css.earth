@@ -153,7 +153,15 @@ export function matchTileBackgrounds(tiles: readonly Binned[], minimumOverlap = 
     degree[pair.i] += pair.pixels; degree[pair.j] += pair.pixels;
     rhs[pair.i] += pair.pixels * pair.difference; rhs[pair.j] -= pair.pixels * pair.difference;
   }
-  if (n > 1 && degree.some(value => value === 0)) throw new Error('A WISE atlas tile has no usable overlap with its neighbours.');
+  // One zero-mean gauge fixes one free level only if every tile is joined through overlaps. Separate
+  // groups would each keep an unknown level while their own overlap steps look solved.
+  const reached = new Uint8Array(n), queue = n ? [0] : [];
+  if (n) reached[0] = 1;
+  for (let head = 0; head < queue.length; head++) for (const pair of pairs) {
+    const next = pair.i === queue[head] ? pair.j : pair.j === queue[head] ? pair.i : -1;
+    if (next >= 0 && !reached[next]) { reached[next] = 1; queue.push(next); }
+  }
+  if (queue.length !== n) throw new Error(`WISE atlas tiles form disconnected overlap groups: ${tiles.filter((_, t) => !reached[t]).map(tile => tile.coaddId).join(', ')} share no chain of overlaps with ${tiles[0]!.coaddId}.`);
   // Conjugate gradients on the weighted graph Laplacian. Its null space is the constant vector and the
   // right-hand side sums to zero, so projecting out the mean fixes the free level (zero-mean gauge).
   const apply = (v: Float64Array) => {

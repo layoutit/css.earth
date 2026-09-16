@@ -102,7 +102,7 @@
       ],
       "input": "spitzer-mid-infrared",
       "preview": {
-        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
+        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e.png",
         "sha256": "8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e",
         "bytes": 5769508,
         "skyBands": {
@@ -121,7 +121,7 @@
     {
       "id": "recipe-1",
       "path": "src/objects/m8/source/delivery.json",
-      "sha256": "bdc1d7755d2490cde15584e3d8e53d5d36311ecf5fbc4a14975da67f278e6720",
+      "sha256": "f12ed98fcb0bf318f30e59226162f24a4a8a1006c0bfa000ee9bc4a6d57b0bc4",
       "bytes": 2197
     },
     {
@@ -159,6 +159,12 @@
       "path": "src/objects/m8/source/bake-inputs/references/05-processing-structures.json",
       "sha256": "e871e01e6636080dad59c1a97734d995f740f80eff3a9e37df7f48d1c8e74d6a",
       "bytes": 420
+    },
+    {
+      "id": "recipe-8",
+      "path": "src/objects/m8/source/sky-bands/spitzer-irac.json",
+      "sha256": "68a22ff2c6bce4ddc3a24c48e7c8eea2b962b96c730bcec7e396a682cae2a4da",
+      "bytes": 792
     }
   ]
 }

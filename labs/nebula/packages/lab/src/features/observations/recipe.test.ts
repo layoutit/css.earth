@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { readObservationRecipe } from './recipe';
+import { observationSourceFile, readObservationRecipe } from './recipe';
 
 const input = () => JSON.parse(readFileSync('labs/nebula/models/m45/observations.json', 'utf8'));
 
@@ -21,4 +21,11 @@ test('registration detector settings reject unbounded, noninteger and incompatib
   const raw = input(), image = raw.images.find((row: { id: string }) => row.id === 'niittee-widefield');
   image.registrationMode = 'publisher-wcs';
   assert.throws(() => readObservationRecipe(raw), /direct field-star discovery/);
+});
+
+test('composed sky band sources cache under their hash; publisher sources keep their downloaded name', () => {
+  const hash = 'a'.repeat(64);
+  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', sha256: hash }), 'spitzer-mid-infrared.tif');
+  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', sha256: hash, skyBands: { path: 'src/objects/m8/source/sky-bands/spitzer-irac.json', sha256: 'b'.repeat(64) } }),
+    `spitzer-mid-infrared.${hash}.png`);
 });

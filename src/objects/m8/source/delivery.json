@@ -41,14 +41,14 @@
   "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses retain one geometry; surrounding stars use Gaia astrometry and estimated distances independently of source-image boundaries. No gas velocity is converted to depth.",
   "defaultLens": "eso-optical",
   "framingRadiusUnits": 3414.784262,
-  "acceptedLabResult": "1b5124c1d9a6f48db17b620f1ce94fdded455eb3c42399d4abc7a3087858f5b9",
+  "acceptedLabResult": "37a8918fb195c57ecee4b6cbc47b62e465092adb324416e449e1d439d34a4b9c",
   "fieldStars": {
     "path": "src/objects/m8/source/stellar-field.json",
     "sha256": "9a39f21a5f81d319879be1540267c2faf593ee3363e9590800361e033f3c747e"
   },
   "compactInputs": {
     "path": "src/objects/m8/source/bake-inputs.json.gz",
-    "sha256": "4bb52f965fb8e0f0ffc6984765099c4634fdddc3cd08f7cc4084aeed880202b9"
+    "sha256": "2a8bf14cb7ee92bcb8adbe450036ac58110473d664c55279887fe2f9adc6d4b9"
   },
   "compactMethod": "compiler"
 }

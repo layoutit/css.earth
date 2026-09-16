@@ -1,6 +1,7 @@
 import type { Affine, SkyFrame, SkyRaster } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { NativeRemoval } from '../../server/workflows/emission-inference/native-source.ts';
 import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 export interface ObservationSource extends SkyRaster {
   id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string;
   registrationMode?: 'field-stars' | 'compact-stars' | 'publisher-wcs';
@@ -37,6 +38,10 @@ function transfer(value: unknown): NonNullable<ObservationSource['registrationTr
   if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Transfer evidence requires a repository-relative path.');
   return { referenceId: id(row.referenceId), pixelToReference: matrix, evidence: { path, sha256: pin(evidence.sha256) } };
 }
+/** Cached working raster name: publisher downloads keep `<id>.tif`; composed sky band rasters carry their hash, so an
+ * existing checkout's retired publisher file is never read as, or overwritten by, the composite. */
+export const observationSourceFile = (source: Pick<ObservationSource, 'id' | 'sha256' | 'skyBands'>) =>
+  source.skyBands ? skyBandCompositeFile(source.id, source.sha256) : `${source.id}.tif`;
 export const scienceObservationSources = (recipe: ObservationRecipe): ObservationSource[] => recipe.images.filter(image => image.processingRole !== 'registration-reference');
 function sky(value: Record<string, unknown>) {
   const result = { width: dimension(value.width), height: dimension(value.height), fieldArcminutes: pair(value.fieldArcminutes), centerIcrsDegrees: pair(value.centerIcrsDegrees) };

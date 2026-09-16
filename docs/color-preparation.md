@@ -121,6 +121,12 @@ percentile. This is the usual practice for survey false color. It is still a
 visualization, and the lens description must say that hue shows each band's
 relative brightness, not physical band ratios.
 
+Dividing by the band's own range cancels its calibration factor, so the MJy/sr
+conversion does not change the image. It gives the recorded background and peak
+physical units, and lets a later common-range display compare bands. What the
+image shows comes from the band selection and the declared normalization and
+stretch, not from calibration.
+
 The shared [Lupton et al. (2004)](https://doi.org/10.1086/382245) asinh display then
 maps the mean of the normalized bands and scales every band by the same factor.
 Pixels brighter than the display are scaled down as a whole, which keeps their hue.

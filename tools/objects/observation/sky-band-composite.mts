@@ -212,11 +212,33 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
       limits: 'The survey products have no absolute zero level, so each band loses one measured background. Dividing each band by its own range means hue does not show physical band ratios. Missing pixels are black. Rows are reversed once from FITS order into top-down raster order.' } };
 }
 
+/** Read and verify a pinned recipe and every tile list it names. Callers run this before trusting a cached
+ * composite, so a missing or altered recipe fails the same way with a warm or a cold cache. */
+export async function verifySkyBandRecipe(recipePin: { readonly path: string; readonly sha256: string }, input: SkyBandIo['input']) {
+  const recipeBytes = await input(recipePin.path);
+  if (sha256(recipeBytes) !== recipePin.sha256) throw new Error(`Changed sky band recipe: ${recipePin.path}`);
+  const recipe = parseSkyBandComposite(JSON.parse(recipeBytes.toString('utf8')));
+  const files = [{ path: recipePin.path, sha256: recipePin.sha256, bytes: recipeBytes.length }];
+  for (const band of recipe.bands) if ('tiles' in band) {
+    const list = await input(band.tiles.path);
+    if (sha256(list) !== band.tiles.sha256) throw new Error(`Changed WISE atlas tile list: ${band.tiles.path}`);
+    parseTilePins(JSON.parse(list.toString('utf8')));
+    files.push({ path: band.tiles.path, sha256: band.tiles.sha256, bytes: list.length });
+  }
+  return { recipe, files };
+}
+
+/** A composed raster's cache name carries its own hash, so a retired publisher file cached under the
+ * source's earlier name is left alone instead of being mistaken for, or overwritten by, the composite. */
+export function skyBandCompositeFile(sourceId: string, compositeSha256: string) {
+  if (!/^[a-z0-9-]+$/u.test(sourceId) || !/^[0-9a-f]{64}$/u.test(compositeSha256)) throw new TypeError('Invalid sky band composite identity.');
+  return `${sourceId}.${compositeSha256}.png`;
+}
+
 /** The pinned recipe's composite as a deterministic lossless RGB8 PNG: the lab working raster and the app preview source. */
 export async function composeSkyBandPng(recipePin: { readonly path: string; readonly sha256: string }, io: SkyBandIo) {
-  const recipeBytes = await io.input(recipePin.path);
-  if (sha256(recipeBytes) !== recipePin.sha256) throw new Error(`Changed sky band recipe: ${recipePin.path}`);
-  const composed = await composeSkyBands(parseSkyBandComposite(JSON.parse(recipeBytes.toString('utf8'))), io);
+  const { recipe } = await verifySkyBandRecipe(recipePin, io.input);
+  const composed = await composeSkyBands(recipe, io);
   const bytes = await sharp(composed.rgb, { raw: { width: composed.width, height: composed.height, channels: 3 } })
     .png({ compressionLevel: 9, adaptiveFiltering: false }).toBuffer();
   return { bytes, sha256: sha256(bytes), width: composed.width, height: composed.height, wcs: composed.wcs, missingPixels: composed.missingPixels,
