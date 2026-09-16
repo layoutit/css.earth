@@ -69,7 +69,7 @@
       "id": "recorded-survey-5",
       "subject": "LAM reduced/deconvolved SPHERE images and CDS J/A+A/653/A57",
       "status": "included",
-      "finding": "Reopened and adopted. Five deconvolved frames from the 2017 apparition are now the SPHERE photograph lens. The camera is computed, not fitted: pole, period and phase epoch come from the release’s own parameter record, observing geometry from JPL Horizons for Paranal, and plate scale, exposure time and filter from each frame’s own header. The rotation convention is čurech, Sidorin and Kaasalainen (2010) equation 1. Predicted limb position angles match the observed half-maximum contour to 3.3 degrees root mean square over seven frames spanning both apparitions, with no free parameter; predicted disc sizes agree with the archived angular diameter to under two percent. The paper’s caution that inferred albedo features near the limb may originate in deconvolution artefacts still stands, which is why the lens states photographed illumination and matched relative brightness rather than albedo.",
+      "finding": "Reopened and adopted. Five deconvolved frames from the 2017 apparition are now the SPHERE photograph lens. The camera is computed, not fitted: pole, period and phase epoch come from the release’s own parameter record, observing geometry from JPL Horizons for Paranal, and plate scale, exposure time and filter from each frame’s own header. The rotation convention is Ďurech, Sidorin and Kaasalainen (2010) equation 1. Every camera field in the recipe is recomputed from the pinned parameter record, the pinned Horizons responses and each frame's own header, and compared against the recipe by a committed test, so the derivation runs rather than being asserted. An earlier revision of this lens shipped the body mirrored in longitude: atan2(y, x) in the inversion frame is an east longitude and was written into the camera's west longitude, and the north azimuth was the pole position angle turned by half a circle. The two errors cancelled in the silhouette, so the limb, disc-size and phase-angle checks all passed on the mirrored body. The handedness is now asserted directly against the transform. The paper’s caution that inferred albedo features near the limb may originate in deconvolution artefacts still stands, which is why the lens states photographed illumination and matched relative brightness rather than albedo.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/",
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/653/A57",
@@ -89,6 +89,10 @@
         {
           "date": "2026-09-15",
           "commit": "eb964b61fe518ae973c05d1214894490dc07808b"
+        },
+        {
+          "date": "2026-09-15",
+          "commit": "a24cb2cf2e2eda7873d820879392438e65e0dd14"
         }
       ]
     },
@@ -151,8 +155,8 @@
       "id": "second-apparition-levels",
       "subject": "2018 apparition frames and the level-matching budget",
       "status": "unresolved",
-      "finding": "The 2018 apparition views the opposite hemisphere and would roughly double the photographed surface, but its frames cannot be combined with the 2017 set here. Level matching puts the 2017 frames within 0.78 to 1.07 of each other and the two 2018 frames at 0.059 and 0.085, about seventeen times fainter, past this route’s budget of sixteen. Several cross-apparition pairs also share no accepted samples, so that ratio is poorly constrained rather than demonstrated. Both frames stay pinned as registration evidence, since they are what shows the spin solution holding across seventeen months, but they are not lens input.",
-      "revisitWhen": "The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or enough overlapping coverage is found to constrain the ratio directly. Raising the matching budget alone would not qualify them.",
+      "finding": "The 2018 apparition views the opposite hemisphere and would roughly double the photographed surface, but its frames cannot be combined with the 2017 set here. A preparation run on 2026-09-15 with all seven frames put the 2017 frames within 0.78 to 1.07 of each other and the two 2018 frames at 0.059 and 0.085, about seventeen times fainter, past this route's budget of sixteen; several cross-apparition pairs also shared no accepted samples, so that ratio is poorly constrained rather than demonstrated. Those two frames are not pinned. They were briefly retained as registration evidence, but no committed check read them, and an input that backs no reproducible claim is worse than a recorded measurement. The acquisition plan and this entry state where they are and what they showed, and the pinned Horizons tables still cover both apparitions.",
+      "revisitWhen": "The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or enough overlapping coverage is found to constrain the ratio directly. Raising the matching budget alone would not qualify them, and re-pinning them without a committed check that reads them would not either.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/",
         "https://github.com/layoutit/css.earth/blob/eb964b61fe518ae973c05d1214894490dc07808b/src/objects/kleopatra/source/manifest.json",

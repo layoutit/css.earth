@@ -2,7 +2,6 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCamera, parseSpinState,
   rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
-
 const DEGREE = Math.PI / 180;
 const direction = (longitude: number, latitude: number): Vector =>
   [Math.cos(latitude * DEGREE) * Math.cos(longitude * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(longitude * DEGREE), Math.sin(latitude * DEGREE)];
@@ -92,17 +91,51 @@ test('a telescope sighting produces the controlled-shape camera the survey frame
   // 216 Kleopatra, VLT/SPHERE/ZIMPOL, 2017-07-14T05:00:59.538 UT. Ephemeris from JPL Horizons for Paranal.
   const spin = parseSpinState('20.1825 73.0895 5.38528201\n2444502.76914 0\n', 'latitude-first');
   const camera = observerCamera({ epochJd: 2457948.709022, targetRightAscensionDegrees: 302.04882, targetDeclinationDegrees: 0.89432,
-    sunRightAscensionDegrees: 112.5, sunDeclinationDegrees: 22.0, rangeAu: 1.725277,
-    pixelAngleMicroradians: 0.0176, center: [128, 127.2] }, spin);
-  close(camera.rangeKm, 1.725277 * 1.495978707e8, 1, 'range in kilometres');
+    sunRightAscensionDegrees: 306.55, sunDeclinationDegrees: 8.60, rangeAu: 1.72527681681845,
+    pixelAngleMicroradians: 0.017599, center: [128, 127.2] }, spin);
+  close(camera.rangeKm, 1.72527681681845 * 1.495978707e8, 1, 'range in kilometres');
   close(camera.observerLatitude, 25.25, 0.05, 'sub-observer latitude');
-  close(camera.observerWestLongitude, 49.74, 0.05, 'sub-observer west longitude');
   close(camera.phaseDegrees, 4.3, 0.05, 'rotation phase');
-  close(camera.northAzimuthDegrees, 221.2, 0.1, 'north azimuth');
   assert.deepEqual(camera.center, [128, 127.2]);
-  // Sub-observer and sub-solar points are on the same body, so their longitudes share the frame.
-  assert.ok(camera.sunWestLongitude >= 0 && camera.sunWestLongitude < 360);
-  assert.ok(Math.abs(camera.sunLatitude) <= 90);
+});
+
+test('the stated longitudes are west, not the frame\u2019s own east longitude', () => {
+  // The inversion frame is right-handed about the pole, so atan2(y, x) is an EAST longitude, while the camera it
+  // feeds states west. Writing it through unchanged reflects the body through its xz-plane, and no silhouette,
+  // disc-size or phase-angle check can see that. This asserts the sign directly against the transform.
+  const spin = parseSpinState('20.1825 73.0895 5.38528201\n2444502.76914 0\n', 'latitude-first');
+  const sighting = { epochJd: 2457948.709022, targetRightAscensionDegrees: 302.04882, targetDeclinationDegrees: 0.89432,
+    sunRightAscensionDegrees: 306.55, sunDeclinationDegrees: 8.60, rangeAu: 1.72527681681845,
+    pixelAngleMicroradians: 0.017599, center: [128, 127.2] as const };
+  const camera = observerCamera(sighting, spin);
+  const phase = rotationPhaseDegrees(bodyEpochJd(sighting.epochJd, sighting.rangeAu), spin);
+  const toTarget = direction(sighting.targetRightAscensionDegrees, sighting.targetDeclinationDegrees);
+  const body = eclipticToBody(equatorialToEcliptic([-toTarget[0], -toTarget[1], -toTarget[2]]), spin, phase);
+  const east = Math.atan2(body[1], body[0]) / DEGREE;
+  closeAngle(camera.observerWestLongitude, -east, 1e-9, 'west longitude is the negated frame longitude');
+  closeAngle(camera.observerWestLongitude, 310.2572, 0.01, 'sub-observer west longitude');
+  // A wrong sign would land on the mirror image, so state what this is not.
+  assert.ok(Math.abs(((camera.observerWestLongitude - east + 540) % 360) - 180) > 1,
+    'west longitude must not equal the frame longitude except at the two meridians where they coincide');
+});
+
+test('the north azimuth is the pole position angle the camera axes want, not its opposite', () => {
+  // The repository camera measures north azimuth clockwise from image up in ITS axes, which run opposite to the
+  // celestial position angle. Returning PA + 180 instead of -PA survives every symmetric-silhouette check.
+  const spin = parseSpinState('20.1825 73.0895 5.38528201\n2444502.76914 0\n', 'latitude-first');
+  const camera = observerCamera({ epochJd: 2457948.709022, targetRightAscensionDegrees: 302.04882, targetDeclinationDegrees: 0.89432,
+    sunRightAscensionDegrees: 306.55, sunDeclinationDegrees: 8.60, rangeAu: 1.72527681681845,
+    pixelAngleMicroradians: 0.017599, center: [128, 127.2] }, spin);
+  const pole = eclipticToEquatorial(direction(spin.longitudeDegrees, spin.latitudeDegrees));
+  const los = direction(302.04882, 0.89432);
+  const skyEast = [-Math.sin(302.04882 * DEGREE), Math.cos(302.04882 * DEGREE), 0] as const;
+  const skyNorth = [los[1] * skyEast[2] - los[2] * skyEast[1], los[2] * skyEast[0] - los[0] * skyEast[2], los[0] * skyEast[1] - los[1] * skyEast[0]];
+  const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const positionAngle = Math.atan2(dot(pole, skyEast), dot(pole, skyNorth)) / DEGREE;
+  closeAngle(camera.northAzimuthDegrees, -positionAngle, 1e-9, 'azimuth is the negated position angle');
+  closeAngle(camera.northAzimuthDegrees, 318.7971, 0.01, 'north azimuth');
+  assert.ok(Math.abs(((camera.northAzimuthDegrees - (positionAngle + 180) + 540) % 360) - 180) > 1,
+    'azimuth must not be the position angle turned by half a circle');
 });
 
 test('a sighting with impossible geometry is refused rather than silently scaled', () => {

@@ -37,7 +37,12 @@ export function decodeCalibratedCamera(bytes: Buffer, encoding = 'calibrated'): 
         ![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported deconvolved ZIMPOL FITS layout.');
     // Header literals keep their FITS quoting and fixed-width padding; compare the stated value, not the literal.
     if(String(fits.header.INSTRUME??'').replace(/^'|'$/g,'').trim()!=='SPHERE')throw new Error('A deconvolved ZIMPOL frame states SPHERE as its instrument.');
-    return {data:fits.values,width:fits.width,height:fits.height,offset:fits.dataOffset,encoding,allowZero:true};
+    // FITS stores row 0 at the bottom; every other camera this route reads stores it at the top, and the ray caster
+    // indexes rows directly. Reversing here puts one handedness downstream instead of two, so a frame's stated
+    // camera centre is a top-down row like every other frame's.
+    const {width,height}=fits, data=new Float64Array(width*height);
+    for(let y=0;y<height;y++)data.set(fits.values.subarray((height-1-y)*width,(height-y)*width),y*width);
+    return {data,width,height,offset:fits.dataOffset,encoding,allowZero:true};
   }
   const text = bytes.subarray(0,4096).toString('ascii');
   const field = (name: string) => text.match(new RegExp(`(?:^|\\s)${name}=(?:'([^']*)'|([^\\s]+))`))?.slice(1).find(v=>v!==undefined);
