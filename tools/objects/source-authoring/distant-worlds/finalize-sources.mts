@@ -1,3 +1,4 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
 import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../../source-values.mts';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
@@ -7,7 +8,6 @@ await ensureReportDirectory('output/distant-worlds', {recursive:true});
 // Use the common title and source-mesh snapshot owners; no scene technique lives here.
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import * as fontkit from 'fontkit';
 import { createPlanetTitleSource } from '../../../../tools/prepare-planet-title-sources.mts';
@@ -20,14 +20,14 @@ if (process.cwd() !== root) throw new Error('Run from the repository root.');
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(entry => requireRecord(entry));
 const bodies = records((await read(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'tools/objects/source-authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit),titleLabel:b.titleLabel===undefined?undefined:requireString(b.titleLabel)}));
-const hash = (data: Uint8Array | string) => createHash('sha256').update(data).digest('hex');
+
 const write = (path: string, value: unknown) => writeFile(path, Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n');
 const files = async (path: string): Promise<string[]> => (await Promise.all((await readdir(path, {withFileTypes:true})).map(e => e.isDirectory() ? files(resolve(path,e.name)) : [resolve(path,e.name)]))).flat();
 const refreshOnly = process.argv.includes('--refresh-pins');
 let font: fontkit.Font | undefined, map: Buffer | undefined;
 if (!refreshOnly) {
   const fontPath = resolve('src/objects/oumuamua/source/presentation/InterVariable.ttf');
-  if (hash(await readFile(fontPath)) !== PLANET_TITLE_RECIPE.sourceSha256) throw new Error('Title font changed.');
+  if (sha256(await readFile(fontPath)) !== PLANET_TITLE_RECIPE.sourceSha256) throw new Error('Title font changed.');
   const baseFont = fontkit.openSync(fontPath);
   if (!('getVariation' in baseFont)) throw new TypeError('The title source must contain one font face.');
   font = baseFont.getVariation({wght:PLANET_TITLE_RECIPE.weight,opsz:PLANET_TITLE_RECIPE.opticalSize});
@@ -53,7 +53,7 @@ for (const b of bodies) {
     const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');
     const navigationPath=requireString(requireRecord(navigation.source).path);
     await write(resolve(src,'preparation/navigation.json'),{...navigation,planetId:b.id,source:{path:navigationPath}});
-    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{id:'prepared-source-context',path:navigationPath,origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:hash(context),recipe})];
+    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{id:'prepared-source-context',path:navigationPath,origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:sha256(context),recipe})];
     console.log(JSON.stringify({id:b.id,sourceFaces:requireTerrainMesh(radial.grid).indices.length,faces:radial.faces.length,contextBytes:context.length}));
   }
   const declared=new Set([...records(manifest.inputs),...records(manifest.generatedIntermediates)].map(e=>requireString(e.path)));
@@ -64,10 +64,10 @@ for (const b of bodies) {
     const rel=relative(src,path);
     if(rel==='manifest.json'||declared.has(rel))continue;
     const bytes=await readFile(path);
-    documents.push(refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:hash(bytes)}));
+    documents.push(refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:sha256(bytes)}));
   }
   await write(resolve(src,'manifest.json'),manifest);
   const descriptor=await read(resolve(pkg,'object.json'));
-  for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))ref.sha256=hash(await readFile(resolve(pkg,requireString(ref.path))));
+  for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))ref.sha256=sha256(await readFile(resolve(pkg,requireString(ref.path))));
   await write(resolve(pkg,'object.json'),descriptor);
 }

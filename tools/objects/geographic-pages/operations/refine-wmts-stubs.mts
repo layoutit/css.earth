@@ -1,3 +1,4 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { parseGeographicScene, parseGlobalInputs, parseRegionReceipt, parseTileStub, shape, array, text, number, optional } from '../source-records.mts';
 import { Worker,isMainThread,parentPort,workerData } from "node:worker_threads";
 import { readFile,writeFile,rename } from "node:fs/promises";
@@ -5,7 +6,7 @@ import { dirname,join } from "node:path";
 import { gzipSync,gunzipSync } from "node:zlib";
 
 import { prepareWmtsTile } from "../wmts-page-geometry.mts";
-import { hashBytes } from "../prepare-wmts-tree.mts";
+import {} from "../prepare-wmts-tree.mts";
 import {commandContext} from './context.mts';
 
 import type { OperationContext } from './context.mts';
@@ -23,7 +24,7 @@ async function refineRegion(directory: string,address: TileAddress,version: stri
   const name=`8-${address.x}-${address.y}`,recordPath=join(directory,name+".json"),saved=parseRegionReceipt(JSON.parse(await readFile(recordPath,"utf8")));
   if(saved.stubRefinement===toolHash&&saved.version===version)return;
   const path=join(directory,name+".pack"),old=await readFile(path),ref=saved.root.directory;
-  if(hashBytes(old)!==saved.sha256)throw new Error(`Prepared pack changed: ${name}`);
+  if(sha256(old)!==saved.sha256)throw new Error(`Prepared pack changed: ${name}`);
   const raw=gunzipSync(old.subarray(ref.offset,ref.offset+ref.bytes)),length=raw.readUInt32LE(8),header=shape({envelope:shape({external:array(parseTileStub)})})(JSON.parse(raw.subarray(16,16+length).toString("utf8")));
   for(const stub of header.envelope.external){
     const [zoom,x,y]=stub.key.slice("wmts-tile-".length).split("-").map(Number);
@@ -32,17 +33,17 @@ async function refineRegion(directory: string,address: TileAddress,version: stri
   const json=Buffer.from(JSON.stringify(header)),decoded=Buffer.concat([raw.subarray(0,16),json,raw.subarray(16+length)]);decoded.writeUInt32LE(json.length,8);
   const compressed=gzipSync(decoded,{level:6}),bytes=Buffer.concat([old.subarray(0,ref.offset),compressed]);
   saved.root.coverageParts=coverageParts(address,scene);
-  saved.root.directory={...ref,url:ref.url.replace(/wmts-[a-f0-9]{16}/,`wmts-${version}`),bytes:compressed.length,sha256:hashBytes(compressed),decodedBytes:decoded.length,decodedSha256:hashBytes(decoded)};
-  saved.version=version;saved.bytes=bytes.length;saved.sha256=hashBytes(bytes);saved.stubRefinement=toolHash;
+  saved.root.directory={...ref,url:ref.url.replace(/wmts-[a-f0-9]{16}/,`wmts-${version}`),bytes:compressed.length,sha256:sha256(compressed),decodedBytes:decoded.length,decodedSha256:sha256(decoded)};
+  saved.version=version;saved.bytes=bytes.length;saved.sha256=sha256(bytes);saved.stubRefinement=toolHash;
   await writeFile(path+".part",bytes);await rename(path+".part",path);await writeFile(recordPath+".part",JSON.stringify(saved));await rename(recordPath+".part",recordPath);
 }
 
 export async function refineWmtsStubs(inputDirectory: string,{context,workers=4}: {context?:OperationContext;workers?:number}={}){
   if(!context)throw new TypeError('Stub refinement requires its selected object context.');
   const scene=await context.readPrepared('scene',parseGeographicScene);
-  const inputs=parseGlobalInputs(JSON.parse(await readFile(join(inputDirectory,"inputs.json"),"utf8"))),toolHash=hashBytes(await readFile(new URL(import.meta.url)));
+  const inputs=parseGlobalInputs(JSON.parse(await readFile(join(inputDirectory,"inputs.json"),"utf8"))),toolHash=sha256(await readFile(new URL(import.meta.url)));
   inputs.hashes["tools/objects/geographic-pages/operations/refine-wmts-stubs.mts"]=toolHash;
-  const version=hashBytes(JSON.stringify({schema:1,lastLevel:inputs.lastLevel,source:inputs.sourceSha256,hashes:inputs.hashes})).slice(0,16);
+  const version=sha256(JSON.stringify({schema:1,lastLevel:inputs.lastLevel,source:inputs.sourceSha256,hashes:inputs.hashes})).slice(0,16);
   const directory=join(dirname(inputDirectory.replace(/\/$/,"")),version);
   if(directory!==inputDirectory.replace(/\/$/,""))await rename(inputDirectory,directory);
   inputs.version=version;await writeFile(join(directory,"inputs.json"),JSON.stringify(inputs,null,2));

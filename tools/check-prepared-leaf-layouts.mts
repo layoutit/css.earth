@@ -1,3 +1,4 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import {requireRecord,requireString} from './source-values.mts';
 import {shape,array,text,number,boolean,dictionary,optional} from './objects/terrestrial-layers/source-records.mts';
 const parseProperty=shape({name:text,value:text,custom:boolean});
@@ -8,7 +9,6 @@ interface StyleRecord {width:string;height:string;backgroundSize:string;backgrou
 interface LayoutFailure {file?:string;path?:string;error?:string;line?:number;reason?:string;}
 interface LayoutReport {id:string;count:number;completedByDescriptor:number;failures:LayoutFailure[];modules:string[];sourceSha256:string|null;}
 import { readFile, writeFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SCENE_OBJECTS } from "../site/objects.mts";
@@ -99,7 +99,7 @@ export async function censusPreparedLeafLayouts({
       reports.push(report); continue;
     }
     const source = await readText(resolve(root, file));
-    report.sourceSha256 = createHash("sha256").update(source).digest("hex");
+    report.sourceSha256 = sha256(source);
     let tree:ReturnType<typeof parseTree>;
     try { const plan=object.presentation?.format === 'json' ? requireRecord(JSON.parse(source)).data : readPreparedPresentationModule(source);tree=parseTree(requireRecord(plan).tree); }
     catch (error) { report.failures.push({ file, error: error instanceof Error ? error.message : String(error) }); reports.push(report); continue; }

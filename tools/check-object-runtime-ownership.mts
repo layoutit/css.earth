@@ -1,6 +1,6 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import { readFile, readdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -678,7 +678,7 @@ async function requireContextPointField(root: string, context: ReturnType<typeof
   if (relative(directory, payloadPath).startsWith('../')) fail('prepared payload escapes its object package');
   const {bytes, value: payload} = await readRecord(payloadPath, 'prepared payload cannot be read');
   const data = payload.data;
-  if (createHash('sha256').update(bytes).digest('hex') !== prepared.sha256 || payload.schema !== 'cssearth-prepared-object@1' || payload.id !== id ||
+  if (sha256(bytes) !== prepared.sha256 || payload.schema !== 'cssearth-prepared-object@1' || payload.id !== id ||
       payload.type !== 'point-field' || payload.format !== prepared.format || !isRecord(data) || data.schema !== 'cssearth-css-point-field-bank@1' || data.id !== id ||
       JSON.stringify(data.frame) !== JSON.stringify(properties.frame) || !isRecord(data.frame) || data.frame.referenceFrame !== context.frame.referenceFrame ||
       data.frame.epochJdTt !== context.frame.epochJdTt || JSON.stringify(data.frame.originM) !== JSON.stringify(context.frame.originM)) fail('prepared payload identity or physical frame drifted');
@@ -738,7 +738,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     if (!sources.has(path)) {
       const text = await readText(path);
       sources.set(path, text);
-      sourceHashes.set(path, createHash('sha256').update(text).digest('hex'));
+      sourceHashes.set(path, sha256(text));
     }
     return sources.get(path)!;
   }

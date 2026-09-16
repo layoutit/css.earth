@@ -1,5 +1,5 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import { execFileSync } from 'node:child_process';
 import { dirname, resolve, relative, extname, sep } from 'node:path';
@@ -32,7 +32,7 @@ const library = requireRecord(JSON.parse(libraryBefore.toString('utf8')));
 const entries = requireArray(library.entries).map(value => requireRecord(value));
 const selected = entries.filter(entry => requireRecord(entry.source).kind === 'model-render' && (!only.length || only.includes(requireString(entry.id))));
 if (!selected.length) throw new Error('No model-render entries selected');
-const sha = (data: Uint8Array) => createHash('sha256').update(data).digest('hex');
+
 const local = (base: string, path: string) => { const result = resolve(base, path); if (!result.startsWith(base + sep)) throw new Error('Unsafe asset path'); return result; };
 await mkdir(resolve(output, 'rendered'), { recursive: true }); await mkdir(resolve(output, 'before'), { recursive: true });
 const files = new Map<string, { path: string; url: string; sha256: string; bytes: number }>();
@@ -50,10 +50,10 @@ for (const file of files.values()) {
     if (!(error instanceof Error) || !('code' in error) || error.code !== 'ENOENT') throw error;
     const response = await fetch(file.url); if (!response.ok) throw new Error(`Source download failed: ${file.url}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== file.bytes || sha(bytes) !== file.sha256) throw new Error(`Source identity mismatch: ${file.path}`);
+    if (bytes.length !== file.bytes || sha256(bytes) !== file.sha256) throw new Error(`Source identity mismatch: ${file.path}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
-  if (bytes.length !== file.bytes || sha(bytes) !== file.sha256) throw new Error(`Source identity mismatch: ${file.path}`);
+  if (bytes.length !== file.bytes || sha256(bytes) !== file.sha256) throw new Error(`Source identity mismatch: ${file.path}`);
 }
 for (const file of files.values()) if (file.path.endsWith('.usdz')) {
   const source = local(cache, file.path), destination = local(cache, file.path.replace(/\.usdz$/, '.usda'));
@@ -134,7 +134,7 @@ try {
     const destination = resolve(root, 'public' + requireString(entry.url));
     try { await copyFile(destination, resolve(output, `before/${id}.webp`), 1); } catch (error) { if (!(error instanceof Error) || !('code' in error) || error.code !== 'EEXIST') throw error; }
     await writeFile(resolve(output, `rendered/${id}.webp`), webp);
-    entry.bytes = webp.length; entry.sha256 = sha(webp); entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
+    entry.bytes = webp.length; entry.sha256 = sha256(webp); entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
     entry.composition = { scale: 1, offsetXCssPixels: 0 };
     entry.processing = { recipe: 'tools/machine-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, omissions: result.report.omissions, camera: result.report.camera, pose: result.report.pose };
     reports.push({ ...result.report, bytes: webp.length, sha256: entry.sha256, subject: entry.subject });
@@ -142,7 +142,7 @@ try {
   }
   if (!inspectAxes && !inspectRolls) {
     library.renderer = { ...await page.evaluate(() => { if (!('MachineRender' in window)) throw new Error('Renderer not loaded'); return window.MachineRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
-      implementation: Object.fromEntries(await Promise.all(['tools/prepare-machine-renders.mts', 'tools/machine-renders/render.mts', 'tools/machine-renders/poses.mts', 'tools/machine-renders/voyager.mts', 'tools/machine-renders/refresh.mts'].map(async file => [file, sha(await readFile(resolve(root, file)))]))) };
+      implementation: Object.fromEntries(await Promise.all(['tools/prepare-machine-renders.mts', 'tools/machine-renders/render.mts', 'tools/machine-renders/poses.mts', 'tools/machine-renders/voyager.mts', 'tools/machine-renders/refresh.mts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
     library.composition = { background: 'transparent for model renders', displaySize: [296, 148], preserveAspectRatio: true, fitPolicy: 'Center retained source geometry; alpha bounds with 6px padding supply sidebar crop.' };
     await writeFile(resolve(output, 'render-report.json'), JSON.stringify(reports, null, 2) + '\n');
     await writeFile(resolve(output, 'render-library.candidate.json'), JSON.stringify(library, null, 2) + '\n');

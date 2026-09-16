@@ -1,6 +1,6 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { writeArrayBuffer } from 'geotiff';
 import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
 import { shape, text, number, array } from '../terrestrial-layers/source-records.mts';
@@ -142,7 +142,7 @@ async function scanCells(root: string, recipe: Recipe, scan: Recipe['scans'][num
   }
   return { maps, inputs: [scan.cube, scan.wavelengths, scan.geometry, scan.label].map((path,i) => {
     const bytes = [cubeBytes, waveBytes, geometryBytes, Buffer.from(label)][i];
-    return { path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
+    return { path, bytes: bytes.length, sha256: sha256(bytes) };
   }) };
 }
 

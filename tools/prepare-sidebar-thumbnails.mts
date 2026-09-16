@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -9,20 +9,20 @@ import { hasErrorCode } from './source-values.mts';
 
 const root = process.cwd();
 const check = process.argv.includes('--check');
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const inputs = new Map<string, { path: string; sha256: string; bytes: number }>();
 const read = async (path: string, expected?: string) => {
   const bytes = await readFile(resolve(root, path));
-  const sha256 = digest(bytes);
-  if (expected && sha256 !== expected) throw new Error(`Changed sidebar image input: ${path}`);
-  inputs.set(path, { path, sha256, bytes: bytes.length });
+  const digest = sha256(bytes);
+  if (expected && digest !== expected) throw new Error(`Changed sidebar image input: ${path}`);
+  inputs.set(path, { path, sha256: digest, bytes: bytes.length });
   return bytes;
 };
 const json = async (path: string): Promise<unknown> => JSON.parse((await read(path)).toString());
 const output = async (path: string, bytes: Uint8Array | string) => {
   const data = typeof bytes === 'string' ? Buffer.from(bytes) : bytes;
   if (check) {
-    if (digest(await readFile(resolve(root, path))) !== digest(data)) throw new Error(`Stale sidebar thumbnail: ${path}`);
+    if (sha256(await readFile(resolve(root, path))) !== sha256(data)) throw new Error(`Stale sidebar thumbnail: ${path}`);
   } else await writeFile(resolve(root, path), data);
 };
 
@@ -38,7 +38,7 @@ const makeThumbnail = async (id: string, lens: string, bytes: Buffer, evidence: 
       .webp({ lossless: true, effort: 6 }).toBuffer();
     const url = `/navigation/focus-${id}-${lens}${density === 2 ? '@2x' : ''}.webp`;
     await output(`public${url}`, tile);
-    generated.push({ url, sha256: digest(tile) });
+    generated.push({ url, sha256: sha256(tile) });
   }
   images[`${id}/${lens}`] = { url: generated[0].url, url2x: generated[1].url,
     sha256: generated[0].sha256, sha2562x: generated[1].sha256, ...evidence };

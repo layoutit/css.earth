@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -16,7 +16,7 @@ const matching=shape({patchRadius:number,searchRadius:number,gridStride:number,g
 const parseRecipe=shape({schema:text,shapeSha256:text,margin:number,matching,maximumRmsPixels:number,maximumResidualPixels:number,frames:array(shape({id:text,referenceId:text,observation:parseEncounterPolicy}))});
 const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
 const parseGeometry=shape({geometry:shape({radialTerrain:shape({path:text,grid:parseMeshProfile})})});
-const digest=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex');
+
 const json=async(p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 
 /** Reproduce the three cropped ITS cameras from pinned native image overlap.
@@ -28,10 +28,10 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
   assert.ok(recipe.maximumRmsPixels>0&&recipe.maximumRmsPixels<=1&&recipe.maximumResidualPixels>=recipe.maximumRmsPixels&&recipe.maximumResidualPixels<=2);
   const pinned=async(path:string)=>{
     const pin=manifest.inputs.find(e=>e.path===path);assert.ok(pin,`Missing source pin: ${path}`);
-    const bytes=await readFile(resolve(source,path));assert.equal(bytes.length,pin.expectedBytes);assert.equal(digest(bytes),pin.expectedSha256);return bytes;
+    const bytes=await readFile(resolve(source,path));assert.equal(bytes.length,pin.expectedBytes);assert.equal(sha256(bytes),pin.expectedSha256);return bytes;
   };
   await pinned('preparation/closeups.json');
-  assert.equal(digest(await pinned(geometry.path)),recipe.shapeSha256);
+  assert.equal(sha256(await pinned(geometry.path)),recipe.shapeSha256);
   const mesh=await loadPdsPlanetocentricShape(resolve(source,geometry.path),geometry.grid);
   const transfer={maximumSeparationMeters:200,visibilityToleranceMeters:.5,maximumEmissionDegrees:75};
   const reports=[];
@@ -54,10 +54,10 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
     }
     const match=matchImageFeatures({width:target.width,height:target.height,values:target.values,valid:Uint8Array.from(target.values,(_,i)=>target.reason(i)?0:1)},{width,height,values,valid},recipe.margin,recipe.matching);
     const controls=match.matches.map(m=>{const i=(m.seedPixel[1]+recipe.margin)*width+m.seedPixel[0]+recipe.margin;return {...m,sourcePointMeters:Array.from(xyz.subarray(i*3,i*3+3)),referencePixel:Array.from(uv.subarray(i*2,i*2+2))};});
-    const control={schema:'cssearth-encounter-control@1',observation:entry.observation,camera:{...seed,offsetPixels:match.offsetPixels},registration:{method:'registered-image-feature-translation',sourceShapeSha256:recipe.shapeSha256,reference:{id:entry.referenceId.replaceAll('_','-'),imageSha256:digest(refBytes),controlSha256:digest(refControlBytes)},nominalPixelScaleMeters:camera.report.nominalPixelScaleMeters,maximumRmsMeters:Math.min(100,recipe.maximumRmsPixels*camera.report.nominalPixelScaleMeters),maximumResidualMeters:Math.min(200,recipe.maximumResidualPixels*camera.report.nominalPixelScaleMeters),limitations:'Relative overlap registration inherits the reference photograph and 2012 shape placement uncertainty. Subpixel relative residuals do not establish subpixel absolute surface coordinates.',controls},matching:{...recipe.matching,excluded:match.excluded},frameBinding:refControl.camera.bodyToJ2000};
+    const control={schema:'cssearth-encounter-control@1',observation:entry.observation,camera:{...seed,offsetPixels:match.offsetPixels},registration:{method:'registered-image-feature-translation',sourceShapeSha256:recipe.shapeSha256,reference:{id:entry.referenceId.replaceAll('_','-'),imageSha256:sha256(refBytes),controlSha256:sha256(refControlBytes)},nominalPixelScaleMeters:camera.report.nominalPixelScaleMeters,maximumRmsMeters:Math.min(100,recipe.maximumRmsPixels*camera.report.nominalPixelScaleMeters),maximumResidualMeters:Math.min(200,recipe.maximumResidualPixels*camera.report.nominalPixelScaleMeters),limitations:'Relative overlap registration inherits the reference photograph and 2012 shape placement uncertainty. Subpixel relative residuals do not establish subpixel absolute surface coordinates.',controls},matching:{...recipe.matching,excluded:match.excluded},frameBinding:refControl.camera.bodyToJ2000};
     const registered=encounterCamera(target.header,control.camera),report=validateEncounterRegistration(registered,control.registration,recipe.shapeSha256);
     const path=`${directory}/${entry.id}.json`,bytes=Buffer.from(JSON.stringify(control,null,2)+'\n');
-    if(write){await writeFile(resolve(source,path),bytes);const pin=manifest.inputs.find(p=>p.path===path);assert.ok(pin);pin.expectedBytes=bytes.length;pin.expectedSha256=digest(bytes);}
+    if(write){await writeFile(resolve(source,path),bytes);const pin=manifest.inputs.find(p=>p.path===path);assert.ok(pin);pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);}
     else assert.equal((await pinned(path)).toString('utf8'),bytes.toString('utf8'),`Registration is not reproducible: ${entry.id}`);
     reports.push({id:entry.id,...report});
   }

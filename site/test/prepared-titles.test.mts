@@ -5,11 +5,8 @@ import { resolve } from "node:path";
 import test from "node:test";
 
 import { loadObjectContent } from "./load-object-content.mts";
-import {
-  PLANET_TITLE_STANDARD,
-  createPreparedTitleLayout,
-  sha256,
-} from "../../src/platform/prepared-title.mts";
+import { sha256 } from "../../src/platform/sha256.mts";
+import { PLANET_TITLE_STANDARD, createPreparedTitleLayout } from "../../src/platform/prepared-title.mts";
 import { PLANET_TITLE_RECIPE } from
   "../../src/platform/planet-title-recipe.mts";
 import { OBJECTS } from "../objects.mts";

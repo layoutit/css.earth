@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -25,7 +25,7 @@ const radians = Math.PI/180;
 const dot = (a:readonly number[], b:readonly number[]) => a.reduce((sum,n,i) => sum+n*b[i],0);
 const sub = (a:readonly number[], b:readonly number[]) => a.map((n,i) => n-b[i]);
 const cross = (a:readonly number[], b:readonly number[]) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
-const digest = (bytes:Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 const median=(values:readonly number[])=>{assert.ok(values.length);const a=[...values].sort((a,b)=>a-b),mid=Math.floor(a.length/2);return a.length%2?a[mid]:(a[mid-1]+a[mid])/2;};
 
 /** A relative display adjustment, not an exposure or spectral calibration.
@@ -102,10 +102,10 @@ export async function prepareEncounters(sourceDirectory:string) {
   const giottoRegistration=JSON.parse(await readFile(resolve(sourceDirectory,'reference/giotto-registration.json'),'utf8'));
   for(const pin of [...registration.sourcePins,...giottoRegistration.sourcePins]) {
     const bytes=await readFile(resolve(sourceDirectory,pin.path));
-    assert.equal(bytes.length,pin.bytes,pin.path); assert.equal(digest(bytes),pin.sha256,pin.path);
+    assert.equal(bytes.length,pin.bytes,pin.path); assert.equal(sha256(bytes),pin.sha256,pin.path);
   }
   const shapeBytes=await readFile(resolve(sourceDirectory,'shape/1682q1halley.tab'));
-  assert.equal(digest(shapeBytes),registration.shapeSha256);
+  assert.equal(sha256(shapeBytes),registration.shapeSha256);
   const mesh=parsePdsRadiusTable(shapeBytes.toString(),{stepDegrees:5,longitudeDirection:'east-positive',metersPerUnit:1000,expectedVertices:2522,expectedFaces:5040});
   const photo=await sharp(resolve(sourceDirectory,'giotto/hmc_best.gif')).toColourspace('srgb').removeAlpha().raw().toBuffer({resolveWithObject:true});
   const giotto=createGiottoSampler(mesh,giottoRegistration,{data:photo.data,...photo.info});
@@ -179,14 +179,14 @@ export async function prepareEncounters(sourceDirectory:string) {
     const index=y*width+x; if(color) rgb.set(color,index*3);attribution[index]=source;counts[source]++;
   }
   const png=await sharp(rgb,{raw:{width,height,channels:3}}).png().toBuffer();
-  const report={schema:'cssearth-halley-encounter-projection-report@1',registrationSha256:digest(registrationBytes),shapeSha256:digest(shapeBytes),
+  const report={schema:'cssearth-halley-encounter-projection-report@1',registrationSha256:sha256(registrationBytes),shapeSha256:sha256(shapeBytes),
     interpretation:'Approximate mixed-filter, mixed-date photographic mosaic; original illumination and coma contamination retained. Not albedo or true colour.',
     sourcePins:[...giottoRegistration.sourcePins,...registration.sourcePins],
     observations:[{id:'giotto',displayGain:1},...vega.map((o,i)=>({id:o.id,filter:o.filter,geometry:o.geometry,outline:o.outline,displayGain:gains[i]}))],
     selection:'Retain every accepted Giotto RGB sample. Else choose the qualified Vega sample with the smallest foreshortening-adjusted pixel size; ties follow observation order.',
     masks:registration.mask,photometricCorrection:'None. Only T11194 receives a fitted relative display gain; this is not a spectral or reflectance calibration.',clippedPixels,
-    map:{width,height,bytes:png.length,sha256:digest(png),attributionCounts:counts},
-    attribution:{width,height,bytes:attribution.length,sha256:digest(attribution),encoding:'One unsigned byte per input-map texel, row-major; no padding or bleed. Same orientation as encounters.png.',codes:['gap','giotto',...vega.map(o=>o.id)]},
+    map:{width,height,bytes:png.length,sha256:sha256(png),attributionCounts:counts},
+    attribution:{width,height,bytes:attribution.length,sha256:sha256(attribution),encoding:'One unsigned byte per input-map texel, row-major; no padding or bleed. Same orientation as encounters.png.',codes:['gap','giotto',...vega.map(o=>o.id)]},
     coverage:{sourceAreaSquareKm:totalArea/1e6,samplesPerTriangle:7,triangles:mesh.indices.length,beforePercent:oldArea/totalArea*100,afterPercent:newArea/totalArea*100,perSourcePercent:perSourceArea.map(a=>a/totalArea*100)},overlap:overlapReport};
   return {png,attribution,report};
 }

@@ -1,3 +1,4 @@
+import { sha256 } from './sha256.mts';
 import { isArray } from './is-array.mts';
 import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
@@ -161,7 +162,7 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot }:
 
 export function assertSourceBytes({ entry, bytes, planetName }: { entry: SourceEntry; bytes: Uint8Array; planetName: string }) {
   return assertSourceDigest({ entry, size: bytes.byteLength,
-    actual: createHash("sha256").update(bytes).digest("hex"), planetName });
+    actual: sha256(bytes), planetName });
 }
 
 function assertSourceDigest({ entry, size, actual, planetName }: { entry: SourceEntry; size: number; actual: string; planetName: string }) {

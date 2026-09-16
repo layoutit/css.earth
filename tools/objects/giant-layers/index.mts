@@ -1,14 +1,14 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parse} from '../material-composition/data-schema.mts';
 import {radialRecipe, type SourcePin, type ObservedRadialLayer} from './radial-contract.mts';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
 import { rasterAnnularField, rasterObservedRadialField, colorizeRadialField, rasterProjectedStripShadow, loadObservedProfile} from './rings.mts';
 export { mapRadius, ringRayOccluded, rasterAnnularField, rasterObservedRadialField, sampleRadialProfile } from './rings.mts';
 
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+
 function fail(message: string): never { throw new TypeError(`Radial preparation: ${message}`); }
 function positive(value: number) { return Number.isFinite(value) && value > 0; }
 function pair(value: readonly number[]) { return isArray(value) && value.length === 2 && value.every(Number.isFinite) && value[1] > value[0]; }
@@ -104,7 +104,7 @@ async function verifyInputs(root: string, sources: readonly SourcePin[]) {
     const offset = relative(actualRoot, file);
     if (offset === '..' || offset.startsWith(`..${sep}`) || offset.startsWith(sep)) fail('source escapes its directory.');
     const bytes = await readFile(file);
-    if (bytes.length !== source.expectedBytes || digest(bytes) !== source.expectedSha256) fail(`source pin mismatch: ${source.path}`);
+    if (bytes.length !== source.expectedBytes || sha256(bytes) !== source.expectedSha256) fail(`source pin mismatch: ${source.path}`);
     result.set(source.path, bytes);
   }
   return result;
@@ -135,10 +135,10 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
       if (sourceSize !== size) pipeline = pipeline.resize(size, size, { kernel: sharp.kernel.lanczos3 });
       const bytes = await pipeline.webp(layer.encoding).toBuffer();
       const filename = layer.output.replace('{suffix}', density === 2 ? '@2x' : '');
-      assets.push({ filename, width: size, height: size, bytes: bytes.length, sha256: digest(bytes), data: bytes });
+      assets.push({ filename, width: size, height: size, bytes: bytes.length, sha256: sha256(bytes), data: bytes });
       for(const overlay of layer.overlays??[]){
         const shadow=rasterProjectedStripShadow(data,size,overlay),encoded=await sharp(shadow,{raw:{width:size,height:size,channels:4}}).webp(overlay.encoding).toBuffer(),filename=overlay.output.replace('{suffix}',density===2?'@2x':'');
-        assets.push({filename,width:size,height:size,bytes:encoded.length,sha256:digest(encoded),data:encoded});
+        assets.push({filename,width:size,height:size,bytes:encoded.length,sha256:sha256(encoded),data:encoded});
       }
       if (layer.variants?.length) {
         const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -146,7 +146,7 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
           const data = colorizeRadialField(decoded.data, decoded.info.width, decoded.info.height, variant);
           const encoded = await sharp(data, { raw: decoded.info }).webp(variant.encoding).toBuffer();
           const filename = variant.output.replace('{suffix}', density === 2 ? '@2x' : '');
-          assets.push({ filename, width: size, height: size, bytes: encoded.length, sha256: digest(encoded), data: encoded });
+          assets.push({ filename, width: size, height: size, bytes: encoded.length, sha256: sha256(encoded), data: encoded });
         }
       }
     }

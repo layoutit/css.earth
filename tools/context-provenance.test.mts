@@ -4,14 +4,15 @@ import { readFile, mkdir, mkdtemp, rm, cp, copyFile } from 'node:fs/promises';
 import { prepareContextProvenance } from './prepare-context-provenance.mts';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { hash } from './context-source-records.mts';
+import { sha256 } from '../src/platform/sha256.mts';
 
-test('context provenance binds every declared output and installs identical complete inventories', async () => {
+
+test('context provenance binds every declared output and installs one complete inventory', async () => {
   const contexts=await prepareContextProvenance();
   assert.deepEqual(contexts.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
   for(const context of contexts){
     const inventories=context.outputs.filter(o=>o.path.endsWith('/runtime-assets.json'));
-    assert.equal(inventories.length,2);assert.equal(inventories[0]!.text,inventories[1]!.text);
+    assert.equal(inventories.length,1,'the inventory is published once, at the body root');
     const inventory=JSON.parse(inventories[0]!.text);
     for(const product of context.provenance.products)for(const output of product.outputs){
       const asset=inventory.assets.find((a:{filename:string})=>output.url.endsWith(`/prepared/${a.filename}`));
@@ -21,7 +22,7 @@ test('context provenance binds every declared output and installs identical comp
       const generated=context.outputs.find(o=>o.path.endsWith(`/prepared/${asset.filename}`));
       const bytes=generated?Buffer.from(generated.text):await readFile(`${context.base}/prepared/${asset.filename}`).catch((error: unknown) => { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
       if (!bytes) continue; // Recovered receipts are valid without installed generated assets.
-      assert.equal(hash(bytes),asset.sha256);assert.equal(bytes.length,asset.bytes);
+      assert.equal(sha256(bytes),asset.sha256);assert.equal(bytes.length,asset.bytes);
     }
     assert.ok(context.provenance.sources.some(s=>s.sourceBinding?.kind==='catalogued'));
   }

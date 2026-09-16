@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -25,7 +25,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     if (!record(descriptor) || descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`${object.id}: prepared features descriptor is invalid.`);
     const url = text(descriptor.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
     const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
-    if (bytes.length !== descriptor.bytes || createHash('sha256').update(bytes).digest('hex') !== descriptor.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
+    if (bytes.length !== descriptor.bytes || sha256(bytes) !== descriptor.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
     const catalog: unknown = JSON.parse(bytes.toString('utf8'));
     if (!record(catalog) || !Array.isArray(catalog.features) || catalog.features.length !== descriptor.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
     for (const value of catalog.features as unknown[]) {
@@ -47,7 +47,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);
   await mkdir(resolve(root, 'public/features'), { recursive: true });
   await writeFile(resolve(root, 'public/features/index.json'), encoded);
-  const pin = { schema: FEATURE_INDEX_SCHEMA, url: FEATURE_INDEX_URL, bytes: encoded.length, sha256: createHash('sha256').update(encoded).digest('hex'), count: features.length, objects: objects.map(object => object.id) };
+  const pin = { schema: FEATURE_INDEX_SCHEMA, url: FEATURE_INDEX_URL, bytes: encoded.length, sha256: sha256(encoded), count: features.length, objects: objects.map(object => object.id) };
   await writeFile(resolve(root, 'site/prepared-feature-index.json'), `${JSON.stringify(pin, null, 2)}\n`);
   return pin;
 }

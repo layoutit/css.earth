@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from '../material-composition/data-schema.mts';
 import {bandedGeometryRecipe} from './geometry-contract.mts';
@@ -11,7 +12,6 @@ import {shape,text,number,optional,array} from '../terrestrial-layers/source-rec
 import {isRecord,requireRecord,requireFiniteNumber} from '../../source-values.mts';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile,realpath} from 'node:fs/promises';
 import {resolve,relative,sep} from 'node:path';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
@@ -29,7 +29,7 @@ import {prepareNormalizedDiscPresentation} from './normalized-disc-presentation.
 import {prepareObservedPolarSurfaces} from '../giant-observations/index.mts';
 import {withFocusedCamera} from '../focused-camera.mts';
 
-const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,`${JSON.stringify(value)}\n`);
 export const isLayeredGiantRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-banded-ellipsoid@1';

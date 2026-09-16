@@ -1,7 +1,7 @@
 // Fit filter cameras to a reference image, or measure authored ones with --check-only, and write the full report.
 // Preparation runs the same check for every camera a colour recipe registers; this job fits new cameras.
+import { sha256 } from '../../../src/platform/sha256.mts';
 import {readFile,writeFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {dirname,resolve} from 'node:path';
 import {requireRecord,requireString} from '../../source-values.mts';
 import {array,parseCameraFrame,shape,text} from './source-records.mts';
@@ -15,7 +15,7 @@ const recipeText=await readFile(jobPath,'utf8'),job=requireRecord(JSON.parse(rec
 const body=requireString(job.body),root=resolve(dirname(jobPath),requireString(job.sourceRoot));
 const color=shape({channels:array(shape({filter:text,frames:array(parseCameraFrame)}))})(job.color),profile=requireRecord(job.shape);
 const mesh=await loadCameraShape(root,profile);
-const sha256=(bytes:Buffer|string)=>createHash('sha256').update(bytes).digest('hex');
+
 const source=async(frame:ReturnType<typeof parseCameraFrame>)=>{const bytes=await readFile(`${root}/${frame.path}`);return {frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)};};
 const reference=await source(parseCameraFrame(job.referenceFrame));
 const targets=[];for(const channel of color.channels)targets.push({filter:channel.filter,...await source(channel.frames[0])});

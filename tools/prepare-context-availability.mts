@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -34,7 +34,7 @@ export async function inspectContextAvailability(projectRoot = root): Promise<Co
         return;
       }
       const bytes = await read(base, path);
-      if (bytes.length !== pin.bytes || createHash('sha256').update(bytes).digest('hex') !== pin.sha256)
+      if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256)
         throw new TypeError(`Prepared identity mismatch: ${relative(projectRoot, file)}.`);
       verified.set(file, identity);
     };

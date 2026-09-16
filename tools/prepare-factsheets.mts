@@ -1,10 +1,10 @@
+import { sha256 } from '../src/platform/sha256.mts';
 import {requireRecord,requireArray,hasErrorCode} from './source-values.mts';
 import {shape,text,number,array} from './objects/terrestrial-layers/source-records.mts';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
 const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text})),documents:array(shape({path:text,expectedBytes:number,expectedSha256:text})),generatedIntermediates:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -13,7 +13,6 @@ import { orderFacts } from '../site/fact-order.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { verifyFactsheetSources } from './factsheet-sources.mts';
 
-const hash = (bytes:Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Re-publish authored facts without rebaking imagery or changing scene state. Reader text has its own publisher, prepare-text. */
 export async function prepareFactsheet(objectDirectory:string, { check = false } = {}) {
@@ -26,7 +25,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
   const entry = [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates]
     .find(source => `source/${source.path}` === reference.path);
   assert.ok(entry, `${descriptor.id}: content source missing from manifest`);
-  assert.equal(hash(bytes), entry.expectedSha256, `${descriptor.id}: content source pin differs`);
+  assert.equal(sha256(bytes), entry.expectedSha256, `${descriptor.id}: content source pin differs`);
   assert.equal(entry.expectedBytes, bytes.length);
   const source = requireRecord(JSON.parse(bytes.toString('utf8')));
   const panel = requireRecord(source.panel);

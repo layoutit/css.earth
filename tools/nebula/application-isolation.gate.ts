@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdtemp, mkdir, readFile, writeFile, cp, symlink, access } from 'node:fs/promises';
 import { resolve, relative, dirname, join } from 'node:path';
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { spawn, spawnSync } from 'node:child_process';
 const root = process.cwd(), require = createRequire(resolve(root, 'package.json'));
 const engine = createRequire(resolve(root, 'packages/engine/package.json'));
@@ -58,15 +58,14 @@ async function run(id: string, reuse: boolean) {
   assert.equal(code, 0, log); assert.match(log, /APPLICATION_ISOLATION_GUARD_ACTIVE/); assert.match(log, /NEBULA_OBJECTS_COMPLETE/);
   if (reuse) assert.match(log, /"status":"verified"/);
 }
-const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 for (const id of ['m42', 'm2-9', 'lmc']) {
   await run(id, false); await run(id, true);
   const directory = join(sandbox, 'src/objects', id);
   const descriptor = JSON.parse(await readFile(join(directory, 'object.json'), 'utf8'));
-  const bytes = await readFile(join(directory, descriptor.prepared.url)); assert.equal(sha(bytes), descriptor.prepared.sha256);
+  const bytes = await readFile(join(directory, descriptor.prepared.url)); assert.equal(sha256(bytes), descriptor.prepared.sha256);
   const bank = JSON.parse(bytes.toString()).data; let resources = 0;
   for (const lens of bank.lenses) for (const resource of lens.volume.resources) {
-    assert.equal(sha(await readFile(join(directory, 'prepared', resource.path))), resource.sha256); resources++;
+    assert.equal(sha256(await readFile(join(directory, 'prepared', resource.path))), resource.sha256); resources++;
   }
   assert.ok(resources > 0);
   console.log(`APPLICATION_ISOLATION_PASS ${id} lenses=${bank.lenses.length} resources=${resources} reuse=verified`);

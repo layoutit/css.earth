@@ -1,5 +1,5 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { parseReflectanceCamera, type NumericRaster } from './source-records.mts';
-import { createHash } from 'node:crypto';
 import { field, imageBlock, acceptOsirisQuality } from './osiris-geo.mts';
 
 /** Level-4 resampled reflectance keeps its quality and sigma arrays in the
@@ -14,7 +14,7 @@ export function decodeOsirisReflectance(bytes: Buffer, cameraSource: unknown, al
   if (!['OSINAC', 'OSIWAC'].includes(field(label, 'INSTRUMENT_ID') ?? '') ||
       field(label, 'TARGET_NAME') !== camera.target || field(label, 'START_TIME') !== camera.startTime ||
       field(label, 'FILTER_NAME') !== camera.filter || field(label, 'DATA_QUALITY_ID') !== '0000000000000000' ||
-      createHash('sha256').update(bytes).digest('hex') !== camera.imageSha256) throw new Error('OSIRIS camera is not bound to this exact observation.');
+      sha256(bytes) !== camera.imageSha256) throw new Error('OSIRIS camera is not bound to this exact observation.');
   const data: Record<string, NumericRaster> = {}, ranges: number[][] = []; const count = camera.width * camera.height;
   for (const name of ['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE']) {
     const block = imageBlock(label, name), quality = name === 'QUALITY_MAP_IMAGE', stride = quality ? 1 : 4;

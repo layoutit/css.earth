@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -74,7 +74,7 @@ export async function acquirePinnedGlobalWmts({ objectId, projectRoot = projectD
   if (failure) throw failure;
   return { schema: "cssearth-pinned-wmts-acquisition@1", mode: verifyOnly ? "verify-only" : "acquire",
     version: release.version, dataset: release.dataset, sourceHashes, packs: files.length, bytes: release.bytes,
-    packInventorySha256: createHash("sha256").update(JSON.stringify(files)).digest("hex"),
+    packInventorySha256: sha256(JSON.stringify(files)),
     verifiedPacks: verified, downloadedPacks: downloaded, downloadedBytes, geometry: "verified-pinned-input-not-regenerated" };
 }
 

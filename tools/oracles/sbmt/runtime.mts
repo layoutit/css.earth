@@ -1,3 +1,4 @@
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { createHash } from 'node:crypto';
 import { createReadStream, existsSync } from 'node:fs';
 import { readFile, mkdir } from 'node:fs/promises';
@@ -28,7 +29,7 @@ export function pin(value: unknown) {
 export async function runtimeLock() {
   const raw = await readFile(lockPath), lock = requireRecord(JSON.parse(raw.toString()));
   if (lock.schema !== 'cssearth-sbmt-runtime@1') throw new Error('Unknown SBMT runtime lock');
-  return { lock, digest: createHash('sha256').update(raw).digest('hex'),
+  return { lock, digest: sha256(raw),
     files: requireArray(lock.files).map(pin), nativeFiles: requireArray(lock.nativeFiles).map(pin), bridgeFiles: requireArray(lock.bridgeFiles).map(pin) };
 }
 export async function verifyFiles(directory: string, files: readonly ReturnType<typeof pin>[]) {

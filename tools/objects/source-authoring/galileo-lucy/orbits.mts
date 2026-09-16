@@ -1,7 +1,7 @@
 // Prepare explicitly illustrative moon phases using published size/period constraints.
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { createHash } from 'node:crypto';
 import { evaluatePublishedOrbit } from '../../../../packages/astronomy/tools/body-epoch-ephemeris.mts';
 import { parsePublishedParameters } from '../../../../packages/astronomy/tools/lib/ephemeris-records.mts';
 import { bodies, celestiaCommit, celestiaUrl } from './catalog.mts';
@@ -43,7 +43,7 @@ for (const body of bodies) {
   await write(`${s}/validation/epoch-state.json`, { schema: 'cssearth-published-body-epoch-ephemeris@1', id: body.id, centerBodyId: body.parent,
     epochJdTt, referenceFrame: 'ICRF', units: 'KM-D', correction: 'NONE', runtimeExtrapolation: false,
     ...state, gravitationalParametersKm3PerS2: { combined: gm, body: 0, parent: gm },
-    source: { path: 'source/orbit/published-parameters.json', bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') },
+    source: { path: 'source/orbit/published-parameters.json', bytes: bytes.length, sha256: sha256(bytes) },
     limitations: [body.qualification, parameters.derivedAssumptions, parameters.gravityQualification],
     validation: { sourceEpochState: state, scope: 'Arithmetic consistency of the declared illustrative conic only; no independent 2026 phase or astrometric residual is available.' } });
   if (body.id === 'dactyl') {

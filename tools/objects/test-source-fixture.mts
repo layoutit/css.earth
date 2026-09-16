@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
@@ -12,7 +12,7 @@ export async function fixtureSource(sourceRoot: string, entries: readonly {
     return { id: `fixture-${index}`, origin: 'Generated unit-test input', credit: 'Authored fixture',
       license: 'CC0', acquisition: 'Generated in a temporary test directory', redistribution: 'Allowed',
       sourceBinding: { kind: 'local', reason: 'Synthetic unit-test input' }, ...entry,
-      expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') };
+      expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
   }));
   await writeFile(resolve(sourceRoot, 'manifest.json'), JSON.stringify({
     schema: 'cssfixture-authoritative-sources@2', inputs, documents: [], generatedIntermediates: [],
