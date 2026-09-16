@@ -73,33 +73,33 @@
     {
       "id": "spitzer-mid-infrared",
       "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
-      "origin": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
-      "sourceUrl": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
-      "title": "Lagoon Nebula · Spitzer · mid-infrared",
-      "credit": "NASA/JPL-Caltech",
-      "displayCredit": "NASA/JPL-Caltech",
-      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "94ab668c21880706ae4fa6e401f8a7237f440cdcf4bcf3f93b45c0794c21ff34",
-      "expectedBytes": 5591662,
+      "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
+      "title": "Lagoon Nebula · Spitzer IRAC · calibrated mid-infrared maps",
+      "credit": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
+      "displayCredit": "NASA/JPL-Caltech; CDS",
+      "acquisition": "Composed by the pinned sky band recipe src/objects/m8/source/sky-bands/spitzer-irac.json from three pinned CDS hips2fits IRAC 8.0/4.5/3.6 µm maps: calibrated to MJy/sr, one measured background and range per band, one Lupton asinh display. The repository-relative path is an ignored cache that the recipe reproduces byte for byte.",
+      "expectedSha256": "8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e",
+      "expectedBytes": 5769508,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "spitzer-sig11-012",
+            "catalogueId": "cds-hips-spitzer-irac",
             "role": "material",
-            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/2"
+            "evidence": "src/objects/m8/source/sky-bands/spitzer-irac.json#/bands"
           }
         ]
       },
       "dependencies": [],
       "lensId": "spitzer-mid-infrared",
-      "license": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy. Retain the complete recorded credit.",
+      "license": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy; CDS HiPS distribution under ODbL-1.0. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
           {
             "kind": "machine",
             "machineId": "spitzer",
-            "evidence": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula"
+            "evidence": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
           }
         ]
       }
@@ -144,7 +144,7 @@
       "title": "Lagoon Nebula adopted world placement",
       "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
       "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
-      "expectedSha256": "47ea5df636096b29645d8b561dccae2a11823126c32a09521c77902e1195ce35",
+      "expectedSha256": "bdc1d7755d2490cde15584e3d8e53d5d36311ecf5fbc4a14975da67f278e6720",
       "expectedBytes": 2197,
       "sourceBinding": {
         "kind": "catalogued",
@@ -206,7 +206,7 @@
     {
       "id": "document-1",
       "path": "src/objects/m8/source/delivery.json",
-      "expectedSha256": "47ea5df636096b29645d8b561dccae2a11823126c32a09521c77902e1195ce35",
+      "expectedSha256": "bdc1d7755d2490cde15584e3d8e53d5d36311ecf5fbc4a14975da67f278e6720",
       "expectedBytes": 2197,
       "sourceBinding": {
         "kind": "local",
@@ -216,7 +216,7 @@
     {
       "id": "document-2",
       "path": "src/objects/m8/source/nebula.json",
-      "expectedSha256": "dc079e1174e6be2a9792faa7992b1cf1c3d922513769db107e6c3b6ab341a18f",
+      "expectedSha256": "78faf99f779fca5f0fa57e8b1cc2f01546b4a14a4dd8685eaeb2cd8028086cd8",
       "expectedBytes": 2222,
       "sourceBinding": {
         "kind": "local",
@@ -226,8 +226,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m8/source/presentation.json",
-      "expectedSha256": "294441887d619feef0cbe412e390fe62bd66bd3f88bbcf42c931258b6440294e",
-      "expectedBytes": 6982,
+      "expectedSha256": "078fee112c54efeffc9fa700fd773246be622b977e5c3a005df573156e044346",
+      "expectedBytes": 7313,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -267,7 +267,7 @@
       "id": "retained-evidence-7",
       "path": "src/objects/m8/source/bake-inputs/references/04-processing-observations.json",
       "expectedSha256": "ead054a15a28d3c7645a833f4e4a7d818d8b6ee0b4412fdb97b5ecd5fcab2482",
-      "expectedBytes": 5501,
+      "expectedBytes": 5778,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -286,7 +286,7 @@
     {
       "id": "retained-evidence-9",
       "path": "src/objects/m8/source/provenance-references.json",
-      "expectedSha256": "feef55ff8d78336bbed6b5b469bdcefef1ac6b8f26bd0f086493f64a9eaf04e8",
+      "expectedSha256": "246162ed610ce5c0ffe5f1016e0aac3cc12081ee28e3e9d663988efb0b298cef",
       "expectedBytes": 1748,
       "sourceBinding": {
         "kind": "local",
@@ -296,7 +296,7 @@
     {
       "id": "retained-evidence-10",
       "path": "src/objects/m8/source/replay-references.json",
-      "expectedSha256": "1e2ed81a54c45bf6169080c0b0f2f35533a6018b76f21a0f5335f5a3ef4b101a",
+      "expectedSha256": "0597390c5c5140e93932287736d36b07fdd68c66965c21cf8b4ca4d7ac57ccbd",
       "expectedBytes": 1254,
       "sourceBinding": {
         "kind": "local",
@@ -312,8 +312,8 @@
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
       },
-      "expectedBytes": 260362,
-      "expectedSha256": "ee8953cb7c95824bb8dadeb86d4029a964409fc4d36ea7339d4f866ea9e2d266"
+      "expectedBytes": 251561,
+      "expectedSha256": "4bb52f965fb8e0f0ffc6984765099c4634fdddc3cd08f7cc4084aeed880202b9"
     }
   ]
 }
