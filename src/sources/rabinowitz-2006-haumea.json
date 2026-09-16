@@ -1,0 +1,43 @@
+{
+  "id": "rabinowitz-2006-haumea",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rabinowitz et al. (2006): Photometric observations constraining the size, shape, and albedo of 2003 EL61",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/499575"
+    },
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0509401"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/499575",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0509401",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0509401",
+      "checkedOn": "2026-09-16",
+      "locator": "Section 3.4 and Table 3, rotation-corrected weighted average colours"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 639, 1238",
+  "creators": [
+    "D. L. Rabinowitz",
+    "et al."
+  ],
+  "publicationDate": "2006"
+}
