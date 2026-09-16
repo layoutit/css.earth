@@ -18,6 +18,7 @@ Betelgeuse is the first body here that is not in the Solar System and the first 
 - `tests/objects/unit/betelgeuse/camera.test.mts` recomputes every camera field of the lens from the astrometry, the pole and the image header through the same observer-camera transform the asteroid photographs use, and checks that the disc centre is the image's flux centroid and that the pole has the ALMA position angle.
 - `tests/objects/unit/betelgeuse/source.test.mts` verifies every pin, that each input is downloaded or produced by a named tool, and that the sphere is the published radius on its grid.
 - `packages/astronomy/src/stars.test.ts` checks the placement: distance, direction, proper motion and radial velocity round-trip.
+- [`source/reference/reconstruction-comparison.png`](source/reference/reconstruction-comparison.png) places the published February 2020 image beside three SQUEEZE reconstructions of the pinned visibilities (entropy 10 and 1, total variation 1) convolved to the 4 mas beam; their peak-to-median contrast inside the disc is 1.30, 1.44 and 1.52.
 - Preparation accepted 2,032 of 2,313 pixels with geometry; the 281 rejected lie beyond 70 degrees of incidence at the limb. No lit shape falls on sky.
 
 ## Known problems
