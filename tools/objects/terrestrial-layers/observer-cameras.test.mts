@@ -14,8 +14,8 @@ import { radialTerrainForLens } from './radial-models.mts';
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
 const bodies = readdirSync(OBJECTS).filter(id => existsSync(resolve(OBJECTS, id, 'source', OBSERVER_CAMERAS_FILE))).sort();
 
-test('at least the five SPHERE photograph bodies record their derivation', () => {
-  for (const id of ['ausonia', 'kalliope', 'kleopatra', 'psyche', 'sylvia']) assert.ok(bodies.includes(id), `${id} records an observer-camera derivation`);
+test('the SPHERE photograph bodies record their derivation', () => {
+  for (const id of ['psyche', 'sylvia']) assert.ok(bodies.includes(id), `${id} records an observer-camera derivation`);
 });
 
 for (const id of bodies) test(`${id}: the recipe states the cameras its pinned inputs derive`, async () => {

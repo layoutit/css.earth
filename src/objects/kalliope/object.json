@@ -31,11 +31,6 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "zimpol",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -112,7 +107,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "708ca31174d0be3bbd3c98c9a8f108e27657eef87f780c38a10c9c248a0faf24"
+        "sha256": "3f34d6eb35e006584ebda9a265d5d16c575fcab7aafc724bf85714138f372bb7"
       }
     },
     "catalog": {
@@ -133,6 +128,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f28d708359205d638d27ac479f1d75d16b0adca7cce238cbe0810e778efca75a"
+    "sha256": "2d4f6fef2f17f80c1faa91332e07b8deeba0b97eef6d57f196826f9773c05a06"
   }
 }
