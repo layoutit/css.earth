@@ -23,6 +23,8 @@ test('a scaffold derives every number from the astronomy record and writes names
   assert.equal(descriptor.properties.recipe.shape.radiusKm, record.physical.meanRadiusKm);
   assert.equal(json('source/preparation/geometry.json').surface.color, spec.color);
   assert.equal(json('source/content/object.json').provenance.editorial.url, spec.paper);
+  // Content provenance paths resolve from the content record's folder, as the shipped stars write them.
+  assert.equal(json('source/content/object.json').provenance.physical.path, JSON.parse(await readFile(resolve(root, 'src/objects/antares/source/content/object.json'), 'utf8')).provenance.physical.path);
 });
 
 test('prose the scaffold cannot know is marked, and the package it writes matches a shipped shape-only star', async () => {

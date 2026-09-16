@@ -93,8 +93,10 @@ test('default discovery admits photographed asteroids and hides illustrations ac
 test('a star with only its shape stays off the map, whatever the settings', () => {
   for (const options of [defaults, { illustrations: true, asteroids: true, asteroidLabels: true, highlighted: 'star' }]) {
     const scene = discoveryVisibility(SCENE_OBJECTS, options);
-    assert.equal(requireSceneObject('antares').discovery.imagery, false);
-    assert.ok(scene.hiddenBodies.includes('antares') && scene.hiddenLabels.includes('antares') && !scene.highlightedBodies.includes('antares'));
+    for (const id of ['antares', 'polaris']) {
+      assert.equal(requireSceneObject(id).discovery.imagery, false, id);
+      assert.ok(scene.hiddenBodies.includes(id) && scene.hiddenLabels.includes(id) && !scene.highlightedBodies.includes(id), id);
+    }
     for (const id of ['sun', 'betelgeuse', 'pi1-gruis', 'ce-tauri']) assert.equal(scene.hiddenBodies.includes(id), false, id);
   }
 });
