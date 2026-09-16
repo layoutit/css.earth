@@ -387,6 +387,7 @@ const searchCategories = ([
 <footer class="planet-footer" aria-label="View information">
     <div class="planet-view-readout" aria-label="View information">
       <SourcesLink objectId={objectId} name={Astro.props.title.label} />
+      <a class="explorer-brand-version" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">v{__CSSEARTH_VERSION__}</a>
       <span class="planet-view-context">
         {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
         <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
