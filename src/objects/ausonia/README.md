@@ -26,11 +26,11 @@ The report includes 2 browser cases tied to recorded body assets. It does not id
 <!-- registration-report:begin -->
 Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
 
-| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 16 | 10 | 2.51° | 1.60° | 1.93° | its other 16 frames | 0 of 16 | — |
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 16 | 10 | 2.51° | 1.60° | 1.93° | its other 16 frames | 0 of 16 | — | 5 of 16, -8.00° |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors, and their median offset from the stated camera, stated only over three or more decisive frames.
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset.
 <!-- registration-report:end -->
 
 ## Known problems
