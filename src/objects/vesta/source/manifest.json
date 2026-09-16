@@ -264,6 +264,1196 @@
           }
         ]
       }
+    },
+    {
+      "id": "vesta-horizons-sphere-observer",
+      "path": "reference/horizons-sphere-observer.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for target 4 and observer code 309, Paranal, at the 60 ZIMPOL exposure epochs (both cameras). The query and its epochs are stated in the body README.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
+      "expectedBytes": 15305,
+      "expectedSha256": "afbf5d9e3d23d1337dcaacd7b082ef5ba0e01a7734d944aa1617951df09307c2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-horizons-sphere-observer",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/38"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-horizons-sphere-heliocentric",
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for target 4 and observer code 309, Paranal, at the 60 ZIMPOL exposure epochs (both cameras). The query and its epochs are stated in the body README.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "heliocentric position vectors of Vesta in the J2000 frame at each light-time-corrected exposure epoch, for the Sun direction",
+      "expectedBytes": 13235,
+      "expectedSha256": "1c9eae44e330823097ae43c5a03186e0022264a994ce777ea9fdd14d80d96a66",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-horizons-sphere-heliocentric",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/39"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180520t064153277",
+      "path": "observations/d4Vesta_2018-05-20T06_41_53.277_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-05-20T06_41_53.277_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:41:53.277 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7dc1c6015fd51dc75d888a923f9e4c2495a4466d5e3ca09ee3030865886f56c9",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180520t064153277",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180520t064324436",
+      "path": "observations/d4Vesta_2018-05-20T06_43_24.436_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-05-20T06_43_24.436_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:43:24.436 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cad32f1ffe26353f86ae0792138148ff5da03b6b019803dc63f1c45848ff5653",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180520t064324436",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180520t064456338",
+      "path": "observations/d4Vesta_2018-05-20T06_44_56.338_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-05-20T06_44_56.338_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:44:56.338 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7caa2786ab33229dc07511c01e543298253eb3d88cfaa0adc21834ea1b767bb6",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180520t064456338",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180520t064625530",
+      "path": "observations/d4Vesta_2018-05-20T06_46_25.530_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-05-20T06_46_25.530_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:46:25.530 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "9465c2de281dc8296239531dfb594741ba21e2f238c477eabe1fffe8949a6387",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180520t064625530",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180520t064756001",
+      "path": "observations/d4Vesta_2018-05-20T06_47_56.001_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-05-20T06_47_56.001_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-05-20 06:47:56.001 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "6b75e3c5c858edcc3695e1b55ad7c047df7adeaa34afd515afa25d43db9b0a4c",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180520t064756001",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t052705809",
+      "path": "observations/d4Vesta_2018-06-08T05_27_05.809_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T05_27_05.809_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:27:05.809 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d3926eab4038fdc116c4afb674bcf892fc563c12bd9c47ecadcd303361231df0",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t052705809",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t052836976",
+      "path": "observations/d4Vesta_2018-06-08T05_28_36.976_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T05_28_36.976_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:28:36.976 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "62cfb75844405fc354f511b85770b4a323fd060e04cdae467932a66147deb776",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t052836976",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t053008079",
+      "path": "observations/d4Vesta_2018-06-08T05_30_08.079_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T05_30_08.079_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:30:08.079 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "414c2322708baecc16c9344a0e4069d64844a3ed899004072e805cc8a83f7866",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t053008079",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t053138064",
+      "path": "observations/d4Vesta_2018-06-08T05_31_38.064_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T05_31_38.064_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:31:38.064 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "3c43aee90acafd65109213bbee89ee6e7494a31dd3d2e8142a024801f62db6ca",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t053138064",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t053307995",
+      "path": "observations/d4Vesta_2018-06-08T05_33_07.995_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T05_33_07.995_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 05:33:07.995 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "94d33a629905f6f8e68757718366ce13211d3dd0c457454256462cf10ef5ec06",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t053307995",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t071440731",
+      "path": "observations/d4Vesta_2018-06-08T07_14_40.731_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T07_14_40.731_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:14:40.731 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e7a48b2db0eae1f45745a21e06c0a757feb2e6c358c53ed94c08a67db335bcc9",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t071440731",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t071610986",
+      "path": "observations/d4Vesta_2018-06-08T07_16_10.986_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T07_16_10.986_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:16:10.986 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "6b3ca6d9c94482d98ea5bd1c63bab11aa9a18e5f290c1532375eb26ea1f4f0c4",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t071610986",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t071742127",
+      "path": "observations/d4Vesta_2018-06-08T07_17_42.127_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T07_17_42.127_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:17:42.127 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "efdce0a3f229e14a257328f5aa9d75adbd2ce951d9067dd65332b68c6f43ea5e",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t071742127",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t071912088",
+      "path": "observations/d4Vesta_2018-06-08T07_19_12.088_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T07_19_12.088_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:19:12.088 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "6fb2111cdaebced30b11ad9dae27660a401e51e62f2fab2a68d5cbc821560c5a",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t071912088",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t072041273",
+      "path": "observations/d4Vesta_2018-06-08T07_20_41.273_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T07_20_41.273_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:20:41.273 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cfe5c05173ba2953ce7b09c5c9122325571933ce0709bb1aedf045dd882ae0dd",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t072041273",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t075851472",
+      "path": "observations/d4Vesta_2018-06-08T07_58_51.472_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T07_58_51.472_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 07:58:51.472 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "1bd94504ba1e42c55c42cc6217a56e0cbae937ee4b33b210f3e6e31fda1add64",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t075851472",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t080022853",
+      "path": "observations/d4Vesta_2018-06-08T08_00_22.853_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T08_00_22.853_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:00:22.853 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e86c152e8ed68f4ffa6e2ba905a4d8800e8ad671c74ffdc2f0c2f5fd32fdcd9c",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t080022853",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/26"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t080151978",
+      "path": "observations/d4Vesta_2018-06-08T08_01_51.978_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T08_01_51.978_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:01:51.978 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "eee4846e17547f776456dcc1c4f7cac19dbe88c09daef9b8dff7136dddc1a25e",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t080151978",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t080321885",
+      "path": "observations/d4Vesta_2018-06-08T08_03_21.885_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T08_03_21.885_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:03:21.885 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0bc3d97f7c4e4c9c6ca9db1514a91218edc54d4c0b87dd479aee3ac998e2760d",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t080321885",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180608t080452060",
+      "path": "observations/d4Vesta_2018-06-08T08_04_52.060_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-06-08T08_04_52.060_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-06-08 08:04:52.060 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "22b9a6df25631905b1e0cc3708ddb90fd9bf139d86e9f5965ff10f21de60780a",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180608t080452060",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/29"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t015952994",
+      "path": "observations/d4Vesta_2018-07-10T01_59_52.994_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T01_59_52.994_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 01:59:52.994 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "673ce9cc2362ad43deb4b5316433fc75c0e57051ede2ab0df13de53e971a4d58",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t015952994",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t020124552",
+      "path": "observations/d4Vesta_2018-07-10T02_01_24.552_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_01_24.552_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:01:24.552 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "a44a287c31152413460dbbaea6f6cd40f8d2be56d0c511ddd781b09d71f31007",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t020124552",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/31"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t020256662",
+      "path": "observations/d4Vesta_2018-07-10T02_02_56.662_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_02_56.662_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:02:56.662 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f6fae3cfbd5b3231ce8b14f68c69cfdc212988baad83499b08c18778041174f4",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t020256662",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/32"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t020425643",
+      "path": "observations/d4Vesta_2018-07-10T02_04_25.643_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_04_25.643_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:04:25.643 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "01d4edd0dc557c63013ee59944e68c3feb3c6fe8b7972b17ddc87732dc8bc1ce",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t020425643",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t020556594",
+      "path": "observations/d4Vesta_2018-07-10T02_05_56.594_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_05_56.594_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:05:56.594 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "73c26e8848452232f5921f0fb6f735f7d1afdd9f3cc9f2baf702999f3045fd20",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t020556594",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/34"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t021638723",
+      "path": "observations/d4Vesta_2018-07-10T02_16_38.723_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_16_38.723_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:16:38.723 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0048a40885711cbb5b94973498bd742394e5c59224ac030c9f5ff6dc5916916e",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t021638723",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/35"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t021809886",
+      "path": "observations/d4Vesta_2018-07-10T02_18_09.886_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_18_09.886_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:18:09.886 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d59c508e7684487106a11af7255cdffd644ca57d1fbe086d94e83cd9f7d96551",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t021809886",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/36"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t021939987",
+      "path": "observations/d4Vesta_2018-07-10T02_19_39.987_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_19_39.987_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:19:39.987 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "4813c63e3537b42274ad97d9b81e7054dab6022244b980dfe69442a8798e8e06",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t021939987",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/37"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t022109940",
+      "path": "observations/d4Vesta_2018-07-10T02_21_09.940_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_21_09.940_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:21:09.940 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "ff7aa9b2baffdfd3789f5cb0e75da2b290ea3566d13b96f0ffb78af74774df6b",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t022109940",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/38"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesta-sphere-20180710t022239063",
+      "path": "observations/d4Vesta_2018-07-10T02_22_39.063_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/4Vesta/Deconv/d4Vesta_2018-07-10T02_22_39.063_zpl_science_imaging_cam1.fits",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-registration"
+      ],
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1, 2018-07-10 02:22:39.063 UT. Not a texture source: held against the Dawn mosaic to measure the observer-camera route on a body with a mapped surface.",
+      "expectedBytes": 593280,
+      "expectedSha256": "1b122e0bdd352bd2fa05c07199ba64e5beb10d1fe76839e5e614986e8b219ca5",
+      "width": 256,
+      "height": 256,
+      "label": "Deconvolved ZIMPOL frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-sphere-20180710t022239063",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/manifest.json@0000000000000000000000000000000000000000#/inputs/39"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -306,8 +1496,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1327,
-      "expectedSha256": "5f258e2a5837e9f317936d4546ff196e5491bc5a81ac3777f3e1523f0a0e2336"
+      "expectedBytes": 16549,
+      "expectedSha256": "107a0dbd2d9301876e2f44f7bc477bfe45a358c0eb89190f469854b9cf5b3664"
     },
     {
       "path": "preparation/navigation.json",
