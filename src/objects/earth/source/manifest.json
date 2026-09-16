@@ -361,7 +361,7 @@
       "expectedSha256": "84a50abbc0dcb1b68f8b396c99ceac4dbb7946bf6c8dac4e6e22e6f91de34825",
       "expectedBytes": 1741,
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
-      "credit": "cssEarth; parameter values adapted from the OpenSpace Team\u2019s RenderableAtmosphere tuning (MIT)",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
       "license": "Repository-authored record; adapted values credited inside the file",
       "acquisition": "authored in the repository",
       "redistribution": "permitted with the credit stated in the record",
@@ -1623,8 +1623,8 @@
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 2587,
-      "expectedSha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
+      "expectedBytes": 2626,
+      "expectedSha256": "96c7300cb79cfa3ac27f15952b87cbdf7973a6f9c42fc7b16c5ba905b3e4cb3a"
     },
     {
       "path": "editorial/earth.json",

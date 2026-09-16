@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db5cf63e697355428b140e7a21d137f4661b174f9dcfca8d8a33d38df2e77fbf"
+    "sha256": "cce57d5d6d07f26e949c91e400dc15dd63a5199ab337c8c99cc59200cc72864a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "57411f2b8be902225031f476a1bfe4bb95fe27ea67451752a0c080ece4f6da05",
+      "sha256": "a4822e9efaeb1381ccc50544fb6e34ad425d063f07bdc851c3af3975ee8e787e",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/eris/",
@@ -42,22 +42,14 @@
         },
         "surfaces": [
           {
-            "id": "illustration",
+            "id": "shape",
             "output": "eris-{id}{suffix}.webp",
             "thumbnail": "eris-lens-{id}.webp",
-            "source": "nasa-eris.glb",
+            "source": "measurements.json",
             "falseColor": false,
             "science": {
-              "kind": "glb-base-color",
-              "model": "nasa-eris.glb",
-              "mesh": {
-                "latitudeSegments": 16,
-                "longitudeSegments": 32,
-                "width": 2048,
-                "height": 1024,
-                "poleSize": 256,
-                "seamOverlap": 0.025
-              }
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for an unresolved surface."
             }
           }
         ],
@@ -107,7 +99,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e34ff65901163435b3dfc5445d20480ddbfaa5d71f54385a15d0a9f2c32c8930",
+      "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +159,7 @@
             {
               "id": "appearance",
               "label": "Surface representation",
-              "value": "NASA VTAD illustration; terrain details are not observations"
+              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
             },
             {
               "id": "orientation",
@@ -183,21 +175,21 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "illustration",
+          "defaultLens": "shape",
           "controls": [
             {
-              "id": "illustration",
-              "label": "Illustrative model",
-              "qualification": "Illustration; not an observed surface map.",
-              "thumbnail": "eris-lens-illustration.webp",
-              "surface": "eris-illustration.webp",
-              "poles": "eris-poles-illustration.webp",
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
+              "thumbnail": "eris-lens-shape.webp",
+              "surface": "eris-shape.webp",
+              "poles": "eris-poles-shape.webp",
               "source": {
-                "id": "nasa-vtad-eris-model",
+                "id": "eris-observational-measurements",
                 "path": "../manifest.json",
-                "url": "https://science.nasa.gov/resource/eris-3d-model/"
+                "url": "https://doi.org/10.1038/nature10550"
               },
-              "notes": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+              "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
             }
           ]
         },
@@ -219,12 +211,6 @@
             "role": "facts",
             "description": "Eris overview",
             "href": "https://science.nasa.gov/dwarf-planets/eris/"
-          },
-          {
-            "label": "NASA VTAD",
-            "role": "illustration",
-            "description": "Eris model and illustrative surface texture",
-            "href": "https://science.nasa.gov/resource/eris-3d-model/"
           },
           {
             "label": "Sicardy et al.",
@@ -258,35 +244,28 @@
   "sources": [
     {
       "kind": "source-input",
-      "path": "nasa-eris.glb",
-      "id": "nasa-vtad-eris-model",
-      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb",
-      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
-      "acquisition": "Original GLB downloaded from NASA Science",
-      "redistribution": "NASA media; illustrative terrain, not spacecraft mapping",
+      "path": "measurements.json",
+      "id": "eris-observational-measurements",
+      "origin": "https://doi.org/10.1038/nature10550",
+      "credit": "Sicardy et al. (2011); Bernstein et al. (2023)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed nominal observational measurements with uncertainties",
+      "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-eris-nasa-vtad-eris-model",
-            "role": "material",
-            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "catalogueId": "doi-10-1038-nature10550",
+            "role": "method",
+            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       },
-      "sha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
-      "bytes": 4398964,
+      "sha256": "8b04d9ee8318ebecf3ea33cd59b7c35e18574e412dab8583807568da47d3b4b3",
+      "bytes": 1211,
       "dependencies": [],
       "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "nasa-eris.glb",
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb"
-      },
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -302,8 +281,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "e34ff65901163435b3dfc5445d20480ddbfaa5d71f54385a15d0a9f2c32c8930",
-      "bytes": 5328,
+      "sha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
+      "bytes": 5172,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -312,18 +291,18 @@
   ],
   "products": [
     {
-      "id": "illustration",
-      "label": "Illustrative model",
+      "id": "shape",
+      "label": "Shape",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Illustration; not an observed surface map."
+        "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour."
       ],
       "lensIds": [
-        "illustration"
+        "shape"
       ],
       "recipeDependencies": [
         "raster"
@@ -332,43 +311,43 @@
         "falseColor": false
       },
       "inputs": [
-        "nasa-vtad-eris-model"
+        "eris-observational-measurements"
       ],
       "outputs": [
         {
-          "url": "/scenes/eris/eris-illustration.webp",
-          "bytes": 570690,
-          "sha256": "74cd214e802b900aeec23f00796ae328a86650397ca426c02b024c4e89af2b75",
+          "url": "/scenes/eris/eris-shape.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-illustration@2x.webp",
-          "bytes": 1279540,
-          "sha256": "7ecb198f04d9c388232d1c5b55f375009e1bef1feeca627f5f758b4b5e542bb4",
+          "url": "/scenes/eris/eris-shape@2x.webp",
+          "bytes": 558,
+          "sha256": "29cb9b42eae9164dc2e5144eeee49eaa035b4970c376c0d04c190b7a8ee808ef",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-lens-illustration.webp",
-          "bytes": 1166,
-          "sha256": "5d332068f027de7a411f3da05ba264733a258c5f6a69bb60605de4d3dbec7e9b",
+          "url": "/scenes/eris/eris-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-poles-illustration.webp",
-          "bytes": 62002,
-          "sha256": "a04f792f972f5545d4ab1e3f23faf1e947ddb11933b6a16f981faf374489a254",
+          "url": "/scenes/eris/eris-poles-shape.webp",
+          "bytes": 680,
+          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/eris/eris-poles-illustration@2x.webp",
-          "bytes": 167954,
-          "sha256": "0d4d3faf438bcc014f7fc8f62ae0a3ff2be58328e680fdb567328fdc011e9961",
+          "url": "/scenes/eris/eris-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "nasa-vtad-eris-model",
+          "sourceId": "eris-observational-measurements",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -811,16 +790,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3699,
-          "sha256": "4b6e77e5fe8db0a70adcd1998d7477523b83855389e3ee0ad3af56d4c76d996e",
+          "bytes": 3566,
+          "sha256": "d9b580cbcbe76558bad0952c6dd1b9795d220ac7f8af026263e398bf2bf204ca",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:illustration",
-      "label": "Illustrative model preview",
+      "id": "preview:shape",
+      "label": "Shape preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -829,16 +808,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "illustration"
+        "shape"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/illustration.webp",
-          "bytes": 66522,
-          "sha256": "ae20b8b98bb0e2d13e20a1b38c50fcd6119b622ac398edf0cdd195fa92e9de81",
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]
@@ -850,11 +829,11 @@
   },
   "lastPreparation": {
     "objectId": "eris",
-    "materialSha256": "4dbca57b92d16c02506ad2fe4f4be6a78d15187131b52a432eeda0934a5e04f7",
+    "materialSha256": "7dcefe12d0ea61063090c49b025704b4280f7ffe624f59f8ad38dc4739baa4c9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

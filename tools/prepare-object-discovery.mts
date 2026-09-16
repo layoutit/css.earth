@@ -37,7 +37,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
       for (const entry of entries) {
         if (!isRecord(entry) || typeof entry.id !== 'string') throw new TypeError('Invalid observation lens.');
         if (isRecord(entry.metadata) && entry.metadata.modeled === true ||
-            isRecord(entry.science) && entry.science.kind === 'glb-base-color' || key === 'surfaces' && policy.illustrationLenses.includes(entry.id)) continue;
+            isRecord(entry.science) && entry.science.kind === 'neutral-shape' || key === 'surfaces' && policy.illustrationLenses.includes(entry.id)) continue;
         if (exposed.has(entry.id)) {
           observed.add(entry.id);
           if (key === 'observations' || key === 'surfaceObservations') photographed.add(entry.id);

@@ -6,11 +6,11 @@
   "physical": {
     "name": "C/2014 UN271 Bernardinelli–Bernstein",
     "horizonsCode": "DES=C/2014 UN271;CAP;",
-    "meanRadiusKm": 66.35274336710184,
+    "meanRadiusKm": 68.5,
     "gravitationalParameterKm3PerS2": 0,
     "parent": "sun"
   },
-  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "physicalNotes": "Effective nucleus radius, Lellouch et al. (2022), A&A 659, L1 (https://doi.org/10.1051/0004-6361/202243090), used as the volume-equivalent radius of the displayed ellipsoid.",
   "comet": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F2014+UN271%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

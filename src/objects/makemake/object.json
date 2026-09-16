@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3840664cafdb623d97be849a905d3442549971a96fe5f450ba66bc1e6367bdc7"
+    "sha256": "002af0edd70e94827a62303da8d5d80e61a53bf46570bfc1cfcdb979b2234458"
   },
   "properties": {
     "preparation": {
@@ -36,12 +36,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "bf0191a3d8efd4c827f1f8a5e726edaaf8396e85eb2f69023f26b143e897aa72"
+          "sha256": "5ef71ae8329a4d4a45935a07b5776f5fe23168cc59dde78d35c2aa5ab2f52be5"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "2938b799d0fbd3654c8a92f2a8146dd8f44c71b5446c5c444dbc1482d07c990b"
+          "sha256": "dc42ee69f3a78bd091f47ee24ec220b24a3c23d2268460da7c70d0fa649cf666"
         },
         {
           "id": "celestial",
@@ -56,7 +56,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8dbbaef295ffaf86432844216ed2fa46ef55af90e6cdcc554e1f1032d9c40b4c"
+          "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e"
         },
         {
           "id": "solar-system",
@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2c63113739abbfb89e513b065c3f25fca9a31a79471b0f74922764fa69f93f2e"
+          "sha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7"
         },
         {
           "id": "rotation",
@@ -91,7 +91,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "illustration",
+              "id": "shape",
               "source": "content",
               "material": "lighting"
             }
@@ -139,13 +139,11 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fcd34e22e7aa8d41f626106867c90aea50e8a1059d411f429b4c1bee566e0d57"
+        "sha256": "989d632cf9828face8f6a21ca9c5cd1a37de48e74f4bdb9e86be2966390ba187"
       }
     },
     "catalog": {
-      "illustrationLenses": [
-        "illustration"
-      ],
+      "illustrationLenses": [],
       "name": "Makemake",
       "classification": "dwarf-planet",
       "color": "#bfa48b",

@@ -1,6 +1,6 @@
 # Credits
 
-Illustrative surface: NASA Visualization Technology Applications and Development (VTAD), Eris 3D Model (2019), https://science.nasa.gov/resource/eris-3d-model/. Original downloadable GLB is retained and pinned; the delivered atlas is a cssEarth reprojection of its illustrative base color, not spacecraft photography. NASA media usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/. No NASA endorsement is implied.
+Surface: the shared neutral gray display convention for an unresolved surface; no texture is redistributed.
 
 Radius and spherical-shape constraint: Sicardy et al., Nature 478 (2011), DOI 10.1038/nature10550. Rotation period: Bernstein et al. (2023), https://arxiv.org/abs/2303.13445. Only factual parameters are transcribed; no paper figures are redistributed. Editorial context: NASA Science.
 

@@ -25,7 +25,7 @@
     {
       "id": "inter-mars-title-vector",
       "path": "presentation/title-mark.json",
-      "expectedSha256": "1ba809a2c4ba5abe4ceab7b2464cc174780c7db70eaa80be1166d83a399e8a6c",
+      "expectedSha256": "76ec9b44e3944fd3e75319dc47e8cdeeb0e1ecfa7d868d5cfd514cd38a7fc288",
       "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Mars outline",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -34,7 +34,7 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 3264,
+      "expectedBytes": 3303,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -82,7 +82,7 @@
       "expectedSha256": "e92febb5f3bb206f53066419a0ab586a017a2dc57a8a9488be126f2485186420",
       "expectedBytes": 1446,
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
-      "credit": "cssEarth; parameter values adapted from the OpenSpace Team\u2019s RenderableAtmosphere tuning (MIT)",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
       "license": "Repository-authored record; adapted values credited inside the file",
       "acquisition": "authored in the repository",
       "redistribution": "permitted with the credit stated in the record",
@@ -414,7 +414,7 @@
       "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
