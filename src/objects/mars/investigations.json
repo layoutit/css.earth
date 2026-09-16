@@ -1,0 +1,282 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mars",
+  "entries": [
+    {
+      "id": "viking-mdim21-visible",
+      "subject": "USGS Viking MDIM 2.1 colorized global mosaic",
+      "status": "included",
+      "finding": "The visible surface is the 21,339 by 10,670 MDIM 2.1 mosaic at about 1 km per pixel with NASA Ames colour processing, resampled directly from its checked bytes with no exposure or sharpening curve.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L90",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/source/manifest.json",
+        "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "viking-first-column",
+      "subject": "Near-black first column of the Viking colour source",
+      "status": "unresolved",
+      "finding": "The first column of the MDIM 2.1 colour source has mean brightness 4 against about 100, so a thin dark line can show along 180 degrees east at close zoom.",
+      "revisitWhen": "A corrected release of the Viking colour mosaic removes the dark first column.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L40"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "mola-shaded-relief",
+      "subject": "USGS MOLA colour shaded relief",
+      "status": "included",
+      "finding": "The elevation display is the MOLA pseudo-colour shaded relief with its published palette legend, stitched from NASA Trek zoom-3 WMTS tiles and pinned in the source manifest; it is false colour.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L37",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L92",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "themis-day-ir",
+      "subject": "Mars Odyssey THEMIS daytime infrared mosaic",
+      "status": "included",
+      "finding": "The infrared display is a USGS Astrogeology WMS GetMap of the global day-IR mosaic taken on 2026-09-16 and pinned in the manifest, shown as a qualified visual representation of daytime thermal response rather than a calibrated temperature retrieval or a single observation date.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L37",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L94",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "themis-coverage-fill",
+      "subject": "Exact-zero fill in the THEMIS mosaic",
+      "status": "unresolved",
+      "finding": "The pinned mosaic has exact-zero fill in rows 0-26, north of about 87.6 degrees north, and rows 1894-2047, south of about 76.5 degrees south, with 15.6 percent zero samples overall; the shared raster lane has no source-validity mask, so those bands render black under the shared lighting.",
+      "revisitWhen": "A validity mask accompanies the mosaic, or a gap-free day-IR product is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L36"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "authored-atmosphere-model",
+      "subject": "Authored atmosphere record adapted from OpenSpace tuning",
+      "status": "included",
+      "finding": "The atmosphere material is a 32-frame phase bank derived from the authored scattering record, atmosphere height 76.98 km over a 3,386.19 km source radius with Rayleigh and Mie coefficients, scale heights and an average ground reflectance of 0.1; it is a display approximation, not an epoch-specific observation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L38",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L114"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "psg-charts",
+      "subject": "NASA GSFC Planetary Spectrum Generator configuration and I/F response",
+      "status": "included",
+      "finding": "The reflectance spectrum and temperature-pressure profile are prepared from a pinned PSG configuration and raw I/F response as static SVG outputs; the browser performs no PSG request or scientific calculation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L127"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "iau-usgs-gazetteer-names",
+      "subject": "IAU/USGS Gazetteer of Planetary Nomenclature centre points",
+      "status": "included",
+      "finding": "Named features use the Mars centre-point export, snapshot 2026-09-11 and public domain per its FGDC metadata; preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and folds repeated rows, and labels appear at the closest zoom only.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L30",
+        "https://planetarynames.wr.usgs.gov/Page/MARS/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "landing-sites",
+      "subject": "Spacecraft landing sites and published traverses",
+      "status": "included",
+      "finding": "14 landing, touchdown or impact sites and 2 published traverse paths are labelled beside the IAU names, each coordinate quoting the NASA NSSDCA, PDS, LROC, agency or paper page it was read from with the stated latitude kind and longitude convention.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L32"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "wikipedia-feature-notes",
+      "subject": "English Wikipedia lead summaries as caption notes",
+      "status": "included",
+      "finding": "644 labelled names carry a caption note from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L34"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "hubble-navigation-portrait",
+      "subject": "2016 NASA/ESA Hubble full-disc Mars portrait",
+      "status": "included",
+      "finding": "The navigation marker uses the ESA/Hubble CC BY 4.0 full-disc portrait, cropped and resized for the prepared navigation atlas with the full source credit preserved in the scene.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L98",
+        "https://esahubble.org/images/heic1609a/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "hubble-limb-brightness-reference",
+      "subject": "Hubble portrait as a limb-brightness reference",
+      "status": "excluded",
+      "finding": "The README records that the Hubble portrait is no longer used as a limb-brightness reference; it serves only the navigation marker.",
+      "revisitWhen": "A calibrated full-disc observation is adopted as a limb-brightness reference for Mars.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L103"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "iau-radii-and-rotation",
+      "subject": "IAU-compatible radii and the IAU/WGCCRE rotation model",
+      "status": "included",
+      "finding": "The recipe declares 3,396.19 km equatorial and 3,376.20 km polar radii from the USGS Viking MDIM product and the pinned JPL physical parameters; the 25.19-degree tilt and 1.02595676-day sidereal rotation are recorded for presentation while the world frame, pole and prime meridian come from the IAU/WGCCRE model in the astronomy package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L50",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L62"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "nasa-science-editorial",
+      "subject": "NASA Science topic 107740 editorial snapshot",
+      "status": "included",
+      "finding": "Build-time editorial information comes from the NASA Science topic and its structured block endpoint, committed as a prepared snapshot, with factsheet values citing the pinned JPL references.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L139"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "interior-view",
+      "subject": "Mars cross-section, methane lens or interior view",
+      "status": "excluded",
+      "finding": "The README records that there is no Mars cross-section, methane lens or fabricated interior view.",
+      "revisitWhen": "A published interior-structure or methane source suitable for a prepared lens is adopted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L105"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "viking-capture-attribution",
+      "subject": "Individual mission attribution for the visible mosaic",
+      "status": "unresolved",
+      "finding": "The mosaic retains its collective Viking-orbiter capture credit; the catalogue distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors, and the Missions tab presents that limit without guessing.",
+      "revisitWhen": "A source identifies the individual orbiter contributions to the pinned mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L166"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "lane-change-oracle",
+      "subject": "Dated oracle report for the shared raster lane",
+      "status": "unresolved",
+      "finding": "The lane change was verified with package, source-closure and browser conformance checks listed in its pull request, but no dated oracle report is cited for the new lane; the source and acquisition records identify every input.",
+      "revisitWhen": "A dated oracle run for the Mars raster lane is recorded in this package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L26"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}

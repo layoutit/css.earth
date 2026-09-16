@@ -1,0 +1,212 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sun",
+  "entries": [
+    {
+      "id": "hmi-continuum-strip-mosaic",
+      "subject": "SDO/HMI continuum browse images across Carrington Rotation 2311",
+      "status": "included",
+      "finding": "The Photosphere lens assembles successive central-meridian strips from the pinned daily HMI continuum browse images of CR2311, 2026-05-12 to 2026-06-09, into one map; source-derived limb normalization, colour and polar continuation are display approximations and the map combines observations across one rotation, not one simultaneous view.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L3",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L89",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/source/manifest.json",
+        "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "jsoc-hmi-radial-field-map",
+      "subject": "JSOC hmi.mrsynop_small_720s radial magnetic-field map for CR2311",
+      "status": "included",
+      "finding": "The Magnetic field lens uses the 720 by 360 radial field synoptic map, whose FITS grid is equally spaced in sine latitude; preparation resamples it to equal latitude and applies a declared bipolar blue-to-amber false-colour scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L92",
+        "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "aia-304-synoptic-map",
+      "subject": "SDO AIA 304 A CR2311 synoptic map",
+      "status": "included",
+      "finding": "The Chromosphere lens uses the 3,600 by 1,080 AIA 304 synoptic FITS map in false colour on a logarithmic intensity scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L96",
+        "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "aia-171-synoptic-map",
+      "subject": "SDO AIA 171 A CR2311 synoptic map",
+      "status": "included",
+      "finding": "The Corona lens uses the 3,600 by 1,080 AIA 171 synoptic FITS map in false colour on a logarithmic intensity scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L13",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L98",
+        "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "aia-off-limb-plates",
+      "subject": "AIA browse images of 2026-05-27 as off-limb context",
+      "status": "included",
+      "finding": "The pinned 2026-05-27 AIA browse images are separate Earth-facing observations that supply stationary off-limb plates behind their matching 304 and 171 lenses; the photosphere off-limb asset is transparent and no plate is presented as a rotating global surface.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L117",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L121",
+        "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000906_1024_0304.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "missing-sample-continuation",
+      "subject": "Unobserved poles and missing samples",
+      "status": "unresolved",
+      "finding": "Unobserved poles and missing samples are continued from nearby values, with rows inside one latitude band of each pole replaced by the Fourier continuation of the band boundary and missing AIA samples filled from the nearest valid latitude in the same checked map; these filled areas and colour choices must not be read as additional observations.",
+      "revisitWhen": "A synoptic release supplies observed polar coverage for these instruments.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L71",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L103",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L135"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "polar-silhouette-dent",
+      "subject": "Flat polar caps of the shared raster sphere",
+      "status": "unresolved",
+      "finding": "The shared sphere closes each pole with one flat patch at the 78.75-degree band boundary, so from the equator the disc is about 1.9 percent of R short at each pole, roughly 6 CSS pixels at the default 310-pixel radius; the limb plate's rim alpha does not cover it and the README states a polar band extension of the shared geometry would remove it.",
+      "revisitWhen": "The shared geometry gains a polar band extension, or another fix for the flat cap is adopted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L64",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L70"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "authored-solar-axis",
+      "subject": "Authored presentation axis and world frame",
+      "status": "unresolved",
+      "finding": "The Sun has no entry in the shared solar geometry tables, so its 7.25-degree presentation axis and world frame are authored in the package recipes rather than derived from an ephemeris, and the prepared sky keeps the retired lane's visual baseline registration without astrometric registration.",
+      "revisitWhen": "The shared solar geometry tables gain an entry for the Sun, or an astrometric sky registration is prepared.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L73",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L77"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "iau-nominal-radius",
+      "subject": "IAU nominal solar radius",
+      "status": "included",
+      "finding": "The shape radius is the IAU nominal 695,700 km used as the world frame's body radius; NASA's rounded 700,000 km stays a fact-sheet value only.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L78",
+        "https://science.nasa.gov/sun/facts/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "nasa-science-sun-facts",
+      "subject": "NASA Science Sun facts",
+      "status": "included",
+      "finding": "The object content carries the NASA Science facts with citations alongside the four lens descriptions and palette legends.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L79",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/source/manifest.json",
+        "https://science.nasa.gov/sun/facts/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "shared-orbital-preparation",
+      "subject": "Shared orbital preparation for the Solar System overview",
+      "status": "included",
+      "finding": "The overview hosted by this scene combines analytical models with retained Horizons states at the displayed scene epoch; the prepared positions and orbit paths are not live ephemerides, and each body keeps its own imagery, measurements and acknowledgments in its own package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L18",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L23"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    },
+    {
+      "id": "scientific-review",
+      "subject": "Dated scientific review of this version",
+      "status": "unresolved",
+      "finding": "The evidence section records package, source-closure, minimap and browser conformance checks and a headless Chrome probe, but states that no dated scientific review is cited for this version and that the lane change claims no new scientific review.",
+      "revisitWhen": "A dated scientific review of the prepared solar maps is recorded in this package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L39",
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L60"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        }
+      ]
+    }
+  ]
+}
