@@ -1,0 +1,44 @@
+{
+  "id": "cambioni-2022-psyche-surface",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cambioni, de Kleer & Shepard (2022): The Heterogeneous Surface of Asteroid (16) Psyche",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1029/2021JE007091"
+    },
+    {
+      "type": "arXiv",
+      "value": "2402.03422"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2021JE007091",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2402.03422",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2402.03422",
+      "checkedOn": "2026-09-16",
+      "locator": "Section 2.3 equation 2 body frame; section 2.5 map binning and masking"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Journal of Geophysical Research: Planets",
+  "creators": [
+    "S. Cambioni",
+    "K. de Kleer",
+    "M. Shepard"
+  ],
+  "publicationDate": "2022"
+}

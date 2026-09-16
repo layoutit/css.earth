@@ -30,7 +30,7 @@ export function parseSolidPreparationSource(input:unknown) {
   const extra=shape({schema:choice('cssearth-terrestrial-preparation@1'),kind:choice('solid-observation-body'),
     namespace:text,displayName:text,publicBase:text,rings:optional(value=>value),
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
-      radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({lensId:text})(value)))),
+      radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({lensId:text,additionalLensIds:optional(array(text))})(value)))),
       camera:shape({initialScenePitchDegrees:number,defaultControlYawDegrees:number,framingScale:optional(number)})}),
     lighting:shape({frameSize:number,frameCount:number,columns:number,logicalSize:number,terminatorWidth:number,
       directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number}),

@@ -1,0 +1,43 @@
+{
+  "id": "shepard-2021-psyche-shape",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Shepard et al. (2021): Asteroid 16 Psyche: Shape, Features, and Global Map",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/abfdba"
+    },
+    {
+      "type": "arXiv",
+      "value": "2110.03635"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/abfdba",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2110.03635",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2110.03635",
+      "checkedOn": "2026-09-16",
+      "locator": "Table 5 spin and W0; body-centred longitude definition (+a axis at 0 deg, +b at 90 deg)"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Planetary Science Journal 2, 125",
+  "creators": [
+    "M. K. Shepard",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}
