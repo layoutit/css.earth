@@ -50,6 +50,18 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     : policy.selection === 'recipe-order' ? values.findIndex(value => value.reason === undefined)
     : policy.selection === 'finest-resolution' ? values.reduce((best, value, i) => value.reason === undefined && (best < 0 || scale(i) < scale(best)) ? i : best, -1)
     : selectObservation(values);
+  // A selection that ranks frames in a fixed order can stop at the first accepted frame: it is the frame choose() picks from all of them
+  // (finest-resolution keeps the lowest index among equal scales). Only lowest-emission and single frames sample every frame.
+  const rank = policy.selection === 'recipe-order' ? frames.map((_, i) => i)
+    : policy.selection === 'finest-resolution' && frames.every((_, i) => Number.isFinite(scale(i))) ? frames.map((_, i) => i).sort((a, b) => scale(a) - scale(b) || a - b) : null;
+  const sampleFirst = (displayPoint: readonly number[], order: readonly number[]) => {
+    const point = displayPoint.map(n => n * metersPerUnit), hit = mesh.closestPoint(point);
+    if (hit && qualifiedFace(mesh, hit.faceId)) for (const i of order) {
+      const frame = frames[i], sample = frame.sample(hit.point);
+      if (sample.reason === undefined && frame.visible(hit.point)) return { point, index: i, value: { ...sample, distanceMeters: hit.distanceMeters } as Missing | Accepted };
+    }
+    return { point, index: -1, value: undefined };
+  };
   // Estimated faces complete an open source surface that no photograph observed, so their sample points stay withheld.
   const points = sampleTrianglePoints(radial.faces, policy.samplesPerTriangle);
   const samples = points.map((point, i) => radial.faces[Math.floor(i / policy.samplesPerTriangle)].estimated
@@ -72,9 +84,14 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     if (!(high > low)) throw new Error('Surface observation has no qualified radiance range.');
   }
   const samplePoint = (displayPoint: readonly number[]): SurfaceColorSample => {
-    const { point, values } = sampleAll(displayPoint), index = choose(values), first = values[0];
-    if (index < 0) return frames.length === 1 && first.reason !== undefined ? first : missing(point, 'no-qualified-observation');
-    const value = values[index];
+    let point: readonly number[], index: number, value: Missing | Accepted | undefined;
+    if (rank) ({ point, index, value } = sampleFirst(displayPoint, rank));
+    else {
+      const all = sampleAll(displayPoint), first = all.values[0];
+      ({ point } = all); index = choose(all.values); value = all.values[index];
+      if (index < 0 && frames.length === 1 && first.reason !== undefined) return first;
+    }
+    if (index < 0 || value === undefined) return missing(point, 'no-qualified-observation');
     if (value.reason !== undefined) return value;
     // The stretch is linear in the observed quantity; grey is sRGB-encoded like the colour bands, and a palette indexes the linear fraction.
     const gain = levels.gains[index], radiance = value.radiance * gain, fraction = Math.max(0, Math.min(1, (radiance - low) / (high - low)));

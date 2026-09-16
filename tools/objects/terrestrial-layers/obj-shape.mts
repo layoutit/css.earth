@@ -375,13 +375,15 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
       }
       if (!n.items) {visit(n.left);visit(n.right);return;}
       for (const f of n.items) {
-        const h=cross(d,f.ac),det=dot(f.ab,h);
+        // Scalar Möller–Trumbore in the order the vector helpers used; every candidate face of every ray passes here.
+        const ab=f.ab, ac=f.ac, fa=f.a;
+        const h0=d[1]*ac[2]-d[2]*ac[1], h1=d[2]*ac[0]-d[0]*ac[2], h2=d[0]*ac[1]-d[1]*ac[0], det=ab[0]*h0+ab[1]*h1+ab[2]*h2;
         if(Math.abs(det)<1e-12)continue;
-        const s=sub(origin,f.a),u=dot(s,h)/det;
+        const s0=origin[0]-fa[0], s1=origin[1]-fa[1], s2=origin[2]-fa[2], u=(s0*h0+s1*h1+s2*h2)/det;
         if(u < -1e-9 || u > 1+1e-9)continue;
-        const q=cross(s,f.ab),v=dot(d,q)/det;
+        const q0=s1*ab[2]-s2*ab[1], q1=s2*ab[0]-s0*ab[2], q2=s0*ab[1]-s1*ab[0], v=(d[0]*q0+d[1]*q1+d[2]*q2)/det;
         if(v < -1e-9 || u+v > 1+1e-9)continue;
-        const t=dot(f.ac,q)/det;
+        const t=(ac[0]*q0+ac[1]*q1+ac[2]*q2)/det;
         if (t > 0 && t < maximumDistance) {
           farthest = Math.max(farthest, t);
           if (t < nearest) { nearest = t; faceId = f.id; }
