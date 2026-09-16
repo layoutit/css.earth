@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "002af0edd70e94827a62303da8d5d80e61a53bf46570bfc1cfcdb979b2234458"
+    "sha256": "cbc697456f945df547b49dea7eb5f3800e6886afcbb31f32689310fd47eb20ca"
   },
   "properties": {
     "preparation": {
@@ -81,7 +81,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "lighting"
             }
@@ -129,14 +129,14 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "989d632cf9828face8f6a21ca9c5cd1a37de48e74f4bdb9e86be2966390ba187"
+        "sha256": "39b36d04fd55ea66fe4cf072d735377865158584ea4fd74d0bd4f3f0763870bb"
       }
     },
     "catalog": {
       "illustrationLenses": [],
       "name": "Makemake",
       "classification": "dwarf-planet",
-      "color": "#bfa48b",
+      "color": "#f0e9d3",
       "distanceAu": 45.8,
       "description": "Distant, reddish dwarf planet with one small moon.",
       "systemName": "Solar System",

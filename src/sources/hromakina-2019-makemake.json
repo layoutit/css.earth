@@ -1,0 +1,45 @@
+{
+  "id": "hromakina-2019-makemake",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hromakina et al. (2019): Long-term photometric monitoring of the dwarf planet (136472) Makemake",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201935274"
+    },
+    {
+      "type": "arXiv",
+      "value": "1904.03679"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201935274",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1904.03679",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1904.03679",
+      "checkedOn": "2026-09-16",
+      "locator": "Section 3.4 colour indices; Section 4 revised geometric albedo"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 625, A46",
+  "creators": [
+    "T. A. Hromakina",
+    "I. N. Belskaya",
+    "Yu. N. Krugly",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

@@ -30,6 +30,7 @@ import { shape, text } from '../terrestrial-layers/source-records.mts';
 import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
+import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
@@ -373,6 +374,16 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // An emissive body (a star with no observation) still owes the presentation its off-limb and limb plates: both transparent.
         if (recipe.emission) return { data, channels: 4, nearest: true, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
         return { data, channels: 4, nearest: true };
+      }
+      case 'disc-integrated-color': {
+        // An unresolved surface painted with its published whole-disc colour and geometric albedo: one measured mean, no map.
+        const source = await manifest;
+        const color = await loadDiscIntegratedColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+          surface.science, surface.source);
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
+        return { data, channels: 4, nearest: true, report: { discIntegratedColor: { srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance,
+          meaning: 'Whole-disc colour and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }
