@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "betelgeuse",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "935dea1dfdd242f8bfaf9f83df53aeec6d351c34cdc93ba2f18637c5e1f689c7"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "2f98a429601e40d3222dd98a2aed8d741b9b02a150112c16787ed32122606f86"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
@@ -347,7 +347,7 @@
       "sha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
       "bytes": 135360,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -388,7 +388,7 @@
       "sha256": "943a0a8e6d43c6fffe522995a13e6dfaefc4ad1b246a0dd7ac1fd6cc81bbad58",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -458,7 +458,7 @@
       "sha256": "e4f41d2aba17736ff1fca5e819d60eaf3d38a8e784f6fc2998d587b0c682bcbd",
       "bytes": 135360,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -478,7 +478,7 @@
       "sha256": "e6270d94800e3d3b8e5838427ba766591867f92edb9b867c74862ef9cd9d21fb",
       "bytes": 4216,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -559,55 +559,55 @@
           "url": "/scenes/betelgeuse/betelgeuse-surface-matisse.webp",
           "bytes": 24992,
           "sha256": "b1d77327da008a278804cb212222edd56840be9b707f9bb6ab16b834d4c60b4a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-surface-matisse@2x.webp",
           "bytes": 56030,
           "sha256": "d541811383256da3553aba931c045473ae6c6520fb2a44539a7f986754545715",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
           "bytes": 596,
           "sha256": "66a045c24cd5f589d1929008cacac8e2ef09b5bfeaa92581bcdd63da07c85ab6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-poles-matisse.webp",
           "bytes": 6700,
           "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-poles-matisse@2x.webp",
           "bytes": 16222,
           "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse.webp",
           "bytes": 66,
           "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-limb-matisse.webp",
           "bytes": 52,
           "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse@2x.webp",
           "bytes": 140,
           "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-limb-matisse@2x.webp",
           "bytes": 84,
           "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [

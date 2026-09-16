@@ -2,19 +2,14 @@
   "schema": "csshaumea-runtime-assets@1",
   "assets": [
     {
-      "filename": "illustration-thumbnail.webp",
-      "bytes": 2420,
-      "sha256": "c9f82de3c313e4610d82aed7e14cbf363a92491624902a5ca5662a35baa4c9ab"
-    },
-    {
       "filename": "lighting.webp",
       "bytes": 20472,
       "sha256": "172032dfbe706cad6a9815cae9933c250d7329ede4285279648e65e2ddaba0ae"
     },
     {
       "filename": "poles.webp",
-      "bytes": 75844,
-      "sha256": "ceb4de7e2d997b2b0cda4ef9fc932e5bd8edd1cc0052dd85c3fc716c3ec9d8b1"
+      "bytes": 680,
+      "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4"
     },
     {
       "filename": "ring.webp",
@@ -22,9 +17,14 @@
       "sha256": "4dec840c2a89a5a78d230e0472d12d4927dedf20c9d3ae080e7adef2db2b590b"
     },
     {
+      "filename": "shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "ac7e37e2b580ee1a0f876029c8e1fb7b51469486245d88810be250f1154a2de8"
+    },
+    {
       "filename": "surface.webp",
-      "bytes": 3525294,
-      "sha256": "c69a552407aa144d2c47741928cfac6bfdc798a25503c29941d2639b96f60742"
+      "bytes": 342,
+      "sha256": "287791a6be87fb06232978a0e21f8e018d4fa340b775cc28bd1f6e8cf187654e"
     }
   ]
 }

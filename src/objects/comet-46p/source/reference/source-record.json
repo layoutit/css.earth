@@ -1,55 +1,20 @@
 {
-  "catalog": {
-    "repository": "CelestiaProject/CelestiaContent",
-    "commit": "1993a082ee6307c0df7fdc0828eb117a0e8e9958",
-    "files": [
-      {
-        "path": "comets.ssc",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-        "sha256": "437aa2e5ad66f26470829b9ee5f1ddb21b4514446b16c601c1d328a1b186b14f",
-        "bytes": 22363
-      },
-      {
-        "path": "asteroid.cms",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/asteroid.cms",
-        "sha256": "5616a5cb3471013ce423195be29c7bda31d292e0f16d95240472ccaaa4ea5361",
-        "bytes": 273
-      },
-      {
-        "path": "roughsphere.cms",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/roughsphere.cms",
-        "sha256": "744168aa06e2a33c3b87911fb7cbdbcc211f209d7e9554dd23fcdee7f68a6ef2",
-        "bytes": 330
-      },
-      {
-        "path": "GPL-2.0-or-later.txt",
-        "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/LICENSES/GPL-2.0-or-later.txt",
-        "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3",
-        "bytes": 17337
-      }
-    ],
-    "entry": "46P",
-    "mesh": "asteroid.cms",
-    "radiusKm": 0.6,
-    "license": "GPL-2.0-or-later",
-    "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
-  },
   "editorial": {
     "introduction": "Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years.",
     "url": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet"
   },
   "selected": {
-    "identity": "Celestia designation",
-    "size": "Catalog Radius scales Celestia-normalized maximum half-extent",
+    "identity": "JPL Small-Body Database designation and Horizons elements",
+    "size": "Published effective nucleus radius 0.6 km (Boehnhardt et al. (2002), A&A 387, 1107) as the volume-equivalent radius",
     "position": "Independent JPL heliocentric elements and vectors at JD2461286.5",
-    "shape": "Native export of Celestia asteroid.cms; shared illustrative geometry",
+    "shape": "Smooth ellipsoid with the published minimum axis ratio 1.4",
     "texture": "Shared missing-imagery grid",
-    "attitude": "Fixed illustration"
+    "attitude": "Arbitrary display orientation"
   },
   "candidateSurvey": [
     {
-      "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
-      "disposition": "Selected native asteroid.cms geometry. Original SphereMesh and Perlin code compiled offline; seed pinned for reproducibility. No Celestia stock texture or invented rotation."
+      "url": "https://doi.org/10.1051/0004-6361:20020494",
+      "disposition": "Selected effective nucleus radius: Boehnhardt et al. (2002), A&A 387, 1107."
     },
     {
       "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/",
@@ -58,63 +23,27 @@
     {
       "url": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet",
       "disposition": "Coma, tail, spectra and encounter context are useful source material; they do not establish a nucleus surface texture. Additional quantitative shape reconstruction remains a separate source qualification."
+    },
+    {
+      "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "disposition": "Formerly supplied the illustrative generic mesh and a catalogue radius; retired 2026-09-16 and no longer used."
     }
   ],
   "derivedFacts": {
-    "diameter": "2 * Celestia Radius (km), rounded to two significant figures; catalog estimate",
-    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date"
+    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date",
+    "radius": "Published effective radius, Boehnhardt et al. (2002), A&A 387, 1107"
   },
   "assumptions": [
     "No observed albedo, mass, density, pole or placeholder rotation is imported.",
-    "The native Celestia procedural mesh is shared and illustrative; no nucleus terrain measurement is claimed.",
-    "No tail, coma or historical outburst is rendered."
+    "No tail, coma or historical outburst is rendered.",
+    "The ellipsoid is a smooth approximation at an effective radius; no nucleus terrain measurement is claimed."
   ],
-  "nativeMesh": {
-    "schema": "cssearth-celestia-mesh@1",
-    "source": "asteroid.cms",
-    "catalogRadiusKm": 0.6,
-    "sourceCodeCommit": "e9997cc011a57fdcc507f4ef5352bfd03cb17a6b",
-    "nativeSeed": 20260909,
-    "nativeExport": {
-      "source": "asteroid.cms",
-      "nativeArguments": [
-        "1",
-        "0.6",
-        "0.7",
-        "15",
-        "12",
-        "60",
-        "0.3",
-        "1",
-        "50",
-        "100",
-        "20260909"
-      ],
-      "nativeSha256": "c26c10e07e16df61e26ed89e926ff3faeccf0ae67c1ec97e37f0a07d8cd97717",
-      "objSha256": "dad540c2a0e97da1bb5c4c5c8ed9f536990f296304c84f922c8e000ebac2aa7c",
-      "nativeVertices": 5050,
-      "vertices": 4802,
-      "faces": 9600,
-      "omittedDegenerate": 200,
-      "normalization": {
-        "center": [
-          0.005257665179669857,
-          0.0034754869993776083,
-          0.006411999464035034
-        ],
-        "scale": 0.9741952419281006,
-        "method": "Celestia Model::normalize bounding-box maximum extent"
-      },
-      "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
-      "maximumWeldError": 1.2014061212539673e-7,
-      "volume": 1.6799252810656218,
-      "volumeEquivalentRadius": 0.7374520470653751,
-      "repeatNativeExportIdentical": true
-    },
-    "scaling": "Celestia bounding-box normalization, then Catalog Radius * 1000 metres. This preserves maximum full extent = 2 * Catalog Radius.",
-    "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
-    "volumeEquivalentRadiusKm": 0.4424712282392251,
-    "illustrative": true,
-    "qualification": "The actual Celestia CMS mesh is reused. It is a shared illustrative shape, not a measured nucleus reconstruction. Grid surface; fixed illustrative attitude."
+  "shape": {
+    "record": "shape/model.json",
+    "effectiveRadiusKm": 0.6,
+    "citation": "Boehnhardt et al. (2002), A&A 387, 1107",
+    "url": "https://doi.org/10.1051/0004-6361:20020494",
+    "method": "Photometry of the nucleus assuming a 0.04 albedo",
+    "convention": "effective-radius-as-volume-equivalent ellipsoid; unit axis ratios unless a lightcurve ratio is cited"
   }
 }

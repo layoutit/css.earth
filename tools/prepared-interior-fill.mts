@@ -29,8 +29,9 @@ export async function preparedSurfaceMean(paths: readonly string[]): Promise<str
 export async function withPreparedInteriorFill<T extends PreparedPresentationDefinition & { assets?: PreparedAssets }>(
   presentation: T, geometry: PreparedInteriorDisc | null, publicRoot: string | ((url: string) => string),
 ): Promise<T> {
-  // A staged preparation resolves its own not-yet-published surfaces; the published tree resolves under public/.
-  const surfacePath = typeof publicRoot === 'function' ? publicRoot : (url: string) => resolve(publicRoot, `.${url}`);
+  // Write-mode preparation stages every scene asset in a flat directory before publishing; the
+  // surface mean must read those staged pixels, never a previously published copy under public/.
+  const resolveAsset = typeof publicRoot === 'string' ? (url: string) => resolve(publicRoot, `.${url}`) : publicRoot;
   if (!geometry || presentation.viewBindings.some(binding => binding.kind === 'interior-disc')) return presentation;
   const assets = presentation.assets;
   if (!assets) throw new Error('Interior fill requires the prepared asset catalogue.');
@@ -46,7 +47,7 @@ export async function withPreparedInteriorFill<T extends PreparedPresentationDef
       const paths = surfaceKeys.map(key => {
         const asset = assets.entries.find(asset => asset.key === key);
         if (!asset || !asset.url.startsWith('/scenes/') || asset.url.includes('..')) throw new Error('Interior fill requires local prepared surface pixels.');
-        return surfacePath(asset.url);
+        return resolveAsset(asset.url);
       });
       colors.set(key, preparedSurfaceMean(paths));
     }

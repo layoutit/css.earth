@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mars",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "233f11dcf5676252d1027dc53640b162f0d95cf84b4514efc581defa81f76a45"
+    "sha256": "9d3e6f2630ce75d702465ff28117aee3e1e254835168c6d84bad85f158603086"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "7a4423487c819fb73f49c38002be3f8176ed9bd4d2d38e60d0f4ac629aeb7de8",
+      "sha256": "b5efcf2c366c56a0f948b39ec10535813fb9a6fe6114a65e5ddf94b660687358",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/mars/",
@@ -65,7 +65,7 @@
           }
         ],
         "atmosphere": {
-          "source": "openspace/atmosphere.asset",
+          "source": "atmosphere/model.json",
           "tileSize": 256,
           "logicalSize": 512,
           "frameCount": 32,
@@ -97,7 +97,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd4446b0424aaf55fada395ee123375dda44549517539b70af29e4e8dfd709c5",
+      "sha256": "6fd63aac032545b77aefa9005667483f465b3e6c5363b6fb023054d942d8007a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -426,7 +426,7 @@
           {
             "label": "OpenSpace",
             "role": "scene",
-            "description": "Atmosphere & scene",
+            "description": "Atmosphere parameter values (adapted, MIT)",
             "href": "https://github.com/OpenSpace/OpenSpace"
           },
           {
@@ -695,7 +695,7 @@
       "sha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
       "bytes": 36708552,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -710,10 +710,10 @@
       "kind": "source-input",
       "id": "usgs-mola-pseudocolor",
       "path": "lenses/mola-pseudocolor-z3.png",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
-      "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
+      "origin": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+      "credit": "NASA Solar System Treks; USGS Astrogeology; NASA Mars Global Surveyor MOLA",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
+      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "checked prepared government-data mosaic without logos",
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
@@ -722,7 +722,7 @@
           {
             "kind": "machine",
             "machineId": "mars-global-surveyor",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
+            "evidence": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
             "missionId": "mars-global-surveyor"
           }
         ]
@@ -737,26 +737,26 @@
           }
         ]
       },
-      "sha256": "16b9b65eebe6512bf625fdb82b87a51d92e9a6e74c5d98ebbac3c66251bcac7c",
-      "bytes": 18438219,
+      "sha256": "bf5fd7f33a34262e36c8437f2b7f3acb5ac100d0efd016a4315a65bec55f2142",
+      "bytes": 16209831,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "tile-mosaic",
         "groups": [
           "refresh"
         ],
         "path": "lenses/mola-pseudocolor-z3.png",
-        "url": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/${y}/${x}",
-        "tileSize": 360,
+        "url": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+        "tileSize": 256,
         "columns": 16,
         "rows": 8,
-        "dataWidth": 5760,
-        "dataHeight": 2880,
+        "dataWidth": 4096,
+        "dataHeight": 2048,
         "width": 4096,
         "height": 2048,
-        "forceRgb": false,
-        "concurrency": 1
+        "forceRgb": true,
+        "concurrency": 6
       },
       "verificationOperations": []
     },
@@ -764,10 +764,10 @@
       "kind": "source-input",
       "id": "usgs-themis-ir-day",
       "path": "lenses/themis-ir-day-z3.png",
-      "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
-      "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
+      "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+      "credit": "USGS Astrogeology WMS; Arizona State University; NASA Mars Odyssey THEMIS (Edwards et al. 2011)",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
+      "acquisition": "USGS Astrogeology WMS GetMap of the global THEMIS day-IR mosaic at 4096 by 2048",
       "redistribution": "checked prepared government-data mosaic without logos",
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
@@ -776,7 +776,7 @@
           {
             "kind": "machine",
             "machineId": "odyssey",
-            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
             "missionId": "odyssey"
           }
         ]
@@ -791,63 +791,38 @@
           }
         ]
       },
-      "sha256": "374bf7e567c53449cd1b7f8072f9ab64cf7c9863e29dc9a7db1bf8c1e2b3127c",
-      "bytes": 8031340,
+      "sha256": "1e9123a696231c456ab210be3d847b880599c7485abfe46af68cf1e7dfe5c61c",
+      "bytes": 9711562,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "tile-mosaic",
-        "groups": [
-          "refresh"
-        ],
-        "path": "lenses/themis-ir-day-z3.png",
-        "url": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/${y}/${x}",
-        "tileSize": 256,
-        "columns": 14,
-        "rows": 7,
-        "dataWidth": 3584,
-        "dataHeight": 1792,
-        "width": 4096,
-        "height": 2048,
-        "forceRgb": false,
-        "concurrency": 1
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "openspace-mars-atmosphere",
-      "path": "openspace/atmosphere.asset",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
-      ],
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT source snapshot",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-mars-atmosphere",
-            "role": "method",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      },
-      "sha256": "0850b8906314a8d72072b60ae3a3e0f0eb37525292955d911767310d2ed97ac5",
-      "bytes": 2044,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
           "refresh"
         ],
-        "path": "openspace/atmosphere.asset",
-        "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
+        "path": "lenses/themis-ir-day-z3.png",
+        "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-atmosphere-model",
+      "path": "atmosphere/model.json",
+      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
+      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
+      "license": "Repository-authored record; adapted values credited inside the file",
+      "acquisition": "authored in the repository",
+      "redistribution": "permitted with the credit stated in the record",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
+      },
+      "sha256": "e92febb5f3bb206f53066419a0ab586a017a2dc57a8a9488be126f2485186420",
+      "bytes": 1446,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -863,10 +838,10 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "cd4446b0424aaf55fada395ee123375dda44549517539b70af29e4e8dfd709c5",
-      "bytes": 13958,
+      "sha256": "6fd63aac032545b77aefa9005667483f465b3e6c5363b6fb023054d942d8007a",
+      "bytes": 14006,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -892,7 +867,7 @@
       "sha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
       "bytes": 11093,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -935,7 +910,7 @@
       "dependencies": [
         "nasa-psg-mars-configuration"
       ],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -968,7 +943,7 @@
       "sha256": "069f3952e2409ba3fd4e0f2fa496a4a89de4a916b56a79ece7a3a61d83530f24",
       "bytes": 996,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -994,7 +969,7 @@
       "sha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "bytes": 5413387,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1021,7 +996,7 @@
       "sha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
       "bytes": 151,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1048,7 +1023,7 @@
       "sha256": "b2236444ed13365223dca094ead1db1c8a258bc6b8ea7009b0f02e7950919dfd",
       "bytes": 301501,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1073,7 +1048,7 @@
       "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
       "bytes": 19986,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1099,7 +1074,7 @@
       "sha256": "d456ce9025ca71673af8b9f72a78dc508f5d963cbac74fa68eeac88a4c7c3a3b",
       "bytes": 349568,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1133,7 +1108,7 @@
       "sha256": "9da19e4f70287fe0d33ba716ff2169c10447c30c7a048583f730e4155226cde9",
       "bytes": 171404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1176,31 +1151,31 @@
           "url": "/scenes/mars/mars-surface-normal.webp",
           "bytes": 820510,
           "sha256": "79d7f0b01fdff2f644f6d965fcbc742dcbc1c44a485ed94acc65d45cbaabd4dd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-surface-normal@2x.webp",
           "bytes": 2996430,
           "sha256": "5cd225ec4de592bb2a9ab199248506eddb71f9149ca823e9cf48a466bfc15c39",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lens-normal.webp",
           "bytes": 664,
           "sha256": "c18b375dd5e4032d5dc8cc1b5cc75c982ac0b76abf893ef72ed4eed47d349f16",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-poles-normal.webp",
           "bytes": 157040,
           "sha256": "11b16a12f0a8ab21da7e0907575a055ac05e2cf9847876facdb290f899f304f3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-poles-normal@2x.webp",
           "bytes": 524794,
           "sha256": "384fa36bdb1c4a30c5c6e470489bdc3c9667ba8d1072b556a9b67d118271120c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1238,33 +1213,33 @@
       "outputs": [
         {
           "url": "/scenes/mars/mars-surface-elevation.webp",
-          "bytes": 1062632,
-          "sha256": "1590d6b06282aea3468ba5c77fbf190da595af97e8b0a57537cb6da8f4c08175",
-          "verification": "bytes-verified"
+          "bytes": 1062260,
+          "sha256": "5f4a8fa5c2df8b31887db328699da9a5996c348be188c2c61385b7dba76ce173",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-surface-elevation@2x.webp",
-          "bytes": 4281926,
-          "sha256": "0a48a7ba0c175bcffad0a85047136b951240ffde2ec25eeaf809d78715d3e095",
-          "verification": "bytes-verified"
+          "bytes": 4284386,
+          "sha256": "aa991949a64c18d89cab197d91ea119bb8a2e52f5ee564463f43b1675776f310",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation.webp",
-          "bytes": 1676,
-          "sha256": "ce6671d51d316b7210b0167d90a4f203dd3af569ba9659e09b6a99aa36f78fe5",
-          "verification": "bytes-verified"
+          "bytes": 1662,
+          "sha256": "c5cf318000c6b1349f870c42c28900b323aee17181f46c1484e10cea7dce5bd1",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-poles-elevation.webp",
-          "bytes": 135846,
-          "sha256": "0001c5f20c2651eb98b98837fd20c5346db2c0fb8f19fd7621128571e8240841",
-          "verification": "bytes-verified"
+          "bytes": 134472,
+          "sha256": "869e9c68144d9c371a226e3cb83d2ad75abaf6c01e82949c97fb5d74a4c798e7",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-poles-elevation@2x.webp",
-          "bytes": 473976,
-          "sha256": "5f0d742d7ed99cd208d65d012397ab97cac60619d05378c86201a1ca977957c5",
-          "verification": "bytes-verified"
+          "bytes": 461358,
+          "sha256": "c271fb2ac24ff3d1dbdc8b73e2f2fd47856416323df24cf23102988d334d7741",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1302,33 +1277,33 @@
       "outputs": [
         {
           "url": "/scenes/mars/mars-surface-thermal.webp",
-          "bytes": 855108,
-          "sha256": "d9116ca62ccbf049cf7dbc036988cd04ac00549e80a3a9b6d4ac6b68598f85d1",
-          "verification": "bytes-verified"
+          "bytes": 1102274,
+          "sha256": "776b3d4dd57d21403defa5ab425cbb54938dd988c1caf6f80464ac2f114065f7",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-surface-thermal@2x.webp",
-          "bytes": 3018182,
-          "sha256": "f47ce1a03ab88df4518933e7f4e3625e8dad4238c585e4d549a53c1344b27ce4",
-          "verification": "bytes-verified"
+          "bytes": 4811674,
+          "sha256": "d5e91b15aa8e441f7aae2467ecfd2e8a5b0fb2cfe8b665b44c821087d5dbd285",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal.webp",
-          "bytes": 136,
-          "sha256": "13bdf4d31eef7a381d1838bdf0bc273072b2fa4362d69cc3c9a1c911f09e9836",
-          "verification": "bytes-verified"
+          "bytes": 140,
+          "sha256": "7126fb082cf201a4ad13091732305e2c31b1dac36109889e4ad0e7e5643f495a",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-poles-thermal.webp",
-          "bytes": 32020,
-          "sha256": "48c69d07f8a9856ed33cc6aa5e34c981facf942e6b8e8906f7b89ed835d5d640",
-          "verification": "bytes-verified"
+          "bytes": 66246,
+          "sha256": "ccd49ca7cf385646fe3f4f1d53095e26cb1880cac4e13d4a283938e3bdb410c7",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-poles-thermal@2x.webp",
-          "bytes": 104630,
-          "sha256": "b188668830b4628d2a1fd054cf26b097d8fa122911af0be1d539cee5e441d070",
-          "verification": "bytes-verified"
+          "bytes": 240764,
+          "sha256": "2de1715ab6991bb1926906b430b5ffbe25739e3007e41f905d05e29f4624a339",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1354,44 +1329,44 @@
         "raster"
       ],
       "inputs": [
-        "openspace-mars-atmosphere"
+        "mars-atmosphere-model"
       ],
       "outputs": [
         {
           "url": "/scenes/mars/mars-material.webp",
           "bytes": 404286,
           "sha256": "afc05aa05f6e967cfdc1a2ce8389316566853cc357ac10cfcc024cce5db9b15a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-observation-material.webp",
           "bytes": 161742,
           "sha256": "6770d670817c4c3d1f5d52f79ea160126e63b22b16f1c81a03fe3e50ae5ebeaa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lighting.webp",
           "bytes": 61694,
           "sha256": "d4835d67e068f737dc999f039a0eb1ba8849c2f7c3cd582ba8ac6bfbd2165d70",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-material@2x.webp",
           "bytes": 1130242,
           "sha256": "9820c485430e70a6ac0aabe78c1737edd99e9cac2fc10c24bfb7983e2443241e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-observation-material@2x.webp",
           "bytes": 453296,
           "sha256": "c1e091a34aff9427840f6a8a27dc920d95d0b54dc68bd4b5faa6b49dd7536bc6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lighting@2x.webp",
           "bytes": 169690,
           "sha256": "1369a6e9d5f4005a14996ebdafc3051121d9d5ca89c14bec8a7cb00a0e7eb4f7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1415,8 +1390,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9136,
-          "sha256": "0e88cfef7202f639724243c52dfd0fae7a2d5f9f9a0594faa6c94034c4682f1f",
+          "bytes": 9160,
+          "sha256": "5e82b8f87998dccd1f7094049d701d739c0a00cb3536ec2f09de41feeaa6e2fa",
           "verification": "bytes-verified"
         }
       ],
@@ -1446,7 +1421,7 @@
           "url": "/scenes/mars/mars-reflectance-spectrum.svg",
           "bytes": 5843,
           "sha256": "6140a667a2b109fbfbb8907bf7e058607e98c464688031d033d9d3187ed35811",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1475,7 +1450,7 @@
           "url": "/scenes/mars/mars-temperature-pressure-profile.svg",
           "bytes": 2423,
           "sha256": "3b4ae81fbfe5f6ffc2ab534b00a869387cad3376e1c3a3fa2a5e56c3204a875d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1503,7 +1478,7 @@
           "url": "/scenes/mars/mars-photometric-phase-curve.svg",
           "bytes": 4492,
           "sha256": "46b2aacc1daa5c632189cce9d04879611096e471c652410ed30a68c8c4538752",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -1542,7 +1517,7 @@
           "url": "/scenes/mars/mars-features.json",
           "bytes": 6046256,
           "sha256": "bb7c7398fb9e27b63ff774796cf088ceeeac05340b0a71898cd4dd5a82d82cdb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1591,8 +1566,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/elevation.webp",
-          "bytes": 73408,
-          "sha256": "ca988b7d290aa74a4409fb0f297ba7dea54ceccf85f13fe4adbec4f7138de200",
+          "bytes": 72982,
+          "sha256": "46d28712588b9cd8265b1dff86bb6ed8cbb6730d99060ce207ee2b0070ef377c",
           "verification": "bytes-verified"
         }
       ]
@@ -1616,8 +1591,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/thermal.webp",
-          "bytes": 46536,
-          "sha256": "e755e42ea4718eec5e9dfc6e98ebd460154fd6209382ce5e453d6900d4fd2d7b",
+          "bytes": 59152,
+          "sha256": "4c6256812cd848ba24e8e4b4034d0e39428725f32f355433a5e814563e16559f",
           "verification": "bytes-verified"
         }
       ]
@@ -1629,11 +1604,11 @@
   },
   "lastPreparation": {
     "objectId": "mars",
-    "materialSha256": "ddcf5a20171d20b03c77a09870ba147d97fbec4c68908dbddca30e22554170e1",
+    "materialSha256": "498489fcc5099bc14d196b4fd695f7ed5b50767e057d541eaa6a8cf06768ab99",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

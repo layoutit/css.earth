@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-atmosphere-model@1",
+  "body": "earth",
+  "description": "Single-scattering atmosphere parameters the raster and material preparers consume: two exponential layers (Rayleigh and Mie) with RGB coefficients per kilometre and a Sun intensity in the preparer’s own units.",
+  "atmosphereHeightKm": 70,
+  "planetRadiusKm": 6377,
+  "averageGroundReflectance": 0.1,
+  "groundRadianceEmission": 0.6,
+  "sunIntensity": 6.9,
+  "rayleigh": {
+    "wavelengthsNm": [
+      680,
+      550,
+      440
+    ],
+    "scatteringPerKm": [
+      0.0058,
+      0.0135,
+      0.0331
+    ],
+    "scaleHeightKm": 8
+  },
+  "mie": {
+    "scatteringPerKm": [
+      0.004,
+      0.004,
+      0.004
+    ],
+    "extinctionPerKm": [
+      0.0044444444444444444,
+      0.0044444444444444444,
+      0.0044444444444444444
+    ],
+    "scaleHeightKm": 1.2,
+    "phaseG": 0.85
+  },
+  "provenance": {
+    "values": "Authored parameter record. The numbers are the tuning OpenSpace shipped in its RenderableAtmosphere asset for this body at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516 (MIT, OpenSpace Team); they are retained unchanged so prepared outputs stay identical, and are cited here rather than fetched.",
+    "formerAsset": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/atmosphere.asset",
+    "primary": [
+      {
+        "role": "Rayleigh scattering coefficients and scale height; Mie extinction as scattering divided by 0.9",
+        "citation": "Bruneton, E. and Neyret, F. (2008), Precomputed Atmospheric Scattering, Computer Graphics Forum 27(4), 1079-1086",
+        "url": "https://doi.org/10.1111/j.1467-8659.2008.01245.x"
+      }
+    ]
+  }
+}

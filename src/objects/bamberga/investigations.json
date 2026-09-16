@@ -90,6 +90,24 @@
           "pr": 192
         }
       ]
+    },
+    {
+      "id": "sphere-cross-frame-registration",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "status": "unresolved",
+      "finding": "The survey holds 85 deconvolved ZIMPOL frames (camera 1) and an ADAM reconstruction with a rotation record for this body, but the record's column order cannot be established: DAMIT lists no light-curve model for it, so neither reading of the pole can be checked against a published one. The observer-camera route reads the record only under a verified column order, so no photograph lens is derived.",
+      "revisitWhen": "A published pole for this body that settles the rotation record's column order, or a DAMIT model to check it against.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/324Bamberga/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        }
+      ]
     }
   ]
 }

@@ -6,11 +6,11 @@
   "physical": {
     "name": "153P Ikeya–Zhang",
     "horizonsCode": "DES=153P;CAP;",
-    "meanRadiusKm": 1.8768154597813798,
+    "meanRadiusKm": 1.877,
     "gravitationalParameterKm3PerS2": 0,
     "parent": "sun"
   },
-  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "physicalNotes": "Assumed display radius; no published nucleus size (see the object ledger).",
   "comet": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D153P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

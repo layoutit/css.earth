@@ -5,13 +5,19 @@ import { lambertAttenuationAtlas } from '../terrestrial-layers/solid-raster.mts'
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
-import { prepareGlbSurface } from './glb-surface.mts';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
 
-/** Preserve the illustrative base color; view-dependent lighting is a separate prepared layer. */
+function neutralSurface(width:number, height:number) {
+  const data = Buffer.alloc(width * height * 4);
+  for (let offset = 0; offset < data.length; offset += 4) { data[offset] = 128; data[offset + 1] = 128; data[offset + 2] = 128; data[offset + 3] = 255; }
+  return data;
+}
+
+/** Neutral base color; view-dependent lighting is a separate prepared layer. */
 export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId }:OutputDirectories & {config:ShapeModelConfig;axes:readonly number[];sourceDirectory:string;lensId?:string}) {
   const { width, height, latitudeSegments, longitudeSegments, poleSize } = config.mesh;
-  const { pixels, ...source } = await prepareGlbSurface(resolve(sourceDirectory, config.surfaceModel), width, height);
+  // The body shows the shared neutral gray (#808080 sRGB): a display convention for an unresolved surface, not a colour.
+  const pixels = neutralSurface(width, height), source = { neutral: true as const };
   const emit = async (name:string, data:Buffer, w:number, h:number) => {
     const bytes = await sharp(data, { raw: { width: w, height: h, channels: 4 } }).webp({ lossless: true, effort: 4 }).toBuffer();
     await writeFile(resolve(publicDirectory, name), bytes);

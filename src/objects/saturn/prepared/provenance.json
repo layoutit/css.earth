@@ -1,43 +1,25 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "saturn",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5969c626d4c1e79832e35e5092f287ac3003120c6eb1e2848716978cf157739c"
+    "sha256": "fb3bcb1d1a0f7191e850064461a8130c1f683365f3926f45eaee21797b538ffd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
       "id": "rings",
       "path": "source/preparation/rings.json",
-      "sha256": "592f1ef7ab8f4b6a8aaa745c5e74d0b6aa83f19eec7fd748d8ba456002ce86c1",
+      "sha256": "3bcf4c15e41de801e4f7e24c7b95c2373bdd6d049199c2175ab1205ada3f8329",
       "parameters": {
         "schema": "cssearth-radial-layer-recipe@1",
         "units": "kilometers",
         "sources": [
-          {
-            "id": "openspace-saturn-ring-color",
-            "path": "color_original_single.png",
-            "expectedBytes": 2059,
-            "expectedSha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
-            "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png",
-            "credit": "OpenSpace Team",
-            "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
-          },
-          {
-            "id": "openspace-saturn-ring-transparency",
-            "path": "trans_original_single.png",
-            "expectedBytes": 2303,
-            "expectedSha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
-            "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png",
-            "credit": "OpenSpace Team",
-            "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
-          },
           {
             "id": "ring-spectral-response",
             "path": "lenses/manifest.json",
@@ -46,6 +28,24 @@
             "origin": "Pinned Hubble program 17843 and Cassini VIMS/CIRS interpretation",
             "credit": "NASA, ESA, STScI, and NASA/JPL-Caltech",
             "license": "project-authored source specification with institutional credits"
+          },
+          {
+            "id": "cassini-uvis-alpvir-2006-285-occultation",
+            "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+            "expectedBytes": 10591493,
+            "expectedSha256": "65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341",
+            "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+            "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+            "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
+          },
+          {
+            "id": "cassini-uvis-alpvir-2006-285-occultation-label",
+            "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+            "expectedBytes": 12013,
+            "expectedSha256": "64858a36470a3d52df1056bb07df5f5aa4396b78924fa07c9861c9a67500b49c",
+            "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+            "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+            "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
           }
         ],
         "layers": [
@@ -67,7 +67,7 @@
               140612
             ],
             "sourceBounds": [
-              74500,
+              66900,
               140612
             ],
             "channelFactors": [
@@ -75,8 +75,6 @@
               0.8796223968878317,
               0.8227857543962834
             ],
-            "colorSource": "color_original_single.png",
-            "transparencySource": "trans_original_single.png",
             "interior": {
               "centers": [
                 67580,
@@ -91,60 +89,7 @@
                 151
               ]
             },
-            "operations": [
-              {
-                "kind": "alpha-cap",
-                "bounds": [
-                  117500,
-                  122050
-                ],
-                "maximum": 46
-              },
-              {
-                "kind": "clear",
-                "bounds": [
-                  133423,
-                  133745
-                ]
-              },
-              {
-                "kind": "clear",
-                "bounds": [
-                  136487,
-                  136522
-                ]
-              },
-              {
-                "kind": "clear",
-                "bounds": [
-                  136770,
-                  139826
-                ],
-                "inclusive": [
-                  true,
-                  false
-                ]
-              },
-              {
-                "kind": "edge-core",
-                "bounds": [
-                  139826,
-                  140612
-                ],
-                "center": 140224,
-                "sigma": 70,
-                "baseDepth": 0.01,
-                "peakDepth": 0.19
-              },
-              {
-                "kind": "alpha-gain",
-                "bounds": [
-                  74500,
-                  91975
-                ],
-                "gain": 2.25
-              }
-            ],
+            "operations": [],
             "readability": {
               "minimumPixels": {
                 "1": 4,
@@ -521,6 +466,19 @@
                 },
                 "qualification": "Cassini VIMS/CIRS-informed thermal false color over visible morphology; not a direct temperature retrieval."
               }
+            ],
+            "opticalDepthProfile": {
+              "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+              "radiusColumn": 1,
+              "opticalDepthColumn": 5,
+              "flagColumn": 12,
+              "corruptedFlag": 64,
+              "missingValue": -1
+            },
+            "color": [
+              255,
+              255,
+              255
             ]
           }
         ]
@@ -529,7 +487,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3",
+      "sha256": "7d946ad0bc7e77a9076cf57cb7e82f63feb408f904c08c10d6ce4a128a8e52d3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -697,7 +655,7 @@
                 "id": "normal",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
               },
-              "notes": "Visible-light appearance from the prepared OpenSpace Saturn mosaic. This is a presentation texture assembled from observations, not a live image of the scene date."
+              "notes": "Visible-light appearance from the Hubble OPAL 2025a global map. This is a presentation texture assembled from observations, not a live image of the scene date."
             },
             {
               "id": "ultraviolet",
@@ -964,7 +922,7 @@
           {
             "label": "OpenSpace",
             "role": "scene",
-            "description": "Planet, rings & moons",
+            "description": "Globe lighting parameters (adapted, MIT)",
             "href": "https://github.com/OpenSpace/OpenSpace"
           },
           {
@@ -1001,13 +959,13 @@
     {
       "id": "geometry",
       "path": "source/preparation/geometry.json",
-      "sha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf",
+      "sha256": "9622e8017d068049476a935d1cb3d9eb6f0c780f0f7df1d7d21aefd52f106fdb",
       "parameters": {
         "schema": "cssearth-layered-oblate-preparation@1",
         "namespace": "saturn",
         "publicPrefix": "/scenes/saturn/",
         "sources": {
-          "surface": "saturn-surface-original.jpg",
+          "surface": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
           "polarObservation": "cassini-pia21611.jpg",
           "approvedMaterial": "approved/saturn-fixed-material.webp",
           "weather": "saturn-weather-static.webp",
@@ -1238,9 +1196,9 @@
           "planetSeamBleed": 0,
           "solarEffectiveTemperatureKelvin": 5772,
           "objectSolarAlbedoMultiplier": "#fff1ea",
-          "openspaceGlobeAmbientIntensity": 0.05,
-          "openspaceGlobeOrenNayarRoughness": 0,
-          "openspaceGlobeTerminatorSmoothstep": [
+          "globeAmbientIntensity": 0.05,
+          "globeOrenNayarRoughness": 0,
+          "globeTerminatorSmoothstep": [
             0,
             0.1
           ]
@@ -1251,7 +1209,7 @@
           "label003": "prepared-oblate-ellipsoid-camera-projection",
           "label004": "prepared-analytic-oblate-ellipsoid-proportional-overscan",
           "label005": "saturn-interior-material",
-          "label006": "source/saturn-surface-original.jpg",
+          "label006": "source/observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
           "label007": "prepared-cassini-north-polar-projection-under-fixed-world-material-plane",
           "label008": "Cassini PIA21611 2017 natural-color polar stereographic map",
           "label009": "source/cassini-pia21611.jpg",
@@ -1277,9 +1235,9 @@
         },
         "sourcePins": [
           {
-            "path": "saturn-surface-original.jpg",
-            "expectedSha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
-            "expectedBytes": 1036492
+            "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+            "expectedSha256": "c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7",
+            "expectedBytes": 4885052
           },
           {
             "path": "cassini-pia21611.jpg",
@@ -1301,6 +1259,24 @@
             "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
             "expectedBytes": 5097
           }
+        ],
+        "surfaceUnobservedRows": [
+          [
+            0,
+            35
+          ],
+          [
+            431,
+            444
+          ],
+          [
+            887,
+            899
+          ]
+        ],
+        "surfaceSourceSize": [
+          1800,
+          900
         ]
       }
     },
@@ -1893,7 +1869,7 @@
       "sha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1936,7 +1912,7 @@
       "sha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1949,38 +1925,44 @@
     },
     {
       "kind": "source-input",
-      "id": "openspace-saturn-surface",
-      "path": "saturn-surface-original.jpg",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset",
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/layers/colorlayers/saturn_texture.asset"
-      ],
-      "acquisition": "checked snapshot from OpenSpace saturn_textures",
-      "redistribution": "permitted with the OpenSpace MIT notice",
+      "id": "hubble-opal-saturn-2025a-visible",
+      "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, STScI, and the OPAL team",
+      "license": "STScI public science archive data",
+      "acquisition": "pinned Hubble OPAL Cycle 32 rotation-A global-map product (2025-08-29, F395N/F502N/F631N composite)",
+      "redistribution": "checked scientific archive product with full credit",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+            "missionId": "hubble"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-saturn-openspace-saturn-surface",
+            "catalogueId": "source-saturn-hubble-opal-saturn-2025a-visible",
             "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "src/objects/saturn/source/manifest.json#/inputs/0"
           }
         ]
       },
-      "sha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
-      "bytes": 1036492,
+      "sha256": "c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7",
+      "bytes": 4885052,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
           "restore"
         ],
-        "path": "saturn-surface-original.jpg",
-        "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg"
+        "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+        "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif"
       },
       "verificationOperations": []
     },
@@ -2021,7 +2003,7 @@
       "sha256": "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
       "bytes": 105281,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2041,7 +2023,7 @@
       "sha256": "e25f97df1892978a1140e9c6a27a4b9976c047f8b92162d0a8d898ba13a85007",
       "bytes": 154240,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2061,7 +2043,7 @@
       "sha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
       "bytes": 1692,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2081,79 +2063,50 @@
       "sha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
       "bytes": 5097,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "openspace-saturn-ring-color",
-      "path": "color_original_single.png",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset"
-      ],
-      "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
-      "redistribution": "permitted with the OpenSpace MIT notice",
+      "id": "cassini-uvis-alpvir-2006-285-occultation",
+      "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set",
+      "acquisition": "pinned PDS Ring-Moon Systems Node product: 1 km normal optical depth profile of the ring system from the alpha Virginis ingress occultation, 2006 day 285",
+      "redistribution": "checked scientific archive product with full credit",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-saturn-openspace-saturn-ring-color",
+            "catalogueId": "source-saturn-cassini-uvis-alpvir-2006-285-occultation",
             "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "src/objects/saturn/source/manifest.json#/inputs/25"
           }
         ]
       },
-      "sha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
-      "bytes": 2059,
+      "sha256": "65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341",
+      "bytes": 10591493,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
           "restore"
         ],
-        "path": "color_original_single.png",
-        "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "openspace-saturn-ring-transparency",
-      "path": "trans_original_single.png",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset"
-      ],
-      "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
-      "redistribution": "permitted with the OpenSpace MIT notice",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-saturn-openspace-saturn-ring-transparency",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      },
-      "sha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
-      "bytes": 2303,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore"
-        ],
-        "path": "trans_original_single.png",
-        "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png"
+        "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+        "url": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB"
       },
       "verificationOperations": []
     },
@@ -2189,7 +2142,7 @@
       "sha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2232,7 +2185,7 @@
       "sha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2256,10 +2209,10 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3",
-      "bytes": 17642,
+      "sha256": "7d946ad0bc7e77a9076cf57cb7e82f63feb408f904c08c10d6ce4a128a8e52d3",
+      "bytes": 17684,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2285,7 +2238,7 @@
       "sha256": "7908cd301b19cbeba2e08a29457f621296860b29ea5f021dea4dea2041fbf1b6",
       "bytes": 11913,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -2331,7 +2284,7 @@
       "sha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
       "bytes": 8260,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -2382,32 +2335,31 @@
       "inputs": [
         "hubble-opal-2025a-f225w",
         "hubble-opal-2025b-f225w",
-        "openspace-saturn-surface",
+        "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
         "saturn-approved-static-weather",
         "saturn-interior-model",
-        "openspace-saturn-ring-color",
-        "openspace-saturn-ring-transparency"
+        "cassini-uvis-alpvir-2006-285-occultation"
       ],
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-ultraviolet.webp",
-          "bytes": 816,
-          "sha256": "6af67955d3e451c4a3e839c9a76530c23284889f7bf07a7cff46aad8b572e332",
-          "verification": "bytes-verified"
+          "bytes": 782,
+          "sha256": "271c11530335381d80f0ac0eb353c462aab7d0755a1dfd4685242e2073a09e9f",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-surface-ultraviolet@2x.webp",
-          "bytes": 9808658,
-          "sha256": "8ddfddbe3f68876851bd0eaf419a37d7e55f9bf942c5539a9e89d827f90b9f09",
-          "verification": "bytes-verified"
+          "bytes": 8426700,
+          "sha256": "e1c543f07fa7d1e99e202b19eaf49d4a5467cdbcbcc2f39813d5fe65ba6d35b8",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-poles-ultraviolet.webp",
-          "bytes": 591320,
-          "sha256": "528ceb5e06be726079d0343e13123907f08f0783dae0c148ab455f43791f2ebc",
-          "verification": "bytes-verified"
+          "bytes": 539626,
+          "sha256": "7b32df4a2760125ce9e99b8f82cddc9ef2d1cf3789d13a61b6f1704de6904e19",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2437,32 +2389,31 @@
       "inputs": [
         "hubble-opal-2025a-fq889n",
         "hubble-opal-2025b-fq889n",
-        "openspace-saturn-surface",
+        "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
         "saturn-approved-static-weather",
         "saturn-interior-model",
-        "openspace-saturn-ring-color",
-        "openspace-saturn-ring-transparency"
+        "cassini-uvis-alpvir-2006-285-occultation"
       ],
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-methane.webp",
-          "bytes": 1070,
-          "sha256": "3088b5572edf61be0bd59300e064968bbbac2c20e90001a9240cb9258254767b",
-          "verification": "bytes-verified"
+          "bytes": 1114,
+          "sha256": "74a6abdee4817c635c128affc535a2ed31bc5cf8ab75aa6c1f7707913b17fe6c",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-surface-methane@2x.webp",
-          "bytes": 6912838,
-          "sha256": "56d872c86d0886c21ea854592ebb81c656d08ca2348c8a294c51f0aed6c5acba",
-          "verification": "bytes-verified"
+          "bytes": 6063528,
+          "sha256": "4961bf75a5895fcb67a076e250b5f6024f300c8830c130dca0ab93105997101e",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-poles-methane.webp",
-          "bytes": 516132,
-          "sha256": "28cb2b7bc6bad2be74101a97cff0ffbfa89beadb2ba5b68f5034973322b40a2a",
-          "verification": "bytes-verified"
+          "bytes": 499112,
+          "sha256": "28ecb7c44ff00522e81e8e04cae6ca7d9757c3777393b6c88f4e6bf00834c4d8",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2490,32 +2441,31 @@
         "sourceKind": "schematic-morphology-illustration"
       },
       "inputs": [
-        "openspace-saturn-surface",
+        "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
         "saturn-approved-static-weather",
         "saturn-interior-model",
-        "openspace-saturn-ring-color",
-        "openspace-saturn-ring-transparency"
+        "cassini-uvis-alpvir-2006-285-occultation"
       ],
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-thermal.webp",
-          "bytes": 402,
-          "sha256": "8c99f5aba5661acdaf82783fd98648402ccec530019bbe550fdea414a5865151",
-          "verification": "bytes-verified"
+          "bytes": 508,
+          "sha256": "a6eeedfe9915977a16dd6995170713287f481bed7db19f5d156ad4e2d6c7b8ac",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-surface-thermal@2x.webp",
-          "bytes": 6837498,
-          "sha256": "3c2f867b02194e828c530703f9b6c33c557456eaa1cddd208c39dd1c5d3aefdf",
-          "verification": "bytes-verified"
+          "bytes": 4899922,
+          "sha256": "687720e7007605071718443705710b2fc95e05912567126513de46520413165a",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-poles-thermal.webp",
-          "bytes": 571378,
-          "sha256": "a127407b6b3b53d62b26d3efdc4777c4a64fcab16b7d6b0a505f2d2e3ed61efe",
-          "verification": "bytes-verified"
+          "bytes": 502000,
+          "sha256": "668d7baad52459262ee94bd6756c4ff748e4768b52696155a6d872968f960a31",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2538,38 +2488,37 @@
         "rings"
       ],
       "inputs": [
-        "openspace-saturn-surface",
+        "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
         "saturn-approved-static-weather",
         "saturn-interior-model",
-        "openspace-saturn-ring-color",
-        "openspace-saturn-ring-transparency"
+        "cassini-uvis-alpvir-2006-285-occultation"
       ],
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-normal.webp",
-          "bytes": 450,
-          "sha256": "e8f15c69600de09c7f2d2c8802fc0e8d1c8dbede7492ba3700ff25818f6df0e4",
-          "verification": "bytes-verified"
+          "bytes": 650,
+          "sha256": "e1f5dccaf44363086babbe9c041efdd4a2a01f365c8f498d22a9cab77dcae1a3",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-surface-body.jpg",
-          "bytes": 787131,
-          "sha256": "437f97177e32643b18c4838d43cf2c707880744f95ca73018d40b05cbca94937",
-          "verification": "bytes-verified"
+          "bytes": 776260,
+          "sha256": "0041c81710edfad40984212c3ae42a15496ad8f299a58cc561a668193dfc470a",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-poles.webp",
-          "bytes": 34906,
-          "sha256": "9a7b647c4b31c8a8f9d25f20f33a1fdf70f2c02c8448c5bf0769cd7e9739a21c",
-          "verification": "bytes-verified"
+          "bytes": 38172,
+          "sha256": "d09b972b591f0e525848c5962b349be163f1d23b6a12698cf385a8804d9b8b89",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/saturn/saturn-orbit-material.webp",
-          "bytes": 10437576,
-          "sha256": "f59bf4b1a3d3f5ef9769cc67f0c11868eb73cb5450210bcb2048dbd1bfe0a417",
-          "verification": "bytes-verified"
+          "bytes": 10214524,
+          "sha256": "8005fbf1b56d015cc1186941b279fd6e6a8e3c4cd3d7f4176df9af46ed6b0451",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2595,20 +2544,19 @@
         "kind": "schematic-interior"
       },
       "inputs": [
-        "openspace-saturn-surface",
+        "hubble-opal-saturn-2025a-visible",
         "cassini-pia21611-polar-map",
         "saturn-approved-fixed-material",
         "saturn-approved-static-weather",
         "saturn-interior-model",
-        "openspace-saturn-ring-color",
-        "openspace-saturn-ring-transparency"
+        "cassini-uvis-alpvir-2006-285-occultation"
       ],
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-view-interior.webp",
           "bytes": 234,
           "sha256": "1fdac1dc6258f31610b70d800888ed3cf5d001f7db16cdf28169ad5fd712f831",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2632,8 +2580,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9885,
-          "sha256": "fd3c90f8371421c697db4c6ed506542c76fb201e7bdb4609d60d5f11afdb8a8e",
+          "bytes": 9904,
+          "sha256": "fc68403c577f9a315e4b6260311050ce20c1d3c9eec3bec9d351d0cca217fbd7",
           "verification": "bytes-verified"
         }
       ],
@@ -2663,7 +2611,7 @@
           "url": "/scenes/saturn/saturn-atmosphere-spectrum.svg",
           "bytes": 5773,
           "sha256": "7673ce7a675422aa27da64c5d657c849136aea777ffa5c52b71c3672c15784de",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2692,7 +2640,7 @@
           "url": "/scenes/saturn/saturn-temperature-pressure-profile.svg",
           "bytes": 2335,
           "sha256": "84070c6049c0829f615b204452bf73594483eb3e064ddbea07352b906a4502bd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2720,7 +2668,7 @@
           "url": "/scenes/saturn/saturn-photometric-phase-curve.svg",
           "bytes": 4490,
           "sha256": "48632513ef40998d4ccac49b84356d93b3fa4cb717c10cf64a85f19575e064e9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -2746,8 +2694,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 9626,
-          "sha256": "9dd2188a5ba144b1992927117699ff84c7f4e3c3f02fb04b7c24ce3748c4cd5e",
+          "bytes": 13738,
+          "sha256": "d1aa9f141fbeafb1cc5d86aefe0915b2487a30f6fb78a7de238f800e5bd6b2f9",
           "verification": "bytes-verified"
         }
       ]
@@ -2774,8 +2722,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/ultraviolet.webp",
-          "bytes": 20096,
-          "sha256": "6c051e2a894d82977dcf385b863a748878f464dd63c4a13b845c94dcac8b93fc",
+          "bytes": 18442,
+          "sha256": "f194b764af342617aa7c90fce6e3b73097aebcd40bb8e6abcc19b4e68a78c3aa",
           "verification": "bytes-verified"
         }
       ]
@@ -2802,8 +2750,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/methane.webp",
-          "bytes": 10698,
-          "sha256": "c8ddee0e4b4e9a843fd2069359d269748ebb096c105474485962175a4ced91ad",
+          "bytes": 11648,
+          "sha256": "6c9dbbde0cd22d9d083894d08c4122591a045232c011e19ea132bbbbe2c95615",
           "verification": "bytes-verified"
         }
       ]
@@ -2830,8 +2778,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/thermal.webp",
-          "bytes": 6916,
-          "sha256": "7f0e8c950cd48e120131cd9d6633c05dc5bae4037ef64255fc6819bf95206e54",
+          "bytes": 8470,
+          "sha256": "848616c559a6300c911289ec5e8331de0896a3ce3af6627f5478173da4946498",
           "verification": "bytes-verified"
         }
       ]
@@ -2843,11 +2791,11 @@
   },
   "lastPreparation": {
     "objectId": "saturn",
-    "materialSha256": "7afcbcb3b076a53d5c5a61bbb69165fdc75d795ee59134aa6fdb427e8119bc23",
+    "materialSha256": "bcfe87bb2190e4d35ff52b83acf81c3509c891f02524d25ec0f770c5b5b39c40",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

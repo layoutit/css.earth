@@ -1,0 +1,272 @@
+PDS_VERSION_ID                  = PDS3
+RECORD_TYPE                     = FIXED_LENGTH
+RECORD_BYTES                    = 121
+FILE_RECORDS                    = 87533
+^SERIES                         = "UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB"
+
+DATA_SET_ID                     = "CO-SR-UVIS-HSP-2/4-OCC-V3.0"
+RING_OBSERVATION_ID             = "UVIS_HSP_2006_285_ALPVIR_I_TAU01KM"
+PRODUCT_ID                      = "UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB"
+PRODUCT_TYPE                    = RING_PROFILE
+PRODUCT_CREATION_TIME           = 2020-11-27T20:00:00
+
+INSTRUMENT_HOST_NAME             = "CASSINI ORBITER"
+INSTRUMENT_HOST_ID              = CO
+INSTRUMENT_NAME                 = "ULTRAVIOLET IMAGING SPECTROGRAPH"
+INSTRUMENT_ID                   = UVIS
+TARGET_NAME                     = "S RINGS"
+START_TIME                      = 2006-285T06:54:27.658
+STOP_TIME                       = 2006-285T08:13:59.867
+SPACECRAFT_CLOCK_START_COUNT    = "1/1539329186.000"
+SPACECRAFT_CLOCK_STOP_COUNT     = "1/1539333958.095"
+ORBIT_NUMBER                    = "030"
+OBSERVATION_ID                  = "
+UVIS_030ST_URALPVIR001_PRIME"
+NOTE                            =  "
+ These data are rebinned to constant intervals of 01 km in ring plane
+ radius from data acquired at 1, 2, 4, or 8 ms integration times. All
+ event times including START_TIME, STOP_TIME, and the corresponding
+ SPACECRAFT_CLOCK_START_COUNT/SPACECRAFT_STOP_COUNT are determined at the
+ midpoint of each radial bin. Thus, the START_TIME and STOP_TIME and the
+ corresponding SPACECRAFT_CLOCK_START_COUNT/SPACECRAFT_CLOCK_STOP_COUNT
+ do not match those of the unbinned data or those of the data binned
+ to a different radial resolution.
+
+ For HIGHEST_DETECTABLE_OPACITY and LOWEST_DETECTABLE_OPACITY, -1.0 indicates
+ the signal was too poor to allow the calculation of the value."
+
+OBSERVATION_TYPE                = OCCULTATION_PROFILE
+OCCULTATION_TYPE                = STELLAR
+STAR_NAME                       = "ALP VIR"
+FEATURE_NAME                    = "RING SYSTEM"
+RING_OCCULTATION_DIRECTION      = "INGRESS"
+RING_PROFILE_DIRECTION          = "INGRESS"
+PLANETARY_OCCULTATION_FLAG      = "N"
+MINIMUM_WAVELENGTH              = 110   /* nm */
+MAXIMUM_WAVELENGTH              = 190   /* nm */
+DATA_QUALITY_SCORE              = GOOD
+
+RADIAL_RESOLUTION               = 1   /* km */
+MINIMUM_RADIAL_SAMPLING_INTERVAL= 1.0 /* km */
+MAXIMUM_RADIAL_SAMPLING_INTERVAL= 2958.0 /* km */
+RING_EVENT_START_TIME           = 2006-285T06:54:26.448
+RING_EVENT_STOP_TIME            = 2006-285T08:13:58.561
+MINIMUM_RING_RADIUS             = 64010.60
+MAXIMUM_RING_RADIUS             = 151545.02
+MINIMUM_RING_LONGITUDE          = 163.9046
+MAXIMUM_RING_LONGITUDE          = 210.3663
+OBSERVED_RING_ELEVATION         = 17.3
+LIGHT_SOURCE_INCIDENCE_ANGLE    = 72.7
+MINIMUM_OBSERVED_RING_AZIMUTH   = 219.8
+MAXIMUM_OBSERVED_RING_AZIMUTH   = 266.3
+HIGHEST_DETECTABLE_OPACITY      = 9.50
+LOWEST_DETECTABLE_OPACITY       = 0.01
+
+OBJECT                          = SERIES
+  NAME                          = "OCCULTATION PROFILE"
+  INTERCHANGE_FORMAT            = ASCII
+  ROWS                          = 87533
+  COLUMNS                       = 12
+  ROW_BYTES                     = 121
+  SAMPLING_PARAMETER_NAME       = "RING RADIUS"
+  SAMPLING_PARAMETER_UNIT       = KILOMETER
+  MINIMUM_SAMPLING_PARAMETER    = 64010.60
+  MAXIMUM_SAMPLING_PARAMETER    = 151542.00
+  SAMPLING_PARAMETER_INTERVAL   = 1
+  DESCRIPTION                   = "This is a radial profile of the ring
+   system of Saturn generated from a Cassini UVIS HSP stellar occultation.
+   The data has been binned to a uniform radial scale, calibrated, and
+   used to generate values of normal optical depth profiles. The process
+   includes determining and applying models of the background signal and
+   unocculted star signal as functions of ring plane radius. Details
+   concerning the production of this profile can be found in
+   Colwell et al., 2010."
+
+OBJECT                          = COLUMN
+  NAME                          = "RING RADIUS"
+  COLUMN_NUMBER                 = 1
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 1
+  BYTES                         = 10
+  FORMAT                        = "F10.2"
+  UNIT                          = "KILOMETER"
+  DESCRIPTION                   = "Radial distance of the occultation
+   intercept point (midpoint of the bin) from the center of the planet,
+   in kilometers. Distances are measured along the ring plane."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "RING LONGITUDE"
+  COLUMN_NUMBER                 = 2
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 12
+  BYTES                         = 7
+  FORMAT                        = "F7.2"
+  UNIT                          = "DEGREE"
+  DESCRIPTION                   = "Inertial longitude on the ring plane
+   corresponding to the midpoint of the bin."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "RING OCC PHI"
+  COLUMN_NUMBER                 = 3
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 20
+  BYTES                         = 7
+  FORMAT                        = "F7.2"
+  UNIT                          = "DEGREE"
+  DESCRIPTION                   = "Angle between an outward radial vector
+   in the ring plane and the projection of the line-of-sight to the star
+   into the ring plane in the prograde direction"
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "MEAN SIGNAL"
+  COLUMN_NUMBER                 = 4
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 28
+  BYTES                         = 9
+  FORMAT                        = "F9.2"
+  MISSING_CONSTANT              = -1.
+  MINIMUM                       = -1.
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "Mean photon counts received by the HSP
+  instrument at this radial location. The background signal has not been
+  subtracted. For unconstrained segments of the data, this value is set
+  to -1."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "NORMAL OPTICAL DEPTH"
+  COLUMN_NUMBER                 = 5
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 38
+  BYTES                         = 8
+  FORMAT                        = "F8.4"
+  MISSING_CONSTANT              = -1.
+  MINIMUM                       = -1.
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "Estimate of the mean normal optical
+   depth for a band of ring material centered at the given radius. For
+   unconstrained segments of the data, this value is set to -1."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "MAXIMUM DETECTABLE NORMAL OPTICAL DEPTH"
+  COLUMN_NUMBER                 = 6
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 47
+  BYTES                         = 8
+  FORMAT                        = "F8.4"
+  MISSING_CONSTANT              = -1.
+  MINIMUM                       = -1.
+  UNIT                          = "N/A"
+  DESCRIPTION                   = "The maximum optical depth is the value
+   at which the uncertainty in the value due to photon counting statistics
+   is 25%. For unconstrained segments of the data, this value is set to -1."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "OBSERVED EVENT TDB"
+  COLUMN_NUMBER                 = 7
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 56
+  BYTES                         = 15
+  FORMAT                        = "F15.2"
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "The instant at which photons were
+   received at the spacecraft. It is represented in the Barycentric
+   Dynamical Time system, as a number of elapsed seconds since the J2000
+   epoch."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "RING EVENT TDB"
+  COLUMN_NUMBER                 = 8
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 72
+  BYTES                         = 15
+  FORMAT                        = "F15.2"
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "The time at which photons left the
+   ring plane. This time is earlier than the associated OBSERVED EVENT TDB
+   by an amount equal to the light travel time. It is represented in the
+   Barycentric Dynamical Time system, as a number of elapsed seconds since
+   the J2000 epoch."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "UNOCCULTED STAR MODEL"
+  COLUMN_NUMBER                 = 9
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 88
+  BYTES                         = 9
+  FORMAT                        = "F9.3"
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "Model of the unocculted star signal as
+   a function of ring plane radius. This is necessary because the
+   instrument does not have a constant response to a bright star."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "BACKGROUND MODEL"
+  COLUMN_NUMBER                 = 10
+  DATA_TYPE                     = ASCII_REAL
+  START_BYTE                    = 98
+  BYTES                         = 9
+  FORMAT                        = "F9.3"
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "Model of the background signal as a
+   function of ring plane radius."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "NUMBER OF SAMPLES PER BIN"
+  COLUMN_NUMBER                 = 11
+  DATA_TYPE                     = INTEGER
+  START_BYTE                    = 108
+  BYTES                         = 7
+  FORMAT                        = "I7"
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "The number of raw data points that in
+  the bin."
+  END_OBJECT                    = COLUMN
+
+OBJECT                          = COLUMN
+  NAME                          = "NOTE_FLAG"
+  COLUMN_NUMBER                 = 12
+  DATA_TYPE                     = INTEGER
+  START_BYTE                    = 116
+  BYTES                         = 4
+  FORMAT                        = "I4"
+  UNIT                          = 'N/A'
+  DESCRIPTION                   = "A numerical flag which associates
+   specific comments with individual radial bins. When more than one
+   comment applies, the values are summed. The values and their associated
+   comments are:
+
+    0: radius and longitude are based on Saturn equatorial plane.
+
+    1: radius and longitude are based on an inclined ring plane model
+       referred to in metadata associated with file. (currently not used)
+
+    2: background is estimated from other occultations. No direct
+       measurement of background in this occultation.
+
+    4: star signal is estimated from other occultations. No direct
+       measurement of unocculted star in this occultation.
+
+    8: line of sight intersects planet.
+
+    16: data includes light from two stars.
+
+    32: significant unmodeled background or instrumental effect,
+        (i.e., no background or star intensity estimate)
+
+    64: the data are corrupted."
+
+  END_OBJECT                    = COLUMN
+
+END_OBJECT                    = SERIES
+
+END

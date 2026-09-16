@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d361c068d42816437891e29906bf1ca43256da9c7ab98f9aa578fa9abca71c23"
+    "sha256": "bf2aee7a635f793a3c5d75761b1f36a65c5049241989d8089bd416aeef105f75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "807c024298f784459a9776d1b389ee52c1e96aea5faea1d1a85ac8eb0cca6a99"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5140b6b9c37716c33c4780c69b61b5df9e0283d0fbf02285e2b1b31015372a58",
+      "sha256": "c356276a9e393c78bb96446f361a923f4e81e1c511a9b5872db2dc00286085a0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -454,6 +454,9 @@
                 "label": "ISS photograph",
                 "falseColor": false,
                 "coverage": "One Cassini ISS narrow-angle photograph from 190,000 km on 11 April 2015, projected through a camera derived from Cassini SPICE kernels and refined to the shape model's limb. Unphotographed or shadowed surface retains the grid."
+              },
+              "reference": {
+                "observation": "normal"
               }
             }
           ]
@@ -2479,7 +2482,7 @@
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

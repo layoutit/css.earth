@@ -17,41 +17,46 @@ export interface AtmosphereSource {
     };
 }
 export type AtmosphereMaterial = ReturnType<typeof deriveAtmosphereMaterial>;
-export function parseAtmosphereSource(source: string) {
-    const rayleigh = requiredSection(source, /Rayleigh\s*=\s*\{([\s\S]*?)\n\s*\},\n\s*-- Default/u, "Rayleigh");
-    const mie = requiredSection(source, /Mie\s*=\s*\{([\s\S]*?)\n\s*\},\n\s*Debug/u, "Mie");
+/** Reads an authored `cssearth-atmosphere-model@1` record: the two-layer single-scattering parameters a body's preparers consume. */
+export function readAtmosphereModel(value: unknown): AtmosphereSource {
+    const record = (v: unknown, label: string): Record<string, unknown> => {
+        if (!v || typeof v !== "object" || Array.isArray(v)) throw new TypeError(`Atmosphere model ${label} must be an object.`);
+        return v as Record<string, unknown>;
+    };
+    const finite = (v: unknown, label: string): number => {
+        if (typeof v !== "number" || !Number.isFinite(v)) throw new TypeError(`Atmosphere model ${label} must be a finite number.`);
+        return v;
+    };
+    const triple = (v: unknown, label: string): readonly number[] => {
+        if (!Array.isArray(v) || v.length !== 3 || v.some((x) => typeof x !== "number" || !Number.isFinite(x) || x <= 0))
+            throw new TypeError(`Atmosphere model ${label} must contain three positive values.`);
+        return Object.freeze([v[0], v[1], v[2]]);
+    };
+    const root = record(value, "record");
+    if (root.schema !== "cssearth-atmosphere-model@1") throw new TypeError("Atmosphere model schema is not cssearth-atmosphere-model@1.");
+    const rayleigh = record(root.rayleigh, "rayleigh"), mie = record(root.mie, "mie");
     const model = Object.freeze({
-        atmosphereHeightKm: difference(source, "AtmosphereHeight"),
-        planetRadiusKm: scalar(source, "PlanetRadius"),
-        averageGroundReflectance: scalar(source, "PlanetAverageGroundReflectance"),
-        groundRadianceEmission: scalar(source, "GroundRadianceEmission"),
-        sunIntensity: scalar(source, "SunIntensity"),
+        atmosphereHeightKm: finite(root.atmosphereHeightKm, "atmosphereHeightKm"),
+        planetRadiusKm: finite(root.planetRadiusKm, "planetRadiusKm"),
+        averageGroundReflectance: finite(root.averageGroundReflectance, "averageGroundReflectance"),
+        groundRadianceEmission: finite(root.groundRadianceEmission, "groundRadianceEmission"),
+        sunIntensity: finite(root.sunIntensity, "sunIntensity"),
         rayleigh: Object.freeze({
-            wavelengthsNm: Object.freeze(vector(rayleigh, "Wavelengths")),
-            scatteringPerKm: Object.freeze(vector(rayleigh, "Scattering")),
-            scaleHeightKm: scalar(rayleigh, "H_R"),
+            wavelengthsNm: triple(rayleigh.wavelengthsNm, "rayleigh.wavelengthsNm"),
+            scatteringPerKm: triple(rayleigh.scatteringPerKm, "rayleigh.scatteringPerKm"),
+            scaleHeightKm: finite(rayleigh.scaleHeightKm, "rayleigh.scaleHeightKm"),
         }),
         mie: Object.freeze({
-            scatteringPerKm: Object.freeze(vector(mie, "Scattering")),
-            extinctionPerKm: Object.freeze(expressionVector(mie, "Extinction")),
-            scaleHeightKm: scalar(mie, "H_M"),
-            phaseG: scalar(mie, "G"),
+            scatteringPerKm: triple(mie.scatteringPerKm, "mie.scatteringPerKm"),
+            extinctionPerKm: triple(mie.extinctionPerKm, "mie.extinctionPerKm"),
+            scaleHeightKm: finite(mie.scaleHeightKm, "mie.scaleHeightKm"),
+            phaseG: finite(mie.phaseG, "mie.phaseG"),
         }),
     });
-    for (const [label, values] of [
-        ["Rayleigh wavelengths", model.rayleigh.wavelengthsNm],
-        ["Rayleigh scattering", model.rayleigh.scatteringPerKm],
-        ["Mie scattering", model.mie.scatteringPerKm],
-        ["Mie extinction", model.mie.extinctionPerKm],
-    ] as const) {
-        if (values.length !== 3 || values.some((value) => !Number.isFinite(value) || value <= 0)) {
-            throw new TypeError(`${label} must contain three positive values.`);
-        }
-    }
     if (model.atmosphereHeightKm <= 0 || model.planetRadiusKm <= 0 ||
         model.rayleigh.scaleHeightKm <= 0 || model.mie.scaleHeightKm <= 0 ||
         model.mie.phaseG < -1 || model.mie.phaseG > 1) {
-        throw new TypeError("OpenSpace atmosphere parameters are invalid.");
+        throw new TypeError("Atmosphere model parameters are invalid.");
     }
     return model;
 }
@@ -77,41 +82,6 @@ export function deriveAtmosphereMaterial(source: AtmosphereSource) {
         mieScatteringOpticalDepth: Object.freeze(mieScatteringOpticalDepth),
         mieExtinctionOpticalDepth: Object.freeze(mieExtinctionOpticalDepth),
         extinctionOpticalDepth: Object.freeze(extinctionOpticalDepth),
-    });
-}
-function requiredSection(source: string, pattern: RegExp, label: string) {
-    const match = source.match(pattern);
-    if (!match)
-        throw new TypeError(`OpenSpace ${label} section is missing.`);
-    return match[1];
-}
-function scalar(source: string, key: string) {
-    const match = source.match(new RegExp(`^\\s*${key}\\s*=\\s*(-?\\d+(?:\\.\\d+)?)`, "mu"));
-    if (!match)
-        throw new TypeError(`OpenSpace ${key} is missing.`);
-    return Number(match[1]);
-}
-function difference(source: string, key: string) {
-    const match = source.match(new RegExp(`^\\s*${key}\\s*=\\s*(\\d+(?:\\.\\d+)?)\\s*-\\s*(\\d+(?:\\.\\d+)?)`, "mu"));
-    if (!match)
-        throw new TypeError(`OpenSpace ${key} difference is missing.`);
-    return Number(match[1]) - Number(match[2]);
-}
-function vector(source: string, key: string) {
-    const match = source.match(new RegExp(`^\\s*${key}\\s*=\\s*\\{([^}]+)\\}`, "mu"));
-    if (!match)
-        throw new TypeError(`OpenSpace ${key} vector is missing.`);
-    return match[1].split(",").map((value) => Number(value.trim()));
-}
-function expressionVector(source: string, key: string) {
-    const match = source.match(new RegExp(`^\\s*${key}\\s*=\\s*\\{([^}]+)\\}`, "mu"));
-    if (!match)
-        throw new TypeError(`OpenSpace ${key} vector is missing.`);
-    return match[1].split(",").map((expression) => {
-        const division = expression.trim().match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/u);
-        if (!division)
-            throw new TypeError(`OpenSpace ${key} expression is invalid.`);
-        return Number(division[1]) / Number(division[2]);
     });
 }
 function mean(values: readonly number[]) {

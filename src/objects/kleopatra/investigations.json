@@ -168,6 +168,23 @@
           "commit": "eb964b61fe518ae973c05d1214894490dc07808b"
         }
       ]
+    },
+    {
+      "id": "sphere-cross-frame-registration",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "status": "included",
+      "finding": "The survey holds 55 deconvolved ZIMPOL frames (camera 1) for this body; the cross-frame registration test could not be run on them in this pass.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        }
+      ]
     }
   ]
 }

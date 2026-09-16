@@ -4,7 +4,7 @@
     {
       "id": "inter-sun-title-vector",
       "path": "presentation/title-mark.json",
-      "expectedSha256": "e2b9fb1f143565bef981fd1413d824c7ad11e26f95dc0ad948fd748f0cce3e7d",
+      "expectedSha256": "6a9745d51236d6aaf64520db33e0b55d205337d8bdecfc22bc8a6d56a23cefea",
       "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Sun outline",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -13,7 +13,7 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 2062,
+      "expectedBytes": 2101,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
