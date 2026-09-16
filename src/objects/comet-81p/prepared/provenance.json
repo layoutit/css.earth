@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "faa0522f55ddcb1e4abeb3ebd94dbb93b29dc6aec714dea163081065fbd472ed"
+    "sha256": "f0ef77b317881d7a9a879488b10ce6d0b427bb85b897c391d18ea8c5a9c4a94e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -193,30 +193,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "978799852f7a293c01778d5e3ec46935415100053a03d81c13a0023677d2eac2",
+      "sha256": "9049513c8333fbfe9d3bb2d33857be5f03f744166fc31b1d791f89a2d284877e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-81p",
         "displayName": "Wild 2",
         "panel": {
-          "facts": [
-            {
-              "id": "scale",
-              "label": "Fitted ellipsoid",
-              "value": "5.2 × 4.0 × 2.7 km"
-            },
-            {
-              "id": "mission",
-              "label": "Explored by",
-              "value": "Stardust"
-            },
-            {
-              "id": "flyby",
-              "label": "Flyby",
-              "value": "2 January 2004"
-            }
-          ],
+          "facts": [],
           "moreFacts": []
         },
         "lenses": {
@@ -852,8 +836,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "978799852f7a293c01778d5e3ec46935415100053a03d81c13a0023677d2eac2",
-      "bytes": 3745,
+      "sha256": "9049513c8333fbfe9d3bb2d33857be5f03f744166fc31b1d791f89a2d284877e",
+      "bytes": 3422,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1182,8 +1166,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3735,
-          "sha256": "1172ca92cdeaae5e313c6e2386c6dae1a7d46dbf42b61b4be42983a43892bbad",
+          "bytes": 3549,
+          "sha256": "6d7ec2d554f24e3cf2a6c4ad6f518623d91265588f8be0a2df61ba0b67753e50",
           "verification": "bytes-verified"
         }
       ],
@@ -1262,7 +1246,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-81p",
-    "materialSha256": "889254f59c14ae83d94479ae11683f372595d06f15248a003137ffdfef912b35",
+    "materialSha256": "ec037b72f6eb92cfbf88ec87527f80f5364fb934eeff0133a0779fc63a2b7c8e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

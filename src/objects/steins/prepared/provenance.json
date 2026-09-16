@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae086982bd6b76d85f7670f8147bdef6225ed2add3e1905c7c43fb11bc980ed7"
+    "sha256": "e4bad7ac527e4f343b3ea29fffdb70bbc582a510b66d9eaebd76d9eb1e9443d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -201,7 +201,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
+      "sha256": "bccae6cc1a939c271c04b0434d1b94154508afe676a434d0882cdaf990760121",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -240,14 +240,17 @@
               }
             },
             {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.363 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "3.64 years"
+              "value": "3.64 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2867",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -695,8 +698,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
-      "bytes": 10227,
+      "sha256": "bccae6cc1a939c271c04b0434d1b94154508afe676a434d0882cdaf990760121",
+      "bytes": 10453,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -984,8 +987,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6096,
-          "sha256": "79aedd4ecabe18d4799f39abe298c038e31759b4eee6cab0b5aa484145db0c10",
+          "bytes": 6275,
+          "sha256": "6132c863b305bebcbbf7e406a3ec7ab8d265f4fe11d2fb342d23b2fcf85079d7",
           "verification": "bytes-verified"
         }
       ],
@@ -1109,7 +1112,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "cbceb0e895ef4e2b89de7dbd34739c10a95a8f9f0db605d4bcabd4c055d7c10a",
+    "materialSha256": "7aa1310c74cd0ad7f0c62791f583b931312400cb257b8baeb882a7d827e914e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
