@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b20bfe1d45a3a09f0ab7c4f0c8c3c35dc4052b49a07d7a2ed293b00447706660"
+    "sha256": "fa038c4a0750052395e0d5ac35aa761c55e0af2be8678c9f7aaded15aee88bea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -344,7 +344,7 @@
           {
             "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
             "role": "material",
-            "evidence": "src/objects/pi1-gruis/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/0"
           }
         ]
       },
@@ -385,7 +385,7 @@
           {
             "catalogueId": "source-pi1-gruis-uniform-disc-sphere",
             "role": "material",
-            "evidence": "src/objects/pi1-gruis/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/1"
           }
         ]
       },
@@ -422,7 +422,7 @@
           {
             "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
             "role": "material",
-            "evidence": "src/objects/pi1-gruis/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+            "evidence": "src/objects/pi1-gruis/source/manifest.json@86534f6388bb099cd25eb60341ec2cba13a8e039#/inputs/2"
           }
         ]
       },
