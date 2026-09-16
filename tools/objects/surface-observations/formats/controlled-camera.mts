@@ -124,7 +124,9 @@ async function frameIdentity(sourceDirectory: string, frame: CameraFrameRecipe) 
   if (!frame.labelPath) {
     // A deconvolved ZIMPOL frame has no detached label of any kind. Its own header states the exposure and the filter.
     const { header } = readFitsPrimary(await readFile(resolve(sourceDirectory, frame.path)));
-    const startTime = header['DATE-OBS'], filter = header['ESO INS3 OPTI5 NAME'];
+    // Header literals keep their FITS quoting and fixed-width padding; provenance records the stated value.
+    const stated = (key: string) => { const raw = header[key]; return raw === undefined ? undefined : String(raw).replace(/^'|'$/g, '').trim() || undefined; };
+    const startTime = stated('DATE-OBS'), filter = stated('ESO INS3 OPTI5 NAME');
     if (!startTime || !filter) throw new Error(`Controlled camera frame ${frame.id} lacks a start time or filter in its header.`);
     return { label: '', startTime, filter };
   }

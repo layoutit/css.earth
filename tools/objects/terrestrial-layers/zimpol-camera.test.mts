@@ -12,9 +12,19 @@ test('a deconvolved ZIMPOL frame decodes through its own header', () => {
   assert.equal(image.width, 2);
   assert.equal(image.height, 2);
   assert.equal(image.encoding, 'fits-zimpol-intensity');
-  assert.deepEqual(Array.from(image.data), [0.5, 1.5, 2.5, 3.5]);
   // Deconvolved intensity has a floor at zero rather than a calibrated sky level, so exact zero is a sample.
   assert.equal(image.allowZero, true);
+});
+
+test('the decoded rows run top-down, as every other camera on this route does', () => {
+  // The file stores row 0 at the bottom. The ray caster indexes rows directly, so a frame left in FITS order
+  // renders mirrored in latitude against the 22 bodies whose archives store row 0 at the top. The silhouette,
+  // the disc size and the phase angle are all identical either way, so only this assertion catches it.
+  const image = decodeCalibratedCamera(zimpol([0.5, 1.5, 2.5, 3.5]), 'fits-zimpol-intensity');
+  assert.deepEqual(Array.from(image.data), [2.5, 3.5, 0.5, 1.5]);
+  const tall = decodeCalibratedCamera(zimpol([1, 2, 3, 4, 5, 6]), 'fits-zimpol-intensity');
+  assert.equal(tall.height, 3);
+  assert.deepEqual(Array.from(tall.data), [5, 6, 3, 4, 1, 2]);
 });
 
 test('a frame from another instrument is refused rather than read as ZIMPOL', () => {
