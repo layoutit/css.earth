@@ -18,7 +18,7 @@ test("the prepared Iapetus nomenclature catalogue is pinned by the runtime plan 
   assert.equal(catalog.features.length, plan.catalog.count);
   assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
   assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
-  assert.equal(plan.catalog.count, 69, "the unchanged features recipe keeps the terrestrial-lane count");
+  assert.equal(plan.catalog.count, 70, "the default-label recipe keeps the terrestrial-lane count plus its landmark class");
   assert.deepEqual(descriptor.skipped, {"diameter:RE":{"count":1,"reason":"Features without a published diameter cannot be ranked or outlined."}}, "the same Gazetteer rows are skipped (unchanged recipe)");
 });
 
@@ -29,5 +29,5 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   assert.deepEqual(plan.lensIds, ["normal","enhanced","infrared","ice-absorption"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0, "labels are not zoom-gated since the default label policy");
 });

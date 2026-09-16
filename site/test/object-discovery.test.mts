@@ -30,6 +30,17 @@ test('all four type searches and scene highlights contain the same eligible regi
   assert.ok(searchObjects(labels, 'Hale–Bopp').matches.some(object => object.id === 'comet-c1995-o1'), 'a name search still finds illustrations');
 });
 
+test('an authored orientation reference passes through discovery as a validated tier', () => {
+  assert.equal(deriveObjectDiscovery({ ...policy, orientationReference: 5 }, controls('model'), []).orientationReference, 5);
+  assert.equal(deriveObjectDiscovery(policy, controls('model'), []).orientationReference, undefined);
+  assert.throws(() => deriveObjectDiscovery({ ...policy, orientationReference: 0 }, controls('model'), []), /orientation reference/);
+  assert.equal(parseObjectDiscovery({ featured: false, imagery: false, illustration: false, orientationReference: 4 }).orientationReference, 4);
+  assert.throws(() => parseObjectDiscovery({ featured: false, imagery: false, illustration: false, orientationReference: 1.5 }), /orientation reference/);
+  // The prepared catalogue carries the Sun and Earth tiers; shared label code never names an object id.
+  assert.equal(requireSceneObject('sun').discovery.orientationReference, 5);
+  assert.equal(requireSceneObject('earth').discovery.orientationReference, 4);
+});
+
 test('only a prepared observation promotes an illustration, without a second flag change', () => {
   const recipes = [{ raster: { observations: [model], surfaceObservations: [{ id: 'camera' }] } }];
   assert.deepEqual(deriveObjectDiscovery(policy, controls('model'), recipes), { featured: false, imagery: false, illustration: true });
