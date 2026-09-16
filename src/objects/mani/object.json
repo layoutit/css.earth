@@ -114,7 +114,9 @@
       "bodyRadiusM": 402795.9116616533
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Máni (2002 MS4)",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",

@@ -109,7 +109,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Despina",
       "classification": "satellite",
       "color": "#a0a0a0",

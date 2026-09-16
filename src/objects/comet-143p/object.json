@@ -114,7 +114,9 @@
       }
     },
     "catalog": {
-      "illustrationLenses": ["model"],
+      "illustrationLenses": [
+        "model"
+      ],
       "name": "Kowal–Mrkos",
       "classification": "comet",
       "color": "#b8b6b2",
