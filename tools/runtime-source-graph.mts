@@ -52,8 +52,6 @@ function importedName(ast: Program, source: string, symbol: string): string | un
 
 /** Resolve published entries through their actual build configurations. */
 export async function resolveRuntimeSource(imported: string, importer: string, { root, source, objectIds }: {root: string; source: RuntimeSourceReader; objectIds?: ReadonlySet<string>}): Promise<string> {
-  // A Vite asset reference (?url, ?raw, ?inline) is served bytes, not runtime source; nothing to follow.
-  if (/\?(?:url|raw|inline)$/.test(imported)) return;
   let target: string;
   if (imported.startsWith('.')) target = resolve(dirname(importer), imported);
   else if (imported.startsWith('@cssearth/')) {
