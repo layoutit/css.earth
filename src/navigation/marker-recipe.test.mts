@@ -75,12 +75,16 @@ test("rejects unsafe recipes and drifted source bytes", async (context) => {
 
 
 test("resolved parent sprites retain native source density and the existing physical size basis", async () => {
-  for (const [id, pixels] of [["saturn",1440], ["jupiter",1019], ["charon",512]]) {
-    const marker = PREPARED_NAVIGATION_MARKERS[id], sprite = contextMarkerSprite(marker);
+  for (const id of ["saturn", "jupiter", "charon"]) {
+    const marker = PREPARED_NAVIGATION_MARKERS[id], sprite = contextMarkerSprite(marker), pixels = marker.context?.pixels;
     assert.equal(sprite.size, marker.presentation.size);
-    assert.equal(sprite.index,0); assert.equal(sprite.count,1);
-    assert.equal(sprite.url, `/navigation/${id}-context.webp`);
-    const metadata = await sharp(resolve(import.meta.dirname,"../../public",sprite.url.slice(1))).metadata();
+    // The 32 px tile draws first; the resolved context image is the detail once the marker outgrows it (#136).
+    assert.equal(sprite.url, marker.url2x);
+    assert.ok('detail' in sprite, `${id}: resolved context detail`);
+    assert.equal(sprite.detail.index,0); assert.equal(sprite.detail.count,1);
+    assert.equal(sprite.detail.url, `/navigation/${id}-context.webp`);
+    assert.equal(sprite.detail.fromDiameterPixels, (marker.url2xPixels ?? 0) / 2);
+    const metadata = await sharp(resolve(import.meta.dirname,"../../public",sprite.detail.url.slice(1))).metadata();
     assert.equal(metadata.width,pixels); assert.equal(metadata.height,pixels);
     assert.ok(metadata.width >= 512, "Resolved imagery must not come from the 32px UI atlas");
   }
