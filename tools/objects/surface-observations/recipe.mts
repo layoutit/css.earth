@@ -6,7 +6,7 @@
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
 import { requireRecord } from '../../source-values.mts';
-import { array, number, optional, shape } from '../terrestrial-layers/source-records.mts';
+import { array, number, optional, shape, text } from '../terrestrial-layers/source-records.mts';
 import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 
 /** Keys every lens has, and the two a mosaic adds. */
@@ -28,8 +28,10 @@ export function checkKeys(value: unknown, required: readonly string[], allowed: 
   if (unknown.length || missing.length) throw new TypeError(`Invalid source-bound ${context}: ${[...unknown.map(key => `unknown ${key}`), ...missing.map(key => `missing ${key}`)].join(', ')}.`);
 }
 
-/** A display maps either a percentile range of the qualified values or one authored display range to display levels; a colour product's bands share that range. */
-export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)) });
+/** A display maps either a percentile range of the qualified values or one authored display range to display levels; a colour product's bands share that range.
+ * A monochrome lens may present those levels through an authored palette of at least two hex colours instead of linear grey. */
+export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)), palette: optional(array(text)) });
+const hexColor = /^#[0-9a-f]{6}$/;
 export type LensDisplay = ReturnType<typeof parseDisplay>;
 
 export interface LensEnvelope {
@@ -42,6 +44,8 @@ export interface LensEnvelope {
 export interface EnvelopeRules {
   selections: readonly string[];
   displays: readonly ('percentiles' | 'displayRange')[];
+  /** Whether the format's monochrome levels may carry an authored palette. */
+  palette?: boolean;
   maximumFrames: number;
   maximumLevelGain: number;
   samplesPerTriangle: 'required' | 'optional';
@@ -51,7 +55,9 @@ export interface EnvelopeRules {
  * distinct safe input paths and one valid display. */
 export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
   const { frames, levelMatching: levels, display } = recipe, mosaic = frames.length > 1;
-  checkKeys(display, [], ['percentiles', 'displayRange'], `${context} display`);
+  checkKeys(display, [], ['percentiles', 'displayRange', 'palette'], `${context} display`);
+  if (display.palette !== undefined && (!rules.palette || !Array.isArray(display.palette) || display.palette.length < 2 || display.palette.some(color => !hexColor.test(color))))
+    throw new TypeError(`Invalid source-bound ${context}: a display palette needs at least two #rrggbb colours on a monochrome lens.`);
   if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
   const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||

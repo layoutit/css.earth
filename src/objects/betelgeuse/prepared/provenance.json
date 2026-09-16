@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9070548bfc90f91fe401e96156d21d2739e0231bfba2c5306724c3bb6a38b48e"
+    "sha256": "3c5fe58415044a301d33ca436cd6e0f74c71b8a24d433d6f58435f26abd75c5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "82f4936bfcd9b859491ac657654a5a67090fb5681d0fafdaef2a6c08684e1954",
+      "sha256": "5d0a10749460ed500015a82c531243aa2df8e890467f7732721e00321c1e5d13",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -41,8 +41,8 @@
               "consumer": "sphere-photograph",
               "metadata": {
                 "label": "MATISSE reconstruction",
-                "falseColor": false,
-                "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. Grayscale is reconstructed relative intensity in one infrared band, not colour or temperature. The far hemisphere is unobserved."
+                "falseColor": true,
+                "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
               },
               "frames": [
                 {
@@ -86,6 +86,14 @@
                 "percentiles": [
                   1,
                   99.5
+                ],
+                "palette": [
+                  "#3b0500",
+                  "#9a1e00",
+                  "#e0641a",
+                  "#ffb340",
+                  "#ffe9a0",
+                  "#fffbf0"
                 ]
               }
             }
@@ -145,7 +153,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "97d670b2b303fc9f8e86554d2988edb92ee93a4cfeb01dac5761a2eba8da6402",
+      "sha256": "ce4bc0dcaeaa3be906cf7d4498663f8088b2cf5638453004c123e401098adb48",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -190,9 +198,23 @@
                 "id": "betelgeuse-matisse-2020-02-continuum",
                 "path": "../manifest.json"
               },
-              "falseColor": false,
-              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. Grayscale is reconstructed relative intensity in one infrared band: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
-              "noData": true
+              "falseColor": true,
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+              "noData": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity at 4 µm",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.37",
+                  "0.68",
+                  "1.00"
+                ],
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://arxiv.org/abs/2401.12404",
+                "image": "/scenes/betelgeuse/betelgeuse-matisse-legend.webp"
+              }
             }
           ]
         },
@@ -416,8 +438,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "97d670b2b303fc9f8e86554d2988edb92ee93a4cfeb01dac5761a2eba8da6402",
-      "bytes": 3251,
+      "sha256": "ce4bc0dcaeaa3be906cf7d4498663f8088b2cf5638453004c123e401098adb48",
+      "bytes": 3758,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -451,14 +473,20 @@
       "outputs": [
         {
           "url": "/scenes/betelgeuse/betelgeuse-matisse-thumbnail.webp",
-          "bytes": 2206,
-          "sha256": "14123a1a4d7e3171573ee13e1ff563ebb62aa0c3510393da1a2919dd6eb7a617",
+          "bytes": 3776,
+          "sha256": "486f645d70a12441881123c19cbdfd75ff99cff195bb431fd7710443d6561c28",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-matisse-legend.webp",
+          "bytes": 164,
+          "sha256": "ea63ca043fcef98608dae82e46043dd041d2b34e8166f7945c6de1b8d5f33b6c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-matisse-surface@2x.webp",
-          "bytes": 296378,
-          "sha256": "3ada067eded9d98c726a3d89bdcc1c2ebda2210ea20ede4f8f696afa33a11adc",
+          "bytes": 401820,
+          "sha256": "3330d6504817f8dcf0c774adb894e773b1d68d0aae5d06ffc1fdda8086959a06",
           "verification": "bytes-verified"
         }
       ],
@@ -516,8 +544,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/matisse.webp",
-          "bytes": 5790,
-          "sha256": "311ef58a2527cabc047cf4e76120484b3ef4a73d6a88c92e9cf3ff3c9c95da67",
+          "bytes": 9398,
+          "sha256": "46a03049009f21f94532f883782a61e6265b9344b069e116d3df285433866a7e",
           "verification": "bytes-verified"
         }
       ]
@@ -529,7 +557,7 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "130d4f2e363907b0d0ce322dcd9915e6c9bb6cc664334569c4968542d9a5717b",
+    "materialSha256": "5ae9fcca80f29d03ac50d150d4e6f51979521a56197c6a41a7b812c52c8fba4f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
