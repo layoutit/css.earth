@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09d8f13910080b13cd2975ecbcd5be88872ba804fc620c82180ece0a282512d8"
+    "sha256": "56d9573199b27f6977294a26ee85b212e373f010a0eb5e3a31b4663d3dbb7274"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+    "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+    "bindingsSha256": "08754b0570a650dcdbbacb34d5564f74d1036faf8542fd456a74d841419ab9b6"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "22391072da4519931d17351b2bbd491a19f0ee9d0a976247d2780337ba32b1fb",
+      "sha256": "924f6b18dc369c6ad90e4a1f6906fba139a2ff272663daee8ea72fabd526c87b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -392,6 +392,9 @@
                   1,
                   99.5
                 ]
+              },
+              "refinement": {
+                "tilt": "silhouette"
               }
             }
           ]
@@ -1728,14 +1731,14 @@
       "outputs": [
         {
           "url": "/scenes/psyche/psyche-zimpol-thumbnail.webp",
-          "bytes": 1782,
-          "sha256": "dc4609aa017d763e07308563fa8b5fc4f9f2e0763a5632e2d1f2592ff22810ee",
+          "bytes": 1770,
+          "sha256": "f9ed25bd4b1847908eb115c1625851480e5232c1568ac2796fe9c0ad68026a2b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
-          "bytes": 327214,
-          "sha256": "7488f69efdedbf099df7ef079e7f64e549d783279bcfd3d7425238258542c47d",
+          "bytes": 320966,
+          "sha256": "0984a97df24da63929ad662c81ff8035e36391cde4176f47fb6db211e50040bb",
           "verification": "bytes-verified"
         }
       ],
@@ -1818,8 +1821,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 6086,
-          "sha256": "2d935f3b33b202be861d8c5b4ed9e83733ffc62049e2332c1ff724e91061486d",
+          "bytes": 5978,
+          "sha256": "27cfd2397be7cae0dca8fd62e510c4659cba4b053aee3db8fd457f1966c9f82d",
           "verification": "bytes-verified"
         }
       ]
@@ -1856,11 +1859,11 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "81522e03dd874e0c7165d6f7a3cc7e69d6f635c9f745d74f79ea5d91510a4708",
+    "materialSha256": "f1c98c0f710a8ac45682e0f6ec27aa4a80ff25d2d72ad50a3188fbfff798cc44",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "6812722b09065738b64a4dd676edf01583c718193d00cd323505d2b521dc28b7",
+      "bindingsSha256": "08754b0570a650dcdbbacb34d5564f74d1036faf8542fd456a74d841419ab9b6"
     }
   }
 }

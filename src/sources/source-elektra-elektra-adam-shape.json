@@ -1,35 +1,35 @@
 {
-  "id": "source-kalliope-kalliope-horizons-sphere-heliocentric",
+  "id": "source-elektra-elektra-adam-shape",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Kalliope · kalliope horizons sphere heliocentric",
+  "title": "Elektra · elektra adam shape",
   "identifiers": [],
   "links": [
     {
       "role": "landing",
-      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "url": "https://observations.lam.fr/astero/3Dshape/130_Elektra_adam.obj",
       "label": "Source"
     }
   ],
   "evidence": [
     {
-      "path": "src/objects/kalliope/source/manifest.json",
+      "path": "src/objects/elektra/source/manifest.json",
       "revision": "0000000000000000000000000000000000000000",
       "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
-      "locator": "/inputs/5"
+      "locator": "/inputs/3"
     }
   ],
   "relations": [],
   "statements": [
     {
       "kind": "credit",
-      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
-      "scope": "The kalliope horizons sphere heliocentric input.",
+      "text": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The elektra adam shape input.",
       "evidence": "Manifest credit field."
     },
     {
       "kind": "rights",
-      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
       "scope": "Redistributed display derivatives.",
       "evidence": "Manifest license field."
     }

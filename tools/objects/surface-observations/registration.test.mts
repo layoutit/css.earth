@@ -5,7 +5,8 @@ import { multiply } from '../../spice/ck.mts';
 import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '../terrestrial-layers/observer-camera.mts';
 import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/observer-registration.mts';
-import { DECISIVE, parseRefinement, refinementDecision, referenceRegistration, reliefRegistration, silhouetteRegistration, type RegistrationStageReport } from './registration.mts';
+import { DECISIVE, parseRefinement, refinementDecision, refinementKept, referenceRegistration, reliefRegistration, silhouetteRegistration, tiltDecision, type RegistrationStageReport } from './registration.mts';
+import { tiltedCamera } from './cameras.mts';
 import type { FrameDetector, LoadContext, ObservationCamera, ObservationFrame, ObservationImage } from './contract.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;
@@ -126,4 +127,28 @@ test('a refinement applies the named reference\'s median only when it is decisiv
   assert.equal(refinementDecision(stage(1.25, 0, 'observation'), parseRefinement({ by: 'map', agreementDegrees: 2 })).applied, true);
   assert.throws(() => parseRefinement({ by: 'silhouette' }), /relief, frames or map/);
   assert.throws(() => parseRefinement({ by: 'relief', agreementDegrees: 45 }), /under thirty/);
+});
+
+test('the silhouette tilts a lens whose stated pole is wrong, and the tilted lens scores like the right one', () => {
+  const view = (id: string, epochJd: number) => photograph(id, epochJd, upright, tilted, 256, 'deconvolved');
+  const frames = [view('a', J2000 + 3.1), view('b', J2000 + 3.1 + 2 / 1440), view('c', J2000 + 3.6), view('d', J2000 + 3.6 + 2 / 1440)];
+  const before = silhouetteRegistration(frames);
+  const decision = tiltDecision({ silhouette: before } as RegistrationStageReport);
+  assert.ok(decision.applied && decision.tiltDegrees !== null, `a pole twenty degrees off is a tilt the silhouette scores (${decision.reason})`);
+  assert.ok(Math.abs(decision.tiltDegrees ?? 0) > 5, `the tilt is well above the floor (${decision.tiltDegrees})`);
+  const corrected = frames.map(frame => ({ ...frame, detector: { ...frame.detector!, camera: tiltedCamera(frame.detector!.camera, decision.tiltDegrees ?? 0, { tilt: 'silhouette' }) } }));
+  const after = silhouetteRegistration(corrected);
+  assert.ok(before.rmsDegrees !== null && after.rmsDegrees !== null && after.rmsDegrees < before.rmsDegrees / 3, `the tilt takes the residual from ${before.rmsDegrees}° to ${after.rmsDegrees}°`);
+  assert.throws(() => parseRefinement({ tilt: 'relief' }), /comes from the silhouette/);
+  assert.equal(parseRefinement({ tilt: 'silhouette' }).tilt, 'silhouette');
+});
+
+test('a correction is kept only when the second measurement improves what it came from', () => {
+  const stage = (rms: number | null, relief: number | null, reference: number | null = null) => ({ silhouette: { rmsDegrees: rms }, relief: { medianOffsetDegrees: relief }, reference: { medianOffsetDegrees: reference } } as unknown as RegistrationStageReport);
+  assert.equal(refinementKept(stage(4.49, 1), stage(3.19, 1), undefined, true).tilt?.kept, true);
+  assert.equal(refinementKept(stage(3.63, 1), stage(4.45, 1), undefined, true).tilt?.kept, false);
+  assert.equal(refinementKept(stage(3, 1.0), stage(3, 0.25), 'relief', false).turn?.kept, true);
+  assert.equal(refinementKept(stage(3, 1.0), stage(3, 1.0), 'relief', false).turn?.kept, false);
+  assert.equal(refinementKept(stage(3, 1.0), stage(3, null), 'relief', false).turn?.kept, true, 'a reference that stops being decisive after the turn does not undo it');
+  assert.equal(refinementKept(stage(3, null, 2), stage(3, null, 0.5), 'frames', false).turn?.kept, true);
 });

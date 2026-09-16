@@ -118,3 +118,21 @@ export function turnedCamera(camera: ObservationCamera, degrees: number, refinem
     ray: (x, y) => turn(camera.ray(x, y)), project: point => camera.project(back(point)),
     report: { ...camera.report, refinement: { ...refinement, turnDegrees: degrees } } };
 }
+
+/**
+ * A camera tilted about its own line of sight by a measured angle: the body's pole seen tilted in the sky is the same
+ * sight as the camera rolled the other way about the line from the body to it, so the rays and the Sun turn about
+ * that line and the projection takes its points through the inverse roll. The position stays; the provider's camera
+ * is kept in the report beside the tilt.
+ */
+export function tiltedCamera(camera: ObservationCamera, degrees: number, refinement: Record<string, unknown>): ObservationCamera {
+  if (!Number.isFinite(degrees)) throw new TypeError('A camera is tilted by a finite angle.');
+  const axis = unit(camera.positionMeters), a = degrees * Math.PI / 180, c = Math.cos(a), s = Math.sin(a);
+  // Rodrigues' rotation about the line of sight, and its inverse.
+  const roll = (v: readonly number[], sign: number) => {
+    const k = axis, kv = cross(k, v), kd = dot(k, v);
+    return v.map((n, i) => n * c + sign * s * kv[i] + k[i] * kd * (1 - c));
+  };
+  return { ...camera, sunDirection: roll(camera.sunDirection, 1), ray: (x, y) => roll(camera.ray(x, y), 1), project: point => camera.project(roll(point, -1)),
+    report: { ...camera.report, refinement: { ...(camera.report.refinement as Record<string, unknown> | undefined ?? {}), ...refinement, tiltDegrees: degrees } } };
+}
