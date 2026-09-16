@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "19.189 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "412",
+        "Uranus",
+        "Oberon",
+        "704",
+        "URA182",
+        "equatorial",
+        "2000-01-01.5",
+        "583511.",
+        "0.002",
+        "132.2",
+        "143.6",
+        "0.1",
+        "76.8",
+        "13.463237",
+        "158.604",
+        "192.798",
+        "",
+        "",
+        "",
+        "45"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "IV",
+        "Oberon",
+        "",
+        "1787",
+        "W. Herschel",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

@@ -15,8 +15,7 @@ const citation = { catalogueId: 'radius-table', url: 'https://example.invalid/ra
   checked: '2026-09-10', path: 'source/review.json', locator: '/references/0' };
 const panel = { facts: [{ id: 'radius', label: 'Mean radius', value: '10 km', source: citation }],
   moreFacts: [{ id: 'rotation-period', label: 'Rotation period', value: '8 h',
-    source: { ...citation, catalogueId: 'rotation-table', url: 'https://example.invalid/rotation', locator: '/references/1' } },
-  { id: 'discovery', label: 'Discovery', value: 'Uncited fixture fact' }] };
+    source: { ...citation, catalogueId: 'rotation-table', url: 'https://example.invalid/rotation', locator: '/references/1' } }] };
 const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: ['radius-table', 'rotation-table'].map(id => ({
   id, kind: 'reference-page', identityLevel: 'work', title: id, identifiers: [],
   links: [{ role: 'landing', url: `https://example.invalid/${id}`, label: id }],
@@ -33,7 +32,8 @@ test('facts sharing one evidence file retain separate claim citations and create
   assert.equal(edges[1].locator, '/panel/moreFacts/0/source');
   assert.equal(edges[1].citationUrl, 'https://example.invalid/rotation');
   assert.deepEqual(usage.datasets, []);
-  assert.equal(edges.length, 2, 'the uncited fact acquires no inferred source');
+  assert.equal(edges.length, 2);
+  assert.throws(() => parseFactsheet({ facts: [...panel.facts, { id: 'discovery', label: 'Discovery', value: 'Uncited fixture fact' }] }), /a published fact names its source/);
   for (const mutation of [{ kind: 'product-input' }, { lensIds: ['surface'] }, { productId: 'surface' }, { objectId: undefined }, { citationUrl: undefined }]) {
     const invalid = structuredClone(edges);
     Object.assign(invalid[0], mutation);

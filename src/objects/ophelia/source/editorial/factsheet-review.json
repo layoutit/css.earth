@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "ophelia",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "416",
+        "Uranus",
+        "Ophelia",
+        "707",
+        "URA184",
+        "Laplace",
+        "2025-01-01.0",
+        "53765.",
+        "0.011",
+        "19.3",
+        "213.4",
+        "0.2",
+        "151.6",
+        "0.3764",
+        "0.4",
+        "0.8",
+        "77.3",
+        "15.2",
+        "180.0",
+        "10"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "VII",
+        "Ophelia",
+        "S/1986 U8",
+        "1986",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

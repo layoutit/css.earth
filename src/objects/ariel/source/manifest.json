@@ -395,8 +395,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7276,
-      "expectedSha256": "6354cab8aa87ccfb791c00b3274f596804815450ae221bf708eb7fac4d5eba03",
+      "expectedBytes": 7741,
+      "expectedSha256": "4502a4caf5c8cfb6731bc9bb197d85410e530f7284aa4c35519e958dd416c3b0",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -428,8 +428,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1073,
-      "expectedSha256": "e139401178ff9b036c04fb60af3defe9e1cf38f6123516f5e58461cd43bebd3a"
+      "expectedBytes": 2308,
+      "expectedSha256": "f1e41fbaa58389c9d4e4d0ff4fdb42d740c15e0acdfb3e1fc60216712264f69a"
     },
     {
       "id": "ariel-surface-feature-notes",

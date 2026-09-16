@@ -4,40 +4,8 @@
   "id": "squannit",
   "displayName": "Squannit",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Moshup"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Radar-derived mesh"
-      },
-      {
-        "id": "dimensions",
-        "label": "Mesh extents",
-        "value": "0.571 × 0.463 × 0.349 km"
-      },
-      {
-        "id": "scale",
-        "label": "Size evidence",
-        "value": "Original radar model · dimensions in kilometres"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "later-size",
-        "label": "Later size estimate",
-        "value": "2021 photometry favors a larger body · original radar scale shown"
-      },
-      {
-        "id": "orbital-position",
-        "label": "Orbital position",
-        "value": "Published orbit extrapolated beyond observations · current phase approximate"
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

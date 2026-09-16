@@ -4,38 +4,7 @@
   "id": "cressida",
   "displayName": "Cressida",
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Projected radius",
-        "value": "41 ± 2 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "92 × 74 × 74 km"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 61,767 km"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1986"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Prolate model; third axis assumed"
-      },
-      {
-        "id": "mass",
-        "label": "Mass from ring dynamics",
-        "value": "(1.84 ± 0.21) × 10¹⁷ kg"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

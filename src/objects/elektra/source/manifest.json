@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7738,
-      "expectedSha256": "a3f56ad7ebc84062bafc0b5c18e241fadde4ca3400d2e0051cf70c244ea200f5",
+      "expectedBytes": 7505,
+      "expectedSha256": "5740b5c1094d20e2e53a4ea4ba9e48c5f8389ef3e6268a96751c66116c2e0913",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "e9d6b779cbda1bce93b8f5dba9514692f2014de805f7a183094f5b30518f884a"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6404,
+      "expectedSha256": "fc418e851196f4052fb765b1f4088bf3d483de8c30b39a49c103e7acd7fff89d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Elektra: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

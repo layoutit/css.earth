@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2638,
-      "expectedSha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
+      "expectedBytes": 2603,
+      "expectedSha256": "6013db88da7f5bfcce439f1f81962546acfbe12c1e8619b337a965db5d072ebb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4052,
       "expectedSha256": "198a8bf6b679f8044da6075d6321275b663355a7594b0040379f3897dd74c626"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3551,
+      "expectedSha256": "12410a0c1c98ad8bcf7b19d357a35686caa8c473cd1c5985a38fc56aac23f996",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Polymele: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

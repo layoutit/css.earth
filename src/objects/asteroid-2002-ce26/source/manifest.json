@@ -149,8 +149,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 14497,
-      "expectedSha256": "8fad87148d30825f0361acc6033d4ed4567103ad310d7e94c8eb928f749ea394",
+      "expectedBytes": 14384,
+      "expectedSha256": "82c821794daad8323feff66accde40320d64e4626795fc6bb259440186c1fc65",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -205,6 +205,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 2362,
       "expectedSha256": "9321130037e2f2705096d8de6d9ec10944e55ab8687772fd7f1eea097ba0e876"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3955,
+      "expectedSha256": "5a1ddfd7c14a48478024e383dd2b1beb51f9cb17206555a858ce67cfaba65d96",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 2002 CE26: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

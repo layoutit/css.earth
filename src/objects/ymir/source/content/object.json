@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "diameter",
-        "label": "Mean diameter estimate",
-        "value": "19 (+5/−3) km"
-      },
-      {
         "id": "parent",
         "label": "Orbits",
-        "value": "Saturn"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Approximate triangular model"
-      },
-      {
-        "id": "rotation",
-        "label": "Sidereal rotation",
-        "value": "11.92220 hours"
+        "value": "Saturn",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; Planet"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Gladman, Kavelaars and colleagues · 2000"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

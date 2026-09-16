@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "19.189 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "413",
+        "Uranus",
+        "Miranda",
+        "705",
+        "URA182",
+        "equatorial",
+        "2000-01-01.5",
+        "129846.",
+        "0.001",
+        "154.8",
+        "73.0",
+        "4.4",
+        "100.9",
+        "1.413479",
+        "8.939",
+        "17.787",
+        "",
+        "",
+        "",
+        "45"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "V",
+        "Miranda",
+        "",
+        "1948",
+        "G. Kuiper",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

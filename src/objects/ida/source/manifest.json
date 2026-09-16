@@ -586,8 +586,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8291,
-      "expectedSha256": "b37080df6e162cf83f3991d4e0d62d5f6d7f819bd68318d4272da7ac3bfc1481",
+      "expectedBytes": 8056,
+      "expectedSha256": "d3087f8b422513b3a1a971525db82c62f8197fcb525875876df88f5323f842cf",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -726,6 +726,21 @@
       "origin": "https://doi.org/10.1006/icar.1996.0036",
       "credit": "Published Hapke parameters: Helfenstein et al. (1996), doi:10.1006/icar.1996.0036. Selection and transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5569,
+      "expectedSha256": "865d4e33528a1cd321ee472a87244c87b076d47cb1e0d680366b87dc8730561f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ida: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

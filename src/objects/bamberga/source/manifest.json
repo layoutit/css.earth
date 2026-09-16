@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11129,
-      "expectedSha256": "ad7e6fe2ddef605f860ff534c809768478963a5f42b82f0ae00287aaaa3805dd",
+      "expectedBytes": 10896,
+      "expectedSha256": "4ade303091539b226cc5979c60d8f982d838bd979cbd2a989a358f23c6ed2d47",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "78557fdd02632192b0b153ae9932bfc5b51d31c2f5a9991cd5e82f3a5ec479bd"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4593,
+      "expectedSha256": "89f8b144d8f06108fff3a18efa92eabaffc506e983bcf41d78599602c49f1ddd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Bamberga: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

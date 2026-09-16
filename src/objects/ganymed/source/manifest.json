@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9756,
-      "expectedSha256": "d832ffc1737d1ab7624d13b51158f628bceaf39ac95e18572d4efb1be746ab8c",
+      "expectedBytes": 9962,
+      "expectedSha256": "f1c4d2fa60398c29878876ab90b290a5ae7e05060c0205cc5268cd2bdf75d507",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1791,
       "expectedSha256": "78d83e4d69fb907bc79798f4d8953ab129fe050db1a2dba07497c2248c108a7d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5918,
+      "expectedSha256": "0d81c868692580e2347efbd99122f6d4daddfdbe840a0b3c277bc3a41f24b4da",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ganymed: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

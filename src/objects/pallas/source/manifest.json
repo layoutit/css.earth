@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8292,
-      "expectedSha256": "2411f91ea9e90f90e9ee128d7a25fa4d13a30d6a6331a86cbc63883ee7936c7f",
+      "expectedBytes": 8059,
+      "expectedSha256": "a88af8039203965ab23759634c681a2e6d5b1631005c696a2dfa52d59d660b11",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 45,
       "expectedSha256": "d6591b2bea849d2b96f4bf3e0902262c1d94d3c0699ac594a846e18ecfa14e30"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4937,
+      "expectedSha256": "0c383f3a998fcbfef22c46a0de127d998d236bac9c9fe213a3c8c73b0682a53b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Pallas: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

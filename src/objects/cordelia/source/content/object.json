@@ -4,48 +4,7 @@
   "id": "cordelia",
   "displayName": "Cordelia",
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Projected radius",
-        "value": "21 ± 3 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "50 × 36 × 36 km"
-      },
-      {
-        "id": "orbital-period",
-        "label": "Orbit around Uranus",
-        "value": "About 8.04 hours"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 49,752 km"
-      },
-      {
-        "id": "mass",
-        "label": "Mass from ring dynamics",
-        "value": "(6.08 ± 0.57) × 10¹⁶ kg"
-      },
-      {
-        "id": "ring-role",
-        "label": "Ring shepherd",
-        "value": "Inner edge of the epsilon ring"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation",
-        "value": "Synchronous model"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1986"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

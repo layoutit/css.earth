@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6602,
-      "expectedSha256": "42e4d564ed330fb700dfecb6b0c2da660d88e974836c2aa74baf8549d17194eb",
+      "expectedBytes": 6370,
+      "expectedSha256": "98ac61cbae0db6f633627583818a228bf956b24becfef95322a9eb4f3d8e158d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 45,
       "expectedSha256": "b5a1ad4c39d2120dadba6d451e1f47d70de429e6e98673d48ba9fa6757ac86c3"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6225,
+      "expectedSha256": "a5e35c0ba9304fd234dd91b6f295e5d7c7afc11cd6e349c19a9ad661fbd94ebc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Juno: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

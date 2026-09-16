@@ -4,33 +4,7 @@
   "id": "menoetius",
   "displayName": "Menoetius",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Patroclus"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate model"
-      },
-      {
-        "id": "dimensions",
-        "label": "Full model dimensions",
-        "value": "117 × 108 × 90 km"
-      },
-      {
-        "id": "scale",
-        "label": "Size evidence",
-        "value": "117 × 108 × 90 km · inferred full axes"
-      },
-      {
-        "id": "rotation",
-        "label": "Mutual orbital period",
-        "value": "4.282753 ± 2.3e-05 d"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2575,
-      "expectedSha256": "318ebb37d12b278795729161e031147ecbcc0f83d119bb41d93ab2e90999b753",
+      "expectedBytes": 2356,
+      "expectedSha256": "d407171804fcf020dd10aa078b8415eece3642a5e89442b3e9de376fc6944b72",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 919,
       "expectedSha256": "8588c31ee84c2271fa884ce8ce2f5d60247a54c1276da811a229296f1db106cd"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2400,
+      "expectedSha256": "e940657052626dee14aa3886a242042db624c66d5387c1ded268a7e612e43d57",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 143P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

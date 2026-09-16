@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9299,
-      "expectedSha256": "87d71136ee17007b72814228c2751d74971931ab1c3cf58a4851f9042607c2d2",
+      "expectedBytes": 9505,
+      "expectedSha256": "b5cdde1bc42961e9033b4657b9521b31d96a93e25d95afa9759f629c5bfd0cad",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1819,
       "expectedSha256": "dc487b33df5ea639cc8429a854f8176eb5ff8074719731fd19624df7ed411ab7"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6072,
+      "expectedSha256": "bc90e537eb7914163bea470fdbff80a65a9332ef1afd824beaa47919b0e30e03",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Phaethon: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

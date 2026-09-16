@@ -4,40 +4,8 @@
   "id": "hiiaka",
   "displayName": "Hiʻiaka",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Haumea"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate model"
-      },
-      {
-        "id": "dimensions",
-        "label": "Full model dimensions",
-        "value": "480 × 360 × 286 km"
-      },
-      {
-        "id": "scale",
-        "label": "Size evidence",
-        "value": "370 ± 20 km · reported volume-equivalent diameter"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation interpretation",
-        "value": "9.68 ± 0.02 h"
-      }
-    ],
-    "moreFacts": [
-      {
-        "label": "Orbital position",
-        "value": "Retained JPL solution from older observations; limited phase accuracy.",
-        "id": "orbital-position"
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

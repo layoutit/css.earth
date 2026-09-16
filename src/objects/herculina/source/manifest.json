@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9169,
-      "expectedSha256": "673ae1d8db40515d8743d877bd1f5d792f93e347c9b6a1b5a1822eac7e4aafe6",
+      "expectedBytes": 9375,
+      "expectedSha256": "65fc915aa226e61372c3f4fd7e3a3d92decb6f4be1d78de268dbaffcf72211a2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1793,
       "expectedSha256": "9222cf5f7c2397ed5e87065a94ae2f09e5842070bb5d17c099120d29bc24773f"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5634,
+      "expectedSha256": "46a5d18d38c9ec46698f5321460bf96146f0d1e7ba7dee314d84a9026f9f14bb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Herculina: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

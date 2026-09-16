@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9920,
-      "expectedSha256": "c4cc244b1fa7c68182b65688f5685c62fb05fbf2a76194b665c37bd554276428",
+      "expectedBytes": 9678,
+      "expectedSha256": "f46cd2d3ca45fb00e9e8e34e3a565a5a184240d8c5548e4ce9eaaf6a9aee9635",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -206,6 +206,21 @@
       "purpose": "Bounded source alternatives and scientific limitations.",
       "expectedBytes": 2172,
       "expectedSha256": "647933db5e396b34c6f0eb7ae04c68b2e591f8d79da25a69656b969e26574ca0"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3818,
+      "expectedSha256": "7b00a0e6971d7a75c5112939917322cd62548419ccb8e4036dd457932b097766",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 1996 HW1: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

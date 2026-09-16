@@ -171,8 +171,7 @@ test('refreshing document pins retains bindings and native source metadata', asy
 test('both catalogues prepare deterministically from the same input closure before publication', async () => {
   const result=await prepareMachines({publish:false});
   const facts = prepared.usage.edges.filter(edge => edge.consumerKind === 'object-fact');
-  assert.equal(facts.length, result.factsheets.cited);
-  assert.equal(result.factsheets.facts, result.factsheets.cited + result.factsheets.uncited.length);
+  assert.equal(facts.length, result.factsheets.facts, 'every published fact is cited');
   assert.ok(facts.some(edge => edge.objectId === 'earth' && edge.consumerId === 'earth/radius'));
   assert.ok(facts.some(edge => edge.objectId === 'abundantia' && edge.citationUrl?.includes('/4625')));
   assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/earth/source/editorial/factsheet-review.json'));

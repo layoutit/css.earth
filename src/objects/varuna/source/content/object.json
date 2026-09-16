@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published light-curve ellipsoid"
-      },
-      {
-        "id": "dimensions",
-        "label": "Display model extents",
-        "value": "1098 × 659 × 474 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "About 6.34357 hours from photometry; display phase is illustrative"
-      },
-      {
         "id": "class",
         "label": "Population",
-        "value": "Trans-Neptunian object"
+        "value": "Trans-Neptunian object",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=20000",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "object.orbit_class.name"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

@@ -649,8 +649,8 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12161,
-      "expectedSha256": "67a37d8f0fee8476e93302e9c6edec44bdc84b3f773984b529ebdd38a3515afd",
+      "expectedBytes": 12626,
+      "expectedSha256": "93973a595153fae9eff3f6553fed2fd8d1beb49c0b171196a0952f46bbe64869",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -687,8 +687,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1078,
-      "expectedSha256": "57ecaabe18cb3d09abded31c579a7c35b4a80ef2e1f3cf1d67893c4d38555fc9"
+      "expectedBytes": 2326,
+      "expectedSha256": "f0128fdda3534c791602a9ad01efff311346cb7173893574bc77fe824547a1ea"
     },
     {
       "path": "preparation/geology-conversion.json",

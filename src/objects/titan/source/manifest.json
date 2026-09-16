@@ -1955,8 +1955,8 @@
     {
       "id": "titan-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15002,
-      "expectedSha256": "c41e2cf1f1571a27ee9cf0de22ff2b54e65d91f3c3ac49f94660c30ed3030af7",
+      "expectedBytes": 14924,
+      "expectedSha256": "3591fe6f03973bf59d7814a78cccf4c2fc01c7057325be003364b4a4eb270193",
       "origin": "Repository-authored Titan object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2002,8 +2002,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1087,
-      "expectedSha256": "ac7aa2fd6d80d4e2368427a1e035a1f4eb9d107689db48c6f948f456759edce4"
+      "expectedBytes": 2337,
+      "expectedSha256": "6c1a2f3e7ff28fcbb660e1545da19a973ebf06c818191e2ff3a1fcc3e2d1fea0"
     },
     {
       "path": "science/b2-intake/titan_topo_corlies.zip",

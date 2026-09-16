@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3346,
-      "expectedSha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
+      "expectedBytes": 3319,
+      "expectedSha256": "ece427b9586072a420b0b892c159f36e8476c8a505b9f5ccea27906c81561526",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 3326,
       "expectedSha256": "33dfc1cfd76a9eddde610928b1c755ff32a9a1bfaf5e244767726fb485cd3685"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3808,
+      "expectedSha256": "f59dc0a9f27c3ad4033d76e92b5491df7334ee1fa1592d561cebd2dfc0450fd5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Bienor: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

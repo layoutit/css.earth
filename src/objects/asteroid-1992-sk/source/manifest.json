@@ -164,8 +164,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9714,
-      "expectedSha256": "aa7515deb026794654859821e485f9febd357235f1551ab25e75a69752f411b0",
+      "expectedBytes": 9451,
+      "expectedSha256": "b0d328ac5a3dc4d390c8f1720e82e37cc0bf9bc84a1c1084aa40175c4bb354d1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -252,6 +252,21 @@
       "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart.",
       "expectedBytes": 169,
       "expectedSha256": "6110d922a3f9dccefc720c4dc109d11a481f2ddfae249e7c538adcc053f5a3c3"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4800,
+      "expectedSha256": "6a42a37fbbcd4ba037c054065bf7ae65288ea5639abfa2bfe1dbeff5eb8da210",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 1992 SK: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

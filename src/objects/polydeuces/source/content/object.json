@@ -6,34 +6,30 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Mean radius",
-        "value": "1.53 ± 0.20 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Measured dimensions",
-        "value": "3.5 × 3.1 × 2.62 km"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Saturn",
-        "value": "About 377,400 km"
-      },
-      {
         "id": "orbital-period",
         "label": "Orbit around Saturn",
-        "value": "About 65.69 hours"
+        "value": "About 65.69 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days) × 24"
+        }
       },
       {
         "id": "discovery",
         "label": "Discovery images",
-        "value": "Cassini imaging team · 2004"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
+        "value": "Cassini imaging team · 2004",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "JPL Planetary Satellite Discovery Circumstances",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-discovery",
+          "locator": "/references/1; discoverer(s); year discovered"
+        }
       }
     ],
     "moreFacts": []

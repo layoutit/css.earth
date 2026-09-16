@@ -23,11 +23,6 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Model volume-equivalent radius",
-        "value": "2.55 km"
-      },
-      {
         "id": "distance-from-sun",
         "label": "Distance from Sun",
         "value": "1.271 AU (mean)",
@@ -56,7 +51,15 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "3.603957 hours"
+        "value": "3.603957 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394",
+          "label": "DAMIT model 4394",
+          "checked": "2026-09-16",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "fields.Period (h)"
+        }
       }
     ],
     "moreFacts": []

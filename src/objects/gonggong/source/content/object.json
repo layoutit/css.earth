@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published size model; shape unresolved"
-      },
-      {
-        "id": "dimensions",
-        "label": "Display model extents",
-        "value": "1230 × 1230 × 1230 km"
-      },
-      {
         "id": "rotation",
         "label": "Rotation",
-        "value": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved."
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Scattered trans-Neptunian object"
+        "value": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved.",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=225088",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.rot_per (h)"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

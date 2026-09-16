@@ -4,33 +4,7 @@
   "id": "rosalind",
   "displayName": "Rosalind",
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Projected radius",
-        "value": "36 ± 6 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "72 × 72 × 72 km"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 69,927 km"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1986"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Sphere consistent with measured outline"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3477,
-      "expectedSha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
+      "expectedBytes": 3081,
+      "expectedSha256": "57b5aa8b0ec239c69a3873286c8254933419b8aa35a1ab6e075e101c06ef7ecd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -155,6 +155,21 @@
       "path": "reference/varda-souami-2020.pdf",
       "expectedBytes": 7602546,
       "expectedSha256": "f5f69964b4d8e9778fcbdf3b834fc9aacb296990bf3ae5659c505781c1f080dc"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3365,
+      "expectedSha256": "68f6d52dac641aa9287925fe49010bf63e476142025da2497677be7fec5f0361",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Varda: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -8,22 +8,41 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "316 solar radii"
+        "value": "316 solar radii",
+        "source": {
+          "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+          "label": "VLTI/PIONIER 2014-09 uniform-disc fit at the Gaia distance",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+          "locator": "radiusKm; radiusSource"
+        }
       },
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "162 parsecs"
+        "value": "162 parsecs",
+        "source": {
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
+          "label": "SIMBAD: Gaia DR3 parallax",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "simbad-pi1-gru",
+          "locator": "distanceParsecs; distanceSource"
+        }
       },
       {
         "id": "angular-diameter",
         "label": "Angular diameter (1.65 µm)",
-        "value": "18.17 milliarcseconds"
-      },
-      {
-        "id": "rotation-axis",
-        "label": "Rotation axis",
-        "value": "not measured"
+        "value": "18.17 milliarcseconds",
+        "source": {
+          "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+          "label": "VLTI/PIONIER 2014-09 uniform-disc fit",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-pi1-gruis-pi1-gruis-pionier-2014-09",
+          "locator": "angularDiameterMas; angularDiameterSource"
+        }
       }
     ],
     "moreFacts": []

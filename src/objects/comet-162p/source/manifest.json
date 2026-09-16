@@ -93,8 +93,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2595,
-      "expectedSha256": "108970d3425734829ebb22af0438319c76819c6ac2472736dbc24c552d6920ea",
+      "expectedBytes": 2376,
+      "expectedSha256": "0ed331dd718157e6f9b57899e0749ccf6f8707e6ff05b80c850289c9ead3017d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,6 +144,21 @@
       "path": "reference/source-record.json",
       "expectedBytes": 931,
       "expectedSha256": "48f24e2c91b6b0b372f19e984e5676e938b6e50e7e9862648bb7259bf6451943"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2823,
+      "expectedSha256": "879e50b29d01029a8f34c028d80b9e07c111b9fce15e7d4747e090e56a53f1ef",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 162P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

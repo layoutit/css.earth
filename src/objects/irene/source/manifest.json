@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7248,
-      "expectedSha256": "bb6458c2c55a90b8449162d5d3c3273ae518320cf7ee2720c975816f1875e901",
+      "expectedBytes": 7454,
+      "expectedSha256": "fc88bb81563c90a3997f1c9d3ce22a717290fd3f8936db04f6dd96f5d07073e1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1793,
       "expectedSha256": "61d788ff8ef6529ea7b0abedc3bcad27b3d8abc4ab65320fa47c57e47157b354"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4679,
+      "expectedSha256": "276c41dccb105618ad870c6e5d51870ebab5ac00eea5e0fd21af32cfae786521",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Irene: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

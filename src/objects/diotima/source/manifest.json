@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8645,
-      "expectedSha256": "82347ad985b3ccc2fe09421d6dd672ed8daac8fe8414e17ab4c9fe7a0564d180",
+      "expectedBytes": 8850,
+      "expectedSha256": "7b42f0887675eb4e4436f236ef4fbe2084a96b4da09b2ce682da812affa6a9eb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1790,
       "expectedSha256": "721412bd7e1f4dc930f147b8f7b8ee354f86cd09d93ff7c210ed70f2601bcdb0"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6044,
+      "expectedSha256": "8b2bf9ae9d5621f44ed1db82db0c3f13becf6a5b187952cd71db57abddf14093",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Diotima: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -21,28 +21,7 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Shape reference radius",
-        "value": "75 m"
-      },
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Didymos"
-      },
-      {
-        "id": "dimensions",
-        "label": "Encounter shape",
-        "value": "178 × 169 × 115 m"
-      },
-      {
-        "id": "impact",
-        "label": "DART impact",
-        "value": "26 September 2022"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

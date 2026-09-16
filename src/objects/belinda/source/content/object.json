@@ -6,34 +6,30 @@
   "panel": {
     "facts": [
       {
-        "id": "radius",
-        "label": "Volume-equivalent model radius",
-        "value": "40.3 km"
-      },
-      {
-        "id": "dimensions",
-        "label": "Approximate dimensions",
-        "value": "128 × 64 × 64 km (prolate model)"
-      },
-      {
         "id": "orbital-period",
         "label": "Orbit around Uranus",
-        "value": "About 15.0 hours"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 75,255 km"
+        "value": "About 15.0 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days) × 24"
+        }
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Voyager 2 · 1986"
-      },
-      {
-        "id": "uncertainty",
-        "label": "Projected equivalent radius",
-        "value": "45 ± 8 km"
+        "value": "Voyager 2 · 1986",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "JPL Planetary Satellite Discovery Circumstances",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-discovery",
+          "locator": "/references/1; discoverer(s); year discovered"
+        }
       }
     ],
     "moreFacts": []

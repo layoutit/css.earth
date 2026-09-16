@@ -34,22 +34,15 @@
       {
         "id": "orbital-period",
         "label": "Orbit around Neptune",
-        "value": "26.94 hours"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "Synchronous with its orbit"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Mean distance from Neptune",
-        "value": "About 117,674 km"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 imaging team · 1989"
+        "value": "26.94 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/2; P (days) × 24"
+        }
       }
     ],
     "moreFacts": []

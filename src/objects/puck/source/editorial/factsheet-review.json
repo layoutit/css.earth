@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "puck",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "414",
+        "Uranus",
+        "Puck",
+        "715",
+        "URA182",
+        "equatorial",
+        "2000-01-01.5",
+        "86004.",
+        "0.000",
+        "0.0",
+        "50.1",
+        "0.3",
+        "216.1",
+        "0.761833",
+        "2.226",
+        "4.454",
+        "",
+        "",
+        "",
+        "45"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XV",
+        "Puck",
+        "S/1985 U1",
+        "1985",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

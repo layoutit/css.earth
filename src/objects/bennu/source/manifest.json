@@ -239,8 +239,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9565,
-      "expectedSha256": "329064bace61b3ce7fbd2ef1849fb090f4e55cafd8edb1c9d6d0c2f13bd7571f",
+      "expectedBytes": 9695,
+      "expectedSha256": "b861d7639a3acf861ef882ea7fd4789a33fe932a2d0283dbbaaf4b8b7468ec6e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -389,6 +389,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6137,
+      "expectedSha256": "5eba0434393c68aa1c0123740cdaf5413efc4a1608566bc326948eef85f6937b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Bennu: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

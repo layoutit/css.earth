@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9459,
-      "expectedSha256": "b093f5ad47c2067a1d41b715ec9ca8e41ac92251f204b54a2c92b6fc2ecb7911",
+      "expectedBytes": 9225,
+      "expectedSha256": "4e7806980eddba09ee2e17aac87eba74beff4faa8ef1f09845ab69617393d2d5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "f4a879b5b7e77a69ab3c68fb2ddc14801148585aeb93239178a278a1d9b6d61d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5387,
+      "expectedSha256": "719d7667b2e8d61c715550ef133b4b7f7e9de75b26f120dab5856929618aa0d7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 52 Europa: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

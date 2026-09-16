@@ -159,8 +159,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3056,
-      "expectedSha256": "fc031b93d0be5a5035e8c909262c7f1b865714d90144ad962edb6847dbd54f85",
+      "expectedBytes": 3439,
+      "expectedSha256": "822dd468a9cbe8ed546ddb30911d70514fe9aae2879e76f2e0ea21e375afdb39",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -401,6 +401,15 @@
       "expectedBytes": 1743,
       "expectedSha256": "ceb946de0fdbc3a5751106493e5737379271b0f2424c72b66e0edf069a406a90",
       "purpose": "Direct source-level check of whether the selected Pallene image contains an independent surface control suitable for image-to-shape registration."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1407,
+      "expectedSha256": "c61e02fca51303ef5ae0cd91fcbbda6a3445fef21de942fb310c93f26dc5793d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

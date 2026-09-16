@@ -207,8 +207,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5172,
-      "expectedSha256": "cd30e68636f9fe3dbd9f1a15beb342864b24a9311cfce92a5576a746eb293371",
+      "expectedBytes": 4019,
+      "expectedSha256": "9654fcaf14a3f87f9e2eb70515067947a54c33ba1f789e0b062036780a7bfbb7",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -233,6 +233,21 @@
       "origin": "https://doi.org/10.1038/nature10550",
       "credit": "cssEarth schematic sphere using Sicardy et al. (2011) shape result; color is illustrative",
       "license": "MIT, cssEarth authored schematic; factual measurements attributed"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3198,
+      "expectedSha256": "ad1b526c155fb257e901f7863d7808085e64914e3e06ccff30e69453eb07e3e8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eris: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []

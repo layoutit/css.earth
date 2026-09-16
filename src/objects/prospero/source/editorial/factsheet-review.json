@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "prospero",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "431",
+        "Uranus",
+        "Prospero",
+        "718",
+        "URA117",
+        "ecliptic",
+        "2020-01-01.0",
+        "16221000.",
+        "0.441",
+        "180.4",
+        "197.6",
+        "149.4",
+        "324.5",
+        "1974.",
+        "1154.",
+        "1369.",
+        "",
+        "",
+        "",
+        "43"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XVIII",
+        "Prospero",
+        "S/1999 U3",
+        "1999",
+        "M. Holman, J.J. Kavelaars, B. Gladman, J.-M. Petit, H. Scholl",
+        "IAUC 7248"
+      ]
+    }
+  ]
+}

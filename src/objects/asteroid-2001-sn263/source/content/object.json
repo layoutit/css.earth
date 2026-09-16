@@ -4,50 +4,8 @@
   "id": "asteroid-2001-sn263",
   "displayName": "2001 SN263 Alpha",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Sun"
-      },
-      {
-        "id": "diameter",
-        "label": "Estimated diameter",
-        "value": "2.5 ± 0.3 km"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Radar and light curves"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "3.4256 hours"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "shape-epoch",
-        "label": "Observations",
-        "value": "January–March 2008"
-      },
-      {
-        "id": "shape-scale",
-        "label": "Model extents",
-        "value": "2.754 × 2.720 × 2.857 km"
-      },
-      {
-        "id": "phase",
-        "label": "Orientation",
-        "value": "Measured pole · illustrative spin phase"
-      },
-      {
-        "id": "orbit-limit",
-        "label": "Position",
-        "value": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations."
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

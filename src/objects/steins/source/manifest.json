@@ -457,8 +457,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10206,
-      "expectedSha256": "9c5a62438a33bce61da0fa23d42ddc9be9303036b5346ba3d1cc8e26df725f6a",
+      "expectedBytes": 10432,
+      "expectedSha256": "1fbaf2d2fdbd5ad1593dccdd84cc4f1a4fdd5499ffc45e83a6b4c1d02cf5b939",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -580,6 +580,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4168,
+      "expectedSha256": "bb9ced7ef19b5eb594d763695fb7b7f15749edfb172c4e667cb899c0e5ef7fae",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Steins: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

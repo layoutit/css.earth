@@ -263,8 +263,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10606,
-      "expectedSha256": "58bba52c78ae3373b08b442a320eec534a2255b2657e15dd756b334296d763fd",
+      "expectedBytes": 10592,
+      "expectedSha256": "b92a5b5bc1b7295527f163b2ceb8d01e022069b9b042108380274c039032817b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -304,8 +304,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1084,
-      "expectedSha256": "1a9a57bdcf869489c29463406b296496251b53a67bfc4c9183f165ebae34a147"
+      "expectedBytes": 2317,
+      "expectedSha256": "ef125cb6c20f7386764bc3df90ac75cc1f231b60a0035f46f06c0987c98e2a6d"
     },
     {
       "id": "phobos-surface-feature-notes",

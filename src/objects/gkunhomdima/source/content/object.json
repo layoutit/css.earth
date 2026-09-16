@@ -4,35 +4,8 @@
   "id": "gkunhomdima",
   "displayName": "Gǃkúnǁʼhòmdímà",
   "panel": {
-    "facts": [
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published occultation model"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model extents",
-        "value": "658 × 658 × 588 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Unresolved; display orientation is illustrative"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Trans-Neptunian object"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model."
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

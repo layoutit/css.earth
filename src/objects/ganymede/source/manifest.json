@@ -805,8 +805,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 21391,
-      "expectedSha256": "1bab75446052063802b893fcac8c50822c9601e3b2f7352ce3c4d72da579ba41",
+      "expectedBytes": 21354,
+      "expectedSha256": "a75333551f02435f8b60315855ce7846226dd55b1e71aa42a0416d86504c96fc",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -993,8 +993,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1094,
-      "expectedSha256": "90cac5506bfd3b67134d3f09eaa0a6ff3e5a5323a195f0bbe5619c59f161806e"
+      "expectedBytes": 2348,
+      "expectedSha256": "f058d12830f361e850686508a73b90d5a3d12ed776e571eb736d61f594e0b3e9"
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-dbf",

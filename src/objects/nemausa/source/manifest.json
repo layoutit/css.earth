@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10040,
-      "expectedSha256": "21a399c438a0729e9e8f69c8c67575626e9386e0c3816b7cd9eb16be0abd56fb",
+      "expectedBytes": 9810,
+      "expectedSha256": "a09d810930ab0eda11aaf414c52dad299f0193942e60e722ea455a8c387bc68c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "2a322841b9f3ddf5e1b50e1ed76a96d33ad3624989a14c91af9d3c2fb1feed82"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6235,
+      "expectedSha256": "9493f05735512caca118a957c26182e402c7c12d9ee84ac4bbb4b9076287820e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Nemausa: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

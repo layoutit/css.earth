@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7953,
-      "expectedSha256": "cf5cff5469e754fd6a86d6b91be8ed188d0382d4774fd7cbc8991ed33fc9e304",
+      "expectedBytes": 8160,
+      "expectedSha256": "90ee15e0604714599ccfc10017e01b55756c6cf371c2304cf05bf73795639963",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -159,6 +159,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1827,
       "expectedSha256": "bfdfc30618210be4ba5d0c25ecd7ed8db51f5d3bc536a95883c9c2c23636ed19"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5999,
+      "expectedSha256": "54d225e1a27433688c154a1bdbf0b528b52be4a84156020acb71ad9603aefa97",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Thisbe: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

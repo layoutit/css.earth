@@ -4,28 +4,7 @@
   "id": "betelgeuse",
   "displayName": "Betelgeuse",
   "panel": {
-    "facts": [
-      {
-        "id": "radius",
-        "label": "Radius",
-        "value": "764 solar radii"
-      },
-      {
-        "id": "distance",
-        "label": "Distance from the Sun",
-        "value": "168 parsecs"
-      },
-      {
-        "id": "angular-diameter",
-        "label": "Angular diameter (4 µm)",
-        "value": "42.45 milliarcseconds"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period (P / sin i)",
-        "value": "36 years"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {

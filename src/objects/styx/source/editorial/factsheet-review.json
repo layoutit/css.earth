@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "styx",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "456",
+        "Pluto",
+        "Styx",
+        "905",
+        "PLU060",
+        "equatorial",
+        "2000-01-01.5",
+        "43200.",
+        "0.025",
+        "322.5",
+        "358.1",
+        "0.0",
+        "0.0",
+        "20.16",
+        "-",
+        "-",
+        "",
+        "",
+        "",
+        "6"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Pluto",
+        "Styx",
+        "905",
+        "n/a PLU060",
+        "5.2 1.0 3",
+        "n/a n/a n/a"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "V",
+        "Styx",
+        "S/2012 (134340) 1",
+        "2012",
+        "M.R. Showalter, H.A. Weaver, S.A. Stern, A.J. Steffl, M.W. Buie, W.J. Merline, M.J. Mutchler, R. Soummer, H.B. Throop",
+        "IAUC 9253"
+      ]
+    }
+  ]
+}

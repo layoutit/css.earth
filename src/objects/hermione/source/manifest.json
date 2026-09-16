@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8923,
-      "expectedSha256": "d56719d13b14183784028822ebfcff86e985973b36542fcb7d56275ff9cf71ec",
+      "expectedBytes": 9128,
+      "expectedSha256": "136216b2be7cefb1953ad4fa9fa8789c2d56e3c89ef2499979de930cb043f274",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1786,
       "expectedSha256": "0b767e645cdd73a2f2f990ec14f71ef6b5209a6b16d1160b6e7635108b8b6e5e"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5011,
+      "expectedSha256": "b1ef64483cfac28c4e078788ac2b3b92e976432351c13bd2953176e667041ecb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Hermione: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

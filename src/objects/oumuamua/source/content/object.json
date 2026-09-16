@@ -4,35 +4,8 @@
   "id": "oumuamua",
   "displayName": "ʻOumuamua",
   "panel": {
-    "facts": [
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published light-curve interpretation"
-      },
-      {
-        "id": "dimensions",
-        "label": "Display model extents",
-        "value": "115 × 111 × 19 m"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Tumbling; no unique single rotation period"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Interstellar visitor"
-      }
-    ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo."
-      }
-    ]
+    "facts": [],
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

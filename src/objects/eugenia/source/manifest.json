@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8815,
-      "expectedSha256": "c04ee931b13fbbc711cf429b6265538dd0a42758a9a4832298f5717931f425a7",
+      "expectedBytes": 8584,
+      "expectedSha256": "7a08f80ed7e0288a6ff8974e181b3c224dd909d3ef4b85bc558f27308ac6ef5d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "ff4edf9ae14e59fcba352c6076b1855efae6d5c51a904b3fe29974096d91112d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6281,
+      "expectedSha256": "9fbb4e86767ba305a3908314a506847e9af0cb3c869710cba0742881effe8461",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eugenia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -60,16 +60,6 @@
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
-      },
-      {
-        "id": "precession-period",
-        "label": "Precession period",
-        "value": "27.45 hours"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Body rotation period",
-        "value": "265.7 hours"
       }
     ],
     "moreFacts": []

@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "kerberos",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "458",
+        "Pluto",
+        "Kerberos",
+        "904",
+        "PLU060",
+        "equatorial",
+        "2000-01-01.5",
+        "58300.",
+        "0.010",
+        "32.1",
+        "276.1",
+        "0.4",
+        "314.3",
+        "32.17",
+        "-",
+        "9",
+        "",
+        "",
+        "",
+        "6"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Pluto",
+        "Kerberos",
+        "904",
+        "n/a PLU060",
+        "6.0 1.0 3",
+        "n/a n/a n/a"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "IV",
+        "Kerberos",
+        "S/2011 (134340) 1",
+        "2011",
+        "M.R. Showalter, D.P. Hamilton, S.A. Stern, H.A. Weaver, A.J. Steffl, L.A. Young",
+        "IAUC 9221"
+      ]
+    }
+  ]
+}

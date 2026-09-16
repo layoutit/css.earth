@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3351,
-      "expectedSha256": "70f70efb09039d6912f43edf6534723947d1fccd8d1a3bcce70eeea553e0b9de",
+      "expectedBytes": 2962,
+      "expectedSha256": "e178d4d6677e527c313e2045f830a28cd5e069c1a7c81a5df2fcaab4d21f5ac9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -145,6 +145,21 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6645,
       "expectedSha256": "ee9feda03504ecb4ac1510041d9207344872032061fd38673d2607b373c6c07d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4181,
+      "expectedSha256": "24988e5665e3ae0b7c1f4dc705d87c613e8e5b44d5578e6fae412f67c41c268f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Varuna: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

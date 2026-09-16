@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8007,
-      "expectedSha256": "fd0907c67c75d1e60bb9c3280c4feb7270703531febe86d3ec7b427ecc702e19",
+      "expectedBytes": 8215,
+      "expectedSha256": "106f102f5da4f9a3c1f319e9948b4f9af3859c64d24bc60e92e7cee3d9704bac",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1793,
       "expectedSha256": "ba9e6cf902f7c75ef2fb06970a64f525705f17e22eddfff2ec8ea701d29560c6"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4630,
+      "expectedSha256": "edb1fbbe0c1f815c181f5a3b452c6e92b50b6dfd1a6a70a078018193ec3d8985",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Aurora: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

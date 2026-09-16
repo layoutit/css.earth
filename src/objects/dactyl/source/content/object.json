@@ -4,23 +4,7 @@
   "id": "dactyl",
   "displayName": "Dactyl",
   "panel": {
-    "facts": [
-      {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Ida"
-      },
-      {
-        "id": "size",
-        "label": "Size",
-        "value": "1.6 × 1.4 × 1.2 km"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Spacecraft images"
-      }
-    ],
+    "facts": [],
     "moreFacts": []
   },
   "lenses": {
