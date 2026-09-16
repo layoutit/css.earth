@@ -164,7 +164,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016), model1144; Hanuš et al. (2018) physical size calibration."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/dike.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }
