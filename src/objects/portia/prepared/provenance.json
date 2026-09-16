@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc7cae01cef655e6f45f3a3bad045b03078bb02e2a0837b3a36483b19a50e2a7"
+    "sha256": "6c05fa5bff55586dfdfa0981441ae3c7727547e85aab7cb37147224420550128"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "172ced1b4ddd26ee9022b47c1fd55784158d585b15ef5709a7b6348a9b8f6020",
+      "sha256": "bb3e8fa3bd40791271f6270f438f615ef65f91e1fc8c22c089310f666f056797",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -110,6 +110,32 @@
         "displayName": "Portia",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Projected radius",
+              "value": "70 ± 4 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/projectedRadiusKm/value"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "156 × 126 × 126 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
@@ -286,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "172ced1b4ddd26ee9022b47c1fd55784158d585b15ef5709a7b6348a9b8f6020",
-      "bytes": 2653,
+      "sha256": "bb3e8fa3bd40791271f6270f438f615ef65f91e1fc8c22c089310f666f056797",
+      "bytes": 3529,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -368,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4511,
-          "sha256": "741a122e5a7d393e9a3b898e8c95a70d5cb90ba4fa1a152038c0c9d33fac65be",
+          "bytes": 5117,
+          "sha256": "0f59968c768d31aa3f145f5f0e1e9b82b9fc44604e5316cffef4a131bc0d532c",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "portia",
-    "materialSha256": "1ee6ef77131c659d98213bfefba675d01ddc2b7eb12e5b530e5471bfadac9886",
+    "materialSha256": "6e305f27dbc6812cafe0e69f1ef2365cc33ce1da5954c3d1beac310cef5dd214",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

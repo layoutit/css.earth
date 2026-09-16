@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "40cfc450033dcde68408848d07a75d36474c8afe35556e31a5fceb5d06c67f25"
+    "sha256": "39a5c4b819959aae54c8e0fc4144481944961057e29bf06a06989b97d50bc5f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "28059d75dbe7ca296d67a5816288ddf3d7435646d0f1d1188e4ed6135ad34dc4",
+      "sha256": "f7b50542c3a79b8fef77ec1bc9dbb01fa813d3f61d78e14ea4c22b87807fbfa7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -110,6 +110,32 @@
         "displayName": "Belinda",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent model radius",
+              "value": "40.3 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/referenceRadiusKm"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Approximate dimensions",
+              "value": "128 × 64 × 64 km (prolate model)",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/semiaxesKm/0"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
@@ -134,6 +160,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-discovery",
                 "locator": "/references/1; discoverer(s); year discovered"
+              }
+            },
+            {
+              "id": "uncertainty",
+              "label": "Projected equivalent radius",
+              "value": "45 ± 8 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/projectedEquivalentRadiusKm/value"
               }
             }
           ],
@@ -307,8 +346,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "28059d75dbe7ca296d67a5816288ddf3d7435646d0f1d1188e4ed6135ad34dc4",
-      "bytes": 3344,
+      "sha256": "f7b50542c3a79b8fef77ec1bc9dbb01fa813d3f61d78e14ea4c22b87807fbfa7",
+      "bytes": 4763,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -389,8 +428,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5867,
-          "sha256": "3fa721883c6625779f268d53fd28eb4658959373504eeeefbf552b39b550f4cd",
+          "bytes": 6881,
+          "sha256": "eab45a2489546a27676d3bf32d8dc0c0a5269fae127802f8143b6f0d2dc1f4c2",
           "verification": "bytes-verified"
         }
       ],
@@ -428,7 +467,7 @@
   },
   "lastPreparation": {
     "objectId": "belinda",
-    "materialSha256": "65e21631eb958dad7af5831b72981c196d347c98afc7f340e6e21c2a50e8d6e1",
+    "materialSha256": "57aaabbd9a27a55fbfb926181cd6512a996ce58e4a60f909a0b0edb12a52f76f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

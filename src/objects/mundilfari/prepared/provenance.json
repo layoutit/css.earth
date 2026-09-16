@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b06d03555a3249347f65cce6134be60bbaefbb46697f913cfe3fc9dba6739ea"
+    "sha256": "96f2b3ef1dd21fd8e78f426560f2ba27bc4ccb81d83924277c711143c939c3ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c22c6dee636cf89d719f7861edb7d8660b7987505ebec524d4ed3a9eb81ebe2",
+      "sha256": "93a61a0c3aaafbf6f7e097c18f33ca0d93ab8ae74340651d48b399319210d197",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -122,6 +122,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "6.74 ± 0.08 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c22c6dee636cf89d719f7861edb7d8660b7987505ebec524d4ed3a9eb81ebe2",
-      "bytes": 2653,
+      "sha256": "93a61a0c3aaafbf6f7e097c18f33ca0d93ab8ae74340651d48b399319210d197",
+      "bytes": 3137,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6009,
-          "sha256": "d78c7123b7dc2cac440ad630adc55654af62bc6900c3330c4ebdd981424e0429",
+          "bytes": 6358,
+          "sha256": "d79aa8352944ba8e2b0fe9ac92f7f8d608fdeaf4e9dfb7a797b934c5069c7cf8",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "mundilfari",
-    "materialSha256": "705035e9eaf5cc9ef36f75e35a3e769b2c44ca61aa61aff908c326b65b11e8a3",
+    "materialSha256": "c8fc1caa5ae88fa2135813259d24acbfceadc63ff0653fd19fee17b8af936110",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

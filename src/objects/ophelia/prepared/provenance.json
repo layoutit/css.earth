@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf12abe6a4cf9f66392e9de28470888ac7f10e181b45395b8616a139ff076596"
+    "sha256": "81dbf925426ac3efc73711b293b93a567aef94aacca178bc14711a1a3121f2ae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "98f597f47d2b9270f4375137abfe502fb61dc0ad6af292ba93b0714a42e8a562",
+      "sha256": "caa9896728453867b0e21ce24fdf560472e0ed18eedeeb5ecd4c70d3fec8424a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -110,6 +110,32 @@
         "displayName": "Ophelia",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Equivalent radius",
+              "value": "About 21.4 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/referenceRadiusKm"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Modeled dimensions",
+              "value": "About 54 × 38 × 38 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
@@ -292,8 +318,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "98f597f47d2b9270f4375137abfe502fb61dc0ad6af292ba93b0714a42e8a562",
-      "bytes": 2867,
+      "sha256": "caa9896728453867b0e21ce24fdf560472e0ed18eedeeb5ecd4c70d3fec8424a",
+      "bytes": 3798,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -374,8 +400,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5456,
-          "sha256": "d536d8ebf3685a2195ccb4ea5c09ebde146579bc286d156d4eecf9543f5dbea4",
+          "bytes": 6117,
+          "sha256": "d961f33706244cd60233bdc6179f7f67e54f9ae099729bab7fb115291cf438ac",
           "verification": "bytes-verified"
         }
       ],
@@ -413,7 +439,7 @@
   },
   "lastPreparation": {
     "objectId": "ophelia",
-    "materialSha256": "bb570f63b35112d77974f428c28ab3edec189ffdb89a9703a3136f25b3d8cc62",
+    "materialSha256": "9276d57d384c8481a495e52cfe67cfb84e385633e0433af658f05d25ee20865d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

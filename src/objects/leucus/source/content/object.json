@@ -6,6 +6,32 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "60.8 × 39.1 × 27.8 km",
+        "source": {
+          "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+          "label": "Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-psj-abb942",
+          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "445.683 ± 0.007 h",
+        "source": {
+          "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+          "label": "Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-psj-abb942",
+          "locator": "/spin/periodHours"
+        }
+      },
+      {
         "id": "class",
         "label": "Population",
         "value": "Jupiter Trojan",

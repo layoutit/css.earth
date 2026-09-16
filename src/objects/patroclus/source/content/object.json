@@ -6,6 +6,19 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "127 × 117 × 98 km",
+        "source": {
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-menoetius-model-surface",
+          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+        }
+      },
+      {
         "id": "class",
         "label": "Population",
         "value": "Jupiter Trojan",

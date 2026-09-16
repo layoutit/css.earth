@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "030210406802fd7645326f986a89be6f50b9023d08bd6f390f0ecf53fdbeebda"
+    "sha256": "0c9f8bb9c5aaad4e43db83eba5fa1b1e5f818f2bdd618a568e974a638a938158"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a1c4900d00a7bffa4026415b9adc9786a93c74b777175899c37c106834f2f98c",
+      "sha256": "2a69032aedd7f14b8c35afe941f24f0aa8bcacabc3a47fde3e9e587d4ccaed68",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Tarvos",
         "panel": {
           "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter estimate",
+              "value": "15 (+4/−3) km",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/scale/adoptedReferenceRadiusKm"
+              }
+            },
             {
               "id": "parent",
               "label": "Orbits",
@@ -122,6 +135,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "10.691 ± 0.001 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +315,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a1c4900d00a7bffa4026415b9adc9786a93c74b777175899c37c106834f2f98c",
-      "bytes": 2621,
+      "sha256": "2a69032aedd7f14b8c35afe941f24f0aa8bcacabc3a47fde3e9e587d4ccaed68",
+      "bytes": 3602,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +397,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4634,
-          "sha256": "ee3fd0d1a811a3283f48e0f3ad22e03ead491f7e4519e6558bd0ee8b1f907cc4",
+          "bytes": 5345,
+          "sha256": "fdf2e6b71770ec17bf8e0ab8520f5ddeeb4f2873f790061c0f6ee010335f738e",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +436,7 @@
   },
   "lastPreparation": {
     "objectId": "tarvos",
-    "materialSha256": "7a37ca91f0bd05a682395c8dabffe30eccbbc8640dcc194854cb2657c888eda7",
+    "materialSha256": "582b66932e9a0bf10f1a33525ef39cea7a84e4b68bceb5ab318efa92a2a3599f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

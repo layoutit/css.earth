@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c16d48ed7bcf94ece38ae26bb9a8ea38c293a00c482d553783f44d2e2cba82b7"
+    "sha256": "57b9bcbb6c7b9a1e080441380deeae61ea215d9461cad33177bf352a4aaaaa50"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e826f7df9721ac18d5f663184513f395db66a58e22fa90df34504cf19fd320aa",
+      "sha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,6 +142,19 @@
         "displayName": "Encke",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Model length",
+              "value": "≈9.2 km",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+                "label": "Research publication · DOI 10.1016/j.icarus.2005.01.012",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "doi-10-1016-j-icarus-2005-01-012",
+                "locator": "/semiaxesKm/0"
+              }
+            },
             {
               "id": "rotation",
               "label": "Dominant period",
@@ -279,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e826f7df9721ac18d5f663184513f395db66a58e22fa90df34504cf19fd320aa",
-      "bytes": 2739,
+      "sha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
+      "bytes": 3199,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -351,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3570,
-          "sha256": "bf6cbbbe3a63022782fe589aa02944b9a5c68631c85e1aaa3f90e371a88ea6f4",
+          "bytes": 3895,
+          "sha256": "98dfe0827b5fce759bb90116a9d96268b6bdef8551c72eb04c9c97962a331578",
           "verification": "bytes-verified"
         }
       ],
@@ -365,7 +378,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-2p",
-    "materialSha256": "4212280c8b274bb591a4f1ea977877ba74f001854d51caac494003eae62cc8e7",
+    "materialSha256": "84887873dce8521e66609175a618063ac1c151e00a05e54708949674630cf44e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

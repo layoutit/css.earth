@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8442eb07675dcba14599d95be3c339abd8e374c230c45db6f1f6ab289a58011c"
+    "sha256": "3fa0ccebd3409d07fecb4552e5042fb688ee0f44edf512fbe2cb7f8eab3bd3a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -137,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "06a175db5cb484610ed3cef69c8fbfbe87d0a82bf8bcb60cfba0f55a42045eb0",
+      "sha256": "d625786fed47ab20a77896e20b576eba1cc1617a4e0c8ba73ab86a10eddac9e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,6 +145,32 @@
         "displayName": "Polydeuces",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "1.53 ± 0.20 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1912.09192",
+                "label": "Research publication · arXiv 1912.09192",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1912-09192",
+                "locator": "/referenceRadiusKm"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Measured dimensions",
+              "value": "3.5 × 3.1 × 2.62 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1912.09192",
+                "label": "Research publication · arXiv 1912.09192",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1912-09192",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
@@ -403,8 +429,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "06a175db5cb484610ed3cef69c8fbfbe87d0a82bf8bcb60cfba0f55a42045eb0",
-      "bytes": 3189,
+      "sha256": "d625786fed47ab20a77896e20b576eba1cc1617a4e0c8ba73ab86a10eddac9e1",
+      "bytes": 4078,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -477,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7471,
-          "sha256": "f1284ec78ff045bd9e7e282e5804a40bc9d72d93379432c74780593afb26ad1b",
+          "bytes": 8090,
+          "sha256": "daebcfeb4801ba853f4495d632e220c0f6df21f29cdd50e11221d298a5079ac1",
           "verification": "bytes-verified"
         }
       ],
@@ -516,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "011ba69a4f5848fdd414316b2dddab47d798061140ba8645e29761fe6ead39d0",
+    "materialSha256": "b0d46e2c35c0c8b59226d9d745b546bc9ce21fe0aa5ef982ab36081c13534c11",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

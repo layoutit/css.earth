@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c8f75fafd2676d7e79dfcb09ba4a05166f49f2264089e9b7f67ab03daf5d61fc"
+    "sha256": "c39b807111bad62a8014d1ac1738af19b0e311270b3f66075dd57ba15c78cc3f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,14 +102,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd4a967321201c6ed38ca5f7a0484799aef5f1da52bd1ae996e9ee6328888a89",
+      "sha256": "45191853cbc527103b12b217c981934910f1862cf367e05761a1dc521b823ce8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "bianca",
         "displayName": "Bianca",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Projected radius",
+              "value": "27 ± 2 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/projectedRadiusKm/value"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "64 × 46 × 46 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -272,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cd4a967321201c6ed38ca5f7a0484799aef5f1da52bd1ae996e9ee6328888a89",
-      "bytes": 2118,
+      "sha256": "45191853cbc527103b12b217c981934910f1862cf367e05761a1dc521b823ce8",
+      "bytes": 2995,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5309,
-          "sha256": "f99385c7cf0b85c25c0731201093dcedbf91bf3e34331da7e3a6ed0e6b72b49b",
+          "bytes": 5911,
+          "sha256": "98f5a7408fbdec5f1ccc27f3a1e92c0a6f01b87e0f8a2e57123694c29f565f9a",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "bianca",
-    "materialSha256": "dd7e243274cc59e26fbf38098bcc294c2e1aa1075e01293fab8e654d107e7619",
+    "materialSha256": "5e3625b16efa7758015bccc8878d415abcdd4f7303b190fda5677f88ca3fe0a7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

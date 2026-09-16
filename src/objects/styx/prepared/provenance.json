@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "51bc8bdb6458fafde9660866cca0552052b38147a4f809ec89c6f8fbc28c2e8a"
+    "sha256": "4c442522be0f05c1439396546c0c8b4ad6b70a150d882340f8063a91096ac3eb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "51fd77d1915fb611f637968285e6fc127b3dd98a8158072e68a4c7fafb4b2217",
+      "sha256": "27677ae153cc65a3a96c1a50bd0aec303510cc370708b0332ef53894d5d6d097",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -110,6 +110,32 @@
         "displayName": "Styx",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Equivalent radius",
+              "value": "About 3.5 km",
+              "source": {
+                "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+                "label": "Kerberos · measured ellipsoid",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-kerberos-measured-ellipsoid",
+                "locator": "/referenceRadiusKm"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Dimensions",
+              "value": "About 10.6 × 6.0 × 5.3 km",
+              "source": {
+                "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+                "label": "Kerberos · measured ellipsoid",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-kerberos-measured-ellipsoid",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
@@ -286,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "51fd77d1915fb611f637968285e6fc127b3dd98a8158072e68a4c7fafb4b2217",
-      "bytes": 2810,
+      "sha256": "27677ae153cc65a3a96c1a50bd0aec303510cc370708b0332ef53894d5d6d097",
+      "bytes": 3808,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -368,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3769,
-          "sha256": "e1b25de61c4676f0c413659b159441a9049198c4c18dd982c0e3bc76790dbd2c",
+          "bytes": 4497,
+          "sha256": "919dc19d5abe1909fba8b8a15f0ec2f07f8b5c3fb2168a17c745a9fcdbd9b188",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "styx",
-    "materialSha256": "f205076f3f047ec46f225928446616bb2d202dacbfa80b271848ff4eba7025f8",
+    "materialSha256": "a430983c8923cca071ae4c175491237306e98ace9c49871516472cac31d382f9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

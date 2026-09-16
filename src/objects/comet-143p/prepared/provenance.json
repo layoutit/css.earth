@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "68c4d874243e2bfd606289f712712f3dabd9a82ab0368114259acc95906d6741"
+    "sha256": "fffaa8a57a26b0a9aef05a429e4c450a3c50c4397df67802a93eb9586aaaaecf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -134,14 +134,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d407171804fcf020dd10aa078b8415eece3642a5e89442b3e9de376fc6944b72",
+      "sha256": "2f0a749cbdef1681824b67a25c62110addcab687c71c1f4bce489635133d5249",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-143p",
         "displayName": "Kowal–Mrkos",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Thermal radius",
+              "value": "≈4.8 km",
+              "source": {
+                "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+                "label": "Comet 137P · shape parameters",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "source-comet-137p-shape-parameters",
+                "locator": "/thermalRadiusKm"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "17.20 hours",
+              "source": {
+                "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+                "label": "Comet 137P · shape parameters",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "source-comet-137p-shape-parameters",
+                "locator": "/periodHours"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -265,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d407171804fcf020dd10aa078b8415eece3642a5e89442b3e9de376fc6944b72",
-      "bytes": 2356,
+      "sha256": "2f0a749cbdef1681824b67a25c62110addcab687c71c1f4bce489635133d5249",
+      "bytes": 3273,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -337,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6427,
-          "sha256": "1ec0c0bb30fff8cd2bd8a6c128ab4c43a50ade7e5e665b264b43b3d2b6143cc7",
+          "bytes": 7069,
+          "sha256": "e687c5704981fe183397ebdc8733caeb0de4a5f6bef285429a346196698fdb9b",
           "verification": "bytes-verified"
         }
       ],
@@ -351,7 +378,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-143p",
-    "materialSha256": "99a0cb6802793ef9fb43ba21f0e57ea99f774c462f71e7b36a94c22c84f162e0",
+    "materialSha256": "6c850d412a49576fdce0b3432e7aa72500a7c938cbf1b4cc2629ea6423414cb0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

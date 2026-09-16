@@ -9,6 +9,19 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "2,322 × 1,704 × 1,026 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.03113",
+          "label": "doi-10-1038-nature24051",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature24051",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+        }
+      },
+      {
         "id": "rotation-period",
         "label": "Rotation period",
         "value": "3.915 hours",
@@ -20,9 +33,35 @@
           "catalogueId": "jpl-small-body-database",
           "locator": "phys_par.rot_per (h)"
         }
+      },
+      {
+        "id": "ring-width",
+        "label": "Ring width",
+        "value": "About 70 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.03113",
+          "label": "doi-10-1038-nature24051",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature24051",
+          "locator": "/ringWidthKm"
+        }
       }
     ],
     "moreFacts": [
+      {
+        "id": "ring-radius",
+        "label": "Ring radius",
+        "value": "About 2,287 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.03113",
+          "label": "doi-10-1038-nature24051",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1038-nature24051",
+          "locator": "/ringRadiusKm"
+        }
+      },
       {
         "id": "orbital-period",
         "label": "Orbital period",

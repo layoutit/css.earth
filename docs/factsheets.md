@@ -39,15 +39,18 @@ uncertainty threshold; those dated selections are not a current catalogue.
    `source/editorial/factsheet-review.json`, and pin that file in the manifest.
    Keep the source units, uncertainty and any calculation in that record.
    A value copied from a record the body pins needs no hand-written citation:
-   `pnpm cite:facts -- <object-id>` cites orbit, size, rotation, class and
-   discovery facts from `reference/horizons-elements.txt`,
-   `reference/horizons-physical.txt`, `reference/sbdb.json` and
-   `reference/damit-model.json`, and for satellites from the JPL satellite table
-   rows it copies into `editorial/factsheet-review.json`, when the displayed value
-   equals the record at its displayed precision (a discovery matches by year and
-   surnames). `--fetch` pins a missing SBDB record and refreshes the satellite
-   rows; `--check` lists what the tool would do without writing; `--prune` removes
-   what no record proves.
+   `pnpm cite:facts -- <object-id>` cites it when the displayed value equals the
+   record at its displayed precision. It reads the JPL Horizons queries, the JPL
+   Small-Body Database record (`--fetch` pins a missing one), the DAMIT model
+   record, the JPL satellite table rows it copies into
+   `editorial/factsheet-review.json`, and the body's own pinned measurement and
+   model JSON. A measurement record proves a value only through a numeric field
+   that measures the same kind of quantity (a size for a length, a period for a
+   time), directly, as a diameter or radius, or converted between units of that
+   kind, and only when the record names a catalogued source. Numbers inside prose,
+   names or URLs, and text a record repeats, are not evidence: the same author
+   wrote them. A discovery matches by year and every surname. `--check` reports
+   without writing; `--prune` removes what no record proves.
 3. Run `pnpm pin:documents -- <object-id>` to re-pin the content in the source
    manifest; the manifest is the only owner of that pin.
 4. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their

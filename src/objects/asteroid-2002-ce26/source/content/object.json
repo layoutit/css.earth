@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "1.73 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf",
+          "label": "Asteroid 2002 Ce26 · asteroid 2002 ce26 research ce26",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-2002-ce26-asteroid-2002-ce26-research-ce26",
+          "locator": "/diameterKm"
+        }
+      },
+      {
         "id": "distance-from-sun",
         "label": "Solar semimajor axis",
         "value": "2.233 AU",

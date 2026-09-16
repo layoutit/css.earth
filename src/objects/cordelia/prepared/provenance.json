@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41047e7e3bfa004901180ae06fb0ab00728af62c4b1128af5f6cf22bfc02fd85"
+    "sha256": "eab5c14ee91013b90c99fe204d91ff992ef8e1db0041d59790cc1d347374d786"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,14 +102,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ff5fd1c62175f076dc6652c64133ba4273b8a8caaaa254d27aabf9b39c54402d",
+      "sha256": "1e43fa03723f34829d16eda73c50e360313a22a3b8430609f57f321fea567745",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "cordelia",
         "displayName": "Cordelia",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Projected radius",
+              "value": "21 ± 3 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/projectedRadiusKm/value"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "50 × 36 × 36 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -272,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ff5fd1c62175f076dc6652c64133ba4273b8a8caaaa254d27aabf9b39c54402d",
-      "bytes": 2207,
+      "sha256": "1e43fa03723f34829d16eda73c50e360313a22a3b8430609f57f321fea567745",
+      "bytes": 3084,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5620,
-          "sha256": "919d95469b9ba0537b11d85b7e642247f36f898c58a4f57fd37fced350ea32cd",
+          "bytes": 6222,
+          "sha256": "e45cac7fd816452750471162e7abf3f46718898d9562ed0b0e26c2853bcd8c21",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "cordelia",
-    "materialSha256": "7626edfddc7aaecfe2bd4a4c36308caf2c5d01d6b5b389e1c1f4990987ff93f5",
+    "materialSha256": "1e7a64d034d4ff570616386c5b65c142cac3e593e8be06bf45b8d5cec7793e62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

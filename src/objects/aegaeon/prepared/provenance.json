@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe740c2486c7d5dde1950c1c5b4b5f77409f47ab4c2207cd91e4faeafad81ad4"
+    "sha256": "4e01a872d80018e8ed72b89cd1d3762fcbc9b3bfca00eea8ac2f785b65685856"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "30250567079e1c2f9662dc0b7f7d14184d56d5b00ae6ebed6bb15feabfef34e2",
+      "sha256": "73612dc552967fed4553803ca3a5574fe0217218fcb9c849ca639b0e4872a43e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Aegaeon",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "0.33 ± 0.06 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1912.09192",
+                "label": "Research publication · arXiv 1912.09192",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1912-09192",
+                "locator": "/referenceRadiusKm"
+              }
+            },
             {
               "id": "distance-from-parent",
               "label": "Distance from Saturn",
@@ -300,8 +313,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "30250567079e1c2f9662dc0b7f7d14184d56d5b00ae6ebed6bb15feabfef34e2",
-      "bytes": 3023,
+      "sha256": "73612dc552967fed4553803ca3a5574fe0217218fcb9c849ca639b0e4872a43e",
+      "bytes": 3446,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -382,8 +395,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6604,
-          "sha256": "a6b9395981c27b79f2d1e9d4d10b7f1aea8710dfe31b7535038981638ba249b9",
+          "bytes": 6892,
+          "sha256": "2932b5d58211bdecc0016d793a25d177375dd6d6af817dd1868b8a4508e1148b",
           "verification": "bytes-verified"
         }
       ],
@@ -421,7 +434,7 @@
   },
   "lastPreparation": {
     "objectId": "aegaeon",
-    "materialSha256": "cbc032fe17b21b68da4c071d36ebedebe3d0c3aa3d9ac3fc44d3eca0a548b69b",
+    "materialSha256": "c4158ef855d180a0417199592ce4af8d77cd243a55d9a5a3c6b4e6b00086b9c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

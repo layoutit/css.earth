@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7eecd8bdbe68899ae0fc2d425f3e9b823405e0b06da743aaed6f3ff62a52c012"
+    "sha256": "f931a7fcbc44d6d16a760ce1c49a010ccc90f53c682bc910685a9cb6c3649cc8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -99,7 +99,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9654fcaf14a3f87f9e2eb70515067947a54c33ba1f789e0b062036780a7bfbb7",
+      "sha256": "5aa7c390071ff3e5d61c25394ca10879257d7045e1e1c1a7da9dd08bf3b7decc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -123,7 +123,34 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter",
+              "value": "2,326 ± 12 km",
+              "source": {
+                "url": "https://doi.org/10.1038/nature10550",
+                "label": "Research publication · DOI 10.1038/nature10550",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature10550",
+                "locator": "/radiusKm"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 15.8 days",
+              "source": {
+                "url": "https://doi.org/10.1038/nature10550",
+                "label": "Research publication · DOI 10.1038/nature10550",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature10550",
+                "locator": "/rotationPeriodDays"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -234,8 +261,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "9654fcaf14a3f87f9e2eb70515067947a54c33ba1f789e0b062036780a7bfbb7",
-      "bytes": 4019,
+      "sha256": "5aa7c390071ff3e5d61c25394ca10879257d7045e1e1c1a7da9dd08bf3b7decc",
+      "bytes": 4906,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -743,8 +770,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2819,
-          "sha256": "d68c02e325f10a9495fbcd31cdaff00673ac2c6485838b452accb10955adb83f",
+          "bytes": 3431,
+          "sha256": "4981cbacfd7bcdf2af450e2a15eb1367f0eee4b55e967e0d70c821b860e1987c",
           "verification": "bytes-verified"
         }
       ],
@@ -782,7 +809,7 @@
   },
   "lastPreparation": {
     "objectId": "eris",
-    "materialSha256": "a9c4f644c638485215919769c573c16c4f491fe9fe7cee0c022f0da21f3b53bf",
+    "materialSha256": "7dba8e4c92e4fd0c79b6dfe422b773fc7144655b808e5c400ffcfa4a19542c3d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

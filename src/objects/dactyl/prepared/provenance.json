@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e4c626a28136381e906c787e70e4b4f7e882253cd436e28999566ad9370360c1"
+    "sha256": "ec91e3e5c2c4148c7abeb894cb3111a0e3d8123517dc5fcb189f51d167dd4a61"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,14 +93,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0a9d345fc8327ea2ce92f0c6981cc1466fb3921ba1beb788e58cb2724b5663e0",
+      "sha256": "083daaab4f63d0543b6262f82faea145961a0f43a44bb5320fc7a361fa7d7eae",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "dactyl",
         "displayName": "Dactyl",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "size",
+              "label": "Size",
+              "value": "1.6 × 1.4 × 1.2 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.1996.0045",
+                "label": "Research publication · DOI 10.1006/icar.1996.0045",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-1996-0045",
+                "locator": "/shapeParameters/semiaxesKm/0; /radiusKm; /shapeParameters/semiaxesKm/2"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -278,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0a9d345fc8327ea2ce92f0c6981cc1466fb3921ba1beb788e58cb2724b5663e0",
-      "bytes": 2259,
+      "sha256": "083daaab4f63d0543b6262f82faea145961a0f43a44bb5320fc7a361fa7d7eae",
+      "bytes": 2761,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -454,8 +468,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4614,
-          "sha256": "6e883c9f80ef0626887afec4d05bf407085cb970d832b1522a1edece50d09ba8",
+          "bytes": 4976,
+          "sha256": "5df59dde5f1527e335bc20d10eb88dc287c63fa16b3d5db883b9cf21bab4a809",
           "verification": "bytes-verified"
         }
       ],
@@ -529,7 +543,7 @@
   },
   "lastPreparation": {
     "objectId": "dactyl",
-    "materialSha256": "fabda5b307c93d075de8b25a9c29fd16a882d1c869a66dbfbd7f3b220d0d34ae",
+    "materialSha256": "692e5cf8150db099bf7e20381cf39888100219ae1cbd9999d74e5f64f574bfe0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

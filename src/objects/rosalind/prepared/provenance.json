@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ed0464426ca3a48b4e9273c75ee61f69c6375479b456e6f0efa1a69c36c96e7"
+    "sha256": "8ee21e8100cf86ae97a8bf91e4fe8a4b33379320104b49564fd145827e32eaa2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,14 +102,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6f5cb0d6e9bc187346a3714f1a34b384bea3e96844f0b90805ba4cf10de725f8",
+      "sha256": "b404d895d3404fecc7a052b2b51bdf38d2895265fcc7bb24aebd63a5778955de",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "rosalind",
         "displayName": "Rosalind",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Projected radius",
+              "value": "36 ± 6 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "72 × 72 × 72 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -272,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6f5cb0d6e9bc187346a3714f1a34b384bea3e96844f0b90805ba4cf10de725f8",
-      "bytes": 2136,
+      "sha256": "b404d895d3404fecc7a052b2b51bdf38d2895265fcc7bb24aebd63a5778955de",
+      "bytes": 2987,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5415,
-          "sha256": "062c0fda739799ca01cbb69973dfff96d9e42db207bac530ab4e687c73b04857",
+          "bytes": 5991,
+          "sha256": "b77466a861530625b48b1565ebeae4a4a1efa70eb8a430a0dafce5139e2efbe4",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalind",
-    "materialSha256": "d5db03db75adc04089f026019ac77fa819dfffc256e4c31fdbb12d3820ecf003",
+    "materialSha256": "1056e11a4ce4000dca6bc96f861bc352cf61117a838d5cb0278b790616811f8c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

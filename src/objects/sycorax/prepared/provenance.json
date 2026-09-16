@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff1655ce1b298e44fe551c3cc4f6ec4f52a5c6f5a973891dc735ce403dad135c"
+    "sha256": "39ca90f7efa9598097083ef4c5a65fcea8766064c396b1a11c5a8c4729e799af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "66629c77bdb1cb851fe49107a180d2b30aae8df21dd00d1dffd30dff4c2eb4ca",
+      "sha256": "2df51876fa6e68d338e2aaae4fbe30ea2300b9b34448bb73caf569f0582aff26",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -122,6 +122,45 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Full model dimensions",
+              "value": "169 × 151 × 151 km",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1"
+              }
+            },
+            {
+              "id": "scale",
+              "label": "Size evidence",
+              "value": "157 (+23/−15) km · thermophysical model",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/constraints/referenceRadiusKm"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation interpretation",
+              "value": "6.9162 ± 0.0013 h",
+              "source": {
+                "url": "https://arxiv.org/pdf/1706.06837",
+                "label": "Research publication · arXiv 1706.06837",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1706-06837",
+                "locator": "/spin/periodHours"
               }
             }
           ],
@@ -309,8 +348,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "66629c77bdb1cb851fe49107a180d2b30aae8df21dd00d1dffd30dff4c2eb4ca",
-      "bytes": 2601,
+      "sha256": "2df51876fa6e68d338e2aaae4fbe30ea2300b9b34448bb73caf569f0582aff26",
+      "bytes": 3979,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -391,8 +430,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6029,
-          "sha256": "f87af42ac9fb6795b2c0beee8979c61bc11f97f4ab101157958244c239682435",
+          "bytes": 7002,
+          "sha256": "d6f2a46e16847525f7c9e8027d59b4a02954a253eb541e53ec7228a6749f2813",
           "verification": "bytes-verified"
         }
       ],
@@ -430,7 +469,7 @@
   },
   "lastPreparation": {
     "objectId": "sycorax",
-    "materialSha256": "f2b4d972080d092936e139722ca45457dac88b4aaa377dff4809ef77a9d952cb",
+    "materialSha256": "385418afee68a6d6a39a52cec4ec3cf601626f0b9931018ed871ddc07ed7b700",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

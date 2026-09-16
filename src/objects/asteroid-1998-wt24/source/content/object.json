@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "0.2075 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf",
+          "label": "Asteroid 1998 Wt24 · asteroid 1998 wt24 research wt24",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-1998-wt24-asteroid-1998-wt24-research-wt24",
+          "locator": "/diameterKm"
+        }
+      },
+      {
         "id": "distance-from-sun",
         "label": "Distance from Sun",
         "value": "0.719 AU (mean)",

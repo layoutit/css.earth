@@ -4,7 +4,21 @@
   "id": "dactyl",
   "displayName": "Dactyl",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "size",
+        "label": "Size",
+        "value": "1.6 × 1.4 × 1.2 km",
+        "source": {
+          "url": "https://doi.org/10.1006/icar.1996.0045",
+          "label": "Research publication · DOI 10.1006/icar.1996.0045",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1006-icar-1996-0045",
+          "locator": "/shapeParameters/semiaxesKm/0; /radiusKm; /shapeParameters/semiaxesKm/2"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

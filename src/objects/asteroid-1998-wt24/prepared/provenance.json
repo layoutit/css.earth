@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d26c998960308a8a0f331d69879b6a73161ec31040913886ca9e75decce6c45d"
+    "sha256": "4f5982f0f8cb595af9dfbca77ee4e81943552a24979a0799051253b68f661e38"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7fd52f8fb775e6ca4cb957169d3cf191f3c93067cd14ae9c35a8e5242ec7d8d8",
+      "sha256": "32833441058630619ef1ab5aed493a006d5cb13d282c92ac4f5776f3c9fa32e8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,6 +161,19 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "0.2075 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf",
+                "label": "Asteroid 1998 Wt24 · asteroid 1998 wt24 research wt24",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1998-wt24-asteroid-1998-wt24-research-wt24",
+                "locator": "/diameterKm"
+              }
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -370,8 +383,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7fd52f8fb775e6ca4cb957169d3cf191f3c93067cd14ae9c35a8e5242ec7d8d8",
-      "bytes": 10096,
+      "sha256": "32833441058630619ef1ab5aed493a006d5cb13d282c92ac4f5776f3c9fa32e8",
+      "bytes": 10630,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -492,8 +505,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7614,
-          "sha256": "f88972675e70ffdc22e16a2f484d5b6b1985476128a6f9acee0cf7fcac3c97f1",
+          "bytes": 8013,
+          "sha256": "ec82e6c572afa8e3eb830be6709b808ff27dd91ce6ee07fc208973c0f501f343",
           "verification": "bytes-verified"
         }
       ],
@@ -556,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-wt24",
-    "materialSha256": "45e357c31756cb740dc18803ffbf2bfba91f01cf7fadf6bc70a129b7fc19a824",
+    "materialSha256": "ae4459d268dca0f5ee31615a541c181d0627969de4c3b1287b481ff8e7f2fed9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e27839defd2cddd5524ab92e8a8702221efdb7d5057e03554c3890aa3692f3d7"
+    "sha256": "ad6b06e23684ee161d5ef1b4c1da1947e6f38b6a973541f8680e9c9f6e73f6d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4b4527e46774323516417e07591c4ee7fee43f1b5285c9b00afa64eed99abd77",
+      "sha256": "3f961c944702912abe1b5d59c29846d0cd99992ef011f079df09c2429985a94f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,6 +202,19 @@
                 "path": "source/reference/horizons-elements.txt",
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "15.16 ± 0.04 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
+                "label": "Nereus · nereus research nereus",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-nereus-nereus-research-nereus",
+                "locator": "/periodHours"
               }
             }
           ],
@@ -375,8 +388,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4b4527e46774323516417e07591c4ee7fee43f1b5285c9b00afa64eed99abd77",
-      "bytes": 8981,
+      "sha256": "3f961c944702912abe1b5d59c29846d0cd99992ef011f079df09c2429985a94f",
+      "bytes": 9486,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +510,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6249,
-          "sha256": "e5258e990904e88f13f8d687904915c40cbb80c271e89d9609e0a2dd552df58f",
+          "bytes": 6619,
+          "sha256": "503a6c88c78e1089ff9aecef3473bb71c2ad3290d78e615bf972ea92306c231a",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +574,7 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "fa8fb1266d096d159338ee5155dfed5552380dc8e2c60a9f14fea4e02bb78fa2",
+    "materialSha256": "11c05d24bbae9f610aa4787acf14b7d3a3b53763e99a74605ef2863199b0bc17",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

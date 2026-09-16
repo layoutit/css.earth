@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b0943b93ca2719a3e0d0c56513965c76e0f61f5aa71c6f12ad428f1b78b1d2f1"
+    "sha256": "e76a7d93f9441e41e1fd2b2a9ccf9569d9a7ed179f76226c23a1e18212ee5219"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,14 +102,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "91ba9cfcc90f7cce969c4f0ddea023b741dc15a869bc1dff3a80e4a4e13ed1e6",
+      "sha256": "73923f7928a9b25a8578e060a58dd872af7a1400fcf1146e6e2756b66c32afdc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "desdemona",
         "displayName": "Desdemona",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Projected radius",
+              "value": "35 ± 4 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/projectedRadiusKm/value"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "90 × 54 × 54 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -272,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "91ba9cfcc90f7cce969c4f0ddea023b741dc15a869bc1dff3a80e4a4e13ed1e6",
-      "bytes": 2145,
+      "sha256": "73923f7928a9b25a8578e060a58dd872af7a1400fcf1146e6e2756b66c32afdc",
+      "bytes": 3022,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7273,
-          "sha256": "26573d24deda21a08b42b9079e0d29c80cba30a8688522998a44616ef4e291a8",
+          "bytes": 7875,
+          "sha256": "4359b86674851c6b9760c337b34bf5d3eed7428ec3f624ce0100a1057cb0f002",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "desdemona",
-    "materialSha256": "d156f8881ff93230bb0b802fba3f7531aa09c32174a1a97b50e7d4351cd556f4",
+    "materialSha256": "3fc93938f820ea2beefe092b9ee4bf4410180bf1447ffc83a90a71fdc6db5110",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

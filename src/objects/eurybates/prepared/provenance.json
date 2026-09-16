@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7bab54f2fec6ef8a4e86744beff0602c4d24fd0922c631810cb4c339ff3aaef8"
+    "sha256": "46b67806a483683a2bdaf0f1b6cda5b197fe25f9e707e6d5276803c76b94c4d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bc16339b3c623931d92a6f6055eb29f8564235a637c57e6059aec3f91f87198b",
+      "sha256": "657a99e2e9d0618abb07e2de75d816224a518bdc0aa0cfddffe7904fe4cc3089",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,32 @@
         "displayName": "Eurybates",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Full approximation dimensions",
+              "value": "77.5 × 71.3 × 61.8 km",
+              "source": {
+                "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+                "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-psj-acaf79",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "8.7027283 ± 0.0000029 h",
+              "source": {
+                "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+                "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-psj-acaf79",
+                "locator": "/spin/periodHours"
+              }
+            },
             {
               "id": "class",
               "label": "Population",
@@ -286,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bc16339b3c623931d92a6f6055eb29f8564235a637c57e6059aec3f91f87198b",
-      "bytes": 2610,
+      "sha256": "657a99e2e9d0618abb07e2de75d816224a518bdc0aa0cfddffe7904fe4cc3089",
+      "bytes": 3805,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -368,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6596,
-          "sha256": "16dea6e49d34c5812b2e8804a9e9ce67aed106d3c03e7dde070c56334335aef0",
+          "bytes": 7521,
+          "sha256": "f51f41e18c52c5aba9cafa71dd914f0265c2750acdc7ff22e79e9bc78dcc5022",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "eurybates",
-    "materialSha256": "ea93def0e18c81a67b86c03976c2042e6d4f9351ef9252678524bccceb6cb405",
+    "materialSha256": "020e3f39efe589910b2fb13fdc5d618a3f80e514be6a016d08fa870c0c62a5de",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

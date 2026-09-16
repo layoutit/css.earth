@@ -4,7 +4,34 @@
   "id": "rosalind",
   "displayName": "Rosalind",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Projected radius",
+        "value": "36 ± 6 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2401.04634",
+          "label": "Research publication · arXiv 2401.04634",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2401-04634",
+          "locator": "/semiAxesKm/0"
+        }
+      },
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "72 × 72 × 72 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2401.04634",
+          "label": "Research publication · arXiv 2401.04634",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2401-04634",
+          "locator": "/semiAxesKm/0"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

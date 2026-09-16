@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd55961e9c1987ba6ec4504e01265eea897b2390fd797f31fad489a4a2e897e0"
+    "sha256": "0d75b212a359adff5e274f2483b5905e4e0d6487425776f0643677765d9817f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "57b5aa8b0ec239c69a3873286c8254933419b8aa35a1ab6e075e101c06ef7ecd",
+      "sha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Varda",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "778 × 706 × 496 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            },
             {
               "id": "class",
               "label": "Population",
@@ -125,7 +138,21 @@
               }
             }
           ],
-          "moreFacts": []
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape.",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -284,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "57b5aa8b0ec239c69a3873286c8254933419b8aa35a1ab6e075e101c06ef7ecd",
-      "bytes": 3081,
+      "sha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
+      "bytes": 4203,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -366,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5193,
-          "sha256": "53bcdbe48f3afca43da149561bda9da87e07b9a6230ec6ab824f26fca5560cb7",
+          "bytes": 6040,
+          "sha256": "700502ae5bfe8a49c7842720e1ac989755fd3db773d36b5ec2ade95f9eee679c",
           "verification": "bytes-verified"
         }
       ],
@@ -405,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "varda",
-    "materialSha256": "770fc6853126bf642b9b794b673b6cdfa92abd4068a3850aadf4db3401532429",
+    "materialSha256": "0b7542921919bbbbf5aae13dbd3571eb3a4a998b71bc83670474c9117b6d92aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

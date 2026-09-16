@@ -4,7 +4,34 @@
   "id": "comet-162p",
   "displayName": "Siding Spring",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Thermal radius",
+        "value": "≈7.0 km",
+        "source": {
+          "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+          "label": "Comet 137P · shape parameters",
+          "checked": "2026-09-16",
+          "path": "source/shape/model.json",
+          "catalogueId": "source-comet-137p-shape-parameters",
+          "locator": "/thermalRadiusKm"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "32.86 hours",
+        "source": {
+          "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+          "label": "Comet 137P · shape parameters",
+          "checked": "2026-09-16",
+          "path": "source/shape/model.json",
+          "catalogueId": "source-comet-137p-shape-parameters",
+          "locator": "/periodHours"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a10b5b6b970775e5cf0604e5bffd8ed2eed7de7c64dfd2090ac5b05d8ffe590c"
+    "sha256": "ec59f9dd50a6f44280d66b4e4561c5e1bab12535eb5de471d790b291df06967f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,14 +102,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "48668064a69929f3e1476b80de259344aa32ef7b1d9a9863aaf5d84369986bdb",
+      "sha256": "8d77ba7e664859570961009e7e9d9012b1dd442eb095f23336c2522e12f51b5e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "squannit",
         "displayName": "Squannit",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Mesh extents",
+              "value": "0.571 × 0.463 × 0.349 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+                "label": "JPL radar shape model of Squannit: kw4b.obj",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "jpl-squannit-kw4b",
+                "locator": "/constraints/fullExtentsKm/0; /constraints/fullExtentsKm/1; /constraints/fullExtentsKm/2"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -280,8 +294,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "48668064a69929f3e1476b80de259344aa32ef7b1d9a9863aaf5d84369986bdb",
-      "bytes": 2527,
+      "sha256": "8d77ba7e664859570961009e7e9d9012b1dd442eb095f23336c2522e12f51b5e",
+      "bytes": 3063,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -362,8 +376,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5745,
-          "sha256": "9a2dce1713921bca5e65353302b89608d81999f488badb168711894d97a7efad",
+          "bytes": 6141,
+          "sha256": "c4707af7e940e952169222981583031077ee77d17c2b0f2517ec4bc60930b1b9",
           "verification": "bytes-verified"
         }
       ],
@@ -401,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "squannit",
-    "materialSha256": "eb97fd00c4ad3d4b46787d1c8572ef4d59844cb3198eeff54c487c3de58da508",
+    "materialSha256": "e679f03d49d50dabc4878984a77dc56a78240e91ca97a6f20101e4dca6f46507",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

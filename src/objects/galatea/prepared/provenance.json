@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "115089f4936bbda101d5f21da71b63c4de795f4fe41dd769038697cf019512f0"
+    "sha256": "a0daf9b1ce6e152c93a4459b6a04ed5bb06ecdfafb966f245608c48de4efa57b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a4932e899aa73446aa9292a0e8129c0d5d277327905ae96a8016270fe1ecac6e",
+      "sha256": "76f585b17c32dc9426faefb38c5ebe2a77b0e80d220134c28eb6ac3ceab41b42",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,6 +121,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-physical-parameters",
                 "locator": "/references/0; radius"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Dimensions",
+              "value": "204 × 184 × 144 km",
+              "source": {
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+                "label": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
               }
             },
             {
@@ -312,8 +325,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a4932e899aa73446aa9292a0e8129c0d5d277327905ae96a8016270fe1ecac6e",
-      "bytes": 3621,
+      "sha256": "76f585b17c32dc9426faefb38c5ebe2a77b0e80d220134c28eb6ac3ceab41b42",
+      "bytes": 4124,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,8 +407,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7130,
-          "sha256": "65f186d7820314ced819ba41ce61a7756a04ef1663aab3dadb636b600a393e92",
+          "bytes": 7498,
+          "sha256": "49ff91fbd1e86ec703bf257bd122d100d24a01f917b78c913a9604faf3a63e1a",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +446,7 @@
   },
   "lastPreparation": {
     "objectId": "galatea",
-    "materialSha256": "f9c82f5728b3ea58103655022a5db5e2c9b1a69540499aca13c34eafdd42bf71",
+    "materialSha256": "834cce150f18f569a0605e0ecebff55a59fce79117ddc576ba58c63b0007335b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

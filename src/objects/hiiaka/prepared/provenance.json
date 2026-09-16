@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "893cd7d7adaf62d72a64033a6d098100f592de93db9384cebc42d78dbdbb4bcc"
+    "sha256": "b79ca03fe72b4e786bd5511dfd2d883644a65c8fad908b55478053970aba8d46"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,54 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a7c4301b2e9dea54c20315cedee7fae9d4a7fbdb54a74d110d5b17ebd4205fbe",
+      "sha256": "dc641b88f63fb6f7ec7fa22a700d68dcc528afbf030150e8664a1d51d96205e4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hiiaka",
         "displayName": "Hiʻiaka",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Full model dimensions",
+              "value": "480 × 360 × 286 km",
+              "source": {
+                "url": "https://www.nature.com/articles/s41467-025-65749-1",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-hiiaka-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+              }
+            },
+            {
+              "id": "scale",
+              "label": "Size evidence",
+              "value": "370 ± 20 km · reported volume-equivalent diameter",
+              "source": {
+                "url": "https://www.nature.com/articles/s41467-025-65749-1",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-hiiaka-model-surface",
+                "locator": "/constraints/reportedVolumeEquivalentDiameterKm/value"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation interpretation",
+              "value": "9.68 ± 0.02 h",
+              "source": {
+                "url": "https://www.nature.com/articles/s41467-025-65749-1",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-hiiaka-model-surface",
+                "locator": "/spin/periodHours"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -272,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a7c4301b2e9dea54c20315cedee7fae9d4a7fbdb54a74d110d5b17ebd4205fbe",
-      "bytes": 2112,
+      "sha256": "dc641b88f63fb6f7ec7fa22a700d68dcc528afbf030150e8664a1d51d96205e4",
+      "bytes": 3549,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4599,
-          "sha256": "fda5fbc3ccbc88b91433d018a1c00f017372c351e8696018d35ccf5294eadb81",
+          "bytes": 5626,
+          "sha256": "be3fa5baa86db374f8a487fdff2a6fd91b297133e6027004b1cd251a55f66fb5",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "hiiaka",
-    "materialSha256": "8e5ec53b0cf04801527381d3cc4dccc5cfd7c67ab3dcea3690bb5b4bc91392f1",
+    "materialSha256": "a843e6c2f95e2e565d292bd20ada912c03a4933295f6d043f012e19c917a93da",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

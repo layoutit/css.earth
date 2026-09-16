@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8b4b99c68b3cae2d5f18a155790384d840cb8a2dbd28b7eb9ad8a2fe0c98b51"
+    "sha256": "b3f01810a6e0a34fc60a4aab895c0517d1e632fd1ac7b45fb03e45ea87c7417b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f23e3b7cbf2c18b58393bbd7adc0e59e5ada2310c8824b9b2f9275b09edc1da",
+      "sha256": "d449ae13229451c11788bacc62dbe1db1a2fb57ef610523dbbcdbe4a941a0783",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Siarnaq",
         "panel": {
           "facts": [
+            {
+              "id": "diameter",
+              "label": "Mean diameter estimate",
+              "value": "39 ± 6 km",
+              "source": {
+                "url": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-siarnaq-model-surface",
+                "locator": "/meanRadiusKm"
+              }
+            },
             {
               "id": "parent",
               "label": "Orbits",
@@ -280,8 +293,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f23e3b7cbf2c18b58393bbd7adc0e59e5ada2310c8824b9b2f9275b09edc1da",
-      "bytes": 2344,
+      "sha256": "d449ae13229451c11788bacc62dbe1db1a2fb57ef610523dbbcdbe4a941a0783",
+      "bytes": 2772,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -362,8 +375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5990,
-          "sha256": "4e17ce54d0b2de85d45167493b1b7c62512b6811ccdfe8864c8b67befb075890",
+          "bytes": 6283,
+          "sha256": "76eafd21bc58ead3c8c580231054636df3e536ce8e25256f7e6569fa0242e081",
           "verification": "bytes-verified"
         }
       ],
@@ -401,7 +414,7 @@
   },
   "lastPreparation": {
     "objectId": "siarnaq",
-    "materialSha256": "1065d45a012c735103255ca24dde8a4a06870fcd9395582493afb4c200da13a0",
+    "materialSha256": "0143d32c239b12c0d627ecdcf92235e19626586c53de25990062928c5bd73381",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

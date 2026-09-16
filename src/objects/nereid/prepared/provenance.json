@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b4e37716b69833c5877ba19b9e86790f670c9722dcff13adce64a5dc930e3bb3"
+    "sha256": "92e411a65b63bc68d22c250ad0de4d7876d450dd2bf1d5dbf97d7d2c0d51e09b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1e4e8e19620983d9d2c9da9008e038781f9f189a4631005ba83ef83f94f4c0fa",
+      "sha256": "928e6dac0a0b134f4b2660c7501b4e7bfb500206fb04e12f0ea582d740ae611d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -150,7 +150,34 @@
               }
             }
           ],
-          "moreFacts": []
+          "moreFacts": [
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "11.594 ± 0.017 hours",
+              "source": {
+                "url": "https://doi.org/10.1093/mnras/stw081",
+                "label": "Research publication · DOI 10.1093/mnras/stw081",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1093-mnras-stw081",
+                "locator": "/rotationPeriodHours"
+              }
+            },
+            {
+              "id": "shape-axes",
+              "label": "Model semiaxes",
+              "value": "194 × 171 × 148 km · derived approximation",
+              "source": {
+                "url": "https://doi.org/10.1093/mnras/stw081",
+                "label": "Research publication · DOI 10.1093/mnras/stw081",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1093-mnras-stw081",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -320,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1e4e8e19620983d9d2c9da9008e038781f9f189a4631005ba83ef83f94f4c0fa",
-      "bytes": 3628,
+      "sha256": "928e6dac0a0b134f4b2660c7501b4e7bfb500206fb04e12f0ea582d740ae611d",
+      "bytes": 4594,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -402,8 +429,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5444,
-          "sha256": "455db6d8d55670576654aebd847a66604c0475f4d2ad17bdc285e75b75564ccc",
+          "bytes": 6135,
+          "sha256": "111bd494380fac05ab11e7dab0a5f1134c82e5514e98514af4a3bdfe4ae6ad50",
           "verification": "bytes-verified"
         }
       ],
@@ -441,7 +468,7 @@
   },
   "lastPreparation": {
     "objectId": "nereid",
-    "materialSha256": "9351bbae4274c7103c0842dc751bb85cdecc2a0300eb549993844f08a448b88d",
+    "materialSha256": "9c47be8f0298ce5ff361e662c8d93ac5c67f5925fbc3b584cb05253df947f0f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

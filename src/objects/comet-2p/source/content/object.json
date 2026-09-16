@@ -6,6 +6,19 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Model length",
+        "value": "≈9.2 km",
+        "source": {
+          "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+          "label": "Research publication · DOI 10.1016/j.icarus.2005.01.012",
+          "checked": "2026-09-16",
+          "path": "source/shape/model.json",
+          "catalogueId": "doi-10-1016-j-icarus-2005-01-012",
+          "locator": "/semiaxesKm/0"
+        }
+      },
+      {
         "id": "rotation",
         "label": "Dominant period",
         "value": "≈11.1 hours",

@@ -4,7 +4,34 @@
   "id": "romulus",
   "displayName": "Romulus",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Full model dimensions",
+        "value": "38 × 14.1 × 14.1 km",
+        "source": {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-romulus-model-surface",
+          "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1"
+        }
+      },
+      {
+        "id": "scale",
+        "label": "Size evidence",
+        "value": "23.1 ± 0.7 km · projected area-equivalent diameter",
+        "source": {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-romulus-model-surface",
+          "locator": "/constraints/projectedDiameterKm/value"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

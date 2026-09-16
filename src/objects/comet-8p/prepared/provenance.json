@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f71c0508ca1eb0a94f1c306b9643671b8d77b09a297295fe8d2856504c60dc0a"
+    "sha256": "1ce919a001db60b34af32ffb060040adc90ee985f486961ba3dad6df89756b00"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -213,14 +213,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6c51123ee235f3cf9b6b66b93bcd7674f85a85ffa0780a2d9c1ce0ac7ad9d3c1",
+      "sha256": "9d3d06bfe7a8a1b277c165762c7a65198697222ecfe4efd1c967295c6458a7cc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-8p",
         "displayName": "Tuttle",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "About 11.4 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+                "label": "Comet 8P · arecibo model",
+                "checked": "2026-09-16",
+                "path": "source/shape/arecibo.json",
+                "catalogueId": "source-comet-8p-arecibo-model",
+                "locator": "/synodicPeriodHours"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -515,8 +529,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6c51123ee235f3cf9b6b66b93bcd7674f85a85ffa0780a2d9c1ce0ac7ad9d3c1",
-      "bytes": 3133,
+      "sha256": "9d3d06bfe7a8a1b277c165762c7a65198697222ecfe4efd1c967295c6458a7cc",
+      "bytes": 3599,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -717,8 +731,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3128,
-          "sha256": "9d4b0df81c3bddc9345bc9b8e9ce60160af052f068cd09ccc98b36e2da0c7135",
+          "bytes": 3454,
+          "sha256": "8203a8f7a781bce20cac8a055a6dd9af25ec787c5ecef29a54abfdc3a700f09a",
           "verification": "bytes-verified"
         }
       ],
@@ -764,7 +778,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-8p",
-    "materialSha256": "c659d7990831f314a663848dd5589c3ab89a18b07bcb731590b44146bdac987a",
+    "materialSha256": "86c66a310cbfcd53885a3ac1c5d48c6577e72c00a690ce515d35b5cbbd906b4b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

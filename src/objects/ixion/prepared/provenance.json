@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ab439af3602aa6f23d1ab8d6d6ddff0e2552c9a35b2ad59f3a694f1815864f6"
+    "sha256": "e8000cd55da2433a87090e511b2b054e6231af20ab81eb52f247ac97691727fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6bfdfa9a0240a436995630753515ef73a82a2f52ccc01303d37da40e4436067c",
+      "sha256": "8a774eca0332f69022df5a3b6546e421af573d4bf4f4b3b987e095f497270d3d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "ixion",
         "displayName": "Ixion",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "727 × 727 × 668 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2601.09639",
+                "label": "Research publication · arXiv 2601.09639",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2601-09639",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -258,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6bfdfa9a0240a436995630753515ef73a82a2f52ccc01303d37da40e4436067c",
-      "bytes": 2332,
+      "sha256": "8a774eca0332f69022df5a3b6546e421af573d4bf4f4b3b987e095f497270d3d",
+      "bytes": 2788,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2960,
-          "sha256": "9c339d6b59cb0162e333e18e02694d82c59cf5faae0ee4eb2d946e628bddfae6",
+          "bytes": 3276,
+          "sha256": "a1fb94f6d75869f5b429ea96ef016ccbdafba6f26c016709a74d583fc0d0d83b",
           "verification": "bytes-verified"
         }
       ],
@@ -379,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "ixion",
-    "materialSha256": "38bd8c48851a75cafa6f76b4f3b6b67ea8ec8cede583f98d276a5e164d49786e",
+    "materialSha256": "e3da57f30f3f94ecd289e64778797b8acf7eb1b95b6075fe9f9bb62dc577377e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

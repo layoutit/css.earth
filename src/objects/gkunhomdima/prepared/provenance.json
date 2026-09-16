@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2e9ca94ad14e3fe2eceed9c5479dc139e88af89e150f029680fd4a5e918c4549"
+    "sha256": "4a59ae75f2751d404a56e87ad89863f1b44f0b8945e97d5b6f6219e35db95973"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,15 +103,43 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc1239fa7bf960b92d26486ff362d9a25c13030c4da42371f67f6dc0c36bae90",
+      "sha256": "7726afb7bfe602cae7911854a36cfb9b5afb5712e0e3730e09d06fe9d17b205e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "gkunhomdima",
         "displayName": "Gǃkúnǁʼhòmdímà",
         "panel": {
-          "facts": [],
-          "moreFacts": []
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Model extents",
+              "value": "658 × 658 × 588 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model.",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -258,8 +286,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc1239fa7bf960b92d26486ff362d9a25c13030c4da42371f67f6dc0c36bae90",
-      "bytes": 2277,
+      "sha256": "7726afb7bfe602cae7911854a36cfb9b5afb5712e0e3730e09d06fe9d17b205e",
+      "bytes": 3352,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,8 +368,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7742,
-          "sha256": "0c271399def2238861ff386663588b0458bee7ee20f412b583dd301f4ba758cf",
+          "bytes": 8537,
+          "sha256": "22491b1502c9823868cd860dc741eb625fd1ca9fe80fd43d142c2a539d26edb1",
           "verification": "bytes-verified"
         }
       ],
@@ -379,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "gkunhomdima",
-    "materialSha256": "9bb8cafca04dd91e48d797ea257f83227b891810181f46a0480092647d0d157c",
+    "materialSha256": "01dfde8dcfeef8c81baa4f256e773b1b941c2a9771ee25376005c8fb0acc4f3e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

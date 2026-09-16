@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9e758540664a9925f8b28dde4a5c7d2cf477d5219d4d005f89866a2687154762"
+    "sha256": "ee495c9faca8941fce8d65ab3d82a1c10943ce133f416e028e92b8cb2589ab5c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c3003ac3a04dbd0543b3783e93da53611eb7f7e24392b9af2762ae9532c87c9",
+      "sha256": "efd72f1336a3ebcf649089fa116c998fd8f954e1479f61f1ed8be452cfc312f6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -151,6 +151,19 @@
         "displayName": "Puck",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "About 81 km",
+              "source": {
+                "url": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+                "label": "Puck · reference sphere",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-puck-reference-sphere",
+                "locator": "/semiAxesKm/0"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
@@ -382,8 +395,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8c3003ac3a04dbd0543b3783e93da53611eb7f7e24392b9af2762ae9532c87c9",
-      "bytes": 2449,
+      "sha256": "efd72f1336a3ebcf649089fa116c998fd8f954e1479f61f1ed8be452cfc312f6",
+      "bytes": 2889,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -456,8 +469,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3146,
-          "sha256": "a9b7ff759413197e3e9bb3daf2e4548e2a7ae7b3711214f642355d2890ba4562",
+          "bytes": 3451,
+          "sha256": "baa720c264efe2c25ba4be4754b53fcb9763ec0f93edf72d75d0ab836e5194b0",
           "verification": "bytes-verified"
         }
       ],
@@ -495,7 +508,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "a09692b70176cfd7a545d76a573976e9611d8d3b7618ee8894e66f285d479310",
+    "materialSha256": "bbd9958d8c41b31de8e58dbf4445d8a719605a6c0b71b7392a397c0598875bf5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

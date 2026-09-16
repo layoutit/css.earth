@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed0ec743d338e2907ed1b05d7466140c151677c30394cb6eaa50e359c27b7cb0"
+    "sha256": "d51d47934af778cbecce1ee1f9b9cc73cb66e24e2c06128250417e306b9df572"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b4718607a3bf931ecb939757dcf6bd6ee3ca01a095b70e834423fff825004cc2",
+      "sha256": "90a5a3497684dcb7b0bc384cd964af8e1083d61e60fc58c3e90e166ecf52e9fc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "deedee",
         "displayName": "DeeDee",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "635 × 635 × 635 km",
+              "source": {
+                "url": "https://doi.org/10.3847/2041-8213/aa64d8",
+                "label": "Research publication · DOI 10.3847/2041-8213/aa64d8",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-2041-8213-aa64d8",
+                "locator": "/fullAxesKm/0"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -264,8 +278,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b4718607a3bf931ecb939757dcf6bd6ee3ca01a095b70e834423fff825004cc2",
-      "bytes": 2733,
+      "sha256": "90a5a3497684dcb7b0bc384cd964af8e1083d61e60fc58c3e90e166ecf52e9fc",
+      "bytes": 3206,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -346,8 +360,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5163,
-          "sha256": "0281d0c66f701b895870e9d9994b7939a307e532b31bb793dad27344f1e4f0dc",
+          "bytes": 5496,
+          "sha256": "8d6961a53e8973f2abe50c83e35e9f335577e277b98b7a6391af954766546457",
           "verification": "bytes-verified"
         }
       ],
@@ -385,7 +399,7 @@
   },
   "lastPreparation": {
     "objectId": "deedee",
-    "materialSha256": "948c7888226b45de0d427f1a1b4cbc48fda6ca57373443a32550b628abe2be1a",
+    "materialSha256": "918a51defd2ceae0d1de695746e7bc7c5f2b2ba8c48aeb4ec72037a646fa86aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

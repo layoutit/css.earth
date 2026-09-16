@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6159906a6c676c8f0890a1d7ffd4eb82ea824e4e77fdd93eb65036409a391536"
+    "sha256": "631de7e7dbeb41e979299fa1c487042fa2db511e7317e35316af998a4cacdd29"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f46cd2d3ca45fb00e9e8e34e3a565a5a184240d8c5548e4ce9eaaf6a9aee9635",
+      "sha256": "7e0dd4f3eadc59b702661d409974daa1e856c7f54df143d8c1b6093d082cf1d6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,6 +166,19 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Model equivalent radius",
+              "value": "1.01 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+                "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+                "locator": "/diameterKm"
+              }
+            },
+            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
               "value": "2.046 AU",
@@ -189,6 +202,19 @@
                 "path": "source/reference/horizons-elements.txt",
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "8.76243 ± 0.00004 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+                "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+                "locator": "/periodHours"
               }
             }
           ],
@@ -355,8 +381,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f46cd2d3ca45fb00e9e8e34e3a565a5a184240d8c5548e4ce9eaaf6a9aee9635",
-      "bytes": 9678,
+      "sha256": "7e0dd4f3eadc59b702661d409974daa1e856c7f54df143d8c1b6093d082cf1d6",
+      "bytes": 10743,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -477,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6484,
-          "sha256": "c8863ce8bd5e3823afb43dcd693d1c15dc3d648a677b2b0bc6c7a292216a1c93",
+          "bytes": 7279,
+          "sha256": "98da2bf8a932a426d080134f72a2d1a3001b98308aff173ea486955683de2834",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1996-hw1",
-    "materialSha256": "e403a4c348165389f4a7ec71d4c3c395980dad60ad32425e55e8d41eae4f2781",
+    "materialSha256": "d94b0317fa969f5678fa72500d7e84b2876bf536c646c92a48798807fa1a2d85",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

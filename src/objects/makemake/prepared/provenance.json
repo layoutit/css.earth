@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "38752b2a57938db41ec50fa682b0caf33bf726f0081669d820ae35f9749547c2"
+    "sha256": "3960e75a861b8bc94173764d61d367bad300d6b1c1c5a502be6d02fb72a128dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -99,7 +99,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2264b3426f2b6ca250c6a146629243f04ee8e4de324e8e3ad10404e9d492ea89",
+      "sha256": "680fc522a3ad17e220c2b6137d63b35133adcf2d454b57bed5cc47fb8c40ae3d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -123,8 +123,62 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [],
-          "moreFacts": []
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Approximate radius",
+              "value": "715 km",
+              "source": {
+                "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+                "label": "Makemake · nasa makemake size",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-makemake-nasa-makemake-size",
+                "locator": "/approximateRadiusKm"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 22.5 hours",
+              "source": {
+                "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+                "label": "Makemake · nasa makemake size",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-makemake-nasa-makemake-size",
+                "locator": "/rotationPeriodHours"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "About 305 years",
+              "source": {
+                "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+                "label": "Makemake · nasa makemake size",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-makemake-nasa-makemake-size",
+                "locator": "/orbitalPeriodYears"
+              }
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "45.8 AU",
+              "source": {
+                "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+                "label": "Makemake · nasa makemake size",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-makemake-nasa-makemake-size",
+                "locator": "/meanDistanceAu"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -228,8 +282,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "2264b3426f2b6ca250c6a146629243f04ee8e4de324e8e3ad10404e9d492ea89",
-      "bytes": 7631,
+      "sha256": "680fc522a3ad17e220c2b6137d63b35133adcf2d454b57bed5cc47fb8c40ae3d",
+      "bytes": 9464,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -737,8 +791,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6460,
-          "sha256": "44ca0657b8aefd45477f31fd2229e61715dcebdc983adf1c79485b15e3a363de",
+          "bytes": 7743,
+          "sha256": "41280e02d6d32079bd25335b4afcf2206a5950b56721ed1f8858f9eeb26bc51b",
           "verification": "bytes-verified"
         }
       ],
@@ -776,7 +830,7 @@
   },
   "lastPreparation": {
     "objectId": "makemake",
-    "materialSha256": "f03c30d390acb9251711d2ae5cbf686c59860dd0eee683253025d391498cc98d",
+    "materialSha256": "924b3132752099138ac978449df7815d5d991a6affb75bc46ff206a59acdbb9b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aa0bc706a7908a5acedbf5c5278bf85d1c8845da270df2a82d8f7286fdf9e48d"
+    "sha256": "6d7c50902c010163e9d956170c3f7a19b58cd106c5d98fc71d15f441cf94ce27"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,15 +103,43 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "11f68b255017659d1cfb61979aa9f8975688335b6e01f12795270b3e43a799a7",
+      "sha256": "7805138f5236c85b7159951e8d8b8de6e392a8b6cde60eb55496dc3075e9ab5e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "huya",
         "displayName": "Huya",
         "panel": {
-          "facts": [],
-          "moreFacts": []
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "436 × 436 × 375 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2501.09739",
+                "label": "Research publication · arXiv 2501.09739",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2501-09739",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions.",
+              "source": {
+                "url": "https://arxiv.org/abs/2501.09739",
+                "label": "Research publication · arXiv 2501.09739",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2501-09739",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -258,8 +286,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "11f68b255017659d1cfb61979aa9f8975688335b6e01f12795270b3e43a799a7",
-      "bytes": 2303,
+      "sha256": "7805138f5236c85b7159951e8d8b8de6e392a8b6cde60eb55496dc3075e9ab5e",
+      "bytes": 3523,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,8 +368,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3220,
-          "sha256": "896c81428fe2938ce0e744c4f5a8ee6abda883c144aac47ad9b27aeed0041d64",
+          "bytes": 4160,
+          "sha256": "e6085cf7a53a8f7b206a497282bba9f579fddb4ad7a523544182ed9535991938",
           "verification": "bytes-verified"
         }
       ],
@@ -379,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "huya",
-    "materialSha256": "d3b93442b080b18e90ee5fabd3908970423e83ca33b0fed19faa0275307195c2",
+    "materialSha256": "5d2226ca111fb7f8946da1e33e1463f58b1605a3e44908dc944b38ee6f993d99",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

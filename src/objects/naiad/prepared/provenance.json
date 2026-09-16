@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc178c5996be6fe817ac100213908d42843156ab1720a34aaffcee859f551408"
+    "sha256": "6a9e6f297ac439a5a8c192e10d8d745c04cfd31422d7f0e08155c803beb8d44b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "690b67d7c26f3ca4a453357ea8e82ed64d2bcf4e03776ed5409d3912c814e4c0",
+      "sha256": "049477b99ae0eec80edbcf89a7ca54a5814726fc6411aeba50af187c38eab1c4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,6 +121,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-physical-parameters",
                 "locator": "/references/1; Mean Radius (km) value"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Dimensions",
+              "value": "About 96 × 60 × 52 km",
+              "source": {
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+                "label": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
               }
             },
             {
@@ -325,8 +338,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "690b67d7c26f3ca4a453357ea8e82ed64d2bcf4e03776ed5409d3912c814e4c0",
-      "bytes": 4114,
+      "sha256": "049477b99ae0eec80edbcf89a7ca54a5814726fc6411aeba50af187c38eab1c4",
+      "bytes": 4620,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -407,8 +420,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6127,
-          "sha256": "79303f0f09b75b990e5104511aff1793c9b348ff1697a5baee65dc02c102bb74",
+          "bytes": 6498,
+          "sha256": "5fb794c78d4ebb361c752dcdbf0557304faebcc03b637f010c0b434b0254a1e5",
           "verification": "bytes-verified"
         }
       ],
@@ -446,7 +459,7 @@
   },
   "lastPreparation": {
     "objectId": "naiad",
-    "materialSha256": "e0f9da0713f74f93c30cc16bc92af69306b22d26ffbe57520caf8445d8015420",
+    "materialSha256": "042611a9d6723fb3e16d9fea0ffd85e7c99272bf5e90aee6de4b9634c388e372",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

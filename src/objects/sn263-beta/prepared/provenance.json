@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea37f0fa86cea77daa52f17e8ba8e27131b345b57df3bfc0302f2fca5d70e129"
+    "sha256": "9ae73c33b8072110647e4b74e2e31ec7588b9a105d5a9af1299743615a097499"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,15 +93,43 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebce1f7a178c6a1030d315489bd56ccbe61df66b4148cf7a51f7e104eb9b13ef",
+      "sha256": "d231985e78fc79b6da7dd5e8ef5c1a8d191badfb7a10587f86163ffda70a4fa3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "sn263-beta",
         "displayName": "2001 SN263 Beta",
         "panel": {
-          "facts": [],
-          "moreFacts": []
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Estimated diameter",
+              "value": "0.77 ± 0.12 km",
+              "source": {
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
+                "label": "Sn263 Beta · radar shape",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-sn263-beta-radar-shape",
+                "locator": "/extentsKm/0"
+              }
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "shape-scale",
+              "label": "Model extents",
+              "value": "0.766 × 1.038 × 0.656 km",
+              "source": {
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
+                "label": "Sn263 Beta · radar shape",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-sn263-beta-radar-shape",
+                "locator": "/extentsKm/0; /extentsKm/1; /extentsKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -242,8 +270,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ebce1f7a178c6a1030d315489bd56ccbe61df66b4148cf7a51f7e104eb9b13ef",
-      "bytes": 2252,
+      "sha256": "d231985e78fc79b6da7dd5e8ef5c1a8d191badfb7a10587f86163ffda70a4fa3",
+      "bytes": 3275,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -314,8 +342,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10063,
-          "sha256": "693ac458e7585b66fa773c3b421a40cea8195680bfe3adea342de1f2b2fa5d81",
+          "bytes": 10806,
+          "sha256": "b3c9d8405dd8424c7c6edc3cdf62060f6be51492acc8f640d83602aa1b4c6d2f",
           "verification": "bytes-verified"
         }
       ],
@@ -353,7 +381,7 @@
   },
   "lastPreparation": {
     "objectId": "sn263-beta",
-    "materialSha256": "1b1d03d1cfee3bf14956447026326dbd7638b3572cdf2fa9ef8f11960aa3c415",
+    "materialSha256": "9190119a19aa3be8209bf58687b9234e64dddfbd465c6ff458ecb29b865b2c9a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

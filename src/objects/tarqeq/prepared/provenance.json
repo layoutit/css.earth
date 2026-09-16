@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29c986529cbad2b53745bbd049d1d086eb9954d2437074c022c3d5a0f482e212"
+    "sha256": "98b93d2dae898e173dc9d748c8d6e060d76bde67e9dd20b09141edb38cc85362"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "306d297aaa9e20335f8bf111837efb46615502bf88d447c486c72cb4a3396105",
+      "sha256": "54c1487a66a72beccc6a574880337b6b236562b22a67c55fa1ae10993273c3ca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -122,6 +122,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "76.13 ± 0.04 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "306d297aaa9e20335f8bf111837efb46615502bf88d447c486c72cb4a3396105",
-      "bytes": 2621,
+      "sha256": "54c1487a66a72beccc6a574880337b6b236562b22a67c55fa1ae10993273c3ca",
+      "bytes": 3106,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5129,
-          "sha256": "dbe66887cd43c9d0216b2cc272e9df830fb0bfe4e9a0c07ecc3beb36cb30935b",
+          "bytes": 5479,
+          "sha256": "ba5deebda0b8b56b7c7e0b281489796e3fd4aa0ecdedc175a6b0d4b84ab262fc",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "tarqeq",
-    "materialSha256": "0f3ef4b375cdd662e70bd27d570c4b2f4f770e5474a5051c3ca94d7e5eb44d81",
+    "materialSha256": "15d95137112e28b9f2f3427c3d32905c39197eca862cf29fe6947f3f6ff32ce4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c54d4402a755531a5be7bdb5b743f581789df72b884ea769ad300ef760b1a9a"
+    "sha256": "7240f2a76b11400105958b151882f64f638cd48e14f825c40fd3cb5638c4a1c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd6bd560e99768aa2e517e266762269b91e7a0988a3c80f4c877435c369d7f9b",
+      "sha256": "f76ee54ebd5773a3fd8536fb09764463eff85f20d75f12d6c60f28e9ac4d8f93",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,6 +202,19 @@
                 "path": "source/reference/horizons-elements.txt",
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "19.793 ± 0.001 hours (model)",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf",
+                "label": "Ra Shalom · ra shalom research rashalom",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-ra-shalom-ra-shalom-research-rashalom",
+                "locator": "/periodHours"
               }
             }
           ],
@@ -368,8 +381,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd6bd560e99768aa2e517e266762269b91e7a0988a3c80f4c877435c369d7f9b",
-      "bytes": 11218,
+      "sha256": "f76ee54ebd5773a3fd8536fb09764463eff85f20d75f12d6c60f28e9ac4d8f93",
+      "bytes": 11758,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -490,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8200,
-          "sha256": "205064d93a5ce09478f8ff89bb9f465c273b13b4123c0fb778dfa52be30dabf8",
+          "bytes": 8605,
+          "sha256": "a2f3491139cb92f00c1ae127a1e5483b58c42c8d79e00f7c5ee3d3b39d63bf60",
           "verification": "bytes-verified"
         }
       ],
@@ -554,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "c36f40a368c46f381ac89f8118307cf39feae3bee6620a03afd962fe0d913792",
+    "materialSha256": "863a2264da60110f0e020a78f812d1f82836316a6f4c60e29680bc9a55fca4aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

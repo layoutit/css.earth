@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../site/objects.mts';
@@ -167,6 +167,104 @@ export function candidates(factId: string, value: string, records: Records): Can
   return out;
 }
 
+
+/** Numbers a fact states, without their uncertainties: `2,326 ± 12 km` states 2326; `764 (+116/-62)` states 764. */
+export function statedNumbers(text: string): { value: number; decimals: number }[] {
+  const plain = text.replace(/±\s*[\d.,]+/g, ' ').replace(/\+\/-\s*[\d.,]+/g, ' ').replace(/\([+−-][^)]*\)/g, ' ');
+  // A number glued to letters or a hyphen (`S/2000 S10`, `MTP019`, `2000-01-01.5`) is part of a name or date, not a measurement.
+  return [...plain.matchAll(/(?<![\p{L}\d/.,-])-?\d[\d,]*(?:\.\d+)?(?![\p{L}\d-])/gu)].map(match => {
+    const digits = match[0].replaceAll(',', '');
+    return { value: Number(digits), decimals: (digits.split('.')[1] ?? '').length };
+  });
+}
+
+const significantDigits = (value: number, decimals: number) => value.toFixed(decimals).replace(/^-?0*\.?0*/, '').replace('.', '').length;
+// A record value supports a stated number directly, as a diameter or radius, or across units of the fact's own kind.
+export function conversionsFor(text: string): readonly number[] {
+  if (/\bsolar radii\b/i.test(text)) return [1, 2, 0.5, 1 / 695700];
+  if (/\bkm\/h\b/i.test(text)) return [1];
+  if (/\b(km|m)\b/i.test(text)) return [1, 2, 0.5, 1000, 1 / 1000];
+  if (/\b(hours?|h|days?|d|years?|yr)\b/i.test(text)) return [1, 24, 1 / 24, 365.25, 1 / 365.25, 24 * 365.25, 1 / (24 * 365.25)];
+  return [1];
+}
+
+/** The record field must measure the fact's kind of quantity: a size for a length, a period for a time, the label's own word otherwise. */
+export function fieldMeasures(pointer: string, value: string, label: string): boolean {
+  // `/projectedRadiusKm/value` and `/diameterUncertaintyKm/plus` are measured by their named parent.
+  const field = pointer.split('/').filter(part => !/^(\d+|value|plus|minus|sigma|uncertainty|lower|upper)$/i.test(part)).at(-1) ?? '';
+  if (/\bsolar radii\b/i.test(value)) return /radius|radii/i.test(field);
+  if (/\bkm\/h\b/i.test(value)) return /wind|speed|velocity/i.test(field);
+  if (/\bAU\b/.test(value)) return /au$|distance|semimajor|perihelion|aphelion/i.test(field);
+  if (/\b(km|m)\b/i.test(value)) return /km|radius|radii|diameter|axes|axis|extent|size|dimension|width|length|thickness|span|distance|semi|orbit/i.test(field) && !/deg|angle|anomaly|node|point|outline|pixel|lat|lon/i.test(field);
+  if (/\b(hours?|h|days?|d|years?|yr)\b/i.test(value)) return /hour|day|year|period|rotation|spin|lightcurve/i.test(field);
+  const words = label.toLowerCase().match(/[a-z]{5,}/g) ?? [];
+  return words.some(word => field.toLowerCase().includes(word.slice(0, 6)));
+}
+
+interface SourcedRecord { path: string; leaves: { pointer: string; numbers: number[]; text: string | null; url: string | null }[] }
+
+/** Every leaf of a pinned project record, each with the nearest source URL its enclosing objects name. */
+export function recordLeaves(raw: unknown) {
+  const leaves: SourcedRecord['leaves'] = [];
+  const urlOf = (value: unknown): string | null => {
+    if (!value || typeof value !== 'object') return null;
+    const entries = Array.isArray(value) ? value.map((item, index) => [String(index), item] as const) : Object.entries(value);
+    const preferred = entries.find(([key, item]) => typeof item === 'string' && /^https:\/\//.test(item) && /source|url|doi|citation|reference|origin|landing/i.test(key));
+    const any = entries.find(([, item]) => typeof item === 'string' && /^https:\/\//.test(item));
+    return (preferred ?? any)?.[1] as string ?? null;
+  };
+  const walk = (value: unknown, pointer: string, urls: (string | null)[]) => {
+    if (typeof value === 'number' && Number.isFinite(value)) { leaves.push({ pointer, numbers: [value], text: null, url: urls.findLast(url => url !== null) ?? null }); return; }
+    if (typeof value === 'string') { leaves.push({ pointer, numbers: statedNumbers(value).map(number => number.value), text: value, url: urls.findLast(url => url !== null) ?? null }); return; }
+    if (!value || typeof value !== 'object') return;
+    const next = [...urls, urlOf(value)];
+    if (Array.isArray(value)) value.forEach((item, index) => walk(item, `${pointer}/${index}`, next));
+    else for (const [key, item] of Object.entries(value)) walk(item, `${pointer}/${key.replaceAll('~', '~0').replaceAll('/', '~1')}`, next);
+  };
+  walk(raw, '', []);
+  const top = leaves.find(leaf => leaf.url)?.url ?? null;
+  return leaves.map(leaf => ({ ...leaf, url: leaf.url ?? top }));
+}
+
+let catalogueByUrl: Map<string, { id: string; title: string }> | null = null;
+const normalUrl = (url: string) => url.trim().toLowerCase().replace(/^http:/, 'https:').replace(/\/+$/, '').replace('arxiv.org/pdf/', 'arxiv.org/abs/').replace(/(arxiv\.org\/abs\/[\d.]+)v\d+$/, '$1').replace('dx.doi.org', 'doi.org');
+/** Source catalogue entries by every landing URL, DOI and arXiv identifier they declare. */
+async function sourceCatalogue(root: string) {
+  if (catalogueByUrl) return catalogueByUrl;
+  catalogueByUrl = new Map();
+  const directory = resolve(root, 'src/sources');
+  for (const file of (await readdir(directory)).filter(name => name.endsWith('.json')).sort()) {
+    const entry = requireRecord(JSON.parse(await readFile(resolve(directory, file), 'utf8')), 'source entry');
+    const identity = { id: requireString(entry.id, 'source id'), title: typeof entry.title === 'string' ? entry.title : requireString(entry.id, 'source id') };
+    const urls = [...requireArray(entry.links ?? [], 'links').map(link => requireRecord(link, 'link').url),
+      ...requireArray(entry.identifiers ?? [], 'identifiers').map(raw => { const identifier = requireRecord(raw, 'identifier'); return identifier.type === 'DOI' ? `https://doi.org/${identifier.value}` : identifier.type === 'arXiv' ? `https://arxiv.org/abs/${identifier.value}` : identifier.value; })];
+    for (const url of urls) if (typeof url === 'string' && /^https?:\/\//.test(url) && !catalogueByUrl.has(normalUrl(url))) catalogueByUrl.set(normalUrl(url), identity);
+  }
+  return catalogueByUrl;
+}
+
+/** Cite a fact from a pinned project record when every number it states is a numeric field of one record that names a catalogued source. */
+export function recordCitation(value: string, records: { path: string; leaves: ReturnType<typeof recordLeaves> }[], catalogue: Map<string, { id: string; title: string }>, bindingOf: (path: string) => string | null, label = ''): Citation | null {
+  const stated = statedNumbers(value);
+  for (const record of records) {
+    const identity = (url: string | null) => { const byUrl = url ? catalogue.get(normalUrl(url)) : undefined; if (byUrl) return { ...byUrl, url: url! }; const bound = bindingOf(record.path); return bound ? { id: bound, title: bound, url: url ?? '' } : null; };
+    if (stated.length) {
+      if (stated.some(number => significantDigits(number.value, number.decimals) < 2)) continue;
+      const used: typeof record.leaves = [], factors = conversionsFor(value);
+      // Only numeric fields are evidence: a number quoted in prose, a URL or a name was written by the same hand as the fact.
+      const ordered = record.leaves.filter(leaf => leaf.text === null && fieldMeasures(leaf.pointer, value, label));
+      const found = stated.every(number => {
+        const leaf = ordered.find(candidate => candidate.numbers.some(exact => factors.some(factor => Math.abs(number.value - exact * factor) <= 0.5 * 10 ** -number.decimals + 1e-9)));
+        if (leaf) used.push(leaf);
+        return leaf !== undefined;
+      });
+      const source = found ? identity(used.find(leaf => leaf.url)?.url ?? null) : null;
+      if (found && source && source.url) return { url: source.url, label: source.title, checked: CHECKED, path: `source/${record.path}`, catalogueId: source.id, locator: [...new Set(used.map(leaf => leaf.pointer))].join('; ') };
+    }
+  }
+  return null;
+}
+
 const matches = (candidate: Candidate, value: string) => candidate.text ? candidate.text(value) : equalAtDisplayedPrecision(displayedValue(value)!, candidate.value as number);
 
 /** Copy the body's rows of the three JPL satellite tables into its source review, once each. Returns the references. */
@@ -263,10 +361,26 @@ export async function citePinnedFacts(objectDirectory: string, { write = true, p
   records.sbdb = sbdbText ? parseSmallBodyRecord(JSON.parse(sbdbText)) : null;
   if (classification === 'satellite' && satelliteTables.size) records.satellite = await reviewSatelliteRows(objectDirectory, name, satelliteTables, write);
   else if (classification === 'satellite') records.satellite = await reviewSatelliteRows(objectDirectory, name, new Map(), false);
+  // The body's own pinned project records: measurement, model and survey JSON that name their sources.
+  const projectRecords: { path: string; leaves: ReturnType<typeof recordLeaves> }[] = [];
+  const bindings = new Map<string, string>();
+  for (const key of ['inputs', 'documents']) for (const raw of requireArray(manifest[key] ?? [], `manifest ${key}`)) {
+    const entry = requireRecord(raw, 'manifest entry'), path = requireString(entry.path, 'manifest path'), binding = entry.sourceBinding;
+    if (binding && typeof binding === 'object' && (binding as Record<string, unknown>).kind === 'catalogued') {
+      const first = requireArray((binding as Record<string, unknown>).references, 'binding references')[0];
+      if (first) bindings.set(path, requireString(requireRecord(first, 'binding reference').catalogueId, 'catalogue id'));
+    }
+    if (!path.endsWith('.json') || /^(preparation|presentation|content|editorial)\/|(^|\/)(sbdb|damit-model)\.json$/.test(path)) continue;
+    const file = resolve(objectDirectory, 'source', path), size = await stat(file).then(info => info.size, () => null);
+    if (size === null || size > 2_000_000) continue;
+    projectRecords.push({ path, leaves: recordLeaves(JSON.parse(await readFile(file, 'utf8'))) });
+  }
+  const catalogue = projectRecords.length ? await sourceCatalogue(resolve(objectDirectory, '../../..')) : new Map();
   for (const fact of uncited) {
     const id = requireString(fact.id, 'fact id'), value = requireString(fact.value, 'fact value');
     const match = candidates(id, value, records).find(candidate => (candidate.text || displayedValue(value)) && matches(candidate, value));
-    if (match) { fact.source = match.citation; run.cited.push(id); }
+    const citation = match?.citation ?? recordCitation(value, projectRecords, catalogue, path => bindings.get(path) ?? null, requireString(fact.label, 'fact label'));
+    if (citation) { fact.source = citation; run.cited.push(id); }
     else if (prune) run.pruned.push(id);
   }
   if (prune) for (const group of ['facts', 'moreFacts']) {

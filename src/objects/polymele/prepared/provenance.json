@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7ccca7fa2b2a5952de77f009b1a0ee3e1c985d9d933c86b8bcd43a8354f71061"
+    "sha256": "a1eb5c7ed73f6c055c93879348f63d9c255d9fec0285f0989d8911a0e7b38fae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6013db88da7f5bfcce439f1f81962546acfbe12c1e8619b337a965db5d072ebb",
+      "sha256": "35a34b36f10a3a3bfedbef5dfabaa9c5e854ca935775de71569be9ded308df15",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Polymele",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Full approximation dimensions",
+              "value": "27 × 24.4 × 10.4 km",
+              "source": {
+                "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-polymele-model-surface",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
+            },
             {
               "id": "class",
               "label": "Population",
@@ -286,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6013db88da7f5bfcce439f1f81962546acfbe12c1e8619b337a965db5d072ebb",
-      "bytes": 2603,
+      "sha256": "35a34b36f10a3a3bfedbef5dfabaa9c5e854ca935775de71569be9ded308df15",
+      "bytes": 3132,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -368,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5437,
-          "sha256": "9e2252e761c934de2d304c6a052b8946bee0989659dfecea2a70da1a44cb85cd",
+          "bytes": 5831,
+          "sha256": "86216b363b4db53273ea770bedc8daf07840290df6cdb925aaa25cbac6790010",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "polymele",
-    "materialSha256": "5e8da81c6add299288c51316f0da25dc4f7b7df85838b4ee08f8a8762262b377",
+    "materialSha256": "ae7805b223ea93ed67e6cce0f7e046a9c2df8131d50b0f7b862be6d726b4ef25",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

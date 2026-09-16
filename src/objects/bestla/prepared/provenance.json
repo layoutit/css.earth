@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f64bd14f601247ebdbaf960f29c11517f57cbce86eced03da59064ede935d70"
+    "sha256": "fa5929b96f10ea860661fbb52b21ea7d7d6043d7adab98712574d8ae1f033308"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cda46f307ae483bbc2107cc030a4bc3aa60f9fd5158146d3368e83ebc42ab0c1",
+      "sha256": "791807323676deda493a06fc57a505eb468e9321c4c9fd81304f4134852577ed",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -122,6 +122,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "14.6238 ± 0.0001 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cda46f307ae483bbc2107cc030a4bc3aa60f9fd5158146d3368e83ebc42ab0c1",
-      "bytes": 2690,
+      "sha256": "791807323676deda493a06fc57a505eb468e9321c4c9fd81304f4134852577ed",
+      "bytes": 3179,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5090,
-          "sha256": "0b4d7223a7e0d59c0237f04d758242f8e765e369587006211812f54f6ebdf3a3",
+          "bytes": 5444,
+          "sha256": "aa6333f50d8691669e898e49cee5999e4d33c2c1071386f67810964263896aad",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "bestla",
-    "materialSha256": "6eb3134257fad4593b244cd605309502198927abbc339395b1805b677bc86482",
+    "materialSha256": "45fb9e2ec45a72e263ebd93c7385ca520ba0db78b6c95c742f211e2e6dc2a1f9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

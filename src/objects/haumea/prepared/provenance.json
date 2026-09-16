@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7994675ff921dbbeb3ceee83122c2b296a97ff983a7c6f598ba933d91d09f1d0"
+    "sha256": "8fbe89f1e50d42a87c289fb8e7dbfda5f1669f78ce80e6d7bc4a695c3f5c5806"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -47,7 +47,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0b3bc1dfabc161854e59e74249221e80eac33b8206cf90e136cb08ec3f4a27e1",
+      "sha256": "44f19db1fbd231097fc0529e6165b7d353369c1e10f7faf67a6a7d7b8803dd54",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -58,6 +58,19 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "2,322 × 1,704 × 1,026 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.03113",
+                "label": "doi-10-1038-nature24051",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature24051",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
+            },
             {
               "id": "rotation-period",
               "label": "Rotation period",
@@ -70,9 +83,35 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "phys_par.rot_per (h)"
               }
+            },
+            {
+              "id": "ring-width",
+              "label": "Ring width",
+              "value": "About 70 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.03113",
+                "label": "doi-10-1038-nature24051",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature24051",
+                "locator": "/ringWidthKm"
+              }
             }
           ],
           "moreFacts": [
+            {
+              "id": "ring-radius",
+              "label": "Ring radius",
+              "value": "About 2,287 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.03113",
+                "label": "doi-10-1038-nature24051",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1038-nature24051",
+                "locator": "/ringRadiusKm"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbital period",
@@ -183,8 +222,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0b3bc1dfabc161854e59e74249221e80eac33b8206cf90e136cb08ec3f4a27e1",
-      "bytes": 2604,
+      "sha256": "44f19db1fbd231097fc0529e6165b7d353369c1e10f7faf67a6a7d7b8803dd54",
+      "bytes": 3880,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -257,8 +296,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5701,
-          "sha256": "7e5e08954a24bb27fddc9337737a62c87e24d202087617a0316e2cf1dd11c7f9",
+          "bytes": 6572,
+          "sha256": "a36b059c3901773111cc36e190355368ed2d24b0ea2dcd2e0567e7d0a1b86332",
           "verification": "bytes-verified"
         }
       ],
@@ -296,7 +335,7 @@
   },
   "lastPreparation": {
     "objectId": "haumea",
-    "materialSha256": "d0cacdc8f232bf9e3b03f4e7cc29f29f4ebd8fc782966b494aaae0e3b7c5d570",
+    "materialSha256": "1d924b3c91833a91dc139765aa6773b86bb8d8db5dc598ce7329d5af5944bbad",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

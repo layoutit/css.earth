@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "028a6213d4e285fc29ac738f9913eaa714703efc0f9411b9b55f3a373fc1d4c6"
+    "sha256": "31362be59284e830a2ae93121b100b85b33405e42852d4b71292561f28bc55b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5510ca060ed41156142eabd32d9fc82b215972c65bbd75a1e4239d5bacbdd4b5",
+      "sha256": "111b8a2842f483aff947e41ec03971656e3fcf9cf3c6704477da38c61080fd91",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -122,6 +122,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "12.76 ± 0.03 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5510ca060ed41156142eabd32d9fc82b215972c65bbd75a1e4239d5bacbdd4b5",
-      "bytes": 2645,
+      "sha256": "111b8a2842f483aff947e41ec03971656e3fcf9cf3c6704477da38c61080fd91",
+      "bytes": 3130,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4421,
-          "sha256": "7bdab229d66d22c9660cf3aab59afae6713cfc8bd1351450010b853a7347b7c0",
+          "bytes": 4771,
+          "sha256": "ebdb82d61845fcb476daf08fe4613ee9e7f5db02080e4f0d803b720383c0e7be",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "hyrrokkin",
-    "materialSha256": "6efc64ae6ac65f4a31a1390f8ae636b406b1067d08b4edf5304ea5cbd525ac5b",
+    "materialSha256": "4a00848fed9de3f2b87bc131033c6c48fce25fb798b4180888cca1be32f3b6c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "04da9598eb6a4132a0780d852d3bd6f1e1adc4e0bb5260b83baabdefffaa2272"
+    "sha256": "e27255ffbc5c5082a88c54ffc703854295a2c0ea482c80e3d64cd4626a542dc3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "87f5ecc9cd8ab254194fdb2c9d6f4e7038d1c57613df04cd1954c56ca6ed48d0",
+      "sha256": "f19f2ea7ddbc364fc1c0ed6ee1443987abe74378ee5ea84999c662bd4f67e441",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -149,6 +149,19 @@
         "displayName": "Nix",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "18.3 km (released shape model)",
+              "source": {
+                "url": "https://doi.org/10.6084/m9.figshare.12779948.v1",
+                "label": "Published archive · DOI 10.6084/m9.figshare.12779948.v1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-6084-m9-figshare-12779948-v1",
+                "locator": "/referenceRadiusKm"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
@@ -429,8 +442,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "87f5ecc9cd8ab254194fdb2c9d6f4e7038d1c57613df04cd1954c56ca6ed48d0",
-      "bytes": 3458,
+      "sha256": "f19f2ea7ddbc364fc1c0ed6ee1443987abe74378ee5ea84999c662bd4f67e441",
+      "bytes": 3959,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -557,8 +570,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2861,
-          "sha256": "8a0bcb8a27bf4c870ca4c25b1a3c46231633584bd62b689d953692e2e2094907",
+          "bytes": 3227,
+          "sha256": "de893c538a563a33142bb0a138db01bbbe9c00240ea044d343826988b68349b4",
           "verification": "bytes-verified"
         }
       ],
@@ -621,7 +634,7 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "40827ac312e5582fcf32db768a21184c721bb852cbdbd00b645fbb1cceb3089b",
+    "materialSha256": "59c50464bb56766ee243857b43d41d384b81a24d3e995b6b63dc8d363b5ba213",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff26126b9f6d5bdfeafe48cdd31a63d305f8d76e4222d9c17d4334a48882bc21"
+    "sha256": "80280d34cb63ce6ca9709710f9c88e090173f44d71ab5a511a9dd7847829c508"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "638782a8fb0c2586f78621e61f23a2bb65dbcbca5d934f0c04557c89647aa500",
+      "sha256": "d568b64cd9215ac88b5ff6918f9f3b357df528f3e2134186c416a1ea2e151595",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Ijiraq",
         "panel": {
           "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter estimate",
+              "value": "13 (+4/−2) km",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/scale/adoptedReferenceRadiusKm"
+              }
+            },
             {
               "id": "parent",
               "label": "Orbits",
@@ -122,6 +135,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "13.03 ± 0.14 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +315,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "638782a8fb0c2586f78621e61f23a2bb65dbcbca5d934f0c04557c89647aa500",
-      "bytes": 2621,
+      "sha256": "d568b64cd9215ac88b5ff6918f9f3b357df528f3e2134186c416a1ea2e151595",
+      "bytes": 3600,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +397,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4343,
-          "sha256": "48cf39b50cbe7da4b6e684d73c4cc8e67fc6a939348e0b0086131e4d2a04e9b7",
+          "bytes": 5052,
+          "sha256": "7c429a2a86f9ab76939c3d8d0d21b6cb3de79f7a4770699624b262620ddfba3a",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +436,7 @@
   },
   "lastPreparation": {
     "objectId": "ijiraq",
-    "materialSha256": "c7fb54207087b284c22ba7ed6d34bfc302b42e6db6ac9bbd62e197d2dbae66a6",
+    "materialSha256": "8f7b7d041ce7dabd5019a87c72b01b92c211a93a9e1ab2d4754827ac470da069",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d075554371d9baf06cc525ea5e0860363a15155f23961a894fa37d0689fd72f"
+    "sha256": "9173e443b18eaffe1ecf701551cbf2a688d7aaf615fe1f0364fefabc1b54c721"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82c821794daad8323feff66accde40320d64e4626795fc6bb259440186c1fc65",
+      "sha256": "e492e8ae37fb908995d26c08028aeb0e31a5fe0e61bef7aa6f122df9b5c9ec79",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -165,6 +165,19 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "1.73 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf",
+                "label": "Asteroid 2002 Ce26 · asteroid 2002 ce26 research ce26",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-2002-ce26-asteroid-2002-ce26-research-ce26",
+                "locator": "/diameterKm"
+              }
+            },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
@@ -373,8 +386,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82c821794daad8323feff66accde40320d64e4626795fc6bb259440186c1fc65",
-      "bytes": 14384,
+      "sha256": "e492e8ae37fb908995d26c08028aeb0e31a5fe0e61bef7aa6f122df9b5c9ec79",
+      "bytes": 14918,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -495,8 +508,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11225,
-          "sha256": "f6abfec03c3baf3c2f9dc0289203fdac1ec92e3da5ba19d37acec68ab6d0c856",
+          "bytes": 11624,
+          "sha256": "d68b861c722e2ee13db0c5afafb7975b19dea6234101500f605b1b2eda70d16c",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +572,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-ce26",
-    "materialSha256": "5cedf0b9049fcee0e1f5008c0d38e4ca7ac2537f798a19e77826bf2aab11017a",
+    "materialSha256": "459168c17c8c40223da99138513845ba87734fd9c194b19a6dce7c193d25740a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

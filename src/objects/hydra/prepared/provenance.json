@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2ba2751e44cead6651a1c8c61c5d29d184d2a0800f8023557ae217dd3b2f46d1"
+    "sha256": "c92ce69a59b37f9f4fc4c639ba5ef8c02afef1a18e4a314090f3c443889693c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "27fbc5562c6274fbd998dea18cb776c17660bf37499c9fd8d6e6e04d4479fec2",
+      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -149,6 +149,19 @@
         "displayName": "Hydra",
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "18.1 km (released shape model)",
+              "source": {
+                "url": "https://doi.org/10.6084/m9.figshare.12779975.v1",
+                "label": "Published archive · DOI 10.6084/m9.figshare.12779975.v1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
+                "locator": "/referenceRadiusKm"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
@@ -429,8 +442,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "27fbc5562c6274fbd998dea18cb776c17660bf37499c9fd8d6e6e04d4479fec2",
-      "bytes": 3488,
+      "sha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
+      "bytes": 3989,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -557,8 +570,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4382,
-          "sha256": "f8658f16e9aacc34d1128b29659430e004867dbbea8d9373e422354f6bad2ca1",
+          "bytes": 4748,
+          "sha256": "a40e0bfb29fe163acd20ed5eb8bd6d8bd6e2dcae0c5af09582735b3feb9bbca9",
           "verification": "bytes-verified"
         }
       ],
@@ -621,7 +634,7 @@
   },
   "lastPreparation": {
     "objectId": "hydra",
-    "materialSha256": "a3d315fc670d6d8279400460bc0ce407b87be580e4d2d2a6a2ce7988aea593c8",
+    "materialSha256": "12424fef3d2ca754d02ee0dbdd038b367cd61c7d959e9cd83fb1552b61498223",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

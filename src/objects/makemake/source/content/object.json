@@ -21,8 +21,62 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [],
-    "moreFacts": []
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Approximate radius",
+        "value": "715 km",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/approximateRadiusKm"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 22.5 hours",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/rotationPeriodHours"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "About 305 years",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/orbitalPeriodYears"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "45.8 AU",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+          "label": "Makemake · nasa makemake size",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-makemake-nasa-makemake-size",
+          "locator": "/meanDistanceAu"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import { citePinnedFacts, discoveryMatches, displayedValue, equalAtDisplayedPrecision, parseHorizonsElements, parseSatelliteTable, smallBodyQuery } from './cite-pinned-facts.mts';
+import { citePinnedFacts, conversionsFor, discoveryMatches, displayedValue, equalAtDisplayedPrecision, fieldMeasures, parseHorizonsElements, parseSatelliteTable, recordCitation, recordLeaves, smallBodyQuery, statedNumbers } from './cite-pinned-facts.mts';
 
 const ELEMENTS = [
   '# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27588%3B%27&EPHEM_TYPE=ELEMENTS',
@@ -112,4 +112,26 @@ test('satellite rows are copied into the source review once and cite orbit, radi
     assert.deepEqual(again.cited, []);
     assert.equal(JSON.parse(await readFile(join(root, 'source/editorial/factsheet-review.json'), 'utf8')).references.length, 2, 'rows are not copied twice');
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a pinned record proves a fact only through a numeric field that measures the same kind of quantity', () => {
+  const catalogue = new Map([['https://arxiv.org/abs/2401.04634', { id: 'french-2024', title: 'French et al. (2024)' }]]);
+  const record = (raw: unknown) => [{ path: 'measurements.json', leaves: recordLeaves(raw) }];
+  const measured = record({ source: 'https://arxiv.org/abs/2401.04634', semiAxesKm: [32, 23, 23], projectedRadiusKm: { value: 27, uncertainty: 2 },
+    designation: 'S/2000 S10', note: 'Axes 64 × 46 × 46 km quoted in prose', outline: { points: [[298, 1]] }, meanAnomalyDeg: 10, rotationPeriodDays: 15.771 });
+  const cite = (value: string, label: string) => recordCitation(value, measured, catalogue, () => null, label);
+  assert.equal(cite('64 × 46 × 46 km', 'Model dimensions')?.locator, '/semiAxesKm/0; /semiAxesKm/1', 'full axes are doubled semi-axes');
+  assert.equal(cite('27 ± 2 km', 'Projected radius')?.locator, '/projectedRadiusKm/value');
+  assert.equal(cite('About 15.8 days', 'Rotation period')?.catalogueId, 'french-2024');
+  assert.equal(cite('10 km', 'Diameter estimate'), null, 'a number inside a designation is not a measurement');
+  assert.equal(cite('596 km', 'Closest approach'), null, 'an outline coordinate is not a distance');
+  assert.equal(cite('About 10 m', 'Ring thickness'), null, 'an angle is not a length');
+  assert.equal(cite('About 3.3 km', 'Equivalent diameter'), null, 'no time conversion applies to a length');
+  assert.equal(recordCitation('Published Jacobi ellipsoid', record({ source: 'https://arxiv.org/abs/2401.04634', shapeLabel: 'Published Jacobi ellipsoid' }), catalogue, () => null, 'Shape evidence'), null,
+    'text copied into a record by the same author is not evidence');
+  assert.deepEqual(statedNumbers('2,326 ± 12 km'), [{ value: 2326, decimals: 0 }]);
+  assert.deepEqual(statedNumbers('157 (+23/−15) km'), [{ value: 157, decimals: 0 }]);
+  assert.ok(fieldMeasures('/constraints/volumeEquivalentDiameterKm/value', '370 km', 'Size evidence'));
+  assert.ok(!fieldMeasures('/moons/35/ascendingNodeDeg', 'Up to 539 km/h', 'Cloud-top winds'));
+  assert.deepEqual(conversionsFor('764 solar radii'), [1, 2, 0.5, 1 / 695700]);
 });

@@ -6,6 +6,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "0.33 ± 0.06 km",
+        "source": {
+          "url": "https://arxiv.org/abs/1912.09192",
+          "label": "Research publication · arXiv 1912.09192",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1912-09192",
+          "locator": "/referenceRadiusKm"
+        }
+      },
+      {
         "id": "distance-from-parent",
         "label": "Distance from Saturn",
         "value": "About 167,500 km",

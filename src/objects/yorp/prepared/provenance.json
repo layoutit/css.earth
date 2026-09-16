@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9c4ee1c460dd82704820de081e486a9f5babb8ef85d0dde0b3f1b68a0bf04b4"
+    "sha256": "a7c637c61a214b4f6892ec2902ee0566ade910e624e3ca727a3758aa2a5f4fe3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6e489ff957f93812b41f07bdf628f8d5e316a4bdec3efacc19ecf220c3ad8493",
+      "sha256": "5b6f0ca9fad0a0c01a0e87c3de6eeab007624d7ddb8ff85733ab16c8074bdfe7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -165,6 +165,19 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "0.0564 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
+                "label": "Yorp · yorp research yorp",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-yorp-yorp-research-yorp",
+                "locator": "/diameterKm"
+              }
+            },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
@@ -361,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6e489ff957f93812b41f07bdf628f8d5e316a4bdec3efacc19ecf220c3ad8493",
-      "bytes": 7382,
+      "sha256": "5b6f0ca9fad0a0c01a0e87c3de6eeab007624d7ddb8ff85733ab16c8074bdfe7",
+      "bytes": 7844,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4264,
-          "sha256": "8c1e6d5929241aaa64df96b008dd73569fa90cb46e5364f296d067b32a838d38",
+          "bytes": 4591,
+          "sha256": "e36999bef892d59bff844952df018f78354110bdfb8c0c7185864e3a2558a5b5",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "841ab8af176b61dff2451f779776fd2c26583198b51f732179cb5c24aefdf2a4",
+    "materialSha256": "e4b03c088bb9016fc4b33e7636391c82233b0fc0a157cc4e2c336592cad2ce8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

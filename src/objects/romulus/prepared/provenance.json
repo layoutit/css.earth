@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eef7a269aa766619562f22b67c4bd10d4b781dd53d75d4afd569036b613b3189"
+    "sha256": "3643247ded1c783d3dfee8e7617fd5adf004eb50cf55aba6f0de1e615b919f96"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,41 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5ab68e37c55418111b2db220825a5d8c78ad08fa323b3b4c45dc22809d79d60e",
+      "sha256": "9873eea8331d77d5395a1fe4298d2077bec2a788d847ba77488f6a18ce929e80",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "romulus",
         "displayName": "Romulus",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Full model dimensions",
+              "value": "38 × 14.1 × 14.1 km",
+              "source": {
+                "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-romulus-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1"
+              }
+            },
+            {
+              "id": "scale",
+              "label": "Size evidence",
+              "value": "23.1 ± 0.7 km · projected area-equivalent diameter",
+              "source": {
+                "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-romulus-model-surface",
+                "locator": "/constraints/projectedDiameterKm/value"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -272,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5ab68e37c55418111b2db220825a5d8c78ad08fa323b3b4c45dc22809d79d60e",
-      "bytes": 2158,
+      "sha256": "9873eea8331d77d5395a1fe4298d2077bec2a788d847ba77488f6a18ce929e80",
+      "bytes": 3164,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -354,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4752,
-          "sha256": "4771667cd5b378b0ad33c2d5e167a3baa30babfa8f1bdb530c1b6fcfbf33dca5",
+          "bytes": 5483,
+          "sha256": "28870d1514b0f89f5a088e67b59c63e8cdade51c442dd578f56303bb846700d3",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "romulus",
-    "materialSha256": "5355d5a6c052926564fdad08f6b5fc775e33ed183d2a3fd531458b279c42a4ab",
+    "materialSha256": "b37d960951eabea04353da85ff2da1350889cb43095ac734558a4eabcdcf5d8d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

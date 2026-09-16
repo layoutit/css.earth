@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d22f2511de82372a1c2b12afc58deefabe2f1f4b5dde1c63891ab3af6b223e44"
+    "sha256": "8ec614fd93a400ce409841528f4cbadded5bdce58fa992a275fc8a277f8c9db7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b343f1a5ff9442fb2272bb670e4d9fe4b11d13d3761e8fadd258076c3173c5bd",
+      "sha256": "677d8501a52cb41bacb9c86c82c92d1ee4e654d57bede554364ac76bc119e5a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "oumuamua",
         "displayName": "ʻOumuamua",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "115 × 111 × 19 m",
+              "source": {
+                "url": "https://doi.org/10.1093/mnras/stz2378",
+                "label": "Research publication · DOI 10.1093/mnras/stz2378",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1093-mnras-stz2378",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -264,8 +278,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b343f1a5ff9442fb2272bb670e4d9fe4b11d13d3761e8fadd258076c3173c5bd",
-      "bytes": 2467,
+      "sha256": "677d8501a52cb41bacb9c86c82c92d1ee4e654d57bede554364ac76bc119e5a7",
+      "bytes": 2959,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -346,8 +360,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6780,
-          "sha256": "fb17f5eb9a923c24a504def487abecd3534734bc2398542d30284f805121a7e0",
+          "bytes": 7132,
+          "sha256": "b0e78525739be74559e614f3a64acb890fd65de39469439ac15c846e09ae9fb0",
           "verification": "bytes-verified"
         }
       ],
@@ -385,7 +399,7 @@
   },
   "lastPreparation": {
     "objectId": "oumuamua",
-    "materialSha256": "359b9a0cef99c1df4c7d48383e37836b49b8614c225a43b883c80579d1cd0ce6",
+    "materialSha256": "7b39d2ff11159336705a865595f6ba3083e4ab4fd86edf90edca847bc91d038d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ed380f20bf23b536cdd29339f30309b4c6e0a9f4d2a09c81e6c13366b8985d3"
+    "sha256": "a9d15381e822ed24dae8b211f6f0e158984f4913b2b7c5d3fd9b113daab9aa35"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "15fbc297abb8f8de8199aa9aa4d63b58161ab67633cd032086a5ae7fa6e19535",
+      "sha256": "e24cc1dad651a8d786cb3f22223e964c6178f550d0f95a80e84bc5c88507c46e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -165,6 +165,19 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "0.845 ± 0.025 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf",
+                "label": "Mithra · mithra research mithra",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-mithra-mithra-research-mithra",
+                "locator": "/diameterKm"
+              }
+            },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
@@ -375,8 +388,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "15fbc297abb8f8de8199aa9aa4d63b58161ab67633cd032086a5ae7fa6e19535",
-      "bytes": 8776,
+      "sha256": "e24cc1dad651a8d786cb3f22223e964c6178f550d0f95a80e84bc5c88507c46e",
+      "bytes": 9278,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +510,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6022,
-          "sha256": "750377f1f4cf7e19bf4c99876a826904214c26fc6866f0997d12a9efc4750809",
+          "bytes": 6389,
+          "sha256": "1a0423f201862506457178763a0da510c7dfd0abf48518d390a37660212f2aa0",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +574,7 @@
   },
   "lastPreparation": {
     "objectId": "mithra",
-    "materialSha256": "e4ae1cf71aa0d07ffe9a099369a4f76398bf8e1a4ce2b54bad022185fc765725",
+    "materialSha256": "98adf283793f7950de7a73386fb0f76c1b74db0a5cf541adf9c047aa9eafa265",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

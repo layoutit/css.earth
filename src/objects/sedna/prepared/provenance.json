@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bfecee71ed43a7e6ef2abc112a03bbf8d59a77743fc8bc2339e91cdc7d0fb621"
+    "sha256": "3e439fd5ef94a24b52f069890b373605a28da8470f6ae22cb25f1edde562114a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "708275f7e38aa20f4f82b8689db26ce117d5403f949209f16020692542b29fb6",
+      "sha256": "077cf6894122decf0173bc0f8bf06cbe945fa9867331ae2055dfcc6120f0c840",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Sedna",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "995 × 995 × 995 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1204.0899",
+                "label": "Research publication · arXiv 1204.0899",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1204-0899",
+                "locator": "/fullAxesKm/0"
+              }
+            },
             {
               "id": "rotation",
               "label": "Rotation",
@@ -125,7 +138,21 @@
               }
             }
           ],
-          "moreFacts": []
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented.",
+              "source": {
+                "url": "https://arxiv.org/abs/1204.0899",
+                "label": "Research publication · arXiv 1204.0899",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1204-0899",
+                "locator": "/fullAxesKm/0"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -293,8 +320,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "708275f7e38aa20f4f82b8689db26ce117d5403f949209f16020692542b29fb6",
-      "bytes": 3161,
+      "sha256": "077cf6894122decf0173bc0f8bf06cbe945fa9867331ae2055dfcc6120f0c840",
+      "bytes": 4196,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -375,8 +402,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5690,
-          "sha256": "259dab6654ce2958bf3f6c0f30f743a9520cdbdcf1d0322bd80d677a45701e3c",
+          "bytes": 6450,
+          "sha256": "0435b1df48a9bf033469ae5e29c921cc9f8f8bfa7a91a1ce601962cd33836f34",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "sedna",
-    "materialSha256": "e83b5fe567182fd30ce6151dd9e715f140dba0218c053a9a22d241fd68c9f91a",
+    "materialSha256": "8541602d8381b34417f30a895bb8bac370a17c572be8e244a90bcd6d9afaac96",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

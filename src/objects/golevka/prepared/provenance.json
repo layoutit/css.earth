@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ce8657b48aa1ca0b30e782d98ef60bc5a4113ecffa12d3593af61b5db1f54adf"
+    "sha256": "ce5c8768213aa0e73f1277a697f952fb28404fcec7964aeefd72b265c7141ddf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8b202db247bdf585cd2a74b1851d26faf7cdf8973cb5c3ff102fe43cc43b10f8",
+      "sha256": "d486aa1b6e35018a1800b740ce908437bce465ca61f17c51a8740b4f35aed079",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,6 +202,19 @@
                 "path": "source/reference/horizons-elements.txt",
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "6.0289 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+                "label": "Golevka · golevka research golevka",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-golevka-golevka-research-golevka",
+                "locator": "/periodHours"
               }
             }
           ],
@@ -368,8 +381,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8b202db247bdf585cd2a74b1851d26faf7cdf8973cb5c3ff102fe43cc43b10f8",
-      "bytes": 9611,
+      "sha256": "d486aa1b6e35018a1800b740ce908437bce465ca61f17c51a8740b4f35aed079",
+      "bytes": 10115,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -490,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6477,
-          "sha256": "8e864ecac4eb70427d4288c0a49490834aeec59155a56080ccf8949fcf1bd20e",
+          "bytes": 6846,
+          "sha256": "01b5cea8b5aa358f0c3ac7d0ef73c274b80f6ac504885db502d543f06f4dd9c6",
           "verification": "bytes-verified"
         }
       ],
@@ -554,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "golevka",
-    "materialSha256": "1652f27272907a173efd3cc647b99c0ebe43754d6e78bba4b4172dea06e8525c",
+    "materialSha256": "6b76177d4909e0550805e1a537c542ff7eedc84f144670ce97359c10f9a1e330",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

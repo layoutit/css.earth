@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfca27e06aca2660bfd3fb6f715fd599e32f7add04975b5f04e02599b8fb3eb5"
+    "sha256": "d940c54eaf606ae78097b83a70a7507577173d4abbe682095f9eca10c57338ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,54 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7290c1a03e140ba7a25a984352ed2bac811b78ffe70ad22614a26d8c06006df3",
+      "sha256": "eea5678f443c55b990569dfc831ffb1006cf710da45273453a2e02df7ae850bc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "menoetius",
         "displayName": "Menoetius",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Full model dimensions",
+              "value": "117 × 108 × 90 km",
+              "source": {
+                "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-menoetius-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+              }
+            },
+            {
+              "id": "scale",
+              "label": "Size evidence",
+              "value": "117 × 108 × 90 km · inferred full axes",
+              "source": {
+                "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-menoetius-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Mutual orbital period",
+              "value": "4.282753 ± 2.3e-05 d",
+              "source": {
+                "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-menoetius-model-surface",
+                "locator": "/spin/periodDays"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -260,8 +300,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7290c1a03e140ba7a25a984352ed2bac811b78ffe70ad22614a26d8c06006df3",
-      "bytes": 1622,
+      "sha256": "eea5678f443c55b990569dfc831ffb1006cf710da45273453a2e02df7ae850bc",
+      "bytes": 3099,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -342,8 +382,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5882,
-          "sha256": "a7436141b4b4635f100b45bd2ed00e2220544d4c5fa36b45228d58986a44eba4",
+          "bytes": 6949,
+          "sha256": "624580970e8c0ad7d491533ce03bba7367464335d5082965d7a607d99349b138",
           "verification": "bytes-verified"
         }
       ],
@@ -381,7 +421,7 @@
   },
   "lastPreparation": {
     "objectId": "menoetius",
-    "materialSha256": "1cda9c7fecd11935808ea5894212fd3042b6c0c67fb8c5aac81d4a0b0128ca0d",
+    "materialSha256": "0303f28aafc5c126e94d67e0125aa9badc330e8dcc57ba88d7253fbcc2371650",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

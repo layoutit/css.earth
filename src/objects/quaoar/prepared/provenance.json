@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b29b328f50b220efdba880ae7166790bfbd594e7972da68ab7a803c83517197"
+    "sha256": "e098c8b3d6f3879993c86edd64b41261e0de7117c28e80fc75e8166252b330b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -126,7 +126,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "918fa28d605789a89bb48968b404e8febb603554e7d84f5759689f01043cf1d7",
+      "sha256": "b8ceb55be627e371b367d86fdab0e4e7011b5de17363fbaae5a4795fd2664ee3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -134,6 +134,19 @@
         "displayName": "Quaoar",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Model extents",
+              "value": "1132.2 × 1132.2 × 1022.4 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2607.06450",
+                "label": "Research publication · arXiv 2607.06450",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2607-06450",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            },
             {
               "id": "class",
               "label": "Population",
@@ -148,7 +161,21 @@
               }
             }
           ],
-          "moreFacts": []
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved.",
+              "source": {
+                "url": "https://arxiv.org/abs/2607.06450",
+                "label": "Research publication · arXiv 2607.06450",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2607-06450",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -301,8 +328,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "918fa28d605789a89bb48968b404e8febb603554e7d84f5759689f01043cf1d7",
-      "bytes": 2839,
+      "sha256": "b8ceb55be627e371b367d86fdab0e4e7011b5de17363fbaae5a4795fd2664ee3",
+      "bytes": 3914,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -383,8 +410,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5741,
-          "sha256": "492cad439c86b0f9823623f7a80fc2d2a0ab7996a001158f845e9d6001553753",
+          "bytes": 6541,
+          "sha256": "fc57d1c9114e4658c273ee31ffb66c52fab4ba5ecb61ce6c66b25f226d30f382",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +449,7 @@
   },
   "lastPreparation": {
     "objectId": "quaoar",
-    "materialSha256": "64f509b233ef2008eebcf78a40e3ee65980a10955ef8ac6a73e9524bf24831a1",
+    "materialSha256": "7ee8271a74d9c4b35c1a88b2e1b8cc2ad774fd4e687f7cedf4db189259cf6881",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

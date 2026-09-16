@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "128e0c54fcb1ea469ab8e8b4c5530fd1252506455a762ee9b00cd8fba3c8880e"
+    "sha256": "425a0960783b5cd8bd5b09e20f5985422befe469ba083bc6d2c31d66db7355f8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,14 +103,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4f40a454b7a6c29c563a29d3360f4d0f2e97be8652c730ac59c85f911685ab6b",
+      "sha256": "7c5afea06313907abcb88b8d88a70c22b1e2eebf92f5a169d39c9a04c04feab4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2002-tx300",
         "displayName": "2002 TX300",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "363 × 363 × 289 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/201732564",
+                "label": "Research publication · DOI 10.1051/0004-6361/201732564",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-201732564",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -258,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4f40a454b7a6c29c563a29d3360f4d0f2e97be8652c730ac59c85f911685ab6b",
-      "bytes": 2376,
+      "sha256": "7c5afea06313907abcb88b8d88a70c22b1e2eebf92f5a169d39c9a04c04feab4",
+      "bytes": 2873,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6369,
-          "sha256": "7c298b8c498113df7bebc9120282870255fc6ec46a887d6e220bd04efc963ed2",
+          "bytes": 6726,
+          "sha256": "5ee95ab9c80b1ba0c4fd94bbf17a5c21fd4acd37c2ff7d10b614ec34c5eefd9e",
           "verification": "bytes-verified"
         }
       ],
@@ -379,7 +393,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tx300",
-    "materialSha256": "6dc92a39a61499a76297df947255d2b550dcd3e7cb5788265dc9ca2f93fe9e82",
+    "materialSha256": "53b5f7f9dd1ddb30c6b71228be381850944e7ee1b083d4f30f2301b345fcced1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,21 @@
   "id": "salacia",
   "displayName": "Salacia",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "838 × 838 × 838 km",
+        "source": {
+          "url": "https://doi.org/10.5194/epsc-dps2025-905",
+          "label": "Research publication · DOI 10.5194/epsc-dps2025-905",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-5194-epsc-dps2025-905",
+          "locator": "/fullAxesKm/0"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

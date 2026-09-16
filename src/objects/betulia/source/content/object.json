@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "2.695 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+          "label": "Betulia · betulia research betulia",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-betulia-betulia-research-betulia",
+          "locator": "/diameterKm"
+        }
+      },
+      {
         "id": "distance-from-sun",
         "label": "Distance from Sun",
         "value": "2.195 AU (mean)",
@@ -46,6 +59,19 @@
           "path": "source/reference/horizons-elements.txt",
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "6.13836 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+          "label": "Betulia · betulia research betulia",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-betulia-betulia-research-betulia",
+          "locator": "/periodHours"
         }
       }
     ],

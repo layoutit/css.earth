@@ -60,6 +60,32 @@
           "catalogueId": "jpl-horizons",
           "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
+      },
+      {
+        "id": "precession-period",
+        "label": "Precession period",
+        "value": "27.45 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+          "label": "Apophis · apophis research apophis 2018",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-apophis-apophis-research-apophis-2018",
+          "locator": "/precessionPeriodHours"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Body rotation period",
+        "value": "265.7 hours",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+          "label": "Apophis · apophis research apophis 2018",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-apophis-apophis-research-apophis-2018",
+          "locator": "/rotationPeriodHours"
+        }
       }
     ],
     "moreFacts": []

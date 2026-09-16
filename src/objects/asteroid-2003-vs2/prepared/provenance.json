@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e6de0df04d4c43411f614623f0015a1f76b3c09b7c0ef0c1825552ce61eecc20"
+    "sha256": "7f0907ad915353e04085dc579353e0bc37eb958e3d92543d4476618ffbaec52c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,15 +103,43 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4daea6f401a89f8536290c40ae51f9d862ba66673d749c210772b40bf9a08bb6",
+      "sha256": "dd879752ab5860d2d6aaf219bf895ef77eebbc87deb153f092cc95af96ad8031",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2003-vs2",
         "displayName": "2003 VS2",
         "panel": {
-          "facts": [],
-          "moreFacts": []
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "678 × 470 × 452 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202141842",
+                "label": "Research publication · DOI 10.1051/0004-6361/202141842",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202141842",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain.",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202141842",
+                "label": "Research publication · DOI 10.1051/0004-6361/202141842",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202141842",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -258,8 +286,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4daea6f401a89f8536290c40ae51f9d862ba66673d749c210772b40bf9a08bb6",
-      "bytes": 2491,
+      "sha256": "dd879752ab5860d2d6aaf219bf895ef77eebbc87deb153f092cc95af96ad8031",
+      "bytes": 3751,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,8 +368,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5631,
-          "sha256": "da702c3b51b880d824e3775e07c1a601354c8033f8b373e524b5bed01e4b5aff",
+          "bytes": 6611,
+          "sha256": "89ba85a2294c20434812a74fbd40d02959aa57dfdc7e2c0a5bc9d785c0049f78",
           "verification": "bytes-verified"
         }
       ],
@@ -379,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2003-vs2",
-    "materialSha256": "8ed33770a3237c97251732b05535ebcca87cfb3ab10c4e20ae42af1df12e7d40",
+    "materialSha256": "212ad179dd21a86f52edb9226e6a4cfe703d362b71a0d2c398f69dfaf2b38933",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

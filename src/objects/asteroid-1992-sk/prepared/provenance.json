@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a3de1f377d8dc29797275731401c78ffa6d9566b2ea75dce66a350cb74662a6"
+    "sha256": "a0717bbb6518e730b1b3901cb717e7b0870b3da8f3a381673ba2314bfb5a6ad9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b0d328ac5a3dc4d390c8f1720e82e37cc0bf9bc84a1c1084aa40175c4bb354d1",
+      "sha256": "a109a8a32281b5c33fe0b3cba18dfbe894147bf8cfe853ee630932c51e8ffd94",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,6 +166,19 @@
         "panel": {
           "facts": [
             {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "0.50 ± 0.10 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+                "label": "Asteroid 1992 Sk · asteroid 1992 sk research sk",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
+                "locator": "/diameterKm"
+              }
+            },
+            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
               "value": "1.249 AU",
@@ -189,6 +202,19 @@
                 "path": "source/reference/horizons-elements.txt",
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "7.3182 ± 0.0003 hours (model)",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+                "label": "Asteroid 1992 Sk · asteroid 1992 sk research sk",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
+                "locator": "/periodHours"
               }
             }
           ],
@@ -355,8 +381,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b0d328ac5a3dc4d390c8f1720e82e37cc0bf9bc84a1c1084aa40175c4bb354d1",
-      "bytes": 9451,
+      "sha256": "a109a8a32281b5c33fe0b3cba18dfbe894147bf8cfe853ee630932c51e8ffd94",
+      "bytes": 10533,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -477,8 +503,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6433,
-          "sha256": "fc26677e59e4f47c746a84e762ddb9184cbed1734ade3790af409f01fcf15048",
+          "bytes": 7245,
+          "sha256": "d7171c507d7f319b247152c820b096e09faf856e10db3453c11f57035783b8a6",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1992-sk",
-    "materialSha256": "36e0792d5cafedb2ec5899cfb13423f9341eaab398c9b3f74227560b8f165860",
+    "materialSha256": "34e5f4ecddb044a9a7d63d7e0def5935fc9a9c0015d141da004de00151d9c33b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

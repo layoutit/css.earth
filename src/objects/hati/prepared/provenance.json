@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ebe869d7139067a207ffd5d10b039896aef07d0c6333aa7a95ff5fa8ec59070c"
+    "sha256": "69a568d9a5d5440e3ba2fb75afb5324f6e6d1237546e53854a3c30a8545a421f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f3b533847b50eb2de4165bf9e0b8797ee998eac060a53b941781d0359c448a6",
+      "sha256": "09157c916d778c85fcdd4fe1ffc59e8b222d4b7f09f0a192037d009d2ce47365",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -122,6 +122,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "5.45 ± 0.04 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f3b533847b50eb2de4165bf9e0b8797ee998eac060a53b941781d0359c448a6",
-      "bytes": 2605,
+      "sha256": "09157c916d778c85fcdd4fe1ffc59e8b222d4b7f09f0a192037d009d2ce47365",
+      "bytes": 3089,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3408,
-          "sha256": "3e0e693625986494494ab090c0f116d263a019f1ce465cd839bbdff11fac72b8",
+          "bytes": 3757,
+          "sha256": "2449c52076c9fd7e3617dfbee96e01d47737d653c3cc6b24d9e5b51995a004ec",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "hati",
-    "materialSha256": "839e57760fafe1302d8c4ab7a97bdfc423a5224026dee369ca0e60adecd69a19",
+    "materialSha256": "0405b3be3ec1987f70559138c59f64df0aef87984e45245db86f5f3139d02cf2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

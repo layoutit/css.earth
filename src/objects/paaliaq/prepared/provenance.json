@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29279158eca94259dbf83a02cb9c33e441e251283b671ab0db6bfc3c23ae901d"
+    "sha256": "f44ec72ecf3306763618d42c5d7c02e647ab38cfc11db1799f1d74c324232c05"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "be4253424d7aec3e0612990b8daeef9bccf2f85b227a09b4d775d45177381f55",
+      "sha256": "c0bc1b11ec91c9482462cc5dc1c40d34eb6cdae4b5dea21916335919b3f8dc47",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Paaliaq",
         "panel": {
           "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter estimate",
+              "value": "25 (+7/−4) km",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/scale/adoptedReferenceRadiusKm"
+              }
+            },
             {
               "id": "parent",
               "label": "Orbits",
@@ -122,6 +135,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/references/0; Planet"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "18.79 ± 0.09 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
               }
             }
           ],
@@ -289,8 +315,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "be4253424d7aec3e0612990b8daeef9bccf2f85b227a09b4d775d45177381f55",
-      "bytes": 2629,
+      "sha256": "c0bc1b11ec91c9482462cc5dc1c40d34eb6cdae4b5dea21916335919b3f8dc47",
+      "bytes": 3608,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -371,8 +397,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6095,
-          "sha256": "7d4232c224b25a6aad2450976fcb3a2e28134bfe192e3b0f614d526864d0ed3f",
+          "bytes": 6804,
+          "sha256": "85e4d903f9ec0c1e163cb9543960cf71d673c76cc8300553e7c5180f8056a94e",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +436,7 @@
   },
   "lastPreparation": {
     "objectId": "paaliaq",
-    "materialSha256": "c72b556ba2f8c4d341a43139b9f88f0166c943c29599b4f830951f15c8f382b9",
+    "materialSha256": "1ee7c0223a1bc7b4677e6c999e51c8cc21ffd27f4a269fba83f4eadeba175a78",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

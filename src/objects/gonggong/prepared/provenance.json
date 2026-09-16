@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2a67aae4ccb6e7351a3f94b7137d7af06b1074b3ac7f4db1fd101b8002d6742"
+    "sha256": "8bb408156a65f441f41bd670f64c040d0d9c456821a9f361d7d293b3605ca4c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7cebc99f6f52b4536d83a942ec742938bc26cef5ac6b355ec50e499dceb94495",
+      "sha256": "8b22c7760b34c473b49abc4325b9fbe0d6d6bbd7431383d1d3cbe6277885ae77",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,19 @@
         "displayName": "Gonggong",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "1230 × 1230 × 1230 km",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+                "label": "Research publication · DOI 10.1016/j.icarus.2019.03.013",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-j-icarus-2019-03-013",
+                "locator": "/fullAxesKm/0"
+              }
+            },
             {
               "id": "rotation",
               "label": "Rotation",
@@ -125,7 +138,21 @@
               }
             }
           ],
-          "moreFacts": []
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid.",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+                "label": "Research publication · DOI 10.1016/j.icarus.2019.03.013",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-j-icarus-2019-03-013",
+                "locator": "/fullAxesKm/0"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -278,8 +305,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7cebc99f6f52b4536d83a942ec742938bc26cef5ac6b355ec50e499dceb94495",
-      "bytes": 2958,
+      "sha256": "8b22c7760b34c473b49abc4325b9fbe0d6d6bbd7431383d1d3cbe6277885ae77",
+      "bytes": 4093,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -360,8 +387,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7419,
-          "sha256": "fba7a36e069b0988c10537eefa24121dc275cb2339ea48001d32b8cea7e9aa88",
+          "bytes": 8279,
+          "sha256": "3d8cc46b5cadb0159840c86322f523abcee809bfb997995492f0f8a7dffce34d",
           "verification": "bytes-verified"
         }
       ],
@@ -399,7 +426,7 @@
   },
   "lastPreparation": {
     "objectId": "gonggong",
-    "materialSha256": "b1d934e6f7686ddb80d10fcb41128c937e1ad418c78758dc4b274e8684fdf05e",
+    "materialSha256": "09a723e66505720bfa49164e971301dafa0481a48055d94b9679bb4737b621f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

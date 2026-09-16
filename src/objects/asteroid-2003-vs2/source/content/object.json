@@ -4,8 +4,36 @@
   "id": "asteroid-2003-vs2",
   "displayName": "2003 VS2",
   "panel": {
-    "facts": [],
-    "moreFacts": []
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "678 × 470 × 452 km",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202141842",
+          "label": "Research publication · DOI 10.1051/0004-6361/202141842",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202141842",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain.",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202141842",
+          "label": "Research publication · DOI 10.1051/0004-6361/202141842",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202141842",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0410dc749ecf6c3b2f845f82d7913fa4376224f92681f35baa93c74fe411129"
+    "sha256": "f616c959dfa4902d549e4ce5b9593cb13b8de2cf02dcb9d8fcf6107f7c05fd55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e178d4d6677e527c313e2045f830a28cd5e069c1a7c81a5df2fcaab4d21f5ac9",
+      "sha256": "cd6e35c4543e4d6fce4f2d436621a1b8c8ea4d59c722ebccfb53454ad3f6c614",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,32 @@
         "displayName": "Varuna",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "1098 × 659 × 474 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1909.04698",
+                "label": "Research publication · arXiv 1909.04698",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1909-04698",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation",
+              "value": "About 6.34357 hours from photometry; display phase is illustrative",
+              "source": {
+                "url": "https://arxiv.org/abs/1909.04698",
+                "label": "Research publication · arXiv 1909.04698",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1909-04698",
+                "locator": "/numericEvidence/periodPhotometricHours"
+              }
+            },
             {
               "id": "class",
               "label": "Population",
@@ -125,7 +151,21 @@
               }
             }
           ],
-          "moreFacts": []
+          "moreFacts": [
+            {
+              "id": "uncertainty",
+              "label": "Shape interpretation",
+              "value": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain.",
+              "source": {
+                "url": "https://arxiv.org/abs/1909.04698",
+                "label": "Research publication · arXiv 1909.04698",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1909-04698",
+                "locator": "/numericEvidence/axisRatioBA; /numericEvidence/axisRatioCB; /radiusKm"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -278,8 +318,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e178d4d6677e527c313e2045f830a28cd5e069c1a7c81a5df2fcaab4d21f5ac9",
-      "bytes": 2962,
+      "sha256": "cd6e35c4543e4d6fce4f2d436621a1b8c8ea4d59c722ebccfb53454ad3f6c614",
+      "bytes": 4607,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -360,8 +400,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5041,
-          "sha256": "1635fb26fd3b7504cf7f7d70cdd1686fa01abe4f570d7994d70d460debb1a942",
+          "bytes": 6276,
+          "sha256": "c59aeefc13b359e397d6f7f7ebd5b290188848cb9775db62d42633f0c6bf4474",
           "verification": "bytes-verified"
         }
       ],
@@ -399,7 +439,7 @@
   },
   "lastPreparation": {
     "objectId": "varuna",
-    "materialSha256": "941ca8528ea85475fc8af46bb84ee48662fc183d1ed0619dda1116fdaa97a38e",
+    "materialSha256": "cb577e1dd825635658ce6c4d611f3baeee96129fb9dd39da16efbfeb922c140c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

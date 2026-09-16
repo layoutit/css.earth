@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4bbf32a4b6143a33d53dace59b4b4c168d44743acfa30b1035d53188b61cc4a2"
+    "sha256": "694f0b55db12877c984b375ee98b91789295ab99045f7747fc92b3baa3af0420"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "59138280117cd6ca6e8e089dc6f81de07206ecd34b8e8c073056497db69210b6",
+      "sha256": "5adfd740ce0ace85bdba86e920c3b0a07939e5b5edba0bf786c25e2767272db8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -110,6 +110,19 @@
         "displayName": "Kerberos",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Approximate dimensions",
+              "value": "14.5 × 8.2 × 7.2 km",
+              "source": {
+                "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+                "label": "Kerberos · measured ellipsoid",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-kerberos-measured-ellipsoid",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
+            },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
@@ -299,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59138280117cd6ca6e8e089dc6f81de07206ecd34b8e8c073056497db69210b6",
-      "bytes": 3327,
+      "sha256": "5adfd740ce0ace85bdba86e920c3b0a07939e5b5edba0bf786c25e2767272db8",
+      "bytes": 3843,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -381,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6413,
-          "sha256": "e7880f0941b0baf740a0397d13679ea18bd51ff347e81aca5a391c06fe8d6870",
+          "bytes": 6794,
+          "sha256": "6f56837d81ff4c9243acfad1ad818f6e061996089e10a44c9b841c4f4de0048a",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "kerberos",
-    "materialSha256": "78a94624b74db2f7c0a80ec331239dfa0422ee9ff0e62112b6a8d8320816dcd0",
+    "materialSha256": "86470e3d381be0cf83a958a3e703593598898b4ab39df68be38aebbd6d21d9f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a38dd1a5d2cdd087b74c57e5972ccd321cec93222d4ef39ba6510498b998eb8"
+    "sha256": "b7a4792cad62a957e428887a5f9c44e52afa2144ccad9d60ed723d99ded95d75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -103,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ece427b9586072a420b0b892c159f36e8476c8a505b9f5ccea27906c81561526",
+      "sha256": "1dbdad54b621161c41b7ad9f42cdd9720af9b046ae4b2d981e0836f3814f3aa4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,6 +111,32 @@
         "displayName": "Bienor",
         "panel": {
           "facts": [
+            {
+              "id": "dimensions",
+              "label": "Full approximation dimensions",
+              "value": "254 × 110 × 90 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202450833",
+                "label": "Research publication · DOI 10.1051/0004-6361/202450833",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202450833",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "9.1736 ± 0.0002 h",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202450833",
+                "label": "Research publication · DOI 10.1051/0004-6361/202450833",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202450833",
+                "locator": "/spin/periodHours"
+              }
+            },
             {
               "id": "class",
               "label": "Population",
@@ -281,8 +307,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ece427b9586072a420b0b892c159f36e8476c8a505b9f5ccea27906c81561526",
-      "bytes": 3319,
+      "sha256": "1dbdad54b621161c41b7ad9f42cdd9720af9b046ae4b2d981e0836f3814f3aa4",
+      "bytes": 4342,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -363,8 +389,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4640,
-          "sha256": "feeb2e71f0ba934ac600cad5cf32289472e1b2c2c7deb6a66f7126eb65e62142",
+          "bytes": 5393,
+          "sha256": "b6efe3d06cc43ec2ffb38d12ad4da06eca901c34434b8a417e748b1138749fdd",
           "verification": "bytes-verified"
         }
       ],
@@ -402,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "bienor",
-    "materialSha256": "16cd494de6c9641f3c23fbbbd7a0c4422bad8146e1ef6c9ab83319e92dfbeb6c",
+    "materialSha256": "4a0348848397d2a1c482e9018456b10893771e649a4cce47e788528a1ed80ad8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

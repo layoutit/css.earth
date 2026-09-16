@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f41a03ee56481e8881f27fc63fa0c3b93581665e483d3965b64841c949eb2630"
+    "sha256": "bdcf5104d5e2ae336da0b356bb9ad06b9004a02567d4f2d1cf90ee7bbfe07f95"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "691ee0c5f5814f6847184c4d3ad6ade507185929ee2791308dd472a166d35c93",
+      "sha256": "97f9d4a0e699d628575665b159b96850f6aab827ed2c5b2374c9219ebc806c6d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,6 +121,19 @@
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-physical-parameters",
                 "locator": "/references/1; Mean Radius (km) value"
+              }
+            },
+            {
+              "id": "dimensions",
+              "label": "Dimensions",
+              "value": "About 108 × 100 × 52 km",
+              "source": {
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+                "label": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
               }
             }
           ],
@@ -286,8 +299,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "691ee0c5f5814f6847184c4d3ad6ade507185929ee2791308dd472a166d35c93",
-      "bytes": 2784,
+      "sha256": "97f9d4a0e699d628575665b159b96850f6aab827ed2c5b2374c9219ebc806c6d",
+      "bytes": 3292,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -368,8 +381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6786,
-          "sha256": "d6e9b23493267c73db53a450f3194cea9d23851926ab355dca788bbf897db3c2",
+          "bytes": 7159,
+          "sha256": "96d00d4e241c361578d90ee4ea6a16085f260c367c5d17b910fdfe4048c2f802",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "thalassa",
-    "materialSha256": "9e702ab98dd3f14493c9a5502a8d17f72340540f2c4a2abd6cdf0679a2f0b7e1",
+    "materialSha256": "cab6235b9e97eb2109b634f4215f30ef7348810d6142c3b7a35c54868daa1689",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

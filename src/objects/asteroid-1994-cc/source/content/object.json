@@ -23,6 +23,19 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "0.31 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf",
+          "label": "Asteroid 1994 Cc · asteroid 1994 cc research cc1994",
+          "checked": "2026-09-16",
+          "path": "source/reference/model-properties.json",
+          "catalogueId": "source-asteroid-1994-cc-asteroid-1994-cc-research-cc1994",
+          "locator": "/diameterKm"
+        }
+      },
+      {
         "id": "distance-from-sun",
         "label": "Distance from Sun",
         "value": "1.638 AU (mean)",

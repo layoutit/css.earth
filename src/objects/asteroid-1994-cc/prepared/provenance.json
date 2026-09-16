@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd6d7d3dd719a26b3f2815547e37be62726b71a7b4aa27ced0d8d62bc294ab9a"
+    "sha256": "42f16360051761f7d5f5cdd375dfb194f7ffcf693c8ac844042f917a4b57f9cc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a48607b4ad3c913a8f13d91c8776bf4f0d6f2eaecc18556ea1f55dadfa2a5bf5",
+      "sha256": "900ad5c20070c290c13d3018efd031d6226390701cf94ab51ba140e49648be53",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,6 +161,19 @@
         },
         "panel": {
           "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "0.31 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf",
+                "label": "Asteroid 1994 Cc · asteroid 1994 cc research cc1994",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1994-cc-asteroid-1994-cc-research-cc1994",
+                "locator": "/diameterKm"
+              }
+            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -370,8 +383,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a48607b4ad3c913a8f13d91c8776bf4f0d6f2eaecc18556ea1f55dadfa2a5bf5",
-      "bytes": 11649,
+      "sha256": "900ad5c20070c290c13d3018efd031d6226390701cf94ab51ba140e49648be53",
+      "bytes": 12176,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -492,8 +505,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9175,
-          "sha256": "3e060348c54d26e1b8b3cd03ffdf7d915684fae9a643c5e9d3dd0dd99bac35f1",
+          "bytes": 9567,
+          "sha256": "5ccca8a0561faa76a0f3411026c6f67d7ea5f797ca6d79467cc4385f8c5d08d3",
           "verification": "bytes-verified"
         }
       ],
@@ -556,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1994-cc",
-    "materialSha256": "2083b9a827df5e5d999be154e429ae5e5b82844b62f41567f2ebedd30c383c57",
+    "materialSha256": "853f81e6016edbf84e3d4be841a127bda20f3f635a0ea191f553b2f8f06fc767",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

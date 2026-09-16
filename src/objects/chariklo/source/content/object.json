@@ -6,6 +6,19 @@
   "panel": {
     "facts": [
       {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "287.6 × 270.4 × 198.2 km",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202141543",
+          "label": "Research publication · DOI 10.1051/0004-6361/202141543",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202141543",
+          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+        }
+      },
+      {
         "id": "rotation",
         "label": "Rotation period",
         "value": "7.004 ± 0.036 h (photometric period)",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "85960f0b5cd1195e51a3dab45fef78b6384f96f587b34c67ed9e971d14fe57f1"
+    "sha256": "1dfdaf0eb705301a16d385cfd8053b7d6aac7a414e4cc5c86f81bd8a889a629c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -93,15 +93,43 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ea98ded40750c4bf19fe24a556c195929242406f4f4adf591f4bb544dc193fe0",
+      "sha256": "5a810a3d2f825e8b40595b89724cdd28cf7d3bb23c6ff57f6815ae5c7d95af93",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2001-sn263",
         "displayName": "2001 SN263 Alpha",
         "panel": {
-          "facts": [],
-          "moreFacts": []
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Estimated diameter",
+              "value": "2.5 ± 0.3 km",
+              "source": {
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+                "label": "Asteroid 2001 Sn263 · radar shape",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-asteroid-2001-sn263-radar-shape",
+                "locator": "/radiusKm"
+              }
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "shape-scale",
+              "label": "Model extents",
+              "value": "2.754 × 2.720 × 2.857 km",
+              "source": {
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+                "label": "Asteroid 2001 Sn263 · radar shape",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-asteroid-2001-sn263-radar-shape",
+                "locator": "/extentsKm/0; /extentsKm/1; /extentsKm/2"
+              }
+            }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -242,8 +270,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ea98ded40750c4bf19fe24a556c195929242406f4f4adf591f4bb544dc193fe0",
-      "bytes": 2300,
+      "sha256": "5a810a3d2f825e8b40595b89724cdd28cf7d3bb23c6ff57f6815ae5c7d95af93",
+      "bytes": 3356,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -314,8 +342,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9709,
-          "sha256": "1733419cba5b51e2db631b3a64d7f51f5da3a7886cbe6fc266cc83290ee65a6c",
+          "bytes": 10485,
+          "sha256": "aa6cbe1ec0cf2abbe6442f655af5f34d1c25c10c47bc45bbf4ca9428a75d54d5",
           "verification": "bytes-verified"
         }
       ],
@@ -353,7 +381,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-sn263",
-    "materialSha256": "0837b45498135eed9a95b073732a2faef21a23e8f976e1ba193adfbdc5b9502c",
+    "materialSha256": "aad7cf7da43e1f3fdf7e0b6e06e53f27154c249f4884f8913cc8dfda2f99444d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
