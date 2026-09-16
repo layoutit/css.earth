@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "66bdf3410de3e481b66b042e0f6bc08e619ed1c5101d271ce568794ca3170234"
+    "sha256": "7394e02a161aff19ed52d1e58ff712d7de9ffbe71424e229e09a9b20f61d220e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "070ebd95bc4a75e5ed4464291ace6a378f2fbdd0bebc0856dd10e64a171572de",
+      "sha256": "992b8f78e7320a4ed98e22abe7df3599d026682c874f17ef4e466bde493a277e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -216,6 +216,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.13
@@ -320,6 +321,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.05
@@ -1792,7 +1794,7 @@
   },
   "lastPreparation": {
     "objectId": "calypso",
-    "materialSha256": "8c220b5b3d84dd61c756bab48bbfca154fe5b7e1263aa54026a49c984c32c56f",
+    "materialSha256": "fe1b01046d591efafbe792852be783da97d8062d9bf394318e65096716bed72d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

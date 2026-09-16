@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b49590a2a8b28c9589a54b85762dca6891b2e4e159b76fdcd340e69fc2328edb"
+    "sha256": "eec42ac10dd7e2af363a334934bc973a3709319659e4d326c520d14edaaa777d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f97fea4af4706f5be869e568e4432b6c20736878c44ce1520c3b1c07dac36caf",
+      "sha256": "478a141a509cad31576bf306005d4612fcb52be6a2246c285bdb35fe88b21fe2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -224,6 +224,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.558
@@ -330,6 +331,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -1828,7 +1830,7 @@
   },
   "lastPreparation": {
     "objectId": "janus",
-    "materialSha256": "dccfb61bb4edf5c015ca69a1ccf268db5217013f69042d0687a9e76c605f7e1e",
+    "materialSha256": "ff3b85ee8f5061029b0af87415ea0a0ce864d2af9e6f14e99d2d30aa480fade9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

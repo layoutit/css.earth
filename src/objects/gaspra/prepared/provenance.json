@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "463c430e9d9d79559bf46f47dd0783d5c3972cd0ce37678e6a1e2b37ac4d1486"
+    "sha256": "83c063bf452d8a8063c2c05efc7486a86ab85b12dbe29b7556e632edc9f703d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7fafe4abb5cc9d9eaccda89f7aec7822670ac41864d222bcc3bbe256da770e0c",
+      "sha256": "90193a15b4d1339b9ada3687b9247d9d0623b03a0c787c2326500b584f58dea5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -185,6 +185,7 @@
                 }
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.0902
@@ -1576,7 +1577,7 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "9c175c9512c2cd4bdf2bc221a24c947b9f888b139cde663a57fb4b90eefd9578",
+    "materialSha256": "3c0980aa224f0a8cdce5d057c3cf72ca8256c3687fcd38698ea447ed96377ae3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

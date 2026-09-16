@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8743f0ca8b2ba668740d31937efff56ea2ead84400d6f685483ecabeed32f748"
+    "sha256": "134fe8c081f1b235a9360490af3ce670507da0a213716d32fb5bc1f500183270"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fa7192074a4eeda465c3c325a7cff9335cafa200269eba42afd4ada26952682c",
+      "sha256": "08d92acd410be5336a16cf6b31c110b0abf930bab938103aeffc08e07c5844df",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -126,6 +126,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.0494
@@ -665,7 +666,7 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "fc444d855a6845d9f4e3098b4a953df35f920cae8b24f05a77dea1db7702d33d",
+    "materialSha256": "82c19947063ebdd5754c44c713e50e0dfc893bd6e415c407a6a62c0323bad023",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

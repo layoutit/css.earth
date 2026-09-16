@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d9028183a6021aeb23d5b438ba5a2a8bf2e3e9532cbe295cb7810c09b2205d93"
+    "sha256": "ce5c4f85e7a12c861a61b0d5feea07e77420d641afb0df629afb101d6c95a209"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e5a725429b32b20ac12d074c87c6ff6a7846e47339a2fa7bc7124ab3e53b224a",
+      "sha256": "c3fab21e9f47569310576c5b3fe32c8316ab0d40c504562b156ca54a01967dad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -233,6 +233,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.907
@@ -393,6 +394,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -2309,7 +2311,7 @@
   },
   "lastPreparation": {
     "objectId": "prometheus",
-    "materialSha256": "c9d55ad0f16b9d504828db516e279321f4a2b63c0a125883dce0a956d58905b0",
+    "materialSha256": "f9ab8d3447859bd1c6e9aeb1079c00f814e5ba312d43074d02cedc2311baa418",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

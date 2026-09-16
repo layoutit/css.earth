@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ddf9059fd6898ee8c01ca08d3cd11983434a5ba08059fb8b5f26ea9941edd8b9"
+    "sha256": "686c71e9eea0514e398827140145bbf23c381db841a3a79426aa47152fa57dd3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "946ad3fd14e8966760d8be129150775304983f5ab60b94ca37e04490af1877eb",
+      "sha256": "c02d7b6395a6207cfd5b71026778ed89f3f4fe08c9ad316e11807b49b4ed9a05",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -179,6 +179,7 @@
                 "maximumGain": 1.5
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0.9,
                   98.8
@@ -1965,7 +1966,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "0fe10247eaddf4cf6c9983f3a60ef71336257d916322ca8e78eb4a89cfffba75",
+    "materialSha256": "779d743b448f365029c3b1ddbf29748a1028e7b3dc3d81dd279342ed782c0144",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

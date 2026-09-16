@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55024e5714bed82e081c9ee612d988bf43f2e9e3f72a16b3d88b6d05bc43a31e"
+    "sha256": "87bb3df084e8a0bae1f17421208bbcfbc6634067e5590bb50bc79fdab3c1bfc8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c1bb5ef5102b1adee0a3234da672b49ecde38ab2124c02eeb991cbd0544c6ace",
+      "sha256": "07c69722d525d92bb574643254090cff6d893aa803c147030511eb53c1c4ad6b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -314,6 +314,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.339
@@ -634,7 +635,7 @@
                   }
                 }
               ],
-              "registration": {
+              "bandAlignment": {
                 "references": [
                   {
                     "id": "n1506388174",
@@ -775,6 +776,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.5
@@ -4233,7 +4235,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "860b61322a3ba0565705213d7cdd9e8e13c5a4b6b2434db6539d551d880d7b69",
+    "materialSha256": "618b72e0223ff7cd75f678638f33fed4e746bdfc6f088ade1aab64ecea70d9f6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

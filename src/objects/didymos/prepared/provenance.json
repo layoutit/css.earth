@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "068d8fe0f355fdf4d7b2b39e9bdac45f2f4608448f193b1e3d926a0070186a9e"
+    "sha256": "76c067a719c9ff2673a6199173557aaf5c422684dab3a3a2063885142d508509"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bd0181489efee6e5b273c34be10c81e8ce61fabdcc7d329f14d1f4eeeeb6c1b1",
+      "sha256": "4c0c1679fc81fcd64f12112b6d8ec92868179c67e51065068653a0680d2a2618",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -220,6 +220,7 @@
                 "maximumGain": 3
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.1,
                   99.9
@@ -1317,7 +1318,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "a41f824fe0550118ef3c0b35a6268284c1bac8837637c54e85f5b9426db78b0e",
+    "materialSha256": "299ebfb17682da5a2b9b597a334491e164aedf70765f5184c8885a9e116ae525",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

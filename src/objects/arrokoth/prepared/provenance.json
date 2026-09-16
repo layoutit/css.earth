@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3feec70ec79bf5ea04dfa914d13adf3ae46cbb4ff884e9bfaf35fa00ab73f87a"
+    "sha256": "644800929d11b2952e8b74901ee93cd65af3cb893f1c71f649cf88f60e3730f4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "849a16ad63a4285db8ca600b32b6428dc39d83854ea5e5e4c84080d6e7b60943",
+      "sha256": "029042584476527697af9cbac677fc09141b9e9c775ad05807d7feb3b8c8f1b4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -106,6 +106,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0.9,
                   99.8
@@ -145,6 +146,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.17
@@ -1029,7 +1031,7 @@
   },
   "lastPreparation": {
     "objectId": "arrokoth",
-    "materialSha256": "26d17094db0ae001bfe3789ed2983919db88eca6c0409e41abe20487ade2eaa4",
+    "materialSha256": "0c6da15cb619329ea40fd185ee1927dda58c94874f63cfb801051b898134910c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

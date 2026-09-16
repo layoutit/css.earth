@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ad49ee4359b00cf44cefca21995fad908b04ecef465d69569c6661626639f7d"
+    "sha256": "e165f1ae61341bb957911a542e3f8b8e25c8ba94a149eaee0b49e496cff844d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b2957a57843dfbb0e055df499917b385d766c9d829e8771faa0fa0bba1552a1d",
+      "sha256": "3a3988cef43e0c54cab86db4ffa723a79172fca7cd105c773ccc964543468222",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -246,6 +246,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.967
@@ -352,6 +353,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -1996,7 +1998,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "f1fb658702fdc2d85483999efd8c9c5f2b966f7b6b35ed22f2b5f1b7d46ecd10",
+    "materialSha256": "f361c40971dece3c949610deff31c115c710d112583c6ad6429ec075a614dfd4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

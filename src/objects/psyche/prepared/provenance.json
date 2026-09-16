@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "54c089c6e8a72a0ed34bc87cbed455976f86b9de80051e917c66601a0a4939cc"
+    "sha256": "b2b8ce36292d4d7c39d64f5945ef361bc294cd90eedb3ee0bf7b3274608b3591"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "924f6b18dc369c6ad90e4a1f6906fba139a2ff272663daee8ea72fabd526c87b",
+      "sha256": "37146cc2667cb783f89e9b480c52a9565c70e4127b00b2df933b8dcc56962df3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -388,6 +388,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1,
                   99.5
@@ -1875,7 +1876,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "b7afd3c09c82079dbad2ef59ab35d47deb02800e8c5a4dd06536e192a17a8293",
+    "materialSha256": "5c88b01e35f9cb5dc81ba721d9f747667136b5bf03e6c5338b351c5b2abe3d96",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

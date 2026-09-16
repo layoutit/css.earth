@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "78fe7cfa409f32dec6d20520c6c7cbd6aceb5890844bd4fd842a6f2348cfa834"
+    "sha256": "33f17f95964dcd2ee750f290e8e4f5fc0ff9a4e27f31c066b25cfd7991dbb8b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bbf99beb80912d15ad375b72b557acf24bcfba9129040433b9e6e5f4316c8c5f",
+      "sha256": "9a9bb61fdadf33af8d3819cce78750137f494f88c7f327865a39dcbee2f67817",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -193,6 +193,7 @@
               },
               "maximumCoordinateErrorMeters": 0.000001,
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   0,
                   100
@@ -1457,7 +1458,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-19p",
-    "materialSha256": "98dbdb2c79ddf256199e0dc1154548f95271b4699e2a9bf0c1dccebeeeae660d",
+    "materialSha256": "40c91f95ed4bae7473764c04e2c50505ec04cb1f8bb589f039f763ef11c161f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a714f45b53b280444de37a3e084df3cb861f5c7ec2d154e9bb2c73aa92eac206"
+    "sha256": "b81e15ecc2d3168072292b5ac2a2a2cfa19ae7cbad28a73e198d7a33a58b81bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "420b59cea9eb4e2428547b83e9f4cfc93841a25ee8921d379cd0e16e9dd2fa80",
+      "sha256": "79e5c3eac0d779204387a888c7efd49b245cab6e60cf76ec51e22dd56a3e5945",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -195,6 +195,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.928
@@ -301,6 +302,7 @@
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.8
@@ -1665,7 +1667,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "1ccc26bd7db91aa9fbc6527f5e1e1df59329b1b5f8d6b560e5d15d1aa0aecf61",
+    "materialSha256": "5887daef8c80ae30e24780be36752d6b6a3d718895f791b65d49a0a10b4b1a22",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

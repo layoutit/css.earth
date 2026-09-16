@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72f1c2fe1d46eae9a80e4deba017ddc0977c7412fef3e113adade57b7d446ef4"
+    "sha256": "8c66b4b4d5f588a5cf60a3ca1ece9dfa70a950e3012fcf6cb7060012ad8ab638"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a0a8e2a7c4eca6f3039f53ea4df4a152400618e32e9345ffc2142c211901e9e1",
+      "sha256": "25e5c82f4ded01b27033bb077502719acb2a96a6a7b0974fef508bfde4c3ac81",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -216,6 +216,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   1.2
@@ -320,6 +321,7 @@
                 "maximumGain": 2.5
               },
               "display": {
+                "basis": "authored",
                 "displayRange": [
                   0,
                   0.95
@@ -1792,7 +1794,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "b35e5bae1eb9690af414550f710f32150c88606aa6cbc6a817f72ac8b8fbfbc1",
+    "materialSha256": "aff0a9b4a8a919581089c831c615037165e750c4cd5d20a2de012a0cfd1f4336",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

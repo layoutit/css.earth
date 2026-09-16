@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "950d15f4ad036a7e193a785da55847ff1f56074a77042622f8bbdfd389848688"
+    "sha256": "b530eebb9d817e9af93266327168115502cddf4b69e5595f54abdacb38e18f60"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ac5d9ccc63b9d3865cc4941a165e5f2b0ab5abd26ed322c2bd548fccd07f4e53",
+      "sha256": "6470236700f8626fff7e597d1e37ec405b216f95522684749b32ce4e0a78fc4e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -210,10 +210,11 @@
                 "visibilityToleranceMeters": 0.5
               },
               "photometry": {
-                "model": "observed",
+                "model": "retained-observation",
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.7,
                   99.4
@@ -278,10 +279,11 @@
                 "visibilityToleranceMeters": 0.5
               },
               "photometry": {
-                "model": "observed",
+                "model": "retained-observation",
                 "maximumGain": 1
               },
               "display": {
+                "basis": "authored",
                 "percentiles": [
                   1.2,
                   99.4
@@ -6102,7 +6104,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "90d8d1f00814e635da0cf3952c76a43821a842d7bf5041388bb14e831d3df075",
+    "materialSha256": "d8f392c0270ad877a5cbbd3e9218e067a7c0e3119edb6f65994758c548790ac1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
