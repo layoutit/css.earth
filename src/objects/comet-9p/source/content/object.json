@@ -4,7 +4,47 @@
   "id": "comet-9p",
   "displayName": "Tempel 1",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "Deep Impact · Stardust-NExT",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
+          "label": "Tempel 1 shape model: tempel1_2012_plan.tab",
+          "checked": "2026-09-16",
+          "path": "source/reference/dataset.cat",
+          "catalogueId": "pds-tempel1-shape-2012",
+          "locator": "\"as derived from Deep Impact and Stardust NEXT images\""
+        }
+      },
+      {
+        "id": "source-epoch",
+        "label": "Deep Impact encounter",
+        "value": "4 July 2005",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.lbl",
+          "label": "Comet 9P · iv05070405 9000632 001 r labelPath",
+          "checked": "2026-09-16",
+          "path": "source/photography/deep-impact/iv05070405_9000632_001_r.lbl",
+          "catalogueId": "source-comet-9p-iv05070405-9000632-001-r-labelpath",
+          "locator": "START_TIME = 2005-07-04T05:38:59.424"
+        }
+      },
+      {
+        "id": "encounter",
+        "label": "Stardust-NExT encounter",
+        "value": "15 February 2011",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.lbl",
+          "label": "Comet 9P · n30036te02 rr labelPath",
+          "checked": "2026-09-16",
+          "path": "source/photography/next/n30036te02_rr.lbl",
+          "catalogueId": "source-comet-9p-n30036te02-rr-labelpath",
+          "locator": "START_TIME = 2011-02-15"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {

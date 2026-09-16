@@ -4,7 +4,34 @@
   "id": "selam",
   "displayName": "Selam",
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Dinkinesh",
+        "source": {
+          "url": "https://doi.org/10.1038/s41586-024-07378-0",
+          "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+          "checked": "2026-09-16",
+          "path": "source/orbit/published-parameters.json",
+          "catalogueId": "doi-10-1038-s41586-024-07378-0",
+          "locator": "centerBodyId: dinkinesh"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Size",
+        "value": "About 520 m end to end",
+        "source": {
+          "url": "https://doi.org/10.1038/s41586-024-07378-0",
+          "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+          "checked": "2026-09-16",
+          "path": "source/shape/model.json",
+          "catalogueId": "doi-10-1038-s41586-024-07378-0",
+          "locator": "lobes semiaxesKm: 2 × (0.12 + 0.14) km along the long axes"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {
