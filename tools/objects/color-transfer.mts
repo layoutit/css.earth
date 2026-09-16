@@ -1,4 +1,4 @@
-import { requireArray, requireFiniteNumber } from '../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '../source-values.mts';
 
 /** IEC 61966-2-1 as published by the ICC. This is a display encoding, not an
  * instrument calibration or a transformation from spectral bands to human vision. */
@@ -69,4 +69,61 @@ export function encodeBandColor(values: Float32Array | Float64Array, missing: Ui
 export function bandColorEvidence(display: BandColorDisplay) {
   return { ...display, interpretation: 'false-color', transferReference: SRGB_REFERENCE,
     processing: 'Source values remain floating point through interpolation, photometry and compositing. One common range maps the selected bands to linear display channels; IEC sRGB encoding and 8-bit quantization happen once, at output. This does not reconstruct natural color.' };
+}
+
+/** Lupton, Blanton, Fekete et al. (2004), PASP 116, 133: one asinh curve on the mean
+ * of the bands, as implemented by Astropy `make_lupton_rgb`. */
+export const LUPTON_ASINH_REFERENCE = 'https://doi.org/10.1086/382245';
+
+export interface AsinhBandDisplay {
+  readonly kind: 'band-asinh';
+  readonly inputQuantity: 'surface-brightness';
+  readonly unit: 'MJy/sr';
+  readonly bands: readonly string[];
+  readonly minimum: number;
+  readonly stretch: number;
+  readonly softening: number;
+  readonly outputEncoding: 'lupton-asinh';
+}
+
+/** Calibrated sky bands in one unit share one black level, one linear stretch and one
+ * softening. The route names one band (monochrome) or three distinct bands in red, green,
+ * blue order. There is no per-band gain, so band ratios decide hue. */
+export function asinhBandDisplay(bands: readonly string[], value: unknown): AsinhBandDisplay {
+  const row = requireRecord(value, 'Asinh display');
+  const keys = Object.keys(row).sort().join();
+  if (keys !== 'minimum,softening,stretch') throw new TypeError('An asinh display declares only minimum, stretch and softening.');
+  const minimum = requireFiniteNumber(row.minimum, 'Asinh minimum'), stretch = requireFiniteNumber(row.stretch, 'Asinh stretch');
+  const softening = requireFiniteNumber(row.softening, 'Asinh softening');
+  if (![1, 3].includes(bands.length) || new Set(bands).size !== bands.length || bands.some(band => !band) || !(stretch > 0) || !(softening > 0))
+    throw new TypeError('An asinh display binds one band or three distinct bands with a positive stretch and softening.');
+  return { kind: 'band-asinh', inputQuantity: 'surface-brightness', unit: 'MJy/sr', bands: [...bands], minimum, stretch, softening, outputEncoding: 'lupton-asinh' };
+}
+
+/** One floating value per band per pixel -> RGB bytes. Missing pixels stay black. */
+export function encodeAsinhBands(values: Float32Array | Float64Array, missing: Uint8Array, display: AsinhBandDisplay): Buffer {
+  const count = display.bands.length;
+  if (!(values instanceof Float32Array || values instanceof Float64Array) || values.length !== missing.length * count)
+    throw new TypeError('Asinh encoding requires one floating source value per band per pixel, not encoded RGB bytes.');
+  const slope = 0.1 / Math.asinh(0.1 * display.softening), soften = display.softening / display.stretch;
+  const result = Buffer.alloc(missing.length * 3), channel = [0, 0, 0];
+  for (let pixel = 0; pixel < missing.length; pixel++) if (!missing[pixel]) {
+    for (let c = 0; c < 3; c++) {
+      const value = values[pixel * count + (count === 1 ? 0 : c)];
+      if (!Number.isFinite(value)) throw new TypeError('A display band value must be finite.');
+      channel[c] = value - display.minimum;
+    }
+    const intensity = (channel[0] + channel[1] + channel[2]) / 3;
+    const ratio = intensity <= 0 ? 0 : Math.asinh(intensity * soften) * slope / intensity;
+    for (let c = 0; c < 3; c++) channel[c] = Math.max(0, channel[c] * ratio);
+    const maximum = Math.max(channel[0], channel[1], channel[2]);
+    // Scale the brightest channel down to 1 so hue survives saturation; truncate like Astropy's uint8 cast.
+    for (let c = 0; c < 3; c++) result[pixel * 3 + c] = Math.trunc((maximum > 1 ? channel[c] / maximum : channel[c]) * 255);
+  }
+  return result;
+}
+
+export function asinhBandEvidence(display: AsinhBandDisplay) {
+  return { ...display, interpretation: display.bands.length === 1 ? 'monochrome' : 'false-color', transferReference: LUPTON_ASINH_REFERENCE,
+    processing: 'Band values stay floating point in MJy/sr through reprojection. One common minimum is subtracted; one asinh curve maps the mean of the bands, and every band is scaled by the same factor, so their ratios decide hue. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color.' };
 }
