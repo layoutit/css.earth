@@ -26,8 +26,8 @@
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Eris a measured uniform colour, which the shape-only convention does not supersede.",
       "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
-        "src/objects/eris/source/photometry/disc-color.json",
-        "docs/shape-only-material.md"
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/docs/shape-only-material.md"
       ],
       "checked": [
         {
@@ -59,7 +59,7 @@
       "finding": "B-V 0.823 +/-0.023, V-R 0.391 +/-0.023, V-I 0.777 +/-0.013 (section 4, weighted means over five nights in 2005; V-R stable night to night) give the uniform Color lens through the disc-integrated-color method.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0610619",
-        "src/objects/eris/source/photometry/disc-color.json"
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json"
       ],
       "checked": [
         {
@@ -75,7 +75,7 @@
       "finding": "p_V 0.96 +0.09/-0.04 from the 2010 occultation radius scales the colour; the same value was already pinned in measurements.json.",
       "evidence": [
         "https://doi.org/10.1038/nature10550",
-        "src/objects/eris/source/measurements.json"
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/measurements.json"
       ],
       "checked": [
         {
@@ -107,8 +107,8 @@
       "finding": "The nominal colour is linear sRGB 0.999, 0.952, 0.827. Measured with the same method: B-V +0.023, V-R +0.023 or an albedo of 1.00 put red above 1, and the method refuses the colour. B-V -0.023 gives 255, 250, 237; V-R -0.023 gives 253, 249, 235; the albedo's lower bound 0.92 gives 250, 245, 230.",
       "revisitWhen": "The colour or albedo is revised, or the shared method gains a stated rule for colours brighter than sRGB white.",
       "evidence": [
-        "src/objects/eris/source/photometry/disc-color.json",
-        "tools/objects/observation/disc-integrated-color.mts"
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/tools/objects/observation/disc-integrated-color.mts"
       ],
       "checked": [
         {
