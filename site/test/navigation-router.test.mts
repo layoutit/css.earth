@@ -74,7 +74,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
     back() { if (index) { const entry = entries[--index]; location = new URL(entry.url); windowTarget.dispatchEvent(Object.assign(new Event('popstate'), { state: entry.state })); } },
     forward() { if (index + 1 < entries.length) { const entry = entries[++index]; location = new URL(entry.url); windowTarget.dispatchEvent(Object.assign(new Event('popstate'), { state: entry.state })); } },
   };
-  const object = (id: string, name = id): ObjectEntry => ({ kind: 'scene', id, name, systemName: name, classification: id === 'sun' ? 'star' : 'planet', color: '#000000', distance: testDistance(0), route: `/${id}/`, description: name, loadScene: async () => factory(id), worldFrame: null });
+  const object = (id: string, name = id): ObjectEntry => ({ kind: 'scene', id, name, systemName: name, classification: id === 'sun' ? 'star' : 'planet', color: '#000000', distance: testDistance(0), route: `/${id}/`, discovery: { featured: false, imagery: false, illustration: false }, description: name, loadScene: async () => factory(id), worldFrame: null });
   const objects = ['mercury', 'venus', 'earth'].map(id => object(id));
   if (withSun) objects.push(object('sun', 'Sun'));
   if (worldFrames) for (const object of objects) Object.assign(object, { worldFrame: worldFrames[object.id] });
@@ -392,8 +392,8 @@ test('asteroid label and orbit settings default off and reach the retained conte
   const labels: boolean[] = [], orbits: boolean[] = [], bodies: boolean[] = [], illustrations: boolean[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
-      setIllustrationModelsEnabled: value => illustrations.push(value),
-      setAsteroidLabelsEnabled: value => labels.push(value),
+      setIllustrationModelsEnabled: (value: boolean) => illustrations.push(value),
+      setAsteroidLabelsEnabled: (value: boolean) => labels.push(value),
       setAsteroidOrbitsEnabled: value => orbits.push(value),
       setAsteroidBodiesEnabled: value => bodies.push(value) };
   } } });

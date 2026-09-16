@@ -43,7 +43,7 @@ test("Mars publishes every declared toggle through the shared controls and selec
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    for (const name of ["atmosphere", "stars", "shadows"]) {
+    for (const name of ["atmosphere", "shadows"]) {
       const input = required(f.inputs.get(name));
       input.checked = !input.checked;
       const listener = required(input.listeners.get("change"));

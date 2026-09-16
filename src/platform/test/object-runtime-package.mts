@@ -111,6 +111,8 @@ class FixtureDocument {
     failAtElement: number | null = null;
     private count = 0;
     querySelector: (selector: string) => FixtureElement | null = () => null;
+    // The runtime resolves form-linked settings inputs through the document; the fixture mounts none.
+    querySelectorAll: (selector: string) => FixtureElement[] = () => [];
     createElement = (tag: string): FixtureElement => { if (++this.count === this.failAtElement)
         throw new Error("injected native element failure"); return new FixtureElement(this, tag); };
     createDocumentFragment = (): FixtureElement => { const fragment = new FixtureElement(this); fragment.nodeType = 11; return fragment; };
@@ -147,28 +149,8 @@ function objectView(definition: ObjectRuntimeDefinition, silhouetteDiameter?: nu
 export function objectRuntimePackageTests(value: unknown): void {
     const definition = runtimeDefinition(value);
     test(`${definition.id}: the actual definition satisfies the common contract`, () => { resolvePreparedPresentation(definition, { selection: initialObjectSelection(definition.controls), view: objectView(definition) }); });
-    function fixture() { const base = retainedPresentationFixture(definition); const images: ControlledImage[] = [], errors: unknown[] = [], services: {
-        controlsDestroyed?: boolean;
-    } = {}; let resources: ReturnType<typeof createPreparedResidency> | null = null; const { document, stage } = base; stage.dataset.objectId = definition.id; const mount = createObjectRuntime(definition, { waitDocument: () => Promise.resolve(), createOrbit(options) {
-        const view = objectView(definition), pose = { schema: "cssearth-camera-pose@1" as const, scene: view.sceneMatrix, skybox: view.sceneMatrix, sunView: view.sceneMatrix };
-        const publication = { ...view, skyboxMatrix: view.sceneMatrix };
-        const state = () => ({ ...publication, pitch: view.controlPitch, pose });
-        options.onPublish?.(publication);
-        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false,
-          initialResponsiveZoom: () => view.zoom, currentResponsiveZoom: () => view.zoom, setZoomOutCentering() {}, preparedFocus: () => null,
-          setPreparedFocus() { throw new Error("Unexpected focus request"); }, async flyToPreparedFocus() { throw new Error("Unexpected focus flight"); },
-          captureWorldCamera() { throw new Error("Unexpected world camera capture"); }, applyWorldCamera() {}, presentWorldCamera() {}, rebaseScene() {},
-          flyToState: async () => ({ completed: true }), invalidate: () => options.onPublish?.(publication), refresh: () => options.onPublish?.(publication),
-          setState: state, state, sharedState: () => ({ controlPitch: view.controlPitch, controlYaw: view.controlYaw, zoom: view.zoom, pose }),
-          skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }),
-          stats(): never { throw new Error("Unexpected orbit stats request"); }, destroy() {} };
-      }, createControls: () => ({ publish() { }, setReady() { }, stats() { return { ready: false, destroyed: false, actions: 0, listenerCount: 0, lensIds: [], settings: [], state: null }; }, destroy() { services.controlsDestroyed = true; } }), createResources(options) { resources = createPreparedResidency({ ...options, createImage: () => { const image = new ControlledImage(); images.push(image); return image; } }); return resources; } }); const runtime = mount(html(stage), { onError: error => errors.push(error), inputSurface: html(stage), runtimePolicy, capabilities: fixtureObjectCapabilities }); return { runtime, stage, images, errors, services, restore() { try { runtime.destroy(); } finally { base.restore(); } }, resources: (): ReturnType<typeof createPreparedResidency> => { assert.ok(resources); return resources; } }; }
-    test(`${definition.id}: cancellation releases actual startup assets without decode settlement`, async t => { const f = fixture(); t.after(f.restore); await flush(); assert.ok(f.images.length > 0); const catalog = new Set(definition.assets.entries.map(entry => entry.url)); assert.ok(f.images.every(image => catalog.has(image.src))); f.runtime.resume(); f.runtime.pause(); f.runtime.destroy(); await f.runtime.ready; f.stage.dataset.lens = "replacement"; assert.ok(f.images.every(image => image.src === "")); assert.equal(f.resources().stats().images.entries.length, 0); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
-        image.reject(new Error("late decode")); await flush(); f.runtime.destroy(); assert.equal(f.stage.dataset.lens, "replacement"); assert.deepEqual(f.errors, []); });
-    test(`${definition.id}: startup rejection releases native siblings and rejects readiness once`, async t => { const f = fixture(); t.after(f.restore); await flush(); const failure = assert.rejects(f.runtime.ready, /decode/i); const first = f.images[0]; assert.ok(first); first.reject(new Error("injected decode failure")); await failure; assert.ok(f.images.every(image => image.src === "")); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
-        image.reject(new Error("late sibling")); await flush(); f.runtime.destroy(); assert.deepEqual(f.errors, []); });
-    test(`${definition.id}: one native release failure does not retain other startup owners`, async t => { const f = fixture(); t.after(f.restore); await flush(); const first = f.images[0]; assert.ok(first); first.removeAttribute = () => { throw new Error("release failed"); }; assert.throws(() => f.runtime.destroy(), /cleanup failed/); await f.runtime.ready; assert.ok(f.images.slice(1).every(image => image.src === "")); assert.equal(f.resources().stats().images.entries.length, 0); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
-        image.reject(new Error("late")); await flush(); f.runtime.destroy(); assert.deepEqual(f.errors, []); });
+    // Startup decoding moved from the mount into the prepared resource lease (src/renderers/css/runtime/prepared-resource-lease.ts);
+    // its cancellation, decode-failure and release-failure behaviour is covered by prepared-resource-lease.test.ts.
 }
 export function retainedPresentationFixture(value: unknown, { failAtElement = null }: {
     failAtElement?: number | null;

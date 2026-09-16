@@ -37,7 +37,7 @@ public/scenes/<id>/             installed/generated serving assets
 public/navigation/body-<id>*.webp   prepared navigation images
 public/navigation/<id>-context.webp  optional resolved context image
 packages/astronomy/data/bodies/<id>.json  physical data and orbit records
-tests/objects/unit/<id>/        body-specific scientific and package checks
+tests/objects/unit/<id>/        hand-written body checks; template bodies live in the shared anchor tables instead
 tests/objects/browser/<id>/     profiles for the shared browser harness
 site/pages/[id].astro           one shared route for all body ids
 ```
@@ -111,7 +111,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Update source and mission catalogues | `pnpm prepare:sources` |
 | Refresh document pins after editing a recipe, content or acquisition plan | `pnpm pin:documents <id>` (`--check` only reports) |
 | Bind new pinned inputs to catalogue records, then pin their evidence after committing the manifest | `pnpm author:sources <id>` then `pnpm author:sources <id> --evidence <commit>` |
-| Run body tests | `node --test tests/objects/unit/<id>/*.test.mts` |
+| Run body tests | `CSSEARTH_TEST_OBJECTS=<id> node --test tests/objects/unit/*.test.mts tests/objects/unit/<id>/*.test.mts` (a body covered only by a shared anchor table has no directory of its own); `pnpm test:objects` runs every body file and reports per file |
 | Run shared package, renderer, platform and shell tests | `pnpm test` |
 | Check source identities, bindings and catalogue generation | `pnpm test:sources` |
 | Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, `pnpm oracles:run`; see `tools/oracles/README.md` |

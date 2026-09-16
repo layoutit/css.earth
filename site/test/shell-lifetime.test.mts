@@ -470,7 +470,8 @@ test('the planet lens controller ignores an earlier retained galaxy bank and bin
     disconnect() {}
   };
   const shell = f.mount();
-  assert.deepEqual(observed.filter(node => node !== f.documentTarget.body && node !== f.documentTarget.documentElement), [button]);
+  const chrome = new Set<unknown>([f.documentTarget.body, f.documentTarget.documentElement]);
+  assert.deepEqual(observed.filter(node => !chrome.has(node)), [button]);
   assert.equal(detail.hidden, false);
   assert.equal(focusedBank.hidden, true);
   shell.destroy();

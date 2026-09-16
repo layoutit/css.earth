@@ -2,15 +2,17 @@ import { record } from './browser-types.mts';
 import { matchesObjectClassification } from './object-categories.mts';
 import { parseArrivalView, type PreparedArrivalView } from './arrival-view.mts';
 
-export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; }
+export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; orientationReference?: number; }
 
 export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> {
-  if (!record(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival'].includes(key)) ||
+  if (!record(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference'].includes(key)) ||
       typeof value.featured !== 'boolean' || typeof value.imagery !== 'boolean' || typeof value.illustration !== 'boolean' ||
       value.illustration && (value.imagery || value.featured)) throw new TypeError('Invalid prepared object discovery.');
   if (value.arrival !== undefined && !value.imagery) throw new TypeError('A photographic arrival requires imagery.');
+  if (value.orientationReference !== undefined && (!Number.isInteger(value.orientationReference) || Number(value.orientationReference) < 1)) throw new TypeError('Invalid object orientation reference.');
   return Object.freeze({ featured: value.featured, imagery: value.imagery, illustration: value.illustration,
-    ...(value.arrival === undefined ? {} : { arrival: parseArrivalView(value.arrival) }) });
+    ...(value.arrival === undefined ? {} : { arrival: parseArrivalView(value.arrival) }),
+    ...(value.orientationReference === undefined ? {} : { orientationReference: Number(value.orientationReference) }) });
 }
 
 export function discoveryDescription(discovery: ObjectDiscovery): string | null {

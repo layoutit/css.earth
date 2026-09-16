@@ -91,6 +91,26 @@ test('view preparation cancels pending native decode and propagates required ima
   failed.lease.destroy();
 });
 
+test('one native release failure does not retain the other prepared images', async () => {
+  // The startup bank decoded three images; releasing one of them throws. The
+  // failure surfaces once from destroy and every other handle is still cleared.
+  const images: { src: string; decoding: 'async'; naturalWidth: number; naturalHeight: number; decode(): Promise<void>; removeAttribute?(name: string): void }[] = [];
+  const assets: PreparedAssets = {
+    entries: ['a', 'b', 'c'].map(key => ({ key, url: `/${key}.webp`, pool: 'material' })),
+    startup: ['a', 'b', 'c'], pools: [{ id: 'material', capacity: 3, concurrency: 3, reuse: true, retention: 'selection', eviction: 'unused' }],
+  };
+  const lease = prepareObjectResources(assets, { createResources: options => createPreparedResidency({ ...options,
+    createImage: () => { const image = { src: '', decoding: 'async' as const, naturalWidth: 8, naturalHeight: 8, decode: async () => {} }; images.push(image); return image; },
+  }) });
+  await lease.ready;
+  expect(images.map(image => image.src).sort()).toEqual(['/a.webp', '/b.webp', '/c.webp']);
+  const failing = images.find(image => image.src === '/b.webp')!;
+  failing.removeAttribute = () => { throw new Error('release failed'); };
+  expect(() => lease.destroy()).toThrow(/cleanup failed/);
+  expect(images.filter(image => image !== failing).every(image => image.src === '')).toBe(true);
+  expect(() => lease.claim(assets, {})).toThrow('unavailable');
+});
+
 function boundedLease(startup: string[], capacity: number) {
   const assets: PreparedAssets = { entries: ['a', 'b', 'c', 'd', 'e', 'f'].map(key => ({ key, url: `/${key}.webp`, pool: 'lighting' })),
     startup, pools: [{ id: 'lighting', capacity, concurrency: capacity, reuse: true, retention: 'selection', eviction: 'capacity' }] };

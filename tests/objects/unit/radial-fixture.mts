@@ -59,7 +59,8 @@ export function requireRadialTestConfig(value: unknown) {
   return {
     config,
     terrain,
-    lens: { ...lens, valueTransform: { offset: requireFiniteNumber(transform.offset, 'Source scientific value transform offset') } },
+    lens: { ...lens, valueTransform: { ...(transform.scale === undefined ? {} : { scale: requireFiniteNumber(transform.scale, 'Source scientific value transform scale') }),
+      offset: requireFiniteNumber(transform.offset, 'Source scientific value transform offset') } },
   };
 }
 
@@ -122,7 +123,8 @@ export function requireMl14Content(value: unknown) {
   const lenses = requireRecord(content.lenses, '1998 ML14 lenses');
   const lensControls = requireArray(lenses.controls, '1998 ML14 lens controls').map((entry, index) => {
     const control = requireRecord(entry, `1998 ML14 lens control ${index}`);
-    return { description: requireString(control.description, `1998 ML14 lens control ${index} description`) };
+    // Reader prose left the source tree for text.json; the source content keeps only lens identities.
+    return { id: requireString(control.id, `1998 ML14 lens control ${index} id`) };
   });
   return { settings: { controls }, panel: { facts }, lenses: { controls: lensControls } };
 }
