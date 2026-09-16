@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ce-tauri",
+  "angularDiameterMas": 10.18,
+  "angularDiameterSource": "Montargès et al. (2018, A&A 614, A12): power-law limb-darkened disc diameter 10.18 +/- 0.07 mas at 1.62 um for the December 2016 dataset (10.09 +/- 0.09 mas in November), first two lobes only. Cruzalèbes et al. (2013) give 9.97 mas in the K band.",
+  "distanceParsecs": 657.5919969093286,
+  "distanceSource": "Gaia DR3 parallax 1.5207 +/- 0.2661 mas (Gaia Collaboration 2020, yCat I/350, via SIMBAD): 658 pc. Montargès et al. (2018) adopt the Hipparcos 1.82 +/- 0.26 mas (549 pc), which gives 587-593 solar radii.",
+  "radiusKm": 500725430,
+  "radiusSource": "The December limb-darkened diameter at the Gaia distance: 10.18 mas at 657.6 pc is 500,725,430 km, 720 solar radii at 695700 km; at the Hipparcos distance the same diameter is 601 solar radii.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "path": "shape/uniform-disc.tab",
+    "stepDegrees": 5,
+    "qualification": "A sphere at the fitted radius. The photosphere of a red supergiant is not a solid surface and its limb is not sharp; the sphere is the reference surface the published images are cast onto, not a measured shape."
+  }
+}

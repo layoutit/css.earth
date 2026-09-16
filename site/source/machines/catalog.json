@@ -5624,6 +5624,80 @@
           }
         ]
       }
+    },
+    {
+      "id": "eso-vlti-pionier-ce-tauri",
+      "name": {
+        "value": "ESO programme 298.D-5005",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLTI/PIONIER",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "description": {
+        "value": "VLTI/PIONIER H-band imaging of the red supergiant CE Tauri at two epochs, November and December 2016.",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlti",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "arxiv-1802-06086",
+              "checkedOn": "2026-09-16"
+            }
+          ]
+        }
+      ],
+      "ended": {
+        "value": "2017",
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-16"
+        },
+        "citations": [
+          {
+            "catalogueId": "arxiv-1802-06086",
+            "checkedOn": "2026-09-16"
+          }
+        ]
+      }
     }
   ]
 }

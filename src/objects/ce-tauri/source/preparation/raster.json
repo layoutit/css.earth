@@ -1,0 +1,235 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/ce-tauri/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "ce-tauri-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssce-tauri-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "pionier-2016-11",
+      "source": "observations/nov_avg.fit",
+      "falseColor": true,
+      "output": "ce-tauri-surface-{id}{suffix}.webp",
+      "thumbnail": "ce-tauri-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 500725430,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 960000000
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "PIONIER image, November 2016",
+            "falseColor": true,
+            "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for November 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colours are a legend for reconstructed relative intensity in the H band, not colour or temperature. The far hemisphere is unobserved."
+          },
+          "frames": [
+            {
+              "id": "pionier-2016-11",
+              "path": "observations/nov_avg.fit",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 1e-09,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 20291168826312556,
+              "northAzimuthDegrees": 0,
+              "pixelAngleMicroradians": 0.0024240684055476798,
+              "center": [
+                15.996,
+                15.006
+              ],
+              "reconstruction": {
+                "startTime": "2016-11-14T04:16:39",
+                "filter": "H band 1.51-1.77 um, six channels merged by the authors",
+                "visibilitiesPath": "observations/oifits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 49 million kilometres at the disc centre from 658 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "photograph-pionier-2016-11"
+        },
+        "offLimb": {
+          "rotationDegrees": 0,
+          "mirror": true
+        }
+      }
+    },
+    {
+      "id": "pionier-2016-12",
+      "source": "observations/dec_avg.fit",
+      "falseColor": true,
+      "output": "ce-tauri-surface-{id}{suffix}.webp",
+      "thumbnail": "ce-tauri-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 500725430,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 960000000
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "PIONIER image, December 2016",
+            "falseColor": true,
+            "coverage": "The published SQUEEZE reconstruction of Montargès et al. (2018, A&A 614, A12) for December 2016, deposited at the CDS as a 32 by 32 pixel image of 0.5 milliarcseconds, cast onto a sphere of the limb-darkened diameter at the Gaia distance. The camera is computed: the star has no measured rotation axis, so the display axis is celestial north in the plane of the sky, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the image's. The image is shown as its authors published it, at a pixel scale finer than the 1.8 milliarcsecond beam of the longest baseline; its features are the authors' reconstruction. The colours are a legend for reconstructed relative intensity in the H band, not colour or temperature. The far hemisphere is unobserved."
+          },
+          "frames": [
+            {
+              "id": "pionier-2016-12",
+              "path": "observations/dec_avg.fit",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 1e-09,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 20291168826312556,
+              "northAzimuthDegrees": 0,
+              "pixelAngleMicroradians": 0.0024240684055476798,
+              "center": [
+                15.976,
+                15.001
+              ],
+              "reconstruction": {
+                "startTime": "2016-12-23T03:43:22",
+                "filter": "H band 1.51-1.77 um, six channels merged by the authors",
+                "visibilitiesPath": "observations/oifits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 49 million kilometres at the disc centre from 658 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "photograph-pionier-2016-12"
+        },
+        "offLimb": {
+          "rotationDegrees": 0,
+          "mirror": true
+        }
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 780,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "ce-tauri-context-{id}{suffix}.webp",
+    "limbOutput": "ce-tauri-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssce-tauri-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 780,
+        "source": "the same published image: its light outside the 10.18 mas disc on the lens palette and stretch with alpha fading to the background; the plate spans the 16 mas field",
+        "composition": "sky-plane image registered to the disc (496 px = 10.18 mas), mirrored and turned to the scene's handedness so its north meets the rendered display axis at the default camera",
+        "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}
