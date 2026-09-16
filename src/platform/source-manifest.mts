@@ -135,8 +135,9 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot }:
   const actual = new Set((await walk(sourceRoot))
     .map((filePath) => relative(sourceRoot, filePath).replaceAll("\\", "/"))
     .filter((sourcePath) => sourcePath !== "manifest.json"));
+  const placeholders = new Set(manifest.generatedIntermediates.filter((entry) => isPlaceholderDigest(entry.expectedSha256)).map((entry) => entry.path));
   const undeclared = [...actual].filter((sourcePath) => !declared.has(sourcePath));
-  const missing = [...declared].filter((sourcePath) => !actual.has(sourcePath));
+  const missing = [...declared].filter((sourcePath) => !actual.has(sourcePath) && !placeholders.has(sourcePath));
   if (undeclared.length > 0 || missing.length > 0) {
     throw new Error(
       `${planetName} source manifest coverage failed. Undeclared: ${
@@ -145,6 +146,9 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot }:
   }
   for (const collection of COLLECTIONS) {
     for (const entry of manifest[collection]) {
+      // A generated intermediate pinned with an all-zero digest is declared but not yet produced: preparation writes it and
+      // reports the pin to record. Nothing else may carry a placeholder.
+      if (collection === "generatedIntermediates" && isPlaceholderDigest(entry.expectedSha256)) continue;
       await validateSourceEntry({ entry, planetName, sourceRoot });
     }
   }
@@ -175,6 +179,8 @@ function assertSourceDigest({ entry, size, actual, planetName }: { entry: Source
   }
   return actual;
 }
+
+export const isPlaceholderDigest = (digest: string) => /^0{64}$/u.test(digest);
 
 async function validateSourceEntry({ entry, planetName, sourceRoot }: SourceVerification) {
   // Original scientific rasters can be hundreds of MB. Verification requires

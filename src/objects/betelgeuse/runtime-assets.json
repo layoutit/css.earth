@@ -1,0 +1,25 @@
+{
+  "schema": "cssbetelgeuse-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "betelgeuse-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "betelgeuse-matisse-shadow@2x.webp",
+      "bytes": 234090,
+      "sha256": "0793d35983a24be917a78492f69012711af193e58b513211449386e9e76f6172"
+    },
+    {
+      "filename": "betelgeuse-matisse-surface@2x.webp",
+      "bytes": 372512,
+      "sha256": "0842deb3a51aa30ed4d9b0d966530de64fce265a2bedcc9d795a4cb689ce45bc"
+    },
+    {
+      "filename": "betelgeuse-matisse-thumbnail.webp",
+      "bytes": 2752,
+      "sha256": "216dcee91550d08d71bec7ea10cc00479d50925a0d263ed3e3ad7f9400f10b51"
+    }
+  ]
+}

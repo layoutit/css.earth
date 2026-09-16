@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "betelgeuse",
+  "angularDiameterMas": 42.45,
+  "angularDiameterSource": "Uniform-disc fit to the 780 averaged squared visibilities of the pinned February 2020 VLT/MATISSE continuum data (3.94-4.00 um), this package; Drevon et al. (2024, MNRAS Letters 527, L88) report 43.8 mas for the same epoch and 42.5 mas for December 2018.",
+  "distanceParsecs": 168,
+  "distanceSource": "Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837): 168 (+27/-15) pc.",
+  "radiusKm": 531514800,
+  "radiusSource": "Joyce et al. (2020): 764 (+116/-62) solar radii at 695700 km. The pinned angular diameter at the adopted distance gives 767 solar radii, 0.4 percent larger.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "path": "shape/uniform-disc.tab",
+    "stepDegrees": 5,
+    "qualification": "A sphere at the published radius. The photosphere of a red supergiant is not a solid surface and its limb is not sharp; the sphere is the reference surface the interferometric image is cast onto, not a measured shape."
+  }
+}

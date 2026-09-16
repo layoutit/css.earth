@@ -14,13 +14,14 @@ import {
 } from './bodies.js'
 import { SATELLITE_ELEMENTS, SATELLITE_IDS } from './satellites.js'
 import { SOLAR_MASS_KG } from './units.js'
+import { STAR_IDS, type StarId } from './stars.js'
 
 const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
-  it('has an entry for the Sun, eight planets, the Moon, every satellite and the five dwarf planets', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length)
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS] as BodyId[]) {
+  it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets and every placed star', () => {
+    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length)
+    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
     }
@@ -34,7 +35,8 @@ describe('the body table', () => {
   it('is a tree rooted at the Sun', () => {
     for (const id of BODY_IDS) {
       const parent = bodyData(id).parent
-      if (id === 'sun') {
+      // The Sun roots the Solar System; a star placed by its own astrometry orbits nothing here.
+      if (id === 'sun' || STAR_IDS.includes(id as StarId)) {
         expect(parent).toBeNull()
         continue
       }
@@ -57,6 +59,11 @@ describe('the body table', () => {
       expect(data.gravitationalParameterKm3PerS2).toBeGreaterThanOrEqual(0)
       // Zero represents an unpublished GM, not a measured massless body.
       if (data.gravitationalParameterKm3PerS2 === 0) continue
+      // A red supergiant is a thousand times less dense than water; only Solar-System bodies take the rock-and-ice bounds.
+      if (STAR_IDS.includes(id as StarId)) {
+        expect(data.meanRadiusKm).toBeGreaterThan(1e8)
+        continue
+      }
       // Mean density between 0.2 and 8.5 g/cm^3 covers porous Helene and
       // Atlas through Mercury and catches a GM or radius entered in the wrong
       // unit, which is the failure this table is most exposed to.

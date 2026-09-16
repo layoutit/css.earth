@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="betelgeuse"]) > :is(.betelgeuse-sun-camera, .betelgeuse-camera, .betelgeuse-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-sun-camera, :where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--betelgeuse-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-body > .betelgeuse-polar { background-image: var(--betelgeuse-poles-image); }
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-material-root { z-index: 3; --betelgeuse-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-material, :where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 220px; height: 220px;
+  margin: -110px 0 0 -110px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-material { background-repeat: no-repeat; transform: rotate(var(--betelgeuse-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="betelgeuse"]) .betelgeuse-billboard { border-radius: 50%; background-color: var(--betelgeuse-billboard-color); opacity: var(--betelgeuse-billboard-opacity); }
+.planet-stage:where([data-object-id="betelgeuse"])[data-lod="billboard"] .betelgeuse-scene, .planet-stage:where([data-object-id="betelgeuse"])[data-lod="marker"] .betelgeuse-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="betelgeuse"])[data-lod="marker"] .betelgeuse-billboard { opacity: 0; }
+

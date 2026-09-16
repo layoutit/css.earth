@@ -1,0 +1,16 @@
+Reconstruction of observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits
+
+Code:     SQUEEZE 3.0, https://github.com/fabienbaron/squeeze, commit 4d34e877606f16be73e7689fcb517d0b72d9d455 (2026-07-18), GPL-3.0.
+Build:    git clone https://github.com/fabienbaron/squeeze && cd squeeze && git checkout 4d34e877606f16be73e7689fcb517d0b72d9d455 && git submodule update --init --recursive && mkdir build && cd build && cmake .. && make
+          (macOS 15, Apple clang 17, cmake 4; cfitsio and OIFITSlib are bundled with the source.)
+Input:    observations/betelgeuse-matisse-2020-02-continuum.oifits, written by tools/objects/source-authoring/betelgeuse/author.mts
+          from the 29 pinned calibrated MATISSE files (see manifest.json) with the recipe stated in that tool.
+Start:    a uniform disc of 42.45 mas on a 128 x 128 grid of 0.78 mas pixels (tools/objects/interferometry/uniform-disc-image.mts).
+Command:  squeeze betelgeuse-matisse-2020-02-continuum.oifits -s 0.78 -w 128 -not3amp -i uniform-disc-128.fits -en 10 -e 3000 -n 3000 -d 500 -chains 1 -threads 1 -quiet -o betelgeuse-matisse-2020-02-continuum-squeeze.fits
+          Maximum-entropy regularisation with multiplier 10 (the paper's prior and hyperparameter), 3000 flux elements,
+          3000 iterations, the posterior mean over the final 500 realisations. SQUEEZE seeds its random generator with a
+          fixed default, so the same inputs, build and thread count reproduce the same image; the output is the file's
+          primary HDU, 128 x 128 x 1 double precision, CDELT1 = -0.78 mas (east left), CDELT2 = +0.78 mas (north up).
+Result:   reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases, printed by the run.
+          Recomputed independently by tests/objects/unit/betelgeuse/reconstruction.test.mts from the pinned image and
+          visibilities, without SQUEEZE.

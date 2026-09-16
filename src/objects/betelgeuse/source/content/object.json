@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "betelgeuse",
+  "displayName": "Betelgeuse",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "764 solar radii"
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "168 parsecs"
+      },
+      {
+        "id": "angular-diameter",
+        "label": "Angular diameter (4 µm)",
+        "value": "42.45 milliarcseconds"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period (P / sin i)",
+        "value": "36 years"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "matisse",
+    "controls": [
+      {
+        "id": "matisse",
+        "label": "MATISSE reconstruction",
+        "thumbnail": "/scenes/betelgeuse/betelgeuse-matisse-thumbnail.webp",
+        "surface": "betelgeuse-matisse-surface@2x.webp",
+        "poles": "betelgeuse-matisse-surface@2x.webp",
+        "source": {
+          "id": "betelgeuse-matisse-2020-02-continuum",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, cast onto a sphere of the published radius. The interferometric beam is 4 milliarcseconds, so structure finer than five pixels belongs to the regulariser. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. Grayscale is reconstructed relative intensity in one infrared band: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Images of Betelgeuse with VLTI/MATISSE across the Great Dimming",
+      "href": "https://doi.org/10.1093/mnrasl/slad138"
+    },
+    {
+      "label": "Visibilities",
+      "role": "terrain",
+      "description": "Calibrated MATISSE OIFITS, February 2020, JMMC OiDB",
+      "href": "https://oidb.jmmc.fr/"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "ALMA pole position angle; the inclination is not measured",
+      "href": "https://arxiv.org/abs/1711.07983"
+    },
+    {
+      "label": "Reconstruction code",
+      "role": "facts",
+      "description": "SQUEEZE, GPL-3.0",
+      "href": "https://github.com/fabienbaron/squeeze"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1093/mnrasl/slad138",
+      "credit": "J. Drevon, F. Millour, P. Cruzalèbes et al.; ESO/VLTI/MATISSE; JMMC OiDB"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Joyce et al. (2020) radius and distance; SIMBAD astrometry; Kervella et al. (2018) rotation"
+    }
+  }
+}
