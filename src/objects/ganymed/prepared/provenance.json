@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82b649ab7057181e9ffb702ceaee791620ea54525447511f89a12ca1a72660f6"
+    "sha256": "668df3442d682545680faccf10f0481ed631b3cd7f6cc997ac57f1131ccfdbb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d832ffc1737d1ab7624d13b51158f628bceaf39ac95e18572d4efb1be746ab8c",
+      "sha256": "fd9a05695fef72dae674b278199b5dbea459eb1079683198e6b66ca191d65988",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ganymed model 1849, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ganymed.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d832ffc1737d1ab7624d13b51158f628bceaf39ac95e18572d4efb1be746ab8c",
-      "bytes": 9756,
+      "sha256": "fd9a05695fef72dae674b278199b5dbea459eb1079683198e6b66ca191d65988",
+      "bytes": 9778,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7459,
-          "sha256": "f631845087745aed535e298ec117cce2e56902c4f36c716556d33c41e54d7929",
+          "bytes": 7481,
+          "sha256": "24e88b51673d37b2d161d37e51afe0dae02a82102ccdacde0f62115bb126af1a",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "ganymed",
-    "materialSha256": "5cc26c7a6baecead949652092ebb9f87a067aac0796717e7b959c44bed8db017",
+    "materialSha256": "9e781571e250b537244bf60301f10e0ac85c36507554a1c67c705bfaa40f2916",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bac95f4e42bf36580a9b4e3dbe34fe296fdb896acb90c08e8040e70fbeef480f"
+    "sha256": "1844aacd4ea9a01db58b79c9053931e9f202a753daad97757bc31402dc70a74c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ffbbf9fb07b6ff57f7f6d8728bcc543e9f9d822c0727d9415386351675fe22a0",
+      "sha256": "74f6d56fb53028acfdbdf9990e6ec9e0c0af6f3b3e89567bb7bc67af71d9aafd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Slivan et al. (2003), B. D. Warner (2008), Ďurech et al. (2011); model 172, version 2011-03-28."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/urda.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ffbbf9fb07b6ff57f7f6d8728bcc543e9f9d822c0727d9415386351675fe22a0",
-      "bytes": 8336,
+      "sha256": "74f6d56fb53028acfdbdf9990e6ec9e0c0af6f3b3e89567bb7bc67af71d9aafd",
+      "bytes": 8355,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5780,
-          "sha256": "c7325da6aaf9dc25fca76cb5337acf1096eca8665f19b972c43de5f644b8d399",
+          "bytes": 5799,
+          "sha256": "931cd0136c7bf98fbeef26d1fac9f05d4190da95e10ae9d1c62821cfdc5259aa",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "urda",
-    "materialSha256": "1078ddc6e9d8961908a84978cfaa53ec9d839fd6c1486ff40843f0bd9a94f462",
+    "materialSha256": "5781a9c0557b973eda1fbceb402feb04a34c835bfd4ee03d869a99ebfda009f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19e2329220224395f1f67932ae2cdaa9e99f2e7a6944328d53469a02362ea4aa"
+    "sha256": "2106d15899c488a8c801bb6364cf275c804a809151ee162853ba37aa13022b07"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c24eeb06b991104ed60eed0e4fa22ae4cba07a75c3696441c8a01799b32a619",
+      "sha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Harmonia model 1855, version 2017-09-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/harmonia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c24eeb06b991104ed60eed0e4fa22ae4cba07a75c3696441c8a01799b32a619",
-      "bytes": 9649,
+      "sha256": "b6ea026f7726b88f5818223bca7c422b9a98b4dc68b67c79a0d3d1ed8930f755",
+      "bytes": 9672,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7339,
-          "sha256": "9811028f70e19095fcf239b0d2293ef2bd3655f3880978cd144379d7af35a6da",
+          "bytes": 7362,
+          "sha256": "a091b99d00f61fd583c7649df1e20d0b08f8ced08a3e32afdbccb59a003c0e3f",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "harmonia",
-    "materialSha256": "30a1acda09f10028d58acc0dc2b2a3050e68d0c4c73346bc6922943f84d369d5",
+    "materialSha256": "3efdcb7e504d7a40e8ccd812fbd1cee7ca2f11d7b5b8e7ee7a2035df1650667d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

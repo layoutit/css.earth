@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa528d43333d40beef885227e4570afbed4b1c9bfff61019852a00ce359364d1"
+    "sha256": "49a14892fae640360be013e732bd5223280b638a899a83a2b03ff3d9406bb86c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "627854aa65e4576e0d60f7963f0a2f7128034d809417f890a8dc9fa4d8fdf866",
+      "sha256": "33e06d89b75c87a60a09999d171432d083ae76eb4b4373dca19d938d2a0e476a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech (2007), M. Delbo and P. Tanga (2009); model 152, version 2009-02-26."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lydia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "627854aa65e4576e0d60f7963f0a2f7128034d809417f890a8dc9fa4d8fdf866",
-      "bytes": 8424,
+      "sha256": "33e06d89b75c87a60a09999d171432d083ae76eb4b4373dca19d938d2a0e476a",
+      "bytes": 8444,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5849,
-          "sha256": "58c0dff65b460d77a984f9f4b4c541caef4694bfa31a2f4f699d99e2c1e21292",
+          "bytes": 5869,
+          "sha256": "a3c31af6e3c3d107d9e85d5db4fd07dba07c9b9042122741df83870d503cb73a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "lydia",
-    "materialSha256": "95369e0abe7537018cb91200549285bc8b258fb6a208a5908144aa79cf575d09",
+    "materialSha256": "8e592e3d6e5df6d6e07cd2cd0312264ca58a362110ca5998f7e49fe5b221f590",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

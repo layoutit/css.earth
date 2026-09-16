@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "098f00b35129c25a8fc3d7d485ab4bfe28982c5f7aba80bffcc434930922373a"
+    "sha256": "18a2dda83c4ccd4be96070173561ca993801211261d6b747f15129b3c500a751"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a370a1d1345cd7eb76248fce05025253e576ea6c12747761909cc081604d1b7b",
+      "sha256": "80fe155a1f9b75b06326c77aa0195d33c125fb825b7ec6dcc3637c8256f389a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Petrina model 1152; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/petrina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a370a1d1345cd7eb76248fce05025253e576ea6c12747761909cc081604d1b7b",
+      "sha256": "80fe155a1f9b75b06326c77aa0195d33c125fb825b7ec6dcc3637c8256f389a0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9567,
+      "bytes": 9589,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6811,
-          "sha256": "4567e1b5aa8966b15f39b43caac336be20e8513351b4917e35d0b392a317a15a",
+          "bytes": 6833,
+          "sha256": "17ff6751c67e04d81bfcf42e38fa037df809e6a5197223c4db95826bb61bcfca",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "petrina",
-    "materialSha256": "8f08b36e55ef2c64d53318ad007acb6dbe2e1a84e028bf3da81cb7855fc7bc62",
+    "materialSha256": "9e2f31cc52cfb11344c069f6d942a7931632793e22b08bf44a10f61b49df804a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

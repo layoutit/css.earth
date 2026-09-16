@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c9a3c6a96edf14f7de8900325dc6fd9dcec044883ea707e62d641c7cea8d6df2"
+    "sha256": "965006955a38ab966d118a2824dfdcf6dadf44d4752eecfcaf0829fa518ab005"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "adc37fb6aa1d8ffe2cf596f8b7ad8df8538cdac6472a0496422d043dc1408a60",
+      "sha256": "cd3c18474d01e4a871970b740ae8dbcc634c100ba17bab2e2b0c6d228ccf6b3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 883, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/philagoria.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "adc37fb6aa1d8ffe2cf596f8b7ad8df8538cdac6472a0496422d043dc1408a60",
-      "bytes": 11435,
+      "sha256": "cd3c18474d01e4a871970b740ae8dbcc634c100ba17bab2e2b0c6d228ccf6b3b",
+      "bytes": 11460,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8796,
-          "sha256": "16d8efa14ee4c430ebefd9b313f3cb3393c16beca8c99c9fee636494bcbe8d41",
+          "bytes": 8821,
+          "sha256": "e74804efd643288c9e02897250e97d0ceadcf414fccf43e50d7b898afbb36f48",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "philagoria",
-    "materialSha256": "f3b336e35dfe57897e59d23b53b0a03314548eecbf18f47b6781b381f864f886",
+    "materialSha256": "0ab0c3aef39e3322284fdde78196d5a25e57f9a254c6d30e468fdd432a800874",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

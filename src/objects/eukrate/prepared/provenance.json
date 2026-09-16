@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "05177e8d01e76cdd5f8c241a7a67e91f1cc0fe530b5a077f3809bcf4d99cb47e"
+    "sha256": "6304d58cff9f5a5d18893511f50fafe2675f102ca081e761126bd001e12c941b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "197dfb1c8cea142b90db0e6e25b17352bf02f9a722433cbca5d096b1dc8612c9",
+      "sha256": "aabd00aeeb1c970a3422dadccd817827b4561a0e0454734f45d835648ca77a22",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1207, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eukrate.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "197dfb1c8cea142b90db0e6e25b17352bf02f9a722433cbca5d096b1dc8612c9",
-      "bytes": 9147,
+      "sha256": "aabd00aeeb1c970a3422dadccd817827b4561a0e0454734f45d835648ca77a22",
+      "bytes": 9169,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6541,
-          "sha256": "f17c4ceef3c5178a32adb8971da85a1438c1a1ce509facac933fe2a92ec02840",
+          "bytes": 6563,
+          "sha256": "d813609044c02c71da031364ffef364e14c0f61ef292165e2daf0108989dcd6f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "eukrate",
-    "materialSha256": "ce3f2eb2532a8a6233835f6e70bc277b1c437a7ef98b923f3c8119b1e7a73489",
+    "materialSha256": "e7cf984e3f5652a8f32329265acdae8e01d88b77fa3f095eb3fbbafa58218b3c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

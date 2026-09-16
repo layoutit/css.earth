@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c5186837082d611a7e0836211548d2b30bba47e4de5548ad20369751b169cc7"
+    "sha256": "c9a965b8767aafec8fda8b7f8fdf317388944a58ee02c28b34c5ab43a71b62c1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "354d79d2fba2dde9ce5e015a36f23a84d3000110ac4e2b2e5d9f6a0847d19909",
+      "sha256": "b1b6ac30404e1440092ecf24febb9e65009564a1cba913fd47087b5a5251c4f6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1088, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ianthe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "354d79d2fba2dde9ce5e015a36f23a84d3000110ac4e2b2e5d9f6a0847d19909",
-      "bytes": 8901,
+      "sha256": "b1b6ac30404e1440092ecf24febb9e65009564a1cba913fd47087b5a5251c4f6",
+      "bytes": 8922,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6310,
-          "sha256": "1ea7b0def0e98236565ebdc76cba2b0e471ea55c74d68f5a3f367388e1ddc986",
+          "bytes": 6331,
+          "sha256": "a40665fa50b28833d448de159b93fccfd2ce27a93177abac1865a3196d71f4b1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "ianthe",
-    "materialSha256": "92555fdbf23cec987e5e376d6274b1f8b9524465de5b46ab5bf6fa0886bf7e92",
+    "materialSha256": "95a99474908193791c76a30d5b4f05422a5cd4a61da0824feff3ba8d50853720",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

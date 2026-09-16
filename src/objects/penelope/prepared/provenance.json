@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5320410fd1991c16d2ffc3d27a593370295830772e4f61cd888638d51636bc2f"
+    "sha256": "cce83b1dd23f47df4eed3e33217251bd279baddd67b89a50f0c07160e091911a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "995e4c500402f6ed0063df936ecd3632d84990f758ef3f1179484e4e7ec32e48",
+      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Penelope model 180, version 2007-02-27; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/penelope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "995e4c500402f6ed0063df936ecd3632d84990f758ef3f1179484e4e7ec32e48",
-      "bytes": 9360,
+      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
+      "bytes": 9383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7050,
-          "sha256": "4315083506985df37d41723ccdc793dc533903548ffc6fca05d3fe6d15f2408c",
+          "bytes": 7073,
+          "sha256": "92409ac885ba46e27c4d243852b6d9d4e3bb2fc2b2503a04b00e572e8327207e",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "penelope",
-    "materialSha256": "76ca846e9f942b6a468549d9628d17bf56bae4f8fa28561aa8e3e1b69ec4bcf0",
+    "materialSha256": "813e30c6dbbb6ddfbbb0837438190bf2abf17f4a07dae62fbdd7af08347b55b8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

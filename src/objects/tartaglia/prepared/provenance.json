@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7fd76ad9097c1a7ee4393f85b175c6ac282f83fe6219bc327a4a695e3915d6cb"
+    "sha256": "cbb46c6fe7868bb7385b10960c2f90dcef805b3e05b830028013a0365f6667c5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "12e5592c7ec8d860e484205213b6b1ea2c7b3c22a5959133cd8db24215827033",
+      "sha256": "441d25b04694b9ce27e1b2e432221b71b9047a30755a91df6393f9ec913077f7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Tartaglia model 15683; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/tartaglia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "12e5592c7ec8d860e484205213b6b1ea2c7b3c22a5959133cd8db24215827033",
+      "sha256": "441d25b04694b9ce27e1b2e432221b71b9047a30755a91df6393f9ec913077f7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11474,
+      "bytes": 11498,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8635,
-          "sha256": "b797eeac22df070a542264415ceb743006a0bcec70542f50b623814ce78e1349",
+          "bytes": 8659,
+          "sha256": "bbe9789f6a68b4467de177e769ce6ee127f5b539138f254b124f861c05099844",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "tartaglia",
-    "materialSha256": "ddf97b44da6af91a0b396b5d202a949e0f1bc8f39bcf29e31247cd86a30649c7",
+    "materialSha256": "bb58515991818de158743290464d374f955991ad037ee527f2df9951a4362861",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

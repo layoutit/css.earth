@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba58509180c4bc7c7096eee327b4f5163e766a0224fce1fcd1037d2cab200a46"
+    "sha256": "690cbaea00b3e6f8fa2ad1665bf7334057e5b666ec6722535013ac808632e67c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -86,7 +86,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2bcb70838f57cc15fea7fc0a01aaa590e521dcd84cad776fd50708c5657a1226",
+      "sha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -172,7 +172,7 @@
             "credit": "K. Ohnaka, K.-H. Hofmann, D. Schertl et al. (2013); M. Montargès et al. (2017); ESO/VLTI/AMBER and PIONIER"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/antares.json",
             "credit": "Published angular diameter at the Hipparcos distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
@@ -219,8 +219,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2bcb70838f57cc15fea7fc0a01aaa590e521dcd84cad776fd50708c5657a1226",
-      "bytes": 2926,
+      "sha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
+      "bytes": 2948,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -335,8 +335,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5564,
-          "sha256": "d9fc2710caa8f6fa2f0c7a53607b20bf66dd1f78e74947be79c76c539f9803be",
+          "bytes": 5586,
+          "sha256": "7c28def2984c207cda742db5088ebd7acf38edcf79e8396d7124a39a3742c2ad",
           "verification": "bytes-verified"
         }
       ],
@@ -374,7 +374,7 @@
   },
   "lastPreparation": {
     "objectId": "antares",
-    "materialSha256": "b4f44e565d1979ac0c8dca50cf278f352b1971c55b8c255c35a5a22627ffc67b",
+    "materialSha256": "c5fb5bf5f1ba73ed19d7ff3c498ca1de032555650778d4a0deb0456399a4cc42",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

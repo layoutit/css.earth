@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bafffb2dfbd4f5549c9f6bb0954846c91480a319854dcf9920aa2f2a97b7d5b1"
+    "sha256": "1812b4bcb3bfe462792269765ab8fe45e28e4a8e98d7619d7b2d9494c5db79e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9c9c1607d5123c8b6ba356d6c238455bb3e3a42fff1664893a7a0253861ab187",
+      "sha256": "2800572e7fef7c31cc97cf6c20815214fa744aeaa360248b2b310afed93644fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Selinur model 5480; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/selinur.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "9c9c1607d5123c8b6ba356d6c238455bb3e3a42fff1664893a7a0253861ab187",
+      "sha256": "2800572e7fef7c31cc97cf6c20815214fa744aeaa360248b2b310afed93644fd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9130,
+      "bytes": 9152,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6315,
-          "sha256": "fc838f68cde72045f47c684e610437c8a0a192998886b44210c072f99b88cb8c",
+          "bytes": 6337,
+          "sha256": "96ededd649cc79446ade580783e7e442c3e9cd516be604cab0ebea9d4e821b70",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "selinur",
-    "materialSha256": "7660257f685ec6a24856725c6c16a3de7bb278d849c4ee3c4e2366e682227c86",
+    "materialSha256": "ce8292f4d77c7dce58f60930a25426de45c3c6f3b3a4cb80d0251ebf6519415f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

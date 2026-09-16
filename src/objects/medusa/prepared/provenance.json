@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f77fca2efe56a7c0b584c76ee74e0b1b5bfe73020f84d14b6b59b86138b7a502"
+    "sha256": "613bf7ca1d12dc476b4208f50fb5128b4d73abfe4b010f0d6a897773cf2a3c56"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "25a889c1229b5252caf274b0a085d13e933f38cbb74de25d4f7786ead433c809",
+      "sha256": "1b70d0b53327fec2493da12c84e6c45d6c63bc162b43b4af87f6c0311dc67f1a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 570, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/medusa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "25a889c1229b5252caf274b0a085d13e933f38cbb74de25d4f7786ead433c809",
-      "bytes": 10320,
+      "sha256": "1b70d0b53327fec2493da12c84e6c45d6c63bc162b43b4af87f6c0311dc67f1a",
+      "bytes": 10341,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7730,
-          "sha256": "98d9914f596748c61f73619d7ed019c5e5697a41a4140ee3a51c4c202bfa91c5",
+          "bytes": 7751,
+          "sha256": "30c8ff9d3d165f254422da3656567f5d61d17ece5c71e7feed9ff8eae0af4430",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "medusa",
-    "materialSha256": "18e80ceb4012ec914cc8d04c0ad3776cbd81218fedb4e7bd96adba79c0c7e378",
+    "materialSha256": "048501d9ff4c76d4f98052fe23beb49fdbad4225e13a647d8d7f11aeff671891",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

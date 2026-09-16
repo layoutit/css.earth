@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5b0d7678a47bf018b8e1dff474af29d9271e067ff84bcbd520d6831c5e8f4d11"
+    "sha256": "355b95b093beb18301b79451edab533ea60203a333358a57db8e80c7200ab6e2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db4e32b66767ff3456069d992056a0e1198abea72789333fb90bb466c16207f9",
+      "sha256": "a11cf97fc909ca839aa43fe2ae68c4e8453fcdb8f719d770e03262e25504860b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hektor model 232, version 2016-06-27; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hektor.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db4e32b66767ff3456069d992056a0e1198abea72789333fb90bb466c16207f9",
-      "bytes": 7383,
+      "sha256": "a11cf97fc909ca839aa43fe2ae68c4e8453fcdb8f719d770e03262e25504860b",
+      "bytes": 7404,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5097,
-          "sha256": "d6e1526c2257c44795393cf32b9c41ce2355d6ed7e5dc04f17f180e15f94cf3b",
+          "bytes": 5118,
+          "sha256": "3c320ca4c4e2e94fb7bd50cacb21f357a23dd95a59bf0a7218611517a3396f49",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "hektor",
-    "materialSha256": "9a6742443d326735819380ca11b6b7be52f9da0b3396c3a752ca6abc80e8c88a",
+    "materialSha256": "ce51465e568b7378ca9b3923f13d3b52431a55211cd4339a327c3fb0299a83c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86391f0a525700799d5eb2641b1182000908c5d48884287d91af54112dd868a0"
+    "sha256": "7cfbc71f16e2f57747e2ca10a01bb6e38e4bb058cb2e7d4f50899ca6d19a7a57"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "86db756514b61c0181959a45a08622ea7d2041ff8acf7b07a130214a171d5838",
+      "sha256": "e32173d79e06dae9d87d0b163df54e87f0dc0cb1b7674fcacf81771fe7be6e0f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3233, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/aglaja.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "86db756514b61c0181959a45a08622ea7d2041ff8acf7b07a130214a171d5838",
-      "bytes": 9835,
+      "sha256": "e32173d79e06dae9d87d0b163df54e87f0dc0cb1b7674fcacf81771fe7be6e0f",
+      "bytes": 9856,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7241,
-          "sha256": "0dcefa1bdea0d28064a116be410c89358b8bec58033150954678bf15d4260c9d",
+          "bytes": 7262,
+          "sha256": "88d4b8932906ec6fa251a714040ad3380947ae28b89ffde705e98fd29bfad909",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "aglaja",
-    "materialSha256": "1fbc0dc9bb59a2eac2252d987881ca87eb348d5e5fa71c264c38a1cd73ebb2fd",
+    "materialSha256": "136c550b476185a65911c9797bbe3ea418b96f4fed22963378bdcddd207a0011",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

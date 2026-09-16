@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a374246739e11b45ca9c48fcf1e76c76f1843351893e9707090430162fe032e"
+    "sha256": "55fc28106e4641370e34827976fd42386d0969cf206ffbd2a791b276eace7010"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75104f5c36c64b74fe702f63072ad2aaf44ed5491f789a73d9ff976f3d39145f",
+      "sha256": "a31105608357e433281db193dd6a6f0b8218c3213494be80e6cd47b52276359d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 588, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/stephania.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "75104f5c36c64b74fe702f63072ad2aaf44ed5491f789a73d9ff976f3d39145f",
-      "bytes": 11730,
+      "sha256": "a31105608357e433281db193dd6a6f0b8218c3213494be80e6cd47b52276359d",
+      "bytes": 11754,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9103,
-          "sha256": "a2e34fac662b5c2a8821d8b8c8007db21e15033ef6697f67a6ec2a8c8115567a",
+          "bytes": 9127,
+          "sha256": "d90d9adf07c386cb1cc8d301acefaaf08dd64fde7e2ec8beb0d1567116b1cc03",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "stephania",
-    "materialSha256": "a0d7eec7c30514e07509fd370bee6cc470c7de66cd7ad120a4b09997664d768b",
+    "materialSha256": "f76e01b12405a740d2beeda63cb9cec4ae9eb93721c917ae7c010c68f9bacbe7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3d7d48e3d2ebd9e4ae1c7e3121449f00e3e2d7068adfa974dfb203f0fadba43"
+    "sha256": "2dd1bc43769cb6d7ed29b067b9b20eed15235df00f8e2cf6e0b67f89e6feada8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c4efe35442679fe89d3f6f5d082c3c7c040439fabc685d22a5a004259312c776",
+      "sha256": "15e1834a73ecc872b9e836de67edb7976e6a6dd690f700d2f1513c7edc7a1f5c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Reinmuthia model 678; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/reinmuthia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "c4efe35442679fe89d3f6f5d082c3c7c040439fabc685d22a5a004259312c776",
+      "sha256": "15e1834a73ecc872b9e836de67edb7976e6a6dd690f700d2f1513c7edc7a1f5c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11060,
+      "bytes": 11085,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8238,
-          "sha256": "b6d495dcaaaa45a88760b83ce240c765edf14cde2551dfdc6660e093353e3e44",
+          "bytes": 8263,
+          "sha256": "6c7596ab1a61333385a05719db463208dcb95d88726d42e2b6d131914b071f9b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "reinmuthia",
-    "materialSha256": "0c51d2fbadc81e2420ddb5ddaf61ecc25a77cdf31ab2edd4482eb93d1d075eed",
+    "materialSha256": "32112b486c0d5052af551fad7be827195f98e66f99c9507ed842fb42366f2195",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

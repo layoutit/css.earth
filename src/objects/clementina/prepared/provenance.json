@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d86a43d11093d7acf662f66e1bc247cca0481fd0fd3f1be546bf685cc67b74e"
+    "sha256": "219b4e3879fb8ce08a1ba71a7cb3e1796155393d91a737f94b5bd5519cef2164"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0d1066c11112da04ffc2692ddc7f50940c516c34f99dfcc5593c3c7a0c53a79b",
+      "sha256": "85d0c5541ffa5a747e77cfc5f8058470dc91d331d93f42f162de41ca4579af3e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2018); model 1912, version 2018-07-18."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/clementina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0d1066c11112da04ffc2692ddc7f50940c516c34f99dfcc5593c3c7a0c53a79b",
-      "bytes": 11354,
+      "sha256": "85d0c5541ffa5a747e77cfc5f8058470dc91d331d93f42f162de41ca4579af3e",
+      "bytes": 11379,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8710,
-          "sha256": "b202479c44d361d1100b7bfe94e9b46d9dddfe2cbface6bd95e84465ab7a97ee",
+          "bytes": 8735,
+          "sha256": "c8a0ea54c510409473f2420ac2d3c39ba5eb828750da030cfec8418c3e7c8e55",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "clementina",
-    "materialSha256": "6b02d42a2bdf8a323cd5090e517d44cfca2e63a0546d05d525b54d7cca3eef60",
+    "materialSha256": "416b230afc11b6f4537f4a4ca65451e210f06c3390addf6057d7e55e07575942",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

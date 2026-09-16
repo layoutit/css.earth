@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7340e4fd9f661fbf44c35d300405b92da0f51041a678939d6041e675655af197"
+    "sha256": "ead779256d2768d6e744499d7c27236500c0f5bc494c43b51443752de12afbb2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "63175eeea1ebe5a882f384f9094095dbad0a92ef2ca1986d27f5a300f8f246d8",
+      "sha256": "5b093f843bc6cca64fb874849049ef13a02c3e5cdaa9d1192a23c3977415ae74",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech et al. (2009), Hanuš (2011); model 161, version 2011-04-19."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/aethra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "63175eeea1ebe5a882f384f9094095dbad0a92ef2ca1986d27f5a300f8f246d8",
-      "bytes": 9157,
+      "sha256": "5b093f843bc6cca64fb874849049ef13a02c3e5cdaa9d1192a23c3977415ae74",
+      "bytes": 9178,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6339,
-          "sha256": "4f56486b2528a6bcbffc79f596b68d40fc5f7005fedb5d755096533cee71ea92",
+          "bytes": 6360,
+          "sha256": "925a5e4c7b1d086a045d58f2e599df29bd1ad9a216f2904b3bd9bfbe08ae21d5",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "aethra",
-    "materialSha256": "160a452a70138f9dc33b3d365bd02af5a83fd509aa9395c1f23dd52280d45fd5",
+    "materialSha256": "0df78e414c942b8bd51c5a08e7b99bbf57ea6a9501a077e7a65963e6281c84f0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

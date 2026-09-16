@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f2167090affa2ba52246a7cefaabd424a901a82ea97d412af6634b0cda48864"
+    "sha256": "246e0a4e41ead23e14b951f1be93953e8b6b8b2594c8e0a27803948ce4048ae9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9b8a4e517edfcdabe4f20603769ba49f140a3d5a653adfab118d7b1cb8da5b8f",
+      "sha256": "a886a42e621b03895d77dc885935c81d1559b3e3c6e907a757864c3cb8648228",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 4273, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/agenor.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9b8a4e517edfcdabe4f20603769ba49f140a3d5a653adfab118d7b1cb8da5b8f",
-      "bytes": 9460,
+      "sha256": "a886a42e621b03895d77dc885935c81d1559b3e3c6e907a757864c3cb8648228",
+      "bytes": 9481,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6611,
-          "sha256": "20e460167e4682f8faf75dbce9e1d6f022c17a0c6ce1fd824f3815f6e15120cc",
+          "bytes": 6632,
+          "sha256": "b46e30796bef42053b23d2fbee2fae797c2f5da98c1936ea0a13bfd385870067",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "agenor",
-    "materialSha256": "e191eeeb231ea4d783bae9f24d6c84a4c68b4487da6e4d95102110e5e5145b7c",
+    "materialSha256": "03393c496d358ce31400b03990813025beb5686c2a6221698b60d52920967267",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

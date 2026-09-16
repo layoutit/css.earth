@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "urania",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2979e923cef97d4e21748734b18474a59487cadc2da318726818f6d6830757dc"
+    "sha256": "532cfaf1874e25cca2cda813d3e4b27530766e3df118e79531465c0195f47edf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "77c1ccda73b845320130a8e1ef84aed8f173a3efd557cd4fae364378a957d2fa",
+      "sha256": "b726780b893d4e1872f2c628e40ec981e20db13d70d2f5d4ee93a0ef273f5c58",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/urania.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "ec4173950efc55a112dcfff8b5b5f40ac684f5514b1f2c987cd0605192f881a9",
       "bytes": 165979,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "77c1ccda73b845320130a8e1ef84aed8f173a3efd557cd4fae364378a957d2fa",
-      "bytes": 8360,
+      "sha256": "b726780b893d4e1872f2c628e40ec981e20db13d70d2f5d4ee93a0ef273f5c58",
+      "bytes": 8381,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/urania/urania-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "fc1e4a28606e25ebaa1592103bf1cd8cc396a7d7478b71a71c9eeff3033c9ed5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urania/urania-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urania/urania-elevation-surface@2x.webp",
           "bytes": 323862,
           "sha256": "75094755a7d7cd3372a37e970c7867095dac4208c1a303b8f169f4103f8c4467",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/urania/urania-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urania/urania-shape-surface@2x.webp",
           "bytes": 66150,
           "sha256": "a47e9f9ead32593fe39a2c28d2815d609a0d629c947531942c92b9896434e2b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6077,
-          "sha256": "1829adc60ea891d155d25dd4ac00f0bd96fcacebad4acc3a7572391e82747219",
+          "bytes": 6098,
+          "sha256": "a33b442cff590fdcef50a3aa79cbf87cb45363db1a05f88be1940ed607072efc",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "urania",
-    "materialSha256": "b39ba5e8cde30339072916eac73bea0094841cfd57e48226682614fc954f03d5",
+    "materialSha256": "439c9011e7443cab379abed94c5a48eda5933e3e5aaf3bf10563e182dae12988",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "a6fe216f854a6fa88d5df111cce3180b65a8e7db11a8d248be586381509d790c"
     }
   }
 }

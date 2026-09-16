@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d45fe494da737676decc6dbaf8825c034079cae38263aed6347cdc7b133fbaba"
+    "sha256": "292570b4cf38f2d2d5bf1e1b49e72e7514c706a1f72e1043ae13a6aa78ed425d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5308a1a16550b177ac0b1dcb8c0218e13a59886e6044ac53f15c25df29856df2",
+      "sha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Thule model 16313, version 2025-07-17; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/thule.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5308a1a16550b177ac0b1dcb8c0218e13a59886e6044ac53f15c25df29856df2",
-      "bytes": 6732,
+      "sha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
+      "bytes": 6752,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4460,
-          "sha256": "a170dbfaeac22d988150271386f096037c75eab59c842cd3c0f7c5bf5fe8dac4",
+          "bytes": 4480,
+          "sha256": "9d7efdc5b3c42fe4a758a080e196852e0150fed5a25d814b0e4070195f43c6d4",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "thule",
-    "materialSha256": "ab1e71e99f30e7e7735771884496340b18037f1535d824c5092e8e68d45b69cb",
+    "materialSha256": "39295ef853999d6add7e92afd26850a045b2bd70651266bd7674ff2b1480d719",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

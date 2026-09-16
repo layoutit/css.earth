@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "528e8e4b4a95092be47d8e1191f1b6188f165fb18586ed70c93968c98b99a976"
+    "sha256": "661fd3d3b95cfe7f7eac69ed628bcbf505c1a2392ff1f3a4cf36ce9a019b41ca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4eb282eb495ce3e1e1860e4ca04956b0c61ce079b55c3981c86b78a8313a77d0",
+      "sha256": "06fd37154869178c9beb63acc1b7e932fd18d585ef38b4ffb4f15a04953cdbbd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4618, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/gallia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4eb282eb495ce3e1e1860e4ca04956b0c61ce079b55c3981c86b78a8313a77d0",
-      "bytes": 9236,
+      "sha256": "06fd37154869178c9beb63acc1b7e932fd18d585ef38b4ffb4f15a04953cdbbd",
+      "bytes": 9257,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6643,
-          "sha256": "d2bca5f6ca8f017817774c3a07773252a730b0a5238e4e1e9d400a191b89122b",
+          "bytes": 6664,
+          "sha256": "dd08cb9e21503056a702422799707f4bb2b23fd203f35000d330ec0a335b11a1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "gallia",
-    "materialSha256": "0c2419c466c6a00b09b5a0825763c9d12da173c47fa4ed9b7a456cb0db68ecde",
+    "materialSha256": "6cd9448cf175aa5f1fe395b57e336b7a3815f11f8cabb6b2948619c0b573294c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

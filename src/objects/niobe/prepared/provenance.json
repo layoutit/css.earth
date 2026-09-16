@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b894683c44c344a8afbb60e94f7ebeefbefe2ddc95c8a5518e80f34b367a9a3b"
+    "sha256": "748e78db4ba523a61bdb08d00ab87981f107b2e118cb56b5251bde165f4cb5ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "945931f90fcbcc43262a6478ada8a8c97d156a8fb3b5513dc5cb0ff8a515fcfa",
+      "sha256": "92ee7c3c6c72d66d6c72f024c8cea88e76f791a489ad3cd7e62c6ca93fdf18e0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1014, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/niobe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "945931f90fcbcc43262a6478ada8a8c97d156a8fb3b5513dc5cb0ff8a515fcfa",
-      "bytes": 8750,
+      "sha256": "92ee7c3c6c72d66d6c72f024c8cea88e76f791a489ad3cd7e62c6ca93fdf18e0",
+      "bytes": 8770,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6171,
-          "sha256": "53dba9dbfa5a44a01d73e03ff9165e055fabaab4c537ad550a8460187d985eff",
+          "bytes": 6191,
+          "sha256": "55d6baf25f2ddf80ecb252792b71b99bd2deaad8a87e75d525928a2cbe6fdd41",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "niobe",
-    "materialSha256": "15903752790f8d685f790a0d3ffc9b6011f89283a3e4f5f2caae5d276ddddb3f",
+    "materialSha256": "974cf08be5bb3aa8450a4885ce470f260acf096bb8708ebdcea701129480c57d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

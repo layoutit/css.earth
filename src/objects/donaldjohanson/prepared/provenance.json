@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "af9ac25fba68684ab1ccf51a919612fcb88d618365464b03fa86d5aa71ba1409"
+    "sha256": "dd04534ee0a4e560b0cfdf63ea845d0adf250690cfc20891a12b429e24f8dfb3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -197,7 +197,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6ebb89eb718e0e0da490690b52b93710ff8a2a0d3e095225f46904060d0bd4ad",
+      "sha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -373,7 +373,7 @@
             "credit": "DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/donaldjohanson.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -594,8 +594,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6ebb89eb718e0e0da490690b52b93710ff8a2a0d3e095225f46904060d0bd4ad",
-      "bytes": 15185,
+      "sha256": "5a020dda13a80ae08d4bafe613aba2c3f9db895f659428802c8393dedd8b93ce",
+      "bytes": 15214,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -868,8 +868,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11249,
-          "sha256": "7e3fca3007054a9fdfc1c615c959f30c13ecdcb474a99b720d5f341cce08e037",
+          "bytes": 11161,
+          "sha256": "dad4fa03d285d3cb6d5d9970265638c280ed7576a2e4b9764d3f0b18f61860b4",
           "verification": "bytes-verified"
         }
       ],
@@ -993,7 +993,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "437c17ab2169757ff47023ffb79f63b256c928c788cb9ed9e4428260142610cc",
+    "materialSha256": "221b81c345641f0cd445e85375702614a966aad6c11f88eda7ea730176d868fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

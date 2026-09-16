@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2c1ae73e984873e01a2b88452dcdc034622fa70ad113d17d0503841a97223b2d"
+    "sha256": "a36f39e68c5dddb11db7bf8bafec37cef95daed662a4866ceca716d59642fa2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cfb4adf218a865286600e354c196b61d41825ded363b649cbf76d27dd6bedecf",
+      "sha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -297,7 +297,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Alphonsina model 301, version 2011-02-18; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/alphonsina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -361,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cfb4adf218a865286600e354c196b61d41825ded363b649cbf76d27dd6bedecf",
-      "bytes": 10312,
+      "sha256": "95438ca4fb5dd62a33df3c14fd9cdf672dab1d70c15eadece6076e6979116002",
+      "bytes": 10337,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7888,
-          "sha256": "f5604bf442efc19c65e9edf66de833cd867d7b30af96db666dbc448e71bb882f",
+          "bytes": 7913,
+          "sha256": "b4b05791b2ea47dc55b7e22d83bb39de7f31a65c5a5c6fcaa3e3e321b297f629",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "b54add5dd1bd541c77c1da55c6ae42b7e881cbd47741ebec6c3f79b752d542ef",
+    "materialSha256": "5a26a7efd23d31301282e2f9fccb9b5b4a838cb78a1bfa2fe8eaa9a1de6e1e62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

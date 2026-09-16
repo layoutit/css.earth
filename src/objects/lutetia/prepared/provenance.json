@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "060af7706eb51e5e569d502fa2c0a04a23f19ef608de6e55fc4416dbafa728b6"
+    "sha256": "c27c03aab0e5959fe173b28acada9f8e6749efcca018c848d5dd37e476298eb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -206,7 +206,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8648040a934ce2d6247ecda66242bc09806867f51d8ba694508de225b52b4fb",
+      "sha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -394,7 +394,7 @@
             "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lutetia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -720,8 +720,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f8648040a934ce2d6247ecda66242bc09806867f51d8ba694508de225b52b4fb",
-      "bytes": 9742,
+      "sha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
+      "bytes": 9764,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -993,8 +993,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5787,
-          "sha256": "55ff3d198590a7bc27200e9100e2735cfacf71dfea881f8bc9c5eca77f187310",
+          "bytes": 5691,
+          "sha256": "6010dfaff3237299714cf24cd22af7382fe550b8368cf406ef5cfdb2db61df51",
           "verification": "bytes-verified"
         }
       ],
@@ -1118,7 +1118,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "0f0cf9e66f347e04588248912210147b2276fc7def3bda74fd8ca2b52a4c74a8",
+    "materialSha256": "ad8c0cecf96a81af3d966bfd545652ee825b73ade47a1979741616301dbe0e6e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

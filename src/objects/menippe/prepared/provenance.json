@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "28d062a9e4013285df07a50437d66e209ccc6a64b4b37e441c3c1bb1752fc929"
+    "sha256": "729662cbcccddad0338c719ab03083322c83e5dc6e67fe489c7e117e86bdeddf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4cb4563ec94b1ade738e8c97ebd0efc8f9a57b5fef9a17b50de27c1df0b0a7c4",
+      "sha256": "f463ff2aae14a82fd9fc6f33c1d862269492fd742d8384b551b2ef0dccd449c4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011); model 327, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/menippe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4cb4563ec94b1ade738e8c97ebd0efc8f9a57b5fef9a17b50de27c1df0b0a7c4",
-      "bytes": 10026,
+      "sha256": "f463ff2aae14a82fd9fc6f33c1d862269492fd742d8384b551b2ef0dccd449c4",
+      "bytes": 10048,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7426,
-          "sha256": "6af9803261a2dd3783bd379fb72eb1bbdafc87c09940b13a1412c4e9573410bc",
+          "bytes": 7448,
+          "sha256": "1934a8921641168e45710d8363d5867ac1f10e6ea36bcff7b15ca13831bf74ad",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "menippe",
-    "materialSha256": "ae7a37d650130b852b884141b44a8c443464963828019a7f974c76bda09a6e9f",
+    "materialSha256": "820dd447bf6a20b2f39f40e2bc94dcbb07b4617114517924b6ae58e47c21271a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8b41ee36b47ed33cb506d7c7e3ee523813a7589d5a0a1676c30141831fdca667"
+    "sha256": "a46c531188bc87f11ced34bc73b47c9b5808be5410f0e94f10b02e211ea782a4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "224ab8111f7cd68d9b7e0666b8e469e294ec0e65803892cee9ac9c15567dbe38",
+      "sha256": "dddad70437e976055ae76730dd15aae9c827566967149ef817216e645ac2b308",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 578, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/huberta.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "224ab8111f7cd68d9b7e0666b8e469e294ec0e65803892cee9ac9c15567dbe38",
-      "bytes": 9619,
+      "sha256": "dddad70437e976055ae76730dd15aae9c827566967149ef817216e645ac2b308",
+      "bytes": 9641,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7018,
-          "sha256": "16238ad0fec579211e6c3db2f6aa62bca98e84663757a2e373d6dd5199c554a1",
+          "bytes": 7040,
+          "sha256": "03d08f965b793960028d4405c678d6bb062bb3ef03552156d13f61e5a6e79d15",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "huberta",
-    "materialSha256": "b64d554945d0f18e362fd796dcf0f4b29eb75ffca2128511d5005d3432d51024",
+    "materialSha256": "5942e22b1b4448133a9dd2d5b3e76372c3d6a74326dac66a92486135ed57445a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

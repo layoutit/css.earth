@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "de144aafb68d0db82b2b79f8adcbc96693104ea97d1e103a511629abe20f7c35"
+    "sha256": "92bcabf86b30345c51060140a37cb365df80227e153228597dc02f00524ed4a3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "07ee2e5d98bbdf72917585d91a832fe02c7b6d6de43e8a2555670540e12cb812",
+      "sha256": "578765331ce52c384a826f62af41c6c361fc51b2394955df1bd698dffec1d8cf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Vernazza et al. (2021); model 5914, version 2021-11-12."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lamberta.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "07ee2e5d98bbdf72917585d91a832fe02c7b6d6de43e8a2555670540e12cb812",
-      "bytes": 10814,
+      "sha256": "578765331ce52c384a826f62af41c6c361fc51b2394955df1bd698dffec1d8cf",
+      "bytes": 10837,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8201,
-          "sha256": "4600d75652e6a52b05e9a4e4dc44f75fc6b3a7b9f4c1250ad48c9185be422e2b",
+          "bytes": 8224,
+          "sha256": "540fa7685349e9bbac1ca749549b6b36eac62306f447b263db12f440703a5bf9",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "lamberta",
-    "materialSha256": "e9f6119e4ce4710e57b928364cae4aeca747ff2df731a47e5b09f91244e6b423",
+    "materialSha256": "35dfd3ce9fe8f1be39f6cffb69195279b086c8ee63e92d23447ba3fb7cb84869",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

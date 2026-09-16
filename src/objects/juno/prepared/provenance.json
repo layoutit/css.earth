@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "juno",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8eccca1000cee7c5e2c6bde2803e052414c46b2b6b4970572d4ff44f32fd1bdd"
+    "sha256": "07bc6e9bc2cdca28bb629e52abc20a0a592d28ac804d9a6788cea10febe97522"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "42e4d564ed330fb700dfecb6b0c2da660d88e974836c2aa74baf8549d17194eb",
+      "sha256": "65d59226be052e357233f67327a0456c4849033bb9fe02c9d3cd5cba37f1ee62",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/juno.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "447ce4f05c48460e381bfcb1d9e132cd190c8d40d3bda9bbf5eee9a3231b3764",
       "bytes": 1620859,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "42e4d564ed330fb700dfecb6b0c2da660d88e974836c2aa74baf8549d17194eb",
-      "bytes": 6602,
+      "sha256": "65d59226be052e357233f67327a0456c4849033bb9fe02c9d3cd5cba37f1ee62",
+      "bytes": 6621,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/juno/juno-elevation-thumbnail.webp",
           "bytes": 6228,
           "sha256": "d2a93b695f30cdce0f24f3e9c175b75f91e0dfa93a815bc34420963c4dc094c3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juno/juno-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juno/juno-elevation-surface@2x.webp",
           "bytes": 354640,
           "sha256": "951b298a754452aae7e311880996670457dd9f34cfbe4e523dce9f5bfc6499bc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/juno/juno-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juno/juno-shape-surface@2x.webp",
           "bytes": 62916,
           "sha256": "202ef0ace54d85d4b7f153c95ff5ba790f8cd8d2d29d8d2d53e2ddae3ba015c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4347,
-          "sha256": "893d118e163c558f6b3b48f818ee272a3da17126e2b0ef4faa2eeb9bf4a61e92",
+          "bytes": 4366,
+          "sha256": "8ca51909df7a14f61a71cb9cf8093f1ce4e7bc13b713c6272fc1a87492cd268f",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "89dd3e9046717f102f35f33f9eba988f7732b161423f8432f7efceede4adf1e0",
+    "materialSha256": "7586120389783392f44c90373ea16433234f27dbbdc8b8d00d794d27b0fae76f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "1c8d3ba5b3fc1b949831720a1a72a59dbfcb6d91e5b0ce2c57cefd499ed6e67c"
     }
   }
 }

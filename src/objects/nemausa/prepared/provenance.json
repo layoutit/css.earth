@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nemausa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7ac104db25f75a138ef4df67cadaf513a216a9c0e7fd8d544c3ecd9f6b2e977"
+    "sha256": "53c27651bd138aeba55d441254556b112920927b8e5c54b4c01c36359c0ea800"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21a399c438a0729e9e8f69c8c67575626e9386e0c3816b7cd9eb16be0abd56fb",
+      "sha256": "55bc10422224acf3b8c96a989ba2ef17b4c82464cefbbbcacfad3d0d2bd16581",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nemausa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "262318530b2b0b5d332413b2dc45fe3e46b63462cba3c90dd3a317d6d99f1941",
       "bytes": 271099,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "21a399c438a0729e9e8f69c8c67575626e9386e0c3816b7cd9eb16be0abd56fb",
-      "bytes": 10040,
+      "sha256": "55bc10422224acf3b8c96a989ba2ef17b4c82464cefbbbcacfad3d0d2bd16581",
+      "bytes": 10062,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/nemausa/nemausa-elevation-thumbnail.webp",
           "bytes": 5136,
           "sha256": "efa64bde093f824c38c73bc0aa7a4a3603f9aa611211718e7f6da71c2a2e8954",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemausa/nemausa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemausa/nemausa-elevation-surface@2x.webp",
           "bytes": 300200,
           "sha256": "31f3e4bf08ccef678abcd679a9fa6df6f01fecdaab580d6219bb078e51a73489",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/nemausa/nemausa-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemausa/nemausa-shape-surface@2x.webp",
           "bytes": 58644,
           "sha256": "23e51b7e8d7baeaedf109326248b79f4f18b28cbf61970516c435d7e6f519fa9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7744,
-          "sha256": "c928afd9f21b37e4850f9f7041e283128a24f2bcbc356117f900c2dafb957948",
+          "bytes": 7766,
+          "sha256": "b8add9905d141acaa3fa80a87bfc7480e263479d5685e17a17efe5f7905127e6",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "nemausa",
-    "materialSha256": "bcae92ec252e2326c14286048e9dc62f3db22443ba46795416e2c96ca84dd0d2",
+    "materialSha256": "eecaf049f1216681e68d514786f1427381dfb4f2a824ddf61b8d11725ba236de",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "b6a3997d9dcb2e77c547b454ae4f51503ebe67f43fdce00fb348c1782d4480bb"
     }
   }
 }

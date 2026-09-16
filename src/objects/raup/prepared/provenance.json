@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8934ced79d6b329774b4b2036eb6d42c9aa9194221bac018af5bd5c3acf6cfe"
+    "sha256": "ae93ebfa33cd5d609c2d95b4b85584141fd47cad5c62eb0e2d308015e63b0db0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ba88feb10d36deba6c3c3b5a136172abd926cb2653c4f0863c1039d17e59735c",
+      "sha256": "fe48ce0d5ee3434e01ca3b2f57248b1ce64162ede54bda9eb5f6749f9da21dc3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Raup model 5835; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/raup.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "ba88feb10d36deba6c3c3b5a136172abd926cb2653c4f0863c1039d17e59735c",
+      "sha256": "fe48ce0d5ee3434e01ca3b2f57248b1ce64162ede54bda9eb5f6749f9da21dc3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8879,
+      "bytes": 8898,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6074,
-          "sha256": "85311dd4c8ebfd501b0c81dca838f6402d6b339d521db4eaac317aee2ed07b77",
+          "bytes": 6093,
+          "sha256": "af67d03d24c9100c7f02a697d8ae8150e20e8d47584486d4a02b1fec09f67bab",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "raup",
-    "materialSha256": "f45643eda4f767dc62c232caeb405623e0233e4c08e321cd9e3c74b9d29580e0",
+    "materialSha256": "dfca919b7b5258a69f2cb5cd7cee52c841b85b9a2502a03ba1d89b321284b5a9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0973b2155ad6cc3c6411ba9b821061d218458b58004214fc15526e181e1482f2"
+    "sha256": "5caa8b70ebe37f8b6ac80e9711ee54c0e6296f3301227336de93468f71b766e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebe60a30c308f978dc12216fd4190f142f66e5395fca0669a3d3e887bd1079e9",
+      "sha256": "908a6afa3e66c157e91fd505265e8f8dc2b45fa503835e2d8f6410ebc6151d0f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Badenia model 3298; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/badenia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "ebe60a30c308f978dc12216fd4190f142f66e5395fca0669a3d3e887bd1079e9",
+      "sha256": "908a6afa3e66c157e91fd505265e8f8dc2b45fa503835e2d8f6410ebc6151d0f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11016,
+      "bytes": 11038,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8211,
-          "sha256": "affb0e1776062d46535a4cd02244ef6cbe9f855ce2536429b17ef7f4b31c279f",
+          "bytes": 8233,
+          "sha256": "a75fd6c1fb81120c54eeaa7d24a733e8964eff719752734bdf33ff29ed934b10",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "badenia",
-    "materialSha256": "86f708059758ddde30a50d67544b6209bc79f3405a966872fd7baad137c31eab",
+    "materialSha256": "4729d13834f6d553deeb24ea59c5fea48a8559e9f5c24ba5eb86d775ab6a72df",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

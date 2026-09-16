@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { pinObjectDocuments } from './pin-object-documents.mts';
+import { pinManifestsReferencing, pinObjectDocuments } from './pin-object-documents.mts';
 
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 
@@ -72,5 +72,44 @@ test('a marker recipe that still copies its manifest record is reduced to its so
     assert.deepEqual(JSON.parse(lean).source, { path: 'presentation/context.png', raster: { kind: 'isis3-float-monochrome' } }, "decoding hints stay; the record is the manifest's");
     assert.equal(JSON.parse(await readFile(join(root, 'source/manifest.json'), 'utf8')).documents[0].expectedSha256, sha(lean));
     assert.deepEqual(await pinObjectDocuments(root), []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('generated intermediates and tool-written inputs are repinned; a download is adopted only once, on request', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'pin-generated-'));
+  try {
+    await mkdir(join(root, 'source/observations'), { recursive: true }); await mkdir(join(root, 'source/preparation'), { recursive: true });
+    const plan = '{"operations":[{"kind":"download","path":"observations/new.fits"},{"kind":"download","path":"observations/old.fits"}]}\n';
+    await writeFile(join(root, 'source/preparation/acquisition.json'), plan);
+    for (const name of ['marker.png', 'sphere.tab', 'new.fits', 'old.fits']) await writeFile(join(root, 'source/observations', name), `${name} bytes\n`);
+    const placeholder = { expectedBytes: 1, expectedSha256: '0'.repeat(64) };
+    await writeFile(join(root, 'source/manifest.json'), JSON.stringify({
+      inputs: [
+        { path: 'observations/sphere.tab', ...placeholder, recipe: { generator: 'tools/author.mts' }, sourceBinding: { kind: 'catalogued' } },
+        { path: 'observations/new.fits', ...placeholder, sourceBinding: { kind: 'catalogued' } },
+        { path: 'observations/old.fits', expectedBytes: 3, expectedSha256: 'a'.repeat(64), sourceBinding: { kind: 'catalogued' } }],
+      generatedIntermediates: [{ path: 'observations/marker.png', ...placeholder }],
+      documents: [{ path: 'preparation/acquisition.json', expectedBytes: plan.length, expectedSha256: sha(plan) }] }, null, 2) + '\n');
+    assert.deepEqual((await pinObjectDocuments(root)).map(change => change.path).sort(), ['observations/marker.png', 'observations/sphere.tab']);
+    assert.deepEqual((await pinObjectDocuments(root, { adoptDownloads: true })).map(change => change.path), ['observations/new.fits'], 'only the placeholder download is adopted');
+    const inputs = JSON.parse(await readFile(join(root, 'source/manifest.json'), 'utf8')).inputs;
+    assert.equal(inputs[1].expectedSha256, sha('new.fits bytes\n'));
+    assert.equal(inputs[2].expectedSha256, 'a'.repeat(64), 'a real upstream pin is never overwritten');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a manifest that pins a repository output by its repository path follows that output', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'pin-referencing-'));
+  try {
+    await mkdir(join(root, 'src/objects/sun/prepared'), { recursive: true }); await mkdir(join(root, 'src/objects/context/source'), { recursive: true });
+    await mkdir(join(root, 'src/objects/other/source'), { recursive: true });
+    await writeFile(join(root, 'src/objects/sun/prepared/world-context.json'), '{"bodies":["new-star"]}\n');
+    const entry = { id: 'navigation-frame', path: 'src/objects/sun/prepared/world-context.json', expectedBytes: 3, expectedSha256: 'b'.repeat(64) };
+    await writeFile(join(root, 'src/objects/context/source/manifest.json'), JSON.stringify({ inputs: [], generatedIntermediates: [entry], documents: [] }, null, 2) + '\n');
+    await writeFile(join(root, 'src/objects/other/source/manifest.json'), JSON.stringify({ inputs: [], generatedIntermediates: [], documents: [] }, null, 2) + '\n');
+    const changes = await pinManifestsReferencing(root, 'src/objects/sun/prepared/world-context.json');
+    assert.deepEqual(changes.map(change => [change.objectId, change.path]), [['context', 'src/objects/sun/prepared/world-context.json']]);
+    const pinned = JSON.parse(await readFile(join(root, 'src/objects/context/source/manifest.json'), 'utf8')).generatedIntermediates[0];
+    assert.equal(pinned.expectedSha256, sha('{"bodies":["new-star"]}\n'));
   } finally { await rm(root, { recursive: true, force: true }); }
 });

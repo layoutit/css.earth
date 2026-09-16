@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fbebcc1d3020d36f565f1d2890895c356966056a6feb1b5fe6b800c2c8bd9e9d"
+    "sha256": "1dc564095bf3d07c84ca876eadc5dfc5c1f2b9abe367b76951749f11c96e576b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c7420ad63ffce10f1e92f626a69fe041cce65c54752e5a1410cc4c0a34f645ab",
+      "sha256": "b7485762fc0450b9517d60270a28a2e5149672a2ad82daf4c9d12ab41ca5060e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Moskva model 515; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/moskva.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "c7420ad63ffce10f1e92f626a69fe041cce65c54752e5a1410cc4c0a34f645ab",
+      "sha256": "b7485762fc0450b9517d60270a28a2e5149672a2ad82daf4c9d12ab41ca5060e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9708,
+      "bytes": 9729,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6923,
-          "sha256": "1bb218b2861af608ab80e38e737a9008cf66b097d0271c596e1aff945d72e1d8",
+          "bytes": 6944,
+          "sha256": "90951ed8895576beec418dc71ad209d5ac7dfbe3bd90113fd5c5bac8393c2517",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "moskva",
-    "materialSha256": "e285a1906c608c2f25a17ffdb09d3eedb9dc9c6426047a1a918b8fd93f44872f",
+    "materialSha256": "00d1931b3c77a47e687c951a151fe35448a85c2eeb0e973bef06910e0ab82366",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

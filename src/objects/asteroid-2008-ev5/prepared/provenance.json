@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2008-ev5",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f938dd1177e8371f82c9499746a2ba7c35b57db65ff147e4fe8874b2c1547e3"
+    "sha256": "b266c3ef75668ec249e5094e05640f48e0d6a6135fd5013ac71c9aa6e2bc666f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb548e435440e62bcff36502d04ecdad235e37f9778d3b49f8d37ba5a40e09db",
+      "sha256": "b5ded703f35fb0b71658020ae207a794113e268691e7f6625d7fef96b426a58f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -307,7 +307,7 @@
             "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-2008-ev5.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -367,7 +367,7 @@
       "sha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
       "bytes": 120483,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +392,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bb548e435440e62bcff36502d04ecdad235e37f9778d3b49f8d37ba5a40e09db",
-      "bytes": 10770,
+      "sha256": "b5ded703f35fb0b71658020ae207a794113e268691e7f6625d7fef96b426a58f",
+      "bytes": 10802,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +427,19 @@
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-thumbnail.webp",
           "bytes": 7908,
           "sha256": "c844a149db64d42481a91418c3d8ffdc0f3b845f90ad0cb3b6b48a0b3ea3e52c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-surface@2x.webp",
           "bytes": 510070,
           "sha256": "17fa683a8dcaef876e485cb54cd38f67ce6d2cd39032d828f7130dc7200cb045",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +477,13 @@
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-surface@2x.webp",
           "bytes": 62962,
           "sha256": "1e736a6e4a06910cb6d9556db79eaeb4111ba5c98753fbb55d4faafc0d43bec1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +514,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7299,
-          "sha256": "f7a6437408a39e53970e4e1e6e013c6fdd53645ddaa7764b313eb90094b49158",
+          "bytes": 7331,
+          "sha256": "8b9b4a23d395c6d27ff13d50cac3629b0994c6dedf8f169c133935e58a4b7e12",
           "verification": "bytes-verified"
         }
       ],
@@ -578,11 +578,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2008-ev5",
-    "materialSha256": "005405ca71a0c8aaa16fad5bc4483b7e89c5375c1fcdbe93442bf620528a24d3",
+    "materialSha256": "824c3c50f6f6ba55e3c3eeebb6b6727515d93a0fba334dfc9a8049c0c29e2d56",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "1c262b957e9204e32db61d7c684274734f88f96aa58af533d71b173aad7a04e3"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f5562a70b85f69886e7abffe7efef3e5244508ebfe0dc18d6b7d115cc41ac55f"
+    "sha256": "4a4d746c8cd4678d79275afea3780e5e60fdbb16547cfd7dee4d53b691f45532"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1aa99d77b28741b2c0910943dcf3918a7870f4589874477ffbbb82b9c228872e",
+      "sha256": "589d10c241696836ff2bc542e0c8e974776f8801e60ead39b9d8030e7856a7ee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 968, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/gerda.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1aa99d77b28741b2c0910943dcf3918a7870f4589874477ffbbb82b9c228872e",
-      "bytes": 9493,
+      "sha256": "589d10c241696836ff2bc542e0c8e974776f8801e60ead39b9d8030e7856a7ee",
+      "bytes": 9513,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6912,
-          "sha256": "90e298a7dce428c4b95150e66bb5ac7bb9bd86d5878bb6a6003aeefa8991dd37",
+          "bytes": 6932,
+          "sha256": "e4d8be5a7b21e7b174ebbf4495b0ce93889ee0363ed2f9aa27bad70be65d988b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "gerda",
-    "materialSha256": "e06a22c566560a858bc5ed76b41c545f378f0f261e743bf2dd365a2d52b17db3",
+    "materialSha256": "6a613e2a82f702160421e03a3ec5d45a2b0a3ae52977c9ea16ca5e2b94b9e66f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

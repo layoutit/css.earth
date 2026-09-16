@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0fb4e8169302bd6f102e4f33bb9dfb4f8c5797efdb8a9b20cb5744437d9bb19c"
+    "sha256": "d10c4df2cabc934bf5c53922d8f60eba894f000c2dcd56cfa8ac1c892f6cb1a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "85573aba0c7b2f31305b360ce30c7a5dfce177fb3e98a0b75295257e837c87d6",
+      "sha256": "ab0b4727966e3d811f0c04822782a49c00303430e8fc6e0ea80b9b8b55ab73fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Nysa model 16324, version 2026-07-28; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/nysa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "85573aba0c7b2f31305b360ce30c7a5dfce177fb3e98a0b75295257e837c87d6",
-      "bytes": 7769,
+      "sha256": "ab0b4727966e3d811f0c04822782a49c00303430e8fc6e0ea80b9b8b55ab73fb",
+      "bytes": 7788,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5508,
-          "sha256": "3e12290f9a612a18ea3802bf675c2644d35b0c5b9e30ddbb835e804bc8a9c557",
+          "bytes": 5527,
+          "sha256": "bdf5c1cc3e439515cde9b4e5efb3e33b817872641566bce3f3655e445de5e107",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "nysa",
-    "materialSha256": "9185357981f8418ba7f531bb53bed18389de3fb3b353e05d2e748f31fdfb945d",
+    "materialSha256": "beefa66e339617528a0407574165f92b6f8be0f0959f90b0793fb954b6600251",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3ac139e869330dc8b244e3811723681740968e09062867eda7510d8143cfa508"
+    "sha256": "65fb59aeb13abbc66fc25ec4dd771a9df05f1294ed9ccfcb7f0d60c78cdf56a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -474,7 +474,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c7a6b3ea0f96891073f6a9c7e7cf027a5a3e2746dddfc1fd0615140522a5047e",
+      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -639,7 +639,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sylvia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1602,8 +1602,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c7a6b3ea0f96891073f6a9c7e7cf027a5a3e2746dddfc1fd0615140522a5047e",
-      "bytes": 8950,
+      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
+      "bytes": 8971,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1784,8 +1784,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5559,
-          "sha256": "e79b4a2589e0ace1e95c4d844a1dca5f36be7be7eae43538a859565cb3d8205d",
+          "bytes": 5580,
+          "sha256": "cfd0ee75a49006be0f94494d000ff942a87d097a192c53d185ce7abfcc986fcb",
           "verification": "bytes-verified"
         }
       ],
@@ -1873,7 +1873,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "36128eb772c4030d47a4726ffeadd0e2f0d4907f23ab24961412a777e3eb10ad",
+    "materialSha256": "406f275f7f5cb2f620003621b1d67bf73bd2289a11f286f8c33a9bb3ca2ee122",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

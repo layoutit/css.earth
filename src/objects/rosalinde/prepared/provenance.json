@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31274d9168b658ee9b69ff100dd5546278b77734c137a763ca8a54d89e26aa76"
+    "sha256": "d19c9ffc166ba07f1de0c9c646a3922ed3a707b160058eceed5f51e057a1ff18"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "81f4061e04977e3c88924bfe3935f694912844b5da899826fe979a28e323ef51",
+      "sha256": "a63281b38d73a94cc936d0ce37d8d52832595f48f0773dac93c9508ef87d6b5d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Rosalinde model 561; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/rosalinde.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "81f4061e04977e3c88924bfe3935f694912844b5da899826fe979a28e323ef51",
+      "sha256": "a63281b38d73a94cc936d0ce37d8d52832595f48f0773dac93c9508ef87d6b5d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11120,
+      "bytes": 11144,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8302,
-          "sha256": "15788220148a833cccd696efefbc5d0b29a625b195fe730179b8f119d26d67ba",
+          "bytes": 8326,
+          "sha256": "51feed3acec6d162ffaf6a23102a5b3c8a60f2b772a723fe9589ab765022d293",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalinde",
-    "materialSha256": "ec4026d179a2a36a2a1f68884eefce1762a10c2de164be8d1d70665e5d7c330b",
+    "materialSha256": "cac2c00dd64454cfe26f9c5125bb20aef3d529ebcc126fa82632b50972a9b989",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

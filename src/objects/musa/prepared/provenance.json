@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5adb3f5e687bc11fbbca307db6047e4673b34ccf1f980c2b162cb9cc8297ea0f"
+    "sha256": "876857203addec243cf0b4211e1b8fdb5f839d8ddd386a93963ca4dcfc2f8c9a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "90dda51a44e25299cc090b2e42ffd20707958ab781ecffb6c1a31d4e9e8023ac",
+      "sha256": "cfee8c49f3393fcc5346c6686e67009145443c03b02b86f34ccd7d4cc1d32783",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Musa model 504; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/musa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "90dda51a44e25299cc090b2e42ffd20707958ab781ecffb6c1a31d4e9e8023ac",
+      "sha256": "cfee8c49f3393fcc5346c6686e67009145443c03b02b86f34ccd7d4cc1d32783",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9073,
+      "bytes": 9092,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6315,
-          "sha256": "3f66bb82f563e54dd77e5da6a00d63df0e6809a5b9c3516693918c47eeecab14",
+          "bytes": 6334,
+          "sha256": "398a76ebf11b282fd803d4644acc7d6e93a453689862bc1f9b50b11fdab29ff5",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "musa",
-    "materialSha256": "61c839c91b38982259810c905210752235251417f0c8afcef9a5c8f49debcf47",
+    "materialSha256": "51bcca3263fc7c470f5cdc3b7c6307eac1099944fc7403e6b045605a9ac88e90",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

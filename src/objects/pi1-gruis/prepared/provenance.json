@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77f91e17c649d17555f0c6d03ee40b7c0974b58978a47bc9f23adbcf1d9cf8e8"
+    "sha256": "93c6c737eff0ea97bd00fb19c9c1e838f271663e1f36762f02d1825af1733ca9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "72194f69ea656ba4e5385bd56856553136b8b5bdb0cd92c7828bff8098c3f758",
+      "sha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -306,7 +306,7 @@
             "credit": "C. Paladini, F. Baron, A. Jorissen et al.; ESO/VLTI/PIONIER; JMMC OiDB; reconstruction by this repository with SQUEEZE"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pi1-gruis.json",
             "credit": "Fitted angular diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
@@ -454,8 +454,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "72194f69ea656ba4e5385bd56856553136b8b5bdb0cd92c7828bff8098c3f758",
-      "bytes": 4230,
+      "sha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
+      "bytes": 4254,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -617,8 +617,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4816,
-          "sha256": "92f266aa48c2826f0a8b97585724a9ef502eb0fced7ea64f5c3211335dad651e",
+          "bytes": 4840,
+          "sha256": "d973fbca3e83914b1d53e93aab19ff26bde8840c51f515e7ad47715496a67763",
           "verification": "bytes-verified"
         }
       ],
@@ -656,7 +656,7 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "85338da6f8c4bcbb754d667fd801dc48a38234329d18ab1a1b0e7c1d5a2922e6",
+    "materialSha256": "bba43569b2556a4d78b8335c5e16aebe7da7f830f5a36543777e3e12ade3655e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

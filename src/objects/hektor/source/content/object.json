@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Hektor model 232, version 2016-06-27; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/hektor.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

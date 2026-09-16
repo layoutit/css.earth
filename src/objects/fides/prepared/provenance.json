@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bce2935a605df1c1f965a7b73f8aed6a858e3520adcc9acc16ca163b3ad53cbc"
+    "sha256": "106fe65f9482464aa0111202d5f746808a00a2543991bb22fbb6d2865ee6d0a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bac0e3552e82d9f4943e3365062c9bbadf181ce8682f61b8fea11a4d8f1b101a",
+      "sha256": "72ae9d4ccfa86bed8a9cb043c277392080c9409d1fecd2dcd8f707fe37466e2f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Fides model 311, version 2011-04-21; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/fides.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bac0e3552e82d9f4943e3365062c9bbadf181ce8682f61b8fea11a4d8f1b101a",
-      "bytes": 7616,
+      "sha256": "72ae9d4ccfa86bed8a9cb043c277392080c9409d1fecd2dcd8f707fe37466e2f",
+      "bytes": 7636,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5346,
-          "sha256": "702bd681f48fc30f2252b5612a860c330b0e4e645489f1234ab558d8d3811cac",
+          "bytes": 5366,
+          "sha256": "d4cc8349d2866e04ddf8364b323879f90de26621049aba98087c6114ff5504ab",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "fides",
-    "materialSha256": "c55fc5b3981eba3d00ad034503908e946f88658d97dd7fcc7a8529610510a10a",
+    "materialSha256": "7f1aa87902352de862fd4c57c520551387fa2e646760d3c4efb531cb05c9d6e0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8dbe5b91639fc544f142b964f435706c5ea8caad02d91e562d7b2564818f441"
+    "sha256": "1efb116d76753c627f5ba4d5ee41dce83f8e88cbe8de576da9cbb731ed68fdf2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1d98a32994ef933f51a2bb2c2173f211cb9efa5f9dddf833e53c94c955bd0035",
+      "sha256": "2f2cb74a7dbfb604a23e6f57216f1268cf628331a22b73d4836bd40871f52c26",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; China model 1119; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/china.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "1d98a32994ef933f51a2bb2c2173f211cb9efa5f9dddf833e53c94c955bd0035",
+      "sha256": "2f2cb74a7dbfb604a23e6f57216f1268cf628331a22b73d4836bd40871f52c26",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9031,
+      "bytes": 9051,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6261,
-          "sha256": "8e1e14700babf0711dcd929e067825106d70f79005cefe7119c619b5e2985e25",
+          "bytes": 6281,
+          "sha256": "e8bc4bd338034a63f2e73ea29968ee8c0f8f93300556390a1de29dcdf9a3210b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "china",
-    "materialSha256": "11b1fb9821713d4af61c26fad11059ff4165165ec0e52a37511e1c04fbd95650",
+    "materialSha256": "040ad1269252f0e6f37462e50b09cbe8d8918b5cac4cdeb0d7727c139ead5f5d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

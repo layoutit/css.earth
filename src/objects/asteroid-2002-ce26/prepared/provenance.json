@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2002-ce26",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfa91838a5f8eab9bc5dfdc7f3e77994a59cf2714d73496fe45f372a2b174e5d"
+    "sha256": "1b2cecc5ab44115995693115f174d125ede9b9c78710acd0b88c23634f4d6dcf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8fad87148d30825f0361acc6033d4ed4567103ad310d7e94c8eb928f749ea394",
+      "sha256": "d8de5cbf5b443e4446b9ee43959bbae318372e5d75780580fcf82548732f162f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -299,7 +299,7 @@
             "credit": "Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-2002-ce26.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,7 +353,7 @@
       "sha256": "4b625ea6906aba4d5828836c44d733ca4ad8c2a501739dc74f305ef84bb42c12",
       "bytes": 67313,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,10 +378,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8fad87148d30825f0361acc6033d4ed4567103ad310d7e94c8eb928f749ea394",
-      "bytes": 14497,
+      "sha256": "d8de5cbf5b443e4446b9ee43959bbae318372e5d75780580fcf82548732f162f",
+      "bytes": 14530,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-thumbnail.webp",
           "bytes": 6264,
           "sha256": "565ad07b9b2b9ab31f8350d7f717368f3f8f091c0e6c3b09998f1105aec251ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-surface@2x.webp",
           "bytes": 351038,
           "sha256": "ace0a02ce77c7b4275dfae29be347d454f90ea54bbe8c4d8d6e4e32e22efba5e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -463,13 +463,13 @@
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
           "bytes": 59966,
           "sha256": "559b03c460bf001f147cda4032a77171d89ff804f42cf74e5a675b55492a4df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -500,8 +500,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11294,
-          "sha256": "e8fd618db08c07b2f683bc1307d4b5650ebdb6be11497f54bd563b05df60108d",
+          "bytes": 11327,
+          "sha256": "4957fe0e73b37413a2e2176ee310d86a2ef61f62565a7477cc4c1b78e30b1c9f",
           "verification": "bytes-verified"
         }
       ],
@@ -564,11 +564,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-ce26",
-    "materialSha256": "2e5769435c5173192d8b030619a37e90e9f3aab6dd88ec973ee7e155cf4296d9",
+    "materialSha256": "cf8b7d60583fca1c311029dd3d1452e7c774d40c6c284f693e7a6e0297b3421f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c7e623f61952a22f6e64c931fe13b5b89c358820001a6047c257d4daea81bddb"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f5eea3862f35a7aa52fc70936b6f91b2ce5627d9869b177fcfcdddf1d3386bc3"
+    "sha256": "1ea33d405a6c759219013f223693d5620cf6b28e23bbe6b9341bb2cfa5fa23f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "77c4d26b8528059b4db52fb2cdeaf4ee7f4f371226cdf56b514545ba66aa548b",
+      "sha256": "2d20533da027fa621c8699d13358ad7f09bf793d759156f03b3c84c7af048cce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Parysatis model 5820; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/parysatis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "77c4d26b8528059b4db52fb2cdeaf4ee7f4f371226cdf56b514545ba66aa548b",
+      "sha256": "2d20533da027fa621c8699d13358ad7f09bf793d759156f03b3c84c7af048cce",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11494,
+      "bytes": 11518,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8655,
-          "sha256": "ea77fe58178dcd40fae8a8673460d0aec4d7f1e5d529d23a38cf09fbaedf7db8",
+          "bytes": 8679,
+          "sha256": "02b7217700dfc2a5b544fe6dff9cc61f1707baf86100d46d27bab52bc8e39240",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "parysatis",
-    "materialSha256": "afe55589c8d78a78dd5e4c369773b17267850497e99852a03b79b802dc49193c",
+    "materialSha256": "0af4d64b230b2271540077c7538c124dbd02c098f2cf9e1558100298edb27323",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

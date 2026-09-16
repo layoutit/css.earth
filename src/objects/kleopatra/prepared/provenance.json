@@ -4,11 +4,11 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "296448a4e2ed6cc13d72492c3aa28837a23c9a487b532a2fb046f1edb0661972"
+    "sha256": "5690b7d26976a05062494e55ac062c7c4d51bd1a943bfb0f04f665822274213c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
     "bindingsSha256": "10344eb0434520a7a8d1121f7c546181790dc65dd6c6bba25e88a5ea9a36039a"
   },
   "recipes": [
@@ -95,7 +95,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4",
+      "sha256": "6ce1adb91d75650294ea1a5b16074e6d1fa1df1a8454090be7cadb13f14b4087",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
             "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kleopatra.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -280,8 +280,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2b391da1b837c3bc4bd4044a47e070a85f5d81690b375682bb67c1508742ebd4",
-      "bytes": 8328,
+      "sha256": "6ce1adb91d75650294ea1a5b16074e6d1fa1df1a8454090be7cadb13f14b4087",
+      "bytes": 8352,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -352,8 +352,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6720,
-          "sha256": "1dc9d39d735c02cd41d4e3a1e49dd6563056321e7336975acbbee4858a50d5b0",
+          "bytes": 6744,
+          "sha256": "2f830ef7d48c636277bf2d9dca813d0f41437b800c0652a6162a23bfdc4330f2",
           "verification": "bytes-verified"
         }
       ],
@@ -391,10 +391,10 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "d008e760fc30a53ccf71b87b852acc157040efee035c90f2ac33d235d9f41308",
+    "materialSha256": "77084b7001f7b2c52814febf8e6e62dd296e32dbe3d98e3b1c2674f008e5ae7a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "54c141475161a8429b73f19bf73940518295740e2967f92b636a9ff929339c6d",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
       "bindingsSha256": "10344eb0434520a7a8d1121f7c546181790dc65dd6c6bba25e88a5ea9a36039a"
     }
   }

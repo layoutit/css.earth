@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a9c7c926384065234f69d4b94a5adfb8d034d49d19a7a52a38252dbc291a789"
+    "sha256": "31429e9536d95114c31d3e34f5170f9d0bbc3f3c4829bcef5a3af29d8ff9b6f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebee728412c0cec230fed62989081103720bd2c6b063421c425622eeaf283cab",
+      "sha256": "767c15023c44b6d48422715a097b2c66768d66f6789576f7167cd2d20d0b3425",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; United Nations model 1154; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/united-nations.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "ebee728412c0cec230fed62989081103720bd2c6b063421c425622eeaf283cab",
+      "sha256": "767c15023c44b6d48422715a097b2c66768d66f6789576f7167cd2d20d0b3425",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12996,
+      "bytes": 13025,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10121,
-          "sha256": "4bd987104d63779a79a4ce6a83ffa061aed58005474ff565e533ca3b4023d25f",
+          "bytes": 10150,
+          "sha256": "869039b97a3271d0531e03edf41c354ee0ac9cb65033893f933f24c265ad3837",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "united-nations",
-    "materialSha256": "10d942c45c902cc23100a287f308cdcd16e4675e7370db642c5be86e81cbe32a",
+    "materialSha256": "aeea831b6174a0da60b86d3467f7df3b11094e9aed3ba748024b4068fa632b04",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

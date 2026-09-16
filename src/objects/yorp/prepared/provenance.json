@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "yorp",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "127915cfa471feea13eedd6a469541feb41810964ff237dd7de3d01e8bc22ba0"
+    "sha256": "f68713b63a4e23a7d2c8ce05fa2ec4bb087cd7691837f8c25d88ed3c161fad12"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "72555350467c959f305de0e155afbe6db0aafda457813231e15565265753ee84",
+      "sha256": "52c56aa5deeb762e846438f35e4978df2591fd97b0e9ef04fbd9dfb838ec6c9c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -291,7 +291,7 @@
             "credit": "Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/yorp.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -346,7 +346,7 @@
       "sha256": "f9047ccbf39831b20d4571f17158f6960313d1b51c9d4ea429162ddb614a51e7",
       "bytes": 16131,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -371,10 +371,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "72555350467c959f305de0e155afbe6db0aafda457813231e15565265753ee84",
-      "bytes": 7623,
+      "sha256": "52c56aa5deeb762e846438f35e4978df2591fd97b0e9ef04fbd9dfb838ec6c9c",
+      "bytes": 7642,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -406,19 +406,19 @@
           "url": "/scenes/yorp/yorp-elevation-thumbnail.webp",
           "bytes": 6790,
           "sha256": "6eee5d1b476bebd6f1c5ca831c13a976c7e9e813bbce0201c8d673b0412a3de9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-surface@2x.webp",
           "bytes": 227432,
           "sha256": "c00a5cb83f222a51a4f5a0a94a9fc5f9ab1683ff0bef9b9bfe620b911c849ccf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -456,13 +456,13 @@
           "url": "/scenes/yorp/yorp-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "bytes": 58204,
           "sha256": "3deff6e52eea403097b5087111f737b88b4029cd3c29541e2a0378e5bad75339",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -493,8 +493,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4417,
-          "sha256": "11bf2e14cb2d7ac1c3f4a2792a56359859cc6fa4aaf79eb5445a88e8e58722f4",
+          "bytes": 4436,
+          "sha256": "26b6ac7ffe6948ac793fad5407eb2c9e5f39a6f27124bbfd41f204192b599cf5",
           "verification": "bytes-verified"
         }
       ],
@@ -557,11 +557,11 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "0b0f7604623b2a4de32994506a1f5003f99b4fad7c11d17876912d924e2f1d06",
+    "materialSha256": "884703afa24f572474793b8b3684d8bae36f2d356036bd66b01755cd62e36cc8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "4d81c9f6c00a264f8ce58688924928f7621ae4ed86cda953cddad444c0345b75"
     }
   }
 }

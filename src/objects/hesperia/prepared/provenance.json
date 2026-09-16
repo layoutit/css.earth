@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6104bb3cb7d3854fd47ebac97db1e239f37f9415761448c0b76bd7e5353f822c"
+    "sha256": "bfd23a9c2dafbd4cf23f34586a6118edcefb26842c1f7f2de489dacea5780650"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e62c2fcaaec86c2801c31854a5e7c58c9823dcf26bc4c898f8a397dbf0c1cdde",
+      "sha256": "b7bc19833a616932f866d41998417f859e8485c9e6ad8804a2fefd6097e412a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš (2011), Hanuš et al. (2013); model 319, version 2011-04-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hesperia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e62c2fcaaec86c2801c31854a5e7c58c9823dcf26bc4c898f8a397dbf0c1cdde",
-      "bytes": 10527,
+      "sha256": "b7bc19833a616932f866d41998417f859e8485c9e6ad8804a2fefd6097e412a2",
+      "bytes": 10550,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7914,
-          "sha256": "6e96796640562c29273cbbfb159ab66ccb4f484f27f817ae7cf4482763573342",
+          "bytes": 7937,
+          "sha256": "0e4bbdcf203b200fa7d8de73b9f71a97475922b97803ef9796455fc4a7c2d313",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "hesperia",
-    "materialSha256": "dadc8ba482cc4d9365c3a29ada48945981d7c228aeef541f6d0594000816b8af",
+    "materialSha256": "05ae7e75e3fbdc68c3783dbcb849846678219980a1fe5509b7547832ab8b4244",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

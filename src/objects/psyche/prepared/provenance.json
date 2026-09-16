@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b2b8ce36292d4d7c39d64f5945ef361bc294cd90eedb3ee0bf7b3274608b3591"
+    "sha256": "85e5b29144c364e3568594be73ee146dae469b6b0ec44842380480045ac18f8a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -477,7 +477,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4564a6eafdd2926f0995c452a258e0efb7739ee31b4f3bbb7259edb01f116536",
+      "sha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -642,7 +642,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/psyche.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -1605,8 +1605,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4564a6eafdd2926f0995c452a258e0efb7739ee31b4f3bbb7259edb01f116536",
-      "bytes": 9423,
+      "sha256": "22f3bd543d2aa87454088862f5aa65fcc82a8325685ce4c5f3e34e0d11b7172b",
+      "bytes": 9444,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1787,8 +1787,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6032,
-          "sha256": "4e0a616c3906f8e5366e8dbaf403e2ec1a673228b53f5a67761a4c782d71ccd3",
+          "bytes": 6053,
+          "sha256": "c9b1c791ff2d05a93d54b530ba4529a723a67c56e8951098967a2e462ffb20e3",
           "verification": "bytes-verified"
         }
       ],
@@ -1876,7 +1876,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "5c88b01e35f9cb5dc81ba721d9f747667136b5bf03e6c5338b351c5b2abe3d96",
+    "materialSha256": "81f1738ac270e1067cec0eb79c92acb610ce7955de77a9dcdefdced2265c55ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

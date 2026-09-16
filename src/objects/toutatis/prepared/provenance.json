@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toutatis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a640394de4cf4390b36fb6aba4cc5f4d214fd3e59a3ec8946d60755dc120551"
+    "sha256": "e20ca0c71b9071b5a1b05d09faa5fed57267998004eb29c75f2875ab208a88df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f55abdd3904e0695d3639ff6b38f724c89e2bfb10f2021966a88659a567c5cae",
+      "sha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -297,7 +297,7 @@
             "credit": "R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/toutatis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -352,7 +352,7 @@
       "sha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "bytes": 2879779,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f55abdd3904e0695d3639ff6b38f724c89e2bfb10f2021966a88659a567c5cae",
-      "bytes": 9176,
+      "sha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
+      "bytes": 9199,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/toutatis/toutatis-elevation-thumbnail.webp",
           "bytes": 5802,
           "sha256": "8172417040d331136b7f5c7905a8a592deb3556da5df383e7465917826da04b8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-surface@2x.webp",
           "bytes": 380870,
           "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +462,13 @@
           "url": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
           "bytes": 73254,
           "sha256": "33450a04b5a8baf229e8c381346fe1277f2787de22e9391558912da867a36d72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5900,
-          "sha256": "2c1e199ed4ed9fd4db892ec3e1b4f3926c73b68c197cf32540d03f02df880d35",
+          "bytes": 5923,
+          "sha256": "a3d68fd4a08c7b983cc2d31c9006aa094f3ad9a7907c9188237aa69ffc1c61dc",
           "verification": "bytes-verified"
         }
       ],
@@ -563,11 +563,11 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "5ae224eb2f06002b7eb77820bd05de177526e4e8aae3ba95e7cbeb5e1fccfbf5",
+    "materialSha256": "12a4a6d43f2e75ed7b19c3162d07bbe2d04aaee83c214a5b712e051ce320a246",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "2e5d44491fd4446a54a66a361268c1d63f79f7a4b4c40058a46d2d8838a50283"
     }
   }
 }

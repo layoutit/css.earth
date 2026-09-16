@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "567b941ad68e417fc0bdbeed0a9e04cae260353373dc40644eedb757befa9d99"
+    "sha256": "ae086982bd6b76d85f7670f8147bdef6225ed2add3e1905c7c43fb11bc980ed7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -201,7 +201,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9c5a62438a33bce61da0fa23d42ddc9be9303036b5346ba3d1cc8e26df725f6a",
+      "sha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -397,7 +397,7 @@
             "credit": "ESA/Rosetta/MPS for OSIRIS Team; Jorda, Gaskell and Kaasalainen; Phil Stooke/NASA PDS"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/steins.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -695,8 +695,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9c5a62438a33bce61da0fa23d42ddc9be9303036b5346ba3d1cc8e26df725f6a",
-      "bytes": 10206,
+      "sha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
+      "bytes": 10227,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -984,8 +984,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6193,
-          "sha256": "a3075ad25264e3f7a6f35b211b18523cff785493f58522e477c93ab35ccd6dc9",
+          "bytes": 6096,
+          "sha256": "79aedd4ecabe18d4799f39abe298c038e31759b4eee6cab0b5aa484145db0c10",
           "verification": "bytes-verified"
         }
       ],
@@ -1109,7 +1109,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "af36e08f59efd0d1284bd6af8a02061808f6a4f66812f999366a6afe60469aa6",
+    "materialSha256": "cbceb0e895ef4e2b89de7dbd34739c10a95a8f9f0db605d4bcabd4c055d7c10a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

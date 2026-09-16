@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "75cc81b311bbda082f22c8305e7a96e0242a2de1ed85576139456cb9d53070e2"
+    "sha256": "c5afd21f6933b1e05f21165d70e9e6f55ca11a7db51a3fdd58684aa572b15b19"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "93a064a1f1daba2fbec1c3e112b25e3222a5ef35152ff1763256b63464104e4d",
+      "sha256": "f662f4521787bab90b2fe18985180ecc5f257478e4314541201b75c60a54e482",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Massalia model 16321; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/massalia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "93a064a1f1daba2fbec1c3e112b25e3222a5ef35152ff1763256b63464104e4d",
+      "sha256": "f662f4521787bab90b2fe18985180ecc5f257478e4314541201b75c60a54e482",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12055,
+      "bytes": 12078,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9226,
-          "sha256": "4b29eafda6cde10247a557873e168a856e0e803b41546cc0ab24ae4e2fbfc057",
+          "bytes": 9249,
+          "sha256": "784f37d6f1cd4df2f0ff5f88118b48c71dece7f7cc4ccb49df4df15b8b107c25",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "massalia",
-    "materialSha256": "c20ca14e1782a2ea0636a13ef9f4901918ce146e953ac85cb97f28d155300afe",
+    "materialSha256": "41eefbde65e590d39584f2b65cb6ab3c3918d95cfbbc173493a0acfe1cb1bf2f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
