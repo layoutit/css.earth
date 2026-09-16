@@ -32,7 +32,7 @@ The two checks, measured with the pinned recipes on 2026-09-16:
 | Polaris, ROTIR sphere, April 2021 | 1.45 and 5.58 | 2.32 | not cast: does not fit |
 | R Dor, SQUEEZE, AMBER continuum | 1.74 and 2.99 | 1.43 | not cast |
 
-Calibration from raw frames was checked against an author's file. One π¹ Gruis block from 25 September 2014, with its two calibrator blocks, reproduces the squared visibilities of Paladini et al. (2018) in all 18 channel points. The median ratio is 0.990, the range 0.954 to 0.999, and the largest difference 0.84 sigma. `calibrate-pionier.test.mts` repeats that comparison whenever the reduction output is present.
+Calibration from raw frames was checked against an author's file. One π¹ Gruis block from 25 September 2014, with its two calibrator blocks, reproduces the squared visibilities of Paladini et al. (2018) in all 18 channel points. The median ratio is 0.990, the range 0.954 to 0.998, and the largest difference 0.84 sigma. `calibrate-pionier.test.mts` repeats that comparison whenever the reduction output is present.
 
 ## Known limits
 
@@ -44,7 +44,7 @@ Calibration from raw frames was checked against an author's file. One π¹ Gruis
 
 **Differential phases do not help a continuum surface.** Across a continuum window, a grey star's Fourier phase is linear in wavenumber on each baseline, and a differential phase has already removed that term. `oifits-observables.test.mts` proves the statistic is unchanged by shifting a grey image. Differential phases matter in spectral lines, not for a surface lens. SQUEEZE 3.0 at the pinned commit also fails to read AMBER's differential visibilities ("OOOOPS BUG when reading differential vis!").
 
-**Our wavelengths differ from the author's.** The spectral calibration gives 1.6376, 1.6857 and 1.7374 µm where Paladini's file states 1.6238, 1.6764 and 1.7287 µm, 0.5 to 0.9 percent longer. Calibrating from a whole block gives the same values. A reconstruction's angular scale from these files carries that uncertainty until the author's wavelength table is understood.
+**Wavelengths come from the lamp scan.** Taking the spectral calibration from a star's own fringe exposure left the wavelengths 0.5 to 0.9 percent longer than Paladini's file. The planner now picks the calibration pndrs itself picks, the closest `FRINGE,LAMP` scan before the first block, and the three channels match the author's to 0.012 percent (1.6238, 1.6766, 1.7288 against 1.6238, 1.6764, 1.7287 µm). The calibration test checks this.
 
 **Only PIONIER is calibrated from raw.** `toolchain.mts install pionier` builds Yorick and ESO's kit in 8 minutes (295 MB), and the comparison above ran on that install; the frames of the oracle came from the ESO data portal and the plan from its archive query, both checked live. GRAVITY, MATISSE and AMBER reductions are not built.
 
