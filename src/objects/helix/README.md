@@ -9,7 +9,7 @@ Three ESO lenses share a conditional emission field. **ESO WFI optical is the de
 | [ESO WFI, eso0907a](https://www.eso.org/public/images/eso0907a/) | B/V/R display; 7059 × 6535 pixels, 28.02′ × 25.94′. |
 | [ESO VISTA, eso1205a](https://www.eso.org/public/images/eso1205a/) | Y/J/K display; 6592² pixels, 37.51′ square. |
 | [ESO 3.6 m, helix](https://www.eso.org/public/images/helix/) | Wider 6850 × 4759-pixel image, 48.82′ × 33.92′; filters not listed by the publisher. |
-| [Molecular component record](../../../labs/nebula/models/helix/kinematics-hco.json) | Zeigler et al. HCO+ measurements condition coarse depth where supported; they do not recover every knot. |
+| [Molecular component record](source/evidence/helix/kinematics-hco.json) | Zeigler et al. HCO+ measurements condition coarse depth where supported; they do not recover every knot. |
 
 All three photographs are display composites with unequal footprints and band responses. The adopted central-star scale is **216 −12/+14 pc**, from [Benedict et al. (2009), abstract, NGC 7293 distance](https://arxiv.org/abs/0909.4281).
 
@@ -39,3 +39,5 @@ The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db44
 ## Compact delivery inputs
 
 The source-owned compact input pin in [delivery.json](source/delivery.json) retains the accepted pre-slice model, material and integration data. Ordinary preparation regenerates the runtime WebP Q80/A80 XYZ atlases and distant impostors without native observation downloads, star extraction or model fitting. Runtime images remain generated and ignored. The [shared bake guide](../../../docs/nebulae/README.md#compact-inputs-and-research-replay) distinguishes this replay from optional full research processing. Source observations and the model limitations above still apply.
+
+Application provenance reads the object-owned evidence and recipe copies recorded in [provenance references](source/provenance-references.json). Their original revisions and SHA-256 pins are preserved; nested research paths describe historical inputs and are not application file reads.
