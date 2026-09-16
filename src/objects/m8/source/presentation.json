@@ -114,14 +114,14 @@
   ],
   "bank": {
     "path": "src/objects/m8/prepared/lenses.json",
-    "sha256": "17b44610c62ad4b238bf44571e9f2d6dace2d5ddd0ee07b6d98ad3d9b257dba7",
-    "bytes": 2787756
+    "sha256": "df3a34efce8fc44f7f2a70ad375c4d5f5b2ce622dd8ddb304bf369eb8290ac1a",
+    "bytes": 2660004
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/m8/source/delivery.json",
-      "sha256": "47ea5df636096b29645d8b561dccae2a11823126c32a09521c77902e1195ce35",
+      "sha256": "bdc1d7755d2490cde15584e3d8e53d5d36311ecf5fbc4a14975da67f278e6720",
       "bytes": 2197
     },
     {
@@ -152,7 +152,7 @@
       "id": "recipe-6",
       "path": "src/objects/m8/source/bake-inputs/references/04-processing-observations.json",
       "sha256": "ead054a15a28d3c7645a833f4e4a7d818d8b6ee0b4412fdb97b5ecd5fcab2482",
-      "bytes": 5501
+      "bytes": 5778
     },
     {
       "id": "recipe-7",
