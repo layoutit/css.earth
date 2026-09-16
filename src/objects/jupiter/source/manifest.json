@@ -29,59 +29,6 @@
       }
     },
     {
-      "id": "openspace-jupiter-globe",
-      "path": "openspace/globe.asset",
-      "expectedSha256": "35f7f9cc623ff01803c2f2bb1e24a1680303ab70469e7b66660a7a5b2419f743",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked MIT source snapshot",
-      "consumers": [
-        "body",
-        "scene",
-        "lighting"
-      ],
-      "expectedBytes": 1443,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-jupiter-openspace-jupiter-globe",
-            "role": "method",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-jupiter-kernels",
-      "path": "openspace/kernels.asset",
-      "expectedSha256": "4c71313bfdd1657dee5198638bf239a4de1bb3b61ceac5dd58c1849f2ca601a3",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/kernels.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked MIT source snapshot",
-      "consumers": [
-        "scene",
-        "moons"
-      ],
-      "expectedBytes": 1037,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-jupiter-openspace-jupiter-kernels",
-            "role": "method",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-hubble-jupiter-global-map-2019",
       "path": "surface/hubble-jupiter-global-map-2019.png",
       "expectedSha256": "e79f89b68b4f1c73387b9871e82a31fb4f53e3885fb2f53dd074d8ac78cb38e3",
@@ -122,7 +69,7 @@
       "path": "surface/juno-pia24239-north-pole-detail.tif",
       "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma Wälimäki",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma W\u00e4lim\u00e4ki",
       "license": "CC BY",
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jupiter-north-pole-detail/"
@@ -160,7 +107,7 @@
       "path": "surface/juno-pia23808-north-polar-projection.jpg",
       "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
       "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichstädt",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichst\u00e4dt",
       "license": "NASA/JPL Media Usage Guidelines with contributor credit",
       "licenseEvidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/"
@@ -507,8 +454,8 @@
     {
       "id": "jupiter-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 7262,
-      "expectedSha256": "403e79fd56deca7c8d43e97f5e39ca83df31f85213a6f8c88f954a5a896bd95e",
+      "expectedBytes": 6821,
+      "expectedSha256": "3ac18bb56b1b57163d71c888d4e5a92fcd685fbd8997aa6cd0de75768435e54f",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -543,8 +490,8 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15410,
-      "expectedSha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068",
+      "expectedBytes": 15280,
+      "expectedSha256": "6b8204b248fbc9b100f1b83067673e5cddc3ba5841662c3cd8c398251a262f01",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -711,7 +658,7 @@
             "catalogueId": "arxiv-1808-01973",
             "role": "method",
             "evidence": "Phase-equation coefficients transcribed from Mallama and Hilton. The local record states the angle limits and terms held fixed.",
-            "locator": "Equations 2–17; body-specific phase equation"
+            "locator": "Equations 2\u201317; body-specific phase equation"
           }
         ]
       }
@@ -719,8 +666,8 @@
     {
       "id": "jupiter-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4839,
-      "expectedSha256": "0648f1d628f8daa94bf5474775d1faa28e2c4aaa5b2dfec9c6f6e9ac525169f5",
+      "expectedBytes": 4253,
+      "expectedSha256": "7c62c1550f74a105b15962b8f2bc3e8c7c38a20680597a22bb4b18fca3ad2c71",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",

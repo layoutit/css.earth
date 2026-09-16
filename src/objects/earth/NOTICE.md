@@ -14,7 +14,7 @@ the publisher's rendered map or sky-brightness model. No endorsement is implied.
 
 NASA and JPL material is credited to the named missions and institutions. NASA imagery is used under NASA's media usage guidelines; no NASA endorsement is implied. JPL data is factual United States government information, with Caltech/JPL attribution retained.
 
-OpenSpace configuration files are redistributed under the OpenSpace MIT licence in `LICENSE.OPENSPACE-MIT`.
+The atmosphere parameter values in `source/atmosphere/model.json` are adapted from the OpenSpace Team's RenderableAtmosphere tuning (MIT) and cited there; no OpenSpace file is read.
 
 Inter is redistributed under the SIL Open Font License 1.1 in `source/presentation/LICENSE.INTER-OFL`.
 

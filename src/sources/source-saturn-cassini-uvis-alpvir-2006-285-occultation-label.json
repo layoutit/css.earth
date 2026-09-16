@@ -1,0 +1,37 @@
+{
+  "id": "source-saturn-cassini-uvis-alpvir-2006-285-occultation-label",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Saturn · cassini uvis alpvir 2006 285 occultation label",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/saturn/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/26"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "scope": "The cassini uvis alpvir 2006 285 occultation label input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

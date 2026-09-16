@@ -28,43 +28,43 @@
     },
     {
       "filename": "mercury-interior-outer-poles.webp",
-      "bytes": 36768,
-      "sha256": "71565ebf60a186ea54c16875afcddb43d3c2694d1533465eed2f584aead192e2"
+      "bytes": 36960,
+      "sha256": "2718c85222e5b00c6b5adf163b5cd95de803ea6726755b2b808356f7fd3b25ce"
     },
     {
       "filename": "mercury-interior-outer-poles@2x.webp",
-      "bytes": 133936,
-      "sha256": "3bd2d7af6a7e9db4a774418e14298ab8058a8223d2e6ca8a68c386d60aeb5a89"
+      "bytes": 135208,
+      "sha256": "1d7bc8e12cc76cc1a8497c5ba1ad5dd2bc6d0aec42a8872019e41984f0b4860f"
     },
     {
       "filename": "mercury-interior-outer-unlit-poles.webp",
-      "bytes": 61350,
-      "sha256": "23d673810118f32924d150a77f4388e2102e46b040380da6196e7c969aff567f"
+      "bytes": 61474,
+      "sha256": "381266d6ac39a58e34f802e202834a36664ca6ce5dde996b82ebae3d735e4a83"
     },
     {
       "filename": "mercury-interior-outer-unlit-poles@2x.webp",
-      "bytes": 213934,
-      "sha256": "4e4bfda27a492e5cb77ecd93748228cf9c0e3dca02fc2b8e5c472c0ea81df46e"
+      "bytes": 215502,
+      "sha256": "6dd27a1ff01b2d9e37c50880cd3cc4be9109ad2ed8b40ac8920eba220b885141"
     },
     {
       "filename": "mercury-interior-outer-unlit.webp",
-      "bytes": 1316058,
-      "sha256": "9be6b85b6df8ec4f91f0bdcc9129b83b46a19e01c36ba5cceef89c3e96a641a7"
+      "bytes": 1327128,
+      "sha256": "514604287bdc442967b83661ae5d73f74cdd5a92451c5a99220cc2b76ef9a680"
     },
     {
       "filename": "mercury-interior-outer-unlit@2x.webp",
-      "bytes": 5340028,
-      "sha256": "c483500b25a94b8be4dcd6490a14d346865c3dededb2ba5d0a6fd073b902bdf2"
+      "bytes": 5494516,
+      "sha256": "270a4fc33db3e3d548b2150043ed605911f5fd1d82eba96ff5ab59699000f60c"
     },
     {
       "filename": "mercury-interior-outer.webp",
-      "bytes": 706126,
-      "sha256": "89711dca4dc3a88ee2fb790025b1d77fc46f685898ffa18ea81cdc24fb5ef399"
+      "bytes": 714076,
+      "sha256": "3640d1f0c599ba7fa3b5563f6b03e026093369abdcd6b93540d14ff73c63174d"
     },
     {
       "filename": "mercury-interior-outer@2x.webp",
-      "bytes": 2817906,
-      "sha256": "70049c6e9776a7fd97d7a8a38eeb110f29f4a1532ebf137cfefd842612094fd6"
+      "bytes": 2927744,
+      "sha256": "84f23efa24ebfa307ef8004362d3015b3d00921f4beb98936cb48b256341523f"
     },
     {
       "filename": "mercury-interior-section.webp",
@@ -78,8 +78,8 @@
     },
     {
       "filename": "mercury-lens-enhanced.webp",
-      "bytes": 590,
-      "sha256": "e96069879e0ce65af82bccf4a4a36e8f283df2769d57a4eade454907673a75e1"
+      "bytes": 594,
+      "sha256": "a1ae43154d5fc56adb6b694c4cb3decf00eb31819d0a7a3ebc0abd4d1c83f231"
     },
     {
       "filename": "mercury-lens-interior.webp",
@@ -88,8 +88,8 @@
     },
     {
       "filename": "mercury-lens-normal.webp",
-      "bytes": 280,
-      "sha256": "12cd76ff9ec246fe2039d0138668942404536eb851159c7a40f565b9098c6d4a"
+      "bytes": 276,
+      "sha256": "2e249be8091e1b8cab225263803863b6f9a6950ab1b11e66931b3f3c8a885547"
     },
     {
       "filename": "mercury-lens-topography-legend.webp",
@@ -98,8 +98,8 @@
     },
     {
       "filename": "mercury-lens-topography.webp",
-      "bytes": 590,
-      "sha256": "3baf9e8f93dd652fd70182d63be3cd2a9be578d8c8cea78f21eb7773f023fa06"
+      "bytes": 594,
+      "sha256": "5ab4dbb58478f79d7e150e990bd016233954c094bd5930125cd1177b56d6c772"
     },
     {
       "filename": "mercury-lighting-1x-billboard.webp",
@@ -438,13 +438,13 @@
     },
     {
       "filename": "mercury-poles.webp",
-      "bytes": 157910,
-      "sha256": "f2b43c6166dd8bf8fae9098d7dc29f369520e7b7bf64a39df180347eeb6b73b2"
+      "bytes": 148864,
+      "sha256": "2a29fda2b4f1a75e180df7bf1f1c67c5a7f8789207ee97ffa69a878e7754b947"
     },
     {
       "filename": "mercury-poles@2x.webp",
-      "bytes": 526156,
-      "sha256": "d35dc6bb79d15d54f4eeae8a80c4df57ec3fe1fe0bb1a787c296ad0ae55bffa3"
+      "bytes": 497292,
+      "sha256": "01405b9c0f75b66ee83be15de391bb186bd3d589919bc275d15f1a7c884ae265"
     },
     {
       "filename": "mercury-surface-albedo.svg",
@@ -453,33 +453,33 @@
     },
     {
       "filename": "mercury-surface-enhanced.jpg",
-      "bytes": 1382509,
-      "sha256": "fc8e52e9595baa04b4dba605c6a24d0029ea4fc01607de04e7cc86004c6bd93f"
+      "bytes": 1379643,
+      "sha256": "206ac9060839f4cece98ff2a79ada21ba8dd828d37e0c56dc36c1930f78b8738"
     },
     {
       "filename": "mercury-surface-enhanced@2x.jpg",
-      "bytes": 5273708,
-      "sha256": "c12d266c18b09285fa29c400f9921a702a7fcefd5f609080bd3c40552c52ceca"
+      "bytes": 5266173,
+      "sha256": "03804cecc9859bb03937c70d919a0157bb06d3dcd933a6493958e83dbf779ea3"
     },
     {
       "filename": "mercury-surface-normal.jpg",
-      "bytes": 977125,
-      "sha256": "0a55b6a9bcf2c454c072223e2a8913ad7ca550638b5a49ea39d61025aa7ac50e"
+      "bytes": 991987,
+      "sha256": "461fc361a88d95b73bf5dec86ebe7d55ba0057bea9c0c24f995f4988e2b672bf"
     },
     {
       "filename": "mercury-surface-normal@2x.jpg",
-      "bytes": 4041840,
-      "sha256": "0b459a7576c464d771a3742be2c4fdf91802d062c8cffb14816c41049b577942"
+      "bytes": 4257932,
+      "sha256": "5f1dfa427fe1c541a62a6262e5c46851eee3e559e5e534a1ec54e7b7bb6354f7"
     },
     {
       "filename": "mercury-surface-topography.jpg",
-      "bytes": 1227245,
-      "sha256": "728d4dbccfe6b1a78421c1e9346e888c47e07788d94f53628e724b71fc482325"
+      "bytes": 1004526,
+      "sha256": "6bdb61523303e236caa5d423a36b328ec663ad9c955e11641eaad394f871e6ce"
     },
     {
       "filename": "mercury-surface-topography@2x.jpg",
-      "bytes": 3804655,
-      "sha256": "0e3f45a7b1e82261293081876896749ea230d7bbf639148d91c74ced21854ef7"
+      "bytes": 2993956,
+      "sha256": "bed71a89a90519863d4a031139a0b32826c6ae24a63290c46118cead4636aa81"
     }
   ]
 }

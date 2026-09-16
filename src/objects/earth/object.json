@@ -27,12 +27,12 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653"
+          "sha256": "61aa5b4efe04275698330b0d6c3c37eff127f456050d9ea5fcbfe7a8a8cab240"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "501afff1d4429dd6e8023b37e6210ea3ee5726d4d91a532bca13d47b22e345cf"
+          "sha256": "c7d11d828a560459cbb67b8793de707375f4b62a5a287dbdeac4616738886b26"
         },
         {
           "id": "lens-bindings",
@@ -57,7 +57,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "75dd96814ad2ce98dd13c709eb4394b1c9c68cfb2f860bbe5947b438311eb6d6"
+          "sha256": "8a48e63a66cbb78df843495463ed604f4c9224e0a4d1add1a49bda360eeb4612"
         },
         {
           "id": "mantle-tomography",
