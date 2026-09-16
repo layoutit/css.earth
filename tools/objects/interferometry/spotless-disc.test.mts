@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readChannelRows } from './oifits-rows.mts';
-import { compareSpotMaps, limbDarkenedVisibility, normalStream, simulateSpotlessDisc, spotMap, SPOT_CONTRAST_RATIO } from './spotless-disc.mts';
+import { compareSpotMaps, limbDarkenedVisibility, normalStream, reconstructionVerdict, simulateSpotlessDisc, spotMap, SPOT_CONTRAST_RATIO } from './spotless-disc.mts';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;
 /** The baseline at which x = pi B theta / lambda equals the given argument, for a 10 mas disc at 1.6 micrometres. */
@@ -60,4 +60,12 @@ test('simulating a spotless disc keeps the sampling and errors and recovers its 
   assert.ok(Math.abs(best.diameter - 18.17) < 0.1, `fitted ${best.diameter.toFixed(2)} mas`);
   assert.ok(best.chi2 / after.vis2.length < 1.5, `the noise is each point's own error: reduced chi-squared ${(best.chi2 / after.vis2.length).toFixed(2)}`);
   assert.ok(after.t3.every(row => Math.abs(((row.phaseDegrees % 180) + 270) % 180 - 90) < 90), 'closure phases stay finite');
+});
+
+test('a reconstruction is cast only when it fits its data and beats the spotless disc', () => {
+  // Measured: π¹ Gruis SQUEEZE, Polaris SQUEEZE, Polaris ROTIR sphere (reduced chi-squared V2 and closure phase; spot ratio).
+  assert.equal(reconstructionVerdict({ vis2: 2.45, closurePhase: 1.06 }, { ratio: 5.22 }).cast, true);
+  assert.deepEqual(reconstructionVerdict({ vis2: 1.76, closurePhase: 2.28 }, { ratio: 1.05 }).reasons.length, 1);
+  const sphere = reconstructionVerdict({ vis2: 1.45, closurePhase: 5.58 }, { ratio: 2.32 });
+  assert.equal(sphere.cast, false); assert.match(sphere.reasons.join(), /does not fit/u);
 });
