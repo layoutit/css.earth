@@ -22,25 +22,25 @@
     "titleKey": "lenses",
     "defaultLens": "model",
     "labels": {
-      "model": "Illustrative nucleus"
+      "model": "Shape approximation"
     },
     "controls": [
       {
         "id": "model",
-        "label": "Illustrative nucleus",
+        "label": "Shape approximation",
         "thumbnail": "/scenes/comet-c2020-f3/comet-c2020-f3-model-thumbnail.webp",
         "surface": "comet-c2020-f3-model-surface@2x.webp",
         "poles": "comet-c2020-f3-model-poles@2x.webp",
         "source": {
-          "id": "celestia-mesh",
+          "id": "shape-parameters",
           "path": "../manifest.json",
-          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=C%2F2020%20F3&phys-par=true"
         },
         "facts": [
           {
-            "id": "diameter",
-            "label": "Catalog diameter",
-            "value": "≈5 km"
+            "id": "radius",
+            "label": "Effective nucleus radius",
+            "value": "1.844 km"
           },
           {
             "id": "perihelion",
@@ -48,7 +48,7 @@
             "value": "0.292 AU"
           }
         ],
-        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and neutral gray marks missing surface imagery. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "notes": "A sphere at an assumed display radius; no published nucleus size exists. A roughly 5 km diameter is attributed to the NEOWISE team in secondary sources, but no primary measurement was located; the displayed radius is an assumption carried from the earlier catalogue estimate and is not a measurement. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
         "noData": true
       }
     ]
@@ -67,10 +67,10 @@
   "charts": [],
   "resources": [
     {
-      "label": "Celestia",
-      "role": "surface",
-      "description": "Catalog entry and estimated scale",
-      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+      "label": "Nucleus size",
+      "role": "shape",
+      "description": "no verified measurement",
+      "href": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=C%2F2020%20F3&phys-par=true"
     },
     {
       "label": "JPL Horizons",
@@ -95,7 +95,7 @@
     },
     "physical": {
       "path": "../shape/model.json",
-      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+      "credit": "no verified measurement"
     }
   }
 }

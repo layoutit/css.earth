@@ -20,7 +20,7 @@
       {
         "id": "model",
         "consumer": "shape",
-        "label": "Illustrative nucleus"
+        "label": "Shape approximation"
       }
     ]
   },
@@ -37,7 +37,7 @@
   },
   "geometry": {
     "radius": 230,
-    "radiusKm": 24.398600977157937,
+    "radiusKm": 33.1,
     "camera": {
       "initialScenePitchDegrees": 20,
       "defaultControlYawDegrees": 0,
@@ -46,12 +46,12 @@
     "mapUrl": "/scenes/comet-167p/comet-167p-model-surface@2x.webp",
     "polesUrl": "/scenes/comet-167p/comet-167p-model-poles@2x.webp",
     "radialTerrain": {
-      "path": "shape/model.obj",
-      "format": "wavefront-obj",
+      "path": "shape/model.json",
+      "format": "ellipsoid-parameters",
       "grid": {
         "metersPerUnit": 1,
-        "expectedVertices": 4802,
-        "expectedFaces": 9600
+        "expectedVertices": 1026,
+        "expectedFaces": 2048
       },
       "faceBudget": 800,
       "tileSize": 64,
@@ -59,7 +59,7 @@
       "simplification": {
         "method": "source-meshoptimizer",
         "targetFaces": 800,
-        "maximumErrorMeters": 1654.25
+        "maximumErrorMeters": 1324
       },
       "primitive": "u",
       "sourceLighting": {
@@ -105,8 +105,8 @@
     }
   },
   "celestial": {
-    "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
-    "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+    "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is an arbitrary display orientation.",
+    "qualification": "JPL position at the shared epoch. The nucleus is an ellipsoid at the published effective radius; the attitude is arbitrary and no photographic surface is claimed."
   },
   "presentation": {
     "defaultLens": "model"

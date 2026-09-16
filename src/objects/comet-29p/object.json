@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "054d337720a42938708457ea234dc51113ef48545102c83854adc5a6f1d699b0"
+          "sha256": "d3bce677986a67c7660d0770b3c91b1b1142069dddd6ef4d0e088fcf2c5d8fdd"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e33fc5ad08810684f7fe58ef25232c80567e9b17ffa85390c88861c40d593e24"
+          "sha256": "baee57c385af8e62ced86de8e3835ff2c4a06cda56cd5c5ada0bbca53b13b7e0"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "aa942f27289a8b77eb72c76b30ea4a0047eb0b6718126db6799e55ad62615ad6"
+          "sha256": "4db630b60ea749fc14dd7d55a7183e381b0816f82d238bece9253938d5a8c58f"
         },
         {
           "id": "acquisition",
@@ -53,7 +53,7 @@
       ],
       "shape": {
         "kind": "radial-terrain",
-        "radiusKm": 22.27105182137433
+        "radiusKm": 32.3
       },
       "surfaces": [
         {
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c73884a79651817410bd54d3af981aad1bfd6f34c3c654c6cdcd3a406cc93a80"
+        "sha256": "fea4747937c76ce522f94fcb939c28c043ae668adcb631caa24a762407a1e6e7"
       }
     },
     "worldFrame": {
@@ -110,8 +110,8 @@
         -0.3977771559319137,
         0.9174820620691818
       ],
-      "metersPerUnit": 96.83066009293185,
-      "bodyRadiusM": 22271.051821374327
+      "metersPerUnit": 140.43478260869563,
+      "bodyRadiusM": 32299.999999999996
     },
     "catalog": {
       "illustrationLenses": [
@@ -132,6 +132,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f3852828736d6192d7c0c5744b32d1e6c7b3abff217bcae7228dd9094ead811c"
+    "sha256": "65f60ff610056c78d76b4ed49b7c7e3f3b9c82f8b284bd71e5bc0cc4a94bdd75"
   }
 }

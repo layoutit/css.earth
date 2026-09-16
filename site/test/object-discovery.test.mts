@@ -55,8 +55,9 @@ test('model textures, shape-derived elevation and featured overrides cannot prom
   const recipes = [{ raster: { observations: [model], scientific: [{ id: 'elevation' }], shapeViews: [{ id: 'shape' }] } }];
   assert.deepEqual(deriveObjectDiscovery({ ...policy, featured: true }, controls('model', 'shape', 'elevation'), recipes),
     { featured: false, imagery: false, illustration: true });
-  const art = [{ surfaces: [{ id: 'art', science: { kind: 'glb-base-color' } }] }];
-  assert.equal(deriveObjectDiscovery({ illustrationLenses: ['art'] }, controls('art'), art).imagery, false);
+  // A neutral-gray shape surface is measured geometry with no imagery: "Shape only", never an illustration.
+  const shape = [{ surfaces: [{ id: 'shape', science: { kind: 'neutral-shape' } }] }];
+  assert.deepEqual(deriveObjectDiscovery({}, controls('shape'), shape), { featured: false, imagery: false, illustration: false });
 });
 
 test('partial photographic coverage still counts; source and lens counts do not', () => {
@@ -76,18 +77,21 @@ test('default discovery admits photographed asteroids and hides illustrations ac
     assert.equal(initial.hiddenLabels.includes(id), false, id);
     assert.equal(requireSceneObject(id).discovery.imagery, true, id);
   }
-  for (const id of ['eris', 'haumea', 'comet-c1995-o1', 'deedee', 'oumuamua', 'aegaeon', 'annefrank']) {
+  for (const id of ['comet-c1995-o1', 'deedee', 'oumuamua', 'aegaeon', 'annefrank']) {
     assert.equal(initial.hiddenBodies.includes(id), true, id);
     assert.equal(discoveryVisibility(SCENE_OBJECTS, { ...defaults, illustrations: true }).hiddenBodies.includes(id), false, id);
   }
-  for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra']) assert.equal(requireSceneObject(id).discovery.illustration, false, id);
+  // Occultation-measured shapes in neutral gray are "Shape only", like reconstructed asteroid meshes.
+  for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'eris', 'haumea', 'makemake']) assert.equal(requireSceneObject(id).discovery.illustration, false, id);
 });
 
 test('category browsing and asteroid settings cannot bypass Illustration models', () => {
   const browse = discoveryVisibility(SCENE_OBJECTS, { illustrations: false, asteroids: true, asteroidLabels: true, highlighted: 'asteroid' });
   assert.equal(browse.hiddenBodies.includes('annefrank'), true);
-  for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'asteroid-2001-sn263']) {
-    assert.equal(browse.hiddenBodies.includes(id), false, `${id}: reconstructed mesh remains available without imagery`);
+  for (const id of ['pallas', 'psyche', 'squannit', 'kleopatra', 'asteroid-2001-sn263', 'eris', 'haumea', 'makemake']) {
+    assert.equal(browse.hiddenBodies.includes(id), false, `${id}: reconstructed shape remains available`);
+  }
+  for (const id of ['pallas', 'squannit', 'asteroid-2001-sn263', 'eris', 'haumea', 'makemake']) {
     assert.equal(requireSceneObject(id).discovery.imagery, false, id);
   }
   const explicit = discoveryVisibility(SCENE_OBJECTS, { ...defaults, highlighted: 'comet' });

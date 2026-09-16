@@ -69,7 +69,7 @@
       "path": "surface/juno-pia24239-north-pole-detail.tif",
       "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma W\u00e4lim\u00e4ki",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma Wälimäki",
       "license": "CC BY",
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jupiter-north-pole-detail/"
@@ -107,7 +107,7 @@
       "path": "surface/juno-pia23808-north-polar-projection.jpg",
       "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
       "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichst\u00e4dt",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichstädt",
       "license": "NASA/JPL Media Usage Guidelines with contributor credit",
       "licenseEvidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/"
@@ -508,8 +508,8 @@
     {
       "id": "jupiter-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3291,
-      "expectedSha256": "42f0c0546aaf5f9334ae92522beebc2426694280ebb451edbc68a77e6eedbf8e",
+      "expectedBytes": 3330,
+      "expectedSha256": "f43e0dd09e323c3dda60be5c9f9ab0ba37e3296813c4ed5073e3c68c391c7c4e",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -658,7 +658,7 @@
             "catalogueId": "arxiv-1808-01973",
             "role": "method",
             "evidence": "Phase-equation coefficients transcribed from Mallama and Hilton. The local record states the angle limits and terms held fixed.",
-            "locator": "Equations 2\u201317; body-specific phase equation"
+            "locator": "Equations 2–17; body-specific phase equation"
           }
         ]
       }

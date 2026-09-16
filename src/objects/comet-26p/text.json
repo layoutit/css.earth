@@ -43,9 +43,9 @@
   },
   "datasets": {
     "model": {
-      "title": "Celestia catalog nucleus",
-      "detail": "Catalog size",
-      "summary": "Celestia's nucleus shape at its catalog size. The real shape is unknown."
+      "title": "Published radius and elongation",
+      "detail": "Effective radius 1.5 km",
+      "summary": "An ellipsoid at the published effective radius of 1.5 km. Lightcurves give its minimum elongation."
     }
   }
 }

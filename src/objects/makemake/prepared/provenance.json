@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a3f94051780c8f7f922cf0a334de523f723f80aa644496120a66693ee10fbfb"
+    "sha256": "b25ca1e94dc16e3877b7c13690473918a032c33a9f40989f61b59c473d552778"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "bf0191a3d8efd4c827f1f8a5e726edaaf8396e85eb2f69023f26b143e897aa72",
+      "sha256": "5ef71ae8329a4d4a45935a07b5776f5fe23168cc59dde78d35c2aa5ab2f52be5",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/makemake/",
@@ -42,22 +42,14 @@
         },
         "surfaces": [
           {
-            "id": "illustration",
+            "id": "shape",
             "output": "makemake-{id}{suffix}.webp",
             "thumbnail": "makemake-lens-{id}.webp",
-            "source": "nasa-makemake.glb",
+            "source": "measurements.json",
             "falseColor": false,
             "science": {
-              "kind": "glb-base-color",
-              "model": "nasa-makemake.glb",
-              "mesh": {
-                "latitudeSegments": 16,
-                "longitudeSegments": 32,
-                "width": 2048,
-                "height": 1024,
-                "poleSize": 256,
-                "seamOverlap": 0.025
-              }
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for an unresolved surface."
             }
           }
         ],
@@ -107,7 +99,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8dbbaef295ffaf86432844216ed2fa46ef55af90e6cdcc554e1f1032d9c40b4c",
+      "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -172,27 +164,27 @@
             {
               "id": "appearance",
               "label": "Surface representation",
-              "value": "NASA VTAD illustration; terrain details are not observations"
+              "value": "Shared neutral gray display convention; the surface is unresolved and no terrain is shown"
             }
           ]
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "illustration",
+          "defaultLens": "shape",
           "controls": [
             {
-              "id": "illustration",
-              "label": "Illustrative model",
-              "qualification": "Illustration; not an observed surface map.",
-              "thumbnail": "makemake-lens-illustration.webp",
-              "surface": "makemake-illustration.webp",
-              "poles": "makemake-poles-illustration.webp",
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour.",
+              "thumbnail": "makemake-lens-shape.webp",
+              "surface": "makemake-shape.webp",
+              "poles": "makemake-poles-shape.webp",
               "source": {
-                "id": "nasa-vtad-makemake-model",
+                "id": "nasa-makemake-size",
                 "path": "../manifest.json",
-                "url": "https://science.nasa.gov/resource/makemake-3d-model/"
+                "url": "https://science.nasa.gov/dwarf-planets/makemake/"
               },
-              "notes": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+              "notes": "Neutral gray marks an unresolved surface. Display coordinates are arbitrary; no terrain, albedo or colour is claimed."
             }
           ]
         },
@@ -214,12 +206,6 @@
             "role": "facts",
             "description": "Makemake overview",
             "href": "https://science.nasa.gov/dwarf-planets/makemake/"
-          },
-          {
-            "label": "NASA VTAD",
-            "role": "illustration",
-            "description": "Makemake model and illustrative surface texture",
-            "href": "https://science.nasa.gov/resource/makemake-3d-model/"
           },
           {
             "label": "Ortiz et al.",
@@ -247,35 +233,28 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "nasa-vtad-makemake-model",
-      "path": "nasa-makemake.glb",
-      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb",
-      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
-      "acquisition": "Original downloadable GLB from NASA Science",
-      "redistribution": "NASA media; not photographed terrain or a measured normal map",
+      "path": "measurements.json",
+      "id": "nasa-makemake-size",
+      "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
+      "credit": "NASA Science; projected size comparison Ortiz et al. (2012)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed approximate radius and reported periods; spherical display approximation",
+      "redistribution": "Factual parameter transcription only; no article figures",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-makemake-nasa-vtad-makemake-model",
+            "catalogueId": "source-makemake-nasa-makemake-size",
             "role": "material",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       },
-      "sha256": "e7d5fa27f50afae10f0e7290cdf7a14ca856c0b9e99b2db02f25b75441fbdbef",
-      "bytes": 4441844,
+      "sha256": "664a8deafff78a4db0ccd77181ec563b0dc2d01c7f7ddd73a3d20a2786d11925",
+      "bytes": 585,
       "dependencies": [],
       "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "nasa-makemake.glb",
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb"
-      },
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -291,8 +270,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8dbbaef295ffaf86432844216ed2fa46ef55af90e6cdcc554e1f1032d9c40b4c",
-      "bytes": 8832,
+      "sha256": "325c9b3055ade9e9322b191b80b412e2b99b05aceeb90b10bd4191b22482239e",
+      "bytes": 8659,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -301,18 +280,18 @@
   ],
   "products": [
     {
-      "id": "illustration",
-      "label": "Illustrative model",
+      "id": "shape",
+      "label": "Shape",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Illustration; not an observed surface map."
+        "Shape from the cited measurement; the neutral gray surface is a display convention, not a measured colour."
       ],
       "lensIds": [
-        "illustration"
+        "shape"
       ],
       "recipeDependencies": [
         "raster"
@@ -321,43 +300,43 @@
         "falseColor": false
       },
       "inputs": [
-        "nasa-vtad-makemake-model"
+        "nasa-makemake-size"
       ],
       "outputs": [
         {
-          "url": "/scenes/makemake/makemake-illustration.webp",
-          "bytes": 804272,
-          "sha256": "f7043ac46d10e104b1185739440ae159b5584967a1ce22a1a144d5ccac5cadc3",
+          "url": "/scenes/makemake/makemake-shape.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-illustration@2x.webp",
-          "bytes": 1806548,
-          "sha256": "70ff01ef5c3fc7332026eb50bfc29892e0e7cbef92bea8ac8e4fb3190c462d89",
+          "url": "/scenes/makemake/makemake-shape@2x.webp",
+          "bytes": 558,
+          "sha256": "29cb9b42eae9164dc2e5144eeee49eaa035b4970c376c0d04c190b7a8ee808ef",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-lens-illustration.webp",
-          "bytes": 1466,
-          "sha256": "df40339993983962c15d51def7cb7809db72ecb994de8bfedefd84b6b3364f6c",
+          "url": "/scenes/makemake/makemake-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-poles-illustration.webp",
-          "bytes": 99464,
-          "sha256": "b582fb88e40183edd0d6b23f8cb7ebd05889a0a9bd34549981b191a67eb3886b",
+          "url": "/scenes/makemake/makemake-poles-shape.webp",
+          "bytes": 680,
+          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/makemake/makemake-poles-illustration@2x.webp",
-          "bytes": 289942,
-          "sha256": "52969215aa0cfdbcd9d1dcbda43d6966d5e0b29128a9cc373faceab5701943ed",
+          "url": "/scenes/makemake/makemake-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "nasa-vtad-makemake-model",
+          "sourceId": "nasa-makemake-size",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -800,16 +779,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7264,
-          "sha256": "f19fd33fe9f3664be16752da84150200db23ee52667ef43ab5e38427f98937e3",
+          "bytes": 7123,
+          "sha256": "e54ba5f995e45d567e50b36d57e8b89e86fd1a397737d52e6a87f830b24d38be",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:illustration",
-      "label": "Illustrative model preview",
+      "id": "preview:shape",
+      "label": "Shape preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -818,16 +797,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "illustration"
+        "shape"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/illustration.webp",
-          "bytes": 80850,
-          "sha256": "3aa806bec5df0e3e6baf256fd112aebe7d6d6454a34a58d8e1082fbadd3ae52e",
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
           "verification": "bytes-verified"
         }
       ]
@@ -839,11 +818,11 @@
   },
   "lastPreparation": {
     "objectId": "makemake",
-    "materialSha256": "828a9781f3ed13aa2caaa821a00a8dd256301e581caf6790c1e3e0b3eac0927e",
+    "materialSha256": "5fe09e3e023cd7ca0e642aec10fef8a01c79004e892cf4ea4a577ca8d8162879",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }

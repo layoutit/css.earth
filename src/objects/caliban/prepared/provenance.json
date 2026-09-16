@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
   },
   "recipes": [
     {
@@ -446,7 +446,7 @@
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
     }
   }
 }
