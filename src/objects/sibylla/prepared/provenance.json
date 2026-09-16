@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b0e990aa62fb70aa4976c391b63bdd358d51dd8719067e3e00db441ce6fe0abf"
+    "sha256": "17137c8ca382f4996d5d9a8dd613a67c28588131e450046d6f0ca0fd7ffd5eeb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "38c76470c84dd20b3acf04d108bb46653e6c0253e4556f4fbf4fb8f9fe1d1048",
+      "sha256": "69dff257facdfd0df14e620e41df6855e131a863399bfa932165e2f1c5021ffc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 6009, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sibylla.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "38c76470c84dd20b3acf04d108bb46653e6c0253e4556f4fbf4fb8f9fe1d1048",
-      "bytes": 9470,
+      "sha256": "69dff257facdfd0df14e620e41df6855e131a863399bfa932165e2f1c5021ffc",
+      "bytes": 9492,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6866,
-          "sha256": "47c87b204e954a9bbf3e4c21c604cc5d781dd303ec7ee5f7e83a844288d88602",
+          "bytes": 6888,
+          "sha256": "4e586fefb8aec882d81700407c6f34b57941696800f6ccd1ed37e865eb3590bc",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "sibylla",
-    "materialSha256": "7bdd58e7fde79dc80cdc1399ee0d986f01fae4f6ece0a632dda7b4c8577ba46a",
+    "materialSha256": "6d2100082c7cd3ce696c1f5d615c41d61ec04581f19714f454b62c961f7ad878",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

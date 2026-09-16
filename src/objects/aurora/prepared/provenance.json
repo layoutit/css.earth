@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4824555e04c6774431962df57ed5106fe5fe09f6985a9adb3298716afd7f372b"
+    "sha256": "28e8c9b39c8f349a39220a27571260d3c8f042b4fc59cd5b2808e0d643859cb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fd0907c67c75d1e60bb9c3280c4feb7270703531febe86d3ec7b427ecc702e19",
+      "sha256": "c6dc081b51298308fbe3393eef62a80e47ff5afaee72fa95c3e33f72a6032abc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Aurora model 1830, version 2017-06-13; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/aurora.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fd0907c67c75d1e60bb9c3280c4feb7270703531febe86d3ec7b427ecc702e19",
-      "bytes": 8007,
+      "sha256": "c6dc081b51298308fbe3393eef62a80e47ff5afaee72fa95c3e33f72a6032abc",
+      "bytes": 8028,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5723,
-          "sha256": "3bdee95e2659a7220d3c5d680bfc0b033d22e761b2a8dc718bbc7dc7ec1a8fc7",
+          "bytes": 5744,
+          "sha256": "80bf2bfbb0900b294148f3d8b5cf40a9a2ce14731317732dffcfa2ba77736843",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "aurora",
-    "materialSha256": "9addd3d7be9fef86f2d01ce1888e7e42e1972407d8e55a9208f4db4cc41a11b3",
+    "materialSha256": "8c332d79364136cbaa5d336e79f2683084ccd8e1715703d4221883a167c785f3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

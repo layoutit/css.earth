@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c61bfa82ef0596aea85c9ffaa3dd0ce48df44339a0138c73e52480cac77e8ff8"
+    "sha256": "6452eab7df82055a2e3c51e1fae75d4173fc1f72d53bb94b2b1018da1e069a51"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b5e5ac652e24b06541e22941e99e6842dbc1132d13690e89c36789c720b2971a",
+      "sha256": "e5108bcc1ca07e8c4d7353b1b63fc45f82c8e6b7a7305ae47b70616f40436cfd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; IAU model 12740; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/iau.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "b5e5ac652e24b06541e22941e99e6842dbc1132d13690e89c36789c720b2971a",
+      "sha256": "e5108bcc1ca07e8c4d7353b1b63fc45f82c8e6b7a7305ae47b70616f40436cfd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7070,
+      "bytes": 7088,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4284,
-          "sha256": "8e504a4b45b396c9d4a56a166414e7452a1bf58a0c547a5487236ab149442a31",
+          "bytes": 4302,
+          "sha256": "d2a73189acfc5778f6effd6cec987547d104070bad89d490af63cb228e23511b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "iau",
-    "materialSha256": "ae5152e3625d5e4a5eb1543e267cb30db1d25f4e985e155a2d607b149e7f87bd",
+    "materialSha256": "96e7d696b42bd4df582bf4e4f9221f4a6d6335ef6b055eab77eb741cf00cc129",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70d7e074714a8920c05e24b0b98699ee608ef42415994b270af97881de3beb7e"
+    "sha256": "3d62ad428e7f7395944682ce6ef4dbe8e0918a6ca9fc565149f22758e838007e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75e91923b6eb567632ee6a97a2100a7312649bb2ff7c47ba164bb30156fb1013",
+      "sha256": "960334eca938234d98ab97a706ba55cf01ebfcccd20d4ea4f82b5a903007113b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2019); model 3102, version 2019-06-24."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eurykleia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "75e91923b6eb567632ee6a97a2100a7312649bb2ff7c47ba164bb30156fb1013",
-      "bytes": 9478,
+      "sha256": "960334eca938234d98ab97a706ba55cf01ebfcccd20d4ea4f82b5a903007113b",
+      "bytes": 9502,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6853,
-          "sha256": "e5bf2bfec272b5541f9871fd855f34956bd369406dc8474b32dbc379a0440598",
+          "bytes": 6877,
+          "sha256": "481a0172a6d0a62c699467171d997102cab950bf65ec5d319ce3398fa258805a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "eurykleia",
-    "materialSha256": "575a98a87d394a25ed5bf9360cfab77b78b497c32ca04f5a4b248ebbb0a38af4",
+    "materialSha256": "afc54cfa82c2744736575f96199387f1b717d0ef5b54887d2585ef1858f63dbd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

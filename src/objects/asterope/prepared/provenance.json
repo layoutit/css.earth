@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c421349fd60f8f9e4070c37ef93d76f3eeb65d21929dbf2407075ce225870054"
+    "sha256": "3164f05af6a25e5601526ec7acfdcc7801e7fec19d8c2f4b35076c10e7cc8c1a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a1b9bf97642e32b677e3d2b22f5cfcd0508e464109a75b9f35e5a691230a6bfb",
+      "sha256": "995f8f4f0348cb5edcff72d931d0a92a86e5ff28bb32f628a2a25f56dd68ff2f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017); model 1823, version 2017-06-16."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asterope.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a1b9bf97642e32b677e3d2b22f5cfcd0508e464109a75b9f35e5a691230a6bfb",
-      "bytes": 10273,
+      "sha256": "995f8f4f0348cb5edcff72d931d0a92a86e5ff28bb32f628a2a25f56dd68ff2f",
+      "bytes": 10296,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7659,
-          "sha256": "84dfea88de15dd1616fe55950ead65b62fd92a7475786a73bc7fd551ede33dad",
+          "bytes": 7682,
+          "sha256": "814266bad0b44cd27ab1e83284e5ff9afa03710a23955645f50ccfc588c727b3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "asterope",
-    "materialSha256": "63f2018540fd83b8289d71554b52f2690ea9c060158794b02d88caff2be016c7",
+    "materialSha256": "6b920231cb094d7ca34f8f77552baa0bbae5bdd20bdea6e59b3acb63749e0e15",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

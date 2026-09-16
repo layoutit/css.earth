@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f2a3e5883ad5083dfbc6481b092fc05c3d418bb13f44e9906652681b186f71b"
+    "sha256": "f610032a3cc4424ed5a7c04e89f0350a1729ce598eb1afb2d176e5cefc70fe1a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3b820de521b563cb1f003a04d8302a5c8c2f850124b7409285f2a3151e8a3e95",
+      "sha256": "9f49bff3737e8ec1e82c30c1a1b68fc5db7be9ecdff7ff25b2883083927cdce0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1851, version 2017-09-21."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/melete.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3b820de521b563cb1f003a04d8302a5c8c2f850124b7409285f2a3151e8a3e95",
-      "bytes": 9104,
+      "sha256": "9f49bff3737e8ec1e82c30c1a1b68fc5db7be9ecdff7ff25b2883083927cdce0",
+      "bytes": 9125,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6519,
-          "sha256": "37b972dad6f93939af2d5f1f7e0aac4ba5566499ca8eee433d501e5bd8e857bc",
+          "bytes": 6540,
+          "sha256": "9e1faa4ce639cf5e9ed02df0ff1dd22fde7710161de9a13d0a204e2c4cb35678",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "melete",
-    "materialSha256": "18654501bee9009c847d42e8fa6191d144cebb149ea42e2a42130bba6989c3b9",
+    "materialSha256": "32dd07271a699fb7bf7190c78a5a088116e252427e01aef6e0b8982871c5bdcb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

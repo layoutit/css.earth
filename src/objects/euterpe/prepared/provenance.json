@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cbd36c6392fc7660a49fb8f091e7164acab7f3b36f165ec92e23a8427c260056"
+    "sha256": "639ee10b12ca9dfda8c5a658b390a9e7a709ad6fc384070bf9588b207019acb2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6a3c01b356720af77a09e054ddc4c7b85383926b5784053a3ae895d8808f28b5",
+      "sha256": "a46e608d5e83084e57024020d11799d49ed4836548f490a8469a21c3e817318d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; R. D. Stephens (2012); model 441, version 2011-10-27."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/euterpe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6a3c01b356720af77a09e054ddc4c7b85383926b5784053a3ae895d8808f28b5",
-      "bytes": 9283,
+      "sha256": "a46e608d5e83084e57024020d11799d49ed4836548f490a8469a21c3e817318d",
+      "bytes": 9305,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6677,
-          "sha256": "da59110c166f252d3d3367748d8619a235fa15fd5f816f4c1332e5923c24e0e7",
+          "bytes": 6699,
+          "sha256": "7ebad4b39883fd88a7f3cfef3209d4115712d786b66d019aa8b5e4864451e9ff",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "euterpe",
-    "materialSha256": "8969a43b5e26b17778dd7daf67dd01193b0092722f6dd1a79d5176359d73ac5d",
+    "materialSha256": "e5efbfd9cb87e6f6d2cefa8cd991be872079ef871f0f467b9381cde7da7141fb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

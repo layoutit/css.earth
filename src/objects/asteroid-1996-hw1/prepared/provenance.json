@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1996-hw1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4f9b8f1cb4d88596296bd32c25fbd0566a445d2a803ce6a4e2dbd7cf4737daa"
+    "sha256": "dcc2fdcae98220bc3786886c8b72ec29a37f69dbcb19f3d5ce7581409e3199b7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c4cc244b1fa7c68182b65688f5685c62fb05fbf2a76194b665c37bd554276428",
+      "sha256": "153946d696e8266e77bb437c0656fc196ffcaf6ece665b50e3e0fb31242c50e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -291,7 +291,7 @@
             "credit": "Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/asteroid-1996-hw1.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -340,7 +340,7 @@
       "sha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996",
       "bytes": 83069,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -365,10 +365,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c4cc244b1fa7c68182b65688f5685c62fb05fbf2a76194b665c37bd554276428",
-      "bytes": 9920,
+      "sha256": "153946d696e8266e77bb437c0656fc196ffcaf6ece665b50e3e0fb31242c50e1",
+      "bytes": 9952,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-thumbnail.webp",
           "bytes": 5714,
           "sha256": "b8fa624375ce6b8c51090f6d326522b96297b1a0c87def366ddeae0660d23144",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-surface@2x.webp",
           "bytes": 362878,
           "sha256": "f4b7bcf01bfcc1aed14573c063e93f0bfc3da7c53eea0788891e14ad70f74850",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -450,13 +450,13 @@
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
           "bytes": 72574,
           "sha256": "9450eb5117dd192f4289770d6d7e290680c6d626dcf718154e195f93e8fdc489",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -487,8 +487,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6638,
-          "sha256": "6eacfbf406dbf885027c2ac8d36cb8b57cd549fce5969fcc244e9bbe23dacd1a",
+          "bytes": 6670,
+          "sha256": "aed54a02270eb4519e86e704325db6dbd697c517d2c1dc8ecba3cd74f6379976",
           "verification": "bytes-verified"
         }
       ],
@@ -551,11 +551,11 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1996-hw1",
-    "materialSha256": "0ce9dd3b4631ec25a6e02779d66e375274f00070357f6c9200edb5f8fe60994a",
+    "materialSha256": "57b5f6c30191f2e54b1f3dc05e1e4806ffd800c81ef1736790f78e49cfe1d81c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "ae3cabd79dc51c1232144cf23318baac82421a484fb9f84e8221553b847c758c"
     }
   }
 }

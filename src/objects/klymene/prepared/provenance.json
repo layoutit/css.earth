@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ecbc828acbe8582f6ea3f4542c73670d55cbd0cf1be09e2894dd6e58f4f350d3"
+    "sha256": "90a0eeff39bcbeb47f61f257fd98ed2aab0ea3ec2f0c12a78cc7e95b957db9db"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c2a19c4b88d40ce825758d9fc24060e8944ffbf57af96bb9697bcb4566d23705",
+      "sha256": "ded8234bc05d0533fa774ef728c0add9cf5b9bbe119ba688c9160b539737e5a4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 797, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/klymene.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c2a19c4b88d40ce825758d9fc24060e8944ffbf57af96bb9697bcb4566d23705",
-      "bytes": 9288,
+      "sha256": "ded8234bc05d0533fa774ef728c0add9cf5b9bbe119ba688c9160b539737e5a4",
+      "bytes": 9310,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6686,
-          "sha256": "02295a78c986d19dce13d550492d7f3743cc986c727db0f26877ebb167a9c43c",
+          "bytes": 6708,
+          "sha256": "6c87d2e2f11a32ac5f0585b0c6a74e8ae2ecaad9d3acc35566b59089d5306c28",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "klymene",
-    "materialSha256": "8ff578ded5c95170d021447fb0aaee01db41929265434f8861e6ce0ed9a9f64b",
+    "materialSha256": "68753e0ddc5005ed7d47442bb158824af682842c6f34cb809c4d8df9da0958bb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

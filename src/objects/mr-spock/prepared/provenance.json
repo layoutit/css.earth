@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4d26fa7788669bdd2037809cb837e5c63c7b5f7b7229fb920afe37a9a36f668"
+    "sha256": "6fd4d987e79d51fd0fab043e6602a302236e68a47ecc14c20811b4edeb1836d8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d4723e1b57a35157ad10a5fa6568dfa829ea325fc6a6f513e94292db661d1719",
+      "sha256": "238d5433bebb746d765209145fddac599ed09ec8d65f20484e5922e8ade9c9ad",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Mr. Spock model 4874; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/mr-spock.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "d4723e1b57a35157ad10a5fa6568dfa829ea325fc6a6f513e94292db661d1719",
+      "sha256": "238d5433bebb746d765209145fddac599ed09ec8d65f20484e5922e8ade9c9ad",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10732,
+      "bytes": 10755,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7903,
-          "sha256": "1384bf75af003f48c0b2a13203b1d17dc3600d0ea4fc04fde185516a9e39545f",
+          "bytes": 7926,
+          "sha256": "94cd1e4edd031bdbe53036241173a3c5e126e5c070aeaa86f4cb14ca452cde06",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "mr-spock",
-    "materialSha256": "1b1ccac090393374ebb62de97d6cd92d317003606a3092aea881f17a6191633b",
+    "materialSha256": "f135a2fb0e83b57ebc4abe84b52b14f7ce642e72538dda1e2d1488c3caf79195",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

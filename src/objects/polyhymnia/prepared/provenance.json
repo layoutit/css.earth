@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d5ca27259e85fadefeb0312a6b57ed62844797f4b7265a91083972b4a21978c"
+    "sha256": "c0c4be87d413755db0691087251cafec31975a6e58bb9c6bac1b078ab367d2ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "200b73385116616aed64cb02a263303eee6c255bf1ad0966df1e6d95261bfb5d",
+      "sha256": "fe70491a9ef49c9218a2392ac549b80f046ca62e6ce3df88d532fb4d08531208",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Polyhymnia model 5163; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/polyhymnia.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "200b73385116616aed64cb02a263303eee6c255bf1ad0966df1e6d95261bfb5d",
+      "sha256": "fe70491a9ef49c9218a2392ac549b80f046ca62e6ce3df88d532fb4d08531208",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11021,
+      "bytes": 11046,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8198,
-          "sha256": "68ae878130cd45de001e3beb28dd296a210d06c65e595d48d0c6140194256306",
+          "bytes": 8223,
+          "sha256": "3041b0b261b40a8f90f03f1cd9b4f0f64de4d5e4b4ecd260123c390a990387c4",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "polyhymnia",
-    "materialSha256": "fc918ff14c5353302ef02064efa7e054c29751511f5c2a19785b1b5902f268a9",
+    "materialSha256": "9c4fa5f3087317cea2d2aa075f75d346efdeba1a939225ae1285b31578f8cb3b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

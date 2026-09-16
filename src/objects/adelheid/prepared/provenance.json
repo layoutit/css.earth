@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c234903ccb812cd13f36a82f0e047e070d465e0075232777b2a344556d1171e"
+    "sha256": "58a3b25f0de7b80fda3f1fabb709228daaa0cc2181f9479da12f604c78df63dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "51b0575db9107193d12969491423a7ddee1da356fbeee6a87980e8818c4de898",
+      "sha256": "f7f9c7fb3f8bef3f22c29879b80ea748c018ce78c09c222a783ee76b22f991e2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2007), Ďurech et al. (2011), Hanuš et al. (2013); model 189, version 2011-03-28."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/adelheid.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "51b0575db9107193d12969491423a7ddee1da356fbeee6a87980e8818c4de898",
-      "bytes": 9637,
+      "sha256": "f7f9c7fb3f8bef3f22c29879b80ea748c018ce78c09c222a783ee76b22f991e2",
+      "bytes": 9660,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7030,
-          "sha256": "b7e2f00180fe40464ce6eddfd06f9d0c751f77965a5137bdc845440e48782f80",
+          "bytes": 7053,
+          "sha256": "bcf68778eace459a2161f88990b42e0d6c94a5fe7efec8f7647817e7321a0b5f",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "adelheid",
-    "materialSha256": "8a0bbc0560b0aa3875dea07a529d6efd99baa87c69e42df405e23d985b8b79cf",
+    "materialSha256": "cc757d347146787e8deb8e3d349fa1ed0dd922b9c5f518be1a4e0959ba890db9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

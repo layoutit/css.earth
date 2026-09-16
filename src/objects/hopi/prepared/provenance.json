@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4c2b77cd692ce18c11d43347cac031c2a076e25e848724691bec7a40576bdf4"
+    "sha256": "994de437995b56c6c082c29acfb4a0f392e0de103b9af1e69aa7876b368c360f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1a505f79c3e33e140470335808de4cb35f680009dbc9a5aa3626581dd14e7e21",
+      "sha256": "994be86cb97d3366ac88bde9f16e42f4c6e8908ad0be68934a647eef6c3e5025",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hopi model 10234; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/hopi.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "1a505f79c3e33e140470335808de4cb35f680009dbc9a5aa3626581dd14e7e21",
+      "sha256": "994be86cb97d3366ac88bde9f16e42f4c6e8908ad0be68934a647eef6c3e5025",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8047,
+      "bytes": 8066,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5270,
-          "sha256": "4a7ae818fe94e77dd6ad881afeb8665c38c0f1eaaaa6cb86ff120ec37bbe3cc3",
+          "bytes": 5289,
+          "sha256": "826891368fc17b55309802a4d6826570291ab7a37b5da7e6a7b43453df07138b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "hopi",
-    "materialSha256": "a03d01c20fc15bbdf2089a78535db1368f176af15867c3978bc51200fbed1bf7",
+    "materialSha256": "44c1cbf97423eaff61b7eb2406da1de46d377228059b30bc4ac663a16afdb936",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

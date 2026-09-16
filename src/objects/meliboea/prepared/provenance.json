@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a417833e1a3caab676cd85a5346c3c0fd2bcb436d3c6b9510ec0f1e31c46611"
+    "sha256": "947ee7bda74ce0f89b8ba39373767ad5578e5b738badb5c00e41473c91433917"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1bcc5e8c14fb2f28bc2f542109593898bc7b38e9972c244af9abaf0b03c3a285",
+      "sha256": "e46e52d7c559b7d3e0a4a769af14738d362a8d929ef194f896952db516aff03d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 5983, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/meliboea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1bcc5e8c14fb2f28bc2f542109593898bc7b38e9972c244af9abaf0b03c3a285",
-      "bytes": 10937,
+      "sha256": "e46e52d7c559b7d3e0a4a769af14738d362a8d929ef194f896952db516aff03d",
+      "bytes": 10960,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8319,
-          "sha256": "b54e0149cff71e147e5cd7e1e3be32e8bfc68682dfa70940238f17c0c69900f8",
+          "bytes": 8342,
+          "sha256": "58b8a88398fb6ae3537cbb3772a3ae411b7f731b85677d66a9ccbe10f78345b1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "meliboea",
-    "materialSha256": "673d906339408a7adea4e27009860b1899ba5f5e772e05ca75960fa4a6f5bcb4",
+    "materialSha256": "52e8aefc6fbca85107c0ae5516275a225e560c62220493be279a816f5e3b8ee7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

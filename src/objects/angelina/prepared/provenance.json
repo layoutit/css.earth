@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "18639c2e098573611b72e19dd1d4b475525c331872dc041cdb89e4176f299d6f"
+    "sha256": "2742359668e63ce601e3e1f27e5deb4cdab31f4a75eabe1673284c5a7d51031f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5b235d8b452f9c47f166b21d9b603cd652a621df0b6fce2a625156ea35fed4bb",
+      "sha256": "0c058eeba15ee2987b1254212b691515454157f9370ddc8464f80b504a1d7b33",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Angelina model 289, version 2011-02-11; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/angelina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5b235d8b452f9c47f166b21d9b603cd652a621df0b6fce2a625156ea35fed4bb",
-      "bytes": 9155,
+      "sha256": "0c058eeba15ee2987b1254212b691515454157f9370ddc8464f80b504a1d7b33",
+      "bytes": 9178,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6847,
-          "sha256": "bb808ad6b768987c448e4a8283193ff0ae562e6db216d2239fbe1f641db08b93",
+          "bytes": 6870,
+          "sha256": "97bd5244ab6831932468e5e08701106f9c631bb178f69421eac33442106abce5",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "angelina",
-    "materialSha256": "a470ca8980bbe9a9f834b3aac32826cc7286a0ab905f119ccc85297ee07878ce",
+    "materialSha256": "2c75bc635c34a4afe2f7a1e3f87d82d8386ea1bb92d1056cdd366919e1b76ee4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

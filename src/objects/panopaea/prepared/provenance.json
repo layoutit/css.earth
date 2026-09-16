@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e74fae12a6b82d412ef51ede8319d7442fdeef1ab75d7c83a21b8990c5db1d0a"
+    "sha256": "e9fdfec10f332a175ab656fb87e415476478cef084dc9dfe02bfb0e8494e5285"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7b0056bbcd8020fead9d06082b061f91d3cc991b79b8df8df0809f196264c3c0",
+      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -297,7 +297,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Panopaea model 6171, version 2023-10-03; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/panopaea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -361,8 +361,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7b0056bbcd8020fead9d06082b061f91d3cc991b79b8df8df0809f196264c3c0",
-      "bytes": 11465,
+      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
+      "bytes": 11488,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -483,8 +483,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9066,
-          "sha256": "b4252ee3959bb488807bf932e505c74ead4f0edcf54f24613257618f7e56e0df",
+          "bytes": 9089,
+          "sha256": "0ff8afdbbb2e859c8495680c1e447ea127e079152ff40c7530583b251a3a2ef4",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "ab6444ba3b6134da4bb4d89a10cad12d44417cbc33082260db720340276101e8",
+    "materialSha256": "4a42e65d5a9e8f1f98608e71c6d2a13d915b18a869ea8c2a698583acfae463e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

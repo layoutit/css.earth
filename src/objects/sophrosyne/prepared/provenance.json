@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "67c1e357c8d8d37100aa833f1c57ddafff4b2188930544f38ef9ce1f04768c5b"
+    "sha256": "81d3925c14763426950f1b1f2ae7589e25ea8f2705bbf4b12efba2d08421cccf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0774102838608f5ec332fdaa0d6ee1377011fbf46a4791ec24e33d44eb95281f",
+      "sha256": "e0089e7ef9d4c01b9c447983be54ab513be100b8a01ac2269e3fa49e27a7fede",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2021); model 5976, version 2022-02-14."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sophrosyne.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0774102838608f5ec332fdaa0d6ee1377011fbf46a4791ec24e33d44eb95281f",
-      "bytes": 11851,
+      "sha256": "e0089e7ef9d4c01b9c447983be54ab513be100b8a01ac2269e3fa49e27a7fede",
+      "bytes": 11876,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9209,
-          "sha256": "3aa56a17639e88940585631bd4ddb090aac55fd1929f2b60ca7f42c762d75004",
+          "bytes": 9234,
+          "sha256": "674e842383c3655d7151003d67df70f4e5bdcd8d3b6d60e6aaba601635f50d7e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "sophrosyne",
-    "materialSha256": "a70975d5ead3a3c33fef8cb5fd3f50410514382e0a2ce3d07005255ec74bc428",
+    "materialSha256": "4f40a2cc2fa41f269ed393d0cb3defce2f8a69f89bd212e81be5287689d04a91",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

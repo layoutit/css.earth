@@ -148,7 +148,7 @@
       "credit": "DAMIT, Astronomical Institute of Charles University; Hekate model 3088, version 2019-06-24; source authors listed in the pinned model record."
     },
     "physical": {
-      "path": "../../../../../../packages/astronomy",
+      "path": "../../../../../packages/astronomy/data/bodies/hekate.json",
       "credit": "Vendored JPL physical and orbital data"
     }
   }

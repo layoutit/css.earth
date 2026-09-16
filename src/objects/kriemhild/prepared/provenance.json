@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "618cc8f91d475d77711ce94b6df1c01904eaf6849dc87d591984a783595e9b72"
+    "sha256": "6bb2e982cc4f531f47b54038ef7afd5cf44d8405dad0531197cebf2b5a558925"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7adf76b05805380331064b219f131c055a870fb8fd4106338f21c2a0950792b2",
+      "sha256": "727748f16db53b25abcb86b6f51448077c157084c84f28708d18e159ed50dd89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 621, version 2013-02-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/kriemhild.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7adf76b05805380331064b219f131c055a870fb8fd4106338f21c2a0950792b2",
-      "bytes": 9664,
+      "sha256": "727748f16db53b25abcb86b6f51448077c157084c84f28708d18e159ed50dd89",
+      "bytes": 9688,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7038,
-          "sha256": "0d33c950ae61340704dc40308a80cfd06d7fe052370930de6324d6e587f7dbc2",
+          "bytes": 7062,
+          "sha256": "dc174d37f561d9d9dce5132974d3da8a2c5e1729ad97483e6247d0a8af40b3a2",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "kriemhild",
-    "materialSha256": "2a39d8b55bbb1b6980077ea5b762688bb49493cc27cdc90651bfcac6a5de76b4",
+    "materialSha256": "0674a207e17afbd0d98925d215739f6a7c92de3bc5e9795c18ce108396b5831f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

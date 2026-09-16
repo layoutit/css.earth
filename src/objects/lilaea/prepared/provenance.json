@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "51aa4ff41abcc58be193d7b6553f52226191c4e9e41a2da344d91170818e018d"
+    "sha256": "abe84affde2e45b6c40c5ab0cbba8d7f8f99b18361cc09734af864604c5f9788"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "70ff5ee38bb32f572261db5288a049b7cc3613abc5503c02c66d4c407dbb50e0",
+      "sha256": "dcf4c0eb2a3229949ed6cb9424a63a9568db4e3e756fa14f83a0a809d2cdac79",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech & Hanuš (2023); model 9003, version 2022-11-29."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lilaea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "70ff5ee38bb32f572261db5288a049b7cc3613abc5503c02c66d4c407dbb50e0",
-      "bytes": 9208,
+      "sha256": "dcf4c0eb2a3229949ed6cb9424a63a9568db4e3e756fa14f83a0a809d2cdac79",
+      "bytes": 9229,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6617,
-          "sha256": "7cedac7d95f45a176655a22781832f01b1a42da0c6562b0e99da4b15a9e3e062",
+          "bytes": 6638,
+          "sha256": "57f7290b0fe108842842c8d5eb2aae0951b2aa2f55abd222a197960c34d94485",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "lilaea",
-    "materialSha256": "1dfd53d87f2625fed464fef693fb5be9d787ca714c31ae825106552e3199423b",
+    "materialSha256": "868ca1f8f65adc834a100b0fd9700a5fa586382497b7933b57f69462e30647e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

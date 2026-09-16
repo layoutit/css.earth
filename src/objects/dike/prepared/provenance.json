@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ffcdbfcc76adabc353fa13c6bedc82170e02cf7ae5cd2919c40cd0726322a72"
+    "sha256": "97dd3e34511dce6adad7d86a0b9636f5d08e06897a32f33c1554b8c474eddeff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f980ade6d2fde730aaa133183e9b775640920a55e038f3fe94969f7605b532fd",
+      "sha256": "4c593fd2c531914c7d4713b1e4fb830712a3a4881a2a8deaed5c0d63880af987",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016), model1144; Hanuš et al. (2018) physical size calibration."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/dike.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "f980ade6d2fde730aaa133183e9b775640920a55e038f3fe94969f7605b532fd",
+      "sha256": "4c593fd2c531914c7d4713b1e4fb830712a3a4881a2a8deaed5c0d63880af987",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7623,
+      "bytes": 7642,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4904,
-          "sha256": "d3db796345e7a3e19f9cbef1da8b4d9e4585548a8ca999fa62b534ac31b165db",
+          "bytes": 4923,
+          "sha256": "7f3e30a5b5bf8041389e279532c5006a348b02b4018d1e0a94422929edcc1a14",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "dike",
-    "materialSha256": "bc0cee55f4be50e10056b87092c288828dbe2068eebe948a9ddbd28e6120d46c",
+    "materialSha256": "9b8ccad22de5db2ca9692c56a4cf6a975eb95d0d8981f141d0964bddb39e92c4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

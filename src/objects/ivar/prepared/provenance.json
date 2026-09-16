@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff2a85081c78ff9952d6157fe73a3a9b61ecacfa0d9df46b28f1422771163872"
+    "sha256": "1a21715a25e44c44b8bdf693db1e318e219590e6637ac9a29348453fb1d0bb21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "60d28b8fd182c6820602efb971b5545bb72abfa7fb65fe241c418851743e2cbe",
+      "sha256": "89bd67dd8d4fab560f21c0eeabb89f690c48c20583d992cc061d4b0973701f86",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2015), Kaasalainen et al. (2004); model 271, version 2016-04-22."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ivar.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "60d28b8fd182c6820602efb971b5545bb72abfa7fb65fe241c418851743e2cbe",
-      "bytes": 7714,
+      "sha256": "89bd67dd8d4fab560f21c0eeabb89f690c48c20583d992cc061d4b0973701f86",
+      "bytes": 7733,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4992,
-          "sha256": "cf23dfa8f06fd80c97fcfb2a099131a049014b0d61f241918373e7dec388e757",
+          "bytes": 5011,
+          "sha256": "fc61e44bafa6b87183dbe4ffaef7b5d64e11443b09822944d88f72c00ff73635",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "ivar",
-    "materialSha256": "2183afb5d93a583882a3e975513c549582a9692a3516d1eed633d0dc2334f947",
+    "materialSha256": "0c648cc3a13d0320d92701241c4ac826e284889c4f4a2f3926a353bd7b43c2b6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

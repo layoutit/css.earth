@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "060d369a9c94c0d787edd443939f1c578242088bab0dd4a91253a9027419e436"
+    "sha256": "93c97c19de828c4ace72fae187c229a6588130111d9d4960950db7d84d976e24"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "45fe200901d682ab4d1ae993aef75308198a56a5dff47aff8d8a2bf6609b1a95",
+      "sha256": "116c5e8a7e995c0a7da8666aad7294ebd2a6b44efe625bb2b2e3ef8adb2fa8b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -293,7 +293,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2019); model 3327, version 2019-05-07."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ajax.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -375,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "45fe200901d682ab4d1ae993aef75308198a56a5dff47aff8d8a2bf6609b1a95",
-      "bytes": 8358,
+      "sha256": "116c5e8a7e995c0a7da8666aad7294ebd2a6b44efe625bb2b2e3ef8adb2fa8b4",
+      "bytes": 8377,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5537,
-          "sha256": "868bd86d284cfdfa01f06eebc4a102839e38a8d50867254fa5bd13e429cab06e",
+          "bytes": 5556,
+          "sha256": "74a8818182437a3cc596a7f552b5dea44263a277aff3ee36da48ca94522a5eb2",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "ajax",
-    "materialSha256": "cfc647893cb38d21f28a2fd9ab7b8208a838f7c455fe663069e5217b60cb33e2",
+    "materialSha256": "478c672bdcf9ca2c1c80c5319dd1134072922a82c9941abd425185e46a3c9db6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

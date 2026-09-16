@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9bf41e186f6eec492c35b4b6a9a93e649720e75be78d88f67e6fb2c598e71d5f"
+    "sha256": "f561ddb48b747cfe1f15ff982f352912c57051327c115005a3a1d1db73d253a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "be7091920cb5afb5032318ad378bda3a10f4f4ff582961f7334ba4c07c7a3901",
+      "sha256": "fa846311975ca904dc896ab71f2a0cb9cbbbf028de888c47c3fecf8d253375b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak et al. (2009); model 169, version 2009-05-29."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/una.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "be7091920cb5afb5032318ad378bda3a10f4f4ff582961f7334ba4c07c7a3901",
-      "bytes": 7870,
+      "sha256": "fa846311975ca904dc896ab71f2a0cb9cbbbf028de888c47c3fecf8d253375b4",
+      "bytes": 7888,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5321,
-          "sha256": "a0d26c1d3d49fc387fa5b902b9887a4cb1026b1f7fb23d6b07291fb942994fed",
+          "bytes": 5339,
+          "sha256": "70bf6facf12e2288ca8339f182d6f85a005446087458c1356edde016c98e4fed",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "una",
-    "materialSha256": "ba04bef50b292b02b1497a79f1f61eeb643a717b4a240027310a9cab91898eaa",
+    "materialSha256": "2cda097b02fe41e5655d7f07461882688ad6d8656dcc6f8fbb4116c1989d6a07",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

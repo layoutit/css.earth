@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "rhea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "964a06c58b23c277568fcfdf48f669f4d528aa9a054ec82e032db622a3bd13e1"
+    "sha256": "a98e9b52f5166c0ebe196884e95e8d97d5e8ee920eb859cc387a8ccdc9adbff8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fe5b2e7217a3cb46bb0aff53efac592a064433d5a5bef8f89e547ceaa0711f78",
+      "sha256": "47a4fc5ba01ba0e3a045080ad6dda268e20412cd170a92e024770de0ad4f785b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -581,7 +581,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/rhea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -713,7 +713,7 @@
       "sha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
       "bytes": 66401915,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -752,7 +752,7 @@
       "sha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -814,7 +814,7 @@
       "sha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
       "bytes": 10389170,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -880,7 +880,7 @@
       "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
       "bytes": 48826,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -934,7 +934,7 @@
       "sha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -991,7 +991,7 @@
       "sha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1047,7 +1047,7 @@
       "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
       "bytes": 133351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1064,10 +1064,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fe5b2e7217a3cb46bb0aff53efac592a064433d5a5bef8f89e547ceaa0711f78",
-      "bytes": 13842,
+      "sha256": "47a4fc5ba01ba0e3a045080ad6dda268e20412cd170a92e024770de0ad4f785b",
+      "bytes": 13861,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1087,7 +1087,7 @@
       "sha256": "3e3dee1d341968b2aba0e30ffbc2759e9d4e25f72277fa7ce2b6ca483ee12db3",
       "bytes": 995,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1113,7 +1113,7 @@
       "sha256": "e483758bc3e1d9b3f38a8ccdc4f73d8e11a68e792249b24a2ea62d1ded1b51c9",
       "bytes": 414397,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1140,7 +1140,7 @@
       "sha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
       "bytes": 151,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1167,7 +1167,7 @@
       "sha256": "572d392dec7cc44cb7ff4239bdee0dc84271c43610c5213b8f20568e644609dd",
       "bytes": 2096,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1211,13 +1211,13 @@
           "url": "/scenes/rhea/rhea-normal-thumbnail.webp",
           "bytes": 2772,
           "sha256": "d629d4430b5fcfae757870c697e17b2e6b054b50b984ee52ec706dc0984c8ce9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "bytes": 6734102,
           "sha256": "f619f250042f2b95d18f980f2342509b1debb88889bcc6f0d914cc64c89fbfdf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1269,13 +1269,13 @@
           "url": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
           "bytes": 5438,
           "sha256": "b6adc3b37aa5421f9c4cda8d4ed5ea0bf1650cbfa4557e4ef3a103e0734f5aec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
           "bytes": 13970660,
           "sha256": "a92c6969c988fb9f0ace46318a10946410382463c9ca31c5b4873e5d0a96e73f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1327,13 +1327,13 @@
           "url": "/scenes/rhea/rhea-infrared-thumbnail.webp",
           "bytes": 4220,
           "sha256": "909de69ac8d2b6a13f4999c523a509c4ad13340b2a002013babb9adb69d05d81",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-infrared-surface@2x.webp",
           "bytes": 240274,
           "sha256": "5254a1199767b509f94d44bbffea58b0b234662ee73a3b0bd4572486bb95ac55",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1379,19 +1379,19 @@
           "url": "/scenes/rhea/rhea-elevation-thumbnail.webp",
           "bytes": 7446,
           "sha256": "684b40b3773bfca89f66f1d3cd691991a995372bafc2ba6bbc89427e75d169f4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
           "bytes": 3131398,
           "sha256": "bbd7aba7459e9dcd93f5740c8fb873207f9cd89b1464211408361e37d025f921",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1432,19 +1432,19 @@
           "url": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
           "bytes": 3668,
           "sha256": "97457e6cd6c860756fafb6b48b372a01a178bd7a28dcb7cb86110ea51cd43dab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
           "bytes": 19214662,
           "sha256": "9e90648db0f0cd61e98f09142f0beaeaabe77a1d0f219350fd34be994b2fa15c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1484,19 +1484,19 @@
           "url": "/scenes/rhea/rhea-ice-absorption-thumbnail.webp",
           "bytes": 3478,
           "sha256": "cb3139d6bf2483ab296243498ed7b56de563ac7713704398b73949d44e329cc8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-legend.webp",
           "bytes": 162,
           "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-surface@2x.webp",
           "bytes": 180602,
           "sha256": "4715f0187b7834a3738fa5af7ed8038b51c24ea036e1a44fbeacaddb3013fb72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1534,13 +1534,13 @@
           "url": "/scenes/rhea/rhea-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
           "bytes": 111830,
           "sha256": "514a1a61e4bf4fa6c6e94baf3db5475c2da5850a081e53fe5b7c4f5edc691e8d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1571,8 +1571,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5741,
-          "sha256": "a2e648257b9110c26449b3c6b4cc9588b6dafe5426a457f49f95ee6aad6c0a96",
+          "bytes": 5641,
+          "sha256": "4351e95a027d04af6490fa33c0888bf2acd267796555f84974aeddb75c5fd122",
           "verification": "bytes-verified"
         }
       ],
@@ -1609,7 +1609,7 @@
           "url": "/scenes/rhea/rhea-features.json",
           "bytes": 208080,
           "sha256": "5c96cba5c41ad06a111d918e6e3ff98922c34497e4f2184b7621ce810ab900e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1796,11 +1796,11 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "76797bf3abc33194d68fc56fe1dbc6ed8e4cc877cf866a178387d8d2f423fdbc",
+    "materialSha256": "46c8e8e7ae03698595526de68db85f820aa02ffc61d4578e50819fdb28d1bb19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "4a6921cf55cc9664b2967e6b164f4f351784865275a242988faa9db9b92ce0d2"
     }
   }
 }

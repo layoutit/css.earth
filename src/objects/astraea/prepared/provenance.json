@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8506988791ba00dbb1a40b1693647a33c936a8c55bb4e3adb5f8b69a9b860c9e"
+    "sha256": "c0fdbc9cf0368f127c766a5e6bc4fbd19ef51b389d12be32f1a7e47ae0dbd60f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "747ac52838cce9baa37acbade8f28f17e9d00cf5e35aacfa87b3a8a87eaf22d7",
+      "sha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Astraea model 1816, version 2017-05-26; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/astraea.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "747ac52838cce9baa37acbade8f28f17e9d00cf5e35aacfa87b3a8a87eaf22d7",
-      "bytes": 9486,
+      "sha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
+      "bytes": 9508,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7188,
-          "sha256": "24893d85d141149d109a149f33f997c240a249ee92c8e51653206f6d9a79e86d",
+          "bytes": 7210,
+          "sha256": "9cbc27dd2cd6b0e6efc5eb0651c5fa62b9d1758f19667d3477008364604f3cfd",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "astraea",
-    "materialSha256": "b6dc22fb9ad56f011c3e6b7aa61f98edadb62dd7a3b4effdee191d61329c3053",
+    "materialSha256": "b044c0f82d1a766775a4dba8629dd2a1e8f12db5f172263e11905b3a48deaac4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

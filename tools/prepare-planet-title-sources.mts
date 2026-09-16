@@ -31,7 +31,8 @@ export async function preparePlanetTitleSources({
       ? `${JSON.stringify({ schema: "cssearth-title-source@1", ...source }, null, 2)}\n`
       : moduleSource);
   },
-}: {fontPath?: string; writeSource?: (planet: TitleObject, moduleSource: string, source: PlanetTitleSource) => Promise<void>} = {}) {
+  ids,
+}: {fontPath?: string; writeSource?: (planet: TitleObject, moduleSource: string, source: PlanetTitleSource) => Promise<void>; ids?: readonly string[]} = {}) {
   const fontBytes = await readFile(fontPath);
   if (sha256(fontBytes) !== PLANET_TITLE_RECIPE.sourceSha256) {
     throw new Error("The checked Inter title font does not match its pinned hash.");
@@ -44,7 +45,9 @@ export async function preparePlanetTitleSources({
     opsz: PLANET_TITLE_RECIPE.opticalSize,
   });
   const prepared: Record<string, {source: PlanetTitleSource; moduleSource: string}> = {};
+  if (ids && ids.some(id => !SCENE_OBJECTS.some(planet => planet.id === id))) throw new TypeError(`Unknown title object: ${ids.join(', ')}.`);
   for (const planet of SCENE_OBJECTS) {
+    if (ids && !ids.includes(planet.id)) continue;
     let label = planet.name;
     try {
       const content = requireRecord(JSON.parse(await readFile(resolve(projectRoot, `src/objects/${planet.id}/source/content/object.json`), 'utf8')));
@@ -148,5 +151,6 @@ function stableNumber(value: number) {
 
 if (process.argv[1] &&
     import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await preparePlanetTitleSources();
+  const ids = process.argv.slice(2);
+  await preparePlanetTitleSources(ids.length ? { ids } : {});
 }

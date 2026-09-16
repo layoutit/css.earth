@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pallas",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b7f7e801775d6d06ec64950453a03003d77044c5eb433e1ff3320c3db552a8f"
+    "sha256": "fd45909395f53eb707576ef58809936843f7879c1345a2ff7034e79f4d67f621"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2411f91ea9e90f90e9ee128d7a25fa4d13a30d6a6331a86cbc63883ee7936c7f",
+      "sha256": "286a83c0676c860755a5e8b261b87a0c5881bcd0529996e44b80846535207852",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/pallas.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e",
       "bytes": 2703739,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2411f91ea9e90f90e9ee128d7a25fa4d13a30d6a6331a86cbc63883ee7936c7f",
-      "bytes": 8292,
+      "sha256": "286a83c0676c860755a5e8b261b87a0c5881bcd0529996e44b80846535207852",
+      "bytes": 8313,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/pallas/pallas-elevation-thumbnail.webp",
           "bytes": 5258,
           "sha256": "47250e3b32ad389d3118910ef46cd914bb3ae5773a2966cb542a93ab6937882c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallas/pallas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallas/pallas-elevation-surface@2x.webp",
           "bytes": 308912,
           "sha256": "862dec3052332666ef5d697f9f5c1f6b0391e711169475ba022033defaf7e2bd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/pallas/pallas-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallas/pallas-shape-surface@2x.webp",
           "bytes": 61932,
           "sha256": "84cf3a84aff7e6f1dd2da58e0d9e88a64a2f9dbb053fbcf90222d6eafb7671a1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6005,
-          "sha256": "33c6de1b74a5b465b3b3c76066b42f43be4962ed862f4075936956458278c27a",
+          "bytes": 6026,
+          "sha256": "6caee13a8248b8dbf145c67daf9248363c781c17fd8904942356be6fa0283ad4",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "pallas",
-    "materialSha256": "2db2da3d394b469197eafd777d9c488e15b9839935d163de0567e31767e485ad",
+    "materialSha256": "7aeb54d1bcf5e84776dacd52bcf67550920b200f70cfc4ad1888835c832e78dc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "e165dd6e1e0558356fcf62690f3d9d15998fac18c6940d09f57102e8763a34af"
     }
   }
 }

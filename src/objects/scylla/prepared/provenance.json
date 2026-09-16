@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2f712a97ae6a919dc731d02ade6ffe06cebf3dc29769315d858cc9f1ad7aae9"
+    "sha256": "2742a2f90aa1db752e479c57778c564c3de733770abcabada7d03cd1af74e025"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0532c2311fac9f0e9cf5cc1755cd7a8481dada09887b1871fed87a145f830fec",
+      "sha256": "ca27b69f071fc8090a6d0f7b62a1aef87cd1cdb1b17772243a06d66d8250c69f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 920, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/scylla.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0532c2311fac9f0e9cf5cc1755cd7a8481dada09887b1871fed87a145f830fec",
-      "bytes": 9262,
+      "sha256": "ca27b69f071fc8090a6d0f7b62a1aef87cd1cdb1b17772243a06d66d8250c69f",
+      "bytes": 9283,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6671,
-          "sha256": "c14bc5827c1da391ae365f928865cba3d1b4c5e801e24354b49cac72dc883263",
+          "bytes": 6692,
+          "sha256": "0961b2e18d7b9244662b2b40a71fd6d289c81c6786d6752600dcc201071b8eea",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "scylla",
-    "materialSha256": "5b200b08d2d67c9fa2187dfaaa697f17b61839bd3a8608bf1231395b5f766410",
+    "materialSha256": "9cc445105ae5ac3da3a7ac0b804bf4af17e602a5725e9deb3595444f80676d51",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -273,6 +273,11 @@ For a photographic resolution refresh on the existing raster lane, use the
 Keep geometry and lighting fixed, prepare one body at a time, and compare actual
 close-ups and image delivery size before accepting the larger texture.
 
+For an authored object, `node tools/prepare-object.mts <id>` runs the whole preparation chain in order for that object only and
+names the step that failed; resume with `--from <step>`. A placed star starts with
+`node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and `node tools/objects/new-star.mts <id>`; see the
+[implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.
+
 Generate the assets actually consumed by each selected view—surface and pole
 atlases, thumbnails, minimaps, markers and legends where applicable—from the
 same prepared interpretation. A minimap needs its own small image, not an HD

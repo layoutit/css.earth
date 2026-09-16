@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "814324914e872088dfab656dee3dbdf5c95e5e6ce3ac8b5bb5697a207af6e439"
+    "sha256": "bf3b96389a0295c2b01e8ffd5bca49374c642a9647a23cca0efe2eed8285bfa4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ec04d7d430b5912e0996147f14a50573ec3704973a3ae6a6e9ab27478e59b1a4",
+      "sha256": "4fc5c821a4ded29fefd802db58829877e0965f0c2e4c364af34987b3072700e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 943, version 2016-01-04."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/lachesis.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ec04d7d430b5912e0996147f14a50573ec3704973a3ae6a6e9ab27478e59b1a4",
-      "bytes": 10747,
+      "sha256": "4fc5c821a4ded29fefd802db58829877e0965f0c2e4c364af34987b3072700e7",
+      "bytes": 10770,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8130,
-          "sha256": "131d3c855d1664846dd16002258d0ce3204ed6a633716e1f3c18bbb949ec85cb",
+          "bytes": 8153,
+          "sha256": "7bc99e78db2efbfdd9a936ab44f47fb01d5b2091126f2ef830240fadf9913423",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "lachesis",
-    "materialSha256": "2a5d69aef76f5826dc02fd0ac0ec02e574aed9238b48938a50be8ffd6d295810",
+    "materialSha256": "9b2036b034991c252222e262aeab806bb38220550615f1f7088927922315de57",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

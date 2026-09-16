@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "europa-52",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "541d763faa8e716fe465cfc9bca8fe6e2ddb7ba6f035e2ae412d89d1938f374b"
+    "sha256": "5524e108f2ab2d38276b88f39d1816cbb91afa23ccd2b05127f698296af2315f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b093f5ad47c2067a1d41b715ec9ca8e41ac92251f204b54a2c92b6fc2ecb7911",
+      "sha256": "ff2138186023dce0af350583a0b83d6dfce567b139fc6a83b834c386517984c3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,7 +287,7 @@
             "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/europa-52.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -336,7 +336,7 @@
       "sha256": "0b9db737f62916855519b472444c4ba6e96afe472d5ae4256dc9eb4d9aa1d935",
       "bytes": 440059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b093f5ad47c2067a1d41b715ec9ca8e41ac92251f204b54a2c92b6fc2ecb7911",
-      "bytes": 9459,
+      "sha256": "ff2138186023dce0af350583a0b83d6dfce567b139fc6a83b834c386517984c3",
+      "bytes": 9483,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -399,19 +399,19 @@
           "url": "/scenes/europa-52/europa-52-elevation-thumbnail.webp",
           "bytes": 4732,
           "sha256": "d2d86747c299c00bc0c40d1db8f86b0fd42a7cb8189baab037a32ac670a2dbfc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-surface@2x.webp",
           "bytes": 280818,
           "sha256": "6cec4adfd9f851f84080ed4f6f12e931834e71ec1b2e04eabe6917ddf9ee5b3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -449,13 +449,13 @@
           "url": "/scenes/europa-52/europa-52-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-shape-surface@2x.webp",
           "bytes": 57164,
           "sha256": "fa31ef4b95ec782b6396091fe3792a3dcc745db1f10b792324d4b62858dc9a1b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -486,8 +486,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7135,
-          "sha256": "140e370f3f00ce2e22345bc108eede1c1c72961e1902f2fd174198d46b0cdde0",
+          "bytes": 7159,
+          "sha256": "5e5e17fa2fa7ad16f1884ee8ec7c6dc4c107a4f49d7161f7efb17f0716e783f7",
           "verification": "bytes-verified"
         }
       ],
@@ -550,11 +550,11 @@
   },
   "lastPreparation": {
     "objectId": "europa-52",
-    "materialSha256": "745e454428be4b2177d2000640fa219b6bfd12b813dd20014cd98557209d67c1",
+    "materialSha256": "57ccab752b4a8604fa45e3dc2765fe3527d6ce4b9008f8167d5c20c317d82390",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "63189af112de64eb75c452b96d1673b97f34981d06599e7c5570ae78c21fe6be"
     }
   }
 }

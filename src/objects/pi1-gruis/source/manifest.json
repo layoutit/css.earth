@@ -163,7 +163,7 @@
     },
     {
       "expectedBytes": 1868,
-      "expectedSha256": "3dde8260783803c17e14d679b1f0652f48e79582218b741bb3cbc0ddbfc54ada",
+      "expectedSha256": "66f6a50610c9d64b10a99a43a9661c7dbe696eb24aa9e5760f72182c64a30517",
       "id": "pi1-gruis-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -262,8 +262,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 4230,
-      "expectedSha256": "72194f69ea656ba4e5385bd56856553136b8b5bdb0cd92c7828bff8098c3f758",
+      "expectedBytes": 4254,
+      "expectedSha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

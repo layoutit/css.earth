@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "de5ad5f668e672ea09d20970d195e9ca740294fbfee226198996fda1bdb5f4e7"
+    "sha256": "365fbfaabf91ba62375a9559b979dfeafd21cd7f56ce84ad380716227aefeba1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "899f47ca4e48640ea19ce7260c358a38bc8ecda90eaef114b6661fb9650be495",
+      "sha256": "bcd09b6d878df8756a09bb3e49146c550437022d5d0fcab0b4cb827683d2eb05",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Proserpina model 1189; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/proserpina.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "899f47ca4e48640ea19ce7260c358a38bc8ecda90eaef114b6661fb9650be495",
+      "sha256": "bcd09b6d878df8756a09bb3e49146c550437022d5d0fcab0b4cb827683d2eb05",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11779,
+      "bytes": 11804,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8952,
-          "sha256": "a2d233cc6ff268a3a592fcf10e4f9b3e10abfb65267e7272ded4fe4514a01d62",
+          "bytes": 8977,
+          "sha256": "8044bcce3edb88c854a49e1374b1cce27469e469d837a061814590b74a82edcc",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "proserpina",
-    "materialSha256": "9aba8f570f411c341ab4b8a5fede35bff1ebefff7b79f1574fdeb810f2994de3",
+    "materialSha256": "87d39c6dc07ea8c41f6943227a4e272ccf81a3101ea766bc5c88e30b78b6f087",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

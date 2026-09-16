@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a093ac7796f2149e55df7ac724f2c19eca88399cb619d9287a860c421dfcf4a3"
+    "sha256": "c963747458fbe4839fc486303171490a0f8a6bdca70556aa39d9feadf92d8c1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "228cc6020408d454b20e31103010ccaf9a61f92f8a559e2ca488fdc596a033eb",
+      "sha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Sappho model 1832, version 2017-06-09; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/sappho.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "228cc6020408d454b20e31103010ccaf9a61f92f8a559e2ca488fdc596a033eb",
-      "bytes": 9354,
+      "sha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
+      "bytes": 9375,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7068,
-          "sha256": "f064f6a18e3364a687cf2d5d0559dbd63e9a5e6b6a15f4db36f6d6baf058e827",
+          "bytes": 7089,
+          "sha256": "92e4a098e8616635925b738745ac0f01685092b43ec1d9bd8901eb5b8161cd76",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "sappho",
-    "materialSha256": "05614f87d4ae2f781abd0677129d59103b43a34d3e476c224026b30bae78f6eb",
+    "materialSha256": "225796eb8c115f2aac7014459c750997147f7a3eba8c7000e0022758c6597ee9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

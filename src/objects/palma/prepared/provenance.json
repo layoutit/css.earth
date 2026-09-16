@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64d2bc1e1fc7099cb0b9dbaa76df996dce3886af5185b83f217aca713c0f4af5"
+    "sha256": "92b617c9568c778cdf574296e37b06475f047f4df6fcc9bdbf9ea8176bf6430d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d79fceeb80882652216324c7d038e32e4fd79487589a6c931d0ce093e0ee255e",
+      "sha256": "991a82d27d233ac08434ce187dfc09549fc8ba76c8d0b64ce13037d4fe608852",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Palma model 298, version 2011-02-18; source authors listed in the pinned model record."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/palma.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -353,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d79fceeb80882652216324c7d038e32e4fd79487589a6c931d0ce093e0ee255e",
-      "bytes": 8293,
+      "sha256": "991a82d27d233ac08434ce187dfc09549fc8ba76c8d0b64ce13037d4fe608852",
+      "bytes": 8313,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -475,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6021,
-          "sha256": "378e556a5369046bbbc0708c31797f23cb9f511396e99ec183638902559744db",
+          "bytes": 6041,
+          "sha256": "38393c6e96ff330b7b1b5f5d576f59b4a5eb30fd2f2eaf4593128e82dd716d9a",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "palma",
-    "materialSha256": "67fb1d372329913c6fed2349c7516d102005af8fb6243172ef4fb3e726fe2f4f",
+    "materialSha256": "5ee7c47b66c898a109a3e6c2d65b7daf2d7bbefd4d07d27bce7d64dd3ff84ce0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

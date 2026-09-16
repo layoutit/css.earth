@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "304d3b2a39768ce81d649c97be66e2ca02f5bc9b5f4d0eaa07db2d0986a1873c"
+    "sha256": "97cfb9db31dbb4e0a8f83699757e80757d64822d6c77bb93e1d53209cbb2647f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -255,7 +255,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0605d807a4936f39e42bb7e838ac2e0ee1053b261afed467be2b0c20b19defb5",
+      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -460,7 +460,7 @@
             "credit": "M. Montargès, R. Norris, A. Chiavassa et al. (2018); ESO/VLTI/PIONIER; images from CDS J/A+A/614/A12"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/ce-tauri.json",
             "credit": "Published limb-darkened diameter at the Gaia DR3 distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
@@ -620,8 +620,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0605d807a4936f39e42bb7e838ac2e0ee1053b261afed467be2b0c20b19defb5",
-      "bytes": 6487,
+      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
+      "bytes": 6510,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -916,8 +916,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5015,
-          "sha256": "7efeaca5585066cdf8d905beb0262c4fbd55d5c873d09c4b6fad285925877db7",
+          "bytes": 5038,
+          "sha256": "13cb4e0019d60447e499b529c157201fca8a9fd457e8170b913df919cdcd2ac6",
           "verification": "bytes-verified"
         }
       ],
@@ -980,7 +980,7 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "00ffdd7e739a9e09edda0727d097c0cd49f03db3d80122616344e3e01c33c493",
+    "materialSha256": "1dd55363869a5c0e49fa3985493f32153fb17b1f90187ed43c31066717cdff66",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

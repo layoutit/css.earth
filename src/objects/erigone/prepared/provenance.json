@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "93d8a7c7d79511c07acdf775fc2d25f3ef4fc61e3d7245a59e03a74b6faa55b8"
+    "sha256": "a3d5fddccfea2cd31023e7d803493919979e856a8ca025fe4d33cfc418e6783a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "08c4bcbd9da49f2f9b90baad5913c47508f0510ecc7bb335757d991230e190f5",
+      "sha256": "e1e3bd841c17c8342c1383d520d545424b390b88a90513c2cb12cdc5173e73fe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2018), Ďurech et al. (2016); model 1399, version 2017-05-11."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/erigone.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "08c4bcbd9da49f2f9b90baad5913c47508f0510ecc7bb335757d991230e190f5",
-      "bytes": 9459,
+      "sha256": "e1e3bd841c17c8342c1383d520d545424b390b88a90513c2cb12cdc5173e73fe",
+      "bytes": 9481,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6855,
-          "sha256": "abe3a2c7042c2b94e6fd18cb32343fe33a43dcf2df081f9dc397245d9cd98af0",
+          "bytes": 6877,
+          "sha256": "b6882db814d104c5616fa8ce932f340bd5f99b0925e50e726b63a23c9f8ba25c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "erigone",
-    "materialSha256": "8906fe0dd098588cd51c61a66bc423319e7a02a1db803aa00e269b0a95345d09",
+    "materialSha256": "4ff28105d170ccfdf30a9fd44db7a5546804da80cc097e897fa86b3d77ddc9a3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

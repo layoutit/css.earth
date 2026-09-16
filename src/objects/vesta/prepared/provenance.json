@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vesta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a552ad850a4e4d099c552a7ff319c335b79eeffc8324582df2d05feb2e0a2a4f"
+    "sha256": "d0496b4f60a37bdfebb6046856f922797120cd4c3c7bdacf58e978da1a89470c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -188,7 +188,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8f0fe3dd8ebc2810483de97315466e30ba8f184a1eb6d2b41315798d7d7a39d",
+      "sha256": "4765ca31462d5f54c0ca436b3c528b498f5fdabac7812b057fc0cb8e63c74643",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -385,7 +385,7 @@
             "credit": "NASA Science"
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/vesta.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -497,7 +497,7 @@
       "sha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
       "bytes": 374574072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -552,7 +552,7 @@
       "sha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
       "bytes": 457291404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -609,7 +609,7 @@
       "sha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
       "bytes": 878609842,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -665,7 +665,7 @@
       "sha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
       "bytes": 446346023,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -690,10 +690,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f8f0fe3dd8ebc2810483de97315466e30ba8f184a1eb6d2b41315798d7d7a39d",
-      "bytes": 10001,
+      "sha256": "4765ca31462d5f54c0ca436b3c528b498f5fdabac7812b057fc0cb8e63c74643",
+      "bytes": 10021,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -713,7 +713,7 @@
       "sha256": "547f49cb9b21176885a0d353786d61c74e569340ef97d47d2c83a776f5dd2534",
       "bytes": 1000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -739,7 +739,7 @@
       "sha256": "ee0007931abcecc970a2184b582995f9f6026d630661f0840607aa7c5006269f",
       "bytes": 314564,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -766,7 +766,7 @@
       "sha256": "75f4e502b985c08b6a527b7c6459a3ca268a0bb27ce5da8c518435d647501fa5",
       "bytes": 152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -793,7 +793,7 @@
       "sha256": "5f6e1fec30acfda423868511c7219ead5e38998c985d1aa96ecdd28e02f99e03",
       "bytes": 4724,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -839,13 +839,13 @@
           "url": "/scenes/vesta/vesta-normal-thumbnail.webp",
           "bytes": 6002,
           "sha256": "47f63a5a4d91ac1b76bc054bea22d6e3803356b5cf56ac702540ce1041faee5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-normal-surface@2x.webp",
           "bytes": 4293850,
           "sha256": "88e8e4861d21c6efbc87bd9fde61bf9d8a1f2e1fb4764286bcb13fb6712eacc5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -899,13 +899,13 @@
           "url": "/scenes/vesta/vesta-surface-thumbnail.webp",
           "bytes": 3782,
           "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-surface-surface@2x.webp",
           "bytes": 2994634,
           "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -960,13 +960,13 @@
           "url": "/scenes/vesta/vesta-ratios-thumbnail.webp",
           "bytes": 8258,
           "sha256": "aa4ac057660924f899099dc645ce72e9bf68209ddebb99749fc01cfba5371746",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-ratios-surface@2x.webp",
           "bytes": 3378534,
           "sha256": "59252fe1b12ba4917bad014b5f7d3978fd901eb127db19f618a3daed3ec8e07a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1009,19 +1009,19 @@
           "url": "/scenes/vesta/vesta-elevation-thumbnail.webp",
           "bytes": 7354,
           "sha256": "d3493ac79ef0c7d57e7f8b63ed47e8aeddcc04584af550f3d8d299d6489e9132",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-elevation-surface@2x.webp",
           "bytes": 1819878,
           "sha256": "8141ca24ec36d809d035f1e34e709a917e1dbfc5b724cafd39d3a5b0e8bf7d85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1052,8 +1052,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5669,
-          "sha256": "c850cdde3f672da59eb843606046db5305d851a87d79d22cf39401d5011c5d33",
+          "bytes": 5570,
+          "sha256": "e489cbf7cd2be2f3a08d633116be7e06e20034a019cf340878bbabd9654d6387",
           "verification": "bytes-verified"
         }
       ],
@@ -1090,7 +1090,7 @@
           "url": "/scenes/vesta/vesta-features.json",
           "bytes": 173735,
           "sha256": "55f7e5bf942353cd68d26dc09dfba9eecec5400c33667230e3f843ad60524d1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1202,11 +1202,11 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "f2d0aa4b8aeda1ef93f0ade156e4e2d7d25f91dc59535759bb1755258c71e884",
+    "materialSha256": "3b60038732b8e5db559c84d4eb89edb5bc1f78fb4c3176a7412980cd82d484c3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "7795dde4e615e4e0790ddfabbee9cf81a71958b9d2bb2828a408275c3d1c26c9"
     }
   }
 }

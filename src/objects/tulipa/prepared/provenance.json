@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "706ad81f35a69d63791e6bd11f907edf224d1575133ccbdca14c8a09d894d058"
+    "sha256": "45eed65765eb7ef256574526e5be89f19a049695ba1674b6f2894d2372ab720d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8fe4ff1e8a3a5ff2e0505abf47456663bdb49e971600eb6f380eb3de8aa34e2c",
+      "sha256": "13a3dc158d38080a4c65b5a4475eb6744128bc235fcf730959e2f7a290a34dad",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Tulipa model 1779; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/tulipa.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "8fe4ff1e8a3a5ff2e0505abf47456663bdb49e971600eb6f380eb3de8aa34e2c",
+      "sha256": "13a3dc158d38080a4c65b5a4475eb6744128bc235fcf730959e2f7a290a34dad",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8723,
+      "bytes": 8744,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5938,
-          "sha256": "489a6c427dc5e1eaac0d914f2dfda39b5d713147a6d675f2f8dad5c10fecd8e3",
+          "bytes": 5959,
+          "sha256": "5d1e50e273ded76b84a7e5639d4ba3bf6e5e7d9e6bd4d5a9e2272b115d868d6c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "tulipa",
-    "materialSha256": "55dfd9a52b67ec9416ae7f2610a3724f40ef2137ddf91a5c28dedac7ac248c32",
+    "materialSha256": "24abefb112bc5643bd4b1a9e066ad8f1cb717f7f9eae52a072c9a91c98ad1fa2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

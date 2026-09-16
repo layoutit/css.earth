@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PARSEC_KM, directionFromRaDec, skyBasis, starAstrometry, starStateKm } from './stars.js'
+import { PARSEC_KM, directionFromRaDec, skyBasis, skyPlaneOrientation, starAstrometry, starStateKm } from './stars.js'
 import { BODIES } from './bodies.js'
 
 describe('star astrometry', () => {
@@ -28,5 +28,23 @@ describe('star astrometry', () => {
   it('is a parentless star with a physical radius', () => {
     expect(BODIES.betelgeuse.parent).toBeNull()
     expect(BODIES.betelgeuse.meanRadiusKm).toBe(531514800)
+  })
+  it('places a sky-plane axis at its position angle with longitude 0 toward the Earth, north and south of the equator', () => {
+    for (const star of [{ rightAscensionDegrees: 335.684, declinationDegrees: -45.948 }, { rightAscensionDegrees: 83.053, declinationDegrees: 18.594 }]) {
+      for (const positionAngle of [0, 48, -120]) {
+        const orientation = skyPlaneOrientation(star, positionAngle)
+        const pole = directionFromRaDec(orientation.rightAscensionDegrees, orientation.declinationDegrees)
+        const sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees), { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+        const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i]!, 0)
+        expect(dot(pole, sight)).toBeCloseTo(0, 12)
+        expect(Math.atan2(dot(pole, east), dot(pole, north)) * 180 / Math.PI).toBeCloseTo(positionAngle, 9)
+        // The body's +x axis at meridian W, rotated from the node about the pole, points at the Earth.
+        const node = [-pole[1]! / Math.hypot(pole[0]!, pole[1]!), pole[0]! / Math.hypot(pole[0]!, pole[1]!), 0]
+        const w = orientation.displayMeridianDegrees * Math.PI / 180
+        const cross = [pole[1]! * node[2]! - pole[2]! * node[1]!, pole[2]! * node[0]! - pole[0]! * node[2]!, pole[0]! * node[1]! - pole[1]! * node[0]!]
+        const primeMeridian = node.map((v, i) => Math.cos(w) * v + Math.sin(w) * cross[i]!)
+        for (let axis = 0; axis < 3; axis++) expect(primeMeridian[axis]!).toBeCloseTo(-sight[axis]!, 9)
+      }
+    }
   })
 })

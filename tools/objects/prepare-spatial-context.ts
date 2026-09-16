@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { basename, dirname, resolve } from 'node:path';
+import { basename, dirname, relative, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM, isSceneSatellite, sceneSatelliteStateKm } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
@@ -190,4 +190,7 @@ if (invoked) {
   const [sourcePath, outputPath, solarGeometryPath = resolve(process.cwd(), 'src/platform/solar-geometry.mts')] = process.argv.slice(2);
   if (!sourcePath || !outputPath || process.argv.length > 5) throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts]');
   await prepareSpatialContext({ sourcePath: resolve(sourcePath), outputPath: resolve(outputPath), solarGeometryPath });
+  // Manifests that pin this output (the nearby universe's navigation frame) follow it, so no star addition leaves a stale pin.
+  const { pinManifestsReferencing } = await import(pathToFileURL(resolve(process.cwd(), 'tools/pin-object-documents.mts')).href) as { pinManifestsReferencing: (root: string, path: string) => Promise<{ objectId: string; path: string; expectedBytes: number }[]> };
+  for (const change of await pinManifestsReferencing(process.cwd(), relative(process.cwd(), resolve(outputPath)))) console.log(`pinned ${change.objectId} ${change.path} (${change.expectedBytes} bytes)`);
 }

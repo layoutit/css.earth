@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a51f49e420621e9e1f3f6c17a13232c53a9ed456c0f036a577c881fa23b2ea91"
+    "sha256": "c26df4b5d4b72373b8c3e3a362c3d405765de57040a4331b856bcca857a6e49d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db8ebee0c1a7c92e275aa9a85b4f75353cfb656f826752a23f85e9f6b144beb4",
+      "sha256": "4a4b6a8f01d50a7d2aa6d8e30e1045a7225a93b4657ecb4c73042c93f26f87e4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2018); model 1743, version 2017-03-31."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/eos.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db8ebee0c1a7c92e275aa9a85b4f75353cfb656f826752a23f85e9f6b144beb4",
-      "bytes": 7523,
+      "sha256": "4a4b6a8f01d50a7d2aa6d8e30e1045a7225a93b4657ecb4c73042c93f26f87e4",
+      "bytes": 7541,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4971,
-          "sha256": "fefa6193dece69773251f5f088e51ce69e74e2bdbedf224367bb4513e0be045f",
+          "bytes": 4989,
+          "sha256": "e280d11084154f59a0f11a3e9a98061eca78066e7f4208be4a2cdc253f798ad2",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "eos",
-    "materialSha256": "2f06e1681d4a5e83ba9527993da466e57fc840c288ef6ef1e26fa042e7010fc0",
+    "materialSha256": "ddd6dd2b6e5ad7b157e976869ea1fb9157a386271d27240066d80a1d275d48fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

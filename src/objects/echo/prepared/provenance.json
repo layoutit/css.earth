@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "031f5eaee13bd4b28b66b6b758f240fccabd722deab992e2475e46733da8371a"
+    "sha256": "a665952d1a0bbd88714c557fa4756d326191290cce9cb5fa093a56fc0a014b4a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "85cc91ae243fc375a16105e52a1f019547940378d6f640270f72a19f8616b4e3",
+      "sha256": "3f406173a1c99e90da775fe21d95390e5ab3348e1f23b33a56fed00f440ba0dc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Echo model 1695; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/echo.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "85cc91ae243fc375a16105e52a1f019547940378d6f640270f72a19f8616b4e3",
+      "sha256": "3f406173a1c99e90da775fe21d95390e5ab3348e1f23b33a56fed00f440ba0dc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8146,
+      "bytes": 8165,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5395,
-          "sha256": "2f82e2d1dc3c7fe0d02a58b255b98812b07f8891ad3bef8fb43c469354f6c777",
+          "bytes": 5414,
+          "sha256": "1f3fe6f117b757596fd485d9b4ba01f4dac6c692f903794e0ad7966e9f1dbacf",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "echo",
-    "materialSha256": "95762dd8719a1e612c9b6b80a260584504c2aff98a467cab3d6272f6fd4dd808",
+    "materialSha256": "59ff6cfa2db78d97306bf524de2296fbbe53af38e7bccd8bdc9767993037ac9c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

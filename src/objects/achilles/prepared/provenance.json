@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9223c9d6c1d6dbae4c0147dcebe9fe8497510ea6f1a6fb2acdf5919cc5229a3c"
+    "sha256": "77b21cbdc5b9ece75af8f5e75b7b7acba0fbfeb61adbef8b7db9ff0f80ffab3e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f82b0a74d0f5ebc0551a3ba0c5e9c7fe9ecc349e1f1e0fe469a9a679d3c84c7f",
+      "sha256": "4d9260449f5388a896e214e1cefed01ba8ada9fe03ff28a31d05e98ea0bb0c48",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,7 +309,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Achilles model 3934; original model authors identified in its pinned reference records."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/achilles.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         }
@@ -363,7 +363,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "f82b0a74d0f5ebc0551a3ba0c5e9c7fe9ecc349e1f1e0fe469a9a679d3c84c7f",
+      "sha256": "4d9260449f5388a896e214e1cefed01ba8ada9fe03ff28a31d05e98ea0bb0c48",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -375,7 +375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9224,
+      "bytes": 9247,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6475,
-          "sha256": "d8af6f8ccab4872de3fbf4234100b6e15d45871680fd94ec3fc813e42c893406",
+          "bytes": 6498,
+          "sha256": "83ef3b80d23343435c2d92b7eedb1378f4ae8571614fd4048a06460a899d4ba1",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "achilles",
-    "materialSha256": "4954dd38d7697a47dfa53291bbff66892596b3d9627d6d151f9ac798e34844f7",
+    "materialSha256": "721ed7024cf3a26e9a9a6251c7355a6af17ef5cc9f5bcef44df7395b822eee22",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

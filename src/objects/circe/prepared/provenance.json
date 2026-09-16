@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10a9041b5a051b46a2560b4aa9431cf61b98d63786e8b670b244df0cb1056060"
+    "sha256": "cb2fcac726c7d1ff64c00aac9cfb6cf9b48f5c3cc33b9e9f8924abee435ef017"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3fd4c9f2a06cadd055242af0ab3c5a8b2cbda08a1ec8f6174259de822f6b22ab",
+      "sha256": "06e6052999b26720de308293b2cb74ef22fbc972e6212a30831bc4987a482348",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; J. Ďurech et al. (2009), Ďurech et al. (2011), Hanuš et al. (2013); model 129, version 2011-03-28."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/circe.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3fd4c9f2a06cadd055242af0ab3c5a8b2cbda08a1ec8f6174259de822f6b22ab",
-      "bytes": 8616,
+      "sha256": "06e6052999b26720de308293b2cb74ef22fbc972e6212a30831bc4987a482348",
+      "bytes": 8636,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6041,
-          "sha256": "6280cb5c0214c778199fe9980ec817b31a0513aaf5eabe0f9ea166b5aae43831",
+          "bytes": 6061,
+          "sha256": "7469692c7f3a208953c65f304b4e3cc10fecf4cfdde9a3d00ba58232d3e00d99",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "circe",
-    "materialSha256": "aa5ab574395171f6c85feb8d79f9966216b4d7ea6b316e325ae52ca4f3869e47",
+    "materialSha256": "5709a3baade2b4d6203482691d5660610831a71e5a5e39c1362c07853bffd029",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

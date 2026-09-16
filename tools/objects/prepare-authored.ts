@@ -62,6 +62,19 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   return Object.freeze({ ...result, definition: prepared.definition, scene });
 }
 
+/** Legend labels of the object's content record against the stretch a staged or checked run reported (legend-labels.mts). */
+export async function stagedLegendLabelChanges(objectDirectory: string, preparedDirectory: string) {
+  const { legendLabelChanges, withDerivedLegendLabels } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/legend-labels.mts')).href) as typeof import('./legend-labels.mts');
+  const { descriptor } = await readAuthoredSources(objectDirectory);
+  const contentReference = descriptor.recipe.sources.find(entry => entry.id === 'content');
+  const assets = await readFile(resolve(preparedDirectory, 'assets.json'), 'utf8').catch(() => null);
+  if (!contentReference || assets === null) return { changes: [], summary: '', contentPath: '', refreshed: null };
+  const contentPath = resolve(objectDirectory, contentReference.path), content = record(JSON.parse(await readFile(contentPath, 'utf8')) as unknown, 'content');
+  const changes = legendLabelChanges(content, JSON.parse(assets) as unknown);
+  return { changes, contentPath, refreshed: withDerivedLegendLabels(content, changes),
+    summary: changes.map(change => `${change.lensId} ${JSON.stringify(change.authored)} -> ${JSON.stringify(change.derived)}`).join('; ') };
+}
+
 async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
     const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
@@ -73,6 +86,16 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
       const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
+      // Palette legend labels are derived from the stretch this run just measured: refresh them, repin, and prepare again.
+      const legend = await stagedLegendLabelChanges(objectDirectory, stagedData);
+      if (legend.changes.length) {
+        if (process.env.CSSEARTH_PREPARATION_TRACE) throw new Error(`${id}: legend labels differ from the prepared stretch: ${legend.summary}.`);
+        await writeFile(legend.contentPath, `${JSON.stringify(legend.refreshed, null, 2)}\n`);
+        console.log(`refreshed legend labels ${legend.summary}`);
+        const { pinObjectDocuments } = await import(pathToFileURL(resolve(projectRoot, 'tools/pin-object-documents.mts')).href) as typeof import('../pin-object-documents.mts');
+        await pinObjectDocuments(objectDirectory);
+        return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages });
+      }
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
         descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
@@ -209,5 +232,10 @@ if (direct) {
     for (const change of await pinObjectDocuments(resolve(root, 'src/objects', id))) console.log(`pinned ${change.file} ${change.path} (${change.expectedBytes} bytes)`);
   }
   const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write });
+  if (!write) {
+    // A check run refuses labels its own report contradicts; write mode rewrites them.
+    const legend = await stagedLegendLabelChanges(resolve(root, 'src/objects', id), resolve(root, '.local/full-json-migration/staged', id));
+    if (legend.changes.length) throw new Error(`${id}: legend labels differ from the prepared stretch: ${legend.summary}; run prepare-authored ${id} --write.`);
+  }
   console.log(JSON.stringify({ id: result.descriptor.id, runtime: result.definition !== undefined }));
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "050d483775f85dbc7214eedeca36054c4a1b1fe7158d255a44cfd32a238047a7"
+    "sha256": "d60939d110f3346ebea46e8dc2b154d638debf53a3e7c316e9ef08b84b9e1c74"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a37d80cdacfff5080db118c9e02549e341b2dce1a653867fb959d33dd0bd6ecd",
+      "sha256": "bc3cb45b7ab4a851f9f95868aa7d35cd00848dcd910f241121939c3881a069d0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4507, version 2019-10-23."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/brunhild.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a37d80cdacfff5080db118c9e02549e341b2dce1a653867fb959d33dd0bd6ecd",
-      "bytes": 9092,
+      "sha256": "bc3cb45b7ab4a851f9f95868aa7d35cd00848dcd910f241121939c3881a069d0",
+      "bytes": 9115,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6478,
-          "sha256": "31d906e97ed08fce8a58c19c566b08532645cd8941b055615b6ebdce6ff458db",
+          "bytes": 6501,
+          "sha256": "5aa5cfe804669ae5d859b7dcc01555049228e2f8df7e96fc3374d143027bcb6c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "brunhild",
-    "materialSha256": "54da2ba51d87639652845847d26a1fed673a67e2b8dd3484741b1d2192c9f89a",
+    "materialSha256": "7263125b84a07962f1a99c55bd6793225fce75fd75dc12ddb1180c055c0c4ca7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

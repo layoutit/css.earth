@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "89130f8ced4928e1d1233412c296e88cc8ce0368427b89d1c3eb2c73827db4a2"
+    "sha256": "cd764c47f8a0cc91b395a7632c5eb2af1e590a943349b97a8c78d20c996af917"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b814a5e1fd4c12d368d65ae08fb71fcdf5501fcab482661b0478e4bd253ba330",
+      "sha256": "e8ec91b3bbd6010a7cb5e708f194daece9492e1f028906627a79162d26f93e0a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,7 +292,7 @@
             "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2017), Marchis et al. (2013); model 1797, version 2017-06-13."
           },
           "physical": {
-            "path": "../../../../../../packages/astronomy",
+            "path": "../../../../../packages/astronomy/data/bodies/minerva.json",
             "credit": "Vendored JPL physical and orbital data"
           }
         },
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b814a5e1fd4c12d368d65ae08fb71fcdf5501fcab482661b0478e4bd253ba330",
-      "bytes": 9528,
+      "sha256": "e8ec91b3bbd6010a7cb5e708f194daece9492e1f028906627a79162d26f93e0a",
+      "bytes": 9550,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -496,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6930,
-          "sha256": "6cd0096d53cb8640194281e69886ba555b4db5379a88ff2a9ff9d8dba4872f30",
+          "bytes": 6952,
+          "sha256": "834239e1ac53b26bcc2c5bd90f0bc2bcab7371fc86f0c75905f5a975b39ce269",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "minerva",
-    "materialSha256": "4f59e7be2899fa0f55b03b6545b4de8a811c6ebfd37f5d45b57def1b0bc3c36e",
+    "materialSha256": "7513d9a84bd746c7b36c71e227f0172ed84bde722446e5dff47857c115cf8023",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
