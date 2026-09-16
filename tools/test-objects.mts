@@ -21,6 +21,7 @@ const MISSING_INPUT = [
   /Cannot find module '([^']+)'/u,
   /Command failed: unzip -p (\S+)/u,
   /spawn (\S+) ENOENT/u,
+  /Input file is missing: (\S+)/u,
 ];
 // Source coverage names the missing path relative to the object's source directory; the object id
 // comes from the test directory or, for a shared contract runner, from the "<id>: " test name prefix.
