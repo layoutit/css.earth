@@ -21,6 +21,23 @@
       ]
     },
     {
+      "id": "rotir-surface-2021-04",
+      "subject": "Surface reconstruction on a sphere with ROTIR, the method Evans et al. (2024) used",
+      "status": "excluded",
+      "finding": "ROTIR at commit ad308759 (OITOOLS f42d2bea, Julia 1.12.7) on the same merged April 2021 file, fitting squared visibilities and closure phases on a 3.16 mas sphere with linear limb darkening 0.12, pole North in the sky plane, HEALPix level 4 and total-variation weight 0.05 (tools/objects/interferometry/surface-reconstruction.mts): reduced chi-squared 1.45 on squared visibilities and 5.58 on closure phases, surface contrast 7.08 percent. The same run on the spotless disc simulated on this file fits at 1.03 and 0.95 with 0.19 percent contrast, and in the sky plane the spot ratio is 2.32, so the sphere's spots are real signal. But no fixed surface explains the closure phases: they stay at 5.58 even unregularised, and each night alone fits its own closure phases (1.19, 1.00, 1.53) with maps that do not agree with one another (correlations -0.24 to 0.23). SQUEEZE images of single nights are 85 to 93 percent correlated with their spotless twins, so single nights cannot settle it. Whether the star changed over the three nights or the nights are calibrated differently is not tested. No surface map is cast.",
+      "revisitWhen": "A surface fit reaches reduced chi-squared 3 on the closure phases, from a denser single epoch or a rotation-aware fit with a measured period.",
+      "evidence": [
+        "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479",
+        "https://arxiv.org/abs/2407.09641"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        }
+      ]
+    },
+    {
       "id": "companion-ab",
       "subject": "Whether the close companion Polaris Ab causes the closure phases",
       "status": "excluded",
