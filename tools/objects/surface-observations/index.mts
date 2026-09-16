@@ -7,6 +7,7 @@ import { encounterFormat } from './formats/encounter.mts';
 import { orthographicFormat } from './formats/orthographic.mts';
 import { controlledCameraFormat, controlledColorFormat } from './formats/controlled-camera.mts';
 import { createSurfaceObservation, type SurfaceObservation } from './surface.mts';
+import { registrationStage } from './registration.mts';
 
 export type { SurfaceObservation, SurfaceObservationReport } from './surface.mts';
 
@@ -36,8 +37,12 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
   if (entries.length !== paths.length || new Set(paths).size !== paths.length || !paths.every(path => entries.some(entry => entry.path === path))) {
     throw new Error('A surface observation must consume exactly its pinned images, labels, cameras and companions.');
   }
-  const { frames, policy, exceeded } = await format.load(recipe, { sourceDirectory, source, radial, config, entries });
+  const context = { sourceDirectory, source, radial, config, entries };
+  const { frames, policy, exceeded } = await format.load(recipe, context);
   // A limit looser than the frames' measured footprint and the mesh error allow would admit pixels across a limb or a neck.
   if (exceeded.length) throw new Error(`Surface observation ${String(requireRecord(recipe).id)} states ${exceeded.join(' and ')} beyond what its frames support: ${JSON.stringify(requireRecord(policy.limits).derived)}.`);
-  return createSurfaceObservation({ frames, policy, radial, config, entries });
+  // Every camera route is measured the same way after it loads; a format's own registration, such as filter bands, is kept beside it.
+  const stage = await registrationStage(frames, requireRecord(recipe), context);
+  const registration = policy.registration || stage ? { ...(policy.registration ? { bands: policy.registration } : {}), ...(stage ?? {}) } : undefined;
+  return createSurfaceObservation({ frames, policy: { ...policy, registration }, radial, config, entries });
 }
