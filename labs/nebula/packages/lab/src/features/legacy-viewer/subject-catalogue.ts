@@ -33,7 +33,7 @@ export interface LabSubjectRecord {
   stars?: string;
   /** Fixed original-image plane prepared from this saved result's exact image registration. */
   reconstructionOverlay?: string;
-  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; candidateImageIds?: string[];
+  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; processingPlan?: string; candidateImageIds?: string[];
     reconstructionReferenceImageId?: string; starAlignmentReference?: { path: string; sha256: string }; referenceFramingRadiusUnits?: number };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
@@ -74,6 +74,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
       throw new TypeError(`Lab subject ${record.id} has invalid reconstruction image metadata.`);
     }
   }
+  if (record.density?.processingPlan !== undefined && !relativePath(record.density.processingPlan))
+    throw new TypeError(`Lab subject ${record.id} has an invalid density processing plan.`);
   const candidateIds = record.density?.candidateImageIds;
   if (candidateIds !== undefined && (!record.density?.overlays || !Array.isArray(candidateIds) || !candidateIds.length ||
       candidateIds.some(id => typeof id !== 'string' || !id.trim()) || new Set(candidateIds).size !== candidateIds.length)) {

@@ -27,7 +27,8 @@
       "starAlignmentReference": {
         "path": "labs/nebula/models/lmc/stars/source/alignment.json",
         "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
-      }
+      },
+      "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
     },
     "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp",
     "menuLabel": "LMC",
@@ -47,10 +48,26 @@
       "directory": "labs/nebula/models/smc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
-      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure."
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-spitzer",
+        "smc-herschel-gas"
+      ],
+      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
+      "referenceFramingRadiusUnits": 7
     },
     "menuLabel": "SMC",
-    "workflow": "density"
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": "labs/nebula/models/smc/candidates/prepared/smc-smash.webp"
   },
   {
     "id": "m2-9-inferred",

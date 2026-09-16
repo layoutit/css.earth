@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-image-processing-plan@1",
+  "catalogue": "labs/nebula/models/smc/image-candidates.json",
+  "alignmentReport": {
+    "path": "labs/nebula/models/smc/registration/alignment-report.json",
+    "sha256": "ce38799c36092c27889ceb303e8ef6809517eb69d09b2d42149974b7fd9dcae5"
+  },
+  "selections": []
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-publisher-placement-correction@1",
+  "source": {
+    "path": ".local/nebula-lab/smc-intake/ssc2010-02c.jpg",
+    "sha256": "d89b9ae4135941b92e2bd675c4d4750c48bb705f0b7f9562eccdf69a254c428e"
+  },
+  "publisher": {
+    "url": "https://www.spitzer.caltech.edu/image/ssc2010-02c-dusty-little-galaxy",
+    "cachedPagePath": ".local/nebula-lab/smc-intake/ssc2010-02c.html",
+    "cachedPageSha256": "2cc24c64e4dadeb852d3d4c09a9313ab108c746d29f11747c1d052352a1222dc",
+    "statement": "North is 148.4 degrees left of vertical"
+  },
+  "before": {
+    "referenceDimension": [
+      11200,
+      6600
+    ],
+    "referencePixel": [
+      5600,
+      3300
+    ],
+    "referenceValueDeg": [
+      21.79583333333333,
+      -73.95883333333333
+    ],
+    "scaleDeg": [
+      -0.0008303571428571429,
+      0.0008333333333333334
+    ],
+    "rotationDeg": -148.4,
+    "projection": "TAN",
+    "coordinateFrame": "ICRS"
+  },
+  "after": {
+    "referenceDimension": [
+      11200,
+      6600
+    ],
+    "referencePixel": [
+      5600,
+      3300
+    ],
+    "referenceValueDeg": [
+      21.79583333333333,
+      -73.95883333333333
+    ],
+    "scaleDeg": [
+      -0.0008303571428571429,
+      0.0008333333333333334
+    ],
+    "rotationDeg": 148.4,
+    "projection": "TAN",
+    "coordinateFrame": "ICRS"
+  },
+  "beforeDiagnostic": {
+    "northRasterVector": [
+      0.6310367900559868,
+      1.0220723210854885
+    ],
+    "northLeftOfVerticalDeg": -148.30843892745415
+  },
+  "afterDiagnostic": {
+    "northRasterVector": [
+      -0.6310367900559868,
+      1.0220723210854885
+    ],
+    "northLeftOfVerticalDeg": 148.30843892745415
+  },
+  "status": "publisher-placement-convention-corrected",
+  "registrationPassed": false,
+  "proof": "For the implemented east-left WCS, celestial north projects to raster direction (-sin(rotation)/abs(scaleX), -cos(rotation)/scaleY). Thus positive rotation is north-left of vertical. Slight angular deviation below arises from publisher rounded anisotropic 9.3×5.5-degree footprint.",
+  "limitations": [
+    "Only the sign of the publisher orientation conversion is corrected.",
+    "The webpage centre and footprint remain approximate; absent embedded reference pixel and exact scale are not recovered.",
+    "No optical-star registration or physical reconstruction acceptance. Four independently qualified candidate gates remain unchanged."
+  ]
+}

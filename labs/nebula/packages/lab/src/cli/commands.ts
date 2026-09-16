@@ -46,6 +46,7 @@ export const labCommands: Record<string, string> = {
   "browser-emission": "labs/nebula/packages/lab/browser/browser-emission.ts",
   "prepare-emission": "labs/nebula/packages/lab/src/cli/commands/prepare-emission.ts",
   "verify-nebula": "labs/nebula/packages/lab/src/cli/commands/verify-nebula.ts",
+  "process-density-candidates": "labs/nebula/packages/lab/src/cli/commands/process-density-candidates.ts",
   "bake-nebula": "labs/nebula/packages/lab/src/cli/commands/bake-nebula.ts",
   "promote-volume-lenses": "labs/nebula/packages/lab/src/cli/commands/promote-volume-lenses.ts",
   "browser-removal-strength": "labs/nebula/packages/lab/browser/browser-removal-strength.ts",

@@ -8,7 +8,7 @@ import { mkdir, readFile, readdir, realpath, rename, rm, stat, writeFile } from 
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import type { Plugin } from 'vite';
 import { defaultOverlayPlacement, updateOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
-import { resolveAppliedRemovalLayers } from './star-removal.ts';
+import { createStarRemover, resolveAppliedRemovalLayers } from './star-removal.ts';
 import { createStarRemovalJobs, starRemovalJobsHandler } from '../jobs/operation-jobs.ts';
 import type { RemovalProgress } from '../../features/star-removal/star-removal-types.ts';
 import type { LabSubjectRecord } from '../../features/legacy-viewer/controller';
@@ -65,7 +65,8 @@ async function context(root: string, subjectId: string) {
   const subjects = await json(root, 'labs/nebula/packages/lab/src/state/subjects.json') as LabSubjectRecord[];
   const subject = subjects.find(item => item.id === subjectId);
   if (!subject?.density?.overlays) throw new TypeError('This object has no aligned image catalogue.');
-  const plan = await json(root, 'labs/nebula/models/lmc/star-separation/plan.json');
+  if (!subject.density.processingPlan) throw new TypeError('This object has no configured density processing plan.');
+  const plan = await json(root, subject.density.processingPlan);
   const catalogue = await json(root, plan.catalogue);
   const target = catalogue.targets.find((item: { directory: string }) => `${item.directory}/overlays.json` === subject.density!.overlays);
   if (!target) throw new TypeError('This object has no reconstruction source catalogue.');
@@ -103,15 +104,19 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
       modified: (await stat(resolve(root, cache, id, 'result.json'))).mtimeMs }); } catch { /* A failed bake is not a completed choice. */ }
   }
   completed.sort((a, b) => b.modified - a.modified);
-  const candidates = [];
+  const candidates = [], remover = createStarRemover(root);
   for (const image of target.images) {
     if (subject.density?.candidateImageIds && !subject.density.candidateImageIds.includes(image.id)) continue;
     const overlay = overlays.overlays.find((item: { id: string }) => item.id === image.id);
     if (!overlay) continue;
-    const removal = removals.find(item => item.sourceSha256 === image.sha256);
     let reason: string | undefined;
     try { await alignmentProof(root, image, alignment); } catch (error) { reason = (error as Error).message; }
-    if (!removal) reason = 'Remove stars in Alignment first.';
+    let removal = removals.find(item => item.sourceSha256 === image.sha256);
+    if (!reason && !removal) {
+      const resultId = await remover.discoverApplied(image.id, overlay.sha256).catch(() => null);
+      if (resultId) removal = { sourceSha256: image.sha256, resultId, modified: 0 };
+    }
+    if (!removal) reason ??= 'Remove stars in Alignment first.';
     const prepared = completed.find(({ result }) => result.imageId === image.id && result.removalResultId === removal?.resultId)?.result;
     candidates.push({ imageId: image.id, label: image.label, sourcePageUrl: image.sourcePageUrl, credit: image.credit,
       sourcePreviewSha256: overlay.sha256, removalResultId: removal?.resultId,
@@ -219,7 +224,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
             sourcePageUrl: image.sourcePageUrl, credit: image.credit, stars: finished.stars ? `${directory}/${finished.stars}` : undefined,
             reconstructionOverlay:finished.reconstructionOverlay?`${directory}/${finished.reconstructionOverlay}`:undefined,
             cloudParts: finished.cloudParts, framingRadiusUnits: finished.framingRadiusUnits ?? subject.framingRadiusUnits,
-            reconstructionImage: { group: subject.id, label: image.label, note: 'Candidate colors on the unchanged Alignment density cloud; saved placement is preserved.' } } };
+            reconstructionImage: { group: subject.id, label: image.label, note: 'Projection-only comparison on the unchanged simulated stellar density; not qualified 3D material. Saved placement is preserved.' } } };
         await writeFile(resolve(temporary, 'request.json'), JSON.stringify(identity, null, 2) + '\n');
         await writeFile(resolve(temporary, 'result.json'), JSON.stringify(result, null, 2) + '\n');
         signal.throwIfAborted(); await rename(temporary, resolve(root, directory));

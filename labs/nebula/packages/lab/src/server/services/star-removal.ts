@@ -14,7 +14,6 @@ const record = (value: unknown): value is Record<string, unknown> => Boolean(val
 const numeric = (value: unknown, low: number, high: number) => typeof value === 'number' && Number.isFinite(value) && value >= low && value <= high;
 const keys = (value: Record<string, unknown>, allowed: string[]) => Object.keys(value).every(key => allowed.includes(key));
 const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
-const planPath = 'labs/nebula/models/lmc/star-separation/plan.json';
 const scriptPath = 'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py';
 const defaultModelPath = '.local/open-star-removal/noxGeneratorColor.pb';
 const defaultModelSha256 = 'd54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546';
@@ -34,12 +33,14 @@ export async function resolveAppliedRemovalLayers(root: string, resultId: string
 }
 export async function restoreAppliedRemovalResult(root: string, input: unknown) {
   if (!record(input) || !keys(input, ['imageId', 'resultId', 'sourcePreviewSha256']) || typeof input.imageId !== 'string' ||
-      !/^[a-z0-9-]+$/.test(input.imageId) || !resultToken(input.resultId) || typeof input.sourcePreviewSha256 !== 'string' ||
+      !/^[a-z0-9-]+$/.test(input.imageId) || (input.resultId !== undefined && !resultToken(input.resultId)) || typeof input.sourcePreviewSha256 !== 'string' ||
       !/^[a-f0-9]{64}$/.test(input.sourcePreviewSha256)) throw new TypeError('Invalid saved applied image identity.');
-  const resolved = await resolveAppliedRemovalLayers(root, input.resultId, input.imageId, input.sourcePreviewSha256);
+  const resultId = input.resultId ?? await createStarRemover(root).discoverApplied(input.imageId, input.sourcePreviewSha256);
+  if (!resultId) return null;
+  const resolved = await resolveAppliedRemovalLayers(root, resultId, input.imageId, input.sourcePreviewSha256);
   const layers = await Promise.all(resolved.layers.map(async layer => ({ ...layer, url: `/@fs${await realpath(resolve(root, layer.texturePath))}` })));
   return { imageId: input.imageId, sourceSha256: resolved.sourceSha256, sourcePreviewSha256: input.sourcePreviewSha256,
-    nativeDimensions: resolved.nativeDimensions, applied: { resultId: input.resultId, layers } };
+    nativeDimensions: resolved.nativeDimensions, applied: { resultId, layers } };
 }
 
 export function parseRemovalRequest(input: unknown): RemovalRequest {
@@ -104,9 +105,37 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
       planSha256: hash(JSON.stringify(['catalogue-rgb8-v1', image.id, image.path, image.sha256, directory])) };
   }
   async function sourceFor(request: RemovalRequest) {
-    const planBytes = await pinned(planPath).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
-    if (!planBytes) return catalogueSource(request, 'labs/nebula/models/image-candidates.json');
-    const plan = JSON.parse(planBytes.toString());
+    const subjects = await json('labs/nebula/packages/lab/src/state/subjects.json').catch(error => { if (error.code === 'ENOENT') return []; throw error; });
+    if (!Array.isArray(subjects)) throw new TypeError('Invalid subject catalogue.');
+    const planPaths = [...new Set<string>(subjects.flatMap(subject => {
+      const path = subject?.density?.processingPlan;
+      if (path === undefined) return [];
+      if (typeof path !== 'string') throw new TypeError('Invalid density processing plan path.');
+      return [path];
+    }))];
+    const matchingPlans = [];
+    const catalogues = new Set<string>();
+    for (const path of planPaths) {
+      const bytes = await pinned(path).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+      if (!bytes) continue;
+      const plan = JSON.parse(bytes.toString());
+      if (typeof plan.catalogue !== 'string') throw new TypeError('Invalid processing catalogue path.');
+      catalogues.add(plan.catalogue);
+      if (plan.schema !== 'cssearth-image-processing-plan@1') throw new TypeError('Invalid saved star-removal plan.');
+      if (plan.selections?.some((value: { id: string }) => value.id === request.imageId)) matchingPlans.push({ bytes, plan });
+    }
+    if (matchingPlans.length > 1) throw new TypeError('This image has ambiguous configured processing plans.');
+    if (!matchingPlans.length) {
+      if (!catalogues.size) catalogues.add('labs/nebula/models/image-candidates.json');
+      const matches: string[] = [];
+      for (const path of catalogues) {
+        const catalogue = await json(path);
+        if (catalogue.targets?.some((target: { images: { id: string }[] }) => target.images.some(image => image.id === request.imageId))) matches.push(path);
+      }
+      if (matches.length !== 1) throw new TypeError('This image needs a unique imported original in the image catalogue.');
+      return catalogueSource(request, matches[0]!);
+    }
+    const { bytes: planBytes, plan } = matchingPlans[0]!;
     const selection = plan.selections?.find((value: { id: string }) => value.id === request.imageId);
     if (plan.schema !== 'cssearth-image-processing-plan@1') throw new TypeError('Invalid saved star-removal plan.');
     if (!selection) return catalogueSource(request, plan.catalogue);
@@ -370,7 +399,28 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     const result = await resultAt(resolve(root, directory), request, proof.source, originalPreviewSha256, scriptSha, modelSha256, proof.baseline?.sha256 ?? null);
     return { value: { sourceSha256: proof.source.sha256, nativeDimensions: proof.source.nativeDimensions, layers: result.applied!.layers } as AppliedLayers, files: [...verifiedInputs] };
   }
-  return Object.assign(sample, { resolveApplied });
+  async function discoverApplied(imageId: string, previewSha256: string): Promise<string | null> {
+    const request = parseRemovalRequest({ imageId, action: 'overview' });
+    const proof = await sourceFor(request), preview = await overview(request, proof);
+    if (preview.sourcePreviewSha256 !== previewSha256) throw new TypeError('Applied removal original preview differs.');
+    const candidates: { id: string; modified: number }[] = [];
+    for (const key of await readdir(appliedCache).catch(error => { if (error.code === 'ENOENT') return []; throw error; })) {
+      if (!/^[a-f0-9]{64}$/.test(key)) continue;
+      try {
+        const directory = `${cachePath}-applied/${key}`, saved = await json(`${directory}/request.json`);
+        if (saved.operation !== 'apply' || saved.source?.sha256 !== proof.source.sha256) continue;
+        const bytes = await pinned(`${directory}/result.json`);
+        candidates.push({ id: `${key}.${hash(bytes)}`, modified: (await stat(resolve(appliedCache, key, 'result.json'))).mtimeMs });
+      } catch { /* Incomplete native runs are not available image layers. */ }
+    }
+    candidates.sort((a, b) => b.modified - a.modified);
+    for (const candidate of candidates) {
+      try { await resolveApplied(candidate.id, imageId, previewSha256); return candidate.id; }
+      catch { /* Stale source/model/code pins or damaged artifacts must never be restored. */ }
+    }
+    return null;
+  }
+  return Object.assign(sample, { resolveApplied, discoverApplied });
 }
 
 export function starRemovalPlugin(repositoryRoot: string): Plugin {

@@ -107,7 +107,9 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     densityProjection:{width:densityProjection.photo.width,height:densityProjection.photo.height,
       tangentBoundsKpc:densityProjection.boundsUnits,observerDistanceKpc:densityProjection.distanceUnits,
       meaning:'Integrated signal of the untouched Alignment density source; identical cutoff for all materials.'},
-    validation,limitations:['The Alignment cloud is simulated stellar density, not measured gas depth.',
+    qualification:{status:'research-baseline',materialGatePassed:false,reason:'Projected image color is repeated through line-of-sight depth; finite 3D material is not inferred.'},
+    validation,limitations:['Projected colors do not pass the finite-3D-material gate; this result is an inspection baseline, not a qualified cloud.',
+      'The Alignment cloud is simulated stellar density, not measured gas depth.',
       'Candidate color and optional local contrast paint the fixed cloud. Image brightness never changes geometry or alpha.',
       'Uncovered or black image samples retain neutral density colors; coverage counts record this mixed-source material.',
       'Catalogue astrometry is preserved; one common Alignment mapping and density-conditioned model supplies the same stellar positions for every material.']};

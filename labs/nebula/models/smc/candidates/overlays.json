@@ -1,0 +1,214 @@
+{
+  "schema": "cssearth-nebula-overlays@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      558685736318132900000,
+      162842042038617440000,
+      -1.83671292332706e+21
+    ],
+    "localToReferenceXyzw": [
+      0.5930234436925893,
+      0.7905512466577111,
+      0.12224251888534837,
+      0.09169889975068647
+    ],
+    "metersPerUnit": 30856775814913670000
+  },
+  "referenceDistanceUnits": 62.440000000000005,
+  "overlays": [
+    {
+      "id": "smc-vista",
+      "label": "ESO VISTA · near infrared",
+      "texturePath": "prepared/smc-vista.webp",
+      "widthPx": 2048,
+      "heightPx": 1812,
+      "sha256": "c0e1ea97c4c0b11fa3f5af022a7a9ad4b61439d827ca7d6253509ff4ea8a0d69",
+      "bytes": 1844274,
+      "pivotCssPx": [
+        -30.4755306407159,
+        -39.64239445570662,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1812px",
+        "transform": "matrix3d(-0.010021490340456608,-0.15618945038085352,0,0.000007915381148126583,-0.158026520316758,0.009347437906271466,0,-0.0000016582245078297881,0,0,1,0,122.75727297985321,111.56506530455452,0,1)",
+        "backgroundSize": "2048px 1812px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://www.eso.org/public/images/eso1714a/",
+      "credit": "ESO/VISTA VMC",
+      "registrationNote": "Matched-star relative registration to the native SMASH TIFF. Publisher sky anchor retained; simulation correspondence and unobserved depths are not measured. Publisher 4000px derivative; full 43223×38236 PSB not acquired (4.4GB)."
+    },
+    {
+      "id": "smc-smash",
+      "label": "NOIRLab SMASH · optical",
+      "texturePath": "prepared/smc-smash.webp",
+      "widthPx": 2048,
+      "heightPx": 1707,
+      "sha256": "f8f09e3bd6815a472689eab6bddffa633d1be8fc4729f591c0b52e936aeb61a8",
+      "bytes": 2121566,
+      "pivotCssPx": [
+        -25.340058862718582,
+        -41.58455267872191,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1707px",
+        "transform": "matrix3d(-0.07606325924427983,-0.11898001870976713,0,-7.048239564528169e-7,-0.11900269071717184,0.07607690771084855,0,1.4645465980945846e-8,0,0,1,0,154.13548730947366,15.348839169784567,0,1)",
+        "backgroundSize": "2048px 1707px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "registrationNote": "Matched-star relative registration to the native SMASH TIFF. Publisher sky anchor retained; simulation correspondence and unobserved depths are not measured. Existing source-originals TIFF reused; downloaded JPEG is alternate representation, not an independent observation."
+    },
+    {
+      "id": "smc-dss2",
+      "label": "DSS2 · optical",
+      "texturePath": "prepared/smc-dss2.webp",
+      "widthPx": 1970,
+      "heightPx": 2048,
+      "sha256": "4d976838da4d2ffeeb69be3438ed7e8708eca326c6f161be49f9f3f561651d39",
+      "bytes": 1873954,
+      "pivotCssPx": [
+        -9.020963984555818,
+        -21.755175712372573,
+        0
+      ],
+      "style": {
+        "width": "1970px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.0009466944629203309,0.10259061154546043,0,9.378019642563127e-8,0.10262857339015974,0.0009224288412779807,0,5.34939091307121e-7,0,0,1,0,-113.18590387032792,-123.76542181828259,0,1)",
+        "backgroundSize": "1970px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://esahubble.org/images/heic0514c/",
+      "credit": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
+      "registrationNote": "Matched-star relative registration to the native SMASH TIFF. Publisher sky anchor retained; simulation correspondence and unobserved depths are not measured. Full-resolution publisher JPEG; 421.7MB TIFF deferred. Smaller footprint than VISTA/SMASH; not outer tidal-tail coverage."
+    },
+    {
+      "id": "smc-wise",
+      "label": "NASA WISE · infrared · alignment pending",
+      "texturePath": "prepared/smc-wise.webp",
+      "widthPx": 2048,
+      "heightPx": 1608,
+      "sha256": "91c4ff76413c98e9c3fa0fd15aa8393e17604097e7b56e13e3f4d2f40af2348a",
+      "bytes": 1386580,
+      "pivotCssPx": [
+        -36.280705838210366,
+        -45.073502344787194,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1608px",
+        "transform": "matrix3d(0.04435924421748894,-0.11034713042495181,0,-1.3003736439476922e-7,-0.11029361210607998,-0.04434921779319887,0,-5.93863928858431e-7,0,0,1,0,6.99364611729033,103.60625331715174,0,1)",
+        "backgroundSize": "2048px 1608px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://wise.ssl.berkeley.edu/gallery_SMC.html",
+      "credit": "NASA/JPL-Caltech/WISE Team",
+      "registrationNote": "Relative stellar fit through VISTA shown for inspection. Negative wrong-scale control did not pass the fixed threshold; reconstruction remains blocked. Original publisher projection is SIN; it has not been relabeled TAN. Native publisher TIFF. Two satellite streaks in upper half; central cloud field, not full tidal tail. SIN projection must remain explicit."
+    },
+    {
+      "id": "smc-allwise-wide",
+      "label": "AllWISE · 10° infrared",
+      "texturePath": "prepared/smc-allwise-wide.webp",
+      "widthPx": 2048,
+      "heightPx": 2048,
+      "sha256": "c3dddca7835aede0d2eeb7f0e31e513fd20d33469b94418fb7b02f4799d96a65",
+      "bytes": 349432,
+      "pivotCssPx": [
+        -32.545159220500835,
+        -43.87174342855523,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.01217588638743497,-0.26590653685919785,0,-0.0000012356634595890638,-0.2659199855354246,0.012214313441067756,0,-8.348028110583052e-7,0,0,1,0,252.29401449065278,216.00210835577337,0,1)",
+        "backgroundSize": "2048px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+      "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+      "registrationNote": "Fixed publisher TAN WCS independently checked against 7,172 bright AllWISE catalogue W1 stars, with unchanged control thresholds and no fitted transform. Survey coordinates and image share mission data; diffuse emission and depth are not validated."
+    },
+    {
+      "id": "smc-herschel-spitzer",
+      "label": "Herschel + Spitzer · far infrared · metadata placement",
+      "texturePath": "prepared/smc-herschel-spitzer.webp",
+      "widthPx": 2048,
+      "heightPx": 1024,
+      "sha256": "9cca4ccc472e42a9cfdf3e80baf0aa59ef6dee4c0e08b76fe27b52f5c9de12d7",
+      "bytes": 592328,
+      "pivotCssPx": [
+        -55.456079677989614,
+        84.85556910982768,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1024px",
+        "transform": "matrix3d(0.06747666055202706,-0.2117571377186569,0,0.000002198957956697859,-0.21186611269331557,-0.06747392401069274,0,3.7011869216327497e-7,0,0,1,0,-16.21211163586831,336.44867950368194,0,1)",
+        "backgroundSize": "2048px 1024px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://www.herschel.caltech.edu/image/nhsc2012-001b",
+      "credit": "ESA/NASA/JPL-Caltech/STScI",
+      "registrationNote": "Inspection candidate only; not approved for reconstruction. Whole bar and wing; dust-temperature colour composite. Same observation as Spitzer ssc2012-01b, excluded duplicate. Nonstellar compact dust structures must be preserved."
+    },
+    {
+      "id": "smc-spitzer",
+      "label": "Spitzer · far infrared · approximate placement",
+      "texturePath": "prepared/smc-spitzer.webp",
+      "widthPx": 2048,
+      "heightPx": 1207,
+      "sha256": "89c64e94e7d7371cd2fe92e198e5ba2faff5db464c87f5a5dc73809ac0790c7b",
+      "bytes": 329842,
+      "pivotCssPx": [
+        -87.78689874627796,
+        83.43979261104114,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1207px",
+        "transform": "matrix3d(-0.14816364280808927,0.19731661712662807,0,-0.000003023047554648999,0.19810456048529282,0.14883140063057984,0,5.095878672787014e-7,0,0,1,0,-55.37867523490261,-208.66480912400988,0,1)",
+        "backgroundSize": "2048px 1207px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://www.spitzer.caltech.edu/image/ssc2010-02c-dusty-little-galaxy",
+      "credit": "NASA/JPL-Caltech/K. Gordon (STScI); caption also credits NASA/JPL-Caltech/STScI",
+      "registrationNote": "Approximate initial placement from publisher webpage centre, extent and orientation. Corrected rotation sign: North 148.4° left of vertical corresponds to AVM rotation +148.4° in the shared WCS implementation. It is NOT a passed registration or verified projection; do not process. Publisher caption/table inconsistent: narrative specifically describes MIPS 24/70/160 composite. No embedded AVM found; webpage approximate astrometry alone not qualified. Full bar/wing/tail field."
+    },
+    {
+      "id": "smc-herschel-gas",
+      "label": "Herschel / Planck / IRAS · gas and dust",
+      "texturePath": "prepared/smc-herschel-gas.webp",
+      "widthPx": 2048,
+      "heightPx": 2048,
+      "sha256": "096665d1ed7b90107fea314bab341123085f0ed91da902a0d2f8092b1cb0b08c",
+      "bytes": 615050,
+      "pivotCssPx": [
+        -21.514807199182854,
+        -31.243596060835216,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.005853053409302311,-0.11683566262287859,0,-3.871453155029515e-7,-0.11683912732039517,0.005860959194026107,0,-2.3940850622610055e-7,0,0,1,0,104.13578957713396,82.4145458638946,0,1)",
+        "backgroundSize": "2048px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://science.nasa.gov/photojournal/small-magellanic-cloud-imaged-by-herschel-planck-iras-cobe/",
+      "credit": "ESA/NASA/JPL-Caltech/CSIRO/NANTEN2/C. Clark (STScI)",
+      "registrationNote": "Inspection only; reconstruction disabled until qualified. Whole cloud gas/dust composite; red hydrogen green cold dust blue warm dust. Preserve nonstellar signal."
+    }
+  ]
+}
