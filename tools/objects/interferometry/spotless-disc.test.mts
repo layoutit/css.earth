@@ -68,12 +68,12 @@ test('simulating a spotless disc keeps the sampling and errors and recovers its 
 test('a reconstruction is cast only when it fits its data, beats the spotless disc and comes back from both halves', () => {
   // Measured: π¹ Gruis and Betelgeuse SQUEEZE (shipped), Polaris SQUEEZE, Polaris ROTIR sphere (reduced chi-squared V2 and closure
   // phase; spot ratio; correlation of the spots beyond the spotless twins between interleaved halves).
-  assert.equal(reconstructionVerdict({ vis2: 2.45, closurePhase: 1.06 }, { ratio: 5.22 }, { correlation: 0.94 }).cast, true);
-  assert.equal(reconstructionVerdict({ vis2: 0.35, closurePhase: 1.12 }, { ratio: 2.90 }, { correlation: 0.80 }).cast, true);
-  const flat = reconstructionVerdict({ vis2: 1.76, closurePhase: 2.28 }, { ratio: 1.05 }, { correlation: -0.26 });
+  assert.equal(reconstructionVerdict({ vis2: 2.45, closurePhase: 1.06 }, { ratio: 5.22 }, { correlation: 0.95 }).cast, true);
+  assert.equal(reconstructionVerdict({ vis2: 0.35, closurePhase: 1.12 }, { ratio: 2.73 }, { correlation: 0.79 }).cast, true);
+  const flat = reconstructionVerdict({ vis2: 1.76, closurePhase: 2.28 }, { ratio: 1.05 }, { correlation: -0.13 });
   assert.equal(flat.reasons.length, 2); assert.match(flat.reasons.join(), /halves/u);
-  const sphere = reconstructionVerdict({ vis2: 1.45, closurePhase: 5.58 }, { ratio: 2.32 }, { correlation: 0.94 });
-  assert.equal(sphere.cast, false); assert.match(sphere.reasons.join(), /does not fit/u);
+  const sphere = reconstructionVerdict({ vis2: 1.45, closurePhase: 5.58 }, { ratio: 1.53 }, { correlation: 0.28 });
+  assert.equal(sphere.cast, false); assert.equal(sphere.reasons.length, 3); assert.match(sphere.reasons.join(), /does not fit/u);
 });
 
 test('reproducibility subtracts each half\'s spotless twin, so shared coverage artefacts cannot agree for it', () => {
