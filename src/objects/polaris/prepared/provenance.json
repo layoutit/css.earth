@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "561266cbc2fb6354bb5490316268269ffce806b96bba6d3a6412b88a04e69b79"
+    "sha256": "fb21918d17364ac08421d6ee0edb79fde55c44e26c3a141d996a6d8ce819bfed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -184,8 +184,14 @@
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2407-09641",
+            "role": "reference",
+            "evidence": "Evans et al. (2024), Section III.1: the limb-darkened diameter, the adopted distance and the radius the record transcribes."
+          }
+        ]
       },
       "sha256": "3fbd45b669bfac6993a32a9ea852200ee787efa8861001806da5ed7d1b729544",
       "bytes": 1315,
