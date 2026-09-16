@@ -237,7 +237,7 @@ test('turning the view does not blink rings out with the captions that leave the
   // captions they cannot place there; the rings they leave behind still cross the view.
   for (let step = 0; step < 90; step++) {
     const angle = step * .5 * Math.PI / 180, distance = 8 * 149597870700;
-    input.world.pose.orientationXyzw = [Math.sin(angle / 2), 0, 0, Math.cos(angle / 2)];
+    Object.assign(input.world.pose, { orientationXyzw: [Math.sin(angle / 2), 0, 0, Math.cos(angle / 2)] });
     input.world.pose.positionM = [0, -distance * Math.sin(angle), distance * Math.cos(angle)];
     for (const body of calculate(input).projectedBodies) {
       const id = points[body.index]!.id, ring = body.segments.length > 0;
