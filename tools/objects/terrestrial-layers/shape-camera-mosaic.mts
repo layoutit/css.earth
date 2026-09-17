@@ -49,7 +49,16 @@ export function decodeCalibratedCamera(bytes: Buffer, encoding = 'calibrated'): 
   if(encoding==='fits-oi-reconstruction'){
     const fits=readFitsImage(bytes);
     if(fits.bitpix!==-64||fits.planes!==1||![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported reconstructed-image FITS layout.');
-    if(fits.header.CTYPE1!=='RA'||fits.header.CTYPE2!=='DEC')throw new Error('A reconstructed image states unprojected RA and Dec axes.');
+    // SQUEEZE writes plain RA and Dec: a reconstruction carries no projection. A radio interferometer's imager writes the same
+    // sky in a zenithal projection, and over a field this small the two agree far inside a pixel, so one is accepted with the
+    // field bounded. The departure of SIN or TAN from a constant plate scale grows as the cube of the field half-angle.
+    const projected=/^RA---(SIN|TAN)$/u.test(String(fits.header.CTYPE1??''))&&/^DEC--(SIN|TAN)$/u.test(String(fits.header.CTYPE2??''));
+    if(projected){
+      const scaleDegrees=Math.max(Math.abs(Number(fits.header.CDELT1)),Math.abs(Number(fits.header.CDELT2)));
+      const halfFieldRadians=Math.hypot(fits.width,fits.height)/2*scaleDegrees*Math.PI/180;
+      // A third of the cube is the leading term for TAN; a hundredth of a pixel is the bound taken here.
+      if(!(halfFieldRadians**3/3<scaleDegrees*Math.PI/180/100))throw new Error('A projected reconstructed image covers too wide a field to read as a plate scale.');
+    } else if(fits.header.CTYPE1!=='RA'||fits.header.CTYPE2!=='DEC')throw new Error('A reconstructed image states unprojected RA and Dec axes.');
     const {width,height}=fits;
     return {data:skyDisplayRaster(fits.values,width,height,skyImageAxes(fits.header)),width,height,offset:fits.dataOffset,encoding,allowZero:true};
   }

@@ -57,6 +57,8 @@
       "finding": "tools/objects/eclipse-map/hd-189733b-raw-map.test.mts fits the two MIRI eclipses reduced from raw (JWST program 2021) and matches the deposited dayside with correlation 0.94, hot spot 41 E 7 N. It uses MIRI only, without the Spitzer data that break the ramp-map degeneracy, so it is a check, not a lens.",
       "revisitWhen": "A raw reduction adds the Spitzer data, or the program's remaining observations are mapped.",
       "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=2021",
+        "https://mast.stsci.edu/search/ui/#/jwst",
         "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/tools/objects/eclipse-map/hd-189733b-raw-map.test.mts",
         "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/docs/eclipse-mapping.md"
       ],
@@ -90,6 +92,8 @@
       "finding": "Measured in docs/eclipse-mapping.md: the eclipse-only map moves about 0.5-1 deg per second of timing; adding the 31 s of light travel time across the orbit, which ThERESA does not model, moves the offset from 42.3 to 26.4 deg in this project's fit. The paper's 33.0 deg lies inside that range. The map is shown as deposited.",
       "revisitWhen": "A map of HD 189733b fitted with light travel time is published.",
       "evidence": [
+        "https://arxiv.org/abs/2503.20895",
+        "https://zenodo.org/records/15103479",
         "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/docs/eclipse-mapping.md"
       ],
       "checked": [

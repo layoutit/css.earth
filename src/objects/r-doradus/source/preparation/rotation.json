@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 69.1899636361153,
+  "declinationDegrees": 27.922834062967965,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No published rotation axis. ALMA molecular lines give a surface rotation velocity of about 1.0 +/- 0.1 km/s, fast for a giant (Vlemmings et al. 2018, A&A 613, L4), seen again over more than six years (Vlemmings et al. 2024, Nature 633, 323); Mohnen et al. (2024, ApJ 962, L36) suggest it could be a chance alignment of convective cells. Neither gives a pole direction or a period, and the star's 362 and 175 day cycles are pulsation, not spin. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of R Doradus are unmeasured; the axis shown is where celestial north lies on the sky."
+}

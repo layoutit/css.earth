@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "r-doradus",
+  "angularDiameterMas": 59.8,
+  "angularDiameterSource": "The 59.8 +/- 0.4 mas stellar disc Vlemmings et al. (2024, Nature 633, 323) fit to the ALMA 338 GHz visibilities, with an axis ratio of 0.99 +/- 0.01. Measured again here on the archive image this package ships: the half-power diameter is 60 mas. The near-infrared photosphere is smaller, 51.18 +/- 2.24 mas (Ohnaka et al. 2019, ApJ 883, 89), because 338 GHz sees a layer above it, and the 1.25 micrometre uniform disc is 57 +/- 5 mas (Bedding et al. 1997, MNRAS 286, 957), the largest stellar diameter in the JMMC JMDC.",
+  "distanceParsecs": 54.61496450027307,
+  "distanceSource": "Hipparcos parallax 18.31 +/- 0.99 mas (van Leeuwen 2007) via SIMBAD: 54.615 pc. Vlemmings et al. (2024, Nature 633, 323) adopt the same measurement as 55 +/- 3 pc and state that there is no useable Gaia parallax for this star.",
+  "radiusKm": 244291444,
+  "radiusSource": "The 59.8 +/- 0.4 mas disc above, at the 54.615 pc Hipparcos distance: 351 solar radii at 695700 km per solar radius, against the 353 +/- 19 Vlemmings et al. (2024) give at their rounded 55 pc. The same ALMA image is this object's lens, so the sphere and its texture are the same star.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "path": "shape/uniform-disc.tab",
+    "stepDegrees": 5,
+    "qualification": "A sphere at the published radius. The photosphere of an asymptotic giant branch star is not a solid surface and its limb is not sharp; the sphere is the reference surface the ALMA image is cast onto, not a measured shape. Its 338 GHz disc is 1.18 +/- 0.11 times the infrared photosphere."
+  }
+}

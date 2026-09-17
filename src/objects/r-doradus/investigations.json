@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "r-doradus",
+  "entries": [
+    {
+      "id": "alma-band7-continuum",
+      "status": "included",
+      "subject": "ALMA band 7 continuum image of the photosphere",
+      "finding": "ALMA project 2022.1.01071.S serves a pipeline continuum image of R Doradus taken on 18 July 2023, public since August 2024, with a 20.7 by 16.8 milliarcsecond beam across a 60 milliarcsecond disc: 10.4 beam areas over the face at a signal-to-noise ratio of 199. Fitting a smooth disc through the image's own beam leaves a residual 7.0 times the image noise against 3.0 times for the session's check quasar, so the mottling is 2.32 times the pipeline's artefact floor, above the threshold of 2. It is this object's lens.",
+      "evidence": [
+        "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea",
+        "https://doi.org/10.1038/s41586-024-07836-9"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "spotless-disc-test",
+      "status": "unresolved",
+      "subject": "The spotless-disc test on this image",
+      "finding": "The test this repository uses on a reconstruction re-images a spotless star through the observation's own sampling. That needs the visibilities, and ALMA serves them only inside the 77 GB product tarball; reducing them needs CASA, which is deferred in the ALMA facility ledger. The quasar control used instead is weaker: the check source has a signal-to-noise ratio of 23 against this image's 199, and a beam at a different position angle.",
+      "revisitWhen": "CASA is taken up in this repository, or the measurement set becomes available in a form that does not need it.",
+      "evidence": [
+        "https://almascience.eso.org/datalink/sync?ID=2022.1.01071.S_uid___A001_X35f5_Xaea_001_of_001.tar",
+        "https://casa.nrao.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "convective-cell-size",
+      "status": "unresolved",
+      "subject": "Whether individual convective cells can be shown",
+      "finding": "The authors measure a dominant structure size of 13.1 +/- 0.6 milliarcseconds, 0.72 +/- 0.05 astronomical units, which is smaller than this image's restoring beam. The lens therefore shows convection smoothed to the resolution and no single cell is resolved. Their own higher-resolution weighting reaches about 14.9 milliarcseconds, still not below the cell size.",
+      "revisitWhen": "An ALMA epoch with a beam well under 13 milliarcseconds on this star is released.",
+      "evidence": [
+        "https://arxiv.org/abs/2409.06785",
+        "https://almascience.eso.org/aq/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "amber-level-3-reconstruction",
+      "status": "excluded",
+      "subject": "Author-calibrated AMBER visibilities as an image route",
+      "finding": "The JMMC OiDB holds 75 calibration-level-3 AMBER granules for R Doradus from Ohnaka et al. (2019), the route this repository's star-candidates tool ranks first. They were screened for the star imaging pool and do not fit a disc well enough to reconstruct from; the ALMA image supersedes the attempt.",
+      "revisitWhen": "A different author-calibrated infrared set for R Doradus appears in the OiDB, or the AMBER fit is retried with the error handling the ESO pipeline work added.",
+      "evidence": [
+        "https://oidb.jmmc.fr/",
+        "https://doi.org/10.3847/1538-4357/ab3d2a"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "matisse-raw-season",
+      "status": "deferred",
+      "subject": "The 2019-2020 VLTI/MATISSE raw season",
+      "finding": "The ESO archive holds 949 raw MATISSE frames of R Doradus between 16 December 2019 and 7 February 2020, which this repository's pipeline could calibrate end to end as it does for Betelgeuse. It is not needed for a lens now that the ALMA image is cast, and a second season would be a second epoch rather than a better one.",
+      "revisitWhen": "A second epoch is wanted, or the MATISSE pipeline gains something the ALMA image cannot show, such as the infrared photosphere below the 338 GHz layer.",
+      "evidence": [
+        "https://archive.eso.org/tap_obs/capabilities",
+        "https://doi.org/10.1051/0004-6361/201936403"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "sphere-zimpol-polarimetry",
+      "status": "excluded",
+      "subject": "VLT/SPHERE-ZIMPOL imaging of R Doradus",
+      "finding": "The ESO archive holds 1613 raw SPHERE frames of R Doradus. The published work on them images the scattering dust envelope around the star rather than the photosphere, and the polarimetric maps constrain grain properties, not surface brightness. They are not a photograph of the star.",
+      "revisitWhen": "A SPHERE analysis resolves the photosphere itself rather than the dust envelope.",
+      "evidence": [
+        "https://arxiv.org/abs/1605.05504",
+        "https://arxiv.org/abs/2511.20816"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "rotation-axis",
+      "status": "unresolved",
+      "subject": "The rotation axis and period",
+      "finding": "ALMA molecular lines give a surface rotation velocity of about 1.0 km/s, fast for a giant, confirmed across at least four epochs over six years; Mohnen et al. (2024) argue it could be a chance alignment of convective cells. No pole direction and no period are published, and the 362 and 175 day cycles are pulsation. The display axis is celestial north at the star, a stated convention.",
+      "revisitWhen": "A published pole direction or rotation period for R Doradus appears.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201832723",
+        "https://doi.org/10.3847/2041-8213/ad2853"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    },
+    {
+      "id": "largest-apparent-star",
+      "status": "excluded",
+      "subject": "Calling this the largest star on the sky after the Sun",
+      "finding": "Bedding et al. (1997) conclude it from their 57 +/- 5 milliarcsecond measurement, and the reader card attributes the claim to them rather than asserting it. Ranking the JMMC JMDC by uniform-disc diameter on 17 September 2026 puts VY Canis Majoris, theta Apodis, W Hydrae, R Leonis and alpha Herculis A above R Doradus; those are measured at wavelengths where molecular and dust layers enlarge a star, so they are not the same quantity.",
+      "revisitWhen": "A survey compares apparent photospheric sizes across stars in one band, or the JMDC gains a larger comparable measurement.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/II/345",
+        "https://arxiv.org/abs/astro-ph/9701021"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "7d5366b6c433cff42e982b1d33adfb064c9ca6e0"
+        }
+      ]
+    }
+  ]
+}
