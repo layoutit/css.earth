@@ -21,7 +21,7 @@ import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe } from './eso-pipeline.mts';
+import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe } from './eso-pipeline.mts';
 import { toolchainPath } from './toolchain.mts';
 
 export { rawFrame } from './eso-pipeline.mts';
@@ -99,8 +99,12 @@ export async function pipelinePaths(overrides: Partial<{ prefix: string; calib: 
   return { prefix, catalogue: resolve(calib, 'share/esopipes/datastatic/pionier-4.0.4/PI_GCAL_150501_FAINT.fits'), yorick };
 }
 
+/** Every raw frame a plan reads. */
+export const pionierPlanFrames = (plan: PionierPlan) => [plan.kappa.dark, ...plan.kappa.frames, plan.spectral, ...plan.blocks.flatMap(block => [block.dark, ...block.exposures])];
+
 export async function calibratePionier(plan: PionierPlan, rawDirectory: string, work: string, paths: PipelinePaths) {
   await mkdir(rawDirectory, { recursive: true }); await mkdir(work, { recursive: true });
+  await rawFrames(pionierPlanFrames(plan), rawDirectory);
   const eso = esoEnvironment(paths.prefix, resolve(work, 'home'), { PATH: `${paths.yorick}:${resolve(paths.prefix, 'bin')}:${process.env.PATH}`,
     PNDRS_DIR: resolve(paths.prefix, 'lib/pionier-4.0.4/pndrs'), PIONIER_PLUGIN_PATH: resolve(paths.prefix, 'lib/pionier-4.0.4') });
   const env = eso.env as NodeJS.ProcessEnv & { PNDRS_DIR: string };
