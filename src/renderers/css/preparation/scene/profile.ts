@@ -9,6 +9,9 @@ export interface GeometryProfile {
     /** Exact tiling whose surface leaves hold a silhouette-stepped outset instead of a fixed overlap. */
     seamOutset?: SeamOutsetProfile };
   bodyRotationDegrees: number;
+  /** Flat textured discs in the body's equatorial plane, drawn under the same system node as the surface, so a ring
+   * follows the body as the body is oriented rather than carrying an orientation of its own. */
+  planes?: { id: string; radius: number; url: string; size: number; color: string }[];
   output: { schema: string; materialSchema: string; layout: 'retained' | 'body-container'; cutawaySchema?: string; interiorOrbitSchema?: string;
     body?: { axialTiltDegrees: number; rotationDirection: string; rotationPeriodEarthDays: number };
     motion?: { visualRotationSeconds: number; physicalSiderealRotationEarthDays: number; speedStates: Record<string, number> };
@@ -56,6 +59,16 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
     const matched = [Number(texture.width) / Number(surface.longitudeSegments), Number(surface.surfaceLatitudeHeight) / Number(surface.latitudeSegments)]
       .every(cellTexels => Math.abs(Number(projection.overlap) * cellTexels - Number(projection.rasterOverscan)) < 1e-9);
     if (projection.seamBleed !== 0 || !matched) throw new TypeError('A stepped seam outset needs seamBleed 0 and an overlap matched to the raster overscan.');
+  }
+  if (profile.planes !== undefined) {
+    if (!Array.isArray(profile.planes) || !profile.planes.length) throw new TypeError('geometry.planes must be a non-empty array.');
+    for (const value of profile.planes) {
+      const plane = object(value, 'plane');
+      numbers(plane, ['radius', 'size'], 'plane');
+      if (Number(plane.radius) <= 0 || !Number.isInteger(plane.size) || Number(plane.size) <= 0) throw new TypeError('A plane needs a positive radius and raster size.');
+      if (typeof plane.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(plane.id) || typeof plane.color !== 'string') throw new TypeError('A plane needs an identifier and colour.');
+      if (typeof plane.url !== 'string' || !plane.url.startsWith('/scenes/')) throw new TypeError('A plane needs a prepared asset.');
+    }
   }
   if (profile.cutaway !== undefined) {
     const cutaway = object(profile.cutaway, 'cutaway');
