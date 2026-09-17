@@ -135,7 +135,8 @@ async function threadMatisse(openmp: Record<string, unknown>, files: readonly st
     await writeFile(path, text.replaceAll(guard, '#if defined (_OPENMP)'));
   }
   const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix,
-    CPPFLAGS: `-Xpreprocessor -fopenmp -I${resolve(prefix, 'include')}`, LIBS: `-L${resolve(prefix, 'lib')} -lomp` };
+    // LLVM installs libomp as @rpath/libomp.dylib; the rpath lets configure's test programs and the recipes find it.
+    CPPFLAGS: `-Xpreprocessor -fopenmp -I${resolve(prefix, 'include')}`, LIBS: `-L${resolve(prefix, 'lib')} -lomp`, LDFLAGS: `-Wl,-rpath,${resolve(prefix, 'lib')}` };
   run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
   run('make', ['-j4'], { cwd: source, env });
   run('make', ['install'], { cwd: source, env });

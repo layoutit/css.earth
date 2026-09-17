@@ -11,7 +11,8 @@
  * 1. Calibrate. PIONIER and AMBER windows through their night planners, GRAVITY and MATISSE exposures through the archive's
  *    association trees. One calibration at a time.
  * 2. Select. Every calibrated file concatenated (oifits-concat.mts), then the season's wavelength windows and error floors
- *    (oifits-select.mts).
+ *    (oifits-select.mts); for MATISSE, the beam-commuting repeats of each block averaged in continuum windows into one
+ *    monochromatic file (matisse-continuum.mts).
  * 3. Size. A uniform disc fitted around the reference diameter (disc-fit.mts): the start image, the spotless twins' size and the beam.
  * 4. Twins. The two interleaved halves of the data, a spotless limb-darkened disc on the season's sampling and errors
  *    (spotless-disc.mts), and the same two halves of that disc.
@@ -35,6 +36,7 @@ import { MATISSE_REDUCTION } from './calibrate-matisse.mts';
 import { calibratePionierWindow } from './calibrate-pionier.mts';
 import { discStartImage, fitUniformDisc } from './disc-fit.mts';
 import { calibrateFromAssociations } from './eso-associations.mts';
+import { mergeContinuum, mergedOifits, type ContinuumRecipe } from './matisse-continuum.mts';
 import { concatenateOifits } from './oifits-concat.mts';
 import { readChannelRows } from './oifits-rows.mts';
 import { selectOifits } from './oifits-select.mts';
@@ -51,7 +53,11 @@ export type SeasonData =
 export interface Season {
   readonly id: string; readonly object: string; readonly target: string; readonly data: SeasonData;
   readonly referenceDiameterMas: number;
-  readonly selection: { readonly windowsMetres: readonly (readonly [number, number])[]; readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number; readonly vis2Minimum?: number } };
+  readonly selection: {
+    readonly windowsMetres: readonly (readonly [number, number])[]; readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number; readonly vis2Minimum?: number };
+    /** MATISSE: average the beam-commuting repeats of each block inside the windows into one monochromatic file (matisse-continuum.mts). */
+    readonly continuum?: ContinuumRecipe;
+  };
   readonly recipe: SqueezeRecipe;
   readonly limbDarkening: number;
   readonly oracles: { readonly calibrated?: string; readonly image?: string };
@@ -85,12 +91,22 @@ export function parseSeason(value: unknown): Season {
   if (recipe.code !== 'squeeze') throw new TypeError('Seasons reconstruct with SQUEEZE.');
   requireString(reference.source);
   const floors = selection.errorFloors === undefined ? undefined : requireRecord(selection.errorFloors, 'errorFloors');
+  const continuum = selection.continuum === undefined ? undefined : requireRecord(selection.continuum, 'continuum');
+  if (continuum && (floors || selection.windowsMicrons !== undefined)) throw new TypeError('A continuum selection states its own windows and floors.');
+  const target = continuum === undefined ? undefined : requireRecord(continuum.target, 'continuum target');
   return {
     id: requireString(record.id), object: requireString(record.object), target: requireString(record.target), data,
     referenceDiameterMas: requireFiniteNumber(reference.mas),
     selection: {
       windowsMetres: requireArray(selection.windowsMicrons ?? []).map(entry => { const [min, max] = requireArray(entry).map(number => requireFiniteNumber(number) * 1e-6); return [min!, max!] as const; }),
       ...(floors ? { errorFloors: { vis2Relative: requireFiniteNumber(floors.vis2Relative), closureDegrees: requireFiniteNumber(floors.closureDegrees), ...(floors.vis2Minimum === undefined ? {} : { vis2Minimum: requireFiniteNumber(floors.vis2Minimum) }) } } : {}),
+      ...(continuum && target ? { continuum: {
+        windowsMicrometres: requireArray(continuum.windowsMicrometres).map(entry => { const [min, max] = requireArray(entry).map(number => requireFiniteNumber(number)); if (!(max! > min!)) throw new TypeError('A continuum window is an ordered pair.'); return [min!, max!] as const; }),
+        referenceWavelengthMetres: requireFiniteNumber(continuum.referenceWavelengthMetres), referenceBandMetres: requireFiniteNumber(continuum.referenceBandMetres),
+        vis2MultiplicativeFloor: requireFiniteNumber(continuum.vis2MultiplicativeFloor), vis2AdditiveFloor: requireFiniteNumber(continuum.vis2AdditiveFloor), closurePhaseFloorDegrees: requireFiniteNumber(continuum.closurePhaseFloorDegrees),
+        outputMjd: requireFiniteNumber(continuum.outputMjd), outputDateObs: requireString(continuum.outputDateObs),
+        target: { name: requireString(target.name), rightAscensionDegrees: requireFiniteNumber(target.rightAscensionDegrees), declinationDegrees: requireFiniteNumber(target.declinationDegrees), spectralType: requireString(target.spectralType) },
+      } } : {}),
     },
     recipe: { pixelMas: requireFiniteNumber(recipe.pixelMas), width: requireFiniteNumber(recipe.width), entropy: requireFiniteNumber(recipe.entropy), elements: requireFiniteNumber(recipe.elements), iterations: requireFiniteNumber(recipe.iterations), discard: requireFiniteNumber(recipe.discard) },
     limbDarkening: check.limbDarkening === undefined ? 0 : requireFiniteNumber(check.limbDarkening),
@@ -131,8 +147,9 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
 
   // 2. Select.
   const calibratedFiles = calibrated ?? Object.values(progress.calibrated).flat();
-  const merged = concatenateOifits(await Promise.all(calibratedFiles.map(path => readFile(path))));
-  const selected = selectOifits(merged.bytes, { windowsMetres: season.selection.windowsMetres, ...(season.selection.errorFloors ? { errorFloors: season.selection.errorFloors } : {}) });
+  const continuum = season.selection.continuum;
+  const selected = continuum ? { bytes: mergedOifits(await mergeContinuum(calibratedFiles, continuum), continuum), raisedErrors: 0 }
+    : selectOifits(concatenateOifits(await Promise.all(calibratedFiles.map(path => readFile(path)))).bytes, { windowsMetres: season.selection.windowsMetres, ...(season.selection.errorFloors ? { errorFloors: season.selection.errorFloors } : {}) });
   const seasonFile = resolve(work, 'season.fits');
   await writeFile(seasonFile, selected.bytes);
 
