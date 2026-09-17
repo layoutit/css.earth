@@ -319,11 +319,11 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 191451,
-      "expectedSha256": "a791308df0c14370bb873a62620fa1d212c3dc09393dfd63636e382ec4607014",
+      "expectedBytes": 268740,
+      "expectedSha256": "0c8270bb881d5a5207d5e9fe8db37e2a08ea2252a8861fc7f6ebc56add40eed0",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation with the limb plate and the orbit-aligned axis."
       }
     }
   ]
