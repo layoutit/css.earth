@@ -157,11 +157,6 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       return systemBarycentreHeliocentricAu((id === 'earth' ? 'emb' : id) as Vsop87BodyKey, source.frame.epochJdTt)
         .map((value, axis) => value * M_PER_AU + (id === 'earth' ? sourcePositions.get('earth')![axis]! * 1000 : 0));
     };
-    // At outer-dwarf coordinates one floating-point step already exceeds a
-    // millimetre. Bound the independent conversion by four relative epsilons.
-    const agrees = (expected: readonly number[], actual: readonly number[]) =>
-      Math.hypot(...expected.map((value, axis) => value - actual[axis]!)) <=
-        Math.max(.001, Math.hypot(...expected) * Number.EPSILON * 4);
     for (const body of result.bodies) {
       const id = body.id as BodyId, parent = BODIES[id].parent!;
       if (body.orbit === undefined) {
@@ -170,20 +165,12 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         assert(Math.hypot(...modelPositionM(id).map((value, axis) => value - body.positionM[axis]!)) <= Math.max(.001, Math.hypot(...body.positionM) * Number.EPSILON * 8), `${id} differs from its independent placement`);
         continue;
       }
-      if (body.placement === 'candidate-orbits') {
-        // A wide companion is placed by its own astrometry and draws the orbits its measurements allow around its primary,
-        // each with its own position along the line of sight. Its ephemeris has no parent.
-        assert.equal(parent, null, `${id} is placed by astrometry`);
-        assert.ok((STAR_IDS as readonly string[]).includes(body.orbit.centerBodyId), `${id} orbits a placed star`);
-        assert(agrees(modelPositionM(id), body.positionM), `${id} differs from its independent placement`);
-        assert.ok(body.additionalOrbits.length >= 1, `${id} draws more than one candidate`);
-        for (const orbit of [body.orbit, ...body.additionalOrbits]) {
-          assert.equal(orbit.centerBodyId, body.orbit.centerBodyId);
-          assert(agrees(modelPositionM(body.orbit.centerBodyId as BodyId), orbit.centerPositionM), `${id} candidate differs from its primary's placement`);
-        }
-        continue;
-      }
       assert.equal(body.orbit.centerBodyId, parent);
+      // At outer-dwarf coordinates one floating-point step already exceeds a
+      // millimetre. Bound the independent conversion by four relative epsilons.
+      const agrees = (expected: readonly number[], actual: readonly number[]) =>
+        Math.hypot(...expected.map((value, axis) => value - actual[axis]!)) <=
+          Math.max(.001, Math.hypot(...expected) * Number.EPSILON * 4);
       assert(agrees(modelPositionM(id), body.positionM), `${id} differs from its independent ephemeris`);
       assert(agrees(modelPositionM(parent), body.orbit.centerPositionM), `${id} orbit differs from its parent's independent ephemeris`);
     }
