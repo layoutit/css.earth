@@ -27,8 +27,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "missionId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj"
           }
@@ -73,8 +73,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "missionId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif"
           }
@@ -119,8 +119,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "missionId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif"
           }
@@ -165,8 +165,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "missionId": "osiris-rex",
             "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A."
           }
@@ -263,8 +263,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4366,
-      "expectedSha256": "4bb4a3717c315de446c56bf3d68a29430efe0451231f37e859efa75d2ceddbe9"
+      "expectedBytes": 4269,
+      "expectedSha256": "6028f9b3011cb4760e49548a9fceddb3a749be7d0116175e0f0d02ad88ad4ecb"
     },
     {
       "path": "presentation/title-mark.json",
@@ -350,8 +350,8 @@
     {
       "id": "bennu-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1863,
-      "expectedSha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
+      "expectedBytes": 1864,
+      "expectedSha256": "62c5010feeff32bf6b8f57287e869946bf15752ef680a5702c24bd529ebfa386",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

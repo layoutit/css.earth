@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-sky-band-composite@1",
+  "grid": {
+    "width": 4000,
+    "height": 4000,
+    "fovDeg": 10,
+    "centerIcrsDegrees": [
+      13.19,
+      -72.83
+    ]
+  },
+  "bands": [
+    {
+      "band": "W4",
+      "tiles": {
+        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming-w4-tiles.json",
+        "sha256": "0204dd5b34d595b9e0aed62c228a3c817b572d0dca74756c6d695a191b5d03a4"
+      }
+    },
+    {
+      "band": "W3",
+      "tiles": {
+        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming-w3-tiles.json",
+        "sha256": "c9e0831a976a37acaf5cf838223495b8a00f1794f46a9033ed64ccd9134bdb68"
+      }
+    },
+    {
+      "band": "W1",
+      "tiles": {
+        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming-w1-tiles.json",
+        "sha256": "26ddaa209c57684c19b624a650ab3cc65b2990cdcec259ea268cb08594fd7412"
+      }
+    }
+  ],
+  "backgroundPercentile": 5,
+  "peakPercentile": 99.95,
+  "display": {
+    "minimum": 0,
+    "stretch": 0.2,
+    "softening": 8
+  }
+}

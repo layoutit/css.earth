@@ -8,24 +8,25 @@ import type {createSourceManifest} from '../../../src/platform/source-manifest.m
 import type {MaterialSourceTrack} from '../../prepare-materials.mts';
 import type {PreparedVariant} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 import type {PreparedPresentationDefinition} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-import {requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
+import {requireArray,requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
 import {requireObjectControls} from '../../../site/scene-contract.mts';
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
-  geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number;framingScale?:number}};
+  geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera?:{framingScale?:number}};
   raster:SolidRasterGrid & Partial<Record<'observations'|'scientific'|'observedColors'|'surfaceObservations',readonly {id:string;focus?:unknown}[]>>;
   presentation:{defaultLens:string};
 }
 type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
 type SolidScene=ReturnType<typeof import('../../prepared-replay-source.mts').parseSolidReplayScene>;
 import {prepareScientificNavigation} from './scientific-focus.mts';
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { preparePerspectiveCamera } from '../../../src/platform/prepare-perspective-camera.mts';
 import { prepareAstrometricSkySceneRegistration } from '../../../src/platform/astrometric-sky-registration.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
+import { photographDirections, prepareDefaultCameraAngles } from '../../../src/platform/default-camera.mts';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
@@ -39,7 +40,12 @@ import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../s
 import { restoreDepthSource } from '../../prepared-depth-partitions.mts';
 import { prepareTerrestrialRings } from './rings.mts';
 
-async function prepareSolidEpochFrame({ config, celestial }:{config:SolidSceneConfig;celestial:SolidCelestial}) {
+/** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */
+export function solidCameraAngles(config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {
+  return prepareDefaultCameraAngles(config.namespace, { observation: photographDirections(config.namespace, config, surfacesReport) });
+}
+
+async function prepareSolidEpochFrame({ config, celestial, surfacesReport }:{config:SolidSceneConfig;celestial:SolidCelestial;surfacesReport:unknown}) {
   const { namespace: id, geometry } = config;
   const { BODIES } = await loadAstronomyPackage();
   const bodyId=(Object.keys(BODIES) as Array<keyof typeof BODIES>).find(key=>key===id);
@@ -53,16 +59,16 @@ async function prepareSolidEpochFrame({ config, celestial }:{config:SolidSceneCo
     sceneRegistrationChain: registration.chain, sceneRegistrationEpoch: registration.epoch };
   const source = new Map(Object.entries(BODY_POSITION_PROVENANCE)).get(id);
   const sun = source ? { ...celestial.sun, localDirection: frame.sunDirection,
-    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: id, ...config.geometry.camera, sceneDirection: frame.sunDirection }),
+    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: id, ...solidCameraAngles(config, surfacesReport), sceneDirection: frame.sunDirection }),
     provenance: { source: source.model, sourcePath: source.sourcePath,
       qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from its retained source state and canonical heliocentric parent coordinates. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
-  return { camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
+  return { camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera, ...solidCameraAngles(config, surfacesReport) }), sky, sun,
     systemTransform: frame.cssTransform };
 }
 
 export async function prepareSolidScene({ config, celestial, outputDirectory, publicDirectory, radial = null }:{config:SolidSceneConfig;celestial:SolidCelestial;outputDirectory:string;publicDirectory:string;radial?:ReturnType<typeof combineRadialModels>}) {
   const { namespace: id, geometry } = config;
-  const epoch = await prepareSolidEpochFrame({ config, celestial });
+  const epoch = await prepareSolidEpochFrame({ config, celestial, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')) });
   const bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[]=radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
       latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
@@ -85,7 +91,7 @@ export async function prepareSolidScene({ config, celestial, outputDirectory, pu
 /** Refresh a changed ephemeris without rebuilding source geometry or image banks.
  * The same numeric owner as full preparation updates the actual retained carrier,
  * so the physical world frame never names a basis absent from the rendered scene. */
-export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan;bodyLeaves:readonly unknown[];systemTransform:string},D extends PreparedPresentationDefinition & {id:string}>({ config, scene, definition: inputDefinition }:{config:SolidSceneConfig;scene:T;definition:D}) {
+export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan;bodyLeaves:readonly unknown[];systemTransform:string},D extends PreparedPresentationDefinition & {id:string}>({ config, scene, definition: inputDefinition, surfacesReport }:{config:SolidSceneConfig;scene:T;definition:D;surfacesReport:unknown}) {
   // Refresh the canonical preparation branch. Generated projection carriers
   // are rebuilt by prepareObjectJson after its physical frame has changed.
   const definition = restoreDepthSource(inputDefinition);
@@ -93,7 +99,7 @@ export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan
   if (config.kind !== 'solid-observation-body' || definition.id !== id || !Array.isArray(scene.bodyLeaves)) {
     throw new TypeError('Epoch refresh requires its prepared solid-observation scene.');
   }
-  const epoch = await prepareSolidEpochFrame({ config, celestial: { sky: scene.sky, sun: scene.sun } });
+  const epoch = await prepareSolidEpochFrame({ config, celestial: { sky: scene.sky, sun: scene.sun }, surfacesReport });
   const nodes = definition.tree.nodes;
   const carriers = nodes.map((node, index) => node.className?.split(' ').includes(`${id}-system`) ? index : -1).filter(index => index >= 0);
   if (carriers.length !== 1) throw new TypeError('Epoch refresh needs one retained physical surface carrier.');
@@ -102,7 +108,14 @@ export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan
     throw new TypeError('Epoch refresh cannot bind a carrier that differs from its prepared source scene.');
   }
   const nextScene = { ...scene, ...epoch };
-  const nextDefinition = { ...definition, camera: { ...definition.camera, ...epoch.camera }, sky: epoch.sky, sun: epoch.sun,
+  // Lens destinations are camera angles in the same frame, so they follow the refreshed camera.
+  const focus = new Map((['observations','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
+    (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
+  const variants = focus.size === 0 ? definition.variants : definition.variants.map(variant => {
+    const lensId = (variant.when as {lensId?:string}|undefined)?.lensId;
+    return lensId !== undefined && focus.has(lensId) ? { ...variant, navigation: prepareScientificNavigation(id, focus.get(lensId), epoch.camera) } : variant;
+  });
+  const nextDefinition = { ...definition, variants, camera: { ...definition.camera, ...epoch.camera }, sky: epoch.sky, sun: epoch.sun,
     tree: { ...definition.tree, nodes: nodes.map((node, index) => index === carriers[0] ? { ...node, style: `transform:${epoch.systemTransform}` } : node) } };
   return { scene: nextScene, definition: nextDefinition };
 }

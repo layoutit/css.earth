@@ -1,3 +1,4 @@
+import { refuseAuthoredCameraAngles } from '../../../src/platform/default-camera.mts';
 import {requireRecord} from '../../source-values.mts';
 import {shape,number,text,optional,nullable,array,boolean,dictionary,choice,parseTransform,parseSciencePalette} from './source-records.mts';
 import {parseSolidScience,parseSolidRasterConfig} from './solid-source.mts';
@@ -31,7 +32,7 @@ export function parseSolidPreparationSource(input:unknown) {
     namespace:text,displayName:text,publicBase:text,rings:optional(value=>value),
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
       radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({lensId:text,additionalLensIds:optional(array(text))})(value)))),
-      camera:shape({initialScenePitchDegrees:number,defaultControlYawDegrees:number,framingScale:optional(number)})}),
+      camera:optional(value=>{const camera=shape({framingScale:optional(number)})(value);refuseAuthoredCameraAngles(camera);return camera;})}),
     lighting:shape({frameSize:number,frameCount:number,columns:number,logicalSize:number,terminatorWidth:number,
       directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number}),
     presentation:shape({defaultLens:text}),

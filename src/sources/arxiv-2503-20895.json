@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-2503-20895",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lally et al. (2025): Eclipse Mapping with MIRI: 2D Map of HD 189733b from 8 µm JWST MIRI LRS Observations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2503.20895"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2503.20895",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2503.20895",
+      "checkedOn": "2026-09-17",
+      "locator": "Table 1 fixed ThERESA inputs (stellar mass 0.807 and radius 0.752 solar radii, planet radius 0.11680 solar radii, period, inclination 85.71, transit time 59838.6863112); best fit 2 eigencurves at degree 5, hot spot 33.0 +0.7/-0.9 degrees east"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "M. Lally",
+    "R. C. Challener",
+    "N. K. Lewis",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

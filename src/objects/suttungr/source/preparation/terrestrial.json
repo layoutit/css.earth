@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 3.5,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.8955269536090855
     },
     "mapUrl": "/scenes/suttungr/suttungr-model-surface@2x.webp",

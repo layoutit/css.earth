@@ -33,6 +33,28 @@ async function cached(path: string, url: string, check: (bytes: Buffer) => void)
   return bytes;
 }
 
+const insideGrid = (p: readonly [number, number], grid: SkyGrid) => p[0] >= 0.5 && p[0] <= grid.width + 0.5 && p[1] >= 0.5 && p[1] <= grid.height + 0.5;
+/** Whether a projected footprint polygon (vertices in order, one-based FITS pixels) overlaps the grid's pixel-centre area.
+ * A bounding-box test is not enough: an atlas tile rotated against the grid can share its box while missing every
+ * output pixel, and the compositor then rightly refuses that pinned tile. */
+export function footprintReachesGrid(polygon: readonly (readonly [number, number])[], grid: SkyGrid): boolean {
+  if (polygon.some(p => insideGrid(p, grid))) return true;
+  const corners: [number, number][] = [[0.5, 0.5], [grid.width + 0.5, 0.5], [grid.width + 0.5, grid.height + 0.5], [0.5, grid.height + 0.5]];
+  const contains = (q: readonly [number, number]) => {
+    let inside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      const a = polygon[i]!, b = polygon[j]!;
+      if ((a[1] > q[1]) !== (b[1] > q[1]) && q[0] < (b[0] - a[0]) * (q[1] - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
+    }
+    return inside;
+  };
+  if (corners.some(contains)) return true;
+  const cross = (o: readonly [number, number], a: readonly [number, number], b: readonly [number, number]) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const crosses = (p1: readonly [number, number], p2: readonly [number, number], q1: readonly [number, number], q2: readonly [number, number]) =>
+    cross(p1, p2, q1) * cross(p1, p2, q2) < 0 && cross(q1, q2, p1) * cross(q1, q2, p2) < 0;
+  return polygon.some((p, i) => corners.some((c, k) => crosses(p, polygon[(i + 1) % polygon.length]!, c, corners[(k + 1) % 4]!)));
+}
+
 /** Tiles whose published footprint reaches the grid, from the IBE search around the grid centre. */
 export async function overlappingAtlasTiles(grid: SkyGrid, band: WiseBand) {
   const wcs = gridWcs(grid), toGrid = skyToGridPixel(wcs);
@@ -51,9 +73,9 @@ export async function overlappingAtlasTiles(grid: SkyGrid, band: WiseBand) {
       const next = corners[(i + 1) % 4]!, dra = ((next[0] - corner[0] + 540) % 360) - 180;
       for (let k = 0; k < 32; k++) samples.push([(corner[0] + dra * k / 32 + 360) % 360, corner[1] + (next[1] - corner[1]) * k / 32]);
     });
-    const pixels = samples.map(([ra, dec]) => toGrid(ra, dec)).filter((pixel): pixel is [number, number] => !!pixel);
-    const xs = pixels.map(p => p[0]), ys = pixels.map(p => p[1]);
-    if (pixels.length && Math.min(...xs) <= grid.width + 0.5 && Math.max(...xs) >= 0.5 && Math.min(...ys) <= grid.height + 0.5 && Math.max(...ys) >= 0.5) ids.add(cell('coadd_id'));
+    const pixels = samples.map(([ra, dec]) => toGrid(ra, dec));
+    if (pixels.every((pixel): pixel is [number, number] => !!pixel) ? footprintReachesGrid(pixels, grid) : pixels.some(pixel => pixel && insideGrid(pixel, grid)))
+      ids.add(cell('coadd_id'));
   }
   return [...ids].sort();
 }
@@ -95,7 +117,8 @@ if (import.meta.main) {
     await writeFile(resolve(root, listPath), list);
     bands.push({ band: id, tiles: { path: listPath, sha256: sha256(list) } });
   }
-  const recipe = { schema: draft.schema, grid: draft.grid, bands, backgroundPercentile: draft.backgroundPercentile, peakPercentile: draft.peakPercentile, display: draft.display };
+  const recipe = { schema: draft.schema, grid: draft.grid, bands, backgroundPercentile: draft.backgroundPercentile, peakPercentile: draft.peakPercentile,
+    ...(draft.coverage === undefined ? {} : { coverage: draft.coverage }), display: draft.display };
   parseSkyBandComposite(recipe);
   await writeFile(recipePath, stable(recipe));
   console.log(`SKY_BANDS_AUTHORED ${recipePath}`);

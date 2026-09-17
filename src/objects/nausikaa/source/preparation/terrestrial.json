@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 47,
-    "camera": {
-      "initialScenePitchDegrees": -124.88764044943821,
-      "defaultControlYawDegrees": 270
-    },
     "mapUrl": "/scenes/nausikaa/nausikaa-shape-surface@2x.webp",
     "polesUrl": "/scenes/nausikaa/nausikaa-shape-surface@2x.webp",
     "radialTerrain": {

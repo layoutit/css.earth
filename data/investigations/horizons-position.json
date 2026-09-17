@@ -1,0 +1,6 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "horizons-position",
+  "subject": "JPL Horizons elements and independent vectors",
+  "finding": "Retained Horizons elements, cross-checked against independent vectors, give the heliocentric geometric position at the fixed 2026-09-03 epoch; the fixed-epoch two-body orbit does not simulate long-term perturbations."
+}

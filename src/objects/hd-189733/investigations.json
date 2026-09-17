@@ -1,0 +1,181 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-189733",
+  "entries": [
+    {
+      "id": "resolved-photosphere",
+      "subject": "Disc-resolved images or interferometric imaging of HD 189733 A",
+      "status": "excluded",
+      "finding": "The disc is 0.38 mas across. OiDB lists CHARA (Classic, PAVO, CLIMB, MIRC-X, MYSTIC), VEGA and AMBER observations, all raw (calibration level 0); the published result is a diameter (Boyajian et al. 2015), not an image. At CHARA's longest baselines the disc is barely resolved, so a surface image is not recoverable.",
+      "revisitWhen": "A reconstructed image of HD 189733 A's surface is published, or public calibrated data resolve it.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015MNRAS.447..846B",
+        "https://oidb.jmmc.fr/search.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "lally-2025-stellar-parameters",
+      "subject": "Stellar radius and mass from Lally et al. (2025)",
+      "status": "included",
+      "finding": "Table 1 fixes 0.752 solar radii and 0.807 solar masses (deposited configuration 0.8070777248865484) for the HD 189733b map. They set the sphere and the display GM; the planet's orbit and radius are fitted in this radius.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20895",
+        "https://zenodo.org/records/15103479"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "interferometric-diameter",
+      "subject": "CHARA limb-darkened diameter, Boyajian et al. (2015)",
+      "status": "excluded",
+      "finding": "0.3848 +/- 0.0046 mas in the H band (JMDC, 2015MNRAS.447..846B): 0.818 solar radii at the Gaia DR3 distance. Not used for the sphere, because the planet's orbit and size are fitted in units of the map's 0.752 solar radii; using it would scale the system by 9 percent away from the published map geometry.",
+      "revisitWhen": "An eclipse map of HD 189733b is fitted with the interferometric stellar radius.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=II/345/jmdc&HD189733",
+        "https://ui.adsabs.harvard.edu/abs/2015MNRAS.447..846B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "gaia-dr3-placement",
+      "subject": "Gaia DR3 astrometry",
+      "status": "included",
+      "finding": "Position at J2016.0, parallax 50.567 +/- 0.016 mas (19.776 pc, no zero-point correction), proper motion -3.208, -250.323 mas/yr and radial velocity -2.53 +/- 0.12 km/s, from the archived gaia_source row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "gaia-dr3-xp-spectrum",
+      "subject": "Photosphere colour from the Gaia DR3 XP sampled spectrum",
+      "status": "included",
+      "finding": "has_xp_sampled is true. The DataLink sampled spectrum (343 samples, 336-1020 nm) through the CIE 1931 2-degree observer gives sRGB 255, 226, 207; one standard error at every sample moves the blue channel by 2 at most. The Gaia GSP-Phot temperature, 4897 K, is not used: the measured spectrum replaces a Planck model.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816201846144&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://doi.org/10.1051/0004-6361/202243880"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "published-tess-limb-darkening",
+      "subject": "A published limb-darkening law fitted to TESS transits of HD 189733b",
+      "status": "excluded",
+      "finding": "Patel & Espinoza (2022, VizieR J/AJ/163/228 table 4), which gives WASP-43's law, has no row for HD 189733 (queried 2026-09-17). The law is fitted in this package instead (next entry).",
+      "revisitWhen": "A published TESS or visible-light limb-darkening law measured from HD 189733b transits appears.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/AJ/163/228/table4&-out=Name&-out.max=9999"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "tess-limb-darkening-fit",
+      "subject": "Quadratic limb darkening fitted here to TESS transits",
+      "status": "included",
+      "finding": "SPOC 2-minute light curves of sectors 41, 54 and 81 (TIC 256364928) hold 30 complete transits. Folded and fitted together: u1 0.236, u2 0.417, radius ratio 0.1556 (the map's 0.1553), transit 6.5 s before the map ephemeris, reduced chi-squared 3.4. Sector by sector u1 runs 0.16-0.30 and u2 0.35-0.51 with u1 + u2 within 0.64-0.67. The 20-second light curves of sectors 41, 54 and 81 and the multi-sector DV products were not used.",
+      "evidence": [
+        "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "stellar-spin-axis",
+      "subject": "Spin axis and rotation of HD 189733 A",
+      "status": "included",
+      "finding": "Cristo et al. (2024, A&A 682, A28), Table 4 model M1: lambda -1.00 +0.22/-0.23 deg, i* 71.87 +5.55/-6.91 deg, equatorial period 11.454 d, differential rotation alpha 0.29 (tentative, 93.4 percent); abstract psi 13.6 +/- 6.9 deg. The rotation record (cssearth-measured-obliquity-pole@1) builds the axis in HD 189733b's sky frame and checks psi: 13.9 deg with the orbit's 85.71 deg inclination, 13.68 deg with the paper's own 85.508 deg.",
+      "evidence": [
+        "https://arxiv.org/abs/2310.06681",
+        "https://doi.org/10.1051/0004-6361/202346366"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "stellar-axis-sky-position-angle",
+      "subject": "Position angle of the spin axis on the sky",
+      "status": "unresolved",
+      "finding": "The Rossiter-McLaughlin effect measures the axis relative to the planet's orbit, and transits do not measure the orbit's position angle on the sky. Both are placed with the orbit's ascending node at position angle 0, a display convention. The sign convention of lambda is not checked against the paper's; at 1 degree it moves the pole by 1 degree.",
+      "revisitWhen": "The orbit's sky orientation is measured, for example by astrometry or interferometry of the system.",
+      "evidence": [
+        "https://arxiv.org/abs/2310.06681"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "starspot-map",
+      "subject": "A map of HD 189733 A's starspots",
+      "status": "excluded",
+      "finding": "SIMBAD classes the star a BY Draconis variable (rotating spots). No spot map is drawn: spots crossed during transits are strips at single moments, and no brightness map of the photosphere was found.",
+      "revisitWhen": "A Doppler or light-curve inversion brightness map of HD 189733 A is published as data.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+189733"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "navigation-marker",
+      "subject": "Distant marker for HD 189733 A",
+      "status": "included",
+      "finding": "The spectrum colour dimmed toward the limb by the fitted law, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/src/objects/hd-189733/source/presentation/context.png"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    }
+  ]
+}

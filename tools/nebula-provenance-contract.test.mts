@@ -4,7 +4,8 @@ import { readFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import test from 'node:test';
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../src/platform/source-catalog.mts';
-import { parseInvestigationLedger } from './investigation-ledger.mts';
+import { evidenceLink, parseInvestigationLedger } from './investigation-ledger.mts';
+import { readInvestigationSurveys } from './investigation-survey.mts';
 
 const root = resolve(import.meta.dirname, '..');
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
@@ -30,7 +31,7 @@ async function presentedBanks() {
 
 test('every presented bank lens has an included, revision-pinned investigation', async () => {
   for (const { id, base } of await presentedBanks()) {
-    const ledger = parseInvestigationLedger(await read(`${base}/investigations.json`), id);
+    const ledger = parseInvestigationLedger(await read(`${base}/investigations.json`), id, await readInvestigationSurveys(resolve(import.meta.dirname, '..'), evidenceLink));
     const presentation = sourceObject(await read(`${base}/source/presentation.json`));
     for (const lens of sourceArray(presentation.lenses, sourceObject)) {
       const lensId = sourceText(lens.id);

@@ -109,10 +109,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 198.8,
-    "camera": {
-      "initialScenePitchDegrees": 40,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/mimas/mimas-normal-surface@2x.webp",
     "polesUrl": "/scenes/mimas/mimas-normal-poles@2x.webp",
     "radialTerrain": {

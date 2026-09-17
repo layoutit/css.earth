@@ -37,7 +37,7 @@ assert.equal(subjects.reduce((sum, subject) => sum + subject.payload.lenses.leng
 for (const path of ['site/test/nebula-provenance-browser.mts', 'site/test/browser-observations.mts',
   'site/components/DatasetDescription.astro', 'site/components/SelectedContent.astro', 'site/components/DatasetContextPanels.astro',
   'site/components/PreparedFocusLenses.astro', 'site/volume-presentation.mts', 'site/dataset-context.mts',
-  'site/prepared-sources.json', 'site/prepared-machines.json']) await pin(path);
+  'site/prepared-sources.json', 'site/prepared-facilities.json']) await pin(path);
 const browser = await chromium.launch({ headless: true });
 const viewport = { width: 1440, height: 1000 }, deviceScaleFactor = 1;
 const page = await browser.newPage({ viewport, deviceScaleFactor, reducedMotion: 'reduce' });
@@ -136,8 +136,8 @@ try {
       const attributions = ownSources.flatMap(source => source.capture?.attributions ?? []);
       assert.ok(attributions.length > 0, `${id}/${lens.id}: its observation must name a capture attribution.`);
       for (const attribution of attributions) {
-        const attribute = attribution.kind === 'unresolved' ? 'data-unresolved' : attribution.missionId ? 'data-mission' : 'data-machine';
-        const value = attribution.kind === 'unresolved' ? attribution.label : attribution.missionId ?? (attribution.kind === 'machine' ? attribution.machineId : '');
+        const attribute = attribution.kind === 'unresolved' ? 'data-unresolved' : attribution.missionId ? 'data-mission' : 'data-facility';
+        const value = attribution.kind === 'unresolved' ? attribution.label : attribution.missionId ?? (attribution.kind === 'facility' ? attribution.facilityId : '');
         assert.ok(value);
         const contributor = selected.locator(`[${attribute}="${value}"]`); assert.ok(await contributor.count());
         if (!await contributor.first().isVisible()) {

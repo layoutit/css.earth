@@ -1,0 +1,179 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-189733-companion",
+  "entries": [
+    {
+      "id": "gaia-dr3-placement",
+      "subject": "Gaia DR3 astrometry of HD 189733 B",
+      "status": "included",
+      "finding": "Position at J2016.0 and proper motion -12.193, -253.993 mas/yr from the archived row. 11.44 arcsec from A at position angle 244 deg, 226 au in projection. Parallax 50.629 +/- 0.014 mas against A's 50.567 +/- 0.016: taken literally B would be 5,000 au nearer; the star is placed at A's distance. Radial velocity 1.5 +/- 1.2 km/s is too uncertain; A's is used.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "line-of-sight-separation",
+      "subject": "How far B lies in front of or behind A",
+      "status": "unresolved",
+      "finding": "Not measured; the Gaia parallax difference is 2.9 times its combined error and would imply a separation 20 times the projected one for a pair moving together.",
+      "revisitWhen": "An orbit or precise relative parallax of the pair is published.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "tic-radius-mass",
+      "subject": "Radius and mass from the TESS Input Catalog v8.2",
+      "status": "included",
+      "finding": "TIC 256364937: 0.224 solar radii, 0.193 solar masses, Teff 3213 K, from Ks and distance by cool-dwarf relations (Stassun et al. 2019). Model values.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=IV/39/tic82&TIC=256364937&-out=TIC,GAIA,Rad,e_Rad,Mass,e_Mass,Teff,Kmag,LClass&-out.meta=hu"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "gaia-dr3-xp-spectrum",
+      "subject": "Photosphere colour from the Gaia DR3 XP sampled spectrum",
+      "status": "included",
+      "finding": "has_xp_sampled is true. The sampled spectrum through the CIE 1931 2-degree observer gives sRGB 255, 201, 123; below about 400 nm the samples are within their errors of zero, and one standard error at every sample (stopping at zero) moves the blue channel from 121 to 126.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816176111360&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "resolved-photosphere",
+      "subject": "Images, diameter, limb darkening or rotation axis of HD 189733 B",
+      "status": "excluded",
+      "finding": "None found: the disc would be about 0.1 mas, and no rotation period or axis is catalogued.",
+      "revisitWhen": "Any of these is measured.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+189733B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "on-the-map",
+      "subject": "Whether a star without imagery or planets stays on the map",
+      "status": "included",
+      "finding": "User rule of 2026-09-17: a star whose colour comes from its own measurements stays on the map. Preparation marks B's discovery sourceColor and discoveryVisibility keeps it visible.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/site/object-discovery.mts",
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/tools/prepare-object-discovery.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "navigation-marker",
+      "subject": "Distant marker for HD 189733 B",
+      "status": "included",
+      "finding": "A uniform disc in the spectrum colour, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/src/objects/hd-189733-companion/source/presentation/context.png"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "published-orbit",
+      "subject": "A published orbit of HD 189733 A and B",
+      "status": "excluded",
+      "finding": "None. Bakos et al. (2006) report a differential proper motion of -1 +/- 5, -21.2 +/- 5 mas/yr, consistent with a clockwise orbit roughly in the plane of the sky and a period near 3200 years if the true separation equals the projected one, and state that it is premature to derive specific orbital parameters. Gaia DR3 measures the relative motion 300 times more precisely and gives -8.98, -3.67 mas/yr, almost along the separation rather than across it, so that tentative orbit is superseded. No Gaia-era orbit of this pair was found.",
+      "revisitWhen": "An orbit of HD 189733 AB is published.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0602136",
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "c648f9e2a4c60ab61b4005742d5dd8b36d92211e"
+        }
+      ]
+    },
+    {
+      "id": "lofti-candidate-orbits",
+      "subject": "Candidate orbits fitted here with LOFTI",
+      "status": "included",
+      "finding": "lofti_gaia 2.0.8 (Pearce et al. 2020, ApJ 894, 115) on both stars' Gaia DR3 rows with masses 0.807 and 0.193 solar masses: 300 accepted orbits. Semi-major axis 132 to 771 au (median 238), period 1,500 to 21,000 years (median 3,700), eccentricity 0.10 to 0.99 (median 0.53), inclination to the sky 73.7 to 89.1 degrees, with 293 of 300 within 30 degrees of edge-on. The first 24 are drawn around HD 189733 A. A rerun draws a different sample of the same fit.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/ab8389",
+        "https://github.com/layoutit/css.earth/blob/c648f9e2a4c60ab61b4005742d5dd8b36d92211e/tools/objects/binary-orbits/lofti-fit.py"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "c648f9e2a4c60ab61b4005742d5dd8b36d92211e"
+        }
+      ]
+    },
+    {
+      "id": "relative-radial-velocity",
+      "subject": "The pair's relative radial velocity",
+      "status": "unresolved",
+      "finding": "Two published values disagree: Bakos et al. (2006) measured -2.38 +/- 0.20 km/s for A and -3.1 +/- 1.0 for B (difference -0.72 +/- 1.02), while Gaia DR3 gives -2.53 +/- 0.12 and +1.46 +/- 1.21 (difference +3.99 +/- 1.21). The escape speed at the projected separation is 2.8 km/s, so the Gaia difference exceeds it: a fit using it keeps only orbits that put the pair farther apart along the line of sight or draw a radial velocity low within its 1.2 km/s error. The drawn fit uses neither value, only the astrometry both agree with. A fit with the 2006 value gives the same picture: semi-major axis 134 to 1,217 au, period 1,556 to 42,454 years, and 295 of 300 orbits within 30 degrees of edge-on.",
+      "revisitWhen": "A precise relative radial velocity of the pair is published, or Gaia DR4 revises B's.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0602136",
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "c648f9e2a4c60ab61b4005742d5dd8b36d92211e"
+        }
+      ]
+    },
+    {
+      "id": "system-membership",
+      "subject": "Whether HD 189733 B belongs to the HD 189733 system",
+      "status": "included",
+      "finding": "El-Badry et al. (2021, MNRAS 506, 2269) list the pair in their Gaia wide-binary catalogue with a chance-alignment probability of 1.3e-4 and a projected separation of 226 au. B's astrometry record states that bond with boundTo, which puts B in the HD 189733 system without an orbit, so it shares the system's breadcrumb and card, and carries the pair's centre of mass: the system view still frames the planet's orbit, and only a camera farther out than the two stars are apart turns onto that centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/506/2269"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "c648f9e2a4c60ab61b4005742d5dd8b36d92211e"
+        }
+      ]
+    }
+  ]
+}

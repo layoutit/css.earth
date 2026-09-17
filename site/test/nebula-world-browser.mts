@@ -226,7 +226,8 @@ try {
     const card = page.locator('[data-prepared-focus-card]');
     assert.equal(await controls.locator('[data-focus-lens]').count(), payload.lenses.length);
     const lensResults: unknown[] = [];
-    const objectReport = { id, queries, lenses: lensResults, stars: count, labelFlyTo: true, cameraRetainedAcrossLenses: true };
+    const sideCaptures: unknown[] = [];
+    const objectReport = { id, queries, lenses: lensResults, stars: count, labelFlyTo: true, cameraRetainedAcrossLenses: true, sides: sideCaptures };
     report.objects.push(objectReport);
     for (const lens of payload.lenses) {
       if (lensSelection === 'default' && lens.id !== payload.defaultLens) continue;
@@ -256,7 +257,7 @@ try {
         ? source.sourceBinding.references.filter(reference => reference.role === 'material').map(reference => reference.catalogueId) : []))];
       assert.ok(sourceIds.length > 0, `${id}/${lens.id}: identify the original image source.`);
       for (const sourceId of sourceIds) assert.equal(await sourceContext.locator(`[data-source="${sourceId}"]`).first().isVisible(), true);
-      assert.ok(await sourceContext.locator('[data-machine], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution must be explicit.');
+      assert.ok(await sourceContext.locator('[data-facility], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution must be explicit.');
       await card.getByRole('tab', { name: 'Factsheet', exact: true }).click();
       const factsBank = card.locator(`[data-focus-facts-bank="${id}"]`);
       await factsBank.waitFor({ state: 'visible' });
@@ -293,6 +294,19 @@ try {
       const obliqueLabel = await checkCloudLabel(id, frame);
       lensResults.push({ id: lens.id, textures, sourceIds, sourcePixels: pixelFact.value, frontLabel, obliqueLabel, cameraRetained: true, lod });
       assert.equal(await page.evaluate(() => window.__nebulaProductionNodes.every(element => element.isConnected)), true, 'Navigation or lens/LOD selection replaced prepared nodes.');
+    }
+    // Inspect the accepted shape at both exact 90-degree side axes, not only from Earth and obliquely.
+    const defaultButton = controls.locator(`[data-focus-lens][value="${payload.defaultLens}"]`);
+    if (await defaultButton.count()) {
+      await defaultButton.click();
+      await page.waitForFunction(({ id, lens }) => document.querySelector(`[data-volume-lens-object="${id}"]`)?.getAttribute('data-selected-lens') === lens,
+        { id, lens: payload.defaultLens });
+    }
+    for (const [name, angle] of [['side-plus', Math.PI / 2], ['side-minus', -Math.PI / 2]] as const) {
+      await apply(framingDistance(angle), angle);
+      const sideTextures = await decodeCssImages(bank.locator(`[data-volume-lens="${payload.defaultLens}"]`));
+      await capture(`${id}-${name}`);
+      sideCaptures.push({ name, angleRadians: angle, lens: payload.defaultLens, textures: sideTextures });
     }
     await apply(frontDistance);
     const stars = controls.locator('[data-focus-stars]');

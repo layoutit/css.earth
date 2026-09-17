@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 30.0,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/ariadne/ariadne-shape-surface@2x.webp",
     "polesUrl": "/scenes/ariadne/ariadne-shape-surface@2x.webp",
     "radialTerrain": {

@@ -36,8 +36,8 @@ try {
       await page.goto(`${origin}/charon/`, { waitUntil: 'networkidle' });
       await page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
       assert.equal(await page.locator('input[name="shadows"]').isChecked(), false);
-      const machines = page.getByRole('button', { name: 'Machines', exact: true });
-      if (await machines.getAttribute('aria-pressed') === 'true') await machines.click();
+      const facilities = page.getByRole('button', { name: 'Machines', exact: true });
+      if (await facilities.getAttribute('aria-pressed') === 'true') await facilities.click();
       const initial = await page.locator('.charon-body s').elementHandles();
       assert.equal(initial.length, 450);
       if (viewport.width < 500) {
@@ -95,7 +95,7 @@ try {
           return state?.pinned === '89100000' && !state.flying;
         });
         await page.evaluate(() => window.__cssearthTest.object('charon').camera.setState({ zoom: 1.8 }));
-        if (await machines.getAttribute('aria-pressed') === 'true') await machines.click();
+        if (await facilities.getAttribute('aria-pressed') === 'true') await facilities.click();
         const map = page.locator('#charon-ammonia-details .planet-surface-minimap');
         await page.waitForFunction(() => {
           const map = document.querySelector<HTMLElement>('#charon-ammonia-details .planet-surface-minimap');

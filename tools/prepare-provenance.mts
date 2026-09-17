@@ -8,7 +8,7 @@ import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { hasErrorCode } from './source-values.mts';
 import { prepareObjectProvenance } from './objects/provenance.mts';
 import { sourceObject } from '../src/platform/source-catalog.mts';
-import { prepareMachines } from './prepare-machines.mts';
+import { prepareFacilities } from './prepare-facilities.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 
 // A fresh run stays a fresh run when its pinned lineage still matches. A changed
@@ -76,7 +76,7 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   if (unverified.length) console.error(`Recovered records that cannot be verified here: ${unverified.join(', ')}.`);
   // Invalid identities, capture pairs, lens IDs or artwork leave the entire
   // previous prepared set in place. Consumers also verify the closure pins.
-  const catalogue = await prepareMachines({ root, publish: false, provenance: documents });
+  const catalogue = await prepareFacilities({ root, publish: false, provenance: documents });
   await writePreparedSet([...outputs, ...catalogue.outputs]);
   return results.map(result => ({ ...result,
     citedFacts: catalogue.preparedSources.usage.edges.filter(edge => edge.consumerKind === 'object-fact' && edge.objectId === result.id).length,

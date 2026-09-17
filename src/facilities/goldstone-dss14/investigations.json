@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "goldstone-dss14",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "included",
+      "finding": "Goldstone radar reaches this repository through NASA's Planetary Data System Small Bodies Node, not an observatory archive: a dedicated Geographos dataset, and compilations of radar detections and shape models, several of which combine Goldstone transmissions with Arecibo or DSS-13 reception. No bulk raw Goldstone bundle was found, and the radar group's own site publishes no archive.",
+      "evidence": [
+        "https://sbn.psi.edu/pds/resource/geograph.html",
+        "https://sbn.psi.edu/pds/resource/jplradarshape.html",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "included",
+      "finding": "Planetary Data System data are in the public domain and are expected to be cited when used. No separate Goldstone data policy was found.",
+      "evidence": [
+        "https://search-pdsppi.igpp.ucla.edu/faq.jsp",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "excluded",
+      "finding": "Only finished products are distributed: radar shape models come from the SHAPE code lineage, for which no public distribution or licence was found.",
+      "revisitWhen": "A radar shape-model code is published openly, or raw radar data are archived.",
+      "evidence": [
+        "https://sbn.psi.edu/pds/resource/rshape.html",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

@@ -21,8 +21,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "missionId": "lro",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
           }
@@ -151,8 +151,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "missionId": "lro",
             "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
           }
@@ -673,8 +673,8 @@
     {
       "id": "moon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "6b9c5784ce3388d37a5dd987817701fc28559f779b877768856fcc5b1177d3bb",
-      "expectedBytes": 270,
+      "expectedSha256": "8866d8a4ad6dac17fa91e02705672f80f95a975bca434f196729f6326e0e2650",
+      "expectedBytes": 203,
       "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -908,8 +908,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "missionId": "lro",
             "evidence": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
           }
@@ -1058,8 +1058,8 @@
     {
       "id": "moon-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 115231,
-      "expectedSha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
+      "expectedBytes": 115313,
+      "expectedSha256": "d1cccc85a33bf459376d5f3f62e4624d33fbe2683680f474e44d775cb3c63333",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

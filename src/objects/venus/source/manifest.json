@@ -4,8 +4,8 @@
     {
       "id": "venus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "1737b4e4f0669fa0669f76330f7adeace8841f71778c2c73e0987272eb7fb749",
-      "expectedBytes": 273,
+      "expectedSha256": "1832ed1c9ea6867070cb5d38bdf94ae9817c3d70b3e5b57e0455f1900b8435b0",
+      "expectedBytes": 206,
       "origin": "Repository-authored physical scene recipe; radius from IAU/NASA and checked astronomy body data, pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
@@ -260,8 +260,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "magellan",
+            "kind": "facility",
+            "facilityId": "magellan",
             "missionId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
           }
@@ -299,8 +299,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "magellan",
+            "kind": "facility",
+            "facilityId": "magellan",
             "missionId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
           }
@@ -644,8 +644,8 @@
     {
       "id": "venus-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 14477,
-      "expectedSha256": "54cc7c82a696f47dca88aa7d4e7e4679fbc3012394628b357b9eb12715883d04",
+      "expectedBytes": 14490,
+      "expectedSha256": "9636d709bdaff36759618a0e6d66daf515ac66bb2f096a161543d8ad5ade9c5e",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

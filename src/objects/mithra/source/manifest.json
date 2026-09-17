@@ -9,14 +9,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "missionId": "goldstone-solar-system-radar",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy"
           }
@@ -87,14 +87,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "missionId": "goldstone-solar-system-radar",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy"
           }
@@ -175,8 +175,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2939,
-      "expectedSha256": "75bb55c6b30d89db3a770013bab99cf1e55f249da226416d56ba8b24919f89bb"
+      "expectedBytes": 2842,
+      "expectedSha256": "4c986da61146fcb70a799a4da6219e54dbae51b8c7f5c69728ec984bcf9edd05"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

@@ -144,10 +144,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 2.58,
-    "camera": {
-      "initialScenePitchDegrees": 10,
-      "defaultControlYawDegrees": 180
-    },
     "mapUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
     "polesUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
     "radialTerrain": {

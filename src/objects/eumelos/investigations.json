@@ -51,10 +51,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery-7",
       "status": "unresolved",
-      "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
         "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=5436&phys-par=true"
@@ -115,10 +113,8 @@
     },
     {
       "id": "recorded-survey-2",
-      "subject": "Integrated colors as a surface map",
+      "survey": "recorded-survey-2",
       "status": "excluded",
-      "finding": "Disk-integrated colors and thermal fits do not supply positions on the surface or a registered regolith map. The diameter fit belongs to the separate selected NEOWISE calibration entry; it was incorrectly mixed into this entry during migration.",
-      "revisitWhen": "A spatially resolved, reusable observation and its registration provide a measured surface product.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md"
       ],

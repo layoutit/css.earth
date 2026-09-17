@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 33.835,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/clementina/clementina-shape-surface@2x.webp",
     "polesUrl": "/scenes/clementina/clementina-shape-surface@2x.webp",
     "radialTerrain": {

@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-189733-companion",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 189733 B",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 155836.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/hd-189733-companion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "bf657054132ab52a406f23b48237fbca0f0e77749043f48b51aa68aadc67d5e5"
+      }
+    },
+    "catalog": {
+      "name": "HD 189733 B",
+      "classification": "star",
+      "color": "#ffc97b",
+      "distanceAu": 4079046.3,
+      "description": "Red dwarf 11 arcseconds from HD 189733 A, moving with it through space.",
+      "systemName": "HD 189733 system",
+      "order": 909,
+      "context": {
+        "order": 906
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        282979843262906050,
+        -486618668916319100,
+        235561077794622000
+      ],
+      "presentationToReference": [
+        0.46373414107112454,
+        0.19406397863271851,
+        -0.8644592637031928,
+        -0.797447930774991,
+        -0.33371637104734725,
+        -0.5027028758597613,
+        0.3860407285607461,
+        -0.9224817374301938,
+        -2.435096091639856e-7
+      ],
+      "orbitUpReference": [
+        -0.19406397863271851,
+        0.33371637104734725,
+        0.9224817374301938
+      ],
+      "metersPerUnit": 502699.3548387097,
+      "bodyRadiusM": 155836800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "ba92cf429ef6b7cf04cfcc613d88e98cc936354b55d84cb820d6c1757be596c9"
+  }
+}

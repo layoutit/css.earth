@@ -33,27 +33,7 @@
               "material": "emission"
             },
             {
-              "id": "nirspec-refit",
-              "source": "content",
-              "material": "emission"
-            },
-            {
               "id": "miri",
-              "source": "content",
-              "material": "emission"
-            },
-            {
-              "id": "miri-band-1",
-              "source": "content",
-              "material": "emission"
-            },
-            {
-              "id": "miri-band-2",
-              "source": "content",
-              "material": "emission"
-            },
-            {
-              "id": "miri-band-3",
               "source": "content",
               "material": "emission"
             }
@@ -125,7 +105,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7613bf62df059793d3e95401f61750bcf9b6431ff6f3f6f83cf2a3f99e596d61"
+        "sha256": "f7330063596ce62d3b6dec61e54e398910fc1e149b2eac9865a18caccbaa7b31"
       }
     },
     "catalog": {
@@ -149,15 +129,15 @@
         -458043586291200000
       ],
       "presentationToReference": [
-        -0.8775754434887368,
+        -0.9419285047378485,
         0.29829147416959223,
-        0.37534455827050256,
-        0.2837555569989943,
+        -0.15424943565554022,
+        0.2903470823037573,
         0.9541916795936617,
-        -0.09487371852318978,
-        0.38645067584070514,
+        0.072227490555343,
+        -0.16872837271785784,
         -0.02324725859017409,
-        0.9220170497937139
+        0.9853884011941816
       ],
       "orbitUpReference": [
         -0.29829147416959223,
@@ -171,6 +151,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e0b7c095c788e117f822dbf3cdba81c731957de37f83130fafcdf1a1384ee526"
+    "sha256": "f4a11c8b421516d2646b0f51faa5e1ea84902f34bc26c0a24ff12b2f1db123de"
   }
 }

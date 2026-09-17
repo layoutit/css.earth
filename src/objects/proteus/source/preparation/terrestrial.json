@@ -275,10 +275,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 208,
-    "camera": {
-      "initialScenePitchDegrees": -10.970382790652298,
-      "defaultControlYawDegrees": 1.6473023715265165
-    },
     "mapUrl": "/scenes/proteus/proteus-normal-surface@2x.webp",
     "polesUrl": "/scenes/proteus/proteus-normal-poles@2x.webp",
     "radialTerrain": {

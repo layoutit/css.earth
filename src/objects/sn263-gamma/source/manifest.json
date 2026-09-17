@@ -38,8 +38,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams"
           }
@@ -148,8 +148,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2184,
-      "expectedSha256": "4c17417d1d30e0d8011b2e59a20e9e03434276bf22b8aaa3d606b96264ec69c4"
+      "expectedBytes": 2107,
+      "expectedSha256": "3191dfd66224e5c3c98fdcac3c2e086b21a653d4e1f551a73fa09664e3f14a35"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

@@ -1,100 +1,167 @@
 {
- "schema": "cssearth-investigation-ledger@1",
- "objectId": "wasp-43",
- "entries": [
-  {
-   "id": "resolved-photosphere",
-   "subject": "Disc-resolved images or interferometry of WASP-43",
-   "status": "excluded",
-   "finding": "At 87.15 pc a 0.665 solar-radius star spans 0.071 mas (computed from the radius and distance), far below the resolution of any telescope or optical interferometer. No image or interferometric diameter is published.",
-   "revisitWhen": "An interferometric diameter or surface image of WASP-43 is published.",
-   "evidence": [
-    "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
-   ],
-   "checked": [
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-43",
+  "entries": [
     {
-     "date": "2026-09-16",
-     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
-    }
-   ]
-  },
-  {
-   "id": "challener-2024-stellar-parameters",
-   "subject": "Stellar radius and mass from Challener et al. (2024)",
-   "status": "included",
-   "finding": "Table 1 lists the assumed stellar radius 0.665 solar radii and mass 0.6916 solar masses, matching Hammond et al. (2024); they set the sphere and the display GM, and the WASP-43b package's orbit is expressed in this radius.",
-   "evidence": [
-    "https://arxiv.org/abs/2406.10207"
-   ],
-   "checked": [
+      "id": "resolved-photosphere",
+      "subject": "Disc-resolved images or interferometry of WASP-43",
+      "status": "excluded",
+      "finding": "At 87.15 pc a 0.665 solar-radius star spans 0.071 mas (computed from the radius and distance), far below the resolution of any telescope or optical interferometer. No image or interferometric diameter is published.",
+      "revisitWhen": "An interferometric diameter or surface image of WASP-43 is published.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        }
+      ]
+    },
     {
-     "date": "2026-09-16",
-     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
-    }
-   ]
-  },
-  {
-   "id": "gaia-edr3-placement",
-   "subject": "Gaia EDR3 astrometry via SIMBAD",
-   "status": "included",
-   "finding": "Position, parallax 11.474 +/- 0.016 mas (87.15 pc, no zero-point correction) and proper motion -41.992, -38.004 mas/yr from Gaia EDR3; radial velocity -3.7 +/- 0.7 km/s from Gaia DR2.",
-   "evidence": [
-    "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
-   ],
-   "checked": [
+      "id": "challener-2024-stellar-parameters",
+      "subject": "Stellar radius and mass from Challener et al. (2024)",
+      "status": "included",
+      "finding": "Table 1 lists the assumed stellar radius 0.665 solar radii and mass 0.6916 solar masses, matching Hammond et al. (2024); they set the sphere and the display GM, and the WASP-43b package's orbit is expressed in this radius.",
+      "evidence": [
+        "https://arxiv.org/abs/2406.10207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        }
+      ]
+    },
     {
-     "date": "2026-09-16",
-     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
-    }
-   ]
-  },
-  {
-   "id": "stellar-rotation-axis",
-   "subject": "Rotation axis of WASP-43",
-   "status": "unresolved",
-   "finding": "No measured axis. Challener et al. (2024) cite only some evidence of rotational modulation longer than 15 days (Hellier et al. 2011). The display axis is celestial north at the star.",
-   "revisitWhen": "A published stellar inclination or spin-orbit angle for WASP-43.",
-   "evidence": [
-    "https://arxiv.org/abs/2406.10207"
-   ],
-   "checked": [
+      "id": "gaia-edr3-placement",
+      "subject": "Gaia EDR3 astrometry via SIMBAD",
+      "status": "included",
+      "finding": "Position, parallax 11.474 +/- 0.016 mas (87.15 pc, no zero-point correction) and proper motion -41.992, -38.004 mas/yr from Gaia EDR3; radial velocity -3.7 +/- 0.7 km/s from Gaia DR2.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        }
+      ]
+    },
     {
-     "date": "2026-09-16",
-     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
-    }
-   ]
-  },
-  {
-   "id": "gaia-dr3-xp-spectrum",
-   "subject": "A measured optical spectrum for the photosphere colour",
-   "status": "excluded",
-   "finding": "Gaia DR3 published no BP/RP (XP) spectrum for WASP-43 (source_id 3767805209112436736, has_xp_sampled and has_xp_continuous false), so no flux-calibrated optical spectrum is available to integrate.",
-   "revisitWhen": "Gaia DR4 publishes XP spectra, or a flux-calibrated optical spectrum of WASP-43 is released.",
-   "evidence": [
-    "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736"
-   ],
-   "checked": [
+      "id": "stellar-rotation-axis",
+      "subject": "Spin axis of WASP-43",
+      "status": "included",
+      "finding": "Esposito et al. (2017, A&A 601, A53) measured the Rossiter-McLaughlin effect of WASP-43b with HARPS-N: sky-projected obliquity 3.5 +/- 6.8 degrees, aligned. The rotation record takes the pole from WASP-43b's orbit normal (cssearth-orbit-aligned-pole@1) with longitude 0 facing the Sun. No rotation period is measured (only some evidence of modulation longer than 15 days, Hellier et al. 2011), so no spin is shown.",
+      "evidence": [
+        "https://arxiv.org/abs/1702.03136",
+        "https://arxiv.org/abs/2406.10207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        }
+      ]
+    },
     {
-     "date": "2026-09-16",
-     "commit": "5926bcf4edbd5dbf8bf5c474c8f6eb0d6479d12b"
-    }
-   ]
-  },
-  {
-   "id": "gaia-dr3-gsp-phot-color",
-   "subject": "Photosphere colour from the Gaia DR3 photometric temperature",
-   "status": "included",
-   "finding": "GSP-Phot gives 4,416 K (16th–84th percentiles 4,407–4,424 K; systematics not included). A Planck spectrum at that temperature through the CIE 1931 2° observer gives sRGB 255, 220, 184 (#ffdcb8); the percentiles move a channel by at most 1. The spectroscopic 4,520 K that Challener et al. (2024) use gives 255, 222, 189. A blackbody ignores the K dwarf's absorption bands, and the colour carries no brightness.",
-   "evidence": [
-    "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736",
-    "https://doi.org/10.1051/0004-6361/202243462"
-   ],
-   "checked": [
+      "id": "gaia-dr3-xp-spectrum",
+      "subject": "A measured optical spectrum for the photosphere colour",
+      "status": "excluded",
+      "finding": "Gaia DR3 published no BP/RP (XP) spectrum for WASP-43 (source_id 3767805209112436736, has_xp_sampled and has_xp_continuous false), so no flux-calibrated optical spectrum is available to integrate.",
+      "revisitWhen": "Gaia DR4 publishes XP spectra, or a flux-calibrated optical spectrum of WASP-43 is released.",
+      "evidence": [
+        "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "5926bcf4edbd5dbf8bf5c474c8f6eb0d6479d12b"
+        }
+      ]
+    },
     {
-     "date": "2026-09-16",
-     "commit": "5926bcf4edbd5dbf8bf5c474c8f6eb0d6479d12b"
+      "id": "gaia-dr3-gsp-phot-color",
+      "subject": "Photosphere colour from the Gaia DR3 photometric temperature",
+      "status": "included",
+      "finding": "GSP-Phot gives 4,416 K (16th–84th percentiles 4,407–4,424 K; systematics not included). A Planck spectrum at that temperature through the CIE 1931 2° observer gives sRGB 255, 220, 184 (#ffdcb8); the percentiles move a channel by at most 1. The spectroscopic 4,520 K that Challener et al. (2024) use gives 255, 222, 189. A blackbody ignores the K dwarf's absorption bands, and the colour carries no brightness.",
+      "evidence": [
+        "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736",
+        "https://doi.org/10.1051/0004-6361/202243462"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "5926bcf4edbd5dbf8bf5c474c8f6eb0d6479d12b"
+        }
+      ]
+    },
+    {
+      "id": "stellar-inclination",
+      "subject": "Tilt of WASP-43's spin axis along the line of sight",
+      "status": "unresolved",
+      "finding": "The Rossiter-McLaughlin effect fixes the spin axis's angle on the sky, not its inclination toward the observer. The pole is assumed to share the orbit's 82 degree inclination; measuring it needs the rotation period with v sin i, or asteroseismology, neither published. The orbit's own position angle on the sky is a display convention, which the axis inherits.",
+      "revisitWhen": "A measured stellar inclination or rotation period with v sin i for WASP-43.",
+      "evidence": [
+        "https://arxiv.org/abs/1702.03136"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        }
+      ]
+    },
+    {
+      "id": "tess-limb-darkening",
+      "subject": "Limb darkening measured from TESS transits",
+      "status": "included",
+      "finding": "Patel & Espinoza (2022, AJ 163, 228; VizieR J/AJ/163/228 table 4) fitted a quadratic law to TESS transits of WASP-43b: u1 0.55 (+0.22 -0.31), u2 0.00 (+0.46 -0.30), so the limb is 45% as bright as the centre (about 25 to 80% within the uncertainty). The row is pinned and drawn as the colour lens's limb plate. TESS covers 600-1000 nm; no visible-light measurement exists. The JWST transits in the WASP-43b package also constrain limb darkening, but in the infrared, where it is weaker.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ac5f55",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/163/228"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        }
+      ]
+    },
+    {
+      "id": "starspot-map",
+      "subject": "Starspots on WASP-43",
+      "status": "excluded",
+      "finding": "Esposito et al. (2017) find enhanced Ca II H and K emission, so the star is magnetically active and has spots, but no spot map exists or can be made with current data: the 0.07 mas disc cannot be imaged, the slow rotation rules out Doppler imaging, and a spot crossed during a transit is one strip at one moment while spots evolve over days. Recorded as a note on the lens, not drawn.",
+      "revisitWhen": "A published spot map or spot-crossing mapping of WASP-43.",
+      "evidence": [
+        "https://arxiv.org/abs/1702.03136"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        }
+      ]
+    },
+    {
+      "id": "navigation-marker",
+      "subject": "Distant marker for WASP-43",
+      "status": "included",
+      "finding": "The marker is the colour lens as a disc with the measured TESS limb darkening, rendered from the pinned colour and limb-darkening records; it replaced the scaffold's flat disc.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ac5f55"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

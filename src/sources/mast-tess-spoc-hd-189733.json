@@ -1,0 +1,41 @@
+{
+  "id": "mast-tess-spoc-hd-189733",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TESS SPOC 2-minute light curves of HD 189733 (TIC 256364928), sectors 41, 54 and 81",
+  "identifiers": [
+    {
+      "type": "TIC",
+      "value": "256364928"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "label": "MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1117/12.2233418",
+      "label": "Jenkins et al. (2016), the TESS Science Processing Operations Center"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "checkedOn": "2026-09-17",
+      "locator": "SPOC light-curve files for sectors 41 (2021), 54 (2022) and 81 (2024): LIGHTCURVE table, PDCSAP_FLUX, QUALITY, TIME in BJD_TDB - 2457000"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This paper includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from MAST; SPOC pipeline, Jenkins et al. (2016)",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

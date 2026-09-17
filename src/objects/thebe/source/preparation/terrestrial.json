@@ -196,10 +196,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 49.3,
-    "camera": {
-      "initialScenePitchDegrees": 1.3844904258175654,
-      "defaultControlYawDegrees": -32.58208818766587
-    },
     "mapUrl": "/scenes/thebe/thebe-normal-surface@2x.webp",
     "polesUrl": "/scenes/thebe/thebe-normal-poles@2x.webp",
     "radialTerrain": {

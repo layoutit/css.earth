@@ -3,6 +3,9 @@ import type {PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolyg
 import type {createAtmospherePreparation, AtmosphereConfiguration} from './atmosphere.mts';
 import type {createPagedSurfaceRaster} from './surface-raster.mts';
 import {requireFiniteNumber} from '../../source-values.mts';
+import type {EllipsoidAttitude} from './attitude.mts';
+import {preparedControlPitch} from '@cssearth/engine';
+import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 interface MaterialBankOptions {id: 'lighting' | 'atmosphere'; className: string; physicalRadius: number; depthBias: number; source?: AtmosphereModel | null; supportsShadowless?: boolean; illumination?: AtmosphereConfiguration['material']['illumination'] | null;}
@@ -24,8 +27,11 @@ import {
 } from "../../../src/platform/projective-surface-raster.mts";
 
 
-export function preparePagedEllipsoidScene({ config: profile, interiorSource, citySource, noise, atmosphereModel, atmosphere, raster }: {config: PagedSceneProfile; interiorSource: InteriorSource; citySource: {presentation: {poolSize: number}} | null; noise: {poolSize: number} | null; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
-const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, OBLIQUITY_DEGREES, PRESENTATION_NODE_DEGREES, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_SCENE_PITCH_DEGREES, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_DEFAULT_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
+export function preparePagedEllipsoidScene({ config: profile, interiorSource, citySource, noise, atmosphereModel, atmosphere, raster, attitude }: {attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; citySource: {presentation: {poolSize: number}} | null; noise: {poolSize: number} | null; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
+const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
+// The default pose is derived (src/platform/default-camera.mts): the Sun to the left of an ecliptic-up frame at the lit pitch.
+const CAMERA_SCENE_PITCH_DEGREES = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
+const CAMERA_DEFAULT_CONTROL_PITCH_DEGREES = preparedControlPitch(CAMERA_SCENE_PITCH_DEGREES, { maximumControlPitchDegrees: CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, maximumScenePitchDegrees: 65 });
 const { MATERIAL_FRAMES_PER_SHARD, MATERIAL_PRESENTATION_SIZE, MATERIAL_TILE_SIZE, ATMOSPHERE_ILLUMINATION, ATMOSPHERE_DEFAULT_FRAME, atmosphereProfile } = atmosphere;
 const { atlas: SURFACE_ATLAS, createSurfaceRasterPlan, surfacePageUrls } = raster;
 const ATMOSPHERE_MODEL = atmosphereModel;
@@ -84,11 +90,7 @@ const camera = createPolyCamera({
 const meshTransform = `transform:${buildPolyMeshTransform({
   rotation: [0, 0, MESH_ROTATION_Z],
 })}`;
-const systemTransform = `transform:${buildPolyMeshTransform({
-  rotation: [0, 0, PRESENTATION_NODE_DEGREES],
-})} ${buildPolyMeshTransform({
-  rotation: [OBLIQUITY_DEGREES, 0, 0],
-})}`;
+const systemTransform = `transform:${attitude.systemTransform}`;
 const surfaceRasterPlan = createSurfaceRasterPlan();
 const bodyBands = prepareSphereBands(bodyConfig, profile.geometry.rotationSeconds);
 const lightingMaterial = prepareMaterialBank({
@@ -157,10 +159,8 @@ const scene = Object.freeze({
   [profile.sceneBodyKey]: Object.freeze({
     equatorialRadiusKm: profile.equatorialRadiusKm,
     polarRadiusKm: profile.polarRadiusKm,
-    obliquityDegrees: OBLIQUITY_DEGREES,
     surfaceRotationSeconds: profile.geometry.rotationSeconds,
-    presentationNodeDegrees: PRESENTATION_NODE_DEGREES,
-    meshRotationDegrees: MESH_ROTATION_Z,
+    bodyMatrix: attitude.bodyMatrix,
     systemTransform,
     meshTransform,
     faceRetention: "complete-source-longitudes-browser-backface-culling",
@@ -748,8 +748,8 @@ function prepareMaterialBank({
   const shardWidth = stride * columns;
   const shardHeight = stride * rows;
   const presentationScale = presentationTileSize / sourceTileSize;
-  const defaultFrame = illumination ? ATMOSPHERE_DEFAULT_FRAME : Math.round((65 - CAMERA_SCENE_PITCH_DEGREES) /
-    65 * (frameCount - 1));
+  // Lighting frames step the Sun's view z across [-1, 1] (the runtime selects by it); the default is the Sun at the default pose.
+  const defaultFrame = illumination ? ATMOSPHERE_DEFAULT_FRAME : Math.round((attitude.sunView(CAMERA_SCENE_PITCH_DEGREES)[2] + 1) / 2 * (frameCount - 1));
   const frames = Object.freeze(Array.from({ length: frameCount },
     (_, frameIndex) => {
       const rowIndex = Math.floor(
@@ -938,12 +938,7 @@ function prepareScreenMaterialPlane({
   depthBias,
   className,
 }: MaterialPlaneOptions) {
-  const screenToObject = (vector: Vec3) => {
-    let result = rotateY(vector, scenePitchDegrees * Math.PI / 180);
-    result = rotateZ(result, -PRESENTATION_NODE_DEGREES * Math.PI / 180);
-    result = rotateX(result, -OBLIQUITY_DEGREES * Math.PI / 180);
-    return rotateZ(result, -MESH_ROTATION_Z * Math.PI / 180);
-  };
+  const screenToObject = (vector: Vec3) => attitude.screenToObject(vector, scenePitchDegrees) as unknown as Vec3;
   const right = normalizeVector(screenToObject([0, 1, 0]));
   const down = normalizeVector(screenToObject([1, 0, 0]));
   const view = normalizeVector(screenToObject([0, 0, 1]));

@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 99,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/aurora/aurora-shape-surface@2x.webp",
     "polesUrl": "/scenes/aurora/aurora-shape-surface@2x.webp",
     "radialTerrain": {

@@ -28,8 +28,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "missionId": "rosetta",
             "evidence": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
           }
@@ -554,8 +554,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5157,
-      "expectedSha256": "40c8bbb118f93df645b4d9c472259d839c674909dc4d636ce094ca597dbbeb20"
+      "expectedBytes": 5060,
+      "expectedSha256": "c635611a2b9fbb77f7b83a9510cfd8cf6d394450995fe6aebb1a5ec7b488c726"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

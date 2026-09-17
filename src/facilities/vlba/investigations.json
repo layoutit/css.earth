@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "vlba",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "The same NRAO archive and TAP service serve VLBA data, which the service lists among its instruments. Targeted queries for resolved nearby stars returned no rows and broad ones timed out, so its stellar holdings are unverified here.",
+      "revisitWhen": "A stellar or planetary target needs milliarcsecond radio imaging.",
+      "evidence": [
+        "https://science.nrao.edu/facilities/vlba/data-archive",
+        "https://science.nrao.edu/facilities/vla/archive/scripted-access-to-the-nrao-archive",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "NRAO's policy applies, with the period counted from when correlated data enter the archive; the VLBA archive page still states 12 months against the policy page's 24 from 2026A. No reuse licence is published; the NRAO, NSF and AUI acknowledgement is required.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://science.nrao.edu/observing/policies/docs/manuals/users-policy/preparation-and-execution-of-observations/data-delivery-and-data-rights/proprietary-periods-and-observational-data-access",
+        "https://science.nrao.edu/facilities/vlba/data-archive",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "CASA, as for the VLA. What published VLBA imaging of nearby giants resolves is circumstellar SiO maser structure, not the photosphere: the multi-epoch movie of TX Cam and the joint VLBA and VLTI study of S Ori are the examples found, and no Betelgeuse, R Dor or Antares imaging was confirmed.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://casa.nrao.edu/",
+        "https://arxiv.org/abs/astro-ph/0310684",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "unresolved",
+      "finding": "The NRAO archive answered 503 Service Unavailable throughout the screen on 2026-09-17, so its holdings for catalogued bodies are unmeasured.",
+      "revisitWhen": "The NRAO archive answers again and the screen is rerun.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://data.nrao.edu/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

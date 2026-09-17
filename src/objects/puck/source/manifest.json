@@ -88,8 +88,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG"
           }
@@ -126,8 +126,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL"
           }
@@ -212,8 +212,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3763,
-      "expectedSha256": "f454353b59f1cc18e12abd681388d3ce03b60b4b9043fa92ec51ed860089584b"
+      "expectedBytes": 3637,
+      "expectedSha256": "29ec041ab9a772b38fcf75ee8b62a52620198424ee15125c5be9441c4ab71655"
     },
     {
       "path": "presentation/minimap.json",

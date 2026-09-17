@@ -24,8 +24,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594"
           }
@@ -82,8 +82,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg"
           }
@@ -289,8 +289,8 @@
     {
       "id": "triton-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 307,
-      "expectedSha256": "d047e35e1ef884d4a5bf74d7929747a3bccb6468dca4332bc272a20bd0766992",
+      "expectedBytes": 207,
+      "expectedSha256": "f9a7888a3f9e92f1203a09422756c99a8bb5937cbfe1d762476f5043cc29f3e8",
       "origin": "Repository-authored Triton solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

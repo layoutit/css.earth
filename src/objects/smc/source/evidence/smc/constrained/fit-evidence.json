@@ -1,0 +1,891 @@
+{
+  "schema": "cssearth-constrained-tracer-evidence@1",
+  "status": "comparison-only-not-qualified",
+  "receipts": [
+    {
+      "codePins": [
+        {
+          "path": "labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts",
+          "sha256": "485d460329a04c9a389ca24a6d09763552aeb375340f6a8280a8d7a8b3e6c0cb"
+        },
+        {
+          "path": "labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts",
+          "sha256": "a353336f5eb1951d1ee29d38de85f2b0280635baa12f9fbf34f46d4e9a0296bd"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts",
+          "sha256": "adae41efcc1ce3c00296757e5a9d7e87200958fb4e8a6f30952d49128484b0d0"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts",
+          "sha256": "99a165eed2c2affe67eef87d53afe97ef80a304c2312b669b6b54767c12eab96"
+        }
+      ],
+      "schema": "cssearth-constrained-tracer-fit@1",
+      "recipe": {
+        "path": "labs/nebula/models/smc/constrained/fit.json",
+        "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe"
+      },
+      "inputs": {
+        "simulation": {
+          "path": ".local/nebula-lab/full-density/smc-full-density.f32",
+          "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4"
+        },
+        "catalogue": {
+          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
+          "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+        },
+        "footprint": {
+          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
+          "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f"
+        },
+        "observedReceipt": {
+          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
+          "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+        },
+        "frameObject": {
+          "path": "labs/nebula/models/smc/full-density/object.json",
+          "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+        }
+      },
+      "simulationCenter": {
+        "x": -3.5839388370513916,
+        "y": -8.495029926300049,
+        "z": -9.775346755981445
+      },
+      "forwardModel": {
+        "distance": 62.440000000000005,
+        "referenceDistance": 61,
+        "x": {
+          "min": -8,
+          "max": 8,
+          "bins": 32
+        },
+        "y": {
+          "min": -8,
+          "max": 8,
+          "bins": 32
+        },
+        "magnitude": {
+          "min": -1.5,
+          "max": 1.5,
+          "bins": 60
+        },
+        "sigmaMag": 0.06118823416311342,
+        "xyKernel": [
+          0.15,
+          0.7,
+          0.15
+        ],
+        "contaminationFraction": 0.1
+      },
+      "selection": {
+        "rows": 489760,
+        "outsideHistogram": 0,
+        "excludedLowCoverage": 77,
+        "trainCells": 172,
+        "testCells": 59,
+        "medianPhotometricErrorMag": 0.012,
+        "effectiveSigmaMag": 0.06118823416311342,
+        "selection": "Published-catalogue footprint and retained/published row ratio; duplicate measurements, source selection and magnitude-dependent incompleteness are not fully modelled.",
+        "split": "2x2-sky-cell checkerboard blocks, one quarter held out before optimizing any model."
+      },
+      "result": {
+        "family": "simulation",
+        "parameters": {
+          "rotationXDeg": 28.79999999999999,
+          "rotationYDeg": 104.4,
+          "rotationZDeg": 103.79999999999997,
+          "xyScale": 1.1105,
+          "yScale": 0.5,
+          "zScale": 1.912,
+          "offsetX": -0.72,
+          "offsetY": -1.18,
+          "offsetZ": -1.2750000000000001
+        },
+        "amplitude": 469292.8190049676,
+        "train": {
+          "observedCount": 334910,
+          "expectedCount": 334910.0000000002,
+          "deviance": 195329.53044822346,
+          "deviancePerObservedCount": 0.5832299138521497
+        },
+        "validation": {
+          "observedCount": 154773,
+          "expectedCount": 134382.81900497482,
+          "deviance": 93446.13737916884,
+          "deviancePerObservedCount": 0.6037625256289458
+        },
+        "fullParticleEvaluation": {
+          "parameters": {
+            "rotationXDeg": 28.79999999999999,
+            "rotationYDeg": 104.4,
+            "rotationZDeg": 103.79999999999997,
+            "xyScale": 1.1105,
+            "yScale": 0.5,
+            "zScale": 1.912,
+            "offsetX": -0.72,
+            "offsetY": -1.18,
+            "offsetZ": -1.2750000000000001
+          },
+          "amplitude": 468425.65209947695,
+          "train": {
+            "observedCount": 334910,
+            "expectedCount": 334910.0000000042,
+            "deviance": 193237.05252480603,
+            "deviancePerObservedCount": 0.5769820325604074
+          },
+          "validation": {
+            "observedCount": 154773,
+            "expectedCount": 133515.6520994848,
+            "deviance": 92094.51636368396,
+            "deviancePerObservedCount": 0.5950296005355195
+          }
+        },
+        "regional": {
+          "settings": {
+            "spatialScale": 3,
+            "bounds": [
+              0.5,
+              2
+            ],
+            "regularization": 0.01,
+            "maxSweeps": 3,
+            "refinements": 3
+          },
+          "coefficients": [
+            0.90625,
+            0.71875,
+            0.90625,
+            1.09375,
+            1.28125,
+            1.1875,
+            1.28125,
+            0.90625
+          ],
+          "coefficientsAtBounds": [],
+          "regularizationPenalty": 999.83794827018,
+          "evaluations": 113,
+          "affineBaseline": {
+            "parameters": {
+              "rotationXDeg": 28.79999999999999,
+              "rotationYDeg": 104.4,
+              "rotationZDeg": 103.79999999999997,
+              "xyScale": 1.1105,
+              "yScale": 0.5,
+              "zScale": 1.912,
+              "offsetX": -0.72,
+              "offsetY": -1.18,
+              "offsetZ": -1.2750000000000001
+            },
+            "amplitude": 468483.6859492729,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.99999998906,
+              "deviance": 195875.47925014386,
+              "deviancePerObservedCount": 0.5848600497152783
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 133573.6859492807,
+              "deviance": 93048.65423880334,
+              "deviancePerObservedCount": 0.6011943571475861
+            }
+          },
+          "fixedGeometrySensitivity": [
+            {
+              "sigmaMag": 0.03,
+              "parameters": {
+                "rotationXDeg": 28.79999999999999,
+                "rotationYDeg": 104.4,
+                "rotationZDeg": 103.79999999999997,
+                "xyScale": 1.1105,
+                "yScale": 0.5,
+                "zScale": 1.912,
+                "offsetX": -0.72,
+                "offsetY": -1.18,
+                "offsetZ": -1.2750000000000001
+              },
+              "amplitude": 468425.65209947526,
+              "train": {
+                "observedCount": 334910,
+                "expectedCount": 334910.0000000054,
+                "deviance": 239675.0597835743,
+                "deviancePerObservedCount": 0.7156402011990514
+              },
+              "validation": {
+                "observedCount": 154773,
+                "expectedCount": 133515.65209948472,
+                "deviance": 115342.3819019493,
+                "deviancePerObservedCount": 0.7452358092299645
+              }
+            },
+            {
+              "sigmaMag": 0.1,
+              "parameters": {
+                "rotationXDeg": 28.79999999999999,
+                "rotationYDeg": 104.4,
+                "rotationZDeg": 103.79999999999997,
+                "xyScale": 1.1105,
+                "yScale": 0.5,
+                "zScale": 1.912,
+                "offsetX": -0.72,
+                "offsetY": -1.18,
+                "offsetZ": -1.2750000000000001
+              },
+              "amplitude": 468425.6520994821,
+              "train": {
+                "observedCount": 334910,
+                "expectedCount": 334910.0000000021,
+                "deviance": 183547.12012518823,
+                "deviancePerObservedCount": 0.5480490881884335
+              },
+              "validation": {
+                "observedCount": 154773,
+                "expectedCount": 133515.65209948554,
+                "deviance": 83595.14103098564,
+                "deviancePerObservedCount": 0.5401144969147438
+              }
+            }
+          ]
+        },
+        "affineRefitSensitivity": [
+          {
+            "sigmaMag": 0.03,
+            "parameters": {
+              "rotationXDeg": 28.79999999999999,
+              "rotationYDeg": 104.4,
+              "rotationZDeg": 103.79999999999997,
+              "xyScale": 1.1915000000000002,
+              "yScale": 0.5,
+              "zScale": 2.008,
+              "offsetX": -0.72,
+              "offsetY": -1.24,
+              "offsetZ": -1.2750000000000001
+            },
+            "amplitude": 465998.8019487102,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.99999998783,
+              "deviance": 234375.54422648865,
+              "deviancePerObservedCount": 0.699816500631479
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131088.80194871678,
+              "deviance": 116293.48003588156,
+              "deviancePerObservedCount": 0.751380925845474
+            },
+            "parametersAtBounds": [
+              "yScale"
+            ]
+          },
+          {
+            "sigmaMag": 0.1,
+            "parameters": {
+              "rotationXDeg": 32.399999999999984,
+              "rotationYDeg": 104.4,
+              "rotationZDeg": 103.79999999999997,
+              "xyScale": 0.9484999999999999,
+              "yScale": 0.5,
+              "zScale": 1.8159999999999998,
+              "offsetX": -0.72,
+              "offsetY": -1.06,
+              "offsetZ": -1.1250000000000002
+            },
+            "amplitude": 474637.91044664104,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.9999999729,
+              "deviance": 175804.5033428131,
+              "deviancePerObservedCount": 0.5249305883455648
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 139727.91044664683,
+              "deviance": 79183.82538849337,
+              "deviancePerObservedCount": 0.5116126545876436
+            },
+            "parametersAtBounds": [
+              "yScale"
+            ]
+          }
+        ],
+        "searches": [
+          {
+            "start": 0,
+            "parameters": {
+              "rotationXDeg": 21.599999999999998,
+              "rotationYDeg": -57.599999999999994,
+              "rotationZDeg": -124.19999999999999,
+              "xyScale": 0.9350000000000002,
+              "yScale": 0.5275000000000001,
+              "zScale": 2.1519999999999997,
+              "offsetX": -1.3199999999999998,
+              "offsetY": -1.2399999999999998,
+              "offsetZ": -0.6
+            },
+            "amplitude": 464424.9500802159,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000103,
+              "deviance": 230607.9754042849,
+              "deviancePerObservedCount": 0.688567004282598
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 129514.95008022882,
+              "deviance": 117018.25347471618,
+              "deviancePerObservedCount": 0.7560637415745394
+            },
+            "evaluations": 217
+          },
+          {
+            "start": 1,
+            "parameters": {
+              "rotationXDeg": 3.5999999999999996,
+              "rotationYDeg": -64.8,
+              "rotationZDeg": 147.00000000000003,
+              "xyScale": 0.9080000000000001,
+              "yScale": 0.6175,
+              "zScale": 1.7679999999999998,
+              "offsetX": -1.1999999999999997,
+              "offsetY": -0.09999999999999998,
+              "offsetZ": -0.44999999999999996
+            },
+            "amplitude": 466855.6401773731,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000013,
+              "deviance": 237170.41125509024,
+              "deviancePerObservedCount": 0.7081616292588763
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131945.6401773827,
+              "deviance": 96911.01017854495,
+              "deviancePerObservedCount": 0.6261493295248199
+            },
+            "evaluations": 181
+          },
+          {
+            "start": 2,
+            "parameters": {
+              "rotationXDeg": 104.4,
+              "rotationYDeg": 21.599999999999998,
+              "rotationZDeg": 54,
+              "xyScale": 1.3940000000000001,
+              "yScale": 1.2249999999999996,
+              "zScale": 1.9599999999999997,
+              "offsetX": -1.2,
+              "offsetY": -0.15999999999999998,
+              "offsetZ": -2.0999999999999996
+            },
+            "amplitude": 470071.723521693,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.9999999763,
+              "deviance": 276808.34146264766,
+              "deviancePerObservedCount": 0.82651560557358
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 135161.72352170706,
+              "deviance": 137307.09584515847,
+              "deviancePerObservedCount": 0.8871514789088437
+            },
+            "evaluations": 217
+          },
+          {
+            "start": 3,
+            "parameters": {
+              "rotationXDeg": 61.2,
+              "rotationYDeg": -36,
+              "rotationZDeg": 39.00000000000002,
+              "xyScale": 0.6920000000000001,
+              "yScale": 1.8775,
+              "zScale": 2.0559999999999996,
+              "offsetX": -1.3200000000000003,
+              "offsetY": -0.09999999999999998,
+              "offsetZ": -0.6
+            },
+            "amplitude": 456912.2110542336,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000001,
+              "deviance": 294125.0569627104,
+              "deviancePerObservedCount": 0.8782211846845731
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 122002.21105423859,
+              "deviance": 157982.4647322402,
+              "deviancePerObservedCount": 1.0207365931541044
+            },
+            "evaluations": 199
+          },
+          {
+            "start": 4,
+            "parameters": {
+              "rotationXDeg": 7.199999999999999,
+              "rotationYDeg": 120,
+              "rotationZDeg": 43.199999999999996,
+              "xyScale": 0.9350000000000002,
+              "yScale": 0.5,
+              "zScale": 2.584,
+              "offsetX": -1.2599999999999998,
+              "offsetY": -1.18,
+              "offsetZ": -0.8999999999999999
+            },
+            "amplitude": 466615.3123303662,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000135,
+              "deviance": 214661.23945081382,
+              "deviancePerObservedCount": 0.640952015319978
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131705.31233037615,
+              "deviance": 103593.0597846944,
+              "deviancePerObservedCount": 0.6693225548687071
+            },
+            "evaluations": 189
+          },
+          {
+            "start": 5,
+            "parameters": {
+              "rotationXDeg": 39.59999999999999,
+              "rotationYDeg": 104.4,
+              "rotationZDeg": 114.59999999999997,
+              "xyScale": 1.124,
+              "yScale": 0.5,
+              "zScale": 1.8639999999999999,
+              "offsetX": -0.66,
+              "offsetY": -1.18,
+              "offsetZ": -1.35
+            },
+            "amplitude": 467044.3236091968,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.9999999582,
+              "deviance": 206607.04085200693,
+              "deviancePerObservedCount": 0.6169031705592755
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 132134.3236092058,
+              "deviance": 99774.17589182501,
+              "deviancePerObservedCount": 0.6446484586576794
+            },
+            "evaluations": 191
+          }
+        ],
+        "activeBounds": [
+          "yScale"
+        ],
+        "particles": {
+          "path": ".local/nebula-lab/smc-constrained/simulation.f32",
+          "sha256": "5917a60fd09a619f362b5f346ee609c15e7dab779bfedee7a83f8f008b3bdbf7",
+          "count": 225000
+        }
+      },
+      "interpretation": "Conditional stellar tracer shape fitting, not a dynamical rerun, gas/dust reconstruction or recovered physical density.",
+      "limitations": [
+        "Survey mask and retained/published tracer ratio approximate selection; no full stellar-population completeness model is available.",
+        "Magnitude uncertainty kernel and contamination fraction are authored sensitivity assumptions, not measured per-star total errors.",
+        "Equal simulation particle weights proxy the red-clump population without population tags.",
+        "Unobserved regions remain simulation- or ellipsoid-dependent; no new observations are invented."
+      ],
+      "materialGatePassed": false,
+      "status": "conditional-neutral-comparison-not-qualified-physical-density"
+    },
+    {
+      "codePins": [
+        {
+          "path": "labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts",
+          "sha256": "485d460329a04c9a389ca24a6d09763552aeb375340f6a8280a8d7a8b3e6c0cb"
+        },
+        {
+          "path": "labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts",
+          "sha256": "a353336f5eb1951d1ee29d38de85f2b0280635baa12f9fbf34f46d4e9a0296bd"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts",
+          "sha256": "adae41efcc1ce3c00296757e5a9d7e87200958fb4e8a6f30952d49128484b0d0"
+        },
+        {
+          "path": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts",
+          "sha256": "99a165eed2c2affe67eef87d53afe97ef80a304c2312b669b6b54767c12eab96"
+        }
+      ],
+      "schema": "cssearth-constrained-tracer-fit@1",
+      "recipe": {
+        "path": "labs/nebula/models/smc/constrained/fit.json",
+        "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe"
+      },
+      "inputs": {
+        "simulation": {
+          "path": ".local/nebula-lab/full-density/smc-full-density.f32",
+          "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4"
+        },
+        "catalogue": {
+          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
+          "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+        },
+        "footprint": {
+          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
+          "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f"
+        },
+        "observedReceipt": {
+          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
+          "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+        },
+        "frameObject": {
+          "path": "labs/nebula/models/smc/full-density/object.json",
+          "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+        }
+      },
+      "simulationCenter": {
+        "x": -3.5839388370513916,
+        "y": -8.495029926300049,
+        "z": -9.775346755981445
+      },
+      "forwardModel": {
+        "distance": 62.440000000000005,
+        "referenceDistance": 61,
+        "x": {
+          "min": -8,
+          "max": 8,
+          "bins": 32
+        },
+        "y": {
+          "min": -8,
+          "max": 8,
+          "bins": 32
+        },
+        "magnitude": {
+          "min": -1.5,
+          "max": 1.5,
+          "bins": 60
+        },
+        "sigmaMag": 0.06118823416311342,
+        "xyKernel": [
+          0.15,
+          0.7,
+          0.15
+        ],
+        "contaminationFraction": 0.1
+      },
+      "selection": {
+        "rows": 489760,
+        "outsideHistogram": 0,
+        "excludedLowCoverage": 77,
+        "trainCells": 172,
+        "testCells": 59,
+        "medianPhotometricErrorMag": 0.012,
+        "effectiveSigmaMag": 0.06118823416311342,
+        "selection": "Published-catalogue footprint and retained/published row ratio; duplicate measurements, source selection and magnitude-dependent incompleteness are not fully modelled.",
+        "split": "2x2-sky-cell checkerboard blocks, one quarter held out before optimizing any model."
+      },
+      "result": {
+        "family": "ellipsoid",
+        "parameters": {
+          "rotationXDeg": 0,
+          "rotationYDeg": -5.3999999999999995,
+          "rotationZDeg": 35.1,
+          "xyScale": 0.6110000000000001,
+          "yScale": 0.7525000000000001,
+          "zScale": 1.888,
+          "offsetX": -0.9299999999999999,
+          "offsetY": -0.7,
+          "offsetZ": -0.6
+        },
+        "amplitude": 466376.9918457186,
+        "train": {
+          "observedCount": 334910,
+          "expectedCount": 334910.00000000757,
+          "deviance": 156321.19861888245,
+          "deviancePerObservedCount": 0.4667558407299945
+        },
+        "validation": {
+          "observedCount": 154773,
+          "expectedCount": 131466.9918457256,
+          "deviance": 70807.1620745358,
+          "deviancePerObservedCount": 0.4574904025542943
+        },
+        "fullParticleEvaluation": {
+          "parameters": {
+            "rotationXDeg": 0,
+            "rotationYDeg": -5.3999999999999995,
+            "rotationZDeg": 35.1,
+            "xyScale": 0.6110000000000001,
+            "yScale": 0.7525000000000001,
+            "zScale": 1.888,
+            "offsetX": -0.9299999999999999,
+            "offsetY": -0.7,
+            "offsetZ": -0.6
+          },
+          "amplitude": 466376.9918457186,
+          "train": {
+            "observedCount": 334910,
+            "expectedCount": 334910.00000000757,
+            "deviance": 156321.19861888245,
+            "deviancePerObservedCount": 0.4667558407299945
+          },
+          "validation": {
+            "observedCount": 154773,
+            "expectedCount": 131466.9918457256,
+            "deviance": 70807.1620745358,
+            "deviancePerObservedCount": 0.4574904025542943
+          }
+        },
+        "regional": null,
+        "affineRefitSensitivity": [
+          {
+            "sigmaMag": 0.03,
+            "parameters": {
+              "rotationXDeg": 0,
+              "rotationYDeg": -5.3999999999999995,
+              "rotationZDeg": 35.1,
+              "xyScale": 0.6110000000000001,
+              "yScale": 0.7525000000000001,
+              "zScale": 2.032,
+              "offsetX": -0.9299999999999999,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 466305.00085359387,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.9999999684,
+              "deviance": 158428.1657456216,
+              "deviancePerObservedCount": 0.4730469849978251
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131395.00085360295,
+              "deviance": 71632.44229762325,
+              "deviancePerObservedCount": 0.46282260017976806
+            },
+            "parametersAtBounds": []
+          },
+          {
+            "sigmaMag": 0.1,
+            "parameters": {
+              "rotationXDeg": 0,
+              "rotationYDeg": -9,
+              "rotationZDeg": 35.1,
+              "xyScale": 0.6110000000000001,
+              "yScale": 0.7525000000000001,
+              "zScale": 1.5999999999999996,
+              "offsetX": -0.9299999999999999,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 465934.2224666731,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.00000000116,
+              "deviance": 152770.31337221817,
+              "deviancePerObservedCount": 0.4561533348428478
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131024.22246667864,
+              "deviance": 70933.49713265884,
+              "deviancePerObservedCount": 0.45830666287181127
+            },
+            "parametersAtBounds": []
+          }
+        ],
+        "searches": [
+          {
+            "start": 0,
+            "parameters": {
+              "rotationXDeg": 0,
+              "rotationYDeg": -7.199999999999999,
+              "rotationZDeg": 37.8,
+              "xyScale": 0.6110000000000001,
+              "yScale": 0.7525000000000001,
+              "zScale": 1.912,
+              "offsetX": -0.9,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 464529.796206794,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000049,
+              "deviance": 165323.46172006996,
+              "deviancePerObservedCount": 0.49363548929584056
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 129619.79620680703,
+              "deviance": 78035.85799410254,
+              "deviancePerObservedCount": 0.5041955508654774
+            },
+            "evaluations": 145
+          },
+          {
+            "start": 1,
+            "parameters": {
+              "rotationXDeg": -3.5999999999999996,
+              "rotationYDeg": -3.5999999999999996,
+              "rotationZDeg": 55.20000000000002,
+              "xyScale": 0.5840000000000001,
+              "yScale": 0.8425,
+              "zScale": 1.8639999999999997,
+              "offsetX": -0.96,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 457018.70330890024,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.9999999847,
+              "deviance": 172091.10900040207,
+              "deviancePerObservedCount": 0.5138428503191964
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 122108.70330890454,
+              "deviance": 73526.00275265302,
+              "deviancePerObservedCount": 0.47505703677419847
+            },
+            "evaluations": 199
+          },
+          {
+            "start": 2,
+            "parameters": {
+              "rotationXDeg": 90,
+              "rotationYDeg": 7.199999999999999,
+              "rotationZDeg": -145.8,
+              "xyScale": 0.7729999999999999,
+              "yScale": 2,
+              "zScale": 0.472,
+              "offsetX": -0.96,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 464931.803782558,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000103,
+              "deviance": 193292.31691886575,
+              "deviancePerObservedCount": 0.5771470452326468
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 130021.80378256591,
+              "deviance": 98406.33747245715,
+              "deviancePerObservedCount": 0.6358107516973707
+            },
+            "evaluations": 217
+          },
+          {
+            "start": 3,
+            "parameters": {
+              "rotationXDeg": 87.60000000000002,
+              "rotationYDeg": -3.5999999999999996,
+              "rotationZDeg": 39.00000000000002,
+              "xyScale": 0.7729999999999999,
+              "yScale": 2,
+              "zScale": 0.47200000000000003,
+              "offsetX": -0.96,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 466307.6523056482,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334909.99999996624,
+              "deviance": 196847.53573841776,
+              "deviancePerObservedCount": 0.5877624906345519
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131397.65230565815,
+              "deviance": 99434.82120636004,
+              "deviancePerObservedCount": 0.6424558624977227
+            },
+            "evaluations": 216
+          },
+          {
+            "start": 4,
+            "parameters": {
+              "rotationXDeg": -89.99999999999999,
+              "rotationYDeg": 86.39999999999999,
+              "rotationZDeg": 43.199999999999996,
+              "xyScale": 1.5290000000000001,
+              "yScale": 0.5,
+              "zScale": 0.472,
+              "offsetX": -0.96,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 466192.88341314456,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.00000000774,
+              "deviance": 193307.3230768872,
+              "deviancePerObservedCount": 0.5771918517717811
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 131282.88341315318,
+              "deviance": 96407.45973004917,
+              "deviancePerObservedCount": 0.6228958521838381
+            },
+            "evaluations": 174
+          },
+          {
+            "start": 5,
+            "parameters": {
+              "rotationXDeg": 46.79999999999999,
+              "rotationYDeg": 93.6,
+              "rotationZDeg": 180,
+              "xyScale": 1.529,
+              "yScale": 0.5,
+              "zScale": 0.472,
+              "offsetX": -0.96,
+              "offsetY": -0.7,
+              "offsetZ": -0.6
+            },
+            "amplitude": 464097.99268672056,
+            "train": {
+              "observedCount": 334910,
+              "expectedCount": 334910.0000000036,
+              "deviance": 196480.47314449606,
+              "deviancePerObservedCount": 0.5866664869502137
+            },
+            "validation": {
+              "observedCount": 154773,
+              "expectedCount": 129187.99268672758,
+              "deviance": 97438.72787178906,
+              "deviancePerObservedCount": 0.6295589532527577
+            },
+            "evaluations": 182
+          }
+        ],
+        "activeBounds": [],
+        "particles": {
+          "path": ".local/nebula-lab/smc-constrained/ellipsoid.f32",
+          "sha256": "2b00aa9d019095d4c9118a4e85b3c80d85e9547f195b86abe821f2f1cfbf024e",
+          "count": 65536
+        }
+      },
+      "interpretation": "Conditional stellar tracer shape fitting, not a dynamical rerun, gas/dust reconstruction or recovered physical density.",
+      "limitations": [
+        "Survey mask and retained/published tracer ratio approximate selection; no full stellar-population completeness model is available.",
+        "Magnitude uncertainty kernel and contamination fraction are authored sensitivity assumptions, not measured per-star total errors.",
+        "Equal simulation particle weights proxy the red-clump population without population tags.",
+        "Unobserved regions remain simulation- or ellipsoid-dependent; no new observations are invented."
+      ],
+      "materialGatePassed": false,
+      "status": "conditional-neutral-comparison-not-qualified-physical-density"
+    }
+  ],
+  "conclusion": "Regional weighting improves the simulation held-out score slightly, but the simpler ellipsoid predicts the withheld catalogue better. Neither establishes gas or dust morphology."
+}

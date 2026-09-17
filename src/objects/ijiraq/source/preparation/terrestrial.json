@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 6.4,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.9499866370426093
     },
     "mapUrl": "/scenes/ijiraq/ijiraq-model-surface@2x.webp",

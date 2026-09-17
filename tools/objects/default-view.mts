@@ -5,12 +5,13 @@
  * through `captureWorldCamera`. From the pose: the sub-camera point on the body, and where the body's pole and the
  * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the lens's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
+import { preparedScenePitch } from '@cssearth/engine';
 import { worldCameraFromPresentation } from '../../src/renderers/css/dist/navigation.js';
 import { requireBodyFixedToIcrf } from '../../src/platform/solar-geometry.mts';
 
 const DEGREE = Math.PI / 180;
 type Vector3 = readonly [number, number, number];
-export interface DefaultViewCamera { readonly defaultControlPitchDegrees: number; readonly defaultControlYawDegrees: number; readonly initialScenePitchDegrees: number; readonly maximumControlPitchDegrees: number; }
+export interface DefaultViewCamera { readonly defaultControlPitchDegrees: number; readonly defaultControlYawDegrees: number; readonly initialScenePitchDegrees: number; readonly maximumControlPitchDegrees: number; readonly maximumScenePitchDegrees: number; }
 export interface DefaultViewFrame { readonly referenceFrame: string; readonly epochJdTt: number; readonly originM: Vector3; readonly presentationToReference: readonly number[]; readonly metersPerUnit: number; readonly bodyRadiusM: number; }
 export interface DefaultViewGeometry {
   readonly scenePitchDegrees: number;
@@ -29,8 +30,7 @@ const rows = (flat: readonly number[]) => [0, 1, 2].map(r => [flat[3 * r]!, flat
 
 /** The runtime's control-to-scene pitch: `preparedScenePitch` in @cssearth/engine. */
 export function scenePitchDegrees(camera: DefaultViewCamera, controlPitch = camera.defaultControlPitchDegrees) {
-  const progress = (controlPitch - camera.defaultControlPitchDegrees) / (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees);
-  return camera.initialScenePitchDegrees * (1 - (Number.isFinite(progress) ? progress : 0));
+  return preparedScenePitch(controlPitch, camera);
 }
 
 export function defaultViewGeometry(bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, controls?: { controlPitch: number; controlYaw: number }): DefaultViewGeometry {

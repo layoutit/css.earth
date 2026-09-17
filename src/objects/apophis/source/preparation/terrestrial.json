@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.17,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/apophis/apophis-shape-surface@2x.webp",
     "polesUrl": "/scenes/apophis/apophis-shape-surface@2x.webp",
     "radialTerrain": {

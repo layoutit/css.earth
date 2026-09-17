@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 82.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/eleonora/eleonora-shape-surface@2x.webp",
     "polesUrl": "/scenes/eleonora/eleonora-shape-surface@2x.webp",
     "radialTerrain": {

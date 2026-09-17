@@ -361,10 +361,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 16,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/ida/ida-normal-surface@2x.webp",
     "polesUrl": "/scenes/ida/ida-normal-surface@2x.webp",
     "radialTerrain": {

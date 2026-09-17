@@ -39,8 +39,6 @@
     "radius": 230,
     "radiusKm": 1.165,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": 0,
       "framingScale": 0.85
     },
     "mapUrl": "/scenes/comet-c2006-p1/comet-c2006-p1-model-surface@2x.webp",

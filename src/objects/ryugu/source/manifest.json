@@ -27,8 +27,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
           }
@@ -73,8 +73,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
           }
@@ -119,8 +119,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
           }
@@ -294,8 +294,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
           }
@@ -343,8 +343,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
           }
@@ -392,8 +392,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
           }
@@ -466,8 +466,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6366,
-      "expectedSha256": "25181932ca0f62c11238914361dd2e32d9f237ee4f001998215760c3f25dc7e4"
+      "expectedBytes": 6269,
+      "expectedSha256": "b05137cc6a5b05156a439f843afaad4ed7c3e4d6dd0c1d9b1775d6ab2ff0dc2b"
     },
     {
       "path": "presentation/title-mark.json",
@@ -576,8 +576,8 @@
     {
       "id": "ryugu-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1789,
-      "expectedSha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
+      "expectedBytes": 1790,
+      "expectedSha256": "43e4385349a320ea5173863dace09c86ca7e0e60353e071146684bc29dc6681a",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

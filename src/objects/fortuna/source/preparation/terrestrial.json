@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 105.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 180
-    },
     "mapUrl": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
     "polesUrl": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
     "radialTerrain": {

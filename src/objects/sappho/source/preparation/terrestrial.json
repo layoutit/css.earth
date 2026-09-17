@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 30.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 180
-    },
     "mapUrl": "/scenes/sappho/sappho-shape-surface@2x.webp",
     "polesUrl": "/scenes/sappho/sappho-shape-surface@2x.webp",
     "radialTerrain": {

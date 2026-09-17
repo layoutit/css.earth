@@ -9,8 +9,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "missionId": "goldstone-solar-system-radar",
             "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy"
           }
@@ -81,8 +81,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "missionId": "goldstone-solar-system-radar",
             "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy"
           }
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2904,
-      "expectedSha256": "b7533ba100f7350e9d56e39f6e9cbda20b10340d34f844be9083e2817947c791"
+      "expectedBytes": 2807,
+      "expectedSha256": "a482f7410513a6f0ff62573db14a7fefde49ecc47ec3f2512488835cb7b7e5bb"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
