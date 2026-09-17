@@ -81,6 +81,24 @@
           "commit": "9db91aac13795fa37594c989636765ad3986ec15"
         }
       ]
+    },
+    {
+      "id": "coma-colour-as-nucleus-colour",
+      "subject": "Measured colour as a whole-body Color lens",
+      "status": "excluded",
+      "finding": "Published colours (spectral slopes of about 18 to 23% per 100 nm across the visible) were measured on the dust coma. The Hubble nucleus photometry used one filter, so no nucleus colour exists to paint on the body.",
+      "revisitWhen": "A nucleus colour is published; the disc-integrated colour route can then add a Color lens.",
+      "evidence": [
+        "https://www.aanda.org/articles/aa/full_html/2025/10/aa56717-25/aa56717-25.html",
+        "https://arxiv.org/abs/2507.11720",
+        "https://arxiv.org/abs/2601.21569"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "151d15feeaa85b62ea6c0049ce8d8f3e57f2c9da"
+        }
+      ]
     }
   ]
 }

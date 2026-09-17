@@ -87,6 +87,23 @@
       ]
     },
     {
+      "id": "alma-archive-project",
+      "subject": "Public ALMA project 2022.1.01753.S on Haumea",
+      "status": "unresolved",
+      "finding": "The ALMA archive holds a public band 7 project on Haumea (target 136108_Haumea_2003_EL61; four observations on 2023-07-06; finest resolution 15.4 mas; principal author Csilla Kalup), missed by the earlier archive search, which did not include ALMA. The 2,322 km long axis spans about 64 mas at 50 AU, so about four beams: a thermal-emission image of that size would show the elongated disc, not a surface map. No resolved analysis of this project was checked, and the pipeline has no route that images ALMA visibilities.",
+      "revisitWhen": "A paper from project 2022.1.01753.S publishes resolved thermal images or maps, or the project's calibrated images are cast through the camera route.",
+      "evidence": [
+        "https://almascience.eso.org/tap/sync",
+        "https://github.com/layoutit/css.earth/blob/b799d5a56eac68ade89b1501ee8ecb2954ac615e/src/objects/haumea/investigations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "b799d5a56eac68ade89b1501ee8ecb2954ac615e"
+        }
+      ]
+    },
+    {
       "id": "hst-imaging-programs",
       "subject": "Hubble frames of Haumea in MAST",
       "status": "excluded",

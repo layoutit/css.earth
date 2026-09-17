@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-2i",
+  "displayName": "2I/Borisov",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "800 × 800 × 800 m",
+        "source": {
+          "url": "https://doi.org/10.3847/1538-3881/ab9df8",
+          "label": "Research publication · DOI 10.3847/1538-3881/ab9df8",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-1538-3881-ab9df8",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/comet-2i/comet-2i-model-thumbnail.webp",
+        "surface": "comet-2i-model-surface@2x.webp",
+        "poles": "comet-2i-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/1538-3881/ab9df8"
+        },
+        "notes": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo. Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase. The grid marks unmapped terrain.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration",
+      "href": "https://doi.org/10.3847/1538-3881/ab9df8"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.3847/2041-8213/ab621b"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.3847/2041-8213/ab9228"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://science.nasa.gov/solar-system/comets/2i-borisov/"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://science.nasa.gov/solar-system/what-we-knowand-dont-knowabout-comet-2i/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/1538-3881/ab9df8",
+      "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration"
+    }
+  }
+}
