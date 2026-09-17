@@ -17,9 +17,9 @@ test('WASP-43 retains source pins and has no observation to acquire', async () =
   assert.ok(requireArray(plan.operations).every(operation => requireString(requireRecord(operation).path).startsWith('presentation/')), 'only the title font is downloaded');
 });
 
-test('the lens is the neutral gray, radius and GM are the stellar values the planet map assumes, and the distance is the Gaia parallax', async () => {
+test('the lens is the Gaia photometric colour, radius and GM are the stellar values the planet map assumes, and the distance is the Gaia parallax', async () => {
   const surfaces = requireArray(requireRecord(await read('preparation/raster.json')).surfaces).map(value => requireRecord(value));
-  assert.equal(requireRecord(surfaces[0]!.science).kind, 'neutral-shape');
+  assert.equal(requireRecord(surfaces[0]!.science).kind, 'stellar-photometric-color');
   const record = requireRecord(JSON.parse(await readFile(resolve(root, '../../../../packages/astronomy/data/bodies/wasp-43.json'), 'utf8')) as unknown);
   const physical = requireRecord(record.physical), star = requireRecord(record.star), measurements = requireRecord(await read('measurements.json'));
   // Challener et al. (2024), Table 1: 0.665 solar radii, 0.6916 solar masses.
@@ -31,6 +31,6 @@ test('the lens is the neutral gray, radius and GM are the stellar values the pla
   assert.match(requireString(measurements.angularDiameterSource), /^Not measured/u);
 });
 
-test("the navigation marker is the scaffold's neutral disc", async () => {
-  assert.ok((await readFile(resolve(root, 'presentation/context.png'))).equals(await neutralDiscMarker(512)));
+test("the navigation marker is the scaffold's disc in the photosphere colour", async () => {
+  assert.ok((await readFile(resolve(root, 'presentation/context.png'))).equals(await neutralDiscMarker(512, 0.9, [255, 220, 184])));
 });

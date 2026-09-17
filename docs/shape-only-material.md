@@ -15,6 +15,14 @@ wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
 is uniform: it is one measured mean, not a map. Makemake and Eris use it on the raster
 route; Haumea uses the same method through the shape-model route's `surface` block.
 
+A star with no image may instead show the colour of its catalogued photometric
+temperature, through the `stellar-photometric-color` science kind
+([stellar-photometric-color.mts](../tools/objects/observation/stellar-photometric-color.mts)).
+A Planck spectrum at that temperature is integrated with the CIE 1931 observer and
+converted to sRGB with its D65 white, scaled so the brightest channel is full. The
+disc is self-luminous: the colour carries no brightness, limb darkening or spectral
+lines. WASP-43 uses it with its Gaia DR3 GSP-Phot temperature.
+
 Photographic, observed-color, and scientific lenses retain their own pixels.
 Their missing-data grid continues to mark rejected or unavailable samples.
 A shape-only lens still records that surface imagery is absent.

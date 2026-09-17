@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c566f2ad62cb6b2192a84161bd9435be50399790cabc00cfa133882bf4915fe2"
+        "sha256": "b765fd7f910841a38e6037c5fdf351ef93990ff81fbe1c9c0a30e21e11da2d14"
       }
     },
     "catalog": {
       "name": "WASP-43",
       "classification": "star",
-      "color": "#ffdabc",
+      "color": "#ffdcb8",
       "distanceAu": 17976692.3,
       "description": "K dwarf in Sextans that hosts the hot Jupiter WASP-43b.",
       "systemName": "WASP-43 system",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8bd70b6eae3ec2270a6126a3aa65cfd437ceebd36e3f34956150bbed8879a1ad"
+    "sha256": "5d2275ee05ef1cc5819222f874b03e91728fbfbd9527c946100c725b02e44b78"
   }
 }
