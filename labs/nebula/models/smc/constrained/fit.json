@@ -1,0 +1,196 @@
+{
+  "schema": "cssearth-tracer-forward-fit@1",
+  "id": "smc-constrained",
+  "outputDirectory": ".local/nebula-lab/smc-constrained",
+  "simulation": {
+    "path": ".local/nebula-lab/full-density/smc-full-density.f32",
+    "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4"
+  },
+  "catalogue": {
+    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
+    "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+  },
+  "footprint": {
+    "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
+    "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f"
+  },
+  "observedReceipt": {
+    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
+    "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+  },
+  "frameObject": {
+    "path": "labs/nebula/models/smc/full-density/object.json",
+    "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+  },
+  "evidence": {
+    "simulation": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "redClump": "https://doi.org/10.1093/mnras/staa3857",
+    "coverage": "https://doi.org/10.1088/0004-637X/744/2/128"
+  },
+  "referenceDistanceKpc": 61,
+  "grid": {
+    "x": {
+      "min": -8,
+      "max": 8,
+      "bins": 32
+    },
+    "y": {
+      "min": -8,
+      "max": 8,
+      "bins": 32
+    },
+    "m": {
+      "min": -1.5,
+      "max": 1.5,
+      "bins": 60
+    }
+  },
+  "sigmaMag": 0.06,
+  "sensitivitySigmaMag": [
+    0.03,
+    0.1
+  ],
+  "contaminationFraction": 0.1,
+  "minimumFootprintCount": 20,
+  "fitParticles": 8192,
+  "ellipsoidParticles": 65536,
+  "seed": 19471,
+  "interpretation": "Conditional stellar tracer shape fitting, not a dynamical rerun, gas/dust reconstruction or recovered physical density.",
+  "limitations": [
+    "Survey mask and retained/published tracer ratio approximate selection; no full stellar-population completeness model is available.",
+    "Magnitude uncertainty kernel and contamination fraction are authored sensitivity assumptions, not measured per-star total errors.",
+    "Equal simulation particle weights proxy the red-clump population without population tags.",
+    "Unobserved regions remain simulation- or ellipsoid-dependent; no new observations are invented."
+  ],
+  "success": "Compare withheld sky-region Poisson deviance of a bounded affine simulation and a simple ellipsoid; retain failed hypotheses and do not promote a result solely for looking round.",
+  "maximumFixRounds": 3,
+  "ellipsoidSigmaKpc": 2,
+  "bounds": {
+    "rotationXDeg": [
+      -120,
+      120
+    ],
+    "rotationYDeg": [
+      -120,
+      120
+    ],
+    "rotationZDeg": [
+      -180,
+      180
+    ],
+    "xyScale": [
+      0.2,
+      2
+    ],
+    "yScale": [
+      0.5,
+      2
+    ],
+    "zScale": [
+      0.3,
+      3.5
+    ],
+    "offsetX": [
+      -3,
+      1
+    ],
+    "offsetY": [
+      -3,
+      1
+    ],
+    "offsetZ": [
+      -5,
+      5
+    ]
+  },
+  "starts": [
+    {
+      "rotationXDeg": 0,
+      "rotationYDeg": 0,
+      "rotationZDeg": 0,
+      "xyScale": 0.8,
+      "yScale": 1,
+      "zScale": 1,
+      "offsetX": -0.9,
+      "offsetY": -0.7,
+      "offsetZ": -0.6
+    },
+    {
+      "rotationXDeg": 0,
+      "rotationYDeg": 0,
+      "rotationZDeg": 120,
+      "xyScale": 0.8,
+      "yScale": 1,
+      "zScale": 1,
+      "offsetX": -0.9,
+      "offsetY": -0.7,
+      "offsetZ": -0.6
+    },
+    {
+      "rotationXDeg": 90,
+      "rotationYDeg": 0,
+      "rotationZDeg": 0,
+      "xyScale": 0.8,
+      "yScale": 1,
+      "zScale": 1,
+      "offsetX": -0.9,
+      "offsetY": -0.7,
+      "offsetZ": -0.6
+    },
+    {
+      "rotationXDeg": 90,
+      "rotationYDeg": 0,
+      "rotationZDeg": 120,
+      "xyScale": 0.8,
+      "yScale": 1,
+      "zScale": 1,
+      "offsetX": -0.9,
+      "offsetY": -0.7,
+      "offsetZ": -0.6
+    },
+    {
+      "rotationXDeg": 0,
+      "rotationYDeg": 90,
+      "rotationZDeg": 0,
+      "xyScale": 0.8,
+      "yScale": 1,
+      "zScale": 1,
+      "offsetX": -0.9,
+      "offsetY": -0.7,
+      "offsetZ": -0.6
+    },
+    {
+      "rotationXDeg": 0,
+      "rotationYDeg": 90,
+      "rotationZDeg": 120,
+      "xyScale": 0.8,
+      "yScale": 1,
+      "zScale": 1,
+      "offsetX": -0.9,
+      "offsetY": -0.7,
+      "offsetZ": -0.6
+    }
+  ],
+  "search": {
+    "maxSweeps": 3,
+    "refinements": 4,
+    "initialStepFraction": 0.12
+  },
+  "refineParticles": 65536,
+  "refinement": {
+    "maxSweeps": 2,
+    "refinements": 3,
+    "initialStepFraction": 0.03
+  },
+  "uncertaintyInterpretation": "sigmaMag and sensitivitySigmaMag are authored nuisance dispersions in magnitude, added in quadrature to the measured median Ks error. This homoscedastic approximation does not recover missing reddening covariance or individual population uncertainty.",
+  "regional": {
+    "spatialScale": 3,
+    "bounds": [
+      0.5,
+      2
+    ],
+    "regularization": 0.01,
+    "maxSweeps": 3,
+    "refinements": 3
+  }
+}
