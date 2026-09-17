@@ -9,11 +9,11 @@ const current = Astro.locals.starlightRoute.id;
 const count = (entries: readonly SystemEntry[]): number => entries.reduce((total, entry) => total + 1 + count(entry.satellites), 0);
 const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry => entry.object.id === current || holds(entry.satellites));
 ---
-<ul class="wiki-tree top-level">
-  <li><a class="wiki-row wiki-index" href="/" aria-current={current === 'index' ? 'page' : undefined}>All objects</a></li>
+<ul class="atlas-tree top-level">
+  <li><a class="atlas-row atlas-index" href="/" aria-current={current === 'index' ? 'page' : undefined}>All objects</a></li>
   {systems.map(system => <li>
     <details open={(system.star ? holds([system.star]) : false) || system.groups.some(group => holds(group.entries))}>
-      <summary><span class="wiki-tree-root">{system.label} ({(system.star ? count([system.star]) : 0) + system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
+      <summary><span class="atlas-tree-root">{system.label} ({(system.star ? count([system.star]) : 0) + system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
       <ul>
         {/* A group of one classification, like the stars or the nebulae, needs no second level. */}
         {system.groups.length === 1 && !system.star
@@ -22,7 +22,7 @@ const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry =
         {system.star && <li><SidebarEntry entry={system.star} current={current} /></li>}
         {system.groups.map(group => <li>
           <details open={holds(group.entries)}>
-            <summary><span class="wiki-tree-group">{group.label} ({count(group.entries)})</span></summary>
+            <summary><span class="atlas-tree-group">{group.label} ({count(group.entries)})</span></summary>
             <ul>{group.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)}</ul>
           </details>
         </li>)}

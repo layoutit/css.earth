@@ -14,13 +14,13 @@ const own = link(entry.object.id, entry.object.title);
   ? <details open={entry.object.id === current || holds(entry.satellites)}>
       {/* A body with satellites opens like a Storybook component: its own page first, then what orbits it. */}
       <summary>
-        <span class="wiki-tree-body"><ObjectMarker objectId={entry.object.id} />{entry.object.title}</span>
+        <span class="atlas-tree-body"><ObjectMarker objectId={entry.object.id} />{entry.object.title}</span>
       </summary>
       <ul>
-        <li><a class="wiki-row wiki-overview" href={own.href} aria-current={own['aria-current']}>Overview</a></li>
+        <li><a class="atlas-row atlas-overview" href={own.href} aria-current={own['aria-current']}>Overview</a></li>
         {entry.satellites.map(satellite => <li><Astro.self entry={satellite} current={current} /></li>)}
       </ul>
     </details>
-  : <a class="wiki-row" href={own.href} aria-current={own['aria-current']}>
+  : <a class="atlas-row" href={own.href} aria-current={own['aria-current']}>
       <ObjectMarker objectId={entry.object.id} />{entry.object.title}
     </a>}

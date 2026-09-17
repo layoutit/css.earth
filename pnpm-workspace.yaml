@@ -1,6 +1,6 @@
 packages:
   - packages/*
   - labs/nebula/packages/*
-  - wiki
+  - atlas
 allowBuilds:
   cwebp-bin: true
