@@ -216,24 +216,6 @@ main h1#_top { margin-top: 1.5rem; color: var(--shell-text); font: var(--shell-f
 .sl-markdown-content .sb-viewer > * { margin: 0; }
 .sb-object { display: flex; flex-direction: column; gap: 1.5rem; }
 .sb-canvas { margin: 0; overflow: hidden; border-radius: 4px; background: var(--sb-preview); box-shadow: var(--sb-shadow), 0 0 0 1px var(--sb-border); }
-.sb-canvas-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 2.5rem;
-  padding: 0 0.5rem 0 0.9375rem;
-  border-bottom: 1px solid var(--sb-border);
-  background: var(--sb-bar);
-}
-.sb-badge {
-  display: inline-block;
-  padding: 0.125rem 0.5rem;
-  border: 1px solid var(--shell-border);
-  border-radius: 3em;
-  color: var(--shell-text-muted);
-  font: var(--shell-font-metadata);
-}
 .sb-canvas-stage { position: relative; display: grid; place-items: center; min-height: 18rem; padding: 1.875rem 1.25rem 2.75rem; }
 .sb-canvas-stage:has(.sb-scene) { aspect-ratio: 4 / 3; min-height: 0; padding: 0; }
 .sb-scene { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
@@ -281,7 +263,8 @@ main:has(.sb-viewer) > .content-panel { border-top: 0; }
 /* The README pane. */
 .sb-readme-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
 .sb-readme-head h1 { color: var(--shell-text); font: var(--shell-font-panel-heading); }
-.sb-readme-head .sb-tool-button { flex: none; margin-top: 0.25rem; box-shadow: inset 0 0 0 1px var(--sb-border); }
+.sb-readme-tools { display: flex; flex: none; gap: 0.5rem; margin-top: 0.25rem; }
+.sb-readme-tools .sb-tool-button { box-shadow: inset 0 0 0 1px var(--sb-border); }
 
 @media (min-width: 50rem) {
   html:has(.sb-viewer), html:has(.sb-viewer) body { height: 100%; overflow: hidden; }
