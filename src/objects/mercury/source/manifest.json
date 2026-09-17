@@ -681,8 +681,8 @@
     {
       "id": "mercury-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1647,
-      "expectedSha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
+      "expectedBytes": 1648,
+      "expectedSha256": "b9a809dbe52117450d9522c8700c1cfb20e1843e28a5d0a34f37b9dd03b84593",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ec6facc886b6d0fe177f2ddb5d28879270950359da00dfdf45bb0afe8c44d22"
+    "sha256": "0d555fa47fc8e1b08e5fd63d7f552a80ee0de62ce49068037d16173c057f181f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1029,8 +1029,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
-      "bytes": 19986,
+      "sha256": "491a324ef342e576e40dc91882418cac617b5bc7db6ea20ee7c53d5360a08782",
+      "bytes": 20002,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1587,7 +1587,7 @@
   },
   "lastPreparation": {
     "objectId": "mars",
-    "materialSha256": "486dccd91fd15c28ddb6f08c609209fc7e407f360af983041f03b11faba60b81",
+    "materialSha256": "0f7df8876786ad793271e2b80abd9990fcd91c1e5b022967c3098a20c2982bce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

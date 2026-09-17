@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8bdedf9cd70208ea11fd2cd479a35fda4ee07f5c27e365ec877320cad9fda97"
+    "sha256": "6f78b0c6c4ffdb2c361db29807bbd3edb6a2bd5854a5904391de6c4e492162c3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1139,8 +1139,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
-      "bytes": 1647,
+      "sha256": "b9a809dbe52117450d9522c8700c1cfb20e1843e28a5d0a34f37b9dd03b84593",
+      "bytes": 1648,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2119,7 +2119,7 @@
   },
   "lastPreparation": {
     "objectId": "mercury",
-    "materialSha256": "063d781ee85b94860f5faa974672dd52e031d57bfd3082b532ed800e15bfed54",
+    "materialSha256": "27522647db9d4bc4af83fd5e59de17880c2aa9a98547213d4cda69f63a1b1ce4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
