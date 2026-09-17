@@ -209,6 +209,150 @@
       "sourcePageUrl": "https://science.nasa.gov/photojournal/small-magellanic-cloud-imaged-by-herschel-planck-iras-cobe/",
       "credit": "ESA/NASA/JPL-Caltech/CSIRO/NANTEN2/C. Clark (STScI)",
       "registrationNote": "Inspection only; reconstruction disabled until qualified. Whole cloud gas/dust composite; red hydrogen green cold dust blue warm dust. Preserve nonstellar signal."
+    },
+    {
+      "id": "smc-horalek-wide",
+      "label": "Horálek · wide optical",
+      "texturePath": "prepared/smc-horalek-wide.webp",
+      "widthPx": 2048,
+      "heightPx": 1365,
+      "sha256": "e25ca68766c44f93e6ccf736ab658a712ddbd2b85da78c87c558c1738d3c4913",
+      "bytes": 1076096,
+      "pivotCssPx": [
+        -21.623695059717626,
+        -47.62412344290981,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1365px",
+        "transform": "matrix3d(-0.17015036671176348,0.1785713480786949,0,3.593946745800095e-7,0.17850651327453376,0.17027264062081401,0,8.966864206505151e-7,0,0,1,0,30.758393735512435,-346.7389331511151,0,1)",
+        "backgroundSize": "2048px 1365px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://noirlab.edu/public/images/iotw2615a/",
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "registrationNote": "Matched stars through VISTA to SMASH. 32,120 matches; held-out p90 1.53 native VISTA pixels. Verified only within matched hull (50.5%); outer field extrapolated. Display-stretched optical photo, not calibrated surface brightness."
+    },
+    {
+      "id": "smc-irida-optical",
+      "label": "IRIDA · optical detail · candidate",
+      "texturePath": "prepared/smc-irida-optical.webp",
+      "widthPx": 2048,
+      "heightPx": 1570,
+      "sha256": "8b3c4c931a132143654a26058637fbae027732a228fd3c454fa2335bc276ac67",
+      "bytes": 1837746,
+      "pivotCssPx": [
+        -13.77484698643101,
+        -37.783951237307534,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "1570px",
+        "transform": "matrix3d(-0.004918500975873683,-0.06747677131779482,0,7.79449921731361e-8,-0.06745357904015571,0.004994820636026301,0,-0.0000013853478643381193,0,0,1,0,44.22663823027773,27.429402615555443,0,1)",
+        "backgroundSize": "2048px 1570px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic.htm",
+      "credit": "Velimir Popov & Emil Ivanov (2016)",
+      "registrationNote": "Relative stellar fit: 5,907 matches, held-out p90 0.95 SMASH pixels. Fixed wrong-scale negative control failed; not qualified for reconstruction. Missing hatched upper-right mosaic corner is no-data, not emission. Central detail image, not full outskirts."
+    },
+    {
+      "id": "smc-dss2-fits",
+      "label": "DSS2 FITS · blue/red plates",
+      "texturePath": "prepared/smc-dss2-fits.webp",
+      "widthPx": 2048,
+      "heightPx": 2048,
+      "sha256": "1addda0c8826b11f978e782ff5cd8192387eea70660ab448f60caa3388eac7f1",
+      "bytes": 1339746,
+      "pivotCssPx": [
+        -23.53196923789603,
+        -49.2778451754312,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.013548872986453894,-0.265866332844289,0,-0.0000013750002862420383,-0.26589337407423225,0.013579244113898797,0,-5.751604481853151e-7,0,0,1,0,262.66388426159597,209.16253979647638,0,1)",
+        "backgroundSize": "2048px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fblue&get=record&fmt=json",
+      "credit": "Digitized Sky Survey (STScI/NASA; UK Schmidt Telescope plates, Royal Observatory Edinburgh / Anglo-Australian Observatory); HiPS and hips2fits CDS (CNRS/Unistra)",
+      "registrationNote": "Composed from pinned DSS2 blue and red hips2fits bands on the exact 10 degree TAN request grid. Relative photographic units. Saturated plate stars and their halos are measured from the plate scan and carried as no coverage (alpha 0). Plate-to-plate background steps remain: plate footprints are not in the pinned inputs."
+    },
+    {
+      "id": "smc-herschel-dust",
+      "label": "Herschel SPIRE 250 µm · cold dust",
+      "texturePath": "prepared/smc-herschel-dust.webp",
+      "widthPx": 2048,
+      "heightPx": 2048,
+      "sha256": "68288da8e4ca7bb5a1a3ba237a8bc541a7256aa417635ac4983406cfa58fa710",
+      "bytes": 253036,
+      "pivotCssPx": [
+        -23.53196923789603,
+        -49.2778451754312,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.013548872986453894,-0.265866332844289,0,-0.0000013750002862420383,-0.26589337407423225,0.013579244113898797,0,-5.751604481853151e-7,0,0,1,0,262.66388426159597,209.16253979647638,0,1)",
+        "backgroundSize": "2048px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2FSPIRE-250&get=record&fmt=json",
+      "credit": "ESA/Herschel/SPIRE; Herschel Science Archive; HiPS ESASky (ESA ESDC and Herschel Science Centre); hips2fits CDS (CNRS/Unistra)",
+      "registrationNote": "SPIRE 250 micron monochrome on the exact 10 degree TAN request grid. The footprint covers the main body only and unobserved pixels carry alpha 0, so they are no coverage rather than zero emission. Relative source units."
+    },
+    {
+      "id": "smc-wise-stellar",
+      "label": "AllWISE FITS · W1/W2 stellar",
+      "texturePath": "prepared/smc-wise-stellar.webp",
+      "widthPx": 2048,
+      "heightPx": 2048,
+      "sha256": "e6501fbd6a2f0d371cbb2436cbc6a52028d9521220ca78e396fce8c7f3dd2b58",
+      "bytes": 1772984,
+      "pivotCssPx": [
+        -23.53196923789603,
+        -49.2778451754312,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.013548872986453894,-0.265866332844289,0,-0.0000013750002862420383,-0.26589337407423225,0.013579244113898797,0,-5.751604481853151e-7,0,0,1,0,262.66388426159597,209.16253979647638,0,1)",
+        "backgroundSize": "2048px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://wise2.ipac.caltech.edu/docs/release/allwise/",
+      "credit": "NASA/JPL-Caltech/UCLA WISE and NEOWISE; AllWISE Atlas Images from NASA/IPAC Infrared Science Archive",
+      "registrationNote": "W2 red, W1 blue, their mean green, from 61 pinned AllWISE atlas tiles per band on the exact 10 degree TAN grid. Fixed grid WCS checked against AllWISE catalogue W1 stars; no fitted transform."
+    },
+    {
+      "id": "smc-wise-starforming",
+      "label": "AllWISE FITS · W1/W3/W4 star forming",
+      "texturePath": "prepared/smc-wise-starforming.webp",
+      "widthPx": 2048,
+      "heightPx": 2048,
+      "sha256": "a49ef806f46d108b56d4d4f6beec750c3fc651887c87b0cfd77164c61ee2d9e2",
+      "bytes": 1408626,
+      "pivotCssPx": [
+        -23.53196923789603,
+        -49.2778451754312,
+        0
+      ],
+      "style": {
+        "width": "2048px",
+        "height": "2048px",
+        "transform": "matrix3d(-0.013548872986453894,-0.265866332844289,0,-0.0000013750002862420383,-0.26589337407423225,0.013579244113898797,0,-5.751604481853151e-7,0,0,1,0,262.66388426159597,209.16253979647638,0,1)",
+        "backgroundSize": "2048px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://wise2.ipac.caltech.edu/docs/release/allwise/",
+      "credit": "NASA/JPL-Caltech/UCLA WISE and NEOWISE; AllWISE Atlas Images from NASA/IPAC Infrared Science Archive",
+      "registrationNote": "W4 red, W3 green, W1 blue from pinned AllWISE atlas tiles on the exact 10 degree TAN grid. Fixed grid WCS checked against AllWISE catalogue W1 stars in the blue channel. Compact 12 and 22 micron dust knots are not stars."
     }
   ]
 }

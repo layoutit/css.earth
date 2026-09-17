@@ -10,8 +10,8 @@
     "chanceExcess": true
   },
   "source": {
-    "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
-    "sha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
+    "path": ".local/nebula-lab/smc-intake/sky-bands/smc-dss2-fits.108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93.png",
+    "sha256": "108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93",
     "nativeDimensions": [
       4000,
       4000
@@ -29,12 +29,12 @@
         2000
       ],
       "referenceValueDeg": [
-        13.5,
-        -73
+        13.19,
+        -72.83
       ],
       "scaleDeg": [
-        -0.0025063655876378,
-        0.0025063655876378
+        -0.0025063655876377947,
+        0.0025063655876377947
       ],
       "rotationDeg": 0
     }
@@ -43,7 +43,7 @@
     "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
     "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
     "downloadedRows": 13220,
-    "inFieldIsolatedCandidates": 7195,
+    "inFieldIsolatedCandidates": 7170,
     "query": {
       "path": "labs/nebula/models/smc/registration/allwise-query.json",
       "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
@@ -65,40 +65,40 @@
     ]
   },
   "chanceExcess": {
-    "closeMatches": 7153,
-    "expectation": 53,
-    "ratio": 134.96226415094338,
+    "closeMatches": 5068,
+    "expectation": 219,
+    "ratio": 23.141552511415526,
     "pass": true,
-    "analyticExpectedChanceMatches": 28.624694433934234,
-    "detectionDensityPerSquarePixel": 0.0022558125,
+    "analyticExpectedChanceMatches": 199.5883417997693,
+    "detectionDensityPerSquarePixel": 0.0159756875,
     "method": "Inside the chance radius, real matches must exceed the largest chance estimate by the declared margin. The estimate is the larger of every shifted and wrong-transform control count in that same radius and the analytic rate for this detection density, so denser detections raise the bar instead of failing a fixed ratio."
   },
   "refitted": false,
   "allCoordinatesHeldOutFromAnyFit": true,
-  "uniqueMatchedStars": 7172,
-  "reservedCheckCount": 2391,
-  "detectedStars": 36093,
+  "uniqueMatchedStars": 5841,
+  "reservedCheckCount": 1947,
+  "detectedStars": 255611,
   "residualNativeWisePixels": {
-    "median": 0.23158028674785003,
-    "p90": 0.38324756569962304,
-    "max": 2.2837293392730578
+    "median": 0.3120312116006837,
+    "p90": 0.9990146419732283,
+    "max": 2.499603181210991
   },
   "reservedCheckResidualNativeWisePixels": {
-    "median": 0.23337509912116128,
-    "p90": 0.3842062589330275,
-    "max": 2.2837293392730578
+    "median": 0.3144267909127435,
+    "p90": 1.0060913670044507,
+    "max": 2.498606474314172
   },
   "residualArcseconds": {
-    "median": 2.105723942815821,
-    "p90": 3.4666608454012735,
-    "max": 20.605898258758085
+    "median": 2.8370465588703038,
+    "p90": 9.077878009005921,
+    "max": 22.54471662337214
   },
-  "matchedSourceHullFraction": 0.9875063528283838,
+  "matchedSourceHullFraction": 0.9864498412684881,
   "quadrantMatchCounts": [
-    1747,
-    1613,
-    1833,
-    1979
+    1296,
+    1336,
+    1593,
+    1616
   ],
   "shiftedControls": [
     {
@@ -106,46 +106,46 @@
         40,
         0
       ],
-      "matchesWithin2_5Pixels": 418,
-      "matchesWithinChanceRadius": 31
+      "matchesWithin2_5Pixels": 2190,
+      "matchesWithinChanceRadius": 203
     },
     {
       "offsetNativePixels": [
         0,
         40
       ],
-      "matchesWithin2_5Pixels": 412,
-      "matchesWithinChanceRadius": 30
+      "matchesWithin2_5Pixels": 2173,
+      "matchesWithinChanceRadius": 178
     },
     {
       "offsetNativePixels": [
         100,
         -70
       ],
-      "matchesWithin2_5Pixels": 380,
-      "matchesWithinChanceRadius": 31
+      "matchesWithin2_5Pixels": 2145,
+      "matchesWithinChanceRadius": 189
     }
   ],
   "wrongTransformControls": {
     "mirrorX": {
-      "matchesWithin2_5Pixels": 410,
-      "matchesWithinChanceRadius": 47
+      "matchesWithin2_5Pixels": 2214,
+      "matchesWithinChanceRadius": 218
     },
     "mirrorY": {
-      "matchesWithin2_5Pixels": 393,
-      "matchesWithinChanceRadius": 43
+      "matchesWithin2_5Pixels": 2266,
+      "matchesWithinChanceRadius": 210
     },
     "rotate90": {
-      "matchesWithin2_5Pixels": 439,
-      "matchesWithinChanceRadius": 49
+      "matchesWithin2_5Pixels": 2207,
+      "matchesWithinChanceRadius": 207
     },
     "scale09": {
-      "matchesWithin2_5Pixels": 488,
-      "matchesWithinChanceRadius": 53
+      "matchesWithin2_5Pixels": 2235,
+      "matchesWithinChanceRadius": 219
     },
     "scale11": {
-      "matchesWithin2_5Pixels": 386,
-      "matchesWithinChanceRadius": 40
+      "matchesWithin2_5Pixels": 1854,
+      "matchesWithinChanceRadius": 171
     }
   },
   "limitations": [
@@ -155,13 +155,17 @@
     "Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.",
     "Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds; the chance-excess control gates acceptance."
   ],
-  "compositeBlueChannel": "AllWISE W1 colour HiPS blue channel",
+  "compositeBlueChannel": "DSS2 blue photographic plates",
+  "skyBands": {
+    "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-dss2-fits.json",
+    "sha256": "990f60858960874795a095222035cf360f285a076ba2173ee517e36407f7bbb4"
+  },
   "implementation": {
     "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
     "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
   },
   "matchedStars": {
-    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-allwise-wide/matched-stars.json",
-    "sha256": "ac9dbe1a7642d26ccef1416ad165492b2a38ec00561345c8ad2118399a2e07a8"
+    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-dss2-fits/matched-stars.json",
+    "sha256": "cc40375b757c65a4fad1d83aa7212c975304500b3930a5c68304d70e3d6a1fd5"
   }
 }

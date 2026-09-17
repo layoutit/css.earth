@@ -66,3 +66,13 @@ console.log('FIXED_WCS_CATALOGUE_PASS', result.receipt.uniqueMatchedStars);
 NODE
 node --test labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.test.ts
 ```
+
+## Density-aware chance control
+
+The fixed-WCS catalogue gate compares an image's own stars with the AllWISE catalogue and fits nothing. Its chance control used to require every shifted control to stay below a tenth of the real matches. That ratio does not scale with detection density: a lossless, deeply stretched raster detects several times more real sources than a publisher JPEG, so coincidence alone exceeded the limit however good the astrometry was.
+
+The control is now an excess over the chance rate at the image's own density. Inside the 0.75-pixel chance radius, which is the protocol's existing median limit, the real close matches must be at least five times the largest chance estimate. That estimate is the larger of every shifted and wrong-transform control count in the same radius and the analytic rate `N_catalogue · (1 − exp(−N_detections · π r² / A))`. Every other threshold is unchanged: at least 100 unique matches, all four quadrants, half the image inside the matched hull, held-out median ≤ 0.75 and P90 ≤ 1.5 native pixels.
+
+`node labs/nebula/run.mts register-sky-bands sky-band-registration.json` runs the whole set in one pass: the four composed survey-band images, the already qualified AllWISE image, and three known-bad controls. It fails if any check fails or any control qualifies. The measured numbers, including the negative controls, are tabulated in [the composite intake](../README-candidates.md#survey-band-composites) and locked in `fixed-catalogue.test.ts`.
+
+The AllWISE re-run reproduces its earlier receipt exactly — 7,172 unique matches, reserved median 0.2334 and P90 0.3842 native pixels, hull 98.75%, the same quadrant counts and the same matched-star table hash — with only the protocol fields and the new control statistics added. The relative star-pattern runs above use the unchanged Python routine; this change does not touch them, and the recorded WISE, Spitzer and Irida failures stand.

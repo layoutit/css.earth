@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/smc/image-candidates.json",
-    "sha256": "8400d504ddcd412fb1113a40d8ce5fb66ff0fa8393bdae73d0cd4b053b1c51ad"
+    "sha256": "370201999627e8a3f80649bc82c25cae491005a8fc78739e9d88dcbadb79144f"
   },
   "frame": {
     "path": "labs/nebula/models/smc/full-density/object.json",
@@ -628,6 +628,478 @@
         "height": 2048,
         "sha256": "096665d1ed7b90107fea314bab341123085f0ed91da902a0d2f8092b1cb0b08c",
         "bytes": 615050
+      }
+    },
+    {
+      "input": {
+        "id": "smc-horalek-wide",
+        "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+        "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2615a.jpg",
+        "sourcePageUrl": "https://noirlab.edu/public/images/iotw2615a/",
+        "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+        "license": "CC BY 4.0; full credit required",
+        "label": "Horálek · wide optical",
+        "registration": {
+          "referenceWcs": {
+            "referenceDimension": [
+              3827,
+              3190
+            ],
+            "referencePixel": [
+              1913.5,
+              1595
+            ],
+            "referenceValueDeg": [
+              13.6618118598,
+              -72.8687942632
+            ],
+            "scaleDeg": [
+              -0.00138788065837,
+              0.00138788065837
+            ],
+            "rotationDeg": 30.12000000000002
+          },
+          "referenceWidthPx": 3827,
+          "referenceHeightPx": 3190,
+          "imageToReferenceMatrix": [
+            -0.262087181008138,
+            -1.0680902429874122,
+            4908.350056854834,
+            1.0675521440565587,
+            -0.2616902746948353,
+            -1199.962907109041,
+            1.3831792413558168e-8,
+            -9.878774783541113e-8,
+            1
+          ]
+        },
+        "wcsSource": {
+          "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2615a.jpg",
+          "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
+          "description": "Matched stars through VISTA to SMASH. 32,120 matches; held-out p90 1.53 native VISTA pixels. Verified only within matched hull (50.5%); outer field extrapolated. Display-stretched optical photo, not calibrated surface brightness."
+        },
+        "registrationNote": "Matched stars through VISTA to SMASH. 32,120 matches; held-out p90 1.53 native VISTA pixels. Verified only within matched hull (50.5%); outer field extrapolated. Display-stretched optical photo, not calibrated surface brightness.",
+        "useSavedAlignment": false
+      },
+      "sourceDimensions": [
+        6069,
+        4045
+      ],
+      "verticesUnits": [
+        [
+          -6.934778663022302,
+          0.6151678747102487,
+          -3.9968028886505635e-15
+        ],
+        [
+          0.3792246296732997,
+          -6.349517644972342,
+          4.440892098500626e-16
+        ],
+        [
+          5.0181112585612855,
+          -1.4780662979567518,
+          6.439293542825908e-15
+        ],
+        [
+          -2.283540573015919,
+          5.481686229435285,
+          -2.6645352591003757e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smc-horalek-wide.webp",
+        "width": 2048,
+        "height": 1365,
+        "sha256": "e25ca68766c44f93e6ccf736ab658a712ddbd2b85da78c87c558c1738d3c4913",
+        "bytes": 1076096
+      }
+    },
+    {
+      "input": {
+        "id": "smc-irida-optical",
+        "path": ".local/nebula-lab/smc-intake/irida-smc.jpg",
+        "sha256": "88bb3e8363abb63ac7ba10dc1cb9f07236f94731f0d15a124ea6230e5c31cc9e",
+        "url": "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic_4000px.jpg",
+        "sourcePageUrl": "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic.htm",
+        "credit": "Velimir Popov & Emil Ivanov (2016)",
+        "license": "All rights reserved; local inspection only; redistribution permission not established",
+        "label": "IRIDA · optical detail · candidate",
+        "registration": {
+          "referenceWcs": {
+            "referenceDimension": [
+              3827,
+              3190
+            ],
+            "referencePixel": [
+              1913.5,
+              1595
+            ],
+            "referenceValueDeg": [
+              13.6618118598,
+              -72.8687942632
+            ],
+            "scaleDeg": [
+              -0.00138788065837,
+              0.00138788065837
+            ],
+            "rotationDeg": 30.12000000000002
+          },
+          "referenceWidthPx": 3827,
+          "referenceHeightPx": 3190,
+          "imageToReferenceMatrix": [
+            0.40327916543040426,
+            0.21675008361454812,
+            648.63881950642,
+            -0.2177764857843882,
+            0.4020374278676088,
+            1310.9835797769406,
+            1.9371528171110255e-7,
+            -6.303910858469223e-7,
+            1
+          ]
+        },
+        "wcsSource": {
+          "url": "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic_4000px.jpg",
+          "sha256": "88bb3e8363abb63ac7ba10dc1cb9f07236f94731f0d15a124ea6230e5c31cc9e",
+          "description": "Relative stellar fit: 5,907 matches, held-out p90 0.95 SMASH pixels. Fixed wrong-scale negative control failed; not qualified for reconstruction. Missing hatched upper-right mosaic corner is no-data, not emission. Central detail image, not full outskirts."
+        },
+        "registrationNote": "Relative stellar fit: 5,907 matches, held-out p90 0.95 SMASH pixels. Fixed wrong-scale negative control failed; not qualified for reconstruction. Missing hatched upper-right mosaic corner is no-data, not emission. Central detail image, not full outskirts.",
+        "useSavedAlignment": false
+      },
+      "sourceDimensions": [
+        4000,
+        3067
+      ],
+      "verticesUnits": [
+        [
+          0.5485880523111089,
+          0.8845327646055546,
+          -3.3861802251067274e-15
+        ],
+        [
+          -2.214906932295395,
+          0.6829619425010063,
+          1.4432899320127035e-15
+        ],
+        [
+          -2.062579983997746,
+          -1.437869248301522,
+          3.164135620181696e-15
+        ],
+        [
+          0.7069630622187395,
+          -1.2361983438902375,
+          2.3314683517128287e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smc-irida-optical.webp",
+        "width": 2048,
+        "height": 1570,
+        "sha256": "8b3c4c931a132143654a26058637fbae027732a228fd3c454fa2335bc276ac67",
+        "bytes": 1837746
+      }
+    },
+    {
+      "input": {
+        "id": "smc-dss2-fits",
+        "label": "DSS2 FITS · blue/red plates",
+        "sha256": "108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93",
+        "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fblue&get=record&fmt=json",
+        "credit": "Digitized Sky Survey (STScI/NASA; UK Schmidt Telescope plates, Royal Observatory Edinburgh / Anglo-Australian Observatory); HiPS and hips2fits CDS (CNRS/Unistra)",
+        "license": "STScI Digitized Sky Survey terms; acknowledgement required",
+        "wcsSource": {
+          "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fblue&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.19&dec=-72.83&format=fits",
+          "sha256": "cbea9d1cc83ccf6bba040c0248d151a319389038baf7a9bb564a0b9b1835dd00",
+          "description": "Exact hips2fits TAN request grid, checked in every band header by the sky band compositor."
+        },
+        "registrationNote": "Composed from pinned DSS2 blue and red hips2fits bands on the exact 10 degree TAN request grid. Relative photographic units. Saturated plate stars and their halos are measured from the plate scan and carried as no coverage (alpha 0). Plate-to-plate background steps remain: plate footprints are not in the pinned inputs.",
+        "skyBands": {
+          "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-dss2-fits.json",
+          "sha256": "990f60858960874795a095222035cf360f285a076ba2173ee517e36407f7bbb4"
+        },
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            4000,
+            4000
+          ],
+          "referencePixel": [
+            2000,
+            2000
+          ],
+          "referenceValueDeg": [
+            13.19,
+            -72.83
+          ],
+          "scaleDeg": [
+            -0.0025063655876377947,
+            0.0025063655876377947
+          ],
+          "rotationDeg": 0
+        },
+        "path": ".local/nebula-lab/smc-intake/sky-bands/smc-dss2-fits.108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93.png"
+      },
+      "sourceDimensions": [
+        4000,
+        4000
+      ],
+      "verticesUnits": [
+        [
+          4.183250795929528,
+          5.25327768523192,
+          -7.882583474838611e-15
+        ],
+        [
+          -6.725573416054852,
+          4.711583670083765,
+          -4.440892098500626e-15
+        ],
+        [
+          -6.175091235567513,
+          -6.217509045201867,
+          7.216449660063518e-15
+        ],
+        [
+          4.745045960169578,
+          -5.644363574119441,
+          -5.773159728050814e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smc-dss2-fits.webp",
+        "width": 2048,
+        "height": 2048,
+        "sha256": "1addda0c8826b11f978e782ff5cd8192387eea70660ab448f60caa3388eac7f1",
+        "bytes": 1339746
+      }
+    },
+    {
+      "input": {
+        "id": "smc-herschel-dust",
+        "label": "Herschel SPIRE 250 µm · cold dust",
+        "sha256": "d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e",
+        "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2FSPIRE-250&get=record&fmt=json",
+        "credit": "ESA/Herschel/SPIRE; Herschel Science Archive; HiPS ESASky (ESA ESDC and Herschel Science Centre); hips2fits CDS (CNRS/Unistra)",
+        "license": "ESA Herschel publishing rules; attribution required",
+        "wcsSource": {
+          "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=ESAVO%2FP%2FHERSCHEL%2FSPIRE-250&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.19&dec=-72.83&format=fits",
+          "sha256": "c8e175783d63e3617b506732a93c87cbf699c1d607204a3d9305e7656bb06e9d",
+          "description": "Exact hips2fits TAN request grid, checked in the band header by the sky band compositor."
+        },
+        "registrationNote": "SPIRE 250 micron monochrome on the exact 10 degree TAN request grid. The footprint covers the main body only and unobserved pixels carry alpha 0, so they are no coverage rather than zero emission. Relative source units.",
+        "skyBands": {
+          "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-herschel-dust.json",
+          "sha256": "516a8d7cf1d9eb94b4b77a20c94a09946731b28fda4904876cedd45c25096fee"
+        },
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            4000,
+            4000
+          ],
+          "referencePixel": [
+            2000,
+            2000
+          ],
+          "referenceValueDeg": [
+            13.19,
+            -72.83
+          ],
+          "scaleDeg": [
+            -0.0025063655876377947,
+            0.0025063655876377947
+          ],
+          "rotationDeg": 0
+        },
+        "path": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e.png"
+      },
+      "sourceDimensions": [
+        4000,
+        4000
+      ],
+      "verticesUnits": [
+        [
+          4.183250795929528,
+          5.25327768523192,
+          -7.882583474838611e-15
+        ],
+        [
+          -6.725573416054852,
+          4.711583670083765,
+          -4.440892098500626e-15
+        ],
+        [
+          -6.175091235567513,
+          -6.217509045201867,
+          7.216449660063518e-15
+        ],
+        [
+          4.745045960169578,
+          -5.644363574119441,
+          -5.773159728050814e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smc-herschel-dust.webp",
+        "width": 2048,
+        "height": 2048,
+        "sha256": "68288da8e4ca7bb5a1a3ba237a8bc541a7256aa417635ac4983406cfa58fa710",
+        "bytes": 253036
+      }
+    },
+    {
+      "input": {
+        "id": "smc-wise-stellar",
+        "label": "AllWISE FITS · W1/W2 stellar",
+        "sha256": "a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc",
+        "sourcePageUrl": "https://wise2.ipac.caltech.edu/docs/release/allwise/",
+        "credit": "NASA/JPL-Caltech/UCLA WISE and NEOWISE; AllWISE Atlas Images from NASA/IPAC Infrared Science Archive",
+        "license": "NASA/IPAC data use policy; acknowledgement required",
+        "wcsSource": {
+          "url": "https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd",
+          "sha256": "a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc",
+          "description": "Exact 10 degree TAN grid of the sky band recipe; pinned AllWISE atlas tiles are reprojected onto it without interpolation and background-matched."
+        },
+        "registrationNote": "W2 red, W1 blue, their mean green, from 61 pinned AllWISE atlas tiles per band on the exact 10 degree TAN grid. Fixed grid WCS checked against AllWISE catalogue W1 stars; no fitted transform.",
+        "skyBands": {
+          "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar.json",
+          "sha256": "3906add8622692b7fca377cbb97c95ecfd3118e1bc117327c89dce1489c5e539"
+        },
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            4000,
+            4000
+          ],
+          "referencePixel": [
+            2000,
+            2000
+          ],
+          "referenceValueDeg": [
+            13.19,
+            -72.83
+          ],
+          "scaleDeg": [
+            -0.0025063655876377947,
+            0.0025063655876377947
+          ],
+          "rotationDeg": 0
+        },
+        "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc.png"
+      },
+      "sourceDimensions": [
+        4000,
+        4000
+      ],
+      "verticesUnits": [
+        [
+          4.183250795929528,
+          5.25327768523192,
+          -7.882583474838611e-15
+        ],
+        [
+          -6.725573416054852,
+          4.711583670083765,
+          -4.440892098500626e-15
+        ],
+        [
+          -6.175091235567513,
+          -6.217509045201867,
+          7.216449660063518e-15
+        ],
+        [
+          4.745045960169578,
+          -5.644363574119441,
+          -5.773159728050814e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smc-wise-stellar.webp",
+        "width": 2048,
+        "height": 2048,
+        "sha256": "e6501fbd6a2f0d371cbb2436cbc6a52028d9521220ca78e396fce8c7f3dd2b58",
+        "bytes": 1772984
+      }
+    },
+    {
+      "input": {
+        "id": "smc-wise-starforming",
+        "label": "AllWISE FITS · W1/W3/W4 star forming",
+        "sha256": "a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1",
+        "sourcePageUrl": "https://wise2.ipac.caltech.edu/docs/release/allwise/",
+        "credit": "NASA/JPL-Caltech/UCLA WISE and NEOWISE; AllWISE Atlas Images from NASA/IPAC Infrared Science Archive",
+        "license": "NASA/IPAC data use policy; acknowledgement required",
+        "wcsSource": {
+          "url": "https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd",
+          "sha256": "a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1",
+          "description": "Exact 10 degree TAN grid of the sky band recipe; pinned AllWISE atlas tiles are reprojected onto it without interpolation and background-matched."
+        },
+        "registrationNote": "W4 red, W3 green, W1 blue from pinned AllWISE atlas tiles on the exact 10 degree TAN grid. Fixed grid WCS checked against AllWISE catalogue W1 stars in the blue channel. Compact 12 and 22 micron dust knots are not stars.",
+        "skyBands": {
+          "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming.json",
+          "sha256": "f0adaa3f9be4279e979fc77d60caa4d68872d763815ebe8dfc535cc6de62aaca"
+        },
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            4000,
+            4000
+          ],
+          "referencePixel": [
+            2000,
+            2000
+          ],
+          "referenceValueDeg": [
+            13.19,
+            -72.83
+          ],
+          "scaleDeg": [
+            -0.0025063655876377947,
+            0.0025063655876377947
+          ],
+          "rotationDeg": 0
+        },
+        "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-starforming.a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1.png"
+      },
+      "sourceDimensions": [
+        4000,
+        4000
+      ],
+      "verticesUnits": [
+        [
+          4.183250795929528,
+          5.25327768523192,
+          -7.882583474838611e-15
+        ],
+        [
+          -6.725573416054852,
+          4.711583670083765,
+          -4.440892098500626e-15
+        ],
+        [
+          -6.175091235567513,
+          -6.217509045201867,
+          7.216449660063518e-15
+        ],
+        [
+          4.745045960169578,
+          -5.644363574119441,
+          -5.773159728050814e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smc-wise-starforming.webp",
+        "width": 2048,
+        "height": 2048,
+        "sha256": "a49ef806f46d108b56d4d4f6beec750c3fc651887c87b0cfd77164c61ee2d9e2",
+        "bytes": 1408626
       }
     }
   ],

@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-sky-band-composite@1",
+  "grid": {
+    "width": 4000,
+    "height": 4000,
+    "fovDeg": 10,
+    "centerIcrsDegrees": [
+      13.19,
+      -72.83
+    ]
+  },
+  "bands": [
+    {
+      "band": "DSS2R",
+      "sha256": "fc359724522f7124f22fade951babea57dfebe47faa2d2a6f07322d17b0974f0",
+      "bytes": 32005440
+    },
+    {
+      "band": "DSS2B",
+      "sha256": "cbea9d1cc83ccf6bba040c0248d151a319389038baf7a9bb564a0b9b1835dd00",
+      "bytes": 32005440
+    }
+  ],
+  "backgroundPercentile": 50,
+  "peakPercentile": 99.7,
+  "coverage": "alpha",
+  "display": {
+    "minimum": 0,
+    "stretch": 0.7,
+    "softening": 8
+  }
+}
