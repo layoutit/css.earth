@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b79ca03fe72b4e786bd5511dfd2d883644a65c8fad908b55478053970aba8d46"
+    "sha256": "64017c19e51a6e43376075cab89cd3798e8762934fe93db68e9b855287fae317"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "05752d85d34e0ef695603f5fab3574ad95aa8bd1b3dddc449ac50ce645e92ae6",
+      "sha256": "ee5644dce81e0fdb89dd4b42448b3d558f6768e9e864be7709086892c1e17682",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 4587.18867530189,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/hiiaka/hiiaka-model-surface@2x.webp",
-          "bytes": 50996,
-          "sha256": "56f2b3de723f746906e426735eafa3b49b9a5ca809ce01139d0fbd4a4f41c24a",
+          "bytes": 59170,
+          "sha256": "13fa3a8231cff736321ad30ee429ec18ad896209d47a41a377be652eed7d39e0",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "hiiaka",
-    "materialSha256": "a843e6c2f95e2e565d292bd20ada912c03a4933295f6d043f012e19c917a93da",
+    "materialSha256": "efee51e15ba402c4427294871c21215e73340e442dafe10bd140607befae0ea7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b3f01810a6e0a34fc60a4aab895c0517d1e632fd1ac7b45fb03e45ea87c7417b"
+    "sha256": "7d09a0054460708aeef05e93010ecac5d81d66e435575de3ca729d317dcdb842"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ba4df739161bccb64a0f48b7b306a024cdbda36c71df351beea466fd4f7a53ac",
+      "sha256": "27cd66403f43c75cd79343ba38ef138825132ac07c99997c18af34e8a85e85ae",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 585,
@@ -337,8 +336,8 @@
         },
         {
           "url": "/scenes/siarnaq/siarnaq-model-surface@2x.webp",
-          "bytes": 55214,
-          "sha256": "475231fd4b70be3b8ed8d0d8050941db662416587884f32f0da74320dec3f009",
+          "bytes": 59876,
+          "sha256": "2d02608d3e0f5ec4d6c443de3a5a7df65ae0adb2a8c1c49efbc5e5fbc2467a38",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "siarnaq",
-    "materialSha256": "0143d32c239b12c0d627ecdcf92235e19626586c53de25990062928c5bd73381",
+    "materialSha256": "c422caf33bb42e49ff6bd97d85019c868b1e9205008bee158913b9d7b5ac9887",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

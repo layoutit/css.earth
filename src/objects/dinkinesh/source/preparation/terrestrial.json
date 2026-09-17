@@ -58,8 +58,7 @@
         "expectedFaces": 1266
       },
       "faceBudget": 1266,
-      "tileSize": 64,
-      "atlasColumns": 16,
+      "texelsPerFace": 4096,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
@@ -79,8 +78,7 @@
           "expectedFaces": 101512
         },
         "faceBudget": 1200,
-        "tileSize": 64,
-        "atlasColumns": 16,
+        "texelsPerFace": 4096,
         "primitive": "u",
         "simplification": {
           "method": "source-meshoptimizer",

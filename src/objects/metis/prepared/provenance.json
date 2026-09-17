@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "411d7f6fdcbbbad609a0b180d07b92bc1115c541259bb0454c15490666ab62cc"
+    "sha256": "2ea41a25277269da43ce253b0fbbbf6179034f8b7bf3499c39ffe258062161b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a98acd40fd61e1f31448623d70dc69869d72a76fe49bd1b6d8d69f1f9014ba50",
+      "sha256": "55e0f729631957ebf1a597de985af67ac1399f907203ba6ac3f2cddab326edda",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -206,8 +206,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 32,
-            "atlasColumns": 16,
+            "texelsPerFace": 1024,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 500,
@@ -970,8 +969,8 @@
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 32556,
-          "sha256": "254d4abb6e2e029bb1e98f1b9c03ade012bc6064f6d61176e3e769563b1f780f",
+          "bytes": 42172,
+          "sha256": "c534e6a848805b5808bd458cc82bf0769367e0bb1d66aac05c30008cc4ebfac7",
           "verification": "bytes-verified"
         }
       ],
@@ -1042,7 +1041,7 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "e7968e2dcbd73ad994aaf02ab21fbf1affb77f386d907a0e1219e1e7d0433e5d",
+    "materialSha256": "d36232f85c2c7d4ceeff2d59bc6ced3349cdac4fb121b1d9b287805519be8432",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

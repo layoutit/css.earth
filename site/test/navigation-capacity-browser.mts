@@ -9,7 +9,7 @@ import { chromium } from 'playwright';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { browserObjects } from './browser-objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
-const sourcePath = '/sun/?overview=solar-system&v=QMa8GhQkxq0kCjwwjGyvKEVkwdEH0KlHMa5BQsczQAAAAD_NAzq-TAs4v9ZvIAwo9nM_43yA9Ilr5wABAAAAAAAAAAA';
+const sourcePath = '/sun/?overview=system&v=QMa8GhQkxq0kCjwwjGyvKEVkwdEH0KlHMa5BQsczQAAAAD_NAzq-TAs4v9ZvIAwo9nM_43yA9Ilr5wABAAAAAAAAAAA';
 const output = 'output/playwright/navigation-capacity';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });

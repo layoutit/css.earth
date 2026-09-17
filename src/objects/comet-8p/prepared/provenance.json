@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ce919a001db60b34af32ffb060040adc90ee985f486961ba3dad6df89756b00"
+    "sha256": "39ad675274ddb364f5fa829ebcc8dc3578a91430955ccde086ae532db58443d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "367e465e11cab17ca24edac66edbf5a6e97ee06514c87fff328025afe8e437b2",
+      "sha256": "6d740286b2295e2cc1c79b4d722173fc495f3bc5191dc856ccb1ef5884060ad3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -92,8 +92,7 @@
               "expectedFaces": 4096
             },
             "faceBudget": 1000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -150,8 +149,7 @@
                 "expectedFaces": 4096
               },
               "faceBudget": 1000,
-              "tileSize": 64,
-              "atlasColumns": 16,
+              "texelsPerFace": 4096,
               "simplification": {
                 "method": "source-meshoptimizer",
                 "targetFaces": 1000,
@@ -639,8 +637,8 @@
         },
         {
           "url": "/scenes/comet-8p/comet-8p-model-surface@2x.webp",
-          "bytes": 105472,
-          "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4",
+          "bytes": 134966,
+          "sha256": "49b416a8c6dd62be73ac42da6f6d50256f6bf3bc1787133bb55d4caaead9159c",
           "verification": "bytes-verified"
         }
       ],
@@ -693,8 +691,8 @@
         },
         {
           "url": "/scenes/comet-8p/comet-8p-arecibo-surface@2x.webp",
-          "bytes": 109186,
-          "sha256": "63f03008ebbfcd2d767e3ea6bc7779970897a084bcaa89388f493e2ac0bc2930",
+          "bytes": 141800,
+          "sha256": "7d9b86245ce591087a36bf0fde88879d8c38baece0ecd726bb05c8732b196d23",
           "verification": "bytes-verified"
         }
       ],
@@ -778,7 +776,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-8p",
-    "materialSha256": "86c66a310cbfcd53885a3ac1c5d48c6577e72c00a690ce515d35b5cbbd906b4b",
+    "materialSha256": "843463c43e31019bd40a222f4cabd5a6584be7746b33bcb5aa51e06c0787383a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

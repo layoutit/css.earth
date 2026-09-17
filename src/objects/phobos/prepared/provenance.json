@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e673545aeadd7ab5440016692cff79150fa919e97640c8e461ed468b63af940"
+    "sha256": "9c77426a777617c5bd5bcc84cd64b99422ecc07b780a9fc728747532493683b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "34cf6c8909b35890b4fc83185786f2e41776cd2e9d200260dbc870518a329765",
+      "sha256": "22c6550fbc70744cd9f4481e4b42f8f3e160fa0b4456b33af943aa5027fbe376",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -215,8 +215,7 @@
             "latitudeSegments": 20,
             "longitudeSegments": 32,
             "faceBudget": 1600,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -849,8 +848,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-normal-surface@2x.webp",
-          "bytes": 7669388,
-          "sha256": "9c2934bc09e9fa83c86bf452215d3aac58ff5bade55d14e1e535014cc3c5b97e",
+          "bytes": 7784560,
+          "sha256": "eff594341a0bf77badda8865dc081a1b83295b446c990493a67dad7a3dbdbb7a",
           "verification": "bytes-verified"
         }
       ],
@@ -904,8 +903,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-elevation-surface@2x.webp",
-          "bytes": 1434432,
-          "sha256": "474a121e601cbc39988a7a76e351ca17e060ffab157eb239965f2ad5251464ed",
+          "bytes": 1564650,
+          "sha256": "4ed3c15a5960bb5649ea21cf586283e73a4c5c8fa71fd52e2eb5fc32c740a473",
           "verification": "bytes-verified"
         }
       ],
@@ -955,8 +954,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-albedo-surface@2x.webp",
-          "bytes": 2460704,
-          "sha256": "d33bb32fc9a10d308e4a7cf015d6cda46d5823cbd675a0f97f6408f71c8e39ea",
+          "bytes": 2624758,
+          "sha256": "d0ae3b12565b2ee1c2cc24b756f7cfc51cee6648d9db3944e5285f946396a89c",
           "verification": "bytes-verified"
         }
       ],
@@ -1006,8 +1005,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-slope-surface@2x.webp",
-          "bytes": 3997560,
-          "sha256": "3cd1197cce3ae8d0057be96bc9e1c358d24dfc7ec9f4422e78eff8c921c47fed",
+          "bytes": 4317638,
+          "sha256": "7f08e4549565e7e90acc8b901b909fa6cc5bbd6afdfaf5267625773530a4c576",
           "verification": "bytes-verified"
         }
       ],
@@ -1039,8 +1038,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5865,
-          "sha256": "d1fd6e4e5d4d7e60fc415e25a82bde49fad459d6ee7f94d557e8e90739963cce",
+          "bytes": 5983,
+          "sha256": "4ec7a252cdfce2497e2098f2374df28d541430709d1867de26b164635688f0ce",
           "verification": "bytes-verified"
         }
       ],
@@ -1189,7 +1188,7 @@
   },
   "lastPreparation": {
     "objectId": "phobos",
-    "materialSha256": "429300fb2bbf202131535ba1f260a9e0cd320b9b183f69cb9b3516be3fb8a0ab",
+    "materialSha256": "f9287b7b967ce687a345793b5a96855c6eddc188b89bcd1f4c61067af6c083bc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

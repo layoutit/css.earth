@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3956a57274c2bb87961cfd96f9716ef66367d701af4a58557f620c9084b2e03a"
+    "sha256": "c29f229943f93bcc43d2a89f31ac4421bfcae4ba9a069f60ec8bf836d782619d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e95b14e1aaf27b458dbbba32902bcde3302ec0858e53833a5e8a0a75e59c4e45",
+      "sha256": "858561f532494eab1bc580f699aa9e0b21e647accda80be6efcfbe508b836056",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -193,8 +193,7 @@
             "latitudeSegments": 36,
             "longitudeSegments": 72,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "meshoptimizer",
@@ -216,8 +215,7 @@
                 "expectedFaces": 5040
               },
               "faceBudget": 800,
-              "tileSize": 128,
-              "atlasColumns": 16,
+              "texelsPerFace": 16384,
               "primitive": "u",
               "simplification": {
                 "method": "source-meshoptimizer",
@@ -1015,8 +1013,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
-          "bytes": 717042,
-          "sha256": "2188b2e86e1b3ca0b4e8c5044aa01eb45e5fc1e9cafc99eb31dc2cca5aed181f",
+          "bytes": 750624,
+          "sha256": "e1cc536e288bbe293c861eb32849860159812b0298daa5553684aa0c88402e9e",
           "verification": "bytes-verified"
         }
       ],
@@ -1071,8 +1069,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
-          "bytes": 517788,
-          "sha256": "5e4bf08d0e4630afc04f3e88f23f370d3ccc53c9fdb4bfcb4874b15ba7719332",
+          "bytes": 532728,
+          "sha256": "ae14800f7a76224d33699ce6285e3578a3642d59be371c9e2fb3bfd0437d8fc8",
           "verification": "bytes-verified"
         }
       ],
@@ -1121,8 +1119,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
-          "bytes": 347054,
-          "sha256": "07b0c53301e720476c4be6b3c4a19ef19083405cbae0950218ef3468804fda6b",
+          "bytes": 349802,
+          "sha256": "cb3f08ce99370cf88d5674ca9ae5bf04a3837d9794e9829e9a8bf7bb47d4199f",
           "verification": "bytes-verified"
         }
       ],
@@ -1154,8 +1152,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6276,
-          "sha256": "8fb2dad6d7e486faf1e2cd7d07b537cb1a34e138c4d45695ddef3995b476b11f",
+          "bytes": 6394,
+          "sha256": "01dda9e7596e1172e25ba19895c5919c07f8652d2e9dbe7f68495e790e97afaf",
           "verification": "bytes-verified"
         }
       ],
@@ -1279,7 +1277,7 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "351bc82fa7b247572ee3de60349a0505e3fc6c3959f88ebb0b628a4b3dcdeb98",
+    "materialSha256": "d96c60d7393197afafb135dc941e7fa006ffed1b8fc4c6a751d1e9c4fc274be0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

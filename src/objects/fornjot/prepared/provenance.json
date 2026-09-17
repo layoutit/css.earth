@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "864b1ee2845a0b8aeececb38ee178c78ed0c04f29023f783821f7463b2a277eb"
+    "sha256": "ec17df94567cc8b8a8e1236088a812ca9085f1da5766f4f96c354fa02a4bda37"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6773d0c377300ca5c689d8649811a04169b8e8084fc660c3c72fc3cb72ed6207",
+      "sha256": "35f03c889572f93385db1a552f90978c0bdcfea7160c4b5712c4ca325db4a8a3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 72.5,
@@ -333,8 +332,8 @@
         },
         {
           "url": "/scenes/fornjot/fornjot-model-surface@2x.webp",
-          "bytes": 57180,
-          "sha256": "ae7d38952bbe5e839b7eaf47fc17dd82ce1ea6a42b170e107d612e444bfe5d35",
+          "bytes": 63464,
+          "sha256": "4e3accae24a6853a65fcf3e22aa64a17cea9f85864bfc8cca34df85c488d55e7",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +409,7 @@
   },
   "lastPreparation": {
     "objectId": "fornjot",
-    "materialSha256": "330bacad1f6827196c82bdff39210584dee5f3586337b45809d6deb745d34100",
+    "materialSha256": "6d12c1ef9d56a704a83c86f9dd7363be0b64192daa30dc1f27d4851c2ffeb1ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

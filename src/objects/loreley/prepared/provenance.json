@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a164f02feffc031e234c2ba24404c3099d6d97260381b8815d3686163e4c7385"
+    "sha256": "e4781941e1cc9326135492660bb40b6adcd7b9d1e0709f2a02704ab3c8ec4299"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9b177461a9ed1edc00d1d057de312d7505b111719dc272c969921c94f50ad561",
+      "sha256": "9cd658e0363c95455ffe928478e14b39d7da62f4ea7eb6f904a8f3fb138fd60a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,8 +120,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -419,8 +418,8 @@
         },
         {
           "url": "/scenes/loreley/loreley-elevation-surface@2x.webp",
-          "bytes": 340198,
-          "sha256": "7c6315aee17c59dce2ab498784a55fd065d73c73ae852ac2e4033d6ad7e8d071",
+          "bytes": 390518,
+          "sha256": "0d22a15b6f0513aceeeaea6c3d877af0322f70bcab17b0bd24e8ea890562043a",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +462,8 @@
         },
         {
           "url": "/scenes/loreley/loreley-shape-surface@2x.webp",
-          "bytes": 58810,
-          "sha256": "f02dd5c4f45551e07d33de209dcf56ad126dc5e1a50a691a1a51303dfe93116c",
+          "bytes": 80054,
+          "sha256": "aa35fb4e7899a6b25d9262f3bbfa8c934d232fdfc0bac763e392b4fa490151be",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "loreley",
-    "materialSha256": "92aee34a1d00ebea1a3aa66cc23479f282a920b3b0ed02ef516dd3b6c3aa0bb3",
+    "materialSha256": "74fe57c85a8d7b1c21056052cc31ede53c65243305f8f84245307d372f4b3495",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

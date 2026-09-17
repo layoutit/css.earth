@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec91e3e5c2c4148c7abeb894cb3111a0e3d8123517dc5fcb189f51d167dd4a61"
+    "sha256": "e415a784869fabdc8d54f1c9be9d61a9f255c9ea1663e9667061fd912c4c8d66"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "efe84d223c66807448a4c050ad0466988f196e4855211c2cacd0a3147eb9110a",
+      "sha256": "7e3ead1e8dcb4b028968e74b68dcc1ec2a0300aadbb7186ffc7ae586d8250e5e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 512
             },
             "faceBudget": 512,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -435,8 +434,8 @@
         },
         {
           "url": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
-          "bytes": 19352,
-          "sha256": "6feccda9153d1591db14b4ba977af45d4243304d7e562ef58a6a4dc7522ad1bb",
+          "bytes": 29452,
+          "sha256": "0b84e7df6b2b9a4f348f1b570ea9996d67037a0dc1045145b5cc486e5574c2ca",
           "verification": "bytes-verified"
         }
       ],
@@ -543,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "dactyl",
-    "materialSha256": "692e5cf8150db099bf7e20381cf39888100219ae1cbd9999d74e5f64f574bfe0",
+    "materialSha256": "cdb1b99f34df334484b64f06a4ab24003e9ecd2ee86e59d17b6c9be11c5b6e94",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

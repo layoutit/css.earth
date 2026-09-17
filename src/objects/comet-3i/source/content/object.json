@@ -1,0 +1,117 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-3i",
+  "displayName": "3I/ATLAS",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "4.37 × 2.19 × 2.19 km",
+        "source": {
+          "url": "https://doi.org/10.3847/2041-8213/ae471c",
+          "label": "Research publication · DOI 10.3847/2041-8213/ae471c",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-2041-8213-ae471c",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "At least about 1 hour; not determined",
+        "source": {
+          "url": "https://doi.org/10.3847/2041-8213/ae471c",
+          "label": "Research publication · DOI 10.3847/2041-8213/ae471c",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-3847-2041-8213-ae471c",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/comet-3i/comet-3i-model-thumbnail.webp",
+        "surface": "comet-3i-model-surface@2x.webp",
+        "poles": "comet-3i-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/2041-8213/ae471c"
+        },
+        "notes": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo. Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase. The grid marks unmapped terrain.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)",
+      "href": "https://doi.org/10.3847/2041-8213/ae471c"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2601.21569"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2508.02934"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://science.nasa.gov/solar-system/comets/3i-atlas/"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://science.nasa.gov/solar-system/what-we-knowand-dont-knowabout-comet-3i/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/2041-8213/ae471c",
+      "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)"
+    }
+  }
+}

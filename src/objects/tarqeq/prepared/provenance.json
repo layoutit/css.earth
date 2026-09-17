@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "98b93d2dae898e173dc9d748c8d6e060d76bde67e9dd20b09141edb38cc85362"
+    "sha256": "6dd01619470889436be800ce8a1af1e5bd1c853f3b4497818d21d0ca022f4944"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8a083a41870a5245b7fc7fe6e12b85c8d142443569551c537825e993e1d71070",
+      "sha256": "cf781454c50293a49de7a62fdb01c53affa3beea05f3b30af37dd3c294083812",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 75,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/tarqeq/tarqeq-model-surface@2x.webp",
-          "bytes": 55540,
-          "sha256": "c3230fa3028a6e38bc8a9d0e3bf31c216c5b8df657131af58d93c0919061f94f",
+          "bytes": 64548,
+          "sha256": "c568351ca3a120c8fadce52e282faf4618e696188008f93e7193c641041978bc",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "tarqeq",
-    "materialSha256": "15d95137112e28b9f2f3427c3d32905c39197eca862cf29fe6947f3f6ff32ce4",
+    "materialSha256": "8ec921837f9153b2f1e030d263ab3406790afc82c506e25a30fda98dccd66db1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

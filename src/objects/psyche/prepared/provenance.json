@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea024498eee2f4ca0b0cec857aba354b8e39c9c50e4a9a34fcd77347222e74e1"
+    "sha256": "1b0f015e09ca2a8c23461b8a37efd0748deeccbe13b33a2640c159baf0e34d8e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "94a28caa2bbde98b39b7a398e9cf16fde4fb01c83471da9a77a854418f564a88",
+      "sha256": "0affcc1fa21e6b07c84ce080888667d913886d338bb5d38c56efc3d50ec04e6a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -503,8 +503,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -526,8 +525,7 @@
               "latitudeSegments": 90,
               "longitudeSegments": 180,
               "faceBudget": 800,
-              "tileSize": 128,
-              "atlasColumns": 16,
+              "texelsPerFace": 16384,
               "primitive": "u",
               "simplification": {
                 "method": "source-meshoptimizer",
@@ -2052,8 +2050,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-elevation-surface@2x.webp",
-          "bytes": 306596,
-          "sha256": "d8a54e06f75763547a0a44b656b6977596609cd0f8b5c3495289566f7bdeb378",
+          "bytes": 374438,
+          "sha256": "d52419645a675e003eb7591f08a04db6ee49d82a5bd4f0944385805c19e67767",
           "verification": "bytes-verified"
         }
       ],
@@ -2107,8 +2105,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-thermal-inertia-surface@2x.webp",
-          "bytes": 272464,
-          "sha256": "d1ae9c0107c91c79b776812e7bd9ae2e9a0570d06d46c819c598dc9ec7b858ba",
+          "bytes": 285250,
+          "sha256": "3653e8b2464bd22ecbfbb74d58eb3e9a648f857d69e349f21735a319f260a0e2",
           "verification": "bytes-verified"
         }
       ],
@@ -2162,8 +2160,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-dielectric-constant-surface@2x.webp",
-          "bytes": 232812,
-          "sha256": "aa26e5cc87033ee3a35f1cfbc40b7919da21217177372d3e350b0f7453dd6a2d",
+          "bytes": 243628,
+          "sha256": "11070b62b05673ec3e894cf70e9b485830a0f8abb7196c18cde365a86777b9c7",
           "verification": "bytes-verified"
         }
       ],
@@ -2206,8 +2204,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-shape-surface@2x.webp",
-          "bytes": 58408,
-          "sha256": "8a271f6aa42e9c817aa35e8234d2e204ecc0246addf6a287dc154d4d6d0ac3fc",
+          "bytes": 76498,
+          "sha256": "13d33d2da19b606a5bb5f233756229ee19c6e365e577d0badd11c21fb5232a3d",
           "verification": "bytes-verified"
         }
       ],
@@ -2266,8 +2264,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
-          "bytes": 309522,
-          "sha256": "12457892230a6fb99324d8d04703d06e2271e0c0ddf3eabc43ed031e9691268c",
+          "bytes": 295708,
+          "sha256": "1ffabc6f18991bd0c351522daf6d9d60dfadb9316d27fac501ac3d00d458e765",
           "verification": "bytes-verified"
         }
       ],
@@ -2438,7 +2436,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "58706c451a5b716df0210b40cf48c6acd32430aa8c772f6facaa66e3e57f2792",
+    "materialSha256": "80a7311b241d2126c7de7db1e042c43b55f77dab9c5ad093c858020284a8286e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

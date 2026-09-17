@@ -2,7 +2,6 @@ import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import { SOURCE_CATALOGUE } from './sources-catalog.mts';
-import solarWorld from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.
@@ -55,12 +54,16 @@ export function focusSourceDocumentation(object: PreparedCatalogObject, catalogI
   return sourceDocumentation(owner, object.name);
 }
 
-// The Sun hosts this overview, but its solar maps do not own the other bodies'
-// credits. Prepare the overview's union from the actual world body registry.
-const solarSystemProviders = [...new Set(['sun', ...solarWorld.bodies.map(body => body.id)].flatMap(sourceProviders))];
-const solarSystemSummary = compactProviders.filter(provider => solarSystemProviders.includes(provider));
-if (solarSystemProviders.some(provider => !compactProviders.includes(provider))) solarSystemSummary.push('others');
+// A star hosts its system overview, but its own maps do not own the other bodies'
+// credits. Prepare the overview's union from the system's prepared members.
+export function systemSourceDocumentation(system: { readonly id: string; readonly name: string; readonly memberIds: readonly string[] }) {
+  const providers = [...new Set([system.id, ...system.memberIds].flatMap(sourceProviders))];
+  const summary = compactProviders.filter(provider => providers.includes(provider));
+  // A large system abbreviates its many providers; a small one without any abbreviated provider names them.
+  if (!summary.length) return { ...sourceDocumentation(system.id, system.name), label: creditLabel(providers) };
+  if (providers.some(provider => !compactProviders.includes(provider))) summary.push('others');
+  return { ...sourceDocumentation(system.id, system.name), label: creditLabel(summary) };
+}
 export function overviewSourceDocumentation(scope: string, name: string) {
-  const document = sourceDocumentation(scope === 'solar-system' ? 'sun' : scope, name);
-  return scope === 'solar-system' ? { ...document, label: creditLabel(solarSystemSummary) } : document;
+  return sourceDocumentation(scope, name);
 }

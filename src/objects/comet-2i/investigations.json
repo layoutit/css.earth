@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-2i",
+  "entries": [
+    {
+      "id": "nucleus-size-estimate",
+      "subject": "Hui et al. (2020) nucleus radius estimate",
+      "status": "included",
+      "finding": "Most likely at most 0.4 km from the non-gravitational acceleration and CO production at assumed density 0.5 g/cm³; used as a 0.4 km display sphere.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cacbb42c347a51dea20228a1163365eac804b4c8/src/objects/comet-2i/source/measurements.json",
+        "https://doi.org/10.3847/1538-3881/ab9df8"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "cacbb42c347a51dea20228a1163365eac804b4c8"
+        }
+      ]
+    },
+    {
+      "id": "hubble-bounds",
+      "subject": "Jewitt et al. (2020) Hubble nucleus bounds",
+      "status": "included",
+      "finding": "Coma modelling limits the radius to at most 0.5 km (albedo 0.04); the acceleration requires at least 0.2 km (density 500 kg/m³). Recorded as the bounds around the display size.",
+      "evidence": [
+        "https://doi.org/10.3847/2041-8213/ab621b"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "cacbb42c347a51dea20228a1163365eac804b4c8"
+        }
+      ]
+    },
+    {
+      "id": "coma-anisotropy-pole",
+      "subject": "Kim et al. (2020) rotation pole",
+      "status": "included",
+      "finding": "Pole RA 205°, Dec 52° (obliquity 30°) from coma anisotropy; the prime meridian, spin phase and period stay undetermined.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cacbb42c347a51dea20228a1163365eac804b4c8/src/objects/comet-2i/source/preparation/rotation.json",
+        "https://doi.org/10.3847/2041-8213/ab9228"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "cacbb42c347a51dea20228a1163365eac804b4c8"
+        }
+      ]
+    },
+    {
+      "id": "outburst-fragments",
+      "subject": "2020 outburst and splitting",
+      "status": "excluded",
+      "finding": "Hubble saw outbursts and a fragment in March 2020; fragment sizes and positions are not modelled on the single display nucleus.",
+      "revisitWhen": "A fragment size and trajectory solution is published.",
+      "evidence": [
+        "https://doi.org/10.3847/2041-8213/ab99cb"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "cacbb42c347a51dea20228a1163365eac804b4c8"
+        }
+      ]
+    },
+    {
+      "id": "coma-images-and-colour",
+      "subject": "Coma photographs, artist impressions and coma colour as surface data",
+      "status": "excluded",
+      "finding": "Every image shows an unresolved nucleus inside its coma, and published colours measure the coma; none maps or colours the nucleus surface.",
+      "revisitWhen": "Resolved imaging or a nucleus colour is published.",
+      "evidence": [
+        "https://science.nasa.gov/solar-system/comets/2i-borisov/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "cacbb42c347a51dea20228a1163365eac804b4c8"
+        }
+      ]
+    },
+    {
+      "id": "horizons-trajectory",
+      "subject": "JPL Horizons fixed-epoch trajectory",
+      "status": "included",
+      "finding": "Horizons 2I (C/2019 Q4) elements and independent vectors at the 2026-09-03 scene epoch: eccentricity 3.35 at 48.10 au. Two-body propagation differs from Horizons by 528 km and 522 km 30 days either side.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cacbb42c347a51dea20228a1163365eac804b4c8/src/objects/comet-2i/source/reference/horizons-elements.txt",
+        "https://github.com/layoutit/css.earth/blob/cacbb42c347a51dea20228a1163365eac804b4c8/src/objects/comet-2i/source/reference/horizons-vectors.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "cacbb42c347a51dea20228a1163365eac804b4c8"
+        }
+      ]
+    }
+  ]
+}

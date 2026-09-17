@@ -58,7 +58,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
     },
     overviewTarget({ scope, objectId, fromId, mount }: TargetRequest & {scope: string}) {
-      if (scope === 'solar-system') {
+      if (scope === 'system') {
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
       }

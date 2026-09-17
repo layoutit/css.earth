@@ -16,7 +16,7 @@ try {
   const requests: string[] = [], errors: string[] = [];
   page.context().on('request', request => requests.push(request.url()));
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto(`${origin}/sun/?overview=solar-system&v=MIZCE4uWPbqNv0FCxzNAAAAAP9IAxQkxWgM_sQBhZ2aaDL_ido5DYqVQAAEAAAAAAAAAAA`);
+  await page.goto(`${origin}/sun/?overview=system&v=MIZCE4uWPbqNv0FCxzNAAAAAP9IAxQkxWgM_sQBhZ2aaDL_ido5DYqVQAAEAAAAAAAAAAA`);
   await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssEarth?.object('sun')?.ready, null, { timeout: 60000 });
   await page.evaluate(() => { window.__bakedSkyFaces = [...document.querySelectorAll('.prepared-celestial-sky [data-sky-face]')]; });
   const observe = () => page.evaluate(() => ({

@@ -18,7 +18,7 @@ try {
     const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-    await page.goto(`${origin}/sun/?overview=solar-system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA`);
+    await page.goto(`${origin}/sun/?overview=system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA`);
     await page.waitForFunction(() => window.__cssEarth?.ready);
     for (const id of ['haumea', 'saturn', 'mars', 'sun']) {
       // Include the shared projection probes after handoff: changing FOV must

@@ -7,7 +7,7 @@ const url = (value: string) => new URL(value, 'https://example.test');
 test('native query selections preserve view state and unrelated anchors; legacy fragments still work', () => {
   assert.deepEqual(readDatasetUrl(url('/saturn/?dataset=ultraviolet')), { requested: true, id: 'ultraviolet' });
   assert.deepEqual(readDatasetUrl(url('/saturn/#dataset=ultraviolet')), { requested: true, id: 'ultraviolet' });
-  const native = withDataset(url('/saturn/?v=view&overview=solar-system#sources'), 'thermal');
+  const native = withDataset(url('/saturn/?v=view&overview=system#sources'), 'thermal');
   assert.equal(native.searchParams.get('dataset'), 'thermal');
   assert.equal(native.searchParams.get('v'), 'view');
   assert.equal(native.hash, '#sources');

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0822596378964c55715feb1536a0a0888586d9e46110ea237e2e692a501a17f"
+    "sha256": "510ebbcada7dc4233f99be42eee751eecb099ada14fd2b66e9177e8148a1ceee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ad70fadd1a15a701d71adb582909b9fecf0928e6d64aae1f2933d6f7f7a095e3",
+      "sha256": "b9c046c9a63d75120ddb265cdfc579ac9853904489e31ec4c7e98e7f3f71d6c4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 3110.831008996753,
@@ -386,8 +385,8 @@
         },
         {
           "url": "/scenes/chariklo/chariklo-model-surface@2x.webp",
-          "bytes": 52652,
-          "sha256": "5099a3bddbb7e701fa6e5b5b0881733d3f5c426dd8660ae5fe4d3603aa6f72c8",
+          "bytes": 58738,
+          "sha256": "adcb2dfc41d2aba6ea7e500b5ad287c205299c90f13fe7b066cdbc63d724ac8c",
           "verification": "bytes-verified"
         }
       ],
@@ -463,7 +462,7 @@
   },
   "lastPreparation": {
     "objectId": "chariklo",
-    "materialSha256": "e36dcfd1551fff07223721314962c2059cba3cab1781ffb292152894f32cc030",
+    "materialSha256": "137063f586982db1daa7806f00be78473e7288de87e7a597f37f8cdf3b0f9769",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

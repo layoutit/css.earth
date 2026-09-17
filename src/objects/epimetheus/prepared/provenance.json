@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3d6cf02631046f01b520799006a62f0f10c165f84ab4f70f775e4c6c47d6b00a"
+    "sha256": "d8bdded721c1cc12dfc5dcf76b6e37671f89b27f252bed47ef038e30b2fbe7bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3b65809afcb833b229c74b9e641c47e2b19ef92886372fc7d061dc0b450b57e5",
+      "sha256": "fdc19e47b38dd844d2ab5e803df0390fb5bf0b965e915adfe0fbb694728c47c5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -453,8 +453,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 720,
@@ -2090,8 +2089,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-elevation-surface@2x.webp",
-          "bytes": 580750,
-          "sha256": "dd83b5b242be43bf85e454fb57329660dfdf90a260478e7a152ba561aa4a6947",
+          "bytes": 587232,
+          "sha256": "a701be776a4b084d43da0acaa6eea502448e7e078865467a55d9973b0e417967",
           "verification": "bytes-verified"
         }
       ],
@@ -2148,8 +2147,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
-          "bytes": 743552,
-          "sha256": "40f9cff45c9601cc15fac523d74547eeaf0d9f3dc86b4a836856d92c46a5b37a",
+          "bytes": 730526,
+          "sha256": "0f8eb7812b26142c5c0601f1da08131fad2b657bd3ff1a7722f27489ae73f9d1",
           "verification": "bytes-verified"
         }
       ],
@@ -2204,8 +2203,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
-          "bytes": 462866,
-          "sha256": "fbfaa1e2b61c917cf8655edac2e0117b7aff4958a96a3f10dcbc6e447d584338",
+          "bytes": 449438,
+          "sha256": "6f8bcc16b86cf8dbeb224f2c906af06751f62f081d664303cbf67f83261797ce",
           "verification": "bytes-verified"
         }
       ],
@@ -2326,7 +2325,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "38af23189bf94b370c12e4cc2404c6410c7c8426548ef807dd611ae0305d484d",
+    "materialSha256": "ec18454e355b5e07597c09c9f9dec8c29949094c222f122bf286df74b90a8b21",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

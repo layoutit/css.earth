@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-43",
+  "displayName": "WASP-43",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.665 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2406-10207",
+          "url": "https://arxiv.org/abs/2406.10207",
+          "label": "Challener et al. (2024), Table 1 (assumed stellar radius)",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "87 parsecs",
+        "source": {
+          "catalogueId": "simbad-wasp-43",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43",
+          "label": "SIMBAD: Gaia EDR3 parallax",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "One photosphere colour from Gaia's photometric temperature through a Planck spectrum, painted uniformly; the disc itself is unresolved.",
+        "thumbnail": "wasp-43-lens-color.webp",
+        "surface": "wasp-43-surface-color.webp",
+        "poles": "wasp-43-poles-color.webp",
+        "source": {
+          "id": "wasp-43-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243462"
+        },
+        "falseColor": false,
+        "notes": "The colour of a 4,416 K blackbody, Gaia DR3's photometric temperature for WASP-43, against the sRGB white point. No image of the photosphere exists: at 87 parsecs its disc spans 0.07 milliarcseconds (see investigations.json). The display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Challener et al. (2024), ApJL 969, L32",
+      "href": "https://arxiv.org/abs/2406.10207"
+    },
+    {
+      "label": "SIMBAD",
+      "role": "facts",
+      "description": "WASP-43 basic data",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2406.10207",
+      "credit": "Challener et al. (2024), ApJL 969, L32"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-43.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

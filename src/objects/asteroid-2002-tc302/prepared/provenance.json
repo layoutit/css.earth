@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "56b620d8e115705eec47a3082fa57c6e04863c07c8d9d88fc8e967074f65fb0c"
+    "sha256": "4cfa390e7523b3973aeccff93dc05682aa25faabe1aabe4f44be49592c7bb37a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "32c99a03cd1921112f14deee7bd0f204b03fb6ba53ef6c197727a7ac612e466a",
+      "sha256": "8d90525cdf7824ea3e409e5a443b09dad6bf88c239209c0179151e257d4337ea",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 6421.626257456744,
@@ -329,8 +328,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-surface@2x.webp",
-          "bytes": 53028,
-          "sha256": "bf3ac9ff95c9e28bc01225d9000db4be960b81fdbbca51db908c20eb670c3924",
+          "bytes": 60110,
+          "sha256": "780a3b59e41c9a4b0aceca8ce80bb5a02020cd1a3fea79a31c1e21ebf812b167",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +405,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tc302",
-    "materialSha256": "a78bc69a855e6f8d2e34098656ac3dadd44ffd1932a98567cbf8b40fa306c020",
+    "materialSha256": "fae9499eb4241cec4cec5129080b7374eb295e51bc2acb9e5bf721abb431c5f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a8ab77d0da22908c98bc6381291f6110cc7136b20f35a47d36a7404e5ec8037"
+    "sha256": "b282f39096b48c1f6e3e909af2ec5c7970fad21eb9006a39c7afdef9643197d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6470236700f8626fff7e597d1e37ec405b216f95522684749b32ce4e0a78fc4e",
+      "sha256": "eb6d9b6b402910c6594483a001a473b2b95300a61bd0a5db1cb45bb1f656922f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -325,8 +325,7 @@
               "expectedFaces": 32040
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -5460,8 +5459,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-model-surface@2x.webp",
-          "bytes": 123566,
-          "sha256": "7a466f80ad638e5fd036afcd4ac728a40c484023bc7330a4ffd4e79cb7f59e1c",
+          "bytes": 154108,
+          "sha256": "bfe630d8191ad226d8521651fdce607ce85a7b4b52680b4462cfcf7d2cbbd5eb",
           "verification": "bytes-verified"
         }
       ],
@@ -5514,8 +5513,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-constraints-surface@2x.webp",
-          "bytes": 137110,
-          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb",
+          "bytes": 169022,
+          "sha256": "23044f977d2ee3a8030296a132062871d7406b408509e442f61d3a78bb0e47ca",
           "verification": "bytes-verified"
         }
       ],
@@ -5656,8 +5655,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-temperature-surface@2x.webp",
-          "bytes": 364910,
-          "sha256": "f0bbff270c044ed4a30a070b0e84c3005c3f525a5ff03e8ff35bb81e54150121",
+          "bytes": 306736,
+          "sha256": "cabf568c62597d7d2664afd0f164187ebacec3b9a5ecdd1469cda2257e198e55",
           "verification": "bytes-verified"
         }
       ],
@@ -5793,8 +5792,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-spectral-slope-surface@2x.webp",
-          "bytes": 365060,
-          "sha256": "5b2ee61ebeae0ccb11df9e8306b96b9595a847ef1a2c1db683ae3e24ca4f9d7e",
+          "bytes": 306864,
+          "sha256": "f8615e6288cfe44f995fa447f1f8d714c45ed1a441a09eac5d169db1392c3b35",
           "verification": "bytes-verified"
         }
       ],
@@ -5861,8 +5860,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 216926,
-          "sha256": "ce22099b4b2bce6ba56c53b8d596a8669d5a31347cfb5a2356bb4b5c9041ace5",
+          "bytes": 235088,
+          "sha256": "d6194da7c1e6df2a973d5b2b9653e04ce196ed7a9defe1efc7f821dae38f3d9d",
           "verification": "bytes-verified"
         }
       ],
@@ -5923,8 +5922,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-next-surface@2x.webp",
-          "bytes": 285560,
-          "sha256": "9356088811031230c652e681be1a3e2c1b7cde1a31f20b8a46a09d9f1c66d618",
+          "bytes": 289442,
+          "sha256": "526a2c95a3bdcf4485ea2488bc45677ee2e92f8549ca4418890be29233ff05a5",
           "verification": "bytes-verified"
         }
       ],
@@ -6128,7 +6127,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "876940557e728334bfc38c2f1da4eb876213feca150b3cacbe332561c076e615",
+    "materialSha256": "ca1fc974d32c0eb78d79400a9bd10146169865a6e9358321ac1fc985de620186",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

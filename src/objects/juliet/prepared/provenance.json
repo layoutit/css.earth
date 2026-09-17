@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6067dbdc2f43a46a520a4a0a1dc6bf9ffa63fd3fb78e3ff325e6676ca01fbe72"
+    "sha256": "7078a745923cd5c30b41d730bbf966f26d1e9c58b9d2adef42914c55b35a3b4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a6fc69602f6ac158978092012dce2cb72f29579e571f70b6700d92cb34012e74",
+      "sha256": "f73c57ad03f8e570ec3450e89184c65c7ceb3bcee9affc2b2accabe89133af3e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,8 +77,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1200,
@@ -362,8 +361,8 @@
         },
         {
           "url": "/scenes/juliet/juliet-model-surface@2x.webp",
-          "bytes": 50050,
-          "sha256": "3b4fc6043c707e2404ccfdd9c28c9f26b9583da55c03a01e1cf07c99ce5035bd",
+          "bytes": 60040,
+          "sha256": "8e84586499f9fd8eda4a2858c13fdd83fb5b354671d3100536af1462b252688f",
           "verification": "bytes-verified"
         }
       ],
@@ -439,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "juliet",
-    "materialSha256": "e1b43ce7a76e97b9361d22ba60ddcf92e72ff6ca1cb1743777eb30f38a3b0726",
+    "materialSha256": "c699e95dd4d7feca2774e8de2cd4cfdb21567bdbe9039ca0297cf79d32dc553b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

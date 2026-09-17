@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9b67961988afcff82cc5c0ea79bd8017b6cbc8208117eaa04acd940d85c6d15"
+    "sha256": "b29d1dbbcc32751268ffacb16b085822814d3fa3cb4177af58102307d27e8150"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "97aa7a1adfda6d1101a2d6da738a13127b7065f025c11c0938387bb20a1329d3",
+      "sha256": "f585ac63829ab1877065c9d443a24559733bca71b9d9013e39004a098c594aa7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -321,8 +320,8 @@
         },
         {
           "url": "/scenes/comet-167p/comet-167p-model-surface@2x.webp",
-          "bytes": 42154,
-          "sha256": "721cef6a464a78efcd64416b38ade2469f3a58333a2919af6097702463aa66cb",
+          "bytes": 57802,
+          "sha256": "835516a139c986b3c8bf4ee97a84a8b0924f7e45d03163bf07a466ec7232e593",
           "verification": "bytes-verified"
         }
       ],
@@ -368,7 +367,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-167p",
-    "materialSha256": "5c726e3102fa9fa732a77cb3afd5b0d7eb4b986b8a65435f56c93f55cd341409",
+    "materialSha256": "732a7fc1983b458bc48f1bd101f4f132003e89832984deb93f8dec34571ac2cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

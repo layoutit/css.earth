@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "914c94c21077e2aaf89f758afde7da27dc706a174b4ece77d4d98056118e26fa"
+    "sha256": "72e2cbe9bbc26dbdb69cacbaf3814bcafc158e8571b4d86ce3f6bf2c16b647d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "54d5c34e64b0d55a45da560d0e52bdaba1042c6d612a0db0f6db79ab344003dd",
+      "sha256": "182d6182d3cac1d5e0a2d949d8d2d9d5a875ad94a53f3b3dfe9be00de43238aa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 10474.999999999996,
@@ -328,8 +327,8 @@
         },
         {
           "url": "/scenes/salacia/salacia-model-surface@2x.webp",
-          "bytes": 57054,
-          "sha256": "9a3256be66c9df8da73034a3a61237ef576e0d5a1a3d2052d133165ce6a0c5f0",
+          "bytes": 62902,
+          "sha256": "8573041e8c3d3c02701838d830c2a6d6cbf337517340ab1ad06115fbaaebaaf7",
           "verification": "bytes-verified"
         }
       ],
@@ -405,7 +404,7 @@
   },
   "lastPreparation": {
     "objectId": "salacia",
-    "materialSha256": "e11d7362308e5c94c1798c8374fcc122701c40fa48b92db367a9d0df4e7a0d85",
+    "materialSha256": "9d2f31df9ba9201ea0a722a153f0e788c4798aa20e1d5e0aa8a6214444587c92",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

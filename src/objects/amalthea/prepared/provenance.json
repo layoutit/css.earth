@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "acc95c537c9ea70bbad25d75e9bec61518f221d1e19f8124b9ec856924ee2098"
+    "sha256": "6d3df36b9164dcb476c8d1d35f10af4ae447923f444429b4ff576ce65765e950"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d2bbfd179bc2de99a4244abae90c53e1bc9550abb108ddda43d0466e9cb3fa30",
+      "sha256": "71118cc74433df88d0fad9ec4df5ea3163cf6273028ea10c9ad214e0d2681504",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -232,8 +232,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 800,
               "maximumErrorMeters": 1500,
@@ -1090,8 +1089,8 @@
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
-          "bytes": 235688,
-          "sha256": "3628a7e922a59e4ad06bddce33da7c5177431d76e095c250fadae50d9ae57d18",
+          "bytes": 287662,
+          "sha256": "2956f223f50590799b459fd9dba336dc9eb66839559dfe44686bc85950ee26f8",
           "verification": "bytes-verified"
         }
       ],
@@ -1142,8 +1141,8 @@
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
-          "bytes": 139474,
-          "sha256": "0f611eea774fb82f4be126c1469808b499053cdba96dbfeb46a3335a65cc396a",
+          "bytes": 157474,
+          "sha256": "f264e92081e13bf418a8c6fc5eab804608e8f518bbca4319c45ae21e646f2093",
           "verification": "bytes-verified"
         }
       ],
@@ -1175,8 +1174,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7330,
-          "sha256": "8930344aafe762eca1ccb22ae855f9c9a8fbe1635a633928117f997fd53bf97e",
+          "bytes": 7447,
+          "sha256": "9dab9dd92627f93028993cc7d609dad8d043d742ca4e43c62fc297960276e344",
           "verification": "bytes-verified"
         }
       ],
@@ -1275,7 +1274,7 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "2aefda79f4d72991ec5e056843e5c24c82524c1bb3f34fd7c21ad6f9adac4e6f",
+    "materialSha256": "4dce2b720569842e11e039a01c123b7c71bb485434ab00f92189bb51badb6cd9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

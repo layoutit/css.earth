@@ -1,0 +1,178 @@
+{
+  "schema": "csscomet-3i-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/comet-3i/source/manifest.json#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 59703,
+      "expectedSha256": "5ce9202b128d16c4847e83c46572be5f02fdd62b0ddb7ca5e939d6a98c4a45da",
+      "origin": "https://doi.org/10.3847/2041-8213/ae471c",
+      "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.3847/2041-8213/ae471c"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Hubble photometry gives an effective radius of 1.3 ± 0.2 km, assuming V-band geometric albedo 0.04, and brightness changes of at least 0.8 mag imply a sky-plane axis ratio of 2:1 or more. No shape model, pole or period was published. This display is a prolate ellipsoid at exactly the minimum 2:1 ratio, sized so the geometric mean of its largest and smallest cross-sections equals π × (1.3 km)²: full axes 4.37 × 2.19 × 2.19 km. A longer body, another albedo or a different shape would change it. Arbitrary display pole and meridian. No rotation pole or phase has been measured. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1377.3021194754251
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/interstellar/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-3847-2041-8213-ae471c",
+            "role": "method",
+            "evidence": "src/objects/comet-3i/source/manifest.json#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1377.3021194754251
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/interstellar/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3969,
+      "expectedSha256": "e88ac187eb3ead9647d7c5d0c610a9d81bda3144716786bab405ebfd8de48703",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2988,
+      "expectedSha256": "984eb00db16ea543c5f73c42d5d560aa4e6922556cc79f77365e148245711c25"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 445,
+      "expectedSha256": "c0f60adde522f781d3dcbf23f795b35c404432ae661aa2e32b1830fcd661358f"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 336,
+      "expectedSha256": "bd7c56592ab5294e90aba719091745c838e55076fc79976204455037e171d677"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2735,
+      "expectedSha256": "abd45e125285797b89fc87d14d30b81c976bb23aedd91dd7f029395a382c6fd3"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3095,
+      "expectedSha256": "989a49b5fda435d85bdbd6fc3ce08f61f09c8cf81538f4f4308537439ff8de85"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7672,
+      "expectedSha256": "19255158618cb25c0c4f744f3df7861a4e9801c00869ed211e3e5ed1cfeeab38"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6962,
+      "expectedSha256": "dac2300f3651e8cafcfeab8b4cd4c2a190970ba054b8843bde159172cdf425d1"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1093/mnras/stz2378",
+      "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 55862,
+      "expectedSha256": "fc3ca7b32f950075ee0baff870839d555ad28874257910dce89895df57434e2d"
+    }
+  ]
+}

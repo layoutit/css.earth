@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec59f9dd50a6f44280d66b4e4561c5e1bab12535eb5de471d790b291df06967f"
+    "sha256": "ba201ec1b1045e7e33a25ea5763358e86c371f6b06501147eea93835af82d28e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "56da63557c5a26cdba0b18fefa539a9f6490cc28d959e176ca3b69e120834353",
+      "sha256": "2fa481e7e477e349e44860ba18be8ca733f133168619ae25bc9f8b7e5f425a53",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -80,8 +80,7 @@
               "expectedFaces": 2292
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 800,
               "maximumErrorMeters": 4,
@@ -338,8 +337,8 @@
         },
         {
           "url": "/scenes/squannit/squannit-model-surface@2x.webp",
-          "bytes": 68658,
-          "sha256": "5cec7c32fcb87b473ac61b0c133f630674b0bd6071c58fec85d26e03b9103a38",
+          "bytes": 82564,
+          "sha256": "c5f2dc43fee1d06905999add86b94b8b04ad65d5983d0b3f587e24f77d82ee65",
           "verification": "bytes-verified"
         }
       ],
@@ -415,7 +414,7 @@
   },
   "lastPreparation": {
     "objectId": "squannit",
-    "materialSha256": "e679f03d49d50dabc4878984a77dc56a78240e91ca97a6f20101e4dca6f46507",
+    "materialSha256": "7e95a2640806b02fdc8e8fa7e661183b8171096137102e3b74ef5d153d97000c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

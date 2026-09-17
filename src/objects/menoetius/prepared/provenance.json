@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d940c54eaf606ae78097b83a70a7507577173d4abbe682095f9eca10c57338ee"
+    "sha256": "c1028bf9e035ed6364c0745c9bf1246d5ad9a5c5536595c603397e93182bc7c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e7ff41c2535a396ee779d13aaf064261ea971cb5ddcb217860a28a4324a73aca",
+      "sha256": "bf150f490380c0dde2344347bfba30aa3b11e99b8cd390e51fb386b7641062a5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1304.7502494710243,
@@ -344,8 +343,8 @@
         },
         {
           "url": "/scenes/menoetius/menoetius-model-surface@2x.webp",
-          "bytes": 55310,
-          "sha256": "ac6d0f1ca55903faaf0419e176a4cbe9f2beef2802a765a33094ee3d97ef98d6",
+          "bytes": 59396,
+          "sha256": "1ea5095664ccea7d8317f2a860bd39fbcc13bf34504011f5b09ce1812d866c49",
           "verification": "bytes-verified"
         }
       ],
@@ -421,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "menoetius",
-    "materialSha256": "0303f28aafc5c126e94d67e0125aa9badc330e8dcc57ba88d7253fbcc2371650",
+    "materialSha256": "671493d24f370dc27787fcc899929e087e1c43e57afdf5fb1c945f3b30364a37",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

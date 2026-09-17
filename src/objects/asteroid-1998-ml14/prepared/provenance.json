@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "78431072668b6aa1a561c41d3270ea85adac773b5f38ef17e227bb7af4c49b8b"
+    "sha256": "38df80ff9b56936ecac21fb71c23d71917413f43f11ed60477f55070f5f050d4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7bf80a9eeeac9205d4f882b3230c0098116584b13ce67debffb80764fca413ba",
+      "sha256": "0a72f632e119b2429bcfc0b26e5aa2bfc9ebf6ba11606a55849e169138f843d0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -433,8 +432,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-surface@2x.webp",
-          "bytes": 345938,
-          "sha256": "c75288a51098a47aee47119967feec0f5730f9071aa1d4ed4c839c9a67303a82",
+          "bytes": 411388,
+          "sha256": "8cdbf8a51717aa4c505252bc2ca56d6b7d758656de33c4dadf0bd766275bd5ef",
           "verification": "bytes-verified"
         }
       ],
@@ -477,8 +476,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-surface@2x.webp",
-          "bytes": 67684,
-          "sha256": "3e264707856126af7706b24f34ec990314e902b9a0058c2118b539ba7eeb5c4a",
+          "bytes": 87834,
+          "sha256": "732b8bca7b1894d2c67aba052db034d98c43d059c908691bc097a6b6f9b93d33",
           "verification": "bytes-verified"
         }
       ],
@@ -574,7 +573,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-ml14",
-    "materialSha256": "9dd07e3a0e7ecd7a70b2c27cc2c61d2f497bad6e1a1c16497e6445ead25cfa23",
+    "materialSha256": "965e19a08e7efbe26d4bc1c564226d81ee8dffb7e5936946e40f906de05472a7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

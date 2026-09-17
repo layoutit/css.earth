@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e01a872d80018e8ed72b89cd1d3762fcbc9b3bfca00eea8ac2f785b65685856"
+    "sha256": "5b355574271ea5b0a8fa71f337e0c8a9d1206b299ad5ae165822d79f7e144e28"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e3de40fafe1a70b7a73e6015d8a1ff4991e05c3536b6ec6f403aa413d722a517",
+      "sha256": "ba9125e3b8fdb28a140a4dd469eb70bdfef35e290157d4c9363db613ab60fe78",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8.177665775471475,
@@ -357,8 +356,8 @@
         },
         {
           "url": "/scenes/aegaeon/aegaeon-model-surface@2x.webp",
-          "bytes": 47964,
-          "sha256": "7fb842d74ddc19a298d13029f58bd334bf4a3c12bdfaad178352540082426295",
+          "bytes": 56472,
+          "sha256": "c3970cf9d471f493b4686044800f1ade5afb910ef5da4138923768aef6c40d40",
           "verification": "bytes-verified"
         }
       ],
@@ -434,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "aegaeon",
-    "materialSha256": "c4158ef855d180a0417199592ce4af8d77cd243a55d9a5a3c6b4e6b00086b9c2",
+    "materialSha256": "06a01d062502349c069058fe3fc2d3cd2b69e51d6ef9dc324eae18c59ed8ae31",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-3i",
+  "entries": [
+    {
+      "id": "hubble-nucleus-photometry",
+      "subject": "Hui et al. (2026) Hubble WFC3 nucleus photometry",
+      "status": "included",
+      "finding": "Effective radius 1.3 ± 0.2 km at assumed V-band geometric albedo 0.04 (H 17.1 ± 0.4) and a sky-plane axis ratio of at least 2:1 from brightness changes of at least 0.8 mag. The display is a prolate ellipsoid at the minimum 2:1 ratio whose geometric-mean cross-section equals π × (1.3 km)².",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/9db91aac13795fa37594c989636765ad3986ec15/src/objects/comet-3i/source/measurements.json",
+        "https://arxiv.org/abs/2601.21569"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9db91aac13795fa37594c989636765ad3986ec15"
+        }
+      ]
+    },
+    {
+      "id": "jewitt-2025-upper-limit",
+      "subject": "Jewitt et al. (2025) July 2025 Hubble nucleus limit",
+      "status": "excluded",
+      "finding": "Before perihelion the coma hid the nucleus; the fit only limited the radius to at most 2.8 km. The 2026 post-perihelion detection supersedes it for size.",
+      "revisitWhen": "The 2026 detection is revised or retracted.",
+      "evidence": [
+        "https://arxiv.org/abs/2508.02934"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9db91aac13795fa37594c989636765ad3986ec15"
+        }
+      ]
+    },
+    {
+      "id": "artist-impressions-and-coma-images",
+      "subject": "Artist impressions and coma photographs as surface textures",
+      "status": "excluded",
+      "finding": "Hubble, JWST and spacecraft images show an unresolved nucleus inside its coma; none maps the surface.",
+      "revisitWhen": "Resolved imaging of the nucleus exists.",
+      "evidence": [
+        "https://esahubble.org/news/heic2509/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9db91aac13795fa37594c989636765ad3986ec15"
+        }
+      ]
+    },
+    {
+      "id": "shape-pole-rotation",
+      "subject": "Published shape model, pole or rotation period",
+      "status": "unresolved",
+      "finding": "Only a lower limit of about 1 hour on the period and the 2:1 axis-ratio limit are published. The display pole, meridian and spin phase are arbitrary.",
+      "revisitWhen": "A lightcurve inversion, pole solution or rotation period is published.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/9db91aac13795fa37594c989636765ad3986ec15/src/objects/comet-3i/source/preparation/rotation.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9db91aac13795fa37594c989636765ad3986ec15"
+        }
+      ]
+    },
+    {
+      "id": "horizons-trajectory",
+      "subject": "JPL Horizons fixed-epoch trajectory",
+      "status": "included",
+      "finding": "Horizons 3I (C/2025 N1) elements and independent vectors at the 2026-09-03 scene epoch: eccentricity 6.12 at 10.88 au. Two-body propagation differs from Horizons by 964 km and 873 km 30 days either side.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/9db91aac13795fa37594c989636765ad3986ec15/src/objects/comet-3i/source/reference/horizons-elements.txt",
+        "https://github.com/layoutit/css.earth/blob/9db91aac13795fa37594c989636765ad3986ec15/src/objects/comet-3i/source/reference/horizons-vectors.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "9db91aac13795fa37594c989636765ad3986ec15"
+        }
+      ]
+    },
+    {
+      "id": "coma-colour-as-nucleus-colour",
+      "subject": "Measured colour as a whole-body Color lens",
+      "status": "excluded",
+      "finding": "Published colours (spectral slopes of about 18 to 23% per 100 nm across the visible) were measured on the dust coma. The Hubble nucleus photometry used one filter, so no nucleus colour exists to paint on the body.",
+      "revisitWhen": "A nucleus colour is published; the disc-integrated colour route can then add a Color lens.",
+      "evidence": [
+        "https://www.aanda.org/articles/aa/full_html/2025/10/aa56717-25/aa56717-25.html",
+        "https://arxiv.org/abs/2507.11720",
+        "https://arxiv.org/abs/2601.21569"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "151d15feeaa85b62ea6c0049ce8d8f3e57f2c9da"
+        }
+      ]
+    }
+  ]
+}

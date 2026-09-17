@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab3816b11e1d9188f20d4113b1fbf5ebffaddca19d8e3203f5c773a6de0a64a1"
+    "sha256": "bf533ac98b561efbb0a96a9dcfae757eab687cf109d30df8f5a54996c56c7419"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "25e5c82f4ded01b27033bb077502719acb2a96a6a7b0974fef508bfde4c3ac81",
+      "sha256": "2b9139c22fed7235628fef3abf4a69d1623e655689959ff557cb4bed91e624e4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -365,8 +365,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "targetFaces": 600,
               "maximumErrorMeters": 350,
@@ -1580,8 +1579,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-elevation-surface@2x.webp",
-          "bytes": 432722,
-          "sha256": "24ce083da640c5c371c596e5405bd7a085d15fb2eb1dbb024e9a09c96c166250",
+          "bytes": 434718,
+          "sha256": "16b1cb9556d03eb430763c6788137bacbd25eec600d06ba14828e15af2926a7f",
           "verification": "bytes-verified"
         }
       ],
@@ -1636,8 +1635,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-normal-surface@2x.webp",
-          "bytes": 330600,
-          "sha256": "951078ac68d5681952e6413248ab248be1fcbb8df24a1baa37df4bd6b083ac55",
+          "bytes": 324200,
+          "sha256": "d8662092b15424a6f783c1a7707239d97d76dc7b94e2d79e326c8f28f1ec537a",
           "verification": "bytes-verified"
         }
       ],
@@ -1686,8 +1685,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-false-color-surface@2x.webp",
-          "bytes": 289076,
-          "sha256": "1db19896a1530a02198d72b1a09b97da358bce46034d0fbb1809082c7e7b8c07",
+          "bytes": 289092,
+          "sha256": "4dd239a01da0e50605205448edadf8f03e8a2a23efc2485bf87555286569ffe2",
           "verification": "bytes-verified"
         }
       ],
@@ -1808,7 +1807,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "5ffbf07a6ca9ba6ea483d0170bf4d689b862c11d17c4300fca8f2fb8354f3954",
+    "materialSha256": "d8089ceb84f042e9f7bb83cdca9d602f265d034c94173ea3b1c6672097b3b88f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
