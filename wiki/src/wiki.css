@@ -1,0 +1,29 @@
+:root { --sl-content-width: 58rem; }
+
+.object-infobox {
+  float: right;
+  clear: right;
+  width: 17rem;
+  margin: 0 0 1.5rem 2rem;
+  padding: .75rem;
+  font-size: var(--sl-text-sm);
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: .5rem;
+}
+
+.sl-markdown-content .object-infobox > :not(:first-child) { margin-top: .5rem; }
+.object-infobox-image { display: block; width: 100%; height: auto; margin-inline: auto; }
+.object-infobox-status { color: var(--sl-color-gray-2); text-align: center; }
+.sl-markdown-content .object-infobox table { display: table; width: 100%; font-size: var(--sl-text-xs); }
+.sl-markdown-content .object-infobox th, .sl-markdown-content .object-infobox td { padding: .3rem .4rem; vertical-align: top; border-bottom: 1px solid var(--sl-color-hairline); }
+.sl-markdown-content .object-infobox th { width: 45%; text-align: left; background: none; }
+.object-infobox-link { display: block; text-align: center; font-weight: 600; }
+
+.sl-markdown-content .object-maps { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1rem; }
+.sl-markdown-content .object-maps > p { margin: 0; font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); }
+.sl-markdown-content .object-maps img { display: block; width: 100%; aspect-ratio: 2; object-fit: cover; border-radius: .25rem; }
+
+@media (max-width: 50rem) {
+  .object-infobox { float: none; width: auto; margin: 0 0 1.5rem; }
+}

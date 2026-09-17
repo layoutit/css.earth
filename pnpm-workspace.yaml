@@ -1,5 +1,6 @@
 packages:
   - packages/*
   - labs/nebula/packages/*
+  - wiki
 allowBuilds:
   cwebp-bin: true
