@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-2409-06785",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "One month convection timescale on the surface of a giant evolved star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.06785"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-024-07836-9"
+    },
+    {
+      "type": "bibcode",
+      "value": "2024Natur.633..323V"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2409.06785",
+      "label": "arXiv"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-024-07836-9",
+      "label": "Nature 633, 323 (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/r-doradus/source/measurements.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/radiusSource"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "W. Vlemmings, T. Khouri, B. Bojnordi Arbab, E. De Beck, M. Maercker",
+      "scope": "citation",
+      "evidence": "src/objects/r-doradus/source/measurements.json#/radiusSource"
+    }
+  ]
+}
