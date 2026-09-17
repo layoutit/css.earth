@@ -77,11 +77,9 @@
     },
     {
       "id": "radar-primary-component",
-      "subject": "Radar model covers the primary component",
+      "survey": "radar-primary-component",
       "status": "included",
-      "finding": "The JPL index labels this selected release Alpha (primary). Its geometry must not be described as the complete multiple-asteroid system; unseen companions or their mutual geometry are not part of this input.",
       "evidence": [
-        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj"
       ],
       "checked": [

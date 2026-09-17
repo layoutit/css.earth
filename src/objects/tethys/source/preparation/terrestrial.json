@@ -458,10 +458,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 536.3,
-    "camera": {
-      "initialScenePitchDegrees": 40,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/tethys/tethys-normal-surface@2x.webp",
     "polesUrl": "/scenes/tethys/tethys-normal-poles@2x.webp",
     "radialTerrain": {

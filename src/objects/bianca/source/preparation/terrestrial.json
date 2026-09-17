@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 25.67646409198381,
-    "camera": {
-      "initialScenePitchDegrees": -49.391450719383705,
-      "defaultControlYawDegrees": 37.40433823305438
-    },
     "mapUrl": "/scenes/bianca/bianca-model-surface@2x.webp",
     "polesUrl": "/scenes/bianca/bianca-model-poles@2x.webp",
     "radialTerrain": {

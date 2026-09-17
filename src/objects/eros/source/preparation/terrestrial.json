@@ -121,10 +121,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 8.42,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/eros/eros-normal-surface@2x.webp",
     "polesUrl": "/scenes/eros/eros-normal-surface@2x.webp",
     "radialTerrain": {

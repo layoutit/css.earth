@@ -21,7 +21,7 @@ export interface ControlsUpdate { drag?: boolean; wheel?: boolean; }
 export interface DestinationMotion { sample(progress: number): void; durationMilliseconds?: number; }
 export interface MotionCompletion { completed: boolean; }
 export interface PitchCalibration {
-  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number;
+  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number; maximumScenePitchDegrees: number;
 }
 export interface ResponsiveFit {
   model: string; portraitBaseWidthShare: number; narrowPortraitWidthShareGain: number;
@@ -36,7 +36,7 @@ export interface LevelOfDetailPlan {
 export interface OrbitLineFade { visibleBelowDiscHeightShare: number; hiddenAboveDiscHeightShare: number; }
 export interface CameraPlan extends PitchCalibration {
   cameraModel: string; pitchBounded: boolean; yawBounded: boolean;
-  minimumControlPitchDegrees: number; defaultControlYawDegrees: number; maximumScenePitchDegrees: number;
+  minimumControlPitchDegrees: number; defaultControlYawDegrees: number;
   materialReferenceControlPitchDegrees?: number; materialReferenceControlYawDegrees?: number;
   minimumZoom: number; maximumZoom: number; defaultZoom: number; sceneScale: number;
   logicalBodyDiameter: number; responsiveFit: ResponsiveFit;

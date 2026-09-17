@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 16.145,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/stephania/stephania-shape-surface@2x.webp",
     "polesUrl": "/scenes/stephania/stephania-shape-surface@2x.webp",
     "radialTerrain": {

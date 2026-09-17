@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 41.605,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
     "polesUrl": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
     "radialTerrain": {

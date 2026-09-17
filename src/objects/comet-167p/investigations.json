@@ -26,13 +26,10 @@
     },
     {
       "id": "measured-shape-archive-route",
-      "subject": "Object-specific measured shape in PDS/Stooke archives",
+      "survey": "measured-shape-archive-route",
       "status": "unresolved",
-      "finding": "The retained catalog intake names the Stooke archive but contains no object-specific mesh search result or inspected reconstruction for this comet. The Celestia illustration is selected; the record does not establish that a measured shape is unavailable.",
-      "revisitWhen": "An object-specific archive product or published numerical shape can be inspected, with coordinates, scale and reuse terms.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-167p/source/reference/source-record.json",
-        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/"
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-167p/source/reference/source-record.json"
       ],
       "checked": [
         {

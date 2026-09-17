@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 104,
-    "camera": {
-      "initialScenePitchDegrees": -124.88764044943821,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/themis/themis-shape-surface@2x.webp",
     "polesUrl": "/scenes/themis/themis-shape-surface@2x.webp",
     "radialTerrain": {

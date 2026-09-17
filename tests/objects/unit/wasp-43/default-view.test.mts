@@ -13,14 +13,17 @@ const json = async (path: string) => JSON.parse(await readFile(resolve(BODY, pat
 const DEG = Math.PI / 180;
 const direction = (ra: number, dec: number): [number, number, number] => [Math.cos(dec * DEG) * Math.cos(ra * DEG), Math.cos(dec * DEG) * Math.sin(ra * DEG), Math.sin(dec * DEG)];
 
-test('the default camera looks at the Earth-facing hemisphere, one degree off the sub-Earth point', async () => {
+test('the default camera looks at the Earth-facing hemisphere, straight at the sub-Earth point', async () => {
   const descriptor = requireRecord(await json('object.json')), runtime = requireRecord(await json('prepared/runtime.json'));
-  const subObserver = { longitudeDegrees: 0, latitudeDegrees: 0 };
+  // Earth observes the star from the Sun's direction; the star's pole is its planet's orbit normal, which that direction is
+  // 7.8 degrees off, so the sub-Earth point is not on this body frame's equator.
+  const { requireBodyFixedSunDirection } = await import('../../../../src/platform/solar-geometry.mts');
+  const toEarth = requireBodyFixedSunDirection('wasp-43');
+  const subObserver = { longitudeDegrees: Math.atan2(toEarth[1], toEarth[0]) / DEG, latitudeDegrees: Math.asin(toEarth[2]) / DEG };
   const view = defaultViewGeometry('wasp-43', requireRecord(runtime.camera) as never, requireRecord(requireRecord(descriptor.properties).worldFrame) as never);
   const separation = angularSeparationDegrees(view.subCamera, subObserver);
-  assert.ok(separation < 1.5, `default view ${separation.toFixed(1)} degrees from the sub-observer point`);
-  assert.ok(Math.abs(view.subCamera.longitudeDegrees) < 0.1 && Math.abs(view.subCamera.latitudeDegrees + 1) < 0.1,
-    `sub-camera point ${view.subCamera.longitudeDegrees.toFixed(1)}, ${view.subCamera.latitudeDegrees.toFixed(1)}`);
+  assert.ok(separation < 0.01, `default view ${separation.toFixed(3)} degrees from the sub-observer point`);
+  assert.ok(Math.abs(subObserver.latitudeDegrees - 7.8) < 0.1, `sub-Earth latitude ${subObserver.latitudeDegrees.toFixed(2)}`);
 });
 
 test('the star\'s pole, WASP-43b\'s orbit normal, stands up on screen, with the Earth toward the viewer', async () => {

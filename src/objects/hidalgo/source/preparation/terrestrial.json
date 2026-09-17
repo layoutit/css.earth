@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 30.7,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
     "polesUrl": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
     "radialTerrain": {

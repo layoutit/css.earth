@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 8.4,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.5706125817263992
     },
     "mapUrl": "/scenes/kiviuq/kiviuq-model-surface@2x.webp",

@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 40,
-    "camera": {
-      "initialScenePitchDegrees": 7.8863261706119285,
-      "defaultControlYawDegrees": -123.49616775538027
-    },
     "mapUrl": "/scenes/thalassa/thalassa-model-surface@2x.webp",
     "polesUrl": "/scenes/thalassa/thalassa-model-poles@2x.webp",
     "radialTerrain": {

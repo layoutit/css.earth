@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 113.5,
-    "camera": {
-      "initialScenePitchDegrees": -44.5505617977528,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
     "polesUrl": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
     "radialTerrain": {

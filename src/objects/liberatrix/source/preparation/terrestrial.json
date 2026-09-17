@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 25.55,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/liberatrix/liberatrix-shape-surface@2x.webp",
     "polesUrl": "/scenes/liberatrix/liberatrix-shape-surface@2x.webp",
     "radialTerrain": {

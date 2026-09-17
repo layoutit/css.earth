@@ -12,7 +12,7 @@ const json = async (path: string) => JSON.parse(await readFile(resolve(BODY, pat
 const DEG = Math.PI / 180;
 const direction = (ra: number, dec: number): [number, number, number] => [Math.cos(dec * DEG) * Math.cos(ra * DEG), Math.cos(dec * DEG) * Math.sin(ra * DEG), Math.sin(dec * DEG)];
 
-test('the default camera looks at the photographed hemisphere, two degrees off the sub-Earth point', async () => {
+test('the default camera looks straight at the photographed hemisphere, at the sub-Earth point', async () => {
   const descriptor = requireRecord(await json('object.json')), runtime = requireRecord(await json('prepared/runtime.json'));
   const raster = requireRecord(await json('source/preparation/raster.json'));
   const lensFrame = requireRecord(requireArray(requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0]).science).lens).frames)[0]);
@@ -20,8 +20,8 @@ test('the default camera looks at the photographed hemisphere, two degrees off t
   const camera = requireRecord(runtime.camera) as never, worldFrame = requireRecord(requireRecord(descriptor.properties).worldFrame) as never;
   const view = defaultViewGeometry('betelgeuse', camera, worldFrame);
   const separation = angularSeparationDegrees(view.subCamera, subObserver);
-  assert.ok(separation < 2.5, `default view ${separation.toFixed(1)} degrees from the sub-observer point`);
-  assert.ok(Math.abs(view.subCamera.longitudeDegrees) < 0.1 && Math.abs(view.subCamera.latitudeDegrees + 2) < 0.1,
+  assert.ok(separation < 0.01, `default view ${separation.toFixed(3)} degrees from the sub-observer point`);
+  assert.ok(Math.abs(view.subCamera.longitudeDegrees) < 0.01 && Math.abs(view.subCamera.latitudeDegrees) < 0.01,
     `sub-camera point ${view.subCamera.longitudeDegrees.toFixed(1)}, ${view.subCamera.latitudeDegrees.toFixed(1)}`);
 });
 
@@ -40,6 +40,7 @@ test('the pole stands up and the sky keeps its handedness: north 48 degrees cloc
   // As on the sky seen from Earth, east is 90 degrees counterclockwise of north.
   const eastFromNorth = ((east.angleDegrees - north.angleDegrees) % 360 + 540) % 360 - 180;
   assert.ok(Math.abs(eastFromNorth - 90) < 0.1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
-  const offLimb = requireRecord(requireRecord(requireRecord(requireArray(requireRecord(await json('source/preparation/raster.json')).surfaces)[0]).science).offLimb);
-  assert.ok(Math.abs(requireFiniteNumber(offLimb.rotationDegrees) - (north.angleDegrees - 90)) < 0.1, 'the off-limb plate turns image north onto celestial north');
+  // The plate's turn is derived at preparation; the lens report records it.
+  const report = JSON.stringify(await json('prepared/assets.json')), turn = Number(/"offLimb":\{[^}]*"rotationDegrees":(-?[\d.e+-]+)/u.exec(report)?.[1]);
+  assert.ok(Math.abs(requireFiniteNumber(turn) - (north.angleDegrees - 90)) < 0.1, 'the off-limb plate turns image north onto celestial north');
 });

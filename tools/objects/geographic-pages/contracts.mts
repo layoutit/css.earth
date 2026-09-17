@@ -5,7 +5,8 @@ export interface GeographicBounds { west: number; east: number; south: number; n
 export interface PolarBounds { projection: 'polar'; hemisphere: 'north' | 'south'; u0: number; u1: number; v0: number; v1: number }
 export interface GeographicLeaf { style: string; geographicFrameMatrix?: string; leafWidth: number }
 export interface GeographicBody { bands: readonly { latitudeIndex: number; leaves: readonly GeographicLeaf[] }[] }
-export interface BodyAttitude { meshRotationDegrees: number; obliquityDegrees: number; presentationNodeDegrees: number }
+/** Row-major CSS rotation of the drawn body's system and mesh nodes: object (mesh-local) coordinates to presentation. */
+export interface BodyAttitude { bodyMatrix: readonly number[] }
 export interface GeographicScene { body: GeographicBody; [key: string]: unknown }
 export interface PolarPlane { origin: number[]; basisU: number[]; basisV: number[]; qx: number; qy: number; inverse: number[]; west: number }
 export interface PolarProjection { type: 'polar'; sign: number; side: number; x0: number; x1: number; y0: number; y1: number; matrix: number[]; planes: PolarPlane[] }

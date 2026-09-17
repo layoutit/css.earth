@@ -31,10 +31,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery-11",
       "status": "unresolved",
-      "finding": "No registered reusable reflectance texture was examined for the selected model. The grid marks missing imagery; Elevation is source-model radius relative to a sphere, not measured geology.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md"
       ],

@@ -29,14 +29,10 @@
     "POLAR_SURFACE_OVERLAP": 1.035,
     "POLAR_INNER_OVERLAP": 1.05,
     "POLAR_INNER_INSET": 2.4,
-    "OBLIQUITY_DEGREES": 23.4,
-    "PRESENTATION_NODE_DEGREES": -60,
     "MESH_ROTATION_Z": 128,
     "CAMERA_ZOOM": 1.1,
-    "CAMERA_SCENE_PITCH_DEGREES": 40,
     "CAMERA_MINIMUM_CONTROL_PITCH_DEGREES": 0,
     "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
-    "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
     "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
     "INTERIOR_LATITUDE_SEGMENTS": 8,
     "INTERIOR_LONGITUDE_SEGMENTS": 16,
@@ -75,11 +71,6 @@
       "maximumLightViewZ": 1,
       "baseLightAzimuthDegrees": 0
     },
-    "worldLight": [
-      0.883835,
-      -0.385595,
-      0.264864
-    ],
     "solarTint": "#fff1ea",
     "shadowlessOverlay": {
       "color": [
@@ -421,11 +412,6 @@
     "cameraModel": "accumulated-matrix3d",
     "minimumControlPitchDegrees": 0,
     "maximumControlPitchDegrees": 89,
-    "defaultControlPitchDegrees": 34.230769230769226,
-    "defaultControlYawDegrees": 0,
-    "materialReferenceControlPitchDegrees": 34.230769230769226,
-    "materialReferenceControlYawDegrees": 0,
-    "initialScenePitchDegrees": 40,
     "maximumScenePitchDegrees": 65,
     "minimumZoom": 0.42,
     "maximumZoom": 4,

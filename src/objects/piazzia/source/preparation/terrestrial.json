@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 23.89,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
     "polesUrl": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
     "radialTerrain": {

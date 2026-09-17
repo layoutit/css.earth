@@ -1437,8 +1437,8 @@
     {
       "id": "sun-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 705,
-      "expectedSha256": "40248a6c77c14931f7bfd8dbdd955617f279edcc14202eb5ca294c818b26422a",
+      "expectedBytes": 635,
+      "expectedSha256": "5d9a78e12d07a45ce6206f29e112f43b4a652582f544a8e1c7df4741bc588278",
       "origin": "Repository-authored star-centred scene recipe; IAU nominal radius 695,700 km, camera plan (defaultZoom 1.25, initial pitch 40, yaw -105) and the 7.25 degree axis tilt carried from the retired static-surface geometry",
       "sourceBinding": {
         "kind": "local",

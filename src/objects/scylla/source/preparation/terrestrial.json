@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 19.605,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/scylla/scylla-shape-surface@2x.webp",
     "polesUrl": "/scenes/scylla/scylla-shape-surface@2x.webp",
     "radialTerrain": {
