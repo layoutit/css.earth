@@ -10,11 +10,14 @@ const root = resolve(import.meta.dirname, '../../../../src/objects/wasp-43/sourc
 const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
 const SOLAR_RADIUS_KM = 695700, SOLAR_GM = 132712440041.93938, PARSEC_M = 3.085677581491367e16, MAS_RAD = Math.PI / 180 / 3.6e6;
 
-test('WASP-43 retains source pins and has no observation to acquire', async () => {
+test('WASP-43 retains source pins; its only acquisitions are the title font and the Gaia query its colour cites', async () => {
   const source = await createSourceManifest({ planetId: 'wasp-43', planetName: 'WASP-43', sourceRoot: root });
   await source.verify();
-  const plan = requireRecord(await read('preparation/acquisition.json'));
-  assert.ok(requireArray(plan.operations).every(operation => requireString(requireRecord(operation).path).startsWith('presentation/')), 'only the title font is downloaded');
+  const operations = requireArray(requireRecord(await read('preparation/acquisition.json')).operations).map(value => requireRecord(value));
+  assert.deepEqual(operations.map(operation => requireString(operation.path)), ['presentation/InterVariable.ttf', 'photometry/gaia-dr3-source.csv']);
+  const temperature = requireRecord(requireRecord(await read('photometry/stellar-color.json')).temperature), gaia = operations[1]!;
+  assert.equal(gaia.url, temperature.service);
+  assert.equal(requireRecord(gaia.form).QUERY, temperature.query, 'the restore runs the query the colour record cites');
 });
 
 test('the lens is the Gaia photometric colour, radius and GM are the stellar values the planet map assumes, and the distance is the Gaia parallax', async () => {
