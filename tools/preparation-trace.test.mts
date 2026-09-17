@@ -4,6 +4,7 @@ import { mkdir, mkdtemp, readdir, readFile, realpath, rm, writeFile } from 'node
 import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
 import test from 'node:test';
+import { readPreparationTraces } from './preparation-cache.mts';
 import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, descriptorDigest, type PreparationTrace } from './preparation-trace-format.mts';
 
 const traceModule = new URL('./preparation-trace.mts', import.meta.url).href;
@@ -124,4 +125,24 @@ test('descriptor views leave the card out and keep each owner apart', () => {
   assert.notEqual(digest(frame, 'registry'), digest(base, 'registry'));
   assert.equal(digest(frame, 'recipe'), digest(base, 'recipe'));
   assert.notEqual(digest(name, 'registry'), digest(base, 'registry'));
+});
+
+test('a worker thread terminated mid-task leaves the journal of what it read', async () => {
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'cssearth-preparation-trace-')));
+  try {
+    await mkdir(join(root, 'data'));
+    await writeFile(join(root, 'data/busy.txt'), 'busy');
+    await writeFile(join(root, 'busy.mts'), "import { readFileSync } from 'node:fs'; import { parentPort } from 'node:worker_threads'; readFileSync('data/busy.txt'); parentPort?.postMessage('read'); setInterval(() => {}, 1000);");
+    await writeFile(join(root, 'script.mts'), `import { Worker } from 'node:worker_threads';
+const busy = new Worker(new URL('./busy.mts', import.meta.url));
+await new Promise(resolve => busy.once('message', resolve));
+await busy.terminate();`);
+    const traces = join(root, 'traces');
+    const result = spawnSync(process.execPath, ['script.mts'], { cwd: root, encoding: 'utf8',
+      env: { ...process.env, [PREPARATION_TRACE_VARIABLE]: traces, NODE_OPTIONS: `--import=${traceModule}` } });
+    assert.equal(result.status, 0, result.stderr);
+    const read = await readPreparationTraces(traces);
+    assert.deepEqual([...read.unsupported], []);
+    assert.deepEqual([...(read.files.get(join(root, 'data/busy.txt'))?.accesses ?? [])], ['read']);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

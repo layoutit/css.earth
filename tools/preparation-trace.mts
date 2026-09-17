@@ -16,12 +16,17 @@ import { CATALOG_MODULE, DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, PREPARATION_
 const directory = process.env[PREPARATION_TRACE_VARIABLE];
 if (!directory) throw new Error(`${PREPARATION_TRACE_VARIABLE} must name the preparation trace directory.`);
 const traceDirectory = resolve(directory), importFlag = `--import=${import.meta.url}`;
-const original = { statSync: fs.statSync, readFileSync: fs.readFileSync, writeFileSync: fs.writeFileSync, mkdirSync: fs.mkdirSync };
+const original = { statSync: fs.statSync, readFileSync: fs.readFileSync, writeFileSync: fs.writeFileSync, appendFileSync: fs.appendFileSync, mkdirSync: fs.mkdirSync };
 const files = new Map<string, { accesses: Set<PreparationAccess>; first: TracedState }>();
 const commands: TracedCommand[] = [], catalogImporters = new Set<string>(), unsupported = new Set<string>();
 // Node's module loader reads sources through the public fs functions; inside the module hooks those reads are the
 // module load itself, which the load hook records.
 let loaderDepth = 0;
+// A worker thread can be terminated without running its exit handlers, so it also journals each new observation as it happens.
+const recordName = workerThreads.isMainThread ? String(process.pid) : `${process.pid}-${workerThreads.threadId}`;
+const journal = workerThreads.isMainThread ? null : resolve(traceDirectory, `${recordName}.jsonl`);
+function journalLine(entry: Record<string, unknown>) { if (journal) original.appendFileSync(journal, JSON.stringify(entry) + '\n'); }
+function markUnsupported(reason: string) { if (!unsupported.has(reason)) { unsupported.add(reason); journalLine({ unsupported: reason }); } }
 
 function pathOf(value: unknown): string | null {
   if (typeof value === 'string') return resolve(value);
@@ -46,7 +51,7 @@ function note(value: unknown, access: PreparationAccess) {
   if (!path || path.includes(`${sep}node_modules${sep}`) || path === traceDirectory || path.startsWith(traceDirectory + sep)) return;
   let file = files.get(path);
   if (!file) files.set(path, file = { accesses: new Set(), first: access === 'write' ? {} : firstState(path) });
-  file.accesses.add(access);
+  if (!file.accesses.has(access)) { file.accesses.add(access); journalLine({ path, access, first: file.first }); }
 }
 
 type Method = (this: unknown, ...args: unknown[]) => unknown;
@@ -56,7 +61,7 @@ function wrap(target: object, name: string, record: Recorder) {
   if (typeof method !== 'function') return;
   const call = (implementation: Method) => function (this: unknown, ...args: unknown[]) {
     let actual = args;
-    try { actual = record(args) ?? args; } catch (error) { unsupported.add(`recording ${name} failed: ${String(error)}`); }
+    try { actual = record(args) ?? args; } catch (error) { markUnsupported(`recording ${name} failed: ${String(error)}`); }
     return implementation.apply(this, actual);
   };
   const wrapped = call(method as Method);
@@ -87,7 +92,7 @@ for (const target of fileSystems) {
   for (const name of variants('rename')) wrap(target, name, args => { note(args[0], 'write'); note(args[1], 'write'); });
   for (const name of variants('link')) wrap(target, name, args => { note(args[0], 'read'); note(args[1], 'write'); });
   for (const name of variants('symlink')) wrap(target, name, args => { note(args[1], 'write'); });
-  for (const name of [...variants('glob'), 'watch', 'watchFile']) wrap(target, name, () => { unsupported.add(`fs.${name}`); });
+  for (const name of [...variants('glob'), 'watch', 'watchFile']) wrap(target, name, () => { markUnsupported(`fs.${name}`); });
 }
 wrap(fs, 'createReadStream', one('read'));
 wrap(fs, 'createWriteStream', one('write'));
@@ -103,8 +108,9 @@ function started(name: string): Recorder {
     const options = optionsAt > 0 ? args[optionsAt] as { cwd?: unknown; env?: Record<string, string | undefined>; shell?: unknown } : undefined;
     const listed = Array.isArray(args[1]) ? args[1].map(String) : [];
     const shell = name === 'exec' || name === 'execSync' || Boolean(options?.shell);
-    commands.push({ command: name === 'fork' ? process.execPath : String(args[0]), args: name === 'fork' ? [String(args[0]), ...listed] : listed,
-      cwd: resolve(typeof options?.cwd === 'string' ? options.cwd : process.cwd()), shell });
+    const command = { command: name === 'fork' ? process.execPath : String(args[0]), args: name === 'fork' ? [String(args[0]), ...listed] : listed,
+      cwd: resolve(typeof options?.cwd === 'string' ? options.cwd : process.cwd()), shell };
+    commands.push(command); journalLine({ command });
     if (!options?.env) return;
     const actual = [...args];
     actual[optionsAt] = { ...options, env: tracedEnvironment(options.env) };
@@ -132,7 +138,7 @@ try {
     wrap(prototype, 'toFile', args => { if (typeof args[0] === 'string') note(args[0], 'write'); });
   }
 } catch (error) {
-  if (!(error instanceof Error && 'code' in error && ['ERR_MODULE_NOT_FOUND', 'MODULE_NOT_FOUND'].includes(String(error.code)))) unsupported.add(`sharp paths are not recorded: ${String(error)}`);
+  if (!(error instanceof Error && 'code' in error && ['ERR_MODULE_NOT_FOUND', 'MODULE_NOT_FOUND'].includes(String(error.code)))) markUnsupported(`sharp paths are not recorded: ${String(error)}`);
 }
 
 registerHooks({
@@ -141,7 +147,8 @@ registerHooks({
     let result;
     try { result = nextResolve(specifier, context); } finally { loaderDepth--; }
     if (context.parentURL?.startsWith('file:') && result.url.startsWith('file:') && fileURLToPath(result.url).endsWith(`${sep}${CATALOG_MODULE.split('/').join(sep)}`)) {
-      catalogImporters.add(fileURLToPath(context.parentURL));
+      const importer = fileURLToPath(context.parentURL);
+      if (!catalogImporters.has(importer)) { catalogImporters.add(importer); journalLine({ importer }); }
     }
     return result;
   },
@@ -153,8 +160,6 @@ registerHooks({
 });
 
 original.mkdirSync(traceDirectory, { recursive: true });
-// A worker thread shares its process id, so its record is named by thread as well.
-const recordName = workerThreads.isMainThread ? String(process.pid) : `${process.pid}-${workerThreads.threadId}`;
 original.writeFileSync(resolve(traceDirectory, `${recordName}.started`), '');
 process.on('exit', () => {
   const trace: PreparationTrace = { schema: PREPARATION_TRACE_SCHEMA, pid: process.pid, argv: process.argv,
