@@ -19,9 +19,10 @@
  * from the pipeline's bundled JSDC catalogue. The result is one calibrated OIFITS file for the target. */
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe } from './eso-pipeline.mts';
+import { findLostFringes, pairVisibilities, removeLostFringes } from './lost-fringes.mts';
 import { toolchainPath } from './toolchain.mts';
 
 export { rawFrame } from './eso-pipeline.mts';
@@ -134,6 +135,16 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
         [[await raw(exposure), 'FRINGE'], [dark, 'DARK_CALIBRATION'], [kappa, 'KAPPA_MATRIX'], [spectral, 'SPECTRAL_CALIBRATION'], [paths.catalogue, 'JSDC_CAT']]) });
     }
   }
+  // Baselines whose fringes were lost are removed before any averaging (lost-fringes.mts), and recorded beside the products.
+  const lost = findLostFringes(await Promise.all(oidata.map(async entry => ({ id: entry.file, object: plan.blocks[entry.block]!.object, block: entry.block, pairs: pairVisibilities(await readFile(entry.file)) }))));
+  for (const entry of oidata) {
+    const pairs = lost.get(entry.file);
+    if (!pairs) continue;
+    const removed = resolve(dirname(entry.file), 'lost-fringes-removed.fits');
+    await writeFile(removed, removeLostFringes(await readFile(entry.file), pairs).bytes);
+    entry.file = removed;
+  }
+  await writeFile(resolve(work, 'lost-fringes.json'), `${JSON.stringify(Object.fromEntries([...lost].map(([file, pairs]) => [relative(work, dirname(file)), pairs])), null, 2)}\n`);
   // pndrs reads at most 15 files per argument (PNDRS_FILE_LIMIT), and a service-mode night holds more. Whole blocks are
   // grouped up to that limit; each calibrator group gives one transfer-function file, and every science group is calibrated against
   // all of them, so the transfer function is still interpolated across the night.
