@@ -8,6 +8,7 @@ import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter
 import { createCloudInspection, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { parsePreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
 import { readPreparedReconstruction } from '../../services/density-reconstruction.ts';
+import { finiteModelStarsPath } from '../../services/finite-lens-bundles.ts';
 import type { CloudBrightness, CloudStarOptions } from '@cssearth/volume-viewer/scene/cloud-types';
 import type { PreparedCssVolume } from '../../../adapters/renderer/volume-types.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
@@ -70,7 +71,13 @@ export async function promoteVolumeLenses(root: string, input: VolumeLensPromoti
     const catalogue = parseCloudCatalogue(JSON.parse(catalogueBytes.toString()), result.subject.id, volume.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.id)));
     const inspection = createCloudInspection(catalogue); inspection.setSelection(lens.enabledIds);
     assert.ok(volume.stacks.every(stack => stack.leaves.some(leaf => inspection.includes(leaf.id))), 'A promoted lens must contain cloud signal on all axes');
-    const stars = parsePreparedLmcStars(await json(resolve(root, result.subject.stars!)), volume.frame);
+    // A star layer belongs either to the subject catalogue or, for a finite emission model, to the
+    // model itself; the model-owned index verifies its own pin, frame and realizing model.
+    const owner = result.subject.sourceSubjectId;
+    assert.ok(result.subject.stars || (result.finiteMaterial && token(owner)), 'A promoted lens needs a star layer or an owning subject');
+    const starsPath = result.subject.stars ?? await finiteModelStarsPath(root, owner!, result.finiteMaterial!.modelResultId);
+    assert.ok(starsPath, 'A promoted lens needs a prepared catalogue star layer');
+    const stars = parsePreparedLmcStars(await json(resolve(root, starsPath)), volume.frame);
     const stellarGeometry = stars.stars.map(star => [star.id, star.positionUnits]);
     if (commonFrame) { assert.deepEqual(volume.frame, commonFrame); assert.deepEqual(stellarGeometry, commonStars); }
     else { commonFrame = volume.frame; commonStars = stellarGeometry; }
