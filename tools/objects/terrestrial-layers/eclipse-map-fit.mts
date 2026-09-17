@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
+import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { binAverage, bandTemperatureTable, fitLightCurveMap, temperatureGrid, type LightCurve, type Systematic } from '../eclipse-map/light-curve-map.mts';
 import { readTarMember } from './tar-member.mts';
 import { array, boolean, number, optional, shape, text } from './source-records.mts';
@@ -95,10 +95,10 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
     band = { wavelengthMicrons: centres, stellarIntensity: binAverage(stellar, centres), counts: Float64Array.from(rows, i => Math.max(0, counts[i]!)) };
   } else throw new TypeError(`Unknown band encoding ${recipe.band.encoding}.`);
 
-  const planet = BODIES[recipe.planet as keyof typeof BODIES], star = BODIES[recipe.host as keyof typeof BODIES];
-  if (!planet || !star) throw new TypeError(`Unknown planet ${recipe.planet} or host ${recipe.host}.`);
-  const radiusRatio = planet.meanRadiusKm / star.meanRadiusKm;
-  const result = fitLightCurveMap(curve, recipe.fit, hostedOrbit(recipe.planet), starAstrometry(recipe.host), radiusRatio);
+  const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
+  if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
+  const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
+  const result = fitLightCurveMap(curve, recipe.fit, hostedOrbit(planetId), starAstrometry(hostId), radiusRatio);
   // Temperatures are taken on the fit's own grid, the cells positivity was enforced on; a finer grid can dip below zero between them.
   const table = bandTemperatureTable(band), height = recipe.fit.gridHeight, width = 2 * height;
   if (!Number.isSafeInteger(height) || height < 2) throw new TypeError('The fit grid needs a whole height of at least 2.');
