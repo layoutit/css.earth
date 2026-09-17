@@ -3,7 +3,8 @@ import { test } from 'node:test';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseRawFrames, planPionierNight } from './calibrate-pionier.mts';
-import { readChannelRows, type ChannelVis2 } from './oifits-rows.mts';
+import { readChannelRows } from './oifits-rows.mts';
+import { matchVis2 } from './author-comparison.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const fixture = resolve(import.meta.dirname, 'fixtures/pionier-2014-09-25-raw-frames.csv');
@@ -52,19 +53,6 @@ test('a night plan pairs each block with its own dark and splits science from ca
   const setupPlan = planPionierNight(grism, 'RAQR', { from: '2019-08-07T00:00:00', to: '2019-08-07T12:00:00' }, dpId => wollaston.has(dpId) ? 'GRI+WOL/52' : 'GRISM/26');
   assert.deepEqual([setupPlan.spectral, setupPlan.kappa.frames[0], setupPlan.kappa.dark], ['PIONI.2019-08-06T10:47:50.943', 'PIONI.2019-08-06T10:46:35.987', 'PIONI.2019-08-06T10:46:10.000']);
 });
-
-/** Pairs our calibrated squared visibilities with the author's for the same exposure: the same baseline vector (either sign)
- * within a metre, channels matched in wavelength order. */
-export function matchVis2(ours: readonly ChannelVis2[], theirs: readonly ChannelVis2[]) {
-  const byBaseline = (rows: readonly ChannelVis2[]) => { const groups = new Map<string, ChannelVis2[]>(); for (const row of rows) { const key = `${row.u.toFixed(3)},${row.v.toFixed(3)}`; (groups.get(key) ?? groups.set(key, []).get(key)!).push(row); } return [...groups.values()].map(group => group.sort((a, b) => a.wavelengthMetres - b.wavelengthMetres)); };
-  const reference = byBaseline(theirs), pairs: [ChannelVis2, ChannelVis2][] = [];
-  for (const group of byBaseline(ours)) {
-    const { u, v } = group[0]!;
-    const match = reference.find(candidate => Math.min(Math.hypot(candidate[0]!.u - u, candidate[0]!.v - v), Math.hypot(candidate[0]!.u + u, candidate[0]!.v + v)) < 1);
-    if (match && match.length === group.length) group.forEach((row, index) => pairs.push([row, match[index]!]));
-  }
-  return pairs;
-}
 
 test('calibrating the raw π¹ Gruis block reproduces the author\'s published squared visibilities', async context => {
   const ours = resolve(repository, 'output/calibration/pi1-2014-09-25/calibrated.fits'), author = resolve(repository, 'src/objects/pi1-gruis/source/observations/PI_GRU_forImage.fits');
