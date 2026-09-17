@@ -40,6 +40,7 @@ import {loadControlledObservationGeometry,matchObservedColorLevels} from './phot
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { radialModelForLens } from './radial-models.mts';
+import { npyLonLatGridDependencies } from './npy-lonlat-grid.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
 
 export function createRasterEmitter(publicDirectory:string, publicBase:string) {
@@ -244,7 +245,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       : lens.format === 'vtk-cell-categories' ? [requireString(lens.surfaceSampling?.renderedMeshPath), lens.symbols?.paths, lens.symbols?.locations].filter(Boolean)
       : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
       : lens.format === 'geologic-shapefile' ? [requireString(requireRecord(lens.grid).attributePath), requireString(requireRecord(lens.grid).projectionPath)]
-      : lens.format === 'pds-image' ? [lens.labelPath] : [];
+      : lens.format === 'pds-image' ? [lens.labelPath]
+      : lens.format === 'npy-lonlat-grid' ? npyLonLatGridDependencies(lens) : [];
     for (const pathValue of dependencies) {
       const path = requireString(pathValue);
       if (![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === path)) throw new Error(`Unpinned scientific dependency: ${path}`);

@@ -21,7 +21,47 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "facts": [],
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Didymos",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+          "label": "Dimorphos · dimorphos relative albedo label",
+          "checked": "2026-09-16",
+          "path": "source/science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+          "catalogueId": "source-dimorphos-dimorphos-relative-albedo-label",
+          "locator": "title: \"(65803) Didymos I (Dimorphos)\""
+        }
+      },
+      {
+        "id": "dimensions",
+        "label": "Triaxial dimensions",
+        "value": "About 192 × 148 × 117 m",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-physical.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "Radii ~ (0.09594 x 0.07390 x 0.05856) km × 2"
+        }
+      },
+      {
+        "id": "encounter",
+        "label": "DART final approach images",
+        "value": "26 September 2022",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml",
+          "label": "Dimorphos · DRACO 2022-09-26T23:14:22.365Z geometry product",
+          "checked": "2026-09-16",
+          "path": "source/observations/dart_0401930049_43695_01_geo.xml",
+          "catalogueId": "dart-draco-0401930049-43695-geometry",
+          "locator": "start_date_time 2022-09-26T23:14:22.365Z"
+        }
+      }
+    ],
     "moreFacts": []
   },
   "lenses": {
