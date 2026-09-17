@@ -32,7 +32,7 @@ test('KFKI detector decoding rejects changed samples, headers and truncated padd
   const image=decodeVegaImage(bytes,header);
   assert.equal(image.data.length,262144);
   assert.equal(image.data.reduce((sum,n)=>sum+n,0),5208251);
-  assert.equal(image.cards.get('FILTER'),'NIR');
+  assert.equal(image.cards.FILTER,'NIR');
   const changed=Buffer.from(bytes);changed[700]++;
   assert.throws(()=>decodeVegaImage(changed,header),/checksum mismatch/);
   assert.throws(()=>decodeVegaImage(bytes,Buffer.from(header.toString().replace('5208251','5208252'))),/checksum mismatch/);
