@@ -96,3 +96,16 @@ test('the author file compared with itself pairs every point with itself', async
   assert.equal(agreement.pairs, rows.length);
   assert.deepEqual([agreement.ratio5, agreement.medianRatio, agreement.ratio95, agreement.medianSigma], [1, 1, 1, 0]);
 });
+
+test('AMBER seasons carry sourced calibrator diameters, and GRAVITY and MATISSE seasons carry exposures', async () => {
+  const raw = JSON.parse(await readFile(seasonPath, 'utf8')) as Record<string, unknown>;
+  const { nights, ...base } = raw;
+  const amber = parseSeason({ ...raw, instrument: 'amber', calibrators: { CANOPUS: { diameterMas: 6.93, errorMas: 0.15, source: 'Ohnaka et al. 2019' } } });
+  assert.ok(amber.data.instrument === 'amber' && amber.data.calibrators.get('CANOPUS')?.diameterMas === 6.93);
+  assert.throws(() => parseSeason({ ...raw, instrument: 'amber', calibrators: { CANOPUS: { diameterMas: 6.93, errorMas: 0.15 } } }));
+  const matisse = parseSeason({ ...base, instrument: 'matisse', exposures: [{ science: 'MATIS.2020-02-08T00:06:12.142' }, { science: 'MATIS.2020-02-08T00:30:00.000', calibrators: ['MATIS.2020-02-08T01:00:00.000'] }] });
+  assert.ok('exposures' in matisse.data);
+  assert.deepEqual(matisse.data.exposures.map(exposure => exposure.calibrators.length), [0, 1]);
+  assert.equal(nights !== undefined, true);
+  assert.throws(() => parseSeason({ ...base, instrument: 'gravity' }));
+});
