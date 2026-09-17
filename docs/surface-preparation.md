@@ -295,6 +295,12 @@ recipe's `texelsPerFace` sets the body's budget: its face count times that value
 The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
+
+![Main's fixed squares, the raster atlas and their pixelmatch difference for Enceladus, Hyperion and Alphonsina](images/raster-atlas-pixelmatch.webp)
+
+Same pose before and after the change (main, raster atlas, pixelmatch at threshold 0.1). Every face gets
+texels at one density, but where the source map is smoother than the old texels the screen does not
+change: the largest difference across all lenses of these three bodies was 0.45%, along a coverage edge.
 Ordinary mapped imagery is sampled from the lossless surface map at this step.
 For banded surfaces, [projective-surface-raster.mjs](../src/platform/projective-surface-raster.mts)
 packs latitude bands and gutters; poles have separate prepared tiles.
