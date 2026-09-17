@@ -37,5 +37,3 @@ export const parseReplayMaterial=shape({surfaces:array(surface),lighting:shape({
 export const parseReplayLenses=shape({controls:array(shape({id:text,billboardColor:optional(text)}))});
 export const parseReplayControls=shape({lenses:parseReplayLenses});
 export const parseReplayMinimaps=shape({images:array(shape({id:text}))});
-export const parseReplayTerrain=shape({width:number,height:number,source:shape({tileSize:number,atlasColumns:number}),
-  faces:array(shape({vertices:array(array(number)),normal:array(number),vertexNormals:array(array(number)),estimated:optional(boolean)}))});

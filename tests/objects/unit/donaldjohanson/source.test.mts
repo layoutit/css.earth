@@ -38,5 +38,5 @@ test('Donaldjohanson keeps the closed Lucy surface within the retained raster bu
  assert.equal(radial.faces.length,800);assert.equal(required(radial.simplification).sourceFaces,547996);assert.equal(required(radial.simplification).removedOppositeFaces,0);
  assert.equal(required(radial.simplification).topology.eulerCharacteristic,2);assert.equal(required(radial.simplification).topology.components,1);assert.ok(required(radial.simplification).estimatedErrorMeters<=56);
  assert.ok(radial.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));
- assert.deepEqual([radial.tileSize,radial.width,radial.height],[128,2048,6400]);
+ assert.ok(radial.plans.reduce((sum,p)=>sum+p.rect.width*p.rect.height,0)<=16384*radial.faces.length);
 });
