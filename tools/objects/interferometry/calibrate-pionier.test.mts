@@ -44,6 +44,13 @@ test('a night plan pairs each block with its own dark and splits science from ca
   assert.deepEqual(serviceNight.blocks.map(block => [block.object, block.role]), [['FRINGE,OBJECT', 'calibrator'], ['RAQR', 'science']]);
   assert.equal(serviceNight.spectral, 'PIONI.2019-08-06T10:51:40.890');
   assert.deepEqual(serviceNight.kappa.frames, ['PIONI.2019-08-06T10:49:35.078']);
+  // With setups, a GRISM night takes the GRISM lamp and kappa sets of that morning, not the GRISM+Wollaston ones taken last.
+  const grism = [...night,
+    at('2019-08-06T10:46:10.000', 'DARK'), at('2019-08-06T10:46:35.987', 'KAPPA,LAMP', 'KAPPA,LAMP', 'CALIB', '60.A-9800(K)', '2019-08-06T10:46:30'),
+    at('2019-08-06T10:47:50.943', 'FRINGE,LAMP')].sort((a, b) => a.dpId.localeCompare(b.dpId));
+  const wollaston = new Set(['PIONI.2019-08-06T10:48:40.000', 'PIONI.2019-08-06T10:49:35.078', 'PIONI.2019-08-06T10:51:40.890', 'PIONI.2019-08-07T10:40:00.000', 'PIONI.2019-08-07T10:42:00.000', 'PIONI.2019-08-07T10:45:00.000']);
+  const setupPlan = planPionierNight(grism, 'RAQR', { from: '2019-08-07T00:00:00', to: '2019-08-07T12:00:00' }, dpId => wollaston.has(dpId) ? 'GRI+WOL/52' : 'GRISM/26');
+  assert.deepEqual([setupPlan.spectral, setupPlan.kappa.frames[0], setupPlan.kappa.dark], ['PIONI.2019-08-06T10:47:50.943', 'PIONI.2019-08-06T10:46:35.987', 'PIONI.2019-08-06T10:46:10.000']);
 });
 
 /** Pairs our calibrated squared visibilities with the author's for the same exposure: the same baseline vector (either sign)
