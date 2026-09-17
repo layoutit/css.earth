@@ -9,7 +9,7 @@ export function ReconstructionControlsPanel({ shell, controller }: LabControlsPr
   return <aside id="cloud-adjustment-panel" className="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden={shell.view !== 'reconstruction' || !shell.presentation?.cloudAdjustments && Boolean(emission)}>
             <ImageAppearancePanel
               image={shell.presentation?.reconstructionImages ? <div id="reconstruction-image-picker" /> : <><label className="visually-hidden" htmlFor="unavailable-reconstruction-image">Image</label><select id="unavailable-reconstruction-image" disabled><option>No image reconstruction configured</option></select><div id="reconstruction-image-picker" hidden /></>}
-              material={{ reason: 'This saved reconstruction does not expose interchangeable neutral and textured banks. Image selection retains its existing reconstruction workflow.' }}
+              material={shell.material?.available && !shell.material.loading && !shell.busy ? { mode: shell.material.mode, onChange: mode => void controller.current?.setMaterial(mode) } : { mode: shell.material?.mode, reason: shell.material?.loading ? 'Loading the prepared material bank.' : 'This saved reconstruction does not include a matching prepared neutral bank.' }}
               stars={<div id="reconstruction-stars-toggle" />}
               original={<ImageAppearanceCheckbox id="reconstruction-original-enabled" label="Original" control={shell.busy || !shell.originalOverlay?.available || shell.originalOverlay.loading ?
                 { checked: shell.originalOverlay?.enabled, reason: 'Select a saved reconstruction prepared with an original-image reference.' } :

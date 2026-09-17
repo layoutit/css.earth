@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-image-processing-plan@1",
+  "catalogue": "labs/nebula/models/smc/image-candidates.json",
+  "alignmentReport": {
+    "path": "labs/nebula/models/smc/registration/alignment-report.json",
+    "sha256": "f02d9370c74450cc5143a5d3fcc608635f2714dc7141cbf466a22690d2398001"
+  },
+  "selections": [],
+  "treatments": [
+    {
+      "id": "smc-wise-starforming",
+      "stellarTreatment": "preserve",
+      "reason": "Compact 12 and 22 micron knots are dust emission, not stars: a NOX application kept only 38 percent of the compact excess at the brightest knots."
+    },
+    {
+      "id": "smc-herschel-dust",
+      "stellarTreatment": "preserve",
+      "reason": "Compact 250 micron clumps are cold dust, not stars: a NOX application kept only 73 percent of the compact excess at the brightest knots."
+    }
+  ]
+}

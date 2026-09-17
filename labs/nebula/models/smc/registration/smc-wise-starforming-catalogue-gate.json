@@ -1,0 +1,171 @@
+{
+  "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
+  "pass": true,
+  "gates": {
+    "uniqueMatches": true,
+    "allFourQuadrants": true,
+    "halfImageHull": true,
+    "median": true,
+    "p90": true,
+    "chanceExcess": true
+  },
+  "source": {
+    "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-starforming.a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1.png",
+    "sha256": "a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1",
+    "nativeDimensions": [
+      4000,
+      4000
+    ],
+    "channel": "W1 blue channel",
+    "wcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        4000,
+        4000
+      ],
+      "referencePixel": [
+        2000,
+        2000
+      ],
+      "referenceValueDeg": [
+        13.19,
+        -72.83
+      ],
+      "scaleDeg": [
+        -0.0025063655876377947,
+        0.0025063655876377947
+      ],
+      "rotationDeg": 0
+    }
+  },
+  "catalogue": {
+    "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
+    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
+    "downloadedRows": 13220,
+    "inFieldIsolatedCandidates": 7170,
+    "query": {
+      "path": "labs/nebula/models/smc/registration/allwise-query.json",
+      "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
+    }
+  },
+  "predeclaredProtocol": {
+    "minUniqueMatches": 100,
+    "minQuadrants": 4,
+    "minHullFraction": 0.5,
+    "maxMedianNativeWisePixels": 0.75,
+    "maxP90NativeWisePixels": 1.5,
+    "chanceRadiusNativePixels": 0.75,
+    "minChanceExcessMargin": 5,
+    "correspondenceWindowNativeWisePixels": 2.5,
+    "catalogueIsolationPixels": 5,
+    "catalogueMagnitudeRangeW1": [
+      8,
+      11
+    ]
+  },
+  "chanceExcess": {
+    "closeMatches": 7140,
+    "expectation": 110,
+    "ratio": 64.9090909090909,
+    "pass": true,
+    "analyticExpectedChanceMatches": 82.75947259198924,
+    "detectionDensityPerSquarePixel": 0.0065696875,
+    "method": "Inside the chance radius, real matches must exceed the largest chance estimate by the declared margin. The estimate is the larger of every shifted and wrong-transform control count in that same radius and the analytic rate for this detection density, so denser detections raise the bar instead of failing a fixed ratio."
+  },
+  "refitted": false,
+  "allCoordinatesHeldOutFromAnyFit": true,
+  "uniqueMatchedStars": 7143,
+  "reservedCheckCount": 2381,
+  "detectedStars": 105115,
+  "residualNativeWisePixels": {
+    "median": 0.028242938815617034,
+    "p90": 0.07523948576296072,
+    "max": 2.48882324318098
+  },
+  "reservedCheckResidualNativeWisePixels": {
+    "median": 0.028007583290336382,
+    "p90": 0.07166854547821623,
+    "max": 2.48882324318098
+  },
+  "residualArcseconds": {
+    "median": 0.2527100746264743,
+    "p90": 0.6466592739695596,
+    "max": 22.456443349518835
+  },
+  "matchedSourceHullFraction": 0.9866046544463822,
+  "quadrantMatchCounts": [
+    1722,
+    1506,
+    1912,
+    2003
+  ],
+  "shiftedControls": [
+    {
+      "offsetNativePixels": [
+        40,
+        0
+      ],
+      "matchesWithin2_5Pixels": 1074,
+      "matchesWithinChanceRadius": 89
+    },
+    {
+      "offsetNativePixels": [
+        0,
+        40
+      ],
+      "matchesWithin2_5Pixels": 1150,
+      "matchesWithinChanceRadius": 88
+    },
+    {
+      "offsetNativePixels": [
+        100,
+        -70
+      ],
+      "matchesWithin2_5Pixels": 1050,
+      "matchesWithinChanceRadius": 94
+    }
+  ],
+  "wrongTransformControls": {
+    "mirrorX": {
+      "matchesWithin2_5Pixels": 1144,
+      "matchesWithinChanceRadius": 99
+    },
+    "mirrorY": {
+      "matchesWithin2_5Pixels": 1111,
+      "matchesWithinChanceRadius": 110
+    },
+    "rotate90": {
+      "matchesWithin2_5Pixels": 1050,
+      "matchesWithinChanceRadius": 107
+    },
+    "scale09": {
+      "matchesWithin2_5Pixels": 1170,
+      "matchesWithinChanceRadius": 98
+    },
+    "scale11": {
+      "matchesWithin2_5Pixels": 922,
+      "matchesWithinChanceRadius": 95
+    }
+  },
+  "limitations": [
+    "Catalogue and image originate from the same infrared survey; catalogue positions independently check fixed publisher image WCS.",
+    "The chance control measures association by coincidence at this raster's own detection density; it does not bound systematic errors that move real and control matches together.",
+    "Display raster sampling is not native detector angular resolution.",
+    "Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.",
+    "Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds; the chance-excess control gates acceptance."
+  ],
+  "compositeBlueChannel": "AllWISE W1 atlas mosaic",
+  "skyBands": {
+    "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming.json",
+    "sha256": "f0adaa3f9be4279e979fc77d60caa4d68872d763815ebe8dfc535cc6de62aaca"
+  },
+  "implementation": {
+    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
+    "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
+  },
+  "matchedStars": {
+    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-wise-starforming/matched-stars.json",
+    "sha256": "6bb2d473290e24432a9698df7005a5134e2e1cea07fed1556037bfeb7dd06806"
+  }
+}

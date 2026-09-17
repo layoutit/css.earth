@@ -29,6 +29,7 @@ export function AlignmentControls({ shell, controller, updateAlignment }: LabCon
                 </div>
               </div>
               <div id="automatic-star-removal"></div>
+              <label htmlFor="density-overlay-enabled"><input id="density-overlay-enabled" type="checkbox" checked={alignment?.densityOverlayEnabled ?? false} onChange={event => controller.current?.showDensityOverlay(event.target.checked)} /> Density overlay</label>
               <div className="overlay-visibility">
                 <label id="overlay-enabled-label" htmlFor="overlay-enabled"><input id="overlay-enabled" type="checkbox" checked={alignment?.enabled ?? false} onChange={event => { updateAlignment({ enabled: event.target.checked }); controller.current?.showImage(event.target.checked); }} /> Show image</label>
                 <label htmlFor="overlay-opacity">Opacity</label>

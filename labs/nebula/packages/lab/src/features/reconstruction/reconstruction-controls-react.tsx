@@ -1,3 +1,5 @@
+import type { ReconstructionProcessingCapability } from './reconstruction-capabilities.ts';
+import { acceptsSavedResult, selectedPreviewAllowed, selectedProcessing } from './reconstruction-selection.ts';
 import { useEffect, useRef, useState } from 'react';
 import type { ControlPortals } from '../../ui/control-portals';
 import { readOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
@@ -34,7 +36,7 @@ interface Props { context: string | null; viewerBusy: boolean;
   onSelect(prepared: PreparedReconstruction | null, subjectId: string, isCurrent: () => boolean): Promise<boolean>;
 }
 interface View { imageId: string; candidates: ReconstructionCandidate[]; selectDisabled: boolean; processDisabled: boolean;
-  appearance: CloudAppearance; appearanceDirty: boolean;
+  appearance: CloudAppearance; appearanceDirty: boolean; processing?: ReconstructionProcessingCapability;
   running: boolean; cancelling: boolean; job: Job | null; text: string; error: boolean; credit: string; sourcePageUrl?: string; displayedResultId?: string; }
 const initialView: View = { imageId: 'benchmark', candidates: [], selectDisabled: true, processDisabled: true,
   appearance: parseCloudAppearance(), appearanceDirty: false,
@@ -49,6 +51,8 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
   let version = 0, controller: AbortController | null = null, job: Job | null = null, loading = false, mounting = false, viewerBusy = false;
   let starting: Promise<void> | null = null;
   let appearance = parseCloudAppearance(), displayedAppearance = parseCloudAppearance();
+  let displayedProcessing: ReconstructionProcessingCapability | undefined;
+  const previewAllowed = () => selectedPreviewAllowed(catalogue, candidate());
   const candidate = () => catalogue?.candidates.find(item => item.imageId === selection.imageId);
   function message(value: string, error = false) { messageText = value; messageError = error; render(); }
   function saveSelection() {
@@ -58,7 +62,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
     const row = candidate(), running = active(job);
     setView({ imageId: selection.imageId, candidates: catalogue?.candidates ?? [],
       selectDisabled: loading || mounting || viewerBusy || !subjectId,
-      processDisabled: !row?.ready || loading || mounting || viewerBusy || running,
+      processing: selectedProcessing(catalogue, row), processDisabled: !previewAllowed() || !row?.ready || loading || mounting || viewerBusy || running,
       appearance: { ...appearance }, appearanceDirty: Boolean(row) && !sameCloudAppearance(appearance, displayedAppearance),
       running, cancelling: job?.status === 'cancelling', job, text: messageText, error: messageError,
       credit: row?.credit ?? 'Historical photo-based LMC experiment.', sourcePageUrl: row?.sourcePageUrl,
@@ -86,10 +90,12 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
     mounting = true; render();
     try {
       if (await onSelect(prepared, subjectId, current) && current()) {
+        displayedProcessing = prepared?.processing;
         displayedAppearance = parseCloudAppearance(prepared?.appearance);
         appearance = readCloudAppearance(subjectId, selection.imageId, displayedAppearance);
         selection.displayedResultId = prepared?.resultId; saveSelection();
-        message(prepared ? 'Reconstruction loaded.' : 'Unpainted density reference.');
+        const skipped = catalogue?.finiteModel?.skipped?.length; // Never present an older fit as the newest one silently.
+        message(`${skipped ? `Older finite model shown · ${skipped} newer lens index rejected. ` : ''}${prepared ? displayedProcessing?.densityPreview === false ? `${displayedProcessing.modelLabel} · offline refit only.` : 'Reconstruction loaded.' : 'Unpainted density reference.'}`, Boolean(skipped));
       }
     } finally { if (current()) { mounting = false; render(); } }
   }
@@ -143,21 +149,25 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
     try {
       const row = candidate(), saved = readJob();
       appearance = readCloudAppearance(subjectId!, selection.imageId, row?.prepared?.appearance); render();
-      if (saved && active(saved)) {
+      if (saved && active(saved) && selectedPreviewAllowed(catalogue, row)) {
         job = { id: saved.id, status: saved.status }; message('Reattaching to reconstruction…'); render(); void watch(saved);
       }
       if (!row) { await install(null, current); return; }
       if (row.prepared) await install(row.prepared, current);
-      else if (restoreDisplay && selection.displayedResultId) {
-        const prepared = await json(`/__nebula/reconstruction/result/${selection.displayedResultId}`);
+      else if (restoreDisplay && selection.displayedResultId && catalogue && acceptsSavedResult(catalogue, selection.displayedResultId)) {
+        const prepared = await json(`/__nebula/reconstruction/result/${selection.displayedResultId}`) as PreparedReconstruction;
+        if (prepared.imageId === row.imageId) row.prepared = prepared; // Preview capability follows the selected row.
         if (current()) await install(prepared, current);
       }
       if (current() && !active(job) && !row.prepared) message(row.ready ? 'Ready to process.' : row.reason ?? 'Remove stars in Alignment first.');
     } catch (error) { if (current()) { mounting = false; message(error instanceof Error ? error.message : String(error), true); render(); } }
   }
-  actions.current.choose = value => { selection.imageId = value; saveSelection(); void activateSelection(); };
+  actions.current.choose = value => {
+    if (catalogue?.candidates.find(row => row.imageId === value)?.unavailable) return;
+    selection.imageId = value; saveSelection(); void activateSelection();
+  };
   actions.current.appearance = value => {
-    if (!subjectId || !candidate() || loading || mounting || viewerBusy || active(job)) return;
+    if (!previewAllowed() || !subjectId || !candidate() || loading || mounting || viewerBusy || active(job)) return;
     appearance = parseCloudAppearance(value); saveCloudAppearance(subjectId, selection.imageId, appearance); render();
   };
   actions.current.export = () => {
@@ -166,6 +176,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
     void saveLensSettings(subjectId, { ...selection }, captureSettings?.()).then(() => setExportLabel('✓ Lens settings saved'), error => { setExportLabel('Save lens settings'); message(error.message, true); });
   };
   actions.current.process = () => {
+    if (!previewAllowed()) { message(selectedProcessing(catalogue, candidate())?.reason ?? 'This saved method does not support density Preview.'); return; }
     const row = candidate(); if (!row?.ready || !row.removalResultId || !catalogue || !subjectId || loading || mounting || active(job)) return;
     const previous = readJob(); if (previous && active(previous)) { void activateSelection(); return; }
     const savedPlacement = readOverlaySessions().get(catalogue.overlayCatalogue)?.find(item => item.id === row.imageId);
@@ -209,10 +220,10 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
           if (owner !== version) return;
           if (value.subjectId !== next || !Array.isArray(value.candidates)) throw new TypeError('Invalid reconstruction source catalogue.');
           catalogue = value;
-          if (!selection.imageId) selection.imageId = value.candidates.find(row => row.prepared)?.imageId ?? 'benchmark';
+          if (!selection.imageId || candidate()?.unavailable) selection.imageId = value.candidates.find(row => row.prepared)?.imageId ?? 'benchmark';
           if (selection.imageId !== 'benchmark' && !candidate()) selection.imageId = 'benchmark';
           const requested = /^reconstruction-([a-f0-9]{64})$/.exec(new URL(location.href).searchParams.get('subject') ?? '')?.[1];
-          if (requested) {
+          if (requested && acceptsSavedResult(value, requested)) {
             const prepared = value.candidates.find(row => row.prepared?.resultId === requested)?.prepared ??
               await json(`/__nebula/reconstruction/result/${requested}`) as PreparedReconstruction;
             if (owner !== version) return;
@@ -240,15 +251,16 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
     <select id="reconstruction-image" aria-describedby="reconstruction-image-status" value={view.imageId}
       disabled={view.selectDisabled} onChange={event => actions.current.choose?.(event.target.value)}>
       <option value="benchmark">Unpainted density</option>
-      {view.candidates.map(row => <option key={row.imageId} value={row.imageId}>{row.label}{row.prepared ? ' · saved' : ''}</option>)}
+      {view.candidates.map(row => <option key={row.imageId} value={row.imageId} disabled={Boolean(row.unavailable)} title={row.unavailable}>
+        {row.label}{row.unavailable ? ' · no lens' : row.prepared ? ' · saved' : ''}</option>)}
     </select>
     </WorkspaceImagePicker>
     <ImageCredit credit={view.credit} active={context !== null && view.imageId !== 'benchmark' && view.candidates.some(row => row.imageId === view.imageId)} />
-    {view.imageId !== 'benchmark' && <CloudAppearanceControls value={view.appearance} disabled={view.processDisabled}
+    {view.imageId !== 'benchmark' && <CloudAppearanceControls value={view.appearance} disabled={view.processDisabled} reason={view.processing?.reason}
       onChange={value => actions.current.appearance?.(value)} />}
     <div className="reconstruction-actions">
       <button id="reconstruction-process" type="button" disabled={view.processDisabled} onClick={() => actions.current.process?.()}
-        title="Save and display a local preview with these settings and the current Alignment placement. Reuses saved starless pixels; never runs star removal.">Preview</button>
+        title={view.processing?.reason ?? "Save a material preview on the fixed density source using the current Alignment placement."}>Preview</button>
       <button id="reconstruction-cancel" type="button" hidden={!view.running} disabled={view.cancelling} onClick={() => actions.current.cancel?.()}>Cancel</button>
     </div>
     <p id="reconstruction-image-status" className="reconstruction-image-detail" role="status" aria-live="polite" data-error={view.error}>

@@ -12,7 +12,7 @@ const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).dige
 const request = { imageId: 'test-photo', action: 'preview' };
 const modelPin = { path: '.local/model.pb', sha256: hash('synthetic pinned model') };
 const script = '# synthetic worker, replaced by the injected runner\n';
-const planPath = 'labs/nebula/models/lmc/star-separation/plan.json';
+const planPath = 'models/test/processing-plan.json';
 const cachePath = '.local/nebula-lab/star-removal-nox';
 
 async function fixture(changeResult?: (result: any) => void) {
@@ -31,6 +31,7 @@ async function fixture(changeResult?: (result: any) => void) {
   await write(source.path, sourceBytes); await write(modelPin.path, 'synthetic pinned model'); await write('labs/nebula/packages/reconstruction/src/star-removal/star-removal.py', script);
   await write('recipe.json', recipeBytes); await write('proof/gate.json', gate); await write('proof/alignment.json', reportBytes);
   await json('catalogue.json', { targets: [{ directory: 'models/test', images: [{ id: request.imageId, ...source, wcs: geometry.wcs }] }] });
+  await json('labs/nebula/packages/lab/src/state/subjects.json', [{ id: 'test', density: { processingPlan: planPath } }]);
   await json(planPath, { schema: 'cssearth-image-processing-plan@1', catalogue: 'catalogue.json',
     alignmentReport: { path: 'proof/alignment.json', sha256: hash(reportBytes) }, selections: [{ id: request.imageId, recipe: 'recipe.json', recipeSha256: hash(recipeBytes) }] });
   await write('.local/approved/diffuse.png', sourceBytes);
@@ -183,6 +184,10 @@ test('16-bit imported images get a separate full-size RGB8 input while their ori
     assert.equal(overview.sourceSha256, hash(converted));
     assert.deepEqual(await readFile(join(f.root, '.local/colour16.tif')), original);
     assert.deepEqual(await f.remove({ ...request, action: 'overview' }), overview);
+    f.source.path = `${cachePath}-inputs/${hash(original)}-rgb8-v1.png`; f.source.sha256 = hash(converted);
+    const applied = await f.remove({ ...request, action: 'apply' }) as any;
+    assert.equal(await f.remove.discoverApplied(request.imageId, hash(f.overview)), applied.applied.resultId);
+    assert.equal(f.calls.length, 1);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 
@@ -213,5 +218,53 @@ test('cancelling one observer keeps shared inference; cancelling the final obser
     second.abort(); await secondRejected;
     for (let i = 0; i < 100 && (await readdir(join(f.root, cachePath))).length; i++) await delay(10);
     assert.equal(stopped, true); assert.deepEqual(await readdir(join(f.root, cachePath)), []);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+
+test('native discovery restores verified completed images without launching removal and rejects changed model/source outputs', async () => {
+  const f = await fixture();
+  try {
+    assert.equal(await f.remove.discoverApplied(request.imageId, hash(f.overview)), null);
+    assert.equal(f.calls.length, 0);
+    const result = await f.remove({ ...request, action: 'apply' }) as any;
+    assert.equal(await f.remove.discoverApplied(request.imageId, hash(f.overview)), result.applied.resultId);
+    assert.equal(f.calls.length, 1);
+    await f.write(modelPin.path, 'changed model');
+    assert.equal(await f.remove.discoverApplied(request.imageId, hash(f.overview)), null);
+    assert.equal(f.calls.length, 1);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('a configured preserve treatment keeps every native pixel, runs no inference and refuses a tampered identity', async () => {
+  const f = await fixture(), preserveImplementation = 'labs/nebula/packages/reconstruction/src/star-removal/native.ts';
+  try {
+    await f.write(preserveImplementation, '// synthetic pinned identity treatment\n');
+    const reason = 'Compact 22 micron knots are dust emission, not stars.';
+    await f.json(planPath, { schema: 'cssearth-image-processing-plan@1', catalogue: 'catalogue.json',
+      alignmentReport: { path: 'proof/alignment.json', sha256: hash(await readFile(join(f.root, 'proof/alignment.json'))) },
+      selections: [], treatments: [{ id: request.imageId, stellarTreatment: 'preserve', reason }] });
+    const result = await f.remove({ ...request, action: 'apply' }) as any;
+    assert.equal(result.method, 'preserve');
+    assert.equal(f.calls.length, 0, 'the identity treatment never starts the NOX worker');
+    const token: string = result.applied.resultId, directory = join(f.root, `${cachePath}-applied`, token.split('.')[0]);
+    const saved = JSON.parse(await readFile(join(directory, 'result.json'), 'utf8'));
+    assert.equal(saved.treatment, 'preserve'); assert.equal(saved.reason, reason);
+    assert.equal(saved.applied.counts.removedPixels, 0);
+    const decoded = await sharp(await readFile(join(directory, 'diffuse.png'))).raw().toBuffer();
+    assert.deepEqual(decoded, await sharp(f.sourceBytes).removeAlpha().raw().toBuffer(), 'the preserved diffuse layer is the source itself');
+    assert.ok((await sharp(await readFile(join(directory, 'stars.png'))).raw().toBuffer()).every(byte => byte === 0), 'the star layer is empty');
+    assert.equal((await f.remove.resolveApplied(token, request.imageId, hash(f.overview))).value.layers.length, 2);
+    // A "preserved" result whose layers are not the identity of the source must never restore, even when its own hashes agree.
+    const starless = await sharp({ create: { width: 16, height: 12, channels: 3, background: '#0b1d2e' } }).png().toBuffer();
+    await writeFile(join(directory, 'diffuse.png'), starless);
+    saved.artifactSha256['diffuse.png'] = hash(starless);
+    const tampered = Buffer.from(JSON.stringify(saved));
+    await writeFile(join(directory, 'result.json'), tampered);
+    await assert.rejects(f.remove.resolveApplied(`${token.split('.')[0]}.${hash(tampered)}`, request.imageId, hash(f.overview)), /identity treatment/);
+    // Removing the configured treatment must not silently accept the preserved result as a NOX application.
+    await f.json(planPath, { schema: 'cssearth-image-processing-plan@1', catalogue: 'catalogue.json',
+      alignmentReport: { path: 'proof/alignment.json', sha256: hash(await readFile(join(f.root, 'proof/alignment.json'))) }, selections: [] });
+    await assert.rejects(f.remove.resolveApplied(token, request.imageId, hash(f.overview)), /treatment differs|identity treatment|stale/);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });

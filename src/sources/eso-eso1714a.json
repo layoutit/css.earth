@@ -1,0 +1,49 @@
+{
+  "id": "eso-eso1714a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Small Magellanic Cloud · ESO eso1714a",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1714a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1714a/",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/smc/image-candidates.json",
+      "revision": "101899478bc56f7549cafe9e51d7617cce301a3d",
+      "sha256": "370201999627e8a3f80649bc82c25cae491005a8fc78739e9d88dcbadb79144f",
+      "locator": "/targets/0/images/0"
+    }
+  ],
+  "publisher": "ESO/VISTA VMC",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VISTA VMC",
+      "scope": "Published source",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/0"
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/0"
+    },
+    {
+      "kind": "limitation",
+      "text": "Publisher 4000-pixel derivative; the 43223 × 38236 publisher master was not acquired. Display colour, not calibrated photometry.",
+      "scope": "Acquired representation",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/0/registrationNote"
+    }
+  ]
+}

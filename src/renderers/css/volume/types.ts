@@ -27,6 +27,8 @@ export interface PreparedVolumeLeaf {
 
 export interface PreparedVolumeStack {
   readonly axis: VolumeAxis;
+  /** Prepared unit normal after an authored rigid model placement. */
+  readonly normalUnits?: VolumeVector;
   readonly leaves: readonly PreparedVolumeLeaf[];
 }
 

@@ -16,10 +16,19 @@ export async function rectifyObservation(bytes: Buffer, mapping: ObservationMapp
   const source = await sharp(bytes, { unlimited: true }).toColourspace('srgb').removeAlpha()
     .resize({ width: width * 2, height: width * 2, fit: 'inside', withoutEnlargement: true })
     .raw().toBuffer({ resolveWithObject: true });
+  // A source that declares its own coverage keeps it: alpha 0 means unobserved, never zero brightness. The
+  // prefilter would blend masked pixels into their neighbours, so coverage is resampled from the native alpha.
+  const declared = (await sharp(bytes, { unlimited: true }).metadata()).hasAlpha === true;
+  const alpha = declared ? await sharp(bytes, { unlimited: true }).ensureAlpha().extractChannel(3)
+    .resize({ width: width * 2, height: width * 2, fit: 'inside', withoutEnlargement: true, kernel: 'nearest' })
+    .raw().toBuffer({ resolveWithObject: true }) : null;
+  if (alpha && (alpha.info.width !== source.info.width || alpha.info.height !== source.info.height))
+    throw new Error('Observation coverage channel differs from its own pixel grid.');
   const { min, max } = mapping.boundsUnits;
   const height = Math.max(1, Math.round(width * (max[1] - min[1]) / (max[0] - min[0])));
   if (width * height > 4_194_304) throw new TypeError('Rectified image exceeds four million pixels.');
   const rgb = new Uint8Array(width * height * 3), intensity = new Float32Array(width * height);
+  const sourceCoverage = alpha ? new Uint8Array(width * height) : undefined;
   let coveredPixels = 0;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const uv = mapping.uvAtTangent(min[0] + (x + .5) / width * (max[0] - min[0]),
@@ -30,6 +39,11 @@ export async function rectifyObservation(bytes: Buffer, mapping: ObservationMapp
     const sy = Math.max(0, Math.min(source.info.height - 1, uv[1] * source.info.height - .5));
     const x0 = Math.floor(sx), y0 = Math.floor(sy), x1 = Math.min(x0 + 1, source.info.width - 1), y1 = Math.min(y0 + 1, source.info.height - 1);
     const tx = sx - x0, ty = sy - y0, p = y * width + x;
+    if (alpha && sourceCoverage) {
+      // Any masked contributor makes the resampled pixel unobserved; a mask must not shrink by interpolation.
+      const taps = [[x0, y0], [x1, y0], [x0, y1], [x1, y1]] as const;
+      sourceCoverage[p] = taps.every(([xx, yy]) => alpha.data[yy * alpha.info.width + xx]! >= 250) ? 1 : 0;
+    }
     for (let c = 0; c < 3; c++) {
       const at = (xx: number, yy: number) => source.data[(yy * source.info.width + xx) * source.info.channels + c]!;
       rgb[3 * p + c] = Math.round((at(x0, y0) * (1 - tx) + at(x1, y0) * tx) * (1 - ty) +
@@ -37,7 +51,7 @@ export async function rectifyObservation(bytes: Buffer, mapping: ObservationMapp
     }
     intensity[p] = (rgb[3 * p]! * .2126 + rgb[3 * p + 1]! * .7152 + rgb[3 * p + 2]! * .0722) / 255;
   }
-  return { width, height, rgb, intensity, coveredPixels };
+  return { width, height, rgb, intensity, coveredPixels, ...(sourceCoverage ? { sourceCoverage } : {}) };
 }
 
 export async function writeObservationPanel(path: string, photo: ObservationPhoto, channel?: Float32Array, eastLeft = true) {

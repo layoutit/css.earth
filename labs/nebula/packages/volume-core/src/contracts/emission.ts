@@ -30,7 +30,7 @@ export interface EmissionComponent {
   /** This component's peak integrated projected emission; z integration recovers this weight. */
   projectedWeight: number;
   /** Historical halo-near/far records remain readable; new unconstrained supports use halo-diffuse. */
-  depthAssignment: 'scaffold-near' | 'scaffold-far' | 'halo-near' | 'halo-far' | 'halo-diffuse' | 'evidence-surface';
+  depthAssignment: 'scaffold-near' | 'scaffold-far' | 'halo-near' | 'halo-far' | 'halo-diffuse' | 'evidence-surface' | 'simulation-prior' | 'unsupported-local';
   velocityCovered: boolean;
 }
 export interface EmissionFieldModel {
@@ -49,7 +49,7 @@ export interface EmissionFieldModel {
     /** Authored diffuse maximum |z| at depth=1; absent in historical spherical-halo records. */
     diffuseDepthExtentArcsec?: number;
     /** Equal weights among scaffold intersections only; diffuse supports are centered at z=0. */
-    equalNearFarSplit: true; velocityUncoveredComponents: number;
+    equalNearFarSplit: boolean; velocityUncoveredComponents: number;
   };
 }
 export interface EmissionFitResult {
