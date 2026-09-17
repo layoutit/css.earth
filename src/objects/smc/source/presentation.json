@@ -2,63 +2,216 @@
   "schema": "cssearth-volume-presentation-source@1",
   "objectId": "smc",
   "name": "Small Magellanic Cloud",
-  "defaultLens": "optical",
+  "defaultLens": "smc-horalek-wide",
   "bank": {
-    "path": "src/objects/smc/prepared/image-layers.json",
-    "sha256": "80075d89330548560ba584a949398f1500a53e8d327245ae563d43b57e316ea6",
-    "bytes": 178276
+    "path": "src/objects/smc/prepared/lenses.json",
+    "sha256": "ac06472b4d62c27a2b14c7a95da79f2b4cc48927b2b5f2d140d2b3b56d246925",
+    "bytes": 6162626
   },
   "recipes": [
     {
-      "id": "image-layer-recipe",
-      "path": "src/objects/smc/source/recipe.json",
-      "sha256": "fbe9ee025ef9935b0e037452281ff5acdc0a5e4316372aabb03c07dd41c6fbde",
-      "bytes": 2880
+      "id": "recipe-1",
+      "path": "src/objects/smc/source/lenses.json",
+      "sha256": "de47bdd2d852e332efce4f61eeffb0abda2d93b72e5ca3e797ea1870531763cf",
+      "bytes": 4033
     },
     {
-      "id": "source-evidence",
-      "path": "src/objects/smc/source/provenance.json",
-      "sha256": "23ec5aaec69500bce667a2b37bd686fd9e235dbf7b6ecab6fca47428964f4505",
-      "bytes": 1689
+      "id": "recipe-2",
+      "path": "src/objects/smc/source/evidence/smc/constrained/emission-envelope-ellipsoid.json",
+      "sha256": "43430d8b03e3ab441d8a9bd1ea4dc8821ec513e6cd0e0d5815d11095990d38af",
+      "bytes": 1724
+    },
+    {
+      "id": "recipe-3",
+      "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
+      "sha256": "2c01258b01ed763bd1b3cacf6bc9429ef43c083ef0460b17845efea55594dbf7",
+      "bytes": 2224
+    },
+    {
+      "id": "recipe-4",
+      "path": "src/objects/smc/source/evidence/smc/constrained/fit.json",
+      "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe",
+      "bytes": 4922
+    },
+    {
+      "id": "recipe-5",
+      "path": "src/objects/smc/source/evidence/smc/registration/alignment-report.json",
+      "sha256": "f02d9370c74450cc5143a5d3fcc608635f2714dc7141cbf466a22690d2398001",
+      "bytes": 12990
+    },
+    {
+      "id": "recipe-6",
+      "path": "src/objects/smc/source/lens-settings-evidence.json",
+      "sha256": "8eb5e0aba4808fe90244fc7729dfee92cb6df681e3cd34eb8b31baaa6223bace",
+      "bytes": 2497
     }
   ],
-  "sharedInputs": [],
+  "sharedInputs": [
+    "density-prior",
+    "vmc-red-clump",
+    "catalogue-stars",
+    "sky-registration"
+  ],
+  "inputEvidence": [],
   "lenses": [
     {
-      "id": "optical",
-      "label": "NSF's NOIRLab via AstroPix \u00b7 optical",
-      "title": "Deepest, widest view of the Small Magellanic Cloud from SMASH",
-      "description": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. The SMASH image covers the main optical body, not the full Bridge, Wing or tidal debris. Released foreground and background sources remain.",
-      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
-      "detail": "3000 \u00d7 2501 px",
+      "id": "smc-horalek-wide",
+      "label": "Horálek optical",
+      "title": "Petr Horálek’s wide-field SMC",
+      "description": "Optical photograph colours are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "6069 × 4045 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "DECam g / DECam r / DECam i / DECam z"
+          "value": "Visible-light photograph"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "3000 \u00d7 2501"
+          "value": "6069 × 4045"
         },
         {
-          "id": "coverage",
-          "label": "Image field",
-          "value": "318.00 \u00d7 264.00 arcmin"
-        },
-        {
-          "id": "license",
-          "label": "License",
-          "value": "CC-BY-4.0"
+          "id": "depth",
+          "label": "Depth",
+          "value": "VMC-constrained ellipsoid envelope"
         }
       ],
-      "input": "optical",
+      "input": "smc-horalek-wide",
+      "preview": {
+        "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+        "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
+        "bytes": 7080917,
+        "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2615a.jpg"
+      }
+    },
+    {
+      "id": "smc-vista",
+      "label": "ESO VISTA",
+      "title": "SMC in VISTA near infrared",
+      "description": "Near-infrared false colour on an image-fitted emission model painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "4000 × 3540 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Near-infrared · Y / J / Ks"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 3540"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "VMC-constrained ellipsoid envelope"
+        }
+      ],
+      "input": "smc-vista",
+      "preview": {
+        "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
+        "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
+        "bytes": 8087047,
+        "url": "https://cdn.eso.org/images/publicationjpg/eso1714a.jpg"
+      }
+    },
+    {
+      "id": "smc-smash",
+      "label": "NOIRLab SMASH",
+      "title": "SMC in the SMASH DECam survey",
+      "description": "DECam survey colours are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "DECam survey colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "3827 × 3190 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Visible light · DECam g / r / i / z"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3827 × 3190"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "VMC-constrained ellipsoid envelope"
+        }
+      ],
+      "input": "smc-smash",
       "preview": {
         "path": "src/objects/smc/source/source.jpg",
         "sha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
         "bytes": 4359408,
         "url": "https://www.astropix.org/archive/noirlab/noirlab2030b/noirlab_noirlab2030b_3000.jpg"
+      }
+    },
+    {
+      "id": "smc-dss2",
+      "label": "DSS2 optical",
+      "title": "SMC on Digitized Sky Survey 2 plates",
+      "description": "Photographic plate colours are painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "Photographic plate colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "13096 × 13616 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Visible-light photographic plates"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "13096 × 13616"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "VMC-constrained ellipsoid envelope"
+        }
+      ],
+      "input": "smc-dss2",
+      "preview": {
+        "path": ".local/nebula-presentation/smc-dss2.jpg",
+        "sha256": "3b995913acff5527b1ed14639d7ffdc8eeb5ad52767fd6f0a4b7c7a46e7ccc54",
+        "bytes": 605262,
+        "url": "https://cdn.esahubble.org/archives/images/screen/heic0514c.jpg"
+      }
+    },
+    {
+      "id": "smc-allwise-wide",
+      "label": "NASA AllWISE",
+      "title": "SMC in AllWISE infrared",
+      "description": "AllWISE infrared false colour on an image-fitted emission model painted onto the shared image-fitted SMC emission model. Depth follows the VMC-constrained ellipsoid envelope and conditional simulation modes, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
+      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "detail": "4000 × 4000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Infrared display colour · W4 / W2 / W1"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 4000"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "VMC-constrained ellipsoid envelope"
+        }
+      ],
+      "input": "smc-allwise-wide",
+      "preview": {
+        "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
+        "sha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
+        "bytes": 858260,
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.5&dec=-73&format=jpg"
       }
     }
   ]

@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-nebula-reconstruction@1",
+  "resultId": "77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+  "imageId": "smc-smash",
+  "removalResultId": "333fa52f7fd247bcc3a468e2853317d446cb7449d312aa08b91d7160085f566d.0b16a84cadec2e9ab81fc99fed4775a01b803d5c6d735cf65b964e4f76e0ead1",
+  "placement": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "rotationX": 0,
+    "rotationY": 0,
+    "rotationZ": 0,
+    "scale": 1
+  },
+  "appearance": {
+    "saturation": 1,
+    "detailStrength": 0,
+    "detailScale": 24,
+    "brightness": 1,
+    "gamma": 1
+  },
+  "subject": {
+    "id": "reconstruction-77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+    "name": "NOIRLab SMASH · optical · reconstruction · finite material",
+    "directory": ".local/nebula-lab/reconstructions/77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+    "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+    "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc-constrained",
+    "density": {
+      "directory": ".local/nebula-lab/smc-constrained/simulation-volume",
+      "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
+      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+      "credit": "Garver et al. (2026) simulation prior; Tatton et al. (2021) / ESO VMC red-clump constraints.",
+      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-herschel-gas",
+        "smc-horalek-wide",
+        "smc-irida-optical"
+      ],
+      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
+      "referenceFramingRadiusUnits": 7
+    },
+    "menuLabel": "SMC · constrained simulation",
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": ".local/nebula-lab/reconstructions/77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86/source/target.png",
+    "comparisonGroup": "smc-constrained-observation",
+    "comparisonImages": [],
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86/source/original-overlay.json",
+    "cloudParts": {
+      "descriptor": "inspection-object.json",
+      "catalogue": "source/cloud-parts.json"
+    },
+    "reconstructionImage": {
+      "group": "smc-constrained",
+      "label": "NOIRLab SMASH · optical · finite material",
+      "note": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry."
+    },
+    "reconstructionNeutral": {
+      "descriptor": "neutral-object.json"
+    },
+    "materialGeometry": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26"
+  },
+  "finiteMaterial": {
+    "modelResultId": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26",
+    "sourceResultId": "a1e5a1d4ee16dfa3bb1861fa4b069642bb8840e86928158afcc0ff4b4aa10032"
+  },
+  "processing": {
+    "densityPreview": false,
+    "modelLabel": "Simulation-guided finite material",
+    "reason": "This saved model cannot be refitted by the density material Preview. Its finite geometry and image colors were prepared together. Refitting requires its recorded offline recipe; shared compiler controls are not connected yet."
+  }
+}
