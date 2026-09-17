@@ -31,7 +31,7 @@
     "temperature": {
       "title": "JWST eclipse map",
       "detail": "Measured temperature",
-      "summary": "How hot each part of the planet is, fitted to JWST light curves as the planet turned and slipped behind its star."
+      "summary": "Each part of the planet's heat, fitted to JWST light curves. The hot spot is east of noon; how far south varies by fit."
     }
   }
 }

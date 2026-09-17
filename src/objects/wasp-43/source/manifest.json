@@ -198,6 +198,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 3807,
       "expectedSha256": "80a334101e3a7f656be03841e6f56aba8e993432289c7213a29040e15c3a05d6"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 122687,
+      "expectedSha256": "ea4c8bf1a8cfbd9cd88bbca568a2495525eba8961cf7005c7f53c1f1651c4ee8",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
     }
   ]
 }

@@ -205,8 +205,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4495,
-      "expectedSha256": "3e55bca14ccfb0d591ade9bbd076d06b3e6f402e7f5d5601710d9a16c8959aa1",
+      "expectedBytes": 4552,
+      "expectedSha256": "ca3586c1ca3a930ea681e3f415470b32ad466c599e9312e911d8daf23504f81f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -236,6 +236,24 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4515,
       "expectedSha256": "d76b8411b90b087c4cecc7de9a66fda223c7735c25dfb5d7cec09c2fe78d94c1"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 327868,
+      "expectedSha256": "2fb1f5796c56799626814f62a6ddf0fc1d3d4346142778119dbd0ee041191fb0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /wasp-43b/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
+    },
+    {
+      "path": "reference/theresa-reruns.md",
+      "expectedBytes": 5335,
+      "expectedSha256": "0ccffc3c89dabfaa0c1305ba60936a9dce8b5a85a84f8978a835e5dd93f13d50",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence record: reruns of the authors' public mapping code on the pinned deposit, 2026-09-16; the scratch environment is described, not kept."
+      }
     }
   ]
 }

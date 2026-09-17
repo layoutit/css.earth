@@ -6,7 +6,8 @@ import { shape, text, array, optional } from './source-records.mts';
 
 const profile = shape({ path: text, member: optional(text), sampling: text, units: text, values: array(text), latitudes: array(text), longitudes: array(text) });
 
-const at = (root: NpyValue, keys: readonly string[]): NpyArray => {
+/** The float64 array at a key path of a pickled dictionary, checked at every step. */
+export const npyArrayAt = (root: NpyValue, keys: readonly string[]): NpyArray => {
   let value = root;
   for (const key of keys) {
     if (typeof value !== 'object' || value === null || Array.isArray(value) || value instanceof Uint8Array || (value as NpyArray).kind === 'ndarray' || !Object.hasOwn(value, key)) {
@@ -26,7 +27,7 @@ export function decodeNpyDictionaryMap(bytes: Uint8Array, value: unknown) {
   const recipe = profile(value);
   if (!['nearest', 'bilinear'].includes(recipe.sampling)) throw new TypeError('An .npy map samples nearest or bilinear.');
   const root = readNpyObject(bytes);
-  const values = at(root, recipe.values), latitudes = at(root, recipe.latitudes), longitudes = at(root, recipe.longitudes);
+  const values = npyArrayAt(root, recipe.values), latitudes = npyArrayAt(root, recipe.latitudes), longitudes = npyArrayAt(root, recipe.longitudes);
   const [height, width] = values.shape;
   if (values.shape.length !== 2 || !height || !width || values.fortranOrder || [latitudes, longitudes].some(grid => grid.fortranOrder || grid.shape.join() !== values.shape.join())) {
     throw new TypeError('The .npy map arrays must share one C-ordered two-dimensional shape.');
