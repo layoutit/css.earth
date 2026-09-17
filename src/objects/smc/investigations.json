@@ -21,6 +21,10 @@
         {
           "date": "2026-09-17",
           "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -43,6 +47,10 @@
         {
           "date": "2026-09-17",
           "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -65,6 +73,10 @@
         {
           "date": "2026-09-17",
           "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -87,6 +99,10 @@
         {
           "date": "2026-09-17",
           "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -109,6 +125,10 @@
         {
           "date": "2026-09-17",
           "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -218,7 +238,7 @@
       "id": "delivery-reproducibility",
       "subject": "Reproducing the delivered bank from a clean checkout",
       "status": "included",
-      "finding": "Resolved. The delivery is regenerated from its own checked-in inputs: 9.3 MB of compact replay inputs (fitted emission field, envelope gain map, neutral alpha bank, the VMC ellipsoid density grid, and per lens the registered colour raster with an alpha-only coverage mask) plus numbered records of the laboratory inputs behind them. `prepare:nebulae --if-missing` rebuilds the bank and its axis atlases, and `prepared/**` is no longer tracked. Verified with the ignored laboratory caches moved aside: all 1,360 regenerated slice textures are byte-identical to the promotion output, every lens is value-identical in label, stars, brightness, frame, provenance and leaf geometry, and the committed descriptor pin matches the regenerated bank. This replaces the earlier finding that a clean checkout could verify the bank but not regenerate it, and that the runtime loaded 272 slice images per lens; it now loads three axis atlases.",
+      "finding": "Resolved. The delivery is regenerated from its own checked-in inputs: 9.3 MB of compact replay inputs (fitted emission field, envelope gain map, neutral alpha bank, the VMC ellipsoid density grid, and per lens the registered colour raster with an alpha-only coverage mask) plus numbered records of the laboratory inputs behind them. `prepare:nebulae --if-missing` rebuilds the bank and its axis atlases, and `prepared/**` is no longer tracked. Verified with the ignored laboratory caches moved aside: all 1,360 regenerated slice textures are byte-identical to the promotion output, every lens is value-identical in label, stars, brightness, frame, provenance and leaf geometry, and the committed descriptor pin matches the regenerated bank. This replaces the earlier finding that a clean checkout could verify the bank but not regenerate it, and that the runtime loaded 272 slice images per lens; it now loads three axis atlases. Re-proven on the merged tree: the restore is byte-identical across all 15 atlases, the bank and the delivery receipt, and re-preparing over an installed delivery is idempotent.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/src/objects/smc/source/compact/inputs.json",
         "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/src/objects/smc/source/compact-delivery.json",
@@ -233,6 +253,10 @@
         {
           "date": "2026-09-17",
           "commit": "f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -322,6 +346,10 @@
         {
           "date": "2026-09-17",
           "commit": "f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     },
@@ -329,8 +357,9 @@
       "id": "atlas-acceptance",
       "subject": "Application acceptance of the regenerated atlas delivery",
       "status": "included",
-      "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each lens now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five lens switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it.",
+      "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each lens now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five lens switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it. Re-inspected again after merging origin/main (177 commits): unchanged verdict on the merged revision, with the same one-texture-per-lens Earth framing, retained camera, star toggle and clean console.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/0dba0f46ad47eff2267799349084b8485d819229/src/objects/smc/evidence/merged-2026-09-17/inspection.json",
         "https://github.com/layoutit/css.earth/blob/4599ea6f2dd745cbd8f864d561d98466b1d634cb/src/objects/smc/evidence/atlas-delivery-2026-09-17/inspection.json",
         "https://github.com/layoutit/css.earth/blob/4599ea6f2dd745cbd8f864d561d98466b1d634cb/src/objects/smc/evidence/promotion-2026-09-17/inspection.json"
       ],
@@ -338,6 +367,10 @@
         {
           "date": "2026-09-17",
           "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0dba0f46ad47eff2267799349084b8485d819229"
         }
       ]
     }
