@@ -113,10 +113,13 @@ function started(name: string): Recorder {
 }
 for (const name of ['spawn', 'spawnSync', 'execFile', 'execFileSync', 'exec', 'execSync', 'fork']) wrap(childProcess, name, started(name));
 
-// Worker threads do not inherit module hooks or these wrappers.
+// Worker threads inherit neither module hooks nor these wrappers, so each worker imports this recorder itself and writes its own record.
 const Worker = workerThreads.Worker;
 (workerThreads as unknown as Record<string, unknown>).Worker = class extends Worker {
-  constructor(...args: ConstructorParameters<typeof Worker>) { unsupported.add('worker thread'); super(...args); }
+  constructor(file: ConstructorParameters<typeof Worker>[0], options: ConstructorParameters<typeof Worker>[1] = {}) {
+    const execArgv = options.execArgv ?? process.execArgv;
+    super(file, { ...options, execArgv: execArgv.includes(importFlag) ? execArgv : [...execArgv, importFlag] });
+  }
 };
 syncBuiltinESMExports();
 
@@ -150,10 +153,12 @@ registerHooks({
 });
 
 original.mkdirSync(traceDirectory, { recursive: true });
-original.writeFileSync(resolve(traceDirectory, `${process.pid}.started`), '');
+// A worker thread shares its process id, so its record is named by thread as well.
+const recordName = workerThreads.isMainThread ? String(process.pid) : `${process.pid}-${workerThreads.threadId}`;
+original.writeFileSync(resolve(traceDirectory, `${recordName}.started`), '');
 process.on('exit', () => {
   const trace: PreparationTrace = { schema: PREPARATION_TRACE_SCHEMA, pid: process.pid, argv: process.argv,
     files: Object.fromEntries([...files].map(([path, file]) => [path, { accesses: [...file.accesses].sort(), first: file.first }])),
     commands, catalogImporters: [...catalogImporters].sort(), unsupported: [...unsupported].sort() };
-  original.writeFileSync(resolve(traceDirectory, `${process.pid}.json`), JSON.stringify(trace));
+  original.writeFileSync(resolve(traceDirectory, `${recordName}.json`), JSON.stringify(trace));
 });
