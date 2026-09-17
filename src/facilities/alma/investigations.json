@@ -75,6 +75,7 @@
       "finding": "The same screen matched 26 bodies in the ALMA archive, 17,934 rows, mostly bands 3, 6 and 7. Pallas and Juno are the strongest unphotographed candidates anywhere in the screen, at roughly 20 and 10 beams across.",
       "revisitWhen": "Pallas, Juno or another ALMA candidate is taken up.",
       "evidence": [
+        "https://almascience.eso.org/tap/capabilities",
         "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
