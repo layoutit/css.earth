@@ -9,7 +9,7 @@ A star's surface reaches this project as interferometric data, not as a picture.
 3. **Reconstruct.** SQUEEZE builds a flat sky-plane image. `surface-reconstruction.mts` runs ROTIR, which fits brightness directly on a sphere of known size and limb darkening.
 4. **Check.** `spotless-disc.mts` simulates a spotless limb-darkened disc on the same sampling and errors, and the same recipe reconstructs it. A reconstruction may be cast only if it passes three conditions:
    - it fits its own data to a reduced chi-squared of 3 or better, on squared visibilities and on closure phases;
-   - its spots are at least twice as strong as the spotless disc's;
+   - its spots are at least twice as strong as those of every spotless twin within 2 percent of the fitted size;
    - its spots come back from two interleaved halves of the data: once each half's own spotless twin is subtracted, the two halves' spots correlate at 0.5 or more.
 5. **Cast.** A flat image goes onto the sphere through the `surface-observation` route with a computed camera, as for Betelgeuse and π¹ Gruis. A sphere reconstruction goes through `surface-lens.mts`, which writes the float32 image map the `terrestrial-scientific` lens reads, to be stated with `outputLongitudeOrigin: -90`.
 
@@ -37,15 +37,15 @@ The command then:
 1. calibrates each night or exposure, one at a time, into `nights/`;
 2. joins every calibrated file and applies the selection;
 3. fits a uniform disc within half the reference diameter either way (`disc-fit.mts`). The disc is the start image and the spotless twins' size, and half the mean wavelength over the longest baseline is the beam;
-4. writes the two interleaved halves and a spotless twin of the season and of each half;
-5. runs SQUEEZE six times, one run at a time (`squeeze.mts`), and reads the fit SQUEEZE prints for each image;
+4. writes the two interleaved halves, spotless twins of the season at 0.98 to 1.02 times the fitted size, and each half of the full-size twin;
+5. runs SQUEEZE nine times, one run at a time (`squeeze.mts`), and reads the fit SQUEEZE prints for each image;
 6. applies the three conditions and, when the season names them, compares the calibrated squared visibilities with the author's file (`author-comparison.mts`: the nearest baseline within a metre, channels in wavelength order) and the image with the shipped one (correlation inside the disc after both are convolved to the beam).
 
 It writes `verdict.json` and prints "cast" or "not cast, because" with the reasons. Stages are kept: calibration steps are reused while their inputs are unchanged, and a SQUEEZE run is reused only while its data, start image and recipe hash the same.
 
-On π¹ Gruis's 2014 season from raw (19 calibrated files, 851 squared visibilities and 593 closure phases), the command gives: cast. The fit is 1.98 and 1.14, the spot ratio 4.97 and the halves correlation 0.90. The disc is 18.12 mas, and the image correlates 0.990 with the shipped one. Against the author's file, 828 squared visibilities pair at a median ratio of 0.999 (5th percentile 0.981) and a median difference of 0.08 sigma. None differs by more than 3 sigma. The 44 pairs above a ratio of 3.5 all differ from the author's value by less than their own error (at most 0.76 of it), where the author's file states 5 percent. 44 of the 66 pairs outside 0.67 to 1.5 have author squared visibilities below 0.002. The first run from raw gave "not cast" (fit 101.8 and 6.3, disc 27.3 mas, halves 0.21), because of two calibration faults: the lost fringes below, and error floors without the author's minimum.
+On π¹ Gruis's 2014 season from raw (19 calibrated files, 851 squared visibilities and 593 closure phases), the command gives: cast. The fit is 1.98 and 1.14, the spot ratio 2.18 against the spottiest twin (4.97 against the full-size one) and the halves correlation 0.90. The disc is 18.12 mas, and the image correlates 0.990 with the shipped one. Against the author's file, 828 squared visibilities pair at a median ratio of 0.999 (5th percentile 0.981) and a median difference of 0.08 sigma. None differs by more than 3 sigma. The 44 pairs above a ratio of 3.5 all differ from the author's value by less than their own error (at most 0.76 of it), where the author's file states 5 percent. 44 of the 66 pairs outside 0.67 to 1.5 have author squared visibilities below 0.002. The first run from raw gave "not cast" (fit 101.8 and 6.3, disc 27.3 mas, halves 0.21), because of two calibration faults: the lost fringes below, and error floors without the author's minimum.
 
-`--calibrated <oifits>` skips the calibration and runs stages 2 to 7 on given files. On π¹ Gruis's season with the file Paladini et al. imaged from, the command gives the shipped image again (correlation 1.000 after convolution to the 2.10 mas beam), the same fit (2.45 and 1.06), spot ratio 5.38 and halves correlation 0.94: cast. The table below has 5.22 and 0.95 for the same file from hand runs whose spotless twins were drawn differently (their closure phases differ by up to 33 degrees). A twin's halves are the halves of the season's twin.
+`--calibrated <oifits>` skips the calibration and runs stages 2 to 7 on given files. On π¹ Gruis's season with the file Paladini et al. imaged from, the command gives the shipped image again (correlation 1.000 after convolution to the 2.10 mas beam), the same fit (2.45 and 1.06), spot ratio 2.40 (5.38 against the full-size twin) and halves correlation 0.94: cast. The table below has 5.22 and 0.95 for the same file from hand runs whose spotless twins were drawn differently (their closure phases differ by up to 33 degrees). A twin's halves are the halves of the season's twin.
 
 Error floors raise squared-visibility errors to a fraction of the value and to a minimum, and closure-phase errors to a number of degrees. They never lower an error. Raw calibration states the scatter within a block, which misses the calibration error between blocks and nights. In the file Paladini et al. imaged π¹ Gruis from, every squared-visibility error is the largest of its own, 5 percent and 5e-6, and every closure-phase error at least 2 degrees (`--error-floor 0.05:2:5e-6`). The minimum matters past a null. Without it, five points with squared visibilities near 1e-5 and errors near 5e-7 gave 59 percent of the chi-squared of the shipped image against the season from raw.
 
@@ -75,11 +75,14 @@ Measured on 2026-09-16 with the pinned recipes and the spotless simulations the 
 | --- | --- | --- | --- | --- |
 | π¹ Gruis, SQUEEZE | 2.45 and 1.06 | 5.22 | 0.95 | cast (shipped) |
 | Betelgeuse, SQUEEZE | 0.35 and 1.12 | 2.73 | 0.79 | cast (shipped) |
+| Betelgeuse, `image-star.mts --calibrated` on the pinned files, twins at 42.2 to 43.9 mas | 0.31 and 1.20 | 1.24 (2.02 at best) | 0.57 | not cast; lens kept with a label |
 | Polaris, SQUEEZE, April 2021 | 1.76 and 2.28 | 1.05 | −0.13 | not cast |
 | Polaris, ROTIR sphere, April 2021 | 1.45 and 5.58 | 1.53 | 0.28 | not cast |
 | R Dor, SQUEEZE, AMBER continuum | 1.74 and 2.99 | 1.31 | 0.36 | not cast |
 | R Aqr, SQUEEZE, PIONIER 2019 from raw, 16 nights, 5% and 2° error floors | 58 and 63 | 15.6 | 0.27 (without floors) | not cast |
-| R Aqr, `image-star.mts` on `seasons/r-aqr-pionier-2019`: lost fringes removed, 5%, 5e-6 and 2° floors | 71.8 and 71.9 | 10.2 | 0.48 | not cast |
+| R Aqr, `image-star.mts` on `seasons/r-aqr-pionier-2019`: lost fringes removed, 5%, 5e-6 and 2° floors | 71.8 and 71.9 | 5.76 (10.2 against the full-size twin) | 0.48 | not cast |
+
+The spot ratio depends on the twin's size. On one half of Betelgeuse's February 2020 data, a spotless disc leaves patches with rms 0.03 at 42.0 mas, 0.12 at 42.8 mas and 0.05 at 43.8 mas, against 0.13 in that half's image. More iterations (10 000), four chains and half-size pixels (0.39 mas) did not make a spotty twin clean. π¹ Gruis's twins stay at 0.012 to 0.019 over ±2 percent. The rows above measured with one twin are kept as measured. Since the check judges by the spottiest twin within 2 percent, Betelgeuse's image does not pass it. The Betelgeuse lens is kept by decision and says on the page that its patches are not confirmed.
 
 Single nights are not used for the third condition. π¹ Gruis's first night alone fails the spotless check (ratio 0.99) and its second passes (4.09); each Polaris night alone correlates 0.92 or 0.93 with its spotless twin. Alternate exposures keep nearly the same coverage in both halves, which is why each half's own spotless twin must be subtracted before the halves are compared.
 
