@@ -86,8 +86,9 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   return { kappa: { dark: kappaDark.dpId, frames: kappaFrames.map(frame => frame.dpId) }, spectral: lamp.dpId, blocks };
 }
 
-/** pndrsCheckFile's limit on OIDATA files per transfer-function or calibration call (pioni_oidata_tf.i, pioni_oidata_calibrated.i). */
-export const PNDRS_FILE_LIMIT = 20;
+/** Files per pndrs argument: pndrsGetArgument splits a comma list with strword(output, ",", 15), so a sixteenth file stays glued
+ * to the fifteenth and the call fails with "should be an exising file". */
+export const PNDRS_FILE_LIMIT = 15;
 
 export interface PipelinePaths { readonly prefix: string; readonly catalogue: string; readonly yorick: string }
 
@@ -129,8 +130,8 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
         [[await raw(exposure), 'FRINGE'], [dark, 'DARK_CALIBRATION'], [kappa, 'KAPPA_MATRIX'], [spectral, 'SPECTRAL_CALIBRATION'], [paths.catalogue, 'JSDC_CAT']]) });
     }
   }
-  // pndrs's scripts accept at most 20 OIDATA files per call (pndrsCheckFile), and a service-mode night holds more. Whole blocks are
-  // grouped up to 20 files; each calibrator group gives one transfer-function file, and every science group is calibrated against
+  // pndrs reads at most 15 files per argument (PNDRS_FILE_LIMIT), and a service-mode night holds more. Whole blocks are
+  // grouped up to that limit; each calibrator group gives one transfer-function file, and every science group is calibrated against
   // all of them, so the transfer function is still interpolated across the night.
   const groups = (role: PionierBlock['role']) => {
     const result: string[][] = [];
@@ -148,6 +149,7 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
     await pndrs('pioni_oidata_tf.i', [`--inputOiDataFiles=${files.join(',')}`, `--inputCatalogFile=${paths.catalogue}`, `--outputOiDataTfFile=${transfer}`], `transfer-function-${index + 1}.log`);
     transfers.push(transfer);
   }
+  if (transfers.length > PNDRS_FILE_LIMIT) throw new Error(`${transfers.length} transfer-function files; pndrs reads at most ${PNDRS_FILE_LIMIT}.`);
   const science = groups('science'), calibratedFiles: string[] = [];
   for (const [index, files] of science.entries()) {
     const calibrated = resolve(work, science.length === 1 ? 'calibrated.fits' : `calibrated-${index + 1}.fits`);
