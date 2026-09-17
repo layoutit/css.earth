@@ -1,0 +1,29 @@
+{
+  "id": "r-doradus",
+  "classification": "star",
+  "order": 906,
+  "physical": {
+    "name": "R Doradus",
+    "horizonsCode": null,
+    "meanRadiusKm": 244291444,
+    "gravitationalParameterKm3PerS2": 112805574035.64847,
+    "parent": null
+  },
+  "physicalNotes": "Radius: the 59.8 +/- 0.4 mas stellar disc Vlemmings et al. (2024, Nature 633, 323) fit to the ALMA 338 GHz visibilities, at the 54.615 pc Hipparcos distance; 351 solar radii at 695700 km per solar radius, against the 353 +/- 19 they give at their rounded 55 pc. The same image is this object's lens, so the sphere and its texture are the same star. The near-infrared photosphere is smaller: 51.18 +/- 2.24 mas (Ohnaka et al. 2019, ApJ 883, 89), 298 +/- 21 solar radii, because 338 GHz sees a layer above it. GM from the 0.7-1.0 solar masses Vlemmings et al. (2024) adopt for log(g) = -0.6 +/- 0.1; the midpoint 0.85 is taken, times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the star has no measured rotation axis and lies far south of the ecliptic, so the presentation frame puts the display axis (celestial north at the star) up and the camera orbit lies in the star's equator.",
+  "star": {
+    "rightAscensionDegrees": 69.18996363611527,
+    "declinationDegrees": -62.077165937032035,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 54.61496450027307,
+    "properMotionRaMasPerYear": -69.36,
+    "properMotionDecMasPerYear": -75.78,
+    "radialVelocityKmPerS": 26.1,
+    "sources": {
+      "position": "SIMBAD basic record for V* R Dor (HD 29712, HIP 21479), ICRS J2000 position from the revised Hipparcos reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-17",
+      "distance": "Hipparcos parallax 18.31 +/- 0.99 mas (van Leeuwen 2007) via SIMBAD: 54.615 pc. Vlemmings et al. (2024, Nature 633, 323) adopt the same measurement as 55 +/- 3 pc and state that there is no useable Gaia parallax for this star.",
+      "properMotion": "van Leeuwen (2007) via SIMBAD: -69.36, -75.78 mas/yr. The ALMA image confirms it: the star sits 1.63 arcsec west and 1.78 arcsec south of this J2000 position, which is 23.5 years of this proper motion.",
+      "radialVelocity": "General Catalogue of Stellar Radial Velocities (Wilson 1953, bibcode 1953GCRV..C......0W) via SIMBAD: 26.1 +/- 2.0 km/s."
+    },
+    "presentationUp": "display-axis"
+  }
+}

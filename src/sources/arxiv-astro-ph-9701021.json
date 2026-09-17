@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-astro-ph-9701021",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The angular diameter of R Doradus: a nearby Mira-like star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/9701021"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/286.4.957"
+    },
+    {
+      "type": "bibcode",
+      "value": "1997MNRAS.286..957B"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/9701021",
+      "label": "arXiv"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/286.4.957",
+      "label": "MNRAS 286, 957 (1997)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/r-doradus/source/measurements.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/angularDiameterSource"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "T. R. Bedding, A. Zijlstra, A. von der Luhe, J. G. Robertson, R. G. Marson, J. R. Barton, B. Carter",
+      "scope": "citation",
+      "evidence": "src/objects/r-doradus/source/measurements.json#/angularDiameterSource"
+    }
+  ]
+}
