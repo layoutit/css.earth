@@ -19,7 +19,7 @@ function pickledDictionary(arrays: Record<string, { shape: number[]; values: num
     const n = Buffer.alloc(4); n.writeUInt32LE(raw.length); parts.push(Buffer.from([0x42]), n, raw); op(0x74, 0x62);
   }
   op(0x75, 0x61, 0x74, 0x62, 0x2e);
-  const header = "{'descr': '|O', 'fortran_order': False, 'shape': (), }", padded = header.padEnd(118, ' ') + '\n';
+  const header = "{'descr': '|O', 'fortran_order': False, 'shape': (), }", padded = header.padEnd(117, ' ') + '\n';
   const prefix = Buffer.from([0x93, 0x4e, 0x55, 0x4d, 0x50, 0x59, 1, 0, padded.length & 255, padded.length >> 8]);
   return Buffer.concat([prefix, Buffer.from(padded, 'latin1'), ...parts]);
 }
