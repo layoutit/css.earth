@@ -20,7 +20,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureCoShift, MINIMUM_CO_CORRELATION } from './co-wavelength.mts';
-import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe, type RawRow } from './eso-pipeline.mts';
+import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from './eso-pipeline.mts';
 import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn, writeCell } from './fits-table.mts';
 import { toolchainPath } from './toolchain.mts';
 
@@ -77,6 +77,7 @@ const baselines = (bytes: Buffer) => readFitsHdus(bytes).filter(hdu => hdu.extna
 
 export async function calibrateAmber(plan: AmberPlan, rawDirectory: string, work: string, prefix: string, calibration: string, calibrators: ReadonlyMap<string, { diameterMas: number; errorMas: number }>, selection = 80) {
   const eso = esoEnvironment(prefix, resolve(work, 'home')), raw = (dpId: string) => rawFrame(dpId, rawDirectory);
+  await rawFrames([...plan.p2vm.wave, ...plan.p2vm.p2v, ...plan.blocks.flatMap(block => [...block.objects, block.dark, block.sky])], rawDirectory);
   const maps: [string, string][] = [[resolve(calibration, 'BadPixelMap.fits'), 'AMBER_BADPIX'], [resolve(calibration, 'FlatFieldMap.fits'), 'AMBER_FLATFIELD']];
   const p2vm = (await runRecipe(eso, work, 'p2vm', 'amber_p2vm', [...maps, ...await Promise.all(plan.p2vm.wave.map(async id => [await raw(id), 'AMBER_3WAVE'] as const)),
     ...await Promise.all(plan.p2vm.p2v.map(async id => [await raw(id), 'AMBER_3P2V'] as const))])).find(file => file.endsWith('/p2vm.fits'));
