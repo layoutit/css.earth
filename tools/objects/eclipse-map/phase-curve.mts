@@ -23,11 +23,19 @@ export function mapPhaseCurve(grid: EmissionGrid, orbit: HostedOrbit, host: { ri
   return mapBasisCurves([grid.values], grid, orbit, host, planetRadiusStellarRadii, timesBmjd)[0]!;
 }
 
+/** Light-travel time across the orbit: with `stellarRadiusKm`, the planet is placed where it was when the light seen at each time
+ * left it. Times stay referenced to the observed transit, as a transit fit reports them (Eureka!'s batman convention): the planet's
+ * light at transit needs no correction, and at eclipse it left 2a sin(i)/c earlier, so eclipses are seen that much later than a
+ * geometry without light time predicts (15 s for WASP-43b, 31 s for HD 189733b). The star's own reflex motion is ignored. */
+export interface LightTravel { readonly stellarRadiusKm?: number }
+const LIGHT_KM_PER_DAY = 299792.458 * 86400;
+
 /** The light curve of each basis map over the same cells, in one geometry pass per time: rows [basis][time]. A cell's weight
  * (projected area, zero when turned away or behind the star) is shared by every basis map, so a degree-5 harmonic basis
  * costs one pass, not thirty-five. `visible` (optional) receives 1 for every cell that faces the observer at any time. */
 export function mapBasisCurves(basis: readonly ArrayLike<number>[], grid: Pick<EmissionGrid, 'width' | 'height' | 'latitudes' | 'longitudes'>, orbit: HostedOrbit,
-  host: { rightAscensionDegrees: number; declinationDegrees: number }, planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, visible?: Uint8Array) {
+  host: { rightAscensionDegrees: number; declinationDegrees: number }, planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, visible?: Uint8Array,
+  { stellarRadiusKm }: LightTravel = {}) {
   const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees), cells = grid.width * grid.height;
   if (basis.some(values => values.length !== cells) || (visible && visible.length !== cells)) throw new RangeError('Every basis map must cover the grid.');
   const cellLatitude = Math.PI / grid.height, cellLongitude = 2 * Math.PI / grid.width, normals = new Float64Array(cells * 3), area = new Float64Array(cells);
@@ -37,9 +45,17 @@ export function mapBasisCurves(basis: readonly ArrayLike<number>[], grid: Pick<E
     area[i] = Math.cos(lat) * cellLatitude * cellLongitude;
   }
   const curves = basis.map(() => new Float64Array(timesBmjd.length)), sums = new Float64Array(basis.length);
+  const atTransit = hostedOrbitStateRelativeKm(orbit, host, 1, orbit.transitTimeBmjdTdb + 2400000.5).positionKm;
+  const transitTowardObserver = atTransit[0] * z[0] + atTransit[1] * z[1] + atTransit[2] * z[2];
   for (let t = 0; t < timesBmjd.length; t++) {
     // Unit stellar radius: positions come back in the same units as the radius passed in.
-    const state = hostedOrbitStateRelativeKm(orbit, host, 1, timesBmjd[t]! + 2400000.5);
+    let state = hostedOrbitStateRelativeKm(orbit, host, 1, timesBmjd[t]! + 2400000.5);
+    if (stellarRadiusKm !== undefined) {
+      // Emission time: later when the planet is nearer the observer than at transit, earlier when farther (first order in v/c).
+      const towardObserver = state.positionKm[0] * z[0] + state.positionKm[1] * z[1] + state.positionKm[2] * z[2];
+      const delayDays = (towardObserver - transitTowardObserver) * stellarRadiusKm / LIGHT_KM_PER_DAY;
+      state = hostedOrbitStateRelativeKm(orbit, host, 1, timesBmjd[t]! + delayDays + 2400000.5);
+    }
     const m = bodyFixedToIcrf(synchronousRotationElements(state.positionKm, state.velocityKmPerDay, orbit.periodDays));
     const r = state.positionKm, behind = r[0] * z[0] + r[1] * z[1] + r[2] * z[2] < 0;
     sums.fill(0);

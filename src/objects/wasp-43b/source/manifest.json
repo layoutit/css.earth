@@ -298,8 +298,8 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 16234,
-      "expectedSha256": "49ac0e69fdbb39d082ab7d2a3d2e289b4df1931d8e055c551a47b40544725619",
+      "expectedBytes": 16439,
+      "expectedSha256": "f85b7097932c1677399de6f956b34c2d4c9b4afc4c415da277695499391b9540",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -450,8 +450,8 @@
     },
     {
       "path": "reference/lens-comparison.png",
-      "expectedBytes": 733056,
-      "expectedSha256": "3aa8d38c179543b56ae4b30d9f5fe8bc1cb98dec32d88c63bcb4215f244ddb98",
+      "expectedBytes": 736512,
+      "expectedSha256": "a0656ccc100a3a9a032764df6a564e5866c4c98baadd655768d71ad5aef46518",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence image: the six prepared lens previews (prepared/minimaps) side by side with sharp, labelled, 2026-09-17 after preparation."

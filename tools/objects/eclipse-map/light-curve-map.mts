@@ -7,6 +7,7 @@
  * eq. 8, over a band), so the temperature is the T at which the two agree. Photon counting enters through C_i: a measured count
  * spectrum already carries it, and a filter curve is weighted by lambda. */
 import type { HostedOrbit } from '@cssearth/astronomy';
+import type { LightTravel } from './phase-curve.mts';
 import { continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap, planckRadiance, type EigenBasis, type EigenFit } from './eigenmap-fit.mts';
 
 export interface LightCurve { readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array; readonly columns: ReadonlyMap<string, Float64Array> }
@@ -32,7 +33,7 @@ export interface FitRecipe {
  * samples. Models within 2 of the lowest BIC are not distinguished by the data, so the one with fewest parameters, then the
  * lowest degree, is taken. */
 export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number },
-  planetRadiusStellarRadii: number) {
+  planetRadiusStellarRadii: number, lightTravel: LightTravel = {}) {
   const n = curve.time.length;
   if (![curve.flux, curve.error].every(values => values.length === n) || [...curve.columns.values()].some(values => values.length !== n)) throw new RangeError('Light-curve columns must share one length.');
   if (!recipe.degrees.length || !recipe.eigencurves.length || [...recipe.degrees, ...recipe.eigencurves].some(v => !Number.isSafeInteger(v) || v < 1)) throw new RangeError('Candidate degrees and eigencurve counts must be positive whole numbers.');
@@ -56,7 +57,7 @@ export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: Ho
   });
   const taus = ramps.length ? ramps[0]!.timeConstantsDays : [null];
   const degrees = [...recipe.degrees].sort((a, b) => a - b), counts = [...recipe.eigencurves].sort((a, b) => a - b);
-  const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time)]));
+  const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time, lightTravel)]));
   const fitWith = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: recipe.positive, systematics: columns(tau) });
   // Profiling the ramp uses the unconstrained linear fit, which is fast; the candidates and the final map keep positivity.
   const profileChi = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: false, systematics: columns(tau) }).chiSquared;
