@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+  "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
   "imageId": "smc-allwise-wide",
   "removalResultId": "a3ad3b73aab7a9cd7f3d778b150ae4939e95e7b382c91d464897bc6e4ad93162.fb89b635c3ea8510db75819641035b8cf7b5f93c3bb410ade39eac3c224a7b84",
   "placement": {
@@ -20,9 +20,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+    "id": "reconstruction-f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
     "name": "AllWISE · 10° infrared · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+    "directory": ".local/nebula-lab/reconstructions/f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
     "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
     "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -53,10 +53,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
@@ -69,10 +69,10 @@
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
     },
-    "materialGeometry": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26"
+    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
   },
   "finiteMaterial": {
-    "modelResultId": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26",
+    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
     "sourceResultId": "298c402ba303bd906466d0279b4d9b7ee2d15718eb3679ee1b0aa5af8a4ef6cb"
   },
   "processing": {

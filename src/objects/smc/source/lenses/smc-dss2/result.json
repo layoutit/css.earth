@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+  "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
   "imageId": "smc-dss2",
   "removalResultId": "ad309b7f4ea79cdd896cee7e47995b7d6b3cde5ddad3e24bec7b973438f13c4e.529c4dd529d9e1c89d9e9607851eae250ecd069ca352025f2e6113a2bea6b753",
   "placement": {
@@ -20,9 +20,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+    "id": "reconstruction-84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
     "name": "DSS2 · optical · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+    "directory": ".local/nebula-lab/reconstructions/84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
     "sourcePageUrl": "https://esahubble.org/images/heic0514c/",
     "credit": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -53,10 +53,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
@@ -69,10 +69,10 @@
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
     },
-    "materialGeometry": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26"
+    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
   },
   "finiteMaterial": {
-    "modelResultId": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26",
+    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
     "sourceResultId": "a280d527b56c9ad28aeaf58182b5360aa5eb7a80a4f0e0ebb95c0d37aada0031"
   },
   "processing": {

@@ -1,7 +1,7 @@
 {
   "settings": {
     "imageId": "smc-dss2",
-    "resultId": "f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+    "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
     "label": "DSS2 optical",
     "description": "Visible-light colors from the ESA/Hubble Digitized Sky Survey 2 image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +26,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+    "id": "reconstruction-84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
     "parts": [
       {
         "id": "all-light",

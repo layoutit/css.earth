@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+  "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
   "imageId": "smc-smash",
   "removalResultId": "333fa52f7fd247bcc3a468e2853317d446cb7449d312aa08b91d7160085f566d.0b16a84cadec2e9ab81fc99fed4775a01b803d5c6d735cf65b964e4f76e0ead1",
   "placement": {
@@ -20,9 +20,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+    "id": "reconstruction-47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
     "name": "NOIRLab SMASH · optical · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+    "directory": ".local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -53,10 +53,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
@@ -69,10 +69,10 @@
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
     },
-    "materialGeometry": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26"
+    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
   },
   "finiteMaterial": {
-    "modelResultId": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26",
+    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
     "sourceResultId": "a1e5a1d4ee16dfa3bb1861fa4b069642bb8840e86928158afcc0ff4b4aa10032"
   },
   "processing": {

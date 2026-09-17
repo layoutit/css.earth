@@ -1,7 +1,7 @@
 {
   "settings": {
     "imageId": "smc-allwise-wide",
-    "resultId": "9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+    "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
     "label": "NASA AllWISE",
     "description": "Infrared colors from the NASA/IPAC AllWISE color mosaic served by CDS, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +26,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+    "id": "reconstruction-f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
     "parts": [
       {
         "id": "all-light",

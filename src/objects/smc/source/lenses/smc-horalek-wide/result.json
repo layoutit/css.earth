@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+  "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
   "imageId": "smc-horalek-wide",
   "removalResultId": "e6467648096ee00e1604611cf8ec4fa643d3764eace979fa6d064ef8f4676dbb.e4129024e2d639f47080f406dfd25702af8c18dd63a6e178daacc0612e673c7a",
   "placement": {
@@ -20,9 +20,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+    "id": "reconstruction-1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
     "name": "Horálek · wide optical · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+    "directory": ".local/nebula-lab/reconstructions/1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
     "sourcePageUrl": "https://noirlab.edu/public/images/iotw2615a/",
     "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -53,10 +53,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
@@ -69,10 +69,10 @@
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
     },
-    "materialGeometry": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26"
+    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
   },
   "finiteMaterial": {
-    "modelResultId": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26",
+    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
     "sourceResultId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333"
   },
   "processing": {

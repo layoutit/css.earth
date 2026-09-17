@@ -1,7 +1,7 @@
 {
   "settings": {
     "imageId": "smc-horalek-wide",
-    "resultId": "c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+    "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
     "label": "Horálek optical",
     "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +26,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+    "id": "reconstruction-1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
     "parts": [
       {
         "id": "all-light",

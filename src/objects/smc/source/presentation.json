@@ -5,14 +5,14 @@
   "defaultLens": "smc-horalek-wide",
   "bank": {
     "path": "src/objects/smc/prepared/lenses.json",
-    "sha256": "ac06472b4d62c27a2b14c7a95da79f2b4cc48927b2b5f2d140d2b3b56d246925",
-    "bytes": 6162626
+    "sha256": "480c84dd88dc1e082bff097b6185e9de337e28aa67b476878cfca4bb8d96a678",
+    "bytes": 6166081
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/smc/source/lenses.json",
-      "sha256": "de47bdd2d852e332efce4f61eeffb0abda2d93b72e5ca3e797ea1870531763cf",
+      "sha256": "29316234cc7b336293a9c3e8590c2b014b22e48bb22d780f8f8ea48c8eff4dab",
       "bytes": 4033
     },
     {
@@ -24,7 +24,7 @@
     {
       "id": "recipe-3",
       "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
-      "sha256": "2c01258b01ed763bd1b3cacf6bc9429ef43c083ef0460b17845efea55594dbf7",
+      "sha256": "f9d891bb54805746101d363270f474b9ca1a3b758a886f238d44e351e6804da2",
       "bytes": 2224
     },
     {
@@ -42,7 +42,7 @@
     {
       "id": "recipe-6",
       "path": "src/objects/smc/source/lens-settings-evidence.json",
-      "sha256": "8eb5e0aba4808fe90244fc7729dfee92cb6df681e3cd34eb8b31baaa6223bace",
+      "sha256": "a0d1bae24d960bdd98e91deaa48cfcd4c1e83cfca461fe1c531c6e2442885e9f",
       "bytes": 2497
     }
   ],

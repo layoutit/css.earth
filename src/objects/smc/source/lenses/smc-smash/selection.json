@@ -1,7 +1,7 @@
 {
   "settings": {
     "imageId": "smc-smash",
-    "resultId": "77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+    "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
     "label": "NOIRLab SMASH",
     "description": "Visible-light colors from the NOIRLab SMASH DECam survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +26,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+    "id": "reconstruction-47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
     "parts": [
       {
         "id": "all-light",
