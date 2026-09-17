@@ -4,6 +4,7 @@ import { mkdir, mkdtemp, readdir, readFile, realpath, rm, writeFile } from 'node
 import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
 import test from 'node:test';
+import { readPreparationTraces } from './preparation-cache.mts';
 import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, descriptorDigest, type PreparationTrace } from './preparation-trace-format.mts';
 
 const traceModule = new URL('./preparation-trace.mts', import.meta.url).href;
@@ -82,14 +83,17 @@ if (child.status !== 0) throw new Error(String(child.stderr));
   assert.deepEqual(files.get('data/child.txt')?.accesses, ['read']);
 });
 
-test('worker threads and file watching are marked as unrecorded', async () => {
-  const { unsupported } = await traced(`
+test('a worker thread records its own reads, and file watching is marked as unrecorded', async () => {
+  const { files, records, unsupported } = await traced(`
 import { Worker } from 'node:worker_threads';
-import { watch } from 'node:fs';
-await new Promise(resolve => new Worker('0', { eval: true }).once('exit', resolve));
+import { watch, writeFileSync } from 'node:fs';
+writeFileSync('worker.mts', "import { readFileSync } from 'node:fs'; readFileSync('data/worker.txt');");
+await new Promise(resolve => new Worker(new URL('./worker.mts', import.meta.url)).once('exit', resolve));
 watch('.').close();
-`);
-  assert.deepEqual(unsupported, ['fs.watch', 'worker thread']);
+`, { 'data/worker.txt': 'thread' });
+  assert.equal(records.length, 2);
+  assert.deepEqual(files.get('data/worker.txt')?.accesses, ['read']);
+  assert.deepEqual(unsupported, ['fs.watch']);
 });
 
 test('the trace keeps each owner view of an object descriptor as first read', async () => {
@@ -121,4 +125,24 @@ test('descriptor views leave the card out and keep each owner apart', () => {
   assert.notEqual(digest(frame, 'registry'), digest(base, 'registry'));
   assert.equal(digest(frame, 'recipe'), digest(base, 'recipe'));
   assert.notEqual(digest(name, 'registry'), digest(base, 'registry'));
+});
+
+test('a worker thread terminated mid-task leaves the journal of what it read', async () => {
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'cssearth-preparation-trace-')));
+  try {
+    await mkdir(join(root, 'data'));
+    await writeFile(join(root, 'data/busy.txt'), 'busy');
+    await writeFile(join(root, 'busy.mts'), "import { readFileSync } from 'node:fs'; import { parentPort } from 'node:worker_threads'; readFileSync('data/busy.txt'); parentPort?.postMessage('read'); setInterval(() => {}, 1000);");
+    await writeFile(join(root, 'script.mts'), `import { Worker } from 'node:worker_threads';
+const busy = new Worker(new URL('./busy.mts', import.meta.url));
+await new Promise(resolve => busy.once('message', resolve));
+await busy.terminate();`);
+    const traces = join(root, 'traces');
+    const result = spawnSync(process.execPath, ['script.mts'], { cwd: root, encoding: 'utf8',
+      env: { ...process.env, [PREPARATION_TRACE_VARIABLE]: traces, NODE_OPTIONS: `--import=${traceModule}` } });
+    assert.equal(result.status, 0, result.stderr);
+    const read = await readPreparationTraces(traces);
+    assert.deepEqual([...read.unsupported], []);
+    assert.deepEqual([...(read.files.get(join(root, 'data/busy.txt'))?.accesses ?? [])], ['read']);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

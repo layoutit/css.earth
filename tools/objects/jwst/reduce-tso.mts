@@ -10,8 +10,7 @@
  *    three at a time: MAST throttles one connection to a fraction of what three reach together.
  * 2. Runs Stage 1 (ramp fitting) and Stage 2 (calibration) on batches of segments, one Python process and one worker at a time,
  *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB.
- * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 for the white light curve, the channels and, when the
- *    program has them, wider slices with their own bounds.
+ * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 twice: the white light curve and the channels.
  * 4. Exports both light curves to CSV (time, flux, err, mask, centroid_y, psf_width_y; flux and err divided by the median flux),
  *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. A deposit is either a zip holding
  *    Eureka! light-curve files (checked by sha256) or individual files (checked by the md5 the archive lists): time, flux and error
@@ -31,7 +30,7 @@ import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {
   readonly id: string; readonly eventName: string; readonly crdsContext: string; readonly batchSegments: number;
-  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string; readonly S4slices?: string };
+  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string };
   readonly segments: readonly Segment[];
   readonly oracle: EurekaZipOracle | DepositFilesOracle;
 }
@@ -59,8 +58,7 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
   return {
     id: requireString(record.id), eventName: requireString(record.eventName), crdsContext: requireString(record.crdsContext),
     batchSegments: requireFiniteNumber(record.batchSegments),
-    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels),
-      ...(stages.S4slices === undefined ? {} : { S4slices: requireString(stages.S4slices) }) },
+    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels) },
     segments,
     oracle: parseOracle(oracle),
   };
@@ -230,8 +228,7 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   const settings = async (step: string, template: string, stagePrefix: string, inputdir: string, outputdir: string) => {
     const directory = resolve(work, 'ecf', step);
     await mkdir(directory, { recursive: true });
-    // A control file may name a file of its own program, such as slice bounds, as PROGRAM_DIRECTORY/<name>.
-    const text = renderSettings(await readFile(resolve(programDirectory, template), 'utf8'), { topdir: `${work}/`, inputdir, outputdir }).replaceAll('PROGRAM_DIRECTORY/', `${programDirectory}/`);
+    const text = renderSettings(await readFile(resolve(programDirectory, template), 'utf8'), { topdir: `${work}/`, inputdir, outputdir });
     await writeFile(resolve(directory, `${stagePrefix}_${program.eventName}.ecf`), text);
     return directory;
   };
@@ -271,7 +268,6 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     ['S3', program.stages.S3, 'S3', 'Stage2_all', 'Stage3'],
     ['S4', program.stages.S4, 'S4', 'Stage3', 'Stage4'],
     ['S4channels', program.stages.S4channels, 'S4', 'Stage3', 'Stage4_channels'],
-    ...(program.stages.S4slices ? [['S4slices', program.stages.S4slices, 'S4', 'Stage3', 'Stage4_slices'] as const] : []),
   ] as const) {
     if (progress.steps[step]) continue;
     progress.steps[step] = await python(toolchain, work, STAGE_RUNNER, [step.slice(0, 2), await settings(step, template, prefix, inputdir, outputdir), program.eventName], resolve(work, `${step}.log`));
@@ -283,7 +279,6 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   await mkdir(curves, { recursive: true });
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours.log'));
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
-  if (program.stages.S4slices) await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_slices'), /^S4_.*_LCData\.h5$/u), 'ours-slice'], resolve(work, 'export-ours-slices.log'));
   await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
   const oracle = program.oracle, oracleDirectory = resolve(work, 'oracle');
   await mkdir(oracleDirectory, { recursive: true });

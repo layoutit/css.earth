@@ -2,52 +2,12 @@
   "schema": "csswasp-43b-runtime-assets@1",
   "assets": [
     {
-      "filename": "wasp-43b-context-miri-band-1.webp",
-      "bytes": 54,
-      "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3"
-    },
-    {
-      "filename": "wasp-43b-context-miri-band-1@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "filename": "wasp-43b-context-miri-band-2.webp",
-      "bytes": 54,
-      "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3"
-    },
-    {
-      "filename": "wasp-43b-context-miri-band-2@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "filename": "wasp-43b-context-miri-band-3.webp",
-      "bytes": 54,
-      "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3"
-    },
-    {
-      "filename": "wasp-43b-context-miri-band-3@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
       "filename": "wasp-43b-context-miri.webp",
       "bytes": 54,
       "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3"
     },
     {
       "filename": "wasp-43b-context-miri@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "filename": "wasp-43b-context-nirspec-refit.webp",
-      "bytes": 54,
-      "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3"
-    },
-    {
-      "filename": "wasp-43b-context-nirspec-refit@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
@@ -62,64 +22,14 @@
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "wasp-43b-lens-miri-band-1.webp",
-      "bytes": 260,
-      "sha256": "388a4abc3f971f6079a1d1ba78ad187688cee30e3f94da3d3a51539a7089c52d"
-    },
-    {
-      "filename": "wasp-43b-lens-miri-band-2.webp",
-      "bytes": 268,
-      "sha256": "a483cce3d04650b038653856aa48797b3b4a85339df99c616e2854658c370207"
-    },
-    {
-      "filename": "wasp-43b-lens-miri-band-3.webp",
-      "bytes": 272,
-      "sha256": "b6ab87425d796d9c02d4d451002b29bdb8a801e46e92495d73e6c5e3172cbb8b"
-    },
-    {
       "filename": "wasp-43b-lens-miri.webp",
-      "bytes": 304,
-      "sha256": "bf1c6cb0fac2f88ee41d19427357157bc7f91c07b76361f2c6c57ec9f61f2afe"
-    },
-    {
-      "filename": "wasp-43b-lens-nirspec-refit.webp",
-      "bytes": 302,
-      "sha256": "ee1e356ab05fb03685878ad778945e9a290fd93bc5d9860e5cd01b9415e597b6"
+      "bytes": 286,
+      "sha256": "13ed50da2a4dc35cac548f75bc9c2669947d6663ed0d1e033d680a1e1651acc6"
     },
     {
       "filename": "wasp-43b-lens-temperature.webp",
       "bytes": 280,
       "sha256": "03a55022c18bb21c35ece9f3a98aef039f283e1ac1c15dfd80811060da1857cc"
-    },
-    {
-      "filename": "wasp-43b-limb-miri-band-1.webp",
-      "bytes": 52,
-      "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af"
-    },
-    {
-      "filename": "wasp-43b-limb-miri-band-1@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "filename": "wasp-43b-limb-miri-band-2.webp",
-      "bytes": 52,
-      "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af"
-    },
-    {
-      "filename": "wasp-43b-limb-miri-band-2@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "filename": "wasp-43b-limb-miri-band-3.webp",
-      "bytes": 52,
-      "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af"
-    },
-    {
-      "filename": "wasp-43b-limb-miri-band-3@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "filename": "wasp-43b-limb-miri.webp",
@@ -128,16 +38,6 @@
     },
     {
       "filename": "wasp-43b-limb-miri@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "filename": "wasp-43b-limb-nirspec-refit.webp",
-      "bytes": 52,
-      "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af"
-    },
-    {
-      "filename": "wasp-43b-limb-nirspec-refit@2x.webp",
       "bytes": 84,
       "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
@@ -152,54 +52,14 @@
       "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
-      "filename": "wasp-43b-poles-miri-band-1.webp",
-      "bytes": 25690,
-      "sha256": "6accf3828831017a4ca1b93d6548d18682e609abaace320d06a7a0679213f065"
-    },
-    {
-      "filename": "wasp-43b-poles-miri-band-1@2x.webp",
-      "bytes": 54444,
-      "sha256": "7d686d8785c623ac37be8372a7327a56f8b91243fba693ffbd8d50a1281bafea"
-    },
-    {
-      "filename": "wasp-43b-poles-miri-band-2.webp",
-      "bytes": 25064,
-      "sha256": "185be89dad6e9a139c1e1524aa27a20f0070c070338b51ac4efbf646f3abaa2f"
-    },
-    {
-      "filename": "wasp-43b-poles-miri-band-2@2x.webp",
-      "bytes": 52516,
-      "sha256": "3ef29c112d3060f66138034451d32a4c19ab3894ef3fb4567c6205236b585b39"
-    },
-    {
-      "filename": "wasp-43b-poles-miri-band-3.webp",
-      "bytes": 25284,
-      "sha256": "9009660bc69ec152ea3948bef5ee0262af87399b45b58bf7c56db880732cbd9b"
-    },
-    {
-      "filename": "wasp-43b-poles-miri-band-3@2x.webp",
-      "bytes": 53420,
-      "sha256": "ffbc5d1f1bcebbcbe4ff84b45315bb72503e7afa04da4178ccab4eba001d6de6"
-    },
-    {
       "filename": "wasp-43b-poles-miri.webp",
-      "bytes": 21004,
-      "sha256": "e2c477a2fb4ca5b1cf9b04c20007544b9e1e3d21c403d8b7751e75455a9882ae"
+      "bytes": 20926,
+      "sha256": "f99dda01b7bcaba69cbcbdfac3bd23fa263e98d7483f18618b1a035d231f6dbe"
     },
     {
       "filename": "wasp-43b-poles-miri@2x.webp",
-      "bytes": 47058,
-      "sha256": "7bfb534ecc5d389771de66342234129bd3a2fa3609b6b40420f3a7e148db1472"
-    },
-    {
-      "filename": "wasp-43b-poles-nirspec-refit.webp",
-      "bytes": 26062,
-      "sha256": "e35ad9c1ea031154732cef8922b8020661537d3d121bc317316dc1fba6b36b49"
-    },
-    {
-      "filename": "wasp-43b-poles-nirspec-refit@2x.webp",
-      "bytes": 55036,
-      "sha256": "2bc302a59bc4e44aa915c724632b6f0f1f6701b6e8ddd6840b56d2382d735d7a"
+      "bytes": 46914,
+      "sha256": "717963158b8994bbc0b275188105d7d6be2af8bd1d07d8386bf431eba5c2982c"
     },
     {
       "filename": "wasp-43b-poles-temperature.webp",
@@ -212,54 +72,14 @@
       "sha256": "4e32e86b800b28fbd15689aceb58100e1007a61d3da68c4bd43ae08540317b84"
     },
     {
-      "filename": "wasp-43b-surface-miri-band-1.webp",
-      "bytes": 14238,
-      "sha256": "6d23e6da668f406d5efc50c1bb53ef9739f79957feb43af5405cfed72b6ea15d"
-    },
-    {
-      "filename": "wasp-43b-surface-miri-band-1@2x.webp",
-      "bytes": 38692,
-      "sha256": "3128797600b5c79d4322eaf9e651026b78177873159aed0c1047da3bf7f00f5e"
-    },
-    {
-      "filename": "wasp-43b-surface-miri-band-2.webp",
-      "bytes": 13632,
-      "sha256": "954f5cade305fe2082207aa4509cec2889154e683c6282915431114050a920f0"
-    },
-    {
-      "filename": "wasp-43b-surface-miri-band-2@2x.webp",
-      "bytes": 37132,
-      "sha256": "291c562682347edbc3c909da39a16cc73386dbb11d2df59aea8d6c591583282d"
-    },
-    {
-      "filename": "wasp-43b-surface-miri-band-3.webp",
-      "bytes": 14178,
-      "sha256": "5df0759af1cb7d863eed48085e1cd730bfabf27dea265ff7dedd24fcda5c1a63"
-    },
-    {
-      "filename": "wasp-43b-surface-miri-band-3@2x.webp",
-      "bytes": 38616,
-      "sha256": "c0c888d7e4e8178b49eaf239e15dbe3891be86eb7d863033dd231947f0e41899"
-    },
-    {
       "filename": "wasp-43b-surface-miri.webp",
-      "bytes": 16020,
-      "sha256": "d2c5da35baf33a2a91c79b6373c4e8ccb4d6bc29f5487aec3cbea94ca77320dc"
+      "bytes": 15866,
+      "sha256": "7370e5fb1e25a878fe8127ac4ce261bec15a406fc381ac5fed69b573e1a1bd82"
     },
     {
       "filename": "wasp-43b-surface-miri@2x.webp",
-      "bytes": 39738,
-      "sha256": "bce4856ddb43a0cb19733477f5e3061a9576bfdfd60ba3260655bf4d7ec74802"
-    },
-    {
-      "filename": "wasp-43b-surface-nirspec-refit.webp",
-      "bytes": 15862,
-      "sha256": "1bc2e663a60a398dae5e0db10696e4f59e63c360ab5b6afc471cc029f9d9615b"
-    },
-    {
-      "filename": "wasp-43b-surface-nirspec-refit@2x.webp",
-      "bytes": 39674,
-      "sha256": "44eee93b362b33f1363416e92ccc87ccf9c3a633ed79be910d357e3b9b06720d"
+      "bytes": 39806,
+      "sha256": "d5dd846a4229e32fde7de0a6366e278995b66cfb5d55795fe3ea03d1049cabee"
     },
     {
       "filename": "wasp-43b-surface-temperature.webp",
