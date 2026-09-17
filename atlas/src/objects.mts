@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { SITE_ORIGIN } from '../../site/seo.mts';
 
-/** Reads the checked-in object packages. The wiki prepares nothing and copies no facts out of them. */
+/** Reads the checked-in object packages. The atlas prepares nothing and copies no facts out of them. */
 export const REPOSITORY = resolve(import.meta.dirname, '../..');
 export const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 export const REPOSITORY_URL = 'https://github.com/layoutit/css.earth';
@@ -108,7 +108,7 @@ function appOrigin(value: string | undefined) {
   return url.origin;
 }
 
-/** The prepared world context: the wiki derives nothing from it, it reads the orbits and colours preparation wrote. */
+/** The prepared world context: the atlas derives nothing from it, it reads the orbits and colours preparation wrote. */
 function worldContext() {
   const context = readJson(resolve(OBJECTS_DIRECTORY, 'sun/prepared/world-context.json'));
   if (!isRecord(context)) throw new Error('src/objects/sun/prepared/world-context.json is missing. Run pnpm prepare:world-context.');

@@ -1,8 +1,8 @@
 {
-  "name": "@cssearth/wiki",
+  "name": "@cssearth/atlas",
   "version": "0.0.0",
   "private": true,
-  "description": "Reader articles for every object package in src/objects, built with Starlight.",
+  "description": "Atlas pages for every object package in src/objects, built with Starlight.",
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4281",
