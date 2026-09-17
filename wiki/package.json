@@ -1,0 +1,21 @@
+{
+  "name": "@cssearth/wiki",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Reader articles for every object package in src/objects, built with Starlight.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4281",
+    "build": "astro build",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.1",
+    "astro": "^7.2.10",
+    "sharp": "0.35.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "typescript": "5.9.3"
+  }
+}
