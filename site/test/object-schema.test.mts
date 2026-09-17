@@ -52,7 +52,7 @@ test("defines one generic renderable-object contract", () => {
 
 test('world-frame capability is validated and copied at the registry boundary', () => {
   const frame = { referenceFrame: 'heliocentric-icrf', epochJdTt: 2451545,
-    originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+    originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1],
     metersPerUnit: 1000, bodyRadiusM: 1000000 };
   const value = defineObject({ ...fixture, worldFrame: frame });
   assert.deepEqual(value.worldFrame, frame);

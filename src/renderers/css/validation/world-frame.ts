@@ -1,5 +1,5 @@
 import type { PreparedWorldCameraFrame } from '../navigation/world-camera.js';
-import { validateWorldRotation } from '../navigation/world-camera-math.js';
+import { validateWorldReflection } from '../navigation/world-camera-math.js';
 import { finite, numbers, positive, record, text } from './guards.js';
 
 export function parsePreparedWorldCameraFrame(input: unknown): PreparedWorldCameraFrame | null {
@@ -16,7 +16,7 @@ export function parsePreparedWorldCameraFrame(input: unknown): PreparedWorldCame
     metersPerUnit: positive(value.metersPerUnit, 'metres per unit'),
     bodyRadiusM: positive(value.bodyRadiusM, 'body radius'),
   };
-  validateWorldRotation(result.presentationToReference);
+  validateWorldReflection(result.presentationToReference);
   if (value.orbitUpReference !== undefined) {
     const up = numbers(value.orbitUpReference, 'orbit up', 3);
     if (Math.abs(Math.hypot(...up) - 1) > 1e-9) throw new TypeError('Orbit up must be a unit vector.');

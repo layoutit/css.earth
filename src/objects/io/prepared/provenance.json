@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d74a51600d027121d4436ec87ca8731c062249fb0ee8f326ef0e33f61990829"
+    "sha256": "8ea5101649c29127b8e772f215bc478e4d42f1ac27e3d2885f7757dab5eb336f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "fcb94b46edfea0a8d9badcceffdb40ea7104069951791f56df8063b06dad7c2f"
+    "bindingsSha256": "d57826826929cd8d26f2ffa6279e5f2e35f1e5a3e39756f6fa7dbddafb3d48be"
   },
   "recipes": [
     {
@@ -877,7 +877,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
+      "sha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -888,7 +888,6 @@
           "metadata": "metadata_nomenclature_points_IO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "io-features.json",
         "publicBase": "/scenes/io/",
         "target": {
@@ -1653,8 +1652,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "2bc17bb8b5b0e11c048f22d0e630fa19596b4c1501c7d72f56bf31cb11d299a4",
-      "bytes": 149,
+      "sha256": "57b9261689b479463ea12838d5639c51da7ebf870db2ba8d9194854fdc8780b9",
+      "bytes": 181,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2465,7 +2464,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2618,11 +2616,11 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "dd6c0bb2df72b38d2e116c9723bc9ee7ca4a329ea4d86e1f7152fbceda97d716",
+    "materialSha256": "40df3db06a5b34f39e6fc75ba4b040fa43fefcbf719d5f7d9fec3ad1a7bb9c2c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "fcb94b46edfea0a8d9badcceffdb40ea7104069951791f56df8063b06dad7c2f"
+      "bindingsSha256": "d57826826929cd8d26f2ffa6279e5f2e35f1e5a3e39756f6fa7dbddafb3d48be"
     }
   }
 }

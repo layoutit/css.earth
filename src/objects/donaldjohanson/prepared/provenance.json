@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b503b4895d7ef4561f076f297ce5edb3ecec7bfba0c0dd4bbb1c74ceb1ae8f6"
+    "sha256": "5634d82d68ba4894418182194a009f326f8b9bfe36ca4ad7151a2819b32269c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f24852c7a8b4532712bc093f5e54a6768f37d751de5f489020f683f41cba47a0"
+    "bindingsSha256": "3cc920edf13422f459fc2ad2549b7b38e86f0bee58ccd879f57bedf2f5726f04"
   },
   "recipes": [
     {
@@ -405,7 +405,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e051d0ae8c5eca92e27231fbcdfe7d1dc3780ec19898aa74a8be968b9503b624",
+      "sha256": "72d37ca42c7c3402201d5c033b40707c70b776fbc86e398708c99318c16e96e3",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -416,7 +416,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "donaldjohanson-features.json",
         "publicBase": "/scenes/donaldjohanson/",
         "target": {
@@ -694,8 +693,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
-      "bytes": 161,
+      "sha256": "2baf4d4af169d4af154ec6c846c5ece03a52af6f3e29fd288bc9d57bb51c1b75",
+      "bytes": 193,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -913,7 +912,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1016,11 +1014,11 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "37383870a20ab2559803988cc791428159f9c2f921d0c961fdc048b48b4f58dd",
+    "materialSha256": "71782744f07166f76c90072720de69716c327cb2bdb2ca57882e396576c2b016",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f24852c7a8b4532712bc093f5e54a6768f37d751de5f489020f683f41cba47a0"
+      "bindingsSha256": "3cc920edf13422f459fc2ad2549b7b38e86f0bee58ccd879f57bedf2f5726f04"
     }
   }
 }

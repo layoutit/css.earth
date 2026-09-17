@@ -1,7 +1,7 @@
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldContext } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { contextOrbitOpacity, selectedOrbitDepthFade } from './context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
@@ -195,7 +195,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
     const opacity = systemFade.update(world.pose.positionM);
-    const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+    const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
       const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;

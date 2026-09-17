@@ -1758,8 +1758,8 @@
     {
       "id": "titan-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1275,
-      "expectedSha256": "c43af9f444375838e7be7d5d50c7986a76acdc31152508e937e51cbf2630192f",
+      "expectedBytes": 1243,
+      "expectedSha256": "0264516ce7c7babafba08b9eff782754a6dc2f8f75609dd7bec69159e09ccc62",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1776,8 +1776,8 @@
     {
       "id": "titan-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "30032741c351451501695e88e48dbd885e1881bb1586aa26bef6a82eb088f17f",
+      "expectedBytes": 184,
+      "expectedSha256": "744bfd0772104fce2113cc91c5c2fc985387e0fefd772efd9b9dc24e7a3a4baa",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

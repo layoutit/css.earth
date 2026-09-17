@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c379817f5fca133bc87ea7b1fe41407069c67308aa3e7661d6854df97c48da9"
+    "sha256": "8731bf16283624a870ec919f20d428f251ef304beb8b69a7cbe05e386a2fcfe2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "296500572669c97092c58602d27cac21de0b5a5c0c5cdaf3c1aee808faa5e628"
+    "bindingsSha256": "955c382e4984796d70de18e48cd87afaeef5da80668cb2f28df8769a792c23fc"
   },
   "recipes": [
     {
@@ -583,7 +583,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1",
+      "sha256": "63517838c7d331f0d607729429f1900b841d704489dff3ecad38493c12451397",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -594,7 +594,6 @@
           "metadata": "metadata_nomenclature_points_MARS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "mars-features.json",
         "publicBase": "/scenes/mars/",
         "target": {
@@ -978,8 +977,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
-      "bytes": 151,
+      "sha256": "1ddacfc53e5a5eef26ee98270502ac5ac628cb1a3c3b3349f89a52a0552dc079",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1483,7 +1482,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1589,11 +1587,11 @@
   },
   "lastPreparation": {
     "objectId": "mars",
-    "materialSha256": "ed5847bfacbcf3ff2f9fb0c3e03a1190960be0ee39aa165048bfc888650dc01e",
+    "materialSha256": "486dccd91fd15c28ddb6f08c609209fc7e407f360af983041f03b11faba60b81",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "296500572669c97092c58602d27cac21de0b5a5c0c5cdaf3c1aee808faa5e628"
+      "bindingsSha256": "955c382e4984796d70de18e48cd87afaeef5da80668cb2f28df8769a792c23fc"
     }
   }
 }

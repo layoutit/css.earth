@@ -193,8 +193,8 @@
     {
       "id": "comet-8p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 780,
-      "expectedSha256": "aa1ae823d931b7340cc3151355b2daa2170e235093c5aea59df20023d92a8db4",
+      "expectedBytes": 748,
+      "expectedSha256": "9e74b2c2ef8ba475083e034d16ff8f6d4940c0ade98c83d1c89dea42d7e631a8",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -211,8 +211,8 @@
     {
       "id": "comet-8p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "c44248203014bbbaacb4b926763a747f4dc0fce5536d672bbeef191671ba4bac",
+      "expectedBytes": 187,
+      "expectedSha256": "fba7ce7f6ad59239f656a8072a0a26f80867923e7b2ecc6be2971858639e3af1",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",

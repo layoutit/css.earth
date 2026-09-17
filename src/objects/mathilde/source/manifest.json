@@ -212,8 +212,8 @@
     {
       "id": "mathilde-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1157,
-      "expectedSha256": "cf83a84097c1adaaf528f9c29592e8758df3d4c5b4be9c9ee6354862c56b7563",
+      "expectedBytes": 1125,
+      "expectedSha256": "75d57d07d8088550b0ba84b9f55681ddbf2fe29fd360e65090695cf37107541b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -230,8 +230,8 @@
     {
       "id": "mathilde-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
+      "expectedBytes": 187,
+      "expectedSha256": "36f43bd3ea3b0dedceada1f503ca5994613cb55ed000fcb5133a373999db22fd",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

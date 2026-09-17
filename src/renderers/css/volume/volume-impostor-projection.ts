@@ -1,5 +1,5 @@
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
 
 type View = PreparedVolumeImpostors['views'][number];
@@ -19,7 +19,7 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
     throw new TypeError('Volume impostor camera viewport is invalid.');
   }
-  const local = presentPhysicalPoseInVolume(world.pose, frame), rotation = worldRotationFromQuaternion(local.orientationXyzw);
+  const local = presentPhysicalPoseInVolume(world.pose, frame), rotation = cssCameraAxesFromOrientation(local.orientationXyzw);
   const right: VolumeVector = [rotation[0]!, rotation[3]!, rotation[6]!];
   const down: VolumeVector = [rotation[1]!, rotation[4]!, rotation[7]!];
   const back: VolumeVector = [rotation[2]!, rotation[5]!, rotation[8]!];

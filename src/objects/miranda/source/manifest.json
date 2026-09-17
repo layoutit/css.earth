@@ -1432,8 +1432,8 @@
     {
       "id": "miranda-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1167,
-      "expectedSha256": "07c55d3158c4a9cb0270d29ebb8e88e534c5c40b272c09fbcab6009b65f7489f",
+      "expectedBytes": 1133,
+      "expectedSha256": "6250b77efb266e10b59bc0e0bcd9ea71c2bbe9431c6ea7d0affb72158c5568bb",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1450,8 +1450,8 @@
     {
       "id": "miranda-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "6c31c6d7afd537b7e6e13475b1268b018ac9e6698013c0d48e23a3ef0bb0cfc3",
+      "expectedBytes": 188,
+      "expectedSha256": "9f27edddd46d4579044bc75438c6ae304e8b9b33f269f93f0f25ae0cfc91d399",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

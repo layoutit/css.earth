@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a85e12134df9d9f6332e781904e4bfc43f60b650de0c00f60002f462c38fc4f4"
+    "sha256": "cf7c63631868852494d2298eb5bf081245102e41020794abba93ca6890596293"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e9c11d13964edc5cf885ad3a8b0e0608842b7b5446c2799c857171c87bfb4914"
+    "bindingsSha256": "79757114f7040cfd72b9c763d1a90254efb6eb27ba69902f567c54197bbf32a5"
   },
   "recipes": [
     {
@@ -546,7 +546,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "65a2fe24d6ac8595591651b64c0cf23b76467352e5b13ef7625c1a57eebf5eae",
+      "sha256": "b37bda5223d6b4f4ebce0c8a076f4b2aff567a338e1b59307647dda9163b6319",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -557,7 +557,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "ryugu-features.json",
         "publicBase": "/scenes/ryugu/",
         "target": {
@@ -1041,8 +1040,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
-      "bytes": 152,
+      "sha256": "3f19b366469430b6c025f610804eadb79be3d19c548c2a7955c988d2ca2109e6",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1493,7 +1492,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1672,11 +1670,11 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "02bcaec9748124ec2eb9530190adcb20ad395974470e776bd04c6efaf0aba838",
+    "materialSha256": "223a1d97e2155bbc2489c0e5cf548e7e15227bb8b18f5fe6e59840a078f2bc5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e9c11d13964edc5cf885ad3a8b0e0608842b7b5446c2799c857171c87bfb4914"
+      "bindingsSha256": "79757114f7040cfd72b9c763d1a90254efb6eb27ba69902f567c54197bbf32a5"
     }
   }
 }
