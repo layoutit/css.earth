@@ -52,6 +52,7 @@ test('hips2fits bands are calibrated by the route, divided by their own measured
   assert.equal(result.missingPixels, 0);
   assert.equal(new URL(skyBandUrl(grid, 'CDS/P/SPITZER/IRAC4')).searchParams.get('hips'), 'CDS/P/SPITZER/IRAC4');
   const w4 = SKY_BANDS.W4!.toMJyPerSr, w1 = SKY_BANDS.W1!.toMJyPerSr;
+  assert.ok(w4 !== null && w1 !== null, 'WISE atlas bands carry their own surface-brightness conversion.');
   assert.ok(Math.abs(w4 - 1.17622) < 1e-4 && Math.abs(w1 - 0.043544) < 1e-5, 'Explanatory Supplement Jy/DN over a 1.375 arcsec pixel');
 }));
 
