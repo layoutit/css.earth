@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "389d6b8452b851806eb4c91967776fa9c641a2fa1f6efde84690666a27171420"
+    "sha256": "79f453294fc362670e40340a2ec1c20ae964cd38973951f7e38e2b9b0a2b3da7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b546ab4d1728853b55057b13fdde88eeae5332488fc1084ca2fd359afc41de69",
+      "sha256": "7928a3025a0cff6addca28c9ef195da7e89cf7d2c2dcf315585dab5b18b5f73a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -143,10 +143,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 261.385,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/vesta/vesta-normal-surface@2x.webp",
           "polesUrl": "/scenes/vesta/vesta-normal-poles@2x.webp",
           "radialTerrain": {
@@ -478,8 +474,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png",
             "missionId": "dawn"
           }
@@ -533,8 +529,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
             "missionId": "dawn"
           }
@@ -590,8 +586,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
             "missionId": "dawn"
           }
@@ -646,8 +642,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive.",
             "missionId": "dawn"
           }
@@ -1202,7 +1198,7 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "c2bbfbdb68a5bccf9577c754cfa9ad14ce8a4ef1d677aff7b77c6a0dbf485ca2",
+    "materialSha256": "784aeea2f7e92970b90b56b68f17310c50df807b9799c38ca65db1ad6d15a098",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

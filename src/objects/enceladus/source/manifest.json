@@ -40,8 +40,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
           }
@@ -96,8 +96,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif"
           }
@@ -779,8 +779,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6856,
-      "expectedSha256": "b94fc235b40856e8733be8245274adf7e911c5a97d4c43b13e94a6da5d792719"
+      "expectedBytes": 6759,
+      "expectedSha256": "f234c2398fa159db29f7e38a3dd7fe3fa6861746cf3241b5bd5422cb4fb859f1"
     },
     {
       "path": "presentation/title-mark.json",

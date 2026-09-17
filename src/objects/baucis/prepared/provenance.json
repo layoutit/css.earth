@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10f233276e10225a84348da78ed4ddbeda238e40eb3fb53a557e91381e97ddda"
+    "sha256": "b3037829c18707b939a0b3266c1395b0dc74f5aab21a76bc8ee95df384d08637"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c6dfe4520822cc912083bef24cdf562c7c7f157427bf29ee8784493af3831f66",
+      "sha256": "9a38bab861ee696cdc34a3b48d4778fd9c93ae7843247db02f07a8669d8b08b3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 33.445,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/baucis/baucis-shape-surface@2x.webp",
           "polesUrl": "/scenes/baucis/baucis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "baucis",
-    "materialSha256": "bbdadd4e0341f77e82956954380aafc0ae6e8e12b0614a841fd2663369830fc0",
+    "materialSha256": "d426b6158e8ed4eb2bedec31e1fb70ae05fb0314007ad515f78c840b7eea9bc9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

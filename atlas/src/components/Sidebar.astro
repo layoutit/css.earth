@@ -1,0 +1,34 @@
+---
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import SidebarEntry from './SidebarEntry.astro';
+import { readObjects, systemGroups, type SystemEntry } from '../objects.mts';
+
+// The tree the sidebar draws: systems, their classifications, each body and what orbits it.
+const systems = systemGroups(readObjects());
+const current = Astro.locals.starlightRoute.id;
+const count = (entries: readonly SystemEntry[]): number => entries.reduce((total, entry) => total + 1 + count(entry.satellites), 0);
+const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry => entry.object.id === current || holds(entry.satellites));
+---
+<ul class="atlas-tree top-level">
+  <li><a class="atlas-row atlas-index" href="/" aria-current={current === 'index' ? 'page' : undefined}>All objects</a></li>
+  {systems.map(system => <li>
+    <details open={(system.star ? holds([system.star]) : false) || system.groups.some(group => holds(group.entries))}>
+      <summary><span class="atlas-tree-root">{system.label} ({(system.star ? count([system.star]) : 0) + system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
+      <ul>
+        {/* A group of one classification, like the stars or the nebulae, needs no second level. */}
+        {system.groups.length === 1 && !system.star
+          ? system.groups[0]!.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)
+          : <>
+        {system.star && <li><SidebarEntry entry={system.star} current={current} /></li>}
+        {system.groups.map(group => <li>
+          <details open={holds(group.entries)}>
+            <summary><span class="atlas-tree-group">{group.label} ({count(group.entries)})</span></summary>
+            <ul>{group.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)}</ul>
+          </details>
+        </li>)}
+          </>}
+      </ul>
+    </details>
+  </li>)}
+</ul>
+<div class="md:sl-hidden"><MobileMenuFooter /></div>

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "47bd493fc084b999b9a255b5efe72e4b9d857a9ee562447db19abef68fdfd75a"
+    "sha256": "1ea1180aa40c30acec61ac201d6d80f942c99642c38b15f81d59f25cf47936f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2a16fc3022e64a383ba105fc98e1aae44758b2ac9dac1ddc63415e7b6af1c047",
+      "sha256": "21132cc289315c1afa7ffc45ce2861ba847173a4bd2394caae1b38e491c6e9be",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 55.27,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/atalante/atalante-shape-surface@2x.webp",
           "polesUrl": "/scenes/atalante/atalante-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "atalante",
-    "materialSha256": "57b32f469bbca733894df85d1af560e962cac708ce5a08f4bfaa2107479a8b84",
+    "materialSha256": "c6e6681338d16152ea694bcf9fd8f248351a781ce219cb41dc331f6a5cbf825f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

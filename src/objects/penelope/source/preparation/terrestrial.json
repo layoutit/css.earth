@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 42.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/penelope/penelope-shape-surface@2x.webp",
     "polesUrl": "/scenes/penelope/penelope-shape-surface@2x.webp",
     "radialTerrain": {

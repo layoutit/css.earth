@@ -76,6 +76,23 @@ export interface ReferenceReport {
 
 /** The relief rule: a peak that stands clear of what a turn the size of the window scores. */
 export const RELIEF_DECISIVE = { minimumCorrelation: 0.15, minimumProminence: 0.1 } as const;
+
+/** The gate every registration measurement is judged against. */
+export const VERDICT_DEGREES = 3;
+
+/**
+ * How far the furthest decisive offset sits from their median. A median is a location, not a measurement: offsets that
+ * disagree by more than the gate have placed nothing, and their median can land anywhere, so such a set reaches no
+ * verdict rather than agreeing or conflicting. The limb already states its own precision as a noise floor; this is the
+ * same statement for a sweep, which has no repeat exposures to measure one from.
+ */
+export function offsetAgreementDegrees(frames: readonly { decisive?: boolean; exact?: { offsetDegrees: number } }[], minimumFrames: number) {
+  const offsets = frames.filter(frame => frame.decisive).map(frame => frame.exact?.offsetDegrees)
+    .filter((value): value is number => typeof value === 'number' && Number.isFinite(value));
+  if (offsets.length < minimumFrames) return null;
+  const sorted = [...offsets].sort((a, b) => a - b), median = sorted[Math.floor(sorted.length / 2)];
+  return Math.max(...sorted.map(value => Math.abs(value - median)));
+}
 export interface ReliefFrameReport extends Partial<ReliefResult> { id: string; skipped?: string; decisive?: boolean }
 export interface ReliefReport { rule: typeof RELIEF_DECISIVE & { minimumFrames: number }; frames: ReliefFrameReport[]; decisive: number; medianOffsetDegrees: number | null }
 export interface RegistrationStageReport { stage: typeof REGISTRATION_STAGE; silhouette: SilhouetteReport; reference: ReferenceReport; relief: ReliefReport }

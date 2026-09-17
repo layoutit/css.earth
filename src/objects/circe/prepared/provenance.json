@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b775037b31e5772d14bae149f1aed7178d42be43fc61cb75b91185e376a48ef"
+    "sha256": "e6b4da01d0e266d71de89732893f22445597cbf34d1c25798903d8057d6f2307"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "214915f4d97816761b2203206d4651809ee4826ddcc13a3b5cfcbca4c27abbe9",
+      "sha256": "2f29a975def67a985230fc628824f7c88cec6653a20663ee68eec44994a0f9d5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 53.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/circe/circe-shape-surface@2x.webp",
           "polesUrl": "/scenes/circe/circe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "circe",
-    "materialSha256": "fdf61f02b514354ebd224dff44e051fb6c5ae3e810bd05a158274329e3388a10",
+    "materialSha256": "82ebccac82c70c01f69e95ae704c835744a93a574fa30d89d1926328675e238f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

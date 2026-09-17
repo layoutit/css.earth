@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fcc7715c9a05915efcfba0c9876cc9b969be9c94039b1603a2ec4db9f1f90d4c"
+    "sha256": "b9eec9917b883fb224093df0f4d5c7e14af3403a42aefbfd3ba9dbb68f3f2216"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "17a69aea1c92244825bc01512bf5828ac85812b7dd723f7cd0aa39116bfd1034",
+      "sha256": "70d525df84acb552e772d83b396c88f42173caff6269f8511dec1da58b4b8f0f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 10.705,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/medusa/medusa-shape-surface@2x.webp",
           "polesUrl": "/scenes/medusa/medusa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "medusa",
-    "materialSha256": "06981c46ea1781be67115bd065a729cdaa2e615dfb6d727ab666cefb442f36b3",
+    "materialSha256": "fe63803e34a6ecb895ed66c119d7f35b782c248531ca671e33adedc5920ce52e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

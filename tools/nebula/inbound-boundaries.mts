@@ -3,7 +3,7 @@
  * their expression references nebula paths. General plugin loaders are not subjected
  * to blanket data-flow claims; literal/const/alias imports are resolved below.
  */
-import { existsSync, readFileSync, readdirSync, realpathSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, realpathSync, statSync } from 'node:fs';
 import { dirname, relative, resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
@@ -19,13 +19,14 @@ const object = (value: unknown): value is Record<string, unknown> => !!value && 
 const within = (base: string, file: string) => { const path = relative(base, file); return path === '' || !path.startsWith('../') && path !== '..' && !path.startsWith('/'); };
 const canonical = (path: string) => existsSync(path) ? realpathSync(path) : resolve(path);
 const readJson = (file: string): Record<string, unknown> => { const value: unknown = JSON.parse(readFileSync(file, 'utf8')); return object(value) ? value : {}; };
+const isFile = (path: string) => existsSync(path) && statSync(path).isFile();
 const sourcePattern = /\.(?:[cm]?[jt]sx?|astro)$/;
 function files(directory: string): string[] {
   if (!existsSync(directory)) return [];
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
     if (['node_modules', 'dist', '.astro'].includes(entry.name)) return [];
     const file = resolve(directory, entry.name);
-    return entry.isDirectory() ? files(file) : sourcePattern.test(file) ? [file] : [];
+    return entry.isDirectory() ? files(file) : sourcePattern.test(file) && isFile(file) ? [file] : [];
   });
 }
 function policy(path: string): Policy {
@@ -155,11 +156,11 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
         }
       }
     }
-    if (direct) for (const candidate of [direct, ...['.ts', '.mts', '.tsx', '.js', '/index.ts'].map(ext => direct + ext)]) if (existsSync(candidate)) return canonical(candidate);
+    if (direct) for (const candidate of [direct, ...['.ts', '.mts', '.tsx', '.js', '/index.ts'].map(ext => direct + ext)]) if (isFile(candidate)) return canonical(candidate);
     return direct;
   }
   const sourceFiles = [...['src', 'site', 'tools', 'packages'].flatMap(path => files(resolve(root, path))),
-    ...readdirSync(root).filter(path => sourcePattern.test(path)).map(path => resolve(root, path))];
+    ...readdirSync(root).filter(path => sourcePattern.test(path) && isFile(resolve(root, path))).map(path => resolve(root, path))];
   type Node = { label: string; imports: Import[]; accesses: { path: string; line: number }[]; unchecked: boolean; edges: { file: string; erased: boolean }[]; packages: { name: PackageName; erased: boolean; specifier: string }[] };
   const graph = new Map<string, Node>();
   for (const file of sourceFiles) {
@@ -187,7 +188,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
         if (target && within(lab, target)) errors.push(`${location}: direct path into labs/nebula is forbidden; use an allowed public package export (${specifier})`);
         else if (target && within(root, target)) {
           node.edges.push({ file: target, erased: item.erased });
-          if (existsSync(target) && sourcePattern.test(target) && !target.includes('/node_modules/') && !graph.has(target)) sourceFiles.push(target);
+          if (isFile(target) && sourcePattern.test(target) && !target.includes('/node_modules/') && !graph.has(target)) sourceFiles.push(target);
         }
       }
     }

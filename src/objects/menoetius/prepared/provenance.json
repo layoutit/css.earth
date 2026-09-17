@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c1028bf9e035ed6364c0745c9bf1246d5ad9a5c5536595c603397e93182bc7c8"
+    "sha256": "d09f5d75757d51af33441e93367dac1228e79e55c448cf9bc460bf1a73e29fe6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bf150f490380c0dde2344347bfba30aa3b11e99b8cd390e51fb386b7641062a5",
+      "sha256": "fc8a4c84cbc3720c7cd7819774526b8378733677c704235b0d9cde04b2538f23",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 52.19000997884097,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8921369227152303
           },
           "mapUrl": "/scenes/menoetius/menoetius-model-surface@2x.webp",
@@ -420,7 +418,7 @@
   },
   "lastPreparation": {
     "objectId": "menoetius",
-    "materialSha256": "671493d24f370dc27787fcc899929e087e1c43e57afdf5fb1c945f3b30364a37",
+    "materialSha256": "729006ad4b760242892ef25121ef51b9a6fc52fb44074a8651a6910c86f09980",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

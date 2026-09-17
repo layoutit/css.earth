@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "715b2313539e75247a1409f5754d50556ad4bdba6855adf6daecac01eceb2932"
+    "sha256": "31de0dd62ea44c63f2cfe04d0a292c7cebaed3e35a31a5152b38b191543da63f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "101d9ea02c1afe2aa1d9a6c03940c923d03215948dc9fffba8e433fb7d861eb3",
+      "sha256": "9a9f3f1554e4d122c398d41f29e580a64057b65e034b0eda645a7c2e57101e4c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 63,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/antigone/antigone-shape-surface@2x.webp",
           "polesUrl": "/scenes/antigone/antigone-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "antigone",
-    "materialSha256": "3c0fe24c5efe5c87d969451506f68bfca8484a76fc9acda68809e0cb98638780",
+    "materialSha256": "9c1bc6036a4153637eebb2736d52faec0a6719dfb6045606340c24ef4cb55a38",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

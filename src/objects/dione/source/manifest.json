@@ -35,20 +35,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "missionId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           }
@@ -97,8 +97,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg"
           }
@@ -149,8 +149,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif"
           }
@@ -199,8 +199,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif"
           }
@@ -249,8 +249,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif"
           }
@@ -329,8 +329,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
           }
@@ -374,8 +374,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
           }
@@ -419,8 +419,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
           }
@@ -777,8 +777,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS"
           }
@@ -975,8 +975,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 10785,
-      "expectedSha256": "1f3b6d3306861f6b2530b65803a47b544012393240148495c5169868c83c7459"
+      "expectedBytes": 10688,
+      "expectedSha256": "8e48728dbbf657a611a5fb65f64fcb70b5afa9c994551ae166ba122443426d92"
     },
     {
       "path": "preparation/navigation.json",

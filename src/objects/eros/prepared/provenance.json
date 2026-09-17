@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d9394ccbaa9d360a68fb0c954c06081a0656049ca5604494608ed861fc1b2052"
+    "sha256": "d9e086e056947e07b686902e609288641a5e326d41769cfade3229b814941aad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1c2cf09ef6e05e2fd5b78ac739e3ee4812e20177a3893255cd0d33fed6a160b1",
+      "sha256": "90977bd46e817194a01c437326b2c01415cfae8c67bbd057ab69c302411d205f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -139,10 +139,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 8.42,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/eros/eros-normal-surface@2x.webp",
           "polesUrl": "/scenes/eros/eros-normal-surface@2x.webp",
           "radialTerrain": {
@@ -450,8 +446,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "near-shoemaker",
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
             "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
             "missionId": "near-shoemaker"
           }
@@ -506,8 +502,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "near-shoemaker",
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
             "missionId": "near-shoemaker"
           }
@@ -562,8 +558,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "near-shoemaker",
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
             "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive.",
             "missionId": "near-shoemaker"
           }
@@ -735,8 +731,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
-      "bytes": 1771,
+      "sha256": "06caf91e611c4ab5e5110af22327ec204349deb521a7f3dc538c768bae13e796",
+      "bytes": 1772,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1074,7 +1070,7 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "0dfa89cb967e1da988c9fa34c546cc5a75308300fa6395fd146db8a0a7bd37e6",
+    "materialSha256": "536bc800233de785460247eac4ec181a57c76f831260769aaf439d3870f98fe5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

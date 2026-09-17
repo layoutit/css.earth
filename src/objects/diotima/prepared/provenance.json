@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f1027d4049874484f83e2b5ed639fc25c16e50e586dafff8e1e7538d09433ba"
+    "sha256": "6499b8d5af806c610af6e15fe3cbd976c1606f32ef52a21a110238bdb59aaa55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5f78cffea01e0432c0fa4feadfda4710270ac6a086c150928ba8bcfab7e7dd20",
+      "sha256": "fa61b17f57ed38b73555ea2355af6cbebb7d31b730f8a5f5d1c9caf93dd87255",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 104.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/diotima/diotima-shape-surface@2x.webp",
           "polesUrl": "/scenes/diotima/diotima-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "diotima",
-    "materialSha256": "4da4ea5eb8fec490b6216cea7d209233c7ad8fe9a377986b06c9711d85c65633",
+    "materialSha256": "922819834cb2bed0e0c90cce9943e602f01138f6f2f95297b7596acee9451d75",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

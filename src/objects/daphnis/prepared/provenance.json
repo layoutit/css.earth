@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7cbd18efaab9e866fce7d03075c91d4ec531b6789a46209fa01ad835c823448e"
+    "sha256": "70372a0a9414d68ab27a7519797364779d76578fb21211ac6d971f9961cc594a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "00818e0ea114d2a329dedb9db5cd9871e53639fd1f9e0bc1139000aea4ec84f1",
+      "sha256": "d518aa6e8f4d824c492dc1959c3fe5ccc17993f75c25116d41125995b9d8e282",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -300,10 +300,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 3.8,
-          "camera": {
-            "initialScenePitchDegrees": -19.567127835573416,
-            "defaultControlYawDegrees": -117.69234950387533
-          },
           "mapUrl": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
           "polesUrl": "/scenes/daphnis/daphnis-normal-poles@2x.webp",
           "radialTerrain": {
@@ -519,8 +515,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/daphnis_30k_plt.tab",
             "missionId": "cassini"
           }
@@ -573,8 +569,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -620,8 +616,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -674,8 +670,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -721,8 +717,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -775,8 +771,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -822,8 +818,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -874,8 +870,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656999219_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -924,8 +920,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656999219_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -976,8 +972,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656999274_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -1026,8 +1022,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656999274_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -1078,8 +1074,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656999330_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -1128,8 +1124,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656999330_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -1439,7 +1435,7 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "1d72ff6b4e2c16e7c9cea399b10c9c3dc492befa7c5dbe509020d897df7cac50",
+    "materialSha256": "ab4d8d2108c3c543263a08800a2408ed90490a7420e85f0defa8dbb3f502728e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

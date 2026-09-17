@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5634d82d68ba4894418182194a009f326f8b9bfe36ca4ad7151a2819b32269c7"
+    "sha256": "4fdd11f709ce56ed78ead3b5ac708387c79d2f673a9f9ca00bb80379e956830c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a2d7f7056097d0aa974e34cb11131e137167114e9280189de5e38ed56693a8e",
+      "sha256": "43c5f6d0df0faa08c54ce4c13f49ca2b1863cada66c5c563300d319a55a68fb8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -157,8 +157,6 @@
           "radius": 230,
           "radiusKm": 2.405325,
           "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 240,
             "framingScale": 0.8
           },
           "mapUrl": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
@@ -1014,7 +1012,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "71782744f07166f76c90072720de69716c327cb2bdb2ca57882e396576c2b016",
+    "materialSha256": "88cee5cf993d150f77d6b067cce1002862105fbcbfb7adaae293d2f3964fb53d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

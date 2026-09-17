@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "539819f5a628dd4e7c5feab13910a7d42d523d7307872669585a733badf47939"
+    "sha256": "0f5aa18dcab0de07a0611ecf4ae77458cf3fbe473dce85c3824db673c3878cb8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c8509f5db505c1b549efffb980658144598c966a6b1f281da613a5cbc4d2c9e2",
+      "sha256": "cfbf8cf9a6a549e0da490fd49eef583845766c553d2fcab5e804f08bb13d033f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -149,10 +149,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 96,
-          "camera": {
-            "initialScenePitchDegrees": 1.56991509945394,
-            "defaultControlYawDegrees": 9.978294627469573
-          },
           "mapUrl": "/scenes/larissa/larissa-normal-surface@2x.webp",
           "polesUrl": "/scenes/larissa/larissa-normal-poles@2x.webp",
           "radialTerrain": {
@@ -671,7 +667,7 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "f35cf18afa84c1a635aac675934174ec52c11f9a17883e9d9ca7c24aaa6e1baf",
+    "materialSha256": "439746e17b3fe3f29e9b70df1c4caa292adab55cfc20e96296951ae5eae8ea14",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

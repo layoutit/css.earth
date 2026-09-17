@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf26c63432f16491639de66681567b30dcf9b50868c144c78833f9c44a69a27c"
+    "sha256": "8e06a3f50f1d60696c1b5e21778cfa94c2aadf25b180216670e3ae8ab9e78ac5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c6654b0265bf7a6dd7d0434f5701c49adec7490de13550770a271922318eb98e",
+      "sha256": "dad0ca73f17a36f091a01a3feea3c4cea1c128326bfee6e90bc121b0631c5431",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 8.4,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.5706125817263992
           },
           "mapUrl": "/scenes/kiviuq/kiviuq-model-surface@2x.webp",
@@ -409,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "kiviuq",
-    "materialSha256": "73e88e2381e8ad1edd3460d6426f57fed3cc777e129345286764d00e542c2e01",
+    "materialSha256": "58805fe1ba3803eebc5841dbbf2057325912cf1afa1616497cf26d286ecf6110",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

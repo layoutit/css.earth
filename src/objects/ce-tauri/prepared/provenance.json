@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db7d7a3fab2406ecc5080ab282414d38d860d8f8f21d792b09671dd7c2c45041"
+    "sha256": "b4bcd6b76402dafa12a349a8f543940b9306fddf266c80478fae64f7da3f432e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "67a7d748e82f909a27fb1ac689407f84fe68ef8892f3cbb44dda3abce06b92a3",
+      "sha256": "91b0a0dc44c6a569f443e56c8d7764f11f2c665b8f009b13982ae04c12c8292f",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ce-tauri/",
@@ -127,9 +127,7 @@
                 },
                 "consumer": "photograph-pionier-2016-11"
               },
-              "offLimb": {
-                "rotationDegrees": 0
-              }
+              "offLimb": {}
             }
           },
           {
@@ -217,9 +215,7 @@
                 },
                 "consumer": "photograph-pionier-2016-12"
               },
-              "offLimb": {
-                "rotationDegrees": 0
-              }
+              "offLimb": {}
             }
           }
         ],
@@ -496,8 +492,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Averaged reconstructed image for the November 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
             "missionId": "eso-vlti-pionier-ce-tauri"
           }
@@ -586,8 +582,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Averaged reconstructed image for the December 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
             "missionId": "eso-vlti-pionier-ce-tauri"
           }
@@ -763,8 +759,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-11@2x.webp",
-          "bytes": 53708,
-          "sha256": "9d7993bb9b54995a512bf371208ae16e8c4da056343b8a18c2f478d0a501a4f4",
+          "bytes": 53660,
+          "sha256": "feb1898d96f2bf6a73f83ad2d4ecfadbbab8fb1d29baa28a13e9ca8cfed59812",
           "verification": "bytes-verified"
         },
         {
@@ -886,8 +882,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-12.webp",
-          "bytes": 27682,
-          "sha256": "a6b689ac611351e902607d04afc847d4dd54957862bdbcf4ecf4e944adb6becf",
+          "bytes": 27718,
+          "sha256": "f1cf8528d554e9c29c628f20cf440ad7a9408ba7bff7be33986f58bc89a67e71",
           "verification": "bytes-verified"
         },
         {
@@ -898,8 +894,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-12@2x.webp",
-          "bytes": 59204,
-          "sha256": "09f21faf433cb0ab831ce9e198e4a52f89cc7c159902b7eb541449a2503eaeb7",
+          "bytes": 59090,
+          "sha256": "66ccf85b41062c7fcddc0a9bbf39213a93b2a698732f99fc37fbb5e553672da9",
           "verification": "bytes-verified"
         },
         {
@@ -1001,7 +997,7 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "c9f36a3da5ce592303c4390cf74df456c2ac7127a79b8709934fc6dc17f2d9ae",
+    "materialSha256": "88d8a8df31e1cb6e8e940d98241645f073a69e64d6f5edfb3ba65c922a0b287b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

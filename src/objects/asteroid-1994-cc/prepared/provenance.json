@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "668eb5c1773d05f6ef1b785054a6f7884b2d5de7195b946b7f7b576e0248c4ed"
+    "sha256": "8d0d3dac35696ecfb2cb517874fa194fece8fcabc3ed88d20b175aa9e6272884"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3d33035b8874f8ce4000cb95189658c54f8f2cab687371d6d391497d0b7255e0",
+      "sha256": "78ef294d35dd5a5b1b38ad5cb21e412ec6a6133109468c26f30c6953a3074d4d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.31,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
           "radialTerrain": {
@@ -319,14 +315,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -568,7 +564,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1994-cc",
-    "materialSha256": "09d8b714be1206aea78f1655b0ef4050e79110fe9e65627953f8fd13433d3e52",
+    "materialSha256": "bc1dfddf4c8c4783a5f4d1e24fdd08ea181eebae42b4e6e35d2c3873cc99c17a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

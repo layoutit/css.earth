@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3390494618ffc2fbd94bf4d52e38952f1f2ffb02608a0df6bf7c8958be5cd0d1"
+    "sha256": "9f743a63c9245e6f2edc847fe550083a2dba2518b4301dd9bd2bc61c024f50a2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4db79c503b3d605dc32d8258297ee7c0d612164e620fe66a5fe2a7748eb7efdb",
+      "sha256": "424c39a9af2d005486e021fda68a09f19231e85d98f256837a051a3273fd92e3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 50.21,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp",
           "polesUrl": "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "sophrosyne",
-    "materialSha256": "20418be86f86bbca1805dc2511ce23ecad0a8e2605174033df766d55a461e6f0",
+    "materialSha256": "7bbb225258e4bc59b5da6943c85347164fbe2b29344ee5c4e703d263171946e2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

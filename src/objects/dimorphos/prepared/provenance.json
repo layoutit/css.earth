@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6853cbc5836e239065f6cdf7199afde812858dd1efa2daba6bb361ec416f0d24"
+    "sha256": "b851550f357d4fcaac40c051c482200b6ee9e9c2e1cafc581a6658cabc9ae6ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "684feba5a39fab7b1f953cbcdb1b762e4fcceda988ce6c0ff103ff88e63d2918",
+      "sha256": "8916c68cbe6043715350dcd183303fff899e723412b19ada34d2fe9369566834",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -296,10 +296,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.075,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 120
-          },
           "mapUrl": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
           "polesUrl": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
           "radialTerrain": {
@@ -1752,7 +1748,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "670f785c8115f9bb5d4f3b3b170248577ced339b659ed635778beb21677245d1",
+    "materialSha256": "0faedb23b063e0f5ad28d189672260a2f2810283e031ebae9d913ab002acc77d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

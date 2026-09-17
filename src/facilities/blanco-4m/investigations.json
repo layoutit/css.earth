@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "blanco-4m",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "NOIRLab's Astro Data Archive holds Blanco data under the telescope code ct4m and needs no account for public data. It publishes Simple Image Access rather than TAP; NOIRLab's separate Astro Data Lab does offer a TAP service for catalogues.",
+      "revisitWhen": "A body in this repository needs Blanco or DECam data.",
+      "evidence": [
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://astroarchive.noirlab.edu/about/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "The proprietary period is usually 18 months, after which data are publicly accessible without an account. No reuse licence is published; the archive asks that its services be acknowledged. NOIRLab's own facility acknowledgement pages refuse this project's requests, so their wording is unverified.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://astroarchive.noirlab.edu/about/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "DECam data are processed by NOIRLab's DECam Community Pipeline, documented in its public document library. No source distribution or licence is published for it.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://nsf-noirlab.gitlab.io/csdc/csdc-mso-docs/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

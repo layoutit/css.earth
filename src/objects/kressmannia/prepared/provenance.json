@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e2fcaa789f66ac8e598ed2f1cef6e64390f20471dbee49a0ebf7294f0bea392"
+    "sha256": "47ce4af75640806f1fbc2f966269fb0f93bb36ef1fdebc54d029a191a08f8fd7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "408b9626c3f55a8fc066a5bcc1af49d58a5db10e3ab628f4105022f86f250495",
+      "sha256": "ab7ebacf7b649712e95be7e4171d880347aaf6b3c93b6cc3ef35ad713cb7b98f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 7.7145,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kressmannia/kressmannia-shape-surface@2x.webp",
           "polesUrl": "/scenes/kressmannia/kressmannia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kressmannia",
-    "materialSha256": "a6b473045d46a65c3632df9cf85bcd9796f6a684dcf3c38c61e551254d0fa399",
+    "materialSha256": "52b518f860a0a315fbf43032a4b54a0cd6d8155021ab798a5747e356767e6b33",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

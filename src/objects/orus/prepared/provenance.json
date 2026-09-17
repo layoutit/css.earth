@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f373f8ceb1c37545b752128080d39e7b822b00214cdfc0476d4b55b761b369c"
+    "sha256": "b12623524cfa89d474d4467590c344da828c3a58fef66cff976880006286c707"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4d8770101a480237afb24dbb240f030d862669664d70425c820cb4b3197b090d",
+      "sha256": "3cdb45027221c11c70458f9f5750fc2eff7280b11bff035822f011ee0661ff19",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 30.5875269554397,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.865276575825734
           },
           "mapUrl": "/scenes/orus/orus-model-surface@2x.webp",
@@ -432,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "orus",
-    "materialSha256": "087b019bc88cdacca661ce9261d709cf8b540d73a7efc1fbf587d76844909a04",
+    "materialSha256": "991f15c4237916b2c5f5473e68c1d4894a149dcd4b5cada8106af4d3fcf7fa34",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

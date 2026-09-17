@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 36.07,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/erigone/erigone-shape-surface@2x.webp",
     "polesUrl": "/scenes/erigone/erigone-shape-surface@2x.webp",
     "radialTerrain": {

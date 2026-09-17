@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0f1b95dd0a69f2ac10b979444b5f6d6c595b00a2cd9f8dd041e512f39e8e775e"
+    "sha256": "7c5a3c65fd2f605fae5923dcaead5f82642bd9958a2d0c2075935b837fe11706"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ed65fcf23845b79cfc58c6bbf0db6816e4c684607747bf52683816f57463a21a",
+      "sha256": "dfb92e2e53c729cfbde53276e18350d8a4fad6a9bc78378978e29f7a4035b198",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 47.6,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/huberta/huberta-shape-surface@2x.webp",
           "polesUrl": "/scenes/huberta/huberta-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "huberta",
-    "materialSha256": "701fdd55990f4300834b13eff57fac495de2cbf0341b4ae0b8586b576be0e517",
+    "materialSha256": "56928241f1b32f092b81a87409053200a1c899cf9fa8c5de58fdc652371e21e2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

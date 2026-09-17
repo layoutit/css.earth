@@ -74,7 +74,7 @@ misspelt field fails instead of being ignored.
 ```
 
 - `frames` lists the photographs. The format caps their number: one for an
-  orthophoto, eight for encounter frames, sixteen for controlled cameras, and
+  orthophoto, eight for encounter frames, thirty-two for controlled cameras, and
   each geo schema its own. A lens with more than one frame also names its
   `selection` and `levelMatching`; a single frame names neither.
 - A frame `id` is the archive's product id, such as `n1506184171_1` or a Galileo

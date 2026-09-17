@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "83375ed57fdaa31152a80c5ce95f7c5a5b6c0ae2ed50d4e5515f487ea632a0d1"
+    "sha256": "8ec81ed3735c651c70505d76df5140036071501948c8c29e95e8f3b567d3add8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d9ac474bebd9c2dbf563a4ebb7271692e883b3ea615e2fbb4d85ab140511b5b6",
+      "sha256": "8ed54437e598a52ea7e9c6cca128f0b2d05da067ffc2c4bf6a35e2632de1a07c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -100,10 +100,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.525973578806757,
-          "camera": {
-            "initialScenePitchDegrees": 13.172927488458257,
-            "defaultControlYawDegrees": 44.85563673651928
-          },
           "mapUrl": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
           "polesUrl": "/scenes/polydeuces/polydeuces-normal-poles@2x.webp",
           "radialTerrain": {
@@ -298,8 +294,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -350,8 +346,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -542,7 +538,7 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "6502adf1d5cad0ffd4c23049e991ec65502cbd32fc7d514c18680400616986ef",
+    "materialSha256": "9fc17caa388543f8dcb47b1af2f537df18be9b4c9afd228b874745bbbd99d237",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

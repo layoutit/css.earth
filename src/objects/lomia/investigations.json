@@ -29,12 +29,10 @@
     },
     {
       "id": "survey-damit-documentation",
-      "subject": "DAMIT documentation",
+      "survey": "survey-damit-documentation",
       "status": "included",
-      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md",
-        "https://damit.cuni.cz/projects/damit/pages/documentation"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md"
       ],
       "checked": [
         {
@@ -45,12 +43,10 @@
     },
     {
       "id": "survey-hanu-et-al-2016-new-and-updated-convex-shape-models-of-asteroids-",
-      "subject": "Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network",
+      "survey": "survey-hanu-et-al-2016-new-and-updated-convex-shape-models-of-asteroids-",
       "status": "included",
-      "finding": "[Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md"
       ],
       "checked": [
         {
@@ -84,12 +80,10 @@
     },
     {
       "id": "survey-hanu-et-al-2016-a-a-586-a108",
-      "subject": "Hanuš et al. (2016), A&A 586, A108",
+      "survey": "survey-hanu-et-al-2016-a-a-586-a108",
       "status": "included",
-      "finding": "[Hanuš et al. (2016), A&A 586, A108](https://arxiv.org/pdf/1510.07422) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md",
-        "https://arxiv.org/pdf/1510.07422"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md"
       ],
       "checked": [
         {
@@ -100,12 +94,10 @@
     },
     {
       "id": "survey-hanu-et-al-2021-a-a-654-a48",
-      "subject": "Hanuš et al. (2021), A&A 654, A48",
+      "survey": "survey-hanu-et-al-2021-a-a-654-a48",
       "status": "included",
-      "finding": "[Hanuš et al. (2021), A&A 654, A48](https://arxiv.org/pdf/2107.10027) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md",
-        "https://arxiv.org/pdf/2107.10027"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md"
       ],
       "checked": [
         {
@@ -116,10 +108,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery",
       "status": "unresolved",
-      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/839"
@@ -156,10 +146,8 @@
     },
     {
       "id": "versioned-view-evidence",
-      "subject": "Versioned browser evidence",
+      "survey": "versioned-view-evidence",
       "status": "unresolved",
-      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
-      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lomia/README.md#evidence"
       ],

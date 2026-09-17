@@ -11,6 +11,7 @@ import { bakeDensity, bakePreviews, bakeSeparationPreviews } from './assets.ts';
 import { prepareBaseline, prepareEnvironment } from './removal.ts';
 import { hash, json, localPath, pinned, writeAtomic } from './io.ts';
 import { deliveryReady, restoreDelivery } from './delivery.ts';
+import { prepareConfiguredDensityPlacements } from './configured-placement.ts';
 import { bakeReferenceTarget } from './reference-target.ts';
 
 export async function bakeNebula(root: string, args: string[]) {
@@ -63,6 +64,7 @@ export async function bakeNebula(root: string, args: string[]) {
   try {
     console.log(`BAKE ${recipe.id}: ${selected.map(image => image.imageId).join(', ')}; through ${options.stage}`);
     for (const object of recipe.densityObjects) { controller.signal.throwIfAborted(); await bakeDensity(root, object); }
+    await prepareConfiguredDensityPlacements(root);
     controller.signal.throwIfAborted();
     if (options.stage !== 'density') {
       await bakePreviews(root, catalogue, selected.map(image => image.imageId));

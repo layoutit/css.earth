@@ -29,12 +29,10 @@
     },
     {
       "id": "survey-damit-documentation",
-      "subject": "DAMIT documentation",
+      "survey": "survey-damit-documentation-2",
       "status": "included",
-      "finding": "[DAMIT documentation](https://damit.cuni.cz/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md",
-        "https://damit.cuni.cz/pages/documentation"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md"
       ],
       "checked": [
         {
@@ -45,12 +43,10 @@
     },
     {
       "id": "survey-hanu-et-al-2021-v-band-photometry-of-asteroids-from-asas-sn-findi",
-      "subject": "Hanuš et al. (2021), V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin",
+      "survey": "survey-hanu-et-al-2021-v-band-photometry-of-asteroids-from-asas-sn-findi",
       "status": "included",
-      "finding": "[Hanuš et al. (2021), V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin](https://ui.adsabs.harvard.edu/abs/2021A&A...654A..48H) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2021A&A...654A..48H"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md"
       ],
       "checked": [
         {
@@ -109,13 +105,10 @@
     },
     {
       "id": "survey-hanu-et-al-2018",
-      "subject": "Hanuš et al. 2018",
+      "survey": "survey-hanu-et-al-2018",
       "status": "included",
-      "finding": "[Hanuš et al. 2018](https://arxiv.org/abs/1803.06116) and [occultation dimensions](https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html) — size comparison candidates; an independent fit or occultation ellipsoid is not silently equated with this mesh’s volume.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md",
-        "https://arxiv.org/abs/1803.06116",
-        "https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md"
       ],
       "checked": [
         {
@@ -126,10 +119,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery",
       "status": "unresolved",
-      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md"
       ],
@@ -142,10 +133,8 @@
     },
     {
       "id": "shape-solution",
-      "subject": "Shape and spin alternatives",
+      "survey": "shape-solution",
       "status": "unresolved",
-      "finding": "The survey found no alternative archive solution for this target.",
-      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/elpis/README.md"
       ],

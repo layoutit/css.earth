@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 39.16,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/klio/klio-shape-surface@2x.webp",
     "polesUrl": "/scenes/klio/klio-shape-surface@2x.webp",
     "radialTerrain": {

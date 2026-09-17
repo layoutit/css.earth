@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f97bbc3e9eecbf3b3b4092f215bd7f601b31a6eb0b66713d5a8fac816de977b0"
+    "sha256": "eb5ffa91cbcad28221d568929d58bb592e018a2a3dd6933c83efe0bf5e6eac67"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e3bf41ddef36ee4ae500d4ee1f293252e1fe8df8de21eb0171c36ec29dd6842c",
+      "sha256": "7d7b600a3f82afc715a651e9f6e63f33b6f71458924fbdf1cce96cc65576cc9a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.542238,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/castalia/castalia-shape-surface@2x.webp",
           "polesUrl": "/scenes/castalia/castalia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -319,8 +315,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           }
@@ -562,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "castalia",
-    "materialSha256": "b385cc5a056ec0bbb811e6b735c2b8ffa0fcc203144ed397db2e456da10cc662",
+    "materialSha256": "3405802156cd46e3ce10ed0257c2a5a19815e327d0cfb51c969cbcaf77b37619",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

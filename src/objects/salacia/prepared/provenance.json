@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72e2cbe9bbc26dbdb69cacbaf3814bcafc158e8571b4d86ce3f6bf2c16b647d3"
+    "sha256": "ab573cf4f23f7adc0a48416fe2bd9a92cb2c53dcc11391f57df65e4527421089"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "182d6182d3cac1d5e0a2d949d8d2d9d5a875ad94a53f3b3dfe9be00de43238aa",
+      "sha256": "e398ddc8bc331e61fe1be357fccf7cfbf40387bef78badda9e3c18735c7a9cc8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 418.99999999999983,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9999999999999996
           },
           "mapUrl": "/scenes/salacia/salacia-model-surface@2x.webp",
@@ -404,7 +402,7 @@
   },
   "lastPreparation": {
     "objectId": "salacia",
-    "materialSha256": "9d2f31df9ba9201ea0a722a153f0e788c4798aa20e1d5e0aa8a6214444587c92",
+    "materialSha256": "155f0e159c10468e8e273fb804640755374718688461e8fa3d4a557d87d3be89",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

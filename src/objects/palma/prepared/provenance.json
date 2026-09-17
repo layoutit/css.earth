@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e575450d778c2746fcc59b100ed6f8d41eeba3f37934fdd6cff4e8d87330e4f"
+    "sha256": "d1ef383111f469b832896332c5f6a50c1483e90950249db5f5c2a261c6dfd63d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3c205f47a0e842a873291ee3bbbdef3c9722ff177ea921fa0758df718cc15462",
+      "sha256": "9b6c9a2b1e4bad3f6502fc366c4aad19550ff828ebbb906bb5f2dc232d704d5e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 93.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/palma/palma-shape-surface@2x.webp",
           "polesUrl": "/scenes/palma/palma-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "palma",
-    "materialSha256": "e19db0a22c01414076bcf47a7ecade5b92a1ca2d59226e40fc988a6b5b1d04db",
+    "materialSha256": "3ff56091bc54a1af56e45a8963788975b1754101c7decec145e5178b77c27def",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

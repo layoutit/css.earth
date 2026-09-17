@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "45c13041bf3d609ab2efd78fd92a60d88c64d4bd0d51f47dd6af4984afeaa605"
+    "sha256": "0c39c2a9ce99d8867c308ee2c7ad723140e75ca0bf22fded791f37ef7666ea35"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2cee561eaa9fa569b34719f61e10a5e43da5eb39d4db49cce1fefbacb7468a7f",
+      "sha256": "850c5879e942dfb65aa8a7923c9bd75c9e5cb4eeae422cd1c71e5d4844feada5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 105.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
           "polesUrl": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "fortuna",
-    "materialSha256": "fe96aa1febd507432cfd6bb814d63975f9d351bd1e56551e17130aec85f1abbb",
+    "materialSha256": "9936306106618b97de44d2b1a933899c93db07c0a2791c98ae05f75fac40ee9b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

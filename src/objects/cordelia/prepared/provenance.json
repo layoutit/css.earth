@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ded069545779259450b6405b8dac450b8dc4d0511a2a10b209945b05eefa0e82"
+    "sha256": "ad427de1a117af1e5fd08543045311b4408e59a985ab04655e3b5e028e535137"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "99424c110afb08b108c8fff0e01fe3d3d9c8f3002911fcfceb69ce83cd48e0f1",
+      "sha256": "19a54c0f68df5b97f0549b90ffcb338cd4f43b35c35e411f15fc7a14e04f37b5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 20.082988502465085,
-          "camera": {
-            "initialScenePitchDegrees": -77.11428877332963,
-            "defaultControlYawDegrees": 124.12619496243376
-          },
           "mapUrl": "/scenes/cordelia/cordelia-model-surface@2x.webp",
           "polesUrl": "/scenes/cordelia/cordelia-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "cordelia",
-    "materialSha256": "443c71852b60ce3d7d690b0504a46c29f66576f7fcc22afefe1bfa9a9a6b2fec",
+    "materialSha256": "9518874eb9e00bebd8d370d8d8b256ad60f1a13661d5fc69362847548ea9e173",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "06baa5e968bab3e41a1f6bb2c68c846bd691683bfa8dc1dc9f98f9c363dc65e8"
+    "sha256": "650099b7aca5510e54c1ec26e97466f5e5bb5198dec8554807385350e9ca71c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "be278aa2dc158862de51a33b6c78a7b647db3ee684486c2a1e655abefdec47c5",
+      "sha256": "b5adf8ca0e5260f130fc42b01b9a8943bea51f7afbdbf35fa966f2c3f10591da",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 10.91,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/susi/susi-shape-surface@2x.webp",
           "polesUrl": "/scenes/susi/susi-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "susi",
-    "materialSha256": "154a3cf176f6b403342a9d2412b7a07e6804dae4b299291ab69b2b812ce56d14",
+    "materialSha256": "947dd31756dbceab12643e2d581db2e2fa6e46fc90bd17194af418aca7580dc3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -23,8 +23,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
           }
@@ -61,8 +61,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
           }
@@ -99,8 +99,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
           }

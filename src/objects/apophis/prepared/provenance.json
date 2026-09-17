@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fdd00d961e4b4598081deddf740fd272a965fd3ab1e5b88391f3471b31683224"
+    "sha256": "679d24f4061d45fe3850bde233295a1b8af2ae937db8460240eefeb1c4c96c2f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d6b5e146f563bc23dd372b4d4412e1db001eaa9ebda9fc1f0db8e0e1cbb6109",
+      "sha256": "62e3e34da23be28ee37fd2bbe480c6a1c46383bf7b5c5b9e67fb2cc1d169692d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.17,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/apophis/apophis-shape-surface@2x.webp",
           "polesUrl": "/scenes/apophis/apophis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -565,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "apophis",
-    "materialSha256": "6fb89d21b7534a3fe3d3e13a78e26384a9b29a9d90c7026bbb95e01dd65f76f7",
+    "materialSha256": "f6fb02c444a4d94e03677e6aa0ffc15de88e9dd60a27990e4f6bd46ac19f6402",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

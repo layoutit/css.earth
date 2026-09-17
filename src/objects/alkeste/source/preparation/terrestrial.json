@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 40.695,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/alkeste/alkeste-shape-surface@2x.webp",
     "polesUrl": "/scenes/alkeste/alkeste-shape-surface@2x.webp",
     "radialTerrain": {

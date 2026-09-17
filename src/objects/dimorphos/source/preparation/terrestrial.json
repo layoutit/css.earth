@@ -278,10 +278,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.075,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 120
-    },
     "mapUrl": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
     "polesUrl": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
     "radialTerrain": {

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d6be6799ab11b27b9d73c930b900641c619bc4606afa1e7b4fae5c900d67a63"
+    "sha256": "5b693d81e028830512c2a256756878f1469457dd217e7660807d07e00e6000f8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b7533ba100f7350e9d56e39f6e9cbda20b10340d34f844be9083e2817947c791",
+      "sha256": "a482f7410513a6f0ff62573db14a7fefde49ecc47ec3f2512488835cb7b7e5bb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.315,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
           "polesUrl": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
           "radialTerrain": {
@@ -323,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "bacchus",
-    "materialSha256": "b9e47cca823a5a34dbe329c9136d33303d852dd60e11d62f65b6bcb0278ab421",
+    "materialSha256": "b250541d809f28583367dbdacfd0ad7f4e988afaec804782426e84b1e652c71d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@1",
   "id": "smc",
-  "type": "image-layer-bank",
+  "type": "volume-lens-bank",
   "properties": {
     "frame": {
       "referenceFrame": "sun-icrf",
@@ -20,25 +20,25 @@
       "metersPerUnit": 30856775814913670000,
       "boundsUnits": {
         "min": [
-          -5.457290802111414,
-          -4.887482630926559,
-          -12.5
+          -7.921340139025261,
+          -9.077825371668188,
+          -10.652996905888628
         ],
         "max": [
-          3.455090234690023,
-          3.667215957303848,
-          12.5
+          8.600007418943365,
+          6.891913440126711,
+          8.882893247926392
         ]
       }
     },
     "preparation": {
-      "source": "source/recipe.json",
-      "sha256": "fbe9ee025ef9935b0e037452281ff5acdc0a5e4316372aabb03c07dd41c6fbde"
+      "source": "source/compact-delivery.json",
+      "sha256": "03dfa6f3020a96479f3d0451a1b36136dd9116268fb6e0b09328f1476f42b5a6"
     }
   },
   "prepared": {
-    "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json",
-    "sha256": "80075d89330548560ba584a949398f1500a53e8d327245ae563d43b57e316ea6"
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "560403477633ebcb5317292ca6ba06a0b93ff25d88211458b2cb47b86b2039ee"
   }
 }

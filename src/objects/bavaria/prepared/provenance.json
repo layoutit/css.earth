@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "24bfc2210325075cfe1391bbee95355b810e293024e34a49c7c74e3a06e0ec8c"
+    "sha256": "668996764ecb5a87724a4f3025a72d080891ae92f9187199c93555289b340e64"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9da49145ace1c3f6bf2f61232a6ab2961bb8c8c584d95de1fedf7134e99aeb16",
+      "sha256": "8a5bc02e1effaf118afb6b0e4964fa3473e23f51455b81468a7d8092806b5df9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 27.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
           "polesUrl": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "bavaria",
-    "materialSha256": "a2cd7a25fe410c6291c4dc0e4d893655bbe7a02502406874a00435e86a11de02",
+    "materialSha256": "b60b485b9971b1e2d3b7f1b0ed96fb679ab6694b5650c9c6e8ba1d677e767004",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

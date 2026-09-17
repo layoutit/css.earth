@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1c141b06e3072f6e03926ca57e8d34f594f71c4ea220724a3764407b8f791bfe"
+    "sha256": "d2832bcbae8938d9437870c86081101688af54fa0f3d60235742d5d09379ca9c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f81f9b4be8d9a1da38c7b8f46178f74efab34e6c1225e0d0da33121406e42edc",
+      "sha256": "074efaf0e2bdfe06cc0dcd535a3eee9b402c36173b6d633e02b668b3dc9fd38b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 14.3,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8227416204848755
           },
           "mapUrl": "/scenes/albiorix/albiorix-model-surface@2x.webp",
@@ -409,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "albiorix",
-    "materialSha256": "5b03338e0c61095c7966554687e1bc3dd8695117c0c98fd90eddad1f3809e42c",
+    "materialSha256": "cc6313a5f2f5dc5b66f3b272db610a52ec770a42a97780c0d078b90192df6118",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 37.375,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/eurynome/eurynome-shape-surface@2x.webp",
     "polesUrl": "/scenes/eurynome/eurynome-shape-surface@2x.webp",
     "radialTerrain": {

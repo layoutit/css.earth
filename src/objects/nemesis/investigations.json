@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 163 km, ecliptic J2000 pole (313°, -19°), period 38.9325 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 83.00209257577323 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 163 km, ecliptic J2000 pole (313\u00b0, -19\u00b0), period 38.9325 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 83.00209257577323 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nemesis/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -75,7 +75,7 @@
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
       "status": "excluded",
-      "finding": "The live directory also lists 128_Nemesis_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "finding": "The live directory also lists 128_Nemesis_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
       "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/128_Nemesis_adam.obj",
@@ -96,7 +96,7 @@
       "subject": "Released SAGE companion model",
       "status": "unresolved",
       "finding": "The live directory also lists 128_Nemesis_sage.obj, which the imported ledger omitted. Its existence establishes a numerical candidate; method, calibration and independence from the selected MPCD reconstruction still need comparison.",
-      "revisitWhen": "The SAGE companion’s paper, scale and shape constraints have been compared with the selected MPCD release.",
+      "revisitWhen": "The SAGE companion\u2019s paper, scale and shape constraints have been compared with the selected MPCD release.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/128_Nemesis_sage.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -115,17 +115,20 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "unresolved",
-      "finding": "The survey holds 25 deconvolved ZIMPOL frames (camera 1) and an ADAM reconstruction with a rotation record for this body, but the record's column order cannot be established: DAMIT lists no light-curve model for it, so neither reading of the pole can be checked against a published one. The observer-camera route reads the record only under a verified column order, so no photograph lens is derived.",
-      "revisitWhen": "A published pole for this body that settles the rotation record's column order, or a DAMIT model to check it against.",
+      "finding": "Measured on all 25 deconvolved frames with the release's rotation record, cast onto the released ADAM mesh: not one frame scores. The projected outline is round at every rotational phase, elongation 1.09 against the rule's 1.20 threshold, so the outline cannot define a position angle and the route has nothing to place this body with. Its record also states a period of 77.86 h where the survey publishes 38.93, exactly twice, which is a separate question but does not affect a round outline. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
+      "revisitWhen": "A registration reference independent of this body's outline: a spacecraft map, or frames resolving surface markings.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/128Nemesis/Deconv/",
-        "https://observations.lam.fr/astero/3Dshape/",
-        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+        "https://observations.lam.fr/astero/3Dshape/128_Nemesis_param.txt"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
         }
       ]
     }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d91d7f2febd9e89e8a2a3615e27217219fcb3a755efa82a29de58c254444d03"
+    "sha256": "8031ff905e738dfcb3fec676ddaea316f1db87bf412d68ffd72bbbc339e46b88"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "de3603c5fcadcc7d310476149768d10f43ff574003c714a493ad2bc54779985d",
+      "sha256": "37fedf9279998ef2abc7b83080b29e2d53a646d216a3ac2dc177ffb9ec469200",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -100,10 +100,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.23,
-          "camera": {
-            "initialScenePitchDegrees": 32.6683395142105,
-            "defaultControlYawDegrees": 32.26189091132878
-          },
           "mapUrl": "/scenes/pallene/pallene-normal-surface@2x.webp",
           "polesUrl": "/scenes/pallene/pallene-normal-poles@2x.webp",
           "radialTerrain": {
@@ -304,8 +300,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -356,8 +352,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -551,7 +547,7 @@
   },
   "lastPreparation": {
     "objectId": "pallene",
-    "materialSha256": "25d1b79ea70d444ba89bfa7ba0faf3521471f2839feacba7997dce3136e56ce5",
+    "materialSha256": "556267a624da32b801a307be0bae44ac14a2581ac95aa67da9dfbf5859ac3a3d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

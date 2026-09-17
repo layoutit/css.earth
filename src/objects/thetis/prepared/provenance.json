@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4f73a1e2fc837b946bb320bae4e2a0b689a6043b53101909acec4d9532eea0fd"
+    "sha256": "8ce7e3aaf12a8d12a7233f4b2aa4a98b60da835e5b09da753d4a29453d1c2b5d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ef0eee46098474d0ac52f907b84fdeb8a8f8be2e0096daadf355cfa6403fc771",
+      "sha256": "63b5642c25763446232b295eb4b309188d20862849e353df363aa521c35731da",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 38.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/thetis/thetis-shape-surface@2x.webp",
           "polesUrl": "/scenes/thetis/thetis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "thetis",
-    "materialSha256": "0a1b2ffac2c7efaa74d93ec5c7fa66c202645279c4e4e88d730a8ee15217a9d9",
+    "materialSha256": "f764c368c9d30b2518e60cf0b4afd84f4576a45b5d6618df8422c81a150954e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2cd28c50af2b75beb64fe66968daed57488c52ce6dfbe15d3f2005ddadcaca31"
+    "sha256": "b8f512ab77884544255e585e5fd4962d6c0c1333f18b0680ec9ddb9cdd520098"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6e7f03879596b472cebd7082d17b80c67a7931edcf394f75ef64aa3cc1485da1",
+      "sha256": "a1d60d23046f1df6572c34c9628e776f050252448c0783690d1de33a9045d663",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 70,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/julia/julia-shape-surface@2x.webp",
           "polesUrl": "/scenes/julia/julia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "julia",
-    "materialSha256": "c53fd0703abe13b20b6082ce71d76d0f4116e696075b0ae6d1709717828b04b8",
+    "materialSha256": "70540d3936fb9427d0d106501607635ed78c8e6757e0ecd5b3b8a600c6d5724a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

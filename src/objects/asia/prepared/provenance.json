@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "20fbbb840de03c4fc9ee574df09d0b8fa80d5dc70e11780dfa7e37064f1072d2"
+    "sha256": "ab60811133363180b22dfc1f68c92064f84381427d566f13fdeb1c5f7cae933b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "583e6bfa369f5b9c87c37f83d0b7a399debb3f82dbd208f9563d94156f586bd8",
+      "sha256": "f52fd961a7dfee6440bab4b5bdc13ac4bd12bf0ec10495e23026c963dee6d18f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 30.815,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asia/asia-shape-surface@2x.webp",
           "polesUrl": "/scenes/asia/asia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asia",
-    "materialSha256": "6a99a7c1c7d35e2a80f5551ae0bda1c6dc23dc9166f4c8ed20aafadcde483462",
+    "materialSha256": "dac35088e25fa6e28200e2a08be8df9785032e8e5a3119b55faccd6bf68172ba",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

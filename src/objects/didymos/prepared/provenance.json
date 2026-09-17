@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ddea30a7ec6d0f140486604ba67aacd4572069381fb159235842245f2456c2d6"
+    "sha256": "06ecd0cb7fdced8d83663636c4b9b4752b0574c498e197352b0f69d846b9671d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e2c97bc1a5796105ebd2e3792a1f88a54e422c518c17e21667d6fe861863f86f",
+      "sha256": "d1fe95e6378b61a5f2b0fc254b6aebea8836bf03dd9221238f900662073d51a2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -248,10 +248,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.365,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 120
-          },
           "mapUrl": "/scenes/didymos/didymos-shape-surface@2x.webp",
           "polesUrl": "/scenes/didymos/didymos-shape-surface@2x.webp",
           "radialTerrain": {
@@ -1321,7 +1317,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "a5f07ad1bd1c70959b3eac3534aec97b18d2c62b9dd49287d6e044f6418f4ab8",
+    "materialSha256": "0f53143406c49b6214301cec9f5f92c477c0cc45314ac9d304f45aa35657161d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86b844a8d0bf767929a873b3dbdf5b393425654db1508062eeab2efb4116d996"
+    "sha256": "3da8720316017ff0f579e8277d586db8f767b80c28c24e99738c3094512c37be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0793f6ed2addc88d7a4dfd9b512b79a18b6e2b6fb8eeb00265f030ba01890053",
+      "sha256": "2515a25d0ed1f5bb26a722a3586e627eeac4f6a4dae45135a8342936bf757f39",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -127,10 +127,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 198.8,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/mimas/mimas-normal-surface@2x.webp",
           "polesUrl": "/scenes/mimas/mimas-normal-poles@2x.webp",
           "radialTerrain": {
@@ -466,8 +462,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png",
             "missionId": "cassini"
           }
@@ -519,8 +515,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj",
             "missionId": "cassini"
           }
@@ -590,8 +586,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18437.jpg",
             "missionId": "cassini"
           }
@@ -656,8 +652,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif",
             "missionId": "cassini"
           }
@@ -1123,7 +1119,7 @@
   },
   "lastPreparation": {
     "objectId": "mimas",
-    "materialSha256": "559caa9db73642e6a0a3bc7dfa8875361679b1752587f6eb1efc17779e8334a7",
+    "materialSha256": "d815306f456b7e4b01ae88e6ed9baee1f44e2755d9cc4d79b34f8bf9cc399fee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

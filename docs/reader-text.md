@@ -54,8 +54,8 @@ Warnings are for the reviewer and never block:
 - a title that repeats the chooser label, or a sentence used twice;
 - a card or introduction that another body shares;
 - repetition between blocks shown together: the introduction, one dataset
-  summary and the mission, machine and note cards beside it. This check reads
-  `site/prepared-machines.json`, so run `pnpm prepare:machines` first.
+  summary and the mission, facility and note cards beside it. This check reads
+  `site/prepared-facilities.json`, so run `pnpm prepare:facilities` first.
 
 `tools/prepare-text.test.mts` runs the check on every registered body.
 `site/test/reader-text-browser.mts` measures the rendered lines at desktop and

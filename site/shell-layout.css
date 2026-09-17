@@ -435,7 +435,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 .planet-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
 .planet-header-action[aria-pressed="true"],
-.planet-machine-action:has(:checked),
+.planet-facility-action:has(:checked),
 .planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-settings-action {
   color: var(--shell-text);
   background: var(--explorer-header-control-selected);
@@ -491,8 +491,8 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .planet-sidebar::-webkit-scrollbar { display: none; }
 
-.planet-machine-action { position: relative; }
-.planet-machine-toggle {
+.planet-facility-action { position: relative; }
+.planet-facility-toggle {
   appearance: none;
   position: absolute;
   inset: 0;
@@ -502,10 +502,10 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   opacity: 0;
   cursor: pointer;
 }
-.planet-machine-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.planet-facility-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
 .planet-settings-panel[popover]:not(:popover-open) { display: none; }
 .planet-settings-panel[popover] { color: var(--shell-text-secondary); }
-.planet-ui-layer:has(.planet-machine-toggle:not(:checked)) .planet-dataset-context-rail,
+.planet-ui-layer:has(.planet-facility-toggle:not(:checked)) .planet-dataset-context-rail,
 .planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-dataset-context-rail,
 .planet-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .planet-dataset-context-rail,
 .planet-information-panel > .planet-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .planet-dataset-context-rail,
@@ -711,7 +711,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   .planet-search-categories { display: none; }
 
   /* Spacecraft sits beside Settings, at the same size. */
-  .planet-machine-action {
+  .planet-facility-action {
     grid-row: 1;
     grid-column: 3;
     align-self: center;
@@ -720,7 +720,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     height: var(--explorer-search-height);
     box-shadow: var(--explorer-float-shadow);
   }
-  .planet-machine-action:disabled { visibility: hidden; }
+  .planet-facility-action:disabled { visibility: hidden; }
 
   /* The wordmark comes first, stacked in two lines, with the search field beside it. */
   .explorer-brand-row {
@@ -738,9 +738,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   .explorer-brand-row .explorer-brand-version { display: none; }
   .planet-view-readout .explorer-brand-version { display: inline; }
 
-  .planet-machine-action { transition: opacity 160ms ease, visibility 0s; }
-  .planet-ui-layer:has(.planet-sheet-handle:checked) .planet-machine-action,
-  body[data-sheet="full"] .planet-machine-action {
+  .planet-facility-action { transition: opacity 160ms ease, visibility 0s; }
+  .planet-ui-layer:has(.planet-sheet-handle:checked) .planet-facility-action,
+  body[data-sheet="full"] .planet-facility-action {
     opacity: 0;
     visibility: hidden;
     transition: opacity 160ms ease, visibility 0s 160ms;

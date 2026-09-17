@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "891d8b1612edcd01da197917529005070c5977bd825250e2fb3a437ce97d5f5a"
+    "sha256": "9a08dd2e7d6967ff50fd66bfaf133bf3ef4b272655706fc474475aac0d4cd8df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d80ab6abbe058fe4cb952232be6a69188819d611eb239cec039d3dc41d33d5e",
+      "sha256": "f8bcb8fb629e98ad81981625089b665de02f699087625c5dfe4744314aac9e35",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 94,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/eugenia/eugenia-shape-surface@2x.webp",
           "polesUrl": "/scenes/eugenia/eugenia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "eugenia",
-    "materialSha256": "d1d5d0d74adeb09dbc2d88ede4db78eae5ed56c780b8a67a78a83449acdb086d",
+    "materialSha256": "5a276f42e969eeb6dfe752b1465091eb697f83a8685533cc9e286013316b01ad",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

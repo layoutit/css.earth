@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "815c497f99499f5ad7c3e6b6089ab63b869aa0dd9163262de450c2469871a17d"
+    "sha256": "14645376c6ef54af8593e4de1210eb90984644db167c926bb1b8834e5fac7eb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5d4f3382f05ed1488e3ff682ad6e93200823748e5aa3edc7a41cfd37f2803aee",
+      "sha256": "a1bfed602f95d5cddfbb2d7157dd2850e822935e0cbd4cd4521f92fa52fbce69",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 34.79,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/isabella/isabella-shape-surface@2x.webp",
           "polesUrl": "/scenes/isabella/isabella-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "isabella",
-    "materialSha256": "f2934dfc833f8eae1ed78cbd6e3195c0a9c36b4b12370bfd2a7f4162677a93dc",
+    "materialSha256": "59660ff9f3dd31dc5fd9d2ff09af09bb44cb380f7fa1618fe322f85fb8c793f1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

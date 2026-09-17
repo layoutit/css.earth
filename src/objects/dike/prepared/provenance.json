@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "957bfa575ebde1d486df2ea872db3a86e9155afa96c9a7f8f1748036d7d70317"
+    "sha256": "01575e6948adaf9115f37cba09de5ba952f8e4b0fbcd9031c647ccd38df48271"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "18f6623c234652b7755fb6faf7392fbfabad5797000303df6dccfe1f1ca24656",
+      "sha256": "b3340f07f97fbf496567abbc63db684bb545d06c5d50173c60827a8efc8aa2bf",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 33.25,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/dike/dike-shape-surface@2x.webp",
           "polesUrl": "/scenes/dike/dike-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dike",
-    "materialSha256": "8f25cacecab06e54eb22142234c700f706cb72db1b24e5355b12a96b8ef2e96d",
+    "materialSha256": "c3c4cad8fbf1b258973e9ec9ff076b80175237c954fb55111b71add46dc51b4e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

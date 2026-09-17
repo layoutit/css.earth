@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ac58a9ca5305b01728df61a5db71656bb710a062c73d4e8b554cdf5feffcb256"
+    "sha256": "ef4958c8e6c397fad9bc8dd985a0accb8e6409c3b1b737611e23e26c1ffd5023"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -466,8 +466,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594",
             "missionId": "voyager-2"
           }
@@ -590,8 +590,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
             "missionId": "voyager-2"
           }

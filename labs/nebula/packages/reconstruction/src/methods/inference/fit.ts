@@ -103,10 +103,12 @@ function buildComponents(bases: Basis[], input: EmissionFitInput, controls: Comp
 }
 /** Fit only the supplied target. Image colors, source selection and stellar overlays never enter this field. */
 export function fitEmissionField(input: EmissionFitInput, requested: unknown = defaultCompilerControls,
-  options: { signal?: AbortSignal; onProgress?(message: string): void; depthRecipe?: DepthRecipe } = {}): EmissionFitResult {
+  options: { signal?: AbortSignal; onProgress?(message: string): void; depthRecipe?: DepthRecipe; externalDepthAssignment?: boolean } = {}): EmissionFitResult {
   validateInput(input); const controls = readCompilerControls(requested), grid = fitGrid(input, controls.detail);
   const depthRecipe = options.depthRecipe && readDepthRecipe(options.depthRecipe);
   if (depthRecipe && input.scaffold) throw new TypeError('Choose a surface depth model or a joint velocity scaffold; do not silently combine incompatible depth methods.');
+  if (options.externalDepthAssignment && (depthRecipe || input.scaffold)) throw new TypeError('External density conditioning cannot combine with a surface or velocity scaffold.');
+  const externallyConditioned = Boolean(depthRecipe || options.externalDepthAssignment);
   const residual = Float64Array.from(grid.target), bases: Basis[] = [], blocked = new Uint8Array(grid.target.length);
   const componentBudget = Math.round(144 + 336 * controls.detail), cutoff = grid.target.reduce((a, b) => Math.max(a, b), 0) * (.004 + .056 * (1 - controls.faint));
   let outerRadius = 0;
@@ -134,11 +136,11 @@ export function fitEmissionField(input: EmissionFitInput, requested: unknown = d
     depths = depths.filter((z, i) => i === 0 || Math.abs(z - depths[i - 1]) > 1e-3);
     // Preserve the existing projected-basis budget: changing only the depth prior must not
     // consume extra image evidence or change its NNLS weights and residuals.
-    const depthSlots = depthRecipe ? 1 : halo ? 2 : depths.length;
+    const depthSlots = externallyConditioned ? 1 : halo ? 2 : depths.length;
     if (allocated + depthSlots > componentBudget) break;
-    const narrowest = Math.max(minSigma, halo && !depthRecipe ? haloRadiusArcsec * .028 : 0);
+    const narrowest = Math.max(minSigma, halo && !externallyConditioned ? haloRadiusArcsec * .028 : 0);
     let best: Basis | undefined, improvement = 0, coefficient = 0;
-    for (const scale of depthRecipe ? [1, 1.6, 2.7, 4.5, 7.5, 12, 20, 32] : [1, 1.6, 2.7, 4.5, 7.5]) {
+    for (const scale of externallyConditioned ? [1, 1.6, 2.7, 4.5, 7.5, 12, 20, 32] : [1, 1.6, 2.7, 4.5, 7.5]) {
       const basis = newBasis(x, y, narrowest * scale, grid, input, depths, halo), dot = correlation(basis, residual, grid);
       const gain = dot > 0 && basis.norm > 0 ? dot * dot / basis.norm : 0;
       if (gain > improvement) { best = basis; improvement = gain; coefficient = dot / basis.norm; }

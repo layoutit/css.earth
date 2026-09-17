@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c61d4ed028e308fb9783013530aca45206295283e9bce4f17b4b1150a5558fc"
+    "sha256": "d1138ffc643186be049c5a2edc867ca4e54acef14ea85af1e3039c331b623ff8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5600ff485030a89c03110f005d3857a7099c873222ffefa90810e108a50557f8",
+      "sha256": "1beec13dbfb670e023c8bf1e02e1cc21fea72fa47849336bec8e01436ee4704b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 76.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/irene/irene-shape-surface@2x.webp",
           "polesUrl": "/scenes/irene/irene-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "irene",
-    "materialSha256": "da051f39d510d74280666eab9c5983b46472d70e0e6358b47be3e172b4825b0e",
+    "materialSha256": "9dd589e3dbcdb1634fb5ca28737f88e368ebce58c0a023be67b08b9c54ab163b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5f5510edd5f1fcb6ba5beccb82256e2246c081b5266bd2b98e7ff83cd7012034"
+    "sha256": "a3e4597e847ebf13d7edd2ffa03011c0002c845882837e846c27b75ab56e8326"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8008173906f1c07ee6753eb86526124daff514eb107225c56b8602e10e6d83c9",
+      "sha256": "ff868436e27b9b0d32f0f07571a1c2f5cb1ad045602b8c44f2f1986b0ed97374",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 5.2015,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-qw16",
-    "materialSha256": "c24ef325078a29a55af8c4628e78694b7fbe101cb5d136a443f60f1a6cdc13f0",
+    "materialSha256": "95b58dae702382c77e2439e59c853d67ed278a69ac922c36a79d06a270e72d6b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -509,8 +509,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "missionId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)"
           }
@@ -586,8 +586,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "missionId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)"
           }
@@ -663,8 +663,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "missionId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)"
           }
@@ -740,8 +740,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "missionId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)"
           }
@@ -1363,8 +1363,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 20700,
-      "expectedSha256": "80e7c964284b314013eb12c5291b915b6c5b6bc93d4b1500bd568fafa0d559d6"
+      "expectedBytes": 20603,
+      "expectedSha256": "18fa98d68649768e460ee40b309b79a5bf0e81a2012ea73b08f0335f38c57a12"
     },
     {
       "path": "presentation/minimap.json",
@@ -1551,8 +1551,8 @@
     {
       "id": "comet-67p-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 3139,
-      "expectedSha256": "82872a1dc96d6d97fcd9ffef2c480ef39feafb4a50db2fc19d3a4db852d3999b",
+      "expectedBytes": 3141,
+      "expectedSha256": "798271a08d700552ec826c7225da3edbe3dc12d1a77850730decbbcdcf746448",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

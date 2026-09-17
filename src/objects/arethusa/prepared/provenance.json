@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "30e51637ad2b562a29e04a47876bdfddb540e872e4638ebe22d37d143a3d3b39"
+    "sha256": "a8bc3568de841a2f3158b6a6d95ac7514f6cde7e76816384f2199df2e5b513bc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "777350af8a55828c26914def000ecaa29ce574b7cf5219d7a28a6652143caa28",
+      "sha256": "801e9b8c9814c587afcc05b9736f1c654b2c1a2661934d75ea7c05a9b0919113",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 73.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/arethusa/arethusa-shape-surface@2x.webp",
           "polesUrl": "/scenes/arethusa/arethusa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "arethusa",
-    "materialSha256": "db621ac176b0bd1d56f6496031ef2086dbf78d72a2e45b262b9e5b95fe98fd8a",
+    "materialSha256": "ce2fc3aa62f255746bd12973cea52e3ebdbc50e1ab6e9fa0fcc1712a5750bbd3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

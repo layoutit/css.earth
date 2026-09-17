@@ -9,14 +9,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
           },
           {
-            "kind": "machine",
-            "machineId": "irtf",
+            "kind": "facility",
+            "facilityId": "irtf",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
           }
         ]
@@ -86,14 +86,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
           },
           {
-            "kind": "machine",
-            "machineId": "irtf",
+            "kind": "facility",
+            "facilityId": "irtf",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
           }
         ]
@@ -173,8 +173,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2979,
-      "expectedSha256": "da593321ea05fb384993a2f6de76746fdd9d496544021f32e7c5b3ec0f9fe8b7"
+      "expectedBytes": 2882,
+      "expectedSha256": "519dad57aa83370dfc22aaa50e56301a61cfcf307f8751acde958485a8c8954d"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

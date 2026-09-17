@@ -87,7 +87,7 @@ export function createSceneRouter({
   if (navigation && windowTarget.location?.href) {
     // Only a settled scene belongs to the entry that history names. An unfinished navigation
     // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
-    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, onError: report });
+    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
       selectPreparedFocus: id => worldContextMount?.selectPreparedFocus?.(id) ?? null,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });

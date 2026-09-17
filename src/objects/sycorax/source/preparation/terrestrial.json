@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 78.5,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.9289663867799363
     },
     "mapUrl": "/scenes/sycorax/sycorax-model-surface@2x.webp",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8682c90cc9300f2637e4df3dbb079c87291447ecd3be3d23592cc76de7f4ccc8"
+    "sha256": "2acb949776501d851204a3253d37270bd6af91d479bdbad2d4d140a672230f6b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -617,8 +617,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -664,8 +664,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/14/20260514_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -711,8 +711,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/15/20260515_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -758,8 +758,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/16/20260516_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -805,8 +805,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/17/20260517_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -852,8 +852,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/18/20260518_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -899,8 +899,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/19/20260519_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -946,8 +946,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/20/20260520_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -993,8 +993,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/21/20260521_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1040,8 +1040,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/22/20260522_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1087,8 +1087,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/23/20260523_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1134,8 +1134,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/24/20260524_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1181,8 +1181,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/25/20260525_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1228,8 +1228,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1275,8 +1275,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/28/20260528_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1322,8 +1322,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/29/20260529_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1369,8 +1369,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/30/20260530_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1416,8 +1416,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/31/20260531_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1463,8 +1463,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/01/20260601_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1510,8 +1510,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/02/20260602_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1557,8 +1557,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/03/20260603_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1604,8 +1604,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/04/20260604_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1651,8 +1651,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/05/20260605_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1698,8 +1698,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/06/20260606_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1745,8 +1745,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/07/20260607_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1792,8 +1792,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/08/20260608_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1839,8 +1839,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/09/20260609_000000_1024_HMIIC.jpg",
             "missionId": "sdo"
           }
@@ -1886,8 +1886,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits",
             "missionId": "sdo"
           }
@@ -1933,8 +1933,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
             "missionId": "sdo"
           }
@@ -1980,8 +1980,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000906_1024_0304.jpg",
             "missionId": "sdo"
           }
@@ -2027,8 +2027,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits",
             "missionId": "sdo"
           }
@@ -2074,8 +2074,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "sdo",
+            "kind": "facility",
+            "facilityId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000710_1024_0171.jpg",
             "missionId": "sdo"
           }

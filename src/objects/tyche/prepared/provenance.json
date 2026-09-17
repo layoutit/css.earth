@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ca9327178b44539a6502dd13c92ed17fae47c033ced57e4e9a134bf92a340ae"
+    "sha256": "71a884005a41da8c2023cccf3eebeaa73478f60e1940b4f197f3df48cf57e828"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d48c61ce01aa65878357ddcc2291d98ea4c12f04fec53b38218b4a31c26ae8e",
+      "sha256": "256c99ae55b06678d4f3a670f0686f90ff82614ac7715c5109ff59a1ff6ba548",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 32.185,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/tyche/tyche-shape-surface@2x.webp",
           "polesUrl": "/scenes/tyche/tyche-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "tyche",
-    "materialSha256": "6e5810871869684dac372952a9b4137b677e8cfcaf82b0057a001dfdba864ec1",
+    "materialSha256": "7999d7b75e1ac9ff6ecc29797e5ee13aff3f60b5dd9a2d0fb83947423977c15e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

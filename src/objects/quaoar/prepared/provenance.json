@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "579b7690c6a0bbd5ad96fd2d7a95a62dfc1fdc12f5683c79b90b4adf9a681ded"
+    "sha256": "d86856f9de109e897b4faa01c6a1abd4de16f4dd8520f059936aeab2c85df2c9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9a6ab0ec78e19aed59d6cc73a41090587d3f41b9fb5e661e4ab5ee74190e5ff3",
+      "sha256": "04722a22560b73645352f391e896a283e745acad31298962a15d47c4934bbacb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 547.1743344090937,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.13360705533259115
           },
           "mapUrl": "/scenes/quaoar/quaoar-model-surface@2x.webp",
@@ -448,7 +446,7 @@
   },
   "lastPreparation": {
     "objectId": "quaoar",
-    "materialSha256": "b64c48dde5afb50ce87e26cd1ea308f47156e36a929feac59ec8c7ceb361e51a",
+    "materialSha256": "3d3398637447349a845925dbd767ab517a1f5d823df4c4dd160475a2f747a171",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

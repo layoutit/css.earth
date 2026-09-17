@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 19.755,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
     "polesUrl": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
     "radialTerrain": {

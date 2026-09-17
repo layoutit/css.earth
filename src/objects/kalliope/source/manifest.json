@@ -9,8 +9,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "missionId": "eso-sphere-asteroid-survey",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           }
@@ -81,8 +81,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "missionId": "eso-sphere-asteroid-survey",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
           }
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2851,
-      "expectedSha256": "6af853a7140d62e528cd220f90ea87e1e7753c3079d2c3a9fa028ea67f56d4aa"
+      "expectedBytes": 2739,
+      "expectedSha256": "594596a3395bf706b1e8bb6d8519a3f0217f2be921d0d23126e82036ed71cd71"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

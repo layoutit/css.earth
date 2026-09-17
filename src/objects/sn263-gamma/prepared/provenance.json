@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4745bb5f6857f980ea70c896d3f6e4accbdfea619b0dacacc589e3d891e8d4b"
+    "sha256": "2008f4c6dfca9fdda1a1607562b5c94e6cc6cbeec705a7d3b89f9e3a02bbf181"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4c17417d1d30e0d8011b2e59a20e9e03434276bf22b8aaa3d606b96264ec69c4",
+      "sha256": "3191dfd66224e5c3c98fdcac3c2e086b21a653d4e1f551a73fa09664e3f14a35",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 230,
           "radiusKm": 0.2242032362372403,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8026401586924221
           },
           "mapUrl": "/scenes/sn263-gamma/sn263-gamma-shape-surface@2x.webp",
@@ -213,8 +211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
             "missionId": "arecibo-planetary-radar"
           }
@@ -380,7 +378,7 @@
   },
   "lastPreparation": {
     "objectId": "sn263-gamma",
-    "materialSha256": "4ecd82393f6a4284fe518325a73bd8e6c93c2b9eefb8cb0bbbff6a9102af7d9e",
+    "materialSha256": "65dc986443006f25b0084f9a59808cf337a2ef5f1e5eef5d9f354b7997636508",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

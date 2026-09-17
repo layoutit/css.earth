@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf7c63631868852494d2298eb5bf081245102e41020794abba93ca6890596293"
+    "sha256": "b5562bcbdfd2e281729fb4ecf23a407175875ca70f3fa3d2af0ee266bde0cb0b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "25181932ca0f62c11238914361dd2e32d9f237ee4f001998215760c3f25dc7e4",
+      "sha256": "b05137cc6a5b05156a439f843afaad4ed7c3e4d6dd0c1d9b1775d6ab2ff0dc2b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -246,10 +246,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.448,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "polesUrl": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "radialTerrain": {
@@ -631,8 +627,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
             "missionId": "hayabusa2"
           }
@@ -684,8 +680,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
             "missionId": "hayabusa2"
           }
@@ -732,8 +728,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://doi.org/10.7910/DVN/WW3IH0",
             "missionId": "hayabusa2"
           }
@@ -794,8 +790,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
             "missionId": "hayabusa2"
           }
@@ -853,8 +849,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
             "missionId": "hayabusa2"
           }
@@ -912,8 +908,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
             "missionId": "hayabusa2"
           }
@@ -1092,8 +1088,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
-      "bytes": 1789,
+      "sha256": "43e4385349a320ea5173863dace09c86ca7e0e60353e071146684bc29dc6681a",
+      "bytes": 1790,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1670,7 +1666,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "223a1d97e2155bbc2489c0e5cf548e7e15227bb8b18f5fe6e59840a078f2bc5a",
+    "materialSha256": "5dad3e03896cfd497bcd7f14f138a3524e89c8ac3f0e66cbc46806f07e79a019",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

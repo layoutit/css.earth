@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ea5101649c29127b8e772f215bc478e4d42f1ac27e3d2885f7757dab5eb336f"
+    "sha256": "e5e4cc2ba12736eecfbacbf55a0c01d09048dde17d8c83500cac2bfaa7ae4232"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -971,20 +971,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
             "missionId": "voyager-2"
           }
@@ -1049,20 +1049,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
             "missionId": "voyager-2"
           }
@@ -1209,8 +1209,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
             "missionId": "eso-muse-galilean-moons"
           }
@@ -1269,8 +1269,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
             "missionId": "eso-muse-galilean-moons"
           }
@@ -1329,8 +1329,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
             "missionId": "eso-muse-galilean-moons"
           }
@@ -1389,8 +1389,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
             "missionId": "eso-muse-galilean-moons"
           }
@@ -1449,8 +1449,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
             "missionId": "eso-muse-galilean-moons"
           }
@@ -1509,8 +1509,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
             "missionId": "eso-muse-galilean-moons"
           }

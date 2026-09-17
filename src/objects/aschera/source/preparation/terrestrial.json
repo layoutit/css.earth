@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 13.035,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/aschera/aschera-shape-surface@2x.webp",
     "polesUrl": "/scenes/aschera/aschera-shape-surface@2x.webp",
     "radialTerrain": {
