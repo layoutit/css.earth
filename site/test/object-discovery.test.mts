@@ -113,6 +113,20 @@ test('a shape-only star that a body with imagery orbits stays on the map with it
   assert.throws(() => parseObjectDiscovery({ featured: true, imagery: true, illustration: false, hostsImagery: true }), /without imagery of its own/u);
 });
 
+test('a star whose colour comes from its own measurements stays on the map', () => {
+  // HD 189733 B hosts no planet; its colour lens is its Gaia XP spectrum.
+  assert.equal(requireSceneObject('hd-189733-companion').discovery.imagery, false);
+  assert.equal(requireSceneObject('hd-189733-companion').discovery.hostsImagery, undefined);
+  assert.equal(requireSceneObject('hd-189733-companion').discovery.sourceColor, true);
+  for (const id of ['antares', 'polaris']) assert.equal(requireSceneObject(id).discovery.sourceColor, undefined, id);
+  for (const options of [defaults, { illustrations: true, asteroids: true, asteroidLabels: true, highlighted: 'star' }]) {
+    const scene = discoveryVisibility(SCENE_OBJECTS, options);
+    for (const id of ['hd-189733', 'hd-189733b', 'hd-189733-companion']) assert.ok(!scene.hiddenBodies.includes(id) && !scene.hiddenLabels.includes(id), id);
+    for (const id of ['antares', 'polaris']) assert.ok(scene.hiddenBodies.includes(id), id);
+  }
+  assert.throws(() => parseObjectDiscovery({ featured: true, imagery: true, illustration: false, sourceColor: true }), /source colour/u);
+});
+
 test('category browsing and asteroid settings cannot bypass Illustration models', () => {
   const browse = discoveryVisibility(SCENE_OBJECTS, { illustrations: false, asteroids: true, asteroidLabels: true, highlighted: 'asteroid' });
   assert.equal(browse.hiddenBodies.includes('annefrank'), true);

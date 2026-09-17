@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, ref_epoch, ra, dec, parallax, parallax_error, pmra, pmdec, radial_velocity, radial_velocity_error, phot_g_mean_mag, bp_rp, teff_gspphot, has_xp_sampled FROM gaiadr3.gaia_source WHERE source_id = 1827242816176111360"
+      },
+      "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816176111360&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/tic-8.2.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "IV/39/tic82",
+        "TIC": "256364937",
+        "-out": "TIC,GAIA,Rad,e_Rad,Mass,e_Mass,Teff,Kmag,LClass",
+        "-out.meta": "hu"
+      },
+      "requiredText": [
+        "256364937"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    }
+  ]
+}

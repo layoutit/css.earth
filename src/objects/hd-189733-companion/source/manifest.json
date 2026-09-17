@@ -1,0 +1,346 @@
+{
+  "schema": "csshd-189733-companion-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "hd-189733-companion-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1611,
+      "expectedSha256": "2348e0b8207536070e7a8e72cda186bc18973e12ade39f9ac1a3a869764189bd",
+      "origin": "https://doi.org/10.3847/1538-3881/ab3467",
+      "credit": "TESS Input Catalog v8.2 (Stassun et al. 2019); Gaia DR3",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed catalogue values and values computed from them, each with its source",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-189733-companion-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/hd-189733-companion/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-companion-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2203,
+      "expectedSha256": "d1691d5c453674de39ce216ba00dc3842fb5953ad4fa8ee66ece6d88a052ef38",
+      "origin": "Repository-authored raster recipe: the star's measured colour on the reference sphere, transparent off-limb plate",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "hd-189733-companion-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1768,
+      "expectedSha256": "45e50aee06dde175c8e5e37e1e2b65fe2c58ef26c6e197cb1767c92c95295c13",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "hd-189733-companion-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "hd-189733-companion-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 114,
+      "expectedSha256": "f66624c6a99f31c0ff4e436abc3ff9df072fc1e3cf54e3c35277fd79089b0fa5",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "hd-189733-companion-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 300,
+      "expectedSha256": "2a418eab04f15ad06d028fa06f6dd9e3c985fcb7e86d8e79aa77c342252517db",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "hd-189733-companion-gaia-dr3-source",
+      "path": "photometry/gaia-dr3-source.csv",
+      "expectedBytes": 339,
+      "expectedSha256": "555666399eb8fece2444319e925a641c74c8a1893fb5bcbbf7565c84104da07c",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP sync, CSV response saved unchanged on 2026-09-17; the ADQL query is in source/preparation/acquisition.json",
+      "redistribution": "One catalogue row, unchanged, with acknowledgement",
+      "consumers": [
+        "placement"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-hd-189733-companion",
+            "role": "material",
+            "evidence": "src/objects/hd-189733-companion/source/photometry/gaia-dr3-source.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-companion-gaia-dr3-xp-sampled",
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10178,
+      "expectedSha256": "4a5d1e92df33c06e79dd14dd7bc790eb87c280f81a28edfc1319ddcacd7ef6df",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816176111360&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia DataLink XP_SAMPLED CSV for the source, saved unchanged on 2026-09-17; restored through source/preparation/acquisition.json",
+      "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-hd-189733-companion",
+            "role": "material",
+            "evidence": "src/objects/hd-189733-companion/source/photometry/gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-companion-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1154,
+      "expectedSha256": "2ef24b7ef289e30144c7df523de1c07da3fa23048f1b7b69b9e1b8af3f4333fe",
+      "origin": "https://doi.org/10.1051/0004-6361/202243880",
+      "credit": "Gaia DR3 XP sampled spectrum (Montegriffo et al. 2023); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived Gaia spectrum, its sampling and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-hd-189733-companion",
+            "role": "material",
+            "evidence": "src/objects/hd-189733-companion/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-companion-tic-8-2",
+      "path": "photometry/tic-8.2.tsv",
+      "expectedBytes": 248,
+      "expectedSha256": "ed87a8d7ea41287adb9f873afc24d64683134b1078ef8086d6974050d3682aac",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "K. G. Stassun et al. (2019), AJ 158, 138; VizieR IV/39 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for IV/39/tic82, row TIC 256364937, with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "One catalogue row, with citation",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+            "role": "material",
+            "evidence": "src/objects/hd-189733-companion/source/photometry/tic-8.2.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-companion-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "stellar-color-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6349,
+      "expectedSha256": "14a64c0993dc43dc6bceae110e85be46caa40594732cdb7d30bc2fc19941b421",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "Photosphere colour from the Gaia DR3 XP spectrum as a uniform disc; rendered by tools/objects/source-authoring/hd-189733/author.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+        "inputs": [
+          "hd-189733-companion-stellar-color",
+          "hd-189733-companion-gaia-dr3-xp-sampled",
+          "hd-189733-companion-cie-1931-2deg-cmf",
+          "hd-189733-companion-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2747,
+      "expectedSha256": "994e24945d75b7fbaf380c94ef48353c4ff96c2fcac4d3d1d9c44183c2951ea9",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1934,
+      "expectedSha256": "24bac643e1ffeda538b734945a69efdfac7152b1bf6f2575aa70e95f6a6e47f9"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 456,
+      "expectedSha256": "386327f4f7988a1b4a758a7acdfdbbe53d5f6956c6a90a9a5542c43a344f6404"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 956,
+      "expectedSha256": "a3098f645b4a80a09529098fb822d983114e06a6d62ac8a75f22f5ff90437a9f"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 6004,
+      "expectedSha256": "b7c67f14cd2a0a7829a2ce71e94cc7da33df4388909753a6fec11b9ea6be6f6d"
+    }
+  ]
+}

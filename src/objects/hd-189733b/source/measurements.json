@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-transiting-planet@1",
+  "id": "hd-189733b",
+  "host": "hd-189733",
+  "radiusKm": 81254.5430832,
+  "radiusSource": "0.116795376 solar radii, the planet radius in Lally et al. (2025)'s deposited ThERESA configuration (Table 1: 0.11680 +/- 0.00014, from Agol et al. 2010), at 695,700 km per solar radius: 81,255 km, 1.14 Jupiter radii at 71,492 km.",
+  "orbitalPeriodDays": 2.21857567,
+  "orbitalPeriodSource": "Lally et al. (2025) deposited configuration, porb 2.21857567 d (Table 1: 2.218575, from Agol et al. 2010).",
+  "semiMajorAxisKm": 4636757.81,
+  "semiMajorAxisSource": "Lally et al. (2025) deposited configuration, a = 0.030994811518716577 au: 4,636,758 km, 8.863 radii of their 0.752 solar-radius star.",
+  "temperature": {
+    "hottestKelvin": 1334.88,
+    "hottestLongitudeDegrees": 37.5,
+    "hottestLatitudeDegrees": 7.5,
+    "daysideMeanKelvin": 1142.4,
+    "visibleLongitudesDegrees": [-109.85, 179.65],
+    "source": "Computed here from the deposited best-fit temperature map (tmap in output_E.npy, Zenodo 10.5281/zenodo.15103479, a 12 x 24 grid of 15 degree cells): the hottest cell and the area-weighted mean of the hemisphere centred on longitude 0. The visible longitudes follow ThERESA's rule from the times saved in the same file. The paper reports the hot spot 33.0 +0.7/-0.9 degrees east; a 3-component model it does not prefer places it 6.1 +/- 1.6 degrees from the equator."
+  }
+}
