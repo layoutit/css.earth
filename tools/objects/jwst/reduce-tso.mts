@@ -9,9 +9,11 @@
  * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume.
  * 2. Runs Stage 1 (ramp fitting) and Stage 2 (calibration) on batches of segments, one Python process and one worker at a time,
  *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB.
- * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 twice: the white light curve and the channels.
+ * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 for the white light curve, the channels and, when the
+ *    program has them, wider slices with their own bounds.
  * 4. Exports both light curves to CSV (time, flux, err, mask, centroid_y, psf_width_y; flux and err divided by the median flux),
- *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text.
+ *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. The star's median extracted counts
+ *    per detector column (ours-stellar-counts.csv) are the band response an eclipse map's temperature conversion needs.
  *
  * Finished batches and stages are recorded in the work directory and skipped on a rerun. */
 import { spawnSync } from 'node:child_process';
@@ -26,7 +28,7 @@ import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {
   readonly id: string; readonly eventName: string; readonly crdsContext: string; readonly batchSegments: number;
-  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string };
+  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string; readonly S4slices?: string };
   readonly segments: readonly Segment[];
   readonly oracle: { readonly url: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly lightCurve: string };
 }
@@ -45,7 +47,8 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
   return {
     id: requireString(record.id), eventName: requireString(record.eventName), crdsContext: requireString(record.crdsContext),
     batchSegments: requireFiniteNumber(record.batchSegments),
-    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels) },
+    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels),
+      ...(stages.S4slices === undefined ? {} : { S4slices: requireString(stages.S4slices) }) },
     segments,
     oracle: { url: requireString(oracle.url), path: requireString(oracle.path), bytes: requireFiniteNumber(oracle.bytes), sha256: requireString(oracle.sha256), lightCurve: requireString(oracle.lightCurve) },
   };
@@ -123,6 +126,17 @@ else:
 print(prefix, flux.shape[0], 'channel(s)', 'with white' if 'flux_white' in lc else '')
 `;
 
+const COUNTS = `
+import sys, numpy as np, xarray as xr
+source, name = sys.argv[1:3]
+spec = xr.open_dataset(source, engine='h5netcdf')
+# Median over integrations of the optimal spectrum, masked pixels excluded, sorted by wavelength: electrons per integration per column.
+optimal = np.where(np.asarray(spec.optmask).astype(bool), np.nan, np.asarray(spec.optspec))
+wave = np.asarray(spec.wave_1d); order = np.argsort(wave)
+np.savetxt(name, np.column_stack([wave[order], np.nanmedian(optimal, axis=0)[order]]), delimiter=',', header='wavelength_um,counts', comments='')
+print(name, optimal.shape)
+`;
+
 function python(toolchain: EurekaToolchain, cwd: string, script: string, args: readonly string[], log: string) {
   const result = spawnSync(toolchain.python, ['-c', script, ...args], { cwd, env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   return writeFile(log, `${result.stdout}${result.stderr}`).then(() => {
@@ -158,7 +172,8 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   const settings = async (step: string, template: string, stagePrefix: string, inputdir: string, outputdir: string) => {
     const directory = resolve(work, 'ecf', step);
     await mkdir(directory, { recursive: true });
-    const text = renderSettings(await readFile(resolve(programDirectory, template), 'utf8'), { topdir: `${work}/`, inputdir, outputdir });
+    // A control file may name a file of its own program, such as slice bounds, as PROGRAM_DIRECTORY/<name>.
+    const text = renderSettings(await readFile(resolve(programDirectory, template), 'utf8'), { topdir: `${work}/`, inputdir, outputdir }).replaceAll('PROGRAM_DIRECTORY/', `${programDirectory}/`);
     await writeFile(resolve(directory, `${stagePrefix}_${program.eventName}.ecf`), text);
     return directory;
   };
@@ -197,6 +212,7 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     ['S3', program.stages.S3, 'S3', 'Stage2_all', 'Stage3'],
     ['S4', program.stages.S4, 'S4', 'Stage3', 'Stage4'],
     ['S4channels', program.stages.S4channels, 'S4', 'Stage3', 'Stage4_channels'],
+    ...(program.stages.S4slices ? [['S4slices', program.stages.S4slices, 'S4', 'Stage3', 'Stage4_slices'] as const] : []),
   ] as const) {
     if (progress.steps[step]) continue;
     progress.steps[step] = await python(toolchain, work, STAGE_RUNNER, [step.slice(0, 2), await settings(step, template, prefix, inputdir, outputdir), program.eventName], resolve(work, `${step}.log`));
@@ -208,6 +224,8 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   await mkdir(curves, { recursive: true });
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours.log'));
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
+  if (program.stages.S4slices) await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_slices'), /^S4_.*_LCData\.h5$/u), 'ours-slice'], resolve(work, 'export-ours-slices.log'));
+  await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
   const deposit = resolve(work, 'oracle', program.oracle.path);
   await mkdir(resolve(work, 'oracle'), { recursive: true });
   if (!await exists(deposit) || await sha256File(deposit) !== program.oracle.sha256) {
