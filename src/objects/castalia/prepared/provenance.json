@@ -421,8 +421,8 @@
         },
         {
           "url": "/scenes/castalia/castalia-elevation-surface@2x.webp",
-          "bytes": 400552,
-          "sha256": "0544ef6baeda701e10b58b767010a12cbe883191f80b398252284b2b84b5667d",
+          "bytes": 335516,
+          "sha256": "6abdc9de84b3442c440c449a7cd5f10fec64238bfb407accd0ce757696f03717",
           "verification": "bytes-verified"
         }
       ],
@@ -465,8 +465,8 @@
         },
         {
           "url": "/scenes/castalia/castalia-shape-surface@2x.webp",
-          "bytes": 84470,
-          "sha256": "86c7cbbe35be0a5592bc47465ab70d0d443dbcae87ab8c787170b755f3c3018d",
+          "bytes": 82874,
+          "sha256": "f1477041a47f155ab782239298e667b0eaaf4111eb99f2848532c81042449db2",
           "verification": "bytes-verified"
         }
       ],
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "castalia",
-    "materialSha256": "b385cc5a056ec0bbb811e6b735c2b8ffa0fcc203144ed397db2e456da10cc662",
+    "materialSha256": "616fe9f794c4ec78e4f9f75828d06ea0bcda7a9e5ab2791c61d071ef373f4168",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

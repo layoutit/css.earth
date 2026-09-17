@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/themis/themis-elevation-surface@2x.webp",
-          "bytes": 352354,
-          "sha256": "5b706845833a756579cfe21b1e4c8c3743e8e88cb84168abcf4a3b283aba9b54",
+          "bytes": 299566,
+          "sha256": "5fbeaf53461830d1e7eaadf306565c37b41ae2d0574b7c6a95e94836d9600636",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/themis/themis-shape-surface@2x.webp",
-          "bytes": 76152,
-          "sha256": "ccc3388d966be8e77bcdadf74c5a9bf44d853bf52405a9aca7663f6c6da2524d",
+          "bytes": 75212,
+          "sha256": "4ae0f485a2ffc09cbf8f2096e2d9ad79e81428163063e94e7373c8397000779a",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "themis",
-    "materialSha256": "82bdd864826a91c6ff6330262f282c127d04e6c6759287f6e8f547308a8cf73e",
+    "materialSha256": "49a442a7366c649e31d249f9a19662b63814112675f152251cee2341b8942d6f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

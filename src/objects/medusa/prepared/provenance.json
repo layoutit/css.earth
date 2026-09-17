@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/medusa/medusa-elevation-surface@2x.webp",
-          "bytes": 291540,
-          "sha256": "9ad6228db2038dc586d1c76215b9ec7dbc218201aaea3b8dd6976adcca2b1668",
+          "bytes": 260854,
+          "sha256": "05d535ee46ed34fac1e0348bfc60689f732d67a062acee4e30ffff2b144c7962",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/medusa/medusa-shape-surface@2x.webp",
-          "bytes": 65260,
-          "sha256": "3df20cb171ec32a4207814af659bf866ad44b17d847120b3216f05d99fbae9a3",
+          "bytes": 62722,
+          "sha256": "c6c06ce8052065818baf53ae3fbc08a47dff067ab34bd405a6f4195d53d70fd8",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "medusa",
-    "materialSha256": "06981c46ea1781be67115bd065a729cdaa2e615dfb6d727ab666cefb442f36b3",
+    "materialSha256": "b78ac5d8007b3e735220e2963ed509918ce9adc3b3371f167da8e736c96a6c59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

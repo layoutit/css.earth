@@ -311,8 +311,8 @@
         },
         {
           "url": "/scenes/kleopatra/kleopatra-shape-surface@2x.webp",
-          "bytes": 87860,
-          "sha256": "40d28e9a8b5e54c24d476444a0d4903419e7c43a6a2c22dd59353166edf0ceda",
+          "bytes": 86322,
+          "sha256": "26be72e78266790dda3a231d90b4aa402ddfc4578113e95213a36a815c0bef47",
           "verification": "bytes-verified"
         }
       ],
@@ -383,7 +383,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "cc4794de690709f6eb31ba3f472aa9bd180c2eaba598442e13861cba92d53748",
+    "materialSha256": "210654eaa57c852014740d2140a4dded8f0dc9d3849620499a594e4459a4bdd3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

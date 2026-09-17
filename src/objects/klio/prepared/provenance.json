@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/klio/klio-elevation-surface@2x.webp",
-          "bytes": 348504,
-          "sha256": "d9afea650783d51a23bf13e1c49155485f9162c5e82ed4272577d6c01bf2387c",
+          "bytes": 309510,
+          "sha256": "d7adb9ddba56f80909dc0eb1442c8e3699d8bdc0e0e79e22cd86f165f079479d",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/klio/klio-shape-surface@2x.webp",
-          "bytes": 69988,
-          "sha256": "ecef7535aaf7aa379eb9ed20dd9a38aa3f736f4308f3f7c0933a5287d92d319d",
+          "bytes": 68754,
+          "sha256": "9097a223f2289e43298ae3ed622a76941f07a7e09b5f8271b06d1c6859c7c0ed",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "klio",
-    "materialSha256": "773395a7caad73c1e6556dce5a5db44a1ae59465f8be7416ac56dc7567b92786",
+    "materialSha256": "785c42728a708fe47aaee65e6e3c49d795c88a11797fbb018c8737991fb1c669",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

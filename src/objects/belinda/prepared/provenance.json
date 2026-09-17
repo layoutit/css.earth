@@ -389,8 +389,8 @@
         },
         {
           "url": "/scenes/belinda/belinda-model-surface@2x.webp",
-          "bytes": 60568,
-          "sha256": "99a4be6fa67214c4761b961a2c286ed57b65344971ef78797d0b5c7ddf749065",
+          "bytes": 51614,
+          "sha256": "97069e4c8afe102ad3dcc2ac3f04216f3799c48a18e17823f6af578b119d9211",
           "verification": "bytes-verified"
         }
       ],
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "belinda",
-    "materialSha256": "179c21acdeedf5b3c780ee890fa0a976d3e3e14c4867d92dafb589b54ab2a2cd",
+    "materialSha256": "f06c096816ce9e32a7605c51b9a78749726832087e5ed0e84321a6c5d67d0e6d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

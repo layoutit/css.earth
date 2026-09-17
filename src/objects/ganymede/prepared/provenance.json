@@ -2612,8 +2612,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8339,
-          "sha256": "807fac4da98e2d64aafbc699eeee79c643493c2f35123814702841c7e836f139",
+          "bytes": 8458,
+          "sha256": "18757c4db9ef4154a7c650149c634c782613bce5fd96d521ce7a8364bcc7e659",
           "verification": "bytes-verified"
         }
       ],
@@ -2811,7 +2811,7 @@
   },
   "lastPreparation": {
     "objectId": "ganymede",
-    "materialSha256": "2f5bd52239c517819b1ca55c6fb8a643ddbb7a1b0b1ad495318387e988ed812d",
+    "materialSha256": "910d223c8247820ac0a97197328f4ed641bcf0246b8fd9a4ed0fbf0c6b56ff12",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

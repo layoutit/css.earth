@@ -419,8 +419,8 @@
         },
         {
           "url": "/scenes/taurinensis/taurinensis-elevation-surface@2x.webp",
-          "bytes": 310186,
-          "sha256": "0d05609208848afd3c811ccdba27c2300fe921c41f6b421879fe2a0319054a86",
+          "bytes": 279716,
+          "sha256": "eb7dc27950d5dbcfe2fff337d979f719e5bd2bc5d7eef0cd6f7e8f3fa1e90fae",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +463,8 @@
         },
         {
           "url": "/scenes/taurinensis/taurinensis-shape-surface@2x.webp",
-          "bytes": 68032,
-          "sha256": "2bb28c8f1d9058bfb445aaebdb4f42f58fdda3e61d6a6eeebf7fed15f5a54495",
+          "bytes": 66426,
+          "sha256": "6fc323ed136bf78a54d35d72716634961c35676a596377ebebd0a66ba358b2f0",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "taurinensis",
-    "materialSha256": "cff254dfcacba02577c6da7ef62b1fed7d410fc7997d0477e4049edfbc96312c",
+    "materialSha256": "3c06ffb7ad334ad41d1d910276a034b5afcf64aa396be8a8bcd6831367539843",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

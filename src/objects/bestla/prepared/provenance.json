@@ -345,8 +345,8 @@
         },
         {
           "url": "/scenes/bestla/bestla-model-surface@2x.webp",
-          "bytes": 62364,
-          "sha256": "ec40c48b3eaf5fea7a7a742fdce91ad30f673088710d27fe95e5ef078874e0c9",
+          "bytes": 53238,
+          "sha256": "34ffa2cd64416aedec01dc3734ee4a898b4aae6cc63154528fbd1d5e22742f7c",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "bestla",
-    "materialSha256": "b1091abdfdb3b61be23a1ad594633d33bec7f4235bdaa6b6fea9a9150eeacf4a",
+    "materialSha256": "7f752f8f23aaefcf3ef5de16bb2a129454974404fd02362a044e8a78ac78e891",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

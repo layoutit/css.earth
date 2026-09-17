@@ -5458,8 +5458,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-model-surface@2x.webp",
-          "bytes": 128870,
-          "sha256": "7d37229e4bfb6c3094da506e1d6d17f987fc6ee9c913e9c3fe87bd6f781a5ecc",
+          "bytes": 125558,
+          "sha256": "e9611aad44a201d529c8fc1b4929a62665c7fe9d48d4e6fd4d7361026a4603c6",
           "verification": "bytes-verified"
         }
       ],
@@ -5512,8 +5512,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-constraints-surface@2x.webp",
-          "bytes": 138670,
-          "sha256": "145fd8322e00e200909dd468950f6d55ebd3de01e4edcef8d802521ee8c7e420",
+          "bytes": 138964,
+          "sha256": "5e12b4c6a472c9226413cacde3259df2ceb458539cb00269bef5366ef3962a5b",
           "verification": "bytes-verified"
         }
       ],
@@ -5654,8 +5654,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-temperature-surface@2x.webp",
-          "bytes": 237440,
-          "sha256": "0644f1818a1f81851a2746cd01d83c1ec862aa02e2b1d06726042ebbdce3a03a",
+          "bytes": 239052,
+          "sha256": "a983576936a0351c3e4c37d8b34b701ccad6092e1c39e4244ffd07570a705227",
           "verification": "bytes-verified"
         }
       ],
@@ -5791,8 +5791,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-spectral-slope-surface@2x.webp",
-          "bytes": 237468,
-          "sha256": "5b544a360c5744eb60584019ff3c1409a85314f8c7032077b66de6f3ab12b8e6",
+          "bytes": 238968,
+          "sha256": "023373ed16c652033b816bf8417102f4abbe86e6b5712d297a1168b167931404",
           "verification": "bytes-verified"
         }
       ],
@@ -5859,8 +5859,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 195300,
-          "sha256": "2c8b7cff7d9b1962dbd53c993332af978a2ea82b817e302b5657e1f1f6ae71a8",
+          "bytes": 196020,
+          "sha256": "957b8f4c8072e30f53af5dbd989a6ee1a34e67d426239a294b7dd3bff1b663b8",
           "verification": "bytes-verified"
         }
       ],
@@ -5921,8 +5921,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-next-surface@2x.webp",
-          "bytes": 262656,
-          "sha256": "ac175de8ce8a64bbfd492f8f5d840c7a2d6a0b4f1a17a7bc9ea8f4ec295cbcc8",
+          "bytes": 250714,
+          "sha256": "a01ce8b8da4cdc38e34901b32927df2ee073ed7acaa3fb24ed5a1b4c64c18acb",
           "verification": "bytes-verified"
         }
       ],
@@ -6125,7 +6125,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "4c325ddce98d9533f22e816a9de18eb571596e4acc6114f3093438851db5791e",
+    "materialSha256": "4f99fe43f65bdab8a4a661441d7bdf043fece909cb8a55c9db56cf87d2a14481",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/byblis/byblis-elevation-surface@2x.webp",
-          "bytes": 342432,
-          "sha256": "e55336b102a6bfe7583956537cae113e09595bced0e136230c8f281c3c50684b",
+          "bytes": 312798,
+          "sha256": "ec537f2e8adbaf9951e846488bdf041fe0639a50ed822365a0562e0d55459b0b",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/byblis/byblis-shape-surface@2x.webp",
-          "bytes": 74586,
-          "sha256": "0c0e4f63a8372227ca931b01977d91c83a8654443bb5b0ab982ce6fbe77b666e",
+          "bytes": 74868,
+          "sha256": "b27ed577ebcae823df85b398ae3e43146bd297c94c708cc2cd01f74f359e7e0c",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "byblis",
-    "materialSha256": "1ace3e3ce959e26b7073fbe86f4b5b0bb0a27a6a3167d3dbaeef96aa058de47b",
+    "materialSha256": "2e2a17072df87578764eedd75f45ff0777860fca9bf16cf9636d3ef544e09e9a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

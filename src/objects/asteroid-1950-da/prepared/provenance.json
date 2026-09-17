@@ -427,8 +427,8 @@
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-surface@2x.webp",
-          "bytes": 403100,
-          "sha256": "86e3497d96f8a95d3bf72c4e802f7de8e054a71a38fcf4a82479dd1318fb3dd3",
+          "bytes": 345744,
+          "sha256": "92dc7e97db3bf779ea8177a3aee0dfd7d879164d90d5e948114bf0db434e1d28",
           "verification": "bytes-verified"
         }
       ],
@@ -471,8 +471,8 @@
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
-          "bytes": 78928,
-          "sha256": "20d5d9515fb38fdbf67bfef380a7b8ff7dfef924a182f6e08981aec783fd3b3c",
+          "bytes": 77180,
+          "sha256": "488fc5ca9d97bc3e1cc4f6fba77d740f1236343f12c03c2c2ed9918aba1477a8",
           "verification": "bytes-verified"
         }
       ],
@@ -568,7 +568,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1950-da",
-    "materialSha256": "0898839a7d3193851e6cbda840f23fee9484afca0d688deb0be22e22325af350",
+    "materialSha256": "6cc589d4391bd0844d1218963b9e71bdc5c27b19d4c85e707304917d15234d61",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

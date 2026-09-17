@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-surface@2x.webp",
-          "bytes": 334210,
-          "sha256": "73e980ae4c79542c3ff8145881165b8baa67bf2cece2a49b799bcc64b203d767",
+          "bytes": 291030,
+          "sha256": "cff9b00893f5f90fce81efe8795251d408aad7be701f73e5f19c60f416413531",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/europa-52/europa-52-shape-surface@2x.webp",
-          "bytes": 76964,
-          "sha256": "11702fd95b2bf127fa6597273579bb077e0026078b80d93596f58f09f571d425",
+          "bytes": 75730,
+          "sha256": "233e5dea3c69c0fc01bd7e1cbcfd5546d6d3264a8b5e986e0c97d33f26aeae41",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "europa-52",
-    "materialSha256": "7eb9237535bbc76b479a4a09611aa1a188628a72d838b313b7c53a72295bc5ae",
+    "materialSha256": "e9635781d099147bf752549f27d0703d5c3c82f88ef9514f184c8fd9335d8f16",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

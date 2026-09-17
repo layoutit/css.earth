@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/circe/circe-elevation-surface@2x.webp",
-          "bytes": 302998,
-          "sha256": "2f4273f37a5c94ab5a6d7da17aadc18a74fb9ad79e41289e2cf8e5e698e8069d",
+          "bytes": 275442,
+          "sha256": "8562a2c4392464f379d9f70cbd44c2c1bdc7afecf1737e174599d02753b53518",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/circe/circe-shape-surface@2x.webp",
-          "bytes": 71998,
-          "sha256": "2788a2ca25ceac0483ced5817c81647c65c0c436ba68391efe02ccdbbe15172b",
+          "bytes": 70900,
+          "sha256": "d9c11cc66f5fde0e5dccb5ebbaef5048bee2cd392dcedfe1b42b7883b7c90b87",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "circe",
-    "materialSha256": "fdf61f02b514354ebd224dff44e051fb6c5ae3e810bd05a158274329e3388a10",
+    "materialSha256": "d5c104ba96480751fa309806a5c597a2163553c061e499f7d52536c7b6888d38",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -345,8 +345,8 @@
         },
         {
           "url": "/scenes/hyrrokkin/hyrrokkin-model-surface@2x.webp",
-          "bytes": 62644,
-          "sha256": "90ddf16579eb7f43535f18c7dd35a9613c79ce0bb15e13d953ac95d1f1cb9ca5",
+          "bytes": 52432,
+          "sha256": "fad90a455596e7b124c12807166c08f253ca955fd691f66c405cc465828c2283",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "hyrrokkin",
-    "materialSha256": "af23c1859882aeda354c5262c6728c6e5898053912730be5d347f35026baed9d",
+    "materialSha256": "82c2f4623b9d38988712f5b83550ca61263999f2a71d923b3d6e05ffc29f9752",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

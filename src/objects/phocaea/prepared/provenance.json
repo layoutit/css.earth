@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/phocaea/phocaea-elevation-surface@2x.webp",
-          "bytes": 306106,
-          "sha256": "29b2c1c1545606215ee00947b7c437f185550c25822aeb3abc7ee08232217130",
+          "bytes": 274334,
+          "sha256": "b876a1e19cf746a5983309d55097f85801f8bd3f155f14a1270039b5b1def417",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
-          "bytes": 76500,
-          "sha256": "25d7c809655601a08088ada343a648b7988dcdce2f691cdd92b1f2b133e4c0b6",
+          "bytes": 73562,
+          "sha256": "fb9cb2460e8e9a0e50337082dec11cf2a6ec3978b8d15fe66e3ad18d1ea9b830",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "phocaea",
-    "materialSha256": "6e0702d32ad4519158757d0e96d46d9d6b7035b32b10ff704eece4d8ef95d2da",
+    "materialSha256": "0e026f4cb00b915db3ca55ea33566b9e64e9cbec1ea61932e68ab38f671ce80c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/hopi/hopi-elevation-surface@2x.webp",
-          "bytes": 333464,
-          "sha256": "58fe4a0b78539be621a7d2d083ea07d16335f6a89d2a3c4a3b26a4039cada93a",
+          "bytes": 299578,
+          "sha256": "a800069993a4287fb39bd89e66c2dc4e3f6d596d2f9373495ee85cbc577a76cc",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/hopi/hopi-shape-surface@2x.webp",
-          "bytes": 68028,
-          "sha256": "f0dd7f3a465e1f08b644bbc10b3b92c6e4f099b0e8b516c62bbf00e3ccfeaf1d",
+          "bytes": 66662,
+          "sha256": "bd821a6120924fe7100a1ade12a5324c206ec5863a2cac8296e99d4cc0c900e3",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "hopi",
-    "materialSha256": "d562e60745712fd46702c974ccf562ed33ccdf5d197fa186a211e833966e8680",
+    "materialSha256": "7ae1d77773250c00caf1df43ad07c5f08031e7ab4620ca3433639d5151f26ed5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

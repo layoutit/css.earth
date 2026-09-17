@@ -329,8 +329,8 @@
         },
         {
           "url": "/scenes/huya/huya-model-surface@2x.webp",
-          "bytes": 61994,
-          "sha256": "3f334bfc239281b1cac7def311d82d2fee3b04b35576e33562ea7be5fa26158c",
+          "bytes": 51330,
+          "sha256": "4046d98474e73cd37776940ce2d731948699a65ee907053cb74e63ee2a65e99b",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "huya",
-    "materialSha256": "8cfd41ac3a99dd76c340e24e25fecbfc8627448a0409cbd079b432dd6c08f719",
+    "materialSha256": "e4599507938029676623e76d4792143a812ebb0f7c1dc07291dddc6379ecc7f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -321,8 +321,8 @@
         },
         {
           "url": "/scenes/deedee/deedee-model-surface@2x.webp",
-          "bytes": 61064,
-          "sha256": "20267ee115db90bf366df837a3b2c94eb14660df7d7d7446e3fed11cf03d0115",
+          "bytes": 52328,
+          "sha256": "ecc3fc83f68e1b51fe331e2410f48919e96db6d874f25af73779e660b2d23a93",
           "verification": "bytes-verified"
         }
       ],
@@ -398,7 +398,7 @@
   },
   "lastPreparation": {
     "objectId": "deedee",
-    "materialSha256": "935db8f0f877b342b6390e73a076861267808aa2c0d18be5f6d44ff4464c1097",
+    "materialSha256": "d0ee12a9c93b7ff4c624df30baba7dfb39d0d455e3910a439430836830980cf0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -3920,8 +3920,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-elevation-surface@2x.webp",
-          "bytes": 889040,
-          "sha256": "412adfdb5c8d4e47117082c4542a327e4dc1dfa6e3051ee7d8cb11571595531e",
+          "bytes": 704062,
+          "sha256": "74c11f1d851b91e6661535db5581956d207524abf614626ae830c03647a5704e",
           "verification": "bytes-verified"
         }
       ],
@@ -3986,8 +3986,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "bytes": 1242288,
-          "sha256": "edf8474383520ea791c0abc0a7748b1974d2807c4064ada076f49e40895b70b3",
+          "bytes": 997184,
+          "sha256": "a455d4ae12bf2620488b8a5dc8c09f81dad63fd50fd4d7ee14b14ca7771e5188",
           "verification": "bytes-verified"
         }
       ],
@@ -4068,8 +4068,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "bytes": 924226,
-          "sha256": "b07995991e725b5ddf67c70b0d583988606bb20473aac884b0030163a367b4f9",
+          "bytes": 684170,
+          "sha256": "72a6d0fa6f6473eb60cb37bd259242d38b088ef1587f657d46bf1002a74c2d6d",
           "verification": "bytes-verified"
         }
       ],
@@ -4162,8 +4162,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 39394,
-          "sha256": "894cf06394d5a4a3a58232f88834f53d816f3682bfa3a91e8a7d62ceb6c8b007",
+          "bytes": 39550,
+          "sha256": "5d4634503f23eef9b5d949151d2192f5533ade05eb34e144bd72c5b734e78207",
           "verification": "bytes-verified"
         }
       ]
@@ -4187,8 +4187,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 18592,
-          "sha256": "528b8e5b07ba16ff86bbaa4c907c1590abe34441c3156597bb8066cda32d30aa",
+          "bytes": 18178,
+          "sha256": "ec277b471dbd957c84f61c39bbfdb6a5561ccfe13eaf44fa1a8f3ab45dd4123a",
           "verification": "bytes-verified"
         }
       ]
@@ -4225,7 +4225,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "d7adabe598d5342505f9a3610e4626267e6ee5337a01529b11117f80050c328d",
+    "materialSha256": "0dba139b7fa99901aa436a7622cf54b0e3ecc6ee0469fad3a9a39a958e95ec9d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

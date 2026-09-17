@@ -995,8 +995,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
-          "bytes": 318892,
-          "sha256": "68869d96118df1e0fb9348eed0fd11945f01ec4030808877befa9ee9bcd281da",
+          "bytes": 284730,
+          "sha256": "a38cf5878f35c3a2c2ca996f47403943207338e68e1696167440e27ae2559f4c",
           "verification": "bytes-verified"
         }
       ],
@@ -1047,8 +1047,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
-          "bytes": 239354,
-          "sha256": "78594cf9f239155a50735b31df85aa2725e4fe333dafb49a13c224a0e412ae47",
+          "bytes": 201266,
+          "sha256": "cb654827d238fad774031aa91835981324a289a42e7ea5351f7a52ac50ab1e20",
           "verification": "bytes-verified"
         }
       ],
@@ -1091,8 +1091,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
-          "bytes": 77828,
-          "sha256": "9ba8ad2028f276d46aecf4aebc6ab50cc111c00c612996b78e92eaf17b519617",
+          "bytes": 77528,
+          "sha256": "85402e9e3de98dfdca758974700e378494b016cc350ec9d97ba15560e125a8be",
           "verification": "bytes-verified"
         }
       ],
@@ -1139,8 +1139,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
-          "bytes": 286432,
-          "sha256": "ef3623ad47c1c57aff5d53cc44b6569eff7c9bde898966907b26d4f35e910f86",
+          "bytes": 228286,
+          "sha256": "25d699259714bf30319a6a8c70d415683ea5c5aed21d5bd60ab20bd24b0d93ff",
           "verification": "bytes-verified"
         }
       ],
@@ -1258,8 +1258,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 6344,
-          "sha256": "a6e4109ae6a919a8c73941ffea2ec8694de73e979adfd625614de5c0518c19a3",
+          "bytes": 6316,
+          "sha256": "6b1e03304ae9d346cccea4a3f0188bfd62d3541d153376798fd26d81ccb332d6",
           "verification": "bytes-verified"
         }
       ]
@@ -1321,7 +1321,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "a5f07ad1bd1c70959b3eac3534aec97b18d2c62b9dd49287d6e044f6418f4ab8",
+    "materialSha256": "436de9ef08d118f63cad7b2fe8928f8cdb2012599281023b612a164520ee2f94",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

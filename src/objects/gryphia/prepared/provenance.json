@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/gryphia/gryphia-elevation-surface@2x.webp",
-          "bytes": 337350,
-          "sha256": "9ee74a556fc22c02177ed79dcadca8e9bfa90fac468f85fc590de55a7dae32cb",
+          "bytes": 313110,
+          "sha256": "0487047a8589964fbcdfdfca583c7e3c6a51498c2ae3f4508bb27354a643624f",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/gryphia/gryphia-shape-surface@2x.webp",
-          "bytes": 75272,
-          "sha256": "2e8cd6b745f72450fd77017f7401d2ab3667f84b8dbac93a5a1371f46cb44955",
+          "bytes": 73624,
+          "sha256": "f9cd2f8b6aa1e805362a9124b055bc807ec9c3b519aeaad7fe3a22c84eca5eea",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "gryphia",
-    "materialSha256": "2a8f0c699b65d2e687ddc7b97e12b32b50c4cca4238e4e461b6eae4a46f5fead",
+    "materialSha256": "09e2add9a5b04dc5ac1b6b1a699a16edd0dafc7d8b1c0d03c982f95bf9b86f03",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -345,8 +345,8 @@
         },
         {
           "url": "/scenes/tarqeq/tarqeq-model-surface@2x.webp",
-          "bytes": 64548,
-          "sha256": "c568351ca3a120c8fadce52e282faf4618e696188008f93e7193c641041978bc",
+          "bytes": 53808,
+          "sha256": "bba5788506b9b6e1695dbd672be8df35e6dd8fa28535efe0590cc8b2a4e2d63d",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "tarqeq",
-    "materialSha256": "8ec921837f9153b2f1e030d263ab3406790afc82c506e25a30fda98dccd66db1",
+    "materialSha256": "0a1bfdd6034da8be1558333d9f80f378ae5fb3aff93d136a0ec87fc8aaca0652",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

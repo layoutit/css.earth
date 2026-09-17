@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/niobe/niobe-elevation-surface@2x.webp",
-          "bytes": 303298,
-          "sha256": "b3c57cc8df5525feff2f6bd3747c393831a6da2039ea9f100288b4f50ba84042",
+          "bytes": 273848,
+          "sha256": "6e7970fa43c61ec2c6b438eb724e3f88ef77d2b16c9c2aad455f643a8fbe7606",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/niobe/niobe-shape-surface@2x.webp",
-          "bytes": 70088,
-          "sha256": "0ba70c3eccfa512ddfca5cffa08bd57bf9d02f458a2a0c2f11c746fe50ea0691",
+          "bytes": 69570,
+          "sha256": "56570c913b3d71265663511f798accf397d3657b6a1c7e0d41281f273103164b",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "niobe",
-    "materialSha256": "edf1fcba08b66cb2532cd479f4ed916b87aa60302f2b0a9967282e656c7c97a3",
+    "materialSha256": "336b8942eae7ec407a00d2fe437fe10d53c894785246c1b6ae045032fc756b72",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

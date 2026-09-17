@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/beatrix/beatrix-elevation-surface@2x.webp",
-          "bytes": 356154,
-          "sha256": "907979bf2e9e78a6abcff80b9b5debbaf3947d7a66abe129966e8e5b92b051c7",
+          "bytes": 323534,
+          "sha256": "960300ea6c915e504400449b4515900ce39babb8c0920a5585377294e67634a5",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/beatrix/beatrix-shape-surface@2x.webp",
-          "bytes": 74002,
-          "sha256": "b6bd8638fbf8dc936b85c3ba4738525e9a3386515f11c05297d94ac121bc9e66",
+          "bytes": 72246,
+          "sha256": "0d1bd554ad40b78ed3f4712a3aa5a1939c67b1833d70b340f83f92514788e069",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "beatrix",
-    "materialSha256": "d12bcd6d407e35901edad9fcc290a9ba3b9c7bde8b7dab3202c15066dd3e0ca1",
+    "materialSha256": "2a514f49d11f4397df1e20ad7d76d1a334235d5c5becb82ed64bb32ebf64c5ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

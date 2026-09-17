@@ -390,8 +390,8 @@
         },
         {
           "url": "/scenes/prospero/prospero-model-surface@2x.webp",
-          "bytes": 62332,
-          "sha256": "805015b2df34da826f80a7bbe2028e3af59320b7e37d368d85427be0901914b5",
+          "bytes": 52096,
+          "sha256": "5af6295db674a9f4edab7227a776da9486c83216ac699128d3ce56695bb93f00",
           "verification": "bytes-verified"
         }
       ],
@@ -467,7 +467,7 @@
   },
   "lastPreparation": {
     "objectId": "prospero",
-    "materialSha256": "b02ce3a9ad4de8fd07d62b83344c9ab129d38d7631c0b8f7ecf174799aa2a272",
+    "materialSha256": "1433a6d12839b03249a758e40c37ef05c70846115ceaccf04f768bb5549e31d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

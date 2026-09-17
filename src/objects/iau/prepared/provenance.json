@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/iau/iau-elevation-surface@2x.webp",
-          "bytes": 298358,
-          "sha256": "5b692933c1b3f2193cb9583d5c5b9aa5bea2049242bff60ca66e8e9525b98468",
+          "bytes": 278018,
+          "sha256": "a635701c687c4ae004249d3607ea2d2797c1e3811358ba64579aafda6414a9f8",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/iau/iau-shape-surface@2x.webp",
-          "bytes": 66384,
-          "sha256": "8cd45189e3ff6383174bf68d9a5b2dba5fa2606b1ca2e3380900a8f6d6f98b06",
+          "bytes": 64980,
+          "sha256": "45a58c2d0a4e6c4efcd917a17d0de6421a4d342da87c34e8c0ffe2901c374dde",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "iau",
-    "materialSha256": "33de47741364455d69aaa805282258a223f9ce05c2b1fa795ac5c8ee22862b93",
+    "materialSha256": "6ca88d554de48bc4056073ab4b640b749ecef02c7bff18b2ad4957178a3baa46",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

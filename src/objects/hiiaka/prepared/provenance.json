@@ -355,8 +355,8 @@
         },
         {
           "url": "/scenes/hiiaka/hiiaka-model-surface@2x.webp",
-          "bytes": 59170,
-          "sha256": "13fa3a8231cff736321ad30ee429ec18ad896209d47a41a377be652eed7d39e0",
+          "bytes": 49440,
+          "sha256": "7170d4be76f14ca1dcbedcbe15316767f34fe6f9a6879c2ebade2de1d2a9d470",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "hiiaka",
-    "materialSha256": "efee51e15ba402c4427294871c21215e73340e442dafe10bd140607befae0ea7",
+    "materialSha256": "29470e831ba442cac55611dc27003070ad74422afae253de7193c7cf0b9de4c8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

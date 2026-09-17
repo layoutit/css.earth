@@ -425,8 +425,8 @@
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-elevation-surface@2x.webp",
-          "bytes": 456482,
-          "sha256": "4ad1ad38c75bd0e01ce778d3b271ec074048f07e41f90458cace24852c71657c",
+          "bytes": 399334,
+          "sha256": "e4575c6dbb822154849b5a6b915ffb8a7920d7a52a5d90c425099899caed0bae",
           "verification": "bytes-verified"
         }
       ],
@@ -469,8 +469,8 @@
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
-          "bytes": 81768,
-          "sha256": "13722084172e862cf8c5422d76a84d25fdad0a08871f6f0c0ed1dbf3e4e9f2df",
+          "bytes": 80272,
+          "sha256": "e55639bc1d3d9b421cb1b5f578a407c63b96bb7ad62b3a6c84d24f235faf75b9",
           "verification": "bytes-verified"
         }
       ],
@@ -566,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "40141c9fd2a566e44edb27ff317b4ec23c887bd51ec1d11701330073032b3e9e",
+    "materialSha256": "8d2346259d05b7f129335494f53ae2c9a074e07c0967a39f021a06916ed578c8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -315,8 +315,8 @@
         },
         {
           "url": "/scenes/ixion/ixion-model-surface@2x.webp",
-          "bytes": 62518,
-          "sha256": "eae293df6e8781a171483375a468605897c22018730ce8f6e1fb09d03e241643",
+          "bytes": 49718,
+          "sha256": "561a81b6ec9c24c35fb58cf623bf2c905e3b1a005f5f73dbdffbbbcc051665e5",
           "verification": "bytes-verified"
         }
       ],
@@ -392,7 +392,7 @@
   },
   "lastPreparation": {
     "objectId": "ixion",
-    "materialSha256": "1266b87d2ed01855a535e7dcd8a2a20b5e36c6aa7262447851bb6f5699b33843",
+    "materialSha256": "e237897ec616985050954f814476bcf775c3584a053e25976523ed912f68f0f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

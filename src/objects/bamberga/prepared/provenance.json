@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/bamberga/bamberga-elevation-surface@2x.webp",
-          "bytes": 327268,
-          "sha256": "56a35e6c14eb04fd1b3ebfc8340573076f961d3ea100dbae05599cab7707e507",
+          "bytes": 278586,
+          "sha256": "e1831f5c7d9a1c7c23da5eb0e57c484e4071492db1eaba73910892747cc87eb3",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
-          "bytes": 79304,
-          "sha256": "2b4a8f7877253d24c38ce43be7b4115051dc9067f9471c1cdadde34463c5a852",
+          "bytes": 76942,
+          "sha256": "2dda630fcac36b8a4ab8724c6d88130a39099a88c5be7fdc49042e21c2249882",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "bamberga",
-    "materialSha256": "bb06cf60cd14c2d70d8fb7b732a314c6bb7cec8d9c5c7aa2e205e9a5a634e69e",
+    "materialSha256": "b6b11a17174f96f464076a498c1e6cde40a7b7a301ce7820c6ed450780b1f97f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

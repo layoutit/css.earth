@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-surface@2x.webp",
-          "bytes": 319508,
-          "sha256": "a4174f00f8b63a2d939755649395cd1016cbd071ea3d69986b7d65413c267c3f",
+          "bytes": 280894,
+          "sha256": "3dee2207d773153dd2f9e8f7c8ca8552243d4e2597cb8d81f8cf8a86c30ed8cd",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
-          "bytes": 77416,
-          "sha256": "0830b7b9597013c0aee977429e855723b2a87b1a6f347ebf8d04067d7737dc2b",
+          "bytes": 76628,
+          "sha256": "b2f9e933fbbee40001a7b3f9d17ff1301db3109c4b0400987a6ae6a62d8ff769",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "ganymed",
-    "materialSha256": "74826719aa54d98b28a2043767ef8c8b6fae3caf9be8770a50a387bf5fd0b239",
+    "materialSha256": "0f17d3a4a86ea7a1785f015eb4ddc6fba88a98c1150c8de278de847898a628f3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

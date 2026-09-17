@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/moskva/moskva-elevation-surface@2x.webp",
-          "bytes": 331106,
-          "sha256": "d006e454aa894d5cba7d101cf40b1bb38e24592c4c2c1a4bcb9e6f32aab38bc4",
+          "bytes": 308786,
+          "sha256": "e44310f91eb7fa68284c14d81e66553fbcc533dbb46ff7bff87dfd0bea619f20",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/moskva/moskva-shape-surface@2x.webp",
-          "bytes": 73240,
-          "sha256": "9bd1691fa092c4982f84032afa25c5bbd223ef56ef257b0c48246e597645c851",
+          "bytes": 71024,
+          "sha256": "1cae8ea11e6badcc1a8340412d436e63bd2c641a05f9f1665c5fe81c3c5ea75b",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "moskva",
-    "materialSha256": "8b91f96302b1d460f6c3a7d2f6501fe2690f49ff1ebeccb074baff82c95cb312",
+    "materialSha256": "2c60d2b145a1799e08fdb21d4f2f9f83ea4a7e8a934d2f7b6e4d593a320790d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

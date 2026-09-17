@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-surface@2x.webp",
-          "bytes": 340918,
-          "sha256": "8802b0c915199449a8f281d094197a608651cc5ebe82ad56d2ae7e483864cbdd",
+          "bytes": 314350,
+          "sha256": "cdd2d349286b3f3b8dd7ec512865be6f0006d93f52d1f087b4c88429d9b4c67b",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/transvaalia/transvaalia-shape-surface@2x.webp",
-          "bytes": 71920,
-          "sha256": "78247b78da4e33b5cc5a70fa82484aaaa518f389168ef77593458a0fde5d9dd9",
+          "bytes": 70240,
+          "sha256": "6aeddc3af45401502a1626f1c17b6cc232656c98fc3dec07a9c6d51d5b57390f",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "transvaalia",
-    "materialSha256": "028d424340e9930f7232a87e79bfcc2d3b920caeae0a41e2023eef824594ff53",
+    "materialSha256": "73dc22d3b8b4700206ce7c63f88cdcb5a738403e6c458a20baa35cb480cd0cb3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

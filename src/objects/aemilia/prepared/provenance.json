@@ -416,8 +416,8 @@
         },
         {
           "url": "/scenes/aemilia/aemilia-elevation-surface@2x.webp",
-          "bytes": 368570,
-          "sha256": "9fb2b760245399d641cada836d26d08cf47d10d8819e23bae41743e9b676c00c",
+          "bytes": 330854,
+          "sha256": "b568674bf266e6fb6a8b237b8072a8dddfc5dff0160cabae774cbc3465fda29d",
           "verification": "bytes-verified"
         }
       ],
@@ -460,8 +460,8 @@
         },
         {
           "url": "/scenes/aemilia/aemilia-shape-surface@2x.webp",
-          "bytes": 76082,
-          "sha256": "3c1d914fc367e50037963cf7452aae90889b089d9c0ee1f65cb72cef3d2e5cb9",
+          "bytes": 72212,
+          "sha256": "78683677b18ffc5aa4968243bd0f40266e81e0f74a8e05c17c2e9ee9116e7bbf",
           "verification": "bytes-verified"
         }
       ],
@@ -557,7 +557,7 @@
   },
   "lastPreparation": {
     "objectId": "aemilia",
-    "materialSha256": "4d000cacb0ad8030e4caec276ce375c3f20054ff002fb5f081ebdd551f1f698c",
+    "materialSha256": "efdab51db492f27330a99f36989053d06473d9d16c58ff36d832bd6c975e58b4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

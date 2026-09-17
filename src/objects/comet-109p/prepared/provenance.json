@@ -313,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-109p/comet-109p-model-surface@2x.webp",
-          "bytes": 57964,
-          "sha256": "fe4ee20b8dfa88c404574333175c48292251e0f5ff44b1285a457780b835fa86",
+          "bytes": 48822,
+          "sha256": "6734d2f46525fa7f8cc70aac013c40d7fc5970da041ad69b3680bcafb1305040",
           "verification": "bytes-verified"
         }
       ],
@@ -360,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-109p",
-    "materialSha256": "3c0528ab96df9ad28641b3289290bd3879f648e7a872accd64ca6f16e70d96a7",
+    "materialSha256": "685962e4409ae6316f44133b22ad5b639ea8736d6ccdd2520cabf1d04646070a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

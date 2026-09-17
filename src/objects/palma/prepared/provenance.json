@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/palma/palma-elevation-surface@2x.webp",
-          "bytes": 398466,
-          "sha256": "c438ee22d2ee319e78a1937e4331bf69a5cb9257b3b3a94f06aca337f0e5de18",
+          "bytes": 319456,
+          "sha256": "24b8ac52e4bd6db26262beca8ff0c874e3be73eb03f79490440f6f7ecf602443",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/palma/palma-shape-surface@2x.webp",
-          "bytes": 70152,
-          "sha256": "98f3ac358c65c67cc74812124610d0435b99a4413c07cc3d957f8c41e8a9ecef",
+          "bytes": 68418,
+          "sha256": "0341a0a89215bfcf42d2d62cf0f2a6013ede8846de0b85b1904403242f8981f1",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "palma",
-    "materialSha256": "e19db0a22c01414076bcf47a7ecade5b92a1ca2d59226e40fc988a6b5b1d04db",
+    "materialSha256": "9e3f0f83fad375681be78ab50bec0a48f5c39baee242aba57138c567e58473ee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

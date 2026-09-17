@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/peitho/peitho-elevation-surface@2x.webp",
-          "bytes": 350158,
-          "sha256": "975c089c33f216fe537b3dd90191f7eac7b04fde94e1ccbe3b80a7289f0520e8",
+          "bytes": 314398,
+          "sha256": "867e68087f051d52c895d32610aebcbbfa09f27413fe8a4d7528f03f88416d9d",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/peitho/peitho-shape-surface@2x.webp",
-          "bytes": 73516,
-          "sha256": "3519591440ee3d803b7099439354f829a2dd5d625a170af273672e589f5c00b6",
+          "bytes": 72150,
+          "sha256": "b6262ddca0e90bd357c675fd34eae5eafbb9eef4e1ca4f1bc728e3f28d55963c",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "peitho",
-    "materialSha256": "113278ebec09a9d1c7e6ba84e765b752eb5f3fd2f5388abb1ccadcb76635c482",
+    "materialSha256": "1de73e3f6ab9401c62bf2de351cb1ad1d54228f12923c4083088551ce5e2689d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/clarissa/clarissa-elevation-surface@2x.webp",
-          "bytes": 287172,
-          "sha256": "f454e34d8a9a21ed3c8d1c653481dd621700b834ba531738962de655fc9dd7b2",
+          "bytes": 256108,
+          "sha256": "b36c2caeec517e551de1f552b42f60e3596c3e74b4e9ebf267ab641471a7bfad",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/clarissa/clarissa-shape-surface@2x.webp",
-          "bytes": 66986,
-          "sha256": "6346d2b640272d23db0688ca5399a536193eecc086ad03d47be7c575a7f3f034",
+          "bytes": 65952,
+          "sha256": "4432e6295d03cf13d2a2c2422260c5171a5512c9a95c26af5ac310cd36ec1464",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "clarissa",
-    "materialSha256": "de382a377709beb82479daf788cd4b877cb909b33a7d1d75969e577c5c3522b2",
+    "materialSha256": "1033291c9948d5bf99418d1e9e8036ee6ace6becf6793505d475d82a35ada275",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

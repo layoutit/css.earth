@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/laetitia/laetitia-elevation-surface@2x.webp",
-          "bytes": 342124,
-          "sha256": "64863d337230862f0885298a9da8917c294549021c27818ff61abbaced137177",
+          "bytes": 296170,
+          "sha256": "dc664d10080488c867865cca06b26c9f52c9a64a8a34936286b32c68e72f51be",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/laetitia/laetitia-shape-surface@2x.webp",
-          "bytes": 79704,
-          "sha256": "c46e3ffa975a52b11f2007f0c8761d239c370bb6d59914d29c3fd20c1fe7b893",
+          "bytes": 78528,
+          "sha256": "678c2ab9d120838bd51102987af389a2af7f06f49cbfeec41294944619eddf29",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "laetitia",
-    "materialSha256": "4c576b6a458f2662196fb2bafe52c78d48933ef8be228cc55b74c7f6349fd307",
+    "materialSha256": "aa6d1550b85c0302e33e9990365d087f9125bd3b37e0168e88d56015435e05e0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

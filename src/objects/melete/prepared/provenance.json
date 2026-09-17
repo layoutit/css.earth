@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/melete/melete-elevation-surface@2x.webp",
-          "bytes": 333076,
-          "sha256": "a43709f329f81730e9848a27572a30526d6cbdb20301ac32fa2458ffde2a0ac9",
+          "bytes": 287328,
+          "sha256": "97c15fe79703d8f6f295a469fc48666fba831dd67b617d3825b6047698586385",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/melete/melete-shape-surface@2x.webp",
-          "bytes": 79622,
-          "sha256": "361c134b12f5e4adbcf5e11ad86d7783f032a922331fb847005dd3b8b626fb85",
+          "bytes": 77622,
+          "sha256": "51bb1244676d6e6305c53ac7ae25627c1ad2587336a3339b9954b63fcf02e180",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "melete",
-    "materialSha256": "a7fc79856c2aa6add0d13730f1661cfd22950bb42dcd7a52803b1d6adaeded47",
+    "materialSha256": "27ad49e4ac9f758d06458782283c9af35f83032a58820ffd0130364ee00c0242",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

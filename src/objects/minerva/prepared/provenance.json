@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/minerva/minerva-elevation-surface@2x.webp",
-          "bytes": 334324,
-          "sha256": "ba5bca4482875d8c4fb6a3b04195328a3dfd6bdc4f4fc9d3f76d8ea1488ff9fa",
+          "bytes": 287634,
+          "sha256": "9b3247a61b664fb45ac6866ab7649397117afdc07ea925928af8f7098fbbc72a",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/minerva/minerva-shape-surface@2x.webp",
-          "bytes": 76346,
-          "sha256": "bb167329c95128b9c0c400b15042808d94d6023b1eac66effc21315fab6d34ae",
+          "bytes": 76212,
+          "sha256": "56ac2ef7b343f55c84797ed0c89d5e79312f12af8e458bbec05b8f1a1f30d0b4",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "minerva",
-    "materialSha256": "05caf4bbd792c92602c0ed00371e5fef687caf0847372ae68034a33ddc7b0980",
+    "materialSha256": "d612715f70ef239d8f754c3ec76b49c57b269233183aefec76108862e324305d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/leda-38/leda-38-elevation-surface@2x.webp",
-          "bytes": 306600,
-          "sha256": "010f9b98eacfafb31a5893e12827800d3a9ebffad50367a134b8b84b93c6f9e6",
+          "bytes": 280462,
+          "sha256": "2cbc0e4e301e837052d44514aea86cf37c77dd428cef156e6be907a68fc3f282",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/leda-38/leda-38-shape-surface@2x.webp",
-          "bytes": 73524,
-          "sha256": "ab208bfe8477aa5b07ff262bbb6dd876f830ea90a7cde00aeb6f9ff00eabda83",
+          "bytes": 73722,
+          "sha256": "caafadccdd2b8877616c6cfbda331ad2e711176fe896f8650de7c047de331642",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "leda-38",
-    "materialSha256": "d977720234e65e2c10ea2f9d95460207b4fee106bfa585e3a67809a3424556eb",
+    "materialSha256": "adc0be6b73e163588c81a6f857f5a394702594dd6d8222cbe4e9cec43911857c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

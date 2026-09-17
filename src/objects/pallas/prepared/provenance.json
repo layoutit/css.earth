@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/pallas/pallas-elevation-surface@2x.webp",
-          "bytes": 379396,
-          "sha256": "b8a5bda1cc2112514607372ab4d45e500f06138032571faf8cb16431b38f0487",
+          "bytes": 314302,
+          "sha256": "955def7d09be8cec64bb8cf5fcd55ee3ff5fd15615dcd1f47af231560fe5db1f",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/pallas/pallas-shape-surface@2x.webp",
-          "bytes": 82500,
-          "sha256": "cf7066e130f11f2922c9aeea02aa96f2de9e628b6da31649c5d8c52acb75c379",
+          "bytes": 81776,
+          "sha256": "79def4bdd495b152e8483fcf045edb0f75ee48ed6cc576a89b83d6a822f817ea",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "pallas",
-    "materialSha256": "fa19aaf25b52ed3125613731bcc95b1ca7e0f7cff03505469f0f7a444ef00ce7",
+    "materialSha256": "489660a3ad8a82a52595a1dd85fa4bafbde0987d88b6f5eea295f9e6b73d9450",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

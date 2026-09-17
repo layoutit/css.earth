@@ -411,8 +411,8 @@
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-surface@2x.webp",
-          "bytes": 347648,
-          "sha256": "e9b243588505fb52ce571f15c2bff8c5fa0457d16794f406c03af310a2df37e6",
+          "bytes": 301840,
+          "sha256": "4374d75ec920b14c2ae4907d3cc0151aad66381e9d3a7853b21daf4bc51b4369",
           "verification": "bytes-verified"
         }
       ],
@@ -455,8 +455,8 @@
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
-          "bytes": 79324,
-          "sha256": "755b9bff59ddd43a224fed76e4af1b9404b8c6ca8312392a2f87f68cb13a20f9",
+          "bytes": 78494,
+          "sha256": "c474ddff8e4e09dae6dcefd68cdfe4e774ef93855d0dbef1082adb0959924faa",
           "verification": "bytes-verified"
         }
       ],
@@ -552,7 +552,7 @@
   },
   "lastPreparation": {
     "objectId": "euphrosyne",
-    "materialSha256": "3dd9f10933ffeeffc3bc7ee3f8f263bebc2a628d401607131cb7a2806671ebab",
+    "materialSha256": "fe2daefc5acd376b492d40308dbd56669cf61e8b7e950df9c275af0fa546757c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

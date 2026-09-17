@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-surface@2x.webp",
-          "bytes": 316876,
-          "sha256": "a4e4ed11e41cd115c792ab88779014832cae9411c0c4cf5a8835988d7ff3f656",
+          "bytes": 284474,
+          "sha256": "90f3cb4b807063a9f9e3576d2a411377d3e2e4eeab995746049ac42ce5031e80",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/aglaja/aglaja-shape-surface@2x.webp",
-          "bytes": 72816,
-          "sha256": "fc4448b1f97eceb020802fc66f60258bf1754bc5fb6c2a67c349161e27917685",
+          "bytes": 70554,
+          "sha256": "6a41b17a633a1002ed986bb0c65a6f41de13e2c4f3fb7bf11c14fb862e9e3011",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "aglaja",
-    "materialSha256": "c4b2653212665c415be5d7f897355b133901dc71de8c8ec66ed3a89bcc31b04d",
+    "materialSha256": "9a777e7d80f9f948166755f28c80755d01e5421e35dbfedc443e1dcffe4ec010",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

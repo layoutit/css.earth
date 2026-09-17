@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-surface@2x.webp",
-          "bytes": 342968,
-          "sha256": "13d8d6570780ee422ba12c84561fd76916b79d81fc51edd2cf2f041aa94dddd6",
+          "bytes": 304738,
+          "sha256": "dd670beea93c002126337d31b16587214ca4c2bab677c3e9bb60a6feb13f73f0",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
-          "bytes": 69204,
-          "sha256": "0a7c03d0fd3329fd380b9cbd3468a6ae7fcecb82266e6f4fc7bfbaf7bafe576b",
+          "bytes": 65826,
+          "sha256": "2d8f71ca329033e9b3d8e2da302af51c219a467a4a346be06d22dc2eb3c668d0",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1999-fr33",
-    "materialSha256": "233bffe3ab94890eb6cac992fef00ac1b6917cfda3402d619aa2f4cb3bae58a1",
+    "materialSha256": "295260f25f92127383ae4c9cdcbbe42cd26bd36bb6b67e62001f0e9d82ff76c3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

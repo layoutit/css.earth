@@ -1098,8 +1098,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
-          "bytes": 359088,
-          "sha256": "9c30fe9bf23698c8a3f90b4946fdaf83bd3aaac7777819c257fe2e3059e90c5d",
+          "bytes": 363224,
+          "sha256": "4031f53a7517958a315156ec230f3dd5b59665dc6fe17bc332813a5fb4feb566",
           "verification": "bytes-verified"
         }
       ],
@@ -1146,8 +1146,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
-          "bytes": 322860,
-          "sha256": "f2fb756d1b93d6d17b3862defe2a128cf72a2a1fa1bd051c96fdb6d755b0fede",
+          "bytes": 305298,
+          "sha256": "57d4b11fa683a2b9bb8ae1bfca3ded89c109ac7f0ab46ea57ca9ffe9ba91a2dd",
           "verification": "bytes-verified"
         }
       ],
@@ -1196,8 +1196,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
-          "bytes": 165074,
-          "sha256": "4861a8313d98f2b1ba7f51fe2190da876ab59d8a61d60f8def1f98f923a8cc2a",
+          "bytes": 168486,
+          "sha256": "9b18c35623c9d3fc478b26b244f63edef8f5b51701c06fec7d33442a9da696a8",
           "verification": "bytes-verified"
         }
       ],
@@ -1318,7 +1318,7 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "3f29afac74c1bee64a0769e0a42a518437c787be84189c89299791b74118130f",
+    "materialSha256": "b31a01c57def3be768e1428a9d4ce06ba4625e575fc6348e8ba1ad996cc4e1e1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

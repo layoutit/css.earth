@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/alkeste/alkeste-elevation-surface@2x.webp",
-          "bytes": 310444,
-          "sha256": "1cb104f13918b523a43f742ea8095fc81df7cb8dbf9f3eeed50d531c8f8dfb67",
+          "bytes": 274136,
+          "sha256": "112a722a7d065d1a1bb9d438d9778f35fe25c4e71a24521c5c13c4fcc5e7a19b",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/alkeste/alkeste-shape-surface@2x.webp",
-          "bytes": 69126,
-          "sha256": "19bb06c63459e9830d4f783baa6b4d5e3eee0e7d8f0744a531a0d0301372915c",
+          "bytes": 66982,
+          "sha256": "9cf74633fe8442b15b80e0570bd4be54de475916ca76ff9f2aa4e4a0764cd5b2",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "alkeste",
-    "materialSha256": "75790ec4cdcb35ce445805fe6da5ff96158b34cbc6f2b7f1e5f92b12829118b5",
+    "materialSha256": "9dc8aa3b367c4562be9fa133be5af521a969e1d158edfa56805babfb1f75305e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

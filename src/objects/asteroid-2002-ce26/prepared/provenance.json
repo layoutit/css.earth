@@ -430,8 +430,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-surface@2x.webp",
-          "bytes": 425580,
-          "sha256": "142e40d764907eb317b6e7ba5039d8c2a64567709b52ea9218b342d61b12b5db",
+          "bytes": 387810,
+          "sha256": "1316339a4243a925238147f6e7d1ae42f476ea19dba9cb3ecc01b0006c86504d",
           "verification": "bytes-verified"
         }
       ],
@@ -474,8 +474,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
-          "bytes": 77504,
-          "sha256": "9e0d47275cd010869ca3c8189161ab8843423e78ff2c49a70f0d858d5aa67ca6",
+          "bytes": 76650,
+          "sha256": "3e67b5b5de59eef2b92796934eac86dcbd0facc6b57115a8ae55ab3eaddf3eab",
           "verification": "bytes-verified"
         }
       ],
@@ -571,7 +571,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-ce26",
-    "materialSha256": "5ae2c8d76c0a1634bed2570fa95fa526b56fa586250af83b0b8bf3f741b64f51",
+    "materialSha256": "f9bc3759bc23d058543a45f1f452c4de132d3bc8093b8a51fe105f0680cb0938",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/musa/musa-elevation-surface@2x.webp",
-          "bytes": 320334,
-          "sha256": "18a57a8b360c8e2fff8ee9a5539cebecad6e7ba1353ff7cbebdc5dda14cf17ca",
+          "bytes": 287906,
+          "sha256": "5b0836e70b57a9758d67f6fe159aca72fb81116ca374cfde34c7b65860ac13fd",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/musa/musa-shape-surface@2x.webp",
-          "bytes": 71704,
-          "sha256": "6001fb61fff8f68e83a417dca808cdb3f91b5959f2cd336d18ec1017e6615516",
+          "bytes": 69002,
+          "sha256": "87ed8ca4cfb4f66f27a7c3d6e28863de5cec4d80dd276a4e969a1dea05b00bcf",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "musa",
-    "materialSha256": "7acecdf72b0ed80e9c15c5749faa3024b340c3c9ee16a57e779b1506cdf8da46",
+    "materialSha256": "8d79e2d583cc1c4233d987894b01bac45b75e308726d1061b67842d5a3d913f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

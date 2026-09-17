@@ -313,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-c2014-un271/comet-c2014-un271-model-surface@2x.webp",
-          "bytes": 58256,
-          "sha256": "cb79b019d546faf58eec65626e404cb7ca0377cafce029329e59daa5ddabb0f6",
+          "bytes": 48552,
+          "sha256": "21ab5ce72fc302406d8693c1a83346a004072bbd3f2b4daccc1afbb291cd2947",
           "verification": "bytes-verified"
         }
       ],
@@ -360,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2014-un271",
-    "materialSha256": "9fd4697705611fa20ff003c5050ea3e3f8e1b4da292dba3f06a80445b6eab6f1",
+    "materialSha256": "81adc5191c03fe347f674b142660cdd39853825b2087de678c525625e2f62471",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

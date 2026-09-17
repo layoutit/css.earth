@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/bellona/bellona-elevation-surface@2x.webp",
-          "bytes": 344320,
-          "sha256": "f0999126c0c9daf0858c43bf3edcbc0d56d2d67c175f901295f4e9a3a0868718",
+          "bytes": 294152,
+          "sha256": "184f87338f90e7cf6f6934a252e1a6bf6f633994ef0b28c7b66da524a5d47465",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/bellona/bellona-shape-surface@2x.webp",
-          "bytes": 77398,
-          "sha256": "91a4f45f7df8f783a58d3de90460e73e175944498f5e251028abb3ec086b58f6",
+          "bytes": 75310,
+          "sha256": "a3a9dedcc9cbfb47a0f132dfea67705a335007b19a329029165f5b3a53821e68",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "bellona",
-    "materialSha256": "5ee1259640428474ead6dfc0156debfad98d674f4c3abb5fd30fb59528c97be2",
+    "materialSha256": "da3c47195e751c821b36f2e6c2960969d01c4d1548cd6bee8ad231adb25a1210",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

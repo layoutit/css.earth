@@ -969,8 +969,8 @@
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 38484,
-          "sha256": "3d64687b2b9a50b63a48238cec040d963c431ace23c2790817aa7cffa2eb1d49",
+          "bytes": 38452,
+          "sha256": "ed8afa018d5eb04d76cc422e1442ddd2b9cd4ce2121b9bbaa281a32f7520d021",
           "verification": "bytes-verified"
         }
       ],
@@ -1041,7 +1041,7 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "8f1f4df116e69e3897d64e2cf7dda931fd26e3bf1166c488b2fa1254e2d2b6fb",
+    "materialSha256": "631ac79cae56bff0f7761b0a24ac384a265f4d19fb49ea1a599f68952e56ee94",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

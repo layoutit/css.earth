@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/cybele/cybele-elevation-surface@2x.webp",
-          "bytes": 352106,
-          "sha256": "f75c6588a22ec3e81ed745b50ad866b30f490238405dbb3442f6bd368f84e793",
+          "bytes": 310978,
+          "sha256": "d388ad71d59a607a8f709c6c424222aaf754f66d97b90886507aecaed4c0cf4c",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/cybele/cybele-shape-surface@2x.webp",
-          "bytes": 79038,
-          "sha256": "bc11443c78345828d8fc8a6e5cafee56c0ebdfe4c7868c70a1b506d80e409915",
+          "bytes": 78530,
+          "sha256": "bb86f898362a6e7d71a25aeb43ffed657b617dde8850a896c026b9b8ab774a66",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "cybele",
-    "materialSha256": "4054bba0e228d6a9b3712c3c372bd3c8117917f8debf1d4f22e3301c03805d8e",
+    "materialSha256": "68f532e69acd1662093c897b87eaa6f4f1530b28d26de548ce087f23f45cf0de",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

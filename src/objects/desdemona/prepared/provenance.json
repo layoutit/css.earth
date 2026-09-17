@@ -342,8 +342,8 @@
         },
         {
           "url": "/scenes/desdemona/desdemona-model-surface@2x.webp",
-          "bytes": 61650,
-          "sha256": "660a017cb924f34e64831491aa4367225eb8681d69e8dc38e75c6a6b2768c791",
+          "bytes": 52816,
+          "sha256": "a7f87976d958fe43a51013d5d4e54d224547c9d855bccffeed21c539731f4d3f",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "desdemona",
-    "materialSha256": "a5126cb08bf30bc65cb7d3eded27bd3c95fc3525aa339d8b29755dc44241dfb9",
+    "materialSha256": "ad9583557483a5bc009ac9efd0a32342088f7a8e1531f8140a862125f5725e02",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

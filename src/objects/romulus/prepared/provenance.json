@@ -342,8 +342,8 @@
         },
         {
           "url": "/scenes/romulus/romulus-model-surface@2x.webp",
-          "bytes": 61462,
-          "sha256": "4c9be19a8412e6aecf0f36eb59eb091242e539ab2154d282fca151d09ef0d348",
+          "bytes": 49464,
+          "sha256": "4895c3a9b6dbcf0e88c6509641b517ef786f0a8580e5bfaa7d7c80e5d10c15ba",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "romulus",
-    "materialSha256": "f7bb24cbae22f0b367c38030aed5f8b562dabbf0b50209b03733d7de737bb030",
+    "materialSha256": "439625b1ab6f3704626e6712074b71179389984795f24d5cc6aca48f8b1000ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

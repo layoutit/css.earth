@@ -345,8 +345,8 @@
         },
         {
           "url": "/scenes/skoll/skoll-model-surface@2x.webp",
-          "bytes": 61902,
-          "sha256": "49b33c4fdc1c1c186fe6bfd420c4c05c2b277b9d6e0dd48741d826778d8779a5",
+          "bytes": 51092,
+          "sha256": "5dfb9f9662eae8f2da51f5ac50422f968f1a057161bf3212c165b6f909a82c91",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "skoll",
-    "materialSha256": "dbcd178a8c8518fbda70c3f31a02401aada3f5a3ddf8be404e928f91d5de5d97",
+    "materialSha256": "12b345f3555d74253737ef6eb6387cb1a39ba93b05e799061a5ef85e9778605e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

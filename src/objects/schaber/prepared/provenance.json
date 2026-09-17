@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/schaber/schaber-elevation-surface@2x.webp",
-          "bytes": 346344,
-          "sha256": "7497c896702d381731adfaad675f8f60f1bb8aa93454695dcbfe96fc4b1de723",
+          "bytes": 303230,
+          "sha256": "6ae53dde95287b1ac6d64eac76782532074fdfc30cdee899cc4bdb18b468b660",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/schaber/schaber-shape-surface@2x.webp",
-          "bytes": 66804,
-          "sha256": "c2e11058fb9156365d6cc67ad32be259f575d74f4f3ab755221b6b8f736bba00",
+          "bytes": 64944,
+          "sha256": "23e1f17d0e8503bd9fe95cce1a19cd0d9c1be0303820cfd521b438737a360641",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "schaber",
-    "materialSha256": "ca26ba2e00e36f61d00595204c9a6f08829a2464bc7984730d2ed311a36249d9",
+    "materialSha256": "4da81465135c684fac54993d364ebc616f49f85d032f0c17eb6fc1417e5e2ced",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

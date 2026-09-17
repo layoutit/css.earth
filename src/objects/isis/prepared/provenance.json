@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/isis/isis-elevation-surface@2x.webp",
-          "bytes": 339880,
-          "sha256": "89d17b02e0974f4c24d633c6602cf42350a7ce61f68e9239e1f91c732f98daaf",
+          "bytes": 291906,
+          "sha256": "30761f9c21f1248369e7081b150ca4cda8e6b0f057426569315e803c164df558",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/isis/isis-shape-surface@2x.webp",
-          "bytes": 77714,
-          "sha256": "679f9a4217bb77e7a7b069cb6940655a7e8ad51141ce45b7697a978b73b0551c",
+          "bytes": 76350,
+          "sha256": "32d5c1ad3a00ca44d5261faf37f53832ea87d86ba891efa0cffe8bc62fc2c864",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "isis",
-    "materialSha256": "8b2d3362d711a3586fb1e2aeebe7f0d7cbfb71aa17e40fefaa41865d65cb2555",
+    "materialSha256": "158e833ab631f932c9e0a3fd7c6ab57767b0d816a8eb8c8602450ce167a72b8f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

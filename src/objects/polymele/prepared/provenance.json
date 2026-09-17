@@ -342,8 +342,8 @@
         },
         {
           "url": "/scenes/polymele/polymele-model-surface@2x.webp",
-          "bytes": 55614,
-          "sha256": "8835b2e4ef04df26cddb778e64906cc9f91364256942c5e1d51a0c44c23ef875",
+          "bytes": 45848,
+          "sha256": "57e931e0636dd431a143cf2b2e0140129b4278b1ff0a88e94e818e4e6201e72f",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "polymele",
-    "materialSha256": "62a5e7f646e04560902c628b6602d804568a12093efba9f92a85d68627186e0c",
+    "materialSha256": "2b388203cbf7d00ee73685161f132c85461941d6afe007c0313717fb2aa7a730",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

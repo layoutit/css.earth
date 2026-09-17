@@ -411,8 +411,8 @@
         },
         {
           "url": "/scenes/egeria/egeria-elevation-surface@2x.webp",
-          "bytes": 386222,
-          "sha256": "374838b6a0faa760c6c85911c4f436057b6ee6b344bbc4488ed231a8b9936dee",
+          "bytes": 329774,
+          "sha256": "cbab1fe4d8fb85819cc1de91f16d7d16c7c08113de1541dcf0d535317aa475be",
           "verification": "bytes-verified"
         }
       ],
@@ -455,8 +455,8 @@
         },
         {
           "url": "/scenes/egeria/egeria-shape-surface@2x.webp",
-          "bytes": 79052,
-          "sha256": "1746fe26a602e564d5a008f04962524410a6789b003fe76d364291228fbf5768",
+          "bytes": 79358,
+          "sha256": "c0e3be92c971023164ee58b58d4c493e6e577e1948cafe721b4fa37ad9ee7a0b",
           "verification": "bytes-verified"
         }
       ],
@@ -552,7 +552,7 @@
   },
   "lastPreparation": {
     "objectId": "egeria",
-    "materialSha256": "ccb31eb2e37ef0c31a5e1b458805f6e1a0ce7710683ddb8c112514b5877c1207",
+    "materialSha256": "84e74ec6aca4e5f7f1bb33e86b723b99cb57b9807e57f19d9e3bd11df6f51f3b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

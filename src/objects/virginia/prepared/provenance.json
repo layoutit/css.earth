@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/virginia/virginia-elevation-surface@2x.webp",
-          "bytes": 371124,
-          "sha256": "99325dd6a3ba5aebd6891fb3e88bb5e53604aeb7da91b541be61282a49a8945d",
+          "bytes": 331590,
+          "sha256": "6a42dd1c2893dfd00b0c1092beca6c4a6cb56fd0b52be233baf8e3a6631009ea",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/virginia/virginia-shape-surface@2x.webp",
-          "bytes": 74948,
-          "sha256": "b10c81e61635be4dad4a14a121516c9f485ea4ddb83ee9758dcd8ebde4cc7dfb",
+          "bytes": 72844,
+          "sha256": "d0d22d3d845bcb5ea6a4a13121b8dda835d5c7fb97a741924fc6eecdce6450b3",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "virginia",
-    "materialSha256": "b559584b5c5b094a72ed26f096240d699286e66d60b87a40134c313121751ad5",
+    "materialSha256": "8c0986355231dca5bd18d97bd28c8081105110ed60f111ae859f9ede0f6f1c8d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

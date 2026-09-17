@@ -355,8 +355,8 @@
         },
         {
           "url": "/scenes/orus/orus-model-surface@2x.webp",
-          "bytes": 61588,
-          "sha256": "80fd283a053f74cce7ddf26f1c9a578793586dea66ebc2512605ab7030150824",
+          "bytes": 52162,
+          "sha256": "6d04301dd7df4831020c8f57f38fe64fe2c2f66731f8bb0f919ec0cb108d2efd",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "orus",
-    "materialSha256": "087b019bc88cdacca661ce9261d709cf8b540d73a7efc1fbf587d76844909a04",
+    "materialSha256": "2bd16802662e2ebb09793ce4d000b7cdd9889798cb3566cd67826e21bae16f61",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

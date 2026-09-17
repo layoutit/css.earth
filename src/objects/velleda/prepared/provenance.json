@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/velleda/velleda-elevation-surface@2x.webp",
-          "bytes": 345840,
-          "sha256": "c667787551fc6fcbd4702a0f56fe735d7d8d729910b34405b0a8ac1c25a22c9f",
+          "bytes": 320232,
+          "sha256": "e19827f6262e0ae0457377b8e20d2538e8c8124d049e7cfe3383f2f603d6c925",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/velleda/velleda-shape-surface@2x.webp",
-          "bytes": 76026,
-          "sha256": "43623bd195abcb2ffcc033a8079e70b61b654d81954c1362fc55728186f2340e",
+          "bytes": 74742,
+          "sha256": "7c64f990fdc36e613905185e9b4066544655bc8ecc8f0ee3614f79ef1b142557",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "velleda",
-    "materialSha256": "84ca6880fc7e706fcf7544b01e1240e1f0e33990fa27c0c3f4c6787da9937a13",
+    "materialSha256": "83b17b0b7208dc20e3adbcb4e063ecb1e39e003725e122193ad6bc55e503e2f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

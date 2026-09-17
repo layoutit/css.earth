@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/sappho/sappho-elevation-surface@2x.webp",
-          "bytes": 335578,
-          "sha256": "7442fde7c54efd2245b961784ab90dac06071e30ca0830c947dc79935b1bf435",
+          "bytes": 297876,
+          "sha256": "9c27b415a96ff0a344f59576ec74c68916011cab6335d4b245f5b6b3433dbd8f",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/sappho/sappho-shape-surface@2x.webp",
-          "bytes": 81828,
-          "sha256": "60318cbcda1508f27fca3ffcc0c1fea5b9def1ed296132b87ff920dbf1a79afc",
+          "bytes": 78804,
+          "sha256": "23d0e72fe78b7fd15dbe930c7866b80ca3da3c8c9a1615d945c3525187d7bcb3",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "sappho",
-    "materialSha256": "b66054dd4387e63347fdf02ad7c11cd6e49ae9709a6c293ddef4929f1cd8f527",
+    "materialSha256": "93cb5cc031881fd9130495101f01d8aeca4d62e18b1c210f4fcba4fa4877efa0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

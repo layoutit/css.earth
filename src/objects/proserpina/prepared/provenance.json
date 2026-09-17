@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/proserpina/proserpina-elevation-surface@2x.webp",
-          "bytes": 352124,
-          "sha256": "5d40dff86422ae161d76a474d59aeab30e850634290ce00b0cd16c2cea579eb6",
+          "bytes": 322120,
+          "sha256": "f1325fd54d5f00a57c43875af609fe43e770e90b34768abbbfc9110897b52aba",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/proserpina/proserpina-shape-surface@2x.webp",
-          "bytes": 74992,
-          "sha256": "eda06022f4ddf2767a2b67312be8aa97bbbd442bee9f027695843fa4a277dba4",
+          "bytes": 73110,
+          "sha256": "87dfc7034cf9c0f65da7c58c656301979887f9209883130f720eacfe97e1e117",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "proserpina",
-    "materialSha256": "6d43ff8c3ce2e8ad2c7738f4966a638f4b814401663c7cf9dca381f170d89151",
+    "materialSha256": "edc47c34b186812d254a15c38cf6135478700af0e69b4e916d018aeb3ef724d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

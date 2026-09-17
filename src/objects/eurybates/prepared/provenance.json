@@ -355,8 +355,8 @@
         },
         {
           "url": "/scenes/eurybates/eurybates-model-surface@2x.webp",
-          "bytes": 62648,
-          "sha256": "5a0bace343333f24966ed96b4144ac7b07a1d81b5261a65f17903873c997fded",
+          "bytes": 49516,
+          "sha256": "01adb367159485854356c694f59ed6731b40a722a3fb339c2ae28df0b410a452",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "eurybates",
-    "materialSha256": "d812cb70d26982f79deba1b927c4202d0a6329669c8bd1e0ab2a8d0c4b93f244",
+    "materialSha256": "7634f663c01ad9132b1b562a7084fc926cb904fd1414d9fe28df2a003dab1a11",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

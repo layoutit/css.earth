@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/kressmannia/kressmannia-elevation-surface@2x.webp",
-          "bytes": 329916,
-          "sha256": "c0363927e22a942ac027c47fd7ffd71b4b3438b38a65aaec7bfe018960dd2014",
+          "bytes": 292440,
+          "sha256": "15b1d25ebf59f57d6cadc1180d355bd6e231dc276202795924010e99fc271ab0",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/kressmannia/kressmannia-shape-surface@2x.webp",
-          "bytes": 73290,
-          "sha256": "85d20e22bd448cf4e19f8564856bf582a7686c85dcb544f597cfd36e2ceb255f",
+          "bytes": 69302,
+          "sha256": "82928390ad6514078623b83d6d2b6a799a961b32182d8670a863ffabaf4c4b0c",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "kressmannia",
-    "materialSha256": "a6b473045d46a65c3632df9cf85bcd9796f6a684dcf3c38c61e551254d0fa399",
+    "materialSha256": "d5bb219c0bab9ad1172f20e7cc72c4ff5f3b43228d55e9ef329744f421332a2d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

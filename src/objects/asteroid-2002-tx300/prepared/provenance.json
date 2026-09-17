@@ -315,8 +315,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-tx300/asteroid-2002-tx300-model-surface@2x.webp",
-          "bytes": 60228,
-          "sha256": "c30b46fb15a6d96e1342014acdb4e6a2a8fb7ef572ed0e269a02d4e2029fd02f",
+          "bytes": 51698,
+          "sha256": "e2354c4ce6d6731e11aac9a78fbc3a94f7483d30980ef556ee248728b1de0add",
           "verification": "bytes-verified"
         }
       ],
@@ -392,7 +392,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tx300",
-    "materialSha256": "baa01045598e9be9a76f89073cbc8a0239f2d194067b2c37fe0e5a29a01554c4",
+    "materialSha256": "7ac3a1afbe874725e5a3b79d50270e6c0eafb02f77ba360adbcfba52e773712d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

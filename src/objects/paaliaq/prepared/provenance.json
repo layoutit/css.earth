@@ -358,8 +358,8 @@
         },
         {
           "url": "/scenes/paaliaq/paaliaq-model-surface@2x.webp",
-          "bytes": 63214,
-          "sha256": "9ba0e56c273df7f3530e7e91bf1f164dd48d573effa4e9fac763839b444173bd",
+          "bytes": 52328,
+          "sha256": "20594250bbb30c953d3a7ee74b08739160f80ebba8ecd1091678d788181aeb8b",
           "verification": "bytes-verified"
         }
       ],
@@ -435,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "paaliaq",
-    "materialSha256": "d9c1ab909fb7d5e723978ccafec73390555e392495927f7c6dca0f869b553a7c",
+    "materialSha256": "3e33738ddd21543afc468f95e4e158ebfa1a85161fe985594e58ca3c9f7e74be",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

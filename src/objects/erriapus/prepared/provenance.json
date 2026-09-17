@@ -358,8 +358,8 @@
         },
         {
           "url": "/scenes/erriapus/erriapus-model-surface@2x.webp",
-          "bytes": 61358,
-          "sha256": "a5978e27081e373402a2f8bf90d081b052ca7713056b062fd37434fa3c2b3f0e",
+          "bytes": 49782,
+          "sha256": "8076c6e41ad0e648ae41402d49ecbbd54b54316dceb31e5fcbd64ac2484f9077",
           "verification": "bytes-verified"
         }
       ],
@@ -435,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "erriapus",
-    "materialSha256": "ed6592c6b7a7fb7f8128edfb0324d12026cbed5a13dc25651f5b4600ce092ce7",
+    "materialSha256": "d9cbbab465a24a9770366ba41ec1e70e1b3e8049a769a06a2fe80c6886716993",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -851,8 +851,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
-          "bytes": 7085140,
-          "sha256": "f6cf49d95a8866e83a2a8c71723b4cb49f4496fa55124dde9959666eccedc6f6",
+          "bytes": 6788238,
+          "sha256": "35bb95c20d8f3eb1a70d6d7cc32c9940337298642010f8c29235f9c84601c063",
           "verification": "bytes-verified"
         }
       ],
@@ -909,8 +909,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
-          "bytes": 8201540,
-          "sha256": "c951023397a8f839767c6dfc3171b8a8bb81702951d6afe7b5033b10144780b1",
+          "bytes": 8068236,
+          "sha256": "f0575ef9b932e727c8bef1f95454ab51413372700746c488de2b64892f88d80a",
           "verification": "bytes-verified"
         }
       ],
@@ -966,8 +966,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
-          "bytes": 2539812,
-          "sha256": "8051da1ead2d0c7526cbceeeee70a1e7840e329b0c006627b02f0e30ec9fe723",
+          "bytes": 1512632,
+          "sha256": "bd23bad7f3f8c40a41cb2a1dabfc605de29513d7db9a71ef32f4342814558afc",
           "verification": "bytes-verified"
         }
       ],
@@ -1123,7 +1123,7 @@
   },
   "lastPreparation": {
     "objectId": "mimas",
-    "materialSha256": "559caa9db73642e6a0a3bc7dfa8875361679b1752587f6eb1efc17779e8334a7",
+    "materialSha256": "b2a95d7c710ad57de375ca4876aee47d1c0f25a04dfc48f4e9976ef83badc50d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

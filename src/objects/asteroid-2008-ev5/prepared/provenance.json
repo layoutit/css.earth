@@ -436,8 +436,8 @@
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-surface@2x.webp",
-          "bytes": 567498,
-          "sha256": "334e6572b4b824bf113477a36b8f7563ab6f1a9c8afddbfe8f1aa1e0821b6eb3",
+          "bytes": 498148,
+          "sha256": "63ae13579c997a49f370811e625ed284177a58bfa5c90721c4d5aefe9d9c5160",
           "verification": "bytes-verified"
         }
       ],
@@ -480,8 +480,8 @@
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-surface@2x.webp",
-          "bytes": 83118,
-          "sha256": "69e0b51004b7cbe20ba6d9dc1773d9a94a4ab1d0172b1ea439bfa5a8d2e5b0ae",
+          "bytes": 80734,
+          "sha256": "2813211baca3116664abbd6e726890f0d31a3ef17881ee5b16c5782277965352",
           "verification": "bytes-verified"
         }
       ],
@@ -577,7 +577,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2008-ev5",
-    "materialSha256": "6b86e78ebec69db9a36071578c24e9c25da626320e81ae12997f7ef4e4a0c155",
+    "materialSha256": "e53e613c6cf7be173c8040880c4c0d64682642b3454dedc087e4037c10be851f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

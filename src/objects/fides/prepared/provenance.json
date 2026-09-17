@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/fides/fides-elevation-surface@2x.webp",
-          "bytes": 393966,
-          "sha256": "5415aa17669b81fd7fca9f4c4ac94365a58976810cb11f0ac92e4b877a151e6e",
+          "bytes": 322298,
+          "sha256": "9ad242553c2dee51d5320172aa4a73ffe45b8416fa05735d43eaa13d04a2166f",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/fides/fides-shape-surface@2x.webp",
-          "bytes": 70814,
-          "sha256": "764a53658d1e5c57b80ac27433c8e44037f3ab386b72b1b40122dbb7b95fc85d",
+          "bytes": 68190,
+          "sha256": "9ca0233d44dfcb3e4cff51955e6f838d8d59b3060f3d6732cf964a2620777576",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "fides",
-    "materialSha256": "a3559c67cb329deeabcacd8658eae62ad3925efbe84ecb084e16e43a8afc4bb0",
+    "materialSha256": "0dbc575501379f8922078fb6739e773ee9bf7b74791853e39f197e0fe0e7b8b8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

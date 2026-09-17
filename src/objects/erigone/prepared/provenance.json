@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/erigone/erigone-elevation-surface@2x.webp",
-          "bytes": 274958,
-          "sha256": "538a57a256d9d658e732c36fb6ffc93fd86c09a6f4d5ff8cc6a22b45929535e5",
+          "bytes": 251138,
+          "sha256": "3832f786f9e22c38272dcccbce619e3cdbfb20a8828a064cdf9717414c3d9cfc",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/erigone/erigone-shape-surface@2x.webp",
-          "bytes": 66846,
-          "sha256": "7c5b4aa8ae21a553907717651e0a965e95a1b7bc3ef969a7b4b2426880807787",
+          "bytes": 66116,
+          "sha256": "062746eae3b8dc0a8340755d3b096de6ab1ab8261997d295daab566902e8da23",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "erigone",
-    "materialSha256": "2eee2927e076f415686c86060aa7ec56ea6a5081d4b8aaa47f67c2e2035f6980",
+    "materialSha256": "2fc729fdba40ee9dd7b01e40d3976f297f954b75a0de01d28d3c7f5b7f49acc9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

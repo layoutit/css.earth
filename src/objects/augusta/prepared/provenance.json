@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/augusta/augusta-elevation-surface@2x.webp",
-          "bytes": 299042,
-          "sha256": "57dc29761a941b2f846c85fe7127a2cb447e16be3436414e6df8667978dbef33",
+          "bytes": 268794,
+          "sha256": "1e92a86688e75ccc6e604bb7e5805d6aa4fc3a4a28ed8a74fe3616e1bfd3b547",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/augusta/augusta-shape-surface@2x.webp",
-          "bytes": 64000,
-          "sha256": "4874c5f020f0142560f356c0119eed0764b10ab54ae58ba483c37f8a0736b092",
+          "bytes": 62932,
+          "sha256": "aa831a52265d0ff9c66d980a4e8cbae0bf820ae1b9a24637792d9521c2419b02",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "augusta",
-    "materialSha256": "9980c00c10198bbf7cab17d28b79d6385d3588e886a1de10a064eca5f79d3215",
+    "materialSha256": "95113d85ebaf2b79383ca98ebacde983c670ddcd7752b6957e0a4214d0dd761d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

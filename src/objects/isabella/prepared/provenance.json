@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/isabella/isabella-elevation-surface@2x.webp",
-          "bytes": 298368,
-          "sha256": "1b4a6ddbf6b22e00e613d5e864776b890d85fba384ec57c25870fd30074c7d96",
+          "bytes": 271066,
+          "sha256": "b65a09d053857d62a114f1cb13984ca155474d12f10c72211555c60e58ff85c9",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/isabella/isabella-shape-surface@2x.webp",
-          "bytes": 68478,
-          "sha256": "649265d40377fd6a02f64d169b79a2758f7ac0adb6ffcc2121f1f6504e684a7c",
+          "bytes": 68274,
+          "sha256": "f5cf536b60b95e6a982c69cccad00089f98659fc44c08c1acd7c41345ea04d71",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "isabella",
-    "materialSha256": "f2934dfc833f8eae1ed78cbd6e3195c0a9c36b4b12370bfd2a7f4162677a93dc",
+    "materialSha256": "e4306fc9fbb4f6fac53315aa8eb77ab592e9c3b4358d09f922d23bc2d8e6fe1f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

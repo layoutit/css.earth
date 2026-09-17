@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/adelheid/adelheid-elevation-surface@2x.webp",
-          "bytes": 339574,
-          "sha256": "d2a00d56cef5ef06118484b662bbc7b9610d43225558290267b3e0094a4a8ba7",
+          "bytes": 321654,
+          "sha256": "a5ef1af1ee1821cdbce381bc53fe4d186e65088b830b51d872d113f43bdd6f93",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/adelheid/adelheid-shape-surface@2x.webp",
-          "bytes": 76794,
-          "sha256": "783eea751791403ab0a139cfad5a7221a8cff92406fdd536fbd4acc0118898ed",
+          "bytes": 74646,
+          "sha256": "1dffd79e37f4434fc17cf91cda04084522db7f497a73dfa6d1d839b857fa34f6",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "adelheid",
-    "materialSha256": "1cb23cb6b368cbcaf0d910aca82af7ac671af53cc8aecd7424600d5874092e87",
+    "materialSha256": "54fb57367a260941a796e4061e4911dfee0ec97a7a0acc49fb43f7969f479d5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

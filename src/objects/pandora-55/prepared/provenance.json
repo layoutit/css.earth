@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/pandora-55/pandora-55-elevation-surface@2x.webp",
-          "bytes": 351926,
-          "sha256": "3ea0b7e0aa6731a0ea32edfedf9b0dcd8da93fa5e1e9be14407046a3ceebdd5f",
+          "bytes": 319848,
+          "sha256": "014627c5f9a3dccaaa68b09d8ad9dcff35022303275b81bae4a66a960b2f39bc",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/pandora-55/pandora-55-shape-surface@2x.webp",
-          "bytes": 71438,
-          "sha256": "4af57c2674b0ddad665eebd5db5f78adfba5d74578c9db44b9bc0951502f73f0",
+          "bytes": 68738,
+          "sha256": "3ce1284a2ff17b5c9b68c7eabb22ce5d609b7e6d5d52aaeb241d587d7637a6ea",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora-55",
-    "materialSha256": "1b9f298c6f43263241518d0cab04f499d042a7561fc386db81a13794a0ff94d4",
+    "materialSha256": "fc39646ad5904942972b3b481eab0c1d905b43f2a69bc6ff3809d4bc4246d6c7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

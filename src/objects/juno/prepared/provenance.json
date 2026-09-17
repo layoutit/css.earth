@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/juno/juno-elevation-surface@2x.webp",
-          "bytes": 412462,
-          "sha256": "6ec860586fba1b044c8c182f86728dea00207e2f9e3ede0cf0f152ae58cab645",
+          "bytes": 342070,
+          "sha256": "e9adb09dee367fbb0029c49bd668c32648f0399718d593c29aa558fb4506604f",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/juno/juno-shape-surface@2x.webp",
-          "bytes": 80538,
-          "sha256": "fb225ca35bf28b137bab91dc820023b94e32b5564a231da0a74fbc8bbba0f307",
+          "bytes": 81918,
+          "sha256": "2e29d875f4f106fd0dea5dc05056981dc34c1f13f6c6e788ab82dad4850982f7",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "7abcffbee4af477a6ed1d83fb9bbb86e8894955ac4fc3d11241e4b885ccbdba6",
+    "materialSha256": "494fba551d81c4d9357b743b8b6045ec5cbefd14d5e07eb985bef7fe7c383dac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

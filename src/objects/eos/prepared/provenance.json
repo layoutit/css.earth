@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/eos/eos-elevation-surface@2x.webp",
-          "bytes": 356934,
-          "sha256": "3084f3554649b4824a12878ef0c6c226f5b01eb85f6eca2bfe691f809b8a95ac",
+          "bytes": 322150,
+          "sha256": "7f303c637e34b9171f57aa0b7ee60f9996b89c39fb4a0911f9c7ffec7ec1fb2a",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/eos/eos-shape-surface@2x.webp",
-          "bytes": 74520,
-          "sha256": "6eb75b68611095af94ae45e5b7006cf811d77edec90ca7df92cf149bcfb2b274",
+          "bytes": 73742,
+          "sha256": "fdeed34252c2cae2fe1c6466a662e897b7f9b0b7983cc24e4c106e3633eda04a",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "eos",
-    "materialSha256": "ab202a4c5dc106b9171c24f75622c99dca8b5395440f74d5537415d46a3afc08",
+    "materialSha256": "cb28a4e9592af24a7d528739a53669a4fa1cb35fc633891b85a6c64e501b32ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

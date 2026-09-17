@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/coelestina/coelestina-elevation-surface@2x.webp",
-          "bytes": 324032,
-          "sha256": "014ae3f737eeca0940fbe4532ab8895242f5dbee6ff8673314ec0c6e6d7f4bad",
+          "bytes": 289248,
+          "sha256": "74162569985d889d728f6a6b1098857065cefa1a252aa7fe089d9f0e79598cb8",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
-          "bytes": 71646,
-          "sha256": "2c9774622eb1f8cb51d044b03fc626ec2a483234e102188dd973bc0a1fef9d55",
+          "bytes": 68766,
+          "sha256": "8ac5b3ea9804cd49f0f1386bfa2d981e02719507279d1d7bc22ca216a1ecbf23",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "coelestina",
-    "materialSha256": "b7c7038a284b69ddbdd7c818810629e0c05595a963af039dc6f449546112d1b8",
+    "materialSha256": "1f81c121a7e9098b2abe2d9b52ac4a30d49689358e51504d7b399293316b6732",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

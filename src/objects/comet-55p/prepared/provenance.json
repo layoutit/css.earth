@@ -326,8 +326,8 @@
         },
         {
           "url": "/scenes/comet-55p/comet-55p-model-surface@2x.webp",
-          "bytes": 57140,
-          "sha256": "9bac9d5c3140aed4a64464f06438aac87d83dd5302f5cd48f536ba6178c08dde",
+          "bytes": 48924,
+          "sha256": "2a7169c2cc3b1126bbdeac0da750690d660f5c16b283d0f923341e1209420e42",
           "verification": "bytes-verified"
         }
       ],
@@ -373,7 +373,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-55p",
-    "materialSha256": "6e0d335d1e7baa0464df3f5312b3d0f694f9e36fe4aae2e2a01ccaec62375230",
+    "materialSha256": "b76187414805a543de02842e4ccbda0cbea4d755bbfcb9759a15a6bb4f543fc0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

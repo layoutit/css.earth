@@ -313,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-c2020-f3/comet-c2020-f3-model-surface@2x.webp",
-          "bytes": 57208,
-          "sha256": "6b00048747af3091d054e9619a9cb24e8ba3f5b3d303ff3d8306d815b0001f57",
+          "bytes": 47962,
+          "sha256": "98a832b55a8b698f23a8c7dcc19cfb89a76af12c506fcad167dbdaacc425bae7",
           "verification": "bytes-verified"
         }
       ],
@@ -360,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2020-f3",
-    "materialSha256": "b7f5fc919cf2668fcfaf69d25fa3937c563ed8e4ac20bad85398dbce5cb985e6",
+    "materialSha256": "f432a0b948a97874e0552a152be92f84e0c2a6566c4432cc2910c5839757de33",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

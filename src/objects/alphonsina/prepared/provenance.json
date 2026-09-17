@@ -413,8 +413,8 @@
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-surface@2x.webp",
-          "bytes": 321910,
-          "sha256": "30a74335cf8c3edc0fb140a6e18c5a950153c5bb2a18382d08d719b5475ffbf1",
+          "bytes": 309598,
+          "sha256": "dd586aa422988f6449e7da40b847ffca5b48779125cae3f60b392f62c5930724",
           "verification": "bytes-verified"
         }
       ],
@@ -457,8 +457,8 @@
         },
         {
           "url": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
-          "bytes": 69128,
-          "sha256": "d9d5756428deace7b0910d67c7d73e94b5a8b36aeabc6edec974068d18e67847",
+          "bytes": 68682,
+          "sha256": "189a49e4cdb325f009abf024350b1e27d92b360ab403539d03a29761164de78d",
           "verification": "bytes-verified"
         }
       ],
@@ -554,7 +554,7 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "be3f0990a25cbe8692c0fa4ab633d062ba4a4b2b90b332aa5976ac439f7223d1",
+    "materialSha256": "81fedd0df3f13c0704aa8fb7ee578f224a5f7ffba2e54ccc9aa8c512bde573cf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

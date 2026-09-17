@@ -411,8 +411,8 @@
         },
         {
           "url": "/scenes/victoria/victoria-elevation-surface@2x.webp",
-          "bytes": 399360,
-          "sha256": "eea8bbcf80423cff74cc7cda817e00578886644c43d5435a63383160287c944d",
+          "bytes": 332338,
+          "sha256": "f3babe8f8de8bac41fc14dcfc9eb696c6c0b920cb970d3cb78fdc0ce41c7ff75",
           "verification": "bytes-verified"
         }
       ],
@@ -455,8 +455,8 @@
         },
         {
           "url": "/scenes/victoria/victoria-shape-surface@2x.webp",
-          "bytes": 79408,
-          "sha256": "e72af29299c341f00ac8cf55806240dcf415cc1465324c4fffd7278afa07a073",
+          "bytes": 77450,
+          "sha256": "c294642ce23817ffd847f49a57747e8c3b1b988de8c9f794f8dc7a4444943379",
           "verification": "bytes-verified"
         }
       ],
@@ -552,7 +552,7 @@
   },
   "lastPreparation": {
     "objectId": "victoria",
-    "materialSha256": "5dd4ace9dbeda1cf04155877c79275e57c18fa4a417571be2ca1a255e899a990",
+    "materialSha256": "984209f7f3202abf194a63a0d709fff4e4f6353725d02a6790890612c4e3f745",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

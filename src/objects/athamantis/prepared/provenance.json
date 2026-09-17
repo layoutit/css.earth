@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-surface@2x.webp",
-          "bytes": 305354,
-          "sha256": "d0a6d94f0b2d55ad9a2e05955c92c35131d3a01149ac1740fd0a1cf8a4c8a74a",
+          "bytes": 276114,
+          "sha256": "a29c843595303382c4675ae2e3749de4fe071578fe2b8fab0bd5113a65b6ec9d",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/athamantis/athamantis-shape-surface@2x.webp",
-          "bytes": 70416,
-          "sha256": "09c4969155d93d64445bbd91ce4ba231668d025b124fbf0a21d12505a4b9d062",
+          "bytes": 68666,
+          "sha256": "82b4560f451b439ff5538aa8b31eca8f91a6c27a19a671fd980f8c7f1e48b4ac",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "athamantis",
-    "materialSha256": "f63930a51158d6077b41bea22efe793f56cfa651885a41c0ee6c26cb11a5bbfd",
+    "materialSha256": "bfa43a1eb4bd0f6cf66d1571c8b6d49d46f5034fea518be9c81214ca836bf6f9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

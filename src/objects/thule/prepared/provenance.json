@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/thule/thule-elevation-surface@2x.webp",
-          "bytes": 373838,
-          "sha256": "911518f29613632673f659206c3fa4d49a526bd62979792e3bf2d125681b11d0",
+          "bytes": 318748,
+          "sha256": "e332d0d40ecf50615a7b9c75df6167375773332fb27d628471db5c109c08864f",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/thule/thule-shape-surface@2x.webp",
-          "bytes": 75614,
-          "sha256": "ef6e7ed69f74d11402cc14858692cf429ef7ad2bff55984a198a42dfd0538354",
+          "bytes": 73154,
+          "sha256": "b852792eabd92b9581ffef537d11c69daaee9ddb7c9828d68fe057089b3931e4",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "thule",
-    "materialSha256": "384dafe2c259f7085bb16a2c512d8cb22b9309d0b6d02bf5c8362560f6070761",
+    "materialSha256": "2ad0aa68c98fce50cdf05a142f2ade2d1011dac8fdcad4146813ffa46cf5ecf0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

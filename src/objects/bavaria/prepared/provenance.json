@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/bavaria/bavaria-elevation-surface@2x.webp",
-          "bytes": 343892,
-          "sha256": "3a311770d9f9e6d942b13501f739c6e66da5856cb57db0cfc0c6658da092e788",
+          "bytes": 312592,
+          "sha256": "4e14efdc1effd1852f05da65420471d42cfd33106ece3d0643586fc474cb6c09",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
-          "bytes": 75266,
-          "sha256": "3cd181c087af65f2b59738430227263f90f8ac02fd0afe0505ab786add025d71",
+          "bytes": 73016,
+          "sha256": "247ed734b8399d57752586efa69552e160d4e04b135e0ff3518d35788b843aa4",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "bavaria",
-    "materialSha256": "a2cd7a25fe410c6291c4dc0e4d893655bbe7a02502406874a00435e86a11de02",
+    "materialSha256": "b2508bf5849b4baa82f949d2bfe6e86072792314dbaa446f6beb448f2cf40023",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

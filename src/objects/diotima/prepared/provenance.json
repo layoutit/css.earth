@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/diotima/diotima-elevation-surface@2x.webp",
-          "bytes": 379464,
-          "sha256": "9c2cf25d317364e088811520e7665256f62c8f74645294ec4903b02df06d4408",
+          "bytes": 328884,
+          "sha256": "6ad79635cb67284cb8649cf23131c6f4086ebb92c9ee1104748d8b3514f235f4",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/diotima/diotima-shape-surface@2x.webp",
-          "bytes": 78914,
-          "sha256": "270ef8e5cb3a3c065910682b76bd39dd09c8e94bde174e12cb73e125812e08b5",
+          "bytes": 79174,
+          "sha256": "9a9930ead7dbf57606679c0dd67b0e7cbbca1f7a082c8f812b9c7fbaa937d978",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "diotima",
-    "materialSha256": "4da4ea5eb8fec490b6216cea7d209233c7ad8fe9a377986b06c9711d85c65633",
+    "materialSha256": "110972a3ba13a6a770ba8a75a87f3089ecb31e3e9a8ed5d00aa60d4ae78cf408",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

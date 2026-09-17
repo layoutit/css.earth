@@ -361,8 +361,8 @@
         },
         {
           "url": "/scenes/juliet/juliet-model-surface@2x.webp",
-          "bytes": 60040,
-          "sha256": "8e84586499f9fd8eda4a2858c13fdd83fb5b354671d3100536af1462b252688f",
+          "bytes": 54238,
+          "sha256": "41562e5cda39ada0d19c24dea9d9b179b37befce1d6de78ccf1137932956bd41",
           "verification": "bytes-verified"
         }
       ],
@@ -438,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "juliet",
-    "materialSha256": "c699e95dd4d7feca2774e8de2cd4cfdb21567bdbe9039ca0297cf79d32dc553b",
+    "materialSha256": "a5ac77f675e9e73dee773dca18c8f2a9ce90652a05c1204e505e1bdf64609b49",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

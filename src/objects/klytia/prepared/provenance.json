@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/klytia/klytia-elevation-surface@2x.webp",
-          "bytes": 278264,
-          "sha256": "16036fefb54d3adbb1d6c8794811bdf7318c455ec662ffa5b091380e7fbff650",
+          "bytes": 247734,
+          "sha256": "d792bb36e0d335c0046b4cec253b0cca4a6e79228b4f0b2e9d6da38efe6a30e3",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/klytia/klytia-shape-surface@2x.webp",
-          "bytes": 73528,
-          "sha256": "62c6a791d4dac2ac907723d75341c90f21842076d53d17bd252acfbe31149c57",
+          "bytes": 71756,
+          "sha256": "4286a3ca0b9ba04e845cfe57331628a5001e8aa7c07bdc271d6e9e38dec4de34",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "klytia",
-    "materialSha256": "546032c80ea5859575b8450bfbc3c3e9d826e025a4280c0913d1ad18ba07566f",
+    "materialSha256": "2ce7b2d3c22ccc5712ab51ba3a26bfcff1fc7dd5c8fa5fe0b0c311ab7ef776d0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

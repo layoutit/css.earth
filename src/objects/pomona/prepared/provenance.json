@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/pomona/pomona-elevation-surface@2x.webp",
-          "bytes": 314620,
-          "sha256": "7789fc11b574687495c8a2550b4f32f0bae4a6aa60baf735e81b73fa76db7560",
+          "bytes": 284422,
+          "sha256": "230075ce52d288afc221dd1984aca665695171941585ac2db30fe83d62a94ac5",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/pomona/pomona-shape-surface@2x.webp",
-          "bytes": 72014,
-          "sha256": "cf83261fd6d4d9eb969a5ba9a001bee30a619a26abf9a0bf298e166608d68b17",
+          "bytes": 70190,
+          "sha256": "3d1dfff61a6ff41cfd62df004789c7953726750d6fb864fce14974b9c5333d06",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "pomona",
-    "materialSha256": "db7761a2f1f701d0c1bb371dc4bfc0f8de8f6573a092c99c054939d2756a6541",
+    "materialSha256": "92be3f733d0bb9bf748dca5923a204bd219c6eb6b0fb527e5a3c2dce6ace4a1e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

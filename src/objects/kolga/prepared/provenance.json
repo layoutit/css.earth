@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/kolga/kolga-elevation-surface@2x.webp",
-          "bytes": 317114,
-          "sha256": "75b5c227f056a6a9c36d5fbeb134e020a2ed5b96dcaa209aa778154a42f5f260",
+          "bytes": 281400,
+          "sha256": "e588e1691adff0ce8a1fc4b2a2df8b63b3ef7083bb73234277d0d991fc9afedd",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/kolga/kolga-shape-surface@2x.webp",
-          "bytes": 69098,
-          "sha256": "98abf9126a809741100b27f0b97d6ef75abaf4b5fbf0b2f3006c4d810f3c0447",
+          "bytes": 68046,
+          "sha256": "bd100263f756066b0e4aa521340d8614c3af6c3f9c1bd44bbd0ba5102d7fbf68",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "kolga",
-    "materialSha256": "dee54edb085b49f13da9c58be24cc01433c098d272e570af69d82325727bca18",
+    "materialSha256": "80067bd04aeb2373b41662b68880728fa1fc98cc4f724ea4d690f9228fd5ee58",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -350,8 +350,8 @@
         },
         {
           "url": "/scenes/bienor/bienor-model-surface@2x.webp",
-          "bytes": 58508,
-          "sha256": "8613759f5c798c7b3a1519bbfb8e31e98493b19f001718efb4334b162184d161",
+          "bytes": 49734,
+          "sha256": "6e1228cadd0a5d90d7975d885c32614d237c43ca58ee02127b76da7ceda3a52c",
           "verification": "bytes-verified"
         }
       ],
@@ -427,7 +427,7 @@
   },
   "lastPreparation": {
     "objectId": "bienor",
-    "materialSha256": "b612e61911b671c2d5abd34ee12ce4569e11513c53452f136b9816ce37938366",
+    "materialSha256": "7491f2f252784ca80f2670022dd6a6e4105594a52c694a3c563b9310a2e7420d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

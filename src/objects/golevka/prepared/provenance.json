@@ -425,8 +425,8 @@
         },
         {
           "url": "/scenes/golevka/golevka-elevation-surface@2x.webp",
-          "bytes": 477898,
-          "sha256": "a07fd76c25c258a6cb3c192cb907310470fb1cd6cf16f75bd8e503a2c535a25d",
+          "bytes": 425516,
+          "sha256": "1c3121055a2fa3e58e2b3ed62481fdd731effda25032479d4b5a98c4cd10874d",
           "verification": "bytes-verified"
         }
       ],
@@ -469,8 +469,8 @@
         },
         {
           "url": "/scenes/golevka/golevka-shape-surface@2x.webp",
-          "bytes": 89362,
-          "sha256": "a3afe7753a6274309ac9ee8dea09e2b9c21b52885b065a7066a77951f7027da1",
+          "bytes": 88032,
+          "sha256": "cafdb76540ab40c89c319385ea4f4aa4bdccee179c6515fa9592d6d45970cf62",
           "verification": "bytes-verified"
         }
       ],
@@ -566,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "golevka",
-    "materialSha256": "c1ff1f6b656a36c94bfe7ba0cacbd1d634aae3a30b974dd93c4b882c2a9cadbd",
+    "materialSha256": "19e13d959d0567cc984fbda866471960e57dc8cff6fcc7a4fd490ae0090d648e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

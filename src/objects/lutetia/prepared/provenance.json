@@ -848,8 +848,8 @@
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
-          "bytes": 446480,
-          "sha256": "6a17501d6458d31fd9bdbe46608213e2b053430e0e63ed26c6703ed8a7cb6396",
+          "bytes": 368648,
+          "sha256": "0ee334d4ceba658aa3036e9579a1f47843bbae0209861cfc27d1a3467bae9ab0",
           "verification": "bytes-verified"
         }
       ],
@@ -892,8 +892,8 @@
         },
         {
           "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
-          "bytes": 84738,
-          "sha256": "74f60541ef8aa433a0f9783f182770de9832f4791cb216b93024ddc466208241",
+          "bytes": 82940,
+          "sha256": "455d2b6a2b1096bef8101f2c6fd4294e8221c6e8df960c1b82dff66afb907365",
           "verification": "bytes-verified"
         }
       ],
@@ -943,8 +943,8 @@
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
-          "bytes": 787694,
-          "sha256": "46d00f204a013d216104b33079dbd820f8c850e72e67c621a445ba26caf5638b",
+          "bytes": 612006,
+          "sha256": "49891d5b63c83feebb6e646503df40699a5f018d63b9e4f9054021f32813649b",
           "verification": "bytes-verified"
         }
       ],
@@ -1062,8 +1062,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 28248,
-          "sha256": "9998901149a90aefa058ec3553c3b64b9406fdd3d532f83b2da4c81d748098f2",
+          "bytes": 27898,
+          "sha256": "f64f9857ce4dcd150a309baae1b893ec11df122d8ee2549a208af3d1dfddf828",
           "verification": "bytes-verified"
         }
       ]
@@ -1100,7 +1100,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "c7034f23d047c8ee2edd5189d0c8b20ef5d245f54c4e9b264ef7aeac07ed5b4a",
+    "materialSha256": "88da933cf115c4713f89f07b5c971a7a0c1c7c21442c1e01e4e3f6724dc64444",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

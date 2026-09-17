@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/doris/doris-elevation-surface@2x.webp",
-          "bytes": 371816,
-          "sha256": "a1de7d320607e94b7bc59c64edea9505ace1c7fbbaf2cbdc93090dd2a9c1a189",
+          "bytes": 331952,
+          "sha256": "026924da666ac7040ae51abc72f75275d8846bf5b5cac02cb59a1390cd33b5cf",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/doris/doris-shape-surface@2x.webp",
-          "bytes": 78278,
-          "sha256": "40f648f08078f3d4670856d2e271f9a9c4205bc0fc00be6fe8dc28ceaaadf35c",
+          "bytes": 76988,
+          "sha256": "483cef5b40b0daa2e48bbb4b6e4529432c44c7808160bff884a58e7d9c679a93",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "doris",
-    "materialSha256": "260c437bdcbb76b5d71d8756e65d5dff0d5bf627817a2f4f01e4ccf5cecea686",
+    "materialSha256": "03c27f2552cf46bcec45c5c2772a147994a418e667b33eda88c876ddb5968d5b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

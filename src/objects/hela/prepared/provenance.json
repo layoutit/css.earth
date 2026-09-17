@@ -419,8 +419,8 @@
         },
         {
           "url": "/scenes/hela/hela-elevation-surface@2x.webp",
-          "bytes": 330296,
-          "sha256": "7d9e36af6c2fce2cbb9740f411892e0c27436cc62cb22376d1b67e2030edc3ae",
+          "bytes": 299340,
+          "sha256": "4d3c0db23ed0a01443ab14705ddc2bc00d54d45694ae4343e5191337770f7c8a",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +463,8 @@
         },
         {
           "url": "/scenes/hela/hela-shape-surface@2x.webp",
-          "bytes": 73778,
-          "sha256": "c4974165a799eecae37439f52fcfca2ce4c8e0dbb29407edf8dc0c81e5ca3aba",
+          "bytes": 70958,
+          "sha256": "04d762c3ed9c9be08a3bf23a468372269f296e678a19fde3973985a08a470638",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "hela",
-    "materialSha256": "38f85c4abd7929d63f40f7846eef3a714388c734f5e686d1e70a441ce645a0c5",
+    "materialSha256": "35d6b39c9e541e9d0ead11c8114eee109226399982cd5215bb170815c21b9743",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

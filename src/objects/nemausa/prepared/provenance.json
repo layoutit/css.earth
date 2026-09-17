@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/nemausa/nemausa-elevation-surface@2x.webp",
-          "bytes": 370590,
-          "sha256": "69fdc1c8b0cbcb5fef49843805e29c877ebc6fdc1e318207b58d9ef4253c64d2",
+          "bytes": 303100,
+          "sha256": "4ff83e0d00a8a18e9a6d4ab8ce1701ebd6d2ab618be69b40b52b554c5e78fcb5",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/nemausa/nemausa-shape-surface@2x.webp",
-          "bytes": 78748,
-          "sha256": "769df55d4089146a2e3852cf5a834df02014741ccc55d9d0b540227c40ce82ad",
+          "bytes": 77278,
+          "sha256": "1202c053b8b0ed0b48e377cd30d8cf7d4523fd9e683d8eb7bb35875ddc23188d",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "nemausa",
-    "materialSha256": "043a34f5bc5edb2ec9fd6c7d1edb55287595a07e9dfe88eb945628273adcc87e",
+    "materialSha256": "dc2f6fa8fd235f5a23ee8ee0f01ed4adb4c3ec92637a9c7686e512f129b57f9a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

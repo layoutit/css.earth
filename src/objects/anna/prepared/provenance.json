@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/anna/anna-elevation-surface@2x.webp",
-          "bytes": 294354,
-          "sha256": "1d9f9f786f2d7187ead833240c899112053ab4a35c2e88d6e1666bc561e3f87f",
+          "bytes": 266594,
+          "sha256": "1fb69f0c4092ce71a77733df06fa08f2ef4d3279ab3a77e3402f6dc03d17f888",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/anna/anna-shape-surface@2x.webp",
-          "bytes": 69798,
-          "sha256": "c6a5a6e8f1106ac7ec70b272d4fae9b8fa8031e38645d0f817c41cd4ed4ce3dc",
+          "bytes": 66514,
+          "sha256": "92e14892e0296e665c3b44e9ed196f4e2a8e087d2f6204d4253a602cf7f60d9d",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "anna",
-    "materialSha256": "5d18bf3282acc8ebb7966d462686f9af625bc4ec84e59f0ab0ec4fe4c4da330d",
+    "materialSha256": "390ba70245b7a0e2ecba5ffea5c8aa11a092d909954e3cb5cce2eef4c6d258a2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

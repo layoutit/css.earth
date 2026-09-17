@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/penelope/penelope-elevation-surface@2x.webp",
-          "bytes": 363984,
-          "sha256": "84e938cf4579f63ddd06a92b20dc8119e50f8ae4edeaa8770cd54ebe748044c7",
+          "bytes": 314606,
+          "sha256": "ca992f3cd695298a032e80c5d47322b6788b05c02ecfbe2e97cd8ad21f9768d4",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/penelope/penelope-shape-surface@2x.webp",
-          "bytes": 72538,
-          "sha256": "eb5f3c71ee03419a766798ebbbe01af0f08847df924429e00a7db29fc6b02fdf",
+          "bytes": 72666,
+          "sha256": "baf6a8adb6429ab3a5f10b0217426ad5f279efdd5db031645483895183021552",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "penelope",
-    "materialSha256": "d9edee91b85d090d49f36947239679ffa2ba8301a15633b4be7d69bf44ebf3ea",
+    "materialSha256": "50365bbc3a40582f6c86f74d56e86eaf4ca3ef1ab93f445e6fb409d553b92eca",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

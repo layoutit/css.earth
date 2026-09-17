@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/parysatis/parysatis-elevation-surface@2x.webp",
-          "bytes": 357748,
-          "sha256": "99e8a77817fca48d10dd146044b7337418109984706c886732c960915e1ac737",
+          "bytes": 326220,
+          "sha256": "0ec0d2349b35bf86306afd50ca744c259c6465ab4f566122eda334956662f43a",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/parysatis/parysatis-shape-surface@2x.webp",
-          "bytes": 72580,
-          "sha256": "2db3f651fddf7dffa102da72411e7e1535d01a8e1c3ee03ae042c294560ee4fb",
+          "bytes": 71434,
+          "sha256": "a7aac7ed6db94e495f1abd7f97325f181dcfb53f05f0901150a7e66afef74ddf",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "parysatis",
-    "materialSha256": "73f2376513817b5ab4f29ba172de0f04d1eacfef38fb557ea986dbd7a28c411e",
+    "materialSha256": "d48fb98913bf0e76926e6a34d095b88d161657dbb8f393989c0f9f763e7452e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

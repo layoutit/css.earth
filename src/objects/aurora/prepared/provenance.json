@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/aurora/aurora-elevation-surface@2x.webp",
-          "bytes": 361786,
-          "sha256": "b3370b58b604c4759de1aa180fd56c359f8da52a4fc0303759264449c88dda75",
+          "bytes": 319262,
+          "sha256": "7a1f3daefbdc9a68efd761a27aa0172ab53361f9a946bfca1cc327a9d1b69144",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/aurora/aurora-shape-surface@2x.webp",
-          "bytes": 79390,
-          "sha256": "9c72be79a0524ff83c3753d8acd57a953689cd6d48770a57ac76a63c5a4fa414",
+          "bytes": 77998,
+          "sha256": "e6bed4c590413687692fc6818a3da58157877082ca2e8b529af7be78ed3b01b3",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "aurora",
-    "materialSha256": "541e714e910c556bea563217938ff90e0523f5ed15c3cbb9db7c9cd40d79b2e3",
+    "materialSha256": "7430f759ba63b4a18ecc9fa110a3a7a6abc19180605c62dd714f3427722dfe5b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

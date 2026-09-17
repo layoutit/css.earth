@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/hekate/hekate-elevation-surface@2x.webp",
-          "bytes": 388510,
-          "sha256": "ef604228f20533caa38ea1c5037df465b6a01f2ad17eaf20335e65be400065f5",
+          "bytes": 320830,
+          "sha256": "01ff1046e15bd98f12e9f94a5e1096447608319280a791f70f3c0c8a93a39c77",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/hekate/hekate-shape-surface@2x.webp",
-          "bytes": 75448,
-          "sha256": "5504b7da9f4587d75dc335631cbcda107bbadcfb3a2b3002b76f8086cae11210",
+          "bytes": 69822,
+          "sha256": "7c14244c1eefae345fe7ed4380e54263c78112a766f6e6db00aadbfbe1a4ffe9",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "hekate",
-    "materialSha256": "4ea64be75d20c32ad76ffe7c07804d47ca8ee81f63658817f3b22fedd6d2a14f",
+    "materialSha256": "aafb452eb529326e55f8a46d1b3a7dba32bbf8310c5be1907364a5edde4bae71",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

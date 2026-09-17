@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/baucis/baucis-elevation-surface@2x.webp",
-          "bytes": 277202,
-          "sha256": "c101ec23981c10d5fe78919a3468a3d14bb8bd74d2147d289eb4fe5832947860",
+          "bytes": 247446,
+          "sha256": "758253c1e184c8be1447768b405e3780de202aafc89dd994e6412bdf444ea631",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/baucis/baucis-shape-surface@2x.webp",
-          "bytes": 69088,
-          "sha256": "7e1909a21bb287e2fb71df6d96c9143546543fb9b3e70c0ddaae5bb0f19857cb",
+          "bytes": 67744,
+          "sha256": "3935344b78b609dda12a26f325d7bd1fbe23e4db659dac59fbc1d3340960ba74",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "baucis",
-    "materialSha256": "bbdadd4e0341f77e82956954380aafc0ae6e8e12b0614a841fd2663369830fc0",
+    "materialSha256": "8290699ef990f530bca57e9bf52e32245fe88d72c1b1ed5b42e3f313bd5d69fa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

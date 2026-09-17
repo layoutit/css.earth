@@ -345,8 +345,8 @@
         },
         {
           "url": "/scenes/bebhionn/bebhionn-model-surface@2x.webp",
-          "bytes": 62336,
-          "sha256": "a6eeffa3c3feecec45dc3a46c045ac9a42a3efd31e642ffb583db9028211bcb5",
+          "bytes": 50798,
+          "sha256": "e392b1079a2b55a0341c13aa5ce67248700d77b52cdbdb395462f46696000dc2",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "bebhionn",
-    "materialSha256": "6e84df288fdbca8d846a6359f15180a38dc567d446d5e4e96b660f2591ab3d25",
+    "materialSha256": "3416fb9d1498e19943f457ef92976e949bc40703ad46cd312deeb909afded4d2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

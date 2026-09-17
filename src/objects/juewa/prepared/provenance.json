@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/juewa/juewa-elevation-surface@2x.webp",
-          "bytes": 395080,
-          "sha256": "de5faf78636bbadf96cc3dd979a57d79c6598dd72def65d3d7b94ff8057669ba",
+          "bytes": 357172,
+          "sha256": "848fe4cbc526c1190ba2461b90235555440d0a98574bf9668ce2f9ff677490cb",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/juewa/juewa-shape-surface@2x.webp",
-          "bytes": 76054,
-          "sha256": "7e1ea5dcc71310ed5a17c0e926d9ce882f091a279ca0944d9a83edc7995dfce3",
+          "bytes": 74030,
+          "sha256": "6a9d54a9c412af869941e24d441cb74d745e0018f3d54e03a34c3fe3df16dec8",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "juewa",
-    "materialSha256": "663b6a030945133dc6cc19acf149e33a8f98ff8f852dedaaee160999ebc428c7",
+    "materialSha256": "2aaead046a5d6fe56e47199ed5dd7bab1c88ffe1f1969cdc295867733696f650",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

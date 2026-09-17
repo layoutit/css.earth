@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/tyche/tyche-elevation-surface@2x.webp",
-          "bytes": 348228,
-          "sha256": "8309fec6d4fd8707370fe0b684409ba6ab4028f97cbf911dfc28046db901194f",
+          "bytes": 309304,
+          "sha256": "eff14fdad09ccb07c8798cfae9e9d1224f6753131373b6e12e3ac8c966bac2c2",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/tyche/tyche-shape-surface@2x.webp",
-          "bytes": 71534,
-          "sha256": "80ecd693611e1f8f2cc503e74d2b437a9e7f3ee629541562957dc5b11dea2499",
+          "bytes": 69664,
+          "sha256": "137ed00125dac723a07aea2ac410bfbb22c6163560362fe55c8ef65402db478a",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "tyche",
-    "materialSha256": "6e5810871869684dac372952a9b4137b677e8cfcaf82b0057a001dfdba864ec1",
+    "materialSha256": "caacec2c7c2c0e4fa85a11c7df0a470db5b981f05af1926070548496e399eee8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

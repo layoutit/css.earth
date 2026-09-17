@@ -1217,8 +1217,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-surface@2x.webp",
-          "bytes": 224676,
-          "sha256": "15ab269768381a4dc5aa6422efbafde22a833a913ff9e206e5bd0899005ec195",
+          "bytes": 222322,
+          "sha256": "56498cdc04059b0689b42a86f848590e0acd21e421b4f599aa79b2fbaa3e6e21",
           "verification": "bytes-verified"
         }
       ],
@@ -1267,8 +1267,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 153782,
-          "sha256": "a3f49cfae6f4aaafc14e748e1e03989807d763f96c0fa409cdb29f96c0433fbc",
+          "bytes": 156144,
+          "sha256": "d9689e297fc2f81b77ce5970cacba356074c5031d41205b70ee43d9e56789895",
           "verification": "bytes-verified"
         }
       ],
@@ -1317,8 +1317,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "bytes": 157460,
-          "sha256": "67a8d3b8c51779f256c6c34d94366ecc768d35aa6776bbe3ac1b987f2a6afbf2",
+          "bytes": 155292,
+          "sha256": "ab6419634f371698ba657ff11f82fc6e3c399e048eeefa44998ef25a039d7828",
           "verification": "bytes-verified"
         }
       ],
@@ -1439,7 +1439,7 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "1c022a5a7598453edb1505f48b3a1361e31feb1553bda1288683b9b34e241cf4",
+    "materialSha256": "6454027c9848e9768c555cca362a86af6896d7266b8ac99db24f28ab45049806",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

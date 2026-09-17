@@ -363,8 +363,8 @@
         },
         {
           "url": "/scenes/sedna/sedna-model-surface@2x.webp",
-          "bytes": 61268,
-          "sha256": "601590cc5dda2c1e6c17278314618da23428d0b614f742a7b49f51c0a92d0996",
+          "bytes": 51038,
+          "sha256": "f3bd0bd5d72656e4ad6eb2125a749ec59685fc708f52b145a91eb84bfe9f27a9",
           "verification": "bytes-verified"
         }
       ],
@@ -440,7 +440,7 @@
   },
   "lastPreparation": {
     "objectId": "sedna",
-    "materialSha256": "5ea6daec733e2fce82f41c87e483ccb08b5ae0ea460ccc56c4b4ee929b3748d2",
+    "materialSha256": "1757b312ad51a675fa1be6b46a7113e664887cce870112efe3caa56268e18fa5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

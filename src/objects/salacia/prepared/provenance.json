@@ -327,8 +327,8 @@
         },
         {
           "url": "/scenes/salacia/salacia-model-surface@2x.webp",
-          "bytes": 62902,
-          "sha256": "8573041e8c3d3c02701838d830c2a6d6cbf337517340ab1ad06115fbaaebaaf7",
+          "bytes": 52510,
+          "sha256": "f4adedbb02c1f83f8b846f8373b969f50ecd25fe66a565fdadfb9155d5f3f1b7",
           "verification": "bytes-verified"
         }
       ],
@@ -404,7 +404,7 @@
   },
   "lastPreparation": {
     "objectId": "salacia",
-    "materialSha256": "9d2f31df9ba9201ea0a722a153f0e788c4798aa20e1d5e0aa8a6214444587c92",
+    "materialSha256": "1c271df3025506c63cefadea3bc9a4a420ef45484a6d7a7a4693debe2e8141aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

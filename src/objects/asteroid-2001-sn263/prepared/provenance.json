@@ -308,8 +308,8 @@
         },
         {
           "url": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-surface@2x.webp",
-          "bytes": 44920,
-          "sha256": "b70c001b6a0b3330c759406348d80028ba6c7cf41fbb114e428a69830f9ea793",
+          "bytes": 43172,
+          "sha256": "72625e39f19a75051f8281ed4ddf84ea602ba50004a2f6899aad20a46a69bb76",
           "verification": "bytes-verified"
         }
       ],
@@ -380,7 +380,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-sn263",
-    "materialSha256": "8876da1f18b486d8f7b80a0167b6f1f2afbadf8d360d408689a270b8e73e94c0",
+    "materialSha256": "080e6ac2064eb114c25e5936e534b8e2029499bddc92cb6559a30bbba2ddeebe",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/bertha/bertha-elevation-surface@2x.webp",
-          "bytes": 350184,
-          "sha256": "400e9994207043b53c2a7680c439632be9961ff10730df2e6f66d818376f34d8",
+          "bytes": 318670,
+          "sha256": "ed08d6c57ce27f0b06700e3f77efe8b2e988e4d44654649181c78d3e8369f4e2",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/bertha/bertha-shape-surface@2x.webp",
-          "bytes": 70538,
-          "sha256": "778155721f86050a4a6083a592b340c668b5ec5b106796f7f6a90aafb5204446",
+          "bytes": 68634,
+          "sha256": "5185b2c5062f31df55a89c7acec42a1f8b9c6c3bd54eafed90644ae5fd0aa299",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "bertha",
-    "materialSha256": "3ffd257a124d1ef4f11d757203a04334d95c683086fe2862682a3cc72cdadafc",
+    "materialSha256": "5bea8089105545fb4cdf68418a21dbb15ae4f2382ebd19914751eb047bd709e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

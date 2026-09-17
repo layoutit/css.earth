@@ -1371,8 +1371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11182,
-          "sha256": "f3745719a9c3b0c18fb7288630dbe76bb097b2b6443e93033ae57e7d33e9c7c3",
+          "bytes": 11303,
+          "sha256": "75bde1bc0518636ed858fff3f9288b436c3211617c6a8f701724e658ad891229",
           "verification": "bytes-verified"
         }
       ],
@@ -1582,7 +1582,7 @@
   },
   "lastPreparation": {
     "objectId": "venus",
-    "materialSha256": "90886175af499b40c0dd64e2cab9a1fa2e3a76c9052e60372b58210090a102db",
+    "materialSha256": "c10a330af949397727a3b075507aea837dbf20808dfc73036092b07f8898a92c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

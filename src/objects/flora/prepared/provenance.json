@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/flora/flora-elevation-surface@2x.webp",
-          "bytes": 392502,
-          "sha256": "bca8c0be4e9067d3fe29ac94bfe524ae1fe6b2f6e3bacb5cc980258d98d5ce05",
+          "bytes": 330174,
+          "sha256": "3ca532c0c1a5ff5d6b9397423b583b985bb13b7be021e58978468e9ab2d61905",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/flora/flora-shape-surface@2x.webp",
-          "bytes": 82296,
-          "sha256": "e89058357922153bcc649afb7479994445fb90e0f456edc36bca2abdb4838ddc",
+          "bytes": 79978,
+          "sha256": "c3f069933b77a617cc0bd5c46198df795e8df9624f46c65f3f641094ec8fc079",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "flora",
-    "materialSha256": "5d357fe094b20b1c2e4a283926c80b6a4ea57e9b7e8f271b7e8c7649e955fb1c",
+    "materialSha256": "d1010cacdda27b8bcacabc1a9c89be2b08d3da02aae9f552df7b8dfae9694ba2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

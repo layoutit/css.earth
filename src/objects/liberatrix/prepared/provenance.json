@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/liberatrix/liberatrix-elevation-surface@2x.webp",
-          "bytes": 327320,
-          "sha256": "fadcff03fb5ed435736c9fd23d73aff870e76e3bce4be9a4210402ceb342c6b3",
+          "bytes": 303038,
+          "sha256": "d77f994678f7046101fa1c1c30dc98cbd385626851b3f19a461478bb75fba512",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/liberatrix/liberatrix-shape-surface@2x.webp",
-          "bytes": 72894,
-          "sha256": "2e2e028c5ec9b49414618a4910433cef6513eafdb57dedc2f27aa381a03176be",
+          "bytes": 71464,
+          "sha256": "7d6fea5b1a4a52a2f11b70c933f58315508d433c562b7bd222872e57f73b0855",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "liberatrix",
-    "materialSha256": "e542ec3bbdc8ee5076e37ab463c5852c5b67f482ad913c58ad3137e84a925588",
+    "materialSha256": "221c51f78dd7a9cbf4f93a5eee9271b79e3524ce389718c613fe699c744d9325",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

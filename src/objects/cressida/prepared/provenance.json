@@ -342,8 +342,8 @@
         },
         {
           "url": "/scenes/cressida/cressida-model-surface@2x.webp",
-          "bytes": 63326,
-          "sha256": "003b9f47d5e44b6204665eea1c8491afe898c5877bc580cf3dec846c8b72999e",
+          "bytes": 51852,
+          "sha256": "4a9d17f3cd0aa0ea1b9ffc25352e5440212128257407685c0119f9bb2ca5e244",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "cressida",
-    "materialSha256": "204a8abff41336dcdc349f31c968b917e2b4f652809d94285526a587beb3a0b9",
+    "materialSha256": "6412a61da86c1712aa49e2eafa40ed68ced128e6ef9d6ba6cabe113e410fcbf8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

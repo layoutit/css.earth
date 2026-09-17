@@ -419,8 +419,8 @@
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-surface@2x.webp",
-          "bytes": 309224,
-          "sha256": "793661fd204e33f41d0bbd9896913fc1147fc7041cda00be7f198b9a758b97ad",
+          "bytes": 276564,
+          "sha256": "bea0618e2e3ee4ec71d6d47de1f292a32a59f4c38c82089ad960b856f82950d3",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +463,8 @@
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
-          "bytes": 68204,
-          "sha256": "23a8854e2e0eb0d750ab08d7690ca63c4ca9ca12cf4a01f93aa478ea645858da",
+          "bytes": 65864,
+          "sha256": "110a37fd9b411b2913323a682271d88af1c0efec30650f66316529a2bcd11f39",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "pyrrhus",
-    "materialSha256": "24b471e29896ae660fcf943970663c2b1b2ccde51d22e25010a1572a96b9ff96",
+    "materialSha256": "8ba467fb716015761d1f84e61c305aaed9c42d6ce9b4b9d31fde04763c4fffb5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

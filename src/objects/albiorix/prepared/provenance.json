@@ -332,8 +332,8 @@
         },
         {
           "url": "/scenes/albiorix/albiorix-model-surface@2x.webp",
-          "bytes": 63420,
-          "sha256": "1b4618a3fd4880310fa44b582b2d86fc552df4979927dd8f34aeaea5c14a24ff",
+          "bytes": 53008,
+          "sha256": "e176bd43fd67b06527ab66953c217afc0a4bb501c9d3d67041b8052fc0d2ffda",
           "verification": "bytes-verified"
         }
       ],
@@ -409,7 +409,7 @@
   },
   "lastPreparation": {
     "objectId": "albiorix",
-    "materialSha256": "5b03338e0c61095c7966554687e1bc3dd8695117c0c98fd90eddad1f3809e42c",
+    "materialSha256": "444f60baaee307a345b8ce6d202c23f2f35dbbf7090b23746abbbfd3d839185a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

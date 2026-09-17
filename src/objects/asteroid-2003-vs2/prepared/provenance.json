@@ -329,8 +329,8 @@
         },
         {
           "url": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-surface@2x.webp",
-          "bytes": 63456,
-          "sha256": "49eaa57c9f0d69faa4a2a034b166a73f81337353850b0a232cf90fd2feea53b4",
+          "bytes": 52958,
+          "sha256": "e70fa82f91f724f144d6ecde61f3c239aeb21fe2e3bedc43e0cf8c2fd59b2342",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2003-vs2",
-    "materialSha256": "0584373178fb43812a50035f56372258f972318e9fb34b146ac03a55d941b34b",
+    "materialSha256": "de6afbffd6aee6ff5a80eaaa896b1cb2a6dd45a9d841d17db156df1c3ae2be8c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

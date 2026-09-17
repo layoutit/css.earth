@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/china/china-elevation-surface@2x.webp",
-          "bytes": 349630,
-          "sha256": "3bcf78ad608063d5de769f46a217eea83a01900904e4d967b1bae7458420eb2d",
+          "bytes": 315968,
+          "sha256": "beaadc1a5d3c5e887f6184a0664fe87fee135df3be7282181e975df2f2054d85",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/china/china-shape-surface@2x.webp",
-          "bytes": 70406,
-          "sha256": "1e692ac3e12dfa61b9416d6c6934ba6305ed76e545868e2fca4f3ccaaafcdaba",
+          "bytes": 69510,
+          "sha256": "a64fed4688220c3f59092cb3cf6d7e73bf51c2853e27750a99c2a5a9a85c0ddb",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "china",
-    "materialSha256": "49fde228e94980bfe8cc4d5ff1c9dc7bb6284e314fe45bb64101a3968ddb392b",
+    "materialSha256": "68fcd5932ef88059db62ea7030836e87fde1be1e7620031a6d0b0a39224358ed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

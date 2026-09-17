@@ -355,8 +355,8 @@
         },
         {
           "url": "/scenes/kerberos/kerberos-model-surface@2x.webp",
-          "bytes": 60366,
-          "sha256": "290ad53ece1a1b71a8e581decf7a83e7015f057a889033d11e525e2ca84ceb9d",
+          "bytes": 48576,
+          "sha256": "b5e8ed95d6679d5ef4cf17826265c5b0dcafbc9259fe9c5fe8468761e32dab60",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "kerberos",
-    "materialSha256": "972362d94d466907fbf6affbf84ee920ecf47c6ec53d9a2f849885e555bb7526",
+    "materialSha256": "5f5d362ac3fa7a082245265e5a3bd20f690308253602a43218e3390b9831d35d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

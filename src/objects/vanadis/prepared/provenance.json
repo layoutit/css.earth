@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-surface@2x.webp",
-          "bytes": 302230,
-          "sha256": "9bd1a81fd0cd8f9ec1f6df53963f2359ab7b993f941d5970b60a984dc791acf0",
+          "bytes": 271602,
+          "sha256": "dda6a316c5994f2f8862fe33c43a10248aed7c8375f4f9133c3dd312c9b7244e",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/vanadis/vanadis-shape-surface@2x.webp",
-          "bytes": 69924,
-          "sha256": "f5d880b3aa48ecb948f6ddc2bed90daa8f08eed721856b2f7b5ae88c9b386af1",
+          "bytes": 68646,
+          "sha256": "f1556aced4910965ee0d2fb1042589fe83c387c46951c8847d04608b766ad68a",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "vanadis",
-    "materialSha256": "1090f7c476cca122f32e3f66b06831baf0154826b85cbe732992341b9a190109",
+    "materialSha256": "552880cd33eff1f917fe58b0775cefe153344ca4f59083afc30513e76a7ca91c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

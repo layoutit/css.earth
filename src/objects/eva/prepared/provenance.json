@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/eva/eva-elevation-surface@2x.webp",
-          "bytes": 303460,
-          "sha256": "6433f01e853b427c092f305c747c9ed4f0fa27a57a1fb06e4cf2954550a0691e",
+          "bytes": 274970,
+          "sha256": "c17395361733b41639acf738540c6eb5ee05fd3c8570bbd1e7ddc908d35bd796",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/eva/eva-shape-surface@2x.webp",
-          "bytes": 73860,
-          "sha256": "dd77b0813870f837a91c7554870bad681c0275f2b38b566596ed9a13b7dc037f",
+          "bytes": 74200,
+          "sha256": "c724ffc5ddde659cd975388cfcb8f046d33a84757a3a86268309c0bfbbcf92f5",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "eva",
-    "materialSha256": "e91386e5d1df741d091a30b59d75ff874ac811e09b54b7029899a8382641c1e5",
+    "materialSha256": "7730909e090f973f2771e6f6e455829a131d29face32a0d070a6409b7d5fa4af",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -391,8 +391,8 @@
         },
         {
           "url": "/scenes/sycorax/sycorax-model-surface@2x.webp",
-          "bytes": 61428,
-          "sha256": "b50f7b7b6ff6bf730811f5415c0f2ca281081b454fe2522b279d84e6b6b0faa7",
+          "bytes": 53110,
+          "sha256": "3219c2b392a233613a28ca7df0892d47f918dbe2da7b24b26b8a441b6c39299a",
           "verification": "bytes-verified"
         }
       ],
@@ -468,7 +468,7 @@
   },
   "lastPreparation": {
     "objectId": "sycorax",
-    "materialSha256": "67e13c6db9a29f7fd62b3b53af0c25a7971e6535720529520aac639f32467780",
+    "materialSha256": "b6da5cdf33b44e4ccb695eda8e9e00f65c92ae70cf9bd65268044b98b51be9cc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

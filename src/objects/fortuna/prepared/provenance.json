@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-surface@2x.webp",
-          "bytes": 379204,
-          "sha256": "3fe01fdc79d5018db54abfdc140fd2dfc37df42152eef41ac020ad7086ce6140",
+          "bytes": 309734,
+          "sha256": "c1522edfdee6da64b20cb2840fb1b17425d95efccb255a397d7be2b3f30a1fcf",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
-          "bytes": 77308,
-          "sha256": "c08cdbabfe12d6a0dd716c9a83ed87eb627f797eb0d9a2098916c453324f4983",
+          "bytes": 75516,
+          "sha256": "f25267309d54b83f28e87e4f56f897775276dc06cc04bb51ba5600fc6bc952fc",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "fortuna",
-    "materialSha256": "fe96aa1febd507432cfd6bb814d63975f9d351bd1e56551e17130aec85f1abbb",
+    "materialSha256": "21e05f98bc29e658ff2bd7e21bc1a2422c5606c8ff479cf1fc67e9f76c7620b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

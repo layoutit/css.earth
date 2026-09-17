@@ -2442,8 +2442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4125,
-          "sha256": "7e2363095fb2f831eda007a0affe98a81468cf91557e412e9dec38aaea901aed",
+          "bytes": 4244,
+          "sha256": "b1c7f3d32a74b9c70df8e0c81e1e0d30a1f861f1c62391fe838f96d075687ae1",
           "verification": "bytes-verified"
         }
       ],
@@ -2616,7 +2616,7 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "40df3db06a5b34f39e6fc75ba4b040fa43fefcbf719d5f7d9fec3ad1a7bb9c2c",
+    "materialSha256": "d8fbff12ccf48ed4f674b1b7ccb0a304b234646595aaa20cdd33efbe4e5853c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

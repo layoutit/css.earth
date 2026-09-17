@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/protogeneia/protogeneia-elevation-surface@2x.webp",
-          "bytes": 299602,
-          "sha256": "ad0d5a0c768f913d24229c265f4fb04b5e9d4aca8a2a3fcd8bb10adc7b790f6c",
+          "bytes": 271266,
+          "sha256": "cc1e383de44eae64918da12da68f03b875ea5930eb43e74b5be4ea7d2a1c181e",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
-          "bytes": 71266,
-          "sha256": "821d2b1d47b7dd8b61c98d0ab680788ef037ecc754c54e3ac9cb43153c975d6c",
+          "bytes": 69068,
+          "sha256": "eeab045887d22805fef6dcea41e97973f4f0ec79b2064e30e4175531b35967a8",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "protogeneia",
-    "materialSha256": "6a4e27faf19c3c21ad06e067fcae3807d49952c18641ad00c8a889aab24385cf",
+    "materialSha256": "7c8dbd154c1b98a4fe0ca745ac62dd6e139a13feed3580e130c6a38596023d47",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

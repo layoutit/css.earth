@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/lomia/lomia-elevation-surface@2x.webp",
-          "bytes": 349790,
-          "sha256": "7c1ceec8b5208269bac6c2a585375d44d823e3ae31c2fa5fd35764855551d928",
+          "bytes": 317400,
+          "sha256": "9f577961a2534b770f29a582584d1ebabd36bd87a81f487d422c5ab4e6fc9a8c",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/lomia/lomia-shape-surface@2x.webp",
-          "bytes": 72252,
-          "sha256": "d5dd6dd19c2bb0e53c44abdef1bcb2eb5aa7190db9132f4984bee9288ac61692",
+          "bytes": 72680,
+          "sha256": "a9779f8eda28c851e4781c7b7da37041867523d6efa6aa360590aa0812bba363",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "lomia",
-    "materialSha256": "784679019d4856de2d76c239e914e073a839defecc261de7cbf4a6e6afcd68cf",
+    "materialSha256": "231aec898897f8b6c3b4012189c55b6e7c2ffcb88d13c72b820822860bd38b7c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

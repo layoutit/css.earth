@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/zachia/zachia-elevation-surface@2x.webp",
-          "bytes": 302604,
-          "sha256": "252c0910aa3c97836f3e1143640048ed189c6ffdbd9ce92fefe08bab19822524",
+          "bytes": 274616,
+          "sha256": "473e653a736c1c19edbfa444a9366412e32839418aa0d42f850debfcd98bd759",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/zachia/zachia-shape-surface@2x.webp",
-          "bytes": 65358,
-          "sha256": "a998431ff335582b0b4848333590ac3a0ee7e921ce1ccbcacd651c71f3d24508",
+          "bytes": 63526,
+          "sha256": "57358e4ba9abc7aa6f35a867b6ad1e2b8b8331c90f09bd83f4961e277e1a1097",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "zachia",
-    "materialSha256": "eadcbef3aca8f831129286912e50c2b8d4d2b9edaf333edc6390058a4421b767",
+    "materialSha256": "3e60e8b65c696b728a6292fe1f95c21f7e8bcb3c28d5055eed5ffe675bcbabfc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

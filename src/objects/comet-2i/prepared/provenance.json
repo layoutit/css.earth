@@ -333,8 +333,8 @@
         },
         {
           "url": "/scenes/comet-2i/comet-2i-model-surface@2x.webp",
-          "bytes": 62022,
-          "sha256": "1b2c5f89a1aa6dbab8bb08f52b77fa96b7dd8b54a83a5297dc80cd80db44644e",
+          "bytes": 53142,
+          "sha256": "d7a1f21f485e80514641b37c78b676ca7a0122b70f18f4be82a33209fa4fb901",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +410,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-2i",
-    "materialSha256": "e4a86750a373bece6a1fe3e866dd3623bbae191a99b0bdf10fc5d4d359377021",
+    "materialSha256": "d3048d8727ad795707ba4e16851895a163c2535aa383175eeebf5604b37111af",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

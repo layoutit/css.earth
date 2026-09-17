@@ -1110,8 +1110,8 @@
         },
         {
           "url": "/scenes/comet-81p/comet-81p-model-surface@2x.webp",
-          "bytes": 146046,
-          "sha256": "81f1fedefe6eb7833196ac249d03127d7919402e5bd30bc9f9b963f44013a4b9",
+          "bytes": 148754,
+          "sha256": "c15dffa5f61894c8a67b39f6c9115c8e2ab45d597350729631bac1a3566b048b",
           "verification": "bytes-verified"
         }
       ],
@@ -1171,8 +1171,8 @@
         },
         {
           "url": "/scenes/comet-81p/comet-81p-navcam-surface@2x.webp",
-          "bytes": 199744,
-          "sha256": "397309f336ff45ee909853c308316c0f27c70dc1f8bd4276e3e0f68a71ef8760",
+          "bytes": 214420,
+          "sha256": "f6491aa445fe7f9311b6c8667b7cfecd7fe00a170869f4fa00140b44d5ddf89a",
           "verification": "bytes-verified"
         }
       ],
@@ -1283,7 +1283,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-81p",
-    "materialSha256": "bd6db06ace5c21ba23f86363c29c35eae24c16f511862d0084c2454b3548ecbf",
+    "materialSha256": "84ccfd446136fa2a84a87499fa544780d9b04bc8222dd7dc112aeed9996689d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

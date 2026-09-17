@@ -3058,8 +3058,8 @@
         },
         {
           "url": "/scenes/helene/helene-elevation-surface@2x.webp",
-          "bytes": 613148,
-          "sha256": "ea4071889b8bc040acddb5e5ae6c8decd5b46952a553495cd323b6f80f7a996c",
+          "bytes": 495800,
+          "sha256": "2f054f073a968306adb6eb3c2e14b5effe0454899c43150723a6cd08c6538485",
           "verification": "bytes-verified"
         }
       ],
@@ -3128,8 +3128,8 @@
         },
         {
           "url": "/scenes/helene/helene-normal-surface@2x.webp",
-          "bytes": 521620,
-          "sha256": "75bfd50bc0df58edea6a611c6fabbf5b5ed65c9776ec4dce03ced484d4a6694e",
+          "bytes": 414032,
+          "sha256": "04025ee5bb4fca8c4b251105cd99973f6c8b8e818b2f507676368353266069af",
           "verification": "bytes-verified"
         }
       ],
@@ -3188,8 +3188,8 @@
         },
         {
           "url": "/scenes/helene/helene-false-color-surface@2x.webp",
-          "bytes": 451546,
-          "sha256": "615855a60909fd4102ba481898701b11eb07b0a39a12ec22db8bb1b7608bc3aa",
+          "bytes": 366372,
+          "sha256": "2f6e55d56fe1bd65b556708aee0c44ae07b32f3c44d6bc5e384d89412e0cfffe",
           "verification": "bytes-verified"
         }
       ],
@@ -3247,8 +3247,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 18054,
-          "sha256": "b95f4c18b830701528a29591f389e6d1b26c1ff1da52eb464814c732a734df2a",
+          "bytes": 16200,
+          "sha256": "bc1dd5d1f5c01b376c3e445c7af04d8d6bff55aab009fec4472d62b68af02188",
           "verification": "bytes-verified"
         }
       ]
@@ -3272,8 +3272,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/false-color.webp",
-          "bytes": 8592,
-          "sha256": "0c17fa8b51216dc133432c944eeb238c91175c503731df138a4fd79ca47c47e6",
+          "bytes": 8022,
+          "sha256": "ef4472c659d3683f7991543cc81f5f3518e89bb307ae34afb2a8335894b9d1f1",
           "verification": "bytes-verified"
         }
       ]
@@ -3310,7 +3310,7 @@
   },
   "lastPreparation": {
     "objectId": "helene",
-    "materialSha256": "425e6e94a79ec2562e7a7f9d1f219a7321fe306e5332c7a9a4d949a991fd7f31",
+    "materialSha256": "835e24054f4ab611b5ce02167809bd789674b14951f02a35119746ec73cf891a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

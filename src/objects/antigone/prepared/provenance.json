@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/antigone/antigone-elevation-surface@2x.webp",
-          "bytes": 307354,
-          "sha256": "0410f948a80faa183470ee785fe94ef91d2b24ecf8b28b7fa852405001fdc369",
+          "bytes": 280952,
+          "sha256": "8953dd34f3f40937a504498d82b05e012d52e93f96557dcb2e2a8581d46361cd",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/antigone/antigone-shape-surface@2x.webp",
-          "bytes": 77776,
-          "sha256": "2ba24e00569c81c3c4facb363861d7ca6b67bb1b615f4e9558986631dc92af3e",
+          "bytes": 78248,
+          "sha256": "ccb72dfa73f44830305242a4201ebbb4d8f057817d76bbdd894f998b1f4fb790",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "antigone",
-    "materialSha256": "3c0fe24c5efe5c87d969451506f68bfca8484a76fc9acda68809e0cb98638780",
+    "materialSha256": "d5800221d83ed4f325c0ff330612c898bbf6875a168736d995fa4bd8c9a1ecda",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

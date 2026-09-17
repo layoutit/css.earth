@@ -850,8 +850,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-normal-surface@2x.webp",
-          "bytes": 1692430,
-          "sha256": "47a663f85dc108e38aca3e3dbee543458b9e0aafbafe515261c3f52d54d74993",
+          "bytes": 1605298,
+          "sha256": "1122dd8542d7f9e8d3b5f085d5260d5405329be403cc9275c2e760c2afd62b9e",
           "verification": "bytes-verified"
         }
       ],
@@ -906,8 +906,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-elevation-surface@2x.webp",
-          "bytes": 967138,
-          "sha256": "1d62edfe29f9ceb4073a2f67f3e52e8449d89587469b998582971733868d2dbc",
+          "bytes": 742896,
+          "sha256": "a7bf7198676361368844d723ec7a59498b214d75847885a057baaefd504f7bcb",
           "verification": "bytes-verified"
         }
       ],
@@ -957,8 +957,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-albedo-surface@2x.webp",
-          "bytes": 1904688,
-          "sha256": "891ae7329338ac719ff83ceef198b08695d1f078d1c7dace465476c37d6726b8",
+          "bytes": 1432968,
+          "sha256": "d3e4d57aa5413983dcde5068e5e4e903087c81d465f79dbdffd3764613090ddc",
           "verification": "bytes-verified"
         }
       ],
@@ -1008,8 +1008,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-slope-surface@2x.webp",
-          "bytes": 2568920,
-          "sha256": "dc390537788314472764249a617684a6b49556f324988d0a16211ba25c3f4bbf",
+          "bytes": 1981274,
+          "sha256": "23a267bb337b732bfdb48928ecb7eb91995c85f8fb21bfe7b4522665ff41ca9a",
           "verification": "bytes-verified"
         }
       ],
@@ -1190,7 +1190,7 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "8c26468642d74437649124aa1303e402c65d5e4772f7bf992147fcd9005792a3",
+    "materialSha256": "31dc6a433e8526b90032f3f09a6a86cd906d28b23955faff247d59fbf28c0a4a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

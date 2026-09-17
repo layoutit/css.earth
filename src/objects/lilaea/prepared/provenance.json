@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/lilaea/lilaea-elevation-surface@2x.webp",
-          "bytes": 347072,
-          "sha256": "ef3ef87f5c1ed572d4214b9804acd3e87bf1e780a675454391ba121b4f633a06",
+          "bytes": 311682,
+          "sha256": "3e0e2e4e071bf94a523284d2357a2472f31ec05f3e12309093a152c2fffb74fb",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/lilaea/lilaea-shape-surface@2x.webp",
-          "bytes": 76940,
-          "sha256": "d7df0162b54d18efd5da28b20d3df9ab98bb119de9666e42642f29f3ae14e276",
+          "bytes": 73622,
+          "sha256": "9e9444d6390ef90b8a3a0932b5d35c018246cb8ba0ea4bba9b71892515832506",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "lilaea",
-    "materialSha256": "4129b0453f18615015a135556b7d5ddbcb119d7918a377d725bf2be9e2b1d987",
+    "materialSha256": "756d00ddb8585828827088433519e3b6f8a9a97aa33a496d31238378e9fbc69c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

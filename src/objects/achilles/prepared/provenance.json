@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/achilles/achilles-elevation-surface@2x.webp",
-          "bytes": 335988,
-          "sha256": "41d45f10cd62ad3092dd5334cb900056b2d6de3069770bd5de932525b5504426",
+          "bytes": 299108,
+          "sha256": "607b366e2ff9777247d62ae7fa300c4e26d81414db5f9c4ddbe88536ff6c7c52",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/achilles/achilles-shape-surface@2x.webp",
-          "bytes": 68100,
-          "sha256": "7aa10752ff781cd41a3fa137341ee5ce31e1e1ea10882040252dece7e7be83a2",
+          "bytes": 67744,
+          "sha256": "4ea3acc87586512c04b37d5b1c3ab24d298a53ba966db1ad6be7bcfb361a9e94",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "achilles",
-    "materialSha256": "02fdf8893c2b58507e3bb9a59266bff3075c7710c657dca8b441f2a2c9489890",
+    "materialSha256": "9a138370d3c379283a349a939c701dbb6d13842dc0c27b0b281922d97a95b2b4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

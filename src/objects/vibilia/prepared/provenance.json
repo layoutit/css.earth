@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/vibilia/vibilia-elevation-surface@2x.webp",
-          "bytes": 333780,
-          "sha256": "e0f10711b28afb61dc0b6cdd576ba91cb85ab81176446a1070f35ba4e2ade296",
+          "bytes": 301478,
+          "sha256": "c1f069cf1b34bd4760befe042365f194db8a714f3d0ab0a28b02da6a087644d5",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/vibilia/vibilia-shape-surface@2x.webp",
-          "bytes": 78788,
-          "sha256": "6e6cd0cd7838a418d849a25fa77368d438b0a8959df3517df292bcc39f0009d7",
+          "bytes": 76312,
+          "sha256": "46d0633279917bcd2ee8cb13b80a08828aa9b2f726420b65bc085ab39a1224db",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "vibilia",
-    "materialSha256": "b3f8b2f2208c1c9d48f494f89f72303fea002b9965e294e46e783c545080779c",
+    "materialSha256": "b18a8ff512d97eff86a8e934d17d48d347598757e977636367e9894d268fc9fa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

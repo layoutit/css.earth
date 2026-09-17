@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/brucia/brucia-elevation-surface@2x.webp",
-          "bytes": 325680,
-          "sha256": "7c6e2c2a2654c40a8e314b54f04b91a9b15bb14b740907b6ac41212ca5a4431b",
+          "bytes": 297176,
+          "sha256": "c6571006e1477abef0334b30bcbede4909ed478baeb33f80bdfeb6f8dc887627",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/brucia/brucia-shape-surface@2x.webp",
-          "bytes": 74544,
-          "sha256": "60c8b17075ab95f4bc39bd56d5fda13bf32723e1d739fcbe7ab258a375f3f0fd",
+          "bytes": 70594,
+          "sha256": "cd5743d1c109365673fe23295bc5f881a272401fa40173ca49ed7c87ac0942fb",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "brucia",
-    "materialSha256": "e15d9ec790586f81bf885a41d9732666de35193016ba48b48db3a660e6cc00e9",
+    "materialSha256": "034e462c390274975d7852b3af50e17249ce84d15e8390ee6bace07c8e08670e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1579,8 +1579,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-elevation-surface@2x.webp",
-          "bytes": 434718,
-          "sha256": "16b1cb9556d03eb430763c6788137bacbd25eec600d06ba14828e15af2926a7f",
+          "bytes": 352966,
+          "sha256": "338b10bc89599b82a70c970938d238044f2be47127c79d01b4f9b4380a8889cd",
           "verification": "bytes-verified"
         }
       ],
@@ -1635,8 +1635,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-normal-surface@2x.webp",
-          "bytes": 324200,
-          "sha256": "d8662092b15424a6f783c1a7707239d97d76dc7b94e2d79e326c8f28f1ec537a",
+          "bytes": 262974,
+          "sha256": "45bc940ce3bd7dc9f84904d21d866636b0546af6fa5062bdd57bf92dc2595372",
           "verification": "bytes-verified"
         }
       ],
@@ -1685,8 +1685,8 @@
         },
         {
           "url": "/scenes/telesto/telesto-false-color-surface@2x.webp",
-          "bytes": 289092,
-          "sha256": "4dd239a01da0e50605205448edadf8f03e8a2a23efc2485bf87555286569ffe2",
+          "bytes": 232322,
+          "sha256": "3aea9f3f83898704eafc53a75f7f85352326cffe0008f7c611033c29ac309e74",
           "verification": "bytes-verified"
         }
       ],
@@ -1744,8 +1744,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 12894,
-          "sha256": "7518e3dbdc8b0a2f3f324e758bd43a6cc54f3d1584f38166659e19e8405ecb35",
+          "bytes": 10916,
+          "sha256": "e111961b1918af7bc2c2c5e4507a9e65a9b6398596240c9dbe299a54d012a02a",
           "verification": "bytes-verified"
         }
       ]
@@ -1769,8 +1769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/false-color.webp",
-          "bytes": 6684,
-          "sha256": "69377a88cde7e27239279b84134697bf7362ce4969b5d516b1d3a9974e04471c",
+          "bytes": 6072,
+          "sha256": "e749a0ad4af9a990b92ff423ee4d7310f998f79ca97593142b20404c9627a2de",
           "verification": "bytes-verified"
         }
       ]
@@ -1807,7 +1807,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "d8089ceb84f042e9f7bb83cdca9d602f265d034c94173ea3b1c6672097b3b88f",
+    "materialSha256": "93d8417e7157405583d0e5172f2e63fe8aa18a31a70f2809842ab098ea880652",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

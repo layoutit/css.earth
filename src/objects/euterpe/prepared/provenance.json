@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/euterpe/euterpe-elevation-surface@2x.webp",
-          "bytes": 310674,
-          "sha256": "56f2c6f2b8e24a2f9c0d78038372bf0880400e2d9607f8ed25231f5e9ca5879a",
+          "bytes": 284210,
+          "sha256": "7fbc70aed62ad2871e67915ae5c630b093429ba233da6c1db397e688b2c7d663",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/euterpe/euterpe-shape-surface@2x.webp",
-          "bytes": 74056,
-          "sha256": "1610adba4e09022530befbeb077398e0a759e79985533dbab71e784a78567b9f",
+          "bytes": 72590,
+          "sha256": "e3eb00a41bb02563d80606d533b6953ed21ab81340088147a9a17461a8b65aa1",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "euterpe",
-    "materialSha256": "6531730b1c644e4d21a909b57d9df99e598b46cb69e2c32f7608525f5b16b4e8",
+    "materialSha256": "d98aca37d7ee194dd7b3eb09b98aab0dffa6ecc6a9f7d88a53bf1ecaa6e2b12e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

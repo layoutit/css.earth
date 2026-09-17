@@ -1581,8 +1581,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7031,
-          "sha256": "8293d9ba7f8a69bcfb342abe0cddf61b95c6f8976df4ce34c807caa19c6de0b1",
+          "bytes": 7149,
+          "sha256": "0c17be555d161fd0832e8fa192ac8e6bcc162661437970c53e4c61904528c8d3",
           "verification": "bytes-verified"
         }
       ],
@@ -1730,7 +1730,7 @@
   },
   "lastPreparation": {
     "objectId": "iapetus",
-    "materialSha256": "caf2c2a309a4405a62c5af7f37e18b01145b79a2b17ccbd2496924551163d5ff",
+    "materialSha256": "89e942b08b4422dfb09d246d6ffb5da56b4544fc1128049277be1c35c40896d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

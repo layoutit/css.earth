@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/feronia/feronia-elevation-surface@2x.webp",
-          "bytes": 322198,
-          "sha256": "421d910b68d052dab07e3b23a90f447d9df6f23a0544aef76c4927880ccb67ba",
+          "bytes": 283456,
+          "sha256": "0ec23e3d696253507d5770edd5f257626b7dec36dc8c6d4e0af231eeefdd5847",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/feronia/feronia-shape-surface@2x.webp",
-          "bytes": 79816,
-          "sha256": "f884c7eacd71c005c812c2bbb2c29f75adb3a936d17bcac7a1cd88c7e6e45658",
+          "bytes": 77812,
+          "sha256": "0a100af8c55a3098eee6bc4752b369e516e878c369067fc00f6995bf8c913fc9",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "feronia",
-    "materialSha256": "d3c60d300710e1cd4e14dfdb20690673afd0afcafe55eeacae32fbbe98058d7f",
+    "materialSha256": "7b693397fe2a476c34fb9d66279826d8c8c90942f30d8738b154fcb18474cce0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

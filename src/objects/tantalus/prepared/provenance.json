@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/tantalus/tantalus-elevation-surface@2x.webp",
-          "bytes": 467738,
-          "sha256": "7d903c19e42b83d4752f451fedd10d0b675d1b7cf1f23e405bbb07da71501b39",
+          "bytes": 414144,
+          "sha256": "1576529c9c12f525aebc0d5e1269bf868d1be8cd41cd13c1590e22be64a657be",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/tantalus/tantalus-shape-surface@2x.webp",
-          "bytes": 82070,
-          "sha256": "248b104aacf957b9d6ff2d76dc44c4e36b6eb9bb3774d11ed44791c3d9484f83",
+          "bytes": 79222,
+          "sha256": "268140636c950b65e9b3a63c751a25e84a4efbfe37e0ade4290542306480c794",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "tantalus",
-    "materialSha256": "3a29149cc98d726d29c5fbec49d33f26dbc0c2f4028e88d507b6c233d1407c89",
+    "materialSha256": "1eec0ccc9cde2ba733157293bd17eb98fbc028f163cc0bd5070e050059fdb0aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

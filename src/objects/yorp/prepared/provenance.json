@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/yorp/yorp-elevation-surface@2x.webp",
-          "bytes": 271064,
-          "sha256": "d02a521fdb1e270030e5ebf5ddfb11043f7b0f4cdde931bdfe782d45ba768b12",
+          "bytes": 253416,
+          "sha256": "8568ee7ef102bc752e553ab4da8d1f02dc3950e5ee2c5785d0998b4f36985ce8",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/yorp/yorp-shape-surface@2x.webp",
-          "bytes": 74160,
-          "sha256": "6b69750d7aa862176e8378c1f9cab139fb2ddc164848969e5e40c88e8cbb232c",
+          "bytes": 73368,
+          "sha256": "e3bc9bf40620b87d6c411ab798cfbbf6932961cce23059c1752374de201e5a38",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "fd327d52a5e503c172a7241fd8d268e3865bb0774d2e03aebc3d0ba6a7e496a8",
+    "materialSha256": "d72d2c6a82ba397b67d7d5790c83df24b815dcb320f58b17a859f47de2a42f9e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

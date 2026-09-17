@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/davida/davida-elevation-surface@2x.webp",
-          "bytes": 362444,
-          "sha256": "fc9d095e039c0648830af762213fcbc9a7ac4275461a03ba2d7d31086cdccb19",
+          "bytes": 310508,
+          "sha256": "2e2f6f2096add46c218e3ac1cf696b7c3d4ad6bae985dbfd903a1f897498f242",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/davida/davida-shape-surface@2x.webp",
-          "bytes": 79192,
-          "sha256": "c6fdc7c5a400ac1ff3c8f80f0e70db267a05b76f7ad86d449d6da8e0825b1b1e",
+          "bytes": 77978,
+          "sha256": "6eecb4893dcab1f6fc1058ad3ebdf921aec27d6ca1961c9a8d0061f81086d0f4",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "davida",
-    "materialSha256": "74d64a46c1d5affd36d3f941ec1358c14c5e5c5885c073494433e7a36f928afe",
+    "materialSha256": "e04ff735c891e34cfbad24b30548c94cc43f9f00353f3430b03ac17db629a174",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

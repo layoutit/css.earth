@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/eurykleia/eurykleia-elevation-surface@2x.webp",
-          "bytes": 357672,
-          "sha256": "e0e9c44c8cee524e25c5fe73c89fda41f8eab594fca98c0aeb029154e5eb6be2",
+          "bytes": 324800,
+          "sha256": "a53cc523122298b81dbd2435fa91fe6c6ef4ce91b441cc61a66c15ee9a0daf64",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/eurykleia/eurykleia-shape-surface@2x.webp",
-          "bytes": 71880,
-          "sha256": "9399ada1407f1cb927a3686b9fd3ab1dcb7f6dc4f9036e14328a4ff0cf844819",
+          "bytes": 70398,
+          "sha256": "2ba51367068c06407dbe3965fd07579ef694ac968df4a0b65e61cadd5493f7f1",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "eurykleia",
-    "materialSha256": "3651d7774cb000cd89070c3c7666f0c0327806cb7c8fd5aec0ff31af7940a9a8",
+    "materialSha256": "ffded2e50d8c70c19164a7c4feed9f0414cf2c026517eeb2ed84822999bb5c85",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

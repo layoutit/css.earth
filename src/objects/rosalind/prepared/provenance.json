@@ -342,8 +342,8 @@
         },
         {
           "url": "/scenes/rosalind/rosalind-model-surface@2x.webp",
-          "bytes": 61438,
-          "sha256": "9561ed17562463340287e1f7a5be1a4b35842ccb9f1a1a242e782f7b2d3b0cdc",
+          "bytes": 50386,
+          "sha256": "88c2c9c6d8850bb92a448f121b4a8e571da78cd5c0acf1f7bdecf92ad79b9597",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalind",
-    "materialSha256": "8afe477903a68ec9507205b07ffbaba5e6d9e81a6ea622a28aaa8d5fec863af6",
+    "materialSha256": "dffd986805b8b27e840d937de78e171348678c5ecc0369906ab40a450614aa1b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

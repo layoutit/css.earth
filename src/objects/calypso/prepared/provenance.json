@@ -1579,8 +1579,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-elevation-surface@2x.webp",
-          "bytes": 396014,
-          "sha256": "5ddd65800b34cf81dfce85d0c54e7fd4c679c7db81fd4a7824a1416259f0b3ab",
+          "bytes": 329704,
+          "sha256": "d65589a36755dd6db3fb9a6dfa8f058aa9d49ce96f0c9467ba8104e0c2a0169c",
           "verification": "bytes-verified"
         }
       ],
@@ -1635,8 +1635,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-normal-surface@2x.webp",
-          "bytes": 317458,
-          "sha256": "c34de3154ee0bb3187a68ff28b08d8759a7ebfac52f50a3e1ff6541efebbc790",
+          "bytes": 251556,
+          "sha256": "261c0094572059fa9023205583aa3be23877f2e284ad1b21ece0eb58985d6504",
           "verification": "bytes-verified"
         }
       ],
@@ -1685,8 +1685,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-false-color-surface@2x.webp",
-          "bytes": 327038,
-          "sha256": "ee636fbf086b9b6e11070ed8598f863c731f6c45241e8d0a329593b967aa46d8",
+          "bytes": 265538,
+          "sha256": "13b4b895b834f42788ae41451fc40c30940e022a487047b885b1ea389a3d25f3",
           "verification": "bytes-verified"
         }
       ],
@@ -1744,8 +1744,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 12062,
-          "sha256": "257b916cf230bbe0a616c3abaff39587ee35efc14e700f5432f21a39111baed7",
+          "bytes": 10600,
+          "sha256": "d0c20039e69b81554b6ae430f70ae35a9be763197e45d4c6ea8c3b0c88b0b7bc",
           "verification": "bytes-verified"
         }
       ]
@@ -1769,8 +1769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/false-color.webp",
-          "bytes": 9838,
-          "sha256": "49f152d6e3c806a96c89660970c5458bc6d655248fa1df918c56b0191e15b94f",
+          "bytes": 8474,
+          "sha256": "a961a3eed9a05ef5d93c5e9d4d6e4daae98671917080c145088c287a1b7668cf",
           "verification": "bytes-verified"
         }
       ]
@@ -1807,7 +1807,7 @@
   },
   "lastPreparation": {
     "objectId": "calypso",
-    "materialSha256": "658d5bfbc1a9fc6988f6afed1274ce8029c56ce11409713a94e444bea9fbf997",
+    "materialSha256": "ff776beb4e619c4bafe12b1eca6de243dfa7d66b2874fc46c91ff5b7d85a3bf8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

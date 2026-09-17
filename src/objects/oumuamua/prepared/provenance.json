@@ -321,8 +321,8 @@
         },
         {
           "url": "/scenes/oumuamua/oumuamua-model-surface@2x.webp",
-          "bytes": 43766,
-          "sha256": "cf1af6ef20e19930a63f64a35c15d53013e7338c37415dccdbbc03392a93c378",
+          "bytes": 35088,
+          "sha256": "bf8de1cb645f4d2594ecbbc1dd9153541799ea416b2349d03ec3726e2854dace",
           "verification": "bytes-verified"
         }
       ],
@@ -398,7 +398,7 @@
   },
   "lastPreparation": {
     "objectId": "oumuamua",
-    "materialSha256": "6a207968528d2f3edd47b948060ccb29a93454927cd413197a48f19c74f1e8fc",
+    "materialSha256": "668d7fdb148adcf53f87d8930326e8af825682de11e9ab86b5d7b398beb78368",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

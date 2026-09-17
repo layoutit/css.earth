@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/aschera/aschera-elevation-surface@2x.webp",
-          "bytes": 322226,
-          "sha256": "d13384836b4e410cf1ddcb8a333688633180abd7c16be36a6214c086f2ba4385",
+          "bytes": 288788,
+          "sha256": "6473b62e474e85db6fd13cef1892829a7d590b32eafadfc31c93a39177c0d5e9",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/aschera/aschera-shape-surface@2x.webp",
-          "bytes": 74376,
-          "sha256": "3f394608f2fa488d499980cb16a73af6432c92b2e7c2d9b1db4ba132f7d425a2",
+          "bytes": 73720,
+          "sha256": "3fb8159269d23194adf7264f1ff03134d634a3df140d57c51c2ecef0ab5792a5",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "aschera",
-    "materialSha256": "6165d175104ff6315820d3c80fd302719c90780660fa7d9f1a9afba032d4e2dc",
+    "materialSha256": "919dd54a60aefa20822f6e47f9d1c1a65e24d35dd8ce40acedd7391ada0be01c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

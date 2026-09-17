@@ -398,8 +398,8 @@
         },
         {
           "url": "/scenes/iris/iris-elevation-surface@2x.webp",
-          "bytes": 482778,
-          "sha256": "700e62d832a8ee70df569391283208d91258e988eb6bc8b8417787412072070e",
+          "bytes": 390154,
+          "sha256": "1532160be73b08299949c5acd0e266d7f2d1400e8b0d2fa34133265c307c42a6",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +442,8 @@
         },
         {
           "url": "/scenes/iris/iris-shape-surface@2x.webp",
-          "bytes": 84412,
-          "sha256": "fa993737eff1be5b10a6ae2d305af5d44d885e75ce478c12f6f815f9def7688d",
+          "bytes": 82404,
+          "sha256": "617a9ee723006ff784cc73b4c090b05d2064c5587eb1c72f8ef25057b3a19d01",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "iris",
-    "materialSha256": "cc3f4de8e1949a0d2cd0fe01ad46c7c624ead7fcbe4d2f41bb7a708e44b8c435",
+    "materialSha256": "e4b04e54d0028219c20da9494f99737d0d76c5a993a95033e6534f6deabf2c42",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

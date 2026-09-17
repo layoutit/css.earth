@@ -427,8 +427,8 @@
         },
         {
           "url": "/scenes/moshup/moshup-elevation-surface@2x.webp",
-          "bytes": 556208,
-          "sha256": "f428db1f47dd643c0a8fd4a8c5ad320a7253b540c8b9e4a0fedef0a3fc57020e",
+          "bytes": 447046,
+          "sha256": "39cb288e591f4e696ed87ce024e7348eb9177b90219322d2589230356adc0d14",
           "verification": "bytes-verified"
         }
       ],
@@ -471,8 +471,8 @@
         },
         {
           "url": "/scenes/moshup/moshup-shape-surface@2x.webp",
-          "bytes": 79034,
-          "sha256": "4af17b918ae5376b085f08918b1ae22c46a0b3b0459cad08efe582371db05e4e",
+          "bytes": 76842,
+          "sha256": "5737a23d03ce3bab207a151d8ab25b9708d95a0b5a933c2f80878a66627fd44e",
           "verification": "bytes-verified"
         }
       ],
@@ -568,7 +568,7 @@
   },
   "lastPreparation": {
     "objectId": "moshup",
-    "materialSha256": "f62bed0d9a1cb6abb676e608940c84ad51871d493f762d9ed1f7193e563dcb6e",
+    "materialSha256": "efcc45fa50b9ed88ce8b6c81a3125881341f541648da117f7093b774ab4b7d0f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

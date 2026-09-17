@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/herculina/herculina-elevation-surface@2x.webp",
-          "bytes": 341238,
-          "sha256": "715db0e904c302210cad6076c11d05843da4cdbb741daf70d29d5a04d289a50c",
+          "bytes": 305682,
+          "sha256": "68a0786084a243f10b41aa6d0624dc3cb6224a18bc217a777e4cc10be711d747",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/herculina/herculina-shape-surface@2x.webp",
-          "bytes": 75026,
-          "sha256": "b173ea35e43a08fc909ef4535faf104594b1cd4ab1bc6c89b0bde944ed13c0ea",
+          "bytes": 73872,
+          "sha256": "fe10c885b16ab11e7ea729bfbdc242f82da72f5a26604be83a8ee06dc9fb1831",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "herculina",
-    "materialSha256": "367c7a26c3f53b5fc4f262fcbe6aba452be1d5bac05b98972abacefbe9ffc5b1",
+    "materialSha256": "8106d8c33b25b6fe628fe56c264604ac76eaaf2f491f1b1a64aea20de65d24b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

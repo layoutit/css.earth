@@ -355,8 +355,8 @@
         },
         {
           "url": "/scenes/despina/despina-model-surface@2x.webp",
-          "bytes": 58012,
-          "sha256": "118d52e4e1d8beb1df609d4c2dd61636c06cfe7876f35b43fb35e30037555fe8",
+          "bytes": 53140,
+          "sha256": "141a77bbbc50643ccfd7501de28b037bc6d5e5a619ca38b6808745539c92fdad",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "despina",
-    "materialSha256": "69003d6f8d4e632daebe211a87515003c37dd61444d94bd05a4a81673ec6a30a",
+    "materialSha256": "6de0d1c56edd54303a5a10142337b8a8df097f3d633d5c14ec1b166a291b713c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

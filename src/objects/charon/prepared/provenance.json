@@ -2192,8 +2192,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7031,
-          "sha256": "cfae5aef5a72191c9322a7216d014b3585d98d7a9525756a9f9f29bf25fb4e31",
+          "bytes": 7145,
+          "sha256": "aa95c20f08668420b0e95c33ea57461c9bf7cffbaf2b09612ed42614bcbe702a",
           "verification": "bytes-verified"
         }
       ],
@@ -2392,7 +2392,7 @@
   },
   "lastPreparation": {
     "objectId": "charon",
-    "materialSha256": "4288057581c30320ff718a6b73a4bdab9f2421899fe6c9b345aab36a09bfd702",
+    "materialSha256": "4a443893d4f80240f66735312ce87209e2fad50cb002911c769bb18eede2ff86",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

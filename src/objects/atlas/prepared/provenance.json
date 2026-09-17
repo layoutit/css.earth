@@ -1438,8 +1438,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-elevation-surface@2x.webp",
-          "bytes": 546210,
-          "sha256": "b0c5b521bd0fe6631d672f75496670b201d25f3267a1b48d6e431bd659d44a45",
+          "bytes": 459794,
+          "sha256": "60c7d929b9b7c4a5fe77c0e6d7b8284b046ef155325cfa610b7c6d26a6814a71",
           "verification": "bytes-verified"
         }
       ],
@@ -1492,8 +1492,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-normal-surface@2x.webp",
-          "bytes": 355100,
-          "sha256": "cbdc5994b5733d7cc3a45e106784a75079e508cd38128641b4cd738d35862670",
+          "bytes": 300346,
+          "sha256": "de17dce199d8f1a6e4248d6cb1aaef235fe62e4f7b7007b0225e7faba9918c42",
           "verification": "bytes-verified"
         }
       ],
@@ -1542,8 +1542,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-filter-color-surface@2x.webp",
-          "bytes": 393670,
-          "sha256": "508b662d8c6ed83ba967e6c16100605a9c557c2287e824dc1b346b2cce85b401",
+          "bytes": 342342,
+          "sha256": "0cccd38cea342bd00d9539ab2052de27a713ffdae12e015dc89756fb7e49fa88",
           "verification": "bytes-verified"
         }
       ],
@@ -1601,8 +1601,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 10250,
-          "sha256": "2bf913d135ddd95cadc1898d6ed001b6e1e16e7448aa21a2036bfbd665185d8c",
+          "bytes": 8698,
+          "sha256": "24f6af1d77718ab1044d4eefbd733cb2dbd57548593a38bc6119f5d2607238b5",
           "verification": "bytes-verified"
         }
       ]
@@ -1626,8 +1626,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 7198,
-          "sha256": "0858952a93eb889f62a1ac6ed099aa9205ea81b4110c09dfd71292dcf3e8c5c8",
+          "bytes": 6310,
+          "sha256": "d3dcdcdf43c84dcf526efdd811fc36ca5781b3e5a47ee320f92bfa00d6da5c09",
           "verification": "bytes-verified"
         }
       ]
@@ -1664,7 +1664,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "a568ce3d7bc8327914f2bf8d067ea58b7ac93fc8513d8d4de17dfcf45c216de8",
+    "materialSha256": "df99ef428a0f5c95667174014d07781abb6868f95197ad0a01ff1ee4e300fffb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

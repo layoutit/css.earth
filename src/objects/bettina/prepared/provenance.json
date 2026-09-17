@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/bettina/bettina-elevation-surface@2x.webp",
-          "bytes": 296204,
-          "sha256": "5553b41f5a8f747df69cd0c242890a0c988ac5b0f7b8062c5aa7653d15fd566a",
+          "bytes": 272012,
+          "sha256": "59449485770150ccd7cdc52b14994dc703740c7e8b51db2bd647a7c474802838",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/bettina/bettina-shape-surface@2x.webp",
-          "bytes": 79664,
-          "sha256": "065c65e9139bcbdd5803a183b33618301a6cb4963a468144384fb338ccb3d4ec",
+          "bytes": 78798,
+          "sha256": "8de4c084a68077ff14b074110758701186ddf9f3f677cb6fd4e7a4c20ed6c8b0",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "bettina",
-    "materialSha256": "6d1522ecfcf8a8ec7e6994ac1554d7b96da64027515c98d922290dc9b352c27b",
+    "materialSha256": "5f8eeddfecc4b003628a2641f8a3f372b5052c0506cec4b29c149d1cf2714024",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

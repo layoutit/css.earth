@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/althaea/althaea-elevation-surface@2x.webp",
-          "bytes": 301836,
-          "sha256": "f2029e66e6984ae04515c68e2d0ee32b17585294ef3f66ad9356fad375a0d801",
+          "bytes": 259318,
+          "sha256": "766440c583bd6ed61b1c1e2a02aa560232eb67970be88e214c72fdce43d7b4c8",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/althaea/althaea-shape-surface@2x.webp",
-          "bytes": 62480,
-          "sha256": "c4c69855ab25376d7697bc9c9b97a3483df8e5c08ea6ec401ff62c8b53906022",
+          "bytes": 59866,
+          "sha256": "9cef1db976e586c30018ffef38f7e07a1a3e1e4147a4b9f1b12417b0f61c57f4",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "althaea",
-    "materialSha256": "fcdf2400ded4c1366998e942bb95ac91515608bba4b4856d08845dddbfbaeaf9",
+    "materialSha256": "64d8db75392aa9b778449c6b83c59eedf06affab7bbe640e21fe018c17f04145",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

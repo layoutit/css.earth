@@ -326,8 +326,8 @@
         },
         {
           "url": "/scenes/comet-c1995-o1/comet-c1995-o1-model-surface@2x.webp",
-          "bytes": 56852,
-          "sha256": "1623be914dfc4619f330d133f1bba5722ef289f945becd67881c5e8ebdc3e69d",
+          "bytes": 48178,
+          "sha256": "6069adbbc98b2212a3efe73fdb47033d2b96cb9401278cfa119401424061ea46",
           "verification": "bytes-verified"
         }
       ],
@@ -373,7 +373,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1995-o1",
-    "materialSha256": "a33b267bf9f7656fa2f7082587acd1f57b909fb530612e430352d7dba4e0e18c",
+    "materialSha256": "74b85201e5e535124ce5c28ffb4eda18be5a4ea1023c147b3e0b8a507ae39a16",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

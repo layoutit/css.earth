@@ -335,8 +335,8 @@
         },
         {
           "url": "/scenes/mani/mani-model-surface@2x.webp",
-          "bytes": 62810,
-          "sha256": "44b11931e901b41f7027f7a1ab5de4565ce882bf137139680e10651a97f0d174",
+          "bytes": 49910,
+          "sha256": "7375da740e011a6b08cca701cd58c0f2b22367f18cb72562c8a88289b985997f",
           "verification": "bytes-verified"
         }
       ],
@@ -412,7 +412,7 @@
   },
   "lastPreparation": {
     "objectId": "mani",
-    "materialSha256": "c89fe316180a6c69b71a3042f2ec39d2079a616ac0636b1468d3dfb11a323c42",
+    "materialSha256": "04ae224d570785257b33e07e2baba7394c4aa39056ce52763b32c5c07ce63ea0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

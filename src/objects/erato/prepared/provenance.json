@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/erato/erato-elevation-surface@2x.webp",
-          "bytes": 301632,
-          "sha256": "03d763ea8cc4a3d28a94ccd9a640918966059626d650b3a57af12112b0560792",
+          "bytes": 272222,
+          "sha256": "91d80b6c76d33f1faaff55a8d86c0cd966ffbfc84aedc2c60b970452d12e98a5",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/erato/erato-shape-surface@2x.webp",
-          "bytes": 69258,
-          "sha256": "d65b0ae146d721c6684a199e95ae4aeff1e09797e75a6fc5972802f361690bce",
+          "bytes": 66414,
+          "sha256": "0f3f8170fee3fce42177f5b70cc2e6a23fb2c376cd10e4dd5ce69f777acf7d81",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "erato",
-    "materialSha256": "d611d303e5e4b7843628e4a87d4cda602ba4ab8059d53ad69f75992742ec414c",
+    "materialSha256": "00f64acd59068af290734ad53fc646e5553f5ab0d531ea55173e4bf7ee2ab398",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

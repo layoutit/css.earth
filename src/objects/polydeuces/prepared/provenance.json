@@ -470,8 +470,8 @@
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
-          "bytes": 66468,
-          "sha256": "74c22a53b36a0409c273fef2704db2db6a04ef2371974542a603e5619dfdee3e",
+          "bytes": 67806,
+          "sha256": "b6acbcf7c11caa9f825efd0e32c898a5ca1720255200a6010190b4fc44309cfb",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "417a8753673042259fb1878a8987a21ae64c65370460e54fca2861bd64c3cf87",
+    "materialSha256": "bba338a4e453c5bc7127dac94918472d564fb4390876f3d2f3d71544e63abd9b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-surface@2x.webp",
-          "bytes": 307408,
-          "sha256": "ab3c8f6c79430dc055099224c59f067423b8f9a0ae3d549fa2cbe650a0974676",
+          "bytes": 279184,
+          "sha256": "cee085df4e88c44b7b7281e68b8ee8c59a82695696f78bfc335827f5ce51abda",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/hesperia/hesperia-shape-surface@2x.webp",
-          "bytes": 73892,
-          "sha256": "5ff62de0d210c9043945c346533bfe4d7587697650d809ea7f69e9bd9aa9838f",
+          "bytes": 71724,
+          "sha256": "903093b8c308b1d8074dc218ffa267e631c709e44f647f5f87ae99d7fd0ee825",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "hesperia",
-    "materialSha256": "f2b223e582f88c88f23014606d14b7aa9877f4d43c1b410a9a5ec2ff80786d65",
+    "materialSha256": "e4c08b93704f4b011c422d1d9f1acac38a60d2900a4aa78756ac410d2becaa7f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

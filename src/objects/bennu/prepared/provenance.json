@@ -881,8 +881,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
-          "bytes": 5739270,
-          "sha256": "b98f9ac08c7fb9bc71e624d70e23cec0e1621d865b4158392961891e5ed0345e",
+          "bytes": 5721680,
+          "sha256": "eca9ca12d4f9495ab97e950442abac17cab48e63389bfd8677b8958f9fe5e29b",
           "verification": "bytes-verified"
         }
       ],
@@ -949,8 +949,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
-          "bytes": 8074634,
-          "sha256": "61e69e8836cd2b9844630809f1d87927ef85bd30a6bc35b6c64b39e38e3b30f6",
+          "bytes": 8065026,
+          "sha256": "c16def7157c0b6f41b3a394497dc8224611260924c85a0b3c29506fd1dea6ef4",
           "verification": "bytes-verified"
         }
       ],
@@ -1020,8 +1020,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
-          "bytes": 5758410,
-          "sha256": "0f3678eb5b0baa3b4fce23455a69304b07ba90cb7f822771be2631ecc612ac2e",
+          "bytes": 3575090,
+          "sha256": "ee63ce8153d90a807f07175160c6d298b582963b3169d7be92fd43090d12d4c9",
           "verification": "bytes-verified"
         }
       ],
@@ -1075,8 +1075,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
-          "bytes": 2692836,
-          "sha256": "0fbf97ad512f73393f1de67f8e8d94b6bcc086c008ad157bf7b6d8f7aa2d2e78",
+          "bytes": 1919540,
+          "sha256": "11ae9d089bd91a4a121e452242f8ab629168ea4b09a585fe6120ae42317c31ed",
           "verification": "bytes-verified"
         }
       ],
@@ -1258,7 +1258,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "3fe771c5e78e9a10abdf4210832a4a060e10e835eb66f473131bd2f978ac0e37",
+    "materialSha256": "5826bc1d278362f2b0899646f8ce70e0093bf8824394de35b5ad5d93606eae60",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

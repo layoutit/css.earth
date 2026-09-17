@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/eurynome/eurynome-elevation-surface@2x.webp",
-          "bytes": 279998,
-          "sha256": "9adbdb6b4e4b816c2e0697d5d0c903bc4078d4b477c14f1f7fcdc2255c0577bd",
+          "bytes": 254700,
+          "sha256": "5f87173eafe9f416ede1b291766220f14a531928a28a7983b6a6a15e4cace7ea",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/eurynome/eurynome-shape-surface@2x.webp",
-          "bytes": 67746,
-          "sha256": "b732e575fba9355d284471c58abf25af4f9848d25083487de2056d4d66c5dee9",
+          "bytes": 66372,
+          "sha256": "8f86b6be3127333f06c9ba5e217de5df9443835d896386c0aa44b1628a9d92ee",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "eurynome",
-    "materialSha256": "8174f29757cdc0f7b796009ffdcf1db93d18876745e74223a87c4d9fcd5a9c4d",
+    "materialSha256": "537ea4034134f75172edcefe3b2839e21b4e183c6209c43479ec8e5149f3cc99",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -400,8 +400,8 @@
         },
         {
           "url": "/scenes/nysa/nysa-elevation-surface@2x.webp",
-          "bytes": 360224,
-          "sha256": "5804332763475c712f94cfaf998d7f9a2d150702f28ec4c871ee23e8632ac345",
+          "bytes": 307648,
+          "sha256": "d4d113e6f0850b572a44e3e8234e02b1a613847f248f4efcc17c091970c2b43f",
           "verification": "bytes-verified"
         }
       ],
@@ -444,8 +444,8 @@
         },
         {
           "url": "/scenes/nysa/nysa-shape-surface@2x.webp",
-          "bytes": 85542,
-          "sha256": "69bc8a553c28c41017f1af6234673b79e752c693f7e6f9e656e274fa79e24cb5",
+          "bytes": 84356,
+          "sha256": "1416649dde26ed7f0950dd023334c7550cadd9356eb62fe2c787219b940a7ba9",
           "verification": "bytes-verified"
         }
       ],
@@ -541,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "nysa",
-    "materialSha256": "09067d93bd9ed6c87008fef15bf223221727d8239487d1077817c648c42bc2e9",
+    "materialSha256": "d466ac7348f626c950867560a4faaa31b3417b649d20ea0839f80aaeb0426145",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

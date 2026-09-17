@@ -2089,8 +2089,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-elevation-surface@2x.webp",
-          "bytes": 587232,
-          "sha256": "a701be776a4b084d43da0acaa6eea502448e7e078865467a55d9973b0e417967",
+          "bytes": 471928,
+          "sha256": "d2b6aca0625ab54978653f3f486c58c6f6dfc372b7f17ef5381e1f621ae12153",
           "verification": "bytes-verified"
         }
       ],
@@ -2147,8 +2147,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
-          "bytes": 730526,
-          "sha256": "0f8eb7812b26142c5c0601f1da08131fad2b657bd3ff1a7722f27489ae73f9d1",
+          "bytes": 558202,
+          "sha256": "d815d836e93ea69884621acb126aa69927c7cba90a5257479a6c60eae2bf31aa",
           "verification": "bytes-verified"
         }
       ],
@@ -2203,8 +2203,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
-          "bytes": 449438,
-          "sha256": "6f8bcc16b86cf8dbeb224f2c906af06751f62f081d664303cbf67f83261797ce",
+          "bytes": 350222,
+          "sha256": "c4b810b6497d00917359ababf0f45f23af9483b4d499b7d1b06f1dbeceae9d76",
           "verification": "bytes-verified"
         }
       ],
@@ -2262,8 +2262,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 30470,
-          "sha256": "f6e022ad0465c90b65c809986bc4300e47a68921d7bedbf396f9d02e76ce0911",
+          "bytes": 27148,
+          "sha256": "6af386906b56753244ac29c97e2349a0e676a39b53413350c78e5552e2c5f631",
           "verification": "bytes-verified"
         }
       ]
@@ -2287,8 +2287,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 10858,
-          "sha256": "f610f7f132400c3458dabf58e5500a45329ba680de9b8179bfd71768bf9cc477",
+          "bytes": 10332,
+          "sha256": "88e5da06fc96825706cc4476ae29d2c2a6d8000ccce800cf1943f5b80b53c9af",
           "verification": "bytes-verified"
         }
       ]
@@ -2325,7 +2325,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "ec18454e355b5e07597c09c9f9dec8c29949094c222f122bf286df74b90a8b21",
+    "materialSha256": "abd5d824452e601ae8b8958b4e65c0da6e7b983b7dac6f10d97e9d20ca119032",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

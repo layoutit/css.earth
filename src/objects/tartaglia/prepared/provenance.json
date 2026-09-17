@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-surface@2x.webp",
-          "bytes": 298556,
-          "sha256": "3d5a7eb1435bb945953e9db552adc197c5fb5fe960c1d2b7fcbe9eac2aa23af9",
+          "bytes": 272144,
+          "sha256": "071a05d8277c5a7a653b66d403be54f3799d408c355971b2035ef2d60c555234",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
-          "bytes": 62028,
-          "sha256": "90ba2c6c99486cb70088abc12ffb7552badc2a4cd831cf2eec61670b68961405",
+          "bytes": 60802,
+          "sha256": "30a4dd93af7d92ff83d6df73d850fbfa6d219bd49251c53db39f308dee84bbe4",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "tartaglia",
-    "materialSha256": "dc7ab89dda1c47d6726969e38ed6bc576a24d11644d5b29899a3b805513643f6",
+    "materialSha256": "cc42b26ae731d448fe4585df4c9f25e91f4bb6dafcab17c5d52f644a3378c03b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

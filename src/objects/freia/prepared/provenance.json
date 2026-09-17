@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/freia/freia-elevation-surface@2x.webp",
-          "bytes": 320402,
-          "sha256": "805b9a9c1bd5b7a5ba5a1166246f4dc19ec6aa7af057f6cd5ff5d78250891b45",
+          "bytes": 288990,
+          "sha256": "112fbd8a866b46f722e1bec5ac4698f1eaf5534b6c2a0704a13df8aa76ff138e",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/freia/freia-shape-surface@2x.webp",
-          "bytes": 76412,
-          "sha256": "a570f7eb31befaefe38e755305684bfccdbfee560202bdf01b9fed262692a921",
+          "bytes": 75708,
+          "sha256": "937554c77d9e05f4bd904a366b38e2a825ee5b8df280a0ebb9e2a3ca7fdc72fb",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "freia",
-    "materialSha256": "0fc67eaec1430dfe2f4b1f8a9646ef80031c8d9ddb1ef222f25f8ec41482dad5",
+    "materialSha256": "194460afb1d86d9c8d205055e5cffd3fc7c8192bfb9f876b7548886325d93027",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

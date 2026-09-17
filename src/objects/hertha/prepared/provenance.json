@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/hertha/hertha-elevation-surface@2x.webp",
-          "bytes": 301148,
-          "sha256": "2d1a3bed26b7f10a993d288ff15420cb1a172f79d7f8db3dd08c639ff851656e",
+          "bytes": 273220,
+          "sha256": "a6fd6c28bfd46c1b024dfdaf3428ce89041013f4a15dccb4a61df922cf7fb918",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/hertha/hertha-shape-surface@2x.webp",
-          "bytes": 76646,
-          "sha256": "ce30c9140296bdfca8226d601a4993e685a575cfb7029872e447998338feda33",
+          "bytes": 76042,
+          "sha256": "f334ca6e105897b95241a35933d73043cb9981b8eff62a940dd92d8789aea552",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "hertha",
-    "materialSha256": "5221b689aadb4386aff8f525f163037642cf6315dfbd1c72b401d825fd84e31f",
+    "materialSha256": "40234d548566210a045c22139f8fd21558a9a8faaaf7f87fcd0180f3c1da5ae6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

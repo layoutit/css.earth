@@ -436,8 +436,8 @@
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
-          "bytes": 72010,
-          "sha256": "b79f825e766ca46f519570d72dc2abb69cc209b6cb9f7aa7e08247d39985d43d",
+          "bytes": 74638,
+          "sha256": "347da848cc4aafe83b499e1cf6d3e2fd6d1a65adad7a22d4717e03fab303306c",
           "verification": "bytes-verified"
         }
       ],
@@ -508,7 +508,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "135d752f3f1867c00125f16717275c105eec480421f4402d33f944a32e2d2ef0",
+    "materialSha256": "26e53a969ba987dab57d5a656e7e30347143f6ae3d550cc6754e11130f049ae6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

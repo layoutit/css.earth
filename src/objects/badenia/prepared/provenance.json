@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/badenia/badenia-elevation-surface@2x.webp",
-          "bytes": 337836,
-          "sha256": "1b7a435c06c7377efcbf235f464a5d98f73ae4f5be0cc15c393b9a1e2f067142",
+          "bytes": 300628,
+          "sha256": "f37190517bf95c655f7b3d158d8b9f8e35d422570e194674f92b4746a58bd2eb",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/badenia/badenia-shape-surface@2x.webp",
-          "bytes": 69962,
-          "sha256": "e161ca92482b9680b38d467db00244ba5f97bfae5b16524279a0e8229a560354",
+          "bytes": 67998,
+          "sha256": "e7f8d34181a9518a2686fe40c739141352e75b427d49b90677910aef03c2e1ad",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "badenia",
-    "materialSha256": "283fe1c0a5f495b3587a4cdf884fdc1bdc75668243f4d2cac07144c95aecc923",
+    "materialSha256": "cd3630ac12315b2dc657ad408842f6806a77d9cdb0e7e29f9046e844b9411a81",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

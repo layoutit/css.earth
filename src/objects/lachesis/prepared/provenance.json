@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/lachesis/lachesis-elevation-surface@2x.webp",
-          "bytes": 309352,
-          "sha256": "7a0087f1d3a9aa017a97c55688a1789b2954610524d214762b576e978bc4ac1c",
+          "bytes": 277100,
+          "sha256": "a36b8d54e5468fb3575e1814727982a3a2b21dc63da8d95932705a393b5e942a",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/lachesis/lachesis-shape-surface@2x.webp",
-          "bytes": 71022,
-          "sha256": "df91001c6452328d25a89dc48faba97a419f107d33729d57af33fb54804896ea",
+          "bytes": 69234,
+          "sha256": "cd981e145f2e0855645c8588cf5b28fffad7087ad7342ead0546bb0edd631059",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "lachesis",
-    "materialSha256": "eebc75710a0351cc370938484630f126c2d63d6d22fc62ae561c32e813632fc9",
+    "materialSha256": "ef5b3e231dc409d471d4104b21a82a8ae5f6847ae5c9ea92a028d6a1180fca99",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

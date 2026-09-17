@@ -453,6 +453,8 @@ hidden, so any crack is a thin non-white line inside the body):
 | Amalthea | 5,746 | 4 |
 | Achlys | 5,574 | 0 |
 
+![Itokawa without and with the 12-pixel overlap: the top row is a zoomed crop of the same surface patch, the bottom row the whole body at the default distance. The hairline seams that cross the left frames are gone on the right.](images/itokawa-seam-repair.webp)
+
 Surface detail is unchanged: Itokawa's mean surface detail (absolute Laplacian
 over pixels that are neither crack nor sky) is 1.572 without overlap and 1.669
 with it; Ida's is 0.912 and 0.918. Pixelmatch between two overlap sizes differs

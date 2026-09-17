@@ -345,8 +345,8 @@
         },
         {
           "url": "/scenes/loge/loge-model-surface@2x.webp",
-          "bytes": 62902,
-          "sha256": "88c0fffe7750c12d64ea080efa485062a6f431f8c6ad15481f451815539745fe",
+          "bytes": 50756,
+          "sha256": "2f6abc7f20d33c687d00aa1bce57e9e4d33d8d5c163f31865a62561edcf638c0",
           "verification": "bytes-verified"
         }
       ],
@@ -422,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "loge",
-    "materialSha256": "a428d9f75e2bc0c5c94ac9292cea936b88e4f97ed98efef899b5458145d9369f",
+    "materialSha256": "9c8c6e4fd07c59ee24fc0e4d63656625e1723b57b1766303e0fdd0d29b5a0685",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

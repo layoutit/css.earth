@@ -418,8 +418,8 @@
         },
         {
           "url": "/scenes/piazzia/piazzia-elevation-surface@2x.webp",
-          "bytes": 344532,
-          "sha256": "00e263c3070ee82bb3d0647b6b058af92b586a0a412f00546eab1aaa7c507060",
+          "bytes": 309894,
+          "sha256": "a9c97469b4fc07e263d1dcf9d00c6f1e725b77aee3169df5f20681d2af33473d",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +462,8 @@
         },
         {
           "url": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
-          "bytes": 67182,
-          "sha256": "04504bd915e5e4315d7f6580e4d0d6e001ced4619e87e0bd6602d99ab78f57de",
+          "bytes": 66300,
+          "sha256": "c9fc1b5dd698ce7389dfebc898a2fff82f2064e24bed5e578896c06c8a845913",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "piazzia",
-    "materialSha256": "6f9ef703c34333c0b27e019f77009c12921c2a2db493289794c2f1815a912682",
+    "materialSha256": "caf9c55cb7b9122905d7100c0ad35bdbe701ddf4398eb74aad31baca2a5dd535",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

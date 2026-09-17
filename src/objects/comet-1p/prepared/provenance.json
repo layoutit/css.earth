@@ -397,8 +397,8 @@
         },
         {
           "url": "/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
-          "bytes": 129088,
-          "sha256": "5939b657ca8f52e041876ba1e78a209a1ac2390194e8ae0101487d1712888427",
+          "bytes": 125498,
+          "sha256": "868d66f314c5d31ef2a7a368716a84554e5840a3cf4ec7f9c0425a4aa7462994",
           "verification": "bytes-verified"
         }
       ],
@@ -446,8 +446,8 @@
         },
         {
           "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
-          "bytes": 50024,
-          "sha256": "330479f3ea3a21b15ee3ab275ce1a20741adb3159771dc0f6d142755993b5b87",
+          "bytes": 50088,
+          "sha256": "25d5bad9fa4a11398750b131ed07a6f0fd68ac63ab2558c6d234fae600711122",
           "verification": "bytes-verified"
         }
       ],
@@ -518,7 +518,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-1p",
-    "materialSha256": "a4be6f1125a590a828a9dd33751ab02eb6effb168046ae7d16633336bbd33a6b",
+    "materialSha256": "5c50fe153e6bc3f19a31e61de67be68a5d242632b5264253ad6275296d012657",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

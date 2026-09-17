@@ -419,8 +419,8 @@
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-surface@2x.webp",
-          "bytes": 323094,
-          "sha256": "4ca158203c197ffa3646490c904b2cbbfa44e23584b2b64c7fc2eb28f3cbec86",
+          "bytes": 285072,
+          "sha256": "824eb6ff53dd4b68ee05a925a1f64fd14f00fef5df77a3a4ed33910a22aeae40",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +463,8 @@
         },
         {
           "url": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
-          "bytes": 67914,
-          "sha256": "d87f573e435f19813813bf428cafd074d60a17c8b1b1e50f7f2577052690965b",
+          "bytes": 66372,
+          "sha256": "5a618ef3de117fd6efcc2ba01a6b34b81096910089c7870fde67bd846b105c26",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +560,7 @@
   },
   "lastPreparation": {
     "objectId": "eumelos",
-    "materialSha256": "240b10efa527b1cbc030164c64722b5ac746781e9e5c6df06657b7fdda72b074",
+    "materialSha256": "9635fdce3b0630f31dd758d733f1b07178ad566cb630ce58e9b0325e2a4b869e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
