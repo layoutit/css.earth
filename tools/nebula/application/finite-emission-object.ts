@@ -119,7 +119,11 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
     const envelope = stringify({ schema: 'cssearth-prepared-object@1', id: bankId, type: 'volume-lens-bank', format: 'cssearth-volume-lenses@1', data });
 
     await mkdir(installed, { recursive: true });
-    for (const entry of await readdir(resolve(staging, 'atlases-out'))) await rename(resolve(staging, 'atlases-out', entry), resolve(installed, entry));
+    // Replace each installed lens directory; a rename onto a populated one fails, and a re-prepare is normal.
+    for (const entry of await readdir(resolve(staging, 'atlases-out'))) {
+      await rm(resolve(installed, entry), { recursive: true, force: true });
+      await rename(resolve(staging, 'atlases-out', entry), resolve(installed, entry));
+    }
     await writeAtomic(resolve(installed, 'lenses.json'), envelope);
     await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@1',
       compactInputs, modelResultId: text(inputs.modelResultId, 'model id'), lenses: receipts }));
