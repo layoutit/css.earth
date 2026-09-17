@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "aro-12m-original",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access for the ARO 12-metre telescope",
+      "status": "deferred",
+      "finding": "No open archive endpoint was found or probed for the Arizona Radio Observatory's original 12-metre dish.",
+      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "evidence": [
+        "https://aro.as.arizona.edu/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Not examined.",
+      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "evidence": [
+        "https://aro.as.arizona.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software for this facility",
+      "status": "deferred",
+      "finding": "Not examined.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://aro.as.arizona.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

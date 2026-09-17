@@ -87,6 +87,12 @@ test('every facility ledger parses, and a catalogued facility keeps its catalogu
   const [ledgers, catalogue] = await Promise.all([readFacilityLedgers(root), readFile(resolve(root, 'site/source/facilities/catalog.json'), 'utf8')]);
   const ids = new Set((JSON.parse(catalogue) as { facilities: { id: string }[] }).facilities.map(facility => facility.id));
   assert.ok(ledgers.some(ledger => ledger.facilityId === 'vlti') && ledgers.some(ledger => ledger.facilityId === 'alma'));
-  // CHARA keeps a ledger without a page record: no dataset on the page credits it.
-  assert.deepEqual(ledgers.map(ledger => ledger.facilityId).filter(id => !ids.has(id)), ['chara']);
+  // A facility no dataset on the page credits keeps a ledger without a catalogue record.
+  assert.deepEqual(ledgers.map(ledger => ledger.facilityId).filter(id => !ids.has(id)).sort(),
+    ['askap', 'chara', 'gemini', 'iram-noema', 'jcmt', 'keck', 'lofar', 'sma', 'subaru']);
+  // Every catalogued ground facility is swept.
+  const ground = new Set((JSON.parse(catalogue) as { facilities: { id: string; setting: { value: string } }[] }).facilities
+    .filter(facility => facility.setting.value === 'ground').map(facility => facility.id));
+  const recorded = new Set(ledgers.map(ledger => ledger.facilityId));
+  assert.deepEqual([...ground].filter(id => !recorded.has(id)), []);
 });

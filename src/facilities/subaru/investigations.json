@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "subaru",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Subaru SMOKA archive access",
+      "status": "deferred",
+      "finding": "SMOKA, Subaru's archive, answered on 2026-09-17 (200). It is its own web interface, not TAP.",
+      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "evidence": [
+        "https://smoka.nao.ac.jp/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Not examined: the proprietary period and licence.",
+      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "evidence": [
+        "https://smoka.nao.ac.jp/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software for this facility",
+      "status": "deferred",
+      "finding": "Not examined: hscPipe and other Subaru pipelines.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://smoka.nao.ac.jp/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

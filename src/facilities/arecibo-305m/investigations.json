@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "arecibo-305m",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Radar data from Arecibo",
+      "status": "deferred",
+      "finding": "Arecibo collapsed in 2020; its asteroid radar products reach this repository through NASA's PDS Small Bodies Node (API 200 on 2026-09-17), not an observatory archive. No live archive endpoint was probed.",
+      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "evidence": [
+        "https://pds.nasa.gov/api/search/1/products?limit=1",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "PDS data carry no restrictions on use; the specific product licences were not re-checked here.",
+      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "evidence": [
+        "https://pds.nasa.gov/api/search/1/products?limit=1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software for this facility",
+      "status": "deferred",
+      "finding": "Radar shape models are delivered as finished products; no reduction software is run here.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://pds.nasa.gov/api/search/1/products?limit=1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}
