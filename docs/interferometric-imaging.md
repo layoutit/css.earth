@@ -28,7 +28,8 @@ Toolchains install under `output/toolchains/`, which git ignores. Downloads are 
 | ROTIR | 2 min 14 s with a warm depot | 1.8 GB |
 | PIONIER 4.0.4 | 9 min | 295 MB |
 | AMBER 4.4.5 | 9 min 36 s | about 80 MB after the build tree is removed |
-TOOLCHAIN_ROWS
+| GRAVITY 1.11.0 | 10 min | 279 MB |
+| MATISSE 2.5.0 | 14 min | 192 MB |
 
 ## Measured checks
 
@@ -60,7 +61,9 @@ Each calibration tool is compared with an author's published file for the same o
 
 The closure phases differ by a median of −1.1 degrees, and no wavelength lag remains. Two steps make that agreement. The frame selection keeps the best 80 percent by fringe S/N on each baseline separately, as amdlib does, instead of whole frames. The wavelengths are calibrated on the star's own CO lines (`co-wavelength.mts`): ESO's lamp-based table is 2.30 nm long near 2.3 µm, the shift that aligns R Dor's absorption with 12CO v = 2-0 lines computed from molecular constants. The paper calibrated on telluric lines in Canopus instead; both land on the same channels. The comparison smooths our channels over three because the author binned to a resolution of 8000.
 
-ORACLE_GRAVITY_MATISSE
+**GRAVITY, R Car, 27 January 2018.** The science exposure `GRAVI.2018-01-27T05:30:10.657` against Rosales-Guzmán et al.'s file in the [OiDB collection](https://oidb.jmmc.fr/collection.html?id=7e5740b8-745c-40bd-9740-b8745cd0bd52) (first polarisation, science camera). The authors calibrated with four later exposures of HD 80404, and `--calibrator` names the same four. The median squared-visibility ratio over all 8472 points is 0.994, and closure phases differ by at most 0.2 degrees per triangle. Per baseline the median ratio runs from 0.96 to 1.12, and the two highest are on baselines where the squared visibility is below 0.02. The calibrator exposure the archive tree pairs with this exposure (05:57, the same star) gives 0.955 and 0.5 degrees instead. The pipeline version is not the cause: the authors used GRAVITY 1.0.7 with `vfactor-min-sc=0.1` and `bias-method=MEDIAN`, and rerunning 1.11.0 with those settings left every value unchanged.
+
+**MATISSE, Betelgeuse, 8 February 2020.** The LM-band exposure `MATIS.2020-02-08T00:06:12.142` (beam commuters IN-IN, no chopping) with default settings and the calibrator exposure the archive tree pairs with it, against Drevon et al.'s (2024) file for the same exposure. On B2-C1, the one baseline where the squared visibility is high (0.50), the median ratio is 1.048. The other five baselines have squared visibilities below 0.03. There the median difference runs from −0.0052 on B2-D0 to +0.0025 on C1-D0, and B2-D0 differs by 3.7 times the combined errors. Closure phases differ by at most 2 degrees per triangle. The authors reduced with MATISSE 1.5.1 and 1.6.0, without the channel-bias subtraction (`cb`), over the whole 14-exposure block, with three calibrator blocks. Removing `cb` changed nothing. MATISSE_CALIBRATORS The cause of the difference at low visibility is not identified.
 
 ## Sphere maps on a lens
 
@@ -76,4 +79,8 @@ ORACLE_GRAVITY_MATISSE
 
 **Calibrator diameters are stated, not looked up.** The AMBER kit's calibrator database has no entry within 60 arcseconds of Canopus, so a calibration names each calibrator's diameter and its source.
 
-**Only public frames.** Raw frames still in their proprietary period answer 401 and are refused.
+**Automatic calibrator choice can be several percent off.** The tree pairs a science exposure with one calibrator exposure. For R Car it gave squared visibilities 4.5 percent below the authors', who chose other exposures of the same star. `--calibrator` reproduces an author's choice; the default is kept, and a new star's calibration should be checked against its calibrators' spread.
+
+**MATISSE at very low visibility.** Where Betelgeuse's squared visibility is below 0.03, MATISSE 2.5.0 and the authors' 1.5.1 differ by up to 0.005, several times the stated errors. Reconstructions from these baselines inherit that difference.
+
+**Only public frames.** Raw frames still in their proprietary period answer 401 and are refused. Public ESO archive data are distributed under [CC BY 4.0](https://archive.eso.org/cms/eso-data-access-policy.html): a star cast from our own calibration credits ESO and the programme identifier of its frames, and derived files keep the ESO headers the pipelines copy into them.
