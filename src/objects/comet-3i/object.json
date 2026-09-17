@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-3i",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "3I/ATLAS",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 1.3773021194754251
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-3i-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7808f608b160297ebcbf767d70f838ef24e66f052501a61e54088fe9e8a012b3"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -372522788543.7557,
+        1485607441639.2666,
+        549745144772.92615
+      ],
+      "presentationToReference": [
+        -0.229248921348952,
+        0,
+        -0.9733678297849904,
+        0.8930475236229374,
+        0.3977771559319137,
+        -0.21033177308637216,
+        0.38718348700749255,
+        -0.9174820620691818,
+        -0.0911899839346451
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 5.9882700846757615,
+      "bodyRadiusM": 1377.3021194754251
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "3I/ATLAS",
+      "classification": "interstellar",
+      "color": "#aaaaaa",
+      "distanceAu": 10.877658422787514,
+      "description": "The third interstellar object seen passing through the Solar System.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "0a4eaab3902f31d286dc5cf3e2f3e4d610b73e09f34682057628bb42a050c256"
+  }
+}
