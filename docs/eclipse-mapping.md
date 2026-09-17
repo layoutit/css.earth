@@ -34,6 +34,33 @@ Measured on 2026-09-17 from the 30 raw segments, against Bell et al.'s deposited
 
 The two reductions differ by a straight-line drift of 2,221 ppm per day, which a map fit takes up in its baseline terms; the cause is not identified. From 10 µm the channels disagree most; Hammond et al. (2024) excluded the data above 10.5 µm for shadowing. The run took 37 minutes: stages 1 and 2 at 316 to 348 s per five segments with a peak of 16.7 GB, stage 3 in 204 s, stage 4 in 44 s.
 
+### HD 189733b: from raw exposures to a map
+
+`hd-189733b-miri-2021-002` and `hd-189733b-miri-2021-011` pin the two MIRI eclipses of JWST program 2021 (seven segments, 6.4 GB each) that Lally et al. (2025) mapped. Their deposit ([Zenodo 15103479](https://zenodo.org/records/15103479), CC BY 4.0) has no Eureka! control files. So the programs take Bell et al.'s MIRI settings with the two choices the paper states for this star: a linear background outside a 24-pixel aperture, and a white light curve in the Spitzer 8 µm band (6.37–9.43 µm). The deposit is read as separate files, each checked by the md5 Zenodo lists. Downloads run three at a time, because MAST throttled one connection to 0.6 MB/s where three together reached 16 MB/s.
+
+| Eclipse | Paired integrations | Correlation | Difference after the drift | Scatter, ours and theirs |
+| --- | --- | --- | --- | --- |
+| 1 (observation 002) | 17,019 | 0.988 | 245 ppm | 352 and 330 ppm |
+| 2 (observation 011) | 17,024 | 0.985 | 249 ppm | 355 and 327 ppm |
+
+Their curves are outlier-clipped, which is why their scatter is lower.
+
+[`hd-189733b-raw-map.test.mts`](../tools/objects/eclipse-map/hd-189733b-raw-map.test.mts) fits a map to both raw eclipses with the model of their ThERESA configuration:
+- MIRI only, degree 5, 3 eigencurves.
+- Their clipping and baselines.
+- An exponential ramp and decorrelation vectors on eclipse 1.
+- Errors scaled to each eclipse's scatter.
+
+It compares that map with the one they deposited:
+
+| Map | Reduced χ² | Hot spot | Dayside correlation with the deposited map |
+| --- | --- | --- | --- |
+| From our raw eclipses | 1.061 | 41.3° E, 7.3° N | 0.938 |
+| From their deposited curves, same fit | 1.052 | 44.0° E, 6.0° N | 0.898 |
+| Deposited map (their fit, with Spitzer) | | brightest cell centred at 37.5° E, 7.5° N | |
+
+The paper gives the hot spot at 33.0° E. The raw reduction and this repository's fit reach the deposited map's brightest cell.
+
 ## Checks
 
 - [`spherical-harmonics.test.mts`](../tools/objects/eclipse-map/spherical-harmonics.test.mts): the harmonics are orthonormal on the sphere and match their closed forms at degree 1.
@@ -54,7 +81,7 @@ With positivity dropped, BIC prefers degree 4 with 12 eigencurves and a hot spot
 
 ## Limits
 
-- **Raw reductions are one instrument mode so far.** `reduce-tso.mts` carries settings for MIRI slitless spectroscopy, reproduced on one phase curve. NIRSpec and NIRISS observations need their own control files and their own comparison with a deposit before a map is fitted from them.
+- **Raw reductions are one instrument mode so far.** `reduce-tso.mts` carries settings for MIRI slitless spectroscopy, reproduced on the WASP-43b phase curve and the two HD 189733b eclipses. NIRSpec and NIRISS observations need their own control files and their own comparison with a deposit before a map is fitted from them.
 - **Systematics are the analyst's model.** Baselines and decorrelation vectors enter as linear columns. A nonlinear ramp's time constant is profiled over a grid and refined, on the most flexible candidate, then refined again for the chosen model. It is poorly constrained and the longitude follows it: on WASP-43b's MIRI curve, 0.08 and 0.16 days fit equally well and put the offset 1.15° apart. Different systematics models move the hot spot by more than the statistical uncertainty.
 - **Eclipse timing moves longitude.** The fit takes eclipse times from the package orbit. On WASP-43b's MIRI curve, eclipses assumed 1 s earlier move the offset about 0.04° east. [`transit-timing.mts`](../tools/objects/eclipse-map/transit-timing.mts) measures the transit time in a light curve, so the orbit's timing can be checked. Remember that eclipse light arrives 2a/c after transit light. [WASP-43b's README](../src/objects/wasp-43b/README.md) records how timing and the ramp account for the difference from Hammond et al. (2024).
 - **Integration grid.** Occultation is decided per cell centre. At 90 × 180 cells, χ² agrees with the 360 × 720 grid to within 0.2.
