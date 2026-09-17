@@ -1,0 +1,36 @@
+{
+  "id": "zenodo-12627524",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Latitudinal Asymmetry in the Dayside Atmosphere of WASP-43b: data inputs and analysis products (Challener et al. 2024)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.12627524"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/12627524",
+      "label": "Zenodo"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/12627524",
+      "checkedOn": "2026-09-16",
+      "locator": "wasp-43b.tar: README, maps.npy (white-light, NRS1 and NRS2 flux and temperature maps), white-light and two-channel light curves; CC BY 4.0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "R. C. Challener, Z. Rustamkulov et al.; JWST NIRSpec/G395H phase curve of WASP-43b, program 1224 (PI S. Birkmann)",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/12627524"
+    }
+  ],
+  "publisher": "Zenodo"
+}

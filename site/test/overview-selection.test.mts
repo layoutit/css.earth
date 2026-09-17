@@ -35,6 +35,14 @@ test('the threshold follows the Sun origin even in a translated world frame', ()
   }
 });
 
+test('a body placed outside the Solar System keeps its scene until the camera is as far from it as the Sun is', () => {
+  const pc = 206_264.806 * au, wasp = frame([87 * pc, 0, 0], 1);
+  const placed = [...objects, objectFixture('wasp-43b', wasp)];
+  const at = (range: number) => selectionAtCamera({ world: camera(wasp, range), viewport, objects: placed, objectId: 'wasp-43b', overview: false });
+  for (const range of [100 * au, 1e4 * au, 50 * pc, 86.99 * pc]) assert.equal(at(range), null, 'The neighbourhood stays on the placed body');
+  assert.deepEqual(at(87 * pc), { overview: true, objectId: 'sun' });
+});
+
 test('only approaching the Sun opens a card, with separate entry and exit thresholds', () => {
   assert.equal(choose(camera(sun, 1281), 'sun', true), null);
   assert.equal(choose(camera(sun, 1000), 'sun', true), null);

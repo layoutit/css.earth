@@ -7,6 +7,9 @@ export interface StarRecord { rightAscensionDegrees: number; declinationDegrees:
   properMotionRaMasPerYear: number; properMotionDecMasPerYear: number; radialVelocityKmPerS: number;
   sources: { position: string; distance: string; properMotion: string; radialVelocity: string } }
 
+export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: 0;
+  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; sources: { period: string; shape: string; phase: string; orientation: string } }
+
 export function objectValue(value: unknown, label = 'record'): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object`);
   return value as Record<string, unknown>;
@@ -58,4 +61,19 @@ export function readStarRecord(value: unknown): StarRecord {
   if (star.rightAscensionDegrees < 0 || star.rightAscensionDegrees >= 360 || Math.abs(star.declinationDegrees) > 90 || !(star.distanceParsecs > 0) ||
       Object.values(star.sources).some(text => !text.trim())) throw new TypeError('Invalid star astrometry.');
   return star;
+}
+
+/** A circular transit-fitted orbit around a placed star; only the published transit quantities and a stated node convention. */
+export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
+  const record = objectValue(value), sources = objectValue(record.sources, 'hosted orbit sources');
+  if (record.eccentricity !== 0) throw new TypeError('Only circular hosted orbits are modelled.');
+  const orbit = { periodDays: numberValue(record.periodDays), semiMajorAxisStellarRadii: numberValue(record.semiMajorAxisStellarRadii),
+    inclinationDegrees: numberValue(record.inclinationDegrees), eccentricity: 0 as const, transitTimeBmjdTdb: numberValue(record.transitTimeBmjdTdb),
+    ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
+    sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation) } };
+  if (!(orbit.periodDays > 0) || !(orbit.semiMajorAxisStellarRadii > 1) || orbit.inclinationDegrees < 0 || orbit.inclinationDegrees > 180 ||
+      orbit.ascendingNodePositionAngleDegrees < 0 || orbit.ascendingNodePositionAngleDegrees >= 360 || Object.values(orbit.sources).some(text => !text.trim())) {
+    throw new TypeError('Invalid hosted orbit.');
+  }
+  return orbit;
 }

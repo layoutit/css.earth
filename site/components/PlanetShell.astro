@@ -58,6 +58,11 @@ const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
 const systemStar = SCENE_OBJECTS.find(object => object.classification === 'star' && object.distance.meters === 0)!;
+// Placed stars whose planets carry imagery are browsable systems; the registry decides, not a list.
+const LIGHT_YEAR_M = 9460730472580800;
+const hostedSystems = SCENE_OBJECTS.filter(object => object.classification === 'star' && object.discovery.hostsImagery)
+  .map(star => ({ star, distanceLy: Math.round(star.distance.meters / LIGHT_YEAR_M) }))
+  .sort((a, b) => a.distanceLy - b.distanceLy);
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
@@ -303,7 +308,7 @@ const searchCategories = ([
           <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
         <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information"
-          tabs={[{ id: 'systems', label: 'Systems', count: 1 + unavailableSystems.length },
+          tabs={[{ id: 'systems', label: 'Systems', count: 1 + hostedSystems.length + unavailableSystems.length },
             { id: 'factsheet', label: 'Factsheet' }]} />
         <div class="planet-object-results-scroll planet-card-tabpanel" id={`${objectId}-milky-way-systems-content`}
           role="region" aria-label="Planetary systems">
@@ -314,6 +319,16 @@ const searchCategories = ([
                 <span class="planet-object-name planet-lens-label">Solar System</span>
               </a>
             </li>
+            {hostedSystems.map(({ star, distanceLy }) => <li>
+              <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={star.route} data-object-id={star.id} aria-label={`Browse ${star.name} system`}>
+                <span class="planet-lens-icon"><PlanetNavigationMarker planetId={star.id} color={star.color} /></span>
+                <span class="planet-object-name planet-lens-label">{star.name}</span>
+                <span class="planet-object-distance planet-lens-detail">
+                  <span class="planet-object-distance-value">≈{distanceLy}</span>{" "}
+                  <span class="planet-object-distance-unit">ly</span>
+                </span>
+              </a>
+            </li>)}
             {unavailableSystems.map(system => <li>
               <span class="planet-object-link planet-observation-control planet-thumbnail-leading" role="link" aria-disabled="true" title="Not available yet">
                 <span class="planet-lens-icon"><PlanetNavigationMarker planetId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} /></span>

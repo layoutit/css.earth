@@ -31,10 +31,10 @@ const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKER
         <PlanetNavigationMarker planetId={object.id} color={object.color} scale={thumbnailScale} />
       </span>
       <span class="planet-object-name planet-lens-label">{object.name}</span>
-      <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={contentDescription ?? `${Number(object.distance.value.toFixed(3))} AU. ${distanceDescription(object.distance)}`}>
+      <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={contentDescription ?? `${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
         {contentDescription ? <span>{contentDescription}</span> : <>
         <span class="planet-object-distance-value">{Number(object.distance.value.toFixed(3))}</span>{" "}
-        <span class="planet-object-distance-unit">AU</span>
+        <span class="planet-object-distance-unit">{object.distance.unit}</span>
         </>}
       </span>
     </a>

@@ -124,8 +124,8 @@
       "origin": "project-preparation",
       "credit": "cssEarth contributors",
       "acquisition": "Existing prepared shared world frame; only the frame identity and navigation epoch are read. No solar data supplies galaxy positions.",
-      "expectedSha256": "5cc15fc19617876aae807b3459ac15cf153c4ad13834f22a2ba8b456fcafebff",
-      "expectedBytes": 7230469,
+      "expectedSha256": "62ff45a25ae5c710020e8169d728c0cfba533a2b19ee4ece99864889c53f51b0",
+      "expectedBytes": 7264359,
       "sourceBinding": {
         "kind": "local",
         "reason": "Prepared application frame identity, not a galaxy measurement."

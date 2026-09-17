@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { objectValue, stringValue, numberValue, readElementRecord, readVectorFixture, readStarRecord } from './lib/generator-records.mts';
+import { objectValue, stringValue, numberValue, readElementRecord, readVectorFixture, readStarRecord, readHostedOrbitRecord } from './lib/generator-records.mts';
 import { shape, optional, boolean } from './lib/source-validation.mts';
 
 const nullableString = (value: unknown) => value === null ? null : stringValue(value);
@@ -11,7 +11,7 @@ const parseRecord = shape({
   id: stringValue, classification: stringValue, order: optional(numberValue), classificationOrder: optional(numberValue),
   physical: shape({ name: stringValue, horizonsCode: nullableString, meanRadiusKm: numberValue,
     gravitationalParameterKm3PerS2: numberValue, parent: nullableString }),
-  asteroid: optional(readElementRecord), comet: optional(readElementRecord), star: optional(readStarRecord),
+  asteroid: optional(readElementRecord), comet: optional(readElementRecord), star: optional(readStarRecord), hostedOrbit: optional(readHostedOrbitRecord),
   asteroidFixture: optional(readVectorFixture), cometFixture: optional(readVectorFixture),
   acquisition: optional(shape({
     heliocentric: optional(shape({ target: stringValue, model: stringValue })),
@@ -36,6 +36,10 @@ function bodyRecord(value: unknown): BodyRecord {
   if (!physical.name || physical.meanRadiusKm <= 0 || physical.gravitationalParameterKm3PerS2 < 0) throw new TypeError(`Invalid physical data: ${record.id}.`);
   // A star beyond the Solar System is placed by its astrometry and orbits nothing this package models.
   if (record.star !== undefined && (record.classification !== 'star' || physical.parent !== null)) throw new TypeError(`Star astrometry belongs to a parentless star: ${record.id}.`);
+  // A hosted orbit belongs to an exoplanet and is placed around its parent star; bodies.ts checks the parent is a placed star.
+  if ((record.hostedOrbit !== undefined) !== (record.classification === 'exoplanet') || record.hostedOrbit !== undefined && physical.parent === null) {
+    throw new TypeError(`An exoplanet has exactly a hosted orbit around a parent: ${record.id}.`);
+  }
   const acquisition = record.acquisition;
   if (acquisition?.heliocentric && !['asteroid', 'comet', 'dwarfPlanet'].includes(acquisition.heliocentric.model)) throw new TypeError('Invalid heliocentric model.');
   if (acquisition?.satellite && (!(acquisition.satellite.toJd > acquisition.satellite.fromJd) || !(acquisition.satellite.stepDays > 0))) throw new TypeError('Invalid satellite sampling window.');
@@ -46,7 +50,7 @@ function bodyRecord(value: unknown): BodyRecord {
 const packageRoot = resolve(import.meta.dirname, '..');
 const order = (a: {id: string; order?: number}, b: {id: string; order?: number}) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
 const kinds = { planet: 'PLANET_IDS', 'dwarf-planet': 'DWARF_PLANET_IDS', asteroid: 'ASTEROID_IDS',
-  'trans-neptunian': 'TRANS_NEPTUNIAN_IDS', interstellar: 'INTERSTELLAR_IDS', comet: 'COMET_IDS' };
+  'trans-neptunian': 'TRANS_NEPTUNIAN_IDS', interstellar: 'INTERSTELLAR_IDS', comet: 'COMET_IDS', exoplanet: 'EXOPLANET_IDS' };
 const models = {
   asteroid: ['ASTEROID_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],
   comet: ['COMET_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],
@@ -54,6 +58,7 @@ const models = {
   satellite: ['SATELLITE_ELEMENTS', "import type { SatelliteRecord } from '../satelliteElements.data.js'", 'SatelliteRecord'],
   sceneSatellite: ['SCENE_SATELLITE_STATES', "import type { SceneSatelliteRecord } from '../../sceneSatellites.js'", 'SceneSatelliteRecord'],
   star: ['STAR_ASTROMETRY', "import type { StarAstrometry } from '../../stars.js'", 'StarAstrometry'],
+  hostedOrbit: ['HOSTED_ORBITS', "import type { HostedOrbit } from '../../hostedOrbits.js'", 'HostedOrbit'],
   asteroidFixture: ['ASTEROID_FIXTURES', '', ''],
   cometFixture: ['COMET_FIXTURES', '', ''],
 };
@@ -70,6 +75,7 @@ export async function readBodyRecords(root = packageRoot) {
   if (!ids.size) throw new TypeError('Astronomy records are empty.');
   for (const record of records) {
     if (record.physical.parent !== null && !ids.has(record.physical.parent)) throw new TypeError(`Missing astronomy parent: ${record.id}.`);
+    if (record.hostedOrbit !== undefined && records.find(parent => parent.id === record.physical.parent)?.star === undefined) throw new TypeError(`A hosted orbit's parent must be a placed star: ${record.id}.`);
   }
   return records.sort(order);
 }
