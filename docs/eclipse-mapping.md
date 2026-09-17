@@ -15,6 +15,25 @@ A hot Jupiter's map reaches this project as a light curve, not as a picture: the
 
 **Spin axis.** The planet spins about the orbit normal, because the geometry is the package's own orbit. The public ThERESA code leaves the map's inclination at 90°, which tilts the axis off the orbit normal for any orbit that is not edge-on (see [WASP-43b's re-runs](../src/objects/wasp-43b/source/reference/theresa-reruns.md)). That tilt cannot occur here.
 
+## From raw exposures
+
+`tools/objects/jwst/reduce-tso.mts` turns raw JWST time-series exposures into the light curves the fit reads, with [Eureka!](https://github.com/kevin218/Eureka) on the STScI `jwst` pipeline.
+
+- **Toolchain.** `tools/objects/jwst/toolchain.mts install` builds Python 3.11 with micromamba and installs `requirements.lock`, every package at its pinned version or commit, under `output/toolchains/eureka`. One patch is applied: Eureka! 1.4 crashes on a scalar detector gain, which MIRI uses. The CRDS reference context is pinned per program, so reference files match the recorded run.
+- **Program.** A directory under `tools/objects/jwst/programs/` pins the raw segments by name and size, the control files, and the deposit to compare with. `wasp-43b-miri-1366` holds the 30 segments (44.2 GB) of the WASP-43b MIRI phase curve, with Bell et al. (2024)'s Eureka! v1 settings carried over to Eureka! 1.4's option names.
+- **Run.** Stages 1 and 2 go in batches of five segments, one worker, and a batch does not start with less than half the memory free: a segment's ramp fit peaks near 17 GB. Stage 3 extracts every segment. Stage 4 makes the white light curve, 14 channels and, when a program names them, wider slices with bounds from a file in the program. All of them are exported to CSV, as is the deposit. So is the star's median extracted count spectrum, the band response for a temperature map. `--raw` points at segments already on disk; missing ones download from MAST with resume.
+- **Check.** `compare-light-curves.mts` pairs integrations by time and reports correlation, the difference after a straight-line drift, scatter and errors. `reduce-tso.test.mts` holds the run to Bell et al.'s published curves.
+
+Measured on 2026-09-17 from the 30 raw segments, against Bell et al.'s deposited Eureka! v1 light curves:
+
+| Light curve | Paired integrations | Correlation | Difference after the drift | Point-to-point scatter, ours and theirs |
+| --- | --- | --- | --- | --- |
+| White, 5–10.5 µm | 9,194 | 0.990 | 172 ppm | 342 and 373 ppm |
+| Channels 5.0–10.0 µm (10) | 9,194 | 0.927 to 0.994 | 328 to 673 ppm | |
+| Channels 10.0–12.0 µm (4) | 9,194 | 0.870 to 0.931 | 846 to 2,430 ppm | |
+
+The two reductions differ by a straight-line drift of 2,221 ppm per day, which a map fit takes up in its baseline terms; the cause is not identified. From 10 µm the channels disagree most; Hammond et al. (2024) excluded the data above 10.5 µm for shadowing. The run took 37 minutes: stages 1 and 2 at 316 to 348 s per five segments with a peak of 16.7 GB, stage 3 in 204 s, stage 4 in 44 s.
+
 ## Checks
 
 - [`spherical-harmonics.test.mts`](../tools/objects/eclipse-map/spherical-harmonics.test.mts): the harmonics are orthonormal on the sphere and match their closed forms at degree 1.
@@ -35,7 +54,7 @@ With positivity dropped, BIC prefers degree 4 with 12 eigencurves and a hot spot
 
 ## Limits
 
-- **Light curves only.** The fit starts from a reduced light curve. Reducing raw JWST data is a separate stage that is not built yet.
+- **Raw reductions are one instrument mode so far.** `reduce-tso.mts` carries settings for MIRI slitless spectroscopy, reproduced on one phase curve. NIRSpec and NIRISS observations need their own control files and their own comparison with a deposit before a map is fitted from them.
 - **Systematics are the analyst's model.** Baselines and decorrelation vectors enter as linear columns. A nonlinear ramp's time constant is profiled over a grid, on the simplest candidate model. Different systematics models move the hot spot by more than the statistical uncertainty.
 - **Integration grid.** Occultation is decided per cell centre. At 90 × 180 cells, χ² agrees with the 360 × 720 grid to within 0.2.
 - **Posterior.** Metropolis with a Gaussian proposal and positivity as a hard prior. It reports the statistical spread under one fixed systematics model, like the published intervals it is compared with.

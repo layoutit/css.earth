@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "00e21347b3a3c7458a2ae98625c72a03e8b574bcb13a586ee20bddc91a7006ea"
+    "sha256": "387472d932cd680fb405f53fa5eab1d3e46503adaa40fcc08c9961fe8f8fe88f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1194,11 +1194,11 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Exported by this project's Eureka! 1.4 reduction of the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), with Bell et al. (2024)'s Eureka! v1 control files carried over to Eureka! 1.4 names: Stages 1-3 once, Stage 4 white light over 5.0-10.5 um and three channels 5.0-6.5, 6.5-8.5, 8.5-10.5 um. Columns: BMJD_TDB time, flux and error normalised by the median, the Stage 4 mask, spatial centroid and PSF width.",
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-white.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by this project's JWST reduction; repinned when the reduction is rerun."
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
       },
       "sha256": "a116e36fe13b7818b5d90155aec445c888d47e54c6103b88160b1a52d6bd442d",
       "bytes": 1382127,
@@ -1221,11 +1221,11 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "The same reduction's Stage 3 optimal spectra (electrons per integration), median over the 9,216 integrations with Stage 3 masked pixels excluded, sorted by wavelength: the band response the white light and channel curves summed.",
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-stellar-counts.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by this project's JWST reduction; repinned when the reduction is rerun."
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
       },
       "sha256": "6f3780d764b85027e7a0cce2df65c36ac23f814995182af477c044487e15d5c3",
       "bytes": 12671,
@@ -1248,11 +1248,11 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Exported by this project's Eureka! 1.4 reduction of the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), with Bell et al. (2024)'s Eureka! v1 control files carried over to Eureka! 1.4 names: Stages 1-3 once, Stage 4 white light over 5.0-10.5 um and three channels 5.0-6.5, 6.5-8.5, 8.5-10.5 um. Columns: BMJD_TDB time, flux and error normalised by the median, the Stage 4 mask, spatial centroid and PSF width.",
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-slice-ch00.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by this project's JWST reduction; repinned when the reduction is rerun."
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
       },
       "sha256": "b6eba2957701a07668fc34076fdc5580fe7074590fa472472eaa2efc7a073e06",
       "bytes": 1382169,
@@ -1275,11 +1275,11 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Exported by this project's Eureka! 1.4 reduction of the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), with Bell et al. (2024)'s Eureka! v1 control files carried over to Eureka! 1.4 names: Stages 1-3 once, Stage 4 white light over 5.0-10.5 um and three channels 5.0-6.5, 6.5-8.5, 8.5-10.5 um. Columns: BMJD_TDB time, flux and error normalised by the median, the Stage 4 mask, spatial centroid and PSF width.",
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-slice-ch01.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by this project's JWST reduction; repinned when the reduction is rerun."
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
       },
       "sha256": "323930f3ad2a9454d0c3391b0d5df89b4e9c161c98f4136ad3754050123bbbc1",
       "bytes": 1382253,
@@ -1302,11 +1302,11 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Exported by this project's Eureka! 1.4 reduction of the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), with Bell et al. (2024)'s Eureka! v1 control files carried over to Eureka! 1.4 names: Stages 1-3 once, Stage 4 white light over 5.0-10.5 um and three channels 5.0-6.5, 6.5-8.5, 8.5-10.5 um. Columns: BMJD_TDB time, flux and error normalised by the median, the Stage 4 mask, spatial centroid and PSF width.",
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-slice-ch02.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by this project's JWST reduction; repinned when the reduction is rerun."
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
       },
       "sha256": "fcd979a1f3520f30b846dbf5605f09696228b4047840f93855a4704f796a235a",
       "bytes": 1382337,
