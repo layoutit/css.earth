@@ -156,7 +156,7 @@ function mainPageBody(objects: readonly ObjectRecord[]) {
     `${objects.length} object packages in \`src/objects\`, nested by planetary system. Each page shows the package's README, minimaps, investigations, source manifest and prepared facts.`,
     ...systemGroups(objects).flatMap(system => [
       `## ${prose(system.label)}`,
-      ...(system.star ? [link(system.star)] : []),
+      ...(system.star ? [entry(system.star)] : []),
       ...(system.groups.length === 1 && !system.star ? [system.groups[0]!.entries.map(entry).join(' · ')]
         : system.groups.flatMap(group => [`### ${prose(group.label)}`, group.entries.map(entry).join(' · ')])),
     ]),

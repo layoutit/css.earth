@@ -1,6 +1,5 @@
 ---
 import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
-import ObjectMarker from './ObjectMarker.astro';
 import SidebarEntry from './SidebarEntry.astro';
 import { readObjects, systemGroups, type SystemEntry } from '../objects.mts';
 
@@ -13,18 +12,14 @@ const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry =
 <ul class="wiki-tree top-level">
   <li><a class="wiki-row wiki-index" href="/" aria-current={current === 'index' ? 'page' : undefined}>All objects</a></li>
   {systems.map(system => <li>
-    <details open={system.star?.id === current || system.groups.some(group => holds(group.entries))}>
-      <summary><span class="wiki-tree-root">{system.label} ({system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
+    <details open={(system.star ? holds([system.star]) : false) || system.groups.some(group => holds(group.entries))}>
+      <summary><span class="wiki-tree-root">{system.label} ({(system.star ? count([system.star]) : 0) + system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
       <ul>
         {/* A group of one classification, like the stars or the nebulae, needs no second level. */}
         {system.groups.length === 1 && !system.star
           ? system.groups[0]!.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)
           : <>
-        {system.star && <li>
-          <a class="wiki-row" href={`/${system.star.id}/`} aria-current={system.star.id === current ? 'page' : undefined}>
-            <ObjectMarker objectId={system.star.id} />{system.star.title}
-          </a>
-        </li>}
+        {system.star && <li><SidebarEntry entry={system.star} current={current} /></li>}
         {system.groups.map(group => <li>
           <details open={holds(group.entries)}>
             <summary><span class="wiki-tree-group">{group.label} ({count(group.entries)})</span></summary>

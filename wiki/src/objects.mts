@@ -8,16 +8,24 @@ export const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 export const REPOSITORY_URL = 'https://github.com/layoutit/css.earth';
 
 /** Sidebar order only. Labels are the descriptors' own classification values, or the prepared catalogue each package belongs to. */
-const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'nebula', 'galaxy', 'context'];
-const LABELS: Record<string, string> = { context: 'Context scenes' };
+const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'nebula', 'galaxy', 'galaxy-cluster', 'heliosphere'];
+const LABELS: Record<string, string> = {};
 /** Top-level groups read as the app's own plurals. */
-const GROUP_LABELS: Record<string, string> = { star: 'Stars', nebula: 'Nebulae', galaxy: 'Galaxies', context: 'Context scenes' };
+const GROUP_LABELS: Record<string, string> = { star: 'Stars', nebula: 'Nebulae', galaxy: 'Galaxies', 'galaxy-cluster': 'Galaxy clusters' };
+
+/** The scene packages the app groups by hand: its own extragalactic sections, its star field and the Sun's heliopause. */
+const SCENE_CLASSIFICATIONS: Record<string, string> = {
+  // site/components/ExtragalacticOverviews.astro lists the Milky Way with the Local Group under Galaxies,
+  // and the nearby-universe cluster catalogue under Galaxy clusters.
+  'milky-way': 'galaxy', 'local-group': 'galaxy', 'nearby-universe': 'galaxy-cluster', 'galaxy-clusters': 'galaxy-cluster',
+  'stellar-neighbourhood': 'star', heliosphere: 'heliosphere',
+};
 const classificationLabel = (classification: string) => LABELS[classification] ??
   classification[0].toLocaleUpperCase('en') + classification.slice(1).replaceAll('-', ' ');
 
 /** The Local Group catalogue names the packages it details; each nebula package carries its own classified record. */
 function catalogueClassifications(): Map<string, string> {
-  const classifications = new Map<string, string>();
+  const classifications = new Map<string, string>(Object.entries(SCENE_CLASSIFICATIONS));
   const galaxies = readJson(resolve(OBJECTS_DIRECTORY, 'local-group/prepared/catalogue.json'));
   for (const object of list(isRecord(galaxies) ? galaxies.objects : null).filter(isRecord)) {
     const id = text(object.detailedObjectId);
@@ -120,10 +128,13 @@ function worldContext() {
 /** Each object's prepared marker colour, for the shell's navigation markers. */
 export const objectColors = (): ReadonlyMap<string, string> => worldContext().colors;
 
+/** Packages the prepared orbits do not place, but that belong to one body: the Sun's heliopause surface. */
+const HOSTS: Record<string, string> = { heliosphere: 'sun' };
+
 /** One object and the satellites that orbit it. */
 export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
 /** One star's system: the star itself, then its members grouped by classification. */
-export interface SystemGroup { id: string; label: string; star: ObjectRecord | null; groups: { label: string; entries: SystemEntry[] }[] }
+export interface SystemGroup { id: string; label: string; star: SystemEntry | null; groups: { label: string; entries: SystemEntry[] }[] }
 
 /** Objects nested by planetary system: the star, its bodies by classification, and each body's satellites under it. */
 export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
@@ -140,8 +151,8 @@ export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
   const hosted = new Set<string>();
   // A satellite hangs under the object it orbits; every other object hangs under the star its orbit chain reaches.
   for (const object of objects) {
-    const parent = parents.get(object.id);
-    if (object.group !== 'satellite' || parent === undefined) continue;
+    const parent = parents.get(object.id) ?? HOSTS[object.id];
+    if (object.group !== 'satellite' && !(object.id in HOSTS) || parent === undefined) continue;
     const host = entries.get(parent);
     if (!host) continue;
     host.satellites.push(entries.get(object.id)!);
@@ -159,7 +170,7 @@ export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
     }
     const system = systems.get(root) ?? { id: root, label: star.system ?? star.title, star: null, groups: [] };
     systems.set(root, system);
-    if (object.id === root) system.star = object;
+    if (object.id === root) system.star = entries.get(object.id)!;
     else system.groups.push({ label: object.groupLabel, entries: [entries.get(object.id)!] });
   }
   // Merge each system's per-object rows into one group per classification, keeping readObjects order.
