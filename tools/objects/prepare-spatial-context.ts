@@ -4,6 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM, isSceneSatellite, sceneSatelliteStateKm } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
+import { loadOrbitFamily, parseOrbitFamilyRecord, type OrbitFamilyRecord } from './binary-orbit-family.mts';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; }
@@ -36,6 +37,15 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
         ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
           ? { placement: 'approximate' as const } : {}) }));
+  }
+  // A body whose orbit is not measured can carry candidate orbits instead; its package names them as an `orbit-family` source.
+  const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
+  const families = new Map<string, OrbitFamilyRecord>();
+  for (const body of input.bodies as { id: string; placement?: string }[]) {
+    const record = await readOrbitFamilyRecord(objectsRoot, body.id);
+    if (!record) continue;
+    families.set(body.id, record);
+    body.placement = 'candidate-orbits';
   }
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
@@ -70,7 +80,26 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // A star other than the focus is placed, not orbiting: the context carries its position and radius and draws no trajectory.
     // A planet of another star closes its orbit around that star, which makes the star the root of its own planetary system.
     const classification = classifications.get(body.id);
-    facts[body.id] = { radiusM, orbitStyle: classification === 'star' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
+    const family = families.get(body.id);
+    facts[body.id] = { radiusM, classification,
+      // A star with candidate orbits around another star closes each of them; any other star is placed, not orbiting.
+      orbitStyle: family ? 'closed' : classification === 'star' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail' };
+  }
+  // Candidate orbits are built once the primaries are placed: each is drawn around its primary, through the body's own position.
+  for (const [id, record] of families) {
+    const state = states[id], primary = states[record.primary];
+    if (!state || !primary) throw new TypeError(`${id} needs its own placement and ${record.primary}'s to draw candidate orbits.`);
+    const { starAstrometry, skyBasis, directionFromRaDec } = await import('@cssearth/astronomy');
+    const astrometry = starAstrometry(record.primary as Parameters<typeof starAstrometry>[0]);
+    const { east, north } = skyBasis(astrometry.rightAscensionDegrees, astrometry.declinationDegrees);
+    const sight = directionFromRaDec(astrometry.rightAscensionDegrees, astrometry.declinationDegrees);
+    const decimalYear = 2000 + (source.frame.epochJdTt - 2451545) / 365.25;
+    const candidates = await loadOrbitFamily(resolve(objectsRoot, id, 'source'), record,
+      { north: [...north] as Vector3, east: [...east] as Vector3, towardObserver: sight.map(value => -value) as unknown as Vector3 },
+      decimalYear, primary.positionM);
+    if (candidates.length < 2) throw new TypeError(`${id} needs at least two candidate orbits.`);
+    states[id] = candidates[0]!;
+    facts[id] = { ...facts[id]!, candidateStates: candidates.slice(1), measuredPositionM: state.positionM };
   }
   const orbitCenters: Record<string, WorldContextOrbitCenter> = {};
   for (const body of source.bodies) {
@@ -100,6 +129,19 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   catch (error: unknown) { if (!isMissingFile(error)) throw error; }
   await mkdir(dirname(options.outputPath), { recursive: true });
   await writeFile(options.outputPath, text);
+}
+
+/** The `orbit-family` source of an object package, when it has one. */
+async function readOrbitFamilyRecord(objectsRoot: string, id: string): Promise<OrbitFamilyRecord | undefined> {
+  let descriptor: unknown;
+  try { descriptor = JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')); }
+  catch (error: unknown) { if (isMissingFile(error)) return undefined; throw error; }
+  const recipe = record((record(descriptor, `${id} descriptor`).properties as Record<string, unknown>).recipe, `${id} recipe`);
+  const sources = Array.isArray(recipe.sources) ? recipe.sources : [];
+  const entry = sources.map(value => record(value, `${id} recipe source`)).find(source => source.id === 'orbit-family');
+  if (!entry) return undefined;
+  const path = text(entry.path, `${id} orbit family source path`);
+  return parseOrbitFamilyRecord(JSON.parse(await readFile(resolve(objectsRoot, id, path), 'utf8')));
 }
 
 /** A migrated object's prepared frame is authoritative when it names this exact physical epoch and centre. */

@@ -303,3 +303,36 @@ test('prepared sky registration preserves the legacy default sky and rejects a m
   }
   assert.throws(() => parseWorldContextSource({ ...raw, sky: undefined }), /sky/i);
 });
+
+test('candidate orbits are drawn beside the first, each with its own position on its own path', async () => {
+  const source = parseWorldContextSource(await readSource());
+  const body = { id: 'wide-companion', name: 'Wide companion', color: '#aaaaaa', placement: 'candidate-orbits' as const };
+  const state = (semiMajorAxisM: number, positionM: readonly number[]): OrbitalState => ({ positionM: [...positionM] as never,
+    centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
+    semiMajorAxisM, eccentricity: 0, trueAnomalyRadians: 0 });
+  const first = state(10 * M_PER_AU, [10 * M_PER_AU, 0, 0]), second = state(30 * M_PER_AU, [30 * M_PER_AU, 0, 0]);
+  // The measured position lies on neither candidate: the candidates disagree about the distance along the line of sight.
+  const measuredPositionM = [12 * M_PER_AU, 0, 3 * M_PER_AU] as const;
+  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments: 16 } },
+    { [body.id]: { radiusM: 100, orbitStyle: 'closed', candidateStates: [second], measuredPositionM: [...measuredPositionM] as never } }, { [body.id]: first });
+  const drawn = prepared.bodies[0]!;
+  assert.equal(drawn.placement, 'candidate-orbits');
+  assert.deepEqual(drawn.positionM, [...measuredPositionM]);
+  assert.equal(drawn.additionalOrbits?.length, 1);
+  assert.deepEqual(drawn.orbit!.verticesM[0], first.positionM);
+  assert.deepEqual(drawn.additionalOrbits![0]!.verticesM[0], second.positionM);
+  for (const orbit of [drawn.orbit!, drawn.additionalOrbits![0]!]) {
+    assert.equal(orbit.centerBodyId, source.focus.id);
+    assert.equal(orbit.verticesM.length, 16);
+    assert.ok(orbit.trail.every(weight => weight === 1));
+  }
+  // Each family member frames itself; a body without candidates cannot claim the placement, and a candidate keeps the parent.
+  assert.throws(() => prepareWorldContext({ ...source, bodies: [body] }, { [body.id]: { radiusM: 100, orbitStyle: 'closed' } }, { [body.id]: first }),
+    /needs candidate orbits exactly when its placement names them/u);
+  assert.throws(() => prepareWorldContext({ ...source, bodies: [body] },
+    { [body.id]: { radiusM: 100, orbitStyle: 'closed', candidateStates: [{ ...second, centerPositionM: [1, 2, 3] }] } }, { [body.id]: first }),
+    /must share the body's parent/u);
+  assert.throws(() => prepareWorldContext({ ...source, bodies: [{ ...body, placement: undefined }] },
+    { [body.id]: { radiusM: 100, orbitStyle: 'none', candidateStates: [second] } }, { [body.id]: first }),
+    /placed without an orbit and cannot carry candidate orbits/u);
+});

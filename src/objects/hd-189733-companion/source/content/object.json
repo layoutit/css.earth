@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "projectedSeparationAu; projectedSeparationSource"
         }
+      },
+      {
+        "id": "orbit",
+        "label": "Orbit around HD 189733 A",
+        "value": "Not measured; 1,500 to 21,000 years in the fit",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ab8389",
+          "url": "https://doi.org/10.3847/1538-4357/ab8389",
+          "label": "Fitted here with LOFTI (Pearce et al. 2020)",
+          "checked": "2026-09-17",
+          "path": "source/orbits/orbit-family.json",
+          "locator": "method; the fitted orbits are orbits/lofti-astrometry-only.txt"
+        }
       }
     ],
     "moreFacts": []
@@ -66,6 +79,12 @@
       "role": "facts",
       "description": "Gaia DR3 1827242816176111360",
       "href": "https://gea.esac.esa.int/archive/"
+    },
+    {
+      "label": "Method",
+      "role": "facts",
+      "description": "LOFTI, Pearce et al. (2020), ApJ 894, 115",
+      "href": "https://doi.org/10.3847/1538-4357/ab8389"
     }
   ],
   "provenance": {

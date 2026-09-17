@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldContext } from './prepared-world-context.js';
+import { contextBodyOrbits, type PreparedWorldContext, type PreparedContextOrbit } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
@@ -15,6 +15,8 @@ import { createLabelBudget, labelExtentOpacity } from '../labels/universe-label-
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
+/** Candidate orbits are drawn only while the family is no wider than this many screen diagonals. */
+const CANDIDATE_ORBIT_VIEW_SHARE = 1.2;
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -162,14 +164,20 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
   const byId = new Map(points.map(point => [point.id, point]));
   const systemFade = createSystemFade(plan);
   const prepared = points.map(body => {
-    const orbit = 'orbit' in body ? body.orbit ?? null : null;
-    // Prepared detail levels are decoded once; each frame only selects one.
-    const levels = !orbit ? [] : [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
-      ...(orbit.lod?.levels ?? []).map(level => ({ vertices: level.vertexIndices.map(index => orbit.verticesM[index]!),
-        trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
-    return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
+    // A body draws its orbit, or the candidate orbits its measurements allow, each with its own detail levels and scratch
+    // projection. Prepared detail levels are decoded once; each frame only selects one per orbit.
+    const drawn = contextBodyOrbits(body).map(orbit => ({ orbit,
+      levels: [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
+        ...(orbit.lod?.levels ?? []).map(level => ({ vertices: level.vertexIndices.map(index => orbit.verticesM[index]!),
+          trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))],
+      projection: createRetainedRingProjection(orbit.verticesM.length * 2) }));
+    const orbit = drawn[0]?.orbit ?? null;
+    const levels = drawn[0]?.levels ?? [];
+    return { body, orbit, orbits: drawn, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
       closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
-      orbitProjection: createRetainedRingProjection(orbit ? orbit.verticesM.length * 2 : 0),
+      orbitProjection: drawn[0]?.projection ?? createRetainedRingProjection(0),
+      // One retained array joins several candidate paths; a single-orbit body publishes the projector's own segments.
+      joinedSegments: drawn.length > 1 ? ([] as OrbitSegment[]) : null,
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
       hiddenStub: null as null | { projected: ProjectedBody<unknown> },
       // Per-frame working objects are retained per body: the view's fields are
@@ -178,7 +186,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       output: null as PlannedBodyOutput | null, bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
   });
   // Only the selected path fades with depth; one shared scratch pool serves it.
-  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0))));
+  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.flatMap(entry => entry.orbits.map(drawn => orbitProjectionCapacity(drawn.orbit.verticesM.length)))));
   return (view: WorldContextView) => {
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
@@ -226,12 +234,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       // the orbit's nearest depth with the off-axis perspective margin. Selection
       // depends on this view alone; a change between banks is below 0.1 px.
       const pixelsPerMeterAtUnitDepth = focal + Math.hypot(width / 2 + Math.abs(ox), height / 2 + Math.abs(oy));
-      const detailLevel = (entry: (typeof bodies)[number]) => {
-        const lod = entry.orbit?.lod;
+      const detailLevel = (drawn: { orbit: PreparedContextOrbit; levels: readonly { deviationM: number }[] }) => {
+        const lod = drawn.orbit.lod;
         if (!lod) return 0;
         const nearest = -toEye(lod.bounds.centerM)[2] - lod.bounds.radiusM;
-        if (nearest > near) for (let level = entry.levels.length - 1; level > 0; level--) {
-          if (entry.levels[level]!.deviationM * pixelsPerMeterAtUnitDepth / nearest <= (view.orbitLodPixels ?? ORBIT_LOD_PIXELS)) return level;
+        if (nearest > near) for (let level = drawn.levels.length - 1; level > 0; level--) {
+          if (drawn.levels[level]!.deviationM * pixelsPerMeterAtUnitDepth / nearest <= (view.orbitLodPixels ?? ORBIT_LOD_PIXELS)) return level;
         }
         return 0;
       };
@@ -286,34 +294,49 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // Prepared trail bounds enclose the faded trail; a complete orbit uses the
         // prepared sphere around every vertex. Either way a path that cannot reach
         // the fade's first visible extent inside the viewport is not projected.
-        const bounds = fullOrbit ? entry.orbit?.lod?.bounds : entry.orbit?.bounds;
-        const boundsEye = bounds ? toEye(bounds.centerM) : null;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
-        if (entry.orbit && systemOpacity > 0 && orbitOpacity > 0 &&
-            (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
+        if (entry.orbit && systemOpacity > 0 && orbitOpacity > 0) {
           const projector = createPreparedRingProjector({ toEye, project, hidden: occlusion.hidden,
             mayOcclude: occlusion.mayOcclude,
             ...(isSelected ? { depthFade: selectedOrbitDepthFade(Math.hypot(...eye)) } : {}),
             near, clipX: width / 2, clipY: height / 2 });
-          if (skipped || inactiveMoon) {
-            // Hidden paths have no geometry consumer. Their proxies still need
-            // the exact existing fade, which saturates at 48 CSS pixels. A moon
-            // outside the active system is drawn only once fully readable.
-            // The prepared sphere bounds every measured vertex, so a sphere whose
-            // projected diameter cannot reach the fade's first visible pixel needs
-            // no projection at all: hundreds of small hidden orbits skip here.
-            const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
-            measuredExtent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
-              : projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
-                ORBIT_FULL_PIXELS, entry.orbit.extentChords ?? entry.orbit.activeChords, entry.orbit.closed !== false);
-            if (measuredExtent < ORBIT_FULL_PIXELS) skipped = true;
+          // Candidate paths are drawn only once the whole family fits the view: inside them they would cross the screen as a
+          // fence of unrelated lines through the system they surround.
+          const candidates = 'placement' in body && body.placement === 'candidate-orbits';
+          const fits = (bounds: { centerM: PositionM; radiusM: number } | undefined, boundsEye: PositionM | null) =>
+            !candidates || !bounds || !boundsEye || projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) <= CANDIDATE_ORBIT_VIEW_SHARE * Math.hypot(width, height);
+          // Every candidate path is measured and projected the same way, then joined into the body's one drawn path.
+          const joined = entry.joinedSegments;
+          if (joined) joined.length = 0;
+          let drawnAny = false, contributed = false;
+          for (const drawn of entry.orbits) {
+            const orbit = drawn.orbit;
+            const bounds = fullOrbit ? orbit.lod?.bounds : orbit.bounds;
+            const boundsEye = bounds ? toEye(bounds.centerM) : null;
+            if (bounds && !orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS)) continue;
+            if (!fits(bounds, boundsEye)) continue;
+            contributed = true;
+            if (skipped || inactiveMoon) {
+              // Hidden paths have no geometry consumer. Their proxies still need
+              // the exact existing fade, which saturates at 48 CSS pixels. A moon
+              // outside the active system is drawn only once fully readable.
+              // The prepared sphere bounds every measured vertex, so a sphere whose
+              // projected diameter cannot reach the fade's first visible pixel needs
+              // no projection at all: hundreds of small hidden orbits skip here.
+              const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
+              const extent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
+                : projector.measureExtent(orbit.verticesM, orbit.trail,
+                  ORBIT_FULL_PIXELS, orbit.extentChords ?? orbit.activeChords, orbit.closed !== false);
+              if (extent < ORBIT_FULL_PIXELS) { measuredExtent = Math.max(measuredExtent ?? 0, extent); continue; }
+            }
+            drawnAny = true;
+            const level = drawn.levels[detailLevel(drawn)]!;
+            const projected = projector(level.vertices, level.trail, level.activeChords, fullOrbit,
+              isSelected && !joined ? selectedOrbitProjection : drawn.projection, orbit.closed !== false);
+            if (joined) joined.push(...projected); else segments = projected;
           }
-          if (!skipped) {
-            measuredExtent = null;
-            const level = entry.levels[detailLevel(entry)]!;
-            segments = projector(level.vertices, level.trail, level.activeChords, fullOrbit,
-              isSelected ? selectedOrbitProjection : entry.orbitProjection, entry.orbit.closed !== false);
-          }
+          if (drawnAny) { measuredExtent = null; skipped = false; if (joined) segments = joined; }
+          else if (contributed && (skipped || inactiveMoon)) skipped = true;
         }
         if (entry.orbit) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
         const appearance = entry.orbitAppearance;

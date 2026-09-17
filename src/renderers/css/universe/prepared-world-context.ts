@@ -57,17 +57,30 @@ export interface PreparedContextFocus extends PreparedContextPoint {
   readonly pointSource?: PreparedContextPointSource;
   readonly systemView?: PreparedContextBody['systemView'];
 }
+/** `approximate`: an illustrative phase on a published orbit. `candidate-orbits`: a measured position with several orbits the
+ * measurements allow, none singled out; the first is `orbit`, the rest `additionalOrbits`. */
+export type PreparedOrbitPlacement = 'approximate' | 'candidate-orbits';
 export interface PreparedContextBody extends PreparedContextPoint {
-  readonly placement?: 'approximate';
+  readonly placement?: PreparedOrbitPlacement;
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates: readonly { readonly cameraToReference: readonly number[];
       readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
-  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
-    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[];
-    readonly extentChords?: readonly number[]; readonly lod?: PreparedOrbitLod;
-    readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
-    readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes };
+  readonly orbit?: PreparedContextOrbit;
+  readonly additionalOrbits?: readonly PreparedContextOrbit[];
 }
+export interface PreparedContextOrbit { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
+  readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[];
+  readonly extentChords?: readonly number[]; readonly lod?: PreparedOrbitLod;
+  readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
+  readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes }
+/** Screen chords a body's drawn paths can produce together. */
+export const bodyOrbitCapacity = (orbits: readonly PreparedContextOrbit[]) =>
+  orbits.reduce((sum, orbit) => sum + orbitProjectionCapacity(orbit.verticesM.length), 0);
+/** Every orbit a context body draws: none, its orbit, or its candidate orbits. */
+export const contextBodyOrbits = (body: PreparedContextPoint): readonly PreparedContextOrbit[] => {
+  const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : undefined;
+  return orbit ? [orbit, ...((body as PreparedContextBody).additionalOrbits ?? [])] : [];
+};
 /** Prepared coarser chord banks: vertex selections of the full path, each with
  * its own trail weights and its largest distance from the full path. */
 export interface PreparedOrbitLod {
@@ -228,14 +241,18 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
-    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
-    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
+    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'additionalOrbits', 'systemView', 'placement']);
+    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'additionalOrbits', 'systemView', 'placement']);
     const systemView = parseSystemView(input.systemView);
-    if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    if (input.placement !== undefined && input.placement !== 'approximate' && input.placement !== 'candidate-orbits') throw new TypeError('Unsupported orbital placement qualification.');
     const body = { ...rawBody, ...(systemView ? { systemView } : {}),
-      ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
-    if (input.orbit === undefined) return Object.freeze(body);
-    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
+      ...(input.placement === undefined ? {} : { placement: input.placement as PreparedOrbitPlacement }) };
+    if (input.orbit === undefined) {
+      if (input.additionalOrbits !== undefined) throw new TypeError('Candidate orbits need a first orbit.');
+      return Object.freeze(body);
+    }
+    const parseOrbit = (value: unknown): PreparedContextOrbit => {
+    const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
       'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod']);
     const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
@@ -254,8 +271,10 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     } else if (['closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel'].some(key => orbit[key] !== undefined)) {
       throw new TypeError('Open trajectory metadata requires closed: false.');
     }
+    // A candidate orbit carries its own position, since the candidates disagree about where the body sits along the line of
+    // sight; every other orbit starts at the body it belongs to.
     if (verticesM.length < 8 || trail.length !== verticesM.length - (open ? 1 : 0) || trail.some(value => value < 0 || value > 1) ||
-        !equalPosition(body.positionM, verticesM[openMetadata?.bodyVertexIndex ?? 0]!)) {
+        (body.placement !== 'candidate-orbits' && !equalPosition(body.positionM, verticesM[openMetadata?.bodyVertexIndex ?? 0]!))) {
       throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
     }
     const activeChords = orbit.activeChords === undefined ? undefined : numbers(orbit.activeChords, 'active orbit chords');
@@ -318,9 +337,21 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
       lod = Object.freeze({ bounds: Object.freeze({ centerM, radiusM }), levels: Object.freeze(levels) });
     }
     // Older prepared banks retain their exact bar representation; no runtime bake.
-    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
+    return Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
       ...openMetadata, ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}),
-      ...(extentChords ? { extentChords: Object.freeze(extentChords) } : {}), ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) }) });
+      ...(extentChords ? { extentChords: Object.freeze(extentChords) } : {}), ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) });
+    };
+    const orbit = parseOrbit(input.orbit);
+    if (input.additionalOrbits === undefined) {
+      if (body.placement === 'candidate-orbits') throw new TypeError('Candidate-orbit placement needs more than one orbit.');
+      return Object.freeze({ ...body, orbit });
+    }
+    const additionalOrbits = array(input.additionalOrbits, 'candidate orbits').map(parseOrbit);
+    if (body.placement !== 'candidate-orbits' || !additionalOrbits.length ||
+        additionalOrbits.some(candidate => candidate.centerBodyId !== orbit.centerBodyId || !equalPosition(candidate.centerPositionM, orbit.centerPositionM))) {
+      throw new TypeError('Candidate orbits share their body placement and parent.');
+    }
+    return Object.freeze({ ...body, orbit, additionalOrbits: Object.freeze(additionalOrbits) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
@@ -424,11 +455,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     marker.dataset.contextAnnotationsAnimate = 'false';
     marker.style.cssText = 'position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat;text-decoration:none;transform-origin:0 0;visibility:hidden';
     applySprite(marker, sprite);
-    const approximate = 'placement' in body && body.placement === 'approximate';
-    if (approximate) {
+    const placement = 'placement' in body ? body.placement : undefined;
+    if (placement === 'approximate') {
       marker.dataset.contextPlacement = 'approximate';
       marker.dataset.contextName = `${body.name} (approx)`;
       marker.title = `${body.name} · Approximate orbital placement`;
+    } else if (placement === 'candidate-orbits') {
+      marker.dataset.contextPlacement = 'candidate-orbits';
+      marker.title = `${body.name} · Measured position; the paths are orbits its measurements allow`;
     }
     marker.style.width = marker.style.height = `${BILLBOARD_SIZE}px`;
     marker.style.margin = '0';
@@ -445,15 +479,15 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size`;
     mover.appendChild(marker);
     root.appendChild(mover);
-    const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
+    const orbits = contextBodyOrbits(body), orbit = orbits[0] ?? null;
     const orbitRoot = host.ownerDocument.createElement('div');
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
     // The orbit is an independent retained paint owner, beside the billboard.
     orbitRoot.style.cssText = 'position:absolute;inset:0;width:0;height:0;pointer-events:none';
-    if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
+    if (placement) orbitRoot.dataset.contextPlacement = placement;
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.verticesM.length ?? 0), id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: placement !== undefined, capacity: bodyOrbitCapacity(orbits), id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -664,8 +698,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       orbitRenderer = renderer;
       for (const entry of bodies) {
         entry.piecePool.destroy();
-        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement === 'approximate',
-          capacity: orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0), id: entry.body.id });
+        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement !== undefined,
+          capacity: bodyOrbitCapacity(contextBodyOrbits(entry.body)), id: entry.body.id });
         entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
       }
       // The next publication carries every chord again: retained deltas name leaves that no longer exist.
