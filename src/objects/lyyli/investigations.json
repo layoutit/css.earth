@@ -30,10 +30,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery-10",
       "status": "unresolved",
-      "finding": "No registered reusable surface imagery was examined for the selected convex model. The grid marks missing imagery; the AKARI thermal size is a separate scale decision, not a surface map or terrain qualification.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lyyli/README.md"
       ],
