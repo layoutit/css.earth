@@ -16,7 +16,8 @@
 import { access, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { archiveHeader, esoEnvironment, esoHeader, frameTime, rawFrame, runRecipe, type EsoHeader, type EsoPipeline } from './eso-pipeline.mts';
-import { toolchainPath } from './toolchain.mts';
+import { requireFiniteNumber, requireRecord } from '../../source-values.mts';
+import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 
 export interface AssociationFile { readonly category: string; readonly name: string }
 export interface Association {
@@ -261,7 +262,11 @@ export async function calibrateFromAssociations(reduction: InstrumentReduction, 
   const calibrationRoot = resolve(root, 'calib/share/esopipes/datastatic');
   const kits = (await readdir(calibrationRoot)).filter(name => name.startsWith(`${reduction.toolchain}-`));
   if (kits.length !== 1) throw new Error(`${kits.length} ${reduction.toolchain} calibration directories in ${calibrationRoot}.`);
-  const pipeline = esoEnvironment(resolve(root, 'pipeline'), resolve(work, 'home'));
+  // A toolchain built with OpenMP runs the thread count its descriptor measured; libomp would otherwise start one per core, and
+  // MATISSE's memory grows with them.
+  const openmp = (await toolchainDescriptor(reduction.toolchain)).entry.openmp;
+  const threads = openmp === undefined ? 1 : requireFiniteNumber(requireRecord(openmp, `${reduction.toolchain} openmp`).threads);
+  const pipeline = esoEnvironment(resolve(root, 'pipeline'), resolve(work, 'home'), { OMP_NUM_THREADS: String(threads) });
   const tree = await associationTree(dpId, work);
   const calibration = resolve(calibrationRoot, kits[0]!);
   const calibrators = await Promise.all(calibratorIds.map(async id => ({ dpId: id, tree: await associationTree(id, work) })));
