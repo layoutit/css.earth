@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "vlti",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "ESO archive: raw table, calibration trees, headers and raw frames",
+      "status": "included",
+      "finding": "The ESO archive serves VLTI raw frames anonymously: the raw table by TAP, calibration association trees by calselector, headers by its header service and frames by the data portal. A PIONIER frame took about 10 s on one connection, so nights download four at a time. The portal also answers 401 for minutes at a time to public frames (a Betelgeuse MATISSE exposure public since 2021 on 17 September 2026), so a 401 is retried before it is reported; frames still in their proprietary period are refused.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/tools/objects/interferometry/eso-pipeline.mts",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/interferometric-imaging.md#known-limits",
+        "https://archive.eso.org/cms/eso-data-access-policy.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 291
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "ESO data access policy for public archive data",
+      "status": "included",
+      "finding": "Public ESO archive data are distributed under CC BY 4.0: a star cast from our own calibration credits ESO and the programme identifier of its frames, and derived files keep the ESO headers the pipelines copy into them.",
+      "evidence": [
+        "https://archive.eso.org/cms/eso-data-access-policy.html",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/interferometric-imaging.md#known-limits"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 267
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "ESO instrument pipelines for PIONIER, AMBER, GRAVITY and MATISSE",
+      "status": "included",
+      "finding": "The ESO kits are public and pinned by sha256 in toolchains.json: PIONIER 4.0.4 (GPL-3.0, with Yorick, BSD), AMBER 4.4.5 (GPL-2.0), GRAVITY 1.11.0 and MATISSE 2.5.0 (GPL-2.0-or-later). They build on macOS with stated repairs: AMBER needs one package rebuilt for Apple clang 17, and MATISSE is rebuilt against LLVM OpenMP 20.1.8 because the kit compiles its loops out on macOS (759 s single-threaded, 479 s with 4 threads for one exposure).",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/tools/objects/interferometry/toolchains.json",
+        "https://github.com/layoutit/css.earth/pull/291"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 291
+        }
+      ]
+    },
+    {
+      "id": "pionier-from-raw",
+      "subject": "PIONIER: π¹ Gruis September 2014 season from raw frames to a cast image",
+      "status": "included",
+      "finding": "Two nights calibrated from raw with pndrs through image-star.mts match Paladini et al.'s file at a median squared-visibility ratio of 0.999 (828 pairs, no difference beyond 3 sigma) and give a reconstruction correlating 0.990 with the shipped image: cast. Lost fringes had to be removed before pndrs averages, and the author's 5e-6 squared-visibility error minimum applied.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/285",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/interferometric-imaging.md#one-command-per-star"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 285
+        }
+      ]
+    },
+    {
+      "id": "amber-from-raw",
+      "subject": "AMBER: R Doradus December 2013 block calibrated from raw frames",
+      "status": "included",
+      "finding": "One block against Ohnaka et al. (2019): median squared-visibility ratios 1.05, 0.98 and 1.15 per baseline and closure phases within 1.1 degrees, after per-baseline frame selection and CO-line wavelengths. R Dor's AMBER continuum does not pass the cast check (fit 1.74 and 2.99, spot ratio 1.31). The lost-fringe rule does not read AMBER products.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/267",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/interferometric-imaging.md#calibration-oracles"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 267
+        }
+      ]
+    },
+    {
+      "id": "gravity-from-raw",
+      "subject": "GRAVITY: calibration from raw frames and a season through image-star",
+      "status": "unresolved",
+      "finding": "R Car 27 January 2018 matches Rosales-Guzmán et al.'s file at a median ratio of 0.994 only with the authors' four HD 80404 calibrator exposures; the exposure the archive tree pairs gives 0.955. No GRAVITY season has run through image-star.mts.",
+      "revisitWhen": "A GRAVITY season (VX Sgr 2019 or Antares 2023) runs through image-star.mts to a verdict.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/267",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/interferometric-imaging.md#calibration-oracles"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 267
+        }
+      ]
+    },
+    {
+      "id": "matisse-from-raw",
+      "subject": "MATISSE: Betelgeuse February 2020 season from raw frames",
+      "status": "unresolved",
+      "finding": "One LM exposure matches Drevon et al.'s file on its high-visibility baseline (ratio 1.048) with differences up to 0.005 below V² 0.03. The five-block season (60 LM exposures) is pinned and the toolchain threaded, but the season has not run: about 7.5 min and 14 GB per exposure, overnight.",
+      "revisitWhen": "The Betelgeuse season runs from raw through image-star.mts and is compared with the authors' files and the shipped image.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/291",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 291
+        }
+      ]
+    }
+  ]
+}

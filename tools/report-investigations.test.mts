@@ -32,3 +32,8 @@ test('finding searches and status filters preserve scope-wide counts, and invali
   assert.throws(() => investigationOptions(['--clasification=asteroid']), /Unknown option/);
   assert.throws(() => investigationReport(objects, [], investigationOptions(['--classification=unknown'])), /Unknown object classification/);
 });
+
+test('the facilities report cannot be filtered by object classification', () => {
+  assert.equal(investigationOptions(['--facilities']).facilities, true);
+  assert.throws(() => investigationOptions(['--facilities', '--classification=asteroid']), /no object classification/);
+});

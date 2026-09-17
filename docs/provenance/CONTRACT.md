@@ -82,6 +82,15 @@ or `deferred`), the finding, evidence links and the commit it was checked at.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
 
+A facility keeps the same ledger in `src/facilities/<facility id>/investigations.json`,
+with `facilityId` in place of `objectId`: a telescope's archive, data policy and
+reduction software, and what was run from it. Every facility ledger answers the
+sweep first, one entry each for `archive-access`, `data-policy` and
+`reduction-software`, so facilities compare side by side. Use the facility
+catalogue's id when the facility has a page record; a facility without one keeps
+its ledger all the same. `node tools/report-investigations.mts --facilities` counts
+the catalogue's ground facilities that have ledgers and lists the open decisions.
+
 Give distinct source decisions their own entries. `included` means selected for
 the stated use, not that every scientific claim is qualified. Ledger coverage
 counts objects with records, not objects with complete imagery or an exhaustive
