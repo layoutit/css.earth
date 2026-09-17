@@ -38,8 +38,7 @@ export async function authorPi1Gruis({ check = false } = {}) {
   const beamMas = meanWavelength / (2 * longest) * 206264806.247;
   if (Math.abs(beamMas - BEAM_FWHM_MAS) > 0.05) throw new Error(`The file's longest baseline gives a ${beamMas.toFixed(2)} mas beam, not ${BEAM_FWHM_MAS}.`);
   const raw = readReconstruction(await readFile(resolve(root, RAW_IMAGE_PATH)));
-  const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
-  if (!(pixelMas > 0)) throw new Error('The reconstruction states no pixel scale.');
+  const pixelMas = raw.axes.scale[0];
   const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
   const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
   const lens = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').lens, 'lens');

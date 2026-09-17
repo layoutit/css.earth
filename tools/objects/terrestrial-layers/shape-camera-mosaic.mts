@@ -10,6 +10,7 @@ import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,l
 import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
 import {readFitsImage} from '../../fits.mts';
+import {skyDisplayRaster, skyImageAxes} from '../../fits-sky.mts';
 import { pds3Keyword } from '../pds-labels.mts';
 import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
 
@@ -33,29 +34,24 @@ export function decodeCalibratedCamera(bytes: Buffer, encoding = 'calibrated'): 
   // Deconvolved VLT/SPHERE/ZIMPOL intensity frames. The survey distributes one double-precision image HDU whose values
   // are the deconvolution's own relative intensity: no BUNIT, no radiometric scale, no calibrated I/F to claim.
   if(encoding==='fits-zimpol-intensity'){
-    const fits=readFitsPrimary(bytes);
-    if(fits.bitpix!==-64||fits.scale!==1||fits.zero!==0||fits.nextOffset!==bytes.length||
+    const fits=readFitsImage(bytes);
+    if(fits.header.XTENSION!==undefined||fits.dimensions.length!==2||fits.bitpix!==-64||fits.scale!==1||fits.zero!==0||fits.nextOffset!==bytes.length||
         ![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported deconvolved ZIMPOL FITS layout.');
-    // Header literals keep their FITS quoting and fixed-width padding; compare the stated value, not the literal.
-    if(String(fits.header.INSTRUME??'').replace(/^'|'$/g,'').trim()!=='SPHERE')throw new Error('A deconvolved ZIMPOL frame states SPHERE as its instrument.');
-    // FITS stores row 0 at the bottom; every other camera this route reads stores it at the top, and the ray caster
-    // indexes rows directly. Reversing here puts one handedness downstream instead of two, so a frame's stated
-    // camera centre is a top-down row like every other frame's.
-    const {width,height}=fits, data=new Float64Array(width*height);
-    for(let y=0;y<height;y++)data.set(fits.values.subarray((height-1-y)*width,(height-y)*width),y*width);
-    return {data,width,height,offset:fits.dataOffset,encoding,allowZero:true};
+    if(fits.header.INSTRUME!=='SPHERE')throw new Error('A deconvolved ZIMPOL frame states SPHERE as its instrument.');
+    // Every other camera this route reads stores its top row first, and the ray caster indexes rows directly. The frame's
+    // own WCS puts north on the first row and east on the first column, so a stated camera centre is a row and column as seen.
+    const {width,height}=fits;
+    return {data:skyDisplayRaster(fits.values,width,height,skyImageAxes(fits.header)),width,height,offset:fits.dataOffset,encoding,allowZero:true};
   }
   // An image reconstructed from optical-interferometric visibilities (SQUEEZE output): one double-precision plane whose values
-  // are the reconstruction's own normalised intensity. Its header states the pixel scale and that the first axis is right
-  // ascension decreasing with column, so east is on the left as the ray caster assumes for every frame on this route.
+  // are the reconstruction's own normalised intensity. Its axes put north on the first row and east on the first column, as the
+  // ray caster assumes for every frame on this route.
   if(encoding==='fits-oi-reconstruction'){
     const fits=readFitsImage(bytes);
     if(fits.bitpix!==-64||fits.planes!==1||![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported reconstructed-image FITS layout.');
-    const literal=(key:string)=>String(fits.header[key]??'').replace(/^'|'$/g,'').trim();
-    if(literal('CTYPE1')!=='RA'||literal('CTYPE2')!=='DEC'||!(Number(fits.header.CDELT1)<0)||!(Number(fits.header.CDELT2)>0))throw new Error('A reconstructed image states RA decreasing along columns and Dec increasing along rows.');
-    const {width,height}=fits, data=new Float64Array(width*height);
-    for(let y=0;y<height;y++)data.set(fits.values.subarray((height-1-y)*width,(height-y)*width),y*width);
-    return {data,width,height,offset:fits.dataOffset,encoding,allowZero:true};
+    if(fits.header.CTYPE1!=='RA'||fits.header.CTYPE2!=='DEC')throw new Error('A reconstructed image states unprojected RA and Dec axes.');
+    const {width,height}=fits;
+    return {data:skyDisplayRaster(fits.values,width,height,skyImageAxes(fits.header)),width,height,offset:fits.dataOffset,encoding,allowZero:true};
   }
   const text = bytes.subarray(0,4096).toString('ascii');
   const field = (name: string) => text.match(new RegExp(`(?:^|\\s)${name}=(?:'([^']*)'|([^\\s]+))`))?.slice(1).find(v=>v!==undefined);

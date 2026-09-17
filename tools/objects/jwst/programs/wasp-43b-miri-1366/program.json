@@ -1,0 +1,181 @@
+{
+  "schema": "cssearth-jwst-tso-program@1",
+  "id": "wasp-43b-miri-1366",
+  "title": "WASP-43b MIRI/LRS slitless phase curve, JWST program 1366 (visit 11)",
+  "planet": "wasp-43b",
+  "eventName": "wasp43b",
+  "instrument": "MIRI/SLITLESSPRISM",
+  "credit": "JWST program 1366, Transiting Exoplanet Community Early Release Science; raw exposures from MAST",
+  "crdsContext": "jwst_1535.pmap",
+  "batchSegments": 5,
+  "stages": {
+    "S1": "S1_wasp43b.ecf",
+    "S2": "S2_wasp43b.ecf",
+    "S3": "S3_wasp43b.ecf",
+    "S4": "S4_wasp43b.ecf",
+    "S4channels": "S4_wasp43b_channels.ecf"
+  },
+  "settingsSource": "Bell et al. (2024) Eureka! v1 control files in the deposit below, carried over to Eureka! 1.4 option names, with one worker and no plots",
+  "segments": [
+    {
+      "name": "jw01366011001_04103_00001-seg001_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg002_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg003_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg004_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg005_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg006_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg007_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg007_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg008_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg008_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg009_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg009_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00001-seg010_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00001-seg010_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg001_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg002_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg003_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg004_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg005_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg006_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg007_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg007_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg008_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg008_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg009_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg009_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00002-seg010_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00002-seg010_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg001_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg002_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg003_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg004_mirimage_uncal.fits",
+      "bytes": 1480916160,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg005_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg006_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg007_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg007_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg008_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg008_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg009_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg009_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw01366011001_04103_00003-seg010_mirimage_uncal.fits",
+      "bytes": 1466539200,
+      "uri": "mast:JWST/product/jw01366011001_04103_00003-seg010_mirimage_uncal.fits"
+    }
+  ],
+  "oracle": {
+    "title": "Products and Models for \"Nightside clouds and disequilibrium chemistry on the hot Jupiter WASP-43b\" (Bell et al. 2024)",
+    "url": "https://zenodo.org/api/records/10525170/files/WASP43b_MIRI_Data.zip/content",
+    "record": "https://zenodo.org/records/10525170",
+    "license": "CC BY 4.0",
+    "path": "WASP43b_MIRI_Data.zip",
+    "bytes": 11533870,
+    "sha256": "bcef029f5b610d7d2175611717e352998120f929e6a54202ae4f6cd1633ffa00",
+    "lightCurve": "WASP43b_MIRI_Data/1_Light_Curves/eureka_v1.h5"
+  }
+}
