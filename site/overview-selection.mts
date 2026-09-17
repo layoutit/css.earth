@@ -17,9 +17,12 @@ export function selectionAtCamera({ world, viewport, objects, objectId, overview
   if (!sun || !selected) return null;
   if (!overview) {
     // Leaving the object's system opens the Solar System overview. A body placed outside the Solar System, such as a star,
-    // anchors that rule on itself: the camera is already far from the Sun while it looks at the body.
-    const anchorM = distance(selected.originM, sun.originM) >= policy.exitSunDistanceM ? selected.originM : sun.originM;
-    return distance(world.pose.positionM, anchorM) >= policy.exitSunDistanceM
+    // anchors that rule on itself and keeps its own scene until the camera is as far from it as the Sun is; handing off
+    // sooner moves the zoom pivot light-years to the Sun and throws the camera out of the galaxy.
+    const placedM = distance(selected.originM, sun.originM);
+    const placed = placedM >= policy.exitSunDistanceM;
+    const anchorM = placed ? selected.originM : sun.originM;
+    return distance(world.pose.positionM, anchorM) >= (placed ? placedM : policy.exitSunDistanceM)
       ? { overview: true, objectId: focus.id } : null;
   }
   const view = presentWorldCamera(world, sun, viewport);
