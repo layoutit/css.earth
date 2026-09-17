@@ -20,7 +20,7 @@ classify terrain as measured. Existing Gazetteer places remain restricted to the
 Celestia dataset because their placement has not been qualified in the recovered
 frame. Shadows default to off.
 
-## Scientific sources
+## Sources
 
 - [TEMPEST Dinkinesh mesh, Git 7df4c88](https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl): preserved numerical shape; original coordinates and connectivity retained.
 - [Lyster, Howett & Penn (2025)](https://doi.org/10.5194/epsc-dps2025-546): thermal-model methods, the 1,266-facet derivative and its source association.
