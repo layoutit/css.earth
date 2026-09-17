@@ -85,7 +85,23 @@ export async function installToolchain(id: string, caches: readonly string[] = [
     // ESO's installer asks for confirmation only when a target directory is missing, and it refuses to ask without a terminal:
     // both directories exist before it runs.
     await mkdir(resolve(root, 'pipeline'), { recursive: true }); await mkdir(resolve(root, 'calib'), { recursive: true });
-    run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, answers: '', env: { HOME: resolve(root, 'home'), PATH: path } });
+    const repair = entry.repair === undefined ? null : requireRecord(entry.repair, `${id} repair`);
+    const install = spawnSync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', stdio: ['pipe', 'inherit', 'inherit'], env: { ...process.env, HOME: resolve(root, 'home'), PATH: path } });
+    if (install.status !== 0 && !repair) throw new Error(`install_pipeline failed for ${id} (status ${install.status}).`);
+    if (repair) {
+      // Rebuild the one package the kit's installer could not compile, against the dependencies it did install, then unpack
+      // the calibration files the installer never reached.
+      const prefix = resolve(root, 'pipeline'), source = resolve(kit, requireString(repair.package));
+      if (!await exists(source)) run('tar', ['-xzf', `${requireString(repair.package)}.tar.gz`], { cwd: kit });
+      const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix, CPPFLAGS: requireString(repair.cppflags).replaceAll('{prefix}', prefix) };
+      run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
+      run('make', ['-j8'], { cwd: source, env });
+      run('make', ['install'], { cwd: source, env });
+      const calibration = resolve(root, 'calib', requireString(repair.calibrationDirectory));
+      await mkdir(calibration, { recursive: true });
+      const archive = requireString(repair.calibration), top = archive.replace(/\.tar\.gz$/u, '');
+      run('tar', ['-xzf', resolve(kit, archive), '--strip-components=2', '-C', calibration, `${top}/cal`], { cwd: kit });
+    }
     // The kit's build tree is not needed at run time; Yorick's relocatable install is.
     await rm(kit, { recursive: true, force: true });
   } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit".`);
