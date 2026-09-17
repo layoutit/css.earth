@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 254 km, ecliptic J2000 pole (105\u00b0, 18\u00b0), period 7.209531 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 126.11549995574961 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 254 km, ecliptic J2000 pole (105°, 18°), period 7.209531 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 126.11549995574961 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/juno/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -75,7 +75,7 @@
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
       "status": "excluded",
-      "finding": "The live directory also lists 3_Juno_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "finding": "The live directory also lists 3_Juno_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
       "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj",
@@ -94,9 +94,8 @@
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured with the cross-frame registration test on 30 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 4999 pixels (median); peak correlation 0.07 (median) against a mirror margin of 0.36; 0 of 30 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists. Corrected on the silhouette: the outline does judge this body, though only in part. Of 30 frames, 5 project an outline elongated enough to define a position angle and they leave 2.485 degrees after a 2.151-degree floor, inside the three-degree gate, while the other 25 are round. A lens on five scoring frames is thin but is not the same as having no check at all, so this is a live candidate rather than a closed no-go. Measured outside preparation by the registration stage's own limb rule driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit; the stage's own number can differ, and on Themis it read 1.65 degrees where this route read 2.92.",
-      "revisitWhen": "Preparation of the lens, to have the stage judge those five scoring frames itself, or a registration reference independent of the outline.",
+      "status": "included",
+      "finding": "The lens is prepared and the registration stage judged it. The outline scores 5 of 30 frames — those elongated enough to define a position angle, 1.294 to 1.300 — and leaves 2.21 degrees after a 2.03-degree floor, inside the three-degree gate, so the verdict is registered. The five fall in one window of two and a quarter minutes on 2018-11-11, so they sample one rotational phase rather than five independent looks. The other 25 are round, several at elongation 1.1923 to 1.1930 against the 1.2 minimum. Neither marking-based sweep places the body: the cross-frame test is decisive on 0 of 30, and the relief sweep, decisive on 20 of 30, spreads from 0.50 to 6.50 degrees, 3.25 degrees from its own median, so it disagrees by more than the gate and reaches no verdict. Measured before preparation, the same limb rule read 2.485 degrees over a 2.151-degree floor; the stage's own number is 2.21 over 2.03, the expected divergence between the two routes. Coverage is 72.7% of retained surface area over 5,884,773 interior texels, level-matched within gains of 0.67 to 1.03 and leaving at most a factor of 1.21 between overlapping frames. A registration reference independent of the outline, or frames whose outlines score across more than one rotational phase, would test the longitude this lens is pinned at; neither exists in this release.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/3Juno/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -110,6 +109,10 @@
         {
           "date": "2026-09-17",
           "commit": "24e2730084f5b0528499be985940392e1d16da17"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "321a9bd9027ba274c484fb1614947da1138cc3de"
         }
       ]
     }

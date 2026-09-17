@@ -10,6 +10,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/3_Juno_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
+| SPHERE photograph | [30 deconvolved ZIMPOL frames](https://observations.lam.fr/astero/Data/3Juno/Deconv/) |
 
 Juno is an irregular main-belt asteroid with broad departures from an ellipsoid. This model combines light-curve constraints with resolved VLT/SPHERE observations.
 
@@ -24,6 +25,34 @@ The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc018
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2298.1 m error; the authored stopping threshold is 2400 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1208.7 m and maximum 3217.3 m.
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
+
+### The photograph
+
+Each frame's camera is computed, never authored: the pinned rotation record gives the pole and the absolute rotational phase, pinned JPL Horizons tables give the Paranal sighting and the direction to the Sun at the exposure midpoint, each frame's own header gives its plate scale and exposure, and the disc centre is fitted to the limb of the lens mesh. Every camera field in the recipe is reproduced by `node tools/objects/observer-cameras.mts juno`, which refuses a recipe that has drifted from those inputs. The rotation record is read latitude-first: its second column, 103.7377°, cannot be a latitude, and its period, 7.20953041 h, matches the 7.209531 h of the survey table above.
+
+The lens rides the released MPCD shape this body already selects, not the release's ADAM reconstruction. The 30 deconvolved ZIMPOL frames, camera 1, were taken over three nights, 2018-11-08 to 2018-11-12, all through the N_R filter at 25.65 s.
+
+The projected disc spans about 102 px and the nadir pixel footprint is 2746 m, so the frames are better sampled than most bodies in this release. That is sampling, not resolved terrain: what the lens carries is real brightness on a measured shape.
+
+The frames cover 72.7% of the retained surface area, transferred to 5,884,773 interior texels. Level matching reconciles their relative brightness within gains of 0.67 to 1.03 across all 30 frames, leaving at most a factor of 1.21 between overlapping frames. Display is the 1st to 99.5th percentile of the displayed samples, in relative deconvolved intensity with the photographed illumination retained.
+
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 30 | 5 | 3.00° | 2.03° | 2.21° | its other 30 frames | 0 of 30 | — | 20 of 30, 3.75° | — | ×1.21 | registered |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+<!-- registration-report:end -->
+
+The outline is what places this body, and it does so on five frames out of thirty. Those five run from 02:05:02 to 02:07:18 on 2018-11-11, a single window of two and a quarter minutes, with outlines elongated between 1.294 and 1.300; their predicted limb position angles match the photographed contour with 2.21° left after removing the 2.03° floor that exposures minutes apart set. The other 25 are round: several sit at elongation 1.1923 to 1.1930 against the 1.2 minimum, missing the gate by under a thousandth. Five frames in one window sample one rotational phase, not five independent looks, so the longitude this lens is pinned at rests on a narrower check than the frame count suggests.
+
+Neither sweep that depends on surface markings places it. The cross-frame test is decisive on 0 of 30 frames: these frames carry no markings it can register. The relief sweep is decisive on 20 of 30, but its offsets run from 0.50° to 6.50°, 3.25° from their own median, so they disagree by more than the three-degree gate and reach no verdict; its 3.75° median is a location rather than a measurement.
+
+Before preparation, the same limb rule driven from the pinned inputs read 2.485° over a 2.151° floor. The stage's own number, above, is 2.21° over 2.03°. Both sit inside the gate, and the difference is the expected divergence between the two routes.
 
 ## Known problems
 
