@@ -5,13 +5,45 @@ A star's surface reaches this project as interferometric data, not as a picture.
 ## Stages
 
 1. **Calibrate.** Most public data are raw exposures in the ESO archive. The calibration tools plan a night from the archive's raw table, download the public frames and reduce them with ESO's own pipelines: `calibrate-pionier.mts` for VLTI/PIONIER, `calibrate-amber.mts` for VLTI/AMBER, `calibrate-gravity.mts` for VLTI/GRAVITY and `calibrate-matisse.mts` for VLTI/MATISSE. PIONIER and AMBER nights are planned from the raw table. GRAVITY and MATISSE need deeper calibration chains, so their tools follow the calibration tree the archive's calselector service gives for the science frame (`eso-associations.mts`). A table per instrument names the recipe for each kind of association, which children it reads, and which header keywords pick between alternatives, such as the dark with the science frame's integration time or the sky in the same beam-commutation state. An author's calibrated file, when one is public, can be used instead.
-2. **Select.** `oifits-select.mts` flags channels outside chosen wavelength windows, data outside an MJD range, or every other exposure (`--half even|odd`), and applies a published wavelength-scale correction. The measurements themselves are never changed.
+2. **Select.** `oifits-select.mts` flags channels outside chosen wavelength windows, data outside an MJD range, or every other exposure (`--half even|odd`), applies a published wavelength-scale correction, and can raise errors to a floor (`--error-floor`). The measured values themselves are never changed.
 3. **Reconstruct.** SQUEEZE builds a flat sky-plane image. `surface-reconstruction.mts` runs ROTIR, which fits brightness directly on a sphere of known size and limb darkening.
 4. **Check.** `spotless-disc.mts` simulates a spotless limb-darkened disc on the same sampling and errors, and the same recipe reconstructs it. A reconstruction may be cast only if it passes three conditions:
    - it fits its own data to a reduced chi-squared of 3 or better, on squared visibilities and on closure phases;
    - its spots are at least twice as strong as the spotless disc's;
    - its spots come back from two interleaved halves of the data: once each half's own spotless twin is subtracted, the two halves' spots correlate at 0.5 or more.
 5. **Cast.** A flat image goes onto the sphere through the `surface-observation` route with a computed camera, as for Betelgeuse and π¹ Gruis. A sphere reconstruction goes through `surface-lens.mts`, which writes the float32 image map the `terrestrial-scientific` lens reads, to be stated with `outputLongitudeOrigin: -90`.
+
+## One command per star
+
+`image-star.mts` runs stages 1 to 4 on one season of one star and ends with a verdict:
+
+```bash
+node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/pi1-gruis-pionier-2014-09 output/stars/pi1-gruis-pionier-2014-09 --raw output/calibration/raw-pionier
+```
+
+A season is a folder under `tools/objects/interferometry/seasons/` with a `season.json` (`cssearth-star-season@1`). It names:
+
+- the instrument and the target's name in the archive;
+- the nights (PIONIER, AMBER) or science exposures with any calibrator exposures (GRAVITY, MATISSE);
+- AMBER calibrator diameters, each with its source;
+- a reference diameter and its source;
+- the wavelength windows and error floors;
+- the SQUEEZE recipe;
+- the limb darkening of the spotless twins;
+- optionally an author's calibrated file and image to compare with.
+
+The command then:
+
+1. calibrates each night or exposure, one at a time, into `nights/`;
+2. joins every calibrated file and applies the selection;
+3. fits a uniform disc within half the reference diameter either way (`disc-fit.mts`). The disc is the start image and the spotless twins' size, and half the mean wavelength over the longest baseline is the beam;
+4. writes the two interleaved halves and a spotless twin of the season and of each half;
+5. runs SQUEEZE six times, one run at a time (`squeeze.mts`), and reads the fit SQUEEZE prints for each image;
+6. applies the three conditions and, when the season names them, compares the calibrated squared visibilities with the author's file (`author-comparison.mts`: the nearest baseline within a metre, channels in wavelength order) and the image with the shipped one (correlation inside the disc after both are convolved to the beam).
+
+It writes `verdict.json` and prints "cast" or "not cast, because" with the reasons. Stages are kept: calibration steps are reused while their inputs are unchanged, and a SQUEEZE run is reused only while its data, start image and recipe hash the same.
+
+Error floors raise squared-visibility errors to a fraction of the value and closure-phase errors to a number of degrees, and never lower an error. Raw calibration states the scatter within a block, which misses the calibration error between blocks and nights. The file Paladini et al. imaged π¹ Gruis from carries 5 percent and 2 degrees on every point.
 
 ## Toolchains
 
