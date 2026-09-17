@@ -170,6 +170,7 @@
     }
   ],
   "oracle": {
+    "kind": "eureka-light-curve-zip",
     "title": "Products and Models for \"Nightside clouds and disequilibrium chemistry on the hot Jupiter WASP-43b\" (Bell et al. 2024)",
     "url": "https://zenodo.org/api/records/10525170/files/WASP43b_MIRI_Data.zip/content",
     "record": "https://zenodo.org/records/10525170",
