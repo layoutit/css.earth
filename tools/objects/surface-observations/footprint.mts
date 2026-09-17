@@ -10,21 +10,41 @@ export interface FootprintSource { image: ObservationImage; camera: Pick<Observa
  * quality verdict, faces the camera within the emission limit, lies on the sampled surface patch, is lit when the photometry normalizes
  * illumination and admits a photometric gain. Each counting contributor is normalized before interpolation, and the sample needs at
  * least half the bilinear weight. Dark calibrated pixels stay eligible; brightness never defines coverage. */
+/** A separation limit that scales with the widest surfaced contributor's pixel diagonal. */
+export interface FootprintSeparation { footprints: number; diagonal: (index: number) => number }
+// Contributors of the sample in progress. Sampling is synchronous and never re-entered, so one set serves every call.
+const usedIndex = new Float64Array(4), usedWeight = new Float64Array(4), usedGain = new Float64Array(4);
+function interpolateUsed(values: ArrayLike<number>, used: number, weight: number) {
+  let sum = 0;
+  for (let u = 0; u < used; u++) sum = sum + values[usedIndex[u]] * usedGain[u] * usedWeight[u];
+  return sum / weight;
+}
+
 export function sampleFootprint({ image, camera, geometry, photometry }: FootprintSource, point: readonly number[],
-  { maximumSeparationMeters, maximumEmissionDegrees }: { maximumSeparationMeters: number | ((ids: readonly number[]) => number); maximumEmissionDegrees: number }): FootprintSample {
+  { maximumSeparationMeters, maximumEmissionDegrees }: { maximumSeparationMeters: number | FootprintSeparation | ((ids: readonly number[]) => number); maximumEmissionDegrees: number }): FootprintSample {
   const projected = camera.project(point);
   if (!projected || !(projected[2] > 0)) return { reason: 'behind-camera' };
   const [x, y] = projected, { width, height } = image;
   if (!Number.isFinite(x + y) || x < 0 || y < 0 || x >= width - 1 || y >= height - 1) return { reason: 'outside-detector' };
   const ix = Math.floor(x), iy = Math.floor(y), tx = x - ix, ty = y - iy;
   // Four contributors in bilinear order, walked with scalars: this runs for every texel of every frame, so it allocates only what it returns.
-  const i0 = iy * width + ix, ids = [i0, i0 + 1, i0 + width, i0 + width + 1];
+  const i0 = iy * width + ix, i1 = i0 + 1, i2 = i0 + width, i3 = i0 + width + 1;
   const w0 = (1 - tx) * (1 - ty), w1 = tx * (1 - ty), w2 = (1 - tx) * ty, w3 = tx * ty, emissionLimit = maximumEmissionDegrees * Math.PI / 180;
-  const limit = typeof maximumSeparationMeters === 'number' ? maximumSeparationMeters : separationLimit(maximumSeparationMeters, ids, geometry);
-  const usedIndex = [0, 0, 0, 0], usedWeight = [0, 0, 0, 0], usedGain = [0, 0, 0, 0];
+  let limit: number;
+  if (typeof maximumSeparationMeters === 'number') limit = maximumSeparationMeters;
+  else if (typeof maximumSeparationMeters === 'function') limit = separationLimit(maximumSeparationMeters, [i0, i1, i2, i3], geometry);
+  else {
+    // The widest diagonal among contributors with a surface point, taken in contributor order as the array form takes it.
+    let widest = -Infinity, surfaced = false;
+    for (let k = 0; k < 4; k++) {
+      const index = k === 0 ? i0 : k === 1 ? i1 : k === 2 ? i2 : i3;
+      if (geometry.reject(index) === null) { surfaced = true; widest = Math.max(widest, maximumSeparationMeters.diagonal(index)); }
+    }
+    limit = surfaced ? maximumSeparationMeters.footprints * widest : NaN;
+  }
   let used = 0, weight = 0, separationMeters = 0, failureReason: string | undefined, failureWeight = 0, failureSeparation: number | undefined;
   for (let k = 0; k < 4; k++) {
-    const index = ids[k], contributorWeight = k === 0 ? w0 : k === 1 ? w1 : k === 2 ? w2 : w3;
+    const index = k === 0 ? i0 : k === 1 ? i1 : k === 2 ? i2 : i3, contributorWeight = k === 0 ? w0 : k === 1 ? w1 : k === 2 ? w2 : w3;
     let reason = geometry.reject(index) ?? image.reject(index), separation: number | undefined, gain: number | null = null;
     if (reason === null) { const emission = geometry.emission(index); if (!Number.isFinite(emission) || emission < 0 || emission > emissionLimit) reason = 'grazing'; }
     // A contributor on another surface, across a neck or a limb, is left out rather than mixed in.
@@ -40,13 +60,12 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
     }
   }
   if (weight < .5) return failureReason !== undefined ? { reason: failureReason, ...(failureSeparation === undefined ? {} : { separationMeters: failureSeparation }) } : { reason: 'no-geometry' };
-  const interpolate = (values: ArrayLike<number>) => { let sum = 0; for (let u = 0; u < used; u++) sum = sum + values[usedIndex[u]] * usedGain[u] * usedWeight[u]; return sum / weight; };
   let gain = -Infinity, emission = -Infinity, incidence = -Infinity;
   for (let u = 0; u < used; u++) {
     gain = Math.max(gain, usedGain[u]); emission = Math.max(emission, geometry.emission(usedIndex[u])); incidence = Math.max(incidence, geometry.incidence(usedIndex[u]));
   }
-  return { radiance: interpolate(image.values) * (image.radianceFactor?.factor ?? 1), separationMeters,
-    ...(image.colorValues ? { color: image.colorValues.map(plane => interpolate(plane)) } : {}),
+  return { radiance: interpolateUsed(image.values, used, weight) * (image.radianceFactor?.factor ?? 1), separationMeters,
+    ...(image.colorValues ? { color: image.colorValues.map(plane => interpolateUsed(plane, used, weight)) } : {}),
     gain, maximumEmissionDegrees: emission * 180 / Math.PI, maximumIncidenceDegrees: incidence * 180 / Math.PI };
 }
 
@@ -84,17 +103,17 @@ export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
   const emissionLimit = limits.maximumEmissionDegrees * Math.PI / 180;
   const diagonal = (i: number) => geometry.rangeMeters(i) * angle * Math.sqrt(1 + 1 / Math.cos(Math.min(geometry.emission(i), emissionLimit)) ** 2);
   const { maximumSeparationMeters, maximumSeparationFootprints } = limits;
-  const separation = maximumSeparationFootprints === undefined ? maximumSeparationMeters ?? NaN : (ids: readonly number[]) => maximumSeparationFootprints * Math.max(...ids.map(diagonal));
+  const separation: number | FootprintSeparation = maximumSeparationFootprints === undefined ? maximumSeparationMeters ?? NaN : { footprints: maximumSeparationFootprints, diagonal };
   const eye = camera.positionMeters, tolerance = limits.visibilityToleranceMeters;
   return { id, startTime: image.startTime, filter: image.filter, positionKm: camera.positionKm, cameraKind: camera.kind, geometrySource: geometry.source,
     nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint, detector: { image, camera, mesh },
     withCamera: turned => cameraFrame({ ...options, camera: turned, geometry: castSourceRays(turned, mesh, image.width, image.height) }),
     sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
     visible: point => {
-      const delta = point.map((n, i) => n - eye[i]), distance = Math.hypot(...delta);
+      const d0 = point[0] - eye[0], d1 = point[1] - eye[1], d2 = point[2] - eye[2], distance = Math.hypot(d0, d1, d2);
       // A double carries 53 bits: at a telescope's distance the metre tolerance sits below the last place of the range itself, so the
       // test admits sixteen units in that place, twenty kilometres from 168 parsecs, still a hundred-millionth of a stellar radius.
-      const slack = Math.max(tolerance, distance * 2 ** -48), hit = mesh.intersect(eye, delta.map(n => n / distance), distance + slack);
+      const slack = Math.max(tolerance, distance * 2 ** -48), hit = mesh.intersect(eye, [d0 / distance, d1 / distance, d2 / distance], distance + slack);
       return !!hit && Math.abs(hit.radius - distance) <= slack;
     },
     report: { id, startTime: image.startTime, filter: image.filter, camera: { kind: camera.kind, ...camera.report }, geometry: geometry.report, quality: image.report,
