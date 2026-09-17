@@ -1,0 +1,4 @@
+# The archive image is restored from the ALMA Science Archive by its pinned URL and digest (source/preparation/acquisition.json),
+# so it is not committed. The window cut from it is produced here and no archive serves it, so it is.
+/source/observations/*
+!/source/observations/r-doradus-alma-338ghz-0p625mas.fits
