@@ -423,7 +423,28 @@ at a time and supplies the same interpretation to the globe and sidebar map.
 ## Internal fill for globe seams
 
 Spherical and ellipsoidal objects share one retained interior disc. Irregular
-body meshes are excluded. The common presentation compiler measures the actual
+body meshes cannot use it: the disc's inner ellipsoid is limited by the nearest
+leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks outside it
+stay open. An irregular body whose recipe sets `interiorSlices` instead gets
+slices of its own mesh (`tools/prepared-interior-slices.mts`):
+
+- Each slice is the loop where a plane through the body origin cuts the leaves,
+  for six plane normals (the icosahedron axes). It is drawn as a fan of `u`
+  leaves, one per outline edge, with the body origin as each apex, so every leaf
+  box stays near its own edge and the origin.
+- Chrome sorts leaf boxes, not the triangles drawn in them, so each slice is
+  shrunk until none of its boxes cuts a surface leaf box, then kept at 97% of
+  that. At exactly the clear size a surface leaf still vanished at zoom 4.
+- The body's leaves then overlap nothing (`seamBleed` 0). The runtime shows the
+  slice whose normal is nearest the view and removes the others with
+  `display: none`, since an invisible slice still takes part in the 3D sort.
+
+Measured limit (Alphonsina, elevation lens, pixelmatch against main): 0.39–0.64%
+at default zoom across five poses, but 5–68% at maximum zoom, where Chrome's
+depth sort draws the slice over surface leaves. A slice tilted from the view
+fails sooner; one exactly perpendicular to it still showed 2.1% at zoom 4.
+
+The disc for globes works as follows. The common presentation compiler measures the actual
 surface leaf planes in the body's frame and fits an inner ellipsoid behind
 them. It reserves two raster pixels around the 512px disc for antialiasing.
 Every point on the camera-facing disc stays inside those prepared bounds as the
