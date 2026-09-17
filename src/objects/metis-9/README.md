@@ -36,6 +36,10 @@ Each frame's camera is computed, never authored: the pinned rotation record give
 
 The lens rides the released MPCD shape rather than the release's ADAM reconstruction. Measured outside preparation by the registration stage's own limb rule, the MPCD leaves 2.30° where the ADAM leaves 2.72°, so the photograph uses the mesh that agrees more closely with the record.
 
+![30 deconvolved ZIMPOL frames at native scale, and the surface they transfer](../../../docs/images/metis-sphere-frames.webp)
+
+The frames above are shown at native pixels; the disc spans 42 to 44 px, so about nine resolved elements cross the body at this plate scale. What the lens carries is real brightness on a measured shape, not resolved terrain.
+
 The frames cover 84.9% of the retained surface area. Level matching reconciles their relative brightness within gains of 0.80 to 1.87 across all 30 frames, joined as a single group, leaving at most a factor of 1.12 between overlapping frames. Display is the 1st to 99.5th percentile of the displayed samples, in relative deconvolved intensity with the photographed illumination retained.
 
 ### Registration
