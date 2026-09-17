@@ -5,6 +5,7 @@ import { REPOSITORY_URL } from '../objects.mts';
 const { title, description, editUrl, object } = Astro.locals.starlightRoute.entry.data;
 const rows = object ? [
   { name: 'Classification', value: object.groupLabel },
+  ...(object.status ? [{ name: 'Status', value: object.status }] : []),
   ...(object.system ? [{ name: 'System', value: object.system }] : []),
   ...object.facts.map(fact => ({ name: fact.label, value: fact.value })),
   { name: 'Minimaps', value: String(object.maps) },
@@ -21,17 +22,16 @@ const rows = object ? [
           <h1 id="_top">{title}</h1>
           {description && <p class="sb-subtitle">{description}</p>}
         </div>
-        {typeof editUrl === 'string' && <a class="sb-tool-button" href={editUrl}>Edit README</a>}
+        <div class="sb-readme-tools">
+          {object.appUrl && <a class="sb-tool-button" href={object.appUrl}>Open in cssEarth</a>}
+          {typeof editUrl === 'string' && <a class="sb-tool-button" href={editUrl}>Edit README</a>}
+        </div>
       </header>
       <slot />
     </article>
     {/* Storybook's canvas mode after the docs: the preview above an addon panel. */}
     <section class="sb-object not-content" aria-label={`${title} viewer`}>
       <figure class="sb-canvas">
-        <div class="sb-canvas-bar">
-          <span class="sb-badge">{object.status ?? object.groupLabel}</span>
-          {object.appUrl && <a class="sb-tool-button" href={object.appUrl}>Open in cssEarth</a>}
-        </div>
         <div class="sb-canvas-stage">
           {object.sceneUrl ? <iframe class="sb-scene" src={object.sceneUrl} title={`${title} scene`} loading="eager" allow="fullscreen"></iframe> : <p class="sb-canvas-empty">This object has no scene page.</p>}
           <a class="sb-canvas-source" href={`${REPOSITORY_URL}/tree/main/src/objects/${object.id}`}>Show package</a>
