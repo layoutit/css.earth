@@ -57,6 +57,25 @@
           "pr": 293
         }
       ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "unresolved",
+      "finding": "The NRAO archive answered 503 Service Unavailable throughout the screen on 2026-09-17, so its holdings for catalogued bodies are unmeasured.",
+      "revisitWhen": "The NRAO archive answers again and the screen is rerun.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://data.nrao.edu/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
     }
   ]
 }
